@@ -1,0 +1,44 @@
+{
+  "format": "levi_marketplace_v0",
+  "note": "Free core forever. Marketplace is optional packs/templates — not a paywall on the brain.",
+  "currency": "future",
+  "revenue_share_creator_pct": 80,
+  "categories": ["factory_templates", "story_modes", "genre_packs", "skill_packs", "education"],
+  "items": [
+    {
+      "id": "checklist_cli",
+      "title": "Offline Checklist CLI",
+      "price": 0,
+      "path": "templates/checklist_cli.json",
+      "status": "free_seed"
+    },
+    {
+      "id": "notes_cli",
+      "title": "Offline Notes CLI",
+      "price": 0,
+      "path": "templates/notes_cli.json",
+      "status": "free_seed"
+    },
+    {
+      "id": "morning_status",
+      "title": "Morning Status Automation",
+      "price": 0,
+      "path": "templates/morning_status.json",
+      "status": "free_seed"
+    },
+    {
+      "id": "systems_horror_seed",
+      "title": "Systems Horror Story Seed",
+      "price": 0,
+      "path": "templates/systems_horror_seed.json",
+      "status": "free_seed"
+    }
+  ],
+  "future_paid_wedges": [
+    "curated season story packs",
+    "hosted sandbox runners",
+    "encrypted multi-device sync",
+    "education cohorts",
+    "enterprise policy packs"
+  ]
+}

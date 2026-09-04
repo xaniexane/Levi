@@ -1,0 +1,65 @@
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Credentials / secrets
+.env
+.env.local
+*.pem
+*.key
+creds/
+secrets/
+*.log
+
+# Archives
+*.zip
+*.tar.gz
+*.tar
+archives/
+archive/
+
+# Temp
+*.tmp
+*.bak
+*.orig
+
+# Virtual envs
+venv/
+.env3/
+ENV/
+.venv/
+
+# JS / node
+node_modules/
+package-lock.json
+
+# Android
+*.apk
+*.aab
+*.dex
+*.class
+*.jar
+.gradle/
+build/
+
+# Archives of old content
+docs_old/
+legacy/
+extras/
