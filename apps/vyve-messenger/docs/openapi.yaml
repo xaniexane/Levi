@@ -1,0 +1,877 @@
+openapi: 3.0.3
+info:
+  title: VYVE Messenger API
+  version: 1.0.0
+  description: |
+    API for VYVE Messenger — the private, end-to-end encrypted communication
+    layer of LEVI SIOS. Authentication is handled by Cybrus OAuth 2.0.
+    
+    ## Security Model
+    - All endpoints require valid OAuth2 bearer token
+    - Message content is end-to-end encrypted client-side
+    - Server NEVER receives plaintext message content
+    - All timestamps are rounded to 1-hour buckets for metadata privacy
+
+  contact:
+    name: VYVE Engineering
+    email: engineering@vyve.local
+
+  license:
+    name: Proprietary
+    url: https://vyve.local/license
+
+servers:
+  - url: https://api.vyve.local/v1
+    description: Production
+  - url: http://localhost:8080/v1
+    description: Local development
+
+tags:
+  - name: OAuth
+    description: Cybrus OAuth 2.0 endpoints
+  - name: Identity
+    description: User identity and device management
+  - name: Messaging
+    description: Encrypted message exchange
+  - name: Conversations
+    description: Conversation management
+  - name: Social
+    description: Social graph and posts
+  - name: Marketplace
+    description: 🔐💲💎 vendor and product endpoints
+
+security:
+  - bearerAuth: []
+
+paths:
+  /oauth/token:
+    post:
+      tags: [OAuth]
+      summary: Exchange authorization code for access token
+      description: |
+        Implements OAuth 2.0 Authorization Code flow with PKCE.
+        Returns access_token, refresh_token, and id_token (OIDC).
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - grant_type
+                - code
+                - code_verifier
+                - client_id
+                - redirect_uri
+              properties:
+                grant_type:
+                  type: string
+                  enum: [authorization_code, refresh_token]
+                code:
+                  type: string
+                  description: Authorization code (from /oauth/authorize)
+                code_verifier:
+                  type: string
+                  description: PKCE code verifier
+                client_id:
+                  type: string
+                redirect_uri:
+                  type: string
+                refresh_token:
+                  type: string
+                  description: Required when grant_type=refresh_token
+      responses:
+        '200':
+          description: Token issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '400':
+          description: Invalid request
+        '401':
+          description: Invalid credentials
+
+  /oauth/authorize:
+    get:
+      tags: [OAuth]
+      summary: Authorization endpoint
+      description: |
+        User authenticates with Cybrus and grants permission to VYVE.
+        On success, redirects to client with authorization code.
+      security: []
+      parameters:
+        - name: response_type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [code]
+        - name: client_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: redirect_uri
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: scope
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: state
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: code_challenge
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: code_challenge_method
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [S256]
+      responses:
+        '302':
+          description: Redirect with authorization code
+
+  /me:
+    get:
+      tags: [Identity]
+      summary: Get current user profile
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /me/devices:
+    get:
+      tags: [Identity]
+      summary: List user's registered devices
+      responses:
+        '200':
+          description: List of devices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+
+    post:
+      tags: [Identity]
+      summary: Register a new device
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceRegistration'
+      responses:
+        '201':
+          description: Device registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+
+  /me/devices/{device_id}:
+    delete:
+      tags: [Identity]
+      summary: Revoke a device
+      parameters:
+        - name: device_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Device revoked
+
+  /me/keys:
+    get:
+      tags: [Identity]
+      summary: Get user's public keys
+      responses:
+        '200':
+          description: Public keys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicKeyBundle'
+    put:
+      tags: [Identity]
+      summary: Upload new public keys (key rotation)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicKeyBundle'
+      responses:
+        '200':
+          description: Keys updated
+
+  /conversations:
+    get:
+      tags: [Conversations]
+      summary: List conversations
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+        - name: before
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: List of conversations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Conversation'
+
+    post:
+      tags: [Conversations]
+      summary: Create a new conversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversationCreate'
+      responses:
+        '201':
+          description: Conversation created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+
+  /conversations/{conversation_id}:
+    get:
+      tags: [Conversations]
+      summary: Get conversation details
+      parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Conversation details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+
+    delete:
+      tags: [Conversations]
+      summary: Delete a conversation (user-side)
+      parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Conversation deleted
+
+  /conversations/{conversation_id}/messages:
+    get:
+      tags: [Messaging]
+      summary: Get messages in a conversation
+      parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+        - name: before
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: List of encrypted messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EncryptedMessage'
+
+    post:
+      tags: [Messaging]
+      summary: Send an encrypted message
+      description: |
+        Server stores the ciphertext but cannot decrypt it.
+        Each recipient device receives its own ciphertext variant.
+      parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EncryptedMessageUpload'
+      responses:
+        '201':
+          description: Message queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptedMessage'
+
+  /messages/{message_id}:
+    get:
+      tags: [Messaging]
+      summary: Get a specific message
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Encrypted message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptedMessage'
+
+    delete:
+      tags: [Messaging]
+      summary: Delete a message (user-side)
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Message deleted
+
+  /posts:
+    get:
+      tags: [Social]
+      summary: Get feed posts
+      parameters:
+        - name: feed_type
+          in: query
+          schema:
+            type: string
+            enum: [chronological, personalized, following, community, vendor, discovery]
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: before
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: List of posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+
+    post:
+      tags: [Social]
+      summary: Create a post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCreate'
+      responses:
+        '201':
+          description: Post created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+
+  /posts/{post_id}:
+    get:
+      tags: [Social]
+      summary: Get a post
+      parameters:
+        - name: post_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Post
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+
+    delete:
+      tags: [Social]
+      summary: Delete a post
+      parameters:
+        - name: post_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Post deleted
+
+  /marketplace/vendors:
+    get:
+      tags: [Marketplace]
+      summary: List vendors
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of vendors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vendor'
+
+    post:
+      tags: [Marketplace]
+      summary: Register as a vendor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorCreate'
+      responses:
+        '201':
+          description: Vendor registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+
+  /marketplace/vendors/{vendor_id}/products:
+    get:
+      tags: [Marketplace]
+      summary: Get vendor's products
+      parameters:
+        - name: vendor_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    TokenResponse:
+      type: object
+      required: [access_token, token_type, expires_in, refresh_token]
+      properties:
+        access_token:
+          type: string
+          description: JWT access token
+        token_type:
+          type: string
+          enum: [bearer]
+        expires_in:
+          type: integer
+          description: Lifetime in seconds
+        refresh_token:
+          type: string
+          description: Opaque refresh token
+        id_token:
+          type: string
+          description: OIDC ID token (JWT with user claims)
+        scope:
+          type: string
+          description: Granted scopes (space-separated)
+
+    User:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        username:
+          type: string
+        display_name:
+          type: string
+        bio:
+          type: string
+        avatar_url:
+          type: string
+        public_keys:
+          $ref: '#/components/schemas/PublicKeyBundle'
+        created_at:
+          type: string
+          format: date-time
+        tier:
+          type: string
+          enum: [free, creator, pro, developer, business, enterprise]
+
+    PublicKeyBundle:
+      type: object
+      properties:
+        identity_signing_key:
+          type: string
+          format: byte
+          description: Ed25519 public key
+        identity_encryption_key:
+          type: string
+          format: byte
+          description: X25519 public key
+        key_id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+
+    Device:
+      type: object
+      properties:
+        device_id:
+          type: string
+          format: uuid
+        device_name:
+          type: string
+        device_type:
+          type: string
+          enum: [android, ios, web, desktop]
+        public_signing_key:
+          type: string
+          format: byte
+        public_encryption_key:
+          type: string
+          format: byte
+        registered_at:
+          type: string
+          format: date-time
+        last_seen:
+          type: string
+          format: date-time
+        trusted:
+          type: boolean
+
+    DeviceRegistration:
+      type: object
+      required: [device_name, device_type, public_signing_key, public_encryption_key]
+      properties:
+        device_name:
+          type: string
+        device_type:
+          type: string
+          enum: [android, ios, web, desktop]
+        public_signing_key:
+          type: string
+          format: byte
+        public_encryption_key:
+          type: string
+          format: byte
+        attestation:
+          type: string
+          description: Hardware attestation token (optional)
+
+    Conversation:
+      type: object
+      properties:
+        conversation_id:
+          type: integer
+        conversation_type:
+          type: string
+          enum: [direct, group, channel]
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        created_at:
+          type: string
+          format: date-time
+        last_message:
+          $ref: '#/components/schemas/EncryptedMessage'
+        unread_count:
+          type: integer
+        encryption_metadata:
+          type: object
+          description: Per-participant encryption details
+
+    ConversationCreate:
+      type: object
+      required: [conversation_type, participants]
+      properties:
+        conversation_type:
+          type: string
+          enum: [direct, group, channel]
+        participants:
+          type: array
+          items:
+            type: string
+            format: uuid
+        name:
+          type: string
+        encryption_keys:
+          type: object
+          description: Initial encryption keys for the conversation
+
+    EncryptedMessage:
+      type: object
+      properties:
+        message_id:
+          type: integer
+        conversation_id:
+          type: integer
+        sender_key_id:
+          type: string
+          format: uuid
+        recipient_key_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        ephemeral_pubkey:
+          type: string
+          format: byte
+        nonce:
+          type: string
+          format: byte
+        ciphertext:
+          type: string
+          format: byte
+        signature:
+          type: string
+          format: byte
+        timestamp:
+          type: string
+          format: date-time
+          description: Rounded to 1-hour bucket
+        size_bucket:
+          type: string
+          enum: [tiny, small, medium, large, xlarge]
+        status:
+          type: string
+          enum: [queued, delivered, read, failed]
+
+    EncryptedMessageUpload:
+      type: object
+      required: [ciphertext, recipient_key_ids, ephemeral_pubkey, nonce, signature]
+      properties:
+        recipient_key_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        ephemeral_pubkey:
+          type: string
+          format: byte
+        nonce:
+          type: string
+          format: byte
+        ciphertext:
+          type: string
+          format: byte
+        signature:
+          type: string
+          format: byte
+        attachment_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        reply_to:
+          type: integer
+          description: ID of message being replied to
+        forward_policy:
+          type: string
+          enum: [allowed, restricted, forbidden]
+
+    Post:
+      type: object
+      properties:
+        post_id:
+          type: integer
+        author:
+          $ref: '#/components/schemas/User'
+        content:
+          type: string
+        attachments:
+          type: array
+          items:
+            type: string
+            format: uuid
+        visibility:
+          type: string
+          enum: [public, followers, community, private]
+        community_id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        reactions:
+          type: object
+          additionalProperties:
+            type: integer
+        comment_count:
+          type: integer
+        repost_count:
+          type: integer
+
+    PostCreate:
+      type: object
+      required: [content, visibility]
+      properties:
+        content:
+          type: string
+          maxLength: 10000
+        attachments:
+          type: array
+          items:
+            type: string
+            format: uuid
+        visibility:
+          type: string
+          enum: [public, followers, community, private]
+        community_id:
+          type: integer
+
+    Vendor:
+      type: object
+      properties:
+        vendor_id:
+          type: string
+          format: uuid
+        vendor_name:
+          type: string
+        description:
+          type: string
+        logo_url:
+          type: string
+        verified:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        rating:
+          type: number
+          format: float
+        review_count:
+          type: integer
+        categories:
+          type: array
+          items:
+            type: string
+
+    VendorCreate:
+      type: object
+      required: [vendor_name, description]
+      properties:
+        vendor_name:
+          type: string
+        description:
+          type: string
+        logo_url:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+        payout_details:
+          type: object
+          description: Sent to payment provider, never stored on VYVE
+
+    Product:
+      type: object
+      properties:
+        product_id:
+          type: string
+          format: uuid
+        vendor_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        currency:
+          type: string
+        product_type:
+          type: string
+          enum: [digital_good, service, course, template, consulting]
+        file_size:
+          type: integer
+        download_count:
+          type: integer
+        rating:
+          type: number
+          format: float
+        created_at:
+          type: string
+          format: date-time

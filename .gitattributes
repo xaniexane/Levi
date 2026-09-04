@@ -1,0 +1,35 @@
+# Treat archives as large files that should use Git LFS
+archives/** filter=lfs diff=lfs merge=lfs -text
+
+# Treat binary files as binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
+*.zip  binary
+*.apk  binary
+*.aab  binary
+*.dex  binary
+*.jar  binary
+*.mp3  binary
+*.mp4  binary
+*.wav  binary
+*.ogg  binary
+
+# Text files
+*.py   text
+*.md   text
+*.txt  text
+*.json text
+*.yaml text
+*.yml  text
+*.xml  text
+*.sh   text eol=lf
+*.html text
+*.css  text
+*.js   text
+*.kt   text
+*.java text
+*.gradle text
