@@ -109,7 +109,23 @@ the curriculum knowledge base it reads at runtime — genuinely useful
 via `course_brief` / `course_search` — with `levi-brain` available as
 the native voice whenever its weights exist.
 
-## 5. News stays out of the weights (deliberate)
+## 5. Run history
+
+- **Run 1 — 600 steps (2026-09-15).** Same tiny arch (4L/4H/256embd/128ctx,
+  3,271,168 params), seed 1337, batch 32, lr 3e-4, 847k-char corpus.
+  Loss 5.2830 → 2.1067 (min 2.0692) in 1252.7s. Held-out 1.857.
+  Shipped as `weights/tiny-gpt.pt`.
+- **Run 2 — 2400 steps (2026-09-15, Operation Sharpen).** Same arch and
+  seed (clean 4× extension of run 1, not a resume — `train.py` trains
+  from scratch). Smoke-validated first (50 steps, 5.2830 → 2.9872).
+  Measured ~6.3 s/step on this sandbox's 2 CPUs (slower than run 1's
+  ~2.1 s/step — CPU contention; reported, not hidden), so ~4h wall time.
+  Log: `~/workspace/levi-brain-runs/run2400/train.log`. Output went to
+  the run dir, never the shipped weights — promotion only if eval
+  (held-out loss + sample quality vs run 1) is genuinely better.
+  Result: _pending at time of writing; see train log._
+
+## 6. News stays out of the weights (deliberate)
 
 `core/levi/knowledge/news/` (see docs/NEWS.md) is **never** fed to
 `prepare_corpus.py`. News goes stale; weights are for stable knowledge.
