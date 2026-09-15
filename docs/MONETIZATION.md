@@ -89,6 +89,67 @@ For companies that want LEVI inside their walls: private cloud, custom model
 remixes, compliance packs (SOC 2 roadmap), training. Priced per deal, floor
 set by dedicated-capacity cost.
 
+## Microtransactions & advertising (revised 2026-09-15)
+
+> Direction: less out-of-pocket for users, profitable and self-sufficient,
+> not greedy. This section **revises** the earlier "no ads, ever" line: the
+> intelligence itself stays ad-free, but clearly-labeled commercial surfaces
+> fund the free tier so users pay as close to nothing as possible.
+
+### The one rule ads can never break
+
+**Ads never touch the intelligence.** No sponsored answers, no ad-influenced
+recommendations, no ads in core chat. The model does not know sponsors exist.
+This is structural, not a promise: local-first means there is no
+surveillance data to sell and no third-party tracker in the PWA. What we
+can't see, we can't sell.
+
+### Microtransactions: pay only for what you use
+
+For users who want cloud power without a subscription:
+
+| Item | Price | Notes |
+|---|---|---|
+| Cloud task credits | $3 / 100 tasks | Top-up, **never expire**; ~$0.03/task vs $0.024 implied in Solo |
+| Fleet hour top-ups | $5 / 20 agent-hours | Same never-expire rule |
+| One-time workflow packs | $1–$9 | Premium fleet workflows / skill bundles, yours forever |
+
+No loot boxes, no dark patterns, no expiring credits, prices published on one
+page. Subscriptions stay the better deal per unit; micro stays the
+lower-commitment door. Both honest.
+
+### Advertising: three labeled surfaces only
+
+1. **Opt-in rewards** — user *chooses* to view a sponsor card, earns task
+   credits. This is the zero-out-of-pocket path: free users fund their own
+   cloud usage with attention, voluntarily. Always skippable, always labeled,
+   daily frequency cap published.
+2. **Marketplace sponsorships** — clearly-labeled sponsored skills/workflows;
+   creators can sponsor their own listings. Search/rank never sold — sponsors
+   get a labeled slot, not the top organic spot.
+3. **NeighborOS B2B lead-gen** — the big one. Home-services pros pay for
+   qualified leads (the Angi/Thumbtack model); homeowners pay nothing and see
+   no ads. This monetizes the product line without touching a single LEVI
+   core user.
+
+### "Not greedy" guardrails (binding)
+
+- Ad revenue target = sustain the free tier + healthy margin. Not maximized.
+- No sale of user data, no third-party trackers, no behavioral ad profiles —
+  structurally impossible in local-first, kept impossible in cloud.
+- Frequency caps published; every ad labeled; every ad dismissible.
+- Annual transparency note: what share of revenue came from ads, from
+  subscriptions, from micro, from B2B.
+- If ad revenue ever exceeds what's needed to fund free + margin, the surplus
+  lowers prices — published as policy, not a vibe.
+
+### The self-sufficiency math (targets)
+
+Free-tier cost per user (sync + 25 tasks + learning packs) is funded by, in
+order: (1) conversion to Solo/Pro, (2) opt-in ad rewards margin, (3) B2B
+lead-gen, (4) marketplace take. The goal: a free user is at worst
+cost-neutral, so growth never punishes us and we never need to squeeze.
+
 ## What we deliberately do NOT sell
 
 - **The core.** Never. Not a "pro local" tier, not feature-gated intelligence.
@@ -96,7 +157,7 @@ set by dedicated-capacity cost.
   them, not the files.
 - **User data.** Learning packs are aggregated technique-only; selling data
   would torch the trust the whole organism runs on.
-- **Ads.** No ad tier, no sponsored answers. Ever.
+- **The answers.** No sponsored responses, no ad-shaped recommendations. Ever.
 
 ## Launch order
 
