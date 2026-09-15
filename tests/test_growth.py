@@ -16,7 +16,7 @@ import pytest
 from levi.growth import cycle as growth_cycle
 from levi.growth import journal as growth_journal
 from levi.growth.consolidate import consolidate
-from levi.growth.experience import Experience, harvest_new, harvest_sessions
+from levi.growth.experience import Experience, harvest_sessions
 from levi.growth.reflect import Learning, reflect_rules
 from levi.memory.store import MemoryStore
 from levi.memory.types import MemoryType
@@ -109,11 +109,11 @@ def test_reflect_rules_preference_and_fact():
                    content="Remember that the staging URL is https://staging.example.com."),
     ]
     learnings = reflect_rules(exps)
-    kinds = {l.kind for l in learnings}
+    kinds = {learning.kind for learning in learnings}
     assert "preference" in kinds
     assert "fact" in kinds
-    assert all(l.confidence > 0 for l in learnings)
-    assert all(l.provenance.get("mode") == "rules" for l in learnings)
+    assert all(learning.confidence > 0 for learning in learnings)
+    assert all(learning.provenance.get("mode") == "rules" for learning in learnings)
 
 
 def test_reflect_rules_correction():
@@ -122,7 +122,7 @@ def test_reflect_rules_correction():
                    content="No, that's wrong — I meant the blue one, not the red one."),
     ]
     learnings = reflect_rules(exps)
-    assert any(l.kind == "correction" for l in learnings)
+    assert any(learning.kind == "correction" for learning in learnings)
 
 
 def test_reflect_rules_tool_trouble():
@@ -132,7 +132,7 @@ def test_reflect_rules_tool_trouble():
         for i in range(3)
     ]
     learnings = reflect_rules(exps)
-    proc = [l for l in learnings if l.kind == "procedural"]
+    proc = [learning for learning in learnings if learning.kind == "procedural"]
     assert proc and "web_fetch" in proc[0].content
 
 
@@ -147,8 +147,8 @@ def test_reflect_never_claims_sentience():
         Experience(id="2", kind="levi-did", source="s", ts="t",
                    content="Understood."),
     ]
-    for l in reflect_rules(exps):
-        low = l.content.lower()
+    for learning in reflect_rules(exps):
+        low = learning.content.lower()
         assert "i feel" not in low and "conscious" not in low and "sentient" not in low
 
 

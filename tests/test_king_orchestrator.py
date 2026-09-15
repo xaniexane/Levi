@@ -1,5 +1,4 @@
 """King orchestration: engine drives harvest into the ledger; gates hold."""
-import pytest
 
 from levi.graph.story_fabric import StoryFabric
 from levi.king import King

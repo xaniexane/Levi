@@ -51,7 +51,6 @@ def perfection_report() -> str:
         return r.ok and len(ServiceMesh().list()) >= 8, "crucible+services"
 
     def ui():
-        from pathlib import Path
         from levi.ops.serve_ui import find_static
         s = find_static()
         return (s / "levi-ops.html").exists() and (s / "lwp-model.html").exists(), str(s)

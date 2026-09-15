@@ -1,7 +1,5 @@
 """Tests for levi.agent.chat: sessions, compression, durable facts."""
 
-import json
-import os
 
 import pytest
 
@@ -11,7 +9,7 @@ from levi.agent.chat import (
     ConversationManager,
     sanitize_session_name,
 )
-from levi.agent.providers import ChatMessage, ChatProvider, ChatResponse
+from levi.agent.providers import ChatProvider, ChatResponse
 
 
 # ---------------------------------------------------------------------------

@@ -1,5 +1,4 @@
 """Policy gate semantics: no bypass paths, ever."""
-import pytest
 
 from levi.policy.gates import PolicyEngine, RiskLevel
 

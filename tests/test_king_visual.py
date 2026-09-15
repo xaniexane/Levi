@@ -7,7 +7,6 @@ import pytest
 from levi.king import visual as visual_mod
 from levi.king.visual import (
     POLLINATIONS_BASE,
-    checkpoint_url,
     checkpoint_urls,
     visual_checkpoint_for_ledger,
 )

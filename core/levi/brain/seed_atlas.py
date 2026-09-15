@@ -579,12 +579,12 @@ def seed_corpus(clear_existing_seed: bool = False) -> str:
 
 def format_atlas_index() -> str:
     letters = {}
-    for text, tags in ATLAS:
+    for _text, tags in ATLAS:
         key = (tags[0] if tags else "?")[0].upper()
         letters.setdefault(key, 0)
         letters[key] += 1
     lines = [
-        f"=== Offline Brain Atlas ===",
+        "=== Offline Brain Atlas ===",
         f"Units: {len(ATLAS)}  across subject tags A–Z+",
         "",
         "Sample domains: finance, health, systems, LEVI core logic, security,",

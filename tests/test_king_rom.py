@@ -46,7 +46,7 @@ def test_locks_are_append_only_and_persist(tmp_path):
     b = rom.rupture_session("second", "fp2")
     rom2 = SessionRom(data_dir=tmp_path / "king")
     assert rom2.count() == 2
-    assert [l["id"] for l in rom2.locks] == [a["id"], b["id"]]
+    assert [lock["id"] for lock in rom2.locks] == [a["id"], b["id"]]
     # latest() is the most recent, not a mutation of the first
     assert rom2.latest()["reason"] == "second"
 

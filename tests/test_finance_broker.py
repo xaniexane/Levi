@@ -10,7 +10,6 @@ import sys
 
 import pytest
 
-from levi.finance import broker
 from levi.finance.broker import (
     AlpacaConnector,
     Fill,

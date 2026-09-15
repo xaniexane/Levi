@@ -44,8 +44,8 @@ def test_failed_turn_still_writes_trace_with_compost(ctx_for, monkeypatch,
 
     records = []
     for f in data_dir.joinpath("traces").glob("*.jsonl"):
-        records += [json.loads(l) for l in f.read_text().splitlines()
-                    if l.strip()]
+        records += [json.loads(line) for line in f.read_text().splitlines()
+                    if line.strip()]
     assert len(records) == 1
     record = records[0]
     assert record["outcome"] == "failed"

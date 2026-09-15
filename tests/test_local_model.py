@@ -535,7 +535,6 @@ def test_server_spawn_passes_ctx_flag(tmp_path, monkeypatch):
 def test_find_runner_prefers_managed_bin_dir(model_home, monkeypatch):
     """A runner installed by fetch_runner() into <model_dir>/bin is found
     without LEVI_LLAMA_SERVER or PATH."""
-    import os as _os
     monkeypatch.delenv("LEVI_LLAMA_SERVER", raising=False)
     bindir = model_home / "bin"
     bindir.mkdir(exist_ok=True)

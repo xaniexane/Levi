@@ -217,11 +217,11 @@ def _mkbars(rows):
             date=f"2026-09-{i + 1:02d}",
             open=c - 0.1,
             high=h,
-            low=l,
+            low=low,
             close=c,
             volume=v,
         )
-        for i, (h, l, c, v) in enumerate(rows)
+        for i, (h, low, c, v) in enumerate(rows)
     ]
 
 

@@ -10,7 +10,6 @@ from typing import Any, Dict, List, Optional
 import py_compile
 import subprocess
 import sys
-import json
 
 
 DEFAULT_ROOT = Path.home() / ".levi" / "factory_sandbox"

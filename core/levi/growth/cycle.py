@@ -53,7 +53,7 @@ def run_cycle(
         learnings, mode = reflect(experiences, use_model=use_model)
         report["mode"] = mode
         report["learnings_proposed"] = len(learnings)
-        report["learnings"] = [l.to_dict() for l in learnings]
+        report["learnings"] = [learning.to_dict() for learning in learnings]
         report["consolidation"] = consolidate(
             learnings, cycle_id=cycle_id, store=store, dry_run=dry_run
         )

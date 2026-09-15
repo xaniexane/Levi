@@ -6,7 +6,6 @@ rule-based planning and needs no patching.
 import json
 import urllib.error
 
-import pytest
 
 from levi.agent.providers import (
     AnthropicProvider,
@@ -77,7 +76,7 @@ def test_local_final_text_no_tool_calls_mentions_completion():
 def test_local_deterministic_per_conversation():
     a = scripted_conversation()
     b = scripted_conversation()
-    for ra, rb in zip(a, b):
+    for ra, rb in zip(a, b, strict=True):
         assert ra.tool_calls == rb.tool_calls
         assert ra.text == rb.text
         assert ra.provider == rb.provider == "local"

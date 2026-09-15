@@ -7,7 +7,7 @@ Companion roles (Friend/Mentor/Challenger/Protector) remain higher-order.
 
 from __future__ import annotations
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional
 
 
 @dataclass

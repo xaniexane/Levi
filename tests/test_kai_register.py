@@ -10,7 +10,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pytest
 
 from levi.persona.kai9000 import all_variants, get, system_for
 from levi.agent.providers import ChatProvider, ChatMessage, ChatResponse

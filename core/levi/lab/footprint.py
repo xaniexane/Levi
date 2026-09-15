@@ -169,7 +169,7 @@ def format_footprint(fp: dict) -> str:
         f"  weights : {fp['weights_gb']:.3f} GB",
         f"  KV cache: {fp['kv_cache_gb']:.3f} GB  [{arch}]",
         f"  headroom: {fp['headroom_gb']:.3f} GB (×{fp['overhead']} overhead)",
-        f"  ─────────────────────────────",
+        "  ─────────────────────────────",
         f"  total   : {fp['total_gb']:.3f} GB  ← estimate, not a measurement",
     ]
     return "\n".join(lines)

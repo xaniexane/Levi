@@ -9,7 +9,7 @@ personas, skills, specialists, and composites.
 
 from __future__ import annotations
 from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Dict, List, Optional
 from enum import Enum
 from datetime import datetime, timezone
 import uuid

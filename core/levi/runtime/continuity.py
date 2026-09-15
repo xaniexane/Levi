@@ -87,8 +87,6 @@ class ContinuityShelf:
         except Exception:
             pass
         try:
-            from levi.persona.monotropism import MonotropismTracker
-            st = MonotropismTracker().state if hasattr(MonotropismTracker, "state") else None
             # soft read
             from pathlib import Path as P
             import json as _j
@@ -103,7 +101,7 @@ class ContinuityShelf:
             pass
         try:
             from levi.identity.charter import Charter
-            c = Charter()
+            Charter()  # validate it loads; result unused
             frame.pointers["charter"] = "loaded"
         except Exception:
             pass

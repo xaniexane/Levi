@@ -9,7 +9,6 @@ Run:  python3 tests/test_genres.py     (has a real __main__ runner)
 """
 from __future__ import annotations
 
-import os
 import re
 import sys
 import traceback
@@ -102,7 +101,7 @@ def test_section_comments_match_computed_counts():
     assert len(claimed) == len(seen), (
         f"{len(claimed)} section comments vs {len(seen)} categories"
     )
-    for cat_value, n_claimed in zip(seen, claimed):
+    for cat_value, n_claimed in zip(seen, claimed, strict=True):
         actual = cats[cat_value]
         assert actual == n_claimed, (
             f"category {cat_value}: comment says {n_claimed}, table has {actual}"
@@ -190,7 +189,7 @@ def test_cloud_model_reports_registry_derived_count():
     assert expected_line in out, out.splitlines()[0]
     assert "Integrity: OK" in out
     assert "core_classical" in out, "category breakdown silently missing again"
-    print(f"  cloud model genres_list derives count from registry")
+    print("  cloud model genres_list derives count from registry")
 
 
 @genre_test

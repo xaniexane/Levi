@@ -8,7 +8,6 @@ Not a chatbot stack of prompts — one organism pass.
 """
 from __future__ import annotations
 
-from typing import Optional
 
 
 def ultimate_reply(user_text: str) -> str:

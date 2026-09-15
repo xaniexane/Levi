@@ -581,7 +581,7 @@ class NervousSystem:
         total = sum(e for _, e in exps) or 1.0
         return [
             {"persona": p, "weight": e / total, "score": round(s, 4)}
-            for (p, s), e in zip(ranked, [e for _, e in exps])
+            for (p, s), e in zip(ranked, [e for _, e in exps], strict=True)
         ]
 
     # ── selection ─────────────────────────────────────────────────

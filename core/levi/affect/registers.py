@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Optional, Tuple
 
 from levi.affect.detector import EmotionReading, detect
 from levi.affect.policy import PolicyDecision, evaluate

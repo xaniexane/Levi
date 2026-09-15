@@ -22,7 +22,7 @@ from dataclasses import dataclass, field
 from typing import List, Optional, Dict, Any
 from enum import Enum
 
-from .five_d import FiveDEI, EIState
+from .five_d import FiveDEI
 from .tone import read_user_tone, regulation_for, UserTone
 
 
@@ -59,7 +59,7 @@ class CompanionCore:
         user_mode: Optional[str] = None,
     ) -> CompanionGuidance:
         context = context or {}
-        ei_state: EIState = self.ei.evaluate(text, context)
+        self.ei.evaluate(text, context)  # sets self.ei.last_tone; value unused
         tone: UserTone = self.ei.last_tone or read_user_tone(text, context)
         reg = regulation_for(tone)
 

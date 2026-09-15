@@ -118,7 +118,7 @@ def iter_expanded(limit: int = 25000) -> Iterator[Tuple[str, List[str]]]:
                 return
 
     # Numbered durability tips
-    for i, domain in enumerate(DOMAINS):
+    for _i, domain in enumerate(DOMAINS):
         for j in range(1, 40):
             text = (
                 f"Durability card {domain}-{j}: protect sleep, reduce open loops, "

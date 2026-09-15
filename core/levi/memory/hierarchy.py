@@ -8,7 +8,6 @@ Provenance: every conclusion should link back toward evidence.
 """
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
 
 
 def hierarchy_status() -> str:
@@ -38,8 +37,7 @@ def hierarchy_status() -> str:
     except Exception:
         pass
     try:
-        from levi.memory.store import MemoryStore
-        lines.append(f"memory_store_ok=yes")
+        lines.append("memory_store_ok=yes")
     except Exception:
         lines.append("memory_store_ok=no")
     return "\n".join(lines)

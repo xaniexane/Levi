@@ -15,8 +15,8 @@ This is LEVI-original structure — cascade + spiral heritage, not a chatbot
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Any, Dict, List
+from dataclasses import dataclass
+from typing import List
 import hashlib
 
 
@@ -44,7 +44,7 @@ class MirrorReport:
             f"Seed: {self.seed[:120]}",
             f"Fingerprint: {self.fingerprint}",
             "",
-            f"── FORWARD coil ──",
+            "── FORWARD coil ──",
         ]
         for f in self.forward.frames:
             lines.append(f"  · {f}")
@@ -91,7 +91,7 @@ class MirrorCascade:
         reverse = CoilResult(
             name="reverse",
             frames=[
-                f"Anti-goal: what if the need is false or inverted?",
+                "Anti-goal: what if the need is false or inverted?",
                 "Invert incentive: who loses if this succeeds cheaply?",
                 "Failure-first: assume the plan fails — what remains valuable?",
             ],

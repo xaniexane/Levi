@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from levi.affect.detector import EmotionReading, detect
+from levi.affect.detector import EmotionReading
 from levi.affect.policy import PolicyDecision, evaluate
 from levi.affect.registers import (
     RegisterSuggestion,

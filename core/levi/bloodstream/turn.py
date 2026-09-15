@@ -397,7 +397,6 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
             )
 
         # 5. Build the route executor (runs INSIDE the policy gate)
-        skills_invoked: List[str] = []
         holder: Dict[str, Any] = {}
         if route is RouteKind.FACTORY:
             execute, verify = _execute_factory(text, data_sub("factory"))

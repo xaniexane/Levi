@@ -21,7 +21,6 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import asdict, dataclass, field
-from typing import Any
 
 from levi.growth.experience import Experience
 
@@ -167,7 +166,7 @@ def reflect_rules(experiences: list[Experience]) -> list[Learning]:
                 s = _snip(sentence, 200)
                 if len(s) > 40 and not _ERROR_HINT.search(s):
                     add("fact", f"From past conversation: {s}", 0.4, exp)
-                    if len([l for l in learnings if l.provenance.get("experience_id") == exp.id]) >= 3:
+                    if len([learning for learning in learnings if learning.provenance.get("experience_id") == exp.id]) >= 3:
                         break
 
     return learnings

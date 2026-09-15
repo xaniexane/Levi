@@ -23,7 +23,6 @@ if str(ROOT / "core") not in sys.path:
 from levi.finance.market import Bar, MarketDataError, MarketDataProvider, StooqProvider  # noqa: E402
 from levi.finance.signals import (  # noqa: E402
     REGIME_WEIGHTS,
-    Signal,
     _weighted_net,
     fallback_narrative,
     generate_signal,

@@ -1,7 +1,7 @@
 
 """×100 knowledge densification — high-signal operators pack."""
 from __future__ import annotations
-from typing import Iterator, List, Tuple
+from typing import List, Tuple
 
 _RAW: List[Tuple[str, str, Tuple[str, ...]]] = []
 

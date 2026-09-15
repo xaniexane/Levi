@@ -6,7 +6,7 @@ Operator-facing status: what is strong, what is next, what is law.
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import List, Tuple
+from typing import List
 
 
 def _safe(fn, default=None):

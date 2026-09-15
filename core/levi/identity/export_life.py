@@ -7,7 +7,6 @@ from typing import Optional, Dict, Any
 from datetime import datetime, timezone
 import json
 import zipfile
-import shutil
 
 DEFAULT_DIR = Path.home() / ".levi"
 

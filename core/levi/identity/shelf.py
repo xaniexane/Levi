@@ -5,7 +5,6 @@ Retention: "continue where you left off"
 from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
-from datetime import datetime
 
 
 @dataclass

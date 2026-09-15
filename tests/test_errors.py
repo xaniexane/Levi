@@ -47,7 +47,6 @@ def test_cli_dispatch_reports_structured_error():
     # inside the handler; the dispatch catch-all must print a structured
     # LeviError line (not a raw traceback) and exit 1. Hermetic: HOME is
     # redirected to a temp dir.
-    import subprocess
     import tempfile
 
     with tempfile.TemporaryDirectory() as home:

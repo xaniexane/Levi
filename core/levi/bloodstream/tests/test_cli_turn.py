@@ -4,7 +4,6 @@ HOME is redirected to a tmp dir so the turn's memory/traces/factory
 writes never touch the real user home.
 """
 import io
-import os
 from contextlib import redirect_stdout
 
 import pytest

@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "core") not in sys.path:
     sys.path.insert(0, str(ROOT / "core"))
 
-from levi.finance.portfolio import DEFAULT_PATH, Position, Portfolio, load  # noqa: E402
+from levi.finance.portfolio import DEFAULT_PATH, Portfolio, load  # noqa: E402
 
 try:
     import pytest  # noqa: F401

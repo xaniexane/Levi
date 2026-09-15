@@ -5,7 +5,7 @@ root conftest conventions used here, and all providers are scripted fakes.
 """
 import json
 
-from levi.agent.loop import AgentTranscript, run_subtask
+from levi.agent.loop import run_subtask
 from levi.agent.providers import ChatProvider, ChatResponse, ProviderToolCall
 from levi.agent.tools import build_default_registry
 

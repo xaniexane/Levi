@@ -31,7 +31,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import asdict, dataclass, field
-from typing import Any, Optional, Union
+from typing import Any, Union
 
 from levi.agent.providers import ChatMessage, ChatProvider, select_provider
 from levi.agent.tools import (
@@ -283,7 +283,7 @@ def run_subtask(
         results: list[dict] = []
         gate_tripped: str | None = None
 
-        for tc, call in zip(resp.tool_calls, tool_calls):
+        for tc, _call in zip(resp.tool_calls, tool_calls, strict=True):
             try:
                 res = registry.execute(tc.name, tc.arguments or {}, exec_ctx)
             except ConfirmationRequired as exc:

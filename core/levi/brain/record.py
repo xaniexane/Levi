@@ -17,7 +17,7 @@ def export_markdown(out_path: Optional[Path] = None) -> Path:
     corpus = Corpus()
     table = BrainTable()
     lines = [
-        f"# LEVI Recording",
+        "# LEVI Recording",
         f"Exported: {datetime.now(timezone.utc).isoformat()}",
         "",
         "## Indexed brain",

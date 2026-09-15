@@ -33,7 +33,7 @@ import json
 import os
 import re
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -291,7 +291,7 @@ class ConversationManager:
         for step in transcript.steps:
             if step.provider_text:
                 self.session.append_message("assistant", step.provider_text)
-            for call, result in zip(step.tool_calls, step.results):
+            for call, result in zip(step.tool_calls, step.results, strict=False):
                 content = (result.get("output") or result.get("error") or "").strip()
                 self.session.append_message("tool", content,
                                             name=call.get("name"))
@@ -583,7 +583,7 @@ def run_chat_repl(session_name: str = DEFAULT_SESSION, *,
         for step in t.steps:
             if step.provider_text:
                 print(f"  [step {step.index + 1}] {step.provider_text[:300]}")
-            for call, res in zip(step.tool_calls, step.results):
+            for call, res in zip(step.tool_calls, step.results, strict=False):
                 verdict = "ok" if res.get("ok") else "FAILED"
                 print(f"  tool {call.get('name')} → {verdict}")
                 if res.get("output"):

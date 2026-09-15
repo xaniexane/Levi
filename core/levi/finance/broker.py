@@ -55,7 +55,6 @@ from typing import Any
 from levi.plugins.registry import (
     Capability,
     Connector,
-    ConnectorAPIError,
     InvalidParams,
     Operation,
     Transport,

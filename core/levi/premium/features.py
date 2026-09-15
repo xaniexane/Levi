@@ -10,7 +10,7 @@ Status: active = wired in kernel · surface = UI/CLI exposed · roadmap = specif
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 
 @dataclass(frozen=True)

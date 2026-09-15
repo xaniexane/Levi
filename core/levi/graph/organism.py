@@ -125,7 +125,7 @@ def format_organism() -> str:
         "",
         "── Organs (lenses on the same body) ──",
     ]
-    for oid, kind, name, role in ORGANS:
+    for _oid, kind, name, role in ORGANS:
         lines.append(f"  [{kind:10}] {name:20} {role}")
     lines.append("")
     lines.append("── Bloodstream (sample interpenetration) ──")

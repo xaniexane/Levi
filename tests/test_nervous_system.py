@@ -15,9 +15,7 @@ from levi.persona.nervous_system import (
     AFFINITY_SEED,
     AFFECT_DIMS,
     DIMENSIONS,
-    AffectState,
     NervousSystem,
-    PersonaAffinity,
 )
 
 
@@ -168,7 +166,7 @@ def test_explain_factors_sum_to_score(tmp_path):
     ns.sense("urgent deadline, please build this now")
     expl = ns.explain_scores(top_n=5)
     assert len(expl) == 5
-    for pid, entry in expl.items():
+    for _pid, entry in expl.items():
         assert set(entry.keys()) == {"score", "factors"}
         assert abs(sum(entry["factors"].values()) - entry["score"]) < 1e-9
     # the example shape from the spec renders
@@ -184,9 +182,9 @@ def test_explain_includes_new_dimensions(tmp_path):
     labels = set()
     for entry in expl.values():
         labels.update(entry["factors"].keys())
-    assert any(l.startswith("fatigue×") for l in labels)
-    assert any(l.startswith("dominance×") for l in labels)
-    assert any(l.startswith("valence×") for l in labels)
+    assert any(label.startswith("fatigue×") for label in labels)
+    assert any(label.startswith("dominance×") for label in labels)
+    assert any(label.startswith("valence×") for label in labels)
 
 
 # ── backward compatibility ────────────────────────────────────────

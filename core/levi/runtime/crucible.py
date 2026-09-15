@@ -12,12 +12,11 @@ Not unrestricted shell. Not a copy of any commercial sandbox UI.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Optional
 from pathlib import Path
 from datetime import datetime, timezone
 import ast
 import py_compile
-import tempfile
 import uuid
 
 

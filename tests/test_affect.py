@@ -5,12 +5,9 @@ No network, no model, no filesystem writes outside tmp_path.
 
 import json
 
-import pytest
 
 from levi.affect import (
     DIMENSIONS,
-    EmotionReading,
-    PolicyDecision,
     SelfModel,
     SessionEI,
     affect_hint,

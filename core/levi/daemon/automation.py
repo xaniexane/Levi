@@ -7,7 +7,7 @@ Policy-gated. Bounded execution.
 """
 
 from __future__ import annotations
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 from enum import Enum
 from datetime import datetime, timezone

@@ -331,7 +331,7 @@ def interpenetration_matrix() -> str:
     lines.append(f"  dangling refs: {len(dang)}" + ("" if not dang else f" ({', '.join(dang)})"))
     lines.append("    (combines_with targets with no catalog entry; kept as external nodes)")
     lines.append("  strongest bonds:")
-    for a, b, w, kinds in g.strongest_bonds(5):
+    for a, b, w, _kinds in g.strongest_bonds(5):
         lines.append(f"    {a} <-> {b}  (w={w:.1f})")
     lines.append("  top assets by weighted degree:")
     top = sorted(((n, g.weighted_degree(n)) for n in g.nodes),

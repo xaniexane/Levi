@@ -59,7 +59,9 @@ class Bar:
             year, month, day = (int(part) for part in self.date.split("-"))
             date(year, month, day)  # validates calendar correctness
         except (ValueError, AttributeError):
-            raise ValueError(f"Bar.date must be YYYY-MM-DD, got {self.date!r}")
+            raise ValueError(
+                f"Bar.date must be YYYY-MM-DD, got {self.date!r}"
+            ) from None
         for field in ("open", "high", "low", "close", "volume"):
             setattr(self, field, float(getattr(self, field)))
 
@@ -177,5 +179,7 @@ def get_provider(name: str = "stooq") -> MarketDataProvider:
     try:
         cls = PROVIDERS[name.lower()]
     except (KeyError, AttributeError):
-        raise MarketDataError(f"unknown market data provider: {name!r}")
+        raise MarketDataError(
+            f"unknown market data provider: {name!r}"
+        ) from None
     return cls()

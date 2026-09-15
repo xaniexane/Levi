@@ -1,7 +1,7 @@
 """Stress / verify harness for engines."""
 from __future__ import annotations
 
-from typing import List, Tuple
+from typing import List
 
 
 def run_stress() -> str:
@@ -28,7 +28,7 @@ def run_stress() -> str:
                 t = expand_paragraph("Hook", "Lena Voss", genre, "A lattice opens under weather law", "old compromise", i)
                 # no consecutive duplicate sentences
                 parts = t.split(". ")
-                for a, b in zip(parts, parts[1:]):
+                for a, b in zip(parts, parts[1:], strict=False):
                     if a == b:
                         raise AssertionError(f"duplicate sentence in {genre}")
                 r = rate_text(t)

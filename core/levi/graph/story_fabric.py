@@ -450,8 +450,8 @@ class StoryFabric:
                 StoryBeat(2, "Complication", f"A rule of the world ({genre}) tightens; cost appears.", [lead]),
                 StoryBeat(3, "Midpoint Turn", f"{ant} forces a choice that can't be undone.", [lead, ant]),
                 StoryBeat(4, "Darkening", f"{lead}'s strategy fails against their wound.", [lead]),
-                StoryBeat(5, "Convergence", f"Allies, doubles, or systems collide; the cascade peaks.", [c.name for c in chars[:3]]),
-                StoryBeat(6, "Aftermath", f"A new equilibrium — or a recursion — remains.", [lead]),
+                StoryBeat(5, "Convergence", "Allies, doubles, or systems collide; the cascade peaks.", [c.name for c in chars[:3]]),
+                StoryBeat(6, "Aftermath", "A new equilibrium — or a recursion — remains.", [lead]),
             ]
 
     def _compose_body(
@@ -533,14 +533,14 @@ class StoryFabric:
             summaries = {
                 "Hook": f"{lead} faces the premise under {genre_l} pressure.",
                 "Complication": f"A rule of the world tightens; the first real cost appears for {lead}.",
-                "Midpoint Turn": f"A forced choice — information that cannot be unread.",
+                "Midpoint Turn": "A forced choice — information that cannot be unread.",
                 "Darkening": f"{lead}'s preferred strategy fails; the wound drives the scene.",
-                "Convergence": f"Threads collide; allies and systems share the same room.",
-                "Aftermath": f"New equilibrium or recursion — the cascade settles into a shape.",
-                "Echo Return": f"An earlier beat returns changed; memory of the loop bleeds in.",
+                "Convergence": "Threads collide; allies and systems share the same room.",
+                "Aftermath": "New equilibrium or recursion — the cascade settles into a shape.",
+                "Echo Return": "An earlier beat returns changed; memory of the loop bleeds in.",
                 "Spiral Deepening": f"Same stakes, higher resolution; {genre_l} logic tightens again.",
                 "Final Cost": f"What {lead} keeps and what they lose is named.",
-                "Coda": f"A last image; the bible of this story can be closed or reopened.",
+                "Coda": "A last image; the bible of this story can be closed or reopened.",
             }
             summary = summaries.get(name, f"{lead} advanced under {genre_l} pressure; the cascade typed the next hinge without flourish.")
             extra = StoryBeat(
@@ -663,7 +663,7 @@ class StoryFabric:
         wound = story.characters[0].wound if story.characters else ""
         support = story.characters[1].name if len(story.characters) > 1 else None
         from levi.graph.story_prose import expand_paragraph
-        from levi.graph.backwords import dual_passage, format_dual_block
+        from levi.graph.backwords import dual_passage
 
         # Build a forward run of `depth` cascade beats (same words as expand)
         names = self.CASCADE_BEAT_NAMES[:depth]

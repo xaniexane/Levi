@@ -11,13 +11,11 @@ This module is the *protocol spec + safe local demo* — not a home-grown produc
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
-from typing import Any, Dict, List, Optional, Tuple
-from pathlib import Path
+from typing import Any, Dict, Optional, Tuple
 from datetime import datetime, timezone
 import hashlib
 import hmac
 import os
-import json
 import secrets
 
 

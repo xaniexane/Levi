@@ -7,7 +7,6 @@ import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
-import pytest
 
 NEWS_DIR = Path(__file__).resolve().parent.parent / "core" / "levi" / "knowledge" / "news"
 sys.path.insert(0, str(NEWS_DIR))

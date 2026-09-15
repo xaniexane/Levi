@@ -96,7 +96,7 @@ def main() -> int:
             lines.append("_No ingested texts yet._")
         lines += ["", "## All courses", ""]
         lines += rows
-        lines += ["", f"_Generated from catalog.json + coverage.json._", ""]
+        lines += ["", "_Generated from catalog.json + coverage.json._", ""]
         (BRIEFS / f"{slug}.md").write_text("\n".join(lines), encoding="utf-8")
         print(f"  {slug}: {len(texts)} texts, {len(rows)} course rows, "
               f"{len(''.join(lines))} chars")

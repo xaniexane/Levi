@@ -8,7 +8,6 @@ from __future__ import annotations
 from dataclasses import dataclass, field, asdict
 from typing import Any, Callable, Dict, List, Optional
 from enum import Enum
-import uuid
 
 
 class SkillRisk(int, Enum):
@@ -218,7 +217,7 @@ def _skill_factory_status(_: Dict[str, Any] | None = None) -> str:
 
 def _skill_factory_create(args: Dict[str, Any] | None = None) -> str:
     from levi.factory.pipeline import SoftwareFactory
-    from levi.orchestration.nl_ir import NLIRCompiler, IRKind
+    from levi.orchestration.nl_ir import NLIRCompiler
     args = args or {}
     raw = (args.get("idea") or args.get("text") or args.get("content") or "").strip()
     if not raw:
@@ -323,7 +322,7 @@ def _skill_compile_ir(args: Dict[str, Any] | None = None) -> str:
 
 
 def _skill_automation_create(args: Dict[str, Any] | None = None) -> str:
-    from levi.orchestration.nl_ir import NLIRCompiler, IRKind
+    from levi.orchestration.nl_ir import NLIRCompiler
     from levi.daemon.automation import AutomationRegistry, AutomationAction, TriggerKind
     args = args or {}
     raw = (args.get("text") or args.get("idea") or "").strip()

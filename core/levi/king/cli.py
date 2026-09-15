@@ -32,7 +32,7 @@ from __future__ import annotations
 
 import sys
 
-from levi.king import PLATFORM_CONNECTORS, King
+from levi.king import King
 from levi.king.social import PLATFORMS
 
 

@@ -6,7 +6,6 @@ Never requires network. User can export / delete.
 
 from __future__ import annotations
 import json
-import os
 from pathlib import Path
 from typing import List, Optional, Dict, Any
 from datetime import datetime, timezone

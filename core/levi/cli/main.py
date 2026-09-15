@@ -25,16 +25,16 @@ from levi.skill.registry import SkillRegistry
 from levi.agent.specialists import SpecialistRegistry
 from levi.memory.store import MemoryStore
 from levi.memory.types import MemoryType
-from levi.policy.gates import PolicyEngine, RiskLevel
+from levi.policy.gates import PolicyEngine
 from levi.model.abstraction import ModelRouter
 from levi.graph.interpenetration import InterpenetrationEngine
 from levi.graph.genres import GenreRegistry
 from levi.factory.pipeline import SoftwareFactory
 from levi.daemon.automation import AutomationRegistry
-from levi.identity.profile import ProfileStore, UserProfile
+from levi.identity.profile import ProfileStore
 from levi.identity.shelf import collect_shelf, format_shelf, latest_item
 from levi.identity.export_life import export_life_pack, import_life_pack
-from levi.identity.templates import list_templates, apply_template, get_template
+from levi.identity.templates import list_templates, apply_template
 
 
 def banner():
@@ -119,7 +119,7 @@ def cmd_home(args):
     print(format_shelf(limit=8))
     latest = latest_item()
     if latest:
-        print(f"\nSuggested: levi continue")
+        print("\nSuggested: levi continue")
     store.save(p)
 
 
@@ -241,7 +241,6 @@ def cmd_morning(args):
 
 
 def cmd_status(args):
-    orch = Orchestrator(persona_id=args.personality)
     memory = MemoryStore()
     router = ModelRouter()
     policy = PolicyEngine()
@@ -253,7 +252,7 @@ def cmd_status(args):
         print("══ LEVI status ══\n")
         print(f"Version: {__version__}")
         print(f"User: {p.name or '(run levi init)'} · onboarded={p.onboarded}")
-        print(f"Companion: Friend · Mentor · Challenger · Protector")
+        print("Companion: Friend · Mentor · Challenger · Protector")
         print(f"Model: {'local' if router.status().get('local_available') else 'offline fallback'}")
         print(f"Memory entries: {memory.stats().get('total', 0)}")
         print(f"Skills: {len(skills.list())} · Specialists: {len(agents.list())}")
@@ -347,7 +346,6 @@ def cmd_turn(args):
 def cmd_nervous(args):
     """Show LEVI affect state + persona activation matrix."""
     from levi.persona.nervous_system import NervousSystem
-    from levi.persona.lattice import PersonaLattice
     ns = NervousSystem(persona_ids=PersonaLattice().keys())
     if getattr(args, "unlock", False):
         ns.unlock()
@@ -672,7 +670,8 @@ def cmd_go(args):
             print(lad.run_ladder())
         else:
             from levi.cli.main import cmd_ladder
-            class A: pass
+            class A:
+                pass
             cmd_ladder(A())
     print("")
     from levi.ops.layer import OperationalLayer
@@ -777,7 +776,7 @@ def cmd_plugin(args):
     conn = get_connector(getattr(args, "connector", None) or "")
     if conn is None:
         print(f"Unknown connector {getattr(args, 'connector', None)!r}. Try: levi plugin list")
-        raise SystemExit(2)
+        raise SystemExit(2) from None
     params = {}
     for item in getattr(args, "param", None) or []:
         if "=" not in item:
@@ -807,7 +806,7 @@ def cmd_plugin(args):
         if result.data:
             print(_json.dumps(result.data, indent=2))
     if not result.ok:
-        raise SystemExit(2)
+        raise SystemExit(2) from None
 
 def cmd_finance(args):
     """Paper-only finance domain (blueprint §5.4/5.5): quotes, indicator
@@ -837,7 +836,7 @@ def cmd_finance(args):
         except _market.MarketDataError as exc:
             # Honest failure: name what happened, print no numbers, exit 1.
             print(f"Market data unavailable for {symbol}: {exc}")
-            raise SystemExit(1)
+            raise SystemExit(1) from None
 
     def _fmt(value, need: int, have: int, decimals: int = 4) -> str:
         if value is None:
@@ -932,7 +931,7 @@ def cmd_finance(args):
         except _market.MarketDataError as exc:
             # Never fabricate a signal from a failed fetch.
             print(f"Market data unavailable for {symbol}: {exc}")
-            raise SystemExit(1)
+            raise SystemExit(1) from None
         narrative = _signals.narrate(signal)
         if getattr(args, "json", False):
             print(_json.dumps({
@@ -1025,7 +1024,7 @@ def cmd_finance(args):
             print("  5. per-order human confirmation")
             print("Until all five hold, AlpacaConnector reports transport_not_wired:")
             print("live trading is structurally impossible in this build.")
-            raise SystemExit(2)
+            raise SystemExit(2) from None
         side = str(getattr(args, "side", "") or "").lower()
         try:
             qty = float(getattr(args, "qty", 0) or 0)
@@ -1040,13 +1039,13 @@ def cmd_finance(args):
                   "@ latest Stooq close (paper).")
             print("  Nothing was placed and nothing was saved.")
             print("  Re-run with --yes to confirm this paper order.")
-            raise SystemExit(2)
+            raise SystemExit(2) from None
         # Validate before touching anything.
         try:
             order = _broker.Order(symbol=symbol, qty=qty, side=side)
         except _broker.InvalidOrder as exc:
             print(f"Order NOT placed: {exc}")
-            raise SystemExit(2)
+            raise SystemExit(2) from None
         # Reference price comes from real market data — never invented.
         bars = _bars_for(symbol, days=10)
         ref_price = bars[-1].close
@@ -1057,14 +1056,14 @@ def cmd_finance(args):
         except (_broker.InvalidOrder, _broker.OrderNotConfirmed,
                 _broker.NoReferencePrice) as exc:
             print(f"Order NOT placed: {exc}")
-            raise SystemExit(2)
+            raise SystemExit(2) from None
         portfolio = _portfolio.load(_portfolio.DEFAULT_PATH)
         try:
             portfolio.apply_fill(fill.symbol, fill.side, fill.qty, fill.fill_price)
         except ValueError as exc:
             print(f"Paper ledger rejected the fill: {exc}")
             print("Nothing was saved.")
-            raise SystemExit(2)
+            raise SystemExit(2) from None
         saved_path = portfolio.save(_portfolio.DEFAULT_PATH)
         print(fill)  # Fill.__str__ always says SIMULATED
         print(f"Applied to the paper ledger and saved: {saved_path}")
@@ -1083,7 +1082,7 @@ def cmd_finance(args):
             portfolio.deposit(amount)
         except ValueError as exc:
             print(f"Deposit refused: {exc}")
-            raise SystemExit(2)
+            raise SystemExit(2) from None
         saved_path = portfolio.save(_portfolio.DEFAULT_PATH)
         print(f"Deposited ${amount:,.2f} into the PAPER portfolio "
               "(SIMULATED — no real money).")
@@ -1125,7 +1124,7 @@ def cmd_agent(args):
         if variant is None:
             valid = ", ".join(v.id for v in all_variants())
             print(f"Unknown KAI-9000 register {variant_id!r}. Valid ids: {valid}")
-            raise SystemExit(2)
+            raise SystemExit(2) from None
         return variant.id, system_for(variant.id)
 
     if action == "serve":
@@ -1195,7 +1194,6 @@ def cmd_agent(args):
             brain = brain_provider.NativeBrainProvider().status()
             print("══ Native brain (levi-brain) status ══\n")
             if brain["weights_present"]:
-                log = brain_provider.train_log()
                 print(f"  Weights   : PRESENT  {Path(brain['weights']).name}")
                 if brain["params"]:
                     print(f"  Params    : {brain['params']:,}")
@@ -1254,7 +1252,7 @@ def cmd_agent(args):
             spec = local_model.MODELS.get(model_key)
             if spec is None:
                 print(f"Unknown model {model_key!r} (known: {', '.join(sorted(local_model.MODELS))})")
-                raise SystemExit(2)
+                raise SystemExit(2) from None
             if getattr(args, "model", None) is None:
                 print("Available models (intelligence-per-RAM tradeoff — bigger is smarter, not magic):")
                 for key in sorted(local_model.MODELS):
@@ -1279,7 +1277,7 @@ def cmd_agent(args):
                     print(f"\npull failed: {exc}")
                     print("Partial files were cleaned up. Check your connection and retry; "
                           "nothing half-installed was left behind.")
-                    raise SystemExit(1)
+                    raise SystemExit(1) from None
                 print(f"\nDownloaded: {dest}")
             print("\nRunner (llama-server):")
             runner, err = local_model.ensure_runner(progress=_progress)
@@ -1302,7 +1300,7 @@ def cmd_agent(args):
         task = getattr(args, "task", None) or ""
         if not task.strip():
             print("Usage: levi agent run \"<task>\" [--provider local|levi-local|openai|anthropic] [--yes] [--max-steps N]")
-            raise SystemExit(2)
+            raise SystemExit(2) from None
         consent = bool(getattr(args, "yes", False))
 
         def _confirm(preview: str) -> bool:
@@ -1351,7 +1349,7 @@ def cmd_agent(args):
                 print(f"── step {step.index + 1} ──")
                 if step.provider_text:
                     print(f"  agent: {step.provider_text[:300]}")
-                for call, result in zip(step.tool_calls, step.results):
+                for call, result in zip(step.tool_calls, step.results, strict=False):
                     args_preview = {k: (str(v)[:80]) for k, v in (call.get("args") or {}).items()}
                     verdict = "ok" if result.get("ok") else "FAILED"
                     print(f"  tool {call.get('name')} {args_preview} → {verdict}")
@@ -1362,7 +1360,7 @@ def cmd_agent(args):
             print(f"\n══ final ({'ok' if transcript.ok else 'FAILED'}) ══")
             print(transcript.final)
         if not transcript.ok:
-            raise SystemExit(1)
+            raise SystemExit(1) from None
         return
 
     print("Usage: levi agent <run|chat|tools|serve|model>")
@@ -1573,8 +1571,8 @@ def cmd_growth(args):
               f"{report['consolidation']['accepted']} accepted, "
               f"{report['consolidation']['corroborated']} corroborated, "
               f"{report['consolidation']['skipped']} skipped")
-        for l in report["learnings"]:
-            print(f"  [{l['kind']}] ({l['confidence']:.2f}) {l['content'][:160]}")
+        for learning in report["learnings"]:
+            print(f"  [{learning['kind']}] ({learning['confidence']:.2f}) {learning['content'][:160]}")
         if report["quiet"]:
             print("(quiet cycle — nothing new to learn from)")
         return
@@ -1674,7 +1672,7 @@ def cmd_news(args):
 
     if action == "refresh":
         script = base / "refresh.py"
-        rc = subprocess.run([sys.executable, str(script)]).returncode
+        subprocess.run([sys.executable, str(script)])
         return
 
     days = base / "days"
@@ -2046,8 +2044,6 @@ def cmd_wit(args):
 
 
 def cmd_personas(args):
-    from levi.persona.lattice import PersonaLattice
-    from levi.ei.chat_companion import ChatCompanion
     lat = PersonaLattice()
     keys = lat.keys()
     core = [k for k in keys if not k.startswith("lens_") and not k.startswith("mood_")]
@@ -2159,7 +2155,7 @@ def cmd_story(args):
         if len(s.body) > 3200:
             print("...")
         print("─" * 48)
-        print(f"Talk to LEVI:  levi chat \"…\"   ·  levi ask \"Who are you?\"")
+        print("Talk to LEVI:  levi chat \"…\"   ·  levi ask \"Who are you?\"")
         print(f"Forward more:  levi story --expand {s.id} --auto-forward 2")
         print(f"Backwards:     levi story --expand {s.id} --auto-backward 2")
         return
@@ -2394,7 +2390,7 @@ def cmd_model(args):
 
 def cmd_chat(args):
     """Enterprise chat companion — multi-turn session with personas & modes."""
-    from levi.ei.chat_companion import ChatCompanion, list_sessions, MODES
+    from levi.ei.chat_companion import ChatCompanion, list_sessions
     if getattr(args, "list_sessions", False):
         rows = list_sessions()
         if not rows:
@@ -2445,7 +2441,6 @@ def cmd_si(args):
 
 def cmd_cognition(args):
     """Where LEVI lives: personas, wit/sarcasm spectrum, cognition organs."""
-    from levi.persona.lattice import PersonaLattice
     from levi.persona.wit_layer import list_styles, calibrate_wit
     from levi.identity.si import si_block
     lat = PersonaLattice()
@@ -2491,8 +2486,7 @@ def cmd_premium(args):
 
 def cmd_kai(args):
     """KAI-9000 family — redesigned SI registers."""
-    from levi.persona.kai9000 import format_kai_roster, get, system_for, register_into_lattice, all_variants
-    from levi.persona.lattice import PersonaLattice
+    from levi.persona.kai9000 import format_kai_roster, get, register_into_lattice, all_variants
     var = getattr(args, "variant", None)
     if var:
         # allow short names: care, ops, ...
@@ -2632,7 +2626,7 @@ def cmd_here(args):
 def cmd_talk(args):
     """Mass-friendly chat entry — LEVI SI with hardwired quality traits."""
     from levi.ei.chat_companion import ChatCompanion
-    from levi.ei.mass_chat import format_traits, format_profiles
+    from levi.ei.mass_chat import format_traits
     profile = getattr(args, "profile", None) or "levi"
     if getattr(args, "list_profiles", False):
         print(format_traits())
@@ -3145,7 +3139,7 @@ def main():
         "morning": cmd_morning, "import": cmd_import,
         "export": cmd_export, "templates": cmd_templates,
         "status": cmd_status, "ask": cmd_ask, "turn": cmd_turn, "personas": cmd_personas, "wit": cmd_wit,
-        "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "continue": cmd_continue, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "plugin": cmd_plugin, "finance": cmd_finance, "agent": cmd_agent, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy, "growth": cmd_growth, "brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "courses": cmd_courses, "news": cmd_news, "capabilities": cmd_capabilities, "affect": cmd_affect, "lab": cmd_lab, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
+        "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "plugin": cmd_plugin, "finance": cmd_finance, "agent": cmd_agent, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy, "growth": cmd_growth, "brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "courses": cmd_courses, "news": cmd_news, "capabilities": cmd_capabilities, "affect": cmd_affect, "lab": cmd_lab, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
         "graph": cmd_graph,
         "image": cmd_image, "story": cmd_story, "genres": cmd_genres, "factory": cmd_factory, "automations": cmd_automations,
         "remember": cmd_remember, "recall": cmd_recall, "cloud": cmd_cloud, "model": cmd_model, "chat": cmd_chat, "enterprise": cmd_enterprise, "scorecard": cmd_scorecard, "si": cmd_si, "cognition": cmd_cognition, "premium": cmd_premium, "kai": cmd_kai, "unique": cmd_unique, "x100": cmd_x100, "max": cmd_max, "max10": cmd_max10, "stress": cmd_stress, "here": cmd_here, "talk": cmd_talk, "profiles": cmd_profiles, "traits": cmd_traits, "retention": cmd_retention, "dna": cmd_dna, "intel": cmd_intel, "giant": cmd_giant, "future": cmd_future, "interpenetrate": cmd_interpenetrate,

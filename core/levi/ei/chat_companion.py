@@ -27,7 +27,6 @@ from pathlib import Path
 from datetime import datetime, timezone
 import json
 import uuid
-import re
 
 
 DEFAULT_DIR = Path.home() / ".levi" / "chat_sessions"
@@ -391,7 +390,8 @@ class ChatCompanion:
     def repl(self) -> None:
         """Interactive REPL (stdin)."""
         print(self.status())
-        print(self.welcome()); print("\nType /help · /quit to exit\n")
+        print(self.welcome())
+        print("\nType /help · /quit to exit\n")
         while True:
             try:
                 line = input("you> ").strip()

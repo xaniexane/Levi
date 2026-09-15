@@ -67,7 +67,7 @@ def step1_kernel_boot() -> List[Tuple[str, bool, str]]:
         return len(ORGANS) >= 20 and len(BLOODSTREAM) >= 15, f"organs={len(ORGANS)}"
 
     def control_crisis():
-        from levi.daemon.control import ControlDaemon, select_core_emphasis
+        from levi.daemon.control import select_core_emphasis
         e = select_core_emphasis("I'm panicking and falling apart")
         return e == ["alchemy"], f"emphasis={e}"
 

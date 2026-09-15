@@ -21,7 +21,7 @@ import json
 import re
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Any, Iterator
+from typing import Iterator
 
 
 # ---------------------------------------------------------------------------

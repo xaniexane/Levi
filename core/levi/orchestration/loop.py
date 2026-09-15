@@ -11,13 +11,13 @@ from typing import Any, Dict, List, Optional
 
 from levi.ei.five_d import FiveDEI
 from levi.ei.companion import CompanionCore
-from levi.persona.lattice import PersonaLattice, Persona
+from levi.persona.lattice import PersonaLattice
 from levi.persona.nervous_system import NervousSystem
 from levi.persona.wit_layer import calibrate_wit, wit_system_block
 from levi.persona.behaviors import apply_special_behavior
 from levi.daemon.control import ControlDaemon
 from levi.persona.monotropism import MonotropismTracker
-from levi.agent.specialists import SpecialistRegistry, Specialist
+from levi.agent.specialists import SpecialistRegistry
 from levi.skill.registry import SkillRegistry
 from levi.policy.gates import PolicyEngine, RiskLevel
 from levi.memory.store import MemoryStore

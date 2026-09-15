@@ -8,12 +8,11 @@ combinatorics — LEVI-original, not a stock NPC table dump.
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 from pathlib import Path
 from datetime import datetime, timezone
 import hashlib
 import json
-import itertools
 import random
 
 

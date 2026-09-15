@@ -19,8 +19,8 @@ BEHAVIOR
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from dataclasses import dataclass
+from typing import List, Optional
 
 
 @dataclass(frozen=True)

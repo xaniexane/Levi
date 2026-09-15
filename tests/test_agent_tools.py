@@ -4,8 +4,6 @@ No network, no user HOME writes: HOME is monkeypatched to a tmp dir and
 the network-dependent tools are tested with LEVI_OFFLINE=1 plus a
 monkeypatched urlopen that fails loudly if any call slips through.
 """
-import os
-from pathlib import Path
 
 import pytest
 
@@ -14,7 +12,6 @@ from levi.agent.tools import (
     ExecContext,
     Tool,
     ToolResult,
-    ToolRegistry,
     build_default_registry,
 )
 

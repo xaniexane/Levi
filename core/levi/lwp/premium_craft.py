@@ -14,7 +14,7 @@ LEVI-unique: cascade-locked beats, scar law, void-ghost residue, ROM rupture hoo
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional, Dict, Any
+from typing import List, Dict, Any
 import hashlib
 
 
@@ -153,7 +153,7 @@ def premium_expand_paragraph(
     techniques = [
         f"**{beat_name}** — try/fail: {lead} attempts to {goal}, and the {g} frame taxes the attempt.",
         f"Sequel beat ({sequel}): the body registers the cost before the plan does. Wound echo: {wound}.",
-        f"Plant/payoff pressure: an earlier detail returns sharper. Cascade will not skip sequence.",
+        "Plant/payoff pressure: an earlier detail returns sharper. Cascade will not skip sequence.",
         f"Micro-tension: the paragraph ends before safety. {lead} still owes the next irreversible inch.",
         f"Focalization locked on {lead}; other minds are weather, not narration rights.",
         f"Iceberg: what is not said about {premise[:80]} carries more weight than a speech.",
@@ -174,11 +174,11 @@ def premium_beats(lead: str, ant: str, genre: str, premise: str) -> List[Dict[st
         {"order": 1, "name": "In Medias Res Hook", "summary": f"{lead} is already paying for: {premise[:100]}"},
         {"order": 2, "name": "Plant (Chekhov)", "summary": f"A detail appears that must matter later under {g} rules."},
         {"order": 3, "name": "Try-Fail 1", "summary": f"{lead} acts; the world answers with cost, not lecture."},
-        {"order": 4, "name": "Sequel Reaction", "summary": f"Emotion → dilemma → decision; wound shapes the choice."},
+        {"order": 4, "name": "Sequel Reaction", "summary": "Emotion → dilemma → decision; wound shapes the choice."},
         {"order": 5, "name": "Midpoint Reversal", "summary": f"{ant} or the system flips the power map."},
-        {"order": 6, "name": "B-Story Mirror", "summary": f"Secondary thread reflects the true need, not the stated want."},
+        {"order": 6, "name": "B-Story Mirror", "summary": "Secondary thread reflects the true need, not the stated want."},
         {"order": 7, "name": "Dark Night Cost", "summary": f"{lead}'s best strategy fails against the wound."},
-        {"order": 8, "name": "Recognition", "summary": f"What was true becomes visible; names change leverage."},
-        {"order": 9, "name": "Convergence Payoff", "summary": f"Plants fire; cascade peaks; no free resets."},
-        {"order": 10, "name": "Aftermath Image", "summary": f"One concrete image holds the new equilibrium."},
+        {"order": 8, "name": "Recognition", "summary": "What was true becomes visible; names change leverage."},
+        {"order": 9, "name": "Convergence Payoff", "summary": "Plants fire; cascade peaks; no free resets."},
+        {"order": 10, "name": "Aftermath Image", "summary": "One concrete image holds the new equilibrium."},
     ]

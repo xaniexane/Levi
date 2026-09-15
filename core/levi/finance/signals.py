@@ -98,7 +98,6 @@ from levi.finance.indicators import (
 )
 from levi.finance.market import (
     Bar,
-    MarketDataError,
     MarketDataProvider,
     StooqProvider,
 )
