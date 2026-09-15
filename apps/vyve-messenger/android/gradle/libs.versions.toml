@@ -13,9 +13,18 @@ ksp = "2.3.12"                 # * LATEST KSP as of 2026-09-15; NO KSP for Kotli
                                #   branch). KSP 2.3.10+ understands Kotlin 2.4 module
                                #   names; build will prove it out.
 hilt = "2.59.2"
-composeBom = "2026.08.00"
+# composeBom 2026.06.01 (Compose 1.11.4, minCompileSdk 35): do NOT bump to
+# 2026.08.00+ (Compose 1.12.0) — its artifacts declare minCompileSdk 37 in
+# their AAR metadata, which AGP 9 enforces as a hard gate, and Google has
+# not published a platforms;android-37 SDK package (verified against the
+# SDK repository XML on 2026-09-15). Revisit once the API 37 platform ships.
+composeBom = "2026.06.01"
 
-coreKtx = "1.19.0"
+# coreKtx 1.18.0 (minCompileSdk 36): do NOT bump to 1.19.0 — it declares
+# minCompileSdk 37 (same unpublished-platform problem as Compose 1.12.0).
+# Nothing in the graph pulls core >= 1.19.0 transitively (activity 1.13.0
+# wants core-ktx 1.18.0; appcompat/material/work want older), so 1.18.0 wins.
+coreKtx = "1.18.0"
 appcompat = "1.8.0"
 material = "1.13.0"
 activityCompose = "1.13.0"

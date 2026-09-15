@@ -2,10 +2,12 @@
 
 Build & release notes for `apps/vyve-messenger/android/`. Rebuilt 2026-09-15
 (P2.4): Gradle 9.6.0, AGP 9.4.0, Kotlin 2.4.20, Compose BOM 2026.08.00,
-compileSdk/targetSdk 36. (Compose BOM 2026.x / androidx.core 1.19.0 declare
-compileSdk 37 in their AAR metadata, but no platforms;android-37 package
-exists yet — the check is suppressed with
-`android.suppressUnsupportedCompileSdk=37`; see gradle.properties.)
+compileSdk/targetSdk 36. Newer androidx releases (Compose 1.12.0 via BOM
+2026.08.00+, androidx.core 1.19.0) declare minCompileSdk 37 in their AAR
+metadata, which AGP 9 enforces as a hard gate for consumers — but Google has
+not published a platforms;android-37 SDK package, so the version catalog pins
+Compose BOM 2026.06.01 (Compose 1.11.4, minCompileSdk 35) and core-ktx 1.18.0
+(minCompileSdk 36). Revisit once the API 37 platform ships.
 
 **Why Gradle 9.6.0 (not 9.4.1):** the official AGP 9.4.0 release notes
 (<https://developer.android.com/build/releases/agp-9-4-0-release-notes>)

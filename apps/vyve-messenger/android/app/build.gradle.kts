@@ -14,10 +14,11 @@ plugins {
 
 android {
     namespace = "com.cybrus.vyve"
-    // compileSdk stays 36: Compose BOM 2026.x (1.12.0) and androidx.core 1.19.0
-    // declare compileSdk 37 in their AAR metadata, but no platforms;android-37
-    // SDK package exists yet, so the check is suppressed via
-    // android.suppressUnsupportedCompileSdk=37 in gradle.properties.
+    // compileSdk/targetSdk 36. Newer androidx releases (Compose 1.12.0 via BOM
+    // 2026.08.00+, androidx.core 1.19.0) declare minCompileSdk 37 in their AAR
+    // metadata, which AGP 9 enforces as a hard gate — but Google has not
+    // published a platforms;android-37 SDK package, so we pin the catalog to
+    // versions whose metadata tops out at 36 (see libs.versions.toml notes).
     compileSdk = 36
 
     defaultConfig {

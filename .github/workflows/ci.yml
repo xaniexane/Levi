@@ -107,7 +107,10 @@ jobs:
       # android-actions/setup-android@v3 is broken: it unconditionally runs
       # `sdkmanager tools`, but the obsolete `tools` package no longer exists
       # in the SDK repository, so the step fails. Install exactly what the
-      # app needs (compileSdk/targetSdk 36) explicitly instead.
+      # app needs (compileSdk/targetSdk 36) explicitly instead. NB: do NOT
+      # try to install an API 37 platform — Google has not published one
+      # (no platforms;android-37* in the SDK repository); the catalog pins
+      # androidx versions whose AAR metadata tops out at compileSdk 36.
       - name: Install Android SDK (API 36)
         run: |
           set -euo pipefail
