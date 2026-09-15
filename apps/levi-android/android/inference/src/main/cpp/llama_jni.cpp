@@ -85,6 +85,7 @@ bool eval_tokens(llama_context* ctx, const llama_token* tokens, int n, int n_pas
         batch.seq_id[i][0] = 0;
         batch.logits[i] = (i == n - 1) ? 1 : 0;
     }
+    batch.n_tokens = n;
     const bool ok = llama_decode(ctx, batch) == 0;
     llama_batch_free(batch);
     return ok;

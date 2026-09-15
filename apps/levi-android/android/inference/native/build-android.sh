@@ -87,12 +87,19 @@ for ABI in "${ABIS[@]}"; do
     echo "=== Building $ABI ==="
     BDIR="$BUILD_ROOT/$ABI"
     mkdir -p "$BDIR"
+    # Upstream llama.cpp's llamafile sgemm uses fp16 NEON intrinsics that don't
+    # exist on 32-bit ARM (FIXME in their source); disable it for that ABI.
+    EXTRA_CMAKE_FLAGS=()
+    if [ "$ABI" = "armeabi-v7a" ]; then
+        EXTRA_CMAKE_FLAGS+=(-DGGML_LLAMAFILE=OFF)
+    fi
     cmake -S "$CPP_DIR" -B "$BDIR" -G Ninja \
         -DCMAKE_TOOLCHAIN_FILE="$TOOLCHAIN" \
         -DANDROID_ABI="$ABI" \
         -DANDROID_PLATFORM="android-$MIN_PLATFORM" \
         -DCMAKE_BUILD_TYPE=Release \
-        -DLLAMA_CPP_REF="$LLAMA_CPP_REF"
+        -DLLAMA_CPP_REF="$LLAMA_CPP_REF" \
+        "${EXTRA_CMAKE_FLAGS[@]}"
     cmake --build "$BDIR" -- -j"$NPROC"
 
     OUT="$JNILIBS_DIR/$ABI"

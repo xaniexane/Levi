@@ -98,6 +98,21 @@ free-form generation only. Constrained tool calling needs grammar sampling
 (GBNF) wired through the sampler chain plus a strict JSON validator — a
 separate, testable increment.
 
+## Verification status
+
+- **JVM unit tests:** 25/25 green (`:inference:testDebugUnitTest`), no emulator needed.
+- **Native compile:** `liblevi_llama.so` builds for `arm64-v8a`, `armeabi-v7a`
+  (with `GGML_LLAMAFILE=OFF` — upstream's llamafile sgemm uses fp16 NEON
+  intrinsics missing on 32-bit ARM), and `x86_64`. All 7 JNI entry points
+  exported.
+- **Host smoke test (2026-09-15):** the same `llama_jni.cpp` compiled for
+  Linux x86_64 and driven through the real JNI signatures on the JVM against
+  `Qwen3-0.6B-Q8_0.gguf` — load, generate, streaming callback, benchmark, and
+  unload all work. **26.7 tok/s** on 2 vCPUs (host, not a phone).
+- **Not yet verified:** anything on an actual Android device or emulator —
+  `.so` loading via the app classloader, real generation on device, thermal
+  behavior, and true tok/s numbers.
+
 ## Benchmark expectations (honest)
 
 No emulator or device numbers have been measured yet — the native build is
@@ -111,6 +126,9 @@ Expectations, not promises:
   patience on first load.
 - **First load:** seconds — model mmap plus KV allocation for the context
   size. `contextSize = 2048` keeps KV cache small (~tens of MB at 0.6B).
+- **Qwen3 bases think by default.** The remix weights emit `<think>` traces
+  unless the prompt carries `/no_think`; the app should add it (or strip
+  think blocks) for chat UX. `PromptBuilder` leaves this choice to the app.
 - **No NPU/GPU path yet:** `n_gpu_layers = 0`; pure CPU via llama.cpp's
   optimized kernels (ARM NEON dotprod/i8mm where the SoC supports them).
 
