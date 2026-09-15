@@ -1437,6 +1437,123 @@ def cmd_brain(args):
         return
     print(BrainTable().format(query=getattr(args, "query", "") or ""))
 
+def cmd_growth(args):
+    """Raising baby Levi: the developmental learning loop.
+
+    status (default) — growth dashboard: stage, cycles, learnings, pending
+    cycle [--dry-run] [--no-model] — run one harvest→reflect→consolidate cycle
+    journal [--limit N] — read the growth journal (baby book)
+    learnings [--kind KIND] — list Levi's self-taught learnings
+    forget (--id ID | --tag TAG) — remove learnings (parental control)
+    """
+    from levi.growth import cycle as _cycle
+    from levi.growth import journal as _journal
+
+    action = getattr(args, "growth_action", "status") or "status"
+
+    if action == "status":
+        s = _cycle.status()
+        print("=== LEVI growth ===")
+        print(f"stage: {s['stage']} — {s['stage_blurb']}")
+        print(f"cycles completed: {s['cycles_completed']}")
+        print(f"learnings consolidated: {s['learnings_consolidated']}")
+        if s["learnings_by_kind"]:
+            kinds = ", ".join(f"{k}={v}" for k, v in sorted(s["learnings_by_kind"].items()))
+            print(f"by kind: {kinds}")
+        print(f"experiences pending: {s['experiences_pending']}")
+        last = s["last_cycle"]
+        if last:
+            print(f"last cycle: {last['id']} at {last['ts']} "
+                  f"(mode={last['mode']}, accepted={last['accepted']})")
+        else:
+            print("last cycle: none yet — run `levi growth cycle` to begin")
+        print(f"growth dir: {s['growth_dir']}")
+        return
+
+    if action == "cycle":
+        dry = bool(getattr(args, "dry_run", False))
+        use_model = not bool(getattr(args, "no_model", False))
+        print("Running growth cycle"
+              + (" (dry run — nothing will be written)" if dry else "")
+              + (" (rules only)" if not use_model else "")
+              + " …")
+        report = _cycle.run_cycle(use_model=use_model, dry_run=dry)
+        print(f"cycle {report['cycle_id']}: "
+              f"{report['experiences']} experiences, "
+              f"mode={report['mode']}, "
+              f"{report['learnings_proposed']} proposed → "
+              f"{report['consolidation']['accepted']} accepted, "
+              f"{report['consolidation']['corroborated']} corroborated, "
+              f"{report['consolidation']['skipped']} skipped")
+        for l in report["learnings"]:
+            print(f"  [{l['kind']}] ({l['confidence']:.2f}) {l['content'][:160]}")
+        if report["quiet"]:
+            print("(quiet cycle — nothing new to learn from)")
+        return
+
+    if action == "journal":
+        limit = int(getattr(args, "limit", 10) or 10)
+        entries = _journal.read_entries(limit=limit)
+        if not entries:
+            print("The baby book is empty — no growth cycles yet.")
+            return
+        for e in entries:
+            if e.get("kind") == "cycle":
+                print(f"{e.get('ts')} {e.get('id')}: "
+                      f"{e.get('experiences', 0)} exp, mode={e.get('mode')}, "
+                      f"accepted={e.get('accepted', 0)}, "
+                      f"corroborated={e.get('corroborated', 0)}"
+                      + (" (quiet)" if e.get("quiet") else ""))
+            else:
+                print(f"{e.get('ts')} {e.get('id')}: {e.get('kind')}")
+        return
+
+    if action == "learnings":
+        from levi.memory.store import MemoryStore
+        kind = (getattr(args, "kind", "") or "").strip().lower()
+        entries = [e for e in MemoryStore().list(limit=5000) if "growth" in e.tags]
+        if kind:
+            entries = [e for e in entries if kind in e.tags]
+        if not entries:
+            print("No learnings consolidated yet.")
+            return
+        for e in entries[:50]:
+            kinds = [t for t in e.tags if t in ("fact", "preference", "procedural", "correction")]
+            conf = (e.metadata or {}).get("confidence", e.importance)
+            print(f"- [{e.id[:8]}] ({'/'.join(kinds) or 'learning'}, conf={conf})")
+            print(f"  {e.content[:220]}")
+        if len(entries) > 50:
+            print(f"… and {len(entries) - 50} more")
+        return
+
+    if action == "forget":
+        from levi.memory.store import MemoryStore
+        store = MemoryStore()
+        target_id = (getattr(args, "forget_id", "") or "").strip()
+        tag = (getattr(args, "tag", "") or "").strip().lower()
+        removed = 0
+        if target_id:
+            entries = [e for e in store.list(limit=5000)
+                       if "growth" in e.tags and e.id.startswith(target_id)]
+            for e in entries:
+                if store.delete(e.id):
+                    removed += 1
+        elif tag:
+            entries = [e for e in store.list(limit=5000)
+                       if "growth" in e.tags and tag in e.tags]
+            for e in entries:
+                if store.delete(e.id):
+                    removed += 1
+        else:
+            print("Specify --id <id> or --tag <tag> to forget.")
+            return
+        _journal.append_entry({"kind": "forget", "removed": removed,
+                               "by_id": bool(target_id), "tag": tag or None})
+        print(f"Forgot {removed} learning(s).")
+        return
+
+    print(f"Unknown growth action: {action}")
+
 def cmd_echo(args):
     from levi.organs.echo import run_echo, format_echo
     print(format_echo(run_echo(getattr(args, "seed", None) or "silence")))
@@ -2540,6 +2657,18 @@ def main():
     inc_p.add_argument("--service", default="service modernization")
     mh_p = sub.add_parser("memory-hierarchy", help="Memory hierarchy + why-belief")
     mh_p.add_argument("--why", default=None, help="Trace belief to evidence")
+    gr_p = sub.add_parser("growth", help="Raise baby Levi: developmental learning loop")
+    gr_p.add_argument("growth_action", nargs="?", default="status",
+                      choices=["status", "cycle", "journal", "learnings", "forget"])
+    gr_p.add_argument("--dry-run", action="store_true",
+                      help="cycle: preview without writing anything")
+    gr_p.add_argument("--no-model", action="store_true",
+                      help="cycle: use rule-based reflection only (offline)")
+    gr_p.add_argument("--limit", type=int, default=10, help="journal: entries to show")
+    gr_p.add_argument("--kind", default="", help="learnings: filter by kind")
+    gr_p.add_argument("--id", dest="forget_id", default="",
+                      help="forget: learning id prefix to remove")
+    gr_p.add_argument("--tag", default="", help="forget: remove learnings with this tag")
     brain_p = sub.add_parser("brain", help="Corpus + indexed brain table + export")
     brain_p.add_argument("brain_action", nargs="?", default="table", choices=["table", "corpus", "set", "export", "atlas"])
     brain_p.add_argument("--seed-atlas", action="store_true", help="Pre-load offline brain A-Z atlas")
@@ -2759,7 +2888,7 @@ def main():
         "morning": cmd_morning, "import": cmd_import,
         "export": cmd_export, "templates": cmd_templates,
         "status": cmd_status, "ask": cmd_ask, "personas": cmd_personas, "wit": cmd_wit,
-        "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "continue": cmd_continue, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "plugin": cmd_plugin, "finance": cmd_finance, "agent": cmd_agent, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy,"brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "courses": cmd_courses, "news": cmd_news, "capabilities": cmd_capabilities, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
+        "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "continue": cmd_continue, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "plugin": cmd_plugin, "finance": cmd_finance, "agent": cmd_agent, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy, "growth": cmd_growth, "brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "courses": cmd_courses, "news": cmd_news, "capabilities": cmd_capabilities, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
         "graph": cmd_graph,
         "image": cmd_image, "story": cmd_story, "genres": cmd_genres, "factory": cmd_factory, "automations": cmd_automations,
         "remember": cmd_remember, "recall": cmd_recall, "cloud": cmd_cloud, "model": cmd_model, "chat": cmd_chat, "enterprise": cmd_enterprise, "scorecard": cmd_scorecard, "si": cmd_si, "cognition": cmd_cognition, "premium": cmd_premium, "kai": cmd_kai, "unique": cmd_unique, "x100": cmd_x100, "max": cmd_max, "max10": cmd_max10, "stress": cmd_stress, "here": cmd_here, "talk": cmd_talk, "profiles": cmd_profiles, "traits": cmd_traits, "retention": cmd_retention, "dna": cmd_dna, "intel": cmd_intel, "giant": cmd_giant, "future": cmd_future, "interpenetrate": cmd_interpenetrate,

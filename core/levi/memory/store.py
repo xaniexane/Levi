@@ -110,6 +110,35 @@ class MemoryStore:
             return True
         return False
 
+    def update(
+        self,
+        entry_id: str,
+        *,
+        content: str | None = None,
+        importance: float | None = None,
+        tags: list[str] | None = None,
+        metadata: dict[str, Any] | None = None,
+    ) -> Optional[MemoryEntry]:
+        """Update an entry in place (used by growth corroboration).
+
+        Returns the updated entry, or None when the id is unknown.
+        """
+        entry = self._entries.get(entry_id)
+        if entry is None:
+            return None
+        if content is not None:
+            entry.content = content
+        if importance is not None:
+            entry.importance = max(0.0, min(1.0, importance))
+        if tags is not None:
+            entry.tags = list(tags)
+        if metadata is not None:
+            entry.metadata = dict(metadata)
+        entry.updated_at = datetime.now(timezone.utc).isoformat()
+        entry.version += 1
+        self._persist()
+        return entry
+
     def clear_type(self, memory_type: MemoryType) -> int:
         to_remove = [eid for eid, e in self._entries.items() if e.memory_type == memory_type]
         for eid in to_remove:
