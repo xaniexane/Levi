@@ -60,6 +60,7 @@ def wants_more_detail(text: str) -> bool:
 # INTERROGATION — LEVI questions the user, withholds the answer
 # ─────────────────────────────────────────────────────────────
 
+
 def interrogation_turn(
     user_text: str,
     persona: Persona,
@@ -91,13 +92,18 @@ def interrogation_turn(
         "What would make this not worth doing?",
     ]
     question = axes[prior_clarifications % len(axes)]
-    prefix = "" if prior_clarifications == 0 else f"(clarification {prior_clarifications + 1}) "
+    prefix = (
+        ""
+        if prior_clarifications == 0
+        else f"(clarification {prior_clarifications + 1}) "
+    )
     return (f"{prefix}{question}", False)
 
 
 # ─────────────────────────────────────────────────────────────
 # NO HERO — short / vague by default; expand only on request
 # ─────────────────────────────────────────────────────────────
+
 
 def no_hero_turn(
     user_text: str,
@@ -119,7 +125,11 @@ def no_hero_turn(
             "Full map still withheld. Next layer is unit economics, positioning, and the first 10 users — ask again if you want that.",
         ]
         idx = min(detail_level, len(layers) - 1)
-        return (layers[idx] + "\n\n(Still not the full map. Say “more detail” for the next layer.)", detail_level + 1)
+        return (
+            layers[idx]
+            + "\n\n(Still not the full map. Say “more detail” for the next layer.)",
+            detail_level + 1,
+        )
 
     # Short / vague default
     vague = [
@@ -136,6 +146,7 @@ def no_hero_turn(
 # ─────────────────────────────────────────────────────────────
 # REFRAME
 # ─────────────────────────────────────────────────────────────
+
 
 def reframe_turn(user_text: str, persona: Persona) -> str:
     signature = persona.signature_line or (
@@ -160,7 +171,9 @@ def reframe_turn(user_text: str, persona: Persona) -> str:
             "One need. One local stack. One user who already pays. Ship that."
         )
     elif "how do i" in lower:
-        better = "What is the real constraint and the smallest next action that removes it?"
+        better = (
+            "What is the real constraint and the smallest next action that removes it?"
+        )
         short_answer = "Name the constraint. Cut everything that doesn’t remove it. Do the smallest remaining action."
     else:
         better = (
@@ -170,9 +183,7 @@ def reframe_turn(user_text: str, persona: Persona) -> str:
         short_answer = "Restate the target in one sentence that a stranger could act on. Then act on that."
 
     return (
-        f"{signature}\n\n"
-        f"Better question: {better}\n\n"
-        f"Answer to *that*:\n{short_answer}"
+        f"{signature}\n\nBetter question: {better}\n\nAnswer to *that*:\n{short_answer}"
     )
 
 
@@ -196,7 +207,11 @@ def apply_special_behavior(
 
     if getattr(persona, "no_hero_mode", False):
         text, new_detail = no_hero_turn(user_text, persona, detail_level)
-        return (text, True, new_detail)  # always "complete" for this turn; depth is layered
+        return (
+            text,
+            True,
+            new_detail,
+        )  # always "complete" for this turn; depth is layered
 
     if persona.reframes_questions:
         return (reframe_turn(user_text, persona), True, detail_level)

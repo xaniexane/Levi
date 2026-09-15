@@ -39,9 +39,9 @@ export function Onboarding() {
           Let&rsquo;s get you set up.
         </h1>
         <p className="mt-3 max-w-sm leading-relaxed text-muted">
-          Part companion, part shipboard AI. I&rsquo;ll remember what matters, push back
-          when you&rsquo;re coasting, and keep everything on this device unless you say
-          otherwise. Three questions, then we&rsquo;re off.
+          Part companion, part shipboard AI. I&rsquo;ll remember what matters, push back when
+          you&rsquo;re coasting, and keep everything on this device unless you say otherwise. Three
+          questions, then we&rsquo;re off.
         </p>
       </div>
 
@@ -72,9 +72,7 @@ export function Onboarding() {
           />
         </label>
         <fieldset>
-          <legend className="mb-2 text-xs font-medium text-muted">
-            Where should we start?
-          </legend>
+          <legend className="mb-2 text-xs font-medium text-muted">Where should we start?</legend>
           <div className="grid gap-2">
             {LOOPS.map((item) => (
               <button

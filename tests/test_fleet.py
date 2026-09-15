@@ -57,18 +57,28 @@ def test_registry_lists_all_categories_with_valid_tools():
 
 def test_expected_categories_present():
     names = {c.name for c in list_categories()}
-    for expected in ("executive supervisor project_manager planning research "
-                     "coding architect uiux database devops qa security "
-                     "automation browser computer device communication "
-                     "finance payment support sales negotiation marketing data document "
-                     "memory learning verification fraud_risk compliance "
-                     "dispatch bidding coach guardian").split():
+    for expected in (
+        "executive supervisor project_manager planning research "
+        "coding architect uiux database devops qa security "
+        "automation browser computer device communication "
+        "finance payment support sales negotiation marketing data document "
+        "memory learning verification fraud_risk compliance "
+        "dispatch bidding coach guardian"
+    ).split():
         assert expected in names
 
 
 def test_read_only_categories_hold_no_mutating_tools():
-    mutating = {"file_edit", "file_write", "shell_exec", "memory_write",
-                "schedule_add", "schedule_remove", "http_request", "delegate"}
+    mutating = {
+        "file_edit",
+        "file_write",
+        "shell_exec",
+        "memory_write",
+        "schedule_add",
+        "schedule_remove",
+        "http_request",
+        "delegate",
+    }
     for name in ("research", "verification", "fraud_risk"):
         c = get_category(name)
         assert not (set(c.tools) & mutating), name
@@ -123,21 +133,30 @@ def test_supervisor_research_objective():
 
 
 def test_plan_rejects_cycle():
-    plan = Plan(objective="x", nodes=[
-        PlanNode(id="n1", category="research", task="t", acceptance="a",
-                 deps=["n2"]),
-        PlanNode(id="n2", category="research", task="t", acceptance="a",
-                 deps=["n1"]),
-    ])
+    plan = Plan(
+        objective="x",
+        nodes=[
+            PlanNode(
+                id="n1", category="research", task="t", acceptance="a", deps=["n2"]
+            ),
+            PlanNode(
+                id="n2", category="research", task="t", acceptance="a", deps=["n1"]
+            ),
+        ],
+    )
     problems = plan.validate()
     assert any("cycle" in p for p in problems)
 
 
 def test_plan_rejects_unknown_category_and_bad_dep():
-    plan = Plan(objective="x", nodes=[
-        PlanNode(id="n1", category="nope", task="t", acceptance="a",
-                 deps=["ghost"]),
-    ])
+    plan = Plan(
+        objective="x",
+        nodes=[
+            PlanNode(
+                id="n1", category="nope", task="t", acceptance="a", deps=["ghost"]
+            ),
+        ],
+    )
     problems = plan.validate()
     assert len(problems) == 2
 
@@ -164,14 +183,29 @@ def test_replan_remaining_rebuilds_failed_nodes():
 
 
 def _chain_plan() -> Plan:
-    return Plan(objective="stub objective", method="test", nodes=[
-        PlanNode(id="n1", category="research", task="gather",
-                 acceptance="notes exist"),
-        PlanNode(id="n2", category="document", task="write",
-                 acceptance="doc exists", deps=["n1"]),
-        PlanNode(id="n3", category="verification", task="check",
-                 acceptance="all green", deps=["n2"]),
-    ])
+    return Plan(
+        objective="stub objective",
+        method="test",
+        nodes=[
+            PlanNode(
+                id="n1", category="research", task="gather", acceptance="notes exist"
+            ),
+            PlanNode(
+                id="n2",
+                category="document",
+                task="write",
+                acceptance="doc exists",
+                deps=["n1"],
+            ),
+            PlanNode(
+                id="n3",
+                category="verification",
+                task="check",
+                acceptance="all green",
+                deps=["n2"],
+            ),
+        ],
+    )
 
 
 def _stub_worker(node, category, ctx):
@@ -184,8 +218,7 @@ def _stub_worker(node, category, ctx):
 
 
 def test_swarm_runs_three_node_dag_with_merged_results():
-    runner = SwarmRunner(budgets=SwarmBudgets(max_agents=10),
-                         worker_fn=_stub_worker)
+    runner = SwarmRunner(budgets=SwarmBudgets(max_agents=10), worker_fn=_stub_worker)
     report = runner.run(_chain_plan())
     assert report["status"] == "completed"
     assert report["halt_reason"] is None
@@ -205,9 +238,7 @@ def test_swarm_blackboard_shares_state():
     def worker(node, category, ctx):
         seen[node.id] = ctx.blackboard.get("done:n1")
         ctx.blackboard.put(f"done:{node.id}", True)
-        return {"ok": True,
-                "summary": f"stub finished {node.id} fine",
-                "artifacts": []}
+        return {"ok": True, "summary": f"stub finished {node.id} fine", "artifacts": []}
 
     report = SwarmRunner(worker_fn=worker).run(_chain_plan())
     assert report["status"] == "completed"
@@ -216,8 +247,7 @@ def test_swarm_blackboard_shares_state():
 
 
 def test_budget_exceeded_halts_with_structured_report():
-    runner = SwarmRunner(
-        budgets=SwarmBudgets(max_agents=1), worker_fn=_stub_worker)
+    runner = SwarmRunner(budgets=SwarmBudgets(max_agents=1), worker_fn=_stub_worker)
     report = runner.run(_chain_plan())
     assert report["status"] == "halted"
     assert report["halt_reason"]["type"] == "budget"
@@ -228,11 +258,12 @@ def test_budget_exceeded_halts_with_structured_report():
 
 def test_tool_call_budget_enforced():
     budgets = SwarmBudgets(max_tool_calls=1)
-    ctx = WorkerContext(blackboard=Blackboard(), ledger=Ledger(),
-                        budgets=budgets, run_id="t")
-    reg = make_counting_registry(["capabilities"],
-                                 get_category("research"), ctx,
-                                 deadline=time.time() + 60)
+    ctx = WorkerContext(
+        blackboard=Blackboard(), ledger=Ledger(), budgets=budgets, run_id="t"
+    )
+    reg = make_counting_registry(
+        ["capabilities"], get_category("research"), ctx, deadline=time.time() + 60
+    )
     first = reg.execute("capabilities", {})
     assert first.ok
     with pytest.raises(BudgetExceeded) as exc:
@@ -247,14 +278,12 @@ def test_verification_failure_retries_once_then_escalates():
 
     def worker(node, category, ctx):
         calls["n"] += 1
-        return {"ok": True, "summary": "stub result looks fine",
-                "artifacts": []}
+        return {"ok": True, "summary": "stub result looks fine", "artifacts": []}
 
     def always_fail(node, result):
         return Verification(False, "not good enough", "test")
 
-    report = SwarmRunner(worker_fn=worker,
-                         verify_fn=always_fail).run(_chain_plan())
+    report = SwarmRunner(worker_fn=worker, verify_fn=always_fail).run(_chain_plan())
     # initial + exactly one retry per wave; the failed node triggers the
     # single allowed replan, whose recovery node also retries once.
     assert calls["n"] == 4
@@ -267,10 +296,10 @@ def test_verification_failure_retries_once_then_escalates():
 
 
 def test_payment_stub_refuses_without_approval_wiring():
-    node = PlanNode(id="n1", category="payment", task="pay invoice",
-                    acceptance="paid")
-    ctx = WorkerContext(blackboard=Blackboard(), ledger=Ledger(),
-                        budgets=SwarmBudgets(), run_id="t")
+    node = PlanNode(id="n1", category="payment", task="pay invoice", acceptance="paid")
+    ctx = WorkerContext(
+        blackboard=Blackboard(), ledger=Ledger(), budgets=SwarmBudgets(), run_id="t"
+    )
     with pytest.raises(FleetRefusal) as exc:
         default_worker(node, get_category("payment"), ctx)
     assert "approval" in str(exc.value).lower()
@@ -279,14 +308,17 @@ def test_payment_stub_refuses_without_approval_wiring():
 def test_max_depth_refused():
     budgets = SwarmBudgets(max_depth=2)
     with pytest.raises(MaxDepthExceeded):
-        spawn_subswarm("x", depth=3, budgets=budgets,
-                       worker_fn=_stub_worker)
+        spawn_subswarm("x", depth=3, budgets=budgets, worker_fn=_stub_worker)
 
 
 def test_permission_check_refuses_out_of_grant_tool():
-    ctx = WorkerContext(blackboard=Blackboard(), ledger=Ledger(),
-                        budgets=SwarmBudgets(), run_id="t",
-                        permissions=["web_search"])
+    ctx = WorkerContext(
+        blackboard=Blackboard(),
+        ledger=Ledger(),
+        budgets=SwarmBudgets(),
+        run_id="t",
+        permissions=["web_search"],
+    )
     ctx.check_permission("web_search")  # granted — no raise
     with pytest.raises(FleetRefusal):
         ctx.check_permission("shell_exec")
@@ -298,8 +330,14 @@ def test_structural_verification_catches_empty_result():
     v = structural_check(node, {"ok": True, "summary": "  "}, board)
     assert not v.ok
     v2 = structural_check(
-        node, {"ok": True, "summary": "a real summary here",
-               "artifacts": [{"name": "missing"}]}, board)
+        node,
+        {
+            "ok": True,
+            "summary": "a real summary here",
+            "artifacts": [{"name": "missing"}],
+        },
+        board,
+    )
     assert not v2.ok and "missing" in v2.notes
 
 
@@ -307,11 +345,15 @@ def test_tool_audit_logged_with_risk():
     from levi.fleet.swarm import _check_budgets  # noqa: F401 (import guard)
 
     budgets = SwarmBudgets()
-    ctx = WorkerContext(blackboard=Blackboard(), ledger=Ledger(),
-                        budgets=budgets, run_id="t")
-    reg = make_counting_registry(["capabilities", "web_search"],
-                                 get_category("research"), ctx,
-                                 deadline=time.time() + 60)
+    ctx = WorkerContext(
+        blackboard=Blackboard(), ledger=Ledger(), budgets=budgets, run_id="t"
+    )
+    reg = make_counting_registry(
+        ["capabilities", "web_search"],
+        get_category("research"),
+        ctx,
+        deadline=time.time() + 60,
+    )
     reg.execute("capabilities", {})
     assert len(ctx.ledger.tool_log) == 1
     entry = ctx.ledger.tool_log[0]
@@ -322,9 +364,13 @@ def test_tool_audit_logged_with_risk():
 
 
 def test_select_worker_provider_routes_light_to_local():
-    ctx = WorkerContext(blackboard=Blackboard(), ledger=Ledger(),
-                        budgets=SwarmBudgets(), run_id="t",
-                        provider="anthropic")
+    ctx = WorkerContext(
+        blackboard=Blackboard(),
+        ledger=Ledger(),
+        budgets=SwarmBudgets(),
+        run_id="t",
+        provider="anthropic",
+    )
     assert select_worker_provider(get_category("research"), ctx) == "local"
     assert select_worker_provider(get_category("devops"), ctx) == "anthropic"
 

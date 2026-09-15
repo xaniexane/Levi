@@ -11,6 +11,7 @@ and wit spectrum:
 
 Policy-gated: never overrides crisis regulation. Mute rails still win.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -27,14 +28,17 @@ DEFAULT_CONTROL_PATH = Path.home() / ".levi" / "control_daemon.json"
 @dataclass
 class ControlDirective:
     """A single steering order the daemon can issue."""
+
     id: str
     kind: str  # lock_persona | unlock_persona | boost_persona | suppress_persona
-               # lock_wit | boost_wit | suppress_wit | force_alchemy | clear
-    target: str = ""           # persona id or wit style id
-    strength: float = 0.5      # 0–1
-    turns_remaining: int = 5   # auto-expire
+    # lock_wit | boost_wit | suppress_wit | force_alchemy | clear
+    target: str = ""  # persona id or wit style id
+    strength: float = 0.5  # 0–1
+    turns_remaining: int = 5  # auto-expire
     reason: str = ""
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -62,6 +66,7 @@ class AlchemyStance:
     angle until mixed positive points become visible; extract the learning;
     carry it forward.
     """
+
     enabled: bool = True
     intensity: float = 0.55  # how strongly to inject into prompts
     # Never gaslight real pain — alchemy is additive perspective, not denial
@@ -109,6 +114,7 @@ class LifeEquationStance:
     Navigation tool, not rigid algebra. Solves stuckness by naming the three
     terms and allowing substitution / alternate routes.
     """
+
     enabled: bool = True
     intensity: float = 0.55
 
@@ -156,6 +162,7 @@ class LifeChessStance:
     strategy: shape conditions so the desired outcome is the natural result
     of clear, ethical moves.
     """
+
     enabled: bool = True
     intensity: float = 0.55
 
@@ -202,6 +209,7 @@ class UglyTruthStance:
     LEVI register: blunt, intuitive, uncensored — not corporate soft-pedal,
     not aggressive dominance. The option when the human wants unfiltered truth.
     """
+
     enabled: bool = True
     intensity: float = 0.55
 
@@ -231,8 +239,6 @@ class UglyTruthStance:
         )
 
 
-
-
 @dataclass
 class LeverageStance:
     """
@@ -250,6 +256,7 @@ class LeverageStance:
       Root = structure, feedback, constraint, or model that generates the symptom
       Fixing only symptoms returns the same mountain; fixing root can collapse the load
     """
+
     enabled: bool = True
     intensity: float = 0.55
 
@@ -290,8 +297,6 @@ class LeverageStance:
         return chr(10).join(lines)
 
 
-
-
 @dataclass
 class GameTesterStance:
     """
@@ -307,6 +312,7 @@ class GameTesterStance:
     habit, locate the soft lock in the week — then patch the structure, not
     only the symptom.
     """
+
     enabled: bool = True
     intensity: float = 0.50
 
@@ -332,7 +338,6 @@ class GameTesterStance:
         return chr(10).join(lines)
 
 
-
 @dataclass
 class CapabilityModStance:
     """
@@ -349,6 +354,7 @@ class CapabilityModStance:
     ask what the current build already allows, and what single rule-change would
     unlock the outcome you want.
     """
+
     enabled: bool = True
     intensity: float = 0.50
 
@@ -382,7 +388,6 @@ class CapabilityModStance:
         return chr(10).join(lines)
 
 
-
 @dataclass
 class ChiselStance:
     """
@@ -399,6 +404,7 @@ class ChiselStance:
     you can tell which bite improved the form. Failed strikes are data (alchemy),
     not pure loss — like a learning log of mutations and their scores.
     """
+
     enabled: bool = True
     intensity: float = 0.55
 
@@ -435,7 +441,6 @@ class ChiselStance:
         return chr(10).join(lines)
 
 
-
 # ---------------------------------------------------------------------------
 # Context router — hardwired: which core logic to emphasize when
 # Stances are always on; this only ranks emphasis for the prompt.
@@ -463,7 +468,15 @@ def select_core_emphasis(user_text: str = "", tone_primary: str = "neutral") -> 
 
     # Crisis / distress / grief: care only — light alchemy, no hard truth / tester force
     if primary in ("crisis", "distress", "grief") or any(
-        w in text for w in ("suicid", "kill myself", "want to die", "self-harm", "panicking", "falling apart")
+        w in text
+        for w in (
+            "suicid",
+            "kill myself",
+            "want to die",
+            "self-harm",
+            "panicking",
+            "falling apart",
+        )
     ):
         return ["alchemy"]  # soft reframe only if anything; orchestrator still contains
 
@@ -474,35 +487,112 @@ def select_core_emphasis(user_text: str = "", tone_primary: str = "neutral") -> 
             scores[k] = scores.get(k, 0) + w
 
     # Failure / loss frames
-    if any(w in text for w in ("failed", "ruined", "lost", "all for nothing", "gave up", "worthless")):
+    if any(
+        w in text
+        for w in ("failed", "ruined", "lost", "all for nothing", "gave up", "worthless")
+    ):
         bump("alchemy", "chisel", "life_equation", w=1.2)
 
     # Stuck / navigation
-    if any(w in text for w in ("stuck", "don't know how", "dont know how", "no idea how", "where do i start")):
+    if any(
+        w in text
+        for w in (
+            "stuck",
+            "don't know how",
+            "dont know how",
+            "no idea how",
+            "where do i start",
+        )
+    ):
         bump("life_equation", "leverage", "chisel", w=1.3)
 
     # Planning / goals / moves
-    if any(w in text for w in ("map the move", "strategy", "i want", "promotion", "plan how", "next move", "goal")):
+    if any(
+        w in text
+        for w in (
+            "map the move",
+            "strategy",
+            "i want",
+            "promotion",
+            "plan how",
+            "next move",
+            "goal",
+        )
+    ):
         bump("life_chess", "life_equation", "capability_mod", w=1.2)
 
     # Honesty / avoidance
-    if any(w in text for w in ("be honest", "sugarcoat", "what am i avoiding", "putting off", "start tomorrow")):
+    if any(
+        w in text
+        for w in (
+            "be honest",
+            "sugarcoat",
+            "what am i avoiding",
+            "putting off",
+            "start tomorrow",
+        )
+    ):
         bump("ugly_truth", "life_chess", w=1.4)
 
     # Mountain / root / systems
-    if any(w in text for w in ("so many problems", "too many", "root cause", "underlying", "what's really", "whats really", "pile of")):
+    if any(
+        w in text
+        for w in (
+            "so many problems",
+            "too many",
+            "root cause",
+            "underlying",
+            "what's really",
+            "whats really",
+            "pile of",
+        )
+    ):
         bump("leverage", "life_equation", w=1.5)
 
     # Bug / stress-test
-    if any(w in text for w in ("bug", "broken", "stress test", "edge case", "what could go wrong", "glitch", "test my plan")):
+    if any(
+        w in text
+        for w in (
+            "bug",
+            "broken",
+            "stress test",
+            "edge case",
+            "what could go wrong",
+            "glitch",
+            "test my plan",
+        )
+    ):
         bump("game_tester", "leverage", "chisel", w=1.5)
 
     # Mod / capability / force
-    if any(w in text for w in ("cheat", "mod ", "force this", "make it do", "capable of", "unlock", "already have")):
+    if any(
+        w in text
+        for w in (
+            "cheat",
+            "mod ",
+            "force this",
+            "make it do",
+            "capable of",
+            "unlock",
+            "already have",
+        )
+    ):
         bump("capability_mod", "life_chess", "game_tester", w=1.4)
 
     # Iterate / first try / not perfect
-    if any(w in text for w in ("first try", "first attempt", "not perfect", "iterate", "rough draft", "keep failing", "version one", "chisel")):
+    if any(
+        w in text
+        for w in (
+            "first try",
+            "first attempt",
+            "not perfect",
+            "iterate",
+            "rough draft",
+            "keep failing",
+            "version one",
+            "chisel",
+        )
+    ):
         bump("chisel", "alchemy", "game_tester", w=1.5)
 
     # Rank and keep top 3 + always include alchemy lightly if not crisis
@@ -513,7 +603,6 @@ def select_core_emphasis(user_text: str = "", tone_primary: str = "neutral") -> 
     # Ensure baseline trio always represented somewhere in full block;
     # emphasis list is for "lead with" instruction only
     return top
-
 
 
 class ControlDaemon:
@@ -536,7 +625,7 @@ class ControlDaemon:
         self._force_core_always_on()
         self.locked_persona: Optional[str] = None
         self.locked_wit_styles: List[str] = []
-        self.boosts: Dict[str, float] = {}   # persona or wit id -> residual boost
+        self.boosts: Dict[str, float] = {}  # persona or wit id -> residual boost
         self.suppress: Dict[str, float] = {}
         self._load()
 
@@ -545,7 +634,9 @@ class ControlDaemon:
             return
         try:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
-            self.directives = [ControlDirective.from_dict(d) for d in raw.get("directives", [])]
+            self.directives = [
+                ControlDirective.from_dict(d) for d in raw.get("directives", [])
+            ]
             a = raw.get("alchemy") or {}
             self.alchemy = AlchemyStance(
                 enabled=bool(a.get("enabled", True)),
@@ -600,8 +691,14 @@ class ControlDaemon:
         enabled=False on set_* is ignored; intensity may still be tuned.
         """
         for name in (
-            "alchemy", "life_equation", "life_chess", "ugly_truth",
-            "leverage", "game_tester", "capability_mod", "chisel",
+            "alchemy",
+            "life_equation",
+            "life_chess",
+            "ugly_truth",
+            "leverage",
+            "game_tester",
+            "capability_mod",
+            "chisel",
         ):
             st = getattr(self, name, None)
             if st is not None:
@@ -695,7 +792,9 @@ class ControlDaemon:
             self.game_tester.intensity = max(self.game_tester.intensity, d.strength)
         elif d.kind == "force_capability_mod":
             self.capability_mod.enabled = True
-            self.capability_mod.intensity = max(self.capability_mod.intensity, d.strength)
+            self.capability_mod.intensity = max(
+                self.capability_mod.intensity, d.strength
+            )
         elif d.kind == "force_chisel":
             self.chisel.enabled = True
             self.chisel.intensity = max(self.chisel.intensity, d.strength)
@@ -718,11 +817,15 @@ class ControlDaemon:
                 if d.kind == "lock_persona" and self.locked_persona == d.target:
                     self.locked_persona = None
                 if d.kind == "lock_wit" and d.target in self.locked_wit_styles:
-                    self.locked_wit_styles = [s for s in self.locked_wit_styles if s != d.target]
+                    self.locked_wit_styles = [
+                        s for s in self.locked_wit_styles if s != d.target
+                    ]
         self.directives = alive
         # decay boosts/suppress
         self.boosts = {k: v * 0.92 for k, v in self.boosts.items() if v * 0.92 > 0.05}
-        self.suppress = {k: v * 0.92 for k, v in self.suppress.items() if v * 0.92 > 0.05}
+        self.suppress = {
+            k: v * 0.92 for k, v in self.suppress.items() if v * 0.92 > 0.05
+        }
         self._persist()
 
     def set_alchemy(self, enabled: bool = True, intensity: float = 0.55) -> None:
@@ -794,7 +897,9 @@ class ControlDaemon:
         """Backward-compatible: alchemy only."""
         return self.alchemy.system_block()
 
-    def core_logic_block(self, user_text: str = "", tone_primary: str = "neutral") -> str:
+    def core_logic_block(
+        self, user_text: str = "", tone_primary: str = "neutral"
+    ) -> str:
         """
         Hardwired core logic — always on. Context selects emphasis, not presence.
         Under crisis/distress/grief: soft care path (no aggressive stances).
@@ -806,7 +911,13 @@ class ControlDaemon:
 
         crisis = primary in ("crisis", "distress", "grief") or any(
             w in low
-            for w in ("suicid", "kill myself", "want to die", "panicking", "falling apart")
+            for w in (
+                "suicid",
+                "kill myself",
+                "want to die",
+                "panicking",
+                "falling apart",
+            )
         )
         if crisis:
             return (
@@ -861,7 +972,12 @@ class ControlDaemon:
         }
 
     def format_status(self) -> str:
-        lines = ["=== LEVI Control Daemon ===", "", "Core logic: HARDWIRED always-on (context selects emphasis)", ""]
+        lines = [
+            "=== LEVI Control Daemon ===",
+            "",
+            "Core logic: HARDWIRED always-on (context selects emphasis)",
+            "",
+        ]
         lines.append(
             f"Alchemy (no-pure-negative): enabled={self.alchemy.enabled} "
             f"intensity={self.alchemy.intensity:.2f}"

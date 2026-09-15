@@ -1,4 +1,5 @@
 """King's Wyrd-ROM: session rupture-locks, distinct from the manuscript engine's."""
+
 import os
 import stat
 

@@ -12,14 +12,14 @@ import uuid
 
 
 class MemoryType(str, Enum):
-    WORKING = "working"           # Current conversation / task
-    EPISODIC = "episodic"         # Past interactions and events
-    SEMANTIC = "semantic"         # Facts and knowledge
-    PREFERENCE = "preference"     # User preferences
-    PROJECT = "project"           # Project-scoped information
-    PROCEDURAL = "procedural"     # Learned workflows and routines
-    RELATIONSHIP = "relationship" # Entities and connections
-    DEVICE = "device"             # Connected device state/capabilities
+    WORKING = "working"  # Current conversation / task
+    EPISODIC = "episodic"  # Past interactions and events
+    SEMANTIC = "semantic"  # Facts and knowledge
+    PREFERENCE = "preference"  # User preferences
+    PROJECT = "project"  # Project-scoped information
+    PROCEDURAL = "procedural"  # Learned workflows and routines
+    RELATIONSHIP = "relationship"  # Entities and connections
+    DEVICE = "device"  # Connected device state/capabilities
 
 
 @dataclass
@@ -29,8 +29,12 @@ class MemoryEntry:
     content: str
     metadata: Dict[str, Any] = field(default_factory=dict)
     importance: float = 0.5
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
-    updated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
+    updated_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
     source: str = "user"
     tags: List[str] = field(default_factory=list)
     project_id: Optional[str] = None

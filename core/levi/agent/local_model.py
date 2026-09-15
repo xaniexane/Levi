@@ -98,8 +98,10 @@ MODELS: dict[str, dict] = {
     "qwen3-0.6b": {
         "display": "Qwen3-0.6B (Q8_0)",
         "file": "Qwen3-0.6B-Q8_0.gguf",
-        "url": ("https://huggingface.co/Qwen/Qwen3-0.6B-GGUF/resolve/"
-                "23749fefcc72300e3a2ad315e1317431b06b590a/Qwen3-0.6B-Q8_0.gguf"),
+        "url": (
+            "https://huggingface.co/Qwen/Qwen3-0.6B-GGUF/resolve/"
+            "23749fefcc72300e3a2ad315e1317431b06b590a/Qwen3-0.6B-Q8_0.gguf"
+        ),
         "approx_bytes": 639_446_688,
         # Authoritative SHA-256: Hugging Face's Git-LFS object id for this
         # file (LFS oids ARE the SHA-256 of the file content), read from
@@ -117,8 +119,10 @@ MODELS: dict[str, dict] = {
     "qwen3-4b": {
         "display": "Qwen3-4B (Q4_K_M)",
         "file": "Qwen3-4B-Q4_K_M.gguf",
-        "url": ("https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/"
-                "bc640142c66e1fdd12af0bd68f40445458f3869b/Qwen3-4B-Q4_K_M.gguf"),
+        "url": (
+            "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/"
+            "bc640142c66e1fdd12af0bd68f40445458f3869b/Qwen3-4B-Q4_K_M.gguf"
+        ),
         "approx_bytes": 2_497_280_256,
         # Authoritative SHA-256: HF Git-LFS object id, verified against the
         # download's X-Linked-ETag header; URL pinned to the exact commit.
@@ -177,7 +181,8 @@ def find_weights(directory: Path | None = None) -> Path | None:
         return candidate if candidate.is_file() else None
     try:
         ggufs = sorted(
-            p for p in directory.iterdir()
+            p
+            for p in directory.iterdir()
             if p.is_file() and p.suffix.lower() == ".gguf"
         )
     except OSError:
@@ -198,10 +203,12 @@ def find_runner() -> str | None:
         if p.is_file() and os.access(p, os.X_OK):
             return str(p)
         return None
-    managed = model_dir() / "bin" / (
-        "llama-server.exe" if sys.platform == "win32" else "llama-server")
-    if managed.is_file() and (sys.platform == "win32"
-                              or os.access(managed, os.X_OK)):
+    managed = (
+        model_dir()
+        / "bin"
+        / ("llama-server.exe" if sys.platform == "win32" else "llama-server")
+    )
+    if managed.is_file() and (sys.platform == "win32" or os.access(managed, os.X_OK)):
         return str(managed)
     return shutil.which("llama-server")
 
@@ -266,7 +273,7 @@ def _parse_gguf_context_length(data: bytes) -> int | None:
         nonlocal pos
         if pos + n > len(data):
             raise ValueError("truncated")
-        b = data[pos:pos + n]
+        b = data[pos : pos + n]
         pos += n
         return b
 
@@ -329,8 +336,7 @@ def ctx_size(weights: Path | None = None) -> int:
     except ValueError:
         requested = DEFAULT_CTX_SIZE
     requested = max(MIN_CTX_SIZE, min(requested, MAX_CTX_SIZE))
-    native = _gguf_context_length(weights if weights is not None
-                                  else find_weights())
+    native = _gguf_context_length(weights if weights is not None else find_weights())
     if native and requested > native:
         return native
     return requested
@@ -344,8 +350,9 @@ def ctx_size(weights: Path | None = None) -> int:
 class _Server:
     """One managed llama-server process."""
 
-    def __init__(self, proc: subprocess.Popen, base_url: str,
-                 runner: str, weights: str):
+    def __init__(
+        self, proc: subprocess.Popen, base_url: str, runner: str, weights: str
+    ):
         self.proc = proc
         self.base_url = base_url
         self.runner = runner
@@ -398,8 +405,9 @@ def _free_port() -> int:
 
 def _ready_timeout() -> float:
     try:
-        return max(1.0, float(os.environ.get(READY_TIMEOUT_ENV, "")
-                             or DEFAULT_READY_TIMEOUT_S))
+        return max(
+            1.0, float(os.environ.get(READY_TIMEOUT_ENV, "") or DEFAULT_READY_TIMEOUT_S)
+        )
     except ValueError:
         return DEFAULT_READY_TIMEOUT_S
 
@@ -431,9 +439,15 @@ def _start_server(runner: str, weights: Path) -> tuple[str | None, str | None]:
     port = _free_port()
     ctx = ctx_size(weights)
     args = [
-        runner, "-m", str(weights),
-        "--host", LOCALHOST, "--port", str(port),
-        "-c", str(ctx),
+        runner,
+        "-m",
+        str(weights),
+        "--host",
+        LOCALHOST,
+        "--port",
+        str(port),
+        "-c",
+        str(ctx),
         "--log-disable",
     ]
     try:
@@ -481,8 +495,7 @@ def ensure_server() -> tuple[str | None, str | None]:
     if weights is None:
         return None, (
             "levi-local: no .gguf weights found in %s — "
-            "run `levi agent model pull` to download the default model"
-            % directory
+            "run `levi agent model pull` to download the default model" % directory
         )
     runner = find_runner()
     if runner is None:
@@ -579,8 +592,7 @@ def _write_manifest(manifest: dict) -> None:
     path = _manifest_path()
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(".json.tmp")
-    tmp.write_text(json.dumps(manifest, indent=2, sort_keys=True),
-                   encoding="utf-8")
+    tmp.write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
     os.replace(tmp, path)
 
 
@@ -592,9 +604,9 @@ def _sha256_of(path: Path) -> str:
     return h.hexdigest()
 
 
-def download_weights(model_key: str = DEFAULT_MODEL_KEY,
-                     *, force: bool = False,
-                     progress=None) -> Path:
+def download_weights(
+    model_key: str = DEFAULT_MODEL_KEY, *, force: bool = False, progress=None
+) -> Path:
     """Download a GGUF weights file into the model dir.
 
     ``progress(done_bytes, total_bytes)`` is called per chunk when given.
@@ -627,8 +639,9 @@ def download_weights(model_key: str = DEFAULT_MODEL_KEY,
 
     tmp_path = None
     try:
-        fd, tmp = tempfile.mkstemp(dir=str(directory),
-                                   prefix=dest.name + ".", suffix=".part")
+        fd, tmp = tempfile.mkstemp(
+            dir=str(directory), prefix=dest.name + ".", suffix=".part"
+        )
         tmp_path = Path(tmp)
         os.close(fd)
         h = hashlib.sha256()
@@ -637,8 +650,10 @@ def download_weights(model_key: str = DEFAULT_MODEL_KEY,
             spec["url"],
             headers={"User-Agent": "levi-agent/levi-local"},
         )
-        with urllib.request.urlopen(req, timeout=120) as resp, \
-                open(tmp_path, "wb") as f:
+        with (
+            urllib.request.urlopen(req, timeout=120) as resp,
+            open(tmp_path, "wb") as f,
+        ):
             total = 0
             try:
                 total = int(resp.headers.get("Content-Length") or 0)
@@ -677,11 +692,11 @@ def download_weights(model_key: str = DEFAULT_MODEL_KEY,
     except urllib.error.HTTPError as exc:
         raise PullError("HTTP %s downloading %s" % (exc.code, spec["url"])) from exc
     except urllib.error.URLError as exc:
-        raise PullError("network error downloading %s: %s"
-                        % (spec["url"], exc.reason)) from exc
+        raise PullError(
+            "network error downloading %s: %s" % (spec["url"], exc.reason)
+        ) from exc
     except Exception as exc:
-        raise PullError("download failed: %s: %s"
-                        % (type(exc).__name__, exc)) from exc
+        raise PullError("download failed: %s: %s" % (type(exc).__name__, exc)) from exc
     finally:
         if tmp_path is not None:
             try:
@@ -706,8 +721,7 @@ def _runner_platform_tokens() -> tuple[str, ...] | None:
     return None
 
 
-def _pick_runner_asset(assets: list[dict],
-                       tokens: tuple[str, ...]) -> dict | None:
+def _pick_runner_asset(assets: list[dict], tokens: tuple[str, ...]) -> dict | None:
     """Pick the best llama.cpp release asset for this platform.
 
     Pure function over the GitHub release JSON — unit-testable, no network.
@@ -723,6 +737,7 @@ def _pick_runner_asset(assets: list[dict],
             candidates.append(asset)
     if not candidates:
         return None
+
     # Prefer CPU-only builds over cuda/vulkan variants (fewer surprises).
     def _score(asset: dict) -> int:
         name = str(asset.get("name") or "").lower()
@@ -732,6 +747,7 @@ def _pick_runner_asset(assets: list[dict],
         if "server" in name:
             score += 1
         return score
+
     candidates.sort(key=_score, reverse=True)
     return candidates[0]
 
@@ -764,8 +780,7 @@ def _extract_runner_files(zf: zipfile.ZipFile, bin_dir: Path) -> Path | None:
     if server_member is None:
         return None
     chosen = [server_member] + [
-        m for m in libs
-        if "/".join(m.replace("\\", "/").split("/")[:-1]) == server_dir
+        m for m in libs if "/".join(m.replace("\\", "/").split("/")[:-1]) == server_dir
     ]
     target = None
     for member in chosen:
@@ -790,8 +805,10 @@ def fetch_runner(*, progress=None) -> str | None:
     try:
         req = urllib.request.Request(
             LLAMACPP_RELEASES_API,
-            headers={"User-Agent": "levi-agent/levi-local",
-                     "Accept": "application/vnd.github+json"},
+            headers={
+                "User-Agent": "levi-agent/levi-local",
+                "Accept": "application/vnd.github+json",
+            },
         )
         with urllib.request.urlopen(req, timeout=30) as resp:
             release = json.loads(resp.read().decode("utf-8"))
@@ -807,8 +824,10 @@ def fetch_runner(*, progress=None) -> str | None:
                 headers={"User-Agent": "levi-agent/levi-local"},
             )
             done = 0
-            with urllib.request.urlopen(dl_req, timeout=120) as resp, \
-                    open(tmp_zip, "wb") as f:
+            with (
+                urllib.request.urlopen(dl_req, timeout=120) as resp,
+                open(tmp_zip, "wb") as f,
+            ):
                 total = 0
                 try:
                     total = int(resp.headers.get("Content-Length") or 0)
@@ -835,8 +854,7 @@ def fetch_runner(*, progress=None) -> str | None:
             target.chmod(0o755)
         except OSError:
             pass
-        if target.is_file() and (sys.platform == "win32"
-                                 or os.access(target, os.X_OK)):
+        if target.is_file() and (sys.platform == "win32" or os.access(target, os.X_OK)):
             return str(target)
         return None
     except Exception:

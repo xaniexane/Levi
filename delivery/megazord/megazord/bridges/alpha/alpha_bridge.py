@@ -2,6 +2,7 @@
 Alpha Bridge — no-code AI compiler.
 Alpha takes Echo's blueprints and compiles them into working artifacts.
 """
+
 from __future__ import annotations
 from enum import Enum
 from dataclasses import dataclass, field
@@ -10,33 +11,36 @@ from ..levi_bridge import LeviBridge
 from ..echo.echo_bridge import Blueprint
 import uuid, time
 
+
 class CompilationStatus(Enum):
-    PENDING   = "pending"
+    PENDING = "pending"
     COMPILING = "compiling"
-    DONE      = "done"
-    FAILED    = "failed"
+    DONE = "done"
+    FAILED = "failed"
+
 
 @dataclass
 class CompilationResult:
-    id:            str
-    blueprint_id:  str
-    status:        CompilationStatus
+    id: str
+    blueprint_id: str
+    status: CompilationStatus
     output_artifacts: List[str] = field(default_factory=list)
-    errors:        List[str] = field(default_factory=list)
-    duration_ms:   float = 0.0
-    ts_start:      float = field(default_factory=time.time)
-    ts_end:        float = 0.0
+    errors: List[str] = field(default_factory=list)
+    duration_ms: float = 0.0
+    ts_start: float = field(default_factory=time.time)
+    ts_end: float = 0.0
+
 
 class AlphaBridge:
     GENERATOR_MAP = {
-        "views":       ("ui",      "out/ui"),
-        "actions":     ("backend", "out/backend"),
-        "automations": ("device",  "out/device"),
+        "views": ("ui", "out/ui"),
+        "actions": ("backend", "out/backend"),
+        "automations": ("device", "out/device"),
     }
 
     def __init__(self):
-        self.levi      = LeviBridge(persona="alpha")
-        self.results:  Dict[str, CompilationResult] = {}
+        self.levi = LeviBridge(persona="alpha")
+        self.results: Dict[str, CompilationResult] = {}
         self._pending: Dict[str, Blueprint] = {}
 
     def receive_blueprint(self, blueprint: Blueprint) -> str:
@@ -64,7 +68,7 @@ class AlphaBridge:
             for key, (gen_name, out_path) in self.GENERATOR_MAP.items():
                 items = blueprint.spec.get(key, [])
                 for item in items:
-                    artifact = f"{out_path}/{blueprint.spec['app_name'].lower().replace(' ','_')}_{gen_name}_{item.get('name','item')}.json"
+                    artifact = f"{out_path}/{blueprint.spec['app_name'].lower().replace(' ', '_')}_{gen_name}_{item.get('name', 'item')}.json"
                     artifacts.append(artifact)
             result.status = CompilationStatus.DONE
         except Exception as exc:
@@ -81,6 +85,7 @@ class AlphaBridge:
         args = action_envelope.get("payload", {}).get("args", {})
         spec = args.get("spec", {})
         from ..echo.echo_bridge import Blueprint as EchoBlueprint, BlueprintStatus
+
         bp = EchoBlueprint(
             id=args.get("blueprint_id", "unknown"),
             name=spec.get("app_name", "Unknown"),
@@ -93,7 +98,16 @@ class AlphaBridge:
         return self.levi.react(
             correlation_id=action_envelope.get("id", "unknown"),
             status="ok" if result.status == CompilationStatus.DONE else "error",
-            body={"result_id": result.id, "artifacts": result.output_artifacts,
-                  "duration_ms": result.duration_ms},
-            soul={"joy": 0.4, "trust": 0.8, "fear": 0.05, "surprise": 0.2, "sadness": 0.0},
+            body={
+                "result_id": result.id,
+                "artifacts": result.output_artifacts,
+                "duration_ms": result.duration_ms,
+            },
+            soul={
+                "joy": 0.4,
+                "trust": 0.8,
+                "fear": 0.05,
+                "surprise": 0.2,
+                "sadness": 0.0,
+            },
         )

@@ -30,8 +30,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-ACTIVE_START_HOUR = 8          # local time, inclusive
-ACTIVE_END_HOUR = 22           # local time, exclusive
+ACTIVE_START_HOUR = 8  # local time, inclusive
+ACTIVE_END_HOUR = 22  # local time, exclusive
 DEFAULT_INTERVAL_MIN = 30
 ENV_INTERVAL = "LEVI_HEARTBEAT_INTERVAL_MIN"
 RECENT_ERRORS_HOURS = 24
@@ -54,7 +54,8 @@ STUDY_DEFAULT_INTERVAL_HOURS = 4
 @dataclass
 class HeartbeatResult:
     """Outcome of one heartbeat run."""
-    checked_at: str                 # UTC ISO-8601 timestamp of the check
+
+    checked_at: str  # UTC ISO-8601 timestamp of the check
     attention: List[str] = field(default_factory=list)
     silent: bool = True
     reason: str = "nothing needs attention"
@@ -63,6 +64,7 @@ class HeartbeatResult:
 # --------------------------------------------------------------------------
 # time / interval helpers
 # --------------------------------------------------------------------------
+
 
 def _local_now(now: Optional[datetime] = None) -> datetime:
     """Return an aware datetime in local time (``now`` defaults to real now)."""
@@ -121,6 +123,7 @@ def _save_state(hb_dir: Path, state: Dict[str, Any]) -> None:
 # self-check sources (read-only, best-effort; never raise)
 # --------------------------------------------------------------------------
 
+
 def _check_growth_learnings(home: Path, since: datetime) -> List[str]:
     """Provisional growth learnings added since the last heartbeat."""
     items: List[str] = []
@@ -174,7 +177,8 @@ def _check_tracked_items(home: Path, now: datetime) -> List[str]:
         last_result = str(auto.get("last_result") or "").lower()
         detail: Optional[str] = None
         if status == "active" and any(
-            marker in last_result for marker in ("fail", "error", "exception", "timeout")
+            marker in last_result
+            for marker in ("fail", "error", "exception", "timeout")
         ):
             detail = "last run failed"
         elif status == "active" and (last_run is None or last_run < stale_cutoff):
@@ -200,9 +204,7 @@ def _check_recent_errors(home: Path, now: datetime) -> List[str]:
         try:
             if not path.is_file():
                 continue
-            mtime = datetime.fromtimestamp(
-                path.stat().st_mtime, tz=timezone.utc
-            )
+            mtime = datetime.fromtimestamp(path.stat().st_mtime, tz=timezone.utc)
             if mtime < cutoff:
                 continue
             lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
@@ -248,16 +250,17 @@ _CHECKS: List[tuple] = [
 # study-hall cadence
 # --------------------------------------------------------------------------
 
+
 def _study_interval_hours() -> float:
     try:
-        return float(os.environ.get(STUDY_ENV_INTERVAL, "") or STUDY_DEFAULT_INTERVAL_HOURS)
+        return float(
+            os.environ.get(STUDY_ENV_INTERVAL, "") or STUDY_DEFAULT_INTERVAL_HOURS
+        )
     except (TypeError, ValueError):
         return float(STUDY_DEFAULT_INTERVAL_HOURS)
 
 
-def _maybe_run_study(
-    home: Path, state: Dict[str, Any], now_utc: datetime
-) -> str:
+def _maybe_run_study(home: Path, state: Dict[str, Any], now_utc: datetime) -> str:
     """Run the study cycle on its own clock, only when idle.
 
     Never raises: any failure is reported as a note string, never as a
@@ -294,7 +297,7 @@ def _maybe_run_study(
     state["last_study"] = now_utc.isoformat()
     state["study_interval_hours"] = interval
     state["study_runs"] = int(state.get("study_runs", 0) or 0) + 1
-    q = (report.get("quiz") or {})
+    q = report.get("quiz") or {}
     score = q.get("mean_score")
     return "study: ran cycle %s (quiz mean=%s)" % (
         report.get("cycle_id"),
@@ -305,6 +308,7 @@ def _maybe_run_study(
 # --------------------------------------------------------------------------
 # digest formatting
 # --------------------------------------------------------------------------
+
 
 def format_digest(result: HeartbeatResult) -> str:
     lines = ["# LEVI heartbeat — %s" % result.checked_at]
@@ -324,6 +328,7 @@ def format_digest(result: HeartbeatResult) -> str:
 # --------------------------------------------------------------------------
 # main entry
 # --------------------------------------------------------------------------
+
 
 def run_heartbeat(
     home: Optional[Path] = None,
@@ -386,8 +391,11 @@ def run_heartbeat(
                 break
 
     silent = not attention
-    reason = "nothing needs attention" if silent else "%d item(s) need attention" % len(
-        [a for a in attention if not a.startswith("  •")]
+    reason = (
+        "nothing needs attention"
+        if silent
+        else "%d item(s) need attention"
+        % len([a for a in attention if not a.startswith("  •")])
     )
     result = HeartbeatResult(
         checked_at=checked_at, attention=attention, silent=silent, reason=reason
@@ -416,6 +424,7 @@ def run_heartbeat(
 # CLI entry (wired by parent into core/levi/cli/main.py)
 # --------------------------------------------------------------------------
 
+
 def cmd_heartbeat(args) -> None:
     """``levi heartbeat [run|status]`` — run the self-check or show state."""
     action = getattr(args, "heartbeat_action", "run") or "run"
@@ -437,18 +446,27 @@ def cmd_heartbeat(args) -> None:
                 count = 0
         print("heartbeat status")
         print("  last run:            %s" % (state.get("last_run") or "never"))
-        print("  interval:            %d min%s" % (
-            interval,
-            " (env %s)" % ENV_INTERVAL if os.environ.get(ENV_INTERVAL) else "",
-        ))
-        print("  active hours:        %02d:00–%02d:00 local" % (
-            ACTIVE_START_HOUR, ACTIVE_END_HOUR))
+        print(
+            "  interval:            %d min%s"
+            % (
+                interval,
+                " (env %s)" % ENV_INTERVAL if os.environ.get(ENV_INTERVAL) else "",
+            )
+        )
+        print(
+            "  active hours:        %02d:00–%02d:00 local"
+            % (ACTIVE_START_HOUR, ACTIVE_END_HOUR)
+        )
         print("  attention items:     %s" % (count if count is not None else "n/a"))
         print("  last study:          %s" % (state.get("last_study") or "never"))
         print("  study note:          %s" % (state.get("last_study_note") or "n/a"))
-        print("  study every:         %s h (env %s), idle-gated"
-              % (os.environ.get(STUDY_ENV_INTERVAL, STUDY_DEFAULT_INTERVAL_HOURS),
-                 STUDY_ENV_INTERVAL))
+        print(
+            "  study every:         %s h (env %s), idle-gated"
+            % (
+                os.environ.get(STUDY_ENV_INTERVAL, STUDY_DEFAULT_INTERVAL_HOURS),
+                STUDY_ENV_INTERVAL,
+            )
+        )
         print("  state:               %s" % (hb_dir / STATE_NAME))
         return
     if action == "run":

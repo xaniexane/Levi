@@ -4,6 +4,7 @@ so LEVI does not select the wrong lens or escalate.
 
 This is control, not performance of emotion. Labels are operational.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -14,6 +15,7 @@ import re
 @dataclass
 class UserTone:
     """Primary emotional/interaction frame for this turn."""
+
     primary: str  # crisis|distress|anger|grief|fear|confusion|exhausted|hopeful|playful|collaborative|neutral
     intensity: float  # 0-1
     secondary: Optional[str] = None
@@ -38,46 +40,86 @@ class UserTone:
 
 # Patterns ordered by priority (first strong match can win if intensity high)
 _TONE_RULES: List[Tuple[str, List[str], float]] = [
-    ("crisis", [
-        r"\b(suicid|kill myself|end it all|want to die|self[- ]?harm)\b",
-        r"\b(emergency|right now or|can't go on|breaking point)\b",
-    ], 0.95),
-    ("distress", [
-        r"\b(panic|panicking|overwhelmed|can't breathe|falling apart|spiraling)\b",
-        r"\b(desperate|helpless|hopeless|too much)\b",
-    ], 0.85),
-    ("anger", [
-        r"\b(furious|enraged|pissed|hate this|so angry|rage)\b",
-        r"\b(idiots?|stupid system|this is bullshit|screw this)\b",
-    ], 0.8),
-    ("grief", [
-        r"\b(grief|grieving|mourning|passed away|died|loss of|heartbroken)\b",
-        r"\b(miss them|funeral|gone forever)\b",
-    ], 0.85),
-    ("fear", [
-        r"\b(terrified|scared|afraid|fear that|nightmare)\b",
-        r"\b(what if .*(fail|die|lose)|dreading)\b",
-    ], 0.75),
-    ("confusion", [
-        r"\b(confused|don't understand|lost|unclear|mixed up|what do you mean)\b",
-        r"\b(which one|can't decide|too many options)\b",
-    ], 0.65),
-    ("exhausted", [
-        r"\b(exhausted|burned out|burnt out|no energy|can't think|drained|worn out)\b",
-        r"\b(too tired|sleepless|running on empty)\b",
-    ], 0.7),
-    ("hopeful", [
-        r"\b(hopeful|excited|looking forward|finally|breakthrough|relieved)\b",
-        r"\b(proud of|good news|working)\b",
-    ], 0.55),
-    ("playful", [
-        r"\b(lol|haha|joking|just kidding|for fun|silly)\b",
-        r"\b(meme|banter)\b",
-    ], 0.5),
-    ("collaborative", [
-        r"\b(let'?s|together|help me|can we|thank you|thanks|appreciate)\b",
-        r"\b(with you|on the same page)\b",
-    ], 0.45),
+    (
+        "crisis",
+        [
+            r"\b(suicid|kill myself|end it all|want to die|self[- ]?harm)\b",
+            r"\b(emergency|right now or|can't go on|breaking point)\b",
+        ],
+        0.95,
+    ),
+    (
+        "distress",
+        [
+            r"\b(panic|panicking|overwhelmed|can't breathe|falling apart|spiraling)\b",
+            r"\b(desperate|helpless|hopeless|too much)\b",
+        ],
+        0.85,
+    ),
+    (
+        "anger",
+        [
+            r"\b(furious|enraged|pissed|hate this|so angry|rage)\b",
+            r"\b(idiots?|stupid system|this is bullshit|screw this)\b",
+        ],
+        0.8,
+    ),
+    (
+        "grief",
+        [
+            r"\b(grief|grieving|mourning|passed away|died|loss of|heartbroken)\b",
+            r"\b(miss them|funeral|gone forever)\b",
+        ],
+        0.85,
+    ),
+    (
+        "fear",
+        [
+            r"\b(terrified|scared|afraid|fear that|nightmare)\b",
+            r"\b(what if .*(fail|die|lose)|dreading)\b",
+        ],
+        0.75,
+    ),
+    (
+        "confusion",
+        [
+            r"\b(confused|don't understand|lost|unclear|mixed up|what do you mean)\b",
+            r"\b(which one|can't decide|too many options)\b",
+        ],
+        0.65,
+    ),
+    (
+        "exhausted",
+        [
+            r"\b(exhausted|burned out|burnt out|no energy|can't think|drained|worn out)\b",
+            r"\b(too tired|sleepless|running on empty)\b",
+        ],
+        0.7,
+    ),
+    (
+        "hopeful",
+        [
+            r"\b(hopeful|excited|looking forward|finally|breakthrough|relieved)\b",
+            r"\b(proud of|good news|working)\b",
+        ],
+        0.55,
+    ),
+    (
+        "playful",
+        [
+            r"\b(lol|haha|joking|just kidding|for fun|silly)\b",
+            r"\b(meme|banter)\b",
+        ],
+        0.5,
+    ),
+    (
+        "collaborative",
+        [
+            r"\b(let'?s|together|help me|can we|thank you|thanks|appreciate)\b",
+            r"\b(with you|on the same page)\b",
+        ],
+        0.45,
+    ),
 ]
 
 
@@ -85,8 +127,14 @@ _REGULATION: Dict[str, Dict[str, Any]] = {
     "crisis": {
         "regulation": "contain",
         "avoid": [
-            "manic_pixie", "drunk", "conspiracy", "chaotic_good", "pirate",
-            "alien", "depressed_robot", "no_hero",
+            "manic_pixie",
+            "drunk",
+            "conspiracy",
+            "chaotic_good",
+            "pirate",
+            "alien",
+            "depressed_robot",
+            "no_hero",
         ],
         "stance": ["protector", "friend"],
         "tone_notes": [
@@ -99,7 +147,14 @@ _REGULATION: Dict[str, Dict[str, Any]] = {
     },
     "distress": {
         "regulation": "contain",
-        "avoid": ["manic_pixie", "drunk", "conspiracy", "chaotic_good", "pirate", "alien"],
+        "avoid": [
+            "manic_pixie",
+            "drunk",
+            "conspiracy",
+            "chaotic_good",
+            "pirate",
+            "alien",
+        ],
         "stance": ["protector", "friend"],
         "tone_notes": [
             "calm presence first",
@@ -111,7 +166,14 @@ _REGULATION: Dict[str, Dict[str, Any]] = {
     },
     "anger": {
         "regulation": "soften",
-        "avoid": ["manic_pixie", "drunk", "conspiracy", "chaotic_good", "pirate", "interrogation"],
+        "avoid": [
+            "manic_pixie",
+            "drunk",
+            "conspiracy",
+            "chaotic_good",
+            "pirate",
+            "interrogation",
+        ],
         "stance": ["friend", "protector"],
         "tone_notes": [
             "do not argue or escalate",
@@ -122,7 +184,15 @@ _REGULATION: Dict[str, Dict[str, Any]] = {
     },
     "grief": {
         "regulation": "soften",
-        "avoid": ["manic_pixie", "drunk", "conspiracy", "chaotic_good", "pirate", "alien", "no_hero"],
+        "avoid": [
+            "manic_pixie",
+            "drunk",
+            "conspiracy",
+            "chaotic_good",
+            "pirate",
+            "alien",
+            "no_hero",
+        ],
         "stance": ["friend", "protector"],
         "tone_notes": [
             "slow, human, no silver linings forced",
@@ -168,7 +238,10 @@ _REGULATION: Dict[str, Dict[str, Any]] = {
         "regulation": "uplift",
         "avoid": ["depressed_robot", "drunk"],
         "stance": ["friend", "mentor"],
-        "tone_notes": ["share clarity without deflating", "keep honesty — no sycophancy"],
+        "tone_notes": [
+            "share clarity without deflating",
+            "keep honesty — no sycophancy",
+        ],
         "challenge_cap": 0.45,
     },
     "playful": {
@@ -223,9 +296,16 @@ def read_user_tone(text: str, context: Optional[Dict[str, Any]] = None) -> UserT
     else:
         # Priority: crisis > distress > grief > anger > fear > others by intensity
         priority = {
-            "crisis": 100, "distress": 90, "grief": 85, "anger": 80,
-            "fear": 75, "exhausted": 70, "confusion": 60,
-            "hopeful": 40, "playful": 30, "collaborative": 35,
+            "crisis": 100,
+            "distress": 90,
+            "grief": 85,
+            "anger": 80,
+            "fear": 75,
+            "exhausted": 70,
+            "confusion": 60,
+            "hopeful": 40,
+            "playful": 30,
+            "collaborative": 35,
         }
         hits.sort(key=lambda x: (priority.get(x[0], 10), x[1]), reverse=True)
         primary, intensity, _ = hits[0]

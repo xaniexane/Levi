@@ -111,11 +111,7 @@ describe("verifyGateIdentityToken", () => {
 
   it("rejects a wrong audience", async () => {
     const key = await makeKey("k1");
-    const token = await signToken(
-      key,
-      { sub: "user-1" },
-      { audience: "app:other-project" },
-    );
+    const token = await signToken(key, { sub: "user-1" }, { audience: "app:other-project" });
     const identity = await verifyGateIdentityToken(token, {
       issuer: ISSUER,
       audience: AUDIENCE,
@@ -126,11 +122,7 @@ describe("verifyGateIdentityToken", () => {
 
   it("rejects a wrong issuer", async () => {
     const key = await makeKey("k1");
-    const token = await signToken(
-      key,
-      { sub: "user-1" },
-      { issuer: "https://evil.example.com" },
-    );
+    const token = await signToken(key, { sub: "user-1" }, { issuer: "https://evil.example.com" });
     const identity = await verifyGateIdentityToken(token, {
       issuer: ISSUER,
       audience: AUDIENCE,
@@ -142,11 +134,7 @@ describe("verifyGateIdentityToken", () => {
   it("rejects an expired token", async () => {
     const key = await makeKey("k1");
     const past = Math.floor(Date.now() / 1000) - 3600;
-    const token = await signToken(
-      key,
-      { sub: "user-1" },
-      { issuedAt: past, expiresIn: 300 },
-    );
+    const token = await signToken(key, { sub: "user-1" }, { issuedAt: past, expiresIn: 300 });
     const identity = await verifyGateIdentityToken(token, {
       issuer: ISSUER,
       audience: AUDIENCE,
@@ -190,18 +178,20 @@ describe("verifyGateIdentityToken", () => {
     };
     const getKey = gateKeyResolver(url, fetchImpl);
 
-    const first = await verifyGateIdentityToken(
-      await signToken(oldKey, { sub: "user-1" }),
-      { issuer: ISSUER, audience: AUDIENCE, getKey },
-    );
+    const first = await verifyGateIdentityToken(await signToken(oldKey, { sub: "user-1" }), {
+      issuer: ISSUER,
+      audience: AUDIENCE,
+      getKey,
+    });
     assert.equal(first?.sub, "user-1");
     assert.equal(calls, 1);
 
     published = [newKey.jwk];
-    const second = await verifyGateIdentityToken(
-      await signToken(newKey, { sub: "user-1" }),
-      { issuer: ISSUER, audience: AUDIENCE, getKey },
-    );
+    const second = await verifyGateIdentityToken(await signToken(newKey, { sub: "user-1" }), {
+      issuer: ISSUER,
+      audience: AUDIENCE,
+      getKey,
+    });
     assert.equal(second?.sub, "user-1");
     assert.equal(calls, 2);
   });
@@ -224,10 +214,7 @@ describe("gateIdentityFromHeaders", () => {
       );
       assert.equal(withToken?.sub, "user-1");
 
-      const withoutToken = await gateIdentityFromHeaders(
-        new Headers(),
-        fetchImpl,
-      );
+      const withoutToken = await gateIdentityFromHeaders(new Headers(), fetchImpl);
       assert.equal(withoutToken, null);
     } finally {
       delete process.env.GROK_PROJECT_ID;
@@ -257,10 +244,7 @@ describe("gateIdentityFromHeaders", () => {
         fetchImpl,
       );
       assert.equal(identity?.sub, "user-1");
-      assert.equal(
-        fetchedFrom[0],
-        "https://gate.app-builder-testing.com/__gate/identity-key",
-      );
+      assert.equal(fetchedFrom[0], "https://gate.app-builder-testing.com/__gate/identity-key");
     } finally {
       delete process.env.GROK_PROJECT_ID;
     }

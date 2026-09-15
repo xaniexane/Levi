@@ -1,4 +1,5 @@
 """Visual checkpoint URLs: pure string construction, no HTTP ever."""
+
 import urllib.parse
 from pathlib import Path
 
@@ -47,7 +48,9 @@ def test_batch_builder():
 
 
 def test_ledger_checkpoint():
-    cps = visual_checkpoint_for_ledger({"rank": "D3", "total_words": 6000, "total_banks": 12})
+    cps = visual_checkpoint_for_ledger(
+        {"rank": "D3", "total_words": 6000, "total_banks": 12}
+    )
     assert len(cps) == 1
     assert cps[0]["name"] == "king-d3"
     assert "D3" in cps[0]["prompt"]
@@ -56,6 +59,7 @@ def test_ledger_checkpoint():
 
 def _imported_modules(mod) -> set:
     import ast
+
     tree = ast.parse(Path(mod.__file__).read_text(encoding="utf-8"))
     names = set()
     for node in ast.walk(tree):
@@ -71,7 +75,15 @@ def test_no_network_by_construction():
     # This module must be incapable of network I/O: fail loudly if
     # anyone adds a socket/http-client import later.
     imported = _imported_modules(visual_mod)
-    banned = {"urllib.request", "urllib.error", "http.client", "socket",
-              "requests", "subprocess"}
-    assert not (imported & banned), f"network-capable imports in visual.py: {imported & banned}"
+    banned = {
+        "urllib.request",
+        "urllib.error",
+        "http.client",
+        "socket",
+        "requests",
+        "subprocess",
+    }
+    assert not (imported & banned), (
+        f"network-capable imports in visual.py: {imported & banned}"
+    )
     assert "urllib.parse" in imported  # string building only, no I/O

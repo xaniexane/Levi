@@ -15,11 +15,7 @@ export type RateLimitResult = { allowed: true } | { allowed: false; retryAfterMs
 
 const buckets = new Map<string, number[]>();
 
-export function checkRateLimit(
-  key: string,
-  limit: number,
-  windowMs: number,
-): RateLimitResult {
+export function checkRateLimit(key: string, limit: number, windowMs: number): RateLimitResult {
   const now = Date.now();
   const recent = (buckets.get(key) ?? []).filter((t) => now - t < windowMs);
   if (recent.length >= limit) {

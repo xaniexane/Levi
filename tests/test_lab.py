@@ -69,8 +69,13 @@ def test_kv_cache_bytes():
 
 def test_footprint_explicit_arch():
     out = footprint(
-        "1B", quant="fp16", ctx="4k",
-        layers=32, hidden_dim=4096, headroom_gb=1.0, overhead=1.0,
+        "1B",
+        quant="fp16",
+        ctx="4k",
+        layers=32,
+        hidden_dim=4096,
+        headroom_gb=1.0,
+        overhead=1.0,
     )
     assert out["arch_estimated"] is False
     assert out["weights_gb"] == 2.0
@@ -97,8 +102,7 @@ def test_footprint_unknown_size_needs_arch():
 
 
 def test_format_footprint():
-    out = footprint("4B", quant="int4", ctx="32k",
-                       layers=36, hidden_dim=2560)
+    out = footprint("4B", quant="int4", ctx="32k", layers=36, hidden_dim=2560)
     text = format_footprint(out)
     assert "total" in text and "estimate" in text
 
@@ -111,7 +115,10 @@ def test_format_footprint():
 def test_scenario_registry():
     scs = lab_scen.list_scenarios()
     assert {s.id for s in scs} == {
-        "resilient-file", "red-green", "research-brief", "effort-ab",
+        "resilient-file",
+        "red-green",
+        "research-brief",
+        "effort-ab",
     }
     for s in scs:
         assert s.title and s.description and s.phases and s.honest_notes
@@ -223,9 +230,7 @@ def test_probe_and_chat_against_stub(stub_endpoint):
     res = live.probe(stub_endpoint)
     assert res["ok"] is True
     assert res["models"] == ["stub-model"]
-    out = live.chat(
-        stub_endpoint, "stub-model", [{"role": "user", "content": "hi"}]
-    )
+    out = live.chat(stub_endpoint, "stub-model", [{"role": "user", "content": "hi"}])
     assert out["ok"] is True
     assert out["text"] == "hello stub"
 
@@ -244,6 +249,7 @@ def test_resolve_endpoint():
     assert live.resolve_endpoint("http://x:8080/") == "http://x:8080"
     assert live.resolve_endpoint(None) is None
     import os
+
     os.environ["LEVI_LAB_ENDPOINT"] = "http://env:1234"
     try:
         assert live.resolve_endpoint() == "http://env:1234"
@@ -281,8 +287,10 @@ def test_lab_footprint_tool_read_only(tmp_path):
         consent=False,
     )
     from levi.agent.tools import ExecContext
+
     res = reg.execute(
-        "lab_footprint", {"params": "1B", "quant": "fp16", "ctx": "4k"},
+        "lab_footprint",
+        {"params": "1B", "quant": "fp16", "ctx": "4k"},
         ExecContext(),
     )
     assert res.ok
@@ -299,6 +307,7 @@ def test_lab_scenario_tool_playback(tmp_path):
         consent=False,
     )
     from levi.agent.tools import ExecContext
+
     ctx = ExecContext()
     res = reg.execute("lab_scenario", {"scenario": "effort-ab"}, ctx)
     assert res.ok

@@ -40,8 +40,9 @@ def _make_engine(url: str):
 
 DATABASE_URL = database_url()
 engine = _make_engine(DATABASE_URL)
-SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False,
-                            expire_on_commit=False)
+SessionLocal = sessionmaker(
+    bind=engine, autoflush=False, autocommit=False, expire_on_commit=False
+)
 
 
 def init_db() -> None:
@@ -52,6 +53,7 @@ def init_db() -> None:
     manual migration step.
     """
     from .models import Base
+
     Base.metadata.create_all(engine)
 
 
@@ -73,8 +75,14 @@ DEMO_SEED_USERS: list[dict] = [
         "password": "changeme",
         "role": "user",
         "tier": "creator",
-        "scopes": ["openid", "profile", "read:v1", "write:v1",
-                   "marketplace:v1", "ai_context:v1"],
+        "scopes": [
+            "openid",
+            "profile",
+            "read:v1",
+            "write:v1",
+            "marketplace:v1",
+            "ai_context:v1",
+        ],
         "email": "chauncey@example.com",
         "display_name": "Chauncey",
     },
@@ -105,16 +113,18 @@ def seed_demo_users(db: Session) -> None:
         exists = db.query(User).filter(User.username == seed["username"]).first()
         if exists:
             continue
-        db.add(User(
-            user_id=seed["user_id"],
-            username=seed["username"],
-            password_hash=bcrypt.hashpw(
-                seed["password"].encode("utf-8"), bcrypt.gensalt()
-            ).decode("utf-8"),
-            role=seed["role"],
-            tier=seed["tier"],
-            scopes=list(seed["scopes"]),
-            email=seed["email"],
-            display_name=seed["display_name"],
-        ))
+        db.add(
+            User(
+                user_id=seed["user_id"],
+                username=seed["username"],
+                password_hash=bcrypt.hashpw(
+                    seed["password"].encode("utf-8"), bcrypt.gensalt()
+                ).decode("utf-8"),
+                role=seed["role"],
+                tier=seed["tier"],
+                scopes=list(seed["scopes"]),
+                email=seed["email"],
+                display_name=seed["display_name"],
+            )
+        )
     db.commit()

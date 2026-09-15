@@ -12,8 +12,13 @@ export type CastMember = {
 export function isBuildIntent(text: string) {
   const t = text.toLowerCase();
   const story = /\b(story|novel|scene|chapter|character|poem)\b/.test(t);
-  const artifact = /\b(cli|app|script|tool|service|library|checklist|notes app|countdown)\b/.test(t);
-  const verb = /\b(build me|scaffold|create me an app|make me a (local |offline )?(cli|app|tool|script))\b/.test(t);
+  const artifact = /\b(cli|app|script|tool|service|library|checklist|notes app|countdown)\b/.test(
+    t,
+  );
+  const verb =
+    /\b(build me|scaffold|create me an app|make me a (local |offline )?(cli|app|tool|script))\b/.test(
+      t,
+    );
   if (story && !artifact) return false;
   return verb || (/\b(build|scaffold)\b/.test(t) && artifact);
 }
@@ -60,7 +65,8 @@ export function localReply(opts: {
     return `${p.signature}\n\nBetter question: what would change if you did the smallest true thing in the next hour?\n\nDo that. Then we talk about the rest.`;
   }
   if (p.interrogation) {
-    if (opts.goal) return `You said the week is for “${opts.goal}.” What did you actually do toward it yesterday?`;
+    if (opts.goal)
+      return `You said the week is for “${opts.goal}.” What did you actually do toward it yesterday?`;
     return "What would count as a real win by tonight — one sentence, no decoration?";
   }
   if (p.noHero) {
@@ -132,8 +138,18 @@ export function fabricStory(
   const names = NAME_BANK[Math.abs(hash(premise)) % NAME_BANK.length]!;
   const wound = woundFor(genre);
   const characters: CastMember[] = [
-    { name: names[0]!, archetype: "bearer", want: "to keep the system quiet", need: "to admit the cost" },
-    { name: names[1]!, archetype: "pressure", want: "compliance without a scar", need: "to be seen without a file" },
+    {
+      name: names[0]!,
+      archetype: "bearer",
+      want: "to keep the system quiet",
+      need: "to admit the cost",
+    },
+    {
+      name: names[1]!,
+      archetype: "pressure",
+      want: "compliance without a scar",
+      need: "to be seen without a file",
+    },
     { name: names[2]!, archetype: "witness", want: "to stay outside", need: "to choose a side" },
   ];
   const beats = [

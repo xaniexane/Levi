@@ -14,12 +14,18 @@ from .persona_core import Persona, PersonaRegistry, DEFAULT_REGISTRY
 
 # Pre-built personas
 from .cybrus_persona import CYBRUS
-from .echo_persona   import ECHO
-from .alpha_persona  import ALPHA
-from .omega_persona  import OMEGA
-from .kai_persona    import KAI
+from .echo_persona import ECHO
+from .alpha_persona import ALPHA
+from .omega_persona import OMEGA
+from .kai_persona import KAI
 
 __all__ = [
-    "Persona", "PersonaRegistry", "DEFAULT_REGISTRY",
-    "CYBRUS", "ECHO", "ALPHA", "OMEGA", "KAI",
+    "Persona",
+    "PersonaRegistry",
+    "DEFAULT_REGISTRY",
+    "CYBRUS",
+    "ECHO",
+    "ALPHA",
+    "OMEGA",
+    "KAI",
 ]

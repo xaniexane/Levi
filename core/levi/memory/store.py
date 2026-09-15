@@ -41,7 +41,9 @@ class MemoryStore:
             "entries": [e.to_dict() for e in self._entries.values()],
         }
         tmp = self._index_path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+        tmp.write_text(
+            json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
         tmp.replace(self._index_path)
 
     def add(
@@ -139,7 +141,9 @@ class MemoryStore:
         return entry
 
     def clear_type(self, memory_type: MemoryType) -> int:
-        to_remove = [eid for eid, e in self._entries.items() if e.memory_type == memory_type]
+        to_remove = [
+            eid for eid, e in self._entries.items() if e.memory_type == memory_type
+        ]
         for eid in to_remove:
             del self._entries[eid]
         if to_remove:

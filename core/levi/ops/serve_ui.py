@@ -1,5 +1,5 @@
-
 """Serve LEVI static interactive UI locally (no cloud)."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -17,7 +17,11 @@ def find_static() -> Path:
         Path.cwd().parent / "static",
     ]
     for c in candidates:
-        if (c / "index.html").exists() or (c / "levi-ops.html").exists() or (c / "lwp-model.html").exists():
+        if (
+            (c / "index.html").exists()
+            or (c / "levi-ops.html").exists()
+            or (c / "lwp-model.html").exists()
+        ):
             return c
     return candidates[0]
 

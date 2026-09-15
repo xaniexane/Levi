@@ -81,7 +81,9 @@ levi lifepack import ~/backup/lifepack-2026-09-15.json             # TTY prompt:
 ```python
 from levi.lifepack import cmd_lifepack
 
-lp = sub.add_parser("lifepack", help="Life pack: versioned JSON export/import of LEVI state")
+lp = sub.add_parser(
+    "lifepack", help="Life pack: versioned JSON export/import of LEVI state"
+)
 lp_sub = lp.add_subparsers(dest="lifepack_action")
 
 lp_exp = lp_sub.add_parser("export", help="Write a life-pack JSON bundle")
@@ -89,10 +91,14 @@ lp_exp.add_argument("file", help="Output path for the .json bundle")
 
 lp_imp = lp_sub.add_parser("import", help="Preview or apply a life-pack JSON bundle")
 lp_imp.add_argument("file", help="Path to the .json bundle")
-lp_imp.add_argument("--preview", action="store_true",
-                    help="Show the diff and write nothing")
-lp_imp.add_argument("--yes", action="store_true",
-                    help="Confirm a real import without an interactive prompt")
+lp_imp.add_argument(
+    "--preview", action="store_true", help="Show the diff and write nothing"
+)
+lp_imp.add_argument(
+    "--yes",
+    action="store_true",
+    help="Confirm a real import without an interactive prompt",
+)
 ```
 
 and in the dispatch section:

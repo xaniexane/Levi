@@ -104,7 +104,13 @@ export function WriteView() {
           messages: [
             {
               role: "system",
-              content: companionSystem({ name, goal, persona, shelf: shelfSummary(), mode: "write" }),
+              content: companionSystem({
+                name,
+                goal,
+                persona,
+                shelf: shelfSummary(),
+                mode: "write",
+              }),
             },
             {
               role: "user",
@@ -177,7 +183,11 @@ export function WriteView() {
           onChange={(e) => setPremise(e.target.value)}
           placeholder="A city that bills people for dreams they have not had yet"
         />
-        <Button className="mt-3 w-full" disabled={busy || !premise.trim()} onClick={() => void create()}>
+        <Button
+          className="mt-3 w-full"
+          disabled={busy || !premise.trim()}
+          onClick={() => void create()}
+        >
           {busy ? "Composing…" : "Create story"}
         </Button>
       </div>
@@ -197,7 +207,12 @@ export function WriteView() {
             </ul>
           )}
           <div className="mt-4 flex flex-wrap gap-1.5">
-            <Button size="sm" variant="outline" disabled={busy} onClick={() => void apply("expand", "next beat")}>
+            <Button
+              size="sm"
+              variant="outline"
+              disabled={busy}
+              onClick={() => void apply("expand", "next beat")}
+            >
               Next beat
             </Button>
             {MODES.map((m) => (
@@ -219,7 +234,9 @@ export function WriteView() {
               Mint to graph
             </Button>
           </div>
-          <div className="mt-6 whitespace-pre-wrap text-sm leading-relaxed text-fg/90">{story.body}</div>
+          <div className="mt-6 whitespace-pre-wrap text-sm leading-relaxed text-fg/90">
+            {story.body}
+          </div>
         </article>
       )}
 

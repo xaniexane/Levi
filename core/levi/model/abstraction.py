@@ -67,16 +67,15 @@ class GenerationResult:
 
 class ModelProvider(ABC):
     @abstractmethod
-    def list_models(self) -> List[ModelInfo]:
-        ...
+    def list_models(self) -> List[ModelInfo]: ...
 
     @abstractmethod
-    def generate(self, model_id: str, request: GenerationRequest) -> GenerationResult:
-        ...
+    def generate(
+        self, model_id: str, request: GenerationRequest
+    ) -> GenerationResult: ...
 
     @abstractmethod
-    def is_available(self) -> bool:
-        ...
+    def is_available(self) -> bool: ...
 
 
 class DeterministicFallbackProvider(ModelProvider):
@@ -103,6 +102,7 @@ class DeterministicFallbackProvider(ModelProvider):
         # Full offline companion synthesizer (tone, continuity, alchemy, xyz, chess)
         try:
             from levi.ei.offline_companion import synthesize
+
             text = synthesize(prompt, system=request.system)
         except Exception:
             text = (
@@ -128,7 +128,9 @@ class OllamaProvider(ModelProvider):
 
     def is_available(self) -> bool:
         try:
-            with urllib.request.urlopen(f"{self.base_url}/api/tags", timeout=1.5) as resp:
+            with urllib.request.urlopen(
+                f"{self.base_url}/api/tags", timeout=1.5
+            ) as resp:
                 if resp.status != 200:
                     self._available = False
                     return False
@@ -176,7 +178,9 @@ class OllamaProvider(ModelProvider):
     def generate(self, model_id: str, request: GenerationRequest) -> GenerationResult:
         t0 = time.time()
         # model_id like "ollama:llama3.2" or raw name
-        name = model_id.split(":", 1)[-1] if model_id.startswith("ollama:") else model_id
+        name = (
+            model_id.split(":", 1)[-1] if model_id.startswith("ollama:") else model_id
+        )
         if name in ("default", "(no model pulled)"):
             # pick first available
             avail = [m for m in self.list_models() if m.available]
@@ -253,7 +257,14 @@ class ModelRouter:
         models: List[ModelInfo] = []
         for p in self.providers:
             if p.is_available():
-                models.extend([m for m in p.list_models() if m.available or p.__class__.__name__ == "DeterministicFallbackProvider"])
+                models.extend(
+                    [
+                        m
+                        for m in p.list_models()
+                        if m.available
+                        or p.__class__.__name__ == "DeterministicFallbackProvider"
+                    ]
+                )
         # Always include fallback
         fb = DeterministicFallbackProvider().list_models()
         ids = {m.id for m in models}
@@ -262,9 +273,15 @@ class ModelRouter:
                 models.append(m)
         return models
 
-    def select(self, prefer_local: bool = True, tier: Optional[ModelTier] = None) -> ModelInfo:
+    def select(
+        self, prefer_local: bool = True, tier: Optional[ModelTier] = None
+    ) -> ModelInfo:
         models = self.available_models()
-        local = [m for m in models if m.is_local and m.tier != ModelTier.FALLBACK and m.available]
+        local = [
+            m
+            for m in models
+            if m.is_local and m.tier != ModelTier.FALLBACK and m.available
+        ]
         if prefer_local and local:
             if self.preferred_local:
                 for m in local:
@@ -274,7 +291,9 @@ class ModelRouter:
         non_fb = [m for m in models if m.tier != ModelTier.FALLBACK and m.available]
         if non_fb:
             return non_fb[0]
-        return models[-1] if models else DeterministicFallbackProvider().list_models()[0]
+        return (
+            models[-1] if models else DeterministicFallbackProvider().list_models()[0]
+        )
 
     def generate(
         self,
@@ -286,9 +305,14 @@ class ModelRouter:
             for p in self.providers:
                 for m in p.list_models():
                     if m.id == model_id or m.name == model_id:
-                        return p.generate(m.id if m.id.startswith("ollama") else model_id, request)
+                        return p.generate(
+                            m.id if m.id.startswith("ollama") else model_id, request
+                        )
             # try raw ollama name
-            if any(isinstance(p, OllamaProvider) and p.is_available() for p in self.providers):
+            if any(
+                isinstance(p, OllamaProvider) and p.is_available()
+                for p in self.providers
+            ):
                 return OllamaProvider().generate(model_id, request)
 
         info = self.select(prefer_local=prefer_local)
@@ -296,7 +320,9 @@ class ModelRouter:
             for m in p.list_models():
                 if m.id == info.id:
                     return p.generate(info.id, request)
-        return DeterministicFallbackProvider().generate("fallback-deterministic", request)
+        return DeterministicFallbackProvider().generate(
+            "fallback-deterministic", request
+        )
 
     def status(self) -> Dict[str, Any]:
         # Force rediscovery
@@ -305,7 +331,10 @@ class ModelRouter:
                 p._available = None
         models = self.available_models()
         return {
-            "local_available": any(m.is_local and m.tier != ModelTier.FALLBACK and m.available for m in models),
+            "local_available": any(
+                m.is_local and m.tier != ModelTier.FALLBACK and m.available
+                for m in models
+            ),
             "cloud_enabled": self.cloud_enabled,
             "models": [
                 {

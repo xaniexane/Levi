@@ -38,7 +38,9 @@ class RateLimiter:
     def _refill(self, bucket_id: str, now: float) -> float:
         tokens, last = self._buckets.get(bucket_id, (float(self.per_minute), now))
         elapsed = max(0.0, now - last)
-        tokens = min(float(self.per_minute), tokens + elapsed * (self.per_minute / 60.0))
+        tokens = min(
+            float(self.per_minute), tokens + elapsed * (self.per_minute / 60.0)
+        )
         return tokens
 
     def check(self, bucket_id: str) -> tuple[bool, float]:

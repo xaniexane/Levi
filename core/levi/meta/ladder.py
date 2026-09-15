@@ -3,6 +3,7 @@ Build ladder — step 1 and up. Concrete readiness, not placeholders.
 
 Step 1 = kernel boots, main organs import, tests green, offline ask works.
 """
+
 from __future__ import annotations
 
 from typing import Any, Dict, List, Tuple
@@ -36,11 +37,13 @@ def step1_kernel_boot() -> List[Tuple[str, bool, str]]:
 
     def offline_ask():
         from levi.ei.offline_companion import synthesize
+
         t = synthesize("I'm stuck and don't know how", system="")
         return bool(t) and len(t) > 40, f"reply_len={len(t)}"
 
     def mirror():
         from levi.lwp.mirror_cascade import MirrorCascade
+
         r = MirrorCascade().run("test seed")
         return bool(r.synthesis), f"fp={r.fingerprint}"
 
@@ -48,6 +51,7 @@ def step1_kernel_boot() -> List[Tuple[str, bool, str]]:
         from levi.lwp.opportunity_rail import OpportunityRail
         import tempfile
         from pathlib import Path
+
         with tempfile.TemporaryDirectory() as td:
             rail = OpportunityRail(path=Path(td) / "r.json")
             car = rail.start("step1 signal")
@@ -57,6 +61,7 @@ def step1_kernel_boot() -> List[Tuple[str, bool, str]]:
         from levi.project.hitl import HITLGate
         import tempfile
         from pathlib import Path
+
         with tempfile.TemporaryDirectory() as td:
             g = HITLGate(path=Path(td) / "h.json")
             r = g.propose("test", "why", "changes", risk="LOW", domain="general")
@@ -64,10 +69,12 @@ def step1_kernel_boot() -> List[Tuple[str, bool, str]]:
 
     def organism():
         from levi.graph.organism import ORGANS, BLOODSTREAM
+
         return len(ORGANS) >= 20 and len(BLOODSTREAM) >= 15, f"organs={len(ORGANS)}"
 
     def control_crisis():
         from levi.daemon.control import select_core_emphasis
+
         e = select_core_emphasis("I'm panicking and falling apart")
         return e == ["alchemy"], f"emphasis={e}"
 
@@ -129,43 +136,67 @@ def format_ladder() -> str:
     lines.append("STEP 5 — Thin UI organs  [defer for complete-non-enterprise]")
     lines.append("")
     lines.append("Usable main services now (if Step 1 pass):")
-    lines.append("  ask · organism · charter · mirror · rail · unified · demand · income")
-    lines.append("  brain · project · builder(E4) · echo · mandella · pulse · symbiosis · factory")
+    lines.append(
+        "  ask · organism · charter · mirror · rail · unified · demand · income"
+    )
+    lines.append(
+        "  brain · project · builder(E4) · echo · mandella · pulse · symbiosis · factory"
+    )
     return "\n".join(lines)
 
 
 def step4_relay_smoke() -> list:
     def relay_test():
         from levi.model.relay import ModelRelay
+
         out = ModelRelay().test()
         return "PASS" in out and "Offline" in out, "relay --test offline"
+
     return [_check("relay_offline", relay_test)]
 
 
 def step3_builder_smoke() -> list:
     def e5_meta():
         from levi.builder.emergency import TIER_META, BuildTier
-        return BuildTier.E5 in TIER_META and TIER_META[BuildTier.E5]["hitl_default"] is True, "E5 HITL default"
+
+        return BuildTier.E5 in TIER_META and TIER_META[BuildTier.E5][
+            "hitl_default"
+        ] is True, "E5 HITL default"
+
     def ops_layer():
         from levi.ops.layer import OperationalLayer
+
         s = OperationalLayer().snapshot()
         return s.cycle >= 0, "ops snapshot"
+
     return [_check("builder_e5_hitl", e5_meta), _check("ops_layer", ops_layer)]
 
 
 def step2_opportunity_smoke() -> list:
     """Light Step 2 checks — opportunity vertical."""
+
     def rail_demand_field():
         from levi.lwp.opportunity_rail import RailCar
+
         f = getattr(RailCar, "__dataclass_fields__", {})
         return "demand_signal_id" in f, "demand_signal_id field"
+
     def install_script():
         from pathlib import Path
+
         p = Path(__file__).resolve().parents[3] / "scripts" / "install_local.sh"
         if not p.exists():
-            p = Path(__file__).resolve().parents[2].parent / "scripts" / "install_local.sh"
+            p = (
+                Path(__file__).resolve().parents[2].parent
+                / "scripts"
+                / "install_local.sh"
+            )
         return p.exists(), str(p)
-    return [_check("rail_demand_link", rail_demand_field), _check("install_script", install_script)]
+
+    return [
+        _check("rail_demand_link", rail_demand_field),
+        _check("install_script", install_script),
+    ]
 
 
 def readiness_pct() -> Dict[str, Any]:

@@ -19,17 +19,27 @@ import pytest
 BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEST_CLIENT_SECRET = "test-client-secret-for-pytest"
 
-_MODULE_NAMES = ("oauth", "oauth.server", "messaging", "messaging.server",
-                 "shared", "shared.jwt_keys")
+_MODULE_NAMES = (
+    "oauth",
+    "oauth.server",
+    "messaging",
+    "messaging.server",
+    "shared",
+    "shared.jwt_keys",
+)
 
 
 def _purge_server_modules() -> None:
     for name in list(sys.modules):
-        if name in _MODULE_NAMES or name.startswith(("oauth.", "messaging.", "shared.")):
+        if name in _MODULE_NAMES or name.startswith(
+            ("oauth.", "messaging.", "shared.")
+        ):
             del sys.modules[name]
 
 
-def load_server(package: str, monkeypatch: pytest.MonkeyPatch, tmp_path, demo_mode: bool):
+def load_server(
+    package: str, monkeypatch: pytest.MonkeyPatch, tmp_path, demo_mode: bool
+):
     """Import ``<package>.server`` fresh, with a clean env + tmp key dir."""
     if BACKEND_DIR not in sys.path:
         sys.path.insert(0, BACKEND_DIR)
@@ -70,16 +80,19 @@ def msg_mod(monkeypatch, tmp_path):
 @pytest.fixture()
 def oauth_client(oauth_mod):
     from fastapi.testclient import TestClient
+
     return TestClient(oauth_mod.app)
 
 
 @pytest.fixture()
 def msg_client(msg_mod):
     from fastapi.testclient import TestClient
+
     return TestClient(msg_mod.app)
 
 
 # ── Token-minting / tampering helpers (library-agnostic) ──────────
+
 
 def _b64u(data: bytes) -> str:
     return base64.urlsafe_b64encode(data).decode().rstrip("=")
@@ -97,15 +110,20 @@ def tamper_payload(token: str) -> str:
 def mint_hs256_token(audience: str = "vyve-messenger") -> str:
     """Craft an HS256 token (must be REJECTED — servers are RS256-only)."""
     import time
+
     header = _b64u(json.dumps({"alg": "HS256", "typ": "JWT"}).encode())
-    payload = _b64u(json.dumps({
-        "iss": "http://localhost:8080",
-        "sub": "someone",
-        "aud": audience,
-        "exp": int(time.time()) + 3600,
-        "iat": int(time.time()),
-        "type": "access",
-        "scope": "openid",
-    }).encode())
+    payload = _b64u(
+        json.dumps(
+            {
+                "iss": "http://localhost:8080",
+                "sub": "someone",
+                "aud": audience,
+                "exp": int(time.time()) + 3600,
+                "iat": int(time.time()),
+                "type": "access",
+                "scope": "openid",
+            }
+        ).encode()
+    )
     signature = _b64u(b"fake-hs256-signature")
     return f"{header}.{payload}.{signature}"

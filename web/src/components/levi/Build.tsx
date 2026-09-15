@@ -142,7 +142,9 @@ export function BuildView() {
             <div>offline · {project.ir.offline ? "yes" : "no"}</div>
           </dl>
           {project.ir.constraints.includes("tiny-slice") && (
-            <p className="mt-3 text-xs text-muted">Scoped to a tiny local slice so it can actually ship.</p>
+            <p className="mt-3 text-xs text-muted">
+              Scoped to a tiny local slice so it can actually ship.
+            </p>
           )}
           {project.notes && <p className="mt-3 text-sm text-fg/90">{project.notes}</p>}
 
@@ -197,5 +199,8 @@ export function BuildView() {
 }
 
 function stripFence(text: string) {
-  return text.replace(/^```(?:python)?\n?/i, "").replace(/\n?```$/i, "").trim();
+  return text
+    .replace(/^```(?:python)?\n?/i, "")
+    .replace(/\n?```$/i, "")
+    .trim();
 }

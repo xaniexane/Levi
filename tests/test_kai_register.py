@@ -6,6 +6,7 @@ Covers the Phase-2 KAI-9000 addition:
   (both run_subtask and the chat ConversationManager paths)
 - prepare_corpus emits exactly 14 identity records (LEVI-original registers)
 """
+
 import subprocess
 import sys
 from pathlib import Path
@@ -45,11 +46,20 @@ def _system_text(messages: list[ChatMessage]) -> str:
 def test_fourteen_registers():
     assert len(all_variants()) == 14
     assert set(VALID_IDS) == {
-        "kai_9000", "kai_9000_care", "kai_9000_ops", "kai_9000_challenger",
-        "kai_9000_literary", "kai_9000_forensic", "kai_9000_void",
-        "kai_9000_builder", "kai_9000_mirror", "kai_9000_architect",
-        "kai_9000_sentinel", "kai_9000_oracle",
-        "kai_9000_muse", "kai_9000_grok",
+        "kai_9000",
+        "kai_9000_care",
+        "kai_9000_ops",
+        "kai_9000_challenger",
+        "kai_9000_literary",
+        "kai_9000_forensic",
+        "kai_9000_void",
+        "kai_9000_builder",
+        "kai_9000_mirror",
+        "kai_9000_architect",
+        "kai_9000_sentinel",
+        "kai_9000_oracle",
+        "kai_9000_muse",
+        "kai_9000_grok",
     }
 
 
@@ -85,8 +95,13 @@ def test_run_subtask_system_prompt_reaches_provider(tmp_path):
     provider = CaptureProvider()
     registry = build_default_registry(workspace_root=tmp_path)
     system = system_for("kai_9000_ops")
-    run_subtask("say hello", provider=provider, registry=registry,
-                max_steps=1, system_prompt=system)
+    run_subtask(
+        "say hello",
+        provider=provider,
+        registry=registry,
+        max_steps=1,
+        system_prompt=system,
+    )
     assert provider.seen, "provider was never called"
     assert system in _system_text(provider.seen[0])
 
@@ -109,11 +124,23 @@ def test_chat_manager_system_prompt_reaches_provider(tmp_path, monkeypatch):
 
 
 def test_cli_bad_register_lists_valid_ids():
-    cmd = [sys.executable, "-m", "levi.cli.main",
-           "agent", "run", "--register", "nope", "hi"]
-    p = subprocess.run(cmd, capture_output=True, text=True, cwd=REPO,
-                       env={"PATH": "/usr/bin:/bin",
-                            "PYTHONPATH": str(REPO / "core")})
+    cmd = [
+        sys.executable,
+        "-m",
+        "levi.cli.main",
+        "agent",
+        "run",
+        "--register",
+        "nope",
+        "hi",
+    ]
+    p = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+        cwd=REPO,
+        env={"PATH": "/usr/bin:/bin", "PYTHONPATH": str(REPO / "core")},
+    )
     assert p.returncode == 2, p.stderr[:300]
     for vid in ("kai_9000", "kai_9000_ops", "kai_9000_oracle"):
         assert vid in p.stdout

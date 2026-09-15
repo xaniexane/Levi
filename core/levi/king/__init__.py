@@ -154,7 +154,9 @@ class King:
         ]
         if self.ledger.promoted:
             p = self.ledger.promoted
-            lines.append(f"baseline: D5 PROMOTED (demo) at {p.get('ts')} — {p.get('reason')}")
+            lines.append(
+                f"baseline: D5 PROMOTED (demo) at {p.get('ts')} — {p.get('reason')}"
+            )
         else:
             lines.append("baseline: derived from ledger (no demo promotion)")
         for h in self.ledger.harvests[-3:]:
@@ -186,7 +188,7 @@ class King:
             return (
                 "No stories yet — King does not auto-create artifacts "
                 "(blueprint §1.5: creation needs an explicit confirm). "
-                "Create one first: levi story --create \"<premise>\" --genre <genre>"
+                'Create one first: levi story --create "<premise>" --genre <genre>'
             )
         else:
             story = max(stories, key=lambda s: s.updated_at or "")
@@ -196,13 +198,21 @@ class King:
         words = _words(story.body) - before_words
         banks = max(1, len(story.beats) - beats_before)
         self.ledger.register_entity(
-            story.id, "story", story.title,
+            story.id,
+            "story",
+            story.title,
             {"genre": story.genre, "beats": len(story.beats)},
         )
         for c in story.characters[:8]:
             self.ledger.register_entity(
-                f"{story.id}:{c.id}", "character", c.name,
-                {"archetype": c.archetype.value if hasattr(c.archetype, "value") else str(c.archetype)},
+                f"{story.id}:{c.id}",
+                "character",
+                c.name,
+                {
+                    "archetype": c.archetype.value
+                    if hasattr(c.archetype, "value")
+                    else str(c.archetype)
+                },
             )
         new_beat = story.beats[-1] if story.beats else None
         if new_beat:
@@ -238,7 +248,8 @@ class King:
         self._manuscript_node()
         for sc in new_scenes:
             self.ledger.register_entity(
-                f"scene:{sc.get('id')}", "scene",
+                f"scene:{sc.get('id')}",
+                "scene",
                 (sc.get("event") or "")[:80],
                 {"words": sc.get("words"), "status": sc.get("status")},
             )
@@ -262,7 +273,9 @@ class King:
         for t in eng.state.tracks:
             tid = f"track:{t.get('id')}"
             self.ledger.register_entity(
-                tid, "reim_track", f"track {t.get('index')}",
+                tid,
+                "reim_track",
+                f"track {t.get('index')}",
                 {"direction": t.get("direction"), "words": t.get("words")},
             )
             self.ledger.add_edge("manuscript", tid, "forks")
@@ -316,7 +329,9 @@ class King:
         out = eng.wyrd_rupture(lens=lens)
         words = eng.state.words - before
         self.ledger.register_entity(
-            f"rom:{lens}", "rom_lock", f"manuscript ROM ({lens})",
+            f"rom:{lens}",
+            "rom_lock",
+            f"manuscript ROM ({lens})",
             {"words": words},
         )
         self._harvest("model_engine", words, 1, f"wyrd-rupture/{lens}")

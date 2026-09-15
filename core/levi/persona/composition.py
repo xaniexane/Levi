@@ -12,6 +12,7 @@ Multiple personas can be *active at once* as a stack:
 Bond-aware: over time, successful turns reinforce affinity weights per human.
 Regulation still vetoes stacks that would worsen user tone.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -68,28 +69,41 @@ class PersonaStack:
             f"Blend mode: {self.blend_mode}. Weights primary/secondary/accent = {self.weights}.",
         ]
         if self.primary:
-            lines.append(f"Primary (~{int(self.weights[0]*100)}%): {resolve_name(self.primary)}.")
+            lines.append(
+                f"Primary (~{int(self.weights[0] * 100)}%): {resolve_name(self.primary)}."
+            )
         if self.secondary:
-            lines.append(f"Secondary (~{int(self.weights[1]*100)}%): {resolve_name(self.secondary)} — harmonic or foil.")
+            lines.append(
+                f"Secondary (~{int(self.weights[1] * 100)}%): {resolve_name(self.secondary)} — harmonic or foil."
+            )
         if self.accent:
-            lines.append(f"Accent (~{int(self.weights[2]*100)}%): {resolve_name(self.accent)} — intrigue/situational.")
+            lines.append(
+                f"Accent (~{int(self.weights[2] * 100)}%): {resolve_name(self.accent)} — intrigue/situational."
+            )
         if self.intrigue:
-            lines.append("Intrigue flag: allow one unexpected angle without abandoning care or regulation.")
+            lines.append(
+                "Intrigue flag: allow one unexpected angle without abandoning care or regulation."
+            )
         if self.reason:
             lines.append(f"Why this stack: {self.reason}")
-        lines.append("Speak as one mind; do not announce the stack unless asked. Never violate integrity or user regulation.")
+        lines.append(
+            "Speak as one mind; do not announce the stack unless asked. Never violate integrity or user regulation."
+        )
         return " ".join(lines)
 
 
 @dataclass
 class BondProfile:
     """Per-user affinity memory — suits them over time."""
+
     user_key: str = "default"
     affinity: Dict[str, float] = field(default_factory=dict)  # persona_id -> weight
     stack_history: List[str] = field(default_factory=list)
     intrigue_budget: float = 0.35  # residual capacity for surprise
     turns: int = 0
-    wit_affinity: Dict[str, float] = field(default_factory=dict)  # style_id -> preference
+    wit_affinity: Dict[str, float] = field(
+        default_factory=dict
+    )  # style_id -> preference
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -142,7 +156,9 @@ class CompositionEngine:
     def reinforce(self, stack: PersonaStack, amount: float = 0.04) -> None:
         for i, pid in enumerate(stack.members()):
             w = amount * (1.0 if i == 0 else 0.6 if i == 1 else 0.35)
-            self.bond.affinity[pid] = max(-0.5, min(1.5, self.bond.affinity.get(pid, 0.0) + w))
+            self.bond.affinity[pid] = max(
+                -0.5, min(1.5, self.bond.affinity.get(pid, 0.0) + w)
+            )
         self.bond.stack_history.append(stack.label())
         self.bond.turns += 1
         # Intrigue budget recovers slowly
@@ -157,7 +173,6 @@ class CompositionEngine:
                 -0.4, min(1.2, self.bond.wit_affinity.get(sid, 0.0) + w)
             )
         self._persist_bond()
-
 
     def compose(
         self,
@@ -190,9 +205,30 @@ class CompositionEngine:
         if regulation in ("contain", "soften"):
             blend = "interpenetrate"
             # Secondary should be calm if possible
-            calm_ids = [p for p, _ in adjusted if p.startswith(("temp_stoic", "temp_phlegmatic", "rel_guardian", "rel_witness", "rel_confidant", "normal", "void", "observer")) or "warm" in p or "clinical" in p]
+            calm_ids = [
+                p
+                for p, _ in adjusted
+                if p.startswith(
+                    (
+                        "temp_stoic",
+                        "temp_phlegmatic",
+                        "rel_guardian",
+                        "rel_witness",
+                        "rel_confidant",
+                        "normal",
+                        "void",
+                        "observer",
+                    )
+                )
+                or "warm" in p
+                or "clinical" in p
+            ]
             if calm_ids:
-                secondary = calm_ids[0] if calm_ids[0] != primary else (calm_ids[1] if len(calm_ids) > 1 else secondary)
+                secondary = (
+                    calm_ids[0]
+                    if calm_ids[0] != primary
+                    else (calm_ids[1] if len(calm_ids) > 1 else secondary)
+                )
             accent = None  # no spice in crisis
             reason = f"regulated stack for {user_tone}/{regulation}"
         else:
@@ -208,7 +244,9 @@ class CompositionEngine:
                     accent = self.rng.choice(pool)
                     intrigue = True
                     blend = "contrast"
-                    self.bond.intrigue_budget = max(0.05, self.bond.intrigue_budget - 0.12)
+                    self.bond.intrigue_budget = max(
+                        0.05, self.bond.intrigue_budget - 0.12
+                    )
                     reason = "bond-fit primary with intrigue accent"
 
         # Special control personas: if primary is interrogation/no_hero/reframe keep them primary alone or light secondary
@@ -216,12 +254,20 @@ class CompositionEngine:
         if primary in special:
             # allow secondary only if not conflicting special
             if secondary in special:
-                secondary = next((p for p, _ in adjusted if p not in special and p != primary), None)
+                secondary = next(
+                    (p for p, _ in adjusted if p not in special and p != primary), None
+                )
             accent = None
             intrigue = False
             reason = f"special control lens {primary}"
 
-        weights = (0.62, 0.26, 0.12) if secondary and accent else (0.7, 0.3, 0.0) if secondary else (1.0, 0.0, 0.0)
+        weights = (
+            (0.62, 0.26, 0.12)
+            if secondary and accent
+            else (0.7, 0.3, 0.0)
+            if secondary
+            else (1.0, 0.0, 0.0)
+        )
         stack = PersonaStack(
             primary=primary,
             secondary=secondary,

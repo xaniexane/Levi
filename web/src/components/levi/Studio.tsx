@@ -67,7 +67,8 @@ export function StudioView() {
       <p className="text-xs tracking-kicker text-muted uppercase">Studio</p>
       <h1 className="mt-2 font-display text-4xl">Keep it honest. Make it last.</h1>
       <p className="mt-2 text-sm text-muted">
-        Demos that actually run. A product model that does not skip HITL. Character graph on this device.
+        Demos that actually run. A product model that does not skip HITL. Character graph on this
+        device.
       </p>
 
       <section className="mt-8">
@@ -92,7 +93,12 @@ export function StudioView() {
       <section className="mt-10">
         <h2 className="text-sm font-medium text-muted">Mirror cascade</h2>
         <p className="mt-1 text-xs text-muted">Forward · reverse · shadow. Local. No cloud.</p>
-        <Textarea className="mt-3" rows={2} value={seed} onChange={(e) => setSeed(e.target.value)} />
+        <Textarea
+          className="mt-3"
+          rows={2}
+          value={seed}
+          onChange={(e) => setSeed(e.target.value)}
+        />
         <Button className="mt-3" variant="outline" onClick={() => runDemo("mirror")}>
           Run coils
         </Button>
@@ -122,7 +128,9 @@ export function StudioView() {
 
       <section className="mt-10">
         <h2 className="text-sm font-medium text-muted">Character graph</h2>
-        <p className="mt-1 text-xs text-muted">{AXIS_TYPES.toLocaleString()} voice×drive×wound×method types.</p>
+        <p className="mt-1 text-xs text-muted">
+          {AXIS_TYPES.toLocaleString()} voice×drive×wound×method types.
+        </p>
         <Button
           className="mt-3"
           variant="outline"
@@ -189,7 +197,8 @@ export function StudioView() {
           ))}
         </ul>
         <p className="mt-4 text-xs text-subtle">
-          Preview uses local plan switching — no card charged. When you publish, these become real checkout.
+          Preview uses local plan switching — no card charged. When you publish, these become real
+          checkout.
         </p>
       </section>
     </main>

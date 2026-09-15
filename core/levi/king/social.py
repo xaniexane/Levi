@@ -178,7 +178,7 @@ def assert_pack_clean(pack: Dict[str, object]) -> None:
         )
     # Every '#' must be a well-formed hashtag in the trailing block.
     for m in re.finditer(r"#", caption):
-        rest = caption[m.start():]
+        rest = caption[m.start() :]
         assert _HASHTAG_RE.match(rest), f"stray '#' at offset {m.start()}"
     # Hashtags live only in the trailing block (last paragraph).
     paras = [p for p in caption.split("\n\n") if p.strip()]

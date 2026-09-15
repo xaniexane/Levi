@@ -4,6 +4,7 @@ The one echo / branch-exploration implementation in this tree. A prior
 lineage's graph/echoverse.py was correctly rejected at merge time to avoid
 a second, competing implementation of the same concept — do not reintroduce
 one; extend this module instead."""
+
 from __future__ import annotations
 
 from typing import Dict, List
@@ -49,7 +50,9 @@ def run_echo(seed: str, cycles: int = 3) -> Dict:
         },
     ]
     for i in range(min(cycles, 3)):
-        branches[i % 3]["summary"] += f" Cycle t{i+1}: pressure redistributes under governor."
+        branches[i % 3]["summary"] += (
+            f" Cycle t{i + 1}: pressure redistributes under governor."
+        )
     insights = [
         "Optionality compounds when reversibility is protected.",
         "The taken path is cheap only if verification is cheap.",

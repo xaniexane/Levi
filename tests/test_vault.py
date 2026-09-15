@@ -4,6 +4,7 @@ Skipped with a clear message when ``cryptography`` isn't installed — the
 seal is fail-closed by design (no XOR fallback), so nothing is testable
 without it.
 """
+
 import pytest
 
 cryptography = pytest.importorskip(

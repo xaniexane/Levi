@@ -4,6 +4,7 @@ Story quality rater — offline scoring of generated prose.
 Dimensions: length, sensory, scar/continuity, specificity, anti-repetition, structure.
 Score 0–10. Used in stress tests and `levi story --rate`.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -57,15 +58,35 @@ def rate_text(text: str) -> QualityReport:
 
     # Sensory
     sensory_cues = [
-        "sound", "cold", "light", "taste", "air", "weight", "room", "door",
-        "metallic", "temperature", "breath", "wrist", "pressure",
+        "sound",
+        "cold",
+        "light",
+        "taste",
+        "air",
+        "weight",
+        "room",
+        "door",
+        "metallic",
+        "temperature",
+        "breath",
+        "wrist",
+        "pressure",
     ]
     sc = sum(1 for c in sensory_cues if c in text.lower())
     scores.append(min(10, 4 + sc * 1.2))
     notes.append(f"sensory cues≈{sc}")
 
     # Scar / continuity law
-    scar_cues = ["scar", "wound", "compromise", "cost", "still", "invoice", "cascade", "nothing reset"]
+    scar_cues = [
+        "scar",
+        "wound",
+        "compromise",
+        "cost",
+        "still",
+        "invoice",
+        "cascade",
+        "nothing reset",
+    ]
     sk = sum(1 for c in scar_cues if c in text.lower())
     scores.append(min(10, 3 + sk * 1.5))
     notes.append(f"continuity/scar cues≈{sk}")
@@ -89,7 +110,12 @@ def rate_text(text: str) -> QualityReport:
 
     # Formula penalty
     formula = 0
-    for bad in ["Premise pressure remained", "Wound law:", "Sensory edge —", "the place-time of the beat"]:
+    for bad in [
+        "Premise pressure remained",
+        "Wound law:",
+        "Sensory edge —",
+        "the place-time of the beat",
+    ]:
         if bad in text:
             formula += 1
     if formula:

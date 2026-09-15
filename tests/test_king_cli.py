@@ -3,6 +3,7 @@
 Hermetic: every run gets a fresh HOME; subprocesses inherit PYTHONPATH
 from conftest like tests/test_cli.py does.
 """
+
 import os
 import re
 import subprocess
@@ -52,8 +53,14 @@ def test_king_all_ten_surfaces():
         assert "story --create" in p.stdout
 
         # create a story, then pulse harvests
-        p = _run(home, "story", "--create", "A lighthouse keeps the last signal.",
-                 "--genre", "literary")
+        p = _run(
+            home,
+            "story",
+            "--create",
+            "A lighthouse keeps the last signal.",
+            "--genre",
+            "literary",
+        )
         assert p.returncode == 0, p.stderr
         p = _run(home, "king", "pulse")
         assert p.returncode == 0, p.stderr
@@ -90,7 +97,7 @@ def test_king_all_ten_surfaces():
 
         # 5b. approved + --yes -> loopback success
         p = _run(home, "king", "social-post", "--id", rid, "--yes")
-        assert p.returncode == 0, (p.stdout + p.stderr)
+        assert p.returncode == 0, p.stdout + p.stderr
         assert "loopback" in p.stdout.lower()
 
         # 6. reim pass-through
@@ -128,6 +135,16 @@ def test_king_help_lists_all_ten():
     with tempfile.TemporaryDirectory(prefix="king_cli_") as home:
         p = _run(home, "king", "--help")
         assert p.returncode == 0, p.stderr
-        for action in ("status", "pulse", "manuscript", "social", "social-post",
-                       "reim", "deny", "approve", "rupture", "d5"):
+        for action in (
+            "status",
+            "pulse",
+            "manuscript",
+            "social",
+            "social-post",
+            "reim",
+            "deny",
+            "approve",
+            "rupture",
+            "d5",
+        ):
             assert action in p.stdout, f"{action} missing from king --help"

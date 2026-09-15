@@ -9,6 +9,7 @@ Inspired by the *need* for safe trial runs; implementation is original:
 
 Not unrestricted shell. Not a copy of any commercial sandbox UI.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -43,19 +44,31 @@ class Crucible:
         p.mkdir(parents=True, exist_ok=True)
         return p
 
-    FORBIDDEN_SNIPPETS = ("__import__", "subprocess", "os.system", "eval(", "exec(", "open(", "socket")
+    FORBIDDEN_SNIPPETS = (
+        "__import__",
+        "subprocess",
+        "os.system",
+        "eval(",
+        "exec(",
+        "open(",
+        "socket",
+    )
 
     def syntax_probe(self, code: str) -> CrucibleResult:
         cid = str(uuid.uuid4())[:8]
         low = code.lower()
         for bad in self.FORBIDDEN_SNIPPETS:
             if bad.lower() in low:
-                return CrucibleResult(id=cid, mode="syntax", ok=False, detail=f"Blocked pattern: {bad}")
+                return CrucibleResult(
+                    id=cid, mode="syntax", ok=False, detail=f"Blocked pattern: {bad}"
+                )
         try:
             ast.parse(code)
             return CrucibleResult(id=cid, mode="syntax", ok=True, detail="AST parse OK")
         except SyntaxError as e:
-            return CrucibleResult(id=cid, mode="syntax", ok=False, detail=f"SyntaxError: {e}")
+            return CrucibleResult(
+                id=cid, mode="syntax", ok=False, detail=f"SyntaxError: {e}"
+            )
 
     def file_smoke(self, rel_name: str, content: str) -> CrucibleResult:
         cid = str(uuid.uuid4())[:8]
@@ -65,10 +78,28 @@ class Crucible:
         if path.suffix == ".py":
             try:
                 py_compile.compile(str(path), doraise=True)
-                return CrucibleResult(id=cid, mode="file_smoke", ok=True, detail=f"compiled {path.name}", stdout=str(chamber))
+                return CrucibleResult(
+                    id=cid,
+                    mode="file_smoke",
+                    ok=True,
+                    detail=f"compiled {path.name}",
+                    stdout=str(chamber),
+                )
             except Exception as e:
-                return CrucibleResult(id=cid, mode="file_smoke", ok=False, detail=str(e), stdout=str(chamber))
-        return CrucibleResult(id=cid, mode="file_smoke", ok=True, detail=f"wrote {path.name} (non-py)", stdout=str(chamber))
+                return CrucibleResult(
+                    id=cid,
+                    mode="file_smoke",
+                    ok=False,
+                    detail=str(e),
+                    stdout=str(chamber),
+                )
+        return CrucibleResult(
+            id=cid,
+            mode="file_smoke",
+            ok=True,
+            detail=f"wrote {path.name} (non-py)",
+            stdout=str(chamber),
+        )
 
     def restricted_eval(self, expr: str) -> CrucibleResult:
         """Extremely limited: literals + arithmetic only via AST."""
@@ -77,16 +108,38 @@ class Crucible:
             tree = ast.parse(expr, mode="eval")
             for node in ast.walk(tree):
                 if isinstance(node, (ast.Call, ast.Attribute, ast.Name)):
-                    if isinstance(node, ast.Name) and node.id in ("True", "False", "None"):
+                    if isinstance(node, ast.Name) and node.id in (
+                        "True",
+                        "False",
+                        "None",
+                    ):
                         continue
                     if isinstance(node, ast.Name):
-                        return CrucibleResult(id=cid, mode="restricted", ok=False, detail="Names not allowed")
+                        return CrucibleResult(
+                            id=cid,
+                            mode="restricted",
+                            ok=False,
+                            detail="Names not allowed",
+                        )
                     if isinstance(node, (ast.Call, ast.Attribute)):
-                        return CrucibleResult(id=cid, mode="restricted", ok=False, detail="Calls/attrs not allowed")
+                        return CrucibleResult(
+                            id=cid,
+                            mode="restricted",
+                            ok=False,
+                            detail="Calls/attrs not allowed",
+                        )
             val = ast.literal_eval(expr)
-            return CrucibleResult(id=cid, mode="restricted", ok=True, detail="literal_eval OK", stdout=repr(val))
+            return CrucibleResult(
+                id=cid,
+                mode="restricted",
+                ok=True,
+                detail="literal_eval OK",
+                stdout=repr(val),
+            )
         except Exception as e:
-            return CrucibleResult(id=cid, mode="restricted", ok=False, detail=str(e)[:200])
+            return CrucibleResult(
+                id=cid, mode="restricted", ok=False, detail=str(e)[:200]
+            )
 
     def format_result(self, r: CrucibleResult) -> str:
         flag = "PASS" if r.ok else "FAIL"

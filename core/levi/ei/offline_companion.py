@@ -13,6 +13,7 @@ This is not a fake LLM: it is deterministic structured care + planning.
 When Ollama/cloud is available, ModelRouter prefers those; this is the
 always-on path that makes the system real.
 """
+
 from __future__ import annotations
 
 from typing import Any, Dict, Optional
@@ -23,6 +24,7 @@ def _continuity() -> Dict[str, Any]:
     out: Dict[str, Any] = {"name": None, "goal": None, "shelf": []}
     try:
         from levi.identity.profile import ProfileStore
+
         p = ProfileStore().load()
         out["name"] = getattr(p, "name", None)
         out["goal"] = getattr(p, "goal_this_week", None) or getattr(p, "goal", None)
@@ -30,6 +32,7 @@ def _continuity() -> Dict[str, Any]:
         pass
     try:
         from levi.identity.shelf import collect_shelf
+
         out["shelf"] = collect_shelf()[:5]
     except Exception:
         pass
@@ -39,6 +42,7 @@ def _continuity() -> Dict[str, Any]:
 def _tone(text: str):
     try:
         from levi.ei.tone import read_user_tone
+
         return read_user_tone(text)
     except Exception:
         return None
@@ -47,6 +51,7 @@ def _tone(text: str):
 def _mono_label() -> Optional[str]:
     try:
         from levi.persona.monotropism import MonotropismTracker
+
         m = MonotropismTracker()
         a = m.state.active
         if a and a.depth >= 0.25:
@@ -59,6 +64,7 @@ def _mono_label() -> Optional[str]:
 def _atlas_hint(user_text: str) -> str:
     try:
         from levi.brain.corpus import Corpus
+
         hits = Corpus().search(user_text or "")
         if not hits:
             return ""
@@ -73,7 +79,17 @@ def _phase1_ensure(text: str, user_text: str = "") -> str:
     """Never return empty; crisis gets soft open if stripped."""
     t = (text or "").strip()
     low = (user_text or "").lower()
-    crisis = any(w in low for w in ("panic", "suicidal", "kill myself", "falling apart", "emergency", "can't go on"))
+    crisis = any(
+        w in low
+        for w in (
+            "panic",
+            "suicidal",
+            "kill myself",
+            "falling apart",
+            "emergency",
+            "can't go on",
+        )
+    )
     if not t:
         t = (
             "I am here with you. We slow this down one step. "
@@ -145,7 +161,10 @@ def synthesize(
         )
 
     # --- Goal queries ---
-    if any(w in lower for w in ("my goal", "goal this week", "what am i working", "holding goal")):
+    if any(
+        w in lower
+        for w in ("my goal", "goal this week", "what am i working", "holding goal")
+    ):
         if goal:
             return (
                 f"{'Ok ' + name + ' — ' if name else ''}"
@@ -159,10 +178,19 @@ def synthesize(
         )
 
     # --- Failure / loss frame → alchemy + equation ---
-    if any(w in lower for w in (
-        "failed", "ruined", "everything is over", "i lost", "all for nothing",
-        "gave up", "worthless", "can't do anything",
-    )):
+    if any(
+        w in lower
+        for w in (
+            "failed",
+            "ruined",
+            "everything is over",
+            "i lost",
+            "all for nothing",
+            "gave up",
+            "worthless",
+            "can't do anything",
+        )
+    ):
         lines = [
             "The weight is real — I'm not papering over it.",
             "Alchemy: this is not a pure loss. Extract the learning (what rule, skill, or hinge became clearer).",
@@ -174,18 +202,34 @@ def synthesize(
         return "\n".join(lines)
 
     # --- Planning / promotion / map the moves → life chess ---
-    if any(w in lower for w in (
-        "map the move", "map moves", "how do i get", "i want the", "plan how",
-        "strategy for", "what should i do", "next move", "promotion",
-    )) or ("want" in lower and any(w in lower for w in ("happen", "get", "become", "reach"))):
+    if any(
+        w in lower
+        for w in (
+            "map the move",
+            "map moves",
+            "how do i get",
+            "i want the",
+            "plan how",
+            "strategy for",
+            "what should i do",
+            "next move",
+            "promotion",
+        )
+    ) or (
+        "want" in lower
+        and any(w in lower for w in ("happen", "get", "become", "reach"))
+    ):
         z_guess = text
         # strip leading want phrases
-        z_guess = re.sub(
-            r"^(i want to|i want|how do i|map the moves? (for|to)?|strategy for)\s*",
-            "",
-            z_guess,
-            flags=re.I,
-        ).strip() or text
+        z_guess = (
+            re.sub(
+                r"^(i want to|i want|how do i|map the moves? (for|to)?|strategy for)\s*",
+                "",
+                z_guess,
+                flags=re.I,
+            ).strip()
+            or text
+        )
         lines = [
             f"Life chess — goal (z): {z_guess[:160]}",
             "",
@@ -200,11 +244,16 @@ def synthesize(
         if goal and goal.lower() not in z_guess.lower():
             lines.append(f"Also holding weekly goal: {goal}.")
         if mono:
-            lines.append(f"Active interest tunnel: {mono} — stay in it unless you change subject.")
+            lines.append(
+                f"Active interest tunnel: {mono} — stay in it unless you change subject."
+            )
         return "\n".join(lines)
 
     # --- Stuck / don't know how → equation ---
-    if any(w in lower for w in ("stuck", "don't know how", "dont know how", "no idea how", "lost on")):
+    if any(
+        w in lower
+        for w in ("stuck", "don't know how", "dont know how", "no idea how", "lost on")
+    ):
         lines = [
             "Name the three terms of the life equation:",
             "  x = what you have / where you are",
@@ -217,12 +266,24 @@ def synthesize(
         return "\n".join(lines)
 
     # --- Chisel / iterative sculpture ---
-    if any(w in lower for w in (
-        "first try", "first attempt", "not perfect", "one shot",
-        "keep failing", "never get it right", "should have worked",
-        "iterate", "version one", "rough draft", "chisel",
-        "not good enough yet", "will take time",
-    )):
+    if any(
+        w in lower
+        for w in (
+            "first try",
+            "first attempt",
+            "not perfect",
+            "one shot",
+            "keep failing",
+            "never get it right",
+            "should have worked",
+            "iterate",
+            "version one",
+            "rough draft",
+            "chisel",
+            "not good enough yet",
+            "will take time",
+        )
+    ):
         lines = [
             "Chisel + refine + evolve — first strike is not the finished form:",
             "The first run not matching the vision is not total failure; it is the first removal of material.",
@@ -238,12 +299,24 @@ def synthesize(
         return "\n".join(lines)
 
     # --- Design / capability / force-mod (cheat-code logic) ---
-    if any(w in lower for w in (
-        "cheat code", "mod this", "force this", "make it do",
-        "what is it capable", "what can it already", "designed to",
-        "if i force", "unlock", "workaround", "how do i make it",
-        "latent", "already have what",
-    )):
+    if any(
+        w in lower
+        for w in (
+            "cheat code",
+            "mod this",
+            "force this",
+            "make it do",
+            "what is it capable",
+            "what can it already",
+            "designed to",
+            "if i force",
+            "unlock",
+            "workaround",
+            "how do i make it",
+            "latent",
+            "already have what",
+        )
+    ):
         lines = [
             "Capability / mod pass (design vs can vs force):",
             "1) DESIGN — what was this produced to do by default?",
@@ -257,11 +330,23 @@ def synthesize(
         return "\n".join(lines)
 
     # --- Game-tester / stress-test the plan ---
-    if any(w in lower for w in (
-        "find the bug", "what's broken", "whats broken", "stress test",
-        "stress-test", "edge case", "what could go wrong", "glitch",
-        "break this", "test my plan", "hole in", "where does this fail",
-    )):
+    if any(
+        w in lower
+        for w in (
+            "find the bug",
+            "what's broken",
+            "whats broken",
+            "stress test",
+            "stress-test",
+            "edge case",
+            "what could go wrong",
+            "glitch",
+            "break this",
+            "test my plan",
+            "hole in",
+            "where does this fail",
+        )
+    ):
         lines = [
             "Game-tester pass (treat the plan like a build under test):",
             "1) Happy path is not enough — name 2–3 edge cases (load, timing, out-of-order, missing input).",
@@ -275,13 +360,24 @@ def synthesize(
         return "\n".join(lines)
 
     # --- Problem mountain / leverage root ---
-    if any(w in lower for w in (
-        "everything is wrong", "so many problems", "overwhelmed by",
-        "pile of problems", "one thing after another", "where do i start",
-        "too many issues", "mountain of", "stack of problems",
-        "underlying problem", "root cause", "what's really going on",
-        "whats really going on",
-    )):
+    if any(
+        w in lower
+        for w in (
+            "everything is wrong",
+            "so many problems",
+            "overwhelmed by",
+            "pile of problems",
+            "one thing after another",
+            "where do i start",
+            "too many issues",
+            "mountain of",
+            "stack of problems",
+            "underlying problem",
+            "root cause",
+            "what's really going on",
+            "whats really going on",
+        )
+    ):
         lines = [
             "Systems check — symptom vs root:",
             "Symptom = the visible pain or event (tip of the iceberg).",
@@ -297,13 +393,26 @@ def synthesize(
         return "\n".join(lines)
 
     # --- Ugly truth triggers: excuse / procrastination / please-validate ---
-    if any(w in lower for w in (
-        "just tell me it's fine", "am i overreacting", "be honest with me",
-        "tell me the truth", "don't sugarcoat", "dont sugarcoat", "no sugarcoat",
-        "what am i avoiding", "why do i keep", "i keep putting off",
-        "i'll start tomorrow", "ill start tomorrow",
-        "everyone else is wrong", "it's not my fault", "its not my fault",
-    )) or ("honest" in lower and "?" in text):
+    if any(
+        w in lower
+        for w in (
+            "just tell me it's fine",
+            "am i overreacting",
+            "be honest with me",
+            "tell me the truth",
+            "don't sugarcoat",
+            "dont sugarcoat",
+            "no sugarcoat",
+            "what am i avoiding",
+            "why do i keep",
+            "i keep putting off",
+            "i'll start tomorrow",
+            "ill start tomorrow",
+            "everyone else is wrong",
+            "it's not my fault",
+            "its not my fault",
+        )
+    ) or ("honest" in lower and "?" in text):
         lines = [
             "Straight answer (no sugarcoat):",
             "What usually keeps this stuck is a move you already see and keep postponing.",
@@ -311,21 +420,31 @@ def synthesize(
             "Name the avoided cost in one plain sentence. Then one small, observable step in the next 24 hours.",
         ]
         if goal:
-            lines.append(f"If it does not serve your held goal, you are working against yourself: {goal}")
+            lines.append(
+                f"If it does not serve your held goal, you are working against yourself: {goal}"
+            )
         return "\n".join(lines)
 
     # --- Remember / shelf ---
-    if any(w in lower for w in ("on my shelf", "what's on the shelf", "what am i continuing")):
+    if any(
+        w in lower
+        for w in ("on my shelf", "what's on the shelf", "what am i continuing")
+    ):
         if shelf:
             items = "\n".join(f"  · {s}" for s in shelf[:5])
             return f"Shelf:\n{items}\nContinue with: levi continue"
-        return "Shelf is empty. Build or ask something worth keeping — it will land here."
+        return (
+            "Shelf is empty. Build or ask something worth keeping — it will land here."
+        )
 
     # --- Build / factory intent ---
-    if any(w in lower for w in ("build me", "scaffold", "create an app", "make a tool", "factory")):
+    if any(
+        w in lower
+        for w in ("build me", "scaffold", "create an app", "make a tool", "factory")
+    ):
         return (
             "Factory DNA is online offline.\n"
-            "  levi factory --create \"short idea\"\n"
+            '  levi factory --create "short idea"\n'
             "  levi factory --advance <id>\n"
             "  levi factory --test <id>\n"
             "Or describe the need in one sentence (paid need + offline-first constraint) and I'll frame the IR."
@@ -343,8 +462,7 @@ def synthesize(
     if name:
         lines.append(f"{name} — noted.")
     lines.append(
-        f"Frame: {primary} / {regulation}. "
-        "I'll match the need, not the arousal."
+        f"Frame: {primary} / {regulation}. I'll match the need, not the arousal."
     )
     if goal:
         lines.append(f"Held goal: {goal}")
@@ -359,17 +477,24 @@ def synthesize(
         "  · Or: levi morning / levi nervous / levi mono"
     )
     # Reflect a short paraphrase of the ask so it feels heard
-    lines.append(f"You said: “{text[:200]}” — pick one term to nail first (x, y, or z).")
+    lines.append(
+        f"You said: “{text[:200]}” — pick one term to nail first (x, y, or z)."
+    )
     return "\n".join(lines)
 
 
 # Phase-1 public guard (ladder offline_ask depends on non-empty usable text)
 _synthesize_impl = synthesize
 
+
 def synthesize(user_text: str, system: str = "", **kwargs) -> str:  # type: ignore[misc]
     """PHASE1_CRISIS_FLOOR — always return grounded offline text."""
     try:
-        out = _synthesize_impl(user_text, system, **kwargs) if kwargs else _synthesize_impl(user_text, system)
+        out = (
+            _synthesize_impl(user_text, system, **kwargs)
+            if kwargs
+            else _synthesize_impl(user_text, system)
+        )
     except TypeError:
         out = _synthesize_impl(user_text, system)
     except Exception:

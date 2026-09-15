@@ -56,7 +56,7 @@ def _cmd_mcp_client(args, action: str) -> None:
     if action == "add":
         name = (getattr(args, "name", None) or "").strip()
         if not name:
-            print("Usage: levi mcp add <name> --url <http-url> | --cmd \"<cmd...>\"")
+            print('Usage: levi mcp add <name> --url <http-url> | --cmd "<cmd...>"')
             raise SystemExit(2)
         url = getattr(args, "url", None) or None
         command_s = getattr(args, "cmd", None) or None

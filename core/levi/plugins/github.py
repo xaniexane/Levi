@@ -56,13 +56,11 @@ def _positive_int(value: Any, what: str) -> int:
         number = int(str(value).strip())
     except (TypeError, ValueError):
         raise InvalidParams(
-            f"invalid {what} {value!r}: expected a positive integer — "
-            "nothing was sent."
+            f"invalid {what} {value!r}: expected a positive integer — nothing was sent."
         ) from None
     if number <= 0:
         raise InvalidParams(
-            f"invalid {what} {value!r}: expected a positive integer — "
-            "nothing was sent."
+            f"invalid {what} {value!r}: expected a positive integer — nothing was sent."
         )
     return number
 
@@ -76,11 +74,13 @@ class GitHubConnector(Connector):
         Capability("read.user", "Read the authenticated user's profile"),
         Capability("read.repo", "Read public/private repo metadata"),
         Capability(
-            "write.issue", "Create issues on repos the token can access",
+            "write.issue",
+            "Create issues on repos the token can access",
             write=True,
         ),
         Capability(
-            "write.comment", "Comment on issues the token can access",
+            "write.comment",
+            "Comment on issues the token can access",
             write=True,
         ),
     )
@@ -88,16 +88,21 @@ class GitHubConnector(Connector):
     operations = (
         Operation("whoami", "Return the authenticated GitHub user", params=()),
         Operation(
-            "get_repo", "Return metadata for owner/repo",
+            "get_repo",
+            "Return metadata for owner/repo",
             params=("owner", "repo"),
         ),
         Operation(
-            "create_issue", "Open an issue on owner/repo",
-            write=True, params=("owner", "repo", "title"),
+            "create_issue",
+            "Open an issue on owner/repo",
+            write=True,
+            params=("owner", "repo", "title"),
         ),
         Operation(
-            "create_comment", "Comment on an issue of owner/repo",
-            write=True, params=("owner", "repo", "issue_number", "body"),
+            "create_comment",
+            "Comment on an issue of owner/repo",
+            write=True,
+            params=("owner", "repo", "issue_number", "body"),
         ),
     )
 
@@ -109,9 +114,7 @@ class GitHubConnector(Connector):
 
     # -- transport (stdlib urllib, wired) ---------------------------------
 
-    def _call_api(
-        self, method: str, path: str, token: str, body: Any = None
-    ) -> Any:
+    def _call_api(self, method: str, path: str, token: str, body: Any = None) -> Any:
         data = None
         headers = {
             "Accept": "application/vnd.github+json",

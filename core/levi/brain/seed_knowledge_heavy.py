@@ -3,6 +3,7 @@ Heavy knowledge expansion — denser A–Z, more inventors/events/stars, domains
 
 Run: python -m levi.cli.main brain --seed-knowledge-heavy
 """
+
 from __future__ import annotations
 
 from typing import Iterator, List, Tuple
@@ -145,16 +146,31 @@ _DEPTH = {
 
 for letter, items in _DEPTH.items():
     for text in items:
-        _RAW.append((f"Depth {letter}: {text}", "OBSERVED", ("knowledge", "heavy", letter.lower(), "subject")))
+        _RAW.append(
+            (
+                f"Depth {letter}: {text}",
+                "OBSERVED",
+                ("knowledge", "heavy", letter.lower(), "subject"),
+            )
+        )
 
 _MORE_INVENTORS = [
     ("Archimedes", "Buoyancy, levers, war engines; geometry applied to machines."),
     ("Al-Khwarizmi", "Algebra algorithms; name root of ‘algorithm’."),
     ("Leonardo da Vinci", "Cross-domain notebooks; observation-driven design."),
-    ("Isaac Newton", "Laws of motion and universal gravitation; calculus priority disputes."),
-    ("Michael Faraday", "Electromagnetic induction; experimental craft over formal math first."),
+    (
+        "Isaac Newton",
+        "Laws of motion and universal gravitation; calculus priority disputes.",
+    ),
+    (
+        "Michael Faraday",
+        "Electromagnetic induction; experimental craft over formal math first.",
+    ),
     ("James Clerk Maxwell", "Unified electricity and magnetism in field equations."),
-    ("Nikola Tesla", "Polyphase AC; high-frequency experiments; separate myth from patents."),
+    (
+        "Nikola Tesla",
+        "Polyphase AC; high-frequency experiments; separate myth from patents.",
+    ),
     ("Guglielmo Marconi", "Long-range radio telegraphy commercialization."),
     ("John von Neumann", "Architecture for stored-program computers; game theory."),
     ("Dorothy Hodgkin", "Protein crystallography; penicillin and B12 structures."),
@@ -166,14 +182,25 @@ _MORE_INVENTORS = [
 ]
 
 for name, note in _MORE_INVENTORS:
-    _RAW.append((f"Inventor — {name}: {note}", "OBSERVED", ("knowledge", "heavy", "inventor")))
+    _RAW.append(
+        (f"Inventor — {name}: {note}", "OBSERVED", ("knowledge", "heavy", "inventor"))
+    )
 
 _MORE_EVENTS = [
-    ("Code of Hammurabi", "Early public law stele; punishment and contract norms recorded."),
+    (
+        "Code of Hammurabi",
+        "Early public law stele; punishment and contract norms recorded.",
+    ),
     ("Magna Carta 1215", "Constraint on ruler power; later constitutional symbol."),
-    ("Fall of Constantinople 1453", "End of Byzantine rule; trade and knowledge routes shift."),
+    (
+        "Fall of Constantinople 1453",
+        "End of Byzantine rule; trade and knowledge routes shift.",
+    ),
     ("Treaty of Westphalia 1648", "State sovereignty norms after religious wars."),
-    ("American and French revolutions", "Popular sovereignty experiments with different outcomes."),
+    (
+        "American and French revolutions",
+        "Popular sovereignty experiments with different outcomes.",
+    ),
     ("Abolition movements", "Moral and political campaigns against chattel slavery."),
     ("Suffrage expansions", "Franchise widened unevenly across gender and class."),
     ("Bretton Woods 1944", "Postwar monetary institutions design."),
@@ -186,7 +213,9 @@ _MORE_EVENTS = [
 ]
 
 for title, note in _MORE_EVENTS:
-    _RAW.append((f"Event — {title}: {note}", "OBSERVED", ("knowledge", "heavy", "event")))
+    _RAW.append(
+        (f"Event — {title}: {note}", "OBSERVED", ("knowledge", "heavy", "event"))
+    )
 
 _MORE_STARS = [
     ("Canopus", "Second-brightest star; southern sky navigation reference."),
@@ -202,7 +231,9 @@ _MORE_STARS = [
 ]
 
 for name, note in _MORE_STARS:
-    _RAW.append((f"Star/celestial — {name}: {note}", "OBSERVED", ("knowledge", "heavy", "star")))
+    _RAW.append(
+        (f"Star/celestial — {name}: {note}", "OBSERVED", ("knowledge", "heavy", "star"))
+    )
 
 _COGNITION = [
     "Cognition — attention is selective; what you ignore shapes what you can know.",
@@ -241,9 +272,11 @@ def iter_heavy(limit: int = 0) -> Iterator[Tuple[str, str, List[str]]]:
 
 def seed(limit: int = 0) -> int:
     from levi.brain.corpus import Corpus
+
     # also ensure base knowledge present
     try:
         from levi.brain.seed_knowledge import seed as seed_base
+
         seed_base()
     except Exception:
         pass

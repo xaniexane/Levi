@@ -17,15 +17,15 @@ from enum import Enum
 
 
 class GenreCategory(str, Enum):
-    CORE_CLASSICAL = "core_classical"           # 16
-    SIGNATURE_LATTICE = "signature_lattice"     # 7
-    HYBRID = "hybrid"                           # 2
+    CORE_CLASSICAL = "core_classical"  # 16
+    SIGNATURE_LATTICE = "signature_lattice"  # 7
+    HYBRID = "hybrid"  # 2
     ATMOSPHERE_STRUCTURE = "atmosphere_structure"  # 12
-    WORLD_SOCIETY = "world_society"             # 12
-    MIND_IDENTITY = "mind_identity"             # 10
-    FORM_FORWARD = "form_forward"               # 8
-    LWP_SPECIALTY = "lwp_specialty"             # 10
-    MAINSTREAM_EXTENDED = "mainstream_extended" # 20
+    WORLD_SOCIETY = "world_society"  # 12
+    MIND_IDENTITY = "mind_identity"  # 10
+    FORM_FORWARD = "form_forward"  # 8
+    LWP_SPECIALTY = "lwp_specialty"  # 10
+    MAINSTREAM_EXTENDED = "mainstream_extended"  # 20
 
 
 @dataclass
@@ -207,11 +207,21 @@ class GenreRegistry:
             "rule": "Never silently truncate. User-designed genres are additive only.",
         }
 
-    def add_custom(self, genre_id: str, category: GenreCategory = GenreCategory.HYBRID, description: str = "") -> Genre:
+    def add_custom(
+        self,
+        genre_id: str,
+        category: GenreCategory = GenreCategory.HYBRID,
+        description: str = "",
+    ) -> Genre:
         """Additive only — does not remove formal 97."""
         gid = genre_id.strip().lower().replace(" ", "_")
         if gid in self._genres:
             return self._genres[gid]
-        g = Genre(id=gid, category=category, description=description, tags=["custom", "additive"])
+        g = Genre(
+            id=gid,
+            category=category,
+            description=description,
+            tags=["custom", "additive"],
+        )
         self._genres[gid] = g
         return g

@@ -168,8 +168,9 @@ class _AgentHandler(BaseHTTPRequestHandler):
                 return False
         return True
 
-    def _meter(self, endpoint: str, steps: int = 0,
-               ok: bool = True, error: str | None = None) -> None:
+    def _meter(
+        self, endpoint: str, steps: int = 0, ok: bool = True, error: str | None = None
+    ) -> None:
         """Usage metering. Never raises; never sees a raw key."""
         try:
             from levi.cloud.metering import log_usage
@@ -237,8 +238,9 @@ class _AgentHandler(BaseHTTPRequestHandler):
             try:
                 payload = _sync.latest_pack_payload()
             except Exception:  # never leak internals
-                self._meter("/v1/learning/packs/latest", ok=False,
-                            error="pack read failed")
+                self._meter(
+                    "/v1/learning/packs/latest", ok=False, error="pack read failed"
+                )
                 self._send_json(500, {"error": "could not read learning packs"})
                 return
             self._meter("/v1/learning/packs/latest")
@@ -303,8 +305,7 @@ class _AgentHandler(BaseHTTPRequestHandler):
         consent = body.get("consent", False)
         if not isinstance(consent, bool):
             return None, {"error": "'consent' must be a boolean"}
-        return {"provider": provider, "max_steps": max_steps,
-                "consent": consent}, None
+        return {"provider": provider, "max_steps": max_steps, "consent": consent}, None
 
     def _session_id_for_caller(self, session_id: str) -> str:
         """Namespace chat sessions per API key so users cannot read each
@@ -312,9 +313,9 @@ class _AgentHandler(BaseHTTPRequestHandler):
         if self._auth_kind == "owner":
             return session_id
         rec = self._auth_record or {}
-        tail = "".join(
-            c for c in str(rec.get("prefix", "")) if c.isalnum()
-        )[-8:] or "key"
+        tail = (
+            "".join(c for c in str(rec.get("prefix", "")) if c.isalnum())[-8:] or "key"
+        )
         namespaced = "cloud_%s_%s" % (tail, session_id)
         max_plain = 64 - (len(namespaced) - len(session_id))
         if len(namespaced) > 64:
@@ -328,7 +329,9 @@ class _AgentHandler(BaseHTTPRequestHandler):
         task = body.get("task")
         if not isinstance(task, str) or not task.strip():
             self._meter("/v1/agent/run", ok=False, error="task required")
-            self._send_json(400, {"error": "'task' is required and must be a non-empty string"})
+            self._send_json(
+                400, {"error": "'task' is required and must be a non-empty string"}
+            )
             return
         kwargs, err = self._run_kwargs(body)
         if err:
@@ -352,8 +355,12 @@ class _AgentHandler(BaseHTTPRequestHandler):
             max_steps=kwargs["max_steps"],
         )
         result = transcript.to_dict()
-        self._meter("/v1/agent/run", steps=len(result.get("steps", [])),
-                    ok=result.get("ok", False), error=result.get("error"))
+        self._meter(
+            "/v1/agent/run",
+            steps=len(result.get("steps", [])),
+            ok=result.get("ok", False),
+            error=result.get("error"),
+        )
         self._send_json(200, {"transcript": result})
 
     def _handle_chat(self, body: dict) -> None:
@@ -363,7 +370,10 @@ class _AgentHandler(BaseHTTPRequestHandler):
         session_id = body.get("session_id")
         if not isinstance(session_id, str) or not session_id.strip():
             self._meter("/v1/agent/chat", ok=False, error="session_id required")
-            self._send_json(400, {"error": "'session_id' is required and must be a non-empty string"})
+            self._send_json(
+                400,
+                {"error": "'session_id' is required and must be a non-empty string"},
+            )
             return
         try:
             session_id = sanitize_session_name(session_id)
@@ -375,7 +385,9 @@ class _AgentHandler(BaseHTTPRequestHandler):
         message = body.get("message")
         if not isinstance(message, str) or not message.strip():
             self._meter("/v1/agent/chat", ok=False, error="message required")
-            self._send_json(400, {"error": "'message' is required and must be a non-empty string"})
+            self._send_json(
+                400, {"error": "'message' is required and must be a non-empty string"}
+            )
             return
         kwargs, err = self._run_kwargs(body)
         if err:
@@ -400,14 +412,21 @@ class _AgentHandler(BaseHTTPRequestHandler):
             self._send_json(400, {"error": str(exc)})
             return
         transcript = result.transcript.to_dict()
-        self._meter("/v1/agent/chat", steps=len(transcript.get("steps", [])),
-                    ok=transcript.get("ok", False), error=transcript.get("error"))
-        self._send_json(200, {
-            "session_id": session_id,
-            "transcript": transcript,
-            "context_pct": result.context_pct,
-            "compressed": result.compressed,
-        })
+        self._meter(
+            "/v1/agent/chat",
+            steps=len(transcript.get("steps", [])),
+            ok=transcript.get("ok", False),
+            error=transcript.get("error"),
+        )
+        self._send_json(
+            200,
+            {
+                "session_id": session_id,
+                "transcript": transcript,
+                "context_pct": result.context_pct,
+                "compressed": result.compressed,
+            },
+        )
 
 
 def serve(host: str = "127.0.0.1", port: int = 8765) -> None:

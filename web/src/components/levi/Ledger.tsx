@@ -97,7 +97,9 @@ export function LedgerView() {
               const file = e.target.files?.[0];
               if (!file) return;
               const text = await file.text();
-              setRestoreMsg(importBackup(text) ? "Restore verified." : "Restore blocked — bad JSON.");
+              setRestoreMsg(
+                importBackup(text) ? "Restore verified." : "Restore blocked — bad JSON.",
+              );
             }}
           />
         </div>
@@ -142,7 +144,10 @@ export function LedgerView() {
         <p className="mt-1 text-xs text-muted">Old console organs vs this restore.</p>
         <ul className="mt-3 divide-y divide-border rounded-xl border border-border">
           {ORGAN_MAP.map((row) => (
-            <li key={row.old + row.now} className="flex flex-col gap-0.5 px-4 py-3 sm:flex-row sm:items-baseline sm:justify-between">
+            <li
+              key={row.old + row.now}
+              className="flex flex-col gap-0.5 px-4 py-3 sm:flex-row sm:items-baseline sm:justify-between"
+            >
               <div>
                 <span className="text-sm">{row.old === "—" ? row.now : row.old}</span>
                 <span className="text-micro text-muted"> → {row.now}</span>
@@ -159,7 +164,8 @@ export function LedgerView() {
         <section className="mt-8">
           <h2 className="text-sm font-medium text-muted">Lineage · current IR</h2>
           <p className="mt-2 font-mono text-xs text-muted">
-            {ir.provenance.transforms.join(" → ")} · seed {ir.provenance.seed} · {ir.provenance.model}
+            {ir.provenance.transforms.join(" → ")} · seed {ir.provenance.seed} ·{" "}
+            {ir.provenance.model}
           </p>
         </section>
       )}
@@ -175,7 +181,12 @@ export function LedgerView() {
             setNote("");
           }}
         >
-          <Textarea rows={2} value={note} onChange={(e) => setNote(e.target.value)} placeholder="One honest sentence." />
+          <Textarea
+            rows={2}
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            placeholder="One honest sentence."
+          />
           <Button type="submit" size="sm" className="self-start">
             File note
           </Button>

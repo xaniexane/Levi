@@ -94,9 +94,7 @@ class _MCPHTTPState:
             return True
         auth = headers.get("Authorization", "")
         scheme, _, value = auth.partition(" ")
-        return scheme.lower() == "bearer" and hmac.compare_digest(
-            value, self.token
-        )
+        return scheme.lower() == "bearer" and hmac.compare_digest(value, self.token)
 
 
 class _Handler(BaseHTTPRequestHandler):
@@ -173,7 +171,9 @@ class _Handler(BaseHTTPRequestHandler):
         self.send_header("Connection", "keep-alive")
         self.end_headers()
         try:
-            self.wfile.write(f"event: endpoint\ndata: /message?sessionId={sid}\n\n".encode())
+            self.wfile.write(
+                f"event: endpoint\ndata: /message?sessionId={sid}\n\n".encode()
+            )
             self.wfile.flush()
             # Keep the stream open; LEVI sends no spontaneous
             # notifications today, so this is keep-alive only.

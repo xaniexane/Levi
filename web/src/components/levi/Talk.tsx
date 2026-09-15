@@ -138,8 +138,7 @@ export function TalkView() {
     busyRef.current = true;
     setBusy(true);
 
-    const fallback = () =>
-      localReply({ input, name, goal, persona, shelf: shelfSummary() });
+    const fallback = () => localReply({ input, name, goal, persona, shelf: shelfSummary() });
 
     if (!catalystAllowed()) {
       addMessage("levi", fallback());
@@ -171,12 +170,10 @@ export function TalkView() {
               designMode,
             }),
           },
-          ...history.map(
-            (m): ChatMessage => ({
-              role: m.role === "levi" ? "assistant" : "user",
-              content: m.text,
-            }),
-          ),
+          ...history.map((m): ChatMessage => ({
+            role: m.role === "levi" ? "assistant" : "user",
+            content: m.text,
+          })),
         ],
         maxTokens: p.noHero ? 180 : p.interrogation ? 220 : 700,
         signal: aborter.signal,
@@ -342,8 +339,7 @@ export function TalkView() {
         ref={scrollRef}
         onScroll={(e) => {
           const el = e.currentTarget;
-          nearBottomRef.current =
-            el.scrollHeight - el.scrollTop - el.clientHeight < 140;
+          nearBottomRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < 140;
         }}
         className="flex-1 overflow-y-auto px-4 py-5"
       >
@@ -370,10 +366,7 @@ export function TalkView() {
                         aria-label="LEVI is thinking"
                       >
                         {[0, 1, 2].map((i) => (
-                          <span
-                            key={i}
-                            className="typing-dot size-1.5 rounded-full bg-muted"
-                          />
+                          <span key={i} className="typing-dot size-1.5 rounded-full bg-muted" />
                         ))}
                       </span>
                     )}

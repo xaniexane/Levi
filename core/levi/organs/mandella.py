@@ -4,6 +4,7 @@ The one stakes/scenario-generation implementation in this tree; pairs with
 organs/echo.py. A prior lineage's graph/mandella.py was correctly rejected
 at merge time to avoid a competing implementation — do not reintroduce one;
 extend this module instead."""
+
 from __future__ import annotations
 
 from typing import Dict, List
@@ -53,9 +54,7 @@ def run_mandella(domain: str = "build", seed: str = "") -> Dict:
         "organ": "mandella",
         "domain": d,
         "premise": premise,
-        "options": [
-            {"label": o[0], "risk": o[1], "note": o[2]} for o in ordered
-        ],
+        "options": [{"label": o[0], "risk": o[1], "note": o[2]} for o in ordered],
         "recommended": ordered[0][0],
         "seed": seed,
     }

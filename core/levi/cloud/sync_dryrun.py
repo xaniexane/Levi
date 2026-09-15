@@ -3,6 +3,7 @@ Encrypted sync dry-run (Phase B prep) — inventory ~/.levi, hash blobs, write m
 
 No plaintext upload path until Phase B transport is stood up.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -74,7 +75,11 @@ class SyncDryRun:
 
         for dirpath, dirnames, filenames in os.walk(self.root):
             # prune
-            dirnames[:] = [d for d in dirnames if d not in self.SKIP_NAMES and not d.startswith(".")]
+            dirnames[:] = [
+                d
+                for d in dirnames
+                if d not in self.SKIP_NAMES and not d.startswith(".")
+            ]
             for name in filenames:
                 if name in self.SKIP_NAMES or name.startswith("."):
                     continue
@@ -85,7 +90,9 @@ class SyncDryRun:
                     continue
                 rel = str(path.relative_to(self.root))
                 h = hashlib.sha256(data).hexdigest()
-                entry = BlobEntry(rel=rel, size=len(data), sha256=h, kind=self._kind(path))
+                entry = BlobEntry(
+                    rel=rel, size=len(data), sha256=h, kind=self._kind(path)
+                )
                 manifest.blobs.append(entry)
                 manifest.total_bytes += entry.size
 

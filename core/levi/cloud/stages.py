@@ -7,6 +7,7 @@ stages; project "phases" are an executable workflow with HITL.
 
 Local-first does not mean cloud-never. Cloud is optional wings; core stays useful offline.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -133,11 +134,17 @@ class StageMap:
             lines.append(f"{marker} Phase {p.id}  {p.name:16}  [{p.status}]")
             lines.append(f"    {p.summary}")
             if p.capabilities:
-                lines.append("    can: " + "; ".join(p.capabilities[:3]) + ("…" if len(p.capabilities) > 3 else ""))
+                lines.append(
+                    "    can: "
+                    + "; ".join(p.capabilities[:3])
+                    + ("…" if len(p.capabilities) > 3 else "")
+                )
             if p.not_yet:
                 lines.append("    not yet: " + "; ".join(p.not_yet[:2]))
             lines.append("")
-        lines.append("Invariant: HITL · local crisis · exportable · server never needs plaintext.")
+        lines.append(
+            "Invariant: HITL · local crisis · exportable · server never needs plaintext."
+        )
         return "\n".join(lines)
 
     def to_dict(self) -> Dict[str, Any]:

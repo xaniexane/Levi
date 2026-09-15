@@ -6,9 +6,7 @@
  */
 
 export type StreamChunk =
-  | { kind: "token"; token: string }
-  | { kind: "done" }
-  | { kind: "error"; error: string };
+  { kind: "token"; token: string } | { kind: "done" } | { kind: "error"; error: string };
 
 /** Parse one line of the protocol; anything else → null. */
 export function parseStreamLine(line: string): StreamChunk | null {

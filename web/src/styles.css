@@ -24,12 +24,10 @@
   --color-ok: #6fbf73;
   --color-live: #e2a63d;
 
-  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
-    "Noto Serif", serif;
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans",
-    "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo,
-    Consolas, monospace;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Noto Serif", serif;
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
 
   --text-micro: 0.6875rem;
   --tracking-kicker: 0.18em;
@@ -87,7 +85,9 @@
 
   @media (prefers-reduced-motion: no-preference) {
     body {
-      transition: background-color 0.35s ease, color 0.35s ease;
+      transition:
+        background-color 0.35s ease,
+        color 0.35s ease;
     }
   }
 

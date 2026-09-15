@@ -44,7 +44,7 @@ from levi.agent.tools import build_default_registry
 SESSIONS_ENV = "LEVI_AGENT_SESSIONS_DIR"
 DEFAULT_SESSION = "default"
 COMPRESSION_THRESHOLD = 0.80  # compress when estimate >= 80% of the window
-KEEP_RECENT_USER_TURNS = 6    # user turns kept verbatim when compressing
+KEEP_RECENT_USER_TURNS = 6  # user turns kept verbatim when compressing
 # Heuristic allowance for the loop's system prompt (15 tool schemas) when
 # estimating context before a turn. After a turn, real usage numbers from
 # the provider replace the estimate.
@@ -129,11 +129,19 @@ class ChatSession:
 
     # -- writers ----------------------------------------------------------
 
-    def append_message(self, role: str, content: str, *,
-                       name: str | None = None,
-                       tool_call_id: str | None = None) -> None:
-        rec: dict[str, Any] = {"kind": "message", "role": role,
-                               "content": content or ""}
+    def append_message(
+        self,
+        role: str,
+        content: str,
+        *,
+        name: str | None = None,
+        tool_call_id: str | None = None,
+    ) -> None:
+        rec: dict[str, Any] = {
+            "kind": "message",
+            "role": role,
+            "content": content or "",
+        }
         if name:
             rec["name"] = name
         if tool_call_id:
@@ -141,8 +149,9 @@ class ChatSession:
         self._append(rec)
 
     def append_summary(self, text: str, covers_messages: int) -> None:
-        self._append({"kind": "summary", "content": text,
-                      "covers_messages": covers_messages})
+        self._append(
+            {"kind": "summary", "content": text, "covers_messages": covers_messages}
+        )
 
     def append_note(self, text: str) -> None:
         self._append({"kind": "note", "content": text})
@@ -155,12 +164,14 @@ class ChatSession:
         dialogue readers (``messages()`` / ``notes()``) and by the
         local session harvester.
         """
-        self._append({
-            "kind": "turn-meta",
-            "provider": provider or "?",
-            "ok": bool(ok),
-            "steps": int(steps),
-        })
+        self._append(
+            {
+                "kind": "turn-meta",
+                "provider": provider or "?",
+                "ok": bool(ok),
+                "steps": int(steps),
+            }
+        )
 
     # -- readers ----------------------------------------------------------
 
@@ -171,12 +182,14 @@ class ChatSession:
         """All message records as ChatMessage (the full dialogue)."""
         out = []
         for r in self.message_records():
-            out.append(ChatMessage(
-                role=r.get("role", "user"),
-                content=r.get("content", ""),
-                name=r.get("name"),
-                tool_call_id=r.get("tool_call_id"),
-            ))
+            out.append(
+                ChatMessage(
+                    role=r.get("role", "user"),
+                    content=r.get("content", ""),
+                    name=r.get("name"),
+                    tool_call_id=r.get("tool_call_id"),
+                )
+            )
         return out
 
     def summary(self) -> tuple[str, int] | tuple[None, int]:
@@ -187,8 +200,7 @@ class ChatSession:
         return None, 0
 
     def notes(self) -> list[str]:
-        return [r.get("content", "") for r in self.records
-                if r.get("kind") == "note"]
+        return [r.get("content", "") for r in self.records if r.get("kind") == "note"]
 
 
 # ---------------------------------------------------------------------------
@@ -199,9 +211,9 @@ class ChatSession:
 @dataclass
 class TurnResult:
     transcript: AgentTranscript
-    context_pct: float       # 0.0-1.0+ of the window used by this turn
-    compressed: bool         # whether compression ran before this turn
-    summary: str | None      # rolling summary after this turn (if any)
+    context_pct: float  # 0.0-1.0+ of the window used by this turn
+    compressed: bool  # whether compression ran before this turn
+    summary: str | None  # rolling summary after this turn (if any)
 
 
 class ConversationManager:
@@ -246,6 +258,7 @@ class ConversationManager:
             if self.affect:
                 try:
                     from levi.affect import SessionEI
+
                     self.affect_session = SessionEI()
                 except Exception:
                     self.affect_session = None
@@ -253,6 +266,7 @@ class ConversationManager:
             self.ctx_size = max(1, int(ctx_size))
         elif self.provider_name == "levi-local":
             from levi.agent.local_model import ctx_size as _local_ctx
+
             self.ctx_size = _local_ctx()
         else:
             self.ctx_size = CONSERVATIVE_CTX_SIZE
@@ -260,10 +274,14 @@ class ConversationManager:
 
     # -- public -----------------------------------------------------------
 
-    def turn(self, user_text: str, *,
-             max_steps: int | None = None,
-             consent: bool | None = None,
-             confirm: Any = "UNCHANGED") -> TurnResult:
+    def turn(
+        self,
+        user_text: str,
+        *,
+        max_steps: int | None = None,
+        consent: bool | None = None,
+        confirm: Any = "UNCHANGED",
+    ) -> TurnResult:
         """Run one user turn: compress if needed, run the agentic loop,
         persist everything, report context usage."""
         text = (user_text or "").strip()
@@ -276,8 +294,7 @@ class ConversationManager:
         # The new user message is already the tail of the context (it was
         # appended to the session above); run_subtask() appends `task`
         # itself, so drop the duplicate instead of sending it twice.
-        if (history and history[-1].role == "user"
-                and history[-1].content == text):
+        if history and history[-1].role == "user" and history[-1].content == text:
             history = history[:-1]
 
         use_consent = self.consent if consent is None else bool(consent)
@@ -308,8 +325,7 @@ class ConversationManager:
                 self.session.append_message("assistant", step.provider_text)
             for call, result in zip(step.tool_calls, step.results, strict=False):
                 content = (result.get("output") or result.get("error") or "").strip()
-                self.session.append_message("tool", content,
-                                            name=call.get("name"))
+                self.session.append_message("tool", content, name=call.get("name"))
         if transcript.final:
             self.session.append_message("assistant", transcript.final)
 
@@ -323,8 +339,12 @@ class ConversationManager:
 
         pct = self._context_pct(transcript, history, text)
         summary, _ = self.session.summary()
-        return TurnResult(transcript=transcript, context_pct=pct,
-                          compressed=compressed, summary=summary)
+        return TurnResult(
+            transcript=transcript,
+            context_pct=pct,
+            compressed=compressed,
+            summary=summary,
+        )
 
     # -- context ----------------------------------------------------------
 
@@ -333,14 +353,16 @@ class ConversationManager:
         summary_text, covers = self.session.summary()
         msgs: list[ChatMessage] = []
         if summary_text:
-            msgs.append(ChatMessage(
-                role="user",
-                content=(
-                    "[Rolling summary of earlier conversation — compressed "
-                    "context, not a new message. Treat it as background and "
-                    "continue the dialogue.]\n" + summary_text
-                ),
-            ))
+            msgs.append(
+                ChatMessage(
+                    role="user",
+                    content=(
+                        "[Rolling summary of earlier conversation — compressed "
+                        "context, not a new message. Treat it as background and "
+                        "continue the dialogue.]\n" + summary_text
+                    ),
+                )
+            )
         msgs.extend(self.session.messages()[covers:])
         return msgs
 
@@ -350,8 +372,9 @@ class ConversationManager:
             total += estimate_tokens(m.content)
         return total
 
-    def _context_pct(self, transcript: AgentTranscript,
-                     history: list[ChatMessage], user_text: str) -> float:
+    def _context_pct(
+        self, transcript: AgentTranscript, history: list[ChatMessage], user_text: str
+    ) -> float:
         """Fraction of the window used. Prefers the provider's real
         prompt-token total from the transcript; falls back to the
         character heuristic when the provider reports nothing."""
@@ -375,9 +398,12 @@ class ConversationManager:
         _, already_covered = self.session.summary()
         # Find the split: keep the last KEEP_RECENT_USER_TURNS user turns
         # (and everything after the KEEP-th newest user message) verbatim.
-        user_idx = [i for i, r in enumerate(records)
-                    if r.get("role") == "user"
-                    and not (r.get("content") or "").startswith("[Rolling summary")]
+        user_idx = [
+            i
+            for i, r in enumerate(records)
+            if r.get("role") == "user"
+            and not (r.get("content") or "").startswith("[Rolling summary")
+        ]
         if len(user_idx) <= KEEP_RECENT_USER_TURNS:
             return False  # nothing old enough to compress; one huge turn
         split = user_idx[-KEEP_RECENT_USER_TURNS]
@@ -387,8 +413,12 @@ class ConversationManager:
         if not older_recs:
             return False
         older = [
-            ChatMessage(role=r.get("role", "user"), content=r.get("content", ""),
-                        name=r.get("name"), tool_call_id=r.get("tool_call_id"))
+            ChatMessage(
+                role=r.get("role", "user"),
+                content=r.get("content", ""),
+                name=r.get("name"),
+                tool_call_id=r.get("tool_call_id"),
+            )
             for r in older_recs
         ]
         summary_text, facts = self._summarize(older)
@@ -405,9 +435,7 @@ class ConversationManager:
 
     def _summarize(self, older: list[ChatMessage]) -> tuple[str, list[str]]:
         """Return (rolling_summary, durable_facts) for the older turns."""
-        convo = "\n".join(
-            "%s: %s" % (m.role, (m.content or "")[:2000]) for m in older
-        )
+        convo = "\n".join("%s: %s" % (m.role, (m.content or "")[:2000]) for m in older)
         prev, _ = self.session.summary()
         if self.provider_name == "local":
             # The rule-based planner cannot write summaries: extractive
@@ -425,8 +453,11 @@ class ConversationManager:
             "assistant with a limited context window. "
         )
         if prev:
-            prompt += ("A previous summary exists — fold it in and update it:\n"
-                       + prev + "\n\n")
+            prompt += (
+                "A previous summary exists — fold it in and update it:\n"
+                + prev
+                + "\n\n"
+            )
         prompt += (
             "Write a compact rolling summary (3-6 sentences) of the "
             "conversation below: keep decisions, names, numbers, preferences, "
@@ -466,7 +497,7 @@ class ConversationManager:
         summary = summary.strip()
         for prefix in ("SUMMARY:", "Summary:"):
             if summary.startswith(prefix):
-                summary = summary[len(prefix):].strip()
+                summary = summary[len(prefix) :].strip()
                 break
         facts = []
         for line in facts_block.splitlines():
@@ -480,7 +511,8 @@ class ConversationManager:
     def _remember_fact(self, fact: str) -> None:
         """Persist one durable fact to the agent scratch memory."""
         registry = self.registry or build_default_registry(
-            workspace_root=self.workspace_root)
+            workspace_root=self.workspace_root
+        )
         try:
             existing = ""
             res = registry.execute("memory_read", {"name": self._memory_key})
@@ -492,15 +524,17 @@ class ConversationManager:
         if entry not in existing:
             combined = (existing.rstrip() + "\n" + entry).strip()
             try:
-                registry.execute("memory_write",
-                                 {"name": self._memory_key, "content": combined})
+                registry.execute(
+                    "memory_write", {"name": self._memory_key, "content": combined}
+                )
             except Exception:
                 pass
 
     def read_facts(self) -> str:
         """Durable facts remembered for this session (may be empty)."""
         registry = self.registry or build_default_registry(
-            workspace_root=self.workspace_root)
+            workspace_root=self.workspace_root
+        )
         try:
             res = registry.execute("memory_read", {"name": self._memory_key})
             return res.output if res.ok else ""
@@ -524,16 +558,19 @@ agentic loop with tools. History is saved per session automatically.\
 """
 
 
-def run_chat_repl(session_name: str = DEFAULT_SESSION, *,
-                  provider: Any = None,
-                  registry: Any = None,
-                  max_steps: int = 10,
-                  consent: bool = False,
-                  confirm: Any = None,
-                  workspace_root: Any = None,
-                  system_prompt: str | None = None,
-                  affect: bool = False,
-                  affect_session: Any = None) -> None:
+def run_chat_repl(
+    session_name: str = DEFAULT_SESSION,
+    *,
+    provider: Any = None,
+    registry: Any = None,
+    max_steps: int = 10,
+    consent: bool = False,
+    confirm: Any = None,
+    workspace_root: Any = None,
+    system_prompt: str | None = None,
+    affect: bool = False,
+    affect_session: Any = None,
+) -> None:
     """Interactive long-conversation REPL. Returns on /quit / EOF."""
     mgr = ConversationManager(
         session_name,
@@ -548,14 +585,20 @@ def run_chat_repl(session_name: str = DEFAULT_SESSION, *,
         affect_session=affect_session,
     )
     resumed = len(mgr.session.message_records())
-    print("levi agent chat — session %r (provider=%s, ctx=%d tokens%s)" % (
-        mgr.session.name, mgr.provider_name, mgr.ctx_size,
-        ", resumed %d message(s)" % resumed if resumed else ", new session",
-    ))
+    print(
+        "levi agent chat — session %r (provider=%s, ctx=%d tokens%s)"
+        % (
+            mgr.session.name,
+            mgr.provider_name,
+            mgr.ctx_size,
+            ", resumed %d message(s)" % resumed if resumed else ", new session",
+        )
+    )
     print("Type /help for commands, /quit to exit.\n")
 
     def _confirm(preview: str) -> bool:
         import sys as _sys
+
         if not _sys.stdin.isatty():
             return False
         try:
@@ -590,8 +633,10 @@ def run_chat_repl(session_name: str = DEFAULT_SESSION, *,
             continue
         if line == "/context":
             est = mgr._estimate_context_tokens()
-            print("estimated next-turn context: ~%d tokens (%.0f%% of %d)" % (
-                est, 100.0 * est / max(1, mgr.ctx_size), mgr.ctx_size))
+            print(
+                "estimated next-turn context: ~%d tokens (%.0f%% of %d)"
+                % (est, 100.0 * est / max(1, mgr.ctx_size), mgr.ctx_size)
+            )
             continue
         try:
             result = mgr.turn(
@@ -617,7 +662,11 @@ def run_chat_repl(session_name: str = DEFAULT_SESSION, *,
         print(f"\nlevi [{status}] {t.final}")
         if result.compressed:
             print("(context was compressed this turn — see /summary)")
-        print("context ~%.0f%% of %d tokens\n" % (
-            100.0 * result.context_pct, mgr.ctx_size))
-    print("session %r saved (%d messages)." % (
-        mgr.session.name, len(mgr.session.message_records())))
+        print(
+            "context ~%.0f%% of %d tokens\n"
+            % (100.0 * result.context_pct, mgr.ctx_size)
+        )
+    print(
+        "session %r saved (%d messages)."
+        % (mgr.session.name, len(mgr.session.message_records()))
+    )

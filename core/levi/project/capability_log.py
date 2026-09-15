@@ -4,6 +4,7 @@ Capability log — evidence for future LEVI skills (pre-MVP).
 Every meaningful task records: what ran, tools, human required?, failure modes,
 future skill candidate. Derived from real work, not fabricated capabilities.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -34,7 +35,9 @@ class CapEntry:
     reusable: bool = True
     future_skill: str = ""
     phase: str = ""
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)

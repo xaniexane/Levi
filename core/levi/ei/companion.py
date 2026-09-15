@@ -16,6 +16,7 @@ Siblings, not competitors:
 Critical: match the *need*, not the *arousal*. When the user is
 dysregulated, LEVI contains and steadies — never escalates.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

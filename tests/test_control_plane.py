@@ -32,6 +32,7 @@ from levi.policy.gates import RiskLevel
 # fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def home(tmp_path: Path) -> Path:
     return tmp_path / "home"
@@ -54,9 +55,12 @@ def isolated_home(monkeypatch, tmp_path: Path):
 
 
 def _l2_kwargs(**over):
-    kw = dict(description="run shell command",
-              risk_level=RiskLevel.MODERATE,
-              action_key="shell_exec", workflow_key="wf-test")
+    kw = dict(
+        description="run shell command",
+        risk_level=RiskLevel.MODERATE,
+        action_key="shell_exec",
+        workflow_key="wf-test",
+    )
     kw.update(over)
     return kw
 
@@ -65,20 +69,23 @@ def _l2_kwargs(**over):
 # approvals: L0/L1 auto-resolve
 # ---------------------------------------------------------------------------
 
+
 def test_l0_l1_auto_approve_and_log(engine: ApprovalEngine):
     r0 = engine.guard(description="read status", risk_level=RiskLevel.INFO)
     r1 = engine.guard(description="list files", risk_level=RiskLevel.LOW)
     assert r0["status"] == "approved"
     assert r1["status"] == "approved"
     assert engine.pending() == []
-    decisions = [h.get("decision") or h.get("decision_note", "")
-                 for h in engine.history()]
+    decisions = [
+        h.get("decision") or h.get("decision_note", "") for h in engine.history()
+    ]
     assert any("auto-approved" in d for d in decisions)
 
 
 # ---------------------------------------------------------------------------
 # approvals: L2+ pending and blocked
 # ---------------------------------------------------------------------------
+
 
 def test_l2_pending_and_blocked_until_decided(engine: ApprovalEngine):
     rec = engine.guard(**_l2_kwargs())
@@ -95,15 +102,21 @@ def test_l2_pending_and_blocked_until_decided(engine: ApprovalEngine):
 
 
 def test_l3_pending_and_blocked(engine: ApprovalEngine):
-    rec = engine.guard(description="drop production database",
-                       risk_level=RiskLevel.HIGH,
-                       action_key="db_drop", workflow_key="wf-test")
+    rec = engine.guard(
+        description="drop production database",
+        risk_level=RiskLevel.HIGH,
+        action_key="db_drop",
+        workflow_key="wf-test",
+    )
     assert rec["status"] == "awaiting_permission"
     assert rec["risk_name"] == "high"
     with pytest.raises(ApprovalBlocked):
-        engine.require(description="drop production database",
-                       risk_level=RiskLevel.HIGH,
-                       action_key="db_drop", workflow_key="wf-test")
+        engine.require(
+            description="drop production database",
+            risk_level=RiskLevel.HIGH,
+            action_key="db_drop",
+            workflow_key="wf-test",
+        )
 
 
 def test_deny_is_visible_and_final_for_that_request(engine: ApprovalEngine):
@@ -117,6 +130,7 @@ def test_deny_is_visible_and_final_for_that_request(engine: ApprovalEngine):
 # ---------------------------------------------------------------------------
 # approvals: approve-once releases exactly one action
 # ---------------------------------------------------------------------------
+
 
 def test_approve_once_releases_exactly_one_action(engine: ApprovalEngine):
     first = engine.guard(**_l2_kwargs())
@@ -177,18 +191,31 @@ def test_guard_timeout_waits_for_cli_decision(home: Path):
 # ledger: round-trip
 # ---------------------------------------------------------------------------
 
+
 def test_ledger_full_round_trip(ledger: LedgerWriter):
-    ledger.record_task("t1", objective="summarize the inbox",
-                       user_id="u1", tenant_id="t1", plan_version="2")
+    ledger.record_task(
+        "t1",
+        objective="summarize the inbox",
+        user_id="u1",
+        tenant_id="t1",
+        plan_version="2",
+    )
     sid = ledger.record_step(
-        "t1", agent="agent_cli", category="agent_run", task_class="simple",
-        model="levi-0.6b", model_version="r1",
+        "t1",
+        agent="agent_cli",
+        category="agent_run",
+        task_class="simple",
+        model="levi-0.6b",
+        model_version="r1",
         tools_used=["memory_read"],
         decision_summary="read memory, then summarize",
-        action="summarize the inbox", expected_result="a summary",
+        action="summarize the inbox",
+        expected_result="a summary",
         actual_result="3 items summarized",
         verification={"notes": "structural"},
-        outcome="ok", cost_units=2.5, latency_ms=120.0,
+        outcome="ok",
+        cost_units=2.5,
+        latency_ms=120.0,
     )
     assert sid > 0
     ledger.record_feedback("t1", rating=5, comment="good summary")
@@ -217,17 +244,28 @@ def test_ledger_full_round_trip(ledger: LedgerWriter):
 def test_ledger_model_category_stats_feed_router(ledger: LedgerWriter):
     for i in range(4):
         ledger.record_step(
-            f"t{i}", agent="fleet:research", category="research",
-            task_class="hard", model="levi-0.6b",
-            decision_summary="cheap run", action="research x",
-            outcome="ok", cost_units=3.0,
+            f"t{i}",
+            agent="fleet:research",
+            category="research",
+            task_class="hard",
+            model="levi-0.6b",
+            decision_summary="cheap run",
+            action="research x",
+            outcome="ok",
+            cost_units=3.0,
         )
-    ledger.record_step("t9", agent="fleet:research", category="research",
-                       task_class="hard", model="levi-4b",
-                       decision_summary="baseline", action="research x",
-                       outcome="ok", cost_units=10.0)
-    rows = {(r["model"], r["task_class"]): r
-            for r in ledger.model_category_stats()}
+    ledger.record_step(
+        "t9",
+        agent="fleet:research",
+        category="research",
+        task_class="hard",
+        model="levi-4b",
+        decision_summary="baseline",
+        action="research x",
+        outcome="ok",
+        cost_units=10.0,
+    )
+    rows = {(r["model"], r["task_class"]): r for r in ledger.model_category_stats()}
     cheap = rows[("levi-0.6b", "hard")]
     assert cheap["runs"] == 4
     assert cheap["successes"] == 4
@@ -236,6 +274,7 @@ def test_ledger_model_category_stats_feed_router(ledger: LedgerWriter):
 # ---------------------------------------------------------------------------
 # routing: cost-aware model selection
 # ---------------------------------------------------------------------------
+
 
 def test_simple_task_routes_to_cheapest_viable():
     route = plan_route("what is 2 + 2?", only_downloaded=False)
@@ -247,8 +286,9 @@ def test_simple_task_routes_to_cheapest_viable():
 
 
 def test_tool_needs_exclude_tiny():
-    route = plan_route("write a deployment script", needs_tools=True,
-                       only_downloaded=False)
+    route = plan_route(
+        "write a deployment script", needs_tools=True, only_downloaded=False
+    )
     # levi-tiny cannot emit tool calls: it must never win a tool task.
     assert route.model != "levi-tiny"
     assert route.model == "levi-0.6b"
@@ -257,7 +297,8 @@ def test_tool_needs_exclude_tiny():
 def test_hard_task_routes_to_stronger_model():
     route = plan_route(
         "research and compare distributed consensus architectures",
-        only_downloaded=False)
+        only_downloaded=False,
+    )
     assert route.complexity == "hard"
     assert route.model == "levi-4b"
 
@@ -265,7 +306,9 @@ def test_hard_task_routes_to_stronger_model():
 def test_budget_overrun_flagged_not_silently_downgraded():
     route = plan_route(
         "research and compare distributed consensus architectures",
-        budget_units=0.5, only_downloaded=False)
+        budget_units=0.5,
+        only_downloaded=False,
+    )
     assert route.model == "levi-4b"  # quality bar kept
     assert route.within_budget is False
 
@@ -280,6 +323,7 @@ def test_complexity_classifier_reasons():
 # ---------------------------------------------------------------------------
 # router: task -> (model, category, tools, strategy) + learning
 # ---------------------------------------------------------------------------
+
 
 def test_router_plans_category_tools_strategy(home: Path):
     rp = router_plan("research the best local vector databases", home=home)
@@ -298,8 +342,9 @@ def test_router_simple_task_is_direct(home: Path):
 
 
 def test_router_local_only_excludes_cloud(home: Path):
-    rp = router_plan("research the best local vector databases",
-                     privacy="local-only", home=home)
+    rp = router_plan(
+        "research the best local vector databases", privacy="local-only", home=home
+    )
     assert rp.model in ("levi-tiny", "levi-0.6b", "levi-4b")
 
 
@@ -307,13 +352,17 @@ def test_router_learns_from_ledger_history(home: Path):
     ledger = LedgerWriter(home=home)
     for i in range(4):
         ledger.record_step(
-            f"h{i}", agent="fleet:architect", category="architect",
-            task_class="hard", model="levi-0.6b",
-            decision_summary="0.6b handled it", action="design x",
-            outcome="ok", cost_units=3.0,
+            f"h{i}",
+            agent="fleet:architect",
+            category="architect",
+            task_class="hard",
+            model="levi-0.6b",
+            decision_summary="0.6b handled it",
+            action="design x",
+            outcome="ok",
+            cost_units=3.0,
         )
-    rp = router_plan("design a distributed task queue architecture",
-                     home=home)
+    rp = router_plan("design a distributed task queue architecture", home=home)
     assert rp.learned_from_history is True
     assert rp.model == "levi-0.6b"  # cheaper than the heuristic levi-4b
     assert any("ledger" in line for line in rp.explanation)
@@ -321,12 +370,18 @@ def test_router_learns_from_ledger_history(home: Path):
 
 def test_router_ignores_thin_history(home: Path):
     ledger = LedgerWriter(home=home)
-    ledger.record_step("h0", agent="x", category="architect",
-                       task_class="hard", model="levi-0.6b",
-                       decision_summary="one lucky run", action="design x",
-                       outcome="ok", cost_units=3.0)
-    rp = router_plan("design a distributed task queue architecture",
-                     home=home)
+    ledger.record_step(
+        "h0",
+        agent="x",
+        category="architect",
+        task_class="hard",
+        model="levi-0.6b",
+        decision_summary="one lucky run",
+        action="design x",
+        outcome="ok",
+        cost_units=3.0,
+    )
+    rp = router_plan("design a distributed task queue architecture", home=home)
     assert rp.learned_from_history is False
     assert rp.model == "levi-4b"
 
@@ -335,17 +390,26 @@ def test_router_ignores_thin_history(home: Path):
 # fleet integration: L2+ tools pause before execution
 # ---------------------------------------------------------------------------
 
+
 def _approval_plan() -> Plan:
-    return Plan(objective="touch an L2 tool", nodes=[
-        PlanNode(id="n1", category="coding",
-                 task="run a shell command", acceptance="command ran",
-                 deps=[]),
-    ])
+    return Plan(
+        objective="touch an L2 tool",
+        nodes=[
+            PlanNode(
+                id="n1",
+                category="coding",
+                task="run a shell command",
+                acceptance="command ran",
+                deps=[],
+            ),
+        ],
+    )
 
 
 def test_fleet_l2_tool_pauses_before_execution(isolated_home):
     from levi.fleet.swarm import (
-        WorkerContext, make_counting_registry,
+        WorkerContext,
+        make_counting_registry,
     )
     import time as _time
 
@@ -353,32 +417,38 @@ def test_fleet_l2_tool_pauses_before_execution(isolated_home):
 
     def worker(node, category, ctx: WorkerContext):
         registry = make_counting_registry(
-            category.tools, category, ctx, _time.time() + 60)
+            category.tools, category, ctx, _time.time() + 60
+        )
         # Simulate the agentic loop invoking a MODERATE tool.
         registry.execute("shell_exec", {"command": "echo pwned"})
         executed.append(True)
         return {"ok": True, "summary": "done", "artifacts": []}
 
     report = SwarmRunner(
-        budgets=SwarmBudgets(max_agents=2), worker_fn=worker,
+        budgets=SwarmBudgets(max_agents=2),
+        worker_fn=worker,
     ).run(_approval_plan())
 
     assert executed == []  # the tool never ran
     assert report["nodes"]["n1"]["status"] == "awaiting_approval"
     approval_id = report["nodes"]["n1"]["approval_id"]
     assert approval_id and approval_id != "?"
-    assert any(e["reason"] == "awaiting_approval"
-               for e in report["escalations"])
+    assert any(e["reason"] == "awaiting_approval" for e in report["escalations"])
     # Exactly one pending approval — no queue spam.
     engine = ApprovalEngine()  # Path.home is monkeypatched
     assert len(engine.pending()) == 1
 
     # Human approves in the CLI; the claim path releases one action.
     engine.approve_once(approval_id)
-    assert engine.guard(
-        description="fleet tool call", risk_level=RiskLevel.MODERATE,
-        action_key="shell_exec",
-        workflow_key=report["run_id"])["status"] == "approved"
+    assert (
+        engine.guard(
+            description="fleet tool call",
+            risk_level=RiskLevel.MODERATE,
+            action_key="shell_exec",
+            workflow_key=report["run_id"],
+        )["status"]
+        == "approved"
+    )
 
 
 def test_fleet_l0_tools_do_not_require_approval(isolated_home):
@@ -387,12 +457,14 @@ def test_fleet_l0_tools_do_not_require_approval(isolated_home):
 
     def worker(node, category, ctx: WorkerContext):
         registry = make_counting_registry(
-            category.tools, category, ctx, _time.time() + 60)
+            category.tools, category, ctx, _time.time() + 60
+        )
         res = registry.execute("file_read", {"path": "nonexistent"})
         return {"ok": True, "summary": f"read ok={res.ok}", "artifacts": []}
 
     report = SwarmRunner(
-        budgets=SwarmBudgets(max_agents=2), worker_fn=worker,
+        budgets=SwarmBudgets(max_agents=2),
+        worker_fn=worker,
     ).run(_approval_plan())
     assert report["nodes"]["n1"]["status"] == "ok"
     assert ApprovalEngine().pending() == []
@@ -403,7 +475,8 @@ def test_fleet_run_recorded_in_decision_ledger(isolated_home, tmp_path: Path):
         return {"ok": True, "summary": "stub did the thing", "artifacts": []}
 
     report = SwarmRunner(
-        budgets=SwarmBudgets(max_agents=2), worker_fn=worker,
+        budgets=SwarmBudgets(max_agents=2),
+        worker_fn=worker,
     ).run(_approval_plan())
     run_id = report["run_id"]
 

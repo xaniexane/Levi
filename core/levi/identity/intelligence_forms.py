@@ -4,6 +4,7 @@ Intelligence forms that can integrate with LEVI SI (Synthetic Intelligence).
 SI remains the core identity: constructed substrate, non-personhood, HITL.
 Other forms are *layers or partners*, not replacements.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass

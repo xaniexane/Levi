@@ -52,10 +52,13 @@ print(z.think('Levi, run a diagnostic'))
 from megazord.bridges.levi_bridge import LeviBridge
 
 bridge = LeviBridge(persona="alpha")
-event  = bridge.dispatch(raw_envelope_bytes)              # inbound
-action = bridge.build_action("system.diagnostic", "levi",
-                             {"scope": "full"},
-                             soul={"joy": 0.7, "trust": 0.9, "fear": 0.0, "surprise": 0.2, "sadness": 0.0})
+event = bridge.dispatch(raw_envelope_bytes)  # inbound
+action = bridge.build_action(
+    "system.diagnostic",
+    "levi",
+    {"scope": "full"},
+    soul={"joy": 0.7, "trust": 0.9, "fear": 0.0, "surprise": 0.2, "sadness": 0.0},
+)
 ```
 
 ## Spec & Status

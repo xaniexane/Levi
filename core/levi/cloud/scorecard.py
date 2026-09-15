@@ -3,6 +3,7 @@
 
 Scores local-first cloud model posture. Not marketing: checklist math.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -36,6 +37,7 @@ def evaluate() -> Tuple[List[ScoreRow], float]:
     def local_complete():
         from levi.ei.offline_companion import synthesize
         from levi.cloud.model import FullCloudModel
+
         t = synthesize("Who are you?")
         m = FullCloudModel().snapshot()
         ok = len(t) > 40 and m.get("seal") == "L.W.P."
@@ -43,38 +45,50 @@ def evaluate() -> Tuple[List[ScoreRow], float]:
 
     def hitl():
         from levi.project.hitl import ALWAYS_HITL
+
         n = len(ALWAYS_HITL) if hasattr(ALWAYS_HITL, "__len__") else 0
         return (10.0 if n >= 10 else 6.0 + min(4, n / 2)), f"domains={n}"
 
     def knowledge():
         from levi.brain.seed_knowledge import iter_knowledge
+
         n = sum(1 for _ in iter_knowledge())
         # 26 letters + inventors + events + stars + x + si ≈ 70+
         return (10.0 if n >= 60 else 7.0), f"knowledge_units={n}"
 
     def story():
         from levi.graph.story_prose import expand_paragraph
+
         p = expand_paragraph("Hook", "Lena", "systems_horror", "test", "wound", 0)
         return (10.0 if len(p.split()) >= 40 else 6.0), f"prose_words={len(p.split())}"
 
     def personas():
         from levi.persona.lattice import PersonaLattice
+
         n = len(PersonaLattice().keys())
         return (10.0 if n >= 100 else 7.0), f"personas={n}"
 
     def phases():
         from levi.cloud.stages import StageMap, current_stage
-        return (10.0 if current_stage().id == "A" and len(StageMap().all()) == 3 else 5.0), f"current={current_stage().id}"
+
+        return (
+            10.0 if current_stage().id == "A" and len(StageMap().all()) == 3 else 5.0
+        ), f"current={current_stage().id}"
 
     def crypto_zk():
         from levi.cloud.crypto_protocol import CryptoProtocol
         from levi.cloud.zk import ZeroKnowledgeDesign
+
         cp = CryptoProtocol()
         zk = ZeroKnowledgeDesign()
-        return 9.0, f"argon_backend={cp.argon.backend} zk_principles={len(zk.principles())}"
+        return (
+            9.0,
+            f"argon_backend={cp.argon.backend} zk_principles={len(zk.principles())}",
+        )
 
     def enterprise():
         from levi.ops.enterprise import run_enterprise_checklist
+
         rows_e = run_enterprise_checklist()
         ok = sum(1 for r in rows_e if r.ok)
         total = len(rows_e) or 1
@@ -82,10 +96,12 @@ def evaluate() -> Tuple[List[ScoreRow], float]:
 
     def si_identity():
         from levi.identity.si import SI_PILLARS
+
         return (10.0 if len(SI_PILLARS) >= 6 else 7.0), f"pillars={len(SI_PILLARS)}"
 
     def integrate():
         from levi.ops.integration import run_integration_audit
+
         text = run_integration_audit()
         # crude parse
         if "FAIL" in text and "[FAIL]" in text:

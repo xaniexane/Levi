@@ -1,4 +1,5 @@
 """Recording — export corpus + brain table to markdown (Word via external docx later)."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -10,8 +11,13 @@ from levi.brain.table import BrainTable
 
 
 def export_markdown(out_path: Optional[Path] = None) -> Path:
-    out = Path(out_path) if out_path else Path.home() / ".levi" / "recordings" / (
-        f"levi_record_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.md"
+    out = (
+        Path(out_path)
+        if out_path
+        else Path.home()
+        / ".levi"
+        / "recordings"
+        / (f"levi_record_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.md")
     )
     out.parent.mkdir(parents=True, exist_ok=True)
     corpus = Corpus()

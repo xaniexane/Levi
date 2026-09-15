@@ -6,6 +6,7 @@ Not a chatbot. Operating substrate under LEVI Daemon Core:
   Event Bus · Scheduler · State · Permission · Tool Registry · Model Router
   Memory Router · Workflow Engine · Cost Controller · Safety · Audit · E-Stop
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -31,7 +32,9 @@ class KernelEvent:
     id: str
     kind: str
     payload: Dict[str, Any] = field(default_factory=dict)
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -45,7 +48,9 @@ class KernelState:
     cost_units_session: float = 0.0
     cost_budget: float = 100.0  # abstract units; free-first = prefer 0-cost paths
     estop: bool = False
-    updated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    updated_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -125,7 +130,11 @@ class DaemonKernel:
     # --- Event bus ---
     def emit(self, kind: str, payload: Optional[Dict[str, Any]] = None) -> KernelEvent:
         if self.state.estop or self.state.safety == SafetyLevel.STOPPED.value:
-            ev = KernelEvent(id=str(uuid.uuid4())[:8], kind="blocked_estop", payload={"attempted": kind})
+            ev = KernelEvent(
+                id=str(uuid.uuid4())[:8],
+                kind="blocked_estop",
+                payload={"attempted": kind},
+            )
             self._audit_log("emit_blocked", {"kind": kind})
             return ev
         ev = KernelEvent(id=str(uuid.uuid4())[:8], kind=kind, payload=payload or {})
@@ -190,11 +199,13 @@ class DaemonKernel:
         self._persist()
 
     def _audit_log(self, action: str, detail: Dict[str, Any]) -> None:
-        self._audit.append({
-            "at": datetime.now(timezone.utc).isoformat(),
-            "action": action,
-            "detail": detail,
-        })
+        self._audit.append(
+            {
+                "at": datetime.now(timezone.utc).isoformat(),
+                "action": action,
+                "detail": detail,
+            }
+        )
         self._audit = self._audit[-200:]
 
     def status(self) -> str:

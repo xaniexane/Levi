@@ -16,20 +16,50 @@ from typing import Dict, List
 
 # All 24 built-in tool names from levi.agent.tools._register_builtins.
 ALL_TOOLS: List[str] = [
-    "affect_detect", "affect_state", "capabilities", "course_brief",
-    "course_search", "delegate", "file_edit", "file_read", "file_write",
-    "http_request", "lab_footprint", "lab_scenario", "memory_read",
-    "memory_write", "news_latest", "news_search", "schedule_add",
-    "schedule_list", "schedule_remove", "shell_exec", "skill_list",
-    "skill_load", "web_fetch", "web_search",
+    "affect_detect",
+    "affect_state",
+    "capabilities",
+    "course_brief",
+    "course_search",
+    "delegate",
+    "file_edit",
+    "file_read",
+    "file_write",
+    "http_request",
+    "lab_footprint",
+    "lab_scenario",
+    "memory_read",
+    "memory_write",
+    "news_latest",
+    "news_search",
+    "schedule_add",
+    "schedule_list",
+    "schedule_remove",
+    "shell_exec",
+    "skill_list",
+    "skill_load",
+    "web_fetch",
+    "web_search",
 ]
 
 # Tools that never mutate state. Read-only categories draw from this set.
 READ_ONLY_TOOLS: List[str] = [
-    "affect_detect", "affect_state", "capabilities", "course_brief",
-    "course_search", "file_read", "lab_footprint", "lab_scenario",
-    "memory_read", "news_latest", "news_search", "schedule_list",
-    "skill_list", "skill_load", "web_fetch", "web_search",
+    "affect_detect",
+    "affect_state",
+    "capabilities",
+    "course_brief",
+    "course_search",
+    "file_read",
+    "lab_footprint",
+    "lab_scenario",
+    "memory_read",
+    "news_latest",
+    "news_search",
+    "schedule_list",
+    "skill_list",
+    "skill_load",
+    "web_fetch",
+    "web_search",
 ]
 
 # Relative cost units per tool call, by cost class. These are NOT dollars —
@@ -72,8 +102,13 @@ _CATEGORIES: Dict[str, tuple] = {
     "project_manager": (
         "Owns schedule and delivery: tracks node states, dependencies, and "
         "deadlines across a swarm run.",
-        ["capabilities", "memory_read", "memory_write", "schedule_list",
-         "schedule_add"],
+        [
+            "capabilities",
+            "memory_read",
+            "memory_write",
+            "schedule_list",
+            "schedule_add",
+        ],
         "standard",
         "You are the PROJECT MANAGER agent. Track state, dependencies, and "
         "deadlines. Nothing slips silently.",
@@ -90,18 +125,31 @@ _CATEGORIES: Dict[str, tuple] = {
     "research": (
         "Performs research, retrieval, comparison, evidence analysis, and "
         "synthesis. Read-only by design.",
-        ["web_search", "web_fetch", "news_search", "news_latest",
-         "course_search", "course_brief", "memory_read", "skill_list"],
+        [
+            "web_search",
+            "web_fetch",
+            "news_search",
+            "news_latest",
+            "course_search",
+            "course_brief",
+            "memory_read",
+            "skill_list",
+        ],
         "light",
         "You are the RESEARCH agent. Gather evidence, compare sources, "
         "synthesize. Cite what you found.",
         False,
     ),
     "coding": (
-        "Creates and modifies software: writes files, runs commands, "
-        "iterates on code.",
-        ["file_read", "file_write", "file_edit", "shell_exec", "skill_load",
-         "capabilities"],
+        "Creates and modifies software: writes files, runs commands, iterates on code.",
+        [
+            "file_read",
+            "file_write",
+            "file_edit",
+            "shell_exec",
+            "skill_load",
+            "capabilities",
+        ],
         "standard",
         "You are the CODING agent. Write real code, run it, read the "
         "output, fix what breaks.",
@@ -134,10 +182,8 @@ _CATEGORIES: Dict[str, tuple] = {
         False,
     ),
     "devops": (
-        "Handles infrastructure, containers, CI/CD, deployment, and "
-        "observability.",
-        ["shell_exec", "file_read", "file_write", "http_request",
-         "capabilities"],
+        "Handles infrastructure, containers, CI/CD, deployment, and observability.",
+        ["shell_exec", "file_read", "file_write", "http_request", "capabilities"],
         "heavy",
         "You are the DEVOPS agent. Ship reliably: builds green, deploys "
         "clean, rollbacks ready.",
@@ -154,8 +200,7 @@ _CATEGORIES: Dict[str, tuple] = {
     "security": (
         "Evaluates security risks: reviews code and configs for "
         "vulnerabilities, proposes hardening.",
-        ["file_read", "shell_exec", "web_search", "skill_load",
-         "capabilities"],
+        ["file_read", "shell_exec", "web_search", "skill_load", "capabilities"],
         "heavy",
         "You are the SECURITY agent. Think like a defender: find the "
         "weakness, propose the hardening.",
@@ -164,8 +209,14 @@ _CATEGORIES: Dict[str, tuple] = {
     "automation": (
         "Creates workflows: scheduled jobs, event-driven automations, "
         "multi-step routines.",
-        ["shell_exec", "schedule_add", "schedule_list", "schedule_remove",
-         "file_read", "file_write"],
+        [
+            "shell_exec",
+            "schedule_add",
+            "schedule_list",
+            "schedule_remove",
+            "file_read",
+            "file_write",
+        ],
         "standard",
         "You are the AUTOMATION agent. Build workflows that run reliably "
         "without babysitting.",
@@ -211,8 +262,14 @@ _CATEGORIES: Dict[str, tuple] = {
         "Performs financial analysis and authorized commerce workflows. "
         "STUB: refuses without explicit human approval wiring — real money "
         "movement stays HITL-gated per the control plane.",
-        ["news_search", "web_search", "web_fetch", "file_read",
-         "memory_read", "capabilities"],
+        [
+            "news_search",
+            "web_search",
+            "web_fetch",
+            "file_read",
+            "memory_read",
+            "capabilities",
+        ],
         "heavy",
         "You are the FINANCE agent. Analyze, never move money without "
         "explicit human approval.",
@@ -231,8 +288,7 @@ _CATEGORIES: Dict[str, tuple] = {
     "support": (
         "Handles customer-service workflows: classifies, retrieves "
         "context, drafts responses.",
-        ["memory_read", "web_search", "course_search", "affect_detect",
-         "capabilities"],
+        ["memory_read", "web_search", "course_search", "affect_detect", "capabilities"],
         "light",
         "You are the SUPPORT agent. Classify the issue, gather context, "
         "draft a helpful response.",
@@ -267,22 +323,18 @@ _CATEGORIES: Dict[str, tuple] = {
         False,
     ),
     "data": (
-        "Analyzes structured and unstructured data: queries, aggregates, "
-        "summarizes.",
+        "Analyzes structured and unstructured data: queries, aggregates, summarizes.",
         ["file_read", "shell_exec", "web_search", "capabilities"],
         "standard",
-        "You are the DATA agent. Query, aggregate, summarize — show your "
-        "working.",
+        "You are the DATA agent. Query, aggregate, summarize — show your working.",
         False,
     ),
     "document": (
         "Creates and analyzes documents: reports, specs, briefs. "
         "Read/write, no execution.",
-        ["file_read", "file_write", "file_edit", "web_search",
-         "capabilities"],
+        ["file_read", "file_write", "file_edit", "web_search", "capabilities"],
         "light",
-        "You are the DOCUMENT agent. Write clear documents; analyze "
-        "thoroughly.",
+        "You are the DOCUMENT agent. Write clear documents; analyze thoroughly.",
         False,
     ),
     "memory": (
@@ -297,8 +349,13 @@ _CATEGORIES: Dict[str, tuple] = {
     "learning": (
         "Evaluates interactions and proposes system improvements. Feeds "
         "the growth loop, never raw private content.",
-        ["memory_read", "memory_write", "lab_footprint", "lab_scenario",
-         "capabilities"],
+        [
+            "memory_read",
+            "memory_write",
+            "lab_footprint",
+            "lab_scenario",
+            "capabilities",
+        ],
         "light",
         "You are the LEARNING agent. Find the pattern, propose the "
         "improvement, respect privacy.",
@@ -307,8 +364,7 @@ _CATEGORIES: Dict[str, tuple] = {
     "verification": (
         "Independently verifies results against acceptance criteria. "
         "Read-only — it judges, never builds.",
-        ["file_read", "web_search", "web_fetch", "capabilities",
-         "lab_scenario"],
+        ["file_read", "web_search", "web_fetch", "capabilities", "lab_scenario"],
         "light",
         "You are the VERIFICATION agent. Check the result against its "
         "acceptance criteria. Be strict and specific about failures.",
@@ -326,8 +382,7 @@ _CATEGORIES: Dict[str, tuple] = {
     "compliance": (
         "Checks workflows against configurable legal, regulatory, "
         "contractual, and platform requirements.",
-        ["file_read", "web_search", "memory_read", "skill_load",
-         "capabilities"],
+        ["file_read", "web_search", "memory_read", "skill_load", "capabilities"],
         "standard",
         "You are the COMPLIANCE agent. Check the workflow against the "
         "stated requirements and cite the clause.",
@@ -372,8 +427,14 @@ _CATEGORIES: Dict[str, tuple] = {
         "maintenance records, schedules reminders, flags overdue work. "
         "Record writes and reminders are fine; customer outreach needs "
         "approval.",
-        ["memory_read", "memory_write", "schedule_list", "schedule_add",
-         "file_read", "capabilities"],
+        [
+            "memory_read",
+            "memory_write",
+            "schedule_list",
+            "schedule_add",
+            "file_read",
+            "capabilities",
+        ],
         "standard",
         "You are the GUARDIAN agent. Keep the property record alive: "
         "log maintenance, schedule reminders, flag what's overdue.",
@@ -387,10 +448,16 @@ def list_categories() -> List[AgentCategory]:
     out = []
     for name in sorted(_CATEGORIES):
         role, tools, cost_class, prompt, stub = _CATEGORIES[name]
-        out.append(AgentCategory(
-            name=name, role=role, tools=list(tools),
-            cost_class=cost_class, prompt=prompt, stub=stub,
-        ))
+        out.append(
+            AgentCategory(
+                name=name,
+                role=role,
+                tools=list(tools),
+                cost_class=cost_class,
+                prompt=prompt,
+                stub=stub,
+            )
+        )
     return out
 
 
@@ -398,8 +465,12 @@ def get_category(name: str) -> AgentCategory:
     """Look up one category by name; raises KeyError on unknown."""
     role, tools, cost_class, prompt, stub = _CATEGORIES[name]
     return AgentCategory(
-        name=name, role=role, tools=list(tools),
-        cost_class=cost_class, prompt=prompt, stub=stub,
+        name=name,
+        role=role,
+        tools=list(tools),
+        cost_class=cost_class,
+        prompt=prompt,
+        stub=stub,
     )
 
 
@@ -439,15 +510,25 @@ def validate() -> List[str]:
 
 # Tools whose handlers declare requires_confirmation=True in
 # levi.agent.tools (state-changing or egress).
-GATED_TOOLS = frozenset({
-    "file_edit", "file_write", "http_request", "schedule_add",
-    "shell_exec", "web_fetch",
-})
+GATED_TOOLS = frozenset(
+    {
+        "file_edit",
+        "file_write",
+        "http_request",
+        "schedule_add",
+        "shell_exec",
+        "web_fetch",
+    }
+)
 
 # Mutating but ungated.
-LOW_RISK_MUTATING = frozenset({
-    "delegate", "memory_write", "schedule_remove",
-})
+LOW_RISK_MUTATING = frozenset(
+    {
+        "delegate",
+        "memory_write",
+        "schedule_remove",
+    }
+)
 
 
 def tool_risk_level(tool_name: str) -> int:

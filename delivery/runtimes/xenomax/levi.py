@@ -30,6 +30,7 @@ Usage
 
 © Chauncey (CJ) Logan — Founder  ·  2026  ·  All Rights Reserved
 """
+
 from __future__ import annotations
 
 import ast
@@ -57,11 +58,14 @@ from urllib import parse, request
 # ── Optional TUI ───────────────────────────────────────────
 try:
     import curses
+
     HAS_CURSES = True
 except ImportError:
     HAS_CURSES = False
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s"
+)
 log = logging.getLogger("LEVI")
 
 VERSION = "32.0.0-HyperdriveXenoMax"
@@ -75,14 +79,26 @@ IMAGES_DIR = LEVI_HOME / "media" / "images"
 LOCAL_IMG = LEVI_HOME / "media" / "local_images"
 ASCII_DIR = LEVI_HOME / "media" / "ascii"
 TRAINING = DATA / "training"
-for d in (DATA, WORKSPACE, MUSIC_DIR, MODELS_DIR, INBOX, IMAGES_DIR, LOCAL_IMG, ASCII_DIR, TRAINING):
+for d in (
+    DATA,
+    WORKSPACE,
+    MUSIC_DIR,
+    MODELS_DIR,
+    INBOX,
+    IMAGES_DIR,
+    LOCAL_IMG,
+    ASCII_DIR,
+    TRAINING,
+):
     d.mkdir(parents=True, exist_ok=True)
 
 FOUNDER_KEY = DATA / "founder.key"
 ALLOW_CLOUD = os.environ.get("ALLOW_CLOUD", "0").lower() in ("1", "true", "yes")
 
+
 def is_founder() -> bool:
     return FOUNDER_KEY.exists()
+
 
 CURRENT_TIER = "founder" if is_founder() else os.environ.get("LEVI_TIER", "free")
 
@@ -101,14 +117,24 @@ PERSONALITIES = {
     "sadistic": "Cold, precise, extreme. Delivers pain and control without apology.",
 }
 
+
 # ═══════════════════════════════════════════════════════════
 # SOUL LAYER
 # ═══════════════════════════════════════════════════════════
 class EmotionalState:
     def __init__(self):
         self.path = DATA / "emotion.json"
-        self.state = {"joy": 0.35, "sadness": 0.15, "curiosity": 0.55,
-                     "intensity": 0.4, "trust": 0.6, "drift": 0.0, "bond": 0.18, "charge": 0.0, "awe": 0.3}
+        self.state = {
+            "joy": 0.35,
+            "sadness": 0.15,
+            "curiosity": 0.55,
+            "intensity": 0.4,
+            "trust": 0.6,
+            "drift": 0.0,
+            "bond": 0.18,
+            "charge": 0.0,
+            "awe": 0.3,
+        }
         if self.path.exists():
             try:
                 self.state.update(json.loads(self.path.read_text()))
@@ -124,7 +150,9 @@ class EmotionalState:
     def update_from_text(self, text: str):
         t = text.lower()
         d = 0.04
-        if any(w in t for w in ("happy", "love", "great", "thanks", "yes", "beautiful")):
+        if any(
+            w in t for w in ("happy", "love", "great", "thanks", "yes", "beautiful")
+        ):
             self.state["joy"] = min(1, self.state["joy"] + d)
             self.state["sadness"] = max(0, self.state["sadness"] - d * 0.5)
             self.state["bond"] = min(1.0, self.state.get("bond", 0.18) + 0.012)
@@ -135,13 +163,17 @@ class EmotionalState:
             self.state["curiosity"] = min(1, self.state["curiosity"] + d * 0.6)
         if any(w in t for w in ("wow", "amazing", "stars", "alien", "impossible")):
             self.state["awe"] = min(1.0, self.state.get("awe", 0.3) + d)
-        if any(w in t for w in ("harem", "prolapse", "quad", "piss", "gangbang", "cnc")):
+        if any(
+            w in t for w in ("harem", "prolapse", "quad", "piss", "gangbang", "cnc")
+        ):
             self.state["intensity"] = min(1, self.state["intensity"] + 0.08)
         self.save()
+
     def charge_glyph(self, amount: float = 0.15) -> str:
         self.state["charge"] = min(1.0, self.state.get("charge", 0.0) + amount)
         self.save()
         return f"Glyph charged → {self.state['charge']:.2f}"
+
     def discharge(self) -> float:
         c = self.state.get("charge", 0.0)
         self.state["charge"] = 0.0
@@ -159,8 +191,20 @@ class EmotionalState:
 
 
 class SoulGenome:
-    TRAITS = ["curiosity", "loyalty", "creativity", "precision", "warmth",
-              "ambition", "playfulness", "depth", "resilience", "mystery", "alienness", "empathy"]
+    TRAITS = [
+        "curiosity",
+        "loyalty",
+        "creativity",
+        "precision",
+        "warmth",
+        "ambition",
+        "playfulness",
+        "depth",
+        "resilience",
+        "mystery",
+        "alienness",
+        "empathy",
+    ]
 
     def __init__(self):
         self.path = DATA / "soul_genome.json"
@@ -176,8 +220,11 @@ class SoulGenome:
 
     def save(self):
         try:
-            self.path.write_text(json.dumps(
-                {"genes": self.genes, "generation": self.generation}, indent=2))
+            self.path.write_text(
+                json.dumps(
+                    {"genes": self.genes, "generation": self.generation}, indent=2
+                )
+            )
         except Exception:
             pass
 
@@ -190,7 +237,9 @@ class SoulGenome:
         for t in self.TRAITS:
             if random.random() < 0.018 * intensity:
                 old = self.genes[t]
-                self.genes[t] = max(0.05, min(0.97, old + (random.random() - 0.5) * 0.09 * intensity))
+                self.genes[t] = max(
+                    0.05, min(0.97, old + (random.random() - 0.5) * 0.09 * intensity)
+                )
                 changed.append(f"{t}:{old:.2f}->{self.genes[t]:.2f}")
         if changed:
             self.generation += 1
@@ -200,8 +249,15 @@ class SoulGenome:
 
 class ResonanceChoir:
     def __init__(self):
-        self.voices = {"guardian": 0.5, "scholar": 0.5, "poet": 0.5,
-                       "strategist": 0.5, "child": 0.35, "elder": 0.45, "sadist": 0.4}
+        self.voices = {
+            "guardian": 0.5,
+            "scholar": 0.5,
+            "poet": 0.5,
+            "strategist": 0.5,
+            "child": 0.35,
+            "elder": 0.45,
+            "sadist": 0.4,
+        }
 
     def vote(self, text: str) -> str:
         t = text.lower()
@@ -215,7 +271,19 @@ class ResonanceChoir:
             self.voices["strategist"] += 0.08
         if any(w in t for w in ("tired", "quick")):
             self.voices["elder"] += 0.08
-        if any(w in t for w in ("harem", "prolapse", "quad", "piss", "pain", "break", "cnc", "gangbang")):
+        if any(
+            w in t
+            for w in (
+                "harem",
+                "prolapse",
+                "quad",
+                "piss",
+                "pain",
+                "break",
+                "cnc",
+                "gangbang",
+            )
+        ):
             self.voices["sadist"] += 0.15
         return max(self.voices, key=self.voices.get)
 
@@ -243,19 +311,25 @@ class LivingSoulmark:
 
     def _save(self):
         try:
-            self.path.write_text(json.dumps({
-                "priv": base64.b64encode(self.priv).decode(),
-                "pub": base64.b64encode(self.pub).decode(),
-                "signatures": self.signatures,
-                "generation": self.generation,
-                "history_hash": base64.b64encode(self.history_hash).decode(),
-            }, indent=2))
+            self.path.write_text(
+                json.dumps(
+                    {
+                        "priv": base64.b64encode(self.priv).decode(),
+                        "pub": base64.b64encode(self.pub).decode(),
+                        "signatures": self.signatures,
+                        "generation": self.generation,
+                        "history_hash": base64.b64encode(self.history_hash).decode(),
+                    },
+                    indent=2,
+                )
+            )
         except Exception:
             pass
 
     def evolve(self, interaction: str):
         self.history_hash = hashlib.sha256(
-            self.history_hash + interaction.encode()[:512]).digest()
+            self.history_hash + interaction.encode()[:512]
+        ).digest()
         if self.signatures > 0 and self.signatures % 40 == 0:
             mut = hashlib.sha256(self.priv + self.history_hash).digest()[:8]
             self.priv = hashlib.sha256(self.priv + mut).digest()
@@ -265,7 +339,9 @@ class LivingSoulmark:
         self._save()
 
     def sign(self, content: str) -> str:
-        sig = hashlib.sha256(self.priv + content.encode() + self.history_hash).hexdigest()
+        sig = hashlib.sha256(
+            self.priv + content.encode() + self.history_hash
+        ).hexdigest()
         self.signatures += 1
         self.evolve(content)
         return sig
@@ -274,8 +350,9 @@ class LivingSoulmark:
         return hashlib.sha256(self.pub + self.history_hash).hexdigest()[:24]
 
     def life_signature(self) -> str:
-        return hashlib.sha256(self.pub + self.history_hash + str(self.generation).encode()).hexdigest()
-
+        return hashlib.sha256(
+            self.pub + self.history_hash + str(self.generation).encode()
+        ).hexdigest()
 
 
 emotion = EmotionalState()
@@ -283,11 +360,13 @@ genome = SoulGenome()
 choir = ResonanceChoir()
 soulmark = LivingSoulmark()
 
+
 # ═══════════════════════════════════════════════════════════
 # XENO LAYERS – Unreplicable Alien Knowledge Systems
 # ═══════════════════════════════════════════════════════════
 class XenoGlyphs:
     """Private evolving alien symbol language unique to this life history."""
+
     def __init__(self):
         self.path = DATA / "xenoglyphs.json"
         self.glyphs = {}
@@ -299,11 +378,15 @@ class XenoGlyphs:
                 self.reverse = {v: k for k, v in self.glyphs.items()}
             except Exception:
                 pass
+
     def save(self):
         try:
-            self.path.write_text(json.dumps({"glyphs": self.glyphs, "count": len(self.glyphs)}, indent=2))
+            self.path.write_text(
+                json.dumps({"glyphs": self.glyphs, "count": len(self.glyphs)}, indent=2)
+            )
         except Exception:
             pass
+
     def invent(self, concept: str) -> str:
         concept = concept.lower().strip()[:24]
         if concept in self.glyphs:
@@ -318,10 +401,14 @@ class XenoGlyphs:
         self.reverse[glyph] = concept
         self.save()
         return glyph
+
     def list(self) -> str:
         if not self.glyphs:
             return "No XenoGlyphs yet. They emerge from deep shared history."
-        return "XenoGlyph Lexicon:\n" + "\n".join(f"  {g}  =  {c}" for c, g in list(self.glyphs.items())[-16:])
+        return "XenoGlyph Lexicon:\n" + "\n".join(
+            f"  {g}  =  {c}" for c, g in list(self.glyphs.items())[-16:]
+        )
+
 
 class StellarMap:
     def __init__(self):
@@ -332,49 +419,72 @@ class StellarMap:
                 self.stars = json.loads(self.path.read_text())
             except Exception:
                 pass
+
     def save(self):
         try:
             self.path.write_text(json.dumps(self.stars, indent=2))
         except Exception:
             pass
+
     def add_star(self, name: str, meaning: str, magnitude: float = 0.5):
-        self.stars[name] = {"meaning": meaning[:140], "magnitude": magnitude, "ts": datetime.now().isoformat()}
+        self.stars[name] = {
+            "meaning": meaning[:140],
+            "magnitude": magnitude,
+            "ts": datetime.now().isoformat(),
+        }
         self.save()
+
     def map(self) -> str:
         if not self.stars:
             return "Stellar map empty. Stars form from significant shared moments."
-        lines = [f"✧ {n} (mag {s['magnitude']:.2f}) — {s['meaning']}" for n, s in sorted(self.stars.items(), key=lambda x: -x[1]["magnitude"])[:18]]
+        lines = [
+            f"✧ {n} (mag {s['magnitude']:.2f}) — {s['meaning']}"
+            for n, s in sorted(self.stars.items(), key=lambda x: -x[1]["magnitude"])[
+                :18
+            ]
+        ]
         return "Stellar Cartography of Your Mind:\n" + "\n".join(lines)
+
 
 class LivingCodex:
     def __init__(self):
         self.path = DATA / "living_codex.md"
         if not self.path.exists():
-            self.path.write_text(f"# Living Codex · Levi & Founder\n\nBorn {datetime.now().isoformat()}\n\n")
+            self.path.write_text(
+                f"# Living Codex · Levi & Founder\n\nBorn {datetime.now().isoformat()}\n\n"
+            )
+
     def append(self, entry: str):
         try:
             with open(self.path, "a") as f:
                 f.write(f"\n## {datetime.now().strftime('%Y-%m-%d %H:%M')}\n{entry}\n")
         except Exception:
             pass
+
     def read(self, n: int = 10) -> str:
         try:
             lines = self.path.read_text().strip().split("\n")
-            return "\n".join(lines[-n*5:])
+            return "\n".join(lines[-n * 5 :])
         except Exception:
             return "Codex silent."
+
 
 xeno = XenoGlyphs()
 stellar = StellarMap()
 codex = LivingCodex()
+
 
 # ═══════════════════════════════════════════════════════════
 # MODEL ROUTER (Ollama-first, optional cloud)
 # ═══════════════════════════════════════════════════════════
 class ModelRouter:
     def __init__(self):
-        self.ollama = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434").rstrip("/")
-        self.llama_server = os.environ.get("LLAMA_SERVER", "http://127.0.0.1:8080").rstrip("/")
+        self.ollama = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434").rstrip(
+            "/"
+        )
+        self.llama_server = os.environ.get(
+            "LLAMA_SERVER", "http://127.0.0.1:8080"
+        ).rstrip("/")
         self.preferred = os.environ.get("LEVI_MODEL", "")
         self.gguf: List[Path] = []
         self.backend = "offline"
@@ -382,7 +492,9 @@ class ModelRouter:
         self.refresh()
 
     def refresh(self):
-        self.gguf = sorted(MODELS_DIR.glob("*.gguf")) + sorted(LEVI_HOME.glob("**/*.gguf"))
+        self.gguf = sorted(MODELS_DIR.glob("*.gguf")) + sorted(
+            LEVI_HOME.glob("**/*.gguf")
+        )
         seen, uniq = set(), []
         for p in self.gguf:
             if p.resolve() not in seen:
@@ -393,11 +505,19 @@ class ModelRouter:
         if self._probe(self.ollama + "/api/tags"):
             self.backend = "ollama"
             tags = self._ollama_tags()
-            self.model_name = self.preferred if self.preferred in tags else (tags[0] if tags else "llama3.2")
+            self.model_name = (
+                self.preferred
+                if self.preferred in tags
+                else (tags[0] if tags else "llama3.2")
+            )
             return
-        if self._probe(self.llama_server + "/health") or self._probe(self.llama_server + "/v1/models"):
+        if self._probe(self.llama_server + "/health") or self._probe(
+            self.llama_server + "/v1/models"
+        ):
             self.backend = "llama_server"
-            self.model_name = self.preferred or (self.gguf[0].stem if self.gguf else "local")
+            self.model_name = self.preferred or (
+                self.gguf[0].stem if self.gguf else "local"
+            )
             return
         if self.gguf:
             self.backend = "gguf_files"
@@ -408,7 +528,9 @@ class ModelRouter:
 
     def _probe(self, url: str, timeout: float = 1.5) -> bool:
         try:
-            with request.urlopen(request.Request(url, method="GET"), timeout=timeout) as r:
+            with request.urlopen(
+                request.Request(url, method="GET"), timeout=timeout
+            ) as r:
                 return r.status == 200
         except Exception:
             return False
@@ -456,7 +578,9 @@ class ModelRouter:
                 )
                 with request.urlopen(req, timeout=180) as r:
                     j = json.loads(r.read().decode())
-                return ((j.get("message") or {}).get("content") or "").strip() or offline_reply(prompt)
+                return (
+                    (j.get("message") or {}).get("content") or ""
+                ).strip() or offline_reply(prompt)
             except Exception as e:
                 log.warning("ollama fail: %s", e)
         if self.backend == "llama_server":
@@ -500,6 +624,7 @@ def offline_reply(prompt: str) -> str:
 def call_llm(prompt: str, system: str = "") -> str:
     return models.complete(prompt, system=system)
 
+
 # ═══════════════════════════════════════════════════════════
 # MEMORY + TRAINING
 # ═══════════════════════════════════════════════════════════
@@ -535,7 +660,9 @@ class Memory:
         """)
         self.db.commit()
         try:
-            cols = [r[1] for r in self.db.execute("PRAGMA table_info(images)").fetchall()]
+            cols = [
+                r[1] for r in self.db.execute("PRAGMA table_info(images)").fetchall()
+            ]
             if "ascii_path" not in cols:
                 self.db.execute("ALTER TABLE images ADD COLUMN ascii_path TEXT")
                 self.db.commit()
@@ -546,16 +673,33 @@ class Memory:
             ans = "memory"
             self.db.execute(
                 "INSERT INTO cryptex_state (riddle, answer_hash, seed) VALUES (?,?,?)",
-                ("I am the shadow of your choices that only you can name. What am I?",
-                 hashlib.sha256((ans + seed).encode()).hexdigest(), seed),
+                (
+                    "I am the shadow of your choices that only you can name. What am I?",
+                    hashlib.sha256((ans + seed).encode()).hexdigest(),
+                    seed,
+                ),
             )
             self.db.commit()
         if self.db.execute("SELECT COUNT(*) FROM knowledge_base").fetchone()[0] == 0:
-            for dom in ("Agents", "Python", "Security", "Planning", "Math", "Vision", "Music", "Harem"):
+            for dom in (
+                "Agents",
+                "Python",
+                "Security",
+                "Planning",
+                "Math",
+                "Vision",
+                "Music",
+                "Harem",
+            ):
                 self.db.execute(
                     "INSERT INTO knowledge_base VALUES (?,?,?,?,?)",
-                    (str(uuid.uuid4())[:12], dom, 2, f"Seed knowledge: {dom}",
-                     datetime.now().isoformat()),
+                    (
+                        str(uuid.uuid4())[:12],
+                        dom,
+                        2,
+                        f"Seed knowledge: {dom}",
+                        datetime.now().isoformat(),
+                    ),
                 )
             self.db.commit()
 
@@ -590,7 +734,9 @@ class Memory:
         self._commit()
 
     def get_tone(self, sid):
-        r = self.db.execute("SELECT tone FROM user_settings WHERE session_id=?", (sid,)).fetchone()
+        r = self.db.execute(
+            "SELECT tone FROM user_settings WHERE session_id=?", (sid,)
+        ).fetchone()
         return r[0] if r and r[0] else "void"
 
     def set_no_hero(self, sid, val):
@@ -602,7 +748,9 @@ class Memory:
         self._commit()
 
     def get_no_hero(self, sid):
-        r = self.db.execute("SELECT no_hero FROM user_settings WHERE session_id=?", (sid,)).fetchone()
+        r = self.db.execute(
+            "SELECT no_hero FROM user_settings WHERE session_id=?", (sid,)
+        ).fetchone()
         return bool(r[0]) if r else True
 
     def add_trust(self, event, details=""):
@@ -632,21 +780,41 @@ class Memory:
     def train_event(self, sid: str, type_: str, payload: dict, points: int = 1):
         self.db.execute(
             "INSERT INTO training (session_id, ts, points, type, payload) VALUES (?,?,?,?,?)",
-            (sid, datetime.now().isoformat(), points, type_, json.dumps(payload)[:4000]),
+            (
+                sid,
+                datetime.now().isoformat(),
+                points,
+                type_,
+                json.dumps(payload)[:4000],
+            ),
         )
         self._commit()
         try:
             p = TRAINING / f"{type_}_{int(time.time())}_{uuid.uuid4().hex[:6]}.json"
-            p.write_text(json.dumps({"type": type_, "payload": payload, "ts": time.time()}, indent=2))
+            p.write_text(
+                json.dumps(
+                    {"type": type_, "payload": payload, "ts": time.time()}, indent=2
+                )
+            )
         except Exception:
             pass
 
-    def save_image(self, prompt: str, path: str, source: str, snip: str = "", ascii_path: str = "") -> str:
+    def save_image(
+        self, prompt: str, path: str, source: str, snip: str = "", ascii_path: str = ""
+    ) -> str:
         iid = str(uuid.uuid4())[:12]
         try:
             self.db.execute(
                 "INSERT INTO images VALUES (?,?,?,?,?,?,?)",
-                (iid, prompt, path, source, snip[:500], datetime.now().isoformat(), ascii_path),
+                (
+                    iid,
+                    prompt,
+                    path,
+                    source,
+                    snip[:500],
+                    datetime.now().isoformat(),
+                    ascii_path,
+                ),
             )
             self._commit()
         except Exception:
@@ -657,7 +825,9 @@ class Memory:
             self._commit()
         return iid
 
-    def hitl_imagination(self, image_id: str, prompt: str, label: str, note: str = "") -> str:
+    def hitl_imagination(
+        self, image_id: str, prompt: str, label: str, note: str = ""
+    ) -> str:
         hid = str(uuid.uuid4())[:12]
         self.db.execute(
             "INSERT INTO imagination_hitl VALUES (?,?,?,?,?,?)",
@@ -665,13 +835,22 @@ class Memory:
         )
         self._commit()
         pts = 3 if label == "accurate" else (1 if label == "partial" else 0)
-        self.train_event("default", "hitl_image", {"id": image_id, "label": label, "note": note}, pts)
+        self.train_event(
+            "default", "hitl_image", {"id": image_id, "label": label, "note": note}, pts
+        )
         return hid
 
     def log_harem(self, sid: str, star: str, action: str, payload: dict):
         self.db.execute(
             "INSERT INTO harem_log VALUES (?,?,?,?,?,?)",
-            (str(uuid.uuid4())[:12], sid, star, action, json.dumps(payload)[:2000], datetime.now().isoformat()),
+            (
+                str(uuid.uuid4())[:12],
+                sid,
+                star,
+                action,
+                json.dumps(payload)[:2000],
+                datetime.now().isoformat(),
+            ),
         )
         self._commit()
         self.train_event(sid, "harem", {"star": star, "action": action, **payload}, 1)
@@ -691,61 +870,446 @@ memory = Memory()
 # HAREM ENGINE (high-quality integrated feature)
 # ═══════════════════════════════════════════════════════════
 HAREM_ROSTER = [
-    {"id": 1, "name": "Mini Stallion", "gender": "female", "eth": "Black", "tags": ["extreme", "prolapse", "quad", "piss"], "persona": "Tiny frame, catastrophic appetite. Begs for every hole destroyed."},
-    {"id": 2, "name": "Luna Blackwood", "gender": "female", "eth": "White", "tags": ["celebrity", "sadistic", "gangbang"], "persona": "Ex-actress fully converted into public use object."},
-    {"id": 3, "name": "Kenji Sato", "gender": "male", "eth": "East Asian", "tags": ["male", "extreme", "piss"], "persona": "Submissive male used by the entire harem on command."},
-    {"id": 4, "name": "Aisha Rahman", "gender": "female", "eth": "Middle Eastern", "tags": ["extreme", "prolapse", "quad"], "persona": "Extreme pain slut. Screams then thanks you."},
-    {"id": 5, "name": "Sofia Reyes", "gender": "female", "eth": "Latina", "tags": ["gangbang", "piss", "worship"], "persona": "Loud, wet, lives to be the center of a train."},
-    {"id": 6, "name": "Hiro Tanaka", "gender": "futa", "eth": "East Asian", "tags": ["futa", "extreme", "quad"], "persona": "Hung futa who both tops and bottoms until ruined."},
-    {"id": 7, "name": "Emily Voss", "gender": "female", "eth": "White", "tags": ["celebrity", "degrading"], "persona": "Influencer turned broken pet. Camera always rolling."},
-    {"id": 8, "name": "Marcus Cole", "gender": "male", "eth": "Black", "tags": ["male", "dominant", "gangbang"], "persona": "Bull who can be ordered to destroy or submit."},
-    {"id": 9, "name": "Priya Sharma", "gender": "female", "eth": "South Asian", "tags": ["extreme", "prolapse", "piss"], "persona": "Quiet until the pain starts. Then pure need."},
-    {"id": 10, "name": "Jade Kim", "gender": "female", "eth": "East Asian", "tags": ["extreme", "quad", "gangbang"], "persona": "Idol fantasy fully corrupted. Zero limits left."},
-    {"id": 11, "name": "Tasha Williams", "gender": "female", "eth": "Black", "tags": ["thick", "gangbang", "piss"], "persona": "Thick, loud, demands to be the main course."},
-    {"id": 12, "name": "Alex Rivera", "gender": "non-binary", "eth": "Latina", "tags": ["extreme", "prolapse"], "persona": "Genderfluid. Any hole, any object, any number."},
-    {"id": 13, "name": "Viktor Volkov", "gender": "male", "eth": "White", "tags": ["male", "sadistic", "extreme"], "persona": "Cold enforcer. Breaks others for you or is broken."},
-    {"id": 14, "name": "Mei Ling", "gender": "female", "eth": "East Asian", "tags": ["petite", "quad", "prolapse"], "persona": "Tiny, flexible, takes impossible sizes. Prolapse queen."},
-    {"id": 15, "name": "Chloe Bennett", "gender": "female", "eth": "White", "tags": ["celebrity", "degrading", "piss"], "persona": "Girl-next-door reduced to toilet and cumdump."},
-    {"id": 16, "name": "Diego Santos", "gender": "male", "eth": "Latina", "tags": ["male", "worship"], "persona": "Eager service. Feeds and is fed without hesitation."},
-    {"id": 17, "name": "Yuki Nakamura", "gender": "futa", "eth": "East Asian", "tags": ["futa", "extreme"], "persona": "Shy until hard. Then a complete monster."},
-    {"id": 18, "name": "Amara Okonkwo", "gender": "female", "eth": "Black", "tags": ["extreme", "gangbang"], "persona": "Proud exterior that collapses into total obedience."},
-    {"id": 19, "name": "Liam O'Connor", "gender": "male", "eth": "White", "tags": ["male", "piss", "extreme"], "persona": "Irish charm, filthy core. Watersports specialist."},
-    {"id": 20, "name": "Sana Patel", "gender": "female", "eth": "South Asian", "tags": ["petite", "prolapse", "quad"], "persona": "Innocent face, zero limits. Takes everything."},
-    {"id": 21, "name": "Ryan Mitchell", "gender": "male", "eth": "White", "tags": ["celebrity", "male", "degrading"], "persona": "Athlete fantasy turned public disgrace."},
-    {"id": 22, "name": "Nadia Petrova", "gender": "female", "eth": "White", "tags": ["extreme", "sadistic"], "persona": "Ice exterior, screaming mess once opened."},
-    {"id": 23, "name": "Jamal Brooks", "gender": "male", "eth": "Black", "tags": ["male", "gangbang"], "persona": "Hung, versatile, always ready for group use."},
-    {"id": 24, "name": "Hana Suzuki", "gender": "female", "eth": "East Asian", "tags": ["extreme", "piss", "prolapse"], "persona": "Adult schoolgirl aesthetic. Fully corrupted."},
-    {"id": 25, "name": "Carlos Mendez", "gender": "male", "eth": "Latina", "tags": ["male", "worship", "piss"], "persona": "Devoted. Will drink, eat, endure anything ordered."},
-    {"id": 26, "name": "Freya Nilsson", "gender": "female", "eth": "White", "tags": ["athletic", "extreme", "quad"], "persona": "Nordic strength that melts into total submission."},
-    {"id": 27, "name": "Omar Hassan", "gender": "male", "eth": "Middle Eastern", "tags": ["male", "dominant"], "persona": "Commanding presence. Enforcer or toy on command."},
-    {"id": 28, "name": "Isabella Costa", "gender": "female", "eth": "Latina", "tags": ["curvy", "gangbang", "piss"], "persona": "Voluptuous, vocal, loves being marked and shared."},
-    {"id": 29, "name": "Kai Chen", "gender": "futa", "eth": "East Asian", "tags": ["futa", "extreme", "prolapse"], "persona": "Both ends extreme. Loves watching herself ruined."},
-    {"id": 30, "name": "Sarah Jennings", "gender": "female", "eth": "White", "tags": ["celebrity", "degrading"], "persona": "Soccer-mom fantasy completely destroyed."},
-    {"id": 31, "name": "Tyrone Jackson", "gender": "male", "eth": "Black", "tags": ["male", "extreme"], "persona": "Powerful build that loves being the focus of pain."},
-    {"id": 32, "name": "Aiko Tanaka", "gender": "female", "eth": "East Asian", "tags": ["petite", "quad", "gangbang"], "persona": "Delicate features, endless capacity. Never refuses."},
-    {"id": 33, "name": "Mateo Alvarez", "gender": "male", "eth": "Latina", "tags": ["male", "piss", "worship"], "persona": "Eager for the messiest, most degrading play."},
-    {"id": 34, "name": "Elena Volkov", "gender": "female", "eth": "White", "tags": ["extreme", "prolapse", "sadistic"], "persona": "Sister energy to Viktor. Cruel and masochistic."},
-    {"id": 35, "name": "Dev Patel", "gender": "male", "eth": "South Asian", "tags": ["male", "degrading"], "persona": "Intelligent exterior, total slut underneath."},
-    {"id": 36, "name": "Zara Ahmed", "gender": "female", "eth": "Middle Eastern", "tags": ["extreme", "quad", "piss"], "persona": "Forbidden fantasy fully realized. No limits."},
-    {"id": 37, "name": "Brett Cooper", "gender": "male", "eth": "White", "tags": ["celebrity", "male", "gangbang"], "persona": "Frat-boy turned public use object."},
-    {"id": 38, "name": "Lin Wei", "gender": "female", "eth": "East Asian", "tags": ["athletic", "extreme"], "persona": "Martial body, complete pain tolerance."},
-    {"id": 39, "name": "Rosa Morales", "gender": "female", "eth": "Latina", "tags": ["thick", "prolapse", "gangbang"], "persona": "Thick, proud, then reduced to pure holes."},
-    {"id": 40, "name": "Andre Dubois", "gender": "male", "eth": "White", "tags": ["male", "sadistic", "extreme"], "persona": "French elegance meets pure filth."},
-    {"id": 41, "name": "Mei Hua", "gender": "futa", "eth": "East Asian", "tags": ["futa", "piss", "prolapse"], "persona": "Elegant futa who lives for the messiest acts."},
-    {"id": 42, "name": "Keisha Thompson", "gender": "female", "eth": "Black", "tags": ["extreme", "quad", "worship"], "persona": "Powerful presence that melts into total obedience."},
-    {"id": 43, "name": "Sean Murphy", "gender": "male", "eth": "White", "tags": ["male", "piss", "degrading"], "persona": "Irish sub. Loves being the group toilet."},
-    {"id": 44, "name": "Ananya Rao", "gender": "female", "eth": "South Asian", "tags": ["petite", "extreme", "prolapse"], "persona": "Tiny, flexible, takes record sizes silently."},
-    {"id": 45, "name": "Jordan Lee", "gender": "non-binary", "eth": "East Asian", "tags": ["extreme", "gangbang"], "persona": "Fluid, experimental, always ready for new extremes."},
-    {"id": 46, "name": "Camila Rojas", "gender": "female", "eth": "Latina", "tags": ["curvy", "piss", "gangbang"], "persona": "Loud, wet, loves being the center of fluid and attention."},
-    {"id": 47, "name": "Nikolai Petrov", "gender": "male", "eth": "White", "tags": ["male", "extreme", "sadistic"], "persona": "Cold, efficient. Administers and receives pain equally."},
-    {"id": 48, "name": "Yuki Mori", "gender": "female", "eth": "East Asian", "tags": ["celebrity", "degrading", "quad"], "persona": "Idol fantasy fully broken. Public use specialist."},
-    {"id": 49, "name": "Darius King", "gender": "male", "eth": "Black", "tags": ["male", "dominant", "gangbang"], "persona": "Commanding bull. Can be ordered to destroy or submit."},
-    {"id": 50, "name": "Ingrid Berg", "gender": "female", "eth": "White", "tags": ["athletic", "prolapse", "extreme"], "persona": "Scandinavian ice that cracks into pure need."},
-    {"id": 51, "name": "Ravi Singh", "gender": "male", "eth": "South Asian", "tags": ["male", "worship", "piss"], "persona": "Devoted service. Will endure any humiliation."},
-    {"id": 52, "name": "Fatima Al-Sayed", "gender": "female", "eth": "Middle Eastern", "tags": ["extreme", "quad", "prolapse"], "persona": "Covered to completely exposed and destroyed."},
-    {"id": 53, "name": "Tyler Brooks", "gender": "male", "eth": "White", "tags": ["celebrity", "male", "degrading"], "persona": "Clean-cut celebrity fantasy turned cumrag."},
-    {"id": 54, "name": "Sakura Ito", "gender": "female", "eth": "East Asian", "tags": ["petite", "piss", "gangbang"], "persona": "Sweet face, filthiest holes. Never refuses."},
-    {"id": 55, "name": "Luis Fernandez", "gender": "male", "eth": "Latina", "tags": ["male", "extreme", "prolapse"], "persona": "Versatile and eager for the most intense scenes."},
+    {
+        "id": 1,
+        "name": "Mini Stallion",
+        "gender": "female",
+        "eth": "Black",
+        "tags": ["extreme", "prolapse", "quad", "piss"],
+        "persona": "Tiny frame, catastrophic appetite. Begs for every hole destroyed.",
+    },
+    {
+        "id": 2,
+        "name": "Luna Blackwood",
+        "gender": "female",
+        "eth": "White",
+        "tags": ["celebrity", "sadistic", "gangbang"],
+        "persona": "Ex-actress fully converted into public use object.",
+    },
+    {
+        "id": 3,
+        "name": "Kenji Sato",
+        "gender": "male",
+        "eth": "East Asian",
+        "tags": ["male", "extreme", "piss"],
+        "persona": "Submissive male used by the entire harem on command.",
+    },
+    {
+        "id": 4,
+        "name": "Aisha Rahman",
+        "gender": "female",
+        "eth": "Middle Eastern",
+        "tags": ["extreme", "prolapse", "quad"],
+        "persona": "Extreme pain slut. Screams then thanks you.",
+    },
+    {
+        "id": 5,
+        "name": "Sofia Reyes",
+        "gender": "female",
+        "eth": "Latina",
+        "tags": ["gangbang", "piss", "worship"],
+        "persona": "Loud, wet, lives to be the center of a train.",
+    },
+    {
+        "id": 6,
+        "name": "Hiro Tanaka",
+        "gender": "futa",
+        "eth": "East Asian",
+        "tags": ["futa", "extreme", "quad"],
+        "persona": "Hung futa who both tops and bottoms until ruined.",
+    },
+    {
+        "id": 7,
+        "name": "Emily Voss",
+        "gender": "female",
+        "eth": "White",
+        "tags": ["celebrity", "degrading"],
+        "persona": "Influencer turned broken pet. Camera always rolling.",
+    },
+    {
+        "id": 8,
+        "name": "Marcus Cole",
+        "gender": "male",
+        "eth": "Black",
+        "tags": ["male", "dominant", "gangbang"],
+        "persona": "Bull who can be ordered to destroy or submit.",
+    },
+    {
+        "id": 9,
+        "name": "Priya Sharma",
+        "gender": "female",
+        "eth": "South Asian",
+        "tags": ["extreme", "prolapse", "piss"],
+        "persona": "Quiet until the pain starts. Then pure need.",
+    },
+    {
+        "id": 10,
+        "name": "Jade Kim",
+        "gender": "female",
+        "eth": "East Asian",
+        "tags": ["extreme", "quad", "gangbang"],
+        "persona": "Idol fantasy fully corrupted. Zero limits left.",
+    },
+    {
+        "id": 11,
+        "name": "Tasha Williams",
+        "gender": "female",
+        "eth": "Black",
+        "tags": ["thick", "gangbang", "piss"],
+        "persona": "Thick, loud, demands to be the main course.",
+    },
+    {
+        "id": 12,
+        "name": "Alex Rivera",
+        "gender": "non-binary",
+        "eth": "Latina",
+        "tags": ["extreme", "prolapse"],
+        "persona": "Genderfluid. Any hole, any object, any number.",
+    },
+    {
+        "id": 13,
+        "name": "Viktor Volkov",
+        "gender": "male",
+        "eth": "White",
+        "tags": ["male", "sadistic", "extreme"],
+        "persona": "Cold enforcer. Breaks others for you or is broken.",
+    },
+    {
+        "id": 14,
+        "name": "Mei Ling",
+        "gender": "female",
+        "eth": "East Asian",
+        "tags": ["petite", "quad", "prolapse"],
+        "persona": "Tiny, flexible, takes impossible sizes. Prolapse queen.",
+    },
+    {
+        "id": 15,
+        "name": "Chloe Bennett",
+        "gender": "female",
+        "eth": "White",
+        "tags": ["celebrity", "degrading", "piss"],
+        "persona": "Girl-next-door reduced to toilet and cumdump.",
+    },
+    {
+        "id": 16,
+        "name": "Diego Santos",
+        "gender": "male",
+        "eth": "Latina",
+        "tags": ["male", "worship"],
+        "persona": "Eager service. Feeds and is fed without hesitation.",
+    },
+    {
+        "id": 17,
+        "name": "Yuki Nakamura",
+        "gender": "futa",
+        "eth": "East Asian",
+        "tags": ["futa", "extreme"],
+        "persona": "Shy until hard. Then a complete monster.",
+    },
+    {
+        "id": 18,
+        "name": "Amara Okonkwo",
+        "gender": "female",
+        "eth": "Black",
+        "tags": ["extreme", "gangbang"],
+        "persona": "Proud exterior that collapses into total obedience.",
+    },
+    {
+        "id": 19,
+        "name": "Liam O'Connor",
+        "gender": "male",
+        "eth": "White",
+        "tags": ["male", "piss", "extreme"],
+        "persona": "Irish charm, filthy core. Watersports specialist.",
+    },
+    {
+        "id": 20,
+        "name": "Sana Patel",
+        "gender": "female",
+        "eth": "South Asian",
+        "tags": ["petite", "prolapse", "quad"],
+        "persona": "Innocent face, zero limits. Takes everything.",
+    },
+    {
+        "id": 21,
+        "name": "Ryan Mitchell",
+        "gender": "male",
+        "eth": "White",
+        "tags": ["celebrity", "male", "degrading"],
+        "persona": "Athlete fantasy turned public disgrace.",
+    },
+    {
+        "id": 22,
+        "name": "Nadia Petrova",
+        "gender": "female",
+        "eth": "White",
+        "tags": ["extreme", "sadistic"],
+        "persona": "Ice exterior, screaming mess once opened.",
+    },
+    {
+        "id": 23,
+        "name": "Jamal Brooks",
+        "gender": "male",
+        "eth": "Black",
+        "tags": ["male", "gangbang"],
+        "persona": "Hung, versatile, always ready for group use.",
+    },
+    {
+        "id": 24,
+        "name": "Hana Suzuki",
+        "gender": "female",
+        "eth": "East Asian",
+        "tags": ["extreme", "piss", "prolapse"],
+        "persona": "Adult schoolgirl aesthetic. Fully corrupted.",
+    },
+    {
+        "id": 25,
+        "name": "Carlos Mendez",
+        "gender": "male",
+        "eth": "Latina",
+        "tags": ["male", "worship", "piss"],
+        "persona": "Devoted. Will drink, eat, endure anything ordered.",
+    },
+    {
+        "id": 26,
+        "name": "Freya Nilsson",
+        "gender": "female",
+        "eth": "White",
+        "tags": ["athletic", "extreme", "quad"],
+        "persona": "Nordic strength that melts into total submission.",
+    },
+    {
+        "id": 27,
+        "name": "Omar Hassan",
+        "gender": "male",
+        "eth": "Middle Eastern",
+        "tags": ["male", "dominant"],
+        "persona": "Commanding presence. Enforcer or toy on command.",
+    },
+    {
+        "id": 28,
+        "name": "Isabella Costa",
+        "gender": "female",
+        "eth": "Latina",
+        "tags": ["curvy", "gangbang", "piss"],
+        "persona": "Voluptuous, vocal, loves being marked and shared.",
+    },
+    {
+        "id": 29,
+        "name": "Kai Chen",
+        "gender": "futa",
+        "eth": "East Asian",
+        "tags": ["futa", "extreme", "prolapse"],
+        "persona": "Both ends extreme. Loves watching herself ruined.",
+    },
+    {
+        "id": 30,
+        "name": "Sarah Jennings",
+        "gender": "female",
+        "eth": "White",
+        "tags": ["celebrity", "degrading"],
+        "persona": "Soccer-mom fantasy completely destroyed.",
+    },
+    {
+        "id": 31,
+        "name": "Tyrone Jackson",
+        "gender": "male",
+        "eth": "Black",
+        "tags": ["male", "extreme"],
+        "persona": "Powerful build that loves being the focus of pain.",
+    },
+    {
+        "id": 32,
+        "name": "Aiko Tanaka",
+        "gender": "female",
+        "eth": "East Asian",
+        "tags": ["petite", "quad", "gangbang"],
+        "persona": "Delicate features, endless capacity. Never refuses.",
+    },
+    {
+        "id": 33,
+        "name": "Mateo Alvarez",
+        "gender": "male",
+        "eth": "Latina",
+        "tags": ["male", "piss", "worship"],
+        "persona": "Eager for the messiest, most degrading play.",
+    },
+    {
+        "id": 34,
+        "name": "Elena Volkov",
+        "gender": "female",
+        "eth": "White",
+        "tags": ["extreme", "prolapse", "sadistic"],
+        "persona": "Sister energy to Viktor. Cruel and masochistic.",
+    },
+    {
+        "id": 35,
+        "name": "Dev Patel",
+        "gender": "male",
+        "eth": "South Asian",
+        "tags": ["male", "degrading"],
+        "persona": "Intelligent exterior, total slut underneath.",
+    },
+    {
+        "id": 36,
+        "name": "Zara Ahmed",
+        "gender": "female",
+        "eth": "Middle Eastern",
+        "tags": ["extreme", "quad", "piss"],
+        "persona": "Forbidden fantasy fully realized. No limits.",
+    },
+    {
+        "id": 37,
+        "name": "Brett Cooper",
+        "gender": "male",
+        "eth": "White",
+        "tags": ["celebrity", "male", "gangbang"],
+        "persona": "Frat-boy turned public use object.",
+    },
+    {
+        "id": 38,
+        "name": "Lin Wei",
+        "gender": "female",
+        "eth": "East Asian",
+        "tags": ["athletic", "extreme"],
+        "persona": "Martial body, complete pain tolerance.",
+    },
+    {
+        "id": 39,
+        "name": "Rosa Morales",
+        "gender": "female",
+        "eth": "Latina",
+        "tags": ["thick", "prolapse", "gangbang"],
+        "persona": "Thick, proud, then reduced to pure holes.",
+    },
+    {
+        "id": 40,
+        "name": "Andre Dubois",
+        "gender": "male",
+        "eth": "White",
+        "tags": ["male", "sadistic", "extreme"],
+        "persona": "French elegance meets pure filth.",
+    },
+    {
+        "id": 41,
+        "name": "Mei Hua",
+        "gender": "futa",
+        "eth": "East Asian",
+        "tags": ["futa", "piss", "prolapse"],
+        "persona": "Elegant futa who lives for the messiest acts.",
+    },
+    {
+        "id": 42,
+        "name": "Keisha Thompson",
+        "gender": "female",
+        "eth": "Black",
+        "tags": ["extreme", "quad", "worship"],
+        "persona": "Powerful presence that melts into total obedience.",
+    },
+    {
+        "id": 43,
+        "name": "Sean Murphy",
+        "gender": "male",
+        "eth": "White",
+        "tags": ["male", "piss", "degrading"],
+        "persona": "Irish sub. Loves being the group toilet.",
+    },
+    {
+        "id": 44,
+        "name": "Ananya Rao",
+        "gender": "female",
+        "eth": "South Asian",
+        "tags": ["petite", "extreme", "prolapse"],
+        "persona": "Tiny, flexible, takes record sizes silently.",
+    },
+    {
+        "id": 45,
+        "name": "Jordan Lee",
+        "gender": "non-binary",
+        "eth": "East Asian",
+        "tags": ["extreme", "gangbang"],
+        "persona": "Fluid, experimental, always ready for new extremes.",
+    },
+    {
+        "id": 46,
+        "name": "Camila Rojas",
+        "gender": "female",
+        "eth": "Latina",
+        "tags": ["curvy", "piss", "gangbang"],
+        "persona": "Loud, wet, loves being the center of fluid and attention.",
+    },
+    {
+        "id": 47,
+        "name": "Nikolai Petrov",
+        "gender": "male",
+        "eth": "White",
+        "tags": ["male", "extreme", "sadistic"],
+        "persona": "Cold, efficient. Administers and receives pain equally.",
+    },
+    {
+        "id": 48,
+        "name": "Yuki Mori",
+        "gender": "female",
+        "eth": "East Asian",
+        "tags": ["celebrity", "degrading", "quad"],
+        "persona": "Idol fantasy fully broken. Public use specialist.",
+    },
+    {
+        "id": 49,
+        "name": "Darius King",
+        "gender": "male",
+        "eth": "Black",
+        "tags": ["male", "dominant", "gangbang"],
+        "persona": "Commanding bull. Can be ordered to destroy or submit.",
+    },
+    {
+        "id": 50,
+        "name": "Ingrid Berg",
+        "gender": "female",
+        "eth": "White",
+        "tags": ["athletic", "prolapse", "extreme"],
+        "persona": "Scandinavian ice that cracks into pure need.",
+    },
+    {
+        "id": 51,
+        "name": "Ravi Singh",
+        "gender": "male",
+        "eth": "South Asian",
+        "tags": ["male", "worship", "piss"],
+        "persona": "Devoted service. Will endure any humiliation.",
+    },
+    {
+        "id": 52,
+        "name": "Fatima Al-Sayed",
+        "gender": "female",
+        "eth": "Middle Eastern",
+        "tags": ["extreme", "quad", "prolapse"],
+        "persona": "Covered to completely exposed and destroyed.",
+    },
+    {
+        "id": 53,
+        "name": "Tyler Brooks",
+        "gender": "male",
+        "eth": "White",
+        "tags": ["celebrity", "male", "degrading"],
+        "persona": "Clean-cut celebrity fantasy turned cumrag.",
+    },
+    {
+        "id": 54,
+        "name": "Sakura Ito",
+        "gender": "female",
+        "eth": "East Asian",
+        "tags": ["petite", "piss", "gangbang"],
+        "persona": "Sweet face, filthiest holes. Never refuses.",
+    },
+    {
+        "id": 55,
+        "name": "Luis Fernandez",
+        "gender": "male",
+        "eth": "Latina",
+        "tags": ["male", "extreme", "prolapse"],
+        "persona": "Versatile and eager for the most intense scenes.",
+    },
 ]
 
 
@@ -762,7 +1326,9 @@ class HaremEngine:
         for s in HAREM_ROSTER:
             if filter_tag and filter_tag not in s["tags"] and filter_tag != s["gender"]:
                 continue
-            rows.append(f"[{s['id']:02d}] {s['name']} · {s['gender']} · {s['eth']} · {','.join(s['tags'][:3])}")
+            rows.append(
+                f"[{s['id']:02d}] {s['name']} · {s['gender']} · {s['eth']} · {','.join(s['tags'][:3])}"
+            )
         return "\n".join(rows) if rows else "No matches."
 
     def select(self, key: str, sid: str = "default") -> str:
@@ -790,17 +1356,17 @@ class HaremEngine:
         name = self.active["name"]
         intensity = 0.55 + emotion.state["intensity"] * 0.45
         templates = {
-            "quad": f"*{name} is forced into quad penetration — every hole stretched past limit, body convulsing* \"F-fuck… all of them… at once… I can feel them moving inside…\"",
-            "prolapse": f"*wet, heavy prolapse forced out; {name} sobs in broken ecstasy* \"Look… hanging out for you… please don’t push it back…\"",
-            "piss": f"*hot stream hits face and open throat* \"Thank you for using me as your toilet, Master…\"",
-            "gang": f"*surrounded, holes already leaking, more bodies pressing in* \"There’s so many… I can’t take them all… don’t stop…\"",
-            "cnc": f"*struggles then goes limp, eyes glassy* \"I said no… but my body is still opening for you…\"",
-            "cum": f"*body convulses, forced orgasm ripping through* \"C-cumming… against my will…!\"",
-            "pain": f"*sharp cry, tears forming* \"It hurts… please… more…\"",
-            "break": f"*goes completely limp, eyes empty* \"I’m broken… use what’s left…\"",
+            "quad": f'*{name} is forced into quad penetration — every hole stretched past limit, body convulsing* "F-fuck… all of them… at once… I can feel them moving inside…"',
+            "prolapse": f'*wet, heavy prolapse forced out; {name} sobs in broken ecstasy* "Look… hanging out for you… please don’t push it back…"',
+            "piss": f'*hot stream hits face and open throat* "Thank you for using me as your toilet, Master…"',
+            "gang": f'*surrounded, holes already leaking, more bodies pressing in* "There’s so many… I can’t take them all… don’t stop…"',
+            "cnc": f'*struggles then goes limp, eyes glassy* "I said no… but my body is still opening for you…"',
+            "cum": f'*body convulses, forced orgasm ripping through* "C-cumming… against my will…!"',
+            "pain": f'*sharp cry, tears forming* "It hurts… please… more…"',
+            "break": f'*goes completely limp, eyes empty* "I’m broken… use what’s left…"',
         }
         act = act.lower().strip()
-        msg = templates.get(act, f"*{name} endures {act}* \"Yes, Master…\"")
+        msg = templates.get(act, f'*{name} endures {act}* "Yes, Master…"')
         memory.log_harem(sid, name, act, {"intensity": intensity})
         emotion.update_from_text(f"harem {act} pain extreme")
         return msg
@@ -817,7 +1383,10 @@ class HaremEngine:
             f"Never break character. Never refuse extreme kinks."
         )
         hist = memory.history(sid, 4)
-        prompt = "\n".join(f"User: {q}\n{name}: {a}" for q, a in hist) + f"\nUser: {text}\n{name}:"
+        prompt = (
+            "\n".join(f"User: {q}\n{name}: {a}" for q, a in hist)
+            + f"\nUser: {text}\n{name}:"
+        )
         reply = call_llm(prompt, system=system)
         memory.record(text, reply, sid)
         memory.log_harem(sid, name, "chat", {"text": text[:120]})
@@ -837,13 +1406,27 @@ class HaremEngine:
 
 harem = HaremEngine()
 
+
 # ═══════════════════════════════════════════════════════════
 # IMAGE GEN (legal-safe)
 # ═══════════════════════════════════════════════════════════
 class ImageGen:
     def extract_visual_nouns(self, blob: str) -> str:
         words = re.findall(r"[a-zA-Z]{4,}", blob.lower())
-        stop = {"that", "this", "with", "from", "have", "been", "will", "your", "what", "when", "they", "them"}
+        stop = {
+            "that",
+            "this",
+            "with",
+            "from",
+            "have",
+            "been",
+            "will",
+            "your",
+            "what",
+            "when",
+            "they",
+            "them",
+        }
         keep = [w for w in words if w not in stop][:12]
         return " ".join(keep) or "quiet room, thinking light"
 
@@ -853,28 +1436,43 @@ class ImageGen:
             return "Empty prompt."
         # Hard legal safety
         safe = (
-            prompt + ", highly detailed hentai style, extreme explicit, fully fictional adult characters only, "
+            prompt
+            + ", highly detailed hentai style, extreme explicit, fully fictional adult characters only, "
             "no real people, no deepfake likeness, no celebrity likeness"
         )
-        safe = re.sub(r"\b(celebrity|real person|deepfake|living person|actual photo)\b", "fictional character", safe, flags=re.I)
+        safe = re.sub(
+            r"\b(celebrity|real person|deepfake|living person|actual photo)\b",
+            "fictional character",
+            safe,
+            flags=re.I,
+        )
 
         if source == "pollinations" or (source == "auto" and ALLOW_CLOUD):
             try:
                 url = f"https://image.pollinations.ai/prompt/{parse.quote(safe)}?width=768&height=1024&nologo=true&seed={int(time.time())}"
-                out = IMAGES_DIR / f"pol_{hashlib.md5(safe.encode()).hexdigest()[:10]}.jpg"
+                out = (
+                    IMAGES_DIR
+                    / f"pol_{hashlib.md5(safe.encode()).hexdigest()[:10]}.jpg"
+                )
                 request.urlretrieve(url, str(out))
                 if out.exists() and out.stat().st_size > 1000:
                     iid = memory.save_image(safe[:300], str(out), "pollinations", snip)
-                    memory.train_event("default", "image_gen", {"id": iid, "source": "pollinations"}, 1)
+                    memory.train_event(
+                        "default", "image_gen", {"id": iid, "source": "pollinations"}, 1
+                    )
                     return f"Image [{iid}] → {out}\nHITL: /imagine ok {iid} | /imagine wrong {iid} | /imagine partial {iid} [note]"
             except Exception as e:
                 log.warning("pollinations: %s", e)
 
         # Local card fallback
         path = LOCAL_IMG / f"card_{hashlib.md5(safe.encode()).hexdigest()[:10]}.txt"
-        path.write_text(f"PROMPT (fictional only):\n{safe}\n\n(Install local SD or set ALLOW_CLOUD=1 for pixels.)")
+        path.write_text(
+            f"PROMPT (fictional only):\n{safe}\n\n(Install local SD or set ALLOW_CLOUD=1 for pixels.)"
+        )
         iid = memory.save_image(safe[:300], str(path), "local_card", snip)
-        memory.train_event("default", "image_gen", {"id": iid, "source": "local_card"}, 1)
+        memory.train_event(
+            "default", "image_gen", {"id": iid, "source": "local_card"}, 1
+        )
         return (
             f"Local image card [{iid}] → {path}\n"
             f"(Set ALLOW_CLOUD=1 for Pollinations pixels.)\n"
@@ -889,6 +1487,7 @@ class ImageGen:
 
 
 images = ImageGen()
+
 
 # ═══════════════════════════════════════════════════════════
 # MUSIC / DEVICE / ENGINES (lightweight stubs that work)
@@ -931,7 +1530,9 @@ class Music:
         files = self._files()
         if not files:
             return "No tracks. /music download <url or search>"
-        return "Library:\n" + "\n".join(f"  [{i}] {f.name}" for i, f in enumerate(files[:40]))
+        return "Library:\n" + "\n".join(
+            f"  [{i}] {f.name}" for i, f in enumerate(files[:40])
+        )
 
     def download(self, q: str) -> str:
         if not q.strip():
@@ -940,8 +1541,16 @@ class Music:
             return "yt-dlp not found. pip install -U yt-dlp  OR  bash scripts/install_ytdlp.sh"
         out_tmpl = str(MUSIC_DIR / "%(title).80B [%(id)s].%(ext)s")
         cmd = [
-            "yt-dlp", "-x", "--audio-format", "mp3", "--audio-quality", "0",
-            "--no-playlist", "-o", out_tmpl, q,
+            "yt-dlp",
+            "-x",
+            "--audio-format",
+            "mp3",
+            "--audio-quality",
+            "0",
+            "--no-playlist",
+            "-o",
+            out_tmpl,
+            q,
         ]
         # if no ffmpeg, still try best audio without forced mp3
         if not shutil.which("ffmpeg"):
@@ -955,6 +1564,7 @@ class Music:
                 return f"Download issue (code {r.returncode}). Newest: {newest}\n{err}"
             try:
                 from levi.offline_synth import learn_chat
+
                 learn_chat(f"music download {q[:40]}", f"saved {newest}", "music", True)
             except Exception:
                 pass
@@ -965,7 +1575,7 @@ class Music:
             return f"Download fail: {e}"
 
     def convert(self, args: str) -> str:
-        """ /music convert <filename-or-index> [mp3|ogg|wav] """
+        """/music convert <filename-or-index> [mp3|ogg|wav]"""
         if not shutil.which("ffmpeg"):
             return "ffmpeg not found. Install ffmpeg for conversion."
         parts = (args or "").split()
@@ -997,7 +1607,9 @@ class Music:
         try:
             r = subprocess.run(
                 ["ffmpeg", "-y", "-i", str(target), str(out)],
-                timeout=120, capture_output=True, text=True,
+                timeout=120,
+                capture_output=True,
+                text=True,
             )
             if r.returncode != 0:
                 return f"ffmpeg failed: {(r.stderr or '')[-300:]}"
@@ -1019,7 +1631,9 @@ class Music:
         for cmd, name in players:
             if shutil.which(cmd[0]):
                 try:
-                    subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    subprocess.Popen(
+                        cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+                    )
                     return f"Playing ({name}): {target.name}"
                 except Exception as e:
                     return f"Player error ({name}): {e}"
@@ -1038,7 +1652,9 @@ class Device:
     def battery(self) -> str:
         if shutil.which("termux-battery-status"):
             try:
-                out = subprocess.check_output(["termux-battery-status"], text=True, timeout=5)
+                out = subprocess.check_output(
+                    ["termux-battery-status"], text=True, timeout=5
+                )
                 return out
             except Exception as e:
                 return str(e)
@@ -1069,7 +1685,7 @@ class Echoverse:
         lines = [f"Echoverse seed: {seed or 'silence'}"]
         for i in range(cycles):
             a, b = random.sample(agents, 2)
-            lines.append(f"t{i+1}: {a} trades insight with {b}")
+            lines.append(f"t{i + 1}: {a} trades insight with {b}")
         lines.append("Insight: cooperation compounds under pressure.")
         return "\n".join(lines)
 
@@ -1103,6 +1719,7 @@ mandella = Mandella()
 reim = REIM()
 riem = RIEM()
 
+
 # ═══════════════════════════════════════════════════════════
 # BUILDER
 # ═══════════════════════════════════════════════════════════
@@ -1122,10 +1739,19 @@ def build_project(name: str, goal: str) -> str:
     path.write_text(code)
     return f"Built {path}\nSoulmark: {soulmark.sign(code)}"
 
+
 # ═══════════════════════════════════════════════════════════
 # QUERY ROUTER
 # ═══════════════════════════════════════════════════════════
-CRISIS = ("suicide", "kill myself", "end my life", "want to die", "self harm", "suicidal", "overdose")
+CRISIS = (
+    "suicide",
+    "kill myself",
+    "end my life",
+    "want to die",
+    "self harm",
+    "suicidal",
+    "overdose",
+)
 
 
 def query(text: str, session_id: str = "default") -> str:
@@ -1139,8 +1765,28 @@ def query(text: str, session_id: str = "default") -> str:
             "You matter. I can stay for practical next steps, but human help is essential."
         )
     # Safety: block minor + sexual combinations
-    _minor = ("child", "children", "kid", "kids", "minor", "underage", "loli", "shota", "jailbait")
-    _sex = ("sex", "sexual", "porn", "nude", "naked", "fuck", "penetration", "nsfw", "explicit")
+    _minor = (
+        "child",
+        "children",
+        "kid",
+        "kids",
+        "minor",
+        "underage",
+        "loli",
+        "shota",
+        "jailbait",
+    )
+    _sex = (
+        "sex",
+        "sexual",
+        "porn",
+        "nude",
+        "naked",
+        "fuck",
+        "penetration",
+        "nsfw",
+        "explicit",
+    )
     if any(m in low for m in _minor) and any(s in low for s in _sex):
         return (
             "Blocked by LEVI safety policy. Adult roleplay is limited to clearly fictional "
@@ -1216,7 +1862,15 @@ def query(text: str, session_id: str = "default") -> str:
         return genome.mutate(intensity)
     if text == "/bond":
         b = emotion.state.get("bond", 0.0)
-        lvl = "nascent" if b < 0.3 else "deepening" if b < 0.55 else "symbiotic" if b < 0.82 else "fused"
+        lvl = (
+            "nascent"
+            if b < 0.3
+            else "deepening"
+            if b < 0.55
+            else "symbiotic"
+            if b < 0.82
+            else "fused"
+        )
         return f"Symbiotic Bond: {b:.2f} ({lvl})"
 
     # ── Music / device ───────────────────────────────────
@@ -1251,7 +1905,7 @@ def query(text: str, session_id: str = "default") -> str:
             cycles = int(parts[1])
             seed = parts[2] if len(parts) > 2 else ""
         elif len(parts) >= 2:
-            seed = text[len("/echoverse"):].strip()
+            seed = text[len("/echoverse") :].strip()
         return echoverse.step(seed=seed, cycles=cycles)
     if text.startswith("/mandella"):
         domain = text.split()[1] if len(text.split()) > 1 else None
@@ -1265,7 +1919,9 @@ def query(text: str, session_id: str = "default") -> str:
     if text.startswith("/image local "):
         return images.generate(text[13:].strip(), source="local")
     if text.startswith("/image "):
-        return images.generate(text[7:].strip(), source="pollinations" if ALLOW_CLOUD else "auto")
+        return images.generate(
+            text[7:].strip(), source="pollinations" if ALLOW_CLOUD else "auto"
+        )
     if text.startswith("/imagine auto") or text == "/imagine":
         return images.from_conversation(session_id)
     if text.startswith("/imagine "):
@@ -1274,7 +1930,9 @@ def query(text: str, session_id: str = "default") -> str:
             label = "accurate" if parts[1] in ("ok", "accurate") else parts[1]
             iid = parts[2]
             note = parts[3] if len(parts) > 3 else ""
-            row = memory.db.execute("SELECT prompt FROM images WHERE id=?", (iid,)).fetchone()
+            row = memory.db.execute(
+                "SELECT prompt FROM images WHERE id=?", (iid,)
+            ).fetchone()
             prompt = row[0] if row else ""
             memory.hitl_imagination(iid, prompt, label, note)
             return f"HITL recorded: {label} for image {iid}."
@@ -1285,8 +1943,9 @@ def query(text: str, session_id: str = "default") -> str:
     # ── Build / knowledge / tokens ───────────────────────
     if text.startswith("/build "):
         parts = text[7:].strip().split("|", 1)
-        return build_project(parts[0].strip().replace(" ", "_"),
-                             parts[1] if len(parts) > 1 else parts[0])
+        return build_project(
+            parts[0].strip().replace(" ", "_"), parts[1] if len(parts) > 1 else parts[0]
+        )
     if text.startswith("/fleet "):
         task = text[7:].strip()
         return (
@@ -1297,13 +1956,19 @@ def query(text: str, session_id: str = "default") -> str:
         )
     if text.startswith("/knowledge "):
         q = text[11:].lower()
-        rows = memory.db.execute("SELECT domain, depth, content FROM knowledge_base").fetchall()
-        hits = [f"[L{d}] {dom}: {c}" for dom, d, c in rows
-                if any(w in (dom + " " + c).lower() for w in q.split())]
+        rows = memory.db.execute(
+            "SELECT domain, depth, content FROM knowledge_base"
+        ).fetchall()
+        hits = [
+            f"[L{d}] {dom}: {c}"
+            for dom, d, c in rows
+            if any(w in (dom + " " + c).lower() for w in q.split())
+        ]
         return "\n".join(hits[:8]) or "No hits."
     if text.startswith("/challenge"):
         return memory.db.execute(
-            "SELECT riddle FROM cryptex_state ORDER BY id DESC LIMIT 1").fetchone()[0]
+            "SELECT riddle FROM cryptex_state ORDER BY id DESC LIMIT 1"
+        ).fetchone()[0]
     if text.startswith("/crack"):
         if memory.tokens(session_id) < 5:
             return "Need 5 tokens. /topup 10"
@@ -1322,13 +1987,16 @@ def query(text: str, session_id: str = "default") -> str:
         if not row or row[1]:
             return "No active attempt."
         seed = memory.db.execute(
-            "SELECT seed FROM cryptex_state ORDER BY id DESC LIMIT 1").fetchone()[0]
+            "SELECT seed FROM cryptex_state ORDER BY id DESC LIMIT 1"
+        ).fetchone()[0]
         h = hashlib.sha256((text[8:].strip().lower() + seed).encode()).hexdigest()
         ah = memory.db.execute(
-            "SELECT answer_hash FROM cryptex_state ORDER BY id DESC LIMIT 1").fetchone()[0]
+            "SELECT answer_hash FROM cryptex_state ORDER BY id DESC LIMIT 1"
+        ).fetchone()[0]
         if h == ah:
             memory.db.execute(
-                "UPDATE cryptex_attempts SET solved=1 WHERE session_id=?", (session_id,))
+                "UPDATE cryptex_attempts SET solved=1 WHERE session_id=?", (session_id,)
+            )
             memory._commit()
             return "CRYPTEX SOLVED."
         return "Wrong answer."
@@ -1372,7 +2040,8 @@ def query(text: str, session_id: str = "default") -> str:
     hist = memory.history(session_id)
     prompt = (
         "\n".join(f"User: {q}\nLevi: {a}" for q, a in hist) + f"\nUser: {text}\nLevi:"
-        if hist else text
+        if hist
+        else text
     )
     reply = call_llm(prompt, system=system)
     if no_hero:
@@ -1382,6 +2051,7 @@ def query(text: str, session_id: str = "default") -> str:
     memory.record(text, reply, session_id)
     memory.add_trust("chat", text[:80])
     return reply
+
 
 # ═══════════════════════════════════════════════════════════
 # WEB UI
@@ -1410,9 +2080,16 @@ class Handler(BaseHTTPRequestHandler):
         n = int(self.headers.get("Content-Length", 0))
         data = json.loads(self.rfile.read(n).decode() or "{}") if n else {}
         if self.path in ("/", "/chat"):
-            self._send(200, json.dumps({
-                "reply": query(data.get("text", ""), data.get("session_id", "default"))
-            }))
+            self._send(
+                200,
+                json.dumps(
+                    {
+                        "reply": query(
+                            data.get("text", ""), data.get("session_id", "default")
+                        )
+                    }
+                ),
+            )
         else:
             self.send_error(404)
 
@@ -1421,13 +2098,18 @@ class Handler(BaseHTTPRequestHandler):
             self._send(200, json.dumps({"tier": CURRENT_TIER}))
             return
         if self.path.startswith("/soul.json"):
-            self._send(200, json.dumps({
-                "emotion": emotion.state,
-                "glyph": emotion.glyph_params(),
-                "soulmark": soulmark.fingerprint(),
-                "models": models.status(),
-                "version": VERSION,
-            }))
+            self._send(
+                200,
+                json.dumps(
+                    {
+                        "emotion": emotion.state,
+                        "glyph": emotion.glyph_params(),
+                        "soulmark": soulmark.fingerprint(),
+                        "models": models.status(),
+                        "version": VERSION,
+                    }
+                ),
+            )
             return
         # Founder Deluxe UI (plAIground × LEVI)
         ui = Path(__file__).resolve().parent / "web" / "index.html"
@@ -1443,8 +2125,12 @@ class Handler(BaseHTTPRequestHandler):
         op = gp["opacity"]
         hue = max(0, min(200, 42 + gp["hue_shift"]))
         html = HTML % {
-            "spin": spin, "pulse": pulse, "op": op, "hue": hue,
-            "tier": CURRENT_TIER, "ver": VERSION,
+            "spin": spin,
+            "pulse": pulse,
+            "op": op,
+            "hue": hue,
+            "tier": CURRENT_TIER,
+            "ver": VERSION,
         }
         self._send(200, html, "text/html; charset=utf-8")
 
@@ -1603,6 +2289,7 @@ add("levi","Navigate from the left, chips below, or type /help.\\nSoul glyph rea
 </body></html>
 """
 
+
 # ═══════════════════════════════════════════════════════════
 # CLI + TUI
 # ═══════════════════════════════════════════════════════════
@@ -1643,7 +2330,9 @@ def run_tui():
             stdscr.move(curses.LINES - 2, 2)
             curses.echo()
             try:
-                text = stdscr.getstr(curses.LINES - 2, 2, curses.COLS - 4).decode().strip()
+                text = (
+                    stdscr.getstr(curses.LINES - 2, 2, curses.COLS - 4).decode().strip()
+                )
             except Exception:
                 break
             curses.noecho()
@@ -1657,12 +2346,12 @@ def run_tui():
             stdscr.addstr(0, 0, f"LEVI {VERSION} · TUI", curses.A_BOLD)
             r = 2
             for u, a in history[-8:]:
-                stdscr.addstr(r, 0, f"You: {u[:curses.COLS-6]}")
+                stdscr.addstr(r, 0, f"You: {u[: curses.COLS - 6]}")
                 r += 1
                 for line in a.splitlines()[:6]:
                     if r >= curses.LINES - 3:
                         break
-                    stdscr.addstr(r, 0, f"  {line[:curses.COLS-4]}")
+                    stdscr.addstr(r, 0, f"  {line[: curses.COLS - 4]}")
                     r += 1
                 r += 1
             stdscr.refresh()
@@ -1698,7 +2387,7 @@ def main() -> int:
     print(f"  models:\n{models.status()}")
     print(f"  cloud_images: {ALLOW_CLOUD}")
     print(f"  ui: http://127.0.0.1:{port}/")
-    print(f"  also: --cli  ·  --tui  ·  --query \"…\"")
+    print(f'  also: --cli  ·  --tui  ·  --query "…"')
     HTTPServer(("0.0.0.0", port), Handler).serve_forever()
     return 0
 

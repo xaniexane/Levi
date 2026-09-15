@@ -91,9 +91,9 @@ def test_pack_build_excludes_nonconsented_and_personal(env):
     _seed(
         env["store"],
         [
-            _cloud_learning(),                                   # shareable
-            _local_learning(),                                  # local, no opt-in
-            _local_learning(TECHNIQUE_C, kind="fact"),           # personal fact
+            _cloud_learning(),  # shareable
+            _local_learning(),  # local, no opt-in
+            _local_learning(TECHNIQUE_C, kind="fact"),  # personal fact
             _local_learning("The user prefers dark mode.", kind="preference"),
             _local_learning("User corrected Levi with: 'no'.", kind="correction"),
         ],
@@ -130,8 +130,12 @@ def test_pack_contains_zero_identifiers(env):
         assert token not in raw, f"identifier leaked: {token!r}"
     for entry in pack["entries"]:
         assert set(entry.keys()) <= {
-            "kind", "content", "confidence", "corroborated_sources",
-            "source_types", "learned_from",
+            "kind",
+            "content",
+            "confidence",
+            "corroborated_sources",
+            "source_types",
+            "learned_from",
         }
         assert entry["kind"] == "procedural"
         assert set(entry["source_types"].keys()) <= {"cloud", "local"}

@@ -69,6 +69,7 @@ def _uuid() -> str:
 
 # ── OAuth: users, auth codes, refresh tokens, devices ──────────────
 
+
 class User(Base):
     __tablename__ = "users"
 
@@ -112,8 +113,10 @@ class OAuthToken(Base):
     # Hex SHA-256 of the token — the lookup key the code used for its dict.
     token_hash = Column(String(64), unique=True, nullable=False, index=True)
     user_id = Column(
-        String(36), ForeignKey("users.user_id", ondelete="CASCADE"),
-        nullable=False, index=True,
+        String(36),
+        ForeignKey("users.user_id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
     )
     scopes = Column(JSON, nullable=False, default=list)
     device_id = Column(String(128), nullable=True)
@@ -131,8 +134,10 @@ class Device(Base):
 
     device_id = Column(String(128), primary_key=True)
     user_id = Column(
-        String(36), ForeignKey("users.user_id", ondelete="CASCADE"),
-        nullable=False, index=True,
+        String(36),
+        ForeignKey("users.user_id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
     )
     device_name = Column(String(64), nullable=False)
     device_type = Column(String(16), nullable=False)
@@ -145,6 +150,7 @@ class Device(Base):
 
 
 # ── Messaging: conversations, messages, offline queue ─────────────
+
 
 class Conversation(Base):
     __tablename__ = "conversations"
@@ -161,7 +167,8 @@ class ConversationParticipant(Base):
     __tablename__ = "conversation_participants"
 
     conversation_id = Column(
-        String(36), ForeignKey("conversations.conversation_id", ondelete="CASCADE"),
+        String(36),
+        ForeignKey("conversations.conversation_id", ondelete="CASCADE"),
         primary_key=True,
     )
     # Plain string, no FK: the messaging server accepts arbitrary user IDs
@@ -180,8 +187,10 @@ class Message(Base):
 
     message_id = Column(String(36), primary_key=True, default=_uuid)
     conversation_id = Column(
-        String(36), ForeignKey("conversations.conversation_id", ondelete="CASCADE"),
-        nullable=False, index=True,
+        String(36),
+        ForeignKey("conversations.conversation_id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
     )
     sender_id = Column(String(36), nullable=False, index=True)
     sender_key_id = Column(String(16), nullable=False)
@@ -194,7 +203,9 @@ class Message(Base):
     size_bucket = Column(String(8), nullable=False, default="small")
     attachment_ids = Column(JSON, nullable=False, default=list)
     reply_to = Column(String(36), nullable=True)
-    sent_at = Column(DateTime(timezone=True), nullable=False, default=_utcnow, index=True)
+    sent_at = Column(
+        DateTime(timezone=True), nullable=False, default=_utcnow, index=True
+    )
     status = Column(String(16), nullable=False, default="queued")
     deleted_at = Column(DateTime(timezone=True), nullable=True)
     # Keyed by user ID, per the code's delivery_receipts / read_receipts dicts.
@@ -210,7 +221,8 @@ class MessageQueue(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(String(36), nullable=False, index=True)
     message_id = Column(
-        String(36), ForeignKey("messages.message_id", ondelete="CASCADE"),
+        String(36),
+        ForeignKey("messages.message_id", ondelete="CASCADE"),
         nullable=False,
     )
     queued_at = Column(DateTime(timezone=True), nullable=False, default=_utcnow)

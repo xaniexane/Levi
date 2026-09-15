@@ -11,6 +11,7 @@ checklists run; consequential steps never auto-fire.
 
 Symbiosis: DemandPulse signal × Income draft × HITL × Corpus record.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -62,7 +63,9 @@ class RailCar:
     checklist: List[str] = field(default_factory=list)
     log: List[str] = field(default_factory=list)
     status: str = "active"
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -80,7 +83,9 @@ class OpportunityRail:
         try:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
             for d in raw.get("cars") or []:
-                c = RailCar(**{k: v for k, v in d.items() if k in RailCar.__dataclass_fields__})
+                c = RailCar(
+                    **{k: v for k, v in d.items() if k in RailCar.__dataclass_fields__}
+                )
                 self.cars[c.id] = c
         except Exception:
             pass
@@ -110,6 +115,7 @@ class OpportunityRail:
         # DemandPulse seed
         try:
             from levi.demand.pulse import DemandPulse
+
             sig = DemandPulse().scan_seed(signal_text)
             car.demand_signal_id = getattr(sig, "id", "") or ""
             self._log(car, f"DemandPulse signal {car.demand_signal_id}")
@@ -128,6 +134,7 @@ class OpportunityRail:
 
         if gate == Gate.MIRROR:
             from levi.lwp.mirror_cascade import MirrorCascade
+
             report = MirrorCascade().run(car.signal_text)
             car.mirror_fingerprint = report.fingerprint
             car.checklist = list(report.synthesis)
@@ -139,6 +146,7 @@ class OpportunityRail:
         if gate == Gate.DRAFT:
             try:
                 from levi.income.factory import IncomeFactory
+
                 fac = IncomeFactory()
                 plan = fac.compose(
                     car.title,
@@ -151,6 +159,7 @@ class OpportunityRail:
             # open HITL
             try:
                 from levi.project.hitl import HITLGate
+
                 req = HITLGate().propose(
                     what=f"Approve offer draft for rail {car.id}: {car.title}",
                     why="Opportunity Rail HITL_OFFER gate",
@@ -180,6 +189,7 @@ class OpportunityRail:
             if car.hitl_ids:
                 try:
                     from levi.project.hitl import HITLGate
+
                     g = HITLGate()
                     ok_any = False
                     hist = list(getattr(g, "history", []) or [])
@@ -187,7 +197,9 @@ class OpportunityRail:
                     for hid in car.hitl_ids:
                         req = pend.get(hid)
                         if req is None:
-                            req = next((h for h in hist if getattr(h, "id", None) == hid), None)
+                            req = next(
+                                (h for h in hist if getattr(h, "id", None) == hid), None
+                            )
                         st = getattr(req, "status", None) if req else None
                         if st in ("approved", "APPROVED", "ok"):
                             ok_any = True
@@ -195,7 +207,10 @@ class OpportunityRail:
                     if ok_any:
                         self._log(car, "HITL_OFFER: verified approved in HITLGate")
                     else:
-                        self._log(car, "HITL_OFFER: operator --approved (local trust override)")
+                        self._log(
+                            car,
+                            "HITL_OFFER: operator --approved (local trust override)",
+                        )
                 except Exception as e:
                     self._log(car, f"HITL verify soft-fail: {e}")
             car.gate = Gate.FULFILL_PREP.value
@@ -212,6 +227,7 @@ class OpportunityRail:
             # second HITL for fulfill
             try:
                 from levi.project.hitl import HITLGate
+
                 req = HITLGate().propose(
                     what=f"Allow fulfillment prep completion for {car.title}",
                     why="Second gate before any external action",
@@ -261,6 +277,7 @@ class OpportunityRail:
     def _record(self, car: RailCar) -> str:
         try:
             from levi.brain.corpus import Corpus
+
             Corpus().add(
                 f"Opportunity rail completed: {car.title} signal={car.demand_signal_id}",
                 kind="INFERENCE",
@@ -271,6 +288,7 @@ class OpportunityRail:
             pass
         try:
             from levi.project.capability_log import CapabilityLog
+
             CapabilityLog().log(
                 task=f"opportunity_rail {car.title}",
                 result="completed",
@@ -295,5 +313,5 @@ class OpportunityRail:
         for c in list(self.cars.values())[-10:]:
             lines.append(f"  [{c.id}] {c.gate:14} {c.title[:50]}")
         if not self.cars:
-            lines.append("  (empty — levi rail --start \"…\")")
+            lines.append('  (empty — levi rail --start "…")')
         return "\n".join(lines)

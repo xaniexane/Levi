@@ -13,6 +13,7 @@ Composites are nameable, testable, reversible: register() validates every
 part exists (fail fast), unregister() removes the name. The governor stage
 of the bloodstream enforces the composite ceiling on the whole turn.
 """
+
 from __future__ import annotations
 
 import json
@@ -54,7 +55,9 @@ class CompositeRegistry:
     """Named composites, persisted as JSON. Reversible by design."""
 
     def __init__(self, data_dir: Optional[Path] = None):
-        self.data_dir = Path(data_dir) if data_dir else Path.home() / ".levi" / "bloodstream"
+        self.data_dir = (
+            Path(data_dir) if data_dir else Path.home() / ".levi" / "bloodstream"
+        )
         self.data_dir.mkdir(parents=True, exist_ok=True)
         self._path = self.data_dir / "composites.json"
         self._items: Dict[str, Composite] = {}
@@ -91,7 +94,9 @@ class CompositeRegistry:
         a dangling reference. Returns the composite (reversible via unregister)."""
         missing = self._missing_parts(composite, skills, specialists, automations)
         if missing:
-            raise ValueError(f"composite {composite.name!r} references unknown parts: {missing}")
+            raise ValueError(
+                f"composite {composite.name!r} references unknown parts: {missing}"
+            )
         # Personas are lenses: unknown persona ids are allowed but recorded.
         self._items[composite.name] = composite
         self._persist()
@@ -148,11 +153,19 @@ class CompositeRegistry:
     ) -> List[str]:
         missing: List[str] = []
         if skills is not None:
-            missing += [f"skill:{s}" for s in composite.skill_ids if skills.get(s) is None]
+            missing += [
+                f"skill:{s}" for s in composite.skill_ids if skills.get(s) is None
+            ]
         if specialists is not None:
-            missing += [f"specialist:{s}" for s in composite.specialist_ids
-                        if specialists.get(s) is None]
+            missing += [
+                f"specialist:{s}"
+                for s in composite.specialist_ids
+                if specialists.get(s) is None
+            ]
         if automations is not None:
-            missing += [f"automation:{a}" for a in composite.automation_ids
-                        if automations.get(a) is None]
+            missing += [
+                f"automation:{a}"
+                for a in composite.automation_ids
+                if automations.get(a) is None
+            ]
         return missing

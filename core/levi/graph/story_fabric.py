@@ -26,6 +26,7 @@ from levi.graph.genres import GenreRegistry
 
 class CharacterArchetype(str, Enum):
     """Expanded character variety for L.W.P. storytelling."""
+
     PROTAGONIST = "protagonist"
     ANTAGONIST = "antagonist"
     MENTOR = "mentor"
@@ -48,13 +49,13 @@ class CharacterArchetype(str, Enum):
     OUTSIDER = "outsider"
     DETECTIVE = "detective"
     HAUNTED = "haunted"
-    ARCHIVIST = "archivist"       # L.W.P. flavor
-    BREAKER = "breaker"           # L.W.P. specialty
-    DAEMON = "daemon"             # L.W.P. specialty
+    ARCHIVIST = "archivist"  # L.W.P. flavor
+    BREAKER = "breaker"  # L.W.P. specialty
+    DAEMON = "daemon"  # L.W.P. specialty
     WITNESS = "witness"
     UNRELIABLE_NARRATOR = "unreliable_narrator"
-    DOUBLE = "double"             # doppelganger / double life
-    SYSTEM = "system"             # non-human system-as-character
+    DOUBLE = "double"  # doppelganger / double life
+    SYSTEM = "system"  # non-human system-as-character
 
 
 @dataclass
@@ -93,8 +94,12 @@ class Story:
     beats: List[StoryBeat] = field(default_factory=list)
     body: str = ""
     mode_history: List[str] = field(default_factory=list)
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
-    updated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
+    updated_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
     metadata: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -117,15 +122,63 @@ DEFAULT_STORY_DIR = Path.home() / ".levi" / "stories"
 
 # Name pools for variety
 _FIRST = [
-    "Avery", "Blair", "Cass", "Devon", "Ellis", "Finch", "Gray", "Haven",
-    "Indigo", "Jules", "Kai", "Lumen", "Mara", "Noor", "Orion", "Pace",
-    "Quinn", "Reed", "Soren", "Tess", "Uma", "Vesper", "Wren", "Xen",
-    "Yara", "Zane", "Ash", "Brynn", "Cipher", "Dahlia", "Echo", "Flint",
+    "Avery",
+    "Blair",
+    "Cass",
+    "Devon",
+    "Ellis",
+    "Finch",
+    "Gray",
+    "Haven",
+    "Indigo",
+    "Jules",
+    "Kai",
+    "Lumen",
+    "Mara",
+    "Noor",
+    "Orion",
+    "Pace",
+    "Quinn",
+    "Reed",
+    "Soren",
+    "Tess",
+    "Uma",
+    "Vesper",
+    "Wren",
+    "Xen",
+    "Yara",
+    "Zane",
+    "Ash",
+    "Brynn",
+    "Cipher",
+    "Dahlia",
+    "Echo",
+    "Flint",
 ]
 _LAST = [
-    "Voss", "Kane", "Mercer", "Crowe", "Ashford", "Bellamy", "Cross",
-    "Dray", "East", "Frost", "Glass", "Hollow", "Ives", "Jin", "Keel",
-    "Locke", "Marsh", "Nyx", "Pike", "Quill", "Rook", "Sage", "Thorne",
+    "Voss",
+    "Kane",
+    "Mercer",
+    "Crowe",
+    "Ashford",
+    "Bellamy",
+    "Cross",
+    "Dray",
+    "East",
+    "Frost",
+    "Glass",
+    "Hollow",
+    "Ives",
+    "Jin",
+    "Keel",
+    "Locke",
+    "Marsh",
+    "Nyx",
+    "Pike",
+    "Quill",
+    "Rook",
+    "Sage",
+    "Thorne",
 ]
 
 
@@ -208,7 +261,9 @@ class StoryFabric:
             chosen = []
             for a in archetypes:
                 try:
-                    chosen.append(CharacterArchetype(a.strip().lower().replace(" ", "_")))
+                    chosen.append(
+                        CharacterArchetype(a.strip().lower().replace(" ", "_"))
+                    )
                 except ValueError:
                     continue
             if chosen:
@@ -220,17 +275,19 @@ class StoryFabric:
             arch = pool[i % len(pool)]
             seed = hash(f"{genre}-{arch.value}-{i}") & 0xFFFFFFFF
             name = self._pick_name(seed)
-            chars.append(Character(
-                id=f"char.{uuid.uuid4().hex[:8]}",
-                name=name,
-                archetype=arch,
-                want=self._want_for(arch, genre),
-                need=self._need_for(arch),
-                wound=self._wound_for(arch, genre),
-                voice=self._voice_for(arch),
-                tags=[arch.value, genre],
-                genre_affinity=[genre],
-            ))
+            chars.append(
+                Character(
+                    id=f"char.{uuid.uuid4().hex[:8]}",
+                    name=name,
+                    archetype=arch,
+                    want=self._want_for(arch, genre),
+                    need=self._need_for(arch),
+                    wound=self._wound_for(arch, genre),
+                    voice=self._voice_for(arch),
+                    tags=[arch.value, genre],
+                    genre_affinity=[genre],
+                )
+            )
         return chars
 
     def _want_for(self, arch: CharacterArchetype, genre: str) -> str:
@@ -286,10 +343,10 @@ class StoryFabric:
         }
         return table.get(arch, "grounded, specific, human")
 
-
     def _local_model_available(self) -> bool:
         try:
             from levi.model.abstraction import ModelRouter
+
             st = ModelRouter().status()
             return bool(st.get("local_available"))
         except Exception:
@@ -320,6 +377,7 @@ class StoryFabric:
 
         try:
             from levi.model.abstraction import ModelRouter, GenerationRequest
+
             cast = ", ".join(f"{c.name} ({c.archetype.value})" for c in chars[:4])
             system = (
                 "You are LEVI writing with L.W.P. genre discipline. "
@@ -331,12 +389,17 @@ class StoryFabric:
                 f"Cast: {cast}\n\nWrite the opening scene (2 paragraphs)."
             )
             result = ModelRouter().generate(
-                GenerationRequest(prompt=prompt, system=system, max_tokens=500, temperature=0.75),
+                GenerationRequest(
+                    prompt=prompt, system=system, max_tokens=500, temperature=0.75
+                ),
                 prefer_local=True,
             )
             if result.error or not (result.text or "").strip():
                 return structural_body, "structural"
-            if result.model_id.startswith("fallback") or result.provider == "levi-local":
+            if (
+                result.model_id.startswith("fallback")
+                or result.provider == "levi-local"
+            ):
                 # Deterministic fallback is not real prose generation
                 return structural_body, "structural"
             # Splice model opening into body after "## Opening"
@@ -346,13 +409,7 @@ class StoryFabric:
                 # drop old opening draft through ---
                 rest = structural_body.split("---", 1)
                 tail = ("\n---\n" + rest[1]) if len(rest) > 1 else ""
-                body = (
-                    head
-                    + "## Opening (local model)\n"
-                    + prose
-                    + "\n"
-                    + tail
-                )
+                body = head + "## Opening (local model)\n" + prose + "\n" + tail
             else:
                 body = structural_body + "\n\n## Opening (local model)\n" + prose + "\n"
             return body, f"local_model:{result.model_id}"
@@ -379,7 +436,9 @@ class StoryFabric:
                 f"registry. {('Did you mean: ' + ', '.join(hint) + '? ') if hint else ''}"
                 "See `levi story --genres` for the full list."
             )
-        chars = self.generate_characters(genre, count=character_count, archetypes=archetypes)
+        chars = self.generate_characters(
+            genre, count=character_count, archetypes=archetypes
+        )
         beats = self._default_beats(genre, chars, premise)
         resolved_title = title or self._title_from(premise, genre)
         body = self._compose_body(resolved_title, genre, premise, chars, beats)
@@ -404,6 +463,7 @@ class StoryFabric:
         self._persist()
         try:
             from levi.brain.corpus import Corpus
+
             Corpus().add(
                 f"Story created: {story.title} genre={story.genre}",
                 kind="INFERENCE",
@@ -415,6 +475,7 @@ class StoryFabric:
         # Interpenetration: register on graph lightly
         try:
             from levi.graph.interpenetration import InterpenetrationEngine
+
             eng = InterpenetrationEngine()
             gid = f"genre.{genre}"
             parts = [p for p in [gid, "lwp.spiral", "role.creator"] if p in eng.nodes]
@@ -435,23 +496,61 @@ class StoryFabric:
         core = " ".join(words[:4]) if words else genre
         return f"{core.title()} ({genre.replace('_', ' ')})"
 
-    def _default_beats(self, genre: str, chars: List[Character], premise: str) -> List[StoryBeat]:
+    def _default_beats(
+        self, genre: str, chars: List[Character], premise: str
+    ) -> List[StoryBeat]:
         lead = chars[0].name if chars else "Someone"
-        ant = next((c.name for c in chars if c.archetype == CharacterArchetype.ANTAGONIST), chars[-1].name if len(chars) > 1 else "the force against them")
+        ant = next(
+            (c.name for c in chars if c.archetype == CharacterArchetype.ANTAGONIST),
+            chars[-1].name if len(chars) > 1 else "the force against them",
+        )
         try:
             from levi.lwp.premium_craft import premium_beats
+
             return [
-                StoryBeat(b["order"], b["name"], b["summary"], [lead] if b["order"] < 5 else [lead, ant])
+                StoryBeat(
+                    b["order"],
+                    b["name"],
+                    b["summary"],
+                    [lead] if b["order"] < 5 else [lead, ant],
+                )
                 for b in premium_beats(lead, ant, genre, premise)
             ]
         except Exception:
             return [
-                StoryBeat(1, "Hook", f"{lead} encounters the premise: {premise[:120]}", [lead]),
-                StoryBeat(2, "Complication", f"A rule of the world ({genre}) tightens; cost appears.", [lead]),
-                StoryBeat(3, "Midpoint Turn", f"{ant} forces a choice that can't be undone.", [lead, ant]),
-                StoryBeat(4, "Darkening", f"{lead}'s strategy fails against their wound.", [lead]),
-                StoryBeat(5, "Convergence", "Allies, doubles, or systems collide; the cascade peaks.", [c.name for c in chars[:3]]),
-                StoryBeat(6, "Aftermath", "A new equilibrium — or a recursion — remains.", [lead]),
+                StoryBeat(
+                    1, "Hook", f"{lead} encounters the premise: {premise[:120]}", [lead]
+                ),
+                StoryBeat(
+                    2,
+                    "Complication",
+                    f"A rule of the world ({genre}) tightens; cost appears.",
+                    [lead],
+                ),
+                StoryBeat(
+                    3,
+                    "Midpoint Turn",
+                    f"{ant} forces a choice that can't be undone.",
+                    [lead, ant],
+                ),
+                StoryBeat(
+                    4,
+                    "Darkening",
+                    f"{lead}'s strategy fails against their wound.",
+                    [lead],
+                ),
+                StoryBeat(
+                    5,
+                    "Convergence",
+                    "Allies, doubles, or systems collide; the cascade peaks.",
+                    [c.name for c in chars[:3]],
+                ),
+                StoryBeat(
+                    6,
+                    "Aftermath",
+                    "A new equilibrium — or a recursion — remains.",
+                    [lead],
+                ),
             ]
 
     def _compose_body(
@@ -484,15 +583,33 @@ class StoryFabric:
         if lead:
             try:
                 from levi.graph.story_prose import opening_prose
-                lines.append(opening_prose(
-                    lead.name, genre, premise, lead.want, lead.need, lead.wound, lead.voice
-                ))
+
+                lines.append(
+                    opening_prose(
+                        lead.name,
+                        genre,
+                        premise,
+                        lead.want,
+                        lead.need,
+                        lead.wound,
+                        lead.voice,
+                    )
+                )
             except Exception:
                 try:
                     from levi.lwp.premium_craft import premium_opening
-                    lines.append(premium_opening(
-                        lead.name, genre, premise, lead.want, lead.need, lead.wound, lead.voice
-                    ))
+
+                    lines.append(
+                        premium_opening(
+                            lead.name,
+                            genre,
+                            premise,
+                            lead.want,
+                            lead.need,
+                            lead.wound,
+                            lead.voice,
+                        )
+                    )
                 except Exception:
                     lines.append(
                         f"{lead.name} had learned not to trust clean explanations. "
@@ -509,8 +626,16 @@ class StoryFabric:
 
     # Canonical cascade order for sequential expansion (L.W.P. physics)
     CASCADE_BEAT_NAMES = [
-        "Hook", "Complication", "Midpoint Turn", "Darkening", "Convergence", "Aftermath",
-        "Echo Return", "Spiral Deepening", "Final Cost", "Coda",
+        "Hook",
+        "Complication",
+        "Midpoint Turn",
+        "Darkening",
+        "Convergence",
+        "Aftermath",
+        "Echo Return",
+        "Spiral Deepening",
+        "Final Cost",
+        "Coda",
     ]
 
     def expand(self, story_id: str, focus: str = "next_beat") -> Story:
@@ -542,7 +667,10 @@ class StoryFabric:
                 "Final Cost": f"What {lead} keeps and what they lose is named.",
                 "Coda": "A last image; the bible of this story can be closed or reopened.",
             }
-            summary = summaries.get(name, f"{lead} advanced under {genre_l} pressure; the cascade typed the next hinge without flourish.")
+            summary = summaries.get(
+                name,
+                f"{lead} advanced under {genre_l} pressure; the cascade typed the next hinge without flourish.",
+            )
             extra = StoryBeat(
                 order=n + 1,
                 name=name,
@@ -552,16 +680,28 @@ class StoryFabric:
             story.beats.append(extra)
             try:
                 from levi.graph.story_prose import expand_paragraph
+
                 wound = story.characters[0].wound if story.characters else ""
-                support = story.characters[1].name if len(story.characters) > 1 else None
-                para = expand_paragraph(name, lead, story.genre, story.premise, wound, n, support)
-                story.body += f"\n\n### Beat {extra.order}: {name}\n{summary}\n\n{para}\n"
+                support = (
+                    story.characters[1].name if len(story.characters) > 1 else None
+                )
+                para = expand_paragraph(
+                    name, lead, story.genre, story.premise, wound, n, support
+                )
+                story.body += (
+                    f"\n\n### Beat {extra.order}: {name}\n{summary}\n\n{para}\n"
+                )
             except Exception:
                 try:
                     from levi.lwp.premium_craft import premium_expand_paragraph
+
                     wound = story.characters[0].wound if story.characters else ""
-                    para = premium_expand_paragraph(name, lead, story.genre, story.premise, wound, n)
-                    story.body += f"\n\n### Beat {extra.order}: {name}\n{summary}\n\n{para}\n"
+                    para = premium_expand_paragraph(
+                        name, lead, story.genre, story.premise, wound, n
+                    )
+                    story.body += (
+                        f"\n\n### Beat {extra.order}: {name}\n{summary}\n\n{para}\n"
+                    )
                 except Exception:
                     story.body += (
                         f"\n\n### Beat {extra.order}: {name}\n"
@@ -572,7 +712,9 @@ class StoryFabric:
                     )
         elif focus == "character" and story.characters:
             # rotate character by expand count
-            idx = sum(1 for m in story.mode_history if m.startswith("expand:character")) % len(story.characters)
+            idx = sum(
+                1 for m in story.mode_history if m.startswith("expand:character")
+            ) % len(story.characters)
             c = story.characters[idx]
             story.body += (
                 f"\n\n### Character depth — {c.name} (cast slot {idx + 1})\n"
@@ -597,6 +739,7 @@ class StoryFabric:
         if self._local_model_available():
             try:
                 from levi.model.abstraction import ModelRouter, GenerationRequest
+
                 system = (
                     "You are LEVI expanding an L.W.P. story in CASCADE order. "
                     "One or two paragraphs only. Stay in genre. Continue the NEXT beat only — "
@@ -611,7 +754,9 @@ class StoryFabric:
                     "Write only the narrative for this beat."
                 )
                 result = ModelRouter().generate(
-                    GenerationRequest(prompt=prompt, system=system, max_tokens=400, temperature=0.75),
+                    GenerationRequest(
+                        prompt=prompt, system=system, max_tokens=400, temperature=0.75
+                    ),
                     prefer_local=True,
                 )
                 if (
@@ -628,8 +773,6 @@ class StoryFabric:
         story.updated_at = datetime.now(timezone.utc).isoformat()
         self._persist()
         return story
-
-
 
     def auto_forward(self, story_id: str, beats: int = 0) -> "Story":
         """Push the story FORWARD using cascade beat names + expand_paragraph.
@@ -668,11 +811,19 @@ class StoryFabric:
         # Build a forward run of `depth` cascade beats (same words as expand)
         names = self.CASCADE_BEAT_NAMES[:depth]
         if len(names) < depth:
-            names = (self.CASCADE_BEAT_NAMES * ((depth // len(self.CASCADE_BEAT_NAMES)) + 1))[:depth]
+            names = (
+                self.CASCADE_BEAT_NAMES * ((depth // len(self.CASCADE_BEAT_NAMES)) + 1)
+            )[:depth]
         forward_paras = []
         for i, name in enumerate(names):
             para = expand_paragraph(
-                name, lead, story.genre, story.premise, wound, index=i, supporting=support
+                name,
+                lead,
+                story.genre,
+                story.premise,
+                wound,
+                index=i,
+                supporting=support,
             )
             forward_paras.append(para)
         combined = " ".join(forward_paras)
@@ -703,7 +854,9 @@ class StoryFabric:
         self._persist()
         return story
 
-    def auto_generate(self, story_id: str, forward: int = 0, backward: int = 3) -> "Story":
+    def auto_generate(
+        self, story_id: str, forward: int = 0, backward: int = 3
+    ) -> "Story":
         """Forward cascade + Backwords (same units, last→first) at once."""
         story = self.stories[story_id]
         story.mode_history.append(f"forward+backwords:fwd={forward}:bak={backward}")
@@ -803,7 +956,9 @@ class StoryFabric:
             ]
             for pt in posts[1:]:
                 parts.append("- " + pt)
-            parts.append("- CTA post: What should %s do next? (series continues)" % lead)
+            parts.append(
+                "- CTA post: What should %s do next? (series continues)" % lead
+            )
             if instruction:
                 parts.append(instruction)
             story.body += "\n".join(parts) + "\n"
@@ -817,10 +972,14 @@ class StoryFabric:
             for b in story.beats:
                 parts.append("**S1E%s — %s**" % (b.order, b.name))
                 parts.append("Logline: %s" % b.summary)
-                parts.append("Cold open → pressure → button ending on %s." % b.name.lower())
+                parts.append(
+                    "Cold open → pressure → button ending on %s." % b.name.lower()
+                )
                 parts.append("")
             parts.append("Season arc: %s" % story.premise[:160])
-            parts.append("Next episode must advance the next beat in order — no out-of-sequence expand.")
+            parts.append(
+                "Next episode must advance the next beat in order — no out-of-sequence expand."
+            )
             if instruction:
                 parts.append(instruction)
             story.body += "\n".join(parts) + "\n"

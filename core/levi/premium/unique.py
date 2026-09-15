@@ -4,6 +4,7 @@ Unique · hard-to-replicate LEVI organs.
 These are not generic chatbot features. They encode specific physics,
 policy, and literary law that do not port by prompt alone.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass

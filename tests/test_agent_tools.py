@@ -28,7 +28,9 @@ def _reg(tmp_path, **kwargs):
 
 def test_register_get_list(tmp_path):
     reg = _reg(tmp_path)
-    tool = Tool(name="t", description="d", parameters={}, handler=lambda a: ToolResult(ok=True))
+    tool = Tool(
+        name="t", description="d", parameters={}, handler=lambda a: ToolResult(ok=True)
+    )
     reg.register(tool)
     assert reg.get("t") is tool
     assert reg.get("missing") is None
@@ -39,7 +41,14 @@ def test_register_get_list(tmp_path):
 def test_register_requires_name(tmp_path):
     reg = _reg(tmp_path)
     with pytest.raises(ValueError):
-        reg.register(Tool(name="", description="d", parameters={}, handler=lambda a: ToolResult(ok=True)))
+        reg.register(
+            Tool(
+                name="",
+                description="d",
+                parameters={},
+                handler=lambda a: ToolResult(ok=True),
+            )
+        )
 
 
 def test_execute_unknown_tool_never_raises(tmp_path):
@@ -60,8 +69,10 @@ def test_execute_basic_ok(tmp_path):
 
 def test_handler_exception_becomes_ok_false(tmp_path):
     reg = _reg(tmp_path)
+
     def boom(args):
         raise RuntimeError("kablam")
+
     reg.register(Tool(name="boom", description="d", parameters={}, handler=boom))
     res = reg.execute("boom", {}, ExecContext())
     assert res.ok is False and "kablam" in res.error
@@ -85,9 +96,11 @@ def test_gate_passes_with_consent(tmp_path):
 def test_gate_confirm_callback_approve(tmp_path):
     reg = _reg(tmp_path)
     seen = []
+
     def confirm(preview):
         seen.append(preview)
         return True
+
     res = reg.execute("shell_exec", {"cmd": "echo hi"}, ExecContext(confirm=confirm))
     assert res.ok is True
     assert seen and "shell_exec" in seen[0]
@@ -96,7 +109,9 @@ def test_gate_confirm_callback_approve(tmp_path):
 def test_gate_confirm_callback_decline_raises(tmp_path):
     reg = _reg(tmp_path)
     with pytest.raises(ConfirmationRequired):
-        reg.execute("shell_exec", {"cmd": "echo hi"}, ExecContext(confirm=lambda p: False))
+        reg.execute(
+            "shell_exec", {"cmd": "echo hi"}, ExecContext(confirm=lambda p: False)
+        )
 
 
 def test_default_consent_from_builder(tmp_path):
@@ -222,7 +237,9 @@ def test_memory_round_trip_tmp_home(tmp_path, monkeypatch):
     # build with defaults -> dirs resolve under the patched HOME
     reg = build_default_registry()
     ctx = ExecContext()
-    w = reg.execute("memory_write", {"name": "scratch-pad_1", "content": "# hello"}, ctx)
+    w = reg.execute(
+        "memory_write", {"name": "scratch-pad_1", "content": "# hello"}, ctx
+    )
     assert w.ok is True
     assert (tmp_path / ".levi" / "agent_memory" / "scratch-pad_1.md").exists()
     r = reg.execute("memory_read", {"name": "scratch-pad_1"}, ctx)
@@ -280,6 +297,7 @@ def test_skill_load_ok(tmp_path):
 
 def test_automation_create_accepts_trigger_config(tmp_path):
     from levi.daemon.automation import AutomationRegistry, TriggerKind
+
     reg = AutomationRegistry(data_dir=tmp_path / "auto")
     auto = reg.create(
         name="n",
@@ -296,6 +314,7 @@ def test_automation_create_accepts_trigger_config(tmp_path):
 
 def test_automation_remove(tmp_path):
     from levi.daemon.automation import AutomationRegistry
+
     reg = AutomationRegistry(data_dir=tmp_path / "auto")
     assert reg.remove("auto.doesnotexist") is False
     auto = reg.create(name="n", description="d", actions=[])
@@ -343,6 +362,7 @@ def test_schedule_add_uses_canonical_registry_store(tmp_path, monkeypatch):
         ExecContext(consent=True),
     )
     from levi.daemon.automation import AutomationRegistry
+
     reg2 = AutomationRegistry(data_dir=tmp_path / "auto")
     items = reg2.list()
     assert len(items) == 1
@@ -356,16 +376,21 @@ def test_schedule_add_uses_canonical_registry_store(tmp_path, monkeypatch):
 def _block_network(monkeypatch):
     def _boom(*a, **k):
         raise AssertionError("network must not be touched in this test")
+
     monkeypatch.setenv("LEVI_OFFLINE", "1")
     import urllib.request
+
     monkeypatch.setattr(urllib.request, "urlopen", _boom)
 
 
-@pytest.mark.parametrize("tool,args", [
-    ("web_search", {"query": "levi"}),
-    ("web_fetch", {"url": "https://example.com"}),
-    ("http_request", {"method": "GET", "url": "https://example.com"}),
-])
+@pytest.mark.parametrize(
+    "tool,args",
+    [
+        ("web_search", {"query": "levi"}),
+        ("web_fetch", {"url": "https://example.com"}),
+        ("http_request", {"method": "GET", "url": "https://example.com"}),
+    ],
+)
 def test_web_tools_offline_honest(tmp_path, monkeypatch, tool, args):
     _block_network(monkeypatch)
     reg = _reg(tmp_path)
@@ -377,12 +402,15 @@ def test_web_tools_offline_honest(tmp_path, monkeypatch, tool, args):
 def test_http_request_blocks_non_http_scheme(tmp_path, monkeypatch):
     monkeypatch.delenv("LEVI_OFFLINE", raising=False)
     import urllib.request
+
     def _boom(*a, **k):
         raise AssertionError("network must not be touched")
+
     monkeypatch.setattr(urllib.request, "urlopen", _boom)
     reg = _reg(tmp_path)
     res = reg.execute(
-        "http_request", {"method": "GET", "url": "file:///etc/passwd"},
+        "http_request",
+        {"method": "GET", "url": "file:///etc/passwd"},
         ExecContext(consent=True),
     )
     assert res.ok is False and "non-http" in res.error.lower()
@@ -452,8 +480,6 @@ def test_delegate_reports_subtask_success(tmp_path, monkeypatch):
 
     monkeypatch.setattr(agent_loop, "run_subtask", _ok_subtask)
     reg = _reg(tmp_path)
-    res = reg.execute(
-        "delegate", {"task": "do an ok thing"}, ExecContext(consent=True)
-    )
+    res = reg.execute("delegate", {"task": "do an ok thing"}, ExecContext(consent=True))
     assert res.ok is True
     assert "all good" in res.output

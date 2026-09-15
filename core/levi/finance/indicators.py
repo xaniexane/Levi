@@ -200,7 +200,9 @@ def atr(bars: list, period: int = 14) -> list[float | None]:
     return out
 
 
-def stochastic(bars: list, k_period: int = 14, d_period: int = 3) -> dict[str, list[float | None]]:
+def stochastic(
+    bars: list, k_period: int = 14, d_period: int = 3
+) -> dict[str, list[float | None]]:
     """Stochastic oscillator: %K and %D, aligned to ``bars``.
 
     Formula (standard, per Wilder/Lane convention)::
@@ -224,9 +226,7 @@ def stochastic(bars: list, k_period: int = 14, d_period: int = 3) -> dict[str, l
     n = len(bars)
     for bar in bars:
         if not isinstance(bar, Bar):
-            raise ValueError(
-                f"stochastic() expects Bar rows, got {type(bar).__name__}"
-            )
+            raise ValueError(f"stochastic() expects Bar rows, got {type(bar).__name__}")
     k: list[float | None] = [None] * n
     for i in range(k_period - 1, n):
         window = bars[i - k_period + 1 : i + 1]
@@ -404,9 +404,7 @@ REGIME_TREND_ADX = 25.0
 REGIME_VOLATILE_ATR_PCT = 4.0
 
 
-def classify_regime(
-    bars: list, adx_period: int = 14, atr_period: int = 14
-) -> dict:
+def classify_regime(bars: list, adx_period: int = 14, atr_period: int = 14) -> dict:
     """Classify the tape into trending / ranging / volatile from ADX + ATR%.
 
     Returns ``{"regime", "adx", "atr_pct"}``. Decision order:

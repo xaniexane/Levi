@@ -6,6 +6,7 @@ invariants, backward-compatible loading of old persisted JSON, and
 blend-weight structure. Hermetic: every NervousSystem gets an explicit
 tmp path — no HOME writes.
 """
+
 import json
 from datetime import datetime, timedelta, timezone
 
@@ -24,9 +25,7 @@ def _no_external_biases(monkeypatch):
     """Hermetic scoring: the control daemon and monotropism tracker read
     real HOME state, which would make these tests environment-dependent.
     Neutralize them — these tests target the nervous system itself."""
-    monkeypatch.setattr(
-        NervousSystem, "_external_biases", lambda self: (None, None)
-    )
+    monkeypatch.setattr(NervousSystem, "_external_biases", lambda self: (None, None))
 
 
 def make_ns(tmp_path, seed=7, noise=0.0, persona_ids=("normal", "strategist")):
@@ -48,6 +47,7 @@ def flat_affinities(ns):
 
 
 # ── determinism ───────────────────────────────────────────────────
+
 
 def test_scoring_deterministic_under_fixed_seed(tmp_path, monkeypatch):
     import levi.persona.nervous_system as ns_mod
@@ -77,9 +77,14 @@ def test_scoring_varies_with_seed_or_noise(tmp_path):
 
 # ── hysteresis ────────────────────────────────────────────────────
 
+
 def test_hysteresis_unit_margin_and_dwell(tmp_path):
-    ns = NervousSystem(path=tmp_path / "unit.json", seed=1, noise=0.0,
-                       persona_ids=["normal", "strategist"])
+    ns = NervousSystem(
+        path=tmp_path / "unit.json",
+        seed=1,
+        noise=0.0,
+        persona_ids=["normal", "strategist"],
+    )
     scores = {"normal": 0.50, "strategist": 0.53}  # gap 0.03 < margin 0.06
     ns._last_selected = "normal"
     ns._incumbent_turns = 5
@@ -132,6 +137,7 @@ def test_hysteresis_respects_crisis_veto(tmp_path):
 
 # ── wall-clock decay ──────────────────────────────────────────────
 
+
 def test_wallclock_decay_moves_affect_toward_baseline(tmp_path):
     ns = make_ns(tmp_path)
     ns.affect.stress = 0.95
@@ -143,10 +149,13 @@ def test_wallclock_decay_moves_affect_toward_baseline(tmp_path):
     assert ns.affect.arousal < 0.5
     assert ns.affect.valence > 0.3  # drifted back toward the 0.55 setpoint
     # bond persists much longer than arousal
-    ns2 = NervousSystem(path=tmp_path / "nervous2.json", seed=8,
-                        persona_ids=("normal", "strategist"))
+    ns2 = NervousSystem(
+        path=tmp_path / "nervous2.json", seed=8, persona_ids=("normal", "strategist")
+    )
     ns2.affect.bond = 0.9
-    ns2.affect.updated_at = (datetime.now(timezone.utc) - timedelta(hours=6)).isoformat()
+    ns2.affect.updated_at = (
+        datetime.now(timezone.utc) - timedelta(hours=6)
+    ).isoformat()
     ns2.sense("")
     assert ns2.affect.bond > 0.6
 
@@ -160,6 +169,7 @@ def test_no_decay_when_no_time_passed(tmp_path):
 
 
 # ── explainability ────────────────────────────────────────────────
+
 
 def test_explain_factors_sum_to_score(tmp_path):
     ns = NervousSystem(path=tmp_path / "e.json", seed=42, noise=0.08)
@@ -191,9 +201,14 @@ def test_explain_includes_new_dimensions(tmp_path):
 
 OLD_FORMAT = {
     "affect": {
-        "stress": 0.9, "anxiety": 0.8, "workload": 0.7,
-        "energy": 0.2, "bond": 0.4, "arousal": 0.6,
-        "turns": 12, "updated_at": "2026-01-01T00:00:00+00:00",
+        "stress": 0.9,
+        "anxiety": 0.8,
+        "workload": 0.7,
+        "energy": 0.2,
+        "bond": 0.4,
+        "arousal": 0.6,
+        "turns": 12,
+        "updated_at": "2026-01-01T00:00:00+00:00",
     },
     "affinities": {"normal": {"uses": 5, "last_used_at": None}},
     "locked_persona": None,
@@ -230,6 +245,7 @@ def test_roundtrip_new_format(tmp_path):
 
 
 # ── blending ─────────────────────────────────────────────────────
+
 
 def test_blend_weights_structure(tmp_path):
     ns = NervousSystem(path=tmp_path / "b.json", seed=5, noise=0.0)

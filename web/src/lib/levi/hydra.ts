@@ -62,7 +62,9 @@ const HEAD_LENS: Record<HeadId, (task: string, rng: () => number) => HeadFragmen
         ? "Injection or exfiltration pattern detected. Block tool calls. Quarantine fragment."
         : `Gate “${clip(task)}” behind HITL if it touches canon, export, or weights.`,
       assumptions: ["Silence is not approval.", "Local-first is default."],
-      subtasks: inject ? ["Quarantine", "Incident log", "No execution"] : ["Classify blast radius", "Require sign if protected"],
+      subtasks: inject
+        ? ["Quarantine", "Incident log", "No execution"]
+        : ["Classify blast radius", "Require sign if protected"],
       risks: inject ? ["Prompt injection"] : ["Unscoped cloud catalyst"],
       veto: inject ? "Block execution. Do not override identityRules." : undefined,
       at: nowIso(),
@@ -76,7 +78,9 @@ const HEAD_LENS: Record<HeadId, (task: string, rng: () => number) => HeadFragmen
         ? "Schema or weight change proposed. Sandbox only. Owner signature required to promote."
         : `Keep “${clip(task)}” inside current IR. No silent evolution.`,
       assumptions: ["Sandbox → test → human approval → promote."],
-      subtasks: mutate ? ["Write migration", "Backward-compat test", "Request owner sign"] : ["Record seed", "Do not mutate canon"],
+      subtasks: mutate
+        ? ["Write migration", "Backward-compat test", "Request owner sign"]
+        : ["Record seed", "Do not mutate canon"],
       risks: mutate ? ["Irreversible evolution"] : [],
       veto: mutate ? "Approval required before any evolution." : undefined,
       at: nowIso(),
@@ -90,7 +94,9 @@ const HEAD_LENS: Record<HeadId, (task: string, rng: () => number) => HeadFragmen
         ? "Ask conflicts with protector/integrity role. Veto the frame; offer a sympathetic alternative that keeps the promise."
         : `Hold friend / mentor / challenger / protector on “${clip(task)}”.`,
       assumptions: ["Owner persona is canonical.", "Continuity is friendship."],
-      subtasks: betray ? ["Refuse the betrayal frame", "Propose three owner-safe IRs"] : ["Stay in role", "Do not sycophant"],
+      subtasks: betray
+        ? ["Refuse the betrayal frame", "Propose three owner-safe IRs"]
+        : ["Stay in role", "Do not sycophant"],
       risks: betray ? ["IdentityRules violation"] : [],
       veto: betray ? "IdentityHead veto. Do not break protected promises." : undefined,
       at: nowIso(),

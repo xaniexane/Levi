@@ -23,8 +23,14 @@ MSG_PAYLOAD = {
 }
 
 
-def _issue(oauth_mod, sub="user-1", scopes=("openid", "profile"),
-           token_type="access", lifetime=None, monkeypatch=None):
+def _issue(
+    oauth_mod,
+    sub="user-1",
+    scopes=("openid", "profile"),
+    token_type="access",
+    lifetime=None,
+    monkeypatch=None,
+):
     if lifetime is not None:
         monkeypatch.setattr(oauth_mod.config, "ACCESS_TOKEN_LIFETIME", lifetime)
     return oauth_mod.create_jwt_token(sub, list(scopes), token_type)
@@ -36,22 +42,29 @@ def tokens(oauth_mod):
     return oauth_mod
 
 
-def test_rest_accepts_valid_token_and_full_message_flow(tokens, msg_client, monkeypatch):
+def test_rest_accepts_valid_token_and_full_message_flow(
+    tokens, msg_client, monkeypatch
+):
     token = _issue(tokens, sub="alice")
     headers = {"Authorization": f"Bearer {token}"}
 
     # create conversation
-    conv = msg_client.post("/conversations", json={
-        "conversation_type": "direct",
-        "participant_ids": ["bob"],
-        "name": "chat",
-    }, headers=headers)
+    conv = msg_client.post(
+        "/conversations",
+        json={
+            "conversation_type": "direct",
+            "participant_ids": ["bob"],
+            "name": "chat",
+        },
+        headers=headers,
+    )
     assert conv.status_code == 201
     conv_id = conv.json()["conversation_id"]
 
     # send a message
-    sent = msg_client.post(f"/conversations/{conv_id}/messages",
-                           json=MSG_PAYLOAD, headers=headers)
+    sent = msg_client.post(
+        f"/conversations/{conv_id}/messages", json=MSG_PAYLOAD, headers=headers
+    )
     assert sent.status_code == 201
     msg_id = sent.json()["message_id"]
 
@@ -70,8 +83,9 @@ def test_rest_accepts_valid_token_and_full_message_flow(tokens, msg_client, monk
     assert rec.status_code == 200
 
 
-@pytest.mark.parametrize("mutate", ["expired", "tampered", "hs256",
-                                    "wrong_audience", "wrong_type", "none"])
+@pytest.mark.parametrize(
+    "mutate", ["expired", "tampered", "hs256", "wrong_audience", "wrong_type", "none"]
+)
 def test_rest_rejects_bad_tokens(tokens, msg_client, monkeypatch, mutate):
     if mutate == "expired":
         token = _issue(tokens, lifetime=-10, monkeypatch=monkeypatch)
@@ -92,8 +106,11 @@ def test_rest_rejects_bad_tokens(tokens, msg_client, monkeypatch, mutate):
     expected = 422 if mutate == "none" else 401  # missing header → FastAPI 422
     for method, path, kwargs in [
         ("get", "/conversations", {}),
-        ("post", "/conversations",
-         {"json": {"conversation_type": "direct", "participant_ids": ["bob"]}}),
+        (
+            "post",
+            "/conversations",
+            {"json": {"conversation_type": "direct", "participant_ids": ["bob"]}},
+        ),
         ("get", "/queue", {}),
     ]:
         resp = getattr(msg_client, method)(path, headers=headers, **kwargs)
@@ -103,6 +120,7 @@ def test_rest_rejects_bad_tokens(tokens, msg_client, monkeypatch, mutate):
 def test_rest_rejects_missing_sub_claim(tokens, msg_client):
     # A token without "sub" must be rejected even if the signature is valid.
     import base64, json
+
     token = _issue(tokens)
     header, payload, sig = token.split(".")
     claims = json.loads(base64.urlsafe_b64decode(payload + "=="))
@@ -110,12 +128,15 @@ def test_rest_rejects_missing_sub_claim(tokens, msg_client):
     raw = json.dumps(claims).encode()
     bad_payload = base64.urlsafe_b64encode(raw).decode().rstrip("=")
     # signature won't match anymore → 401 either way; the point is no crash
-    resp = msg_client.get("/conversations",
-                          headers={"Authorization": f"Bearer {header}.{bad_payload}.{sig}"})
+    resp = msg_client.get(
+        "/conversations",
+        headers={"Authorization": f"Bearer {header}.{bad_payload}.{sig}"},
+    )
     assert resp.status_code == 401
 
 
 # ── WebSocket auth ───────────────────────────────────────────────
+
 
 def test_websocket_accepts_valid_token(tokens, msg_client):
     token = _issue(tokens, sub="ws-user")
@@ -130,6 +151,7 @@ def test_websocket_accepts_valid_token(tokens, msg_client):
 
 def test_websocket_rejects_tampered_token(tokens, msg_client):
     from starlette.websockets import WebSocketDisconnect
+
     token = tamper_payload(_issue(tokens, sub="ws-user"))
     with msg_client.websocket_connect("/ws/ws-user") as ws:
         ws.send_json({"type": "auth", "token": token})
@@ -142,6 +164,7 @@ def test_websocket_rejects_tampered_token(tokens, msg_client):
 
 def test_websocket_rejects_sub_mismatch(tokens, msg_client):
     from starlette.websockets import WebSocketDisconnect
+
     token = _issue(tokens, sub="someone-else")
     with msg_client.websocket_connect("/ws/ws-user") as ws:
         ws.send_json({"type": "auth", "token": token})
@@ -154,6 +177,7 @@ def test_websocket_rejects_sub_mismatch(tokens, msg_client):
 
 def test_websocket_rejects_expired_token(tokens, msg_client, monkeypatch):
     from starlette.websockets import WebSocketDisconnect
+
     token = _issue(tokens, sub="ws-user", lifetime=-10, monkeypatch=monkeypatch)
     with msg_client.websocket_connect("/ws/ws-user") as ws:
         ws.send_json({"type": "auth", "token": token})
@@ -166,6 +190,7 @@ def test_websocket_rejects_expired_token(tokens, msg_client, monkeypatch):
 
 def test_websocket_requires_auth_message(tokens, msg_client):
     from starlette.websockets import WebSocketDisconnect
+
     with msg_client.websocket_connect("/ws/ws-user") as ws:
         ws.send_json({"type": "hello"})
         try:

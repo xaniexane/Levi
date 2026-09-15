@@ -9,7 +9,11 @@ import { PLANS } from "@/lib/levi/monetize";
 import { ORGAN_MAP } from "@/lib/levi/types";
 import { Mark } from "./Mark";
 
-const LATTICE_CARDS: { view: "hydra" | "echo" | "mandella" | "compost" | "ledger"; title: string; body: string }[] = [
+const LATTICE_CARDS: {
+  view: "hydra" | "echo" | "mandella" | "compost" | "ledger";
+  title: string;
+  body: string;
+}[] = [
   { view: "hydra", title: "Hydra", body: "Six heads. Converge. Sign." },
   { view: "echo", title: "Echo", body: "Taken / not-taken / wild." },
   { view: "mandella", title: "Mandella", body: "A/B/C. Phantoms remain." },
@@ -100,7 +104,10 @@ export function HomeView() {
       ) : (
         <p className="mt-3 text-muted">
           No weekly goal.{" "}
-          <button className="text-subtle underline-offset-2 hover:underline" onClick={() => setEditing(true)}>
+          <button
+            className="text-subtle underline-offset-2 hover:underline"
+            onClick={() => setEditing(true)}
+          >
             Set one
           </button>
         </p>
@@ -126,7 +133,9 @@ export function HomeView() {
 
       <div className="mt-6 rounded-xl border border-border bg-surface px-4 py-4">
         <div className="text-xs text-muted">Daily ritual</div>
-        <p className="mt-1 text-sm">Name the constraint. One reversible step. Come back tomorrow.</p>
+        <p className="mt-1 text-sm">
+          Name the constraint. One reversible step. Come back tomorrow.
+        </p>
         <Button
           className="mt-3"
           size="sm"
@@ -194,7 +203,9 @@ export function HomeView() {
       <section className="mt-10">
         <h2 className="text-sm font-medium text-muted">Shelf</h2>
         {stories.length === 0 && projects.length === 0 ? (
-          <p className="mt-3 text-sm text-subtle">Empty. Run a demo in Studio, or start Talk / Write / Build.</p>
+          <p className="mt-3 text-sm text-subtle">
+            Empty. Run a demo in Studio, or start Talk / Write / Build.
+          </p>
         ) : (
           <ul className="mt-4 space-y-2">
             {stories.slice(0, 6).map((s) => (
@@ -204,7 +215,9 @@ export function HomeView() {
                   className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-left hover:bg-elevated"
                 >
                   <div className="text-sm font-medium">{s.title}</div>
-                  <div className="mt-0.5 text-xs text-muted">story · {s.genre.replaceAll("_", " ")}</div>
+                  <div className="mt-0.5 text-xs text-muted">
+                    story · {s.genre.replaceAll("_", " ")}
+                  </div>
                 </button>
               </li>
             ))}

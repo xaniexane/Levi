@@ -35,7 +35,9 @@ export function MandellaView() {
               type="button"
               onClick={() => setDomain(d === domain ? "" : d)}
               className={`h-9 rounded-full px-3 text-xs ${
-                d === domain ? "bg-accent text-accent-fg" : "border border-border text-muted hover:text-fg"
+                d === domain
+                  ? "bg-accent text-accent-fg"
+                  : "border border-border text-muted hover:text-fg"
               }`}
             >
               {d}

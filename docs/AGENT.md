@@ -375,13 +375,13 @@ from levi.agent.tools import build_default_registry
 registry = build_default_registry(workspace_root="/tmp/demo-ws")
 transcript = run_subtask(
     "create notes.txt with three lines, read it back",
-    provider=LocalProvider(),   # or "local", or None for select_provider()
+    provider=LocalProvider(),  # or "local", or None for select_provider()
     registry=registry,
-    consent=True,               # per-run consent for the 6 gated tools
+    consent=True,  # per-run consent for the 6 gated tools
 )
-print(transcript.ok)            # True
-print(transcript.final)         # "Done: wrote 3 line(s) to notes.txt ..."
-for step in transcript.steps:   # provider_text, tool_calls, results
+print(transcript.ok)  # True
+print(transcript.final)  # "Done: wrote 3 line(s) to notes.txt ..."
+for step in transcript.steps:  # provider_text, tool_calls, results
     ...
 ```
 

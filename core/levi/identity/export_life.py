@@ -1,6 +1,7 @@
 """
 Life pack export/import — portable user value (not lock-in).
 """
+
 from __future__ import annotations
 from pathlib import Path
 from typing import Optional, Dict, Any
@@ -78,7 +79,9 @@ def import_life_pack(src: Path, *, merge: bool = True) -> Dict[str, Any]:
             "profile.json": DEFAULT_DIR / "profile.json",
             "stories/stories.json": DEFAULT_DIR / "stories" / "stories.json",
             "factory/projects.json": DEFAULT_DIR / "factory" / "projects.json",
-            "automations/automations.json": DEFAULT_DIR / "automations" / "automations.json",
+            "automations/automations.json": DEFAULT_DIR
+            / "automations"
+            / "automations.json",
             "graph/composites.json": DEFAULT_DIR / "graph" / "composites.json",
         }
 
@@ -94,12 +97,14 @@ def import_life_pack(src: Path, *, merge: bool = True) -> Dict[str, Any]:
             report["imported"].append(archive_name)
 
         # Memory tree
-        mem_members = [n for n in names if n.startswith("memory/") and not n.endswith("/")]
+        mem_members = [
+            n for n in names if n.startswith("memory/") and not n.endswith("/")
+        ]
         if mem_members:
             mem_root = DEFAULT_DIR / "memory"
             mem_root.mkdir(parents=True, exist_ok=True)
             for n in mem_members:
-                rel = n[len("memory/"):]
+                rel = n[len("memory/") :]
                 if not rel or ".." in rel:
                     continue
                 out = mem_root / rel

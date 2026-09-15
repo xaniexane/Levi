@@ -24,8 +24,8 @@ class Persona:
     priority: int = 50
     # Special control flags
     requires_explicit_answer_request: bool = False  # interrogation
-    reframes_questions: bool = False                # reframe
-    no_hero_mode: bool = False                      # no_hero
+    reframes_questions: bool = False  # reframe
+    no_hero_mode: bool = False  # no_hero
     signature_line: Optional[str] = None
 
     def inherits_core_policies(self) -> bool:
@@ -216,11 +216,11 @@ STARTER_PERSONAS: Dict[str, Persona] = {
 }
 
 
-
 def _load_expanded_catalog() -> Dict[str, Persona]:
     """Merge generated chameleon catalog (~200 lenses). Fail-soft."""
     import json
     from pathlib import Path
+
     path = Path(__file__).resolve().parent / "catalog_expanded.json"
     out: Dict[str, Persona] = {}
     if not path.exists():
@@ -248,6 +248,7 @@ def _load_expanded_catalog() -> Dict[str, Persona]:
 
 # Expanded registry: core roster + generated chameleon facets
 EXPANDED_PERSONAS: Dict[str, Persona] = {**STARTER_PERSONAS, **_load_expanded_catalog()}
+
 
 class PersonaLattice:
     def __init__(self, default: str = "normal"):
@@ -284,6 +285,7 @@ def ensure_kai_personas(lattice: "PersonaLattice") -> int:
     """Idempotent KAI-9000 injection."""
     try:
         from levi.persona.kai9000 import register_into_lattice, all_variants
+
         if all(v.id in lattice.registry for v in all_variants()):
             return 0
         return register_into_lattice(lattice)

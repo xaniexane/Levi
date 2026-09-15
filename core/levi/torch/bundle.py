@@ -60,6 +60,7 @@ def _resolve_home(home: Optional[Path]) -> Path:
 # build
 # ---------------------------------------------------------------------------
 
+
 def _curriculum_lessons() -> List[Dict[str, Any]]:
     from levi.growth import study as _study
 
@@ -84,7 +85,9 @@ def _curriculum_digest() -> Dict[str, Any]:
     }
 
 
-def _journal_highlights(home: Path, limit: int = HIGHLIGHT_LIMIT) -> List[Dict[str, Any]]:
+def _journal_highlights(
+    home: Path, limit: int = HIGHLIGHT_LIMIT
+) -> List[Dict[str, Any]]:
     """Top corroborated growth learnings — 'what I've learned'."""
     from levi.memory.store import MemoryStore
 
@@ -98,13 +101,19 @@ def _journal_highlights(home: Path, limit: int = HIGHLIGHT_LIMIT) -> List[Dict[s
     entries.sort(key=_score, reverse=True)
     out = []
     for e in entries[:limit]:
-        kinds = [t for t in e.tags if t in ("fact", "preference", "procedural", "correction")]
+        kinds = [
+            t for t in e.tags if t in ("fact", "preference", "procedural", "correction")
+        ]
         out.append(
             {
                 "content": e.content,
                 "kinds": kinds,
-                "corroborated_count": int((e.metadata or {}).get("corroborated_count", 0) or 0),
-                "confidence": float((e.metadata or {}).get("confidence", e.importance) or 0.0),
+                "corroborated_count": int(
+                    (e.metadata or {}).get("corroborated_count", 0) or 0
+                ),
+                "confidence": float(
+                    (e.metadata or {}).get("confidence", e.importance) or 0.0
+                ),
                 "created_at": e.created_at,
             }
         )
@@ -161,6 +170,7 @@ def write_bundle(path: Path, bundle: Dict[str, Any]) -> Path:
 # read / validate
 # ---------------------------------------------------------------------------
 
+
 def read_bundle(path: Path) -> Dict[str, Any]:
     try:
         raw = json.loads(Path(path).expanduser().read_text(encoding="utf-8"))
@@ -199,19 +209,25 @@ def preview_read(bundle: Dict[str, Any]) -> List[str]:
         % (bundle["version"], bundle.get("created_at"), bundle.get("levi_version")),
         "  lifepack: identity+settings+memory sections from the source instance",
         "  curriculum: %d lesson(s), %d topic(s), provenance %s"
-        % (cur.get("lesson_count", 0), len(cur.get("topics", [])), cur.get("provenance", {})),
+        % (
+            cur.get("lesson_count", 0),
+            len(cur.get("topics", [])),
+            cur.get("provenance", {}),
+        ),
         "  journal highlights: %d learning(s) as provisional torch seed facts"
         % (len(highlights) if isinstance(highlights, list) else 0),
-        "  model card: %s" % (
-            (sections.get("model_card") or {}).get("current", "none shipped")
-        ),
+        "  model card: %s"
+        % ((sections.get("model_card") or {}).get("current", "none shipped")),
     ]
     if note.get("signed_by"):
         lines.append(
-            "  founder's note: signed by %s at %s" % (note["signed_by"], note.get("signed_at"))
+            "  founder's note: signed by %s at %s"
+            % (note["signed_by"], note.get("signed_at"))
         )
     else:
-        lines.append("  founder's note: UNSIGNED (template — sign with `levi torch sign`)")
+        lines.append(
+            "  founder's note: UNSIGNED (template — sign with `levi torch sign`)"
+        )
     lines.append("  secrets: never shipped in bundles (lifepack strips them on export)")
     return lines
 
@@ -235,8 +251,10 @@ def _ingest_torch_lessons(lessons: List[Dict[str, Any]], store: Any) -> Dict[str
     from levi.growth.reflect import Learning
 
     valid = [
-        it for it in lessons
-        if isinstance(it, dict) and str(it.get("text", "")).strip()
+        it
+        for it in lessons
+        if isinstance(it, dict)
+        and str(it.get("text", "")).strip()
         and str(it.get("topic", "")).strip()
     ]
     learnings = [
@@ -374,7 +392,8 @@ def ingest_bundle(
         )
     except Exception as exc:  # noqa: BLE001 — last resort: plant the seed file
         curriculum_steps.append(
-            "%s (in-memory ingest failed: %s)" % (_plant_seed_file(lessons), type(exc).__name__)
+            "%s (in-memory ingest failed: %s)"
+            % (_plant_seed_file(lessons), type(exc).__name__)
         )
     summary["curriculum"] = {"lessons": len(lessons), "steps": curriculum_steps}
 
@@ -477,6 +496,7 @@ def sign_bundle(path: Path, *, by: str, note: str = "") -> Dict[str, Any]:
 # CLI entry (wired by cli/main.py; kept here so it is testable)
 # ---------------------------------------------------------------------------
 
+
 def format_founders_note(note: Dict[str, Any]) -> str:
     signed_by = (note.get("signed_by") or "").strip()
     header = (
@@ -493,18 +513,25 @@ def cmd_torch(args: argparse.Namespace, home: Optional[Path] = None) -> int:
     path_arg = (getattr(args, "path", "") or "").strip()
 
     if action == "create":
-        out = path_arg or "levi-torch-%s.json" % datetime.now(timezone.utc).strftime("%Y%m%d")
+        out = path_arg or "levi-torch-%s.json" % datetime.now(timezone.utc).strftime(
+            "%Y%m%d"
+        )
         bundle = create_bundle(home)
         write_bundle(out, bundle)
         cur = bundle["sections"]["curriculum"]
         print("torch bundle created: %s" % out)
         print("  format: levi-torch v%d" % bundle["version"])
-        print("  curriculum: %d lesson(s), %d topic(s)"
-              % (cur["lesson_count"], len(cur["topics"])))
+        print(
+            "  curriculum: %d lesson(s), %d topic(s)"
+            % (cur["lesson_count"], len(cur["topics"]))
+        )
         print("  highlights: %d" % len(bundle["sections"]["journal_highlights"]))
-        print("  model card: %s" % ((bundle["sections"]["model_card"] or {}).get("current", "none")))
+        print(
+            "  model card: %s"
+            % ((bundle["sections"]["model_card"] or {}).get("current", "none"))
+        )
         print("  founder's note: unsigned — sign it before handing over:")
-        print("    levi torch sign %s --by \"Chauncey\"" % out)
+        print('    levi torch sign %s --by "Chauncey"' % out)
         return 0
 
     if action == "read":
@@ -523,8 +550,10 @@ def cmd_torch(args: argparse.Namespace, home: Optional[Path] = None) -> int:
         for step in summary["curriculum"]["steps"]:
             print("    - %s" % step)
         sf = summary["torch_seed_facts"]
-        print("  torch seed facts: %d added fresh, %d stamped (from lifepack)"
-              % (sf["added"], sf["stamped_from_lifepack"]))
+        print(
+            "  torch seed facts: %d added fresh, %d stamped (from lifepack)"
+            % (sf["added"], sf["stamped_from_lifepack"])
+        )
         print()
         print(format_founders_note(bundle["sections"].get("founders_note") or {}))
         return 0

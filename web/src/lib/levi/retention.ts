@@ -13,7 +13,8 @@ export function yesterdayKey(d = new Date()) {
 export function nextStreak(lastVisit: string | null, streak: number, now = new Date()) {
   const today = todayKey(now);
   if (lastVisit === today) return { streak, lastVisit, touched: false };
-  if (lastVisit === yesterdayKey(now)) return { streak: streak + 1, lastVisit: today, touched: true };
+  if (lastVisit === yesterdayKey(now))
+    return { streak: streak + 1, lastVisit: today, touched: true };
   return { streak: 1, lastVisit: today, touched: true };
 }
 

@@ -11,6 +11,7 @@ requests, and a LEVI user-agent. All parsing/extraction is stdlib.
 Usage: python3 ingest.py [--limit N] [--subject slug]
 Idempotent: skips courses already recorded in coverage.json unless --refetch.
 """
+
 from __future__ import annotations
 
 import html
@@ -31,8 +32,14 @@ TIMEOUT = 10
 DELAY = 0.3
 MAX_CHARS = 20_000
 
-VIDEO_HOSTS = ("youtube.com", "youtu.be", "vimeo.com", "itunes.apple.com",
-               "podcasts.apple.com", "dailymotion.com")
+VIDEO_HOSTS = (
+    "youtube.com",
+    "youtu.be",
+    "vimeo.com",
+    "itunes.apple.com",
+    "podcasts.apple.com",
+    "dailymotion.com",
+)
 BINARY_EXTS = (".pdf", ".ppt", ".pptx", ".zip", ".mp4", ".mp3", ".dmg", ".exe")
 
 
@@ -77,7 +84,9 @@ def fetch(url: str) -> tuple[str | None, str]:
 
 
 def extract_text(html_text: str) -> str:
-    text = re.sub(r"(?is)<(script|style|noscript|header|footer|nav)[^>]*>.*?</\1>", " ", html_text)
+    text = re.sub(
+        r"(?is)<(script|style|noscript|header|footer|nav)[^>]*>.*?</\1>", " ", html_text
+    )
     text = re.sub(r"(?s)<[^>]+>", " ", text)
     text = html.unescape(text)
     text = re.sub(r"[ \t]+", " ", text)
@@ -147,7 +156,8 @@ def main(argv: list[str]) -> int:
                         dest.write_text(
                             f"# {course['title']}\n# {course['school']}\n"
                             f"# source: {course['primary']}\n\n{text}",
-                            encoding="utf-8")
+                            encoding="utf-8",
+                        )
                         rec["status"] = "ok"
                         rec["detail"] = f"{len(text)} chars"
                         rec["file"] = str(dest.relative_to(BASE))
@@ -167,9 +177,11 @@ def main(argv: list[str]) -> int:
     COVERAGE.write_text(json.dumps(records, indent=1), encoding="utf-8")
 
     from collections import Counter
+
     counts = Counter(r["status"] for r in records)
-    chars = sum(int((r.get("detail") or "0").split()[0])
-                for r in records if r["status"] == "ok")
+    chars = sum(
+        int((r.get("detail") or "0").split()[0]) for r in records if r["status"] == "ok"
+    )
     print(f"attempted this run: {done}")
     print("status counts:", dict(counts))
     print(f"total corpus chars (ok): {chars}")

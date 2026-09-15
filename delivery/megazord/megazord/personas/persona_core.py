@@ -10,17 +10,23 @@ import uuid, time
 
 # ── Soul profile (5D Emotional Intelligence) ──────────────────────────────────
 
+
 @dataclass
 class SoulProfile:
-    joy:      float = 0.0   # -1.0 … +1.0
-    trust:    float = 0.0
-    fear:     float = 0.0
+    joy: float = 0.0  # -1.0 … +1.0
+    trust: float = 0.0
+    fear: float = 0.0
     surprise: float = 0.0
-    sadness:  float = 0.0
+    sadness: float = 0.0
 
     def to_dict(self) -> Dict[str, float]:
-        return dict(joy=self.joy, trust=self.trust,
-                     fear=self.fear, surprise=self.surprise, sadness=self.sadness)
+        return dict(
+            joy=self.joy,
+            trust=self.trust,
+            fear=self.fear,
+            surprise=self.surprise,
+            sadness=self.sadness,
+        )
 
     @classmethod
     def from_dict(cls, d: Dict[str, float]) -> "SoulProfile":
@@ -41,22 +47,23 @@ class SoulProfile:
 
 # ── Trait flags ──────────────────────────────────────────────────────────────
 
+
 @dataclass
 class PersonaTraits:
     # Behavior toggles
-    verbose:         bool = False
-    cautious:        bool = False   # high fear baseline → slow to act
-    empathetic:      bool = True
-    creative:        bool = False
-    security_first:  bool = False
-    executor_mode:   bool = False  # Alpha-style: just do it
+    verbose: bool = False
+    cautious: bool = False  # high fear baseline → slow to act
+    empathetic: bool = True
+    creative: bool = False
+    security_first: bool = False
+    executor_mode: bool = False  # Alpha-style: just do it
     # Skill flags
-    can_write_code:      bool = False
-    can_compile:         bool = False
+    can_write_code: bool = False
+    can_compile: bool = False
     can_write_automations: bool = False
-    can_orchestrate:     bool = False
-    can_secure:          bool = False
-    can_broadcast:       bool = False
+    can_orchestrate: bool = False
+    can_secure: bool = False
+    can_broadcast: bool = False
 
     def to_dict(self) -> Dict[str, Any]:
         return {k: v for k, v in self.__dict__.items()}
@@ -68,51 +75,55 @@ class PersonaTraits:
 
 # ── Persona ──────────────────────────────────────────────────────────────────
 
+
 @dataclass
 class Persona:
-    id:       str = field(default_factory=lambda: str(uuid.uuid4())[:8])
-    name:     str = "UNNAMED"
-    tagline:  str = ""
-    soul:     SoulProfile = field(default_factory=SoulProfile)
-    traits:   PersonaTraits = field(default_factory=PersonaTraits)
-    memory:   List[Dict[str, Any]] = field(default_factory=list)
-    created:  float = field(default_factory=time.time)
+    id: str = field(default_factory=lambda: str(uuid.uuid4())[:8])
+    name: str = "UNNAMED"
+    tagline: str = ""
+    soul: SoulProfile = field(default_factory=SoulProfile)
+    traits: PersonaTraits = field(default_factory=PersonaTraits)
+    memory: List[Dict[str, Any]] = field(default_factory=list)
+    created: float = field(default_factory=time.time)
 
     def think(self, prompt: str) -> Dict[str, Any]:
         """Called on every inbound prompt. Returns a Levi-style thought + decision dict."""
         return {
-            "persona_id":  self.id,
+            "persona_id": self.id,
             "persona_name": self.name,
-            "dominant":    self.soul.dominate(),
-            "soul":        self.soul.to_dict(),
-            "thought":     f"[{self.name}] Processing: {prompt[:80]}",
-            "traits":      self.traits.to_dict(),
+            "dominant": self.soul.dominate(),
+            "soul": self.soul.to_dict(),
+            "thought": f"[{self.name}] Processing: {prompt[:80]}",
+            "traits": self.traits.to_dict(),
         }
 
-    def react(self, context: Dict[str, Any], decision: str, confidence: float = 0.75) -> Dict[str, Any]:
+    def react(
+        self, context: Dict[str, Any], decision: str, confidence: float = 0.75
+    ) -> Dict[str, Any]:
         """Return a soul-adjusted reaction envelope."""
         return {
-            "persona_id":   self.id,
+            "persona_id": self.id,
             "persona_name": self.name,
-            "decision":     decision,
-            "confidence":   float(confidence),
-            "dominant":     self.soul.dominate(),
-            "soul":         self.soul.to_dict(),
-            "context":      context,
+            "decision": decision,
+            "confidence": float(confidence),
+            "dominant": self.soul.dominate(),
+            "soul": self.soul.to_dict(),
+            "context": context,
         }
 
     def snapshot(self) -> Dict[str, Any]:
         return {
-            "id":      self.id,
-            "name":    self.name,
+            "id": self.id,
+            "name": self.name,
             "tagline": self.tagline,
-            "soul":    self.soul.to_dict(),
-            "traits":  self.traits.to_dict(),
+            "soul": self.soul.to_dict(),
+            "traits": self.traits.to_dict(),
             "created": self.created,
         }
 
 
 # ── Registry ─────────────────────────────────────────────────────────────────
+
 
 class PersonaRegistry:
     """Singleton registry of all known personas."""

@@ -5,6 +5,7 @@ Method (not copyrighted lyrics): write start-to-finish, then the same units
 from finish back to start. LEVI uses the same cascade / expand_paragraph
 units both ways.
 """
+
 from __future__ import annotations
 
 from typing import List, Tuple

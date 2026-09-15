@@ -3,6 +3,7 @@
 Every stage speaks these dataclasses. The pipeline in levi.bloodstream.turn
 is the only producer; traces, CLI, and tests are consumers.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -16,17 +17,17 @@ from levi.policy.gates import RiskLevel
 class BehaviorKind(str, Enum):
     NONE = "none"
     INTERROGATION = "interrogation"  # LEVI questions the user; withholds the answer
-    NO_HERO = "no_hero"              # short, vague default; expands one layer on request
-    REFRAME = "reframe"              # reframes the question back at the user
+    NO_HERO = "no_hero"  # short, vague default; expands one layer on request
+    REFRAME = "reframe"  # reframes the question back at the user
 
 
 class RouteKind(str, Enum):
-    SPECIAL = "special"      # persona special behavior short-circuited the turn
-    FACTORY = "factory"      # constructive intent → Software Factory cascade
-    ORGAN = "organ"          # branching organ (echo / mandella)
-    MODEL = "model"          # provider chain + specialists (deterministic offline default)
-    GOVERNED = "governed"    # governor/breaker refused the turn
-    FAILED = "failed"        # a stage raised; failure was composted
+    SPECIAL = "special"  # persona special behavior short-circuited the turn
+    FACTORY = "factory"  # constructive intent → Software Factory cascade
+    ORGAN = "organ"  # branching organ (echo / mandella)
+    MODEL = "model"  # provider chain + specialists (deterministic offline default)
+    GOVERNED = "governed"  # governor/breaker refused the turn
+    FAILED = "failed"  # a stage raised; failure was composted
 
 
 @dataclass
@@ -35,9 +36,13 @@ class TurnContext:
 
     session_id: str = "default"
     persona_id: Optional[str] = None
-    provider: Optional[str] = None  # explicit provider name; None → provider chain default
+    provider: Optional[str] = (
+        None  # explicit provider name; None → provider chain default
+    )
     auto_approve_up_to: RiskLevel = RiskLevel.LOW
-    confirm: Optional[Callable[[Any], bool]] = None  # HITL callback; None → non-interactive
+    confirm: Optional[Callable[[Any], bool]] = (
+        None  # HITL callback; None → non-interactive
+    )
     data_dir: Optional[Path] = None  # overrides ~/.levi (tests, hermetic runs)
     composite_name: Optional[str] = None
     dry_run: bool = False

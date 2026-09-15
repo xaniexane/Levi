@@ -6,6 +6,7 @@ copied from the implementation under test.
 Run:  python3 tests/test_finance_indicators.py     (has a real __main__ runner)
       python3 -m pytest tests/test_finance_indicators.py -q
 """
+
 from __future__ import annotations
 
 import math
@@ -128,13 +129,17 @@ def test_bollinger_hand_computed():
         close(bands["upper"][i], mean + 2 * sd)
         close(bands["lower"][i], mean - 2 * sd)
     assert bands["upper"][0] is None and bands["upper"][1] is None
-    print(f"  band[2]: {bands['lower'][2]:.6f} {bands['middle'][2]} {bands['upper'][2]:.6f}")
+    print(
+        f"  band[2]: {bands['lower'][2]:.6f} {bands['middle'][2]} {bands['upper'][2]:.6f}"
+    )
 
 
 @finance_test
 def test_atr_flat_bars_is_zero():
-    bars = [Bar(date=f"2026-09-{d:02d}", open=100, high=100, low=100,
-                close=100, volume=0) for d in range(1, 6)]
+    bars = [
+        Bar(date=f"2026-09-{d:02d}", open=100, high=100, low=100, close=100, volume=0)
+        for d in range(1, 6)
+    ]
     out = atr(bars, period=3)
     # True Range of a flat bar is 0; after warmup ATR is 0.0 (not None)
     assert out == [None, None, 0.0, 0.0, 0.0], out
@@ -156,8 +161,9 @@ def test_atr_hand_computed():
     close(out[2], 31 / 3)
     # Wilder smoothing continues: TR4 = max(5,|120-117|=3,|115-117|=2)=5
     # ATR = (10.333...*2 + 5)/3 = 25.666.../3 = 8.555...
-    bars.append(Bar(date="2026-09-04", open=117, high=120, low=115,
-                    close=119, volume=1))
+    bars.append(
+        Bar(date="2026-09-04", open=117, high=120, low=115, close=119, volume=1)
+    )
     out = atr(bars, period=3)
     close(out[3], ((31 / 3) * 2 + 5) / 3)
     print(f"  atr: {out[2]:.6f}, {out[3]:.6f}")
@@ -182,11 +188,12 @@ def test_macd_crossover_sign_convention():
     assert res["histogram"][33] is not None
     assert res["macd_line"][-1] > res["signal_line"][-1]
     assert res["histogram"][-1] > 0
-    close(res["histogram"][-1],
-          res["macd_line"][-1] - res["signal_line"][-1])
-    print(f"  macd[-1]={res['macd_line'][-1]:.4f} "
-          f"signal[-1]={res['signal_line'][-1]:.4f} "
-          f"hist[-1]={res['histogram'][-1]:.4f}")
+    close(res["histogram"][-1], res["macd_line"][-1] - res["signal_line"][-1])
+    print(
+        f"  macd[-1]={res['macd_line'][-1]:.4f} "
+        f"signal[-1]={res['signal_line'][-1]:.4f} "
+        f"hist[-1]={res['histogram'][-1]:.4f}"
+    )
 
 
 @finance_test
@@ -198,10 +205,14 @@ def test_macd_insufficient_data_all_none():
 
 @finance_test
 def test_period_validation():
-    for fn in (lambda: sma([1.0], 0), lambda: ema([1.0], -2),
-               lambda: rsi([1.0], 0), lambda: macd([1.0], fast=0),
-               lambda: bollinger([1.0], 0),
-               lambda: atr([], 0)):
+    for fn in (
+        lambda: sma([1.0], 0),
+        lambda: ema([1.0], -2),
+        lambda: rsi([1.0], 0),
+        lambda: macd([1.0], fast=0),
+        lambda: bollinger([1.0], 0),
+        lambda: atr([], 0),
+    ):
         try:
             fn()
         except ValueError:
@@ -234,8 +245,13 @@ def test_stochastic_hand_computed():
     # K[4] = 100*(12.5-9)/(13-9) = 100*3.5/4  = 87.5
     # D = SMA(K, 3): D[4] = (75 + 50/3 + 87.5)/3 = 59.722...
     bars = _mkbars(
-        [(10, 8, 9, 100), (11, 9, 10, 100), (12, 10, 11, 100),
-         (11, 9, 9.5, 100), (13, 11, 12.5, 100)]
+        [
+            (10, 8, 9, 100),
+            (11, 9, 10, 100),
+            (12, 10, 11, 100),
+            (11, 9, 9.5, 100),
+            (13, 11, 12.5, 100),
+        ]
     )
     out = stochastic(bars, k_period=3, d_period=3)
     k, d = out["k"], out["d"]
@@ -265,8 +281,7 @@ def test_obv_hand_computed():
     # i=2: flat -> 200
     # i=3: down -> 200 - 400 = -200
     bars = _mkbars(
-        [(10, 9, 10, 100), (11, 10, 11, 200),
-         (11, 10, 11, 300), (10, 9, 9, 400)]
+        [(10, 9, 10, 100), (11, 10, 11, 200), (11, 10, 11, 300), (10, 9, 9, 400)]
     )
     assert obv(bars) == [0.0, 200.0, 200.0, -200.0], obv(bars)
 
@@ -277,9 +292,7 @@ def test_vwap_hand_computed():
     # vwap[0] = 9*100/100 = 9.0
     # vwap[1] = (900 + 2200)/300 = 3100/300 = 31/3
     # vwap[2] = (3100 + 3900)/600 = 7000/600 = 35/3
-    bars = _mkbars(
-        [(10, 8, 9, 100), (12, 10, 11, 200), (14, 12, 13, 300)]
-    )
+    bars = _mkbars([(10, 8, 9, 100), (12, 10, 11, 200), (14, 12, 13, 300)])
     out = vwap(bars)
     close(out[0], 9.0)
     close(out[1], 31.0 / 3.0)
@@ -301,10 +314,15 @@ def test_adx_perfect_uptrend_is_100():
     # Steady uptrend: +DM > 0 every bar, -DM = 0 -> +DI >> -DI, DX = 100,
     # ADX(3) = 100 at the first valid index (2*3-1 = 5).
     bars = _mkbars(
-        [(1000, 998, 999, 100), (1002, 999, 1001, 100),
-         (1004, 1000, 1003, 100), (1006, 1002, 1005, 100),
-         (1008, 1004, 1007, 100), (1010, 1006, 1009, 100),
-         (1012, 1008, 1011, 100)]
+        [
+            (1000, 998, 999, 100),
+            (1002, 999, 1001, 100),
+            (1004, 1000, 1003, 100),
+            (1006, 1002, 1005, 100),
+            (1008, 1004, 1007, 100),
+            (1010, 1006, 1009, 100),
+            (1012, 1008, 1011, 100),
+        ]
     )
     out = adx(bars, period=3)
     assert out["adx"][:5] == [None] * 5, out["adx"]
@@ -324,10 +342,15 @@ def test_adx_ranging_hand_computed():
     #   +DI[6] = 100*(17/27)/(197/18) = 5.7522
     #   -DI[6] = 100*(47/54)/(197/18) = 7.9534
     bars = _mkbars(
-        [(100.5, 99.0, 99.8, 100), (101.0, 99.0, 100.2, 100),
-         (101.0, 98.5, 99.6, 100), (101.5, 98.5, 100.4, 100),
-         (101.5, 98.0, 99.8, 100), (102.0, 98.0, 100.6, 100),
-         (102.0, 97.5, 100.0, 100)]
+        [
+            (100.5, 99.0, 99.8, 100),
+            (101.0, 99.0, 100.2, 100),
+            (101.0, 98.5, 99.6, 100),
+            (101.5, 98.5, 100.4, 100),
+            (101.5, 98.0, 99.8, 100),
+            (102.0, 98.0, 100.6, 100),
+            (102.0, 97.5, 100.0, 100),
+        ]
     )
     out = adx(bars, period=3)
     assert out["adx"][:5] == [None] * 5, out["adx"]
@@ -354,10 +377,15 @@ def test_adx_insufficient_data_all_none():
 def test_classify_regime_trending():
     # Perfect uptrend, tiny ATR% (0.39% < 4.0): ADX(3) = 100 >= 25.
     bars = _mkbars(
-        [(1000, 998, 999, 100), (1002, 999, 1001, 100),
-         (1004, 1000, 1003, 100), (1006, 1002, 1005, 100),
-         (1008, 1004, 1007, 100), (1010, 1006, 1009, 100),
-         (1012, 1008, 1011, 100)]
+        [
+            (1000, 998, 999, 100),
+            (1002, 999, 1001, 100),
+            (1004, 1000, 1003, 100),
+            (1006, 1002, 1005, 100),
+            (1008, 1004, 1007, 100),
+            (1010, 1006, 1009, 100),
+            (1012, 1008, 1011, 100),
+        ]
     )
     res = classify_regime(bars, adx_period=3, atr_period=3)
     assert res["regime"] == "trending", res
@@ -369,10 +397,15 @@ def test_classify_regime_trending():
 def test_classify_regime_ranging():
     # Balanced +DM/-DM fixture: ADX(3) = 20.99 < 25, ATR% = 3.60 < 4.0.
     bars = _mkbars(
-        [(100.5, 99.0, 99.8, 100), (101.0, 99.0, 100.2, 100),
-         (101.0, 98.5, 99.6, 100), (101.5, 98.5, 100.4, 100),
-         (101.5, 98.0, 99.8, 100), (102.0, 98.0, 100.6, 100),
-         (102.0, 97.5, 100.0, 100)]
+        [
+            (100.5, 99.0, 99.8, 100),
+            (101.0, 99.0, 100.2, 100),
+            (101.0, 98.5, 99.6, 100),
+            (101.5, 98.5, 100.4, 100),
+            (101.5, 98.0, 99.8, 100),
+            (102.0, 98.0, 100.6, 100),
+            (102.0, 97.5, 100.0, 100),
+        ]
     )
     res = classify_regime(bars, adx_period=3, atr_period=3)
     assert res["regime"] == "ranging", res
@@ -385,9 +418,15 @@ def test_classify_regime_volatile_takes_priority():
     # Strong uptrend (ADX(3) = 100) but ATR% ~ 14.8 >= 4.0 -> "volatile":
     # the volatility check runs first by design.
     bars = _mkbars(
-        [(110, 90, 100, 100), (115, 95, 108, 100), (120, 100, 115, 100),
-         (125, 105, 120, 100), (130, 110, 125, 100), (135, 115, 130, 100),
-         (140, 120, 135, 100)]
+        [
+            (110, 90, 100, 100),
+            (115, 95, 108, 100),
+            (120, 100, 115, 100),
+            (125, 105, 120, 100),
+            (130, 110, 125, 100),
+            (135, 115, 130, 100),
+            (140, 120, 135, 100),
+        ]
     )
     res = classify_regime(bars, adx_period=3, atr_period=3)
     assert res["regime"] == "volatile", res

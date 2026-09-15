@@ -1,4 +1,5 @@
 """Trace contract: one JSONL record per turn, all fields, decision path."""
+
 import json
 
 from levi.bloodstream.stages import RouteKind
@@ -12,8 +13,9 @@ def test_trace_written_with_all_required_fields(ctx, data_dir):
     traces_dir = data_dir / "traces"
     files = list(traces_dir.glob("*.jsonl"))
     assert len(files) == 1
-    records = [json.loads(line) for line in files[0].read_text().splitlines()
-               if line.strip()]
+    records = [
+        json.loads(line) for line in files[0].read_text().splitlines() if line.strip()
+    ]
     assert len(records) == 1
     record = records[0]
     for field in TRACE_FIELDS:
@@ -29,23 +31,22 @@ def test_trace_written_with_all_required_fields(ctx, data_dir):
     assert all(s["decision"] for s in stages)
 
 
-def test_failed_turn_still_writes_trace_with_compost(ctx_for, monkeypatch,
-                                                     data_dir):
+def test_failed_turn_still_writes_trace_with_compost(ctx_for, monkeypatch, data_dir):
     # Force a mid-turn failure in the route executor.
     def boom(text, data_dir):
         raise RuntimeError("factory exploded")
 
     monkeypatch.setattr("levi.bloodstream.turn._execute_factory", boom)
-    result = run_turn("build me a todo app",
-                      ctx_for(confirm=lambda p: True))
+    result = run_turn("build me a todo app", ctx_for(confirm=lambda p: True))
     assert result.ok is False
     assert result.route is RouteKind.FAILED
     assert result.error and "RuntimeError" in result.error
 
     records = []
     for f in data_dir.joinpath("traces").glob("*.jsonl"):
-        records += [json.loads(line) for line in f.read_text().splitlines()
-                    if line.strip()]
+        records += [
+            json.loads(line) for line in f.read_text().splitlines() if line.strip()
+        ]
     assert len(records) == 1
     record = records[0]
     assert record["outcome"] == "failed"

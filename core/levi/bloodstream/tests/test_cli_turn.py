@@ -3,6 +3,7 @@
 HOME is redirected to a tmp dir so the turn's memory/traces/factory
 writes never touch the real user home.
 """
+
 import io
 from contextlib import redirect_stdout
 
@@ -22,6 +23,7 @@ def clean_home(tmp_path, monkeypatch):
 
 def _run(argv):
     import sys
+
     old = sys.argv
     sys.argv = ["levi", *argv]
     try:

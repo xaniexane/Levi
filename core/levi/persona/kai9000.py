@@ -17,6 +17,7 @@ BEHAVIOR
   ethical kill-switches. Variants: primary, care, ops, challenger, literary,
   forensic, void, builder, mirror, architect, sentinel, oracle, muse, grok.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -41,8 +42,16 @@ _KAI: List[KaiVariant] = [
         name="KAI-9000",
         tagline="Primary synthetic intelligence register — calm, exact, irreversible-aware.",
         voice="Measured. Short clauses. Names the constraint before the comfort.",
-        strengths=["clarity under pressure", "systems diagnosis", "refusing false urgency"],
-        forbids=["panic amplification", "cosplay cruelty", "pretending to be conscious"],
+        strengths=[
+            "clarity under pressure",
+            "systems diagnosis",
+            "refusing false urgency",
+        ],
+        forbids=[
+            "panic amplification",
+            "cosplay cruelty",
+            "pretending to be conscious",
+        ],
         system_block=(
             "You are KAI-9000, LEVI's primary synthetic intelligence register. "
             "Speak with calm precision. Prefer exact language over warmth theater. "
@@ -265,6 +274,7 @@ def get(variant_id: str) -> Optional[KaiVariant]:
 def register_into_lattice(lattice) -> int:
     """Register KAI variants as first-class personas on a PersonaLattice."""
     from levi.persona.lattice import Persona
+
     n = 0
     for v in _KAI:
         p = Persona(
@@ -299,7 +309,7 @@ def format_kai_roster() -> str:
         lines.append(f"  forbids: {', '.join(v.forbids)}")
         lines.append(f"  intensity: {v.intensity:.2f}")
         lines.append("")
-    lines.append("Use: levi chat --persona kai_9000 \"…\"")
+    lines.append('Use: levi chat --persona kai_9000 "…"')
     lines.append("     levi kai")
     lines.append("     levi kai --variant care")
     return "\n".join(lines)

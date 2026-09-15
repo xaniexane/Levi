@@ -13,6 +13,7 @@ Route selection:
 Special persona behaviors (interrogation ⊥ no_hero) short-circuit the turn
 with their own reply — at most ONE may fire per turn, enforced here.
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -67,20 +68,48 @@ def reset_session_state() -> None:
 # ---------------------------------------------------------------------------
 
 _FACTORY_HINTS = (
-    "build me", "build a", "create an app", "create a tool", "make an app",
-    "make me", "scaffold", "factory create", "new project", "software factory",
+    "build me",
+    "build a",
+    "create an app",
+    "create a tool",
+    "make an app",
+    "make me",
+    "scaffold",
+    "factory create",
+    "new project",
+    "software factory",
 )
 _ECHO_HINTS = (
-    "what if", "echoverse", "explore", "scenarios", "possibilities",
-    "parallel", "what could",
+    "what if",
+    "echoverse",
+    "explore",
+    "scenarios",
+    "possibilities",
+    "parallel",
+    "what could",
 )
 _MANDELLA_HINTS = (
-    "should i", "mandella", "decide", "choose", "a or b", "options",
-    "which one", "help me pick",
+    "should i",
+    "mandella",
+    "decide",
+    "choose",
+    "a or b",
+    "options",
+    "which one",
+    "help me pick",
 )
 _EXTERNAL_HINTS = (
-    "send", "email", "post ", "publish", "deploy", "tweet", "message ",
-    "pay", "buy ", "transfer", "wire ",
+    "send",
+    "email",
+    "post ",
+    "publish",
+    "deploy",
+    "tweet",
+    "message ",
+    "pay",
+    "buy ",
+    "transfer",
+    "wire ",
 )
 
 
@@ -108,7 +137,10 @@ def _assess_risk(text: str, route: RouteKind) -> Tuple[RiskLevel, str]:
 # Stages
 # ---------------------------------------------------------------------------
 
-def _stage_companion_ei(text: str, ctx: TurnContext) -> Tuple[StageRecord, SessionEI, Dict[str, Any]]:
+
+def _stage_companion_ei(
+    text: str, ctx: TurnContext
+) -> Tuple[StageRecord, SessionEI, Dict[str, Any]]:
     """Companion + 5D EI. UX/state shaping only — never overrides safety,
     permission, or facts. Never claims sentience or feeling."""
     session = _session_for(ctx.session_id)
@@ -123,14 +155,19 @@ def _stage_companion_ei(text: str, ctx: TurnContext) -> Tuple[StageRecord, Sessi
         "deescalate": bool(getattr(policy, "deescalate", False)),
         "crisis": bool(getattr(policy, "crisis", False)),
         "register": getattr(modulation.get("suggestion"), "register_id", None)
-        if isinstance(modulation, dict) else None,
+        if isinstance(modulation, dict)
+        else None,
     }
     record = StageRecord(
         stage="companion_ei",
         decision="observed",
         detail=ei_summary,
     )
-    return record, session, {"reading": reading, "modulation": modulation, "policy": policy}
+    return (
+        record,
+        session,
+        {"reading": reading, "modulation": modulation, "policy": policy},
+    )
 
 
 def _stage_persona(
@@ -144,8 +181,13 @@ def _stage_persona(
         lattice.set_active(ctx.persona_id)
     persona = lattice.current()
     if persona is None:  # pragma: no cover — lattice always has a default
-        persona = Persona(id="normal", display_name="Normal",
-                          description="", reasoning_bias="", communication_style="")
+        persona = Persona(
+            id="normal",
+            display_name="Normal",
+            description="",
+            reasoning_bias="",
+            communication_style="",
+        )
     persona_id = persona.id
 
     key = (ctx.session_id, persona_id)
@@ -158,8 +200,9 @@ def _stage_persona(
 
     behavior = BehaviorKind.NONE
     reply: Optional[str] = None
-    special = apply_special_behavior(text, persona, prior_clarifications=prior,
-                                     detail_level=detail)
+    special = apply_special_behavior(
+        text, persona, prior_clarifications=prior, detail_level=detail
+    )
     if special is not None:
         text_out, is_final, new_detail = special
         if wants_interrogation:
@@ -178,7 +221,9 @@ def _stage_persona(
         detail={
             "persona_id": persona_id,
             "behavior_conflict": conflict,
-            "conflict_resolution": "interrogation takes precedence" if conflict else None,
+            "conflict_resolution": "interrogation takes precedence"
+            if conflict
+            else None,
         },
     )
     return record, persona, behavior, reply
@@ -208,15 +253,21 @@ def _stage_governor(
             from levi.skill.registry import SkillRegistry
             from levi.agent.specialists import SpecialistRegistry
             from levi.daemon.automation import AutomationRegistry
+
             skills = SkillRegistry()
             specialists = SpecialistRegistry()
             auto_dir = (data_dir / "automations") if data_dir else None
-            automations = (AutomationRegistry(data_dir=auto_dir)
-                           if auto_dir else AutomationRegistry())
+            automations = (
+                AutomationRegistry(data_dir=auto_dir)
+                if auto_dir
+                else AutomationRegistry()
+            )
             ceiling = max(
                 ceiling,
                 registry.risk_ceiling(
-                    comp, skills=skills, specialists=specialists,
+                    comp,
+                    skills=skills,
+                    specialists=specialists,
                     automations=automations,
                 ),
             )
@@ -240,7 +291,10 @@ def _stage_governor(
 # Route executors (each runs INSIDE the policy gate)
 # ---------------------------------------------------------------------------
 
-def _execute_factory(text: str, data_dir: Optional[Path]) -> Tuple[Callable[[], str], Callable[[], bool]]:
+
+def _execute_factory(
+    text: str, data_dir: Optional[Path]
+) -> Tuple[Callable[[], str], Callable[[], bool]]:
     from levi.factory.pipeline import SoftwareFactory
 
     factory = SoftwareFactory(data_dir=data_dir)
@@ -259,7 +313,9 @@ def _execute_factory(text: str, data_dir: Optional[Path]) -> Tuple[Callable[[], 
     return execute, verify
 
 
-def _execute_organ(text: str, classification_detail: str) -> Tuple[Callable[[], str], Callable[[], bool], List[str]]:
+def _execute_organ(
+    text: str, classification_detail: str
+) -> Tuple[Callable[[], str], Callable[[], bool], List[str]]:
     if "mandella" in classification_detail:
         from levi.organs.mandella import run_mandella, format_mandella
 
@@ -312,6 +368,7 @@ def _execute_model(
 # Failure composting (REIM lives in lwp/model_engine.py — route, don't expand)
 # ---------------------------------------------------------------------------
 
+
 def _compost_failure(summary: str, data_dir: Optional[Path]) -> Dict[str, Any]:
     """Route a failed turn's residue to the existing REIM. Best-effort:
     composting must never break the turn that is already failing."""
@@ -332,6 +389,7 @@ def _compost_failure(summary: str, data_dir: Optional[Path]) -> Dict[str, Any]:
 # ---------------------------------------------------------------------------
 # The turn
 # ---------------------------------------------------------------------------
+
 
 def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
     """Run one bloodstream turn. Deterministic and offline-first: every stage
@@ -361,11 +419,22 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
         if special_reply is not None:
             # Special behavior short-circuits: still memory + trace, no model call.
             result = _finish(
-                text=text, ctx=ctx, trace_id=trace_id, stages=stages,
-                reply=special_reply, route=RouteKind.SPECIAL, behavior=behavior,
-                persona_id=persona.id, risk=0,
-                provider="special-behavior", skills=[], receipt_id=None,
-                awaiting=False, outcome="replied", error=None, composted=None,
+                text=text,
+                ctx=ctx,
+                trace_id=trace_id,
+                stages=stages,
+                reply=special_reply,
+                route=RouteKind.SPECIAL,
+                behavior=behavior,
+                persona_id=persona.id,
+                risk=0,
+                provider="special-behavior",
+                skills=[],
+                receipt_id=None,
+                awaiting=False,
+                outcome="replied",
+                error=None,
+                composted=None,
                 data_dir=data_dir,
             )
             return result
@@ -379,21 +448,40 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
             text, ctx, route, base_risk
         )
         stages.append(gov_record)
-        stages.append(StageRecord(
-            stage="route", decision=route.value,
-            detail={"reason": route_detail, "risk_reason": risk_reason,
-                    "composite": composite_name or None},
-        ))
+        stages.append(
+            StageRecord(
+                stage="route",
+                decision=route.value,
+                detail={
+                    "reason": route_detail,
+                    "risk_reason": risk_reason,
+                    "composite": composite_name or None,
+                },
+            )
+        )
 
         if not allowed:
             return _finish(
-                text=text, ctx=ctx, trace_id=trace_id, stages=stages,
-                reply=("The turn governor refused this request (budget or breaker). "
-                       "Nothing was executed."),
-                route=RouteKind.GOVERNED, behavior=behavior, persona_id=persona.id,
-                risk=effective_risk, provider="none",
-                skills=[], receipt_id=None, awaiting=False, outcome="governed",
-                error=None, composted=None, data_dir=data_dir,
+                text=text,
+                ctx=ctx,
+                trace_id=trace_id,
+                stages=stages,
+                reply=(
+                    "The turn governor refused this request (budget or breaker). "
+                    "Nothing was executed."
+                ),
+                route=RouteKind.GOVERNED,
+                behavior=behavior,
+                persona_id=persona.id,
+                risk=effective_risk,
+                provider="none",
+                skills=[],
+                receipt_id=None,
+                awaiting=False,
+                outcome="governed",
+                error=None,
+                composted=None,
+                data_dir=data_dir,
             )
 
         # 5. Build the route executor (runs INSIDE the policy gate)
@@ -423,20 +511,27 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
             affected_systems=["local"],
             reversible=True,
         )
-        stages.append(StageRecord(
-            stage="policy",
-            decision=("awaiting_permission" if gate.awaiting_permission
-                      else "denied" if not gate.approved
-                      else "dry_run" if gate.dry_run
-                      else "executed"),
-            detail={
-                "risk": effective_risk,
-                "auto_approved": gate.auto_approved,
-                "verified": gate.verified,
-                "receipt_id": gate.receipt_id,
-                "preview": gate.preview,
-            },
-        ))
+        stages.append(
+            StageRecord(
+                stage="policy",
+                decision=(
+                    "awaiting_permission"
+                    if gate.awaiting_permission
+                    else "denied"
+                    if not gate.approved
+                    else "dry_run"
+                    if gate.dry_run
+                    else "executed"
+                ),
+                detail={
+                    "risk": effective_risk,
+                    "auto_approved": gate.auto_approved,
+                    "verified": gate.verified,
+                    "receipt_id": gate.receipt_id,
+                    "preview": gate.preview,
+                },
+            )
+        )
 
         if gate.awaiting_permission:
             preview = gate.preview or {}
@@ -449,23 +544,43 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
                 "Approve it and I'll execute, verify, and hand you a receipt."
             )
             return _finish(
-                text=text, ctx=ctx, trace_id=trace_id, stages=stages,
-                reply=reply, route=route, behavior=behavior, persona_id=persona.id,
+                text=text,
+                ctx=ctx,
+                trace_id=trace_id,
+                stages=stages,
+                reply=reply,
+                route=route,
+                behavior=behavior,
+                persona_id=persona.id,
                 risk=effective_risk,
                 provider=holder.get("provider", "none"),
-                skills=holder.get("skills", []), receipt_id=None,
-                awaiting=True, outcome="awaiting_permission", error=None,
-                composted=None, data_dir=data_dir,
+                skills=holder.get("skills", []),
+                receipt_id=None,
+                awaiting=True,
+                outcome="awaiting_permission",
+                error=None,
+                composted=None,
+                data_dir=data_dir,
             )
         if not gate.approved:
             return _finish(
-                text=text, ctx=ctx, trace_id=trace_id, stages=stages,
+                text=text,
+                ctx=ctx,
+                trace_id=trace_id,
+                stages=stages,
                 reply="Denied at the permission gate. Nothing was executed.",
-                route=route, behavior=behavior, persona_id=persona.id,
+                route=route,
+                behavior=behavior,
+                persona_id=persona.id,
                 risk=effective_risk,
-                provider=holder.get("provider", "none"), skills=[],
-                receipt_id=None, awaiting=False, outcome="denied", error=None,
-                composted=None, data_dir=data_dir,
+                provider=holder.get("provider", "none"),
+                skills=[],
+                receipt_id=None,
+                awaiting=False,
+                outcome="denied",
+                error=None,
+                composted=None,
+                data_dir=data_dir,
             )
 
         reply = holder.get("reply") or "done."
@@ -477,39 +592,79 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
             raise RuntimeError(gate.error)
 
         return _finish(
-            text=text, ctx=ctx, trace_id=trace_id, stages=stages,
-            reply=reply, route=route, behavior=behavior, persona_id=persona.id,
+            text=text,
+            ctx=ctx,
+            trace_id=trace_id,
+            stages=stages,
+            reply=reply,
+            route=route,
+            behavior=behavior,
+            persona_id=persona.id,
             risk=effective_risk,
-            provider=holder.get("provider", "policy-gate") if route is RouteKind.MODEL
+            provider=holder.get("provider", "policy-gate")
+            if route is RouteKind.MODEL
             else "deterministic-local",
-            skills=holder.get("skills", []), receipt_id=gate.receipt_id,
-            awaiting=False, outcome="replied", error=None, composted=None,
+            skills=holder.get("skills", []),
+            receipt_id=gate.receipt_id,
+            awaiting=False,
+            outcome="replied",
+            error=None,
+            composted=None,
             data_dir=data_dir,
         )
 
     except Exception as exc:  # noqa: BLE001 — the turn must never crash the caller
         summary = f"{exc.__class__.__name__}: {exc}"[:300]
-        composted = _compost_failure(f"bloodstream turn failed: {summary} :: {text[:120]}",
-                                     data_dir)
-        stages.append(StageRecord(stage="failure", decision="composted",
-                                  detail={"error": summary}))
+        composted = _compost_failure(
+            f"bloodstream turn failed: {summary} :: {text[:120]}", data_dir
+        )
+        stages.append(
+            StageRecord(
+                stage="failure", decision="composted", detail={"error": summary}
+            )
+        )
         return _finish(
-            text=text, ctx=ctx, trace_id=trace_id, stages=stages,
-            reply=("Something broke mid-turn. The failure was recorded and its "
-                   "residue routed to REIM compost — it won't be silently dropped."),
-            route=RouteKind.FAILED, behavior=BehaviorKind.NONE, persona_id="unknown",
-            risk=0, provider="none",
-            skills=[], receipt_id=None, awaiting=False, outcome="failed",
-            error=summary, composted=composted, data_dir=data_dir,
+            text=text,
+            ctx=ctx,
+            trace_id=trace_id,
+            stages=stages,
+            reply=(
+                "Something broke mid-turn. The failure was recorded and its "
+                "residue routed to REIM compost — it won't be silently dropped."
+            ),
+            route=RouteKind.FAILED,
+            behavior=BehaviorKind.NONE,
+            persona_id="unknown",
+            risk=0,
+            provider="none",
+            skills=[],
+            receipt_id=None,
+            awaiting=False,
+            outcome="failed",
+            error=summary,
+            composted=composted,
+            data_dir=data_dir,
         )
 
 
 def _finish(
-    *, text: str, ctx: TurnContext, trace_id: str, stages: List[StageRecord],
-    reply: str, route: RouteKind, behavior: BehaviorKind, persona_id: str,
-    risk: int, provider: str, skills: List[str],
-    receipt_id: Optional[str], awaiting: bool, outcome: str,
-    error: Optional[str], composted: Optional[Dict[str, Any]],
+    *,
+    text: str,
+    ctx: TurnContext,
+    trace_id: str,
+    stages: List[StageRecord],
+    reply: str,
+    route: RouteKind,
+    behavior: BehaviorKind,
+    persona_id: str,
+    risk: int,
+    provider: str,
+    skills: List[str],
+    receipt_id: Optional[str],
+    awaiting: bool,
+    outcome: str,
+    error: Optional[str],
+    composted: Optional[Dict[str, Any]],
     data_dir: Optional[Path],
 ) -> TurnResult:
     """Memory + trace + promotion eligibility. Shared by every exit path —
@@ -519,6 +674,7 @@ def _finish(
     try:
         from levi.memory.store import MemoryStore
         from levi.memory.types import MemoryType
+
         mem_dir = (data_dir / "memory") if data_dir else None
         store = MemoryStore(data_dir=mem_dir) if mem_dir else MemoryStore()
         store.add(
@@ -532,10 +688,13 @@ def _finish(
         memory_ok = True
     except Exception:
         pass  # memory is durable-nice-to-have; never break the turn
-    stages.append(StageRecord(
-        stage="memory", decision="recorded" if memory_ok else "skipped",
-        detail={"memory_type": "episodic", "source": "bloodstream"},
-    ))
+    stages.append(
+        StageRecord(
+            stage="memory",
+            decision="recorded" if memory_ok else "skipped",
+            detail={"memory_type": "episodic", "source": "bloodstream"},
+        )
+    )
 
     # Trace: every field, every turn. The trace stage records itself as it
     # writes — the JSONL snapshot shows the full decision path including it.
@@ -570,7 +729,8 @@ def _finish(
 
     promotion_eligible = receipt_id is not None and outcome == "replied"
     receipt_summary = (
-        f"receipt {receipt_id[:8]}…" if receipt_id
+        f"receipt {receipt_id[:8]}…"
+        if receipt_id
         else "no receipt (no consequential act executed)"
     ) + f" · risk {risk} · route {route.value} · provider {provider}"
 

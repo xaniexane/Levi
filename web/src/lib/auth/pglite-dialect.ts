@@ -21,15 +21,12 @@ import {
 type Client = PGlite;
 
 /** Factory used by `auth/server.ts`: `pgliteDialect(() => getPglite())`. */
-export function pgliteDialect(
-  getClient: () => Promise<Client> | Client,
-): Dialect {
+export function pgliteDialect(getClient: () => Promise<Client> | Client): Dialect {
   return {
     createAdapter: () => new PostgresAdapter(),
     createDriver: () => new LazyPGliteDriver(getClient),
     createQueryCompiler: (): QueryCompiler => new PostgresQueryCompiler(),
-    createIntrospector: (db: Kysely<unknown>): DatabaseIntrospector =>
-      new PostgresIntrospector(db),
+    createIntrospector: (db: Kysely<unknown>): DatabaseIntrospector => new PostgresIntrospector(db),
   };
 }
 
@@ -69,16 +66,11 @@ class LazyPGliteDriver implements Driver {
     next(this.connection);
   }
 
-  async beginTransaction(
-    conn: DatabaseConnection,
-    settings: TransactionSettings,
-  ): Promise<void> {
+  async beginTransaction(conn: DatabaseConnection, settings: TransactionSettings): Promise<void> {
     const c = conn as PGliteConnection;
     if (settings.isolationLevel) {
       await c.executeQuery(
-        CompiledQuery.raw(
-          `start transaction isolation level ${settings.isolationLevel}`,
-        ),
+        CompiledQuery.raw(`start transaction isolation level ${settings.isolationLevel}`),
       );
     } else {
       await c.executeQuery(CompiledQuery.raw("begin"));
@@ -90,9 +82,7 @@ class LazyPGliteDriver implements Driver {
   }
 
   async rollbackTransaction(conn: DatabaseConnection): Promise<void> {
-    await (conn as PGliteConnection).executeQuery(
-      CompiledQuery.raw("rollback"),
-    );
+    await (conn as PGliteConnection).executeQuery(CompiledQuery.raw("rollback"));
   }
 
   async destroy(): Promise<void> {
@@ -109,9 +99,7 @@ class PGliteConnection implements DatabaseConnection {
   constructor(private readonly client: Client) {}
 
   async executeQuery<O>(compiledQuery: CompiledQuery): Promise<QueryResult<O>> {
-    const result = await this.client.query(compiledQuery.sql, [
-      ...compiledQuery.parameters,
-    ]);
+    const result = await this.client.query(compiledQuery.sql, [...compiledQuery.parameters]);
     if (result.affectedRows) {
       return {
         numAffectedRows: BigInt(result.affectedRows),
@@ -128,9 +116,7 @@ class PGliteConnection implements DatabaseConnection {
     if (!Number.isInteger(chunkSize) || chunkSize <= 0) {
       throw new Error("chunkSize must be a positive integer");
     }
-    const result = await this.client.query(compiledQuery.sql, [
-      ...compiledQuery.parameters,
-    ]);
+    const result = await this.client.query(compiledQuery.sql, [...compiledQuery.parameters]);
     for (let i = 0; i < result.rows.length; i += chunkSize) {
       yield { rows: result.rows.slice(i, i + chunkSize) as O[] };
     }

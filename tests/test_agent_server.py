@@ -4,6 +4,7 @@ Starts the real stdlib ``ThreadingHTTPServer`` machinery on an ephemeral
 port in a thread; traffic stays on loopback. ``LEVI_AGENT_TOKEN`` is a
 monkeypatched dummy, never a real secret.
 """
+
 import json
 import threading
 import urllib.error
@@ -99,8 +100,11 @@ def _patch_run(monkeypatch):
     def _fake_run(task, **kwargs):
         seen.update(task=task, kwargs=kwargs)
         return AgentTranscript(
-            task=task, provider_name="fake", steps=[],
-            final="fake run complete", ok=True,
+            task=task,
+            provider_name="fake",
+            steps=[],
+            final="fake run complete",
+            ok=True,
         )
 
     monkeypatch.setattr(agent_loop, "run_subtask", _fake_run)
@@ -110,7 +114,9 @@ def _patch_run(monkeypatch):
 def test_agent_run_drives_the_loop(srv, monkeypatch):
     seen = _patch_run(monkeypatch)
     status, payload = _request(
-        srv, "/v1/agent/run", method="POST",
+        srv,
+        "/v1/agent/run",
+        method="POST",
         body=_json_body({"task": "do the thing", "max_steps": 5}),
         token=TOKEN,
     )
@@ -128,7 +134,9 @@ def test_agent_run_drives_the_loop(srv, monkeypatch):
 def test_agent_run_401_without_token(srv, monkeypatch):
     _patch_run(monkeypatch)
     status, _ = _request(
-        srv, "/v1/agent/run", method="POST",
+        srv,
+        "/v1/agent/run",
+        method="POST",
         body=_json_body({"task": "do the thing"}),
     )
     assert status == 401
@@ -137,8 +145,11 @@ def test_agent_run_401_without_token(srv, monkeypatch):
 def test_agent_run_missing_task_400(srv, monkeypatch):
     _patch_run(monkeypatch)
     status, payload = _request(
-        srv, "/v1/agent/run", method="POST",
-        body=_json_body({}), token=TOKEN,
+        srv,
+        "/v1/agent/run",
+        method="POST",
+        body=_json_body({}),
+        token=TOKEN,
     )
     assert status == 400
     assert "task" in payload["error"]
@@ -147,8 +158,11 @@ def test_agent_run_missing_task_400(srv, monkeypatch):
 def test_agent_run_body_too_large_413(srv, monkeypatch):
     _patch_run(monkeypatch)
     status, payload = _request(
-        srv, "/v1/agent/run", method="POST",
-        body=b"x" * (agent_server.MAX_BODY_BYTES + 1), token=TOKEN,
+        srv,
+        "/v1/agent/run",
+        method="POST",
+        body=b"x" * (agent_server.MAX_BODY_BYTES + 1),
+        token=TOKEN,
     )
     assert status == 413
     assert "too large" in payload["error"]
@@ -157,8 +171,11 @@ def test_agent_run_body_too_large_413(srv, monkeypatch):
 def test_agent_run_max_steps_capped(srv, monkeypatch):
     seen = _patch_run(monkeypatch)
     status, _ = _request(
-        srv, "/v1/agent/run", method="POST",
-        body=_json_body({"task": "x", "max_steps": 9999}), token=TOKEN,
+        srv,
+        "/v1/agent/run",
+        method="POST",
+        body=_json_body({"task": "x", "max_steps": 9999}),
+        token=TOKEN,
     )
     assert status == 200
     assert seen["kwargs"]["max_steps"] == agent_server.MAX_STEPS_CAP
@@ -202,8 +219,11 @@ def _patch_chat(monkeypatch):
             seen.update(message=message, turn_kwargs=kwargs)
             return agent_chat.TurnResult(
                 transcript=AgentTranscript(
-                    task=message, provider_name="fake", steps=[],
-                    final="fake chat reply", ok=True,
+                    task=message,
+                    provider_name="fake",
+                    steps=[],
+                    final="fake chat reply",
+                    ok=True,
                 ),
                 context_pct=0.12,
                 compressed=False,
@@ -217,9 +237,10 @@ def _patch_chat(monkeypatch):
 def test_agent_chat_drives_a_turn(srv, monkeypatch):
     seen = _patch_chat(monkeypatch)
     status, payload = _request(
-        srv, "/v1/agent/chat", method="POST",
-        body=_json_body({"session_id": "s1", "message": "hello there",
-                         "max_steps": 4}),
+        srv,
+        "/v1/agent/chat",
+        method="POST",
+        body=_json_body({"session_id": "s1", "message": "hello there", "max_steps": 4}),
         token=TOKEN,
     )
     assert status == 200
@@ -238,7 +259,9 @@ def test_agent_chat_drives_a_turn(srv, monkeypatch):
 def test_agent_chat_401_without_token(srv, monkeypatch):
     _patch_chat(monkeypatch)
     status, _ = _request(
-        srv, "/v1/agent/chat", method="POST",
+        srv,
+        "/v1/agent/chat",
+        method="POST",
         body=_json_body({"session_id": "s1", "message": "hi"}),
     )
     assert status == 401
@@ -247,7 +270,9 @@ def test_agent_chat_401_without_token(srv, monkeypatch):
 def test_agent_chat_401_with_wrong_token(srv, monkeypatch):
     _patch_chat(monkeypatch)
     status, _ = _request(
-        srv, "/v1/agent/chat", method="POST",
+        srv,
+        "/v1/agent/chat",
+        method="POST",
         body=_json_body({"session_id": "s1", "message": "hi"}),
         token="wrong-token",
     )
@@ -257,14 +282,20 @@ def test_agent_chat_401_with_wrong_token(srv, monkeypatch):
 def test_agent_chat_missing_fields_400(srv, monkeypatch):
     _patch_chat(monkeypatch)
     status, payload = _request(
-        srv, "/v1/agent/chat", method="POST",
-        body=_json_body({"message": "hi"}), token=TOKEN,
+        srv,
+        "/v1/agent/chat",
+        method="POST",
+        body=_json_body({"message": "hi"}),
+        token=TOKEN,
     )
     assert status == 400
     assert "session_id" in payload["error"]
     status, payload = _request(
-        srv, "/v1/agent/chat", method="POST",
-        body=_json_body({"session_id": "s1"}), token=TOKEN,
+        srv,
+        "/v1/agent/chat",
+        method="POST",
+        body=_json_body({"session_id": "s1"}),
+        token=TOKEN,
     )
     assert status == 400
     assert "message" in payload["error"]
@@ -273,7 +304,9 @@ def test_agent_chat_missing_fields_400(srv, monkeypatch):
 def test_agent_chat_bad_session_id_400(srv, monkeypatch):
     _patch_chat(monkeypatch)
     status, payload = _request(
-        srv, "/v1/agent/chat", method="POST",
+        srv,
+        "/v1/agent/chat",
+        method="POST",
         body=_json_body({"session_id": "../../etc", "message": "hi"}),
         token=TOKEN,
     )
@@ -287,7 +320,9 @@ def test_agent_chat_turns_accumulate_in_one_session(srv, monkeypatch, tmp_path):
     monkeypatch.setenv("LEVI_MODEL_DIR", str(tmp_path / "models"))
     monkeypatch.setenv("LEVI_AGENT_SESSIONS_DIR", str(tmp_path / "sessions"))
     status, payload = _request(
-        srv, "/v1/agent/chat", method="POST",
+        srv,
+        "/v1/agent/chat",
+        method="POST",
         body=_json_body({"session_id": "e2e", "message": "remember the sky is green"}),
         token=TOKEN,
     )

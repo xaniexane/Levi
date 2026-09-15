@@ -34,6 +34,7 @@ class ArtifactType(str, Enum):
 @dataclass
 class BuildIR:
     """Intermediate representation for constructive (Factory) intents."""
+
     id: str
     kind: IRKind
     raw: str
@@ -78,6 +79,7 @@ class BuildIR:
 @dataclass
 class AutomateIR:
     """Intermediate representation for automation intents."""
+
     id: str
     kind: IRKind
     raw: str
@@ -102,7 +104,9 @@ def _slug_name(text: str, fallback: str = "project") -> str:
     # Try quoted name
     m = re.search(r"[\"']([^\"']+)[\"']", text)
     if m:
-        return re.sub(r"[^a-z0-9_]+", "_", m.group(1).lower())[:40].strip("_") or fallback
+        return (
+            re.sub(r"[^a-z0-9_]+", "_", m.group(1).lower())[:40].strip("_") or fallback
+        )
     # "called X" / "named X"
     m = re.search(r"(?:called|named)\s+([a-zA-Z0-9_-]+)", t)
     if m:
@@ -114,9 +118,22 @@ def _slug_name(text: str, fallback: str = "project") -> str:
     )
     if m:
         chunk = re.sub(r"[^a-z0-9\s]", "", m.group(1)).strip()
-        words = [w for w in chunk.split() if w not in {
-            "a", "an", "the", "local", "offline", "simple", "tiny", "small", "new"
-        }][:4]
+        words = [
+            w
+            for w in chunk.split()
+            if w
+            not in {
+                "a",
+                "an",
+                "the",
+                "local",
+                "offline",
+                "simple",
+                "tiny",
+                "small",
+                "new",
+            }
+        ][:4]
         if words:
             return "_".join(words)[:40]
     return fallback
@@ -129,12 +146,28 @@ class NLIRCompiler:
     """
 
     BUILD_HINTS = (
-        "build", "make me", "make a", "create a", "create an", "scaffold",
-        "factory", "new project", "write a", "generate a", "implement a",
+        "build",
+        "make me",
+        "make a",
+        "create a",
+        "create an",
+        "scaffold",
+        "factory",
+        "new project",
+        "write a",
+        "generate a",
+        "implement a",
     )
     AUTO_HINTS = (
-        "automate", "every day", "every morning", "schedule", "whenever",
-        "when i", "cron", "remind me to run", "on startup",
+        "automate",
+        "every day",
+        "every morning",
+        "schedule",
+        "whenever",
+        "when i",
+        "cron",
+        "remind me to run",
+        "on startup",
     )
 
     def classify(self, text: str) -> IRKind:

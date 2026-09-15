@@ -19,6 +19,7 @@ Features:
   - Export transcript
   - Enterprise: HITL-aware, no silent customer contact, local-first
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -60,8 +61,12 @@ class ChatSession:
     mode: str = "companion"
     persona_id: Optional[str] = None
     messages: List[ChatMessage] = field(default_factory=list)
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
-    updated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
+    updated_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
     meta: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -78,7 +83,9 @@ class ChatSession:
 
     @classmethod
     def from_dict(cls, d: Dict[str, Any]) -> "ChatSession":
-        msgs = [ChatMessage(**m) for m in d.get("messages") or [] if isinstance(m, dict)]
+        msgs = [
+            ChatMessage(**m) for m in d.get("messages") or [] if isinstance(m, dict)
+        ]
         return cls(
             id=d.get("id") or str(uuid.uuid4())[:10],
             title=d.get("title") or "LEVI chat",
@@ -120,11 +127,15 @@ class ChatCompanion:
             path = self.dir / f"{session_id}.json"
             if path.exists():
                 try:
-                    return ChatSession.from_dict(json.loads(path.read_text(encoding="utf-8")))
+                    return ChatSession.from_dict(
+                        json.loads(path.read_text(encoding="utf-8"))
+                    )
                 except Exception:
                     pass
         sid = session_id or str(uuid.uuid4())[:10]
-        return ChatSession(id=sid, persona_id=persona_id, mode=mode if mode in MODES else "companion")
+        return ChatSession(
+            id=sid, persona_id=persona_id, mode=mode if mode in MODES else "companion"
+        )
 
     def _persist(self) -> None:
         self.session.updated_at = datetime.now(timezone.utc).isoformat()
@@ -136,11 +147,15 @@ class ChatCompanion:
     def _get_orch(self):
         if self._orch is None:
             from levi.orchestration.loop import Orchestrator
-            self._orch = Orchestrator(persona_id=self.session.persona_id, soft_power=True)
+
+            self._orch = Orchestrator(
+                persona_id=self.session.persona_id, soft_power=True
+            )
         return self._orch
 
     def set_persona(self, persona_id: str) -> str:
         from levi.persona.lattice import PersonaLattice
+
         lat = PersonaLattice()
         if persona_id not in lat.keys() and persona_id != "auto":
             return f"Unknown persona '{persona_id}'. Try: levi personas"
@@ -160,6 +175,7 @@ class ChatCompanion:
     def set_profile(self, profile_id: str) -> str:
         """Deprecated name — traits are hardwired, not presets."""
         from levi.ei.mass_chat import format_traits
+
         return (
             "Traits are hardwired into LEVI (not presets to cosplay other products).\n"
             + format_traits()
@@ -192,7 +208,9 @@ class ChatCompanion:
         if m == "mentor":
             return "[Mode: mentor — teach structure; use equation/chess when useful.] "
         if m == "writer":
-            return "[Mode: writer — literary clarity; offer L.W.P. expand if relevant.] "
+            return (
+                "[Mode: writer — literary clarity; offer L.W.P. expand if relevant.] "
+            )
         if m == "builder":
             return "[Mode: builder — prefer concrete artifacts, scaffolds, next ship step.] "
         return ""
@@ -207,10 +225,13 @@ class ChatCompanion:
         if text.startswith("/"):
             return self._slash(text)
 
-        self.session.messages.append(ChatMessage(role="user", content=text, mode=self.session.mode))
+        self.session.messages.append(
+            ChatMessage(role="user", content=text, mode=self.session.mode)
+        )
 
         try:
             from levi.ei.mass_chat import trait_block_for_prompt, emphasize_for_text
+
             trait_prefix = trait_block_for_prompt()
             emp = emphasize_for_text(text)
             if emp:
@@ -234,6 +255,7 @@ class ChatCompanion:
             # hard fallback offline
             try:
                 from levi.ei.offline_companion import synthesize
+
                 reply = synthesize(text)
             except Exception:
                 reply = (
@@ -243,10 +265,16 @@ class ChatCompanion:
 
         if not reply or not str(reply).strip():
             from levi.ei.offline_companion import synthesize
+
             reply = synthesize(text)
 
         self.session.messages.append(
-            ChatMessage(role="assistant", content=str(reply), persona_id=persona_used, mode=self.session.mode)
+            ChatMessage(
+                role="assistant",
+                content=str(reply),
+                persona_id=persona_used,
+                mode=self.session.mode,
+            )
         )
         # title from first user line
         if len([m for m in self.session.messages if m.role == "user"]) == 1:
@@ -276,6 +304,7 @@ class ChatCompanion:
             return "\n".join(lines)
         if cmd in ("/traits", "/profile"):
             from levi.ei.mass_chat import format_traits
+
             return format_traits()
         if cmd == "/welcome":
             return self.welcome()
@@ -300,6 +329,7 @@ class ChatCompanion:
             return "Messages cleared."
         if cmd == "/model":
             from levi.cloud.model import FullCloudModel
+
             m = FullCloudModel()
             sub = (arg.split() or ["status"])[0]
             if sub == "expand":
@@ -314,15 +344,21 @@ class ChatCompanion:
             f"Unknown command {cmd}. /help for list."
         )
 
-
     def list_personas(self, query: Optional[str] = None) -> str:
         from levi.persona.lattice import PersonaLattice
+
         lat = PersonaLattice()
         keys = lat.keys()
-        core = [k for k in keys if not k.startswith("lens_") and not k.startswith("mood_")]
+        core = [
+            k for k in keys if not k.startswith("lens_") and not k.startswith("mood_")
+        ]
         q = (query or "").lower()
         if q:
-            core = [k for k in core if q in k or q in (lat.get(k).display_name or "").lower()]
+            core = [
+                k
+                for k in core
+                if q in k or q in (lat.get(k).display_name or "").lower()
+            ]
             keys_f = [k for k in keys if q in k]
         else:
             keys_f = core[:40]
@@ -332,7 +368,9 @@ class ChatCompanion:
             mark = "▶" if k == self.session.persona_id else " "
             lines.append(f"{mark} {k:28} {p.display_name if p else ''}")
         if not q:
-            lines.append("… use /personas <filter> · lenses/moods included in full lattice")
+            lines.append(
+                "… use /personas <filter> · lenses/moods included in full lattice"
+            )
         return "\n".join(lines)
 
     def history(self, n: int = 10) -> str:
@@ -351,7 +389,11 @@ class ChatCompanion:
             "",
         ]
         for m in self.session.messages:
-            who = "**You**" if m.role == "user" else f"**LEVI** ({m.persona_id or 'auto'})"
+            who = (
+                "**You**"
+                if m.role == "user"
+                else f"**LEVI** ({m.persona_id or 'auto'})"
+            )
             lines.append(f"{who}  \n{m.content}\n")
         out.write_text("\n".join(lines), encoding="utf-8")
         return f"Exported: {out}"
@@ -367,19 +409,28 @@ class ChatCompanion:
         try:
             from levi.persona.nervous_system import NervousSystem
             from levi.persona.lattice import PersonaLattice
+
             ns = NervousSystem(persona_ids=PersonaLattice().keys())
             lines.append("")
-            lines.append(ns.format_status().split("\n")[0] if hasattr(ns, "format_status") else "nervous: ok")
+            lines.append(
+                ns.format_status().split("\n")[0]
+                if hasattr(ns, "format_status")
+                else "nervous: ok"
+            )
         except Exception as e:
             lines.append(f"nervous: {e}")
         try:
             from levi.daemon.kernel import DaemonKernel
+
             k = DaemonKernel()
-            lines.append(f"daemon estop={k.state.estop} cycle={getattr(k.state, 'cycle', 0)}")
+            lines.append(
+                f"daemon estop={k.state.estop} cycle={getattr(k.state, 'cycle', 0)}"
+            )
         except Exception:
             pass
         try:
             from levi.cloud.stages import current_stage
+
             cp = current_stage()
             lines.append(f"phase: {cp.id}/{cp.status}")
         except Exception:
@@ -417,13 +468,15 @@ def list_sessions(directory: Optional[Path] = None) -> List[Dict[str, Any]]:
             continue
         try:
             data = json.loads(p.read_text(encoding="utf-8"))
-            rows.append({
-                "id": data.get("id"),
-                "title": data.get("title"),
-                "mode": data.get("mode"),
-                "messages": len(data.get("messages") or []),
-                "updated_at": data.get("updated_at"),
-            })
+            rows.append(
+                {
+                    "id": data.get("id"),
+                    "title": data.get("title"),
+                    "mode": data.get("mode"),
+                    "messages": len(data.get("messages") or []),
+                    "updated_at": data.get("updated_at"),
+                }
+            )
         except Exception:
             continue
     return rows

@@ -1,4 +1,5 @@
 """Production error surface — structured, never silent on critical paths."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

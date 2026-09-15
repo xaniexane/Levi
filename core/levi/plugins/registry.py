@@ -71,8 +71,8 @@ class ExecutionResult:
     operation: str
     ok: bool
     status: str  # ok | missing_credential | transport_not_wired |
-                 # confirmation_required | unknown_operation |
-                 # invalid_params | api_error
+    # confirmation_required | unknown_operation |
+    # invalid_params | api_error
     message: str
     data: dict[str, Any] | None = None
     request_made: bool = False
@@ -129,10 +129,7 @@ class Connector(ABC):
         return value if value.strip() else None
 
     def missing_credential_message(self) -> str:
-        return (
-            f"missing credential: set {self.credential_env_var} "
-            "— nothing was sent."
-        )
+        return f"missing credential: set {self.credential_env_var} — nothing was sent."
 
     # -- operation lookup -------------------------------------------------
 
@@ -144,9 +141,7 @@ class Connector(ABC):
 
     # -- transport --------------------------------------------------------
 
-    def _call_api(
-        self, method: str, path: str, token: str, body: Any = None
-    ) -> Any:
+    def _call_api(self, method: str, path: str, token: str, body: Any = None) -> Any:
         """Perform one authenticated request. Subclasses wire this to a
         real transport (stdlib ``urllib`` for the kernel).
 
@@ -293,9 +288,7 @@ def register_connector(cls: type[Connector]) -> type[Connector]:
     if not cls.id:
         raise ValueError(f"{cls.__name__} must define a non-empty id")
     if not cls.credential_env_var:
-        raise ValueError(
-            f"{cls.__name__} must declare credential_env_var"
-        )
+        raise ValueError(f"{cls.__name__} must declare credential_env_var")
     _REGISTRY[cls.id] = cls
     return cls
 
@@ -314,9 +307,7 @@ def describe(connector: Connector) -> str:
     caps = ", ".join(
         f"{c.name}{'*' if c.write else ''}" for c in connector.capabilities
     )
-    ops = ", ".join(
-        f"{o.name}{'*' if o.write else ''}" for o in connector.operations
-    )
+    ops = ", ".join(f"{o.name}{'*' if o.write else ''}" for o in connector.operations)
     return (
         f"{connector.id} — {connector.display_name}\n"
         f"  credential: {connector.credential_env_var} "

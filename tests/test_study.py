@@ -77,6 +77,7 @@ def _store(env) -> MemoryStore:
 # idle gating
 # ---------------------------------------------------------------------------
 
+
 def _touch(path: Path, age_hours: float) -> None:
     path.write_text("{}\n", encoding="utf-8")
     ts = time.time() - age_hours * 3600
@@ -135,6 +136,7 @@ def test_heartbeat_study_disabled(env, monkeypatch):
 # quiz
 # ---------------------------------------------------------------------------
 
+
 def test_quiz_perfect_recall_on_intact_lessons(env):
     quiz = study.run_quiz(sample_size=3)
     assert quiz["total_lessons"] == 3
@@ -173,6 +175,7 @@ def test_quiz_no_curriculum(env, monkeypatch):
 # study run + trend
 # ---------------------------------------------------------------------------
 
+
 def test_study_run_journals_quiz(env):
     report = study.run_study(store=_store(env))
     assert report["quiz"]["mean_score"] == 1.0
@@ -209,7 +212,9 @@ def test_study_run_without_curriculum_still_cycles(env, monkeypatch):
     monkeypatch.setattr(curriculum_mod, "LESSONS", [])
     report = study.run_study(store=_store(env))
     assert report["quiz"]["mean_score"] is None
-    studies = [e for e in growth_journal.read_entries(limit=5) if e.get("kind") == "study"]
+    studies = [
+        e for e in growth_journal.read_entries(limit=5) if e.get("kind") == "study"
+    ]
     assert studies and studies[0]["quiz"]["sampled"] == 0
 
 

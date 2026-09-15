@@ -52,7 +52,9 @@ class Automation:
     last_run: Optional[str] = None
     last_result: Optional[str] = None
     tags: List[str] = field(default_factory=list)
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
     # Interpenetration links
     linked_personas: List[str] = field(default_factory=list)
     linked_genres: List[str] = field(default_factory=list)
@@ -66,7 +68,10 @@ class Automation:
             "trigger": self.trigger.value,
             "trigger_config": self.trigger_config,
             "conditions": self.conditions,
-            "actions": [{"skill_id": a.skill_id, "args": a.args, "risk_level": a.risk_level} for a in self.actions],
+            "actions": [
+                {"skill_id": a.skill_id, "args": a.args, "risk_level": a.risk_level}
+                for a in self.actions
+            ],
             "status": self.status.value,
             "risk_ceiling": self.risk_ceiling,
             "run_count": self.run_count,
@@ -190,6 +195,7 @@ class AutomationRegistry:
         results = []
         if skill_registry is None:
             from levi.skill.registry import SkillRegistry
+
             skill_registry = SkillRegistry()
         for action in a.actions:
             try:

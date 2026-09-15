@@ -2,6 +2,7 @@
 
 Never touches the real ~/.levi: every config function takes a home param.
 """
+
 import json
 import stat
 import sys
@@ -29,21 +30,39 @@ class _StubHandler(BaseHTTPRequestHandler):
         method = msg.get("method")
         params = msg.get("params") or {}
         if method == "initialize":
-            return {"protocolVersion": "2024-11-05",
-                    "serverInfo": {"name": "stub", "version": "0"}}
+            return {
+                "protocolVersion": "2024-11-05",
+                "serverInfo": {"name": "stub", "version": "0"},
+            }
         if method == "tools/list":
-            return {"tools": [
-                {"name": "echo", "description": "echoes args",
-                 "inputSchema": {"type": "object",
-                                "properties": {"text": {"type": "string"}}}},
-                {"name": "slow", "description": "sleeps then answers",
-                 "inputSchema": {"type": "object", "properties": {}}},
-            ]}
+            return {
+                "tools": [
+                    {
+                        "name": "echo",
+                        "description": "echoes args",
+                        "inputSchema": {
+                            "type": "object",
+                            "properties": {"text": {"type": "string"}},
+                        },
+                    },
+                    {
+                        "name": "slow",
+                        "description": "sleeps then answers",
+                        "inputSchema": {"type": "object", "properties": {}},
+                    },
+                ]
+            }
         if method == "tools/call":
             if params.get("name") == "slow":
                 time.sleep(2)
-            return {"content": [{"type": "text",
-                                 "text": "echo:" + json.dumps(params.get("arguments", {}))}]}
+            return {
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "echo:" + json.dumps(params.get("arguments", {})),
+                    }
+                ]
+            }
         if method == "ping":
             return {}
         return None
@@ -66,9 +85,14 @@ class _StubHandler(BaseHTTPRequestHandler):
         try:
             msg = json.loads(body)
         except ValueError:
-            self._send_json({"jsonrpc": "2.0", "id": None,
-                             "error": {"code": -32700, "message": "parse error"}},
-                            code=400)
+            self._send_json(
+                {
+                    "jsonrpc": "2.0",
+                    "id": None,
+                    "error": {"code": -32700, "message": "parse error"},
+                },
+                code=400,
+            )
             return
         if "id" not in msg:  # notification
             self.send_response(202)
@@ -76,8 +100,13 @@ class _StubHandler(BaseHTTPRequestHandler):
             return
         result = self._dispatch(msg)
         if result is None:
-            self._send_json({"jsonrpc": "2.0", "id": msg.get("id"),
-                             "error": {"code": -32601, "message": "unknown method"}})
+            self._send_json(
+                {
+                    "jsonrpc": "2.0",
+                    "id": msg.get("id"),
+                    "error": {"code": -32601, "message": "unknown method"},
+                }
+            )
         else:
             self._send_json({"jsonrpc": "2.0", "id": msg.get("id"), "result": result})
 
@@ -332,8 +361,17 @@ def test_cli_add_probes_and_lists(http_stub, tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(Path, "home", lambda: home)
     from levi.mcp import cli as mcli
 
-    mcli.cmd_mcp(_ns(mcp_action="add", name="web", url=_url(http_stub),
-                     cmd=None, client_transport="", header=[], timeout=5))
+    mcli.cmd_mcp(
+        _ns(
+            mcp_action="add",
+            name="web",
+            url=_url(http_stub),
+            cmd=None,
+            client_transport="",
+            header=[],
+            timeout=5,
+        )
+    )
     out = capsys.readouterr().out
     assert "Added MCP server 'web'" in out and "2 tool(s)" in out
 

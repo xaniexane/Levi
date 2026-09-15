@@ -9,6 +9,7 @@ Public products (Gemini, Copilot, Claude, Grok-class UIs) set a *quality bar*
 humans already recognize. LEVI internalizes that bar as its own traits —
 local-first, HITL, non-personhood, exportable.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -19,7 +20,7 @@ from typing import Dict, List
 class QualityTrait:
     id: str
     name: str
-    inspired_by: str   # quality bar reference only — not an identity switch
+    inspired_by: str  # quality bar reference only — not an identity switch
     what_levi_owns: str
     always_on: bool = True
 
@@ -98,7 +99,9 @@ def format_traits() -> str:
         lines.append(f"  quality bar ref: {t.inspired_by}")
         lines.append(f"  LEVI owns:      {t.what_levi_owns}")
         lines.append("")
-    lines.append("Identity: Synthetic Intelligence · local-first · HITL · non-personhood")
+    lines.append(
+        "Identity: Synthetic Intelligence · local-first · HITL · non-personhood"
+    )
     lines.append("Use:  levi traits   ·  levi talk   ·  levi chat")
     return "\n".join(lines)
 
@@ -117,7 +120,9 @@ def emphasize_for_text(text: str) -> List[str]:
     """Which hardwired traits to *emphasize* (all remain on)."""
     t = (text or "").lower()
     emp: List[str] = ["precision", "continuity"]
-    if any(w in t for w in ("build", "code", "checklist", "ship", "scaffold", "implement")):
+    if any(
+        w in t for w in ("build", "code", "checklist", "ship", "scaffold", "implement")
+    ):
         emp.append("craft")
     if any(w in t for w in ("explain", "options", "learn", "how do", "what should")):
         emp.append("breadth")
@@ -125,7 +130,10 @@ def emphasize_for_text(text: str) -> List[str]:
         emp.append("careful")
     if any(w in t for w in ("pressure", "honest", "wrong", "weak", "fail", "roast")):
         emp.append("edge")
-    if any(w in t for w in ("hurt", "anxious", "scared", "crisis", "overwhelm", "slow down")):
+    if any(
+        w in t
+        for w in ("hurt", "anxious", "scared", "crisis", "overwhelm", "slow down")
+    ):
         emp.append("care")
     return list(dict.fromkeys(emp))
 

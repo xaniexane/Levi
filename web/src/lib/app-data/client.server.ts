@@ -1,9 +1,6 @@
 import { createHash } from "node:crypto";
 import { getRequest } from "@tanstack/react-start/server";
-import {
-  assertSameSiteRequest,
-  CrossSiteRequestError,
-} from "../auth/isolation.server.ts";
+import { assertSameSiteRequest, CrossSiteRequestError } from "../auth/isolation.server.ts";
 import { assertAppDataServerOnly } from "./server-only.ts";
 import {
   CONNECTOR_TOKEN_HEADER,
@@ -39,10 +36,7 @@ function connectorsBaseFor(publicHost: string | null): string | null {
 
   const host = publicHost?.toLowerCase();
   if (!host || isLoopbackHost(host)) return null;
-  if (
-    host === "app-builder-testing.com" ||
-    host.endsWith(".app-builder-testing.com")
-  ) {
+  if (host === "app-builder-testing.com" || host.endsWith(".app-builder-testing.com")) {
     return `https://${CONNECTORS_HOST_STAGING}`;
   }
   if (host === "grok.me" || host.endsWith(".grok.me")) {
@@ -62,13 +56,10 @@ function tryGetRequest(): Request | null {
 function inboundContext(): InboundContext {
   const req = tryGetRequest();
   const xf = req?.headers.get("x-forwarded-host")?.split(",")[0]?.trim();
-  const publicHost =
-    (xf || req?.headers.get("host") || "").split(":")[0]?.trim() || null;
+  const publicHost = (xf || req?.headers.get("host") || "").split(":")[0]?.trim() || null;
   const headerToken = req?.headers.get(CONNECTOR_TOKEN_HEADER)?.trim() || null;
   const envToken =
-    process.env.NODE_ENV === "production"
-      ? null
-      : (env("GROK_CONNECTOR_ACCESS_TOKEN") ?? null);
+    process.env.NODE_ENV === "production" ? null : (env("GROK_CONNECTOR_ACCESS_TOKEN") ?? null);
   return {
     token: headerToken ?? envToken,
     publicHost,
@@ -150,14 +141,9 @@ function gateSigninUrl(ctx: InboundContext): string | undefined {
     const gateHost = connectorsHost.replace(/^connectors\./, "gate.");
     if (gateHost === connectorsHost) return undefined;
     const publicHost = ctx.publicHost?.toLowerCase();
-    const gated =
-      publicHost && !isLoopbackHost(publicHost)
-        ? `https://${publicHost}`
-        : undefined;
+    const gated = publicHost && !isLoopbackHost(publicHost) ? `https://${publicHost}` : undefined;
     const signin = `https://${gateHost}/__gate/signin`;
-    return gated
-      ? `${signin}?return_to=${encodeURIComponent(gated)}`
-      : signin;
+    return gated ? `${signin}?return_to=${encodeURIComponent(gated)}` : signin;
   } catch {
     return undefined;
   }
@@ -195,9 +181,7 @@ function tokenIdentityKey(token: string): string {
   const payload = token.split(".")[1];
   if (payload) {
     try {
-      const claims: unknown = JSON.parse(
-        Buffer.from(payload, "base64url").toString("utf8"),
-      );
+      const claims: unknown = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
       if (claims && typeof claims === "object" && !Array.isArray(claims)) {
         const { sub, team_id: teamId } = claims as {
           sub?: unknown;
@@ -205,9 +189,7 @@ function tokenIdentityKey(token: string): string {
         };
         if (typeof sub === "string" && sub) {
           return createHash("sha256")
-            .update(
-              JSON.stringify([sub, typeof teamId === "string" ? teamId : null]),
-            )
+            .update(JSON.stringify([sub, typeof teamId === "string" ? teamId : null]))
             .digest("base64url");
         }
       }
@@ -229,10 +211,7 @@ function memoizedFailure(key: string | null): CallToolResult | null {
   return hit.result;
 }
 
-function memoizeFailure(
-  key: string | null,
-  result: CallToolResult,
-): CallToolResult {
+function memoizeFailure(key: string | null, result: CallToolResult): CallToolResult {
   if (!key) return result;
   const now = Date.now();
   for (const [staleKey, entry] of failureMemo) {
@@ -328,9 +307,7 @@ export async function callTool(
     if (status === 401) {
       const loginUrl =
         gateSigninUrl(ctx) ??
-        (typeof json.loginUrl === "string" && json.loginUrl
-          ? json.loginUrl
-          : undefined);
+        (typeof json.loginUrl === "string" && json.loginUrl ? json.loginUrl : undefined);
       return {
         ok: false,
         data: null,
@@ -357,15 +334,6 @@ export async function callTool(
   }
 }
 
-export {
-  ConnectorType,
-  GoogleDriveTools,
-  CONNECTOR_TOKEN_HEADER,
-} from "./types.ts";
-export type {
-  CallToolResult,
-  CallToolOptions,
-  ToolArgs,
-  ConnectorTypeName,
-} from "./types.ts";
+export { ConnectorType, GoogleDriveTools, CONNECTOR_TOKEN_HEADER } from "./types.ts";
+export type { CallToolResult, CallToolOptions, ToolArgs, ConnectorTypeName } from "./types.ts";
 export { isLoginRequired, redirectToLoginIfRequired } from "./login.ts";

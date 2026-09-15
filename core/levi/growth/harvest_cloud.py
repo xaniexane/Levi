@@ -36,12 +36,17 @@ from levi.growth.experience import Experience, _clean, _session_records
 
 def cloud_learn_enabled() -> bool:
     """Global kill switch. ``LEVI_GROWTH_CLOUD_LEARN=0`` disables."""
-    return os.environ.get("LEVI_GROWTH_CLOUD_LEARN", "1").strip() not in ("0", "false", "no")
+    return os.environ.get("LEVI_GROWTH_CLOUD_LEARN", "1").strip() not in (
+        "0",
+        "false",
+        "no",
+    )
 
 
 def _sessions_dir() -> Path | None:
     try:
         from levi.agent.chat import sessions_dir as _sd
+
         return _sd()
     except Exception:
         return None

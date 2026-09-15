@@ -47,17 +47,36 @@ def _write_session(sessions: Path, name: str, records: list[dict]) -> None:
 
 def _sample_records() -> list[dict]:
     return [
-        {"kind": "message", "role": "user", "ts": "2026-09-15T10:00:00Z",
-         "content": "Please remember that I prefer dark mode in every app."},
-        {"kind": "message", "role": "assistant", "ts": "2026-09-15T10:00:05Z",
-         "content": "Got it, I'll remember you prefer dark mode."},
-        {"kind": "message", "role": "user", "ts": "2026-09-15T10:01:00Z",
-         "content": "No, that's wrong — I meant dark mode only for the terminal."},
-        {"kind": "message", "role": "user", "ts": "2026-09-15T10:02:00Z",
-         "content": "Remember that my backup drive is mounted at /mnt/backup."},
-        {"kind": "summary", "ts": "2026-09-15T10:03:00Z",
-         "content": "User set a dark-mode preference and corrected its scope to terminal only.",
-         "covers_messages": 4},
+        {
+            "kind": "message",
+            "role": "user",
+            "ts": "2026-09-15T10:00:00Z",
+            "content": "Please remember that I prefer dark mode in every app.",
+        },
+        {
+            "kind": "message",
+            "role": "assistant",
+            "ts": "2026-09-15T10:00:05Z",
+            "content": "Got it, I'll remember you prefer dark mode.",
+        },
+        {
+            "kind": "message",
+            "role": "user",
+            "ts": "2026-09-15T10:01:00Z",
+            "content": "No, that's wrong — I meant dark mode only for the terminal.",
+        },
+        {
+            "kind": "message",
+            "role": "user",
+            "ts": "2026-09-15T10:02:00Z",
+            "content": "Remember that my backup drive is mounted at /mnt/backup.",
+        },
+        {
+            "kind": "summary",
+            "ts": "2026-09-15T10:03:00Z",
+            "content": "User set a dark-mode preference and corrected its scope to terminal only.",
+            "covers_messages": 4,
+        },
     ]
 
 
@@ -86,12 +105,26 @@ def test_harvest_watermark_idempotent(env):
 
 
 def test_harvest_skips_tiny_and_malformed(env):
-    _write_session(env["sessions"], "chat2", [
-        {"kind": "message", "role": "user", "ts": "2026-09-15T11:00:00Z", "content": "ok"},
-        {"kind": "message", "role": "user", "ts": "2026-09-15T11:01:00Z", "content": ""},
-        {"no-kind": True},
-        "not json at all",
-    ])
+    _write_session(
+        env["sessions"],
+        "chat2",
+        [
+            {
+                "kind": "message",
+                "role": "user",
+                "ts": "2026-09-15T11:00:00Z",
+                "content": "ok",
+            },
+            {
+                "kind": "message",
+                "role": "user",
+                "ts": "2026-09-15T11:01:00Z",
+                "content": "",
+            },
+            {"no-kind": True},
+            "not json at all",
+        ],
+    )
     exps, _ = harvest_sessions()
     assert exps == []
 
@@ -103,10 +136,20 @@ def test_harvest_skips_tiny_and_malformed(env):
 
 def test_reflect_rules_preference_and_fact():
     exps = [
-        Experience(id="1", kind="user-said", source="s", ts="t",
-                   content="I prefer concise answers, please always keep them short."),
-        Experience(id="2", kind="user-said", source="s", ts="t",
-                   content="Remember that the staging URL is https://staging.example.com."),
+        Experience(
+            id="1",
+            kind="user-said",
+            source="s",
+            ts="t",
+            content="I prefer concise answers, please always keep them short.",
+        ),
+        Experience(
+            id="2",
+            kind="user-said",
+            source="s",
+            ts="t",
+            content="Remember that the staging URL is https://staging.example.com.",
+        ),
     ]
     learnings = reflect_rules(exps)
     kinds = {learning.kind for learning in learnings}
@@ -118,8 +161,13 @@ def test_reflect_rules_preference_and_fact():
 
 def test_reflect_rules_correction():
     exps = [
-        Experience(id="1", kind="user-said", source="s", ts="t",
-                   content="No, that's wrong — I meant the blue one, not the red one."),
+        Experience(
+            id="1",
+            kind="user-said",
+            source="s",
+            ts="t",
+            content="No, that's wrong — I meant the blue one, not the red one.",
+        ),
     ]
     learnings = reflect_rules(exps)
     assert any(learning.kind == "correction" for learning in learnings)
@@ -127,8 +175,13 @@ def test_reflect_rules_correction():
 
 def test_reflect_rules_tool_trouble():
     exps = [
-        Experience(id=f"t{i}", kind="levi-did", source="s", ts="t",
-                   content=f"[tool web_fetch] error: connection failed ({i})")
+        Experience(
+            id=f"t{i}",
+            kind="levi-did",
+            source="s",
+            ts="t",
+            content=f"[tool web_fetch] error: connection failed ({i})",
+        )
         for i in range(3)
     ]
     learnings = reflect_rules(exps)
@@ -142,10 +195,14 @@ def test_reflect_rules_empty():
 
 def test_reflect_never_claims_sentience():
     exps = [
-        Experience(id="1", kind="user-said", source="s", ts="t",
-                   content="Remember that I prefer dark mode."),
-        Experience(id="2", kind="levi-did", source="s", ts="t",
-                   content="Understood."),
+        Experience(
+            id="1",
+            kind="user-said",
+            source="s",
+            ts="t",
+            content="Remember that I prefer dark mode.",
+        ),
+        Experience(id="2", kind="levi-did", source="s", ts="t", content="Understood."),
     ]
     for learning in reflect_rules(exps):
         low = learning.content.lower()
@@ -158,17 +215,23 @@ def test_reflect_never_claims_sentience():
 
 
 def _learning(kind, content, conf=0.8):
-    return Learning(kind=kind, content=content, confidence=conf,
-                    provenance={"mode": "rules"})
+    return Learning(
+        kind=kind, content=content, confidence=conf, provenance={"mode": "rules"}
+    )
 
 
 def test_consolidate_writes_typed_memories(env):
     store = MemoryStore(data_dir=env["mem"])
     rep = consolidate(
-        [_learning("preference", "The user prefers concise answers in every app."),
-         _learning("fact", "The staging URL is https://staging.example.com."),
-         _learning("procedural", "When web_fetch fails twice, re-check arguments first.")],
-        cycle_id="cyc-test", store=store,
+        [
+            _learning("preference", "The user prefers concise answers in every app."),
+            _learning("fact", "The staging URL is https://staging.example.com."),
+            _learning(
+                "procedural", "When web_fetch fails twice, re-check arguments first."
+            ),
+        ],
+        cycle_id="cyc-test",
+        store=store,
     )
     assert rep["accepted"] == 3 and rep["corroborated"] == 0
     assert len(rep["writes"]) == 3
@@ -196,8 +259,12 @@ def test_consolidate_dedup_corroborates(env):
 
 def test_consolidate_dry_run_writes_nothing(env):
     store = MemoryStore(data_dir=env["mem"])
-    rep = consolidate([_learning("fact", "The sky is blue on clear days.")],
-                      cycle_id="cyc-dry", store=store, dry_run=True)
+    rep = consolidate(
+        [_learning("fact", "The sky is blue on clear days.")],
+        cycle_id="cyc-dry",
+        store=store,
+        dry_run=True,
+    )
     assert rep["accepted"] == 1 and rep["writes"] == []
     assert store.stats()["total"] == 0
 
@@ -269,8 +336,11 @@ def test_status_dashboard(env):
 
 def test_forget_path_removes_learnings(env):
     store = MemoryStore(data_dir=env["mem"])
-    rep = consolidate([_learning("fact", "Levi learned the staging URL today.")],
-                      cycle_id="cyc-f", store=store)
+    rep = consolidate(
+        [_learning("fact", "Levi learned the staging URL today.")],
+        cycle_id="cyc-f",
+        store=store,
+    )
     eid = rep["writes"][0]
     assert store.delete(eid)
     assert store.get(eid) is None

@@ -67,7 +67,9 @@ def contribute_enabled() -> bool:
     default; the owner's own sessions need this explicit opt-in.
     """
     return os.environ.get("LEVI_GROWTH_CONTRIBUTE", "0").strip().lower() in (
-        "1", "true", "yes",
+        "1",
+        "true",
+        "yes",
     )
 
 

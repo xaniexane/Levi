@@ -11,6 +11,7 @@ the catalog registers new subjects automatically.
 they surface structured curriculum knowledge the agent can study from.
 They do not confer expertise — see docs/COURSES.md for honest limits.
 """
+
 from __future__ import annotations
 
 import json

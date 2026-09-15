@@ -9,6 +9,7 @@ Local SSA is the oxygen. Cloud (Phase B/C) is optional wings:
 This is the “next cloud model people would use”: offline-first literary engine
 with full L.W.P. organs, fused into the LEVI symbiotic kernel.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -25,20 +26,45 @@ from levi.cloud.zk import ZeroKnowledgeDesign
 @dataclass
 class ModelCapabilities:
     """What the full cloud model exposes."""
+
     directions: List[str] = field(default_factory=lambda: list(DIRS.keys()))
     phases: List[str] = field(default_factory=lambda: list(PHASES.keys()))
     powers: List[str] = field(default_factory=lambda: list(POWERS.keys()))
     rom_lenses: List[str] = field(default_factory=lambda: list(ROM_LENSES.keys()))
-    organs: List[str] = field(default_factory=lambda: [
-        "expand", "deny", "approve", "reim", "crown", "rupture",
-        "causal_bleed", "manuscript", "set_phase", "set_power", "set_direction",
-        "genres", "status", "polish",
-    ])
-    integrations: List[str] = field(default_factory=lambda: [
-        "story_fabric", "genre_registry_97", "mirror_cascade", "opportunity_rail",
-        "character_graph", "premium_craft", "model_relay", "vault_seal",
-        "corpus_brain", "hitl", "phase_abc", "zk_sync_dryrun",
-    ])
+    organs: List[str] = field(
+        default_factory=lambda: [
+            "expand",
+            "deny",
+            "approve",
+            "reim",
+            "crown",
+            "rupture",
+            "causal_bleed",
+            "manuscript",
+            "set_phase",
+            "set_power",
+            "set_direction",
+            "genres",
+            "status",
+            "polish",
+        ]
+    )
+    integrations: List[str] = field(
+        default_factory=lambda: [
+            "story_fabric",
+            "genre_registry_97",
+            "mirror_cascade",
+            "opportunity_rail",
+            "character_graph",
+            "premium_craft",
+            "model_relay",
+            "vault_seal",
+            "corpus_brain",
+            "hitl",
+            "phase_abc",
+            "zk_sync_dryrun",
+        ]
+    )
 
 
 class FullCloudModel:
@@ -65,7 +91,9 @@ class FullCloudModel:
 
     # ── L.W.P. literary organs ─────────────────────────────────
 
-    def expand(self, n: int = 1, seed: Optional[str] = None, polish: bool = False) -> str:
+    def expand(
+        self, n: int = 1, seed: Optional[str] = None, polish: bool = False
+    ) -> str:
         out = self.engine.expand(n=n, seed=seed)
         if polish and self.engine.state.last_text:
             polished = self.engine.optional_polish(self.engine.state.last_text)
@@ -136,14 +164,20 @@ class FullCloudModel:
 
     # ── Story fabric bridge ────────────────────────────────────
 
-    def story_create(self, premise: str, genre: str = "literary", title: str = "") -> str:
+    def story_create(
+        self, premise: str, genre: str = "literary", title: str = ""
+    ) -> str:
         from levi.graph.story_fabric import StoryFabric
+
         fab = StoryFabric()
         st = fab.create_story(premise=premise, genre=genre, title=title or None)
-        return f"story id={st.id} title={st.title} genre={st.genre} beats={len(st.beats)}"
+        return (
+            f"story id={st.id} title={st.title} genre={st.genre} beats={len(st.beats)}"
+        )
 
     def story_expand(self, story_id: str, focus: str = "next_beat") -> str:
         from levi.graph.story_fabric import StoryFabric
+
         fab = StoryFabric()
         st = fab.expand(story_id, focus=focus)
         body = (st.body or "")[-500:]
@@ -151,12 +185,16 @@ class FullCloudModel:
 
     def genres_list(self) -> str:
         from levi.graph.genres import GenreRegistry
+
         r = GenreRegistry()
         info = r.integrity_check()
-        lines = [f"Genres: {r.count()}/{info['expected']}  Integrity: {'OK' if info.get('ok') else 'FAIL'}"]
+        lines = [
+            f"Genres: {r.count()}/{info['expected']}  Integrity: {'OK' if info.get('ok') else 'FAIL'}"
+        ]
         # category counts if available
         try:
             from collections import Counter
+
             cats = Counter(g.category.value for g in r.list())
             for c, n in sorted(cats.items()):
                 lines.append(f"  {c}: {n}")
@@ -168,11 +206,13 @@ class FullCloudModel:
 
     def mirror(self, seed: str = "cloud model cross-check") -> str:
         from levi.lwp.mirror_cascade import MirrorCascade
+
         r = MirrorCascade().run(seed)
         return f"MirrorCascade fp={r.fingerprint}\n{getattr(r, 'summary', r)}"
 
     def rail_status(self) -> str:
         from levi.lwp.opportunity_rail import OpportunityRail
+
         rail = OpportunityRail()
         cars = list(rail.cars.values()) if hasattr(rail, "cars") else []
         active = sum(1 for c in cars if getattr(c, "status", "") == "active")
@@ -180,6 +220,7 @@ class FullCloudModel:
 
     def characters(self, genre: str = "literary", count: int = 4) -> str:
         from levi.graph.story_fabric import StoryFabric
+
         fab = StoryFabric()
         chars = fab.generate_characters(genre=genre, count=count)
         lines = [f"Cast · genre={genre} · n={len(chars)}"]
@@ -190,6 +231,7 @@ class FullCloudModel:
     def brain_touch(self, note: str = "L.W.P. cloud model event") -> str:
         try:
             from levi.brain.corpus import Corpus
+
             c = Corpus()
             if hasattr(c, "add"):
                 c.add(note, kind="OBSERVED")

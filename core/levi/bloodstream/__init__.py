@@ -16,6 +16,7 @@ Every turn emits a Trace record (see levi.bloodstream.trace).
 Composites (see levi.bloodstream.composites) let persona + skills +
 specialists + automations interpenetrate under one strict risk ceiling.
 """
+
 from levi.bloodstream.stages import (
     BehaviorKind,
     RouteKind,

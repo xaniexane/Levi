@@ -44,22 +44,31 @@ def register_king(sub) -> None:
     )
     ksub = king_p.add_subparsers(dest="king_action")
 
-    ksub.add_parser("status", help="Ledger rank/totals, engines, review, ROM locks").add_argument(
+    ksub.add_parser(
+        "status", help="Ledger rank/totals, engines, review, ROM locks"
+    ).add_argument(
         "--visual", action="store_true", help="Include visual checkpoint URL(s)"
     )
 
-    pulse_p = ksub.add_parser("pulse", help="Drive StoryFabric one beat (harvests to ledger)")
+    pulse_p = ksub.add_parser(
+        "pulse", help="Drive StoryFabric one beat (harvests to ledger)"
+    )
     pulse_p.add_argument("--story-id", default=None, help="Story id (default: latest)")
 
-    man_p = ksub.add_parser("manuscript", help="Drive the model engine (harvests to ledger)")
+    man_p = ksub.add_parser(
+        "manuscript", help="Drive the model engine (harvests to ledger)"
+    )
     man_p.add_argument("--scenes", type=int, default=1, help="Scenes to expand (1-8)")
 
-    soc_p = ksub.add_parser("social", help="Generate a sanitized social pack (queued for review)")
+    soc_p = ksub.add_parser(
+        "social", help="Generate a sanitized social pack (queued for review)"
+    )
     soc_p.add_argument("--platform", default="x", choices=sorted(PLATFORMS))
     soc_p.add_argument("--title", default="", help="Optional pack title")
 
     post_p = ksub.add_parser(
-        "social-post", help="Post an APPROVED pack via the plugin connector (needs --yes)"
+        "social-post",
+        help="Post an APPROVED pack via the plugin connector (needs --yes)",
     )
     post_p.add_argument("--id", required=True, help="Review item id (must be approved)")
     post_p.add_argument("--platform", default=None, choices=sorted(PLATFORMS))
@@ -73,18 +82,30 @@ def register_king(sub) -> None:
     reim_p.add_argument("--tracks", type=int, default=3, help="Fork tracks (2-4)")
     reim_p.add_argument("--seed", default=None, help="Seed text for the forks")
 
-    deny_p = ksub.add_parser("deny", help="Deny: manuscript scene, or review item with id")
-    deny_p.add_argument("id", nargs="?", default=None, help="Review item id (omit: deny last scene)")
+    deny_p = ksub.add_parser(
+        "deny", help="Deny: manuscript scene, or review item with id"
+    )
+    deny_p.add_argument(
+        "id", nargs="?", default=None, help="Review item id (omit: deny last scene)"
+    )
     deny_p.add_argument("--note", default="", help="Decision note")
 
-    appr_p = ksub.add_parser("approve", help="Approve: manuscript scene, or review item with id")
-    appr_p.add_argument("id", nargs="?", default=None, help="Review item id (omit: approve last scene)")
+    appr_p = ksub.add_parser(
+        "approve", help="Approve: manuscript scene, or review item with id"
+    )
+    appr_p.add_argument(
+        "id", nargs="?", default=None, help="Review item id (omit: approve last scene)"
+    )
     appr_p.add_argument("--note", default="", help="Decision note")
 
-    rup_p = ksub.add_parser("rupture", help="Pass-through: manuscript engine wyrd-rupture")
+    rup_p = ksub.add_parser(
+        "rupture", help="Pass-through: manuscript engine wyrd-rupture"
+    )
     rup_p.add_argument("--lens", default="mccarthy", help="ROM lens style")
 
-    d5_p = ksub.add_parser("d5", help="Baseline promotion: demo the D2→D5 rank progression")
+    d5_p = ksub.add_parser(
+        "d5", help="Baseline promotion: demo the D2→D5 rank progression"
+    )
     d5_p.add_argument("--reset", action="store_true", help="Clear the demo promotion")
 
 
@@ -100,8 +121,12 @@ def cmd_king(args) -> None:
     elif action == "manuscript":
         print(king.pulse_manuscript(n=int(getattr(args, "scenes", 1) or 1)))
     elif action == "social":
-        print(king.social(platform=getattr(args, "platform", "x") or "x",
-                          title=getattr(args, "title", "") or ""))
+        print(
+            king.social(
+                platform=getattr(args, "platform", "x") or "x",
+                title=getattr(args, "title", "") or "",
+            )
+        )
     elif action == "social-post":
         res = king.social_post(
             pack_id=args.id,
@@ -117,14 +142,26 @@ def cmd_king(args) -> None:
             print(res["message"], file=sys.stderr)
             sys.exit(1)
     elif action == "reim":
-        print(king.reim(tracks=int(getattr(args, "tracks", 3) or 3),
-                        seed=getattr(args, "seed", None)))
+        print(
+            king.reim(
+                tracks=int(getattr(args, "tracks", 3) or 3),
+                seed=getattr(args, "seed", None),
+            )
+        )
     elif action == "deny":
-        print(king.deny(review_id=getattr(args, "id", None),
-                        note=getattr(args, "note", "") or ""))
+        print(
+            king.deny(
+                review_id=getattr(args, "id", None),
+                note=getattr(args, "note", "") or "",
+            )
+        )
     elif action == "approve":
-        print(king.approve(review_id=getattr(args, "id", None),
-                           note=getattr(args, "note", "") or ""))
+        print(
+            king.approve(
+                review_id=getattr(args, "id", None),
+                note=getattr(args, "note", "") or "",
+            )
+        )
     elif action == "rupture":
         print(king.rupture(lens=getattr(args, "lens", None) or "mccarthy"))
     elif action == "d5":

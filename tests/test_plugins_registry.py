@@ -50,9 +50,7 @@ class _WriteStub(Connector):
     id = "stub-write"
     display_name = "Write Stub"
     credential_env_var = "LEVI_TEST_WRITE_TOKEN"
-    capabilities = (
-        Capability("write.thing", "Writes things", write=True),
-    )
+    capabilities = (Capability("write.thing", "Writes things", write=True),)
     operations = (Operation("do_write", "Writes a thing", write=True, params=()),)
     # A deliberate attempt to opt out — the registry must force this True.
     requires_confirmation = False

@@ -23,6 +23,7 @@ plugin. Unreachable servers are skipped at startup with a stderr warning
 
 Server configs live in ``~/.levi/mcp/servers.json`` (owner-only 0o600).
 """
+
 from __future__ import annotations
 
 import json
@@ -158,7 +159,9 @@ def list_servers(home: Optional[Path] = None) -> dict:
 
 def _unwrap(result_msg: Any, method: str) -> Any:
     if not isinstance(result_msg, dict) or result_msg.get("jsonrpc") != "2.0":
-        raise MCPClientError(f"bad JSON-RPC response for {method}: {result_msg!r}"[:200])
+        raise MCPClientError(
+            f"bad JSON-RPC response for {method}: {result_msg!r}"[:200]
+        )
     if "error" in result_msg and result_msg["error"] is not None:
         err = result_msg["error"] or {}
         raise MCPClientError(
@@ -204,7 +207,10 @@ class StdioTransport:
             pass
 
     def request(
-        self, method: str, params: Optional[dict] = None, timeout: float = DEFAULT_TIMEOUT
+        self,
+        method: str,
+        params: Optional[dict] = None,
+        timeout: float = DEFAULT_TIMEOUT,
     ) -> Any:
         with self._lock:
             self._next_id += 1
@@ -212,7 +218,12 @@ class StdioTransport:
         stashed = self._stashed.pop(rid, None)
         if stashed is not None:
             return _unwrap(stashed, method)
-        payload = {"jsonrpc": "2.0", "id": rid, "method": method, "params": params or {}}
+        payload = {
+            "jsonrpc": "2.0",
+            "id": rid,
+            "method": method,
+            "params": params or {},
+        }
         try:
             assert self._proc.stdin is not None
             self._proc.stdin.write(json.dumps(payload) + "\n")
@@ -321,7 +332,9 @@ class HttpTransport:
             with urllib.request.urlopen(req, timeout=timeout) as resp:
                 raw = resp.read(65536).decode("utf-8", "replace")
         except Exception as exc:
-            raise MCPClientError(f"MCP SSE handshake failed at {sse_url}: {exc}") from exc
+            raise MCPClientError(
+                f"MCP SSE handshake failed at {sse_url}: {exc}"
+            ) from exc
         event: Optional[str] = None
         for line in raw.splitlines():
             if line.startswith("event:"):
@@ -334,20 +347,30 @@ class HttpTransport:
         raise MCPClientError(f"MCP SSE handshake at {sse_url} gave no endpoint event")
 
     def request(
-        self, method: str, params: Optional[dict] = None, timeout: Optional[float] = None
+        self,
+        method: str,
+        params: Optional[dict] = None,
+        timeout: Optional[float] = None,
     ) -> Any:
         timeout = self._timeout if timeout is None else timeout
         with self._lock:
             self._next_id += 1
             rid = self._next_id
-        payload = {"jsonrpc": "2.0", "id": rid, "method": method, "params": params or {}}
+        payload = {
+            "jsonrpc": "2.0",
+            "id": rid,
+            "method": method,
+            "params": params or {},
+        }
         target = self._legacy_endpoint or self._url
         try:
             ctype, body, _ = self._post(target, payload, timeout)
         except MCPClientError as exc:
             # Legacy servers answer 404/405 to a direct POST: try the SSE
             # handshake once, then POST to the negotiated message endpoint.
-            if self._legacy_endpoint is None and ("HTTP 404" in str(exc) or "HTTP 405" in str(exc)):
+            if self._legacy_endpoint is None and (
+                "HTTP 404" in str(exc) or "HTTP 405" in str(exc)
+            ):
                 self._legacy_endpoint = self._legacy_handshake(timeout)
                 ctype, body, _ = self._post(self._legacy_endpoint, payload, timeout)
             else:
@@ -426,7 +449,10 @@ class MCPClient:
         return [t for t in tools if isinstance(t, dict)]
 
     def call_tool(
-        self, name: str, arguments: Optional[dict] = None, timeout: Optional[float] = None
+        self,
+        name: str,
+        arguments: Optional[dict] = None,
+        timeout: Optional[float] = None,
     ) -> Any:
         return self._t.request(
             "tools/call",
@@ -462,7 +488,9 @@ def connect_server(
     elif transport == "stdio":
         command = cfg.get("command") or []
         if not command:
-            raise MCPClientError(f"MCP server {name!r}: stdio transport needs a command")
+            raise MCPClientError(
+                f"MCP server {name!r}: stdio transport needs a command"
+            )
         t = StdioTransport([str(c) for c in command])
     else:
         raise MCPClientError(f"MCP server {name!r}: unknown transport {transport!r}")
@@ -495,9 +523,7 @@ def _get_client(name: str, home: Optional[Path] = None) -> MCPClient:
     return client
 
 
-def mcp_tools_for_server(
-    name: str, cfg: dict, home: Optional[Path] = None
-) -> "list":
+def mcp_tools_for_server(name: str, cfg: dict, home: Optional[Path] = None) -> "list":
     """Connect to one server and convert its tools to LEVI Tool objects.
 
     Names are ``mcp__<server>__<tool>``. Adding the server is the trust
@@ -528,7 +554,10 @@ def mcp_tools_for_server(
         desc = str(rt.get("description") or "MCP tool")[:500]
 
         def _handler(
-            args: dict, _client: MCPClient = client, _tname: str = tname, _tmo: float = timeout
+            args: dict,
+            _client: MCPClient = client,
+            _tname: str = tname,
+            _tmo: float = timeout,
         ) -> ToolResult:
             try:
                 result = _client.call_tool(_tname, args, timeout=_tmo)
@@ -572,7 +601,10 @@ def attach_mcp_tools(registry: Any, home: Optional[Path] = None) -> list[str]:
         except MCPClientError as exc:
             print(f"[levi:mcp] skipping server {name!r}: {exc}", file=sys.stderr)
         except Exception as exc:  # defensive: never break agent startup
-            print(f"[levi:mcp] skipping server {name!r}: unexpected error: {exc}", file=sys.stderr)
+            print(
+                f"[levi:mcp] skipping server {name!r}: unexpected error: {exc}",
+                file=sys.stderr,
+            )
     return attached
 
 

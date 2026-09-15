@@ -32,7 +32,9 @@ from levi.mcp.transports import _Handler, _MCPHTTPState
 
 def test_mcp_initialize_handshake():
     server = build_owner_server()
-    resp = server.handle({"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}})
+    resp = server.handle(
+        {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {}}
+    )
     assert resp["id"] == 1
     result = resp["result"]
     assert result["protocolVersion"] == PROTOCOL_VERSION
@@ -42,7 +44,9 @@ def test_mcp_initialize_handshake():
 
 def test_mcp_notification_returns_no_response():
     server = build_owner_server()
-    assert server.handle({"jsonrpc": "2.0", "method": "notifications/initialized"}) is None
+    assert (
+        server.handle({"jsonrpc": "2.0", "method": "notifications/initialized"}) is None
+    )
     assert server.handle({"jsonrpc": "2.0", "method": "ping"}) is None
 
 
@@ -54,13 +58,17 @@ def test_mcp_ping():
 
 def test_mcp_unknown_method_is_32601():
     server = build_owner_server()
-    resp = server.handle({"jsonrpc": "2.0", "id": 3, "method": "nope/nope", "params": {}})
+    resp = server.handle(
+        {"jsonrpc": "2.0", "id": 3, "method": "nope/nope", "params": {}}
+    )
     assert resp["error"]["code"] == -32601
 
 
 def test_mcp_tools_list_has_valid_schemas():
     server = build_owner_server()
-    resp = server.handle({"jsonrpc": "2.0", "id": 4, "method": "tools/list", "params": {}})
+    resp = server.handle(
+        {"jsonrpc": "2.0", "id": 4, "method": "tools/list", "params": {}}
+    )
     tools = resp["result"]["tools"]
     assert len(tools) == 24
     for tool in tools:
@@ -91,8 +99,12 @@ def test_mcp_tools_call_round_trips_read_only_tool():
 def test_mcp_unknown_tool_is_32602():
     server = build_owner_server()
     resp = server.handle(
-        {"jsonrpc": "2.0", "id": 6, "method": "tools/call",
-         "params": {"name": "does_not_exist", "arguments": {}}}
+        {
+            "jsonrpc": "2.0",
+            "id": 6,
+            "method": "tools/call",
+            "params": {"name": "does_not_exist", "arguments": {}},
+        }
     )
     assert resp["error"]["code"] == -32602
     assert "does_not_exist" in resp["error"]["message"]
@@ -101,8 +113,12 @@ def test_mcp_unknown_tool_is_32602():
 def test_mcp_gated_tool_without_consent_is_tool_error():
     server = build_owner_server()  # consent=False
     resp = server.handle(
-        {"jsonrpc": "2.0", "id": 7, "method": "tools/call",
-         "params": {"name": "shell_exec", "arguments": {"command": "echo hi"}}}
+        {
+            "jsonrpc": "2.0",
+            "id": 7,
+            "method": "tools/call",
+            "params": {"name": "shell_exec", "arguments": {"command": "echo hi"}},
+        }
     )
     result = resp["result"]
     assert result["isError"] is True
@@ -111,18 +127,28 @@ def test_mcp_gated_tool_without_consent_is_tool_error():
 
 def test_mcp_resources():
     server = build_owner_server()
-    resp = server.handle({"jsonrpc": "2.0", "id": 8, "method": "resources/list", "params": {}})
+    resp = server.handle(
+        {"jsonrpc": "2.0", "id": 8, "method": "resources/list", "params": {}}
+    )
     uris = [r["uri"] for r in resp["result"]["resources"]]
     assert "levi://info" in uris and "levi://capabilities" in uris
     resp = server.handle(
-        {"jsonrpc": "2.0", "id": 9, "method": "resources/read",
-         "params": {"uri": "levi://info"}}
+        {
+            "jsonrpc": "2.0",
+            "id": 9,
+            "method": "resources/read",
+            "params": {"uri": "levi://info"},
+        }
     )
     info = json.loads(resp["result"]["contents"][0]["text"])
     assert info["name"] == "levi" and info["profile"] == "owner"
     resp = server.handle(
-        {"jsonrpc": "2.0", "id": 10, "method": "resources/read",
-         "params": {"uri": "levi://bogus"}}
+        {
+            "jsonrpc": "2.0",
+            "id": 10,
+            "method": "resources/read",
+            "params": {"uri": "levi://bogus"},
+        }
     )
     assert resp["error"]["code"] == -32602
 
@@ -135,16 +161,29 @@ def test_mcp_resources():
 def test_mcp_http_profile_is_restricted():
     server = build_http_server()
     assert server.profile == "cloud-safe"
-    resp = server.handle({"jsonrpc": "2.0", "id": 1, "method": "tools/list", "params": {}})
+    resp = server.handle(
+        {"jsonrpc": "2.0", "id": 1, "method": "tools/list", "params": {}}
+    )
     names = {t["name"] for t in resp["result"]["tools"]}
     assert len(names) == 12
-    for denied in ("shell_exec", "file_write", "file_read", "memory_write",
-                   "delegate", "http_request", "schedule_add"):
+    for denied in (
+        "shell_exec",
+        "file_write",
+        "file_read",
+        "memory_write",
+        "delegate",
+        "http_request",
+        "schedule_add",
+    ):
         assert denied not in names
     # tools/call enforces the same boundary server-side
     resp = server.handle(
-        {"jsonrpc": "2.0", "id": 2, "method": "tools/call",
-         "params": {"name": "shell_exec", "arguments": {"command": "echo hi"}}}
+        {
+            "jsonrpc": "2.0",
+            "id": 2,
+            "method": "tools/call",
+            "params": {"name": "shell_exec", "arguments": {"command": "echo hi"}},
+        }
     )
     assert resp["error"]["code"] == -32602
 
@@ -173,9 +212,19 @@ def test_mcp_stdio_subprocess_handshake(tmp_path):
         text=True,
     )
     try:
+
         def rpc(msg_id, method, params=None):
-            proc.stdin.write(json.dumps({"jsonrpc": "2.0", "id": msg_id,
-                                         "method": method, "params": params or {}}) + "\n")
+            proc.stdin.write(
+                json.dumps(
+                    {
+                        "jsonrpc": "2.0",
+                        "id": msg_id,
+                        "method": method,
+                        "params": params or {},
+                    }
+                )
+                + "\n"
+            )
             proc.stdin.flush()
             return json.loads(proc.stdout.readline())
 
@@ -183,9 +232,14 @@ def test_mcp_stdio_subprocess_handshake(tmp_path):
         assert init["result"]["protocolVersion"] == PROTOCOL_VERSION
         tools = rpc(2, "tools/list")
         assert len(tools["result"]["tools"]) == 24
-        call = rpc(3, "tools/call",
-                   {"name": "lab_footprint",
-                    "arguments": {"params": "0.6B", "quant": "int4", "ctx": "32k"}})
+        call = rpc(
+            3,
+            "tools/call",
+            {
+                "name": "lab_footprint",
+                "arguments": {"params": "0.6B", "quant": "int4", "ctx": "32k"},
+            },
+        )
         assert call["result"]["isError"] is False
         bad = rpc(4, "tools/call", {"name": "nope", "arguments": {}})
         assert bad["error"]["code"] == -32602
@@ -233,14 +287,21 @@ def _post(port, payload, token=None):
 def test_mcp_http_enforces_restricted_profile():
     httpd, port = _serve_in_thread(build_http_server())
     try:
-        status, body = _post(port, {"jsonrpc": "2.0", "id": 1,
-                                    "method": "tools/list", "params": {}})
+        status, body = _post(
+            port, {"jsonrpc": "2.0", "id": 1, "method": "tools/list", "params": {}}
+        )
         assert status == 200
         names = {t["name"] for t in body["result"]["tools"]}
         assert "shell_exec" not in names and len(names) == 12
-        status, body = _post(port, {"jsonrpc": "2.0", "id": 2, "method": "tools/call",
-                                    "params": {"name": "shell_exec",
-                                               "arguments": {"command": "echo hi"}}})
+        status, body = _post(
+            port,
+            {
+                "jsonrpc": "2.0",
+                "id": 2,
+                "method": "tools/call",
+                "params": {"name": "shell_exec", "arguments": {"command": "echo hi"}},
+            },
+        )
         assert body["error"]["code"] == -32602
     finally:
         httpd.shutdown()
@@ -249,11 +310,15 @@ def test_mcp_http_enforces_restricted_profile():
 def test_mcp_http_bearer_token():
     httpd, port = _serve_in_thread(build_http_server(), token="tok123")
     try:
-        status, _ = _post(port, {"jsonrpc": "2.0", "id": 1,
-                                 "method": "ping", "params": {}})
+        status, _ = _post(
+            port, {"jsonrpc": "2.0", "id": 1, "method": "ping", "params": {}}
+        )
         assert status == 401
-        status, body = _post(port, {"jsonrpc": "2.0", "id": 1,
-                                    "method": "ping", "params": {}}, token="tok123")
+        status, body = _post(
+            port,
+            {"jsonrpc": "2.0", "id": 1, "method": "ping", "params": {}},
+            token="tok123",
+        )
         assert status == 200 and body["result"] == {}
     finally:
         httpd.shutdown()

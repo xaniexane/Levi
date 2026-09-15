@@ -87,39 +87,33 @@ UMK = Argon2id(
 
 ### 4.1 Message Encryption (sender side)
 ```python
-def encrypt_message(plaintext: bytes, sender_device_key: KeyPair,
-                    recipient_device_key: PublicKey) -> EncryptedMessage:
+def encrypt_message(
+    plaintext: bytes, sender_device_key: KeyPair, recipient_device_key: PublicKey
+) -> EncryptedMessage:
     # Step 1: Generate ephemeral key for forward secrecy
     ephemeral_keypair = X25519.keygen()
 
     # Step 2: Compute shared secret
     shared_secret = X25519.compute_shared_key(
-        ephemeral_keypair.priv,
-        recipient_device_key.pub
+        ephemeral_keypair.priv, recipient_device_key.pub
     )
 
     # Step 3: Derive message key
     message_key = HKDF_BLAKE2b(
-        ikm=shared_secret,
-        salt=sender_device_key.id,
-        info=b"VYVE-MESSAGE-v1",
-        length=32
+        ikm=shared_secret, salt=sender_device_key.id, info=b"VYVE-MESSAGE-v1", length=32
     )
 
     # Step 4: Authenticate additional data
     aad = (
-        sender_device_key.id          # who sent it
-        + recipient_device_key.id      # intended recipient
-        + timestamp                    # prevent replay
+        sender_device_key.id  # who sent it
+        + recipient_device_key.id  # intended recipient
+        + timestamp  # prevent replay
     )
 
     # Step 5: Encrypt
     nonce = random(24)  # XChaCha20 uses 24-byte nonce
     ciphertext = XChaCha20_Poly1305.encrypt(
-        key=message_key,
-        nonce=nonce,
-        plaintext=plaintext,
-        aad=aad
+        key=message_key, nonce=nonce, plaintext=plaintext, aad=aad
     )
 
     return EncryptedMessage(
@@ -128,40 +122,28 @@ def encrypt_message(plaintext: bytes, sender_device_key: KeyPair,
         recipient_key_id=recipient_device_key.id,
         nonce=nonce,
         ciphertext=ciphertext,
-        timestamp=rounded_timestamp
+        timestamp=rounded_timestamp,
     )
 ```
 
 ### 4.2 Message Decryption (recipient side)
 ```python
-def decrypt_message(msg: EncryptedMessage,
-                    recipient_device_key: KeyPair) -> bytes:
+def decrypt_message(msg: EncryptedMessage, recipient_device_key: KeyPair) -> bytes:
     # Step 1: Compute shared secret
     shared_secret = X25519.compute_shared_key(
-        recipient_device_key.priv,
-        msg.ephemeral_pubkey
+        recipient_device_key.priv, msg.ephemeral_pubkey
     )
 
     # Step 2: Derive message key
     message_key = HKDF_BLAKE2b(
-        ikm=shared_secret,
-        salt=msg.sender_key_id,
-        info=b"VYVE-MESSAGE-v1",
-        length=32
+        ikm=shared_secret, salt=msg.sender_key_id, info=b"VYVE-MESSAGE-v1", length=32
     )
 
     # Step 3: Decrypt and verify
-    aad = (
-        msg.sender_key_id
-        + recipient_device_key.id
-        + msg.timestamp
-    )
+    aad = msg.sender_key_id + recipient_device_key.id + msg.timestamp
 
     plaintext = XChaCha20_Poly1305.decrypt(
-        key=message_key,
-        nonce=msg.nonce,
-        ciphertext=msg.ciphertext,
-        aad=aad
+        key=message_key, nonce=msg.nonce, ciphertext=msg.ciphertext, aad=aad
     )
 
     return plaintext

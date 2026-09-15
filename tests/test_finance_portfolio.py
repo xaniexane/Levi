@@ -3,6 +3,7 @@
 Run:  python3 tests/test_finance_portfolio.py   (has a real __main__ runner)
       python3 -m pytest tests/test_finance_portfolio.py -q
 """
+
 from __future__ import annotations
 
 import json
@@ -20,6 +21,7 @@ from levi.finance.portfolio import DEFAULT_PATH, Portfolio, load  # noqa: E402
 
 try:
     import pytest  # noqa: F401
+
     _HAS_PYTEST = True
 except ImportError:  # pragma: no cover
     _HAS_PYTEST = False
@@ -39,6 +41,7 @@ except ImportError:  # pragma: no cover
 #   unrealized             -> 15 * (180 - 155) = 375.00
 #   total pnl              -> 75.00 + 375.00 = 450.00
 # ---------------------------------------------------------------------------
+
 
 def _example_portfolio() -> Portfolio:
     p = Portfolio()
@@ -112,11 +115,11 @@ def test_invalid_fill_args_raise():
     p = Portfolio()
     p.deposit(1000.0)
     bad = [
-        ("AAPL", "hold", 1, 10.0),   # bad side
-        ("AAPL", "buy", 0, 10.0),    # zero qty
-        ("AAPL", "buy", -1, 10.0),   # negative qty
-        ("AAPL", "buy", 1, 0.0),     # zero price
-        ("AAPL", "sell", 1, -5.0),   # negative price
+        ("AAPL", "hold", 1, 10.0),  # bad side
+        ("AAPL", "buy", 0, 10.0),  # zero qty
+        ("AAPL", "buy", -1, 10.0),  # negative qty
+        ("AAPL", "buy", 1, 0.0),  # zero price
+        ("AAPL", "sell", 1, -5.0),  # negative price
     ]
     for args in bad:
         try:
@@ -181,7 +184,7 @@ def test_save_creates_dir_with_0700(tmp_path):
 def test_missing_price_warns_and_uses_avg_cost_not_zero():
     p = Portfolio()
     p.deposit(5000.0)
-    p.apply_fill("TSLA", "buy", 5, 200.00)   # cash = 5000 - 1000 = 4000
+    p.apply_fill("TSLA", "buy", 5, 200.00)  # cash = 5000 - 1000 = 4000
     value, warnings = p.market_value({})
     assert warnings == ["TSLA"], warnings
     # valued at avg_cost (200), never 0:
@@ -237,10 +240,13 @@ def test_sell_to_flat_keeps_realized_pnl():
 # Runner (blueprint §1.3: a real, executable runner block — not just asserts)
 # ---------------------------------------------------------------------------
 
+
 def _run_all():
     import inspect
+
     fns = [
-        (name, fn) for name, fn in sorted(globals().items())
+        (name, fn)
+        for name, fn in sorted(globals().items())
         if name.startswith("test_") and callable(fn)
     ]
     passed = failed = 0
@@ -249,6 +255,7 @@ def _run_all():
         kwargs = {}
         if "tmp_path" in params:
             import tempfile
+
             kwargs["tmp_path"] = Path(tempfile.mkdtemp(prefix="levi_pf_"))
         try:
             fn(**kwargs)

@@ -5,6 +5,7 @@ as test_vault.py): the core suite must stay green on a bare stdlib python.
 The micro training run is kept FAST (<2 min) by using a small fixture
 corpus and 20 steps.
 """
+
 from __future__ import annotations
 
 import json
@@ -13,7 +14,9 @@ from pathlib import Path
 
 import pytest
 
-torch = pytest.importorskip("torch", reason="torch not installed; tiny-brain training needs it")
+torch = pytest.importorskip(
+    "torch", reason="torch not installed; tiny-brain training needs it"
+)
 
 TRAIN_DIR = Path(__file__).resolve().parent.parent / "core" / "levi" / "brain" / "train"
 sys.path.insert(0, str(TRAIN_DIR))
@@ -39,7 +42,9 @@ def fixture_corpus(tmp_path: Path) -> Path:
     ]
     with open(path, "w", encoding="utf-8") as fh:
         for i, p in enumerate(paras * 60):  # ~60KB of real-ish text
-            fh.write(json.dumps({"text": f"{p} Variation {i}.", "kind": "course"}) + "\n")
+            fh.write(
+                json.dumps({"text": f"{p} Variation {i}.", "kind": "course"}) + "\n"
+            )
     return path
 
 
@@ -69,16 +74,20 @@ def test_prepare_corpus_emits_valid_jsonl_and_identity_records(tmp_path: Path):
 
 
 def test_micro_training_run_decreases_loss(fixture_corpus: Path, tmp_path: Path):
-    log = tiny_train.train(fixture_corpus, steps=20, out_dir=tmp_path / "w",
-                           batch_size=8, seed=7)
+    log = tiny_train.train(
+        fixture_corpus, steps=20, out_dir=tmp_path / "w", batch_size=8, seed=7
+    )
     assert log["loss_last"] < log["loss_first"], (
-        f"loss did not decrease: {log['loss_first']:.4f} -> {log['loss_last']:.4f}")
+        f"loss did not decrease: {log['loss_first']:.4f} -> {log['loss_last']:.4f}"
+    )
     assert (tmp_path / "w" / "tiny-gpt.pt").is_file()
     assert (tmp_path / "w" / "train_log.json").is_file()
 
 
 def test_eval_handles_missing_weights_gracefully(tmp_path: Path, fixture_corpus: Path):
-    rc = tiny_eval.main(["--data", str(fixture_corpus), "--out", str(tmp_path / "empty")])
+    rc = tiny_eval.main(
+        ["--data", str(fixture_corpus), "--out", str(tmp_path / "empty")]
+    )
     assert rc == 2  # plainspoken refusal, no fabricated numbers
 
 

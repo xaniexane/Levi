@@ -3,6 +3,7 @@ Factory Sandbox — constrained local checks (symbiosis with builder + factory p
 
 Does not grant host-wide power. No network/package install.
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -43,7 +44,12 @@ class Sandbox:
                 syn_ok = False
                 errors.append(f"{p}: {e}")
         if not syn_ok:
-            return {"ok": False, "returncode": 1, "error": "; ".join(errors), "stdout": ""}
+            return {
+                "ok": False,
+                "returncode": 1,
+                "error": "; ".join(errors),
+                "stdout": "",
+            }
         if main.exists():
             try:
                 r = subprocess.run(
@@ -58,7 +64,9 @@ class Sandbox:
                     "returncode": r.returncode,
                     "stdout": r.stdout or "",
                     "stderr": r.stderr or "",
-                    "error": None if r.returncode == 0 else (r.stderr or "nonzero exit"),
+                    "error": None
+                    if r.returncode == 0
+                    else (r.stderr or "nonzero exit"),
                 }
             except Exception as e:
                 return {"ok": False, "returncode": 1, "error": str(e), "stdout": ""}

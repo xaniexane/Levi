@@ -33,9 +33,6 @@ export function readStoredTheme(
 }
 
 /** The one DOM write for theme switching. */
-export function applyTheme(
-  theme: Theme,
-  doc: Document = globalThis.document,
-): void {
+export function applyTheme(theme: Theme, doc: Document = globalThis.document): void {
   doc.documentElement.dataset.theme = theme;
 }

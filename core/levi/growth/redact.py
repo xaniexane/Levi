@@ -31,7 +31,9 @@ from levi.growth.experience import Experience
 # -- scrub patterns ----------------------------------------------------------
 
 _EMAIL = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
-_PHONE = re.compile(r"(?<!\d)(?:\+?1[-.\s]?)?(?:\(?\d{3}\)?[-.\s]?)\d{3}[-.\s]?\d{4}(?!\d)")
+_PHONE = re.compile(
+    r"(?<!\d)(?:\+?1[-.\s]?)?(?:\(?\d{3}\)?[-.\s]?)\d{3}[-.\s]?\d{4}(?!\d)"
+)
 _SECRET_TOKENS = re.compile(
     r"(levi_sk_[A-Za-z0-9_\-]+|sk-[A-Za-z0-9]{8,}|sk-ant-[A-Za-z0-9\-_]{8,}|"
     r"ghp_[A-Za-z0-9]+|gho_[A-Za-z0-9]+|github_pat_[A-Za-z0-9_]+|"
@@ -50,7 +52,9 @@ _WS = re.compile(r"\s+")
 
 def redact_text(text: str) -> str:
     """Scrub secrets/PII from ``text``. Best-effort, never total."""
-    text = _CREDENTIAL_ASSIGN.sub(lambda m: m.group(0).split(":", 1)[0].split("=", 1)[0] + "=[redacted]", text)
+    text = _CREDENTIAL_ASSIGN.sub(
+        lambda m: m.group(0).split(":", 1)[0].split("=", 1)[0] + "=[redacted]", text
+    )
     text = _SECRET_TOKENS.sub("[secret redacted]", text)
     text = _EMAIL.sub("[email redacted]", text)
     text = _PHONE.sub("[phone redacted]", text)

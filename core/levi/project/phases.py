@@ -12,6 +12,7 @@ LEVI can run these phases before the full product exists:
 
 Does not claim production deploy or invented business facts.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -25,6 +26,7 @@ from levi.project.hitl import HITLGate
 
 
 DEFAULT_STATE = Path.home() / ".levi" / "project_phases.json"
+
 
 # backward-compatible name
 def _alias_phases():
@@ -155,7 +157,6 @@ SERVICE_PHASES: List[Dict[str, Any]] = [
 EASY_TOUCH_PHASES = SERVICE_PHASES  # alias only
 
 
-
 @dataclass
 class ProjectState:
     project_id: str = "service_client"
@@ -163,7 +164,9 @@ class ProjectState:
     current_phase: str = "P0"
     completed: List[str] = field(default_factory=list)
     notes: Dict[str, str] = field(default_factory=dict)
-    updated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    updated_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -220,12 +223,18 @@ class PhaseRunner:
             "Phases:",
         ]
         for p in SERVICE_PHASES:
-            mark = "✓" if p["id"] in self.state.completed else ("→" if p["id"] == self.state.current_phase else "·")
+            mark = (
+                "✓"
+                if p["id"] in self.state.completed
+                else ("→" if p["id"] == self.state.current_phase else "·")
+            )
             lines.append(
                 f"  {mark} {p['id']} {p['name']}  [{p['autonomy']}/{p['risk']}]"
             )
         lines.append("")
-        lines.append("Principle: AUTONOMOUS ON EXECUTION · HUMAN-CONTROLLED ON CONSEQUENCES")
+        lines.append(
+            "Principle: AUTONOMOUS ON EXECUTION · HUMAN-CONTROLLED ON CONSEQUENCES"
+        )
         lines.append("Silence is not approval. Production/money/customer data = HITL.")
         return "\n".join(lines)
 
@@ -243,7 +252,9 @@ class PhaseRunner:
         pid = (phase_id or self.state.current_phase).upper()
         meta = self.phase_info(pid)
         if not meta:
-            return f"Unknown phase {pid}. Known: " + ", ".join(p["id"] for p in SERVICE_PHASES)
+            return f"Unknown phase {pid}. Known: " + ", ".join(
+                p["id"] for p in SERVICE_PHASES
+            )
 
         lines = [
             f"══ Phase {meta['id']}: {meta['name']} ══",
@@ -289,14 +300,18 @@ class PhaseRunner:
         elif meta["id"] == "P12":
             cands = self.log.skill_candidates()
             lines.append("Skill candidates from log:")
-            lines.append(", ".join(cands) if cands else "(none yet — run earlier phases)")
+            lines.append(
+                ", ".join(cands) if cands else "(none yet — run earlier phases)"
+            )
             for p in SERVICE_PHASES:
                 lines.append(f"  · {p['future_skill']} — {p['name']}")
         else:
             lines.append("PRE-MVP guided mode:")
             lines.append(f"  1) Perform: {meta['desc']}")
-            lines.append("  2) Separate OBSERVED FACT / INFERENCE / HYPOTHESIS / UNKNOWN")
-            lines.append("  3) Log results: levi project --log \"...\"")
+            lines.append(
+                "  2) Separate OBSERVED FACT / INFERENCE / HYPOTHESIS / UNKNOWN"
+            )
+            lines.append('  3) Log results: levi project --log "..."')
             lines.append("  4) Mark complete: levi project --complete " + meta["id"])
             if meta.get("needs"):
                 lines.append(f"  Needs: {meta['needs']}")
@@ -337,13 +352,17 @@ class PhaseRunner:
         for name, cls, note in rows:
             lines.append(f"  {name:22} {cls:28} {note}")
         lines.append("")
-        lines.append("Mark P0 complete when you accept this audit: levi project --complete P0")
+        lines.append(
+            "Mark P0 complete when you accept this audit: levi project --complete P0"
+        )
         return lines
 
     def _run_p1(self) -> List[str]:
         lines = ["Site archaeology checklist:", ""]
         if not self.state.public_url:
-            lines.append("NO URL SET — cannot fetch. Set: levi project --url https://...")
+            lines.append(
+                "NO URL SET — cannot fetch. Set: levi project --url https://..."
+            )
             lines.append("Until then, document only what the owner provides.")
             return lines
         lines.append(f"Target: {self.state.public_url}")
@@ -363,7 +382,7 @@ class PhaseRunner:
         lines.append("")
         lines.append("Separate: OBSERVED FACT | INFERENCE | HYPOTHESIS | UNKNOWN")
         lines.append("Do not invent reviews, awards, or medical claims.")
-        lines.append("Log findings: levi project --log \"archaeology: ...\"")
+        lines.append('Log findings: levi project --log "archaeology: ..."')
         return lines
 
     def complete(self, phase_id: str) -> str:

@@ -36,9 +36,9 @@ LEARNING_KINDS = ("fact", "preference", "procedural", "correction")
 class Learning:
     """One candidate durable insight."""
 
-    kind: str            # fact | preference | procedural | correction
-    content: str         # the durable statement, self-contained
-    confidence: float    # 0..1
+    kind: str  # fact | preference | procedural | correction
+    content: str  # the durable statement, self-contained
+    confidence: float  # 0..1
     provenance: dict = field(default_factory=dict)  # source ids, ts range, mode
 
     def to_dict(self) -> dict:
@@ -68,7 +68,9 @@ _APPROVAL = re.compile(
     r"\b(thanks|thank you|perfect|that worked|exactly what i (wanted|needed)|great job)\b",
     re.IGNORECASE,
 )
-_ERROR_HINT = re.compile(r"\b(error|failed|traceback|exception|not found|denied)\b", re.IGNORECASE)
+_ERROR_HINT = re.compile(
+    r"\b(error|failed|traceback|exception|not found|denied)\b", re.IGNORECASE
+)
 
 
 def _snip(text: str, limit: int = 220) -> str:
@@ -121,7 +123,7 @@ def reflect_rules(experiences: list[Experience]) -> list[Learning]:
             add("preference", f"User preference expressed: '{_snip(text)}'.", 0.7, exp)
         m = _REMEMBER.search(text)
         if m:
-            fact = _snip(text[m.end():], 240)
+            fact = _snip(text[m.end() :], 240)
             if fact:
                 add("fact", f"User asked Levi to remember: '{fact}'.", 0.75, exp)
 
@@ -129,7 +131,11 @@ def reflect_rules(experiences: list[Experience]) -> list[Learning]:
     err_counts: dict[str, int] = {}
     err_example: dict[str, Experience] = {}
     for exp in experiences:
-        if exp.kind == "levi-did" and exp.content.startswith("[tool") and _ERROR_HINT.search(exp.content):
+        if (
+            exp.kind == "levi-did"
+            and exp.content.startswith("[tool")
+            and _ERROR_HINT.search(exp.content)
+        ):
             tool = exp.content.split("]")[0].replace("[tool ", "")
             err_counts[tool] = err_counts.get(tool, 0) + 1
             err_example.setdefault(tool, exp)
@@ -146,7 +152,9 @@ def reflect_rules(experiences: list[Experience]) -> list[Learning]:
             )
 
     # pass 3: approved multi-turn work → procedural learnings
-    approved = [e for e in experiences if e.kind == "user-said" and _APPROVAL.search(e.content)]
+    approved = [
+        e for e in experiences if e.kind == "user-said" and _APPROVAL.search(e.content)
+    ]
     levi_turns = [e for e in experiences if e.kind == "levi-did"]
     if approved and len(levi_turns) >= 3:
         add(
@@ -166,7 +174,16 @@ def reflect_rules(experiences: list[Experience]) -> list[Learning]:
                 s = _snip(sentence, 200)
                 if len(s) > 40 and not _ERROR_HINT.search(s):
                     add("fact", f"From past conversation: {s}", 0.4, exp)
-                    if len([learning for learning in learnings if learning.provenance.get("experience_id") == exp.id]) >= 3:
+                    if (
+                        len(
+                            [
+                                learning
+                                for learning in learnings
+                                if learning.provenance.get("experience_id") == exp.id
+                            ]
+                        )
+                        >= 3
+                    ):
                         break
 
     return learnings
@@ -211,12 +228,15 @@ def _reflect_model(experiences: list[Experience]) -> tuple[list[Learning], str]:
     for e in experiences[:60]:
         lines.append(f"[{e.kind} | {e.source} | {e.ts}] {e.content[:500]}")
     user_text = (
-        "Experiences to reflect on:\n\n" + "\n".join(lines)
+        "Experiences to reflect on:\n\n"
+        + "\n".join(lines)
         + "\n\nExtract durable learnings as a JSON array."
     )
     resp = prov.chat(
-        [ChatMessage(role="system", content=_REFLECT_SYSTEM),
-         ChatMessage(role="user", content=user_text)],
+        [
+            ChatMessage(role="system", content=_REFLECT_SYSTEM),
+            ChatMessage(role="user", content=user_text),
+        ],
         [],
     )
     if resp.error or not (resp.text or "").strip():
@@ -298,7 +318,12 @@ _LEVI_PREFIX = "levi"
 
 def _is_external_source(provider: str) -> bool:
     p = (provider or "").strip().lower()
-    return bool(p) and p != "?" and p not in _LEVI_PROVIDERS and not p.startswith(_LEVI_PREFIX)
+    return (
+        bool(p)
+        and p != "?"
+        and p not in _LEVI_PROVIDERS
+        and not p.startswith(_LEVI_PREFIX)
+    )
 
 
 def _technique_from_tools(tool_names: list[str]) -> str | None:

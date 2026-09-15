@@ -89,14 +89,29 @@ const PREMISE: Record<MandellaDomain, string> = {
 
 const CATALOG: Record<MandellaDomain, [string, string, MandellaOption["risk"], string][]> = {
   crisis: [
-    ["Act fast with incomplete data", "Execute the smallest containment now", "high", "Observe cascade after 1 cycle"],
-    ["Gather one more signal", "Buy information; delay irreversible spend", "medium", "Time-box the wait"],
+    [
+      "Act fast with incomplete data",
+      "Execute the smallest containment now",
+      "high",
+      "Observe cascade after 1 cycle",
+    ],
+    [
+      "Gather one more signal",
+      "Buy information; delay irreversible spend",
+      "medium",
+      "Time-box the wait",
+    ],
     ["Contain and observe", "Freeze scope; instrument; no heroics", "low", "Define exit criteria"],
   ],
   resource: [
     ["Spend the reserve", "Convert buffer into progress", "high", "Track burn vs milestone"],
     ["Cut scope", "Ship a thinner vertical", "low", "User-visible outcome in 1 session"],
-    ["Borrow from another organ", "Interpenetrate factory, story, automation", "medium", "Composite risk ceiling"],
+    [
+      "Borrow from another organ",
+      "Interpenetrate factory, story, automation",
+      "medium",
+      "Composite risk ceiling",
+    ],
   ],
   trust: [
     ["Extend provisional trust", "Cooperate with audit hooks", "medium", "Receipt plus verify"],

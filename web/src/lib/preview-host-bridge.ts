@@ -60,13 +60,11 @@ export function isSafeBridgePath(path: string): boolean {
  * Install host↔guest messaging. Returns a dispose function.
  * Noops (returns a no-op dispose) when not embedded under a Grok parent.
  */
-export function installPreviewHostBridge(
-  options: PreviewHostBridgeOptions = {},
-): () => void {
+export function installPreviewHostBridge(options: PreviewHostBridgeOptions = {}): () => void {
   if (typeof window === "undefined") return () => {};
 
   const ancestorOrigin =
-    typeof location.ancestorOrigins !== 'undefined' && location.ancestorOrigins.length > 0
+    typeof location.ancestorOrigins !== "undefined" && location.ancestorOrigins.length > 0
       ? location.ancestorOrigins[0]
       : null;
   const parentOrigin = resolveParentEmbedderOrigin(
@@ -83,9 +81,7 @@ export function installPreviewHostBridge(
 
   const isAtHistoryRoot = () => {
     const state = window.history.state;
-    return Boolean(
-      state && typeof state === "object" && state[ROOT_STATE_KEY] === true,
-    );
+    return Boolean(state && typeof state === "object" && state[ROOT_STATE_KEY] === true);
   };
 
   // Floor for chrome Back: only the first install in a fresh history stack is
@@ -212,21 +208,17 @@ export function installPreviewHostBridge(
 
   // Patch history so in-app SPA navigations sync the host address bar.
   window.history.pushState = (data, unused, url) => {
-    const next =
-      data && typeof data === "object"
-        ? { ...data, [ROOT_STATE_KEY]: false }
-        : data;
+    const next = data && typeof data === "object" ? { ...data, [ROOT_STATE_KEY]: false } : data;
     originalPushState(next, unused, url);
     reportLocation();
   };
   window.history.replaceState = (data, unused, url) => {
-    const next =
-      isAtHistoryRoot()
-        ? {
-            ...(data && typeof data === "object" ? data : {}),
-            [ROOT_STATE_KEY]: true,
-          }
-        : data;
+    const next = isAtHistoryRoot()
+      ? {
+          ...(data && typeof data === "object" ? data : {}),
+          [ROOT_STATE_KEY]: true,
+        }
+      : data;
     originalReplaceState(next, unused, url);
     reportLocation();
   };

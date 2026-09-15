@@ -68,16 +68,44 @@ MODEL_COSTS: Dict[str, Dict[str, Any]] = {
 # Complexity → expected output length (tokens, heuristic).
 _OUTPUT_TOKENS = {"simple": 150, "medium": 600, "hard": 1500}
 
-_HARD_WORDS = frozenset({
-    "research", "architecture", "strategy", "plan", "design", "build",
-    "implement", "debug", "analyze", "compare", "evaluate", "multi-step",
-    "swarm", "system", "enterprise", "comprehensive", "thorough",
-    "investigate", "audit",
-})
-_MEDIUM_WORDS = frozenset({
-    "write", "summarize", "explain", "draft", "review", "list",
-    "outline", "convert", "translate", "improve", "refactor",
-})
+_HARD_WORDS = frozenset(
+    {
+        "research",
+        "architecture",
+        "strategy",
+        "plan",
+        "design",
+        "build",
+        "implement",
+        "debug",
+        "analyze",
+        "compare",
+        "evaluate",
+        "multi-step",
+        "swarm",
+        "system",
+        "enterprise",
+        "comprehensive",
+        "thorough",
+        "investigate",
+        "audit",
+    }
+)
+_MEDIUM_WORDS = frozenset(
+    {
+        "write",
+        "summarize",
+        "explain",
+        "draft",
+        "review",
+        "list",
+        "outline",
+        "convert",
+        "translate",
+        "improve",
+        "refactor",
+    }
+)
 
 
 def classify_complexity(task: str) -> Tuple[str, List[str]]:
@@ -175,11 +203,14 @@ def _available_models(prefer: Optional[List[str]] = None) -> List[str]:
     return order
 
 
-def plan_route(task: str, *,
-               budget_units: Optional[float] = None,
-               needs_tools: Optional[bool] = None,
-               candidates: Optional[List[str]] = None,
-               only_downloaded: bool = True) -> Route:
+def plan_route(
+    task: str,
+    *,
+    budget_units: Optional[float] = None,
+    needs_tools: Optional[bool] = None,
+    candidates: Optional[List[str]] = None,
+    only_downloaded: bool = True,
+) -> Route:
     """Choose the cheapest model meeting the quality bar.
 
     ``needs_tools`` defaults to a verb heuristic when not given.
@@ -191,9 +222,19 @@ def plan_route(task: str, *,
     if needs_tools is None:
         lowered = (task or "").lower()
         needs_tools = any(
-            verb in lowered for verb in (
-                "write file", "create", "send", "run", "build", "deploy",
-                "schedule", "delete", "edit", "search files", "execute",
+            verb in lowered
+            for verb in (
+                "write file",
+                "create",
+                "send",
+                "run",
+                "build",
+                "deploy",
+                "schedule",
+                "delete",
+                "edit",
+                "search files",
+                "execute",
             )
         )
     in_tokens, out_tokens = estimate_tokens(task, complexity)
@@ -215,8 +256,11 @@ def plan_route(task: str, *,
     viable.sort(key=cost_of)
 
     alternatives = [
-        {"model": m, "est_cost_units": round(cost_of(m), 2),
-         "priced": MODEL_COSTS[m]["priced"]}
+        {
+            "model": m,
+            "est_cost_units": round(cost_of(m), 2),
+            "priced": MODEL_COSTS[m]["priced"],
+        }
         for m in viable[1:4]
     ]
     chosen = viable[0] if viable else "levi-tiny"
@@ -237,11 +281,18 @@ def plan_route(task: str, *,
             + f" at ~{est:.1f} relative units"
         )
     return Route(
-        task=task, complexity=complexity, complexity_reasons=reasons,
-        needs_tools=needs_tools, model=chosen,
-        est_input_tokens=in_tokens, est_output_tokens=out_tokens,
-        est_cost_units=est, quality_ok=quality_ok,
-        within_budget=within, reason=reason, alternatives=alternatives,
+        task=task,
+        complexity=complexity,
+        complexity_reasons=reasons,
+        needs_tools=needs_tools,
+        model=chosen,
+        est_input_tokens=in_tokens,
+        est_output_tokens=out_tokens,
+        est_cost_units=est,
+        quality_ok=quality_ok,
+        within_budget=within,
+        reason=reason,
+        alternatives=alternatives,
     )
 
 
@@ -264,12 +315,19 @@ def _filter_downloaded(models: List[str]) -> List[str]:
     return kept
 
 
-def record_actual(task_id: str, route: Route, *,
-                  input_tokens: int, output_tokens: int,
-                  outcome: str, latency_ms: float = 0.0,
-                  home=None) -> int:
+def record_actual(
+    task_id: str,
+    route: Route,
+    *,
+    input_tokens: int,
+    output_tokens: int,
+    outcome: str,
+    latency_ms: float = 0.0,
+    home=None,
+) -> int:
     """Track actuals back into the ledger as a router step row."""
     from levi.control.ledger import LedgerWriter
+
     per_1k = MODEL_COSTS.get(route.model, {}).get("cost_per_1k", 0.0)
     actual_cost = (input_tokens + output_tokens) / 1000.0 * per_1k
     ledger = LedgerWriter(home=home)

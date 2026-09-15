@@ -3,6 +3,7 @@
 
 Adds thousands of short operator units without replacing the 2518 base pack.
 """
+
 from __future__ import annotations
 
 from typing import Iterator, List, Tuple
@@ -14,8 +15,22 @@ def _build() -> List[Tuple[str, str, Tuple[str, ...]]]:
     raw: List[Tuple[str, str, Tuple[str, ...]]] = []
     # 500 interpenetration drills
     organs = [
-        "si", "kai", "persona", "wit", "hitl", "corpus", "story", "model",
-        "cloud", "crypto", "enterprise", "agent", "ui", "cli", "scar", "export",
+        "si",
+        "kai",
+        "persona",
+        "wit",
+        "hitl",
+        "corpus",
+        "story",
+        "model",
+        "cloud",
+        "crypto",
+        "enterprise",
+        "agent",
+        "ui",
+        "cli",
+        "scar",
+        "export",
     ]
     for i, a in enumerate(organs):
         for b in organs[i + 1 :]:
@@ -56,11 +71,29 @@ def _build() -> List[Tuple[str, str, Tuple[str, ...]]]:
         )
     # 300 KAI discipline
     regs = [
-        "kai_9000", "kai_9000_care", "kai_9000_ops", "kai_9000_challenger",
-        "kai_9000_literary", "kai_9000_forensic", "kai_9000_void", "kai_9000_builder",
-        "kai_9000_mirror", "kai_9000_architect", "kai_9000_sentinel", "kai_9000_oracle",
+        "kai_9000",
+        "kai_9000_care",
+        "kai_9000_ops",
+        "kai_9000_challenger",
+        "kai_9000_literary",
+        "kai_9000_forensic",
+        "kai_9000_void",
+        "kai_9000_builder",
+        "kai_9000_mirror",
+        "kai_9000_architect",
+        "kai_9000_sentinel",
+        "kai_9000_oracle",
     ]
-    contexts = ["crisis", "design", "review", "handoff", "conflict", "planning", "incident", "writing"]
+    contexts = [
+        "crisis",
+        "design",
+        "review",
+        "handoff",
+        "conflict",
+        "planning",
+        "incident",
+        "writing",
+    ]
     for r in regs:
         for c in contexts:
             for n in range(1, 4):
@@ -97,6 +130,7 @@ def iter_x10(limit: int = 0) -> Iterator[Tuple[str, str, List[str]]]:
 
 def seed(limit: int = 0) -> int:
     from levi.brain.corpus import Corpus
+
     c = Corpus()
     count = 0
     for text, kind, tags in iter_x10(limit=limit):

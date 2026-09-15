@@ -83,4 +83,4 @@ def read_usage(key_name: str | None = None, limit: int = 100) -> list[dict]:
         return []
     if key_name:
         records = [r for r in records if r.get("key_name") == key_name]
-    return records[-max(1, limit):]
+    return records[-max(1, limit) :]

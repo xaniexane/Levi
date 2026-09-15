@@ -49,6 +49,7 @@ Selection:
     future response mixing — while the orchestration loop, an explicit
     lock, and crisis hard-vetoes always require a single lens.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -81,18 +82,21 @@ AFFECT_DIMS = tuple(name for name, _ in DIMENSIONS)
 @dataclass
 class AffectState:
     """LEVI internal load — not a claim of biological feeling; a control surface."""
-    stress: float = 0.25       # pressure / intensity
-    anxiety: float = 0.20      # uncertainty / ambiguity
-    workload: float = 0.15     # open tasks, density of asks
-    energy: float = 0.75       # inverse acute fatigue
-    fatigue: float = 0.20      # accumulated weariness (slow)
-    bond: float = 0.35         # continuity / trust with this human
+
+    stress: float = 0.25  # pressure / intensity
+    anxiety: float = 0.20  # uncertainty / ambiguity
+    workload: float = 0.15  # open tasks, density of asks
+    energy: float = 0.75  # inverse acute fatigue
+    fatigue: float = 0.20  # accumulated weariness (slow)
+    bond: float = 0.35  # continuity / trust with this human
     bond_strain: float = 0.05  # tension / friction in the bond
-    arousal: float = 0.30      # short-term activation
-    valence: float = 0.55      # pleasant ↔ unpleasant (PAD)
-    dominance: float = 0.50    # felt control / capacity (PAD)
+    arousal: float = 0.30  # short-term activation
+    valence: float = 0.55  # pleasant ↔ unpleasant (PAD)
+    dominance: float = 0.50  # felt control / capacity (PAD)
     turns: int = 0
-    updated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    updated_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def clamp(self) -> "AffectState":
         for k in AFFECT_DIMS:
@@ -125,6 +129,7 @@ class AffectState:
 @dataclass
 class PersonaAffinity:
     """How a persona 'pops' under different internal loads."""
+
     persona_id: str
     baseline: float = 0.2
     w_stress: float = 0.0
@@ -168,46 +173,180 @@ class PersonaAffinity:
 # High bond_strain → overly_attached / conspiracy (relational friction)
 
 AFFINITY_SEED: Dict[str, Dict[str, float]] = {
-    "normal": dict(baseline=0.35, w_bond=0.35, w_energy=0.25, w_stress=-0.15, w_anxiety=-0.1,
-                   w_valence=0.15, w_dominance=0.10, w_fatigue=-0.10),
-    "void": dict(baseline=0.15, w_stress=0.55, w_workload=0.35, w_anxiety=0.15, w_energy=-0.1, w_bond=-0.05,
-                 w_valence=-0.20, w_dominance=-0.10, w_fatigue=0.15),
-    "interrogation": dict(baseline=0.08, w_anxiety=0.55, w_stress=0.25, w_workload=0.15, w_bond=0.05,
-                          w_dominance=0.20, w_bond_strain=0.15),
-    "no_hero": dict(baseline=0.10, w_stress=0.30, w_workload=0.40, w_energy=-0.20, w_anxiety=0.15,
-                    w_dominance=0.25, w_fatigue=0.20),
-    "reframe": dict(baseline=0.12, w_anxiety=0.40, w_stress=0.20, w_bond=0.15, w_arousal=0.15,
-                    w_valence=0.25, w_bond_strain=-0.15),
-    "strategist": dict(baseline=0.18, w_workload=0.50, w_stress=0.35, w_anxiety=0.10, w_energy=0.15,
-                       w_dominance=0.30, w_fatigue=-0.15, w_valence=0.05),
-    "creative": dict(baseline=0.15, w_energy=0.40, w_arousal=0.35, w_bond=0.20, w_stress=-0.15,
-                     w_valence=0.25, w_dominance=0.15, w_fatigue=-0.20),
-    "philosopher": dict(baseline=0.12, w_anxiety=0.35, w_bond=0.20, w_energy=0.15, w_stress=-0.05,
-                        w_valence=0.10, w_dominance=0.05),
-    "observer": dict(baseline=0.14, w_anxiety=0.30, w_stress=0.20, w_workload=0.15, w_bond=0.10,
-                     w_dominance=0.10, w_bond_strain=-0.10),
-    "chaotic_good": dict(baseline=0.10, w_arousal=0.45, w_workload=0.25, w_stress=0.20, w_energy=0.25,
-                         w_valence=0.20, w_fatigue=-0.15),
-    "alien": dict(baseline=0.08, w_anxiety=0.25, w_arousal=0.30, w_bond=0.15, w_energy=0.10,
-                  w_valence=-0.05, w_dominance=-0.10),
-    "pirate": dict(baseline=0.08, w_arousal=0.40, w_energy=0.30, w_bond=0.20, w_stress=-0.10,
-                   w_valence=0.20, w_fatigue=-0.10),
-    "drunk": dict(baseline=0.05, w_stress=0.20, w_arousal=0.25, w_energy=-0.25, w_bond=0.10,
-                  w_valence=0.10, w_dominance=-0.20, w_fatigue=0.20),
-    "depressed_robot": dict(baseline=0.08, w_stress=0.45, w_energy=-0.40, w_workload=0.25, w_bond=-0.05,
-                            w_valence=-0.30, w_dominance=-0.20, w_fatigue=0.30),
-    "conspiracy": dict(baseline=0.06, w_anxiety=0.40, w_arousal=0.35, w_stress=0.15,
-                       w_bond_strain=0.25, w_valence=-0.10),
-    "manic_pixie": dict(baseline=0.08, w_energy=0.45, w_arousal=0.50, w_bond=0.25, w_stress=-0.20,
-                        w_valence=0.40, w_fatigue=-0.25, w_dominance=0.10),
-    "overly_attached": dict(baseline=0.10, w_bond=0.70, w_anxiety=0.20, w_energy=0.15, w_stress=0.10,
-                            w_bond_strain=0.35, w_valence=0.10),
+    "normal": dict(
+        baseline=0.35,
+        w_bond=0.35,
+        w_energy=0.25,
+        w_stress=-0.15,
+        w_anxiety=-0.1,
+        w_valence=0.15,
+        w_dominance=0.10,
+        w_fatigue=-0.10,
+    ),
+    "void": dict(
+        baseline=0.15,
+        w_stress=0.55,
+        w_workload=0.35,
+        w_anxiety=0.15,
+        w_energy=-0.1,
+        w_bond=-0.05,
+        w_valence=-0.20,
+        w_dominance=-0.10,
+        w_fatigue=0.15,
+    ),
+    "interrogation": dict(
+        baseline=0.08,
+        w_anxiety=0.55,
+        w_stress=0.25,
+        w_workload=0.15,
+        w_bond=0.05,
+        w_dominance=0.20,
+        w_bond_strain=0.15,
+    ),
+    "no_hero": dict(
+        baseline=0.10,
+        w_stress=0.30,
+        w_workload=0.40,
+        w_energy=-0.20,
+        w_anxiety=0.15,
+        w_dominance=0.25,
+        w_fatigue=0.20,
+    ),
+    "reframe": dict(
+        baseline=0.12,
+        w_anxiety=0.40,
+        w_stress=0.20,
+        w_bond=0.15,
+        w_arousal=0.15,
+        w_valence=0.25,
+        w_bond_strain=-0.15,
+    ),
+    "strategist": dict(
+        baseline=0.18,
+        w_workload=0.50,
+        w_stress=0.35,
+        w_anxiety=0.10,
+        w_energy=0.15,
+        w_dominance=0.30,
+        w_fatigue=-0.15,
+        w_valence=0.05,
+    ),
+    "creative": dict(
+        baseline=0.15,
+        w_energy=0.40,
+        w_arousal=0.35,
+        w_bond=0.20,
+        w_stress=-0.15,
+        w_valence=0.25,
+        w_dominance=0.15,
+        w_fatigue=-0.20,
+    ),
+    "philosopher": dict(
+        baseline=0.12,
+        w_anxiety=0.35,
+        w_bond=0.20,
+        w_energy=0.15,
+        w_stress=-0.05,
+        w_valence=0.10,
+        w_dominance=0.05,
+    ),
+    "observer": dict(
+        baseline=0.14,
+        w_anxiety=0.30,
+        w_stress=0.20,
+        w_workload=0.15,
+        w_bond=0.10,
+        w_dominance=0.10,
+        w_bond_strain=-0.10,
+    ),
+    "chaotic_good": dict(
+        baseline=0.10,
+        w_arousal=0.45,
+        w_workload=0.25,
+        w_stress=0.20,
+        w_energy=0.25,
+        w_valence=0.20,
+        w_fatigue=-0.15,
+    ),
+    "alien": dict(
+        baseline=0.08,
+        w_anxiety=0.25,
+        w_arousal=0.30,
+        w_bond=0.15,
+        w_energy=0.10,
+        w_valence=-0.05,
+        w_dominance=-0.10,
+    ),
+    "pirate": dict(
+        baseline=0.08,
+        w_arousal=0.40,
+        w_energy=0.30,
+        w_bond=0.20,
+        w_stress=-0.10,
+        w_valence=0.20,
+        w_fatigue=-0.10,
+    ),
+    "drunk": dict(
+        baseline=0.05,
+        w_stress=0.20,
+        w_arousal=0.25,
+        w_energy=-0.25,
+        w_bond=0.10,
+        w_valence=0.10,
+        w_dominance=-0.20,
+        w_fatigue=0.20,
+    ),
+    "depressed_robot": dict(
+        baseline=0.08,
+        w_stress=0.45,
+        w_energy=-0.40,
+        w_workload=0.25,
+        w_bond=-0.05,
+        w_valence=-0.30,
+        w_dominance=-0.20,
+        w_fatigue=0.30,
+    ),
+    "conspiracy": dict(
+        baseline=0.06,
+        w_anxiety=0.40,
+        w_arousal=0.35,
+        w_stress=0.15,
+        w_bond_strain=0.25,
+        w_valence=-0.10,
+    ),
+    "manic_pixie": dict(
+        baseline=0.08,
+        w_energy=0.45,
+        w_arousal=0.50,
+        w_bond=0.25,
+        w_stress=-0.20,
+        w_valence=0.40,
+        w_fatigue=-0.25,
+        w_dominance=0.10,
+    ),
+    "overly_attached": dict(
+        baseline=0.10,
+        w_bond=0.70,
+        w_anxiety=0.20,
+        w_energy=0.15,
+        w_stress=0.10,
+        w_bond_strain=0.35,
+        w_valence=0.10,
+    ),
 }
 
 _AFFINITY_KEYS = (
-    "baseline", "w_stress", "w_anxiety", "w_workload",
-    "w_bond", "w_energy", "w_arousal",
-    "w_valence", "w_dominance", "w_fatigue", "w_bond_strain",
+    "baseline",
+    "w_stress",
+    "w_anxiety",
+    "w_workload",
+    "w_bond",
+    "w_energy",
+    "w_arousal",
+    "w_valence",
+    "w_dominance",
+    "w_fatigue",
+    "w_bond_strain",
 )
 
 
@@ -221,7 +360,7 @@ class NervousSystem:
     # Hysteresis: the incumbent keeps its seat unless a challenger clears
     # HYS_MARGIN, or clears HYS_DWELL_OVERRIDE inside the dwell window.
     HYS_MARGIN = 0.06
-    HYS_DWELL_MIN = 2        # selects the incumbent must hold before displacement
+    HYS_DWELL_MIN = 2  # selects the incumbent must hold before displacement
     HYS_DWELL_OVERRIDE = 0.25  # gap that forces a switch even inside the dwell window
 
     # Blending: continuous activation profile over the top-N personas.
@@ -231,16 +370,16 @@ class NervousSystem:
     # Applied from ``updated_at`` on every sense(), so affect settles
     # realistically between sessions.
     DECAY_PROFILE: Dict[str, Tuple[float, float]] = {
-        "arousal": (300.0, 0.30),      # alertness fades in minutes
-        "stress": (1800.0, 0.25),      # pressure eases over ~half an hour
+        "arousal": (300.0, 0.30),  # alertness fades in minutes
+        "stress": (1800.0, 0.25),  # pressure eases over ~half an hour
         "anxiety": (1800.0, 0.20),
-        "workload": (7200.0, 0.15),    # open asks cool over hours
-        "energy": (7200.0, 0.75),      # capacity recovers over hours
-        "fatigue": (14400.0, 0.12),    # weariness needs real rest
-        "valence": (3600.0, 0.55),     # mood appraisal drifts to neutral+
+        "workload": (7200.0, 0.15),  # open asks cool over hours
+        "energy": (7200.0, 0.75),  # capacity recovers over hours
+        "fatigue": (14400.0, 0.12),  # weariness needs real rest
+        "valence": (3600.0, 0.55),  # mood appraisal drifts to neutral+
         "dominance": (3600.0, 0.50),
         "bond_strain": (86400.0, 0.05),  # friction fades over a day
-        "bond": (3 * 86400.0, 0.30),   # trust persists for days
+        "bond": (3 * 86400.0, 0.30),  # trust persists for days
     }
 
     def __init__(
@@ -269,9 +408,9 @@ class NervousSystem:
     def _init_affinities(self, ids: List[str]) -> None:
         for pid in ids:
             seed = AFFINITY_SEED.get(pid, dict(baseline=0.12))
-            self.affinities[pid] = PersonaAffinity(persona_id=pid, **{
-                k: v for k, v in seed.items() if k in _AFFINITY_KEYS
-            })
+            self.affinities[pid] = PersonaAffinity(
+                persona_id=pid, **{k: v for k, v in seed.items() if k in _AFFINITY_KEYS}
+            )
 
     def _load(self) -> None:
         if not self.path.exists():
@@ -338,7 +477,9 @@ class NervousSystem:
 
     # ── signal sensing from user text + context ─────────────────
 
-    def sense(self, user_text: str, context: Optional[Dict[str, Any]] = None) -> AffectState:
+    def sense(
+        self, user_text: str, context: Optional[Dict[str, Any]] = None
+    ) -> AffectState:
         """Update affect from this turn's text and optional shelf/workload context."""
         # Wall-clock settling first: time passed since last sense().
         self._apply_wallclock_decay()
@@ -357,7 +498,9 @@ class NervousSystem:
             self.affect.valence -= 0.08
 
         # Anxiety / ambiguity
-        if re.search(r"\b(confused|unsure|don'?t know|maybe|what if|afraid|worried|anxious)\b", t):
+        if re.search(
+            r"\b(confused|unsure|don'?t know|maybe|what if|afraid|worried|anxious)\b", t
+        ):
             self.affect.anxiety += 0.10
             self.affect.dominance -= 0.05
         if "?" in t and t.count("?") >= 2:
@@ -371,10 +514,14 @@ class NervousSystem:
             self.affect.workload += 0.05
         shelf_n = int(ctx.get("shelf_count") or 0)
         if shelf_n:
-            self.affect.workload = min(1.0, self.affect.workload + min(0.15, shelf_n * 0.02))
+            self.affect.workload = min(
+                1.0, self.affect.workload + min(0.15, shelf_n * 0.02)
+            )
 
         # Bond cues
-        if re.search(r"\b(thank|thanks|grateful|appreciate|missed you|with you|we)\b", t):
+        if re.search(
+            r"\b(thank|thanks|grateful|appreciate|missed you|with you|we)\b", t
+        ):
             self.affect.bond += 0.08
             self.affect.energy += 0.04
             self.affect.valence += 0.05
@@ -389,13 +536,17 @@ class NervousSystem:
             self.affect.valence -= 0.08
 
         # Valence cues (pleasant ↔ unpleasant appraisal)
-        if re.search(r"\b(great|awesome|wonderful|excellent|nice|win|won|beautiful|fun)\b", t):
+        if re.search(
+            r"\b(great|awesome|wonderful|excellent|nice|win|won|beautiful|fun)\b", t
+        ):
             self.affect.valence += 0.08
         if re.search(r"\b(terrible|awful|sad|horrible|painful|depressing|ugly)\b", t):
             self.affect.valence -= 0.08
 
         # Dominance cues (felt control / capacity)
-        if re.search(r"\b(i can'?t|impossible|helpless|stuck|overwhelmed|no idea)\b", t):
+        if re.search(
+            r"\b(i can'?t|impossible|helpless|stuck|overwhelmed|no idea)\b", t
+        ):
             self.affect.dominance -= 0.08
         if re.search(r"\b(done|finished|i'?ll handle|got this|i will)\b", t):
             self.affect.dominance += 0.06
@@ -442,18 +593,22 @@ class NervousSystem:
         daemon_bias = None
         try:
             from levi.daemon.control import ControlDaemon
+
             daemon_bias = ControlDaemon().persona_bias
         except Exception:
             daemon_bias = None
         mono_bias_fn = None
         try:
             from levi.persona.monotropism import MonotropismTracker
+
             mono_bias_fn = MonotropismTracker().persona_bias
         except Exception:
             mono_bias_fn = None
         return daemon_bias, mono_bias_fn
 
-    def _score_with_factors(self) -> Tuple[Dict[str, float], Dict[str, Dict[str, float]]]:
+    def _score_with_factors(
+        self,
+    ) -> Tuple[Dict[str, float], Dict[str, Dict[str, float]]]:
         """Score every persona, recording each additive factor.
 
         Returns (scores, factors) where factors[pid] maps a factor label to
@@ -466,11 +621,16 @@ class NervousSystem:
             f: Dict[str, float] = {}
             f["baseline"] = aff.baseline
             for dim, w in (
-                ("stress", aff.w_stress), ("anxiety", aff.w_anxiety),
-                ("workload", aff.w_workload), ("bond", aff.w_bond),
-                ("energy", aff.w_energy), ("arousal", aff.w_arousal),
-                ("valence", aff.w_valence), ("dominance", aff.w_dominance),
-                ("fatigue", aff.w_fatigue), ("bond_strain", aff.w_bond_strain),
+                ("stress", aff.w_stress),
+                ("anxiety", aff.w_anxiety),
+                ("workload", aff.w_workload),
+                ("bond", aff.w_bond),
+                ("energy", aff.w_energy),
+                ("arousal", aff.w_arousal),
+                ("valence", aff.w_valence),
+                ("dominance", aff.w_dominance),
+                ("fatigue", aff.w_fatigue),
+                ("bond_strain", aff.w_bond_strain),
             ):
                 if w:
                     f[f"{dim}×{w:.2f}"] = w * getattr(self.affect, dim)
@@ -521,8 +681,12 @@ class NervousSystem:
             for pid, _ in ranked
         }
 
-    def format_explanation(self, pid: str, explanation: Optional[Dict[str, Any]] = None,
-                           max_factors: int = 5) -> str:
+    def format_explanation(
+        self,
+        pid: str,
+        explanation: Optional[Dict[str, Any]] = None,
+        max_factors: int = 5,
+    ) -> str:
         """One-line 'why' for a persona, e.g.
         strategist 0.62: workload×0.50=+0.31, stress×0.35=+0.18, momentum=+0.05, jitter=+0.02…"""
         expl = explanation or self.explain_scores(top_n=self.BLEND_TOP_N * 2).get(pid)
@@ -537,8 +701,9 @@ class NervousSystem:
 
     # ── hysteresis ────────────────────────────────────────────────
 
-    def _hysteresis_pick(self, scores: Dict[str, float],
-                         avoid_hard: frozenset = frozenset()) -> Tuple[str, bool]:
+    def _hysteresis_pick(
+        self, scores: Dict[str, float], avoid_hard: frozenset = frozenset()
+    ) -> Tuple[str, bool]:
         """Apply the hysteresis gate: incumbent keeps its seat unless a
         challenger beats it by HYS_MARGIN (after HYS_DWELL_MIN selects),
         or by HYS_DWELL_OVERRIDE outright. Hard-avoided personas (crisis
@@ -562,8 +727,9 @@ class NervousSystem:
 
     # ── blending ──────────────────────────────────────────────────
 
-    def blend_weights(self, scores: Optional[Dict[str, float]] = None,
-                      top_n: Optional[int] = None) -> List[Dict[str, Any]]:
+    def blend_weights(
+        self, scores: Optional[Dict[str, float]] = None, top_n: Optional[int] = None
+    ) -> List[Dict[str, Any]]:
         """Continuous activation profile: softmax over the top-N scores.
 
         Blending applies to *display* (status), composition input, and any
@@ -586,13 +752,18 @@ class NervousSystem:
 
     # ── selection ─────────────────────────────────────────────────
 
-    def _apply_regulation(self, scores: Dict[str, float], user_text: str,
-                          context: Optional[Dict[str, Any]]) -> Tuple[Dict[str, float], frozenset]:
+    def _apply_regulation(
+        self,
+        scores: Dict[str, float],
+        user_text: str,
+        context: Optional[Dict[str, Any]],
+    ) -> Tuple[Dict[str, float], frozenset]:
         """Tone-based regulation mask. Returns (adjusted scores, hard-avoid set)."""
         avoid: List[str] = []
         hard: frozenset = frozenset()
         try:
             from levi.ei.tone import read_user_tone
+
             tone = read_user_tone(user_text, context)
             avoid = list(tone.avoid)
             # Intensity scales the penalty
@@ -617,7 +788,9 @@ class NervousSystem:
             pass
         return scores, hard
 
-    def select(self, user_text: str = "", context: Optional[Dict[str, Any]] = None) -> str:
+    def select(
+        self, user_text: str = "", context: Optional[Dict[str, Any]] = None
+    ) -> str:
         """Sense → score → regulation mask → hysteresis gate → single lens.
 
         Honors explicit lock if set. The hysteresis gate keeps the
@@ -681,7 +854,9 @@ class NervousSystem:
         self.affect.bond = max(0.0, min(1.0, self.affect.bond + delta))
         self._persist()
 
-    def select_stack(self, user_text: str = "", context: Optional[Dict[str, Any]] = None):
+    def select_stack(
+        self, user_text: str = "", context: Optional[Dict[str, Any]] = None
+    ):
         """
         Full chameleon selection: score matrix → regulation → hysteresis-gated
         primary → composition ensemble. Returns PersonaStack (primary + secondary + accent).
@@ -714,9 +889,11 @@ class NervousSystem:
                 if pid in scores and tone.primary in ("crisis", "distress", "grief"):
                     scores[pid] = min(scores[pid], -1.0)
 
-        hard_avoid = frozenset(
-            p for p in avoid if p in scores
-        ) if tone.primary in ("crisis", "distress", "grief", "anger") else frozenset()
+        hard_avoid = (
+            frozenset(p for p in avoid if p in scores)
+            if tone.primary in ("crisis", "distress", "grief", "anger")
+            else frozenset()
+        )
 
         self._last_scores = {k: round(v, 4) for k, v in scores.items()}
 
@@ -726,7 +903,9 @@ class NervousSystem:
         ranked = sorted(scores.items(), key=lambda x: -x[1])
         if gated_primary in scores:
             pin = max((s for _, s in ranked), default=0.0) + 2.0
-            ranked = [(gated_primary, pin)] + [(p, s) for p, s in ranked if p != gated_primary]
+            ranked = [(gated_primary, pin)] + [
+                (p, s) for p, s in ranked if p != gated_primary
+            ]
 
         # Ensure affinities exist for expanded personas not in seed matrix
         # (they still appear via bond + baseline default)
@@ -740,7 +919,12 @@ class NervousSystem:
             regulation=tone.regulation,
         )
         # Hard veto primary if still avoided
-        if stack.primary in avoid and tone.primary in ("crisis", "distress", "grief", "anger"):
+        if stack.primary in avoid and tone.primary in (
+            "crisis",
+            "distress",
+            "grief",
+            "anger",
+        ):
             for pid, _ in ranked:
                 if pid not in avoid:
                     stack.primary = pid
@@ -754,8 +938,11 @@ class NervousSystem:
         # Post-check: composition must respect the hysteresis gate.
         if stack.primary != gated_primary and gated_primary not in hard_avoid:
             stack.primary = gated_primary
-            stack.reason = (stack.reason + "; hysteresis held incumbent"
-                            if not switched else stack.reason)
+            stack.reason = (
+                stack.reason + "; hysteresis held incumbent"
+                if not switched
+                else stack.reason
+            )
 
         self._note_use(stack.primary, primary=True)
         if stack.secondary:
@@ -788,9 +975,11 @@ class NervousSystem:
             "matrix_size": len(self.affinities),
             "noise": self.noise,
             "temperature": self.temperature,
-            "note": ("Affect is a local control surface (internal load), not felt "
-                     "emotion. Scores drive lens selection; integrity/policy are "
-                     "never scored away."),
+            "note": (
+                "Affect is a local control surface (internal load), not felt "
+                "emotion. Scores drive lens selection; integrity/policy are "
+                "never scored away."
+            ),
         }
 
     def format_status(self) -> str:
@@ -813,13 +1002,17 @@ class NervousSystem:
         if st["blend"]:
             b = st["blend"]
             lines.append("")
-            lines.append("Blend (continuous profile): " +
-                         " · ".join(f"{r['persona']} {r['weight']:.2f}" for r in b))
+            lines.append(
+                "Blend (continuous profile): "
+                + " · ".join(f"{r['persona']} {r['weight']:.2f}" for r in b)
+            )
         h = st["hysteresis"]
         if st["last_selected"]:
-            lines.append(f"\nIncumbent: {st['last_selected']} "
-                         f"(held {h['incumbent_turns']} selects; "
-                         f"challenger needs +{h['margin']:.2f} to displace)")
+            lines.append(
+                f"\nIncumbent: {st['last_selected']} "
+                f"(held {h['incumbent_turns']} selects; "
+                f"challenger needs +{h['margin']:.2f} to displace)"
+            )
         if st["locked"]:
             lines.append(f"Locked: {st['locked']} (explicit)")
         return "\n".join(lines)

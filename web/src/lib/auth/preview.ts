@@ -24,8 +24,7 @@
  */
 export const PREVIEW_CLIENT_ID = "grok_preview";
 /** Injected secret — never committed. Empty disables federated sign-in (fail-closed). */
-export const PREVIEW_CLIENT_SECRET =
-  process.env.GROK_PREVIEW_CLIENT_SECRET?.trim() || "";
+export const PREVIEW_CLIENT_SECRET = process.env.GROK_PREVIEW_CLIENT_SECRET?.trim() || "";
 
 /** The shared auth broker issuer (OIDC discovery lives under it). */
 export const GROK_ISSUER_DEFAULT = "https://auth.grok.me";

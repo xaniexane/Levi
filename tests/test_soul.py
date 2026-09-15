@@ -77,9 +77,7 @@ def test_apply_soul_prepends_marker_and_content(tmp_path):
     _write_soul(tmp_path, "Speak like a pirate, but stay honest.")
     out = apply_soul("base prompt", home=tmp_path)
     assert out == (
-        SOUL_MARKER + "\n"
-        "Speak like a pirate, but stay honest.\n\n"
-        "base prompt"
+        SOUL_MARKER + "\nSpeak like a pirate, but stay honest.\n\nbase prompt"
     )
     assert out.startswith(SOUL_MARKER)
 
@@ -119,9 +117,7 @@ def test_build_system_prompt_with_soul_prepends_override(tmp_path):
         assert got.startswith(SOUL_MARKER + "\nYou adore haiku answers.\n\n")
         assert got.endswith(_default_system_prompt(schemas))
         got_custom = _build_system_prompt(schemas, "custom base")
-        assert got_custom == (
-            SOUL_MARKER + "\nYou adore haiku answers.\n\ncustom base"
-        )
+        assert got_custom == (SOUL_MARKER + "\nYou adore haiku answers.\n\ncustom base")
     finally:
         if old_home is None:
             del os.environ["HOME"]

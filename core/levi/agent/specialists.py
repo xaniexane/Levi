@@ -120,7 +120,9 @@ class SpecialistRegistry:
 
         if any(w in lower for w in ("remember", "recall", "memory", "forgot")):
             selected.append(self._roster["memory"])
-        if any(w in lower for w in ("research", "search", "find out", "what is", "compare")):
+        if any(
+            w in lower for w in ("research", "search", "find out", "what is", "compare")
+        ):
             selected.append(self._roster["research"])
         if any(w in lower for w in ("code", "build", "implement", "debug", "software")):
             selected.append(self._roster["coding"])

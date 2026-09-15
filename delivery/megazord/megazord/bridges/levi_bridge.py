@@ -24,8 +24,8 @@ from typing import Optional
 
 # ── Internal Levi event types (what Levi Core consumes) ───────────────────────
 LEVI_EVENT_TYPES = {
-    "prompt",   # user / system input
-    "sync",      # bulk catch-up
+    "prompt",  # user / system input
+    "sync",  # bulk catch-up
     "reaction",  # result of a previously dispatched action
 }
 
@@ -38,9 +38,9 @@ class LeviBridge:
     VERSION = "0.1"
 
     def __init__(self, persona: str = "alpha", workspace: str = "omega"):
-        self.persona  = persona          # e.g. "alpha", "cybrus", "echo"
-        self.workspace = workspace        # e.g. "omega", "browser_ext"
-        self._handlers = {}               # msg_type → callable
+        self.persona = persona  # e.g. "alpha", "cybrus", "echo"
+        self.workspace = workspace  # e.g. "omega", "browser_ext"
+        self._handlers = {}  # msg_type → callable
 
     # ── Inbound: envelope → Levi event ───────────────────────────────────────
 
@@ -53,18 +53,16 @@ class LeviBridge:
         msg_type = envelope["type"]
 
         if msg_type not in LEVI_EVENT_TYPES:
-            raise LeviBridgeError(
-                f"Unsupported inbound message type: {msg_type!r}"
-            )
+            raise LeviBridgeError(f"Unsupported inbound message type: {msg_type!r}")
 
         event = {
-            "event_id":   envelope["id"],
+            "event_id": envelope["id"],
             "event_type": msg_type,
-            "ts":         envelope["ts"],
-            "from":       envelope["from"],
-            "payload":    envelope["payload"],
-            "soul":       envelope.get("soul"),
-            "raw":        envelope,
+            "ts": envelope["ts"],
+            "from": envelope["from"],
+            "payload": envelope["payload"],
+            "soul": envelope.get("soul"),
+            "raw": envelope,
         }
 
         # Route to registered handler if any
@@ -90,12 +88,12 @@ class LeviBridge:
         """
         now = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
         envelope = {
-            "lwp":    self.VERSION,
-            "id":     _id or str(uuid.uuid4()),
-            "ts":     now,
-            "from":   f"levi.persona.{self.persona}",
-            "to":     to or f"workspace.{self.workspace}",
-            "type":   msg_type,
+            "lwp": self.VERSION,
+            "id": _id or str(uuid.uuid4()),
+            "ts": now,
+            "from": f"levi.persona.{self.persona}",
+            "to": to or f"workspace.{self.workspace}",
+            "type": msg_type,
             "payload": payload,
         }
         if soul:
@@ -113,7 +111,12 @@ class LeviBridge:
         """Convenience: build a typed action envelope."""
         env = self.build(
             msg_type="action",
-            payload={"intent": intent, "target": target, "args": args, "priority": priority},
+            payload={
+                "intent": intent,
+                "target": target,
+                "args": args,
+                "priority": priority,
+            },
             soul=soul,
         )
         env["payload"]["correlation_id"] = env["id"]
@@ -123,7 +126,9 @@ class LeviBridge:
         """Emit a thought envelope (Levi internal monologue stream)."""
         return self.build(msg_type="thought", payload={"text": text}, soul=soul)
 
-    def build_state(self, soul_delta: dict, memory_delta: Optional[dict] = None) -> dict:
+    def build_state(
+        self, soul_delta: dict, memory_delta: Optional[dict] = None
+    ) -> dict:
         """Emit a state envelope (soul + memory snapshot delta)."""
         payload = {"soul_delta": self._clamp_soul(soul_delta)}
         if memory_delta:
@@ -142,7 +147,9 @@ class LeviBridge:
     ) -> dict:
         """Build a reaction envelope in response to an action's correlation_id."""
         if status == "error" and not error:
-            raise LeviBridgeError("react() called with status=error but no error message")
+            raise LeviBridgeError(
+                "react() called with status=error but no error message"
+            )
         payload = {"status": status, "correlation_id": correlation_id}
         if body:
             payload["body"] = body
@@ -154,9 +161,11 @@ class LeviBridge:
 
     def on(self, msg_type: str):
         """Decorator to register a handler for a message type."""
+
         def decorator(fn):
             self._handlers[msg_type] = fn
             return fn
+
         return decorator
 
     # ── Validation ─────────────────────────────────────────────────────────────
@@ -175,7 +184,12 @@ class LeviBridge:
             )
 
         if env["type"] not in {
-            "thought", "prompt", "action", "reaction", "state", "sync"
+            "thought",
+            "prompt",
+            "action",
+            "reaction",
+            "state",
+            "sync",
         }:
             raise LeviBridgeError(f"Invalid message type: {env['type']!r}")
 
@@ -208,17 +222,25 @@ if __name__ == "__main__":
 
     # Simulate an inbound prompt envelope
     inbound = {
-        "lwp":   "0.1",
-        "id":    str(uuid.uuid4()),
-        "ts":    "2026-09-04T12:00:00Z",
-        "from":  "workspace.omega",
-        "to":    "levi.persona.cybrus",
-        "type":  "prompt",
+        "lwp": "0.1",
+        "id": str(uuid.uuid4()),
+        "ts": "2026-09-04T12:00:00Z",
+        "from": "workspace.omega",
+        "to": "levi.persona.cybrus",
+        "type": "prompt",
         "payload": {"text": "Run a full diagnostic on the system."},
-        "soul":  {"joy": 0.6, "trust": 0.7, "fear": 0.1, "surprise": 0.3, "sadness": 0.0},
+        "soul": {
+            "joy": 0.6,
+            "trust": 0.7,
+            "fear": 0.1,
+            "surprise": 0.3,
+            "sadness": 0.0,
+        },
     }
     event = bridge.dispatch(inbound)
-    print(f"[IN]  Levi event: {event['event_type']!r} | soul joy={event['soul']['joy']}")
+    print(
+        f"[IN]  Levi event: {event['event_type']!r} | soul joy={event['soul']['joy']}"
+    )
 
     # Levi thinks about it
     thought = bridge.build_thought(

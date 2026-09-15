@@ -2,6 +2,7 @@
 Cybrus Bridge — security, gatekeeping, threat assessment.
 Receives action requests, evaluates threat level, allows/denies.
 """
+
 from __future__ import annotations
 from enum import Enum
 from dataclasses import dataclass, field
@@ -9,23 +10,25 @@ from typing import Dict, Any, List, Optional
 from ..levi_bridge import LeviBridge
 import uuid, time
 
+
 class ThreatLevel(Enum):
-    NONE     = 0
-    LOW      = 1
-    MEDIUM   = 2
-    HIGH     = 3
+    NONE = 0
+    LOW = 1
+    MEDIUM = 2
+    HIGH = 3
     CRITICAL = 4
+
 
 @dataclass
 class ThreatReport:
-    id:          str
+    id: str
     threat_level: ThreatLevel
-    target:      str
-    intent:      str
+    target: str
+    intent: str
     description: str
-    allowed:     bool
+    allowed: bool
     mitigations: List[str] = field(default_factory=list)
-    ts:          float = field(default_factory=time.time)
+    ts: float = field(default_factory=time.time)
 
 
 class CybrusBridge:
@@ -33,14 +36,25 @@ class CybrusBridge:
 
     # Intents that are inherently sensitive — these trigger heightened scrutiny.
     SENSITIVE_INTENTS = {
-        "shell.exec", "file.delete", "system.format",
-        "network.open_port", "user.ban", "system.shutdown",
+        "shell.exec",
+        "file.delete",
+        "system.format",
+        "network.open_port",
+        "user.ban",
+        "system.shutdown",
     }
 
     # Threat keywords — used to evaluate string payloads.
     THREAT_KEYWORDS = {
-        "rm -rf", "drop table", "delete database", "wipe", "exploit",
-        "override security", "bypass auth", "kill all", "shutdown all",
+        "rm -rf",
+        "drop table",
+        "delete database",
+        "wipe",
+        "exploit",
+        "override security",
+        "bypass auth",
+        "kill all",
+        "shutdown all",
     }
 
     def __init__(self):
@@ -54,8 +68,8 @@ class CybrusBridge:
         """
         intent = action.get("intent", "")
         target = action.get("target", "")
-        args   = action.get("args", {}) or {}
-        text   = (intent + " " + target + " " + str(args)).lower()
+        args = action.get("args", {}) or {}
+        text = (intent + " " + target + " " + str(args)).lower()
 
         # Base threat level
         threat = ThreatLevel.NONE
@@ -105,10 +119,9 @@ class CybrusBridge:
         """
         report = self.evaluate(action_envelope.get("payload", action_envelope))
         status = "ok" if report.allowed else "denied"
-        soul   = {"joy": 0.1, "trust": 0.2, "fear": 0.85,
-                  "surprise": 0.2, "sadness": 0.0}
+        soul = {"joy": 0.1, "trust": 0.2, "fear": 0.85, "surprise": 0.2, "sadness": 0.0}
         body = {
-            "threat_id":   report.id,
+            "threat_id": report.id,
             "threat_level": report.threat_level.name,
             "mitigations": report.mitigations,
         }

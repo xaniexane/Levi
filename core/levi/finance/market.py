@@ -80,10 +80,7 @@ class MarketDataProvider(ABC):
 
 
 _SYMBOL_RE = re.compile(r"^[A-Za-z.\-]{1,12}$")
-_STOOQ_URL = (
-    "https://stooq.com/q/d/l/?s={symbol}.us"
-    "&d1={d1}&d2={d2}&i=d"
-)
+_STOOQ_URL = "https://stooq.com/q/d/l/?s={symbol}.us&d1={d1}&d2={d2}&i=d"
 
 
 class StooqProvider(MarketDataProvider):
@@ -124,9 +121,7 @@ class StooqProvider(MarketDataProvider):
         for row in rows:
             if len(row) < 6:
                 continue
-            day, open_, high, low, close, volume = (
-                cell.strip() for cell in row[:6]
-            )
+            day, open_, high, low, close, volume = (cell.strip() for cell in row[:6])
             if close.upper() == "N/D":
                 # Stooq marks unavailable closes as N/D; skip, don't fake.
                 continue
@@ -179,7 +174,5 @@ def get_provider(name: str = "stooq") -> MarketDataProvider:
     try:
         cls = PROVIDERS[name.lower()]
     except (KeyError, AttributeError):
-        raise MarketDataError(
-            f"unknown market data provider: {name!r}"
-        ) from None
+        raise MarketDataError(f"unknown market data provider: {name!r}") from None
     return cls()

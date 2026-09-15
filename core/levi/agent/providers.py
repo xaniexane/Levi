@@ -83,7 +83,7 @@ from dataclasses import dataclass, field
 class ChatMessage:
     role: str  # "system" | "user" | "assistant" | "tool"
     content: str
-    name: str | None = None        # tool name for role="tool"
+    name: str | None = None  # tool name for role="tool"
     tool_call_id: str | None = None
 
 
@@ -112,8 +112,7 @@ class ChatProvider(ABC):
     name: str  # class attr
 
     @abstractmethod
-    def is_available(self) -> bool:
-        ...
+    def is_available(self) -> bool: ...
 
     @abstractmethod
     def chat(self, messages: list[ChatMessage], tools: list[dict]) -> ChatResponse:
@@ -144,8 +143,16 @@ class LocalProvider(ChatProvider):
     name = "local"
 
     _NUMBER_WORDS = {
-        "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
-        "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
+        "one": 1,
+        "two": 2,
+        "three": 3,
+        "four": 4,
+        "five": 5,
+        "six": 6,
+        "seven": 7,
+        "eight": 8,
+        "nine": 9,
+        "ten": 10,
     }
 
     def is_available(self) -> bool:
@@ -155,10 +162,7 @@ class LocalProvider(ChatProvider):
 
     def chat(self, messages: list[ChatMessage], tools: list[dict]) -> ChatResponse:
         t0 = time.perf_counter()
-        available = {
-            t["name"] for t in tools
-            if isinstance(t, dict) and t.get("name")
-        }
+        available = {t["name"] for t in tools if isinstance(t, dict) and t.get("name")}
         called = self._called_tools(messages)
         task = self._task_text(messages)
 
@@ -203,8 +207,9 @@ class LocalProvider(ChatProvider):
     # -- history / state derivation (no instance state) ---------------------
 
     @staticmethod
-    def _finish(t0: float, text: str,
-                tool_calls: list[ProviderToolCall] | None = None) -> ChatResponse:
+    def _finish(
+        t0: float, text: str, tool_calls: list[ProviderToolCall] | None = None
+    ) -> ChatResponse:
         return ChatResponse(
             text=text,
             tool_calls=tool_calls or [],
@@ -223,14 +228,15 @@ class LocalProvider(ChatProvider):
             (i for i, m in enumerate(messages) if m.role == "user"),
             default=-1,
         )
-        return messages[idx + 1:]
+        return messages[idx + 1 :]
 
     @staticmethod
     def _called_tools(messages: list[ChatMessage]) -> list[str]:
         """Tool names already executed in the current turn, in order,
         derived from tool results."""
         return [
-            m.name for m in LocalProvider._turn_messages(messages)
+            m.name
+            for m in LocalProvider._turn_messages(messages)
             if m.role == "tool" and m.name
         ]
 
@@ -264,7 +270,8 @@ class LocalProvider(ChatProvider):
     def _classify_memory(task: str) -> dict | None:
         m = re.search(
             r"(?:remember|note down|jot down|save to memory)\s+(?:that\s+)?(.+?)[.!?\s]*$",
-            task, re.IGNORECASE | re.DOTALL,
+            task,
+            re.IGNORECASE | re.DOTALL,
         )
         if not m:
             return None
@@ -276,7 +283,9 @@ class LocalProvider(ChatProvider):
         path = self._extract_path(task)
         if path is None:
             return None
-        needs_write = any(k in low for k in ("create", "write", "save", "make", "update"))
+        needs_write = any(
+            k in low for k in ("create", "write", "save", "make", "update")
+        )
         needs_read = "read" in low
         if not (needs_write or needs_read):
             return None
@@ -318,7 +327,8 @@ class LocalProvider(ChatProvider):
             return {"command": "ls"}
         m = re.search(
             r"(?:run|execute)\s+(?:the\s+command\s+)?[`\"']?([^`\"'\n.!?;]+)",
-            task, re.IGNORECASE,
+            task,
+            re.IGNORECASE,
         )
         if m:
             command = m.group(1).strip()
@@ -333,11 +343,12 @@ class LocalProvider(ChatProvider):
         if intent == "file":
             steps: list[tuple[str, dict]] = []
             if params.get("needs_write"):
-                steps.append((
-                    "file_write",
-                    {"path": params["path"],
-                     "content": "\n".join(params["lines"])},
-                ))
+                steps.append(
+                    (
+                        "file_write",
+                        {"path": params["path"], "content": "\n".join(params["lines"])},
+                    )
+                )
             if params.get("needs_read"):
                 steps.append(("file_read", {"path": params["path"]}))
             return steps
@@ -351,8 +362,9 @@ class LocalProvider(ChatProvider):
 
     # -- honest final summary -------------------------------------------------
 
-    def _summary(self, intent: str, params: dict, called: list[str],
-                 messages: list[ChatMessage]) -> str:
+    def _summary(
+        self, intent: str, params: dict, called: list[str], messages: list[ChatMessage]
+    ) -> str:
         results = {}
         for m in messages:
             if m.role == "tool" and m.name:
@@ -361,8 +373,7 @@ class LocalProvider(ChatProvider):
             path = params["path"]
             parts = []
             if "file_write" in called:
-                parts.append("wrote %d line(s) to %s"
-                             % (len(params["lines"]), path))
+                parts.append("wrote %d line(s) to %s" % (len(params["lines"]), path))
             if "file_read" in called:
                 parts.append("read %s back" % path)
             text = "Done: " + " and ".join(parts) + "."
@@ -421,8 +432,9 @@ class OpenAICompatibleProvider(ChatProvider):
         t0 = time.perf_counter()
         key, base_url, _overridden, model = self._config()
 
-        def finish(text="", tool_calls=None, error=None,
-                   prompt_tokens=0, completion_tokens=0) -> ChatResponse:
+        def finish(
+            text="", tool_calls=None, error=None, prompt_tokens=0, completion_tokens=0
+        ) -> ChatResponse:
             return ChatResponse(
                 text=text,
                 tool_calls=tool_calls or [],
@@ -443,11 +455,16 @@ class OpenAICompatibleProvider(ChatProvider):
         }
         if tools:
             payload["tools"] = [
-                {"type": "function",
-                 "function": {"name": t["name"],
-                              "description": t.get("description", ""),
-                              "parameters": t.get("parameters", {})}}
-                for t in tools if isinstance(t, dict) and t.get("name")
+                {
+                    "type": "function",
+                    "function": {
+                        "name": t["name"],
+                        "description": t.get("description", ""),
+                        "parameters": t.get("parameters", {}),
+                    },
+                }
+                for t in tools
+                if isinstance(t, dict) and t.get("name")
             ]
             payload["tool_choice"] = "auto"
 
@@ -464,7 +481,11 @@ class OpenAICompatibleProvider(ChatProvider):
         try:
             resp = urllib.request.urlopen(req, timeout=self.TIMEOUT_S)
             try:
-                status = resp.getcode() if hasattr(resp, "getcode") else getattr(resp, "status", 200)
+                status = (
+                    resp.getcode()
+                    if hasattr(resp, "getcode")
+                    else getattr(resp, "status", 200)
+                )
                 raw = resp.read()
             finally:
                 try:
@@ -480,12 +501,12 @@ class OpenAICompatibleProvider(ChatProvider):
         except urllib.error.URLError as e:
             return finish(error="network error: %s" % e.reason)
         except Exception as e:  # timeout etc.
-            return finish(error="request failed: %s: %s"
-                          % (type(e).__name__, e))
+            return finish(error="request failed: %s: %s" % (type(e).__name__, e))
 
         if status and status >= 400:
-            return finish(error="HTTP %s: %s"
-                          % (status, raw.decode("utf-8", "replace")[:500]))
+            return finish(
+                error="HTTP %s: %s" % (status, raw.decode("utf-8", "replace")[:500])
+            )
 
         try:
             data = json.loads(raw.decode("utf-8"))
@@ -502,11 +523,13 @@ class OpenAICompatibleProvider(ChatProvider):
                     args = json.loads(fn.get("arguments") or "{}")
                 except Exception:
                     args = {}
-                calls.append(ProviderToolCall(
-                    id=tc.get("id") or "call-%d" % i,
-                    name=fn.get("name", ""),
-                    arguments=args if isinstance(args, dict) else {},
-                ))
+                calls.append(
+                    ProviderToolCall(
+                        id=tc.get("id") or "call-%d" % i,
+                        name=fn.get("name", ""),
+                        arguments=args if isinstance(args, dict) else {},
+                    )
+                )
             usage = data.get("usage") or {}
             try:
                 prompt_tokens = int(usage.get("prompt_tokens") or 0)
@@ -519,9 +542,12 @@ class OpenAICompatibleProvider(ChatProvider):
         except (KeyError, IndexError, TypeError) as e:
             return finish(error="unexpected response shape: %s" % e)
 
-        return finish(text=text, tool_calls=calls,
-                      prompt_tokens=prompt_tokens,
-                      completion_tokens=completion_tokens)
+        return finish(
+            text=text,
+            tool_calls=calls,
+            prompt_tokens=prompt_tokens,
+            completion_tokens=completion_tokens,
+        )
 
     @staticmethod
     def _to_openai_message(m: ChatMessage, i: int) -> dict:
@@ -558,8 +584,10 @@ class AnthropicProvider(ChatProvider):
     MAX_TOKENS = 1024
 
     def _config(self) -> tuple[str, str]:
-        return (os.environ.get("LEVI_ANTHROPIC_API_KEY", ""),
-                os.environ.get("LEVI_ANTHROPIC_MODEL", self.DEFAULT_MODEL))
+        return (
+            os.environ.get("LEVI_ANTHROPIC_API_KEY", ""),
+            os.environ.get("LEVI_ANTHROPIC_MODEL", self.DEFAULT_MODEL),
+        )
 
     def is_available(self) -> bool:
         key, _model = self._config()
@@ -594,10 +622,13 @@ class AnthropicProvider(ChatProvider):
             payload["system"] = system
         if tools:
             payload["tools"] = [
-                {"name": t["name"],
-                 "description": t.get("description", ""),
-                 "input_schema": t.get("parameters", {"type": "object"})}
-                for t in tools if isinstance(t, dict) and t.get("name")
+                {
+                    "name": t["name"],
+                    "description": t.get("description", ""),
+                    "input_schema": t.get("parameters", {"type": "object"}),
+                }
+                for t in tools
+                if isinstance(t, dict) and t.get("name")
             ]
 
         req = urllib.request.Request(
@@ -614,7 +645,11 @@ class AnthropicProvider(ChatProvider):
         try:
             resp = urllib.request.urlopen(req, timeout=self.TIMEOUT_S)
             try:
-                status = resp.getcode() if hasattr(resp, "getcode") else getattr(resp, "status", 200)
+                status = (
+                    resp.getcode()
+                    if hasattr(resp, "getcode")
+                    else getattr(resp, "status", 200)
+                )
                 raw = resp.read()
             finally:
                 try:
@@ -630,12 +665,12 @@ class AnthropicProvider(ChatProvider):
         except urllib.error.URLError as e:
             return finish(error="network error: %s" % e.reason)
         except Exception as e:
-            return finish(error="request failed: %s: %s"
-                          % (type(e).__name__, e))
+            return finish(error="request failed: %s: %s" % (type(e).__name__, e))
 
         if status and status >= 400:
-            return finish(error="HTTP %s: %s"
-                          % (status, raw.decode("utf-8", "replace")[:500]))
+            return finish(
+                error="HTTP %s: %s" % (status, raw.decode("utf-8", "replace")[:500])
+            )
 
         try:
             data = json.loads(raw.decode("utf-8"))
@@ -650,11 +685,13 @@ class AnthropicProvider(ChatProvider):
                     texts.append(block.get("text", ""))
                 elif btype == "tool_use":
                     args = block.get("input") or {}
-                    calls.append(ProviderToolCall(
-                        id=block.get("id", ""),
-                        name=block.get("name", ""),
-                        arguments=args if isinstance(args, dict) else {},
-                    ))
+                    calls.append(
+                        ProviderToolCall(
+                            id=block.get("id", ""),
+                            name=block.get("name", ""),
+                            arguments=args if isinstance(args, dict) else {},
+                        )
+                    )
         except (AttributeError, TypeError) as e:
             return finish(error="unexpected response shape: %s" % e)
 
@@ -667,14 +704,18 @@ class AnthropicProvider(ChatProvider):
             if m.role == "system":
                 system_parts.append(m.content)
             elif m.role == "tool":
-                conv.append({
-                    "role": "user",
-                    "content": [{
-                        "type": "tool_result",
-                        "tool_use_id": m.tool_call_id or m.name or "unknown",
-                        "content": m.content,
-                    }],
-                })
+                conv.append(
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "tool_result",
+                                "tool_use_id": m.tool_call_id or m.name or "unknown",
+                                "content": m.content,
+                            }
+                        ],
+                    }
+                )
             elif m.role == "assistant":
                 conv.append({"role": "assistant", "content": m.content})
             else:
@@ -714,6 +755,7 @@ def _levi_brain_provider() -> ChatProvider:
     # Lazy: levi.agent.brain_provider imports torch lazily and must not
     # slow down or break stdlib-only imports of this module.
     from levi.agent.brain_provider import NativeBrainProvider
+
     return NativeBrainProvider()
 
 
@@ -722,6 +764,7 @@ def _levi_local_provider() -> ChatProvider:
     # so it imports this module — importing it at top level here would
     # be circular.
     from levi.agent.local_model import LocalModelProvider
+
     return LocalModelProvider()
 
 
@@ -729,15 +772,19 @@ def provider_names() -> list[str]:
     """Names of all known chat providers, LEVI family first."""
     from levi.agent import model_family
 
-    return (model_family.family_names()
-            + ["local", "levi-brain", "levi-local", "openai", "anthropic"])
+    return model_family.family_names() + [
+        "local",
+        "levi-brain",
+        "levi-local",
+        "openai",
+        "anthropic",
+    ]
 
 
 def _remix_names() -> set[str]:
     from levi.agent import model_family
 
-    return {e["name"] for e in model_family.entries()
-            if e["kind"] == "remix"}
+    return {e["name"] for e in model_family.entries() if e["kind"] == "remix"}
 
 
 def select_provider(preference: str | None = None) -> ChatProvider:

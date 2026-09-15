@@ -170,9 +170,7 @@ class ToolRegistry:
 
 
 def _confirmation_preview(tool: Tool, args: dict) -> str:
-    summary = ", ".join(
-        f"{k}={str(v)[:80]}" for k, v in sorted(args.items())
-    )
+    summary = ", ".join(f"{k}={str(v)[:80]}" for k, v in sorted(args.items()))
     return (
         f"Tool '{tool.name}' requires confirmation. "
         f"Description: {tool.description} Args: {{{summary}}}"
@@ -211,9 +209,7 @@ _NAME_RE = re.compile(r"^[A-Za-z0-9_-]+$")
 
 def _sanitize_name(name: str) -> str:
     if not name or not _NAME_RE.match(name):
-        raise ValueError(
-            f"refused: name must match [A-Za-z0-9_-], got {name!r}"
-        )
+        raise ValueError(f"refused: name must match [A-Za-z0-9_-], got {name!r}")
     return name + ".md"
 
 
@@ -377,9 +373,7 @@ def _register_builtins(
         try:
             text = target.read_text(encoding="utf-8")
         except UnicodeDecodeError:
-            return ToolResult(
-                ok=False, error=f"file_read: {raw!r} is not UTF-8 text"
-            )
+            return ToolResult(ok=False, error=f"file_read: {raw!r} is not UTF-8 text")
         except OSError as exc:
             return ToolResult(ok=False, error=f"file_read: {exc}")
         return ToolResult(ok=True, output=_truncate(text, 200_000))
@@ -424,9 +418,7 @@ def _register_builtins(
             return ToolResult(ok=False, error=f"file_edit: cannot read: {exc}")
         count = text.count(old_text)
         if count == 0:
-            return ToolResult(
-                ok=False, error="file_edit: 'old_text' not found in file"
-            )
+            return ToolResult(ok=False, error="file_edit: 'old_text' not found in file")
         if count > 1:
             return ToolResult(
                 ok=False,
@@ -455,7 +447,9 @@ def _register_builtins(
         if not target.is_file():
             return ToolResult(ok=False, error=f"memory_read: no such entry: {name!r}")
         try:
-            return ToolResult(ok=True, output=_truncate(target.read_text(encoding="utf-8"), 200_000))
+            return ToolResult(
+                ok=True, output=_truncate(target.read_text(encoding="utf-8"), 200_000)
+            )
         except OSError as exc:
             return ToolResult(ok=False, error=f"memory_read: {exc}")
 
@@ -494,13 +488,8 @@ def _register_builtins(
             skills = SkillRegistry().list()
         except Exception as exc:
             return ToolResult(ok=False, error=f"skill_list: registry failed: {exc}")
-        lines = [
-            f"{s.id} | risk={int(s.risk_level)} | {s.description}"
-            for s in skills
-        ]
-        return ToolResult(
-            ok=True, output=f"{len(skills)} skills:\n" + "\n".join(lines)
-        )
+        lines = [f"{s.id} | risk={int(s.risk_level)} | {s.description}" for s in skills]
+        return ToolResult(ok=True, output=f"{len(skills)} skills:\n" + "\n".join(lines))
 
     def _skill_load(args: dict) -> ToolResult:
         name = args.get("name")
@@ -515,7 +504,9 @@ def _register_builtins(
                 error=f"skill_load: no playbook for skill {name!r} in {skills_dir}",
             )
         try:
-            return ToolResult(ok=True, output=_truncate(target.read_text(encoding="utf-8"), 200_000))
+            return ToolResult(
+                ok=True, output=_truncate(target.read_text(encoding="utf-8"), 200_000)
+            )
         except OSError as exc:
             return ToolResult(ok=False, error=f"skill_load: {exc}")
 
@@ -549,7 +540,9 @@ def _register_builtins(
                 f"known: {', '.join(known) or '(catalog not ingested)'}",
             )
         try:
-            return ToolResult(ok=True, output=_truncate(brief.read_text(encoding="utf-8"), 100_000))
+            return ToolResult(
+                ok=True, output=_truncate(brief.read_text(encoding="utf-8"), 100_000)
+            )
         except OSError as exc:
             return ToolResult(ok=False, error=f"course_brief: {exc}")
 
@@ -557,9 +550,13 @@ def _register_builtins(
         query = str(args.get("query") or "").strip()
         if not query:
             return ToolResult(ok=False, error="course_search: 'query' is required")
-        terms = [t.lower() for t in re.findall(r"[a-z0-9]+", query.lower()) if len(t) > 2]
+        terms = [
+            t.lower() for t in re.findall(r"[a-z0-9]+", query.lower()) if len(t) > 2
+        ]
         if not terms:
-            return ToolResult(ok=False, error="course_search: query has no searchable terms")
+            return ToolResult(
+                ok=False, error="course_search: query has no searchable terms"
+            )
         catalog = _course_catalog()
         coverage = _course_coverage()
         # Map each course to its OWN ingested raw file (via coverage.json),
@@ -573,7 +570,7 @@ def _register_builtins(
         hits: list[str] = []
         for subj in catalog.get("subjects", []):
             for course in subj["courses"]:
-                hay = f"{course['title']} {course['school']} {course.get('description','')}".lower()
+                hay = f"{course['title']} {course['school']} {course.get('description', '')}".lower()
                 score = sum(hay.count(t) for t in terms)
                 snippet = ""
                 if score:
@@ -587,9 +584,11 @@ def _register_builtins(
                         for t in terms:
                             i = low.find(t)
                             if i != -1:
-                                snippet = ("...[from this course's ingested text] "
-                                           + " ".join(txt[max(0, i - 120):i + 200].split())
-                                           + "...")
+                                snippet = (
+                                    "...[from this course's ingested text] "
+                                    + " ".join(txt[max(0, i - 120) : i + 200].split())
+                                    + "..."
+                                )
                                 break
                 if score:
                     line = f"[{subj['slug']}] {course['title']} ({course['school']}) — {course['primary']}"
@@ -598,11 +597,14 @@ def _register_builtins(
                     hits.append((score, line))
         hits.sort(key=lambda h: -h[0])
         if not hits:
-            return ToolResult(ok=True, output=f"course_search: no matches for {query!r}")
+            return ToolResult(
+                ok=True, output=f"course_search: no matches for {query!r}"
+            )
         out = "\n".join(h[1] for h in hits[:10])
         return ToolResult(
             ok=True,
-            output=f"course_search: {len(hits)} match(es) for {query!r} (top 10):\n{out}")
+            output=f"course_search: {len(hits)} match(es) for {query!r} (top 10):\n{out}",
+        )
 
     # -- news_latest / news_search (dated current-events recall) ------------
     def _news_dir() -> Path:
@@ -624,8 +626,10 @@ def _register_builtins(
         return items
 
     def _fmt_news(it: dict) -> str:
-        return (f"[{it.get('date', '?')}] ({it.get('source', '?')}) "
-                f"{it.get('title', '')}\n    {it.get('summary', '')}\n    {it.get('url', '')}")
+        return (
+            f"[{it.get('date', '?')}] ({it.get('source', '?')}) "
+            f"{it.get('title', '')}\n    {it.get('summary', '')}\n    {it.get('url', '')}"
+        )
 
     def _news_latest(args: dict) -> ToolResult:
         try:
@@ -634,22 +638,30 @@ def _register_builtins(
             return ToolResult(ok=False, error="news_latest: 'limit' must be an int")
         items = _news_items()
         if not items:
-            return ToolResult(ok=True, output="news_latest: no ingested news yet — run `levi news refresh`.")
+            return ToolResult(
+                ok=True,
+                output="news_latest: no ingested news yet — run `levi news refresh`.",
+            )
         items.sort(key=lambda r: r.get("date", ""), reverse=True)
         out = "\n".join(_fmt_news(it) for it in items[:limit])
         newest = items[0].get("date", "?")
         return ToolResult(
             ok=True,
             output=f"news_latest: newest ingested date is {newest} "
-                   f"(dated recall — cite dates, do not imply freshness):\n{out}")
+            f"(dated recall — cite dates, do not imply freshness):\n{out}",
+        )
 
     def _news_search(args: dict) -> ToolResult:
         query = str(args.get("query") or "").strip()
         if not query:
             return ToolResult(ok=False, error="news_search: 'query' is required")
-        terms = [t.lower() for t in re.findall(r"[a-z0-9]+", query.lower()) if len(t) > 2]
+        terms = [
+            t.lower() for t in re.findall(r"[a-z0-9]+", query.lower()) if len(t) > 2
+        ]
         if not terms:
-            return ToolResult(ok=False, error="news_search: query has no searchable terms")
+            return ToolResult(
+                ok=False, error="news_search: query has no searchable terms"
+            )
         hits = []
         for it in _news_items():
             hay = f"{it.get('title', '')} {it.get('summary', '')}".lower()
@@ -659,15 +671,24 @@ def _register_builtins(
         hits.sort(key=lambda h: (-h[0], h[1]), reverse=False)
         hits.sort(key=lambda h: -h[0])
         if not hits:
-            return ToolResult(ok=True, output=f"news_search: no matches for {query!r} in ingested news.")
+            return ToolResult(
+                ok=True,
+                output=f"news_search: no matches for {query!r} in ingested news.",
+            )
         out = "\n".join(_fmt_news(it) for _, _, it in hits[:10])
         return ToolResult(
             ok=True,
-            output=f"news_search: {len(hits)} match(es) for {query!r} (top 10, dates shown):\n{out}")
+            output=f"news_search: {len(hits)} match(es) for {query!r} (top 10, dates shown):\n{out}",
+        )
 
     # -- capabilities (honest capability atlas) ------------------------------
     def _capabilities(args: dict) -> ToolResult:
-        path = Path(__file__).resolve().parent.parent / "knowledge" / "capabilities" / "atlas.json"
+        path = (
+            Path(__file__).resolve().parent.parent
+            / "knowledge"
+            / "capabilities"
+            / "atlas.json"
+        )
         if not path.is_file():
             return ToolResult(ok=False, error="capabilities: atlas.json not found")
         try:
@@ -680,7 +701,10 @@ def _register_builtins(
             match = next((d for d in domains if d["id"] == domain), None)
             if not match:
                 known = ", ".join(d["id"] for d in domains)
-                return ToolResult(ok=False, error=f"capabilities: unknown domain {domain!r}; known: {known}")
+                return ToolResult(
+                    ok=False,
+                    error=f"capabilities: unknown domain {domain!r}; known: {known}",
+                )
             domains = [match]
         lines = ["LEVI capability atlas — what the agent can do, honestly:"]
         for d in domains:
@@ -688,7 +712,9 @@ def _register_builtins(
             lines.append(d["description"])
             lines.append(f"Tools: {', '.join(d['tools'])}")
             lines.append(f"Limits: {'; '.join(d['known_limits'])}")
-        lines.append("\nHonesty rule: if it is not in this atlas or the tool list, say so — do not improvise abilities.")
+        lines.append(
+            "\nHonesty rule: if it is not in this atlas or the tool list, say so — do not improvise abilities."
+        )
         return ToolResult(ok=True, output="\n".join(lines))
 
     # -- affect (5D emotional-intelligence engine) --------------------------
@@ -754,9 +780,7 @@ def _register_builtins(
             return ToolResult(ok=False, error=f"affect_state: {exc}")
         tracker = affect_tracker if affect_tracker is not None else SessionEI()
         rep = tracker.report()
-        dims = ", ".join(
-            f"{k}={v:.2f}" for k, v in rep["dimensions"].items()
-        )
+        dims = ", ".join(f"{k}={v:.2f}" for k, v in rep["dimensions"].items())
         sm = rep["self_model"]
         return ToolResult(
             ok=True,
@@ -805,9 +829,7 @@ def _register_builtins(
             memory_dir=memory_dir,
             skills_dir=skills_dir,
         )
-        child_ctx = ExecContext(
-            consent=parent_ctx.consent, confirm=parent_ctx.confirm
-        )
+        child_ctx = ExecContext(consent=parent_ctx.consent, confirm=parent_ctx.confirm)
         result_box: dict[str, Any] = {}
 
         def _worker() -> None:
@@ -843,9 +865,7 @@ def _register_builtins(
         worker.start()
         worker.join(timeout=300)
         if worker.is_alive():
-            return ToolResult(
-                ok=False, error="delegate: subtask timed out after 300s"
-            )
+            return ToolResult(ok=False, error="delegate: subtask timed out after 300s")
         if "denied" in result_box:
             return ToolResult(ok=False, error=result_box["denied"])
         if "error" in result_box:
@@ -892,7 +912,9 @@ def _register_builtins(
             auto = reg.create(
                 name=name,
                 description=task,
-                actions=[AutomationAction(skill_id="__scheduled__", args={"task": task})],
+                actions=[
+                    AutomationAction(skill_id="__scheduled__", args={"task": task})
+                ],
                 trigger=TriggerKind.SCHEDULE,
                 trigger_config={"cron": cron, "task": task},
             )
@@ -923,7 +945,9 @@ def _register_builtins(
     def _schedule_remove(args: dict) -> ToolResult:
         schedule_id = str(args.get("schedule_id") or "").strip()
         if not schedule_id:
-            return ToolResult(ok=False, error="schedule_remove: 'schedule_id' is required")
+            return ToolResult(
+                ok=False, error="schedule_remove: 'schedule_id' is required"
+            )
         try:
             reg = _automation_registry()
             if reg.get(schedule_id) is None:
@@ -944,9 +968,7 @@ def _register_builtins(
     # -- web_search / web_fetch / http_request --------------------------------
     def _offline() -> ToolResult | None:
         if os.environ.get("LEVI_OFFLINE") == "1":
-            return ToolResult(
-                ok=False, error="network unavailable (offline mode)"
-            )
+            return ToolResult(ok=False, error="network unavailable (offline mode)")
         return None
 
     def _http_error(exc: Exception) -> ToolResult:
@@ -959,13 +981,8 @@ def _register_builtins(
         blocked = _offline()
         if blocked:
             return blocked
-        url = (
-            "https://html.duckduckgo.com/html/?q="
-            + urllib.parse.quote_plus(query)
-        )
-        req = urllib.request.Request(
-            url, headers={"User-Agent": "LEVI-agent/1.0"}
-        )
+        url = "https://html.duckduckgo.com/html/?q=" + urllib.parse.quote_plus(query)
+        req = urllib.request.Request(url, headers={"User-Agent": "LEVI-agent/1.0"})
         try:
             with urllib.request.urlopen(req, timeout=10) as resp:
                 html = resp.read(200_000).decode("utf-8", errors="replace")
@@ -1003,9 +1020,7 @@ def _register_builtins(
             return ToolResult(
                 ok=False, error=f"web_fetch: blocked non-http(s) scheme: {scheme!r}"
             )
-        req = urllib.request.Request(
-            url, headers={"User-Agent": "LEVI-agent/1.0"}
-        )
+        req = urllib.request.Request(url, headers={"User-Agent": "LEVI-agent/1.0"})
         try:
             with urllib.request.urlopen(req, timeout=10) as resp:
                 raw = resp.read(100_000)
@@ -1104,8 +1119,7 @@ def _register_builtins(
         Tool(
             name="file_edit",
             description=(
-                "Replace text in a workspace file. 'old_text' must occur "
-                "exactly once."
+                "Replace text in a workspace file. 'old_text' must occur exactly once."
             ),
             parameters=_schema(
                 {
@@ -1151,8 +1165,7 @@ def _register_builtins(
         Tool(
             name="skill_list",
             description=(
-                "List skills from the canonical levi.skill.registry "
-                "capability catalog."
+                "List skills from the canonical levi.skill.registry capability catalog."
             ),
             parameters=_schema({}, []),
             handler=_skill_list,

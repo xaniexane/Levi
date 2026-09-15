@@ -65,13 +65,19 @@ def _dst_store(homes) -> MemoryStore:
 # create
 # ---------------------------------------------------------------------------
 
+
 def test_create_bundle_schema(homes):
     bundle = torch_bundle.create_bundle(homes["src"])
     assert bundle["format"] == "levi-torch"
     assert bundle["version"] == 1
     sections = bundle["sections"]
-    for key in ("lifepack", "curriculum", "journal_highlights",
-                "model_card", "founders_note"):
+    for key in (
+        "lifepack",
+        "curriculum",
+        "journal_highlights",
+        "model_card",
+        "founders_note",
+    ):
         assert key in sections, key
     # lifepack is the real thing, not a fork
     assert sections["lifepack"]["format"] == "levi-lifepack"
@@ -119,6 +125,7 @@ def test_read_rejects_bad_version(homes):
 # ingest
 # ---------------------------------------------------------------------------
 
+
 def test_ingest_requires_confirm(homes):
     bundle = torch_bundle.create_bundle(homes["src"])
     with pytest.raises(TorchError):
@@ -128,8 +135,9 @@ def test_ingest_requires_confirm(homes):
 def test_ingest_roundtrip_into_clean_home(homes, capsys):
     bundle = torch_bundle.create_bundle(homes["src"])
     path = torch_bundle.write_bundle(homes["tmp"] / "torch.json", bundle)
-    summary = torch_bundle.ingest_bundle(torch_bundle.read_bundle(path),
-                                         homes["dst"], confirm=True)
+    summary = torch_bundle.ingest_bundle(
+        torch_bundle.read_bundle(path), homes["dst"], confirm=True
+    )
     # curriculum present via the loader + torch seeds
     assert summary["curriculum"]["lessons"] == 1
     store = _dst_store(homes)
@@ -150,7 +158,9 @@ def test_ingest_roundtrip_into_clean_home(homes, capsys):
         else:
             assert (e.metadata or {}).get("status") == "provisional"
     assert any("curriculum" in e.tags for e in torch_seeds), "curriculum lesson missing"
-    assert any("curriculum" not in e.tags for e in torch_seeds), "provisional learnings missing"
+    assert any("curriculum" not in e.tags for e in torch_seeds), (
+        "provisional learnings missing"
+    )
 
     # founder's note displayed on read
     rc = torch_bundle.cmd_torch(
@@ -165,9 +175,13 @@ def test_ingest_roundtrip_into_clean_home(homes, capsys):
 def test_ingest_idempotent_on_reimport(homes):
     bundle = torch_bundle.create_bundle(homes["src"])
     path = torch_bundle.write_bundle(homes["tmp"] / "torch.json", bundle)
-    torch_bundle.ingest_bundle(torch_bundle.read_bundle(path), homes["dst"], confirm=True)
+    torch_bundle.ingest_bundle(
+        torch_bundle.read_bundle(path), homes["dst"], confirm=True
+    )
     before = len(_dst_store(homes).list(limit=5000))
-    torch_bundle.ingest_bundle(torch_bundle.read_bundle(path), homes["dst"], confirm=True)
+    torch_bundle.ingest_bundle(
+        torch_bundle.read_bundle(path), homes["dst"], confirm=True
+    )
     after = len(_dst_store(homes).list(limit=5000))
     assert after == before, "re-ingest must not duplicate entries"
 
@@ -175,7 +189,9 @@ def test_ingest_idempotent_on_reimport(homes):
 def test_preview_before_confirm(homes, capsys):
     bundle = torch_bundle.create_bundle(homes["src"])
     path = torch_bundle.write_bundle(homes["tmp"] / "torch.json", bundle)
-    rc = torch_bundle.cmd_torch(_ns(torch_action="read", path=str(path), yes=False), homes["dst"])
+    rc = torch_bundle.cmd_torch(
+        _ns(torch_action="read", path=str(path), yes=False), homes["dst"]
+    )
     assert rc == 0
     out = capsys.readouterr().out
     assert "preview" in out.lower()
@@ -187,8 +203,14 @@ def test_torch_journal_entry(homes):
 
     bundle = torch_bundle.create_bundle(homes["src"])
     path = torch_bundle.write_bundle(homes["tmp"] / "torch.json", bundle)
-    torch_bundle.ingest_bundle(torch_bundle.read_bundle(path), homes["dst"], confirm=True)
-    torch_reads = [e for e in growth_journal.read_entries(limit=10) if e.get("kind") == "torch-read"]
+    torch_bundle.ingest_bundle(
+        torch_bundle.read_bundle(path), homes["dst"], confirm=True
+    )
+    torch_reads = [
+        e
+        for e in growth_journal.read_entries(limit=10)
+        if e.get("kind") == "torch-read"
+    ]
     assert torch_reads, "expected a torch-read journal entry"
     assert torch_reads[0]["seed_facts_added"] >= 0
 
@@ -196,6 +218,7 @@ def test_torch_journal_entry(homes):
 # ---------------------------------------------------------------------------
 # sign + CLI
 # ---------------------------------------------------------------------------
+
 
 def test_sign_bundle(homes):
     bundle = torch_bundle.create_bundle(homes["src"])
@@ -209,7 +232,9 @@ def test_sign_bundle(homes):
 
 def test_cmd_torch_create(capsys, homes):
     out_path = homes["tmp"] / "mentor.json"
-    rc = torch_bundle.cmd_torch(_ns(torch_action="create", path=str(out_path)), homes["src"])
+    rc = torch_bundle.cmd_torch(
+        _ns(torch_action="create", path=str(out_path)), homes["src"]
+    )
     assert rc == 0
     assert out_path.exists()
     assert "torch bundle created" in capsys.readouterr().out
@@ -219,10 +244,14 @@ def test_cmd_torch_sign_cli(homes):
     bundle = torch_bundle.create_bundle(homes["src"])
     path = torch_bundle.write_bundle(homes["tmp"] / "torch.json", bundle)
     rc = torch_bundle.cmd_torch(
-        _ns(torch_action="sign", path=str(path), sign_by="Chauncey", sign_note="Hi."), homes["src"]
+        _ns(torch_action="sign", path=str(path), sign_by="Chauncey", sign_note="Hi."),
+        homes["src"],
     )
     assert rc == 0
-    assert torch_bundle.read_bundle(path)["sections"]["founders_note"]["signed_by"] == "Chauncey"
+    assert (
+        torch_bundle.read_bundle(path)["sections"]["founders_note"]["signed_by"]
+        == "Chauncey"
+    )
 
 
 def test_cmd_torch_unknown_action(homes):
@@ -235,8 +264,11 @@ def _ns(**kwargs):
 
     ns = NS()
     defaults = {
-        "torch_action": "create", "path": "", "yes": False,
-        "sign_by": "", "sign_note": "",
+        "torch_action": "create",
+        "path": "",
+        "yes": False,
+        "sign_by": "",
+        "sign_note": "",
     }
     defaults.update(kwargs)
     for k, v in defaults.items():

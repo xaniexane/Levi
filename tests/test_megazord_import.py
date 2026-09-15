@@ -3,6 +3,7 @@
 Regression for P1.1: ``DEFAULT_REGISTRY`` was never re-exported from
 ``megazord.personas`` which made the whole package unimportable.
 """
+
 import pytest
 
 import megazord

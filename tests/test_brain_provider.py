@@ -83,12 +83,14 @@ def test_brain_never_wins_default_chain(monkeypatch, tmp_path):
 
 def test_prompt_renders_conversation():
     p = NativeBrainProvider()
-    prompt = p._prompt([
-        _msg("system", "You are Levi."),
-        _msg("user", "what is 2+2"),
-        _msg("assistant", "four"),
-        _msg("user", "and 3+3"),
-    ])
+    prompt = p._prompt(
+        [
+            _msg("system", "You are Levi."),
+            _msg("user", "what is 2+2"),
+            _msg("assistant", "four"),
+            _msg("user", "and 3+3"),
+        ]
+    )
     assert "You are Levi." in prompt
     assert "user: what is 2+2" in prompt
     assert "assistant: four" in prompt
@@ -114,9 +116,15 @@ def _toy_checkpoint(path):
     torch.save(
         {
             "chars": chars,
-            "config": {"n_layer": 1, "n_head": 2, "n_embd": 16,
-                       "block_size": 32, "params": model.n_params(),
-                       "steps": 1, "corpus_chars": 100},
+            "config": {
+                "n_layer": 1,
+                "n_head": 2,
+                "n_embd": 16,
+                "block_size": 32,
+                "params": model.n_params(),
+                "steps": 1,
+                "corpus_chars": 100,
+            },
             "model_state": model.state_dict(),
         },
         str(path),

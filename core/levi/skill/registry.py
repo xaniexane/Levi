@@ -41,6 +41,7 @@ class Skill:
 
 # ── Built-in skill handlers (local, safe) ─────────────────────
 
+
 def _skill_status(_: Dict[str, Any] | None = None) -> str:
     return "LEVI core online. Local-first. Companion active. Policy gated."
 
@@ -48,6 +49,7 @@ def _skill_status(_: Dict[str, Any] | None = None) -> str:
 def _skill_remember(args: Dict[str, Any] | None = None) -> str:
     from levi.memory.store import MemoryStore
     from levi.memory.types import MemoryType
+
     args = args or {}
     content = args.get("content") or args.get("text") or ""
     if not content:
@@ -65,6 +67,7 @@ def _skill_remember(args: Dict[str, Any] | None = None) -> str:
 
 def _skill_recall(args: Dict[str, Any] | None = None) -> str:
     from levi.memory.store import MemoryStore
+
     args = args or {}
     query = args.get("query") or args.get("text") or ""
     store = MemoryStore()
@@ -80,6 +83,7 @@ def _skill_recall(args: Dict[str, Any] | None = None) -> str:
 
 def _skill_list_personas(_: Dict[str, Any] | None = None) -> str:
     from levi.persona.lattice import PersonaLattice
+
     lattice = PersonaLattice()
     return ", ".join(p.id for p in lattice.list())
 
@@ -117,16 +121,18 @@ def _skill_phase1_checklist(_: Dict[str, Any] | None = None) -> str:
     )
 
 
-
 def _skill_interpenetration_stats(_: Dict[str, Any] | None = None) -> str:
     from levi.graph.interpenetration import InterpenetrationEngine
+
     eng = InterpenetrationEngine()
     import json
+
     return json.dumps(eng.stats(), indent=2)
 
 
 def _skill_suggest_compose(args: Dict[str, Any] | None = None) -> str:
     from levi.graph.interpenetration import InterpenetrationEngine
+
     args = args or {}
     seed = args.get("seed") or args.get("text") or "persona.interrogation"
     # Allow bare names
@@ -143,13 +149,16 @@ def _skill_suggest_compose(args: Dict[str, Any] | None = None) -> str:
         return f"No suggestions for {seed} (unknown or isolated)."
     lines = [f"Interpenetration suggestions for {seed}:"]
     for s in suggestions:
-        lines.append(f"  × {s['with']} ({s['kind']}) risk≤{s['combined_risk']} — {s['reason']}")
+        lines.append(
+            f"  × {s['with']} ({s['kind']}) risk≤{s['combined_risk']} — {s['reason']}"
+        )
     lines.append("Use compose skill to create a named composite.")
     return "\n".join(lines)
 
 
 def _skill_compose(args: Dict[str, Any] | None = None) -> str:
     from levi.graph.interpenetration import InterpenetrationEngine
+
     args = args or {}
     name = args.get("name") or "Unnamed Composite"
     parts = args.get("parts") or []
@@ -179,6 +188,7 @@ def _skill_compose(args: Dict[str, Any] | None = None) -> str:
 
 def _skill_genres(args: Dict[str, Any] | None = None) -> str:
     from levi.graph.genres import GenreRegistry, GenreCategory
+
     args = args or {}
     reg = GenreRegistry()
     check = reg.integrity_check()
@@ -198,26 +208,30 @@ def _skill_genres(args: Dict[str, Any] | None = None) -> str:
     ]
     for k, v in sorted(check["categories"].items()):
         lines.append(f"  {k}: {v}")
-    lines.append("Rule: Never silently truncate. User-designed genres are additive only.")
+    lines.append(
+        "Rule: Never silently truncate. User-designed genres are additive only."
+    )
     return "\n".join(lines)
 
 
 def _skill_list_all_genres(_: Dict[str, Any] | None = None) -> str:
     from levi.graph.genres import GenreRegistry
+
     reg = GenreRegistry()
     return f"All {reg.count()} genres:\n" + ", ".join(reg.ids())
-
 
 
 def _skill_factory_status(_: Dict[str, Any] | None = None) -> str:
     from levi.factory.pipeline import SoftwareFactory
     import json
+
     return json.dumps(SoftwareFactory().status(), indent=2)
 
 
 def _skill_factory_create(args: Dict[str, Any] | None = None) -> str:
     from levi.factory.pipeline import SoftwareFactory
     from levi.orchestration.nl_ir import NLIRCompiler
+
     args = args or {}
     raw = (args.get("idea") or args.get("text") or args.get("content") or "").strip()
     if not raw:
@@ -229,7 +243,9 @@ def _skill_factory_create(args: Dict[str, Any] | None = None) -> str:
     proj.risk_ceiling = ir.risk_ceiling
     fac.projects[proj.id] = proj
     fac._persist()
-    proj = fac.advance(proj.id, summary=f"NL→IR compiled (confidence={ir.confidence:.2f})")
+    proj = fac.advance(
+        proj.id, summary=f"NL→IR compiled (confidence={ir.confidence:.2f})"
+    )
     return (
         f"NL→IR → Factory DNA\n"
         f"IR [{ir.id}] conf={ir.confidence:.2f} artifact={ir.artifact_type.value} lang={ir.language}\n"
@@ -242,6 +258,7 @@ def _skill_factory_create(args: Dict[str, Any] | None = None) -> str:
 
 def _skill_factory_advance(args: Dict[str, Any] | None = None) -> str:
     from levi.factory.pipeline import SoftwareFactory
+
     args = args or {}
     pid = args.get("project_id") or args.get("id")
     if not pid:
@@ -257,21 +274,25 @@ def _skill_factory_advance(args: Dict[str, Any] | None = None) -> str:
 def _skill_automation_status(_: Dict[str, Any] | None = None) -> str:
     from levi.daemon.automation import AutomationRegistry
     import json
+
     return json.dumps(AutomationRegistry().status(), indent=2)
 
 
 def _skill_automation_list(_: Dict[str, Any] | None = None) -> str:
     from levi.daemon.automation import AutomationRegistry
+
     reg = AutomationRegistry()
     items = reg.list()
     if not items:
         return "No automations yet."
-    return "\n".join(f"{a.id} | {a.status.value} | {a.name} | risk≤{a.risk_ceiling}" for a in items)
-
+    return "\n".join(
+        f"{a.id} | {a.status.value} | {a.name} | risk≤{a.risk_ceiling}" for a in items
+    )
 
 
 def _skill_agent_run(args: Dict[str, Any] | None = None) -> str:
     from levi.agent.runtime import AgentRuntime
+
     args = args or {}
     intent = args.get("text") or args.get("intent") or "status"
     rt = AgentRuntime()
@@ -283,10 +304,10 @@ def _skill_agent_run(args: Dict[str, Any] | None = None) -> str:
     return "\n".join(lines)
 
 
-
 def _skill_intent_map(args: Dict[str, Any] | None = None) -> str:
     from levi.orchestration.intent import motivation_graph_for
     import json
+
     args = args or {}
     raw = (args.get("text") or args.get("request") or "").strip()
     if not raw:
@@ -312,6 +333,7 @@ def _skill_intent_map(args: Dict[str, Any] | None = None) -> str:
 def _skill_compile_ir(args: Dict[str, Any] | None = None) -> str:
     from levi.orchestration.nl_ir import NLIRCompiler
     import json
+
     args = args or {}
     raw = (args.get("text") or args.get("idea") or "").strip()
     if not raw:
@@ -320,18 +342,20 @@ def _skill_compile_ir(args: Dict[str, Any] | None = None) -> str:
     return json.dumps(ir.to_dict(), indent=2)
 
 
-
 def _skill_automation_create(args: Dict[str, Any] | None = None) -> str:
     from levi.orchestration.nl_ir import NLIRCompiler
     from levi.daemon.automation import AutomationRegistry, AutomationAction, TriggerKind
+
     args = args or {}
     raw = (args.get("text") or args.get("idea") or "").strip()
     if not raw:
         return "Provide automation NL to compile."
     ir = NLIRCompiler().compile_automate(raw)
     reg = AutomationRegistry()
-    trigger = TriggerKind.SCHEDULE if ir.trigger == "schedule" else (
-        TriggerKind.EVENT if ir.trigger == "event" else TriggerKind.MANUAL
+    trigger = (
+        TriggerKind.SCHEDULE
+        if ir.trigger == "schedule"
+        else (TriggerKind.EVENT if ir.trigger == "event" else TriggerKind.MANUAL)
     )
     actions = [AutomationAction(skill_id=a, args={}, risk_level=0) for a in ir.actions]
     auto = reg.create(
@@ -350,11 +374,11 @@ def _skill_automation_create(args: Dict[str, Any] | None = None) -> str:
     )
 
 
-
 def _skill_story_create(args: Dict[str, Any] | None = None) -> str:
     from levi.graph.story_fabric import StoryFabric
     from levi.graph.genres import GenreRegistry
     import re
+
     args = args or {}
     text_in = (args.get("text") or args.get("premise") or "").strip()
     genre = (args.get("genre") or "").strip().lower().replace(" ", "_")
@@ -369,7 +393,9 @@ def _skill_story_create(args: Dict[str, Any] | None = None) -> str:
         if not genre:
             genre = "literary"
     premise = text_in
-    premise = re.sub(r"(?i)^(?:write|create|make)\s+(?:me\s+)?(?:a\s+)?story\s+", "", premise)
+    premise = re.sub(
+        r"(?i)^(?:write|create|make)\s+(?:me\s+)?(?:a\s+)?story\s+", "", premise
+    )
     flex = genre.replace("_", r"[_ ]")
     premise = re.sub(rf"(?i)^in\s+{flex}\s+", "", premise)
     premise = re.sub(r"(?i)^about\s+", "", premise).strip()
@@ -380,21 +406,25 @@ def _skill_story_create(args: Dict[str, Any] | None = None) -> str:
     if isinstance(arch, str):
         arch = [a.strip() for a in arch.split(",") if a.strip()]
     fab = StoryFabric()
-    story = fab.create_story(premise=premise, genre=genre, character_count=count, archetypes=arch)
+    story = fab.create_story(
+        premise=premise, genre=genre, character_count=count, archetypes=arch
+    )
     return (
         f"Story [{story.id}]  genre={story.genre}  title={story.title}\n"
         f"Cast: {', '.join(c.name + ' (' + c.archetype.value + ')' for c in story.characters)}\n\n"
-        f"{story.body[:1200]}{'…' if len(story.body)>1200 else ''}\n\n"
+        f"{story.body[:1200]}{'…' if len(story.body) > 1200 else ''}\n\n"
         f"Expand: story_expand {story.id} | Modify: story_modify {story.id} mode=void"
     )
 
 
 def _skill_story_expand(args: Dict[str, Any] | None = None) -> str:
     from levi.graph.story_fabric import StoryFabric
+
     args = args or {}
     sid = args.get("story_id") or args.get("id") or ""
     text_in = args.get("text") or ""
     import re
+
     if not sid:
         m = re.search(r"story\.([a-f0-9]+)", text_in)
         if m:
@@ -420,16 +450,27 @@ def _skill_story_expand(args: Dict[str, Any] | None = None) -> str:
 
 def _skill_story_modify(args: Dict[str, Any] | None = None) -> str:
     from levi.graph.story_fabric import StoryFabric
+
     args = args or {}
     text_in = args.get("text") or ""
     sid = args.get("story_id") or args.get("id") or ""
     mode = args.get("mode") or "void"
     import re
+
     if not sid:
         m = re.search(r"story\.([a-f0-9]+)", text_in)
         if m:
             sid = "story." + m.group(1)
-    for mname in ("void", "interrogation", "reframe", "noir", "horror", "compress", "soft_landing", "spiral"):
+    for mname in (
+        "void",
+        "interrogation",
+        "reframe",
+        "noir",
+        "horror",
+        "compress",
+        "soft_landing",
+        "spiral",
+    ):
         if mname in text_in.lower():
             mode = mname
             break
@@ -449,6 +490,7 @@ def _skill_story_modify(args: Dict[str, Any] | None = None) -> str:
 
 def _skill_list_characters(_: Dict[str, Any] | None = None) -> str:
     from levi.graph.story_fabric import StoryFabric
+
     arches = StoryFabric().list_archetypes()
     return f"Character archetypes ({len(arches)}):\n" + ", ".join(arches)
 
@@ -681,6 +723,7 @@ BUILTIN_SKILLS: List[Skill] = [
     ),
 ]
 
+
 class SkillRegistry:
     def __init__(self):
         self._skills: Dict[str, Skill] = {}
@@ -689,11 +732,13 @@ class SkillRegistry:
         # LEVI cybersecurity skill pack (100 original playbooks).
         # Lazy import: cyber_skills imports Skill/SkillRisk from this module.
         from levi.skill.cyber_skills import CYBER_SKILLS
+
         for s in CYBER_SKILLS:
             self.register(s)
         # LEVI curriculum skill pack (awesome-courses subjects).
         # Data-driven: course_skills scans knowledge/courses/catalog.json.
         from levi.skill.course_skills import COURSE_SKILLS
+
         for s in COURSE_SKILLS:
             self.register(s)
 
@@ -703,7 +748,9 @@ class SkillRegistry:
     def get(self, skill_id: str) -> Optional[Skill]:
         return self._skills.get(skill_id)
 
-    def list(self, category: Optional[str] = None, tag: Optional[str] = None) -> List[Skill]:
+    def list(
+        self, category: Optional[str] = None, tag: Optional[str] = None
+    ) -> List[Skill]:
         results = list(self._skills.values())
         if category:
             results = [s for s in results if s.category == category]

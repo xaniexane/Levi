@@ -57,13 +57,27 @@ def test_validate_rejects_bad_lesson():
         validate_lessons([{"id": "x-1"}])
     with pytest.raises(ValueError):
         validate_lessons(
-            [{"id": "x-1", "topic": "Nope", "kind": "fact",
-              "text": "some text here", "taught_by": "chauncey"}]
+            [
+                {
+                    "id": "x-1",
+                    "topic": "Nope",
+                    "kind": "fact",
+                    "text": "some text here",
+                    "taught_by": "chauncey",
+                }
+            ]
         )
     with pytest.raises(ValueError):
         validate_lessons(
-            [{"id": "x-1", "topic": TOPICS[0], "kind": "fact",
-              "text": "some text here", "taught_by": "mallory"}]
+            [
+                {
+                    "id": "x-1",
+                    "topic": TOPICS[0],
+                    "kind": "fact",
+                    "text": "some text here",
+                    "taught_by": "mallory",
+                }
+            ]
         )
 
 

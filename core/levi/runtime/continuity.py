@@ -5,6 +5,7 @@ Not a third-party agent “memory product.” Cross-organ pointers so the operat
 never loses the thread: last ask, open HITL, active rail cars, L.W.P. scenes,
 factory projects, monotropism tunnel, charter version.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -50,7 +51,10 @@ class ContinuityShelf:
 
     def _persist(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        payload = {"history": self.history[-40:], "updated": datetime.now(timezone.utc).isoformat()}
+        payload = {
+            "history": self.history[-40:],
+            "updated": datetime.now(timezone.utc).isoformat(),
+        }
         tmp = self.path.with_suffix(".tmp")
         tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
         tmp.replace(self.path)
@@ -61,6 +65,7 @@ class ContinuityShelf:
         frame.last_reply_head = (last_reply or "")[:240]
         try:
             from levi.project.hitl import HITLGate
+
             pend = [r for r in HITLGate().list_pending()]
             frame.open_hitl = len(pend)
             if pend:
@@ -70,6 +75,7 @@ class ContinuityShelf:
             pass
         try:
             from levi.lwp.opportunity_rail import OpportunityRail
+
             cars = list(OpportunityRail().cars.values())
             active = [c for c in cars if getattr(c, "status", "") == "active"]
             frame.active_rails = len(active)
@@ -80,6 +86,7 @@ class ContinuityShelf:
             pass
         try:
             from levi.lwp.model_engine import LWPModelEngine
+
             eng = LWPModelEngine()
             frame.lwp_words = eng.state.words
             if eng.state.last_id:
@@ -90,17 +97,23 @@ class ContinuityShelf:
             # soft read
             from pathlib import Path as P
             import json as _j
+
             mp = P.home() / ".levi" / "monotropism.json"
             if mp.exists():
                 data = _j.loads(mp.read_text())
                 tunnels = data.get("tunnels") or data.get("active") or []
                 if tunnels and isinstance(tunnels, list):
-                    d = tunnels[0].get("depth", 0) if isinstance(tunnels[0], dict) else 0
+                    d = (
+                        tunnels[0].get("depth", 0)
+                        if isinstance(tunnels[0], dict)
+                        else 0
+                    )
                     frame.monotropism_depth = float(d)
         except Exception:
             pass
         try:
             from levi.identity.charter import Charter
+
             Charter()  # validate it loads; result unused
             frame.pointers["charter"] = "loaded"
         except Exception:
@@ -126,8 +139,12 @@ class ContinuityShelf:
             for n in frame.notes[:6]:
                 lines.append(f"  · {n}")
         if frame.pointers:
-            lines.append("Pointers: " + ", ".join(f"{k}={v}" for k, v in frame.pointers.items()))
+            lines.append(
+                "Pointers: " + ", ".join(f"{k}={v}" for k, v in frame.pointers.items())
+            )
         lines.append("")
-        lines.append("Continue: levi ask | levi project --approve ID | levi rail --advance ID --approved")
+        lines.append(
+            "Continue: levi ask | levi project --approve ID | levi rail --advance ID --approved"
+        )
         lines.append("This is not a SaaS memory vault — local JSON shelf under ~/.levi")
         return "\n".join(lines)

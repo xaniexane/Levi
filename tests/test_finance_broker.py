@@ -169,9 +169,7 @@ def test_confirmed_with_credential_but_no_transport(monkeypatch):
 def test_key_alone_is_not_enough_for_credential(monkeypatch):
     monkeypatch.setenv("LEVI_ALPACA_KEY", "test-key")
     monkeypatch.delenv("LEVI_ALPACA_SECRET", raising=False)
-    result = AlpacaConnector().execute(
-        "quote", {"symbol": "AAPL"}, confirm=True
-    )
+    result = AlpacaConnector().execute("quote", {"symbol": "AAPL"}, confirm=True)
     assert result.ok is False
     assert result.status == "missing_credential"
 

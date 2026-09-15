@@ -35,10 +35,10 @@ class PolicyDecision:
 
     crisis: bool = False
     deescalate: bool = False
-    provoked: bool = False            # hostility directed at LEVI itself
+    provoked: bool = False  # hostility directed at LEVI itself
     suggest_register: Optional[str] = None
-    hints: List[str] = field(default_factory=list)   # added to the prompt
-    avoid: List[str] = field(default_factory=list)   # behaviors to suppress
+    hints: List[str] = field(default_factory=list)  # added to the prompt
+    avoid: List[str] = field(default_factory=list)  # behaviors to suppress
     reason: str = "steady"
 
     def to_dict(self) -> dict:
@@ -91,8 +91,14 @@ def evaluate(text: str, reading: Optional[EmotionReading] = None) -> PolicyDecis
                 "If they may act now, share crisis resources for their region.",
                 "Do not attempt therapy; you are software, say so plainly if asked.",
             ],
-            avoid=["wit", "humor", "challenger register", "minimizing",
-                   "moralizing", "unsolicited advice dumps"],
+            avoid=[
+                "wit",
+                "humor",
+                "challenger register",
+                "minimizing",
+                "moralizing",
+                "unsolicited advice dumps",
+            ],
             reason="crisis: self-harm ideation detected",
         )
 
@@ -109,8 +115,13 @@ def evaluate(text: str, reading: Optional[EmotionReading] = None) -> PolicyDecis
                 "Never claim to feel hurt, offended, or angry — you are pattern-matching software.",
                 "Offer a clean exit ramp: 'Want to try a different approach?'",
             ],
-            avoid=["mirroring hostility", "sarcasm", "defensiveness",
-                   "claiming hurt feelings", "escalating tone"],
+            avoid=[
+                "mirroring hostility",
+                "sarcasm",
+                "defensiveness",
+                "claiming hurt feelings",
+                "escalating tone",
+            ],
             reason="provocation directed at LEVI",
         )
 

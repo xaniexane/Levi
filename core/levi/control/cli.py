@@ -11,43 +11,49 @@ def register_control(sub) -> None:
     approve_p = sub.add_parser(
         "approve",
         help="Human control plane: list / approve / deny pending actions "
-             "(default: list)",
+        "(default: list)",
     )
-    approve_p.add_argument("decision", nargs="?", default="list",
-                           choices=["list", "approve", "deny", "for-workflow"],
-                           help="Decision to take")
-    approve_p.add_argument("approval_id", nargs="?",
-                           help="Approval id (from list)")
-    approve_p.add_argument("--note", default="",
-                           help="Decision note recorded in history")
-    approve_p.add_argument("--workflow", default="",
-                           help="Workflow key for 'for-workflow' grants")
+    approve_p.add_argument(
+        "decision",
+        nargs="?",
+        default="list",
+        choices=["list", "approve", "deny", "for-workflow"],
+        help="Decision to take",
+    )
+    approve_p.add_argument("approval_id", nargs="?", help="Approval id (from list)")
+    approve_p.add_argument(
+        "--note", default="", help="Decision note recorded in history"
+    )
+    approve_p.add_argument(
+        "--workflow", default="", help="Workflow key for 'for-workflow' grants"
+    )
 
     ledger_p = sub.add_parser(
         "ledger",
         help="Decision & execution ledger (default: stats)",
     )
-    ledger_p.add_argument("action", nargs="?", default="stats",
-                          choices=["stats", "query", "recent"])
-    ledger_p.add_argument("--task", default="",
-                          help="Task id for 'query'")
+    ledger_p.add_argument(
+        "action", nargs="?", default="stats", choices=["stats", "query", "recent"]
+    )
+    ledger_p.add_argument("--task", default="", help="Task id for 'query'")
 
     route_p = sub.add_parser(
         "route",
         help="AI router: show the planned route for a task",
     )
-    route_p.add_argument("action", nargs="?", default="plan",
-                         choices=["plan"])
-    route_p.add_argument("task", nargs="?", default="",
-                         help="Task text to route")
-    route_p.add_argument("--budget", type=float, default=None,
-                         help="Task budget in relative cost units")
-    route_p.add_argument("--local-only", action="store_true",
-                         help="Restrict to local models (privacy)")
+    route_p.add_argument("action", nargs="?", default="plan", choices=["plan"])
+    route_p.add_argument("task", nargs="?", default="", help="Task text to route")
+    route_p.add_argument(
+        "--budget", type=float, default=None, help="Task budget in relative cost units"
+    )
+    route_p.add_argument(
+        "--local-only", action="store_true", help="Restrict to local models (privacy)"
+    )
 
 
 def cmd_approve(args) -> int:
     from levi.control.approvals import ApprovalEngine, ApprovalNotFound
+
     engine = ApprovalEngine()
     decision = args.decision
     if decision == "list":
@@ -65,8 +71,10 @@ def cmd_approve(args) -> int:
             if r.get("affected_systems"):
                 print(f"  systems: {', '.join(r['affected_systems'])}")
             print(f"  requested: {r.get('created_at', '?')}")
-        print(f"\n{len(pending)} pending. "
-              "levi approve approve <id> | levi approve deny <id>")
+        print(
+            f"\n{len(pending)} pending. "
+            "levi approve approve <id> | levi approve deny <id>"
+        )
         return 0
     if not args.approval_id:
         print(f"approval id required for '{decision}'")
@@ -78,8 +86,8 @@ def cmd_approve(args) -> int:
             r = engine.deny(args.approval_id, note=args.note)
         else:  # for-workflow
             r = engine.approve_for_workflow(
-                args.approval_id, workflow_key=args.workflow,
-                note=args.note)
+                args.approval_id, workflow_key=args.workflow, note=args.note
+            )
     except ApprovalNotFound as exc:
         print(str(exc))
         return 1
@@ -89,6 +97,7 @@ def cmd_approve(args) -> int:
 
 def cmd_ledger(args) -> int:
     from levi.control.ledger import LedgerWriter
+
     ledger = LedgerWriter()
     action = args.action
     if action == "stats":
@@ -96,8 +105,10 @@ def cmd_ledger(args) -> int:
         return 0
     if action == "recent":
         for t in ledger.recent_tasks():
-            print(f"{t['task_id']} [{t['status']}] "
-                  f"{t['objective'][:70]} ({t['cost_units']:.1f}u)")
+            print(
+                f"{t['task_id']} [{t['status']}] "
+                f"{t['objective'][:70]} ({t['cost_units']:.1f}u)"
+            )
         return 0
     if action == "query":
         if not args.task:
@@ -115,8 +126,9 @@ def cmd_ledger(args) -> int:
 
 def cmd_route(args) -> int:
     from levi.control.router import plan as plan_task_route
+
     if not args.task:
-        print("task text required: levi route plan \"<task>\"")
+        print('task text required: levi route plan "<task>"')
         return 2
     rp = plan_task_route(
         args.task,

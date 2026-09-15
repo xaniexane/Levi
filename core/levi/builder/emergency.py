@@ -18,6 +18,7 @@ All tiers:
 This is the "builder that can improve the whole system's source code
 and other independent projects from skeleton → MVP → final product."
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -66,11 +67,11 @@ TIER_META = {
 
 
 STAGES = [
-    "skeleton",      # folders + README
-    "scaffold",      # modules stubs
-    "mvp",           # minimal working path
-    "harden",        # tests + policy
-    "product",       # package + handoff
+    "skeleton",  # folders + README
+    "scaffold",  # modules stubs
+    "mvp",  # minimal working path
+    "harden",  # tests + policy
+    "product",  # package + handoff
 ]
 
 
@@ -86,7 +87,9 @@ class BuildJob:
     plan_steps: List[str] = field(default_factory=list)
     requires_hitl: bool = False
     hitl_id: str = ""
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -94,7 +97,11 @@ class BuildJob:
 
 class EmergencyBuilder:
     def __init__(self, workspace: Optional[Path] = None):
-        self.workspace = Path(workspace) if workspace else Path.home() / ".levi" / "builder_workspace"
+        self.workspace = (
+            Path(workspace)
+            if workspace
+            else Path.home() / ".levi" / "builder_workspace"
+        )
         self.workspace.mkdir(parents=True, exist_ok=True)
         self.state_path = Path.home() / ".levi" / "emergency_builder.json"
         self.jobs: List[BuildJob] = []
@@ -107,7 +114,15 @@ class EmergencyBuilder:
             raw = json.loads(self.state_path.read_text(encoding="utf-8"))
             self.jobs = []
             for j in raw.get("jobs") or []:
-                self.jobs.append(BuildJob(**{k: v for k, v in j.items() if k in BuildJob.__dataclass_fields__}))
+                self.jobs.append(
+                    BuildJob(
+                        **{
+                            k: v
+                            for k, v in j.items()
+                            if k in BuildJob.__dataclass_fields__
+                        }
+                    )
+                )
         except Exception:
             pass
 
@@ -130,7 +145,9 @@ class EmergencyBuilder:
     ) -> BuildJob:
         t = BuildTier(tier.upper() if tier.upper() in BuildTier.__members__ else "E4")
         meta = TIER_META[t]
-        safe_name = re.sub(r"[^a-zA-Z0-9_-]+", "_", project_name).strip("_") or "new_project"
+        safe_name = (
+            re.sub(r"[^a-zA-Z0-9_-]+", "_", project_name).strip("_") or "new_project"
+        )
         steps = [
             f"Tier {t.value}: {meta['name']} — {meta['desc']}",
             f"Target: {target} / {safe_name}",
@@ -143,7 +160,9 @@ class EmergencyBuilder:
             "6) HITL before any claim of production-ready or self-merge into LEVI core",
         ]
         if t in (BuildTier.E5, BuildTier.E6):
-            steps.append("7) Hard HITL: source upgrade / product path requires explicit APPROVE + --apply")
+            steps.append(
+                "7) Hard HITL: source upgrade / product path requires explicit APPROVE + --apply"
+            )
         job = BuildJob(
             id=str(uuid.uuid4())[:8],
             tier=t.value,
@@ -157,6 +176,7 @@ class EmergencyBuilder:
         if job.requires_hitl:
             try:
                 from levi.project.hitl import HITLGate
+
                 req = HITLGate().propose(
                     what=f"Emergency Builder {job.tier} apply for {job.target}: {goal[:100]}",
                     why="Source scaffold/upgrade can change system or project code",
@@ -184,6 +204,7 @@ class EmergencyBuilder:
             # check HITL approved
             try:
                 from levi.project.hitl import HITLGate
+
                 g = HITLGate()
                 # if still pending, block
                 if job.hitl_id and job.hitl_id in g.pending:
@@ -195,7 +216,8 @@ class EmergencyBuilder:
                 if job.status == "awaiting_hitl" and job.hitl_id:
                     # allow if not in pending (was decided) — check history
                     approved = any(
-                        h.id == job.hitl_id and h.status == "approved" for h in g.history
+                        h.id == job.hitl_id and h.status == "approved"
+                        for h in g.history
                     )
                     if not approved:
                         return f"HITL not approved for {job.hitl_id}"
@@ -225,7 +247,10 @@ class EmergencyBuilder:
         pkg = root / "src" / name
         pkg.mkdir(parents=True, exist_ok=True)
         init = pkg / "__init__.py"
-        init.write_text(f'"""{name} — scaffolded by LEVI Emergency Builder."""\n__version__ = "0.0.1"\n', encoding="utf-8")
+        init.write_text(
+            f'"""{name} — scaffolded by LEVI Emergency Builder."""\n__version__ = "0.0.1"\n',
+            encoding="utf-8",
+        )
         artifacts.append(str(init))
 
         main = pkg / "main.py"
@@ -241,7 +266,7 @@ class EmergencyBuilder:
                 f'    if args and args[0] in ("status", "--status"):\n'
                 f"        print(status())\n"
                 f"        return 0\n"
-                f'    print(status())\n'
+                f"    print(status())\n"
                 f'    print("Usage: python -m {name}.main status")\n'
                 f"    return 0\n\n"
                 f'if __name__ == "__main__":\n'
@@ -265,7 +290,7 @@ class EmergencyBuilder:
         pyproject.write_text(
             f'[project]\nname = "{name}"\nversion = "0.1.0"\ndescription = "{job.goal[:80]}"\n'
             f'requires-python = ">=3.10"\n\n'
-            f"[tool.setuptools.packages.find]\nwhere = [\"src\"]\n",
+            f'[tool.setuptools.packages.find]\nwhere = ["src"]\n',
             encoding="utf-8",
         )
         artifacts.append(str(pyproject))
@@ -279,11 +304,10 @@ class EmergencyBuilder:
             f"    assert __version__\n\n"
             f"def test_status():\n"
             f"    from {name}.main import status\n"
-            f"    assert {name!r} in status() or \"OK\" in status()\n",
+            f'    assert {name!r} in status() or "OK" in status()\n',
             encoding="utf-8",
         )
         artifacts.append(str(test_f))
-
 
         # handoff note
         handoff = root / "HANDOFF.md"
@@ -305,6 +329,7 @@ class EmergencyBuilder:
         smoke_note = ""
         try:
             from levi.factory.sandbox import run_smoke
+
             smoke_note = run_smoke(root)
             job.artifacts.append(
                 "sandbox:" + ("ok" if "fail" not in smoke_note.lower() else "issues")
@@ -315,6 +340,7 @@ class EmergencyBuilder:
 
         try:
             from levi.project.capability_log import CapabilityLog
+
             CapabilityLog().log(
                 task=f"emergency_builder {job.tier} {name}",
                 result="completed",
@@ -333,7 +359,9 @@ class EmergencyBuilder:
         for a in artifacts:
             lines.append(f"  · {a}")
         lines.append("")
-        lines.append("E5/E6 product claims still require governance — scaffold ≠ final product.")
+        lines.append(
+            "E5/E6 product claims still require governance — scaffold ≠ final product."
+        )
         if smoke_note:
             lines.append("")
             lines.append("--- Sandbox ---")
@@ -371,5 +399,7 @@ class EmergencyBuilder:
         for j in self.jobs[-8:]:
             lines.append(f"  [{j.id}] {j.tier} {j.status:14} {j.target}: {j.goal[:40]}")
         if not self.jobs:
-            lines.append('  (no jobs — levi builder --plan "…" --tier E4 --name my_app)')
+            lines.append(
+                '  (no jobs — levi builder --plan "…" --tier E4 --name my_app)'
+            )
         return "\n".join(lines)

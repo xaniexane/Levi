@@ -7,6 +7,7 @@ and opportunities with HITL before payment, production, or customer contact.
 Capability under LEVI, not the whole system. Never auto-charges money.
 Produces plans that require HITL before payment, production, or customer contact.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -31,7 +32,9 @@ class ServicePlan:
     status: str = "draft"  # draft | awaiting_hitl | approved | rejected
     demand_signal_id: str = ""
     value_flags: List[str] = field(default_factory=list)
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -50,7 +53,15 @@ class IncomeFactory:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
             self.plans = []
             for p in raw.get("plans") or []:
-                self.plans.append(ServicePlan(**{k: v for k, v in p.items() if k in ServicePlan.__dataclass_fields__}))
+                self.plans.append(
+                    ServicePlan(
+                        **{
+                            k: v
+                            for k, v in p.items()
+                            if k in ServicePlan.__dataclass_fields__
+                        }
+                    )
+                )
         except Exception:
             pass
 
@@ -81,6 +92,7 @@ class IncomeFactory:
         value_flags: List[str] = []
         try:
             from levi.graph.symbiosis import value_check
+
             vc = value_check(title + " " + service)
             if "Flags" in vc or "Fabricated" in vc or "Pressure" in vc:
                 value_flags.append("value_boundary_warning")
@@ -116,11 +128,14 @@ class IncomeFactory:
         )
         if not sig:
             # weak pair without demand evidence
-            plan.offer_steps.insert(0, "⚠ No demand_signal_id — run DemandPulse before scaling this offer")
+            plan.offer_steps.insert(
+                0, "⚠ No demand_signal_id — run DemandPulse before scaling this offer"
+            )
         self.plans.append(plan)
         self._persist()
         try:
             from levi.brain.corpus import Corpus
+
             Corpus().add(
                 f"Income draft {plan.id}: {plan.opportunity_title[:120]} signal={plan.demand_signal_id}",
                 kind="INFERENCE",
@@ -169,6 +184,7 @@ class IncomeFactory:
             return "\n".join(lines)
         try:
             from levi.demand.pulse import DemandPulse
+
             n = len(DemandPulse().opportunities)
             lines.append(f"Demand opportunities on file: {n}")
             if n == 0:

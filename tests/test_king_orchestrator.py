@@ -29,7 +29,9 @@ def test_pulse_without_stories_guides_no_autocreate(tmp_path):
 
 def test_pulse_harvests_story_fabric(tmp_path):
     k = _king(tmp_path)
-    story = k._fabric().create_story("A lighthouse keeps the last signal.", genre="literary")
+    story = k._fabric().create_story(
+        "A lighthouse keeps the last signal.", genre="literary"
+    )
     out = k.pulse(story_id=story.id)
     assert "words" in out and "bank(s) harvested" in out
     assert k.ledger.total_words > 0
@@ -129,6 +131,7 @@ def test_social_queues_pending_pack(tmp_path):
     assert k.review.pending_count() == 1
     # the queued caption satisfies the sanitize contract
     from levi.king.social import assert_pack_clean
+
     assert_pack_clean({"caption": k.review.pending[0]["caption"]})
 
 

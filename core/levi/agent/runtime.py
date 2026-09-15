@@ -45,8 +45,12 @@ class AgentRuntime:
         self.specialists = SpecialistRegistry()
         self.skills = SkillRegistry()
         self.policy = PolicyEngine(auto_approve_up_to=auto_approve_up_to)
-        self.governor = Governor(name="agent_runtime", budget=budget, complexity_limit=8)
-        self.breaker = CircuitBreaker(name="agent_runtime", max_depth=4, max_calls=20, max_cost=budget)
+        self.governor = Governor(
+            name="agent_runtime", budget=budget, complexity_limit=8
+        )
+        self.breaker = CircuitBreaker(
+            name="agent_runtime", max_depth=4, max_calls=20, max_cost=budget
+        )
 
     def run(self, intent: str, max_steps: int = 4) -> AgentRun:
         run = AgentRun(id=f"run.{uuid.uuid4().hex[:10]}", intent=intent)
@@ -60,11 +64,20 @@ class AgentRuntime:
 
         for i, spec in enumerate(selected[:max_steps]):
             if not self.breaker.check(depth=i, add_cost=0.1):
-                run.steps.append(AgentStep(spec.id, "halt", f"Circuit breaker: {self.breaker.reason}", False))
+                run.steps.append(
+                    AgentStep(
+                        spec.id,
+                        "halt",
+                        f"Circuit breaker: {self.breaker.reason}",
+                        False,
+                    )
+                )
                 run.ok = False
                 break
             if not self.governor.authorize(cost=0.1, complexity=1):
-                run.steps.append(AgentStep(spec.id, "halt", "Governor budget exhausted", False))
+                run.steps.append(
+                    AgentStep(spec.id, "halt", "Governor budget exhausted", False)
+                )
                 run.ok = False
                 break
 
@@ -75,7 +88,9 @@ class AgentRuntime:
                 break
 
         if run.steps:
-            run.final = " | ".join(f"{s.specialist_id}:{s.result[:80]}" for s in run.steps)
+            run.final = " | ".join(
+                f"{s.specialist_id}:{s.result[:80]}" for s in run.steps
+            )
         else:
             run.final = "No steps"
         return run
@@ -99,11 +114,19 @@ class AgentRuntime:
             out = self.skills.invoke("factory_status")
             return "factory_status", str(out)[:200], True
         if spec.id == "security":
-            return "risk_note", f"Risk ceiling for this roster path ≤ {spec.risk_ceiling}", True
+            return (
+                "risk_note",
+                f"Risk ceiling for this roster path ≤ {spec.risk_ceiling}",
+                True,
+            )
         if spec.id == "supervisor":
             roster = ", ".join(s.id for s in self.specialists.select_for_intent(intent))
             return "plan", f"Delegating via: {roster}", True
         if spec.id == "verification":
             return "verify", "Step boundary verified (foundation runtime)", True
         # default
-        return "observe", f"{spec.display_name} noted intent ({len(intent)} chars)", True
+        return (
+            "observe",
+            f"{spec.display_name} noted intent ({len(intent)} chars)",
+            True,
+        )

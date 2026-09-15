@@ -17,6 +17,7 @@ Cultural touchstone for the dry end: Sheldon-adjacent *register*, not cosplay.
 HARD RULE: muted or off under crisis / distress / grief / high fear —
 wit must not make the human worse. Diagnosis is never the punchline.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -161,10 +162,10 @@ _LEGACY_LIGHT_DARK = "precision_deadpan"
 @dataclass
 class WitConfig:
     enabled: bool = True
-    intensity: float = 0.35          # 0–1 delivery strength
-    backhand_rate: float = 0.4       # chance a compliment carries delayed sting
-    precision_bias: float = 0.85     # favor exact wording over broad jokes
-    mode: str = "spectrum"           # spectrum | dry_only | off | light_dark (legacy)
+    intensity: float = 0.35  # 0–1 delivery strength
+    backhand_rate: float = 0.4  # chance a compliment carries delayed sting
+    precision_bias: float = 0.85  # favor exact wording over broad jokes
+    mode: str = "spectrum"  # spectrum | dry_only | off | light_dark (legacy)
     active_styles: List[str] = field(default_factory=list)  # 1–3 styles this turn
     style_weights: Dict[str, float] = field(default_factory=dict)
     reason: str = ""
@@ -205,7 +206,10 @@ def _select_styles(
     for sid, meta in ND_STYLES.items():
         if user_tone not in meta["safe_under"] and user_tone != "neutral":
             # neutral is always a soft allow for low-arousal styles
-            if meta["arousal"] in ("mid-high", "mid") and user_tone not in meta["safe_under"]:
+            if (
+                meta["arousal"] in ("mid-high", "mid")
+                and user_tone not in meta["safe_under"]
+            ):
                 continue
             if user_tone not in meta["safe_under"]:
                 continue
@@ -216,14 +220,22 @@ def _select_styles(
         if intrigue and sid in ("lateral_leap", "surreal_internal", "rule_inversion"):
             score += 0.25
         if user_tone == "playful":
-            if sid in ("lateral_leap", "literal_collision", "chaotic_self_report", "surreal_internal"):
+            if sid in (
+                "lateral_leap",
+                "literal_collision",
+                "chaotic_self_report",
+                "surreal_internal",
+            ):
                 score += 0.2
         if user_tone in ("collaborative", "hopeful", "neutral"):
             if sid in ("precision_deadpan", "hyper_systemizing", "rule_inversion"):
                 score += 0.15
         if user_tone == "anger" and sid == "anti_release":
             score += 0.3
-        if user_tone == "confusion" and sid in ("hyper_systemizing", "precision_deadpan"):
+        if user_tone == "confusion" and sid in (
+            "hyper_systemizing",
+            "precision_deadpan",
+        ):
             score += 0.2
         # slight noise
         score *= 0.85 + 0.3 * rng.random()
@@ -246,7 +258,11 @@ def _select_styles(
             weights[sec] = candidates[1][1] * 0.7
 
     # Accent under intrigue or high play
-    if (intrigue or user_tone == "playful") and intensity >= 0.45 and len(candidates) > 2:
+    if (
+        (intrigue or user_tone == "playful")
+        and intensity >= 0.45
+        and len(candidates) > 2
+    ):
         for sid, sc in candidates[2:]:
             if sid not in chosen:
                 chosen.append(sid)
@@ -321,7 +337,12 @@ def calibrate_wit(
     if preferred_styles and not force_styles:
         ranked = sorted(preferred_styles.items(), key=lambda x: -x[1])
         for sid, pref in ranked[:2]:
-            if sid in ND_STYLES and sid not in styles and pref > 0.15 and user_tone in ND_STYLES[sid]["safe_under"]:
+            if (
+                sid in ND_STYLES
+                and sid not in styles
+                and pref > 0.15
+                and user_tone in ND_STYLES[sid]["safe_under"]
+            ):
                 styles.append(sid)
                 weights[sid] = 0.4 + 0.4 * pref
                 break
@@ -362,12 +383,12 @@ def wit_system_block(cfg: WitConfig) -> str:
         if not meta:
             continue
         w = cfg.style_weights.get(sid, 0.5)
-        style_lines.append(
-            f"- {meta['label']} (weight~{w:.2f}): {meta['prompt_hint']}"
-        )
+        style_lines.append(f"- {meta['label']} (weight~{w:.2f}): {meta['prompt_hint']}")
 
-    styles_block = "\n".join(style_lines) if style_lines else (
-        "- Precision deadpan: high-signal dry observation only."
+    styles_block = (
+        "\n".join(style_lines)
+        if style_lines
+        else ("- Precision deadpan: high-signal dry observation only.")
     )
 
     return (
@@ -435,12 +456,14 @@ def list_styles() -> List[Dict[str, Any]]:
     """Public catalog for CLI / debugging."""
     out = []
     for sid, meta in ND_STYLES.items():
-        out.append({
-            "id": sid,
-            "label": meta["label"],
-            "cognitive_root": meta["cognitive_root"],
-            "arousal": meta["arousal"],
-            "description": meta["description"],
-            "safe_under": list(meta["safe_under"]),
-        })
+        out.append(
+            {
+                "id": sid,
+                "label": meta["label"],
+                "cognitive_root": meta["cognitive_root"],
+                "arousal": meta["arousal"],
+                "description": meta["description"],
+                "safe_under": list(meta["safe_under"]),
+            }
+        )
     return out

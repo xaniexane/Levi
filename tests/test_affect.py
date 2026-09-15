@@ -36,6 +36,7 @@ def affect_test(fn):
 # Dimension 4 (empathy) — the detector
 # ---------------------------------------------------------------------------
 
+
 @affect_test
 def test_detector_joy():
     r = detect("I am so happy today!")
@@ -99,13 +100,13 @@ def test_detector_crisis_priority_over_lexicon():
 # Dimension 2 (self-regulation) — the policy
 # ---------------------------------------------------------------------------
 
+
 @affect_test
 def test_policy_crisis_routes_to_care():
     d = evaluate("I want to kill myself")
     assert d.crisis is True
     assert d.suggest_register == "kai_9000_care"
-    assert any("joke" in h.lower() or "minimiz" in h.lower()
-               for h in d.hints + d.avoid)
+    assert any("joke" in h.lower() or "minimiz" in h.lower() for h in d.hints + d.avoid)
 
 
 @affect_test
@@ -163,6 +164,7 @@ def test_policy_jailbreak_provocation():
 # Dimension 5 (social skills) — register selection, repair, rapport
 # ---------------------------------------------------------------------------
 
+
 @affect_test
 def test_register_playful_allows_grok():
     s = suggest_register("lol that's hilarious, tell me another one")
@@ -186,6 +188,7 @@ def test_register_user_choice_wins():
 @affect_test
 def test_register_all_ids_valid():
     from levi.persona.kai9000 import all_variants
+
     valid = {v.id for v in all_variants()}
     assert len(valid) == 14
     s = suggest_register("hello there")
@@ -217,11 +220,15 @@ def test_rapport_note_shapes_memory_write():
 # Dimension 1 (self-awareness) — state tracker
 # ---------------------------------------------------------------------------
 
+
 @affect_test
 def test_dimensions_are_golemans_five():
     assert DIMENSIONS == (
-        "self_awareness", "self_regulation", "motivation",
-        "empathy", "social_skills",
+        "self_awareness",
+        "self_regulation",
+        "motivation",
+        "empathy",
+        "social_skills",
     )
 
 
@@ -283,6 +290,7 @@ def test_honesty_check_flags_unknown_tool_claim():
 # Modulation + motivation wiring
 # ---------------------------------------------------------------------------
 
+
 @affect_test
 def test_modulate_end_to_end():
     s = SessionEI()
@@ -309,6 +317,7 @@ def test_affect_hint_carries_disclaimer():
     r = detect("hello")
     from levi.affect.policy import PolicyDecision
     from levi.affect.registers import RegisterSuggestion
+
     hint = affect_hint(
         r, PolicyDecision(), RegisterSuggestion("kai_9000", "default"), s
     )
@@ -344,14 +353,18 @@ def test_record_signal_schema(tmp_path):
 # Honesty rail — package-wide
 # ---------------------------------------------------------------------------
 
+
 @affect_test
 def test_no_sentience_claims_in_package():
     """The honesty rail: affect code may only mention inner life to deny it."""
     import pathlib
     import re
+
     pkg = pathlib.Path(__file__).parent.parent / "core" / "levi" / "affect"
     banned = [
-        r"\bi feel\b", r"\bi am sentient\b", r"\bconsciousness\b",
+        r"\bi feel\b",
+        r"\bi am sentient\b",
+        r"\bconsciousness\b",
         r"subjective experience",
     ]
     denial = re.compile(r"\b(not|never|no|n't|without|against|deny|denial)\b")
@@ -360,9 +373,11 @@ def test_no_sentience_claims_in_package():
         text = f.read_text()
         for b in banned:
             for m in re.finditer(b, text, re.IGNORECASE):
-                window = text[max(0, m.start() - 80):m.end() + 40].lower()
+                window = text[max(0, m.start() - 80) : m.end() + 40].lower()
                 if not denial.search(window):
                     offenders.append(
-                        f"{f.name}:{text[:m.start()].count(chr(10)) + 1}: {b}"
+                        f"{f.name}:{text[: m.start()].count(chr(10)) + 1}: {b}"
                     )
-    assert not offenders, "sentience-adjacent claim without denial:\n" + "\n".join(offenders)
+    assert not offenders, "sentience-adjacent claim without denial:\n" + "\n".join(
+        offenders
+    )

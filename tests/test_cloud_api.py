@@ -4,6 +4,7 @@ Spins up :class:`levi.agent.server._AgentHandler` on 127.0.0.1 with an
 ephemeral port, in-process. ``LEVI_CLOUD_DIR`` and ``HOME`` point at
 tmp dirs so nothing touches the real user state.
 """
+
 import json
 import threading
 from http.server import ThreadingHTTPServer
@@ -62,8 +63,12 @@ def _call(base, path, bearer=None, payload=None, method=None):
     if payload is not None:
         data = json.dumps(payload).encode()
         headers["Content-Type"] = "application/json"
-    req = urlrequest.Request(base + path, data=data, headers=headers,
-                             method=method or ("POST" if data else "GET"))
+    req = urlrequest.Request(
+        base + path,
+        data=data,
+        headers=headers,
+        method=method or ("POST" if data else "GET"),
+    )
     try:
         with urlrequest.urlopen(req, timeout=30) as resp:
             return resp.status, dict(resp.headers), json.loads(resp.read() or b"{}")
@@ -84,6 +89,7 @@ def _make_key(name="alice"):
 
 
 # -- key lifecycle ---------------------------------------------------------
+
 
 def test_key_create_verify_revoke(cloud_env):
     from levi.cloud import apikeys
@@ -126,6 +132,7 @@ def test_key_store_is_owner_only(cloud_env):
 
 # -- auth ------------------------------------------------------------------
 
+
 def test_healthz_is_open(server):
     status, _, body = _call(server, "/healthz")
     assert status == 200
@@ -157,6 +164,7 @@ def test_revoked_key_rejected(server, cloud_env):
 
 # -- tool profiles ---------------------------------------------------------
 
+
 def test_cloud_registry_is_restricted_directly():
     from levi.cloud.profile import (
         CLOUD_SAFE_TOOLS,
@@ -168,8 +176,16 @@ def test_cloud_registry_is_restricted_directly():
     names = {t.name for t in reg.list()}
     assert names == set(CLOUD_SAFE_TOOLS)
     # The dangerous tools are absent — no consent flag can reach them.
-    for denied in ("shell_exec", "file_write", "file_edit", "file_read",
-                   "memory_write", "delegate", "http_request", "web_fetch"):
+    for denied in (
+        "shell_exec",
+        "file_write",
+        "file_edit",
+        "file_read",
+        "memory_write",
+        "delegate",
+        "http_request",
+        "web_fetch",
+    ):
         assert denied in CLOUD_DENIED_TOOLS
         assert reg.get(denied) is None
 
@@ -192,6 +208,7 @@ def test_owner_gets_full_registry_key_gets_restricted(server, cloud_env):
 
 
 # -- rate limiting ---------------------------------------------------------
+
 
 def test_rate_limit_429_trips(server, cloud_env):
     from levi.agent.server import _AgentHandler
@@ -217,6 +234,7 @@ def test_owner_not_rate_limited(server, cloud_env):
 
 
 # -- metering --------------------------------------------------------------
+
 
 def test_usage_is_metered(server, cloud_env):
     from levi.cloud import metering
@@ -246,20 +264,28 @@ def test_usage_filter_by_key(server, cloud_env):
 
 # -- chat sessions are namespaced per key ----------------------------------
 
+
 def test_chat_sessions_namespaced_per_key(server, cloud_env):
     raw, record = _make_key()
-    payload = {"session_id": "s1", "message": "hello", "provider": "local",
-               "max_steps": 2}
+    payload = {
+        "session_id": "s1",
+        "message": "hello",
+        "provider": "local",
+        "max_steps": 2,
+    }
     status, _, body = _call(server, "/v1/agent/chat", bearer=raw, payload=payload)
     assert status == 200
     assert body["session_id"].startswith("cloud_")
     assert body["session_id"].endswith("_s1")
     # The on-disk session file is namespaced too.
-    sessions = list((cloud_env / "home" / ".levi" / "agent" / "sessions").glob("*.jsonl"))
+    sessions = list(
+        (cloud_env / "home" / ".levi" / "agent" / "sessions").glob("*.jsonl")
+    )
     assert sessions, "expected a session file to be written"
     assert all(p.stem.startswith("cloud_") for p in sessions)
     # The owner keeps un-namespaced sessions.
     status, _, owner_body = _call(
-        server, "/v1/agent/chat", bearer=OWNER_TOKEN, payload=payload)
+        server, "/v1/agent/chat", bearer=OWNER_TOKEN, payload=payload
+    )
     assert status == 200
     assert owner_body["session_id"] == "s1"

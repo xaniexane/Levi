@@ -96,7 +96,9 @@ __all__ = [
 def receive_enabled() -> bool:
     """Receiving is on with opt-out: ``LEVI_GROWTH_RECEIVE=0`` disables."""
     return os.environ.get("LEVI_GROWTH_RECEIVE", "1").strip().lower() not in (
-        "0", "false", "no",
+        "0",
+        "false",
+        "no",
     )
 
 
@@ -216,7 +218,7 @@ def _next_version() -> int:
     best = 0
     for path in packs_dir().glob(PACK_PREFIX + "*.json"):
         try:
-            best = max(best, int(path.stem[len(PACK_PREFIX):]))
+            best = max(best, int(path.stem[len(PACK_PREFIX) :]))
         except ValueError:
             continue
     return best + 1
@@ -235,9 +237,7 @@ def build_pack(
     """
     from levi.growth import journal as _journal
 
-    shareable, excluded = collect_shareable(
-        store, min_corroboration=min_corroboration
-    )
+    shareable, excluded = collect_shareable(store, min_corroboration=min_corroboration)
 
     # cluster near-duplicates, aggregate counts (never identities)
     clusters: list[dict[str, Any]] = []
@@ -431,9 +431,7 @@ def ingest_pack(
     installed = installed_packs()
     newest = int(installed[0]["version"]) if installed else 0
     if version <= newest:
-        raise PackError(
-            f"pack version {version} is not newer than installed {newest}"
-        )
+        raise PackError(f"pack version {version} is not newer than installed {newest}")
     store = store or MemoryStore()
     growth_entries = [e for e in store.list(limit=10000) if "growth" in (e.tags or [])]
 
@@ -535,9 +533,7 @@ def fetch_latest_pack(
 ) -> dict[str, Any]:
     """GET /v1/learning/packs/latest → {"manifest", "pack"}."""
     url = server.rstrip("/") + "/v1/learning/packs/latest"
-    req = urllib.request.Request(
-        url, headers={"Authorization": "Bearer " + api_key}
-    )
+    req = urllib.request.Request(url, headers={"Authorization": "Bearer " + api_key})
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             body = resp.read().decode("utf-8")

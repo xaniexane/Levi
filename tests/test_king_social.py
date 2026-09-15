@@ -1,4 +1,5 @@
 """Social packs: sanitize contract enforced by real assertions on output."""
+
 import re
 from pathlib import Path
 
@@ -51,11 +52,13 @@ def test_build_pack_all_platforms_clean():
 
 
 def test_every_hash_is_a_generated_hashtag():
-    pack = build_pack("The lattice remembers the weather. The weather keeps the receipt.",
-                      platform="x")
+    pack = build_pack(
+        "The lattice remembers the weather. The weather keeps the receipt.",
+        platform="x",
+    )
     assert_pack_clean(pack)
     for m in re.finditer(r"#", pack["caption"]):
-        rest = pack["caption"][m.start():]
+        rest = pack["caption"][m.start() :]
         assert re.match(r"#[A-Za-z][A-Za-z0-9_]*", rest), f"stray # at {m.start()}"
 
 
@@ -88,6 +91,7 @@ def test_empty_source_raises():
 
 def _imported_modules(mod) -> set:
     import ast
+
     tree = ast.parse(Path(mod.__file__).read_text(encoding="utf-8"))
     names = set()
     for node in ast.walk(tree):
@@ -103,6 +107,14 @@ def test_no_network_by_construction():
     # This module must be incapable of network I/O: fail loudly if
     # anyone adds a socket/http-client import later.
     imported = _imported_modules(social_mod)
-    banned = {"urllib.request", "urllib.error", "http.client", "socket",
-              "requests", "subprocess"}
-    assert not (imported & banned), f"network-capable imports in social.py: {imported & banned}"
+    banned = {
+        "urllib.request",
+        "urllib.error",
+        "http.client",
+        "socket",
+        "requests",
+        "subprocess",
+    }
+    assert not (imported & banned), (
+        f"network-capable imports in social.py: {imported & banned}"
+    )

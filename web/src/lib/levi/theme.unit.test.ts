@@ -1,11 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import {
-  applyTheme,
-  DEFAULT_THEME,
-  isTheme,
-  readStoredTheme,
-  THEME_STORAGE_KEY,
-} from "./theme";
+import { applyTheme, DEFAULT_THEME, isTheme, readStoredTheme, THEME_STORAGE_KEY } from "./theme";
 
 function memStorage(initial: Record<string, string> = {}): Storage {
   const map = new Map(Object.entries(initial));

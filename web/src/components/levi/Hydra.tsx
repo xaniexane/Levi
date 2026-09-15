@@ -148,7 +148,10 @@ export function HydraView() {
           {ir.headFragments.length > 0 && (
             <div className="grid gap-2 sm:grid-cols-2">
               {ir.headFragments.map((f) => (
-                <article key={f.head} className="rounded-lg border border-border bg-surface px-3 py-3">
+                <article
+                  key={f.head}
+                  className="rounded-lg border border-border bg-surface px-3 py-3"
+                >
                   <div className="flex items-center justify-between gap-2">
                     <h3 className="text-sm font-medium capitalize">{f.head}</h3>
                     {f.veto && <span className="text-micro text-danger">veto</span>}

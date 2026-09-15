@@ -6,6 +6,7 @@ High-grade features that increase return *use* without manufactured urgency:
   story quality feedback, KAI register fit, life-pack continuity,
   weekly review, opt-in streak (never punishes absence), trust floor.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -148,7 +149,11 @@ def streak_days(st: RetentionState | None = None) -> int:
             dd = date.fromisoformat(d)
         except ValueError:
             continue
-        if dd == expect or (streak == 0 and dd == expect.replace(day=expect.day) and (expect - dd).days <= 1):
+        if dd == expect or (
+            streak == 0
+            and dd == expect.replace(day=expect.day)
+            and (expect - dd).days <= 1
+        ):
             if streak == 0 and (expect - dd).days > 1:
                 break
             if (expect - dd).days <= 1 or dd == expect:
@@ -198,5 +203,7 @@ def format_retention() -> str:
         "  levi stress · levi kai",
     ]
     if st.kai_uses:
-        lines.append("KAI uses: " + ", ".join(f"{k}={v}" for k, v in sorted(st.kai_uses.items())))
+        lines.append(
+            "KAI uses: " + ", ".join(f"{k}={v}" for k, v in sorted(st.kai_uses.items()))
+        )
     return "\n".join(lines)

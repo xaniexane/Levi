@@ -66,9 +66,7 @@ def _utcnow() -> str:
 def _validate_name(name: str) -> str:
     name = (name or "").strip()
     if not _NAME_RE.match(name):
-        raise KeyError(
-            "invalid key name %r: use 1-64 chars of [A-Za-z0-9_-]" % (name,)
-        )
+        raise KeyError("invalid key name %r: use 1-64 chars of [A-Za-z0-9_-]" % (name,))
     return name
 
 
@@ -155,9 +153,7 @@ def list_keys(*, include_revoked: bool = True) -> list[dict]:
     records = _load()
     if not include_revoked:
         records = [r for r in records if not r.get("revoked")]
-    return [
-        {k: v for k, v in r.items() if k != "key_hash"} for r in records
-    ]
+    return [{k: v for k, v in r.items() if k != "key_hash"} for r in records]
 
 
 def revoke_key(name_or_prefix: str) -> dict:

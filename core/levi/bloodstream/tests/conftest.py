@@ -4,6 +4,7 @@ Everything runs under a tmp data_dir; nothing touches the real ~/.levi.
 The provider chain is pinned to the deterministic local provider so no
 model download or network is ever attempted.
 """
+
 import pytest
 
 from levi.bloodstream.stages import TurnContext

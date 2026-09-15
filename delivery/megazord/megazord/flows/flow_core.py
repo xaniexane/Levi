@@ -1,29 +1,32 @@
 """
 Flow engine core: a Flow is a sequence of steps; FlowEngine orchestrates them.
 """
+
 from __future__ import annotations
 from typing import Callable, Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from enum import Enum
 import time
 
+
 class FlowState(Enum):
     PENDING = "pending"
     RUNNING = "running"
-    DONE    = "done"
-    FAILED  = "failed"
-    PAUSED  = "paused"
+    DONE = "done"
+    FAILED = "failed"
+    PAUSED = "paused"
+
 
 @dataclass
 class FlowStep:
-    name:     str
-    handler:  Callable[..., Any]
-    args:     tuple = field(default_factory=tuple)
-    kwargs:   Dict[str, Any] = field(default_factory=dict)
-    result:   Any = None
-    error:    Optional[str] = None
+    name: str
+    handler: Callable[..., Any]
+    args: tuple = field(default_factory=tuple)
+    kwargs: Dict[str, Any] = field(default_factory=dict)
+    result: Any = None
+    error: Optional[str] = None
     ts_start: float = 0.0
-    ts_end:   float = 0.0
+    ts_end: float = 0.0
 
     def run(self) -> Any:
         self.ts_start = time.time()
@@ -45,17 +48,19 @@ class FlowStep:
 
 @dataclass
 class Flow:
-    id:         str
-    name:       str
+    id: str
+    name: str
     description: str = ""
-    steps:      List[FlowStep] = field(default_factory=list)
-    state:      FlowState = FlowState.PENDING
-    context:    Dict[str, Any] = field(default_factory=dict)
-    ts_start:   float = 0.0
-    ts_end:     float = 0.0
+    steps: List[FlowStep] = field(default_factory=list)
+    state: FlowState = FlowState.PENDING
+    context: Dict[str, Any] = field(default_factory=dict)
+    ts_start: float = 0.0
+    ts_end: float = 0.0
 
     def add_step(self, name: str, handler: Callable, *args, **kwargs) -> "Flow":
-        self.steps.append(FlowStep(name=name, handler=handler, args=args, kwargs=kwargs))
+        self.steps.append(
+            FlowStep(name=name, handler=handler, args=args, kwargs=kwargs)
+        )
         return self
 
     def execute(self) -> Dict[str, Any]:
@@ -65,19 +70,38 @@ class Flow:
         for step in self.steps:
             try:
                 r = step.run()
-                results.append({"step": step.name, "ok": True, "result": r,
-                                 "duration_ms": step.duration_ms})
+                results.append(
+                    {
+                        "step": step.name,
+                        "ok": True,
+                        "result": r,
+                        "duration_ms": step.duration_ms,
+                    }
+                )
             except Exception as exc:
-                results.append({"step": step.name, "ok": False, "error": str(exc),
-                                 "duration_ms": step.duration_ms})
+                results.append(
+                    {
+                        "step": step.name,
+                        "ok": False,
+                        "error": str(exc),
+                        "duration_ms": step.duration_ms,
+                    }
+                )
                 self.state = FlowState.FAILED
                 self.ts_end = time.time()
-                return {"flow": self.name, "state": self.state.value,
-                        "results": results}
+                return {
+                    "flow": self.name,
+                    "state": self.state.value,
+                    "results": results,
+                }
         self.state = FlowState.DONE
         self.ts_end = time.time()
-        return {"flow": self.name, "state": self.state.value,
-                "total_ms": (self.ts_end - self.ts_start)*1000, "results": results}
+        return {
+            "flow": self.name,
+            "state": self.state.value,
+            "total_ms": (self.ts_end - self.ts_start) * 1000,
+            "results": results,
+        }
 
 
 class FlowRegistry:

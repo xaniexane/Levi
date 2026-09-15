@@ -2,6 +2,7 @@
 
 Hermetic: no network. The subprocess test redirects HOME to a temp dir.
 """
+
 import os
 import subprocess
 import sys
@@ -54,7 +55,14 @@ def test_cli_dispatch_reports_structured_error():
         env["HOME"] = home
         env["PYTHONPATH"] = os.pathsep.join([str(ROOT / "core"), *sys.path])
         proc = subprocess.run(
-            [sys.executable, "-m", "levi.cli.main", "story", "--expand", "no-such-story"],
+            [
+                sys.executable,
+                "-m",
+                "levi.cli.main",
+                "story",
+                "--expand",
+                "no-such-story",
+            ],
             cwd=ROOT,
             env=env,
             capture_output=True,

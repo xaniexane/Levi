@@ -1,6 +1,8 @@
 """MAX ×10 rail — combined densest posture."""
+
 from __future__ import annotations
 from datetime import datetime, timezone
+
 
 def format_max10() -> str:
     from levi.brain.seed_knowledge_max import _RAW as MAX
@@ -10,13 +12,16 @@ def format_max10() -> str:
     from levi.persona.kai9000 import all_variants
     from levi.persona.lattice import PersonaLattice
     from levi.ops.x100 import laws
+
     try:
         from levi.cloud.scorecard import evaluate
+
         score = evaluate()[1]
     except Exception:
         score = 0.0
     try:
         from levi.ops.enterprise import run_enterprise_checklist
+
         rows = run_enterprise_checklist()
         ent = f"{sum(1 for r in rows if r.ok)}/{len(rows)}"
     except Exception:

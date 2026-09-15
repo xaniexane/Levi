@@ -7,6 +7,7 @@ scoring rules, not copied from the implementation under test.
 Run:  python3 tests/test_finance_signals.py     (has a real __main__ runner)
       python3 -m pytest tests/test_finance_signals.py -q
 """
+
 from __future__ import annotations
 
 import dataclasses
@@ -115,10 +116,20 @@ def test_rising_series_is_bullish():
     assert sig.confidence == 0.95, sig.confidence
     assert sig.advisory is True
     rationale = " ".join(sig.rationale)
-    for expected in ("20-day SMA", "MACD", "RSI(14)", "overbought", "Bollinger",
-                     "Directional movement", "Stochastic", "VWAP", "OBV",
-                     "Regime: 'trending'", "weighted net +5.50",
-                     "direction 'bullish'"):
+    for expected in (
+        "20-day SMA",
+        "MACD",
+        "RSI(14)",
+        "overbought",
+        "Bollinger",
+        "Directional movement",
+        "Stochastic",
+        "VWAP",
+        "OBV",
+        "Regime: 'trending'",
+        "weighted net +5.50",
+        "direction 'bullish'",
+    ):
         assert expected in rationale, f"missing from rationale: {expected!r}"
     snap = sig.indicator_snapshot
     assert snap["bars_used"] == 40
@@ -142,8 +153,15 @@ def test_falling_series_is_bearish():
     assert sig.confidence == 0.95, sig.confidence
     assert sig.advisory is True
     rationale = " ".join(sig.rationale)
-    for expected in ("20-day SMA", "MACD", "RSI(14)", "oversold",
-                     "-DI(14)", "weighted net -5.50", "direction 'bearish'"):
+    for expected in (
+        "20-day SMA",
+        "MACD",
+        "RSI(14)",
+        "oversold",
+        "-DI(14)",
+        "weighted net -5.50",
+        "direction 'bearish'",
+    ):
         assert expected in rationale, f"missing from rationale: {expected!r}"
     assert sig.indicator_snapshot["rsi14"] == 0.0
     assert sig.indicator_snapshot["regime"] == "trending"
@@ -218,8 +236,7 @@ def test_weighted_net_applies_documented_weights():
     assert net_t == -0.5 and net_r == -1.5 and bear_r == 1.5
     # Value/flow are regime-neutral; volatile privileges no class.
     for regime in ("trending", "ranging", "volatile", "unknown"):
-        net, _, _ = _weighted_net([("value", 1), ("flow", -1)],
-                                  REGIME_WEIGHTS[regime])
+        net, _, _ = _weighted_net([("value", 1), ("flow", -1)], REGIME_WEIGHTS[regime])
         assert net == 0.0, regime
 
 
@@ -228,11 +245,23 @@ def test_regime_weights_table_matches_documentation():
     # The exact table shipped in FINANCE.md §6.4 — the test pins the code
     # to the documented numbers.
     assert REGIME_WEIGHTS["trending"] == {
-        "trend_follow": 1.5, "mean_revert": 0.5, "value": 1.0, "flow": 1.0}
+        "trend_follow": 1.5,
+        "mean_revert": 0.5,
+        "value": 1.0,
+        "flow": 1.0,
+    }
     assert REGIME_WEIGHTS["ranging"] == {
-        "trend_follow": 0.5, "mean_revert": 1.5, "value": 1.0, "flow": 1.0}
+        "trend_follow": 0.5,
+        "mean_revert": 1.5,
+        "value": 1.0,
+        "flow": 1.0,
+    }
     assert REGIME_WEIGHTS["volatile"] == {
-        "trend_follow": 1.0, "mean_revert": 1.0, "value": 1.0, "flow": 1.0}
+        "trend_follow": 1.0,
+        "mean_revert": 1.0,
+        "value": 1.0,
+        "flow": 1.0,
+    }
 
 
 @finance_test
@@ -243,8 +272,16 @@ def test_volatility_penalty_lowers_confidence_for_identical_votes():
         out = []
         for i, close in enumerate(closes):
             day = (date(2026, 1, 5) + timedelta(days=i)).isoformat()
-            out.append(Bar(date=day, open=close - 0.1, high=close + 5.0,
-                           low=close - 5.0, close=close, volume=1000.0))
+            out.append(
+                Bar(
+                    date=day,
+                    open=close - 0.1,
+                    high=close + 5.0,
+                    low=close - 5.0,
+                    close=close,
+                    volume=1000.0,
+                )
+            )
         return out
 
     closes = [100.0 + i for i in range(40)]
@@ -260,10 +297,15 @@ def test_volatility_penalty_lowers_confidence_for_identical_votes():
 def test_confidence_stays_within_bounds():
     # Property check across tapes: confidence is always in [0, 1].
     series = [
-        _rising(), _falling(), _flat(), _dead_flat(),
-        _bars([100.0 + i for i in range(70)]),          # 70-bar ramp (MTF on)
-        _bars([200.0 - i for i in range(60)] +          # decline-then-bounce
-              [140.0 + i for i in range(10)]),
+        _rising(),
+        _falling(),
+        _flat(),
+        _dead_flat(),
+        _bars([100.0 + i for i in range(70)]),  # 70-bar ramp (MTF on)
+        _bars(
+            [200.0 - i for i in range(60)]  # decline-then-bounce
+            + [140.0 + i for i in range(10)]
+        ),
     ]
     for bars in series:
         sig = score_bars("AAPL", bars)
@@ -319,13 +361,29 @@ def test_mtf_divergence_subtracts_delta():
 @finance_test
 def test_new_indicator_snapshot_keys_present():
     snap = score_bars("AAPL", _rising()).indicator_snapshot
-    for key in ("stochastic_k", "stochastic_d", "adx14", "plus_di14",
-                "minus_di14", "vwap", "obv", "regime", "mtf_weekly_bars",
-                "mtf_weekly_trend"):
+    for key in (
+        "stochastic_k",
+        "stochastic_d",
+        "adx14",
+        "plus_di14",
+        "minus_di14",
+        "vwap",
+        "obv",
+        "regime",
+        "mtf_weekly_bars",
+        "mtf_weekly_trend",
+    ):
         assert key in snap, f"missing snapshot key: {key}"
     # Old keys still present — the snapshot only grew.
-    for key in ("sma20", "macd_line", "macd_signal", "rsi14",
-                "bollinger_upper", "atr14", "atr_pct_of_close"):
+    for key in (
+        "sma20",
+        "macd_line",
+        "macd_signal",
+        "rsi14",
+        "bollinger_upper",
+        "atr14",
+        "atr_pct_of_close",
+    ):
         assert key in snap, f"missing snapshot key: {key}"
 
 
@@ -384,6 +442,7 @@ def test_narrate_without_local_model_uses_domain_fallback():
     # the router's generic offline template (which echoes prompts and
     # carries placeholder variables like "x, y, z").
     from levi.model.abstraction import ModelRouter as _MR
+
     status = _MR().status()
     if status.get("local_available") or status.get("cloud_enabled"):
         return  # a real model is present; nothing to assert here

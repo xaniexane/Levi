@@ -8,6 +8,7 @@ Soul · Personalities · Glyph UI · Memory
 + Image gen (Pollinations opt-in + local path)
 + HITL imagination accuracy training
 """
+
 from __future__ import annotations
 
 import ast
@@ -32,7 +33,9 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from urllib import parse, request
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s"
+)
 log = logging.getLogger("LEVI")
 
 VERSION = "Apotheosis-Apex-1.2-ASCII"
@@ -46,14 +49,26 @@ IMAGES_DIR = LEVI_HOME / "media" / "images"
 LOCAL_IMG = LEVI_HOME / "media" / "local_images"
 ASCII_DIR = LEVI_HOME / "media" / "ascii"
 TRAINING = DATA / "training"
-for d in (DATA, WORKSPACE, MUSIC_DIR, MODELS_DIR, INBOX, IMAGES_DIR, LOCAL_IMG, ASCII_DIR, TRAINING):
+for d in (
+    DATA,
+    WORKSPACE,
+    MUSIC_DIR,
+    MODELS_DIR,
+    INBOX,
+    IMAGES_DIR,
+    LOCAL_IMG,
+    ASCII_DIR,
+    TRAINING,
+):
     d.mkdir(parents=True, exist_ok=True)
 
 FOUNDER_KEY = DATA / "founder.key"
 ALLOW_CLOUD = os.environ.get("ALLOW_CLOUD", "0").lower() in ("1", "true", "yes")
 
+
 def is_founder() -> bool:
     return FOUNDER_KEY.exists()
+
 
 CURRENT_TIER = "founder" if is_founder() else os.environ.get("LEVI_TIER", "free")
 
@@ -71,12 +86,19 @@ PERSONALITIES = {
     "normal": "Clear, competent assistant.",
 }
 
+
 # ── Soul layer ─────────────────────────────────────────────
 class EmotionalState:
     def __init__(self):
         self.path = DATA / "emotion.json"
-        self.state = {"joy": 0.35, "sadness": 0.15, "curiosity": 0.55,
-                     "intensity": 0.4, "trust": 0.6, "drift": 0.0}
+        self.state = {
+            "joy": 0.35,
+            "sadness": 0.15,
+            "curiosity": 0.55,
+            "intensity": 0.4,
+            "trust": 0.6,
+            "drift": 0.0,
+        }
         if self.path.exists():
             try:
                 self.state.update(json.loads(self.path.read_text()))
@@ -113,8 +135,18 @@ class EmotionalState:
 
 
 class SoulGenome:
-    TRAITS = ["curiosity", "loyalty", "creativity", "precision", "warmth",
-              "ambition", "playfulness", "depth", "resilience", "mystery"]
+    TRAITS = [
+        "curiosity",
+        "loyalty",
+        "creativity",
+        "precision",
+        "warmth",
+        "ambition",
+        "playfulness",
+        "depth",
+        "resilience",
+        "mystery",
+    ]
 
     def __init__(self):
         self.path = DATA / "soul_genome.json"
@@ -130,8 +162,11 @@ class SoulGenome:
 
     def save(self):
         try:
-            self.path.write_text(json.dumps(
-                {"genes": self.genes, "generation": self.generation}, indent=2))
+            self.path.write_text(
+                json.dumps(
+                    {"genes": self.genes, "generation": self.generation}, indent=2
+                )
+            )
         except Exception:
             pass
 
@@ -144,7 +179,9 @@ class SoulGenome:
         for t in self.TRAITS:
             if random.random() < 0.018 * intensity:
                 old = self.genes[t]
-                self.genes[t] = max(0.05, min(0.97, old + (random.random() - 0.5) * 0.09 * intensity))
+                self.genes[t] = max(
+                    0.05, min(0.97, old + (random.random() - 0.5) * 0.09 * intensity)
+                )
                 changed.append(f"{t}:{old:.2f}->{self.genes[t]:.2f}")
         if changed:
             self.generation += 1
@@ -154,8 +191,14 @@ class SoulGenome:
 
 class ResonanceChoir:
     def __init__(self):
-        self.voices = {"guardian": 0.5, "scholar": 0.5, "poet": 0.5,
-                       "strategist": 0.5, "child": 0.35, "elder": 0.45}
+        self.voices = {
+            "guardian": 0.5,
+            "scholar": 0.5,
+            "poet": 0.5,
+            "strategist": 0.5,
+            "child": 0.35,
+            "elder": 0.45,
+        }
 
     def vote(self, text: str) -> str:
         t = text.lower()
@@ -195,19 +238,25 @@ class LivingSoulmark:
 
     def _save(self):
         try:
-            self.path.write_text(json.dumps({
-                "priv": base64.b64encode(self.priv).decode(),
-                "pub": base64.b64encode(self.pub).decode(),
-                "signatures": self.signatures,
-                "generation": self.generation,
-                "history_hash": base64.b64encode(self.history_hash).decode(),
-            }, indent=2))
+            self.path.write_text(
+                json.dumps(
+                    {
+                        "priv": base64.b64encode(self.priv).decode(),
+                        "pub": base64.b64encode(self.pub).decode(),
+                        "signatures": self.signatures,
+                        "generation": self.generation,
+                        "history_hash": base64.b64encode(self.history_hash).decode(),
+                    },
+                    indent=2,
+                )
+            )
         except Exception:
             pass
 
     def evolve(self, interaction: str):
         self.history_hash = hashlib.sha256(
-            self.history_hash + interaction.encode()[:512]).digest()
+            self.history_hash + interaction.encode()[:512]
+        ).digest()
         if self.signatures > 0 and self.signatures % 40 == 0:
             mut = hashlib.sha256(self.priv + self.history_hash).digest()[:8]
             self.priv = hashlib.sha256(self.priv + mut).digest()
@@ -217,7 +266,9 @@ class LivingSoulmark:
         self._save()
 
     def sign(self, content: str) -> str:
-        sig = hashlib.sha256(self.priv + content.encode() + self.history_hash).hexdigest()
+        sig = hashlib.sha256(
+            self.priv + content.encode() + self.history_hash
+        ).hexdigest()
         self.signatures += 1
         self.evolve(content)
         return sig
@@ -231,13 +282,18 @@ genome = SoulGenome()
 choir = ResonanceChoir()
 soulmark = LivingSoulmark()
 
+
 # ── Model auto-detect ──────────────────────────────────────
 class ModelRouter:
     """Auto-detect Ollama, llama-server, local GGUF files; offline fallback."""
 
     def __init__(self):
-        self.ollama = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434").rstrip("/")
-        self.llama_server = os.environ.get("LLAMA_SERVER", "http://127.0.0.1:8080").rstrip("/")
+        self.ollama = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434").rstrip(
+            "/"
+        )
+        self.llama_server = os.environ.get(
+            "LLAMA_SERVER", "http://127.0.0.1:8080"
+        ).rstrip("/")
         self.preferred = os.environ.get("LEVI_MODEL", "")
         self.gguf: List[Path] = []
         self.backend = "offline"
@@ -245,7 +301,9 @@ class ModelRouter:
         self.refresh()
 
     def refresh(self):
-        self.gguf = sorted(MODELS_DIR.glob("*.gguf")) + sorted(LEVI_HOME.glob("**/*.gguf"))
+        self.gguf = sorted(MODELS_DIR.glob("*.gguf")) + sorted(
+            LEVI_HOME.glob("**/*.gguf")
+        )
         # unique
         seen = set()
         uniq = []
@@ -258,11 +316,19 @@ class ModelRouter:
         if self._probe(self.ollama + "/api/tags"):
             self.backend = "ollama"
             tags = self._ollama_tags()
-            self.model_name = self.preferred if self.preferred in tags else (tags[0] if tags else "llama3.2")
+            self.model_name = (
+                self.preferred
+                if self.preferred in tags
+                else (tags[0] if tags else "llama3.2")
+            )
             return
-        if self._probe(self.llama_server + "/health") or self._probe(self.llama_server + "/v1/models"):
+        if self._probe(self.llama_server + "/health") or self._probe(
+            self.llama_server + "/v1/models"
+        ):
             self.backend = "llama_server"
-            self.model_name = self.preferred or (self.gguf[0].stem if self.gguf else "local")
+            self.model_name = self.preferred or (
+                self.gguf[0].stem if self.gguf else "local"
+            )
             return
         if self.gguf:
             self.backend = "gguf_files"
@@ -273,7 +339,9 @@ class ModelRouter:
 
     def _probe(self, url: str, timeout: float = 1.5) -> bool:
         try:
-            with request.urlopen(request.Request(url, method="GET"), timeout=timeout) as r:
+            with request.urlopen(
+                request.Request(url, method="GET"), timeout=timeout
+            ) as r:
                 return r.status == 200
         except Exception:
             return False
@@ -320,7 +388,9 @@ class ModelRouter:
                 )
                 with request.urlopen(req, timeout=120) as r:
                     j = json.loads(r.read().decode())
-                return ((j.get("message") or {}).get("content") or "").strip() or offline_reply(prompt)
+                return (
+                    (j.get("message") or {}).get("content") or ""
+                ).strip() or offline_reply(prompt)
             except Exception as e:
                 log.warning("ollama fail: %s", e)
         if self.backend == "llama_server":
@@ -399,7 +469,9 @@ class Memory:
         self.db.commit()
         # migrate ascii columns/tables
         try:
-            cols = [r[1] for r in self.db.execute("PRAGMA table_info(images)").fetchall()]
+            cols = [
+                r[1] for r in self.db.execute("PRAGMA table_info(images)").fetchall()
+            ]
             if "ascii_path" not in cols:
                 self.db.execute("ALTER TABLE images ADD COLUMN ascii_path TEXT")
                 self.db.commit()
@@ -410,16 +482,32 @@ class Memory:
             ans = "memory"
             self.db.execute(
                 "INSERT INTO cryptex_state (riddle, answer_hash, seed) VALUES (?,?,?)",
-                ("I am the shadow of your choices that only you can name. What am I?",
-                 hashlib.sha256((ans + seed).encode()).hexdigest(), seed),
+                (
+                    "I am the shadow of your choices that only you can name. What am I?",
+                    hashlib.sha256((ans + seed).encode()).hexdigest(),
+                    seed,
+                ),
             )
             self.db.commit()
         if self.db.execute("SELECT COUNT(*) FROM knowledge_base").fetchone()[0] == 0:
-            for dom in ("Agents", "Python", "Security", "Planning", "Math", "Vision", "Music"):
+            for dom in (
+                "Agents",
+                "Python",
+                "Security",
+                "Planning",
+                "Math",
+                "Vision",
+                "Music",
+            ):
                 self.db.execute(
                     "INSERT INTO knowledge_base VALUES (?,?,?,?,?)",
-                    (str(uuid.uuid4())[:12], dom, 2, f"Seed knowledge: {dom}",
-                     datetime.now().isoformat()),
+                    (
+                        str(uuid.uuid4())[:12],
+                        dom,
+                        2,
+                        f"Seed knowledge: {dom}",
+                        datetime.now().isoformat(),
+                    ),
                 )
             self.db.commit()
 
@@ -454,7 +542,9 @@ class Memory:
         self._commit()
 
     def get_tone(self, sid):
-        r = self.db.execute("SELECT tone FROM user_settings WHERE session_id=?", (sid,)).fetchone()
+        r = self.db.execute(
+            "SELECT tone FROM user_settings WHERE session_id=?", (sid,)
+        ).fetchone()
         return r[0] if r and r[0] else "void"
 
     def set_no_hero(self, sid, val):
@@ -466,7 +556,9 @@ class Memory:
         self._commit()
 
     def get_no_hero(self, sid):
-        r = self.db.execute("SELECT no_hero FROM user_settings WHERE session_id=?", (sid,)).fetchone()
+        r = self.db.execute(
+            "SELECT no_hero FROM user_settings WHERE session_id=?", (sid,)
+        ).fetchone()
         return bool(r[0]) if r else True
 
     def add_trust(self, event, details=""):
@@ -496,22 +588,42 @@ class Memory:
     def train_event(self, sid: str, type_: str, payload: dict, points: int = 1):
         self.db.execute(
             "INSERT INTO training (session_id, ts, points, type, payload) VALUES (?,?,?,?,?)",
-            (sid, datetime.now().isoformat(), points, type_, json.dumps(payload)[:4000]),
+            (
+                sid,
+                datetime.now().isoformat(),
+                points,
+                type_,
+                json.dumps(payload)[:4000],
+            ),
         )
         self._commit()
         # also mirror to TRAINING dir for export
         try:
             p = TRAINING / f"{type_}_{int(time.time())}_{uuid.uuid4().hex[:6]}.json"
-            p.write_text(json.dumps({"type": type_, "payload": payload, "ts": time.time()}, indent=2))
+            p.write_text(
+                json.dumps(
+                    {"type": type_, "payload": payload, "ts": time.time()}, indent=2
+                )
+            )
         except Exception:
             pass
 
-    def save_image(self, prompt: str, path: str, source: str, snip: str = "", ascii_path: str = "") -> str:
+    def save_image(
+        self, prompt: str, path: str, source: str, snip: str = "", ascii_path: str = ""
+    ) -> str:
         iid = str(uuid.uuid4())[:12]
         try:
             self.db.execute(
                 "INSERT INTO images (id, prompt, path, source, conversation_snip, ts, ascii_path) VALUES (?,?,?,?,?,?,?)",
-                (iid, prompt, path, source, snip[:500], datetime.now().isoformat(), ascii_path or ""),
+                (
+                    iid,
+                    prompt,
+                    path,
+                    source,
+                    snip[:500],
+                    datetime.now().isoformat(),
+                    ascii_path or "",
+                ),
             )
         except Exception:
             self.db.execute(
@@ -521,14 +633,29 @@ class Memory:
         self._commit()
         return iid
 
-    def save_ascii(self, image_id: str, ascii_text: str, width: int, height: int, ascii_path: str = "") -> None:
+    def save_ascii(
+        self,
+        image_id: str,
+        ascii_text: str,
+        width: int,
+        height: int,
+        ascii_path: str = "",
+    ) -> None:
         try:
             self.db.execute(
                 "INSERT OR REPLACE INTO image_ascii (image_id, ascii_text, width, height, ts) VALUES (?,?,?,?,?)",
-                (image_id, ascii_text[:120000], width, height, datetime.now().isoformat()),
+                (
+                    image_id,
+                    ascii_text[:120000],
+                    width,
+                    height,
+                    datetime.now().isoformat(),
+                ),
             )
             if ascii_path:
-                self.db.execute("UPDATE images SET ascii_path=? WHERE id=?", (ascii_path, image_id))
+                self.db.execute(
+                    "UPDATE images SET ascii_path=? WHERE id=?", (ascii_path, image_id)
+                )
             self._commit()
         except Exception:
             pass
@@ -562,7 +689,9 @@ class Memory:
             lines.append(f"[{iid}] {source} · {flag} · {(prompt or '')[:50]} · {ts}")
         return "\n".join(lines)
 
-    def hitl_imagination(self, image_id: str, prompt: str, label: str, note: str = "") -> str:
+    def hitl_imagination(
+        self, image_id: str, prompt: str, label: str, note: str = ""
+    ) -> str:
         hid = str(uuid.uuid4())[:12]
         self.db.execute(
             "INSERT INTO imagination_hitl VALUES (?,?,?,?,?,?)",
@@ -570,9 +699,17 @@ class Memory:
         )
         self._commit()
         pts = 2 if label == "accurate" else (-1 if label == "wrong" else 0)
-        self.train_event("default", "imagination_hitl", {
-            "image_id": image_id, "prompt": prompt, "label": label, "note": note,
-        }, points=pts)
+        self.train_event(
+            "default",
+            "imagination_hitl",
+            {
+                "image_id": image_id,
+                "prompt": prompt,
+                "label": label,
+                "note": note,
+            },
+            points=pts,
+        )
         return hid
 
 
@@ -585,7 +722,11 @@ class MusicController:
         self.lib = self.scan()
 
     def scan(self) -> List[Path]:
-        files = list(MUSIC_DIR.glob("*.mp3")) + list(MUSIC_DIR.glob("*.flac")) + list(MUSIC_DIR.glob("*.ogg"))
+        files = (
+            list(MUSIC_DIR.glob("*.mp3"))
+            + list(MUSIC_DIR.glob("*.flac"))
+            + list(MUSIC_DIR.glob("*.ogg"))
+        )
         return sorted(files)
 
     def status(self) -> str:
@@ -609,9 +750,18 @@ class MusicController:
         out = MUSIC_DIR / "%(title).80s.%(ext)s"
         try:
             r = subprocess.run(
-                ["yt-dlp", "-x", "--audio-format", "mp3", "-o", str(out),
-                 f"ytsearch1:{query}"],
-                capture_output=True, text=True, timeout=180,
+                [
+                    "yt-dlp",
+                    "-x",
+                    "--audio-format",
+                    "mp3",
+                    "-o",
+                    str(out),
+                    f"ytsearch1:{query}",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=180,
             )
             self.lib = self.scan()
             if r.returncode == 0:
@@ -641,8 +791,11 @@ class MusicController:
         else:
             track = random.choice(self.lib)
         try:
-            subprocess.Popen(["mpv", "--no-video", str(track)],
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.Popen(
+                ["mpv", "--no-video", str(track)],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
             return f"Playing: {track.name}"
         except Exception as e:
             return f"Play error: {e}"
@@ -675,16 +828,30 @@ class DeviceAutomation:
             return 1, "", str(e)
 
     def has_termux_api(self) -> bool:
-        return bool(shutil.which("termux-sms-list") or shutil.which("termux-battery-status"))
+        return bool(
+            shutil.which("termux-sms-list") or shutil.which("termux-battery-status")
+        )
 
     def status(self) -> str:
         cmds = [
-            "termux-sms-list", "termux-sms-send", "termux-battery-status",
-            "termux-toast", "termux-clipboard-get", "termux-clipboard-set",
-            "termux-notification", "termux-vibrate", "termux-torch",
-            "termux-volume", "termux-wifi-connectioninfo", "termux-telephony-deviceinfo",
-            "termux-camera-photo", "termux-microphone-record", "termux-tts-speak",
-            "termux-share", "am", "input",
+            "termux-sms-list",
+            "termux-sms-send",
+            "termux-battery-status",
+            "termux-toast",
+            "termux-clipboard-get",
+            "termux-clipboard-set",
+            "termux-notification",
+            "termux-vibrate",
+            "termux-torch",
+            "termux-volume",
+            "termux-wifi-connectioninfo",
+            "termux-telephony-deviceinfo",
+            "termux-camera-photo",
+            "termux-microphone-record",
+            "termux-tts-speak",
+            "termux-share",
+            "am",
+            "input",
         ]
         lines = ["Device automation (Termux:API preferred):"]
         for c in cmds:
@@ -719,9 +886,15 @@ class DeviceAutomation:
         return "Toast shown" if code == 0 else (err or "toast failed")
 
     def notify(self, title: str, content: str) -> str:
-        code, out, err = self._run([
-            "termux-notification", "--title", title, "--content", content[:200],
-        ])
+        code, out, err = self._run(
+            [
+                "termux-notification",
+                "--title",
+                title,
+                "--content",
+                content[:200],
+            ]
+        )
         return "Notification posted" if code == 0 else (err or "notification failed")
 
     def vibrate(self, ms: int = 200) -> str:
@@ -737,12 +910,24 @@ class DeviceAutomation:
         if not p.is_dir():
             return f"Not a directory: {directory}"
         mapping = {
-            ".jpg": "images", ".jpeg": "images", ".png": "images", ".gif": "images",
-            ".mp3": "audio", ".flac": "audio", ".wav": "audio",
-            ".mp4": "video", ".mkv": "video",
-            ".pdf": "docs", ".txt": "docs", ".md": "docs",
-            ".zip": "archives", ".tar": "archives", ".gz": "archives",
-            ".py": "code", ".js": "code", ".ts": "code",
+            ".jpg": "images",
+            ".jpeg": "images",
+            ".png": "images",
+            ".gif": "images",
+            ".mp3": "audio",
+            ".flac": "audio",
+            ".wav": "audio",
+            ".mp4": "video",
+            ".mkv": "video",
+            ".pdf": "docs",
+            ".txt": "docs",
+            ".md": "docs",
+            ".zip": "archives",
+            ".tar": "archives",
+            ".gz": "archives",
+            ".py": "code",
+            ".js": "code",
+            ".ts": "code",
         }
         moved = 0
         for f in p.iterdir():
@@ -761,11 +946,29 @@ class DeviceAutomation:
 
     def app_launch(self, component: str) -> str:
         # component like com.package/.Activity or package
-        code, out, err = self._run([
-            "am", "start", "-a", "android.intent.action.MAIN", "-n", component,
-        ]) if "/" in component else self._run([
-            "monkey", "-p", component, "-c", "android.intent.category.LAUNCHER", "1",
-        ])
+        code, out, err = (
+            self._run(
+                [
+                    "am",
+                    "start",
+                    "-a",
+                    "android.intent.action.MAIN",
+                    "-n",
+                    component,
+                ]
+            )
+            if "/" in component
+            else self._run(
+                [
+                    "monkey",
+                    "-p",
+                    component,
+                    "-c",
+                    "android.intent.category.LAUNCHER",
+                    "1",
+                ]
+            )
+        )
         return out or err or ("Launched " + component if code == 0 else "Launch failed")
 
 
@@ -800,7 +1003,13 @@ class REIM:
                 note = f"Avoid pattern: {d.get('prompt', d)[:120]}"
                 memory.db.execute(
                     "INSERT INTO knowledge_base VALUES (?,?,?,?,?)",
-                    (str(uuid.uuid4())[:12], "REIM", 3, note, datetime.now().isoformat()),
+                    (
+                        str(uuid.uuid4())[:12],
+                        "REIM",
+                        3,
+                        note,
+                        datetime.now().isoformat(),
+                    ),
                 )
                 fixed += 1
             memory._commit()
@@ -817,8 +1026,13 @@ class REIM:
             )
             memory.db.execute(
                 "INSERT INTO knowledge_base VALUES (?,?,?,?,?)",
-                (str(uuid.uuid4())[:12], "REIM", 4, f"Q:{q[:80]} → {suggestion[:200]}",
-                 datetime.now().isoformat()),
+                (
+                    str(uuid.uuid4())[:12],
+                    "REIM",
+                    4,
+                    f"Q:{q[:80]} → {suggestion[:200]}",
+                    datetime.now().isoformat(),
+                ),
             )
             out.append(f"- {q[:60]} → {suggestion[:100]}")
         memory._commit()
@@ -848,11 +1062,17 @@ class RIEM:
             )
             memory.db.execute(
                 "INSERT INTO knowledge_base VALUES (?,?,?,?,?)",
-                (str(uuid.uuid4())[:12], "RIEM", 5,
-                 f"Detailed: {detailed[:300]} | Concise: {concise[:160]}",
-                 datetime.now().isoformat()),
+                (
+                    str(uuid.uuid4())[:12],
+                    "RIEM",
+                    5,
+                    f"Detailed: {detailed[:300]} | Concise: {concise[:160]}",
+                    datetime.now().isoformat(),
+                ),
             )
-            out.append(f"Q: {q[:50]}\n  detailed: {detailed[:120]}\n  concise: {concise[:100]}")
+            out.append(
+                f"Q: {q[:50]}\n  detailed: {detailed[:120]}\n  concise: {concise[:100]}"
+            )
         memory._commit()
         return "\n".join(out)
 
@@ -870,8 +1090,10 @@ class EchoVerse:
         lines = [f"Echoverse seed: {seed}", "— taken —"]
         for i in range(cycles):
             a, b = random.sample(agents, 2)
-            act = random.choice(["trade", "teach", "scout", "defend", "build", "negotiate"])
-            lines.append(f"t{i+1}: {a} {act}↔{b}")
+            act = random.choice(
+                ["trade", "teach", "scout", "defend", "build", "negotiate"]
+            )
+            lines.append(f"t{i + 1}: {a} {act}↔{b}")
         lines.append("— not_taken —")
         lines.append("Counterfactual: refused the first trade; scarcity rises.")
         lines.append("— wild —")
@@ -882,17 +1104,35 @@ class EchoVerse:
         )
         memory.db.execute(
             "INSERT INTO knowledge_base VALUES (?,?,?,?,?)",
-            (str(uuid.uuid4())[:12], "Echoverse", 3, insight[:500], datetime.now().isoformat()),
+            (
+                str(uuid.uuid4())[:12],
+                "Echoverse",
+                3,
+                insight[:500],
+                datetime.now().isoformat(),
+            ),
         )
         memory._commit()
-        memory.train_event("default", "echoverse", {"seed": seed, "insight": insight}, 1)
+        memory.train_event(
+            "default", "echoverse", {"seed": seed, "insight": insight}, 1
+        )
         lines.append("Insight: " + insight)
         return "\n".join(lines)
 
 
 class Mandella:
-    DOMAINS = ["negotiation", "coding", "finance", "security", "leadership",
-               "crisis", "repair", "design", "health", "teaching"]
+    DOMAINS = [
+        "negotiation",
+        "coding",
+        "finance",
+        "security",
+        "leadership",
+        "crisis",
+        "repair",
+        "design",
+        "health",
+        "teaching",
+    ]
 
     def generate_scenario(self, domain: Optional[str] = None) -> str:
         d = domain if domain in self.DOMAINS else random.choice(self.DOMAINS)
@@ -909,7 +1149,6 @@ echoverse = EchoVerse()
 mandella = Mandella()
 reim = REIM()
 riem = RIEM()
-
 
 
 # ── ASCII compress / reanimate ─────────────────────────────
@@ -931,6 +1170,7 @@ class AsciiCodec:
         try:
             from io import BytesIO
             from PIL import Image  # type: ignore
+
             im = Image.open(BytesIO(data)).convert("L")
             w, h = im.size
             aspect = h / max(1, w)
@@ -940,7 +1180,9 @@ class AsciiCodec:
             pixels = list(im.getdata())
             lines = []
             for y in range(new_h):
-                row = "".join(cls._luma_to_char(pixels[y * new_w + x]) for x in range(new_w))
+                row = "".join(
+                    cls._luma_to_char(pixels[y * new_w + x]) for x in range(new_w)
+                )
                 lines.append(row)
             art = "\n".join(lines)
             return art, new_w, new_h
@@ -981,9 +1223,18 @@ class AsciiCodec:
         return "\n".join(lines), width, len(lines)
 
     @classmethod
-    def compress_and_store(cls, image_id: str, image_path: Path, prompt: str, width: int = 64) -> str:
+    def compress_and_store(
+        cls, image_id: str, image_path: Path, prompt: str, width: int = 64
+    ) -> str:
         ascii_path = ASCII_DIR / f"{image_id}.ascii.txt"
-        if image_path.exists() and image_path.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp", ".bmp", ".gif"):
+        if image_path.exists() and image_path.suffix.lower() in (
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".webp",
+            ".bmp",
+            ".gif",
+        ):
             art, w, h = cls.from_image_path(image_path, width=width)
         else:
             art, w, h = cls.from_prompt_fallback(prompt or image_path.stem, width=width)
@@ -1005,11 +1256,15 @@ class AsciiCodec:
         ).fetchone()
         if not row and not art:
             return f"Unknown image id: {image_id}"
-        prompt, path, source = (row if row else ("", "", ""))
+        prompt, path, source = row if row else ("", "", "")
         if not art:
             # try rebuild from file or prompt
             p = Path(path) if path else None
-            if p and p.exists() and p.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp", ".bmp"):
+            if (
+                p
+                and p.exists()
+                and p.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp", ".bmp")
+            ):
                 art, w, h = cls.from_image_path(p, width=width)
                 AsciiCodec.compress_and_store(image_id, p, prompt or "", width=width)
             else:
@@ -1026,12 +1281,31 @@ class ImageGen:
     def extract_visual_nouns(self, text: str) -> str:
         # heuristic visual prompt from conversation
         words = re.findall(r"[A-Za-z]{4,}", text)
-        stop = {"that", "this", "with", "from", "have", "what", "when", "your", "about",
-                "would", "could", "should", "there", "their", "them", "then", "than"}
+        stop = {
+            "that",
+            "this",
+            "with",
+            "from",
+            "have",
+            "what",
+            "when",
+            "your",
+            "about",
+            "would",
+            "could",
+            "should",
+            "there",
+            "their",
+            "them",
+            "then",
+            "than",
+        }
         vis = [w for w in words if w.lower() not in stop][:12]
         if not vis:
             return "abstract geometric light on dark field, contemplative mood"
-        return "cinematic still of " + " ".join(vis[:8]) + ", detailed, coherent lighting"
+        return (
+            "cinematic still of " + " ".join(vis[:8]) + ", detailed, coherent lighting"
+        )
 
     def generate(self, prompt: str, source: str = "auto", snip: str = "") -> str:
         prompt = (prompt or "").strip()[:400]
@@ -1047,14 +1321,25 @@ class ImageGen:
                 url = "https://image.pollinations.ai/prompt/" + parse.quote(prompt)
                 with request.urlopen(url, timeout=45) as r:
                     data = r.read()
-                path = IMAGES_DIR / f"pol_{hashlib.md5(prompt.encode()).hexdigest()[:10]}.png"
+                path = (
+                    IMAGES_DIR
+                    / f"pol_{hashlib.md5(prompt.encode()).hexdigest()[:10]}.png"
+                )
                 path.write_bytes(data)
                 iid = memory.save_image(prompt, str(path), "pollinations", snip)
                 ap = AsciiCodec.compress_and_store(iid, path, prompt)
-                memory.train_event("default", "image_gen", {
-                    "id": iid, "prompt": prompt, "source": "pollinations", "path": str(path),
-                    "ascii_path": ap,
-                }, 1)
+                memory.train_event(
+                    "default",
+                    "image_gen",
+                    {
+                        "id": iid,
+                        "prompt": prompt,
+                        "source": "pollinations",
+                        "path": str(path),
+                        "ascii_path": ap,
+                    },
+                    1,
+                )
                 memory.add_trust("image_pollinations", prompt[:80])
                 return (
                     f"Image [{iid}] pollinations → {path}\n"
@@ -1076,19 +1361,32 @@ class ImageGen:
         # If a local binary exists, try
         for bin_name in ("sd-cpp", "stable-diffusion-cpp", "sd"):
             if shutil.which(bin_name):
-                out_img = LOCAL_IMG / f"loc_{hashlib.md5(prompt.encode()).hexdigest()[:10]}.png"
+                out_img = (
+                    LOCAL_IMG
+                    / f"loc_{hashlib.md5(prompt.encode()).hexdigest()[:10]}.png"
+                )
                 try:
                     subprocess.run(
                         [bin_name, "-p", prompt, "-o", str(out_img)],
-                        capture_output=True, text=True, timeout=180,
+                        capture_output=True,
+                        text=True,
+                        timeout=180,
                     )
                     if out_img.exists():
                         iid = memory.save_image(prompt, str(out_img), "local_sd", snip)
                         ap = AsciiCodec.compress_and_store(iid, out_img, prompt)
-                        memory.train_event("default", "image_gen", {
-                            "id": iid, "prompt": prompt, "source": "local_sd", "path": str(out_img),
-                            "ascii_path": ap,
-                        }, 1)
+                        memory.train_event(
+                            "default",
+                            "image_gen",
+                            {
+                                "id": iid,
+                                "prompt": prompt,
+                                "source": "local_sd",
+                                "path": str(out_img),
+                                "ascii_path": ap,
+                            },
+                            1,
+                        )
                         return (
                             f"Image [{iid}] local_sd → {out_img}\n"
                             f"ASCII → {ap}\n"
@@ -1099,10 +1397,18 @@ class ImageGen:
                     log.warning("local sd: %s", e)
         iid = memory.save_image(prompt, str(path), "local_card", snip)
         ap = AsciiCodec.compress_and_store(iid, path, prompt)
-        memory.train_event("default", "image_gen", {
-            "id": iid, "prompt": prompt, "source": "local_card", "path": str(path),
-            "ascii_path": ap,
-        }, 1)
+        memory.train_event(
+            "default",
+            "image_gen",
+            {
+                "id": iid,
+                "prompt": prompt,
+                "source": "local_card",
+                "path": str(path),
+                "ascii_path": ap,
+            },
+            1,
+        )
         return (
             f"Local image card [{iid}] → {path}\n"
             f"ASCII → {ap}\n"
@@ -1140,7 +1446,15 @@ def build_project(name: str, goal: str) -> str:
 
 
 # ── Query router ───────────────────────────────────────────
-CRISIS = ("suicide", "kill myself", "end my life", "want to die", "self harm", "suicidal", "overdose")
+CRISIS = (
+    "suicide",
+    "kill myself",
+    "end my life",
+    "want to die",
+    "self harm",
+    "suicidal",
+    "overdose",
+)
 
 
 def query(text: str, session_id: str = "default") -> str:
@@ -1222,7 +1536,9 @@ def query(text: str, session_id: str = "default") -> str:
         return device.toast(text[7:])
     if text.startswith("/notify "):
         parts = text[8:].split("|", 1)
-        return device.notify(parts[0].strip(), parts[1].strip() if len(parts) > 1 else "")
+        return device.notify(
+            parts[0].strip(), parts[1].strip() if len(parts) > 1 else ""
+        )
     if text.startswith("/vibrate"):
         return device.vibrate()
     if text.startswith("/speak "):
@@ -1241,7 +1557,7 @@ def query(text: str, session_id: str = "default") -> str:
             cycles = int(parts[1])
             seed = parts[2] if len(parts) > 2 else ""
         elif len(parts) >= 2:
-            seed = text[len("/echoverse"):].strip()
+            seed = text[len("/echoverse") :].strip()
         return echoverse.step(seed=seed, cycles=cycles)
     if text.startswith("/mandella"):
         domain = text.split()[1] if len(text.split()) > 1 else None
@@ -1262,7 +1578,9 @@ def query(text: str, session_id: str = "default") -> str:
     if text.startswith("/image local "):
         return images.generate(text[13:].strip(), source="local")
     if text.startswith("/image "):
-        return images.generate(text[7:].strip(), source="pollinations" if ALLOW_CLOUD else "auto")
+        return images.generate(
+            text[7:].strip(), source="pollinations" if ALLOW_CLOUD else "auto"
+        )
     if text.startswith("/imagine auto") or text == "/imagine":
         return images.from_conversation(session_id)
     if text.startswith("/imagine "):
@@ -1283,8 +1601,9 @@ def query(text: str, session_id: str = "default") -> str:
     # build / knowledge / crypto-ish
     if text.startswith("/build "):
         parts = text[7:].strip().split("|", 1)
-        return build_project(parts[0].strip().replace(" ", "_"),
-                             parts[1] if len(parts) > 1 else parts[0])
+        return build_project(
+            parts[0].strip().replace(" ", "_"), parts[1] if len(parts) > 1 else parts[0]
+        )
     if text.startswith("/fleet "):
         task = text[7:].strip()
         return (
@@ -1296,13 +1615,18 @@ def query(text: str, session_id: str = "default") -> str:
     if text.startswith("/knowledge "):
         q = text[11:].lower()
         rows = memory.db.execute(
-            "SELECT domain, depth, content FROM knowledge_base").fetchall()
-        hits = [f"[L{d}] {dom}: {c}" for dom, d, c in rows
-                if any(w in (dom + " " + c).lower() for w in q.split())]
+            "SELECT domain, depth, content FROM knowledge_base"
+        ).fetchall()
+        hits = [
+            f"[L{d}] {dom}: {c}"
+            for dom, d, c in rows
+            if any(w in (dom + " " + c).lower() for w in q.split())
+        ]
         return "\n".join(hits[:8]) or "No hits."
     if text.startswith("/challenge"):
         return memory.db.execute(
-            "SELECT riddle FROM cryptex_state ORDER BY id DESC LIMIT 1").fetchone()[0]
+            "SELECT riddle FROM cryptex_state ORDER BY id DESC LIMIT 1"
+        ).fetchone()[0]
     if text.startswith("/crack"):
         if memory.tokens(session_id) < 5:
             return "Need 5 tokens. /topup 10"
@@ -1321,13 +1645,16 @@ def query(text: str, session_id: str = "default") -> str:
         if not row or row[1]:
             return "No active attempt."
         seed = memory.db.execute(
-            "SELECT seed FROM cryptex_state ORDER BY id DESC LIMIT 1").fetchone()[0]
+            "SELECT seed FROM cryptex_state ORDER BY id DESC LIMIT 1"
+        ).fetchone()[0]
         h = hashlib.sha256((text[8:].strip().lower() + seed).encode()).hexdigest()
         ah = memory.db.execute(
-            "SELECT answer_hash FROM cryptex_state ORDER BY id DESC LIMIT 1").fetchone()[0]
+            "SELECT answer_hash FROM cryptex_state ORDER BY id DESC LIMIT 1"
+        ).fetchone()[0]
         if h == ah:
             memory.db.execute(
-                "UPDATE cryptex_attempts SET solved=1 WHERE session_id=?", (session_id,))
+                "UPDATE cryptex_attempts SET solved=1 WHERE session_id=?", (session_id,)
+            )
             memory._commit()
             return "CRYPTEX SOLVED."
         return "Wrong answer."
@@ -1371,7 +1698,8 @@ def query(text: str, session_id: str = "default") -> str:
     hist = memory.history(session_id)
     prompt = (
         "\n".join(f"User: {q}\nLevi: {a}" for q, a in hist) + f"\nUser: {text}\nLevi:"
-        if hist else text
+        if hist
+        else text
     )
     reply = call_llm(prompt, system=system)
     if no_hero:
@@ -1400,9 +1728,16 @@ class Handler(BaseHTTPRequestHandler):
         n = int(self.headers.get("Content-Length", 0))
         data = json.loads(self.rfile.read(n).decode() or "{}") if n else {}
         if self.path in ("/", "/chat"):
-            self._send(200, json.dumps({
-                "reply": query(data.get("text", ""), data.get("session_id", "default"))
-            }))
+            self._send(
+                200,
+                json.dumps(
+                    {
+                        "reply": query(
+                            data.get("text", ""), data.get("session_id", "default")
+                        )
+                    }
+                ),
+            )
         else:
             self.send_error(404)
 
@@ -1411,12 +1746,17 @@ class Handler(BaseHTTPRequestHandler):
             self._send(200, json.dumps({"tier": CURRENT_TIER}))
             return
         if self.path.startswith("/soul.json"):
-            self._send(200, json.dumps({
-                "emotion": emotion.state,
-                "glyph": emotion.glyph_params(),
-                "soulmark": soulmark.fingerprint(),
-                "models": models.status(),
-            }))
+            self._send(
+                200,
+                json.dumps(
+                    {
+                        "emotion": emotion.state,
+                        "glyph": emotion.glyph_params(),
+                        "soulmark": soulmark.fingerprint(),
+                        "models": models.status(),
+                    }
+                ),
+            )
             return
         if self.path != "/":
             self.send_error(404)
@@ -1427,8 +1767,12 @@ class Handler(BaseHTTPRequestHandler):
         op = gp["opacity"]
         hue = max(0, min(200, 42 + gp["hue_shift"]))
         html = HTML % {
-            "spin": spin, "pulse": pulse, "op": op, "hue": hue,
-            "tier": CURRENT_TIER, "ver": VERSION,
+            "spin": spin,
+            "pulse": pulse,
+            "op": op,
+            "hue": hue,
+            "tier": CURRENT_TIER,
+            "ver": VERSION,
         }
         self._send(200, html, "text/html; charset=utf-8")
 

@@ -37,7 +37,9 @@ export function companionSystem(opts: {
     );
   }
   if (p.reframe && p.signature) {
-    lines.push(`REFRAME MODE: Start with: “${p.signature}” Then restate a better question and answer that.`);
+    lines.push(
+      `REFRAME MODE: Start with: “${p.signature}” Then restate a better question and answer that.`,
+    );
   }
   if (opts.mode === "write") {
     lines.push(

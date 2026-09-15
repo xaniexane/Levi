@@ -20,6 +20,7 @@ frontmatter block. These tests assert:
 Run:  python3 tests/test_cyber_skills.py     (has a real __main__ runner)
       python3 -m pytest tests/test_cyber_skills.py -q
 """
+
 from __future__ import annotations
 
 import re
@@ -85,8 +86,19 @@ GATED_IDS = {
 MIN_BATCH1_LINES = 100  # batch-1 quality bar (100-160 lines)
 
 NEGATIONS = (
-    "do not", "don't", "does not", "never", "not include", "not contain",
-    "without", "avoid", "prohibit", "refrain", "no ", "non-", "against",
+    "do not",
+    "don't",
+    "does not",
+    "never",
+    "not include",
+    "not contain",
+    "without",
+    "avoid",
+    "prohibit",
+    "refrain",
+    "no ",
+    "non-",
+    "against",
 )
 
 
@@ -133,7 +145,9 @@ def test_every_playbook_has_valid_frontmatter():
             sid = str(meta.get("skill_id", ""))
             expected = "cyber_" + path.stem.replace("-", "_")
             if not ID_RE.match(sid):
-                problems.append(f"skill_id {sid!r} violates cyber_<slug_with_underscores>")
+                problems.append(
+                    f"skill_id {sid!r} violates cyber_<slug_with_underscores>"
+                )
             elif sid != expected:
                 problems.append(f"skill_id {sid!r} != filename-derived {expected!r}")
             if str(meta.get("risk", "")).lower() not in VALID_RISKS:
@@ -192,7 +206,9 @@ def test_batch2_slugs_all_registered():
     assert not missing, f"batch-2 skills not registered: {missing}"
     # Full library: every slug from both batches registered, plus any later
     # defensive playbooks added to the same directory (e.g. phase-derived).
-    assert len(registered) >= 818, f"expected at least 818 cyber skills, got {len(registered)}"
+    assert len(registered) >= 818, (
+        f"expected at least 818 cyber skills, got {len(registered)}"
+    )
 
 
 @_test
@@ -226,8 +242,11 @@ def test_gated_skills_require_confirmation():
         assert s.risk_level == SkillRisk.MODERATE, f"{gid}: risk is not MODERATE"
         assert s.requires_confirmation, f"{gid}: requires_confirmation not set"
     # Policy generalization: every MODERATE cyber skill must be gated.
-    ungated = [s.id for s in _cyber_skills()
-               if s.risk_level == SkillRisk.MODERATE and not s.requires_confirmation]
+    ungated = [
+        s.id
+        for s in _cyber_skills()
+        if s.risk_level == SkillRisk.MODERATE and not s.requires_confirmation
+    ]
     assert not ungated, f"MODERATE skills without confirmation gate: {ungated}"
 
 
@@ -238,7 +257,7 @@ def test_batch1_playbooks_meet_line_bar_and_footer():
     for s in _cyber_skills():
         if s.id not in batch1:
             continue
-        path = PLAYBOOK_DIR / f"{s.id[len('cyber_'):].replace('_', '-')}.md"
+        path = PLAYBOOK_DIR / f"{s.id[len('cyber_') :].replace('_', '-')}.md"
         text = path.read_text(encoding="utf-8")
         if len(text.splitlines()) < MIN_BATCH1_LINES:
             thin.append(s.id)
@@ -253,7 +272,11 @@ def test_procedure_has_numbered_steps():
     bad = []
     for path in _md_files():
         body = cyber_skills._playbook_body(path)
-        proc = body.split("## Procedure", 1)[1].split("## ", 1)[0] if "## Procedure" in body else ""
+        proc = (
+            body.split("## Procedure", 1)[1].split("## ", 1)[0]
+            if "## Procedure" in body
+            else ""
+        )
         steps = re.findall(r"(?m)^\s*\d+\.\s+\S", proc)
         if len(steps) < 5:
             bad.append((path.name, len(steps)))
@@ -271,7 +294,12 @@ def test_every_playbook_loads_via_registry_handler():
             failures.append((s.id, f"invoke raised: {exc}"))
             continue
         if not isinstance(out, str) or len(out) < 1000:
-            failures.append((s.id, f"handler returned {type(out).__name__} len={len(out) if isinstance(out, str) else '?'}"))
+            failures.append(
+                (
+                    s.id,
+                    f"handler returned {type(out).__name__} len={len(out) if isinstance(out, str) else '?'}",
+                )
+            )
         elif s.name not in out:
             failures.append((s.id, "playbook title not in handler output"))
     assert not failures, f"handler load failures: {failures}"
@@ -280,8 +308,9 @@ def test_every_playbook_loads_via_registry_handler():
 @_test
 def test_filenames_match_skill_load_convention():
     # agent skill_load sanitizes names to [A-Za-z0-9_-] + ".md"
-    bad = [p.name for p in _md_files()
-           if not re.fullmatch(r"[A-Za-z0-9_-]+\.md", p.name)]
+    bad = [
+        p.name for p in _md_files() if not re.fullmatch(r"[A-Za-z0-9_-]+\.md", p.name)
+    ]
     assert not bad, f"filenames incompatible with skill_load: {bad}"
 
 
@@ -291,8 +320,12 @@ def test_no_attack_howto_markers():
     # that mention them in a prohibition ("do not include exploit code").
     # ("weaponize" is deliberately excluded: it appears routinely in
     # defensive prose such as "before the domains are weaponized".)
-    markers = ["exploit code", "payload generator", "step-by-step attack",
-               "zero-day exploit"]
+    markers = [
+        "exploit code",
+        "payload generator",
+        "step-by-step attack",
+        "zero-day exploit",
+    ]
     bad = []
     for path in _md_files():
         hits = []

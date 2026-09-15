@@ -73,7 +73,12 @@ def _normalize_schema(parameters: Any) -> dict:
 
 def _atlas_summary() -> str:
     """One-paragraph summary of the capability atlas for levi://capabilities."""
-    path = Path(__file__).resolve().parent.parent / "knowledge" / "capabilities" / "atlas.json"
+    path = (
+        Path(__file__).resolve().parent.parent
+        / "knowledge"
+        / "capabilities"
+        / "atlas.json"
+    )
     try:
         atlas = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
@@ -205,7 +210,10 @@ class MCPServer:
                 "stdio mode only)"
             )
         if result.ok:
-            return {"content": [{"type": "text", "text": result.output}], "isError": False}
+            return {
+                "content": [{"type": "text", "text": result.output}],
+                "isError": False,
+            }
         return _tool_error(result.error or f"tool {name} failed")
 
     def _resources_list(self, params: dict) -> dict:

@@ -6,8 +6,8 @@ SOURCE CORPUS → DOCUMENT INDEX → CHUNKS/ENTITIES → EPISODIC → SEMANTIC
 
 Provenance: every conclusion should link back toward evidence.
 """
-from __future__ import annotations
 
+from __future__ import annotations
 
 
 def hierarchy_status() -> str:
@@ -28,11 +28,13 @@ def hierarchy_status() -> str:
     # live counts
     try:
         from levi.brain.corpus import Corpus
+
         lines.append(f"corpus_units={len(Corpus().list(limit=500))}")
     except Exception:
         pass
     try:
         from levi.brain.table import BrainTable
+
         lines.append(f"brain_rows={len(BrainTable().rows)}")
     except Exception:
         pass
@@ -50,6 +52,7 @@ def explain_belief(claim: str) -> str:
     found = False
     try:
         from levi.brain.corpus import Corpus
+
         hits = Corpus().search(claim, limit=5)
         for h in hits:
             found = True
@@ -58,6 +61,7 @@ def explain_belief(claim: str) -> str:
         pass
     try:
         from levi.brain.table import BrainTable
+
         hits = BrainTable().search(claim)[:5]
         for h in hits:
             found = True

@@ -21,8 +21,7 @@ def _gate(engine, **over):
 def test_risk2_without_human_channel_never_executes():
     engine = PolicyEngine()
     called = []
-    out = _gate(engine, confirm=None,
-                execute=lambda: called.append(True) or "x")
+    out = _gate(engine, confirm=None, execute=lambda: called.append(True) or "x")
     assert out.awaiting_permission is True
     assert out.executed is False
     assert out.receipt is None
@@ -44,8 +43,9 @@ def test_risk2_with_human_approval_executes_verifies_receipts():
 def test_risk2_human_denial_executes_nothing():
     engine = PolicyEngine()
     called = []
-    out = _gate(engine, confirm=lambda p: False,
-                execute=lambda: called.append(True) or "x")
+    out = _gate(
+        engine, confirm=lambda p: False, execute=lambda: called.append(True) or "x"
+    )
     assert out.approved is False
     assert out.executed is False
     assert out.receipt is None
@@ -55,8 +55,12 @@ def test_risk2_human_denial_executes_nothing():
 def test_dry_run_never_executes_but_still_receipts():
     engine = PolicyEngine()
     called = []
-    out = _gate(engine, confirm=lambda p: True, dry_run=True,
-                execute=lambda: called.append(True) or "x")
+    out = _gate(
+        engine,
+        confirm=lambda p: True,
+        dry_run=True,
+        execute=lambda: called.append(True) or "x",
+    )
     assert out.dry_run is True
     assert out.executed is False
     assert called == []
@@ -87,7 +91,11 @@ def test_low_risk_auto_approves_with_no_human():
 def test_high_risk_requires_human_even_with_strict_ceiling():
     engine = PolicyEngine(auto_approve_up_to=RiskLevel.INFO)
     called = []
-    out = _gate(engine, risk_level=RiskLevel.LOW, confirm=None,
-                execute=lambda: called.append(True) or "x")
+    out = _gate(
+        engine,
+        risk_level=RiskLevel.LOW,
+        confirm=None,
+        execute=lambda: called.append(True) or "x",
+    )
     assert out.awaiting_permission is True
     assert called == []

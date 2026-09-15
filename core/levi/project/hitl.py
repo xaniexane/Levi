@@ -4,6 +4,7 @@ HITL gates — human-controlled on consequences (pre-MVP).
 Never treat silence as approval. Format approval cards for money, production,
 customer data, DNS, legal, public claims, destructive ops.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -17,12 +18,28 @@ import uuid
 DEFAULT_PATH = Path.home() / ".levi" / "hitl_pending.json"
 
 # Domains that always require HITL (Easy Touch master prompt + LEVI policy)
-ALWAYS_HITL = frozenset({
-    "money", "payment", "customer_data", "customer_comms", "domain", "dns",
-    "production", "pricing", "advertising", "subscription", "legal",
-    "public_claim", "destructive", "business_policy",
-    "opportunity_rail", "core_source", "daemon_execute", "customer_contact",
-})
+ALWAYS_HITL = frozenset(
+    {
+        "money",
+        "payment",
+        "customer_data",
+        "customer_comms",
+        "domain",
+        "dns",
+        "production",
+        "pricing",
+        "advertising",
+        "subscription",
+        "legal",
+        "public_claim",
+        "destructive",
+        "business_policy",
+        "opportunity_rail",
+        "core_source",
+        "daemon_execute",
+        "customer_contact",
+    }
+)
 
 
 @dataclass
@@ -39,7 +56,9 @@ class HITLRequest:
     domain: str = "general"
     status: str = "pending"  # pending | approved | denied | edited
     decision_note: str = ""
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
     decided_at: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
@@ -50,22 +69,24 @@ class HITLRequest:
         return cls(**{k: d[k] for k in cls.__dataclass_fields__ if k in d})  # type: ignore
 
     def format_card(self) -> str:
-        return "\n".join([
-            "════════ HUMAN APPROVAL REQUIRED ════════",
-            f"ID: {self.id}",
-            f"Domain: {self.domain}  Risk: {self.risk}  Cost: {self.cost}",
-            "",
-            f"What I want to do:\n  {self.what}",
-            f"Why:\n  {self.why}",
-            f"What changes:\n  {self.changes}",
-            f"Potential benefit:\n  {self.benefit or '—'}",
-            f"If approved:\n  {self.if_approved or '—'}",
-            f"If denied:\n  {self.if_denied or '—'}",
-            "",
-            "Choose: APPROVE | DENY | EDIT | PROVIDE INFO",
-            "Silence is NOT approval.",
-            "══════════════════════════════════════════",
-        ])
+        return "\n".join(
+            [
+                "════════ HUMAN APPROVAL REQUIRED ════════",
+                f"ID: {self.id}",
+                f"Domain: {self.domain}  Risk: {self.risk}  Cost: {self.cost}",
+                "",
+                f"What I want to do:\n  {self.what}",
+                f"Why:\n  {self.why}",
+                f"What changes:\n  {self.changes}",
+                f"Potential benefit:\n  {self.benefit or '—'}",
+                f"If approved:\n  {self.if_approved or '—'}",
+                f"If denied:\n  {self.if_denied or '—'}",
+                "",
+                "Choose: APPROVE | DENY | EDIT | PROVIDE INFO",
+                "Silence is NOT approval.",
+                "══════════════════════════════════════════",
+            ]
+        )
 
 
 class HITLGate:
@@ -81,9 +102,12 @@ class HITLGate:
         try:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
             self.pending = {
-                k: HITLRequest.from_dict(v) for k, v in (raw.get("pending") or {}).items()
+                k: HITLRequest.from_dict(v)
+                for k, v in (raw.get("pending") or {}).items()
             }
-            self.history = [HITLRequest.from_dict(x) for x in (raw.get("history") or [])][-100:]
+            self.history = [
+                HITLRequest.from_dict(x) for x in (raw.get("history") or [])
+            ][-100:]
         except Exception:
             pass
 

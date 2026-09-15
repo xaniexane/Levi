@@ -195,8 +195,11 @@ class AgentContext:
     budget: float
     max_steps: int
 
+
 class Agent(ABC):
-    def __init__(self, context, model_router, tool_registry, memory, permission_engine): ...
+    def __init__(
+        self, context, model_router, tool_registry, memory, permission_engine
+    ): ...
     @abstractmethod
     def run(self, objective): ...
 

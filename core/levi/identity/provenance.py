@@ -5,6 +5,7 @@ Explicitly NOT a rebrand of Kai 9000 or any third-party agent shell.
 Patterns may resemble industry practice; implementations, names, DNA,
 and governance (HITL, L.W.P., organism, Mirror, Rail, Charter) are LEVI-original.
 """
+
 from __future__ import annotations
 
 PROVENANCE = {
@@ -53,6 +54,7 @@ def provenance_report() -> str:
 def scan_tree_for_foreign_branding(root: str = ".") -> str:
     """Soft audit: flag accidental Kai/OpenDevin drop-in strings in source (not docs)."""
     from pathlib import Path
+
     hits = []
     banned = ("kai 9000", "kai9000", "opendevin", "devin ai")
     base = Path(root)
@@ -64,7 +66,11 @@ def scan_tree_for_foreign_branding(root: str = ".") -> str:
         except Exception:
             continue
         for b in banned:
-            if b in text and "not_a_fork" not in text and "provenance" not in str(p).lower():
+            if (
+                b in text
+                and "not_a_fork" not in text
+                and "provenance" not in str(p).lower()
+            ):
                 # allow provenance module itself
                 if "provenance" in p.name:
                     continue

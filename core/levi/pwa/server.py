@@ -103,8 +103,9 @@ class _PWAHandler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *args):  # keep logs quiet but present
         pass
 
-    def _send(self, code: int, body: bytes, ctype: str,
-              extra: dict | None = None) -> None:
+    def _send(
+        self, code: int, body: bytes, ctype: str, extra: dict | None = None
+    ) -> None:
         self.send_response(code)
         self.send_header("Content-Type", ctype)
         self.send_header("Content-Length", str(len(body)))
@@ -188,9 +189,10 @@ class _PWAHandler(BaseHTTPRequestHandler):
         if not target.is_file():
             self._send_json(404, {"error": "not found"})
             return
-        ctype = _SPECIAL_TYPES.get("/" + rel,
-                                   _CONTENT_TYPES.get(target.suffix.lower(),
-                                                      "application/octet-stream"))
+        ctype = _SPECIAL_TYPES.get(
+            "/" + rel,
+            _CONTENT_TYPES.get(target.suffix.lower(), "application/octet-stream"),
+        )
         try:
             body = target.read_bytes()
         except OSError:
@@ -204,11 +206,14 @@ class _PWAHandler(BaseHTTPRequestHandler):
 
     def _route_api_get(self, path: str) -> None:
         if path == "/api/health":
-            self._send_json(200, {
-                "status": "ok",
-                "service": "levi-pwa",
-                "version": getattr(levi, "__version__", "0"),
-            })
+            self._send_json(
+                200,
+                {
+                    "status": "ok",
+                    "service": "levi-pwa",
+                    "version": getattr(levi, "__version__", "0"),
+                },
+            )
         elif path == "/api/registers":
             self._send_json(200, {"registers": _list_registers()})
         elif path == "/api/models":
@@ -220,6 +225,7 @@ class _PWAHandler(BaseHTTPRequestHandler):
 
     def _provider(self, name: str | None):
         from levi.agent.providers import select_provider
+
         if self.provider_factory is not None:
             return self.provider_factory()
         return select_provider(name or None)
@@ -228,17 +234,16 @@ class _PWAHandler(BaseHTTPRequestHandler):
         from levi.agent.chat import ConversationManager, sanitize_session_name
         from levi.persona.kai9000 import get as _get, system_for
 
-        session = sanitize_session_name(
-            str(body.get("session") or "default"))
-        register_id = (body.get("register")
-                       or self.default_register or "").strip() or None
+        session = sanitize_session_name(str(body.get("session") or "default"))
+        register_id = (
+            body.get("register") or self.default_register or ""
+        ).strip() or None
         system_prompt = None
         if register_id:
             if _get(register_id) is None:
                 raise ValueError("unknown register %r" % register_id)
             system_prompt = system_for(register_id)
-        provider = self._provider(
-            str(body.get("provider") or "").strip() or None)
+        provider = self._provider(str(body.get("provider") or "").strip() or None)
         max_steps = body.get("max_steps", 10)
         try:
             max_steps = max(1, int(max_steps))
@@ -254,8 +259,7 @@ class _PWAHandler(BaseHTTPRequestHandler):
             system_prompt=system_prompt,
         ), session
 
-    def _turn_payload(self, mgr, message: str, session: str,
-                      consent: bool) -> dict:
+    def _turn_payload(self, mgr, message: str, session: str, consent: bool) -> dict:
         result = mgr.turn(message, consent=consent, confirm=None)
         t = result.transcript
         return {
@@ -287,15 +291,15 @@ class _PWAHandler(BaseHTTPRequestHandler):
             try:
                 payload = self._turn_payload(mgr, message, session, consent)
             except Exception as exc:
-                self._send_json(500, {"error": "%s: %s"
-                                     % (type(exc).__name__, exc)})
+                self._send_json(500, {"error": "%s: %s" % (type(exc).__name__, exc)})
                 return
             self._send_json(200, payload)
             return
         self._handle_chat_stream(mgr, message, session, consent)
 
-    def _handle_chat_stream(self, mgr, message: str, session: str,
-                            consent: bool) -> None:
+    def _handle_chat_stream(
+        self, mgr, message: str, session: str, consent: bool
+    ) -> None:
         """SSE: liveness events while the turn runs, then done/error.
 
         The agentic loop does not stream tokens, so these events are
@@ -308,8 +312,7 @@ class _PWAHandler(BaseHTTPRequestHandler):
                 payload = self._turn_payload(mgr, message, session, consent)
                 out.put(("done", payload))
             except Exception as exc:  # never leave the stream hanging
-                out.put(("error", {"error": "%s: %s"
-                                           % (type(exc).__name__, exc)}))
+                out.put(("error", {"error": "%s: %s" % (type(exc).__name__, exc)}))
 
         threading.Thread(target=_run, daemon=True).start()
         self.send_response(200)
@@ -321,7 +324,9 @@ class _PWAHandler(BaseHTTPRequestHandler):
         def _emit(event: str, data: Any) -> bool:
             try:
                 chunk = "event: %s\ndata: %s\n\n" % (
-                    event, json.dumps(data, ensure_ascii=False))
+                    event,
+                    json.dumps(data, ensure_ascii=False),
+                )
                 self.wfile.write(chunk.encode("utf-8"))
                 self.wfile.flush()
                 return True
@@ -334,9 +339,10 @@ class _PWAHandler(BaseHTTPRequestHandler):
             try:
                 event, data = out.get(timeout=15)
             except queue.Empty:
-                if not _emit("status", {"state": "working",
-                                        "session": session,
-                                        "ts": time.time()}):
+                if not _emit(
+                    "status",
+                    {"state": "working", "session": session, "ts": time.time()},
+                ):
                     return
                 continue
             _emit(event, data)
@@ -364,16 +370,24 @@ class _PWAHandler(BaseHTTPRequestHandler):
             img = generate(prompt, width=width, height=height)
         except Exception as exc:
             # Cloud-backed generation; report failure honestly.
-            self._send_json(502, {"error": "image generation failed: %s: %s"
-                                       % (type(exc).__name__, exc)})
+            self._send_json(
+                502,
+                {
+                    "error": "image generation failed: %s: %s"
+                    % (type(exc).__name__, exc)
+                },
+            )
             return
-        self._send_json(200, {
-            "prompt": img.prompt,
-            "url": img.url,
-            "path": img.path,
-            "seed": img.seed,
-            "model": img.model,
-        })
+        self._send_json(
+            200,
+            {
+                "prompt": img.prompt,
+                "url": img.url,
+                "path": img.path,
+                "seed": img.seed,
+                "model": img.model,
+            },
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -383,6 +397,7 @@ class _PWAHandler(BaseHTTPRequestHandler):
 
 def _list_registers() -> list[dict]:
     from levi.persona.kai9000 import all_variants
+
     return [
         {"id": v.id, "name": v.name, "tagline": v.tagline, "voice": v.voice}
         for v in all_variants()
@@ -391,6 +406,7 @@ def _list_registers() -> list[dict]:
 
 def _model_status() -> dict:
     from levi.agent import model_family
+
     try:
         resolved = model_family.resolve_family()
     except Exception:
@@ -398,8 +414,10 @@ def _model_status() -> dict:
     return {
         "family": model_family.entries(),
         "resolved": resolved,
-        "note": ("LEVI-first: native brain and remixes head the list; "
-                 "other providers are selectable sources."),
+        "note": (
+            "LEVI-first: native brain and remixes head the list; "
+            "other providers are selectable sources."
+        ),
     }
 
 
@@ -408,10 +426,14 @@ def _model_status() -> dict:
 # ---------------------------------------------------------------------------
 
 
-def serve(host: str = "127.0.0.1", port: int = 8000, *,
-          provider_factory: Callable[[], Any] | None = None,
-          default_register: str | None = None,
-          token: str | None = None) -> ThreadingHTTPServer:
+def serve(
+    host: str = "127.0.0.1",
+    port: int = 8000,
+    *,
+    provider_factory: Callable[[], Any] | None = None,
+    default_register: str | None = None,
+    token: str | None = None,
+) -> ThreadingHTTPServer:
     """Start the PWA server. Returns the server (caller serves/poll it).
 
     ``provider_factory`` lets tests inject a stub provider; production
@@ -420,16 +442,22 @@ def serve(host: str = "127.0.0.1", port: int = 8000, *,
     if token is None:
         token = os.environ.get("LEVI_PWA_TOKEN", "").strip()
     if host != "127.0.0.1" and host != "localhost" and not token:
-        print("WARNING: binding %s without LEVI_PWA_TOKEN — anyone on the "
-              "network can chat with your LEVI. Set LEVI_PWA_TOKEN for LAN "
-              "use; public exposure belongs behind a TLS reverse proxy."
-              % host)
-    handler = type("_PWAHandler", (_PWAHandler,), {
-        "provider_factory": staticmethod(provider_factory)
-        if provider_factory else None,
-        "token": token or "",
-        "default_register": default_register,
-    })
+        print(
+            "WARNING: binding %s without LEVI_PWA_TOKEN — anyone on the "
+            "network can chat with your LEVI. Set LEVI_PWA_TOKEN for LAN "
+            "use; public exposure belongs behind a TLS reverse proxy." % host
+        )
+    handler = type(
+        "_PWAHandler",
+        (_PWAHandler,),
+        {
+            "provider_factory": staticmethod(provider_factory)
+            if provider_factory
+            else None,
+            "token": token or "",
+            "default_register": default_register,
+        },
+    )
     server = ThreadingHTTPServer((host, int(port)), handler)
     return server
 
@@ -437,8 +465,10 @@ def serve(host: str = "127.0.0.1", port: int = 8000, *,
 def run(host: str = "127.0.0.1", port: int = 8000, **kwargs) -> None:
     """Start the PWA server and serve forever (Ctrl-C stops)."""
     server = serve(host, port, **kwargs)
-    print("LEVI PWA serving at http://%s:%d/  (Ctrl-C to stop)"
-          % (host, server.server_address[1]))
+    print(
+        "LEVI PWA serving at http://%s:%d/  (Ctrl-C to stop)"
+        % (host, server.server_address[1])
+    )
     try:
         server.serve_forever()
     except KeyboardInterrupt:

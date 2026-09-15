@@ -2,6 +2,7 @@
 User profile + first-run state — retention DNA.
 Local-only under ~/.levi/profile.json
 """
+
 from __future__ import annotations
 from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional
@@ -23,7 +24,9 @@ class UserProfile:
     onboarded: bool = False
     last_active: str = ""
     last_continued: str = ""  # last project/story id hint
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
     notes: List[str] = field(default_factory=list)
     pending_skill: str = ""
     pending_text: str = ""
@@ -46,7 +49,9 @@ class ProfileStore:
         if not self.path.exists():
             return UserProfile()
         try:
-            return UserProfile.from_dict(json.loads(self.path.read_text(encoding="utf-8")))
+            return UserProfile.from_dict(
+                json.loads(self.path.read_text(encoding="utf-8"))
+            )
         except Exception:
             return UserProfile()
 

@@ -8,6 +8,7 @@ POLLINATIONS_API_KEY or ~/.levi/pollinations.key for higher limits.
 
 Does not claim ownership of Pollinations; thin client only.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -101,7 +102,9 @@ def generate(
     return PollinationsImage(prompt=prompt, url=url, path=path, seed=seed, model=model)
 
 
-def story_still(story_title: str, genre: str, beat: str = "midpoint") -> PollinationsImage:
+def story_still(
+    story_title: str, genre: str, beat: str = "midpoint"
+) -> PollinationsImage:
     prompt = (
         f"Cinematic still, {genre.replace('_', ' ')} mood, "
         f"scene for story '{story_title}', beat {beat}, "

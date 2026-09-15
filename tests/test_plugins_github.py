@@ -97,9 +97,7 @@ def test_whoami_without_token_is_honest(conn, no_token):
 
 
 def test_whoami_returns_authenticated_user(conn, with_token):
-    fake = _FakeTransport(
-        {"login": "octocat", "name": "monalisa octocat", "id": 1}
-    )
+    fake = _FakeTransport({"login": "octocat", "name": "monalisa octocat", "id": 1})
     res = conn.execute("whoami", transport=fake)
     assert res.ok and res.status == "ok" and res.request_made
     assert res.data["login"] == "octocat"
@@ -128,9 +126,7 @@ def test_get_repo_builds_path_from_validated_slugs(conn, with_token):
 
 def test_path_injection_is_rejected_before_transport(conn, with_token):
     fake = _FakeTransport()
-    res = conn.execute(
-        "get_repo", {"owner": "../evil", "repo": "x"}, transport=fake
-    )
+    res = conn.execute("get_repo", {"owner": "../evil", "repo": "x"}, transport=fake)
     assert not res.ok
     assert res.status == "invalid_params"
     assert fake.calls == []
@@ -162,8 +158,7 @@ def test_create_issue_without_confirm_sends_nothing(conn, with_token):
 
 def test_create_issue_with_confirm_posts(conn, with_token):
     fake = _FakeTransport(
-        {"number": 7, "html_url": "https://github.com/o/r/issues/7",
-         "state": "open"}
+        {"number": 7, "html_url": "https://github.com/o/r/issues/7", "state": "open"}
     )
     res = conn.execute(
         "create_issue",
@@ -195,12 +190,8 @@ def test_create_comment_with_confirm_posts(conn, with_token):
 
 
 def test_api_error_is_honest_and_never_contains_token(conn, with_token):
-    fake = _FakeTransport(
-        error=ConnectorAPIError("GitHub API error 404: Not Found")
-    )
-    res = conn.execute(
-        "get_repo", {"owner": "o", "repo": "r"}, transport=fake
-    )
+    fake = _FakeTransport(error=ConnectorAPIError("GitHub API error 404: Not Found"))
+    res = conn.execute("get_repo", {"owner": "o", "repo": "r"}, transport=fake)
     assert not res.ok
     assert res.status == "api_error"
     assert "404" in res.message
@@ -214,8 +205,11 @@ def test_token_never_appears_in_any_failure_message(conn, with_token):
     )
     for kwargs in (
         {"operation": "whoami"},
-        {"operation": "create_issue",
-         "params": {"owner": "o", "repo": "r", "title": "t"}, "confirm": True},
+        {
+            "operation": "create_issue",
+            "params": {"owner": "o", "repo": "r", "title": "t"},
+            "confirm": True,
+        },
     ):
         res = conn.execute(transport=fake, **kwargs)
         assert TOKEN not in res.message, kwargs
@@ -279,7 +273,10 @@ def test_real_urllib_transport_posts_json_body(conn, monkeypatch):
 def test_http_error_becomes_connector_api_error_without_token(conn, monkeypatch):
     def fake_urlopen(request, timeout=None):
         raise urllib.error.HTTPError(
-            request.full_url, 403, "Forbidden", {},
+            request.full_url,
+            403,
+            "Forbidden",
+            {},
             io.BytesIO(b'{"message": "API rate limit exceeded"}'),
         )
 

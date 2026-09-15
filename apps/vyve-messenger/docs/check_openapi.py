@@ -119,9 +119,11 @@ def spec_routes(spec: dict) -> tuple[dict[str, set[tuple[str, str]]], list[str]]
             op = item.get(method)
             if op is None:
                 continue
-            op_servers = op.get("servers") or item.get("servers") or [
-                {"url": u} for u in global_servers
-            ]
+            op_servers = (
+                op.get("servers")
+                or item.get("servers")
+                or [{"url": u} for u in global_servers]
+            )
             if not (op.get("servers") or item.get("servers")):
                 # Falls back to the global list: acceptable only if the global
                 # list is unambiguous; require explicit attribution instead.
@@ -145,8 +147,7 @@ def main() -> int:
         for method, path in sorted(routes):
             if (method, path) not in claimed[app_name]:
                 problems.append(
-                    f"route in code but missing from spec: "
-                    f"[{app_name}] {method} {path}"
+                    f"route in code but missing from spec: [{app_name}] {method} {path}"
                 )
 
     # Direction 2: every spec route must exist in the app it claims.
@@ -154,17 +155,22 @@ def main() -> int:
         for method, path in sorted(routes):
             if (method, path) not in real[app_name]:
                 problems.append(
-                    f"path in spec but missing from code: "
-                    f"[{app_name}] {method} {path}"
+                    f"path in spec but missing from code: [{app_name}] {method} {path}"
                 )
 
     real_total = sum(len(r) for r in real.values())
     spec_total = sum(len(r) for r in claimed.values())
-    print(f"spec:  {SPEC_PATH.relative_to(Path.cwd()) if SPEC_PATH.is_relative_to(Path.cwd()) else SPEC_PATH}")
-    print(f"routes in code: {real_total}  "
-          f"(oauth: {len(real['oauth'])}, messaging: {len(real['messaging'])})")
-    print(f"routes in spec: {spec_total}  "
-          f"(oauth: {len(claimed['oauth'])}, messaging: {len(claimed['messaging'])})")
+    print(
+        f"spec:  {SPEC_PATH.relative_to(Path.cwd()) if SPEC_PATH.is_relative_to(Path.cwd()) else SPEC_PATH}"
+    )
+    print(
+        f"routes in code: {real_total}  "
+        f"(oauth: {len(real['oauth'])}, messaging: {len(real['messaging'])})"
+    )
+    print(
+        f"routes in spec: {spec_total}  "
+        f"(oauth: {len(claimed['oauth'])}, messaging: {len(claimed['messaging'])})"
+    )
 
     if problems:
         print(f"\nFAILED: {len(problems)} problem(s):")

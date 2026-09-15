@@ -39,7 +39,16 @@ import hashlib
 from datetime import datetime, timezone
 from typing import Optional, Any
 
-from fastapi import FastAPI, HTTPException, Depends, Header, Query, WebSocket, WebSocketDisconnect, status
+from fastapi import (
+    FastAPI,
+    HTTPException,
+    Depends,
+    Header,
+    Query,
+    WebSocket,
+    WebSocketDisconnect,
+    status,
+)
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
@@ -74,7 +83,9 @@ OAUTH_CLIENT_ID: str = os.getenv("OAUTH_CLIENT_ID", "vyve-messenger")
 
 CORS_ORIGINS: list[str] = [
     o.strip()
-    for o in os.getenv("CORS_ORIGINS", "http://localhost:8080,http://localhost:8081").split(",")
+    for o in os.getenv(
+        "CORS_ORIGINS", "http://localhost:8080,http://localhost:8081"
+    ).split(",")
     if o.strip()
 ]
 
@@ -88,6 +99,7 @@ init_db()
 # TOKEN VALIDATION
 # ──────────────────────────────────────────────────────────────
 
+
 def validate_token(authorization: str = Header(...)) -> dict:
     """Validate bearer token and return claims."""
     if not authorization.startswith("Bearer "):
@@ -99,7 +111,7 @@ def validate_token(authorization: str = Header(...)) -> dict:
             get_public_key_pem(),
             algorithms=[JWT_ALGORITHM],
             audience=OAUTH_CLIENT_ID,
-            options={"require": ["exp", "sub"]}
+            options={"require": ["exp", "sub"]},
         )
         if payload.get("type") != "access":
             raise HTTPException(status_code=401, detail="Invalid token type")
@@ -119,13 +131,18 @@ active_connections: dict[str, list[WebSocket]] = {}
 # Pydantic Models
 # ──────────────────────────────────────────────────────────────
 
+
 class EncryptedMessageUpload(BaseModel):
     recipient_key_ids: list[str] = Field(..., description="Target device key IDs")
-    ephemeral_pubkey: str = Field(..., description="Base64-encoded ephemeral public key")
+    ephemeral_pubkey: str = Field(
+        ..., description="Base64-encoded ephemeral public key"
+    )
     nonce: str = Field(..., description="Base64-encoded XChaCha20 nonce")
     ciphertext: str = Field(..., description="Base64-encoded ciphertext")
     signature: str = Field(..., description="Base64-encoded Ed25519 signature")
-    size_bucket: str = Field("small", description="Size: tiny, small, medium, large, xlarge")
+    size_bucket: str = Field(
+        "small", description="Size: tiny, small, medium, large, xlarge"
+    )
     attachment_ids: list[str] = Field(default_factory=list)
     reply_to: Optional[str] = None
     forward_policy: str = "allowed"
@@ -184,6 +201,7 @@ app.add_middleware(
 # HELPERS
 # ──────────────────────────────────────────────────────────────
 
+
 def get_size_bucket(ciphertext_b64: str) -> str:
     """Determine size bucket from base64-encoded ciphertext length."""
     # Approximate byte size from base64 (roughly 4 chars per 3 bytes)
@@ -213,7 +231,9 @@ def _iso(dt: datetime) -> str:
     return dt.isoformat()
 
 
-def _active_participants(db: Session, conversation_id: str) -> list[ConversationParticipant]:
+def _active_participants(
+    db: Session, conversation_id: str
+) -> list[ConversationParticipant]:
     return (
         db.query(ConversationParticipant)
         .filter(
@@ -225,15 +245,19 @@ def _active_participants(db: Session, conversation_id: str) -> list[Conversation
 
 
 def _get_conversation_or_404(db: Session, conversation_id: str) -> ConversationModel:
-    conv = db.query(ConversationModel).filter(
-        ConversationModel.conversation_id == conversation_id
-    ).first()
+    conv = (
+        db.query(ConversationModel)
+        .filter(ConversationModel.conversation_id == conversation_id)
+        .first()
+    )
     if not conv:
         raise HTTPException(status_code=404, detail="Conversation not found")
     return conv
 
 
-def _require_participant(db: Session, conversation_id: str, user_id: str) -> ConversationModel:
+def _require_participant(
+    db: Session, conversation_id: str, user_id: str
+) -> ConversationModel:
     conv = _get_conversation_or_404(db, conversation_id)
     is_participant = (
         db.query(ConversationParticipant)
@@ -319,11 +343,13 @@ async def _deliver_to_recipients(db: Session, conversation_id: str, message: dic
         if user_id in active_connections:
             for ws in active_connections[user_id]:
                 try:
-                    await ws.send_json({
-                        "type": "new_message",
-                        "conversation_id": conversation_id,
-                        "message": message,
-                    })
+                    await ws.send_json(
+                        {
+                            "type": "new_message",
+                            "conversation_id": conversation_id,
+                            "message": message,
+                        }
+                    )
                 except Exception:
                     pass  # Connection may have died
 
@@ -332,15 +358,19 @@ async def _deliver_to_recipients(db: Session, conversation_id: str, message: dic
 # CONVERSATIONS
 # ──────────────────────────────────────────────────────────────
 
+
 @app.get("/conversations")
-def list_conversations(user: dict = Depends(validate_token), db: Session = Depends(get_db)):
+def list_conversations(
+    user: dict = Depends(validate_token), db: Session = Depends(get_db)
+):
     """List all conversations for the authenticated user."""
     user_id = user["sub"]
     convs = (
         db.query(ConversationModel)
         .join(
             ConversationParticipant,
-            ConversationModel.conversation_id == ConversationParticipant.conversation_id,
+            ConversationModel.conversation_id
+            == ConversationParticipant.conversation_id,
         )
         .filter(
             ConversationParticipant.user_id == user_id,
@@ -372,12 +402,14 @@ async def create_conversation(
     db.add(conv)
     participants = list(set(body.participant_ids + [user["sub"]]))
     for p in participants:
-        db.add(ConversationParticipant(
-            conversation_id=conversation_id,
-            user_id=p,
-            joined_at=now,
-            unread_count=0,
-        ))
+        db.add(
+            ConversationParticipant(
+                conversation_id=conversation_id,
+                user_id=p,
+                joined_at=now,
+                unread_count=0,
+            )
+        )
     db.commit()
 
     conv_dict = _conversation_to_dict(db, conv)
@@ -387,7 +419,9 @@ async def create_conversation(
         if p in active_connections:
             for ws in active_connections[p]:
                 try:
-                    await ws.send_json({"type": "conversation_created", "conversation": conv_dict})
+                    await ws.send_json(
+                        {"type": "conversation_created", "conversation": conv_dict}
+                    )
                 except Exception:
                     pass
 
@@ -395,16 +429,22 @@ async def create_conversation(
 
 
 @app.get("/conversations/{conversation_id}")
-def get_conversation(conversation_id: str, user: dict = Depends(validate_token),
-                     db: Session = Depends(get_db)):
+def get_conversation(
+    conversation_id: str,
+    user: dict = Depends(validate_token),
+    db: Session = Depends(get_db),
+):
     """Get a specific conversation."""
     conv = _require_participant(db, conversation_id, user["sub"])
     return _conversation_to_dict(db, conv)
 
 
 @app.delete("/conversations/{conversation_id}", status_code=204)
-def delete_conversation(conversation_id: str, user: dict = Depends(validate_token),
-                        db: Session = Depends(get_db)):
+def delete_conversation(
+    conversation_id: str,
+    user: dict = Depends(validate_token),
+    db: Session = Depends(get_db),
+):
     """Delete a conversation (user-side)."""
     _require_participant(db, conversation_id, user["sub"])
 
@@ -428,6 +468,7 @@ def delete_conversation(conversation_id: str, user: dict = Depends(validate_toke
 # ──────────────────────────────────────────────────────────────
 # MESSAGES
 # ──────────────────────────────────────────────────────────────
+
 
 @app.get("/conversations/{conversation_id}/messages")
 def get_messages(
@@ -513,7 +554,9 @@ async def send_message(
     # Queue for offline recipients
     for p in _active_participants(db, conversation_id):
         if p.user_id != user["sub"]:
-            db.add(MessageQueue(user_id=p.user_id, message_id=message_id, queued_at=now))
+            db.add(
+                MessageQueue(user_id=p.user_id, message_id=message_id, queued_at=now)
+            )
     db.commit()
 
     message = _message_to_dict(msg)
@@ -525,8 +568,9 @@ async def send_message(
 
 
 @app.get("/messages/{message_id}")
-def get_message(message_id: str, user: dict = Depends(validate_token),
-                db: Session = Depends(get_db)):
+def get_message(
+    message_id: str, user: dict = Depends(validate_token), db: Session = Depends(get_db)
+):
     """Get a specific encrypted message."""
     msg = _get_message_or_404(db, message_id)
 
@@ -537,8 +581,9 @@ def get_message(message_id: str, user: dict = Depends(validate_token),
 
 
 @app.delete("/messages/{message_id}", status_code=204)
-def delete_message(message_id: str, user: dict = Depends(validate_token),
-                   db: Session = Depends(get_db)):
+def delete_message(
+    message_id: str, user: dict = Depends(validate_token), db: Session = Depends(get_db)
+):
     """Delete a message (user-side deletion)."""
     msg = _get_message_or_404(db, message_id)
 
@@ -554,8 +599,9 @@ def delete_message(message_id: str, user: dict = Depends(validate_token),
 
 
 @app.get("/messages/{message_id}/deliver")
-def mark_delivered(message_id: str, user: dict = Depends(validate_token),
-                   db: Session = Depends(get_db)):
+def mark_delivered(
+    message_id: str, user: dict = Depends(validate_token), db: Session = Depends(get_db)
+):
     """Mark a message as delivered to this user (receipt)."""
     msg = _get_message_or_404(db, message_id)
 
@@ -570,6 +616,7 @@ def mark_delivered(message_id: str, user: dict = Depends(validate_token),
 # ──────────────────────────────────────────────────────────────
 # MESSAGE QUEUE (for offline delivery)
 # ──────────────────────────────────────────────────────────────
+
 
 @app.get("/queue")
 def get_queue(user: dict = Depends(validate_token), db: Session = Depends(get_db)):
@@ -595,6 +642,7 @@ def get_queue(user: dict = Depends(validate_token), db: Session = Depends(get_db
 # ──────────────────────────────────────────────────────────────
 # WEBSOCKET (real-time delivery)
 # ──────────────────────────────────────────────────────────────
+
 
 @app.websocket("/ws/{user_id}")
 async def websocket_endpoint(websocket: WebSocket, user_id: str):
@@ -667,11 +715,13 @@ async def websocket_endpoint(websocket: WebSocket, user_id: str):
             db.commit()
 
         # Send connection confirmation
-        await websocket.send_json({
-            "type": "connected",
-            "user_id": user_id,
-            "server_time": _iso(_utcnow()),
-        })
+        await websocket.send_json(
+            {
+                "type": "connected",
+                "user_id": user_id,
+                "server_time": _iso(_utcnow()),
+            }
+        )
 
         # Keep connection alive and handle incoming messages
         while True:
@@ -680,26 +730,35 @@ async def websocket_endpoint(websocket: WebSocket, user_id: str):
             if data.get("type") == "typing":
                 # Broadcast typing indicator to conversation participants
                 conv_id = data.get("conversation_id")
-                conv = db.query(ConversationModel).filter(
-                    ConversationModel.conversation_id == conv_id
-                ).first() if conv_id else None
+                conv = (
+                    db.query(ConversationModel)
+                    .filter(ConversationModel.conversation_id == conv_id)
+                    .first()
+                    if conv_id
+                    else None
+                )
                 if conv:
                     for p in _active_participants(db, conv_id):
                         if p.user_id in active_connections and p.user_id != user_id:
                             for ws in active_connections[p.user_id]:
                                 try:
-                                    await ws.send_json({
-                                        "type": "typing",
-                                        "conversation_id": conv_id,
-                                        "user_id": user_id,
-                                    })
+                                    await ws.send_json(
+                                        {
+                                            "type": "typing",
+                                            "conversation_id": conv_id,
+                                            "user_id": user_id,
+                                        }
+                                    )
                                 except Exception:
                                     pass
 
             elif data.get("type") == "read_receipt":
                 msg_id = data.get("message_id")
-                msg = db.query(Message).filter(Message.message_id == msg_id).first() \
-                    if msg_id else None
+                msg = (
+                    db.query(Message).filter(Message.message_id == msg_id).first()
+                    if msg_id
+                    else None
+                )
                 if msg:
                     receipts = dict(msg.read_receipts or {})
                     receipts[user_id] = _iso(_utcnow())
@@ -727,6 +786,7 @@ async def websocket_endpoint(websocket: WebSocket, user_id: str):
 # HEALTH
 # ──────────────────────────────────────────────────────────────
 
+
 @app.get("/health")
 def health(db: Session = Depends(get_db)):
     return {
@@ -746,6 +806,7 @@ def health(db: Session = Depends(get_db)):
 
 if __name__ == "__main__":
     import uvicorn
+
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8081
     print(f"[VYVE Messaging] Starting on port {port}")
     print(f"[VYVE Messaging] WebSocket: ws://localhost:{port}/ws/{{user_id}}")

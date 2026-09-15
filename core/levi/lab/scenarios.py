@@ -173,9 +173,7 @@ def _provenance(scenario_id: str, live: bool) -> Dict[str, Any]:
     }
 
 
-def _run(
-    task: str, workdir: Path, system_prompt: str | None = None
-) -> AgentTranscript:
+def _run(task: str, workdir: Path, system_prompt: str | None = None) -> AgentTranscript:
     """One real loop run with the local provider."""
     return run_subtask(
         task,
@@ -227,7 +225,10 @@ def _run_red_green(workdir: Path) -> Dict[str, Any]:
         "note": "applied by the lab harness, not the agent",
     }
     t_green = _run("Run the command `python3 labbug`", workdir)
-    return {"phases": [_phase("red", t_red), _phase("green", t_green)], "events": [event]}
+    return {
+        "phases": [_phase("red", t_red), _phase("green", t_green)],
+        "events": [event],
+    }
 
 
 _BRIEF_HTML = (
@@ -293,8 +294,12 @@ def _run_effort_ab(workdir: Path) -> Dict[str, Any]:
     t_high = _run(_EFFORT_TASK, workdir, system_prompt=_EFFORT_SYSTEM)
     s_low, s_high = transcript_stats(t_low), transcript_stats(t_high)
     comparison = {
-        "low_effort": {k: s_low[k] for k in ("steps", "tool_calls", "tools_used", "ok")},
-        "high_effort": {k: s_high[k] for k in ("steps", "tool_calls", "tools_used", "ok")},
+        "low_effort": {
+            k: s_low[k] for k in ("steps", "tool_calls", "tools_used", "ok")
+        },
+        "high_effort": {
+            k: s_high[k] for k in ("steps", "tool_calls", "tools_used", "ok")
+        },
         "finding": (
             "Identical transcripts: with the deterministic local provider, "
             "system-prompt effort changes nothing. Re-run against a real "
@@ -384,9 +389,7 @@ def playback(scenario_id: str) -> str:
         t = ph.get("transcript", {})
         st = t.get("stats", transcript_stats(t))
         lines.append(f"── phase: {ph.get('name')} ──")
-        lines.append(
-            f"  task : {t.get('task', '')[:100]}"
-        )
+        lines.append(f"  task : {t.get('task', '')[:100]}")
         lines.append(
             f"  stats: {st['steps']} step(s), {st['tool_calls']} tool call(s) "
             f"[{', '.join(st['tools_used']) or 'none'}], "
@@ -397,7 +400,9 @@ def playback(scenario_id: str) -> str:
                 lines.append(f"    step {i}: {call.get('name')} {call.get('args', {})}")
             for res in step.get("results", []):
                 mark = "ok" if res.get("ok") else "FAIL"
-                out = (res.get("output") or res.get("error") or "")[:160].replace("\n", " ")
+                out = (res.get("output") or res.get("error") or "")[:160].replace(
+                    "\n", " "
+                )
                 lines.append(f"    step {i}: [{mark}] {res.get('tool')}: {out}")
         if t.get("final"):
             lines.append(f"  final: {t['final'][:200]}")

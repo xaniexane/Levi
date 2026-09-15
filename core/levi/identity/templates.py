@@ -1,4 +1,5 @@
 """Template loader — free asset flywheel seeds."""
+
 from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -48,6 +49,7 @@ def apply_template(tid: str) -> str:
     nl = t.get("nl") or ""
     kind = t.get("kind") or "factory"
     from levi.skill.registry import SkillRegistry
+
     reg = SkillRegistry()
     if kind == "factory":
         return str(reg.invoke("factory_create", {"text": nl}))

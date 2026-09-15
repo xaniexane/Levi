@@ -23,6 +23,7 @@ can never escape the vault directory.
 
 Not a substitute for a full HSM. Good enough for local private chat/notes at rest.
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -48,8 +49,7 @@ class VaultError(Exception):
 def _sanitize_name(name: str) -> str:
     if not isinstance(name, str) or not _NAME_RE.match(name):
         raise VaultError(
-            "invalid vault entry name %r: use 1-64 chars of "
-            "[A-Za-z0-9_-]" % (name,)
+            "invalid vault entry name %r: use 1-64 chars of [A-Za-z0-9_-]" % (name,)
         )
     return name
 

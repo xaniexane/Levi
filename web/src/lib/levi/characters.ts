@@ -1,8 +1,32 @@
 /** L.W.P. character graph — combinatorial, local. */
 
-const DRIVES = ["belonging", "mastery", "justice", "freedom", "legacy", "curiosity", "safety", "truth"] as const;
-const WOUNDS = ["abandonment", "humiliation", "betrayal", "powerlessness", "erasure", "exile"] as const;
-const METHODS = ["strategy", "charm", "service", "analysis", "humor", "craft", "endurance"] as const;
+const DRIVES = [
+  "belonging",
+  "mastery",
+  "justice",
+  "freedom",
+  "legacy",
+  "curiosity",
+  "safety",
+  "truth",
+] as const;
+const WOUNDS = [
+  "abandonment",
+  "humiliation",
+  "betrayal",
+  "powerlessness",
+  "erasure",
+  "exile",
+] as const;
+const METHODS = [
+  "strategy",
+  "charm",
+  "service",
+  "analysis",
+  "humor",
+  "craft",
+  "endurance",
+] as const;
 const VOICES = ["spare", "lyrical", "clinical", "ironic", "tender", "blunt"] as const;
 const ROOTS = ["Ash", "Nyx", "Quill", "Vesper", "Reed", "Sable", "Wren", "Cass", "Orin", "Lumen"];
 

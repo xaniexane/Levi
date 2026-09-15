@@ -6,6 +6,7 @@ LEVI is not a pile of features; it is a mesh:
   ↔ corpus/knowledge ↔ story/L.W.P. ↔ cloud model phases
   ↔ enterprise gates ↔ premium/unique ↔ UI console
 """
+
 from __future__ import annotations
 
 from typing import Dict, List, Tuple
@@ -43,7 +44,6 @@ EDGES: List[Tuple[str, str, str]] = [
 ]
 
 
-
 def format_mesh() -> str:
     lines = [
         "══ LEVI Interpenetration Mesh ══",
@@ -69,33 +69,39 @@ def smoke() -> Dict[str, object]:
     checks = {}
     try:
         from levi.identity.si import SI_KIND
+
         checks["si"] = SI_KIND
     except Exception as e:
         checks["si"] = str(e)
     try:
         from levi.persona.kai9000 import all_variants
+
         checks["kai"] = len(all_variants())
     except Exception as e:
         checks["kai"] = str(e)
     try:
         from levi.persona.lattice import PersonaLattice
+
         checks["personas"] = len(PersonaLattice().keys())
     except Exception as e:
         checks["personas"] = str(e)
     try:
         from levi.premium.features import FEATURES
         from levi.premium.unique import UNIQUES
+
         checks["premium"] = len(FEATURES)
         checks["unique"] = len(UNIQUES)
     except Exception as e:
         checks["premium"] = str(e)
     try:
         from levi.brain.seed_knowledge_max import _RAW
+
         checks["max_units"] = len(_RAW)
     except Exception as e:
         checks["max_units"] = str(e)
     try:
         from levi.cloud.model import FullCloudModel
+
         checks["model_seal"] = FullCloudModel().snapshot().get("seal")
     except Exception as e:
         checks["model_seal"] = str(e)

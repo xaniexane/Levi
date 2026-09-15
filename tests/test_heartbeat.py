@@ -68,10 +68,9 @@ class Args:
 # seeded attention item → digest, silent=False
 # --------------------------------------------------------------------------
 
+
 def test_provisional_learning_seed_produces_digest(home, capsys):
-    _write_memory_index(
-        home, [_growth_entry("2026-09-15T19:00:00+00:00")]
-    )
+    _write_memory_index(home, [_growth_entry("2026-09-15T19:00:00+00:00")])
     result = run_heartbeat(home=home, now=_at(15, 14), force=True)
     assert isinstance(result, HeartbeatResult)
     assert result.silent is False
@@ -92,6 +91,7 @@ def test_provisional_learning_seed_produces_digest(home, capsys):
 # clean home → silent
 # --------------------------------------------------------------------------
 
+
 def test_clean_home_is_silent(home, capsys):
     result = run_heartbeat(home=home, now=_at(15, 14), force=True)
     assert result.silent is True
@@ -108,6 +108,7 @@ def test_clean_home_is_silent(home, capsys):
 # active-hours gating
 # --------------------------------------------------------------------------
 
+
 def test_outside_active_hours_is_silent(home):
     result = run_heartbeat(home=home, now=_at(15, 3), force=True)
     assert result.silent is True
@@ -123,6 +124,7 @@ def test_inside_active_hours_proceeds(home):
 # --------------------------------------------------------------------------
 # interval: second run inside interval is a no-op
 # --------------------------------------------------------------------------
+
 
 def test_interval_second_run_is_noop(home):
     first = run_heartbeat(home=home, now=_at(15, 14), force=True)
@@ -150,6 +152,7 @@ def test_interval_env_override(home, monkeypatch):
 # status action
 # --------------------------------------------------------------------------
 
+
 def test_status_action_prints_state(home, capsys):
     run_heartbeat(home=home, now=_at(15, 14), force=True)
     cmd_heartbeat(Args(heartbeat_action="status"))
@@ -163,6 +166,7 @@ def test_status_action_prints_state(home, capsys):
 # --------------------------------------------------------------------------
 # resilience: a broken source must not crash the run
 # --------------------------------------------------------------------------
+
 
 def test_broken_source_does_not_crash(home):
     mem_dir = home / ".levi" / "memory"

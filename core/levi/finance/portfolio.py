@@ -97,7 +97,9 @@ class Portfolio:
             self.cash -= qty * price
             pos = self.positions.get(symbol)
             if pos is None:
-                self.positions[symbol] = Position(symbol=symbol, qty=qty, avg_cost=price)
+                self.positions[symbol] = Position(
+                    symbol=symbol, qty=qty, avg_cost=price
+                )
             else:
                 total_cost = pos.qty * pos.avg_cost + qty * price
                 pos.qty += qty
@@ -121,7 +123,9 @@ class Portfolio:
 
     # -- valuation -------------------------------------------------------
 
-    def _price_for(self, symbol: str, prices: dict[str, float], warnings: list[str]) -> float:
+    def _price_for(
+        self, symbol: str, prices: dict[str, float], warnings: list[str]
+    ) -> float:
         price = prices.get(symbol)
         if price is None:
             warnings.append(symbol)
@@ -140,7 +144,9 @@ class Portfolio:
             total += pos.qty * self._price_for(symbol, prices, warnings)
         return _r2(total), warnings
 
-    def unrealized_pnl(self, prices: dict[str, float]) -> tuple[dict[str, float], float]:
+    def unrealized_pnl(
+        self, prices: dict[str, float]
+    ) -> tuple[dict[str, float], float]:
         """Per-position unrealized P&L and its total.
 
         Symbols missing from ``prices`` are valued at average cost, so

@@ -8,6 +8,7 @@ models + HITL + exportable memory.
 Not a claim of artificial general consciousness or personhood.
 SI amplifies; it does not silently replace consequential agency.
 """
+
 from __future__ import annotations
 
 from typing import Dict, List

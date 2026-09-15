@@ -5,6 +5,7 @@ runner is a fake executable script, the download source is a loopback
 HTTP server, and HOME/MODEL_DIR are isolated per test. Spawned fake
 servers are shut down by an autouse fixture (atexit is the backstop).
 """
+
 import json
 import os
 import stat
@@ -97,8 +98,9 @@ def model_home(tmp_path, monkeypatch):
     monkeypatch.setenv("LEVI_MODEL_DIR", str(mdir))
     # Fake bindir first (so no real llama-server shadows the fake), but keep
     # the rest of PATH: the fake runner scripts use `#!/usr/bin/env python3`.
-    monkeypatch.setenv("PATH", os.pathsep.join(
-        [str(bindir), os.environ.get("PATH", "")]))
+    monkeypatch.setenv(
+        "PATH", os.pathsep.join([str(bindir), os.environ.get("PATH", "")])
+    )
     monkeypatch.delenv("LEVI_LLAMA_SERVER", raising=False)
     monkeypatch.delenv("LEVI_LOCAL_MODEL", raising=False)
     monkeypatch.delenv("LEVI_PROVIDER", raising=False)
@@ -212,10 +214,16 @@ def test_select_explicit_flag_wins_over_env(model_home, monkeypatch):
 def test_chat_through_fake_server(model_home, monkeypatch):
     _install_fake_stack(model_home, monkeypatch)
     provider = LocalModelProvider()
-    tools = [{"name": "file_read", "description": "Read a file",
-              "parameters": {"type": "object"}}]
+    tools = [
+        {
+            "name": "file_read",
+            "description": "Read a file",
+            "parameters": {"type": "object"},
+        }
+    ]
     resp = provider.chat(
-        [local_model.ChatMessage(role="user", content="read x.txt")], tools)
+        [local_model.ChatMessage(role="user", content="read x.txt")], tools
+    )
     assert resp.error is None, resp.error
     assert resp.provider == "levi-local"
     assert len(resp.tool_calls) == 1
@@ -224,21 +232,26 @@ def test_chat_through_fake_server(model_home, monkeypatch):
 
 def test_server_is_shared_across_provider_instances(model_home, monkeypatch):
     _install_fake_stack(model_home, monkeypatch)
-    tools = [{"name": "file_read", "description": "d",
-              "parameters": {"type": "object"}}]
+    tools = [
+        {"name": "file_read", "description": "d", "parameters": {"type": "object"}}
+    ]
     LocalModelProvider().chat(
-        [local_model.ChatMessage(role="user", content="a")], tools)
+        [local_model.ChatMessage(role="user", content="a")], tools
+    )
     LocalModelProvider().chat(
-        [local_model.ChatMessage(role="user", content="b")], tools)
+        [local_model.ChatMessage(role="user", content="b")], tools
+    )
     assert len(local_model._servers) == 1
 
 
 def test_server_shutdown_kills_process(model_home, monkeypatch):
     _install_fake_stack(model_home, monkeypatch)
-    tools = [{"name": "file_read", "description": "d",
-              "parameters": {"type": "object"}}]
+    tools = [
+        {"name": "file_read", "description": "d", "parameters": {"type": "object"}}
+    ]
     LocalModelProvider().chat(
-        [local_model.ChatMessage(role="user", content="a")], tools)
+        [local_model.ChatMessage(role="user", content="a")], tools
+    )
     assert len(local_model._servers) == 1
     proc = next(iter(local_model._servers.values())).proc
     assert proc.poll() is None
@@ -254,8 +267,7 @@ def test_dying_runner_reports_honest_error(model_home, monkeypatch):
     # is_available() only checks files, so it is True even though the
     # runner dies on spawn — the failure surfaces at chat() time.
     assert provider.is_available()
-    resp = provider.chat(
-        [local_model.ChatMessage(role="user", content="hi")], [])
+    resp = provider.chat([local_model.ChatMessage(role="user", content="hi")], [])
     assert resp.error is not None
     assert "levi-local" in resp.error
     assert not resp.tool_calls
@@ -263,8 +275,7 @@ def test_dying_runner_reports_honest_error(model_home, monkeypatch):
 
 def test_chat_without_setup_reports_missing_plainly(model_home):
     provider = LocalModelProvider()
-    resp = provider.chat(
-        [local_model.ChatMessage(role="user", content="hi")], [])
+    resp = provider.chat([local_model.ChatMessage(role="user", content="hi")], [])
     assert resp.error is not None
     assert "no .gguf weights" in resp.error
     assert "model pull" in resp.error
@@ -328,7 +339,8 @@ def fake_models(monkeypatch, file_server):
 def test_download_success_records_manifest(model_home, fake_models):
     progress_calls = []
     dest = local_model.download_weights(
-        "test-tiny", progress=lambda d, t: progress_calls.append((d, t)))
+        "test-tiny", progress=lambda d, t: progress_calls.append((d, t))
+    )
     assert dest.is_file()
     assert dest.read_bytes() == _FileHandler.payload
     assert progress_calls, "progress callback was never called"
@@ -355,7 +367,8 @@ def test_download_sha_mismatch_cleans_up(model_home, fake_models, monkeypatch):
 
 def test_download_http_error_cleans_up(model_home, fake_models):
     fake_models["test-tiny"]["url"] = fake_models["test-tiny"]["url"].replace(
-        "test-tiny.gguf", "missing.gguf")
+        "test-tiny.gguf", "missing.gguf"
+    )
     fake_models["test-tiny"]["file"] = "missing.gguf"
     with pytest.raises(PullError, match="HTTP 404"):
         local_model.download_weights("test-tiny")
@@ -375,12 +388,18 @@ def test_download_unknown_model(model_home):
 
 def test_pick_runner_asset_prefers_plain_cpu_build():
     assets = [
-        {"name": "llama-b9999-bin-ubuntu-x64-cuda-12-4.zip",
-         "browser_download_url": "http://x/cuda.zip"},
-        {"name": "llama-b9999-bin-ubuntu-x64.zip",
-         "browser_download_url": "http://x/plain.zip"},
-        {"name": "llama-b9999-bin-macos-arm64.zip",
-         "browser_download_url": "http://x/macos.zip"},
+        {
+            "name": "llama-b9999-bin-ubuntu-x64-cuda-12-4.zip",
+            "browser_download_url": "http://x/cuda.zip",
+        },
+        {
+            "name": "llama-b9999-bin-ubuntu-x64.zip",
+            "browser_download_url": "http://x/plain.zip",
+        },
+        {
+            "name": "llama-b9999-bin-macos-arm64.zip",
+            "browser_download_url": "http://x/macos.zip",
+        },
     ]
     picked = local_model._pick_runner_asset(assets, ("ubuntu", "x64"))
     assert picked["browser_download_url"] == "http://x/plain.zip"
@@ -461,13 +480,22 @@ def _gguf_blob(arch: str = "qwen3", context_length: int | None = 40960) -> bytes
 
     def kv_str(key: str, value: str) -> bytes:
         kb, vb = key.encode(), value.encode()
-        return (struct.pack("<Q", len(kb)) + kb + struct.pack("<I", 8)
-                + struct.pack("<Q", len(vb)) + vb)
+        return (
+            struct.pack("<Q", len(kb))
+            + kb
+            + struct.pack("<I", 8)
+            + struct.pack("<Q", len(vb))
+            + vb
+        )
 
     def kv_u32(key: str, value: int) -> bytes:
         kb = key.encode()
-        return (struct.pack("<Q", len(kb)) + kb + struct.pack("<I", 4)
-                + struct.pack("<I", value))
+        return (
+            struct.pack("<Q", len(kb))
+            + kb
+            + struct.pack("<I", 4)
+            + struct.pack("<I", value)
+        )
 
     kvs = [kv_str("general.architecture", arch)]
     if context_length is not None:
@@ -477,12 +505,18 @@ def _gguf_blob(arch: str = "qwen3", context_length: int | None = 40960) -> bytes
 
 def test_parse_gguf_context_length():
     assert local_model._parse_gguf_context_length(_gguf_blob()) == 40960
-    assert local_model._parse_gguf_context_length(
-        _gguf_blob(arch="llama", context_length=8192)) == 8192
+    assert (
+        local_model._parse_gguf_context_length(
+            _gguf_blob(arch="llama", context_length=8192)
+        )
+        == 8192
+    )
 
 
 def test_parse_gguf_context_length_missing():
-    assert local_model._parse_gguf_context_length(_gguf_blob(context_length=None)) is None
+    assert (
+        local_model._parse_gguf_context_length(_gguf_blob(context_length=None)) is None
+    )
     assert local_model._parse_gguf_context_length(b"not a gguf") is None
     assert local_model._parse_gguf_context_length(b"GGUF" + b"\x00" * 4) is None
 
@@ -556,6 +590,7 @@ def test_find_runner_env_override_still_wins(model_home, monkeypatch):
 def _make_release_zip(members: dict) -> "Path":
     import tempfile
     import zipfile
+
     tmp = Path(tempfile.mkdtemp()) / "rel.zip"
     with zipfile.ZipFile(tmp, "w") as zf:
         for name, data in members.items():
@@ -565,15 +600,18 @@ def _make_release_zip(members: dict) -> "Path":
 
 def test_extract_runner_takes_server_and_sibling_libs(tmp_path):
     import zipfile
-    zpath = _make_release_zip({
-        "build/bin/llama-server": b"ELF-binary",
-        "build/bin/libggml.so": b"shared-lib",
-        "build/bin/libfoo.so.1.2": b"versioned-lib",
-        "build/bin/llama-cli": b"other-tool",       # not extracted
-        "other/libbar.so": b"elsewhere-lib",        # wrong dir: skipped
-        "../evil.sh": b"zip-slip",                  # skipped
-        "/abs/path.sh": b"zip-slip",                # skipped
-    })
+
+    zpath = _make_release_zip(
+        {
+            "build/bin/llama-server": b"ELF-binary",
+            "build/bin/libggml.so": b"shared-lib",
+            "build/bin/libfoo.so.1.2": b"versioned-lib",
+            "build/bin/llama-cli": b"other-tool",  # not extracted
+            "other/libbar.so": b"elsewhere-lib",  # wrong dir: skipped
+            "../evil.sh": b"zip-slip",  # skipped
+            "/abs/path.sh": b"zip-slip",  # skipped
+        }
+    )
     bin_dir = tmp_path / "bin"
     bin_dir.mkdir()
     with zipfile.ZipFile(zpath) as zf:
@@ -590,6 +628,7 @@ def test_extract_runner_takes_server_and_sibling_libs(tmp_path):
 
 def test_extract_runner_none_without_server(tmp_path):
     import zipfile
+
     zpath = _make_release_zip({"build/bin/llama-cli": b"x"})
     bin_dir = tmp_path / "bin"
     bin_dir.mkdir()
@@ -608,13 +647,16 @@ def test_models_carry_pinned_authoritative_sha256():
     (content hash) and a commit-pinned download URL, so downloads are
     verified against an authoritative upstream value."""
     import re
+
     for key, spec in local_model.MODELS.items():
         sha = spec.get("sha256")
-        assert re.fullmatch(r"[0-9a-f]{64}", sha or ""), \
+        assert re.fullmatch(r"[0-9a-f]{64}", sha or ""), (
             "model %r has no pinned SHA-256" % key
+        )
         url = spec.get("url") or ""
-        assert re.search(r"/resolve/[0-9a-f]{40}/", url), \
+        assert re.search(r"/resolve/[0-9a-f]{40}/", url), (
             "model %r URL is not pinned to an exact commit" % key
+        )
         assert spec["file"] in url
 
 

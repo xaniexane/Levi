@@ -86,11 +86,7 @@ def load_curriculum(store: Any = None) -> dict[str, Any]:
     entries = store.list(limit=5000)
     for lesson in lessons:
         match = next(
-            (
-                e
-                for e in entries
-                if e.content == lesson["text"] and "growth" in e.tags
-            ),
+            (e for e in entries if e.content == lesson["text"] and "growth" in e.tags),
             None,
         )
         if match is None:
@@ -153,7 +149,5 @@ def curriculum_entries(store: Any = None, *, topic: str = "") -> list[Any]:
     entries = [e for e in store.list(limit=5000) if "curriculum" in e.tags]
     if topic:
         entries = [e for e in entries if (e.metadata or {}).get("topic") == topic]
-    entries.sort(
-        key=lambda e: str((e.metadata or {}).get("lesson_id") or e.id)
-    )
+    entries.sort(key=lambda e: str((e.metadata or {}).get("lesson_id") or e.id))
     return entries

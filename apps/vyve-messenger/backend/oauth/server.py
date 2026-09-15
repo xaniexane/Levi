@@ -68,14 +68,19 @@ from shared.models import AuthCode, Device, OAuthToken, User
 # CONFIGURATION
 # ──────────────────────────────────────────────────────────────
 
+
 class Config:
     """Environment-driven configuration. Never hardcode secrets."""
 
     # JWT / Token settings — RS256. Keys are managed by shared/jwt_keys.py;
     # there is intentionally no JWT_SECRET fallback (fail-closed, P1.2).
     JWT_ALGORITHM: str = _RSA_ALGORITHM  # "RS256"
-    ACCESS_TOKEN_LIFETIME: int = int(os.getenv("ACCESS_TOKEN_LIFETIME", "3600"))  # 1 hour
-    REFRESH_TOKEN_LIFETIME: int = int(os.getenv("REFRESH_TOKEN_LIFETIME", "2592000"))  # 30 days
+    ACCESS_TOKEN_LIFETIME: int = int(
+        os.getenv("ACCESS_TOKEN_LIFETIME", "3600")
+    )  # 1 hour
+    REFRESH_TOKEN_LIFETIME: int = int(
+        os.getenv("REFRESH_TOKEN_LIFETIME", "2592000")
+    )  # 30 days
     ID_TOKEN_LIFETIME: int = 3600
 
     # OAuth2 settings
@@ -96,7 +101,9 @@ class Config:
     # CORS origins (explicit list, P1.6)
     CORS_ORIGINS: list[str] = [
         o.strip()
-        for o in os.getenv("CORS_ORIGINS", "http://localhost:8080,http://localhost:8081").split(",")
+        for o in os.getenv(
+            "CORS_ORIGINS", "http://localhost:8080,http://localhost:8081"
+        ).split(",")
         if o.strip()
     ]
 
@@ -114,6 +121,7 @@ class Config:
                 "OAUTH_CLIENT_SECRET environment variable must be set. "
                 "Refusing to start without a client secret."
             )
+
 
 config = Config()
 
@@ -139,6 +147,7 @@ DEMO_USERS: dict[str, dict] = {}
 # TOKEN HELPERS
 # ──────────────────────────────────────────────────────────────
 
+
 def hash_password(password: str) -> str:
     """Hash password with bcrypt (direct bcrypt; passlib removed in P2.3)."""
     return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
@@ -153,7 +162,7 @@ def create_jwt_token(
     subject: str,
     scopes: list[str],
     token_type: str = "access",
-    extra_claims: dict = None
+    extra_claims: dict = None,
 ) -> str:
     """Create an RS256-signed JWT. Signing key comes from shared/jwt_keys.py."""
     now = int(time.time())
@@ -161,9 +170,12 @@ def create_jwt_token(
         "iss": config.ISSUER,
         "sub": subject,
         "aud": config.CLIENT_ID,
-        "exp": now + (
-            config.ACCESS_TOKEN_LIFETIME if token_type == "access"
-            else config.REFRESH_TOKEN_LIFETIME if token_type == "refresh"
+        "exp": now
+        + (
+            config.ACCESS_TOKEN_LIFETIME
+            if token_type == "access"
+            else config.REFRESH_TOKEN_LIFETIME
+            if token_type == "refresh"
             else config.ID_TOKEN_LIFETIME
         ),
         "iat": now,
@@ -189,10 +201,12 @@ def decode_jwt(token: str, required_type: str = "access") -> dict:
             get_public_key_pem(),
             algorithms=[config.JWT_ALGORITHM],
             audience=config.CLIENT_ID,
-            options={"require": ["exp", "sub"]}
+            options={"require": ["exp", "sub"]},
         )
         if payload.get("type") != required_type:
-            raise HTTPException(status_code=401, detail=f"Token type mismatch: expected {required_type}")
+            raise HTTPException(
+                status_code=401, detail=f"Token type mismatch: expected {required_type}"
+            )
         return payload
     except JWTError as e:
         raise HTTPException(status_code=401, detail=f"Invalid token: {e}")
@@ -213,6 +227,7 @@ def create_code_challenge(verifier: str) -> str:
 # Pydantic Models
 # ──────────────────────────────────────────────────────────────
 
+
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
@@ -220,6 +235,7 @@ class TokenResponse(BaseModel):
     refresh_token: str
     id_token: Optional[str] = None
     scope: str
+
 
 class AuthorizeParams(BaseModel):
     response_type: str
@@ -230,6 +246,7 @@ class AuthorizeParams(BaseModel):
     code_challenge: str
     code_challenge_method: str
 
+
 class TokenRequest(BaseModel):
     grant_type: str
     code: Optional[str] = None
@@ -238,6 +255,7 @@ class TokenRequest(BaseModel):
     refresh_token: Optional[str] = None
     client_id: Optional[str] = None
     client_secret: Optional[str] = None
+
 
 class UserProfile(BaseModel):
     sub: str
@@ -248,12 +266,14 @@ class UserProfile(BaseModel):
     tier: str
     scopes: list[str]
 
+
 class DeviceRegistration(BaseModel):
     device_id: str
     device_name: str
     device_type: str
     signing_key: str
     encryption_key: str
+
 
 # ──────────────────────────────────────────────────────────────
 # FastAPI App
@@ -279,7 +299,7 @@ app.add_middleware(
 oauth2_scheme = HTTPBearer(auto_error=False)
 
 
-def get_current_user(credentials = Depends(oauth2_scheme)) -> dict:
+def get_current_user(credentials=Depends(oauth2_scheme)) -> dict:
     """Dependency: extract and validate bearer token."""
     if not credentials:
         raise HTTPException(status_code=401, detail="Missing authorization header")
@@ -296,6 +316,7 @@ def _utcnow() -> datetime:
 # DISCOVERY ENDPOINT (OIDC)
 # ──────────────────────────────────────────────────────────────
 
+
 @app.get("/.well-known/openid-configuration")
 def oidc_discovery():
     """OIDC Discovery document."""
@@ -309,12 +330,21 @@ def oidc_discovery():
         "response_types_supported": ["code"],
         "grant_types_supported": ["authorization_code", "refresh_token"],
         "scopes_supported": [
-            "openid", "profile", "email",
-            "read:v1", "write:v1", "social:v1",
-            "marketplace:v1", "ai_context:v1", "admin:v1"
+            "openid",
+            "profile",
+            "email",
+            "read:v1",
+            "write:v1",
+            "social:v1",
+            "marketplace:v1",
+            "ai_context:v1",
+            "admin:v1",
         ],
         "code_challenge_methods_supported": ["S256"],
-        "token_endpoint_auth_methods_supported": ["client_secret_post", "client_secret_basic"],
+        "token_endpoint_auth_methods_supported": [
+            "client_secret_post",
+            "client_secret_basic",
+        ],
         "id_token_signing_alg_values_supported": ["RS256"],
     }
 
@@ -332,6 +362,7 @@ def jwks():
 # ──────────────────────────────────────────────────────────────
 # AUTHORIZATION ENDPOINT
 # ──────────────────────────────────────────────────────────────
+
 
 @app.get("/oauth/authorize")
 def authorize(
@@ -354,23 +385,25 @@ def authorize(
     if response_type != "code":
         return RedirectResponse(
             f"{redirect_uri}?error=unsupported_response_type&state={state}",
-            status_code=302
+            status_code=302,
         )
     if client_id != config.CLIENT_ID:
         return RedirectResponse(
-            f"{redirect_uri}?error=invalid_client&state={state}",
-            status_code=302
+            f"{redirect_uri}?error=invalid_client&state={state}", status_code=302
         )
     if code_challenge_method != "S256":
         return RedirectResponse(
             f"{redirect_uri}?error=invalid_request&error_description=code_challenge_method must be S256&state={state}",
-            status_code=302
+            status_code=302,
         )
     if redirect_uri not in config.REDIRECT_URIS:
         # Never redirect to an unregistered URI (open-redirect / code theft,
         # P1.4). Return a plain 400 so no attacker-controlled URI is reflected.
         return JSONResponse(
-            {"error": "invalid_request", "error_description": "unregistered redirect_uri"},
+            {
+                "error": "invalid_request",
+                "error_description": "unregistered redirect_uri",
+            },
             status_code=400,
         )
 
@@ -415,12 +448,12 @@ a{{color:#58a6ff}}p{{color:#8b949e;font-size:13px}}
     user = db.query(User).filter(User.username == username).first()
     if not user or not verify_password(password, user.password_hash):
         return HTMLResponse(
-            content="<h1>Invalid credentials</h1><p><a href='/oauth/authorize?" +
-                    f"response_type={response_type}&client_id={client_id}&redirect_uri={redirect_uri}" +
-                    f"&scope={scope}&state={state}&code_challenge={code_challenge}" +
-                    f"&code_challenge_method={code_challenge_method}" +
-                    "'>Try again</a></p>",
-            status_code=401
+            content="<h1>Invalid credentials</h1><p><a href='/oauth/authorize?"
+            + f"response_type={response_type}&client_id={client_id}&redirect_uri={redirect_uri}"
+            + f"&scope={scope}&state={state}&code_challenge={code_challenge}"
+            + f"&code_challenge_method={code_challenge_method}"
+            + "'>Try again</a></p>",
+            status_code=401,
         )
 
     # Validate scopes
@@ -433,19 +466,21 @@ a{{color:#58a6ff}}p{{color:#8b949e;font-size:13px}}
     # Generate authorization code (10-minute window, single use)
     code = secrets.token_urlsafe(32)
     now = _utcnow()
-    db.add(AuthCode(
-        code=code,
-        client_id=client_id,
-        redirect_uri=redirect_uri,
-        user_id=user.user_id,
-        username=user.username,
-        scopes=granted_scopes,
-        code_challenge=code_challenge,
-        code_challenge_method=code_challenge_method,
-        issued_at=now,
-        expires_at=datetime.fromtimestamp(time.time() + 600, tz=timezone.utc),
-        used=False,
-    ))
+    db.add(
+        AuthCode(
+            code=code,
+            client_id=client_id,
+            redirect_uri=redirect_uri,
+            user_id=user.user_id,
+            username=user.username,
+            scopes=granted_scopes,
+            code_challenge=code_challenge,
+            code_challenge_method=code_challenge_method,
+            issued_at=now,
+            expires_at=datetime.fromtimestamp(time.time() + 600, tz=timezone.utc),
+            used=False,
+        )
+    )
     db.commit()
 
     # Redirect with code
@@ -456,6 +491,7 @@ a{{color:#58a6ff}}p{{color:#8b949e;font-size:13px}}
 # ──────────────────────────────────────────────────────────────
 # TOKEN ENDPOINT
 # ──────────────────────────────────────────────────────────────
+
 
 @app.post("/oauth/token", response_model=TokenResponse)
 async def token_endpoint(form: Request, db: Session = Depends(get_db)):
@@ -481,7 +517,9 @@ async def token_endpoint(form: Request, db: Session = Depends(get_db)):
         code_verifier = (await form.form()).get("code_verifier")
         redirect_uri = (await form.form()).get("redirect_uri")
 
-        stored = db.query(AuthCode).filter(AuthCode.code == code).first() if code else None
+        stored = (
+            db.query(AuthCode).filter(AuthCode.code == code).first() if code else None
+        )
         if not stored:
             raise HTTPException(status_code=400, detail="invalid_code")
 
@@ -543,7 +581,9 @@ async def token_endpoint(form: Request, db: Session = Depends(get_db)):
             raise HTTPException(status_code=400, detail="refresh_token required")
 
         token_hash = hashlib.sha256(refresh_tok.encode()).hexdigest()
-        stored = db.query(OAuthToken).filter(OAuthToken.token_hash == token_hash).first()
+        stored = (
+            db.query(OAuthToken).filter(OAuthToken.token_hash == token_hash).first()
+        )
         if not stored:
             raise HTTPException(status_code=401, detail="invalid_refresh_token")
 
@@ -570,7 +610,9 @@ async def token_endpoint(form: Request, db: Session = Depends(get_db)):
         )
 
     else:
-        raise HTTPException(status_code=400, detail=f"unsupported_grant_type: {grant_type}")
+        raise HTTPException(
+            status_code=400, detail=f"unsupported_grant_type: {grant_type}"
+        )
 
 
 def _as_aware(dt: datetime) -> datetime:
@@ -580,20 +622,24 @@ def _as_aware(dt: datetime) -> datetime:
     return dt
 
 
-def _issue_refresh_token(db: Session, user_id: str, scopes: list[str],
-                         rotated_from: Optional[str] = None) -> str:
+def _issue_refresh_token(
+    db: Session, user_id: str, scopes: list[str], rotated_from: Optional[str] = None
+) -> str:
     """Issue a new refresh token with rotation tracking."""
     token = secrets.token_urlsafe(48)
     token_hash = hashlib.sha256(token.encode()).hexdigest()
-    db.add(OAuthToken(
-        token_hash=token_hash,
-        user_id=user_id,
-        scopes=list(scopes),
-        issued_at=_utcnow(),
-        expires_at=datetime.fromtimestamp(
-            time.time() + config.REFRESH_TOKEN_LIFETIME, tz=timezone.utc),
-        rotated_from=rotated_from,
-    ))
+    db.add(
+        OAuthToken(
+            token_hash=token_hash,
+            user_id=user_id,
+            scopes=list(scopes),
+            issued_at=_utcnow(),
+            expires_at=datetime.fromtimestamp(
+                time.time() + config.REFRESH_TOKEN_LIFETIME, tz=timezone.utc
+            ),
+            rotated_from=rotated_from,
+        )
+    )
     db.commit()
     return token
 
@@ -608,6 +654,7 @@ def _revoke_all_user_tokens(db: Session, user_id: str):
 # USERINFO ENDPOINT (OIDC)
 # ──────────────────────────────────────────────────────────────
 
+
 @app.get("/oauth/userinfo")
 def userinfo(user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
     """OIDC UserInfo endpoint."""
@@ -620,12 +667,14 @@ def userinfo(user: dict = Depends(get_current_user), db: Session = Depends(get_d
     response = {"sub": user_id, "username": db_user.username}
 
     if "profile" in scopes:
-        response.update({
-            "name": db_user.display_name or "",
-            "email": db_user.email or "",
-            "role": db_user.role,
-            "tier": db_user.tier,
-        })
+        response.update(
+            {
+                "name": db_user.display_name or "",
+                "email": db_user.email or "",
+                "role": db_user.role,
+                "tier": db_user.tier,
+            }
+        )
 
     return response
 
@@ -633,6 +682,7 @@ def userinfo(user: dict = Depends(get_current_user), db: Session = Depends(get_d
 # ──────────────────────────────────────────────────────────────
 # VYVE-SPECIFIC ENDPOINTS
 # ──────────────────────────────────────────────────────────────
+
 
 @app.get("/me", response_model=UserProfile)
 def get_me(user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
@@ -678,16 +728,18 @@ def register_device(
     db.query(Device).filter(
         Device.user_id == user_id, Device.device_id == reg.device_id
     ).delete()
-    db.add(Device(
-        device_id=reg.device_id,
-        user_id=user_id,
-        device_name=reg.device_name,
-        device_type=reg.device_type,
-        signing_key=reg.signing_key,
-        encryption_key=reg.encryption_key,
-        registered_at=_utcnow(),
-        trusted=False,
-    ))
+    db.add(
+        Device(
+            device_id=reg.device_id,
+            user_id=user_id,
+            device_name=reg.device_name,
+            device_type=reg.device_type,
+            signing_key=reg.signing_key,
+            encryption_key=reg.encryption_key,
+            registered_at=_utcnow(),
+            trusted=False,
+        )
+    )
     db.commit()
 
     return {"status": "registered", "device_id": reg.device_id}
@@ -702,8 +754,11 @@ def list_devices(user: dict = Depends(get_current_user), db: Session = Depends(g
 
 
 @app.delete("/me/devices/{device_id}")
-def revoke_device(device_id: str, user: dict = Depends(get_current_user),
-                 db: Session = Depends(get_db)):
+def revoke_device(
+    device_id: str,
+    user: dict = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
     """Revoke a device (removes it from the device registry)."""
     user_id = user["sub"]
     db.query(Device).filter(
@@ -734,6 +789,7 @@ async def revoke_token(form: Request, db: Session = Depends(get_db)):
 # HEALTH
 # ──────────────────────────────────────────────────────────────
 
+
 @app.get("/health")
 def health(db: Session = Depends(get_db)):
     return {
@@ -751,14 +807,18 @@ def health(db: Session = Depends(get_db)):
 # RUN
 # ──────────────────────────────────────────────────────────────
 
+
 class HTMLResponse(JSONResponse):
     media_type = "text/html"
 
 
 if __name__ == "__main__":
     import uvicorn
+
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8080
     print(f"[Cybrus OAuth] Starting on port {port}")
-    print(f"[Cybrus OAuth] Discovery: http://localhost:{port}/.well-known/openid-configuration")
+    print(
+        f"[Cybrus OAuth] Discovery: http://localhost:{port}/.well-known/openid-configuration"
+    )
     print(f"[Cybrus OAuth] Demo: http://localhost:{port}/oauth/authorize")
     uvicorn.run("server:app", host="0.0.0.0", port=port, reload=True)

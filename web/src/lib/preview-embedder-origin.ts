@@ -37,9 +37,7 @@ export function resolveParentEmbedderOrigin(
   if (parentIsSelf) return null;
   for (const candidate of [referrer, ancestorOrigin ?? ""].filter(Boolean)) {
     try {
-      const url = new URL(
-        candidate.includes("://") ? candidate : `https://${candidate}`,
-      );
+      const url = new URL(candidate.includes("://") ? candidate : `https://${candidate}`);
       if (url.protocol !== "https:" && url.protocol !== "http:") continue;
       if (isGrokEmbedderOrigin(url.origin)) return url.origin;
       if (

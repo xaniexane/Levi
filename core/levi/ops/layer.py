@@ -6,6 +6,7 @@ Not a chatbot. Coordinates:
 
 All consequential paths remain HITL-gated.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -53,6 +54,7 @@ class OperationalLayer:
         snap = OpsSnapshot()
         try:
             from levi.daemon.kernel import DaemonKernel
+
             k = DaemonKernel()
             snap.estop = bool(k.state.estop)
             snap.safety = getattr(k.state, "safety", "normal") or "normal"
@@ -64,34 +66,44 @@ class OperationalLayer:
             snap.notes.append(f"kernel: {e}")
         try:
             from levi.project.hitl import HITLGate
+
             snap.hitl_pending = len(HITLGate().list_pending())
         except Exception as e:
             snap.notes.append(f"hitl: {e}")
         try:
             from levi.lwp.opportunity_rail import OpportunityRail
+
             cars = list(OpportunityRail().cars.values())
-            snap.rail_active = sum(1 for c in cars if c.status == "active" and c.gate != "done")
-            snap.rail_done = sum(1 for c in cars if c.gate == "done" or c.status == "done")
+            snap.rail_active = sum(
+                1 for c in cars if c.status == "active" and c.gate != "done"
+            )
+            snap.rail_done = sum(
+                1 for c in cars if c.gate == "done" or c.status == "done"
+            )
         except Exception as e:
             snap.notes.append(f"rail: {e}")
         try:
             from levi.demand.pulse import DemandPulse
+
             dp = DemandPulse()
             snap.demand_signals = len(getattr(dp, "signals", []) or [])
         except Exception as e:
             snap.notes.append(f"demand: {e}")
         try:
             from levi.income.factory import IncomeFactory
+
             snap.income_plans = len(IncomeFactory().plans)
         except Exception as e:
             snap.notes.append(f"income: {e}")
         try:
             from levi.brain.corpus import Corpus
+
             snap.corpus_units = len(Corpus().list(limit=5000))
         except Exception as e:
             snap.notes.append(f"corpus: {e}")
         try:
             from levi.model.relay import ModelRelay
+
             r = ModelRelay()
             ol = r.probe_ollama()
             snap.ollama_up = bool(ol.get("up"))
@@ -102,7 +114,10 @@ class OperationalLayer:
 
         try:
             from levi.cloud.stages import current_stage
-            snap.notes.append("phase=%s/%s" % (current_stage().id, current_stage().status))
+
+            snap.notes.append(
+                "phase=%s/%s" % (current_stage().id, current_stage().status)
+            )
         except Exception as e:
             snap.notes.append(f"phase: {e}")
 
@@ -119,7 +134,9 @@ class OperationalLayer:
             "",
         ]
         if s.estop:
-            lines.append("⚠ EMERGENCY STOP — clear only after human review: levi ops --clear-estop")
+            lines.append(
+                "⚠ EMERGENCY STOP — clear only after human review: levi ops --clear-estop"
+            )
         if s.hitl_pending:
             lines.append(f"→ Review HITL: levi project hitl (pending={s.hitl_pending})")
         if s.rail_active:
@@ -128,6 +145,7 @@ class OperationalLayer:
         lines.append("--- Pulse ---")
         try:
             from levi.pulse.check import run_pulse
+
             lines.append(run_pulse())
         except Exception as e:
             lines.append(f"pulse error: {e}")
@@ -135,6 +153,7 @@ class OperationalLayer:
         lines.append("--- Kernel ---")
         try:
             from levi.daemon.kernel import DaemonKernel
+
             lines.append(DaemonKernel().status())
         except Exception as e:
             lines.append(str(e))
@@ -142,16 +161,20 @@ class OperationalLayer:
             lines.append("")
             lines.append("notes: " + "; ".join(s.notes))
         lines.append("")
-        lines.append("Ops is local coordination only — no external side effects without HITL.")
+        lines.append(
+            "Ops is local coordination only — no external side effects without HITL."
+        )
         return "\n".join(lines)
 
     def run_cycle(self, task: str, execute: bool = False) -> str:
         from levi.daemon.unified import UnifiedDaemon
+
         return UnifiedDaemon().run_cycle(task, execute=execute)
 
     def rail_dry_run(self, signal: str) -> str:
         """Start rail + advance through MIRROR and DRAFT until HITL_OFFER — no approve."""
         from levi.lwp.opportunity_rail import OpportunityRail
+
         rail = OpportunityRail()
         car = rail.start(signal)
         lines = [f"Started car {car.id} gate={car.gate}", ""]
@@ -164,17 +187,21 @@ class OperationalLayer:
             lines.append("")
             if car.gate in ("hitl_offer", "blocked", "done"):
                 break
-        lines.append("Stopped at HITL (or block). Approve then: levi rail --advance <id> --approved")
+        lines.append(
+            "Stopped at HITL (or block). Approve then: levi rail --advance <id> --approved"
+        )
         return "\n".join(lines)
 
     def clear_estop(self) -> str:
         from levi.daemon.kernel import DaemonKernel
+
         k = DaemonKernel()
         k.clear_estop()
         return "E-stop cleared.\n" + k.status()
 
     def estop(self, reason: str = "operator") -> str:
         from levi.daemon.kernel import DaemonKernel
+
         k = DaemonKernel()
         k.emergency_stop(reason)
         return k.status()

@@ -49,8 +49,7 @@ class ApprovalBlocked(ApprovalError):
     def __init__(self, record: Dict[str, Any], reason: str = ""):
         super().__init__(
             "action blocked: approval %s is %s%s"
-            % (record.get("id"), record.get("status"),
-               f" ({reason})" if reason else "")
+            % (record.get("id"), record.get("status"), f" ({reason})" if reason else "")
         )
         self.record = record
 
@@ -108,8 +107,9 @@ class ApprovalEngine:
     tells the caller what happened.
     """
 
-    def __init__(self, home: Optional[Path] = None,
-                 auto_approve_up_to: RiskLevel = RiskLevel.LOW) -> None:
+    def __init__(
+        self, home: Optional[Path] = None, auto_approve_up_to: RiskLevel = RiskLevel.LOW
+    ) -> None:
         self._dir = _control_dir(home)
         self._path = self._dir / "approvals.json"
         self._policy = PolicyEngine(auto_approve_up_to=auto_approve_up_to)
@@ -185,27 +185,33 @@ class ApprovalEngine:
             reversible=reversible,
         )
         record = approval_record(proposal)
-        record.update({
-            "action_key": action_key,
-            "workflow_key": workflow_key,
-            "task_id": task_id,
-            "user_id": user_id,
-        })
-        if grant is not None or risk_level <= self._policy.auto_approve_up_to:
-            decided = self._policy.approve(
-                proposal.id,
-                note=("auto-approved under workflow grant"
-                      if grant is not None
-                      else "auto-approved L%d by policy" % int(risk_level)),
-            )
-            record = approval_record(decided)
-            record.update({
+        record.update(
+            {
                 "action_key": action_key,
                 "workflow_key": workflow_key,
                 "task_id": task_id,
                 "user_id": user_id,
-                "grant": grant,
-            })
+            }
+        )
+        if grant is not None or risk_level <= self._policy.auto_approve_up_to:
+            decided = self._policy.approve(
+                proposal.id,
+                note=(
+                    "auto-approved under workflow grant"
+                    if grant is not None
+                    else "auto-approved L%d by policy" % int(risk_level)
+                ),
+            )
+            record = approval_record(decided)
+            record.update(
+                {
+                    "action_key": action_key,
+                    "workflow_key": workflow_key,
+                    "task_id": task_id,
+                    "user_id": user_id,
+                    "grant": grant,
+                }
+            )
             self._history.append(record)
         else:
             record["status"] = ActionStatus.AWAITING_PERMISSION.value
@@ -258,7 +264,8 @@ class ApprovalEngine:
         if record["status"] != ActionStatus.APPROVED.value:
             raise ApprovalBlocked(
                 record,
-                "denied" if record["status"] == ActionStatus.DENIED.value
+                "denied"
+                if record["status"] == ActionStatus.DENIED.value
                 else "still awaiting approval",
             )
         return record
@@ -276,15 +283,13 @@ class ApprovalEngine:
 
     def pending(self) -> List[Dict[str, Any]]:
         self._load()
-        return sorted(self._pending.values(),
-                      key=lambda r: r.get("created_at", ""))
+        return sorted(self._pending.values(), key=lambda r: r.get("created_at", ""))
 
     def history(self, limit: int = 50) -> List[Dict[str, Any]]:
         self._load()
         return list(reversed(self._history[-limit:]))
 
-    def approve_once(self, approval_id: str,
-                     note: str = "") -> Dict[str, Any]:
+    def approve_once(self, approval_id: str, note: str = "") -> Dict[str, Any]:
         """Approve exactly one action."""
         self._load()
         record = self._pending.pop(approval_id, None)
@@ -311,8 +316,9 @@ class ApprovalEngine:
         self._save()
         return record
 
-    def approve_for_workflow(self, approval_id: str, workflow_key: str = "",
-                             note: str = "") -> Dict[str, Any]:
+    def approve_for_workflow(
+        self, approval_id: str, workflow_key: str = "", note: str = ""
+    ) -> Dict[str, Any]:
         """Approve this action and grant the same ``action_key`` for the
         rest of ``workflow_key`` (e.g. a fleet run id)."""
         self._load()
@@ -336,14 +342,16 @@ class ApprovalEngine:
         self._save()
         return record
 
-    def _find_grant(self, action_key: str,
-                    workflow_key: str) -> Optional[Dict[str, Any]]:
+    def _find_grant(
+        self, action_key: str, workflow_key: str
+    ) -> Optional[Dict[str, Any]]:
         if not action_key or not workflow_key:
             return None
         return self._grants.get(f"{workflow_key}:{action_key}")
 
-    def _find_pending(self, action_key: str,
-                      workflow_key: str) -> Optional[Dict[str, Any]]:
+    def _find_pending(
+        self, action_key: str, workflow_key: str
+    ) -> Optional[Dict[str, Any]]:
         """Existing pending record for the same action+workflow, if any.
 
         Lets a worker that retries (or polls via ``guard``) reuse the
@@ -353,13 +361,16 @@ class ApprovalEngine:
         if not action_key or not workflow_key:
             return None
         for record in self._pending.values():
-            if (record.get("action_key") == action_key
-                    and record.get("workflow_key") == workflow_key):
+            if (
+                record.get("action_key") == action_key
+                and record.get("workflow_key") == workflow_key
+            ):
                 return record
         return None
 
-    def _claim_approve_once(self, action_key: str,
-                            workflow_key: str) -> Optional[Dict[str, Any]]:
+    def _claim_approve_once(
+        self, action_key: str, workflow_key: str
+    ) -> Optional[Dict[str, Any]]:
         """Consume an unconsumed approve-once decision, at most once.
 
         Returns the approved record on the first call for a matching
@@ -369,10 +380,12 @@ class ApprovalEngine:
         if not action_key or not workflow_key:
             return None
         for record in reversed(self._history):
-            if (record.get("decision") == "approve-once"
-                    and not record.get("consumed")
-                    and record.get("action_key") == action_key
-                    and record.get("workflow_key") == workflow_key):
+            if (
+                record.get("decision") == "approve-once"
+                and not record.get("consumed")
+                and record.get("action_key") == action_key
+                and record.get("workflow_key") == workflow_key
+            ):
                 record["consumed"] = True
                 record["consumed_at"] = _now()
                 self._save()
@@ -393,8 +406,9 @@ class ApprovalEngine:
         self._load()
         by_risk: Dict[str, int] = {}
         for record in self._pending.values():
-            by_risk[record.get("risk_name", "?")] = \
+            by_risk[record.get("risk_name", "?")] = (
                 by_risk.get(record.get("risk_name", "?"), 0) + 1
+            )
         return {
             "pending": len(self._pending),
             "pending_by_risk": by_risk,
@@ -407,6 +421,7 @@ class ApprovalEngine:
 
 def _now() -> str:
     from datetime import datetime, timezone
+
     return datetime.now(timezone.utc).isoformat()
 
 

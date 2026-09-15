@@ -13,11 +13,11 @@ import uuid
 
 
 class RiskLevel(int, Enum):
-    INFO = 0              # Pure information
-    LOW = 1               # Low risk local actions
-    MODERATE = 2          # Moderate impact
-    HIGH = 3              # High impact
-    CRITICAL = 4          # Financial / security / irreversible
+    INFO = 0  # Pure information
+    LOW = 1  # Low risk local actions
+    MODERATE = 2  # Moderate impact
+    HIGH = 3  # High impact
+    CRITICAL = 4  # Financial / security / irreversible
 
 
 class ActionStatus(str, Enum):
@@ -43,7 +43,9 @@ class ActionProposal:
     permissions_required: List[str] = field(default_factory=list)
     reversible: bool = True
     status: ActionStatus = ActionStatus.PROPOSED
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
     decided_at: Optional[str] = None
     decision_note: Optional[str] = None
     result_summary: Optional[str] = None

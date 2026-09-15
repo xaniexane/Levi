@@ -38,7 +38,8 @@ export function EchoView() {
           {latest.branches.map((b) => (
             <article key={b.id} className="rounded-xl border border-border bg-surface p-4">
               <p className="text-micro tracking-kicker text-muted uppercase">
-                {b.kind.replaceAll("_", " ")} · risk {b.risk} · optionality {b.optionality.toFixed(2)}
+                {b.kind.replaceAll("_", " ")} · risk {b.risk} · optionality{" "}
+                {b.optionality.toFixed(2)}
               </p>
               <h3 className="mt-1 text-sm font-medium">{b.label}</h3>
               <p className="mt-1 text-sm text-muted">{b.summary}</p>

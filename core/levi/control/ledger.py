@@ -113,10 +113,15 @@ class LedgerWriter:
 
     # -- writes ----------------------------------------------------------
 
-    def record_task(self, task_id: str, objective: str = "",
-                    user_id: str = "local", tenant_id: str = "local",
-                    plan_version: str = "1",
-                    status: str = "running") -> None:
+    def record_task(
+        self,
+        task_id: str,
+        objective: str = "",
+        user_id: str = "local",
+        tenant_id: str = "local",
+        plan_version: str = "1",
+        status: str = "running",
+    ) -> None:
         now = _now()
         with self._connect() as conn:
             conn.execute(
@@ -126,13 +131,25 @@ class LedgerWriter:
                    VALUES(?,?,?,?,?,?,?,?)
                    ON CONFLICT(task_id) DO UPDATE SET
                      status=excluded.status, updated_at=excluded.updated_at""",
-                (task_id, user_id, tenant_id, objective, plan_version,
-                 status, now, now),
+                (
+                    task_id,
+                    user_id,
+                    tenant_id,
+                    objective,
+                    plan_version,
+                    status,
+                    now,
+                    now,
+                ),
             )
 
-    def set_task_status(self, task_id: str, status: str,
-                        cost_units: float = 0.0,
-                        latency_ms: float = 0.0) -> None:
+    def set_task_status(
+        self,
+        task_id: str,
+        status: str,
+        cost_units: float = 0.0,
+        latency_ms: float = 0.0,
+    ) -> None:
         with self._connect() as conn:
             conn.execute(
                 """UPDATE tasks SET status=?, cost_units=cost_units+?,
@@ -140,17 +157,27 @@ class LedgerWriter:
                 (status, cost_units, latency_ms, _now(), task_id),
             )
 
-    def record_step(self, task_id: str, *,
-                    agent: str = "", category: str = "",
-                    task_class: str = "",
-                    model: str = "", model_version: str = "",
-                    tools_used: Optional[List[str]] = None,
-                    decision_summary: str = "", action: str = "",
-                    expected_result: str = "", actual_result: str = "",
-                    verification: Optional[Dict[str, Any]] = None,
-                    error: str = "", recovery: str = "",
-                    outcome: str = "", cost_units: float = 0.0,
-                    latency_ms: float = 0.0) -> int:
+    def record_step(
+        self,
+        task_id: str,
+        *,
+        agent: str = "",
+        category: str = "",
+        task_class: str = "",
+        model: str = "",
+        model_version: str = "",
+        tools_used: Optional[List[str]] = None,
+        decision_summary: str = "",
+        action: str = "",
+        expected_result: str = "",
+        actual_result: str = "",
+        verification: Optional[Dict[str, Any]] = None,
+        error: str = "",
+        recovery: str = "",
+        outcome: str = "",
+        cost_units: float = 0.0,
+        latency_ms: float = 0.0,
+    ) -> int:
         """Record one decision step.
 
         ``decision_summary`` is a concise rationale — never hidden
@@ -166,18 +193,30 @@ class LedgerWriter:
                                      verification, error, recovery, outcome,
                                      cost_units, latency_ms, created_at)
                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
-                (task_id, agent, category, task_class, model, model_version,
-                 json.dumps(tools_used or []),
-                 decision_summary[:2000], action[:4000],
-                 expected_result[:2000], actual_result[:4000],
-                 json.dumps(verification or {}),
-                 error[:2000], recovery[:2000], outcome,
-                 cost_units, latency_ms, _now()),
+                (
+                    task_id,
+                    agent,
+                    category,
+                    task_class,
+                    model,
+                    model_version,
+                    json.dumps(tools_used or []),
+                    decision_summary[:2000],
+                    action[:4000],
+                    expected_result[:2000],
+                    actual_result[:4000],
+                    json.dumps(verification or {}),
+                    error[:2000],
+                    recovery[:2000],
+                    outcome,
+                    cost_units,
+                    latency_ms,
+                    _now(),
+                ),
             )
             return int(cur.lastrowid)
 
-    def record_feedback(self, task_id: str, rating: int = 0,
-                        comment: str = "") -> int:
+    def record_feedback(self, task_id: str, rating: int = 0, comment: str = "") -> int:
         with self._connect() as conn:
             cur = conn.execute(
                 "INSERT INTO feedback(task_id, rating, comment, created_at)"
@@ -191,38 +230,48 @@ class LedgerWriter:
     def get_task(self, task_id: str) -> Optional[Dict[str, Any]]:
         with self._connect() as conn:
             row = conn.execute(
-                "SELECT * FROM tasks WHERE task_id=?", (task_id,)).fetchone()
+                "SELECT * FROM tasks WHERE task_id=?", (task_id,)
+            ).fetchone()
             if row is None:
                 return None
             task = dict(row)
-            steps = [dict(r) for r in conn.execute(
-                "SELECT * FROM steps WHERE task_id=? ORDER BY id",
-                (task_id,))]
+            steps = [
+                dict(r)
+                for r in conn.execute(
+                    "SELECT * FROM steps WHERE task_id=? ORDER BY id", (task_id,)
+                )
+            ]
             for s in steps:
                 s["tools_used"] = json.loads(s["tools_used"])
                 s["verification"] = json.loads(s["verification"])
             task["steps"] = steps
-            task["feedback"] = [dict(r) for r in conn.execute(
-                "SELECT * FROM feedback WHERE task_id=? ORDER BY id",
-                (task_id,))]
+            task["feedback"] = [
+                dict(r)
+                for r in conn.execute(
+                    "SELECT * FROM feedback WHERE task_id=? ORDER BY id", (task_id,)
+                )
+            ]
             return task
 
     def stats(self) -> Dict[str, Any]:
         with self._connect() as conn:
-            n_tasks = conn.execute(
-                "SELECT COUNT(*) c FROM tasks").fetchone()["c"]
-            n_steps = conn.execute(
-                "SELECT COUNT(*) c FROM steps").fetchone()["c"]
+            n_tasks = conn.execute("SELECT COUNT(*) c FROM tasks").fetchone()["c"]
+            n_steps = conn.execute("SELECT COUNT(*) c FROM steps").fetchone()["c"]
             agg = conn.execute(
                 "SELECT COALESCE(SUM(cost_units),0) cost,"
-                " COALESCE(AVG(latency_ms),0) lat FROM steps").fetchone()
+                " COALESCE(AVG(latency_ms),0) lat FROM steps"
+            ).fetchone()
             outcomes = {
-                r["outcome"]: r["c"] for r in conn.execute(
-                    "SELECT outcome, COUNT(*) c FROM steps GROUP BY outcome")
+                r["outcome"]: r["c"]
+                for r in conn.execute(
+                    "SELECT outcome, COUNT(*) c FROM steps GROUP BY outcome"
+                )
             }
             by_model = {
-                r["model"]: r["c"] for r in conn.execute(
-                    "SELECT model, COUNT(*) c FROM steps GROUP BY model")
+                r["model"]: r["c"]
+                for r in conn.execute(
+                    "SELECT model, COUNT(*) c FROM steps GROUP BY model"
+                )
             }
             return {
                 "tasks": n_tasks,
@@ -247,11 +296,17 @@ class LedgerWriter:
                               THEN 1 ELSE 0 END) successes
                    FROM steps
                    WHERE model != ''
-                   GROUP BY model, category, task_class""").fetchall()
+                   GROUP BY model, category, task_class"""
+            ).fetchall()
             return [dict(r) for r in rows]
 
     def recent_tasks(self, limit: int = 20) -> List[Dict[str, Any]]:
         with self._connect() as conn:
-            return [dict(r) for r in conn.execute(
-                "SELECT task_id, objective, status, cost_units, created_at"
-                " FROM tasks ORDER BY created_at DESC LIMIT ?", (limit,))]
+            return [
+                dict(r)
+                for r in conn.execute(
+                    "SELECT task_id, objective, status, cost_units, created_at"
+                    " FROM tasks ORDER BY created_at DESC LIMIT ?",
+                    (limit,),
+                )
+            ]

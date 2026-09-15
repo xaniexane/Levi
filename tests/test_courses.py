@@ -4,13 +4,16 @@ Covers: catalog shape (11 subjects / 212 courses), per-subject field guides,
 coverage.json accounting for every cataloged course, the course_brief /
 course_search agent tools, and the data-driven skill registration.
 """
+
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
 
-COURSES = Path(__file__).resolve().parent.parent / "core" / "levi" / "knowledge" / "courses"
+COURSES = (
+    Path(__file__).resolve().parent.parent / "core" / "levi" / "knowledge" / "courses"
+)
 
 
 def _catalog() -> dict:
@@ -55,12 +58,17 @@ def test_coverage_accounts_for_every_course():
             # id scheme must match ingest.py's slug()
             import re
             import unicodedata
+
             t = unicodedata.normalize("NFKD", c["code"] + "-" + c["title"])
             t = t.encode("ascii", "ignore").decode()
-            cid = s["slug"] + "/" + re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")[:80]
+            cid = (
+                s["slug"] + "/" + re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")[:80]
+            )
             if cid not in by_id:
                 missing.append(cid)
-    assert not missing, f"{len(missing)} courses missing from coverage.json: {missing[:5]}"
+    assert not missing, (
+        f"{len(missing)} courses missing from coverage.json: {missing[:5]}"
+    )
     valid = {"ok", "dead", "skipped-video", "skipped-binary"}
     for r in recs:
         assert r["status"] in valid, f"bad status {r['status']} for {r['id']}"

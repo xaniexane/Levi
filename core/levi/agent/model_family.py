@@ -107,10 +107,18 @@ def get_entry(name: str) -> dict | None:
     return None
 
 
-def register_remix(name: str, *, base: str, version: str,
-                   local_key: str, notes: str = "",
-                   approx_bytes: int = 0, ram_note: str = "",
-                   blurb: str = "", capability: str = "") -> dict:
+def register_remix(
+    name: str,
+    *,
+    base: str,
+    version: str,
+    local_key: str,
+    notes: str = "",
+    approx_bytes: int = 0,
+    ram_note: str = "",
+    blurb: str = "",
+    capability: str = "",
+) -> dict:
     """Register a future Levi remix structurally.
 
     ``local_key`` must already exist in ``levi.agent.local_model.MODELS``
@@ -290,7 +298,8 @@ def resolve_family() -> dict | None:
 
     if _runner_available():
         downloaded = [
-            e for e in entries()
+            e
+            for e in entries()
             if e["kind"] == "remix" and e["status"]["weights_present"]
         ]
         if downloaded:

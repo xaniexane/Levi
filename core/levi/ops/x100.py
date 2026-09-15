@@ -3,6 +3,7 @@
 
 Operator-facing status: what is strong, what is next, what is law.
 """
+
 from __future__ import annotations
 
 from datetime import datetime, timezone
@@ -17,13 +18,42 @@ def _safe(fn, default=None):
 
 
 def snapshot() -> dict:
-    personas = _safe(lambda: len(__import__("levi.persona.lattice", fromlist=["PersonaLattice"]).PersonaLattice().keys()), 0)
-    kai = _safe(lambda: len(__import__("levi.persona.kai9000", fromlist=["all_variants"]).all_variants()), 0)
-    premium = _safe(lambda: len(__import__("levi.premium.features", fromlist=["FEATURES"]).FEATURES), 0)
-    unique = _safe(lambda: len(__import__("levi.premium.unique", fromlist=["UNIQUES"]).UNIQUES), 0)
-    score = _safe(lambda: __import__("levi.cloud.scorecard", fromlist=["evaluate"]).evaluate()[1], 0.0)
-    ent = _safe(lambda: __import__("levi.ops.enterprise", fromlist=["run_enterprise_checklist"]).run_enterprise_checklist(), [])
-    ent_ok = sum(1 for r in ent if getattr(r, "ok", False)) if isinstance(ent, list) else 0
+    personas = _safe(
+        lambda: len(
+            __import__("levi.persona.lattice", fromlist=["PersonaLattice"])
+            .PersonaLattice()
+            .keys()
+        ),
+        0,
+    )
+    kai = _safe(
+        lambda: len(
+            __import__("levi.persona.kai9000", fromlist=["all_variants"]).all_variants()
+        ),
+        0,
+    )
+    premium = _safe(
+        lambda: len(
+            __import__("levi.premium.features", fromlist=["FEATURES"]).FEATURES
+        ),
+        0,
+    )
+    unique = _safe(
+        lambda: len(__import__("levi.premium.unique", fromlist=["UNIQUES"]).UNIQUES), 0
+    )
+    score = _safe(
+        lambda: __import__("levi.cloud.scorecard", fromlist=["evaluate"]).evaluate()[1],
+        0.0,
+    )
+    ent = _safe(
+        lambda: __import__(
+            "levi.ops.enterprise", fromlist=["run_enterprise_checklist"]
+        ).run_enterprise_checklist(),
+        [],
+    )
+    ent_ok = (
+        sum(1 for r in ent if getattr(r, "ok", False)) if isinstance(ent, list) else 0
+    )
     ent_n = len(ent) if isinstance(ent, list) else 0
     return {
         "at": datetime.now(timezone.utc).isoformat(),
@@ -89,5 +119,7 @@ def format_x100() -> str:
     for i, n in enumerate(next_slices(), 1):
         lines.append(f"  {i}. {n}")
     lines.append("")
-    lines.append("Commands: levi kai · levi unique · levi premium · levi scorecard · levi enterprise · levi go")
+    lines.append(
+        "Commands: levi kai · levi unique · levi premium · levi scorecard · levi enterprise · levi go"
+    )
     return "\n".join(lines)

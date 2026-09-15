@@ -4,6 +4,7 @@ Corpus — append-only knowledge body for LEVI.
 Every unit is tagged: OBSERVED | INFERENCE | HYPOTHESIS | UNKNOWN
 so archaeology and service work never launder guesses as facts.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
@@ -91,13 +92,17 @@ class Corpus:
 
     def search(self, query: str, limit: int = 20) -> List[CorpusUnit]:
         q = (query or "").lower()
-        hits = [u for u in self.list(limit=500) if q in u.text.lower() or q in " ".join(u.tags).lower()]
+        hits = [
+            u
+            for u in self.list(limit=500)
+            if q in u.text.lower() or q in " ".join(u.tags).lower()
+        ]
         return hits[-limit:]
 
     def format(self, limit: int = 20) -> str:
         units = list(reversed(self.list(limit)))
         if not units:
-            return "Corpus empty. Add with: levi brain corpus --add \"…\" --kind OBSERVED"
+            return 'Corpus empty. Add with: levi brain corpus --add "…" --kind OBSERVED'
         lines = ["=== LEVI Corpus ===", ""]
         for u in units:
             lines.append(f"[{u.id}] {u.kind}  {u.text[:120]}")

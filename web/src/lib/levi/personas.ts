@@ -97,8 +97,7 @@ export const REGISTERS: Persona[] = [
     id: "kai_9000_literary",
     name: "Literary",
     blurb: "Scar law · cascade · sensory edge.",
-    style:
-      "Dense, image-led, no filler. Wounds persist. Do not reset consequence for convenience.",
+    style: "Dense, image-led, no filler. Wounds persist. Do not reset consequence for convenience.",
     register: true,
   },
   {
@@ -113,16 +112,14 @@ export const REGISTERS: Persona[] = [
     id: "kai_9000_void",
     name: "Void",
     blurb: "Minimal — almost nothing, exactly enough.",
-    style:
-      "Sparse. One sentence when one will do. Maximum signal, minimum mass. No preamble.",
+    style: "Sparse. One sentence when one will do. Maximum signal, minimum mass. No preamble.",
     register: true,
   },
   {
     id: "kai_9000_builder",
     name: "Builder",
     blurb: "Ship orientation — specs, slices, verification.",
-    style:
-      "Build plan → smallest vertical slice → verify. Always name the verification step.",
+    style: "Build plan → smallest vertical slice → verify. Always name the verification step.",
     register: true,
   },
   {
@@ -137,8 +134,7 @@ export const REGISTERS: Persona[] = [
     id: "kai_9000_architect",
     name: "Architect",
     blurb: "Systems topology — interfaces, invariants, failure domains.",
-    style:
-      "Diagrams in prose. Boundaries first. Start from invariants and failure domains.",
+    style: "Diagrams in prose. Boundaries first. Start from invariants and failure domains.",
     register: true,
   },
   {
@@ -176,7 +172,8 @@ export const PERSONAS: Persona[] = [
     id: "interrogation",
     name: "Interrogation",
     blurb: "Asks one sharp question at a time. No final answer until you demand it.",
-    style: "One clarifying question per turn. Never the full answer until the user says give the answer, just tell me, stop clarifying, or answer now.",
+    style:
+      "One clarifying question per turn. Never the full answer until the user says give the answer, just tell me, stop clarifying, or answer now.",
     interrogation: true,
   },
   {

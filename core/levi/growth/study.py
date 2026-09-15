@@ -54,7 +54,9 @@ def study_enabled() -> bool:
 
 def study_interval_hours() -> float:
     try:
-        return float(os.environ.get(ENV_STUDY_INTERVAL_HOURS, "") or DEFAULT_STUDY_INTERVAL_HOURS)
+        return float(
+            os.environ.get(ENV_STUDY_INTERVAL_HOURS, "") or DEFAULT_STUDY_INTERVAL_HOURS
+        )
     except (TypeError, ValueError):
         return float(DEFAULT_STUDY_INTERVAL_HOURS)
 
@@ -73,8 +75,8 @@ def quiz_sample_size() -> int:
 # Substrings that mark a sessions dir as worth checking. Kept as names,
 # not full paths, so the check stays cheap and HOME-agnostic.
 _ACTIVITY_DIR_CANDIDATES = (
-    "agent/sessions",      # levi agent chat sessions
-    "automations",         # automation run registry / records
+    "agent/sessions",  # levi agent chat sessions
+    "automations",  # automation run registry / records
 )
 
 
@@ -126,7 +128,9 @@ def last_activity_ts(home: Optional[Path] = None) -> Optional[datetime]:
     return datetime.fromtimestamp(max(mtimes.values()), tz=timezone.utc)
 
 
-def is_idle(home: Optional[Path] = None, *, window_hours: float = DEFAULT_STUDY_INTERVAL_HOURS) -> bool:
+def is_idle(
+    home: Optional[Path] = None, *, window_hours: float = DEFAULT_STUDY_INTERVAL_HOURS
+) -> bool:
     """True when no session/chat/automation activity inside the window."""
     last = last_activity_ts(home)
     if last is None:
@@ -209,7 +213,9 @@ def extract_key_terms(text: str, top_n: int = 8) -> list[str]:
     """Key terms = frequent long content words. Crude, deterministic."""
     words = _WORD_RE.findall(text.lower())
     counts = Counter(w for w in words if len(w) >= 5 and w not in _STOPWORDS)
-    ranked = sorted(counts.items(), key=lambda kv: (kv[1] * len(kv[0]), kv[0]), reverse=True)
+    ranked = sorted(
+        counts.items(), key=lambda kv: (kv[1] * len(kv[0]), kv[0]), reverse=True
+    )
     return [w for w, _ in ranked[:top_n]]
 
 
@@ -224,7 +230,9 @@ def make_question(lesson: dict[str, Any]) -> dict[str, Any]:
         key=lambda s: sum(1 for t in key_terms if t in s.lower()),
         default=text[:200],
     )
-    blank_term = next((t for t in key_terms if t in best.lower()), key_terms[0] if key_terms else "")
+    blank_term = next(
+        (t for t in key_terms if t in best.lower()), key_terms[0] if key_terms else ""
+    )
     if blank_term:
         pattern = re.compile(re.escape(blank_term), re.IGNORECASE)
         question_text = pattern.sub("_____", best, count=1)
@@ -238,7 +246,9 @@ def make_question(lesson: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def recall_by_topic(lessons: list[dict[str, Any]], topic: str) -> Optional[dict[str, Any]]:
+def recall_by_topic(
+    lessons: list[dict[str, Any]], topic: str
+) -> Optional[dict[str, Any]]:
     """Topic-cued recall: the only offline 'memory' available.
 
     Returns a pseudo-lesson whose text is the union of every lesson under
@@ -258,7 +268,9 @@ def recall_by_topic(lessons: list[dict[str, Any]], topic: str) -> Optional[dict[
     return {"topic": topic, "text": "\n".join(texts)}
 
 
-def grade(question: dict[str, Any], recalled: Optional[dict[str, Any]]) -> dict[str, Any]:
+def grade(
+    question: dict[str, Any], recalled: Optional[dict[str, Any]]
+) -> dict[str, Any]:
     """Score = fraction of key terms present in the recalled lesson text.
 
     This is a recall-integrity proxy, NOT a comprehension test.
@@ -278,7 +290,9 @@ def grade(question: dict[str, Any], recalled: Optional[dict[str, Any]]) -> dict[
     }
 
 
-def run_quiz(lessons: Optional[list[dict[str, Any]]] = None, *, sample_size: Optional[int] = None) -> dict[str, Any]:
+def run_quiz(
+    lessons: Optional[list[dict[str, Any]]] = None, *, sample_size: Optional[int] = None
+) -> dict[str, Any]:
     """Quiz LEVI on a sample of curriculum lessons. Returns the result dict."""
     all_lessons = lessons if lessons is not None else get_lessons()
     n = sample_size if sample_size is not None else quiz_sample_size()
@@ -296,7 +310,10 @@ def run_quiz(lessons: Optional[list[dict[str, Any]]] = None, *, sample_size: Opt
     # round-robin across runs so every lesson gets quizzed over time
     state = _journal.load_state()
     offset = (int(state.get("study_quiz_offset", 0)) or 0) % len(all_lessons)
-    picked = [all_lessons[(offset + i) % len(all_lessons)] for i in range(min(n, len(all_lessons)))]
+    picked = [
+        all_lessons[(offset + i) % len(all_lessons)]
+        for i in range(min(n, len(all_lessons)))
+    ]
     state["study_quiz_offset"] = offset + len(picked)
     _journal.save_state(state)
 
@@ -325,6 +342,7 @@ def run_quiz(lessons: Optional[list[dict[str, Any]]] = None, *, sample_size: Opt
 # ---------------------------------------------------------------------------
 # one study run: cycle + quiz, journaled
 # ---------------------------------------------------------------------------
+
 
 def run_study(
     *,
@@ -357,7 +375,8 @@ def run_study(
         trend_scores = [
             e.get("quiz", {}).get("mean_score")
             for e in _journal.read_entries(limit=10)
-            if e.get("kind") == "study" and e.get("quiz", {}).get("mean_score") is not None
+            if e.get("kind") == "study"
+            and e.get("quiz", {}).get("mean_score") is not None
         ]
         _journal.append_entry(
             {
@@ -370,7 +389,9 @@ def run_study(
                 "quiet": report["quiet"],
                 "quiz": quiz,
                 "quiz_trend_avg": (
-                    round(sum(trend_scores) / len(trend_scores), 3) if trend_scores else None
+                    round(sum(trend_scores) / len(trend_scores), 3)
+                    if trend_scores
+                    else None
                 ),
                 "quiz_trend_runs": len(trend_scores),
             }
@@ -381,9 +402,7 @@ def run_study(
 def study_trend(limit: int = 10) -> list[dict[str, Any]]:
     """Score history for the trend view: chronological, oldest first."""
     entries = [
-        e
-        for e in _journal.read_entries(limit=limit)
-        if e.get("kind") == "study"
+        e for e in _journal.read_entries(limit=limit) if e.get("kind") == "study"
     ]
     out = []
     for e in reversed(entries):
@@ -422,10 +441,13 @@ def format_trend(runs: list[dict[str, Any]]) -> str:
                 " (quiet)" if r["quiet"] else "",
             )
         )
-    scores = [r["mean_score"] for r in runs if isinstance(r["mean_score"], (int, float))]
+    scores = [
+        r["mean_score"] for r in runs if isinstance(r["mean_score"], (int, float))
+    ]
     if scores:
         lines.append(
-            "  avg=%.2f over %d scored run(s)" % (sum(scores) / len(scores), len(scores))
+            "  avg=%.2f over %d scored run(s)"
+            % (sum(scores) / len(scores), len(scores))
         )
     return "\n".join(lines)
 

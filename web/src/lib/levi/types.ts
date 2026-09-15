@@ -1,10 +1,4 @@
-export type HeadId =
-  | "logic"
-  | "creation"
-  | "systems"
-  | "security"
-  | "evolution"
-  | "identity";
+export type HeadId = "logic" | "creation" | "systems" | "security" | "evolution" | "identity";
 
 export type DesignMode = "sovereignty" | "hybrid";
 
@@ -58,14 +52,7 @@ export interface Phantom {
 }
 
 export type MandellaDomain =
-  | "crisis"
-  | "resource"
-  | "trust"
-  | "identity"
-  | "build"
-  | "write"
-  | "security"
-  | "product";
+  "crisis" | "resource" | "trust" | "identity" | "build" | "write" | "security" | "product";
 
 export interface MandellaScenario {
   id: string;
@@ -178,12 +165,37 @@ export const ORGAN_MAP: {
   status: "merged" | "kept" | "added";
   note: string;
 }[] = [
-  { old: "Chat", now: "talk", status: "merged", note: "Talk is the companion. Personas, HITL, Grok catalyst." },
+  {
+    old: "Chat",
+    now: "talk",
+    status: "merged",
+    note: "Talk is the companion. Personas, HITL, Grok catalyst.",
+  },
   { old: "Morning", now: "home", status: "merged", note: "Daily ritual and streak live on Home." },
-  { old: "Journal", now: "ledger", status: "merged", note: "Human notes sit on the ledger with provenance." },
-  { old: "Echoverse", now: "echo", status: "kept", note: "Taken / not-taken / wild. Still a distinct organ." },
-  { old: "Mandella", now: "mandella", status: "kept", note: "A/B/C stakes and phantoms. Feeds Echo." },
-  { old: "Compost (REIM/RIEM)", now: "compost", status: "kept", note: "Part 2 archive: quarantined, non-canon, learnable." },
+  {
+    old: "Journal",
+    now: "ledger",
+    status: "merged",
+    note: "Human notes sit on the ledger with provenance.",
+  },
+  {
+    old: "Echoverse",
+    now: "echo",
+    status: "kept",
+    note: "Taken / not-taken / wild. Still a distinct organ.",
+  },
+  {
+    old: "Mandella",
+    now: "mandella",
+    status: "kept",
+    note: "A/B/C stakes and phantoms. Feeds Echo.",
+  },
+  {
+    old: "Compost (REIM/RIEM)",
+    now: "compost",
+    status: "kept",
+    note: "Part 2 archive: quarantined, non-canon, learnable.",
+  },
   { old: "—", now: "write", status: "added", note: "97-genre story fabric." },
   { old: "—", now: "build", status: "added", note: "NL → IR factory, E3–E6, HITL." },
   { old: "—", now: "studio", status: "added", note: "Demos, mirror coils, plans." },

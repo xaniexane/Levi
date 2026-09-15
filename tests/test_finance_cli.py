@@ -12,6 +12,7 @@ hermeticity.
 Run:  python3 tests/test_finance_cli.py     (has a real __main__ runner)
       python3 -m pytest tests/test_finance_cli.py -q
 """
+
 from __future__ import annotations
 
 import argparse

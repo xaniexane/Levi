@@ -3,6 +3,7 @@
 Runs ``python -m levi.cli.main --help`` as a subprocess (mirrors how the
 console script boots: ``levi.cli.main:main``), hermetic — no config touched.
 """
+
 import os
 import subprocess
 import sys
@@ -11,7 +12,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 # Key subcommands every operator expects to see in --help.
-EXPECTED_SUBCOMMANDS = ["init", "ask", "status", "memory-hierarchy", "vault", "serve-ui"]
+EXPECTED_SUBCOMMANDS = [
+    "init",
+    "ask",
+    "status",
+    "memory-hierarchy",
+    "vault",
+    "serve-ui",
+]
 
 
 def _run_help():

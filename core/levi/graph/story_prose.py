@@ -3,6 +3,7 @@ High-quality offline prose for story expand/create — literary delivery without
 
 Deterministic, seed-stable, genre-aware paragraphs. Used when local model is absent.
 """
+
 from __future__ import annotations
 
 from typing import List, Optional
@@ -139,7 +140,9 @@ def expand_paragraph(
     seed = f"{beat_name}|{lead}|{genre}|{premise}|{index}"
     r = _rng(seed)
     genre_key = genre.strip().lower().replace(" ", "_")
-    atmo = list(GENRE_ATMOSPHERE.get(genre_key) or GENRE_ATMOSPHERE.get("literary") or [])
+    atmo = list(
+        GENRE_ATMOSPHERE.get(genre_key) or GENRE_ATMOSPHERE.get("literary") or []
+    )
     openers = BEAT_OPENERS.get(beat_name) or [
         f"{{lead}} moved through the next pressure under {genre.replace('_', ' ')} law."
     ]
@@ -184,7 +187,9 @@ def expand_paragraph(
         parts.append(r.choice(wound_lines))
 
     if supporting and r.random() > 0.45:
-        parts.append(f"{supporting} held the edge of the frame and wanted something unspoken.")
+        parts.append(
+            f"{supporting} held the edge of the frame and wanted something unspoken."
+        )
 
     if r.random() > 0.55:
         s2 = r.choice(SENSORY)
@@ -209,7 +214,6 @@ def expand_paragraph(
         words = text.split()
         guard += 1
     return text
-
 
 
 def opening_prose(

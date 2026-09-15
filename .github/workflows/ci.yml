@@ -35,7 +35,10 @@ jobs:
         # httpx2 is required by starlette's TestClient (used by the VYVE
         # backend tests); it is deliberately not in backend/requirements.txt
         # (runtime-only pins), so CI installs it here.
-        run: pip install pytest cryptography httpx2 pyyaml
+        run: pip install pytest cryptography httpx2 pyyaml ruff
+
+      - name: Format check (ruff format)
+        run: ruff format --check .
 
       - name: Byte-compile everything
         run: python -m compileall -q core delivery apps/vyve-messenger/backend
@@ -80,6 +83,9 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+      - name: Format check (prettier)
+        run: npx prettier --check src
 
       - name: Existing node --test suite
         run: npm run test

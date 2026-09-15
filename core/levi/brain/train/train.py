@@ -14,6 +14,7 @@ Requires torch (CPU). Install: pip install -r requirements.txt
 Usage:
     python3 train.py [--data corpus.jsonl] [--steps 1500] [--out ../weights]
 """
+
 from __future__ import annotations
 
 import argparse
@@ -32,6 +33,7 @@ HERE = Path(__file__).resolve().parent
 
 # ---------------------------------------------------------------- model
 
+
 class CausalSelfAttention(nn.Module):
     def __init__(self, n_embd: int, n_head: int, block_size: int):
         super().__init__()
@@ -41,7 +43,11 @@ class CausalSelfAttention(nn.Module):
         self.qkv = nn.Linear(n_embd, 3 * n_embd, bias=False)
         self.proj = nn.Linear(n_embd, n_embd, bias=False)
         self.register_buffer(
-            "mask", torch.tril(torch.ones(block_size, block_size)).view(1, 1, block_size, block_size))
+            "mask",
+            torch.tril(torch.ones(block_size, block_size)).view(
+                1, 1, block_size, block_size
+            ),
+        )
 
     def forward(self, x):
         B, T, C = x.shape
@@ -64,8 +70,8 @@ class Block(nn.Module):
         self.attn = CausalSelfAttention(n_embd, n_head, block_size)
         self.ln2 = nn.LayerNorm(n_embd)
         self.mlp = nn.Sequential(
-            nn.Linear(n_embd, 4 * n_embd), nn.GELU(),
-            nn.Linear(4 * n_embd, n_embd))
+            nn.Linear(n_embd, 4 * n_embd), nn.GELU(), nn.Linear(4 * n_embd, n_embd)
+        )
 
     def forward(self, x):
         x = x + self.attn(self.ln1(x))
@@ -79,7 +85,9 @@ class TinyGPT(nn.Module):
         self.block_size = block_size
         self.tok_emb = nn.Embedding(vocab_size, n_embd)
         self.pos_emb = nn.Embedding(block_size, n_embd)
-        self.blocks = nn.Sequential(*[Block(n_embd, n_head, block_size) for _ in range(n_layer)])
+        self.blocks = nn.Sequential(
+            *[Block(n_embd, n_head, block_size) for _ in range(n_layer)]
+        )
         self.ln_f = nn.LayerNorm(n_embd)
         self.head = nn.Linear(n_embd, vocab_size, bias=False)
 
@@ -94,6 +102,7 @@ class TinyGPT(nn.Module):
 
 
 # ---------------------------------------------------------------- data
+
 
 def load_corpus(path: Path) -> str:
     texts = []
@@ -117,20 +126,29 @@ def build_vocab(text: str):
 
 def get_batch(data: torch.Tensor, batch_size: int, block_size: int):
     ix = torch.randint(0, len(data) - block_size - 1, (batch_size,))
-    x = torch.stack([data[i:i + block_size] for i in ix])
-    y = torch.stack([data[i + 1:i + block_size + 1] for i in ix])
+    x = torch.stack([data[i : i + block_size] for i in ix])
+    y = torch.stack([data[i + 1 : i + block_size + 1] for i in ix])
     return x, y
 
 
 # ---------------------------------------------------------------- train
 
-def train(data_path: Path, steps: int, out_dir: Path, seed: int = 1337,
-          batch_size: int = 32, lr: float = 3e-4) -> dict:
+
+def train(
+    data_path: Path,
+    steps: int,
+    out_dir: Path,
+    seed: int = 1337,
+    batch_size: int = 32,
+    lr: float = 3e-4,
+) -> dict:
     torch.manual_seed(seed)
     random.seed(seed)
     text = load_corpus(data_path)
     if len(text) < 10_000:
-        raise SystemExit(f"corpus too small ({len(text)} chars); run prepare_corpus.py first")
+        raise SystemExit(
+            f"corpus too small ({len(text)} chars); run prepare_corpus.py first"
+        )
     chars, stoi = build_vocab(text)
     data = torch.tensor([stoi[c] for c in text], dtype=torch.long)
 
@@ -153,22 +171,40 @@ def train(data_path: Path, steps: int, out_dir: Path, seed: int = 1337,
             print(f"  step {step}/{steps}  loss {loss.item():.4f}", flush=True)
 
     out_dir.mkdir(parents=True, exist_ok=True)
-    torch.save({
-        "model_state": model.state_dict(),
-        "chars": chars,
-        "config": {"n_layer": 4, "n_head": 4, "n_embd": 256,
-                   "block_size": block_size, "steps": steps,
-                   "batch_size": batch_size, "lr": lr, "seed": seed,
-                   "params": model.n_params(),
-                   "corpus_chars": len(text), "corpus_file": str(data_path)},
-    }, out_dir / "tiny-gpt.pt")
-    log = {"loss_first": losses[0], "loss_last": losses[-1],
-           "loss_min": min(losses), "steps": steps,
-           "seconds": round(time.time() - t0, 1),
-           "params": model.n_params(), "vocab_size": len(chars)}
+    torch.save(
+        {
+            "model_state": model.state_dict(),
+            "chars": chars,
+            "config": {
+                "n_layer": 4,
+                "n_head": 4,
+                "n_embd": 256,
+                "block_size": block_size,
+                "steps": steps,
+                "batch_size": batch_size,
+                "lr": lr,
+                "seed": seed,
+                "params": model.n_params(),
+                "corpus_chars": len(text),
+                "corpus_file": str(data_path),
+            },
+        },
+        out_dir / "tiny-gpt.pt",
+    )
+    log = {
+        "loss_first": losses[0],
+        "loss_last": losses[-1],
+        "loss_min": min(losses),
+        "steps": steps,
+        "seconds": round(time.time() - t0, 1),
+        "params": model.n_params(),
+        "vocab_size": len(chars),
+    }
     (out_dir / "train_log.json").write_text(json.dumps(log, indent=1))
-    print(f"params: {model.n_params():,}  loss {losses[0]:.4f} -> {losses[-1]:.4f} "
-          f"(min {min(losses):.4f}) in {log['seconds']}s")
+    print(
+        f"params: {model.n_params():,}  loss {losses[0]:.4f} -> {losses[-1]:.4f} "
+        f"(min {min(losses):.4f}) in {log['seconds']}s"
+    )
     print("wrote", out_dir / "tiny-gpt.pt")
     return log
 

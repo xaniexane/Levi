@@ -1,4 +1,5 @@
 """MAX upgrade surface — densest operator view of LEVI SI."""
+
 from __future__ import annotations
 
 from datetime import datetime, timezone
@@ -11,13 +12,16 @@ def format_max() -> str:
     from levi.premium.unique import UNIQUES
     from levi.brain.seed_knowledge_max import _RAW as MAX_RAW
     from levi.ops.x100 import laws, next_slices
+
     try:
         from levi.cloud.scorecard import evaluate
+
         score = evaluate()[1]
     except Exception:
         score = 0.0
     try:
         from levi.ops.enterprise import run_enterprise_checklist
+
         rows = run_enterprise_checklist()
         ent = f"{sum(1 for r in rows if r.ok)}/{len(rows)}"
     except Exception:

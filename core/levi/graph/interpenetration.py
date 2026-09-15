@@ -62,6 +62,7 @@ class GraphEdge:
 @dataclass
 class Composite:
     """A verified composition of interpenetrating parts."""
+
     id: str
     name: str
     description: str
@@ -79,10 +80,10 @@ class Composite:
 DEFAULT_GRAPH_DIR = Path.home() / ".levi" / "graph"
 
 # Circuit Breaker / Governor bounds — combinatorial space is open but not unbounded
-MAX_COMPOSITION_DEPTH = 8          # max ancestry depth for a composite
-MAX_PARTS_PER_COMPOSITE = 12       # max direct parts
-MAX_COMPOSITES = 500               # soft cap on stored composites
-MAX_GRAPH_NODES = 2000             # soft cap on total nodes
+MAX_COMPOSITION_DEPTH = 8  # max ancestry depth for a composite
+MAX_PARTS_PER_COMPOSITE = 12  # max direct parts
+MAX_COMPOSITES = 500  # soft cap on stored composites
+MAX_GRAPH_NODES = 2000  # soft cap on total nodes
 
 
 class InterpenetrationEngine:
@@ -104,40 +105,245 @@ class InterpenetrationEngine:
         """Seed with known first-class entities so interpenetration has material."""
         seeds = [
             # Companion roles
-            GraphNode("role.friend", NodeKind.COMPANION_ROLE, "Best Friend", "Reliable presence and continuity", 1, ["companion"]),
-            GraphNode("role.mentor", NodeKind.COMPANION_ROLE, "Mentor", "Teaches and grows capability", 1, ["companion"]),
-            GraphNode("role.challenger", NodeKind.COMPANION_ROLE, "Challenger", "Surfaces weak assumptions", 2, ["companion"]),
-            GraphNode("role.protector", NodeKind.COMPANION_ROLE, "Protector", "Guards against irreversible harm", 4, ["companion"]),
+            GraphNode(
+                "role.friend",
+                NodeKind.COMPANION_ROLE,
+                "Best Friend",
+                "Reliable presence and continuity",
+                1,
+                ["companion"],
+            ),
+            GraphNode(
+                "role.mentor",
+                NodeKind.COMPANION_ROLE,
+                "Mentor",
+                "Teaches and grows capability",
+                1,
+                ["companion"],
+            ),
+            GraphNode(
+                "role.challenger",
+                NodeKind.COMPANION_ROLE,
+                "Challenger",
+                "Surfaces weak assumptions",
+                2,
+                ["companion"],
+            ),
+            GraphNode(
+                "role.protector",
+                NodeKind.COMPANION_ROLE,
+                "Protector",
+                "Guards against irreversible harm",
+                4,
+                ["companion"],
+            ),
             # Key personas
-            GraphNode("persona.interrogation", NodeKind.PERSONA, "Interrogation", "Questions the user; withholds answer until demanded", 1, ["persona"]),
-            GraphNode("persona.no_hero", NodeKind.PERSONA, "No Hero", "Short/vague; expands on request", 1, ["persona"]),
-            GraphNode("persona.reframe", NodeKind.PERSONA, "Reframe", "Better question then answers that", 1, ["persona"]),
-            GraphNode("persona.void", NodeKind.PERSONA, "Void", "Dry, precise, anti-hype", 1, ["persona"]),
-            GraphNode("persona.strategist", NodeKind.PERSONA, "Strategist", "Goals, sequence, tradeoffs", 1, ["persona"]),
+            GraphNode(
+                "persona.interrogation",
+                NodeKind.PERSONA,
+                "Interrogation",
+                "Questions the user; withholds answer until demanded",
+                1,
+                ["persona"],
+            ),
+            GraphNode(
+                "persona.no_hero",
+                NodeKind.PERSONA,
+                "No Hero",
+                "Short/vague; expands on request",
+                1,
+                ["persona"],
+            ),
+            GraphNode(
+                "persona.reframe",
+                NodeKind.PERSONA,
+                "Reframe",
+                "Better question then answers that",
+                1,
+                ["persona"],
+            ),
+            GraphNode(
+                "persona.void",
+                NodeKind.PERSONA,
+                "Void",
+                "Dry, precise, anti-hype",
+                1,
+                ["persona"],
+            ),
+            GraphNode(
+                "persona.strategist",
+                NodeKind.PERSONA,
+                "Strategist",
+                "Goals, sequence, tradeoffs",
+                1,
+                ["persona"],
+            ),
             # Specialists
-            GraphNode("spec.supervisor", NodeKind.SPECIALIST, "Supervisor", "Coordinates decomposition and synthesis", 3, ["agent"]),
-            GraphNode("spec.companion", NodeKind.SPECIALIST, "Companion Specialist", "Ensures companion framing", 2, ["agent"]),
-            GraphNode("spec.research", NodeKind.SPECIALIST, "Research", "Search, retrieve, synthesize", 1, ["agent"]),
-            GraphNode("spec.memory", NodeKind.SPECIALIST, "Memory", "Recall/remember/summarize", 1, ["agent"]),
-            GraphNode("spec.coding", NodeKind.SPECIALIST, "Coding", "Code within sandbox", 3, ["agent"]),
-            GraphNode("spec.security", NodeKind.SPECIALIST, "Security", "Risk and policy review", 4, ["agent"]),
-            GraphNode("spec.automation", NodeKind.SPECIALIST, "Automation", "Workflow design and run", 3, ["agent"]),
+            GraphNode(
+                "spec.supervisor",
+                NodeKind.SPECIALIST,
+                "Supervisor",
+                "Coordinates decomposition and synthesis",
+                3,
+                ["agent"],
+            ),
+            GraphNode(
+                "spec.companion",
+                NodeKind.SPECIALIST,
+                "Companion Specialist",
+                "Ensures companion framing",
+                2,
+                ["agent"],
+            ),
+            GraphNode(
+                "spec.research",
+                NodeKind.SPECIALIST,
+                "Research",
+                "Search, retrieve, synthesize",
+                1,
+                ["agent"],
+            ),
+            GraphNode(
+                "spec.memory",
+                NodeKind.SPECIALIST,
+                "Memory",
+                "Recall/remember/summarize",
+                1,
+                ["agent"],
+            ),
+            GraphNode(
+                "spec.coding",
+                NodeKind.SPECIALIST,
+                "Coding",
+                "Code within sandbox",
+                3,
+                ["agent"],
+            ),
+            GraphNode(
+                "spec.security",
+                NodeKind.SPECIALIST,
+                "Security",
+                "Risk and policy review",
+                4,
+                ["agent"],
+            ),
+            GraphNode(
+                "spec.automation",
+                NodeKind.SPECIALIST,
+                "Automation",
+                "Workflow design and run",
+                3,
+                ["agent"],
+            ),
             # Skills
-            GraphNode("skill.remember", NodeKind.SKILL, "Remember", "Store semantic memory", 1, ["skill"]),
-            GraphNode("skill.recall", NodeKind.SKILL, "Recall", "Search memories", 0, ["skill"]),
-            GraphNode("skill.phase1_checklist", NodeKind.SKILL, "Phase1 Checklist", "Progress checklist", 0, ["skill"]),
-            GraphNode("skill.status", NodeKind.SKILL, "Status", "System health", 0, ["skill"]),
-            GraphNode("skill.factory_create", NodeKind.SKILL, "Factory Create", "Software Factory project from idea", 1, ["skill", "factory"]),
-            GraphNode("skill.factory_advance", NodeKind.SKILL, "Factory Advance", "Advance factory pipeline stage", 2, ["skill", "factory"]),
-            GraphNode("cap.software_factory", NodeKind.SPECIALIST, "Software Factory", "LEVI-native software factory capability", 3, ["factory", "capability"]),
-            GraphNode("cap.automation_runtime", NodeKind.SPECIALIST, "Automation Runtime", "LEVI automation execution", 3, ["automation", "capability"]),
+            GraphNode(
+                "skill.remember",
+                NodeKind.SKILL,
+                "Remember",
+                "Store semantic memory",
+                1,
+                ["skill"],
+            ),
+            GraphNode(
+                "skill.recall",
+                NodeKind.SKILL,
+                "Recall",
+                "Search memories",
+                0,
+                ["skill"],
+            ),
+            GraphNode(
+                "skill.phase1_checklist",
+                NodeKind.SKILL,
+                "Phase1 Checklist",
+                "Progress checklist",
+                0,
+                ["skill"],
+            ),
+            GraphNode(
+                "skill.status", NodeKind.SKILL, "Status", "System health", 0, ["skill"]
+            ),
+            GraphNode(
+                "skill.factory_create",
+                NodeKind.SKILL,
+                "Factory Create",
+                "Software Factory project from idea",
+                1,
+                ["skill", "factory"],
+            ),
+            GraphNode(
+                "skill.factory_advance",
+                NodeKind.SKILL,
+                "Factory Advance",
+                "Advance factory pipeline stage",
+                2,
+                ["skill", "factory"],
+            ),
+            GraphNode(
+                "cap.software_factory",
+                NodeKind.SPECIALIST,
+                "Software Factory",
+                "LEVI-native software factory capability",
+                3,
+                ["factory", "capability"],
+            ),
+            GraphNode(
+                "cap.automation_runtime",
+                NodeKind.SPECIALIST,
+                "Automation Runtime",
+                "LEVI automation execution",
+                3,
+                ["automation", "capability"],
+            ),
             # L.W.P. primitives (conceptual seeds)
-            GraphNode("lwp.cascade", NodeKind.LWP_PRIMITIVE, "Cascade Chain", "Typed deterministic sequence", 2, ["lwp"]),
-            GraphNode("lwp.spiral", NodeKind.LWP_PRIMITIVE, "Spiral Coil", "Iterative feedback workflow", 2, ["lwp"]),
-            GraphNode("lwp.governor", NodeKind.LWP_PRIMITIVE, "Governor", "Dynamic budget/complexity control", 3, ["lwp"]),
-            GraphNode("lwp.circuit_breaker", NodeKind.LWP_PRIMITIVE, "Circuit Breaker", "Resource/risk limiter", 4, ["lwp"]),
-            GraphNode("lwp.bible", NodeKind.LWP_PRIMITIVE, "Bible", "Immutable verified canon", 1, ["lwp"]),
-            GraphNode("lwp.banks", NodeKind.LWP_PRIMITIVE, "Banks", "Versioned approved stores", 1, ["lwp"]),
+            GraphNode(
+                "lwp.cascade",
+                NodeKind.LWP_PRIMITIVE,
+                "Cascade Chain",
+                "Typed deterministic sequence",
+                2,
+                ["lwp"],
+            ),
+            GraphNode(
+                "lwp.spiral",
+                NodeKind.LWP_PRIMITIVE,
+                "Spiral Coil",
+                "Iterative feedback workflow",
+                2,
+                ["lwp"],
+            ),
+            GraphNode(
+                "lwp.governor",
+                NodeKind.LWP_PRIMITIVE,
+                "Governor",
+                "Dynamic budget/complexity control",
+                3,
+                ["lwp"],
+            ),
+            GraphNode(
+                "lwp.circuit_breaker",
+                NodeKind.LWP_PRIMITIVE,
+                "Circuit Breaker",
+                "Resource/risk limiter",
+                4,
+                ["lwp"],
+            ),
+            GraphNode(
+                "lwp.bible",
+                NodeKind.LWP_PRIMITIVE,
+                "Bible",
+                "Immutable verified canon",
+                1,
+                ["lwp"],
+            ),
+            GraphNode(
+                "lwp.banks",
+                NodeKind.LWP_PRIMITIVE,
+                "Banks",
+                "Versioned approved stores",
+                1,
+                ["lwp"],
+            ),
         ]
         for n in seeds:
             self.nodes[n.id] = n
@@ -145,6 +351,7 @@ class InterpenetrationEngine:
         # Seed ALL L.W.P. formal genres (97) — never truncate
         try:
             from levi.graph.genres import GenreRegistry
+
             greg = GenreRegistry()
             for g in greg.list():
                 nid = f"genre.{g.id}"
@@ -162,16 +369,36 @@ class InterpenetrationEngine:
         # Software Factory DNA — stages and capabilities as first-class interpenetrable nodes
         factory_seeds = [
             ("factory.stage.idea", "Idea", "Factory cascade stage: idea capture"),
-            ("factory.stage.requirements", "Requirements", "Factory cascade stage: requirements"),
-            ("factory.stage.architecture", "Architecture", "Factory cascade stage: architecture"),
+            (
+                "factory.stage.requirements",
+                "Requirements",
+                "Factory cascade stage: requirements",
+            ),
+            (
+                "factory.stage.architecture",
+                "Architecture",
+                "Factory cascade stage: architecture",
+            ),
             ("factory.stage.scaffold", "Scaffold", "Factory cascade stage: scaffold"),
-            ("factory.stage.implement", "Implement", "Factory cascade stage: implement"),
+            (
+                "factory.stage.implement",
+                "Implement",
+                "Factory cascade stage: implement",
+            ),
             ("factory.stage.build", "Build", "Factory cascade stage: build"),
             ("factory.stage.test", "Test", "Factory cascade stage: test"),
             ("factory.stage.package", "Package", "Factory cascade stage: package"),
-            ("factory.ability.codegen", "Codegen Ability", "Generate code under sandbox"),
+            (
+                "factory.ability.codegen",
+                "Codegen Ability",
+                "Generate code under sandbox",
+            ),
             ("factory.ability.verify", "Verify Ability", "Verify factory outputs"),
-            ("factory.ability.rollback", "Rollback Ability", "Roll back factory artifacts"),
+            (
+                "factory.ability.rollback",
+                "Rollback Ability",
+                "Roll back factory artifacts",
+            ),
         ]
         for fid, fname, fdesc in factory_seeds:
             self.nodes[fid] = GraphNode(
@@ -295,11 +522,17 @@ class InterpenetrationEngine:
         Not auto-promoted; verified=False until approved.
         """
         if len(self.composites) >= MAX_COMPOSITES:
-            raise RuntimeError(f"Circuit breaker: max composites ({MAX_COMPOSITES}) reached")
+            raise RuntimeError(
+                f"Circuit breaker: max composites ({MAX_COMPOSITES}) reached"
+            )
         if len(self.nodes) >= MAX_GRAPH_NODES:
-            raise RuntimeError(f"Circuit breaker: max graph nodes ({MAX_GRAPH_NODES}) reached")
+            raise RuntimeError(
+                f"Circuit breaker: max graph nodes ({MAX_GRAPH_NODES}) reached"
+            )
         if len(part_ids) > MAX_PARTS_PER_COMPOSITE:
-            raise ValueError(f"Circuit breaker: max {MAX_PARTS_PER_COMPOSITE} parts per composite")
+            raise ValueError(
+                f"Circuit breaker: max {MAX_PARTS_PER_COMPOSITE} parts per composite"
+            )
         if len(part_ids) < 2:
             raise ValueError("A composite needs at least 2 parts")
 
@@ -325,7 +558,8 @@ class InterpenetrationEngine:
             created_at=datetime.now(timezone.utc).isoformat(),
             verified=False,
             behavior_summary=behavior_summary,
-            tags=(tags or ["composite"]) + ([f"depth-{new_depth}"] if new_depth > 1 else []),
+            tags=(tags or ["composite"])
+            + ([f"depth-{new_depth}"] if new_depth > 1 else []),
         )
         self.composites[comp.id] = comp
         self.nodes[comp.id] = GraphNode(
@@ -349,18 +583,24 @@ class InterpenetrationEngine:
         self._persist()
         return comp
 
-    def neighbors(self, node_id: str, relation: Optional[str] = None) -> List[GraphNode]:
+    def neighbors(
+        self, node_id: str, relation: Optional[str] = None
+    ) -> List[GraphNode]:
         out = []
         for e in self.edges:
             if e.source_id == node_id and (relation is None or e.relation == relation):
                 if e.target_id in self.nodes:
                     out.append(self.nodes[e.target_id])
-            elif e.target_id == node_id and (relation is None or e.relation == relation):
+            elif e.target_id == node_id and (
+                relation is None or e.relation == relation
+            ):
                 if e.source_id in self.nodes:
                     out.append(self.nodes[e.source_id])
         return out
 
-    def suggest_compositions(self, seed_id: str, limit: int = 5) -> List[Dict[str, Any]]:
+    def suggest_compositions(
+        self, seed_id: str, limit: int = 5
+    ) -> List[Dict[str, Any]]:
         """
         Suggest interpenetration partners for a node.
         Genres, personas, skills, specialists, composites, LWP primitives —
@@ -369,7 +609,15 @@ class InterpenetrationEngine:
         """
         # Resolve bare names
         if seed_id not in self.nodes:
-            for prefix in ("genre.", "persona.", "skill.", "spec.", "role.", "lwp.", "composite."):
+            for prefix in (
+                "genre.",
+                "persona.",
+                "skill.",
+                "spec.",
+                "role.",
+                "lwp.",
+                "composite.",
+            ):
                 if prefix + seed_id in self.nodes:
                     seed_id = prefix + seed_id
                     break
@@ -382,14 +630,17 @@ class InterpenetrationEngine:
                 continue
             # Everything interpenetrates — including genre × genre and composite × genre
             same_kind = node.kind == seed.kind
-            suggestions.append({
-                "with": nid,
-                "name": node.name,
-                "kind": node.kind.value,
-                "combined_risk": max(seed.risk_ceiling, node.risk_ceiling),
-                "reason": f"{seed.kind.value} × {node.kind.value}" + (" (same-kind)" if same_kind else ""),
-                "same_kind": same_kind,
-            })
+            suggestions.append(
+                {
+                    "with": nid,
+                    "name": node.name,
+                    "kind": node.kind.value,
+                    "combined_risk": max(seed.risk_ceiling, node.risk_ceiling),
+                    "reason": f"{seed.kind.value} × {node.kind.value}"
+                    + (" (same-kind)" if same_kind else ""),
+                    "same_kind": same_kind,
+                }
+            )
         # Prefer cross-kind, then lower risk, then name
         suggestions.sort(key=lambda s: (s["same_kind"], s["combined_risk"], s["name"]))
         return suggestions[:limit]
@@ -402,7 +653,9 @@ class InterpenetrationEngine:
             "nodes": len(self.nodes),
             "edges": len(self.edges),
             "composites": len(self.composites),
-            "verified_composites": sum(1 for c in self.composites.values() if c.verified),
+            "verified_composites": sum(
+                1 for c in self.composites.values() if c.verified
+            ),
             "by_kind": by_kind,
             "data_dir": str(self.data_dir),
             "principle": "Everything interpenetrates under policy and integrity",

@@ -1,11 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  FEATURED_PERSONAS,
-  getPersona,
-  isRegister,
-  PERSONAS,
-  REGISTERS,
-} from "./personas";
+import { FEATURED_PERSONAS, getPersona, isRegister, PERSONAS, REGISTERS } from "./personas";
 
 describe("personas / KAI-9000 registers", () => {
   it("exposes exactly 14 LEVI-original registers", () => {

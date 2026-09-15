@@ -3,6 +3,7 @@
 No network, no user HOME writes: HOME is monkeypatched to a tmp dir by the
 root conftest conventions used here, and all providers are scripted fakes.
 """
+
 import json
 
 from levi.agent.loop import run_subtask
@@ -57,14 +58,18 @@ def _resp(text="", calls=None, error=None):
 
 
 def test_loop_executes_tools_and_feeds_results_back(tmp_path):
-    prov = FakeProvider([
-        _resp(calls=[_call("file_write", path="hello.txt", content="line one")]),
-        _resp(calls=[_call("file_read", path="hello.txt")]),
-        _resp(text="Done; the file contained: line one"),
-    ])
+    prov = FakeProvider(
+        [
+            _resp(calls=[_call("file_write", path="hello.txt", content="line one")]),
+            _resp(calls=[_call("file_read", path="hello.txt")]),
+            _resp(text="Done; the file contained: line one"),
+        ]
+    )
     reg = _reg(tmp_path)
     t = run_subtask(
-        "write hello.txt then read it back", provider=prov, registry=reg,
+        "write hello.txt then read it back",
+        provider=prov,
+        registry=reg,
         consent=True,
     )
     assert t.ok is True
@@ -81,13 +86,14 @@ def test_loop_executes_tools_and_feeds_results_back(tmp_path):
 
 
 def test_unknown_tool_is_honest_not_fatal(tmp_path):
-    prov = FakeProvider([
-        _resp(calls=[_call("no_such_tool", x=1)]),
-        _resp(text="the tool did not exist, so I did nothing"),
-    ])
+    prov = FakeProvider(
+        [
+            _resp(calls=[_call("no_such_tool", x=1)]),
+            _resp(text="the tool did not exist, so I did nothing"),
+        ]
+    )
     reg = _reg(tmp_path)
-    t = run_subtask("call a bogus tool", provider=prov, registry=reg,
-                    consent=True)
+    t = run_subtask("call a bogus tool", provider=prov, registry=reg, consent=True)
     assert t.ok is True
     assert t.steps[0].results[0]["ok"] is False
     assert "unknown tool" in t.steps[0].results[0]["error"]
@@ -100,14 +106,11 @@ def test_loop_respects_max_steps(tmp_path):
     class AlwaysCalls(FakeProvider):
         def chat(self, messages, tools):
             self.calls += 1
-            return _resp(
-                calls=[_call("memory_write", text="note %d" % self.calls)]
-            )
+            return _resp(calls=[_call("memory_write", text="note %d" % self.calls)])
 
     prov = AlwaysCalls([])
     reg = _reg(tmp_path)
-    t = run_subtask("anything", provider=prov, registry=reg,
-                    consent=True, max_steps=3)
+    t = run_subtask("anything", provider=prov, registry=reg, consent=True, max_steps=3)
     assert t.ok is False
     assert t.error == "max_steps_exceeded"
     assert len(t.steps) == 3
@@ -119,14 +122,19 @@ def test_loop_respects_max_steps(tmp_path):
 
 
 def test_loop_gate_trips_without_consent(tmp_path):
-    prov = FakeProvider([
-        _resp(calls=[_call("file_write", path="secret.txt", content="x")]),
-        _resp(text="this must never be reached"),
-    ])
+    prov = FakeProvider(
+        [
+            _resp(calls=[_call("file_write", path="secret.txt", content="x")]),
+            _resp(text="this must never be reached"),
+        ]
+    )
     reg = _reg(tmp_path)
     t = run_subtask(
-        "write secret.txt", provider=prov, registry=reg,
-        consent=False, confirm=None,
+        "write secret.txt",
+        provider=prov,
+        registry=reg,
+        consent=False,
+        confirm=None,
     )
     assert t.ok is False
     assert t.error == "confirmation_required"
@@ -152,16 +160,25 @@ def test_loop_surfaces_provider_error(tmp_path):
 
 
 def test_transcript_to_dict_json_round_trip(tmp_path):
-    prov = FakeProvider([
-        _resp(calls=[_call("memory_write", text="a note")]),
-        _resp(text="noted"),
-    ])
+    prov = FakeProvider(
+        [
+            _resp(calls=[_call("memory_write", text="a note")]),
+            _resp(text="noted"),
+        ]
+    )
     reg = _reg(tmp_path)
-    t = run_subtask("remember a note", provider=prov, registry=reg,
-                    consent=True)
+    t = run_subtask("remember a note", provider=prov, registry=reg, consent=True)
     d = t.to_dict()
-    assert set(d) == {"task", "provider_name", "steps", "final", "ok", "error",
-                      "prompt_tokens", "completion_tokens"}
+    assert set(d) == {
+        "task",
+        "provider_name",
+        "steps",
+        "final",
+        "ok",
+        "error",
+        "prompt_tokens",
+        "completion_tokens",
+    }
     rt = json.loads(json.dumps(d))
     assert rt == d
     assert rt["task"] == "remember a note"
@@ -169,8 +186,12 @@ def test_transcript_to_dict_json_round_trip(tmp_path):
     assert rt["ok"] is True
     assert isinstance(rt["steps"], list) and len(rt["steps"]) == 1
     assert set(rt["steps"][0]) == {
-        "index", "provider_text", "tool_calls", "results",
-        "prompt_tokens", "completion_tokens",
+        "index",
+        "provider_text",
+        "tool_calls",
+        "results",
+        "prompt_tokens",
+        "completion_tokens",
     }
 
 
@@ -188,8 +209,9 @@ def test_provider_as_instance_uses_that_provider(tmp_path):
 def test_provider_as_name_string(tmp_path, monkeypatch):
     monkeypatch.setenv("LEVI_PROVIDER", "local")
     reg = _reg(tmp_path)
-    t = run_subtask("remember that the sky is blue", provider="local",
-                    registry=reg, consent=True)
+    t = run_subtask(
+        "remember that the sky is blue", provider="local", registry=reg, consent=True
+    )
     assert t.provider_name == "local"
     assert t.ok is True
 
@@ -197,8 +219,9 @@ def test_provider_as_name_string(tmp_path, monkeypatch):
 def test_provider_none_falls_back_to_select_provider(tmp_path, monkeypatch):
     monkeypatch.setenv("LEVI_PROVIDER", "local")
     reg = _reg(tmp_path)
-    t = run_subtask("remember that the sky is blue", provider=None,
-                    registry=reg, consent=True)
+    t = run_subtask(
+        "remember that the sky is blue", provider=None, registry=reg, consent=True
+    )
     assert t.provider_name == "local"
     assert t.ok is True
 

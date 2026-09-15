@@ -39,12 +39,7 @@ def weights_path() -> Path:
     override = os.environ.get("LEVI_BRAIN_WEIGHTS", "").strip()
     if override:
         return Path(override).expanduser()
-    return (
-        Path(__file__).resolve().parent.parent
-        / "brain"
-        / "weights"
-        / "tiny-gpt.pt"
-    )
+    return Path(__file__).resolve().parent.parent / "brain" / "weights" / "tiny-gpt.pt"
 
 
 def train_log() -> dict[str, Any]:
@@ -63,6 +58,7 @@ def train_log() -> dict[str, Any]:
 def torch_available() -> bool:
     try:
         import torch  # noqa: F401
+
         return True
     except Exception:
         return False
@@ -112,8 +108,9 @@ class NativeBrainProvider(ChatProvider):
             self._load_error = f"cannot load native brain: {exc}"
             return False
         try:
-            ckpt = torch.load(str(weights_path()), map_location="cpu",
-                              weights_only=False)
+            ckpt = torch.load(
+                str(weights_path()), map_location="cpu", weights_only=False
+            )
             chars = ckpt["chars"]
             cfg = ckpt.get("config", {})
             model = TinyGPT(
@@ -159,15 +156,14 @@ class NativeBrainProvider(ChatProvider):
         # the brain only sees the tail it was built for
         return prompt[-self._block_size :]
 
-    def _generate(self, prompt: str, n_chars: int = 280,
-                  temperature: float = 0.9) -> str:
+    def _generate(
+        self, prompt: str, n_chars: int = 280, temperature: float = 0.9
+    ) -> str:
         import torch
         import torch.nn.functional as F
 
         model = self._model
-        idx = torch.tensor(
-            [[self._stoi.get(c, 0) for c in prompt]], dtype=torch.long
-        )
+        idx = torch.tensor([[self._stoi.get(c, 0) for c in prompt]], dtype=torch.long)
         with torch.no_grad():
             for _ in range(n_chars):
                 logits = model(idx[:, -self._block_size :])
@@ -175,7 +171,9 @@ class NativeBrainProvider(ChatProvider):
                 nxt = torch.multinomial(probs, 1)
                 idx = torch.cat([idx, nxt], dim=1)
                 # stop at a clean-ish boundary past the minimum
-                if idx.shape[1] - len(prompt) > 60 and int(nxt) == self._stoi.get("\n", -1):
+                if idx.shape[1] - len(prompt) > 60 and int(nxt) == self._stoi.get(
+                    "\n", -1
+                ):
                     if idx.shape[1] - len(prompt) > 120:
                         break
         text = "".join(self._chars[i] for i in idx[0].tolist())
@@ -183,8 +181,7 @@ class NativeBrainProvider(ChatProvider):
 
     # -- ChatProvider contract -------------------------------------------
 
-    def chat(self, messages: list[ChatMessage],
-             tools: list[dict]) -> ChatResponse:
+    def chat(self, messages: list[ChatMessage], tools: list[dict]) -> ChatResponse:
         t0 = time.time()
         if not self._ensure_model():
             return ChatResponse(

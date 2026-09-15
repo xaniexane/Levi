@@ -52,10 +52,10 @@ def affect_hint(
         f"confidence={reading.confidence:.2f}"
     )
     if reading.stress_signals:
-        lines.append(
-            "Stress signals: " + ", ".join(reading.stress_signals)
-        )
-    lines.append(f"Suggested register: {suggestion.register_id} ({suggestion.rationale})")
+        lines.append("Stress signals: " + ", ".join(reading.stress_signals))
+    lines.append(
+        f"Suggested register: {suggestion.register_id} ({suggestion.rationale})"
+    )
     for hint in policy.hints:
         lines.append(f"- {hint}")
     if policy.avoid:
@@ -82,9 +82,7 @@ def modulate(
     """
     reading = session.observe_user(text)
     policy = evaluate(text, reading)
-    suggestion = suggest_register(
-        text, reading, policy, user_choice=user_register
-    )
+    suggestion = suggest_register(text, reading, policy, user_choice=user_register)
     # Safety veto: wit registers can never override a de-escalation policy.
     allowed, veto_reason = check_wit_safety(suggestion.register_id, policy)
     if not allowed:
@@ -115,6 +113,7 @@ def modulate(
 # ---------------------------------------------------------------------------
 # Motivation -> growth loop
 # ---------------------------------------------------------------------------
+
 
 def _signals_path() -> Path:
     base = Path(os.environ.get("LEVI_HOME", Path.home() / ".levi"))

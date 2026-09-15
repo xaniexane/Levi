@@ -3,6 +3,7 @@
 D1 Presence · D2 Empathy · D3 Regulation · D4 Relational · D5 Integrity
 Never overrides safety, permission, or factual integrity.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -46,7 +47,11 @@ class EIState:
         return d
 
     def guidance_summary(self) -> str:
-        tone = f" tone={self.user_tone}@{self.user_intensity:.2f}" if self.user_tone else ""
+        tone = (
+            f" tone={self.user_tone}@{self.user_intensity:.2f}"
+            if self.user_tone
+            else ""
+        )
         return (
             f"EI — P:{self.presence:.2f} E:{self.empathy:.2f} R:{self.regulation:.2f} "
             f"Rel:{self.relational:.2f} I:{self.integrity:.2f}{tone}"

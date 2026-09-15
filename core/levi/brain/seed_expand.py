@@ -5,6 +5,7 @@ Produces large volumes of distinct principle-units from axis templates
 without shipping tens of thousands of hand lines. Unique LEVI design.
 Not medical/legal advice.
 """
+
 from __future__ import annotations
 
 from typing import List, Tuple, Iterator
@@ -13,17 +14,51 @@ import hashlib
 
 # Axes for combinatorial expansion
 DOMAINS = [
-    "health", "finance", "learning", "relationships", "security", "work",
-    "creativity", "systems", "ethics", "communication", "leadership", "ops",
-    "parenting", "nutrition", "exercise", "sleep", "attention", "decision",
-    "neuroscience", "plasticity", "memory", "emotion", "habit", "product",
-    "writing", "design", "career", "community", "privacy", "planning",
+    "health",
+    "finance",
+    "learning",
+    "relationships",
+    "security",
+    "work",
+    "creativity",
+    "systems",
+    "ethics",
+    "communication",
+    "leadership",
+    "ops",
+    "parenting",
+    "nutrition",
+    "exercise",
+    "sleep",
+    "attention",
+    "decision",
+    "neuroscience",
+    "plasticity",
+    "memory",
+    "emotion",
+    "habit",
+    "product",
+    "writing",
+    "design",
+    "career",
+    "community",
+    "privacy",
+    "planning",
 ]
 
 LENSES = [
-    "first_principles", "systems", "opportunity_cost", "reversibility",
-    "evidence", "second_order", "margin_of_safety", "feedback",
-    "constraint", "habit_design", "ethical_boundary", "local_first",
+    "first_principles",
+    "systems",
+    "opportunity_cost",
+    "reversibility",
+    "evidence",
+    "second_order",
+    "margin_of_safety",
+    "feedback",
+    "constraint",
+    "habit_design",
+    "ethical_boundary",
+    "local_first",
 ]
 
 ACTIONS = [
@@ -42,15 +77,29 @@ ACTIONS = [
 ]
 
 NEURO_FOCUS = [
-    "hippocampal encoding", "prefrontal control", "amygdala salience",
-    "basal ganglia habits", "cerebellar timing", "dopamine prediction error",
-    "sleep consolidation", "synaptic LTP/LTD", "myelin timing",
-    "attention networks", "interoceptive insula", "default mode rumination",
+    "hippocampal encoding",
+    "prefrontal control",
+    "amygdala salience",
+    "basal ganglia habits",
+    "cerebellar timing",
+    "dopamine prediction error",
+    "sleep consolidation",
+    "synaptic LTP/LTD",
+    "myelin timing",
+    "attention networks",
+    "interoceptive insula",
+    "default mode rumination",
 ]
 
 REGION_NOTES = [
-    ("hippocampus", "binds relational episodes and supports flexible navigation of space and ideas"),
-    ("prefrontal cortex", "maintains goals, inhibits impulses, and supports reappraisal"),
+    (
+        "hippocampus",
+        "binds relational episodes and supports flexible navigation of space and ideas",
+    ),
+    (
+        "prefrontal cortex",
+        "maintains goals, inhibits impulses, and supports reappraisal",
+    ),
     ("amygdala", "tags emotional significance and speeds threat learning"),
     ("striatum", "updates action values and stabilizes habits with repetition"),
     ("cerebellum", "predicts sensory consequences and refines timing"),
@@ -72,9 +121,11 @@ def _uid(*parts: str) -> str:
 def iter_hyperdrive_units(limit: int = 0):
     try:
         from levi.brain.seed_hyperdrive import iter_hyperdrive
+
         yield from iter_hyperdrive(limit=limit)
     except Exception:
         return
+
 
 def iter_expanded(limit: int = 25000) -> Iterator[Tuple[str, List[str]]]:
     """Yield unique (text, tags) units up to limit."""
@@ -99,7 +150,13 @@ def iter_expanded(limit: int = 25000) -> Iterator[Tuple[str, List[str]]]:
                     f"In {domain} under a {lens.replace('_', ' ')} lens, respect biology; "
                     f"this is literacy not diagnosis."
                 )
-                tags = [region.replace(" ", "_"), "neuroscience", domain, lens, "expand"]
+                tags = [
+                    region.replace(" ", "_"),
+                    "neuroscience",
+                    domain,
+                    lens,
+                    "expand",
+                ]
                 yield text, tags
                 n += 1
                 if n >= limit:
@@ -133,16 +190,19 @@ def iter_expanded(limit: int = 25000) -> Iterator[Tuple[str, List[str]]]:
 
 def expand_corpus(limit: int = 25000, source: str = "seed_expand") -> str:
     from levi.brain.corpus import Corpus
+
     c = Corpus()
     n = 0
     # Hyperdrive operational units first (high signal)
     try:
         from levi.brain.seed_hyperdrive import seed as seed_hd
+
         n += seed_hd()
     except Exception:
         pass
     try:
         from levi.brain.seed_knowledge import seed as seed_k
+
         n += seed_k()
     except Exception:
         pass

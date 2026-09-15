@@ -12,6 +12,7 @@ Cycle (deterministic spine; models are optional modules):
 
 Self-composition: smallest useful combination of capabilities for the task.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -77,7 +78,17 @@ class UnifiedDaemon:
             caps.append("demand_pulse")
             tools.append("demand.scan")
             notes.append("DemandPulse activated")
-        if any(w in t for w in ("income", "sell", "revenue", "offer", "service factory", "monetiz")):
+        if any(
+            w in t
+            for w in (
+                "income",
+                "sell",
+                "revenue",
+                "offer",
+                "service factory",
+                "monetiz",
+            )
+        ):
             caps.append("income_factory")
             tools.append("income.compose")
             hitl = True
@@ -92,7 +103,9 @@ class UnifiedDaemon:
         if any(w in t for w in ("mandella", "stake", "decision")):
             tools.append("organ.mandella")
             caps.append("organs")
-        if any(w in t for w in ("security", "payment", "production", "dns", "customer")):
+        if any(
+            w in t for w in ("security", "payment", "production", "dns", "customer")
+        ):
             hitl = True
             tools.append("hitl.propose")
             notes.append("Consequential domain → HITL")
@@ -128,25 +141,33 @@ class UnifiedDaemon:
 
         for step in CYCLE_STEPS:
             if step == "OBSERVE":
-                lines.append(f"[{step}] context task received; estop={self.kernel.state.estop}")
+                lines.append(
+                    f"[{step}] context task received; estop={self.kernel.state.estop}"
+                )
             elif step == "UNDERSTAND":
                 lines.append(f"[{step}] composition: {', '.join(comp.capabilities)}")
             elif step == "RETRIEVE_MEMORY":
                 mem_bits = []
                 try:
                     from levi.brain.corpus import Corpus
+
                     mem_bits.append(f"corpus_units={len(Corpus().list(limit=500))}")
                 except Exception:
                     pass
                 try:
                     from levi.brain.table import BrainTable
+
                     mem_bits.append(f"brain_rows={len(BrainTable().rows)}")
                 except Exception:
                     pass
-                lines.append(f"[{step}] scopes={comp.memory_scopes} {' '.join(mem_bits)}")
+                lines.append(
+                    f"[{step}] scopes={comp.memory_scopes} {' '.join(mem_bits)}"
+                )
             elif step == "DETECT_OPPORTUNITY":
                 if "demand_pulse" in comp.capabilities:
-                    lines.append(f"[{step}] DemandPulse active — signals={len(self.demand.signals)}")
+                    lines.append(
+                        f"[{step}] DemandPulse active — signals={len(self.demand.signals)}"
+                    )
                 else:
                     lines.append(f"[{step}] skipped (not in composition)")
             elif step == "PLAN":
@@ -158,11 +179,16 @@ class UnifiedDaemon:
                 lines.append(f"[{step}] selected capabilities={comp.capabilities}")
             elif step == "EXECUTE":
                 if not execute:
-                    lines.append(f"[{step}] HELD (plan-only). Re-run with --execute after review.")
+                    lines.append(
+                        f"[{step}] HELD (plan-only). Re-run with --execute after review."
+                    )
                 elif comp.requires_hitl:
-                    lines.append(f"[{step}] BLOCKED pending HITL — consequential actions listed in plan")
+                    lines.append(
+                        f"[{step}] BLOCKED pending HITL — consequential actions listed in plan"
+                    )
                     try:
                         from levi.project.hitl import HITLGate
+
                         req = HITLGate().propose(
                             what=f"Execute daemon composition for: {task[:120]}",
                             why="Composition marked requires_hitl",
@@ -182,13 +208,18 @@ class UnifiedDaemon:
                         lines.append(f"[{step}] demand signal logged id={sig.id}")
                     if "income.compose" in comp.tools:
                         plan = self.income.compose(task[:80])
-                        lines.append(f"[{step}] income plan draft id={plan.id} (still HITL before money)")
+                        lines.append(
+                            f"[{step}] income plan draft id={plan.id} (still HITL before money)"
+                        )
                     lines.append(f"[{step}] local-safe actions only")
             elif step == "VERIFY":
-                lines.append(f"[{step}] policy + estop + cost budget OK={not self.kernel.state.estop}")
+                lines.append(
+                    f"[{step}] policy + estop + cost budget OK={not self.kernel.state.estop}"
+                )
             elif step == "RECORD":
                 try:
                     from levi.brain.corpus import Corpus
+
                     Corpus().add(
                         f"Daemon cycle recorded: {task[:160]}",
                         kind="INFERENCE",
@@ -199,6 +230,7 @@ class UnifiedDaemon:
                     pass
                 try:
                     from levi.project.capability_log import CapabilityLog
+
                     CapabilityLog().log(
                         task=f"daemon_cycle: {task[:100]}",
                         result="partial" if not execute else "completed",
@@ -211,9 +243,13 @@ class UnifiedDaemon:
                 except Exception:
                     lines.append(f"[{step}] log skipped")
             elif step == "LEARN":
-                lines.append(f"[{step}] outcomes feed corpus/brain when operators add OBSERVED facts")
+                lines.append(
+                    f"[{step}] outcomes feed corpus/brain when operators add OBSERVED facts"
+                )
             elif step == "OPTIMIZE":
-                lines.append(f"[{step}] free-first: prefer local/deterministic over paid cloud")
+                lines.append(
+                    f"[{step}] free-first: prefer local/deterministic over paid cloud"
+                )
             elif step == "WAIT":
                 lines.append(f"[{step}] cycle {self.kernel.state.cycle} complete")
 

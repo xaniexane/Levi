@@ -1,4 +1,5 @@
 """Tests for current-events ingestion (dated recall, not live awareness)."""
+
 from __future__ import annotations
 
 import json
@@ -8,7 +9,9 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
 
-NEWS_DIR = Path(__file__).resolve().parent.parent / "core" / "levi" / "knowledge" / "news"
+NEWS_DIR = (
+    Path(__file__).resolve().parent.parent / "core" / "levi" / "knowledge" / "news"
+)
 sys.path.insert(0, str(NEWS_DIR))
 import refresh as news_refresh  # noqa: E402
 
@@ -34,12 +37,24 @@ def test_dedupe_within_and_across_days(tmp_path, monkeypatch):
     days = tmp_path / "days"
     days.mkdir()
     (days / "2026-09-14.jsonl").write_text(
-        json.dumps({"date": "2026-09-14", "source": "t", "title": "Old",
-                    "summary": "", "url": "https://example.com/a"}) + "\n")
+        json.dumps(
+            {
+                "date": "2026-09-14",
+                "source": "t",
+                "title": "Old",
+                "summary": "",
+                "url": "https://example.com/a",
+            }
+        )
+        + "\n"
+    )
     monkeypatch.setattr(news_refresh, "DAYS", days)
     monkeypatch.setattr(news_refresh, "SOURCES_JSON", tmp_path / "sources.json")
-    monkeypatch.setattr(news_refresh, "SOURCES",
-                        [{"id": "t", "kind": "rss", "url": "https://example.com/feed"}])
+    monkeypatch.setattr(
+        news_refresh,
+        "SOURCES",
+        [{"id": "t", "kind": "rss", "url": "https://example.com/feed"}],
+    )
     monkeypatch.setattr(news_refresh, "_fetch", lambda url: FEED.encode())
     out = news_refresh.refresh(day="2026-09-15", limit=10)
     assert out["new_records"] == 1  # /a deduped against yesterday, /b new
@@ -54,6 +69,7 @@ def test_refresh_handles_dead_source_gracefully(tmp_path, monkeypatch):
         def do_GET(self):
             self.send_response(500)
             self.end_headers()
+
         def log_message(self, *a):
             pass
 
@@ -64,13 +80,23 @@ def test_refresh_handles_dead_source_gracefully(tmp_path, monkeypatch):
         days.mkdir()
         monkeypatch.setattr(news_refresh, "DAYS", days)
         monkeypatch.setattr(news_refresh, "SOURCES_JSON", tmp_path / "sources.json")
-        monkeypatch.setattr(news_refresh, "SOURCES", [
-            {"id": "dead-src", "kind": "rss",
-             "url": f"http://127.0.0.1:{srv.server_port}/feed"},
-            {"id": "live-src", "kind": "rss", "url": "https://example.com/feed"},
-        ])
-        monkeypatch.setattr(news_refresh, "_fetch",
-                            lambda url: None if "127.0.0.1" in url else FEED.encode())
+        monkeypatch.setattr(
+            news_refresh,
+            "SOURCES",
+            [
+                {
+                    "id": "dead-src",
+                    "kind": "rss",
+                    "url": f"http://127.0.0.1:{srv.server_port}/feed",
+                },
+                {"id": "live-src", "kind": "rss", "url": "https://example.com/feed"},
+            ],
+        )
+        monkeypatch.setattr(
+            news_refresh,
+            "_fetch",
+            lambda url: None if "127.0.0.1" in url else FEED.encode(),
+        )
         out = news_refresh.refresh(day="2026-09-15", limit=10)
         assert out["new_records"] == 2  # live source still ingested
         statuses = json.loads((tmp_path / "sources.json").read_text())

@@ -127,8 +127,7 @@ def _validate_side(side: Any) -> str:
     text = str(side or "").strip().lower()
     if text not in ("buy", "sell"):
         raise InvalidOrder(
-            f"invalid side {side!r}: expected 'buy' or 'sell' — "
-            "nothing was executed."
+            f"invalid side {side!r}: expected 'buy' or 'sell' — nothing was executed."
         )
     return text
 
@@ -230,8 +229,7 @@ class PaperBroker:
             )
         if not isinstance(order, Order):
             raise InvalidOrder(
-                f"invalid order {order!r}: expected an Order — nothing "
-                "was executed."
+                f"invalid order {order!r}: expected an Order — nothing was executed."
             )
         # Re-validate defensively: Order.__post_init__ already guarantees
         # these, but a fill must never be built from unchecked values.
@@ -320,9 +318,7 @@ class AlpacaConnector(Connector):
     )
 
     operations = (
-        Operation(
-            "quote", "Return the latest quote for symbol", params=("symbol",)
-        ),
+        Operation("quote", "Return the latest quote for symbol", params=("symbol",)),
         Operation(
             "place_order",
             "Place a market order for symbol/qty/side",
@@ -368,9 +364,7 @@ class AlpacaConnector(Connector):
     ) -> Any:
         missing = [
             name
-            for name in next(
-                o for o in self.operations if o.name == operation
-            ).params
+            for name in next(o for o in self.operations if o.name == operation).params
             if not str(params.get(name, "")).strip()
         ]
         if missing:
@@ -400,15 +394,12 @@ class AlpacaConnector(Connector):
                 "type": "market",
                 "time_in_force": "day",
             }
-            return self._request(
-                "POST", "/v2/orders", token, body, transport
-            )
+            return self._request("POST", "/v2/orders", token, body, transport)
 
         # Unreachable via execute() (unknown ops are rejected there), but
         # stay honest rather than returning a fabricated payload.
         raise InvalidParams(
-            f"operation {operation!r} has no implementation — "
-            "nothing was sent."
+            f"operation {operation!r} has no implementation — nothing was sent."
         )
 
     def _request(
@@ -466,9 +457,7 @@ def get_broker(name: str = "paper") -> PaperBroker | AlpacaConnector:
     if key == "alpaca":
         missing: list[str] = []
         if os.environ.get(BROKER_LIVE_FLAG) != "1":
-            missing.append(
-                f"{BROKER_LIVE_FLAG}=1 (explicit live-trading opt-in flag)"
-            )
+            missing.append(f"{BROKER_LIVE_FLAG}=1 (explicit live-trading opt-in flag)")
         if not os.environ.get(ALPACA_KEY_ENV, "").strip():
             missing.append(f"{ALPACA_KEY_ENV} (Alpaca API key)")
         if not os.environ.get(ALPACA_SECRET_ENV, "").strip():
@@ -481,6 +470,4 @@ def get_broker(name: str = "paper") -> PaperBroker | AlpacaConnector:
                 "Nothing was sent and nothing was traded."
             )
         return AlpacaConnector()
-    raise ValueError(
-        f"unknown broker {name!r}: expected 'paper' or 'alpaca'."
-    )
+    raise ValueError(f"unknown broker {name!r}: expected 'paper' or 'alpaca'.")

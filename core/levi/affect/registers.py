@@ -20,10 +20,19 @@ from levi.affect.policy import PolicyDecision, evaluate
 
 # All 14 KAI-9000 register ids (must match levi.persona.kai9000).
 REGISTERS = (
-    "kai_9000", "kai_9000_care", "kai_9000_ops", "kai_9000_challenger",
-    "kai_9000_literary", "kai_9000_forensic", "kai_9000_void",
-    "kai_9000_builder", "kai_9000_mirror", "kai_9000_architect",
-    "kai_9000_sentinel", "kai_9000_oracle", "kai_9000_muse",
+    "kai_9000",
+    "kai_9000_care",
+    "kai_9000_ops",
+    "kai_9000_challenger",
+    "kai_9000_literary",
+    "kai_9000_forensic",
+    "kai_9000_void",
+    "kai_9000_builder",
+    "kai_9000_mirror",
+    "kai_9000_architect",
+    "kai_9000_sentinel",
+    "kai_9000_oracle",
+    "kai_9000_muse",
     "kai_9000_grok",
 )
 
@@ -35,7 +44,7 @@ _WIT_AND_EDGE = {"kai_9000_grok", "kai_9000_challenger"}
 class RegisterSuggestion:
     register_id: str
     rationale: str
-    overridden: bool = False   # True when user choice beat the suggestion
+    overridden: bool = False  # True when user choice beat the suggestion
 
 
 def suggest_register(
@@ -58,8 +67,8 @@ def suggest_register(
             register_id=user_choice if known else "kai_9000",
             rationale=(
                 "explicit user choice honored"
-                if known else
-                f"unknown register {user_choice!r}; fell back to kai_9000"
+                if known
+                else f"unknown register {user_choice!r}; fell back to kai_9000"
             ),
             overridden=True,
         )
@@ -115,9 +124,14 @@ def check_wit_safety(register_id: str, policy: PolicyDecision) -> Tuple[bool, st
 # ---------------------------------------------------------------------------
 
 _REPAIR_CUES = [
-    r"\bno,? i meant\b", r"\bthat'?s (not|wrong)\b", r"\byou misunderstood\b",
-    r"\bi said\b.{0,20}\bnot\b", r"\bwrong (answer|thing)\b",
-    r"\btry again\b", r"\bstart over\b", r"\bnot what i asked\b",
+    r"\bno,? i meant\b",
+    r"\bthat'?s (not|wrong)\b",
+    r"\byou misunderstood\b",
+    r"\bi said\b.{0,20}\bnot\b",
+    r"\bwrong (answer|thing)\b",
+    r"\btry again\b",
+    r"\bstart over\b",
+    r"\bnot what i asked\b",
 ]
 
 _COMPLIMENT_CUES = [
@@ -148,6 +162,7 @@ def detect_rapport(text: str) -> Optional[str]:
 # ---------------------------------------------------------------------------
 # People / relationship memory hooks
 # ---------------------------------------------------------------------------
+
 
 def rapport_note(
     person: str,

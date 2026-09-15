@@ -3,6 +3,7 @@
 Hermetic: every function takes an explicit ``home`` path, so the tests run
 against fresh tmp_path homes and never touch the real ``~/.levi``.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -34,16 +35,24 @@ from levi.memory.types import MemoryType
 def seed_home(home: Path) -> None:
     """Seed a fake LEVI home with identity, settings, and memory."""
     home.mkdir(parents=True, exist_ok=True)
-    profile = UserProfile(name="Chauncey", goal_this_week="Ship life packs", onboarded=True)
+    profile = UserProfile(
+        name="Chauncey", goal_this_week="Ship life packs", onboarded=True
+    )
     ProfileStore(path=home / "profile.json").save(profile)
-    (home / "charter.json").write_text(json.dumps({"principle": "local-first"}), encoding="utf-8")
+    (home / "charter.json").write_text(
+        json.dumps({"principle": "local-first"}), encoding="utf-8"
+    )
 
     store = MemoryStore(data_dir=home / "memory")
     store.add(MemoryType.SEMANTIC, "Chauncey prefers dark mode", source="user")
     store.add(MemoryType.PREFERENCE, "coffee: black", source="user")
     store.add(MemoryType.PROCEDURAL, "deploy with ./deploy.sh", source="user")
-    store.add(MemoryType.WORKING, "ephemeral scratch note", source="user")  # must NOT travel
-    store.add(MemoryType.DEVICE, "phone battery 80%", source="device")  # must NOT travel
+    store.add(
+        MemoryType.WORKING, "ephemeral scratch note", source="user"
+    )  # must NOT travel
+    store.add(
+        MemoryType.DEVICE, "phone battery 80%", source="device"
+    )  # must NOT travel
 
 
 def snapshot_files(home: Path) -> dict:
@@ -79,7 +88,9 @@ def test_export_pack_shape(tmp_path):
     assert len(manifest) > 100
     ids = [s["id"] for s in manifest]
     assert "status" in ids
-    assert all(set(s) == {"id", "name", "category", "version", "risk_level"} for s in manifest)
+    assert all(
+        set(s) == {"id", "name", "category", "version", "risk_level"} for s in manifest
+    )
 
 
 def test_export_tolerates_empty_home(tmp_path):
@@ -121,7 +132,9 @@ def test_export_import_round_trip(tmp_path):
     store = MemoryStore(data_dir=dst / "memory")
     assert len(store.list(limit=10_000)) == 3
     # settings landed
-    assert json.loads((dst / "charter.json").read_text()) == {"principle": "local-first"}
+    assert json.loads((dst / "charter.json").read_text()) == {
+        "principle": "local-first"
+    }
     # skills manifest verifiable
     assert summary["skills"]["local_count"] == summary["skills"]["pack_count"]
 
@@ -172,13 +185,21 @@ def test_preview_diff(tmp_path):
     profile.name = "Someone Else"
     ProfileStore(path=dst / "profile.json").save(profile)
     # diverge a settings file the pack also carries
-    (dst / "charter.json").write_text(json.dumps({"principle": "cloud-first"}), encoding="utf-8")
+    (dst / "charter.json").write_text(
+        json.dumps({"principle": "cloud-first"}), encoding="utf-8"
+    )
 
     lines = preview_import(pack, dst)
     text = "\n".join(lines)
     assert "'Someone Else'" in text and "'Chauncey'" in text, text
-    assert any("settings" in line and "charter.json" in line and "differs" in line for line in lines), text
-    assert any(line.startswith("memory:") and "+0 new" in line and "0 changed" in line for line in lines), text
+    assert any(
+        "settings" in line and "charter.json" in line and "differs" in line
+        for line in lines
+    ), text
+    assert any(
+        line.startswith("memory:") and "+0 new" in line and "0 changed" in line
+        for line in lines
+    ), text
     assert any(line.startswith("skills:") for line in lines), text
 
     # preview is read-only
@@ -217,7 +238,9 @@ def test_cmd_import_preview_writes_nothing(tmp_path, capsys):
     pack_file.write_text(json.dumps(pack), encoding="utf-8")
 
     dst = tmp_path / "dst"
-    args = argparse.Namespace(lifepack_action="import", file=str(pack_file), preview=True, yes=False)
+    args = argparse.Namespace(
+        lifepack_action="import", file=str(pack_file), preview=True, yes=False
+    )
     rc = cmd_lifepack(args, home=dst)
     assert rc == 0
     assert not (dst / "profile.json").exists()
@@ -234,7 +257,9 @@ def test_cmd_import_refuses_without_tty_or_yes(tmp_path, monkeypatch, capsys):
 
     dst = tmp_path / "dst"
     monkeypatch.setattr(sys.stdin, "isatty", lambda: False)
-    args = argparse.Namespace(lifepack_action="import", file=str(pack_file), preview=False, yes=False)
+    args = argparse.Namespace(
+        lifepack_action="import", file=str(pack_file), preview=False, yes=False
+    )
     rc = cmd_lifepack(args, home=dst)
     assert rc == 1
     assert not (dst / "profile.json").exists()
@@ -249,7 +274,9 @@ def test_cmd_import_yes_writes(tmp_path, capsys):
     pack_file.write_text(json.dumps(pack), encoding="utf-8")
 
     dst = tmp_path / "dst"
-    args = argparse.Namespace(lifepack_action="import", file=str(pack_file), preview=False, yes=True)
+    args = argparse.Namespace(
+        lifepack_action="import", file=str(pack_file), preview=False, yes=True
+    )
     rc = cmd_lifepack(args, home=dst)
     assert rc == 0
     assert ProfileStore(path=dst / "profile.json").load().name == "Chauncey"

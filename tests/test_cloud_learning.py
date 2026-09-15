@@ -48,8 +48,13 @@ def env(tmp_path, monkeypatch):
     monkeypatch.setenv("LEVI_CLOUD_DIR", str(cloud))
     monkeypatch.setenv("LEVI_GROWTH_DIR", str(growth))
     monkeypatch.setenv("LEVI_GROWTH_CLOUD_LEARN", "1")
-    return {"sessions": sessions, "cloud": cloud, "growth": growth,
-            "mem": mem, "store": MemoryStore(data_dir=mem)}
+    return {
+        "sessions": sessions,
+        "cloud": cloud,
+        "growth": growth,
+        "mem": mem,
+        "store": MemoryStore(data_dir=mem),
+    }
 
 
 def _tail_for(rec: dict) -> str:
@@ -62,8 +67,9 @@ def _make_key(name="alice", **kw):
     return raw, rec
 
 
-def _write_cloud_session(sessions: Path, tail: str, name: str,
-                         records: list[dict]) -> Path:
+def _write_cloud_session(
+    sessions: Path, tail: str, name: str, records: list[dict]
+) -> Path:
     p = sessions / f"cloud_{tail}_{name}.jsonl"
     with open(p, "w", encoding="utf-8") as f:
         for r in records:
@@ -73,20 +79,51 @@ def _write_cloud_session(sessions: Path, tail: str, name: str,
 
 def _good_session(provider="openai") -> list[dict]:
     return [
-        {"kind": "message", "role": "user", "ts": "2026-09-15T10:00:00Z",
-         "content": "Research the best lightweight stargazing telescopes."},
-        {"kind": "turn-meta", "ts": "2026-09-15T10:00:10Z",
-         "provider": provider, "ok": True, "steps": 3},
-        {"kind": "message", "role": "assistant", "ts": "2026-09-15T10:00:11Z",
-         "content": "ZEBRA-UNIQUE-PHRASE-77 searching now."},
-        {"kind": "message", "role": "tool", "name": "web_search",
-         "ts": "2026-09-15T10:00:12Z", "content": "results: 3 telescopes"},
-        {"kind": "message", "role": "tool", "name": "web_search",
-         "ts": "2026-09-15T10:00:13Z", "content": "results: prices compared"},
-        {"kind": "message", "role": "assistant", "ts": "2026-09-15T10:00:14Z",
-         "content": "Here is the comparison table you asked for."},
-        {"kind": "message", "role": "user", "ts": "2026-09-15T10:01:00Z",
-         "content": "Perfect, thanks — exactly what I needed!"},
+        {
+            "kind": "message",
+            "role": "user",
+            "ts": "2026-09-15T10:00:00Z",
+            "content": "Research the best lightweight stargazing telescopes.",
+        },
+        {
+            "kind": "turn-meta",
+            "ts": "2026-09-15T10:00:10Z",
+            "provider": provider,
+            "ok": True,
+            "steps": 3,
+        },
+        {
+            "kind": "message",
+            "role": "assistant",
+            "ts": "2026-09-15T10:00:11Z",
+            "content": "ZEBRA-UNIQUE-PHRASE-77 searching now.",
+        },
+        {
+            "kind": "message",
+            "role": "tool",
+            "name": "web_search",
+            "ts": "2026-09-15T10:00:12Z",
+            "content": "results: 3 telescopes",
+        },
+        {
+            "kind": "message",
+            "role": "tool",
+            "name": "web_search",
+            "ts": "2026-09-15T10:00:13Z",
+            "content": "results: prices compared",
+        },
+        {
+            "kind": "message",
+            "role": "assistant",
+            "ts": "2026-09-15T10:00:14Z",
+            "content": "Here is the comparison table you asked for.",
+        },
+        {
+            "kind": "message",
+            "role": "user",
+            "ts": "2026-09-15T10:01:00Z",
+            "content": "Perfect, thanks — exactly what I needed!",
+        },
     ]
 
 
@@ -151,25 +188,40 @@ def test_apikey_learn_toggle(env):
 
 
 def test_redaction_scrubs_secrets_and_pii():
-    dirty = ("contact me at jane@example.com or 555-123-4567, "
-             "key levi_sk_abcDEF123456, password=hunter2, "
-             "card 4111111111111111")
+    dirty = (
+        "contact me at jane@example.com or 555-123-4567, "
+        "key levi_sk_abcDEF123456, password=hunter2, "
+        "card 4111111111111111"
+    )
     clean = redact_text(dirty)
-    for secret in ("jane@example.com", "555-123-4567", "levi_sk_abcDEF123456",
-                   "hunter2", "4111111111111111"):
+    for secret in (
+        "jane@example.com",
+        "555-123-4567",
+        "levi_sk_abcDEF123456",
+        "hunter2",
+        "4111111111111111",
+    ):
         assert secret not in clean, secret
 
 
 def test_redact_cloud_experiences_generalizes_user_speech(env):
     exps = [
-        Experience(id="1", kind="user-said", source="cloud:alice",
-                   ts="2026-09-15T10:00:00Z",
-                   content="My email is jane@example.com and password=hunter2 please help",
-                   meta={"origin": "cloud"}),
-        Experience(id="2", kind="levi-did", source="cloud:alice",
-                   ts="2026-09-15T10:00:01Z",
-                   content="[tool web_search] results ok",
-                   meta={"origin": "cloud"}),
+        Experience(
+            id="1",
+            kind="user-said",
+            source="cloud:alice",
+            ts="2026-09-15T10:00:00Z",
+            content="My email is jane@example.com and password=hunter2 please help",
+            meta={"origin": "cloud"},
+        ),
+        Experience(
+            id="2",
+            kind="levi-did",
+            source="cloud:alice",
+            ts="2026-09-15T10:00:01Z",
+            content="[tool web_search] results ok",
+            meta={"origin": "cloud"},
+        ),
     ]
     out = redact_cloud_experiences(exps)
     assert all(e.meta.get("redacted") is True for e in out)
@@ -206,9 +258,12 @@ def test_bad_outcome_distills_nothing(env):
     _, rec = _make_key("alice")
     tail = _tail_for(rec)
     records = _good_session("openai")
-    records[-1] = {"kind": "message", "role": "user",
-                   "ts": "2026-09-15T10:01:00Z",
-                   "content": "No, that's wrong — I meant something else entirely."}
+    records[-1] = {
+        "kind": "message",
+        "role": "user",
+        "ts": "2026-09-15T10:01:00Z",
+        "content": "No, that's wrong — I meant something else entirely.",
+    }
     _write_cloud_session(env["sessions"], tail, "demo", records)
     exps, _ = hc.harvest_cloud_sessions()
     assert reflect_cloud(redact_cloud_experiences(exps)) == []
@@ -230,13 +285,22 @@ def test_cloud_never_reaches_model_reflector(env, monkeypatch):
         raise RuntimeError("no provider in test")
 
     monkeypatch.setattr(reflect_mod, "_reflect_model", _stub)
-    cloud_exp = Experience(id="c1", kind="levi-did", source="cloud:alice",
-                           ts="2026-09-15T10:00:00Z", content="did a thing",
-                           meta={"origin": "cloud"})
-    local_exp = Experience(id="l1", kind="user-said", source="default",
-                           ts="2026-09-15T10:00:00Z",
-                           content="Please remember that I prefer dark mode.",
-                           meta={"origin": "local"})
+    cloud_exp = Experience(
+        id="c1",
+        kind="levi-did",
+        source="cloud:alice",
+        ts="2026-09-15T10:00:00Z",
+        content="did a thing",
+        meta={"origin": "cloud"},
+    )
+    local_exp = Experience(
+        id="l1",
+        kind="user-said",
+        source="default",
+        ts="2026-09-15T10:00:00Z",
+        content="Please remember that I prefer dark mode.",
+        meta={"origin": "local"},
+    )
     learnings, mode = reflect([cloud_exp, local_exp], use_model=True)
     assert mode == "rules"  # stub raised → honest fallback
     assert seen and all(
@@ -253,13 +317,17 @@ def test_full_cycle_secret_never_reaches_memory_or_journal(env):
     _, rec = _make_key("alice")
     tail = _tail_for(rec)
     records = _good_session("openai")
-    records[0] = {"kind": "message", "role": "user",
-                  "ts": "2026-09-15T10:00:00Z",
-                  "content": ("Research telescopes. My email is jane@example.com, "
-                              "password=hunter2, key levi_sk_SECRETSEED999.")}
+    records[0] = {
+        "kind": "message",
+        "role": "user",
+        "ts": "2026-09-15T10:00:00Z",
+        "content": (
+            "Research telescopes. My email is jane@example.com, "
+            "password=hunter2, key levi_sk_SECRETSEED999."
+        ),
+    }
     _write_cloud_session(env["sessions"], tail, "demo", records)
-    report = growth_cycle.run_cycle(use_model=False, dry_run=False,
-                                    store=env["store"])
+    report = growth_cycle.run_cycle(use_model=False, dry_run=False, store=env["store"])
     assert report["experiences"] > 0
     assert report["sources"]["by_origin"].get("cloud", 0) > 0
 

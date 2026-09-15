@@ -20,6 +20,7 @@ These registers are LEVI-original (see core/levi/persona/kai9000.py header).
 
 Usage: python3 prepare_corpus.py [--out DIR]
 """
+
 from __future__ import annotations
 
 import json
@@ -127,8 +128,10 @@ def main(argv: list[str]) -> int:
     }
     (out_dir / "corpus_stats.json").write_text(json.dumps(stats, indent=1))
     print(f"files in : {files_in}")
-    print(f"chunks   : {len(records)} "
-          f"(identity={stats['identity_records']}, course={stats['course_chunks']})")
+    print(
+        f"chunks   : {len(records)} "
+        f"(identity={stats['identity_records']}, course={stats['course_chunks']})"
+    )
     print(f"chars    : {total_chars}")
     print(f"wrote    : {jsonl_path}")
     return 0

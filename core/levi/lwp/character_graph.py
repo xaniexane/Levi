@@ -5,6 +5,7 @@ Axes interpenetrate (drive × wound × method × voice × domain × era × bond)
 Each node is a stable id; edges are relation types. Unlimited types via
 combinatorics — LEVI-original, not a stock NPC table dump.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -19,32 +20,96 @@ import random
 DEFAULT = Path.home() / ".levi" / "lwp_character_graph.json"
 
 DRIVES = [
-    "belonging", "mastery", "justice", "freedom", "legacy", "curiosity",
-    "safety", "status", "care", "truth", "creation", "redemption",
+    "belonging",
+    "mastery",
+    "justice",
+    "freedom",
+    "legacy",
+    "curiosity",
+    "safety",
+    "status",
+    "care",
+    "truth",
+    "creation",
+    "redemption",
 ]
 WOUNDS = [
-    "abandonment", "humiliation", "betrayal", "powerlessness", "erasure",
-    "debt", "exile", "broken_promise", "witnessed_harm", "failed_duty",
+    "abandonment",
+    "humiliation",
+    "betrayal",
+    "powerlessness",
+    "erasure",
+    "debt",
+    "exile",
+    "broken_promise",
+    "witnessed_harm",
+    "failed_duty",
 ]
 METHODS = [
-    "strategy", "charm", "force", "service", "withdrawal", "analysis",
-    "humor", "ritual", "craft", "network", "sabotage", "endurance",
+    "strategy",
+    "charm",
+    "force",
+    "service",
+    "withdrawal",
+    "analysis",
+    "humor",
+    "ritual",
+    "craft",
+    "network",
+    "sabotage",
+    "endurance",
 ]
 VOICES = [
-    "spare", "lyrical", "clinical", "ironic", "tender", "blunt",
-    "archaic", "street", "scholarly", "fragmented", "musical", "silent_heavy",
+    "spare",
+    "lyrical",
+    "clinical",
+    "ironic",
+    "tender",
+    "blunt",
+    "archaic",
+    "street",
+    "scholarly",
+    "fragmented",
+    "musical",
+    "silent_heavy",
 ]
 DOMAINS = [
-    "city_under", "coastal", "archive", "frontier", "court", "lab",
-    "temple", "market", "war_camp", "station", "forest_edge", "orbital",
+    "city_under",
+    "coastal",
+    "archive",
+    "frontier",
+    "court",
+    "lab",
+    "temple",
+    "market",
+    "war_camp",
+    "station",
+    "forest_edge",
+    "orbital",
 ]
 ERAS = [
-    "mythic", "industrial", "digital", "collapse", "reconstruction",
-    "eternal_night", "high_summer", "deep_winter",
+    "mythic",
+    "industrial",
+    "digital",
+    "collapse",
+    "reconstruction",
+    "eternal_night",
+    "high_summer",
+    "deep_winter",
 ]
 BONDS = [
-    "rival", "mentor", "debtor", "kin", "mirror", "hunter", "ward",
-    "co_conspirator", "ex", "patron", "witness", "stranger_who_knows",
+    "rival",
+    "mentor",
+    "debtor",
+    "kin",
+    "mirror",
+    "hunter",
+    "ward",
+    "co_conspirator",
+    "ex",
+    "patron",
+    "witness",
+    "stranger_who_knows",
 ]
 
 
@@ -84,8 +149,22 @@ class CharacterEdge:
 
 def _name_from_axes(drive: str, wound: str, method: str, seed: int) -> str:
     roots = [
-        "Ash", "Nyx", "Quill", "Vesper", "Reed", "Sable", "Iota", "Kestrel",
-        "Morrow", "Pell", "Wren", "Cass", "Orin", "Lumen", "Harrow", "Syl",
+        "Ash",
+        "Nyx",
+        "Quill",
+        "Vesper",
+        "Reed",
+        "Sable",
+        "Iota",
+        "Kestrel",
+        "Morrow",
+        "Pell",
+        "Wren",
+        "Cass",
+        "Orin",
+        "Lumen",
+        "Harrow",
+        "Syl",
     ]
     suffixes = ["e", "an", "is", "el", "or", "yn", "a", ""]
     random.seed(seed)
@@ -124,8 +203,12 @@ class CharacterGraph:
 
     def theoretical_types(self) -> int:
         return (
-            len(DRIVES) * len(WOUNDS) * len(METHODS) * len(VOICES)
-            * len(DOMAINS) * len(ERAS)
+            len(DRIVES)
+            * len(WOUNDS)
+            * len(METHODS)
+            * len(VOICES)
+            * len(DOMAINS)
+            * len(ERAS)
         )
 
     def mint(
@@ -139,6 +222,7 @@ class CharacterGraph:
         seed: Optional[str] = None,
     ) -> CharacterNode:
         rng = hashlib.sha1((seed or str(len(self.nodes))).encode()).hexdigest()
+
         def pick(opts, i):
             return opts[int(rng[i : i + 2], 16) % len(opts)]
 
@@ -191,17 +275,25 @@ class CharacterGraph:
 
     def weave(self, n_chars: int = 4) -> str:
         chars = self.mint_batch(n_chars)
-        lines = ["=== L.W.P. Character Graph Weave ===", f"Theoretical axis types: {self.theoretical_types():,}", ""]
+        lines = [
+            "=== L.W.P. Character Graph Weave ===",
+            f"Theoretical axis types: {self.theoretical_types():,}",
+            "",
+        ]
         for c in chars:
             lines.append(c.blurb())
             lines.append(f"  id={c.id}")
         if len(chars) >= 2:
             for i in range(len(chars) - 1):
                 e = self.link(chars[i].id, chars[i + 1].id)
-                lines.append(f"Edge: {chars[i].name} —{e.relation}→ {chars[i+1].name} ({e.tension})")
+                lines.append(
+                    f"Edge: {chars[i].name} —{e.relation}→ {chars[i + 1].name} ({e.tension})"
+                )
         lines.append("")
         lines.append(f"Graph size: {len(self.nodes)} nodes, {len(self.edges)} edges")
-        lines.append("Unlimited further types via axis remix — unique L.W.P. combinatorics.")
+        lines.append(
+            "Unlimited further types via axis remix — unique L.W.P. combinatorics."
+        )
         return "\n".join(lines)
 
     def format_status(self) -> str:

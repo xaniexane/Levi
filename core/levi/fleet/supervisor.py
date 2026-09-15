@@ -129,8 +129,21 @@ _KEYWORDS: List[tuple] = [
     (("data", "dataset", "analytics", "metrics", "spreadsheet"), "data"),
     (("design", "ui", "interface", "mockup"), "uiux"),
     (("database", "schema", "migration"), "database"),
-    (("build", "app", "implement", "feature", "code", "api", "website",
-      "saas", "program", "script"), "coding"),
+    (
+        (
+            "build",
+            "app",
+            "implement",
+            "feature",
+            "code",
+            "api",
+            "website",
+            "saas",
+            "program",
+            "script",
+        ),
+        "coding",
+    ),
 ]
 
 
@@ -151,13 +164,21 @@ def heuristic_plan(objective: str) -> Plan:
     nodes: List[PlanNode] = []
     seq = 0
 
-    def add(category: str, task: str, acceptance: str,
-            deps: Optional[List[str]] = None) -> str:
+    def add(
+        category: str, task: str, acceptance: str, deps: Optional[List[str]] = None
+    ) -> str:
         nonlocal seq
         seq += 1
         nid = f"n{seq}"
-        nodes.append(PlanNode(id=nid, category=category, task=task,
-                             acceptance=acceptance, deps=deps or []))
+        nodes.append(
+            PlanNode(
+                id=nid,
+                category=category,
+                task=task,
+                acceptance=acceptance,
+                deps=deps or [],
+            )
+        )
         return nid
 
     # Always open with planning, close with verification.
@@ -251,19 +272,24 @@ def model_plan(objective: str, provider: Any = None) -> Plan:
     """Decompose via the existing agentic loop; falls back to heuristic."""
     from levi.agent.loop import run_subtask
 
-    cats = ", ".join(sorted(
-        n for n in (
-            "executive supervisor project_manager planning research coding "
-            "architect uiux database devops qa security automation browser "
-            "computer device communication finance payment support sales "
-            "marketing data document memory learning verification fraud_risk "
-            "compliance"
-        ).split()
-    ))
+    cats = ", ".join(
+        sorted(
+            n
+            for n in (
+                "executive supervisor project_manager planning research coding "
+                "architect uiux database devops qa security automation browser "
+                "computer device communication finance payment support sales "
+                "marketing data document memory learning verification fraud_risk "
+                "compliance"
+            ).split()
+        )
+    )
     prompt = _DECOMP_PROMPT.format(categories=cats, objective=objective)
     try:
         transcript = run_subtask(
-            prompt, provider=provider, max_steps=4,
+            prompt,
+            provider=provider,
+            max_steps=4,
             system_prompt="You are the fleet supervisor. Emit NODE lines only.",
         )
         text = getattr(transcript, "final", "") or ""
@@ -276,9 +302,15 @@ def model_plan(objective: str, provider: Any = None) -> Plan:
             continue
         nid, cat, task, acceptance, after = m.groups()
         deps = [d.strip() for d in (after or "").split(",") if d.strip()]
-        nodes.append(PlanNode(id=nid, category=cat.strip().lower(),
-                              task=task.strip(),
-                              acceptance=acceptance.strip(), deps=deps))
+        nodes.append(
+            PlanNode(
+                id=nid,
+                category=cat.strip().lower(),
+                task=task.strip(),
+                acceptance=acceptance.strip(),
+                deps=deps,
+            )
+        )
     plan = Plan(objective=objective, nodes=nodes, method="model")
     if not nodes or plan.validate():
         # Model output unusable — honest fallback, flagged as heuristic.
@@ -286,8 +318,9 @@ def model_plan(objective: str, provider: Any = None) -> Plan:
     return plan
 
 
-def plan_objective(objective: str, *, use_model: bool = False,
-                   provider: Any = None) -> Plan:
+def plan_objective(
+    objective: str, *, use_model: bool = False, provider: Any = None
+) -> Plan:
     """Decompose an objective into a subtask DAG."""
     if use_model:
         return model_plan(objective, provider=provider)
@@ -306,20 +339,27 @@ def replan_remaining(plan: Plan, failed_ids: List[str]) -> Plan:
     nodes: List[PlanNode] = []
     for n in plan.nodes:
         if n.id in failed:
-            nodes.append(PlanNode(
-                id=remap[n.id],
-                category="planning",
-                task=f"Recover failed subtask {n.id} ({n.category}): {n.task}",
-                acceptance=n.acceptance,
-                deps=[remap.get(d, d) for d in n.deps],
-            ))
+            nodes.append(
+                PlanNode(
+                    id=remap[n.id],
+                    category="planning",
+                    task=f"Recover failed subtask {n.id} ({n.category}): {n.task}",
+                    acceptance=n.acceptance,
+                    deps=[remap.get(d, d) for d in n.deps],
+                )
+            )
         else:
-            nodes.append(PlanNode(
-                id=n.id,
-                category=n.category,
-                task=n.task,
-                acceptance=n.acceptance,
-                deps=[remap.get(d, d) for d in n.deps],
-            ))
-    return Plan(objective=plan.objective + " (replanned)", nodes=nodes,
-                method=plan.method + "+replan")
+            nodes.append(
+                PlanNode(
+                    id=n.id,
+                    category=n.category,
+                    task=n.task,
+                    acceptance=n.acceptance,
+                    deps=[remap.get(d, d) for d in n.deps],
+                )
+            )
+    return Plan(
+        objective=plan.objective + " (replanned)",
+        nodes=nodes,
+        method=plan.method + "+replan",
+    )

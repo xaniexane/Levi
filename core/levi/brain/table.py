@@ -3,6 +3,7 @@ Indexed brain table — spreadsheet-like second brain (local JSON).
 
 Columns: id | domain | key | value | source | tags | updated_at
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
@@ -111,7 +112,9 @@ class BrainTable:
                 out.append(r)
         return sorted(out, key=lambda x: x.updated_at, reverse=True)
 
-    def format(self, query: str = "", domain: Optional[str] = None, limit: int = 30) -> str:
+    def format(
+        self, query: str = "", domain: Optional[str] = None, limit: int = 30
+    ) -> str:
         rows = self.search(query, domain)[:limit]
         if not rows:
             return "Brain table empty. Set: levi brain set --domain x --key y --value z"

@@ -1,11 +1,19 @@
 """Stage ordering and route classification for the bloodstream turn."""
+
 from levi.factory.pipeline import SoftwareFactory
 
 from levi.bloodstream.stages import BehaviorKind, RouteKind
 from levi.bloodstream.turn import run_turn
 
-FULL_ORDER = ["companion_ei", "persona", "governor", "route", "policy",
-              "memory", "trace"]
+FULL_ORDER = [
+    "companion_ei",
+    "persona",
+    "governor",
+    "route",
+    "policy",
+    "memory",
+    "trace",
+]
 SPECIAL_ORDER = ["companion_ei", "persona", "memory", "trace"]
 
 

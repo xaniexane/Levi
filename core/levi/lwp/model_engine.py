@@ -12,6 +12,7 @@ genres, REIM forks, RIEM/void ghost, ROM / Wyrd-Rupture locks, manuscript.
 
 Cloud is optional booster — never owns continuity. Seal: L.W.P.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -77,8 +78,14 @@ GENRES_BODY = {
         "The machine did not predict; it remembered a future already discarded.",
         "Extraction was a civic service with a waiting room.",
     ],
-    "horror": ["Dread arrived with a filing number.", "The room kept a second temperature."],
-    "noir": ["Compromise was already the furniture.", "Style remained after trust left."],
+    "horror": [
+        "Dread arrived with a filing number.",
+        "The room kept a second temperature.",
+    ],
+    "noir": [
+        "Compromise was already the furniture.",
+        "Style remained after trust left.",
+    ],
 }
 OPEN = {
     "forward": [
@@ -100,10 +107,19 @@ OPEN = {
     ],
 }
 CLOSE = {
-    "forward": ["The weather kept the receipt.", "Nothing was finished; only advanced."],
+    "forward": [
+        "The weather kept the receipt.",
+        "Nothing was finished; only advanced.",
+    ],
     "reverse": ["The earlier light still held the later cost.", "Spool held."],
-    "inverse": ["Polarity settled; the door remembered both prices.", "Inversion complete."],
-    "free": ["The jump left a scar the locks would honor.", "Continuity held across the cut."],
+    "inverse": [
+        "Polarity settled; the door remembered both prices.",
+        "Inversion complete.",
+    ],
+    "free": [
+        "The jump left a scar the locks would honor.",
+        "Continuity held across the cut.",
+    ],
 }
 POVS = {
     "Lena Voss": {
@@ -285,13 +301,17 @@ class LWPModelEngine:
         if st.bible_facts:
             parts.append(f"Locked fact: {st.bible_facts[-1]}")
         if st.rom:
-            parts.append("ROM law holds: the genome will not contradict the locked cartridge.")
+            parts.append(
+                "ROM law holds: the genome will not contradict the locked cartridge."
+            )
         if st.ghost and (direction in ("reverse", "inverse") or riem):
             parts.append(f"Phantom from a denied hour: {st.ghost}")
         if st.power == "repeater":
             parts.append("Scar liturgy re-entered so the distance would not rot.")
         if st.power == "gain" or st.phase == "gold_push":
-            parts.append("Gain holds. Repeaters keep the signal from rotting at distance.")
+            parts.append(
+                "Gain holds. Repeaters keep the signal from rotting at distance."
+            )
         parts.append(r.choice(CLOSE.get(direction, CLOSE["forward"])))
         text = " ".join(p for p in parts if p)
         need = target or self.target_words()
@@ -301,7 +321,12 @@ class LWPModelEngine:
         pool.extend(GENRES_BODY["literary"])
         guard = 0
         while _words(text) < need and guard < 14:
-            text += " " + r.choice(pool) + " " + r.choice(CLOSE.get(direction, CLOSE["forward"]))
+            text += (
+                " "
+                + r.choice(pool)
+                + " "
+                + r.choice(CLOSE.get(direction, CLOSE["forward"]))
+            )
             guard += 1
         event = f"{direction}: {seed.split('.')[0][:48]}"
         return {"text": text, "words": _words(text), "event": event}
@@ -330,8 +355,12 @@ class LWPModelEngine:
             self.state.last_id = sid
             self.state.bible_facts.append(built["event"])
             self.state.bible_facts = self.state.bible_facts[-40:]
-            lines.append(f"— scene {sid} · {built['words']}w · {self.state.direction} —")
-            lines.append(built["text"][:1200] + ("…" if len(built["text"]) > 1200 else ""))
+            lines.append(
+                f"— scene {sid} · {built['words']}w · {self.state.direction} —"
+            )
+            lines.append(
+                built["text"][:1200] + ("…" if len(built["text"]) > 1200 else "")
+            )
             lines.append("")
         self._persist()
         lines.append(
@@ -340,6 +369,7 @@ class LWPModelEngine:
         )
         try:
             from levi.brain.corpus import Corpus
+
             Corpus().add(
                 f"L.W.P. expand {n} scenes seed={self.state.seed[:80]}",
                 kind="INFERENCE",
@@ -358,8 +388,16 @@ class LWPModelEngine:
         text = last.get("text") or ""
         sents = re.split(r"(?<=\.)\s+", text)
         self.state.ghost = " ".join(sents[:2])
-        self.state.vault.append({"id": last.get("id"), "note": f"denied {last.get('event')}", "seed": self.state.seed})
-        self.state.last_text = self.state.scenes[-1]["text"] if self.state.scenes else ""
+        self.state.vault.append(
+            {
+                "id": last.get("id"),
+                "note": f"denied {last.get('event')}",
+                "seed": self.state.seed,
+            }
+        )
+        self.state.last_text = (
+            self.state.scenes[-1]["text"] if self.state.scenes else ""
+        )
         self.state.last_id = self.state.scenes[-1]["id"] if self.state.scenes else ""
         self._persist()
         return f"Denied → Void. Ghost armed ({len(self.state.ghost)} chars). words={self.state.words}"
@@ -381,16 +419,20 @@ class LWPModelEngine:
         tracks_data: List[Dict[str, Any]] = []
         for i in range(tracks):
             d = dirs[i % 4]
-            built = self.assemble(seed=seed, direction=d, key=f"reim{i}{seed}", target=220)
+            built = self.assemble(
+                seed=seed, direction=d, key=f"reim{i}{seed}", target=220
+            )
             tid = str(uuid.uuid4())[:8]
-            tracks_data.append({
-                "id": tid,
-                "index": i,
-                "direction": d,
-                "text": built["text"],
-                "words": built["words"],
-            })
-            lines.append(f"Track {chr(65+i)} · {d} · {built['words']}w · id={tid}")
+            tracks_data.append(
+                {
+                    "id": tid,
+                    "index": i,
+                    "direction": d,
+                    "text": built["text"],
+                    "words": built["words"],
+                }
+            )
+            lines.append(f"Track {chr(65 + i)} · {d} · {built['words']}w · id={tid}")
             lines.append(built["text"][:400] + "…")
             lines.append("")
         self.state.tracks = tracks_data
@@ -403,23 +445,29 @@ class LWPModelEngine:
             return "Budget exhausted. Write ~20k more words before another rupture."
         prose = ROM_LENSES.get(lens, ROM_LENSES["mccarthy"])
         self.state.ruptures += 1
-        self.state.rom = {"lens": lens, "text": prose, "ts": datetime.now(timezone.utc).isoformat()}
+        self.state.rom = {
+            "lens": lens,
+            "text": prose,
+            "ts": datetime.now(timezone.utc).isoformat(),
+        }
         w = _words(prose)
         self.state.words += w
         self.state.events += 1
         self.state.last_text = prose
         self.state.bible_scars.append(f"rupture/{lens}")
         self.state.bible_facts.append(f"Wyrd-ROM ({lens}) immutable")
-        self.state.scenes.append({
-            "id": str(uuid.uuid4())[:8],
-            "text": prose,
-            "words": w,
-            "event": f"rupture/{lens}",
-            "direction": self.state.direction,
-            "pov": self.state.pov,
-            "genres": list(self.state.genres),
-            "status": "rom",
-        })
+        self.state.scenes.append(
+            {
+                "id": str(uuid.uuid4())[:8],
+                "text": prose,
+                "words": w,
+                "event": f"rupture/{lens}",
+                "direction": self.state.direction,
+                "pov": self.state.pov,
+                "genres": list(self.state.genres),
+                "status": "rom",
+            }
+        )
         self._persist()
         return (
             f"=== Wyrd-Rupture · {lens} · immutable ===\n\n{prose}\n\n"
@@ -480,29 +528,31 @@ class LWPModelEngine:
             # synthesize from last reim if empty
             return "No tracks. Run reim_forks first, then crown."
         if index < 0 or index >= len(self.state.tracks):
-            return f"Track index out of range (0..{len(self.state.tracks)-1})"
+            return f"Track index out of range (0..{len(self.state.tracks) - 1})"
         t = self.state.tracks[index]
         self.state.crowned = t.get("id") or str(index)
         text = t.get("text") or ""
         w = _words(text)
         sid = str(uuid.uuid4())[:8]
-        self.state.scenes.append({
-            "id": sid,
-            "text": text,
-            "words": w,
-            "event": f"crown/track{index}",
-            "direction": t.get("direction", self.state.direction),
-            "pov": self.state.pov,
-            "genres": list(self.state.genres),
-            "status": "crowned",
-        })
+        self.state.scenes.append(
+            {
+                "id": sid,
+                "text": text,
+                "words": w,
+                "event": f"crown/track{index}",
+                "direction": t.get("direction", self.state.direction),
+                "pov": self.state.pov,
+                "genres": list(self.state.genres),
+                "status": "crowned",
+            }
+        )
         self.state.words += w
         self.state.events += 1
         self.state.last_text = text
         self.state.last_id = sid
         self.state.bible_facts.append(f"Crowned track {index} into continuity")
         self._persist()
-        return f"=== Crowned track {index} ===\n\n{text[:600]}{'…' if len(text)>600 else ''}\n\nwords={self.state.words} rank={self.rank()}"
+        return f"=== Crowned track {index} ===\n\n{text[:600]}{'…' if len(text) > 600 else ''}\n\nwords={self.state.words} rank={self.rank()}"
 
     def causal_bleed(self) -> str:
         """Prefer ghost / denied material as nonlocal stain (Mass Butterfly class)."""
@@ -535,7 +585,9 @@ class LWPModelEngine:
         ]
         for s in scenes:
             status = s.get("status") or "draft"
-            lines.append(f"--- [{status}] {s.get('event','')} · {s.get('direction','')} ---")
+            lines.append(
+                f"--- [{status}] {s.get('event', '')} · {s.get('direction', '')} ---"
+            )
             lines.append(s.get("text") or "")
             lines.append("")
         if self.state.rom:
@@ -554,6 +606,7 @@ class LWPModelEngine:
             parts = list(self.state.genres)
         try:
             from levi.graph.genres import GenreRegistry
+
             reg = GenreRegistry()
             resolved = []
             for p in parts:
@@ -568,15 +621,20 @@ class LWPModelEngine:
             self._persist()
             return self.state.genres
 
-    def optional_polish(self, text: str, instruction: str = "Tighten literary prose; keep meaning.") -> str:
+    def optional_polish(
+        self, text: str, instruction: str = "Tighten literary prose; keep meaning."
+    ) -> str:
         """Optional model relay polish — never required; offline text returned on failure."""
         try:
             from levi.model.relay import ModelRelay
+
             relay = ModelRelay()
             prompt = f"{instruction}\n\n---\n{text[:3000]}"
             # GenerationRequest path varies; use router status first
             st = relay.router.status() if hasattr(relay, "router") else {}
-            if not st.get("local_available") and not getattr(relay.config, "cloud_endpoints", None):
+            if not st.get("local_available") and not getattr(
+                relay.config, "cloud_endpoints", None
+            ):
                 return text
             # Best-effort: if relay has generate
             if hasattr(relay, "generate"):
@@ -609,4 +667,3 @@ class LWPModelEngine:
             "seal": "L.W.P.",
             "cloud_role": "optional booster — never owns continuity",
         }
-

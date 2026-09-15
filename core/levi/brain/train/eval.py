@@ -7,6 +7,7 @@ Writes ../weights/samples.md with 3 generations from fixed prompts.
 
 Usage: python3 eval.py [--data corpus.jsonl] [--out ../weights]
 """
+
 from __future__ import annotations
 
 import argparse
@@ -41,8 +42,13 @@ def main(argv=None) -> int:
     chars = ckpt["chars"]
     stoi = {c: i for i, c in enumerate(chars)}
     cfg = ckpt["config"]
-    model = TinyGPT(len(chars), n_layer=cfg["n_layer"], n_head=cfg["n_head"],
-                    n_embd=cfg["n_embd"], block_size=cfg["block_size"])
+    model = TinyGPT(
+        len(chars),
+        n_layer=cfg["n_layer"],
+        n_head=cfg["n_head"],
+        n_embd=cfg["n_embd"],
+        block_size=cfg["block_size"],
+    )
     model.load_state_dict(ckpt["model_state"])
     model.eval()
 
@@ -53,25 +59,27 @@ def main(argv=None) -> int:
     held = data[cut:]
     with torch.no_grad():
         x, y = get_batch(held, 16, model.block_size)
-        loss = F.cross_entropy(
-            model(x).view(-1, len(chars)), y.view(-1)).item()
+        loss = F.cross_entropy(model(x).view(-1, len(chars)), y.view(-1)).item()
     print(f"held-out loss: {loss:.4f}")
 
     def generate(prompt: str, n: int = 200) -> str:
         idx = torch.tensor([[stoi.get(c, 0) for c in prompt]], dtype=torch.long)
         with torch.no_grad():
             for _ in range(n):
-                logits = model(idx[:, -model.block_size:])
+                logits = model(idx[:, -model.block_size :])
                 probs = F.softmax(logits[:, -1, :], dim=-1)
                 nxt = torch.multinomial(probs, 1)
                 idx = torch.cat([idx, nxt], dim=1)
         return "".join(chars[i] for i in idx[0].tolist())
 
     torch.manual_seed(7)
-    lines = ["# tiny-gpt samples", "",
-             f"_held-out loss: {loss:.4f} | params: {cfg['params']:,} | "
-             f"steps: {cfg['steps']} | corpus: {cfg['corpus_chars']:,} chars_",
-             ""]
+    lines = [
+        "# tiny-gpt samples",
+        "",
+        f"_held-out loss: {loss:.4f} | params: {cfg['params']:,} | "
+        f"steps: {cfg['steps']} | corpus: {cfg['corpus_chars']:,} chars_",
+        "",
+    ]
     for p in PROMPTS:
         gen = generate(p)
         lines += [f"## prompt: {p!r}", "", "```", gen, "```", ""]
@@ -79,8 +87,11 @@ def main(argv=None) -> int:
     (out_dir / "samples.md").write_text("\n".join(lines), encoding="utf-8")
     print("wrote", out_dir / "samples.md")
     (out_dir / "eval.json").write_text(
-        json.dumps({"held_out_loss": loss, "params": cfg["params"],
-                    "steps": cfg["steps"]}, indent=1))
+        json.dumps(
+            {"held_out_loss": loss, "params": cfg["params"], "steps": cfg["steps"]},
+            indent=1,
+        )
+    )
     return 0
 
 

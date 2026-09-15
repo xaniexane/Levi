@@ -49,7 +49,9 @@ def parse_params(text: str | int | float) -> int:
         return int(text)
     m = _PARAM_RE.match(str(text))
     if not m:
-        raise ValueError(f"parse_params: cannot parse {text!r} (try '30B', '600M', '3.3M')")
+        raise ValueError(
+            f"parse_params: cannot parse {text!r} (try '30B', '600M', '3.3M')"
+        )
     value, suffix = float(m.group(1)), m.group(2).lower()
     mult = {"": 1, "k": 1e3, "m": 1e6, "b": 1e9, "t": 1e12}[suffix]
     return int(value * mult)
@@ -74,7 +76,9 @@ def weight_bytes(params: int, quant: str = "int4") -> float:
     """Weight memory in bytes for a param count at a quantization."""
     q = quant.lower()
     if q not in BYTES_PER_PARAM:
-        raise ValueError(f"weight_bytes: unknown quant {quant!r}; choose from {sorted(BYTES_PER_PARAM)}")
+        raise ValueError(
+            f"weight_bytes: unknown quant {quant!r}; choose from {sorted(BYTES_PER_PARAM)}"
+        )
     return params * BYTES_PER_PARAM[q]
 
 
@@ -91,7 +95,9 @@ def kv_cache_bytes(
     which is the honest choice for capacity planning.
     """
     if layers <= 0 or hidden_dim <= 0 or ctx_tokens <= 0:
-        raise ValueError("kv_cache_bytes: layers, hidden_dim, ctx_tokens must be positive")
+        raise ValueError(
+            "kv_cache_bytes: layers, hidden_dim, ctx_tokens must be positive"
+        )
     return 2.0 * layers * hidden_dim * ctx_tokens * bytes_per_elem
 
 

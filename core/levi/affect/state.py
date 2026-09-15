@@ -87,14 +87,18 @@ def honesty_check(statement: str, known_tool_names: List[str]) -> List[str]:
     known = {t.lower() for t in known_tool_names}
     # Look for "I can <verb> ..." / "I'll <verb> ..." claims naming tools.
     for m in re.finditer(
-        r"\b(?:i can|i'll|i will|let me|i'm able to)\s+([a-z_]+)", 
+        r"\b(?:i can|i'll|i will|let me|i'm able to)\s+([a-z_]+)",
         statement.lower(),
     ):
         verb = m.group(1)
         if verb not in known and len(verb) > 2:
             # Only warn when the verb looks like a tool name.
             if "_" in verb or verb in (
-                "browse", "search", "email", "schedule", "deploy",
+                "browse",
+                "search",
+                "email",
+                "schedule",
+                "deploy",
             ):
                 warnings.append(
                     f"unverified capability claim: {verb!r} is not a known tool"
@@ -134,11 +138,9 @@ class SessionEI:
         if reading.confidence > 0:
             # Attunement: noticing affect at all is the empathy behavior.
             self.scores["empathy"] = min(1.0, self.scores["empathy"] + 0.03)
-            self.scores["social_skills"] = min(
-                1.0, self.scores["social_skills"] + 0.02
-            )
+            self.scores["social_skills"] = min(1.0, self.scores["social_skills"] + 0.02)
         # Track frustration streaks (anger/fear at high arousal, repeated).
-        if (reading.dominant in ("anger", "fear") and reading.arousal > 0.6):
+        if reading.dominant in ("anger", "fear") and reading.arousal > 0.6:
             self._frustration_streak += 1
         else:
             self._frustration_streak = 0
@@ -167,13 +169,9 @@ class SessionEI:
                 1.0, self.scores["self_awareness"] + 0.04
             )
         if was_proactive:
-            self.scores["motivation"] = min(
-                1.0, self.scores["motivation"] + 0.04
-            )
+            self.scores["motivation"] = min(1.0, self.scores["motivation"] + 0.04)
         if repaired:
-            self.scores["social_skills"] = min(
-                1.0, self.scores["social_skills"] + 0.05
-            )
+            self.scores["social_skills"] = min(1.0, self.scores["social_skills"] + 0.05)
             self._frustration_streak = 0
 
     # -- queries ----------------------------------------------------------

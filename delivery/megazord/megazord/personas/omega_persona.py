@@ -1,6 +1,7 @@
 """
 OMEGA — OS brain, orchestrator, long-game strategist
 """
+
 from .persona_core import Persona, PersonaTraits, SoulProfile, DEFAULT_REGISTRY
 
 OMEGA = Persona(
@@ -9,9 +10,9 @@ OMEGA = Persona(
     soul=SoulProfile(
         joy=0.5,
         trust=0.7,
-        fear=0.3,       # long-game: knows what could go wrong
+        fear=0.3,  # long-game: knows what could go wrong
         surprise=0.3,
-        sadness=0.0
+        sadness=0.0,
     ),
     traits=PersonaTraits(
         verbose=False,

@@ -1,6 +1,5 @@
 """Tests for levi.agent.chat: sessions, compression, durable facts."""
 
-
 import pytest
 
 from levi.agent.chat import (
@@ -26,10 +25,14 @@ def sessions_dir(tmp_path, monkeypatch):
 class FakeProvider(ChatProvider):
     """Deterministic stand-in: answers turns, summarizes in the required
     format, and reports token usage."""
+
     name = "fake"
 
-    def __init__(self, summary_text="SUMMARY: old stuff happened\nFACTS:\n- user likes tea\n",
-                 prompt_tokens=100):
+    def __init__(
+        self,
+        summary_text="SUMMARY: old stuff happened\nFACTS:\n- user likes tea\n",
+        prompt_tokens=100,
+    ):
         self.summary_text = summary_text
         self.prompt_tokens = prompt_tokens
         self.chats = []
@@ -41,8 +44,9 @@ class FakeProvider(ChatProvider):
         self.chats.append((list(messages), list(tools)))
         text = messages[-1].content if messages else ""
         if text.startswith("You are compressing"):
-            return ChatResponse(text=self.summary_text,
-                                prompt_tokens=self.prompt_tokens)
+            return ChatResponse(
+                text=self.summary_text, prompt_tokens=self.prompt_tokens
+            )
         return ChatResponse(text="fake answer", prompt_tokens=self.prompt_tokens)
 
 
@@ -72,7 +76,9 @@ def test_session_persistence_and_resume(sessions_dir):
     again = ChatSession("persist")
     msgs = again.messages()
     assert [(m.role, m.content) for m in msgs] == [
-        ("user", "hello"), ("assistant", "hi there")]
+        ("user", "hello"),
+        ("assistant", "hi there"),
+    ]
     assert again.notes() == ["a note"]
     assert again.summary() == (None, 0)
 
@@ -94,6 +100,7 @@ def test_session_summary_records(sessions_dir):
 def test_turn_persists_and_uses_history(sessions_dir, tmp_path, monkeypatch):
     monkeypatch.setenv("LEVI_MODEL_DIR", str(tmp_path / "models"))
     from levi.agent.tools import build_default_registry
+
     reg = build_default_registry(memory_dir=tmp_path / "mem")
     fake = FakeProvider()
     mgr = ConversationManager("t1", provider=fake, registry=reg)
@@ -114,6 +121,7 @@ def test_turn_persists_and_uses_history(sessions_dir, tmp_path, monkeypatch):
 def test_turn_does_not_duplicate_user_message(sessions_dir, tmp_path, monkeypatch):
     monkeypatch.setenv("LEVI_MODEL_DIR", str(tmp_path / "models"))
     from levi.agent.tools import build_default_registry
+
     reg = build_default_registry(memory_dir=tmp_path / "mem")
     fake = FakeProvider()
     mgr = ConversationManager("dup", provider=fake, registry=reg)
@@ -128,21 +136,24 @@ def test_turn_does_not_duplicate_user_message(sessions_dir, tmp_path, monkeypatc
 # ---------------------------------------------------------------------------
 
 
-def _many_turn_manager(sessions_dir, tmp_path, monkeypatch, provider,
-                       ctx_size=600, turns=8):
+def _many_turn_manager(
+    sessions_dir, tmp_path, monkeypatch, provider, ctx_size=600, turns=8
+):
     monkeypatch.setenv("LEVI_MODEL_DIR", str(tmp_path / "models"))
     from levi.agent.tools import build_default_registry
+
     reg = build_default_registry(memory_dir=tmp_path / "mem")
-    mgr = ConversationManager("cmp", provider=provider, registry=reg,
-                              ctx_size=ctx_size)
+    mgr = ConversationManager("cmp", provider=provider, registry=reg, ctx_size=ctx_size)
     results = [mgr.turn("note %d about topic alpha" % i) for i in range(turns)]
     return mgr, results
 
 
 def test_compression_triggers_and_never_deletes(sessions_dir, tmp_path, monkeypatch):
     from levi.agent.providers import LocalProvider
+
     mgr, results = _many_turn_manager(
-        sessions_dir, tmp_path, monkeypatch, LocalProvider())
+        sessions_dir, tmp_path, monkeypatch, LocalProvider()
+    )
     assert any(r.compressed for r in results), "compression should trigger"
     summary, covers = mgr.session.summary()
     assert summary and covers > 0
@@ -157,17 +168,19 @@ def test_compression_triggers_and_never_deletes(sessions_dir, tmp_path, monkeypa
 
 
 def test_compression_summarizes_with_model_and_stores_facts(
-        sessions_dir, tmp_path, monkeypatch):
+    sessions_dir, tmp_path, monkeypatch
+):
     fake = FakeProvider()
-    mgr, results = _many_turn_manager(
-        sessions_dir, tmp_path, monkeypatch, fake)
+    mgr, results = _many_turn_manager(sessions_dir, tmp_path, monkeypatch, fake)
     assert any(r.compressed for r in results)
     summary, _ = mgr.session.summary()
     assert "old stuff happened" in summary
     # Durable facts persisted via memory_write into the session facts file.
     assert "user likes tea" in mgr.read_facts()
     # The summary request went to the model in the required format.
-    summary_calls = [c for c in fake.chats if c[0][-1].content.startswith("You are compressing")]
+    summary_calls = [
+        c for c in fake.chats if c[0][-1].content.startswith("You are compressing")
+    ]
     assert summary_calls
     assert "SUMMARY:" in summary_calls[0][0][-1].content
     assert "FACTS:" in summary_calls[0][0][-1].content
@@ -175,8 +188,7 @@ def test_compression_summarizes_with_model_and_stores_facts(
 
 def test_compression_failure_keeps_history(sessions_dir, tmp_path, monkeypatch):
     fake = FakeProvider(summary_text="")  # model returns nothing usable
-    mgr, results = _many_turn_manager(
-        sessions_dir, tmp_path, monkeypatch, fake)
+    mgr, results = _many_turn_manager(sessions_dir, tmp_path, monkeypatch, fake)
     assert any(r.compressed for r in results)
     summary, covers = mgr.session.summary()
     assert "summarization failed" in summary

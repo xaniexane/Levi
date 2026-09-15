@@ -2,6 +2,7 @@
 
 Hermetic: build_intent_map / motivation_graph_for touch no disk, no network.
 """
+
 from levi.orchestration.intent import (
     Direction,
     IntentMap,
@@ -54,6 +55,7 @@ def test_turn_carries_intent_map_metadata():
 
 def test_intent_skill_registered_and_runs():
     from levi.skill.registry import SkillRegistry
+
     reg = SkillRegistry()
     skill = reg.get("intent_map")
     assert skill is not None

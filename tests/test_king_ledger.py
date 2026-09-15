@@ -1,4 +1,5 @@
 """King continuity ledger: rank ladder, harvest aggregation, persistence."""
+
 import json
 import os
 import stat

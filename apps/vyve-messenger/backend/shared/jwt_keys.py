@@ -41,7 +41,9 @@ _private_key: rsa.RSAPrivateKey | None = None
 
 def _key_dir() -> Path:
     return Path(
-        os.getenv("VYVE_KEY_DIR", os.path.join(os.path.expanduser("~"), ".vyve", "keys"))
+        os.getenv(
+            "VYVE_KEY_DIR", os.path.join(os.path.expanduser("~"), ".vyve", "keys")
+        )
     ).expanduser()
 
 

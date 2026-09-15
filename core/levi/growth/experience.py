@@ -34,9 +34,9 @@ class Experience:
     """One learnable unit of past activity."""
 
     id: str
-    kind: str          # "user-said" | "levi-did" | "distilled" | "automation" | "note"
-    source: str        # session name / automation id / "note"
-    ts: str            # ISO timestamp ("" when unknown)
+    kind: str  # "user-said" | "levi-did" | "distilled" | "automation" | "note"
+    source: str  # session name / automation id / "note"
+    ts: str  # ISO timestamp ("" when unknown)
     content: str
     meta: dict = field(default_factory=dict)
 
@@ -86,6 +86,7 @@ def harvest_sessions(
     if sessions_dir is None:
         try:
             from levi.agent.chat import sessions_dir as _sd
+
             sessions_dir = _sd()
         except Exception:
             return [], {}
@@ -263,7 +264,9 @@ def harvest_affect_signals(
     return experiences, ({"affect": latest} if latest else {})
 
 
-def harvest_new(since: dict[str, str] | None = None) -> tuple[list[Experience], dict[str, str]]:
+def harvest_new(
+    since: dict[str, str] | None = None,
+) -> tuple[list[Experience], dict[str, str]]:
     """Harvest all new experiences across sources.
 
     Sources: local chat sessions, automations, affect signals, and —

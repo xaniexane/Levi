@@ -112,9 +112,12 @@ export const leviStream = createServerFn({ method: "POST" })
 
 /** A terminated SSE response carrying a single error event (HTTP 200). */
 function sseError(error: string): Response {
-  return new Response(`data: ${JSON.stringify({ error })}\n\ndata: ${JSON.stringify({ done: true })}\n\n`, {
-    headers: { "Content-Type": "text/event-stream" },
-  });
+  return new Response(
+    `data: ${JSON.stringify({ error })}\n\ndata: ${JSON.stringify({ done: true })}\n\n`,
+    {
+      headers: { "Content-Type": "text/event-stream" },
+    },
+  );
 }
 
 export const leviComplete = createServerFn({ method: "POST" })

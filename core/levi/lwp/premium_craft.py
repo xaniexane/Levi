@@ -11,6 +11,7 @@ refusal of explanation-dumps, micro-tension per paragraph.
 
 LEVI-unique: cascade-locked beats, scar law, void-ghost residue, ROM rupture hooks.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -57,23 +58,75 @@ class CraftLens:
 
 
 LENSES: List[CraftLens] = [
-    CraftLens("scene_sequel", "classical", "Alternate scene (goal/conflict/disaster) with sequel (emotion/dilemma/decision)."),
-    CraftLens("try_fail", "classical", "Protagonist tries; fails at escalating cost before any win."),
-    CraftLens("chekhov", "classical", "Every introduced object or line must fire later."),
-    CraftLens("iceberg", "classical", "Show 1/8th; imply the rest through behavior and omission."),
-    CraftLens("objective_correlative", "classical", "External image carries emotion; do not name the feeling first."),
+    CraftLens(
+        "scene_sequel",
+        "classical",
+        "Alternate scene (goal/conflict/disaster) with sequel (emotion/dilemma/decision).",
+    ),
+    CraftLens(
+        "try_fail",
+        "classical",
+        "Protagonist tries; fails at escalating cost before any win.",
+    ),
+    CraftLens(
+        "chekhov", "classical", "Every introduced object or line must fire later."
+    ),
+    CraftLens(
+        "iceberg",
+        "classical",
+        "Show 1/8th; imply the rest through behavior and omission.",
+    ),
+    CraftLens(
+        "objective_correlative",
+        "classical",
+        "External image carries emotion; do not name the feeling first.",
+    ),
     CraftLens("in_medias_res", "classical", "Open after the irreversible has begun."),
-    CraftLens("recognition_reversal", "classical", "Anagnorisis + peripeteia: knowledge changes the power map."),
-    CraftLens("free_indirect", "classical", "Narration leans into character diction without full 1st person."),
-    CraftLens("in_late_out_early", "modern", "Enter scenes late; leave early; cut throat-clearing."),
-    CraftLens("micro_tension", "modern", "Every paragraph ends with unanswered pressure."),
-    CraftLens("focalization", "modern", "Lock whose eyes we borrow; do not head-hop mid-beat."),
-    CraftLens("plant_payoff", "modern", "Ledger plants early; pay off under cascade pressure."),
-    CraftLens("kishotenketsu_turn", "modern", "Twists can reframe without pure antagonist opposition."),
-    CraftLens("sensory_triangle", "modern", "At least two senses + one body state per major beat."),
-    CraftLens("cascade_lock", "lwp", "Next beat is typed by cascade order, not random flourish."),
-    CraftLens("scar_law", "lwp", "Consequences accrue; wounds do not reset for convenience."),
-    CraftLens("void_ghost", "lwp", "Denied paths leave residue that can haunt later prose."),
+    CraftLens(
+        "recognition_reversal",
+        "classical",
+        "Anagnorisis + peripeteia: knowledge changes the power map.",
+    ),
+    CraftLens(
+        "free_indirect",
+        "classical",
+        "Narration leans into character diction without full 1st person.",
+    ),
+    CraftLens(
+        "in_late_out_early",
+        "modern",
+        "Enter scenes late; leave early; cut throat-clearing.",
+    ),
+    CraftLens(
+        "micro_tension", "modern", "Every paragraph ends with unanswered pressure."
+    ),
+    CraftLens(
+        "focalization", "modern", "Lock whose eyes we borrow; do not head-hop mid-beat."
+    ),
+    CraftLens(
+        "plant_payoff", "modern", "Ledger plants early; pay off under cascade pressure."
+    ),
+    CraftLens(
+        "kishotenketsu_turn",
+        "modern",
+        "Twists can reframe without pure antagonist opposition.",
+    ),
+    CraftLens(
+        "sensory_triangle",
+        "modern",
+        "At least two senses + one body state per major beat.",
+    ),
+    CraftLens(
+        "cascade_lock",
+        "lwp",
+        "Next beat is typed by cascade order, not random flourish.",
+    ),
+    CraftLens(
+        "scar_law", "lwp", "Consequences accrue; wounds do not reset for convenience."
+    ),
+    CraftLens(
+        "void_ghost", "lwp", "Denied paths leave residue that can haunt later prose."
+    ),
     CraftLens("rom_hook", "lwp", "Optional rupture only when anomaly budget allows."),
 ]
 
@@ -167,18 +220,60 @@ def premium_expand_paragraph(
     return f"{core}\n{sensory}\n{scar}"
 
 
-def premium_beats(lead: str, ant: str, genre: str, premise: str) -> List[Dict[str, Any]]:
+def premium_beats(
+    lead: str, ant: str, genre: str, premise: str
+) -> List[Dict[str, Any]]:
     """Richer default spine than bare 6-beat list."""
     g = genre.replace("_", " ")
     return [
-        {"order": 1, "name": "In Medias Res Hook", "summary": f"{lead} is already paying for: {premise[:100]}"},
-        {"order": 2, "name": "Plant (Chekhov)", "summary": f"A detail appears that must matter later under {g} rules."},
-        {"order": 3, "name": "Try-Fail 1", "summary": f"{lead} acts; the world answers with cost, not lecture."},
-        {"order": 4, "name": "Sequel Reaction", "summary": "Emotion → dilemma → decision; wound shapes the choice."},
-        {"order": 5, "name": "Midpoint Reversal", "summary": f"{ant} or the system flips the power map."},
-        {"order": 6, "name": "B-Story Mirror", "summary": "Secondary thread reflects the true need, not the stated want."},
-        {"order": 7, "name": "Dark Night Cost", "summary": f"{lead}'s best strategy fails against the wound."},
-        {"order": 8, "name": "Recognition", "summary": "What was true becomes visible; names change leverage."},
-        {"order": 9, "name": "Convergence Payoff", "summary": "Plants fire; cascade peaks; no free resets."},
-        {"order": 10, "name": "Aftermath Image", "summary": "One concrete image holds the new equilibrium."},
+        {
+            "order": 1,
+            "name": "In Medias Res Hook",
+            "summary": f"{lead} is already paying for: {premise[:100]}",
+        },
+        {
+            "order": 2,
+            "name": "Plant (Chekhov)",
+            "summary": f"A detail appears that must matter later under {g} rules.",
+        },
+        {
+            "order": 3,
+            "name": "Try-Fail 1",
+            "summary": f"{lead} acts; the world answers with cost, not lecture.",
+        },
+        {
+            "order": 4,
+            "name": "Sequel Reaction",
+            "summary": "Emotion → dilemma → decision; wound shapes the choice.",
+        },
+        {
+            "order": 5,
+            "name": "Midpoint Reversal",
+            "summary": f"{ant} or the system flips the power map.",
+        },
+        {
+            "order": 6,
+            "name": "B-Story Mirror",
+            "summary": "Secondary thread reflects the true need, not the stated want.",
+        },
+        {
+            "order": 7,
+            "name": "Dark Night Cost",
+            "summary": f"{lead}'s best strategy fails against the wound.",
+        },
+        {
+            "order": 8,
+            "name": "Recognition",
+            "summary": "What was true becomes visible; names change leverage.",
+        },
+        {
+            "order": 9,
+            "name": "Convergence Payoff",
+            "summary": "Plants fire; cascade peaks; no free resets.",
+        },
+        {
+            "order": 10,
+            "name": "Aftermath Image",
+            "summary": "One concrete image holds the new equilibrium.",
+        },
     ]

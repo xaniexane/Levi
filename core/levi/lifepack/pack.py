@@ -30,6 +30,7 @@ anything under other data dirs (agent workspaces, factories, stories).
 All public functions take an explicit ``home`` path so callers (and tests)
 never have to touch the real ``~/.levi``.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -52,9 +53,9 @@ PACK_VERSION = 1
 #: Memory types considered durable enough to travel in a life pack.
 DURABLE_MEMORY_TYPES = frozenset(
     {
-        MemoryType.SEMANTIC,      # facts
-        MemoryType.PREFERENCE,    # preferences
-        MemoryType.PROCEDURAL,    # learned workflows / routines
+        MemoryType.SEMANTIC,  # facts
+        MemoryType.PREFERENCE,  # preferences
+        MemoryType.PROCEDURAL,  # learned workflows / routines
         MemoryType.RELATIONSHIP,  # people and connections
     }
 )
@@ -268,11 +269,18 @@ def preview_import(pack: Dict[str, Any], home: Optional[Path] = None) -> List[st
         for eid, e in incoming_entries.items()
         if eid in current_entries and _entry_changed(current_entries[eid], e)
     ]
-    secret_skipped = [e for e in new + [incoming_entries[e] for e in changed]
-                      if looks_secret(e.get("content", "") or "")]
+    secret_skipped = [
+        e
+        for e in new + [incoming_entries[e] for e in changed]
+        if looks_secret(e.get("content", "") or "")
+    ]
     lines.append(
         f"memory: +{len(new)} new entries, {len(changed)} changed"
-        + (f", {len(secret_skipped)} look secret-like (will be skipped)" if secret_skipped else "")
+        + (
+            f", {len(secret_skipped)} look secret-like (will be skipped)"
+            if secret_skipped
+            else ""
+        )
     )
 
     # skills (manifest is informational: code ships the skills)
@@ -283,7 +291,11 @@ def preview_import(pack: Dict[str, Any], home: Optional[Path] = None) -> List[st
     missing_locally = pack_ids - local_ids
     lines.append(
         f"skills: pack lists {len(manifest)} skills; {len(local)} registered here"
-        + (f"; {len(missing_locally)} in pack are unknown here (informational only)" if missing_locally else "")
+        + (
+            f"; {len(missing_locally)} in pack are unknown here (informational only)"
+            if missing_locally
+            else ""
+        )
     )
     return lines
 
@@ -323,7 +335,9 @@ def _import_identity(incoming: Dict[str, Any], home: Path) -> Dict[str, Any]:
     current = store.load().to_dict()
     profile = UserProfile.from_dict(incoming)
     new = profile.to_dict()
-    diffs = [k for k in new if k not in ("last_active",) and current.get(k) != new.get(k)]
+    diffs = [
+        k for k in new if k not in ("last_active",) and current.get(k) != new.get(k)
+    ]
     if not diffs:
         return {"changed": False, "fields": []}
     store.save(profile)  # atomic temp+rename inside ProfileStore.save
@@ -504,19 +518,30 @@ def cmd_lifepack(args: argparse.Namespace, home: Optional[Path] = None) -> int:
         sett = summary["settings"]
         mem = summary["memory"]
         print("Import summary:")
-        print(f"  identity: {'updated ' + str(ident['fields']) if ident['changed'] else 'unchanged'}")
+        print(
+            f"  identity: {'updated ' + str(ident['fields']) if ident['changed'] else 'unchanged'}"
+        )
         print(f"  settings: {sett['files'] or 'unchanged'}")
         if sett["secrets_skipped"]:
             print(f"  settings secrets skipped: {sett['secrets_skipped']}")
         print(
             f"  memory: +{mem['added']} added, {mem['changed_entries']} changed"
-            + (f", {len(mem['secrets_skipped'])} secret-like skipped" if mem["secrets_skipped"] else "")
+            + (
+                f", {len(mem['secrets_skipped'])} secret-like skipped"
+                if mem["secrets_skipped"]
+                else ""
+            )
         )
         sk = summary["skills"]
-        print(f"  skills: {sk['pack_count']} in pack, {sk['local_count']} registered (manifest only — no writes)")
+        print(
+            f"  skills: {sk['pack_count']} in pack, {sk['local_count']} registered (manifest only — no writes)"
+        )
         return 0
 
-    print("usage: levi lifepack {export|import} <file> [--preview] [--yes]", file=sys.stderr)
+    print(
+        "usage: levi lifepack {export|import} <file> [--preview] [--yes]",
+        file=sys.stderr,
+    )
     return 2
 
 

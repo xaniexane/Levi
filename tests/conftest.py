@@ -4,6 +4,7 @@ These tests are hermetic: no network, no daemons, no user HOME writes.
 They only add ``core/`` and ``delivery/megazord/`` to ``sys.path`` so the
 two Python products are importable from a checkout without installing.
 """
+
 import sys
 from pathlib import Path
 

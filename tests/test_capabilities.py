@@ -1,10 +1,18 @@
 """Tests for the capability atlas (honest 'what can you do?')."""
+
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
-ATLAS = Path(__file__).resolve().parent.parent / "core" / "levi" / "knowledge" / "capabilities" / "atlas.json"
+ATLAS = (
+    Path(__file__).resolve().parent.parent
+    / "core"
+    / "levi"
+    / "knowledge"
+    / "capabilities"
+    / "atlas.json"
+)
 
 
 def _atlas() -> dict:

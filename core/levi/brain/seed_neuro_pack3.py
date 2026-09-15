@@ -1,170 +1,670 @@
 """Neuro pack 3 — regions + protocols."""
+
 from typing import List, Tuple
+
 NEURO_PACK3: List[Tuple[str, List[str]]] = [
-    ('Hippocampus function theme: episodic binding — part of distributed networks, not a solo organ myth.', ['hippocampus', 'brain_regions', 'neuroscience']),
-    ('Hippocampus function theme: spatial maps — part of distributed networks, not a solo organ myth.', ['hippocampus', 'brain_regions', 'neuroscience']),
-    ('Hippocampus function theme: stress sensitivity — part of distributed networks, not a solo organ myth.', ['hippocampus', 'brain_regions', 'neuroscience']),
-    ('Hippocampus function theme: pattern separation — part of distributed networks, not a solo organ myth.', ['hippocampus', 'brain_regions', 'neuroscience']),
-    ('Hippocampus function theme: adult neurogenesis niche — part of distributed networks, not a solo organ myth.', ['hippocampus', 'brain_regions', 'neuroscience']),
-    ('Amygdala function theme: threat learning — part of distributed networks, not a solo organ myth.', ['amygdala', 'brain_regions', 'neuroscience']),
-    ('Amygdala function theme: salience — part of distributed networks, not a solo organ myth.', ['amygdala', 'brain_regions', 'neuroscience']),
-    ('Amygdala function theme: emotional memory gain — part of distributed networks, not a solo organ myth.', ['amygdala', 'brain_regions', 'neuroscience']),
-    ('Amygdala function theme: social fear cues — part of distributed networks, not a solo organ myth.', ['amygdala', 'brain_regions', 'neuroscience']),
-    ('Amygdala function theme: extinction targets — part of distributed networks, not a solo organ myth.', ['amygdala', 'brain_regions', 'neuroscience']),
-    ('Prefrontal cortex function theme: inhibition — part of distributed networks, not a solo organ myth.', ['prefrontal_cortex', 'brain_regions', 'neuroscience']),
-    ('Prefrontal cortex function theme: planning — part of distributed networks, not a solo organ myth.', ['prefrontal_cortex', 'brain_regions', 'neuroscience']),
-    ('Prefrontal cortex function theme: reappraisal — part of distributed networks, not a solo organ myth.', ['prefrontal_cortex', 'brain_regions', 'neuroscience']),
-    ('Prefrontal cortex function theme: working memory — part of distributed networks, not a solo organ myth.', ['prefrontal_cortex', 'brain_regions', 'neuroscience']),
-    ('Prefrontal cortex function theme: social judgment — part of distributed networks, not a solo organ myth.', ['prefrontal_cortex', 'brain_regions', 'neuroscience']),
-    ('Anterior cingulate function theme: error monitoring — part of distributed networks, not a solo organ myth.', ['anterior_cingulate', 'brain_regions', 'neuroscience']),
-    ('Anterior cingulate function theme: conflict — part of distributed networks, not a solo organ myth.', ['anterior_cingulate', 'brain_regions', 'neuroscience']),
-    ('Anterior cingulate function theme: pain affect — part of distributed networks, not a solo organ myth.', ['anterior_cingulate', 'brain_regions', 'neuroscience']),
-    ('Anterior cingulate function theme: motivation — part of distributed networks, not a solo organ myth.', ['anterior_cingulate', 'brain_regions', 'neuroscience']),
-    ('Anterior cingulate function theme: adaptive control — part of distributed networks, not a solo organ myth.', ['anterior_cingulate', 'brain_regions', 'neuroscience']),
-    ('Insula function theme: interoception — part of distributed networks, not a solo organ myth.', ['insula', 'brain_regions', 'neuroscience']),
-    ('Insula function theme: disgust — part of distributed networks, not a solo organ myth.', ['insula', 'brain_regions', 'neuroscience']),
-    ('Insula function theme: craving — part of distributed networks, not a solo organ myth.', ['insula', 'brain_regions', 'neuroscience']),
-    ('Insula function theme: empathy components — part of distributed networks, not a solo organ myth.', ['insula', 'brain_regions', 'neuroscience']),
-    ('Insula function theme: salience — part of distributed networks, not a solo organ myth.', ['insula', 'brain_regions', 'neuroscience']),
-    ('Cerebellum function theme: timing — part of distributed networks, not a solo organ myth.', ['cerebellum', 'brain_regions', 'neuroscience']),
-    ('Cerebellum function theme: prediction — part of distributed networks, not a solo organ myth.', ['cerebellum', 'brain_regions', 'neuroscience']),
-    ('Cerebellum function theme: motor fine-tune — part of distributed networks, not a solo organ myth.', ['cerebellum', 'brain_regions', 'neuroscience']),
-    ('Cerebellum function theme: cognitive timing — part of distributed networks, not a solo organ myth.', ['cerebellum', 'brain_regions', 'neuroscience']),
-    ('Cerebellum function theme: error learning — part of distributed networks, not a solo organ myth.', ['cerebellum', 'brain_regions', 'neuroscience']),
-    ('Basal ganglia function theme: action selection — part of distributed networks, not a solo organ myth.', ['basal_ganglia', 'brain_regions', 'neuroscience']),
-    ('Basal ganglia function theme: habits — part of distributed networks, not a solo organ myth.', ['basal_ganglia', 'brain_regions', 'neuroscience']),
-    ('Basal ganglia function theme: skill chunking — part of distributed networks, not a solo organ myth.', ['basal_ganglia', 'brain_regions', 'neuroscience']),
-    ('Basal ganglia function theme: reward updating — part of distributed networks, not a solo organ myth.', ['basal_ganglia', 'brain_regions', 'neuroscience']),
-    ('Basal ganglia function theme: vigor — part of distributed networks, not a solo organ myth.', ['basal_ganglia', 'brain_regions', 'neuroscience']),
-    ('Thalamus function theme: sensory relay — part of distributed networks, not a solo organ myth.', ['thalamus', 'brain_regions', 'neuroscience']),
-    ('Thalamus function theme: attention gating — part of distributed networks, not a solo organ myth.', ['thalamus', 'brain_regions', 'neuroscience']),
-    ('Thalamus function theme: sleep spindles — part of distributed networks, not a solo organ myth.', ['thalamus', 'brain_regions', 'neuroscience']),
-    ('Thalamus function theme: motor loops — part of distributed networks, not a solo organ myth.', ['thalamus', 'brain_regions', 'neuroscience']),
-    ('Thalamus function theme: alertness — part of distributed networks, not a solo organ myth.', ['thalamus', 'brain_regions', 'neuroscience']),
-    ('Hypothalamus function theme: hunger — part of distributed networks, not a solo organ myth.', ['hypothalamus', 'brain_regions', 'neuroscience']),
-    ('Hypothalamus function theme: thirst — part of distributed networks, not a solo organ myth.', ['hypothalamus', 'brain_regions', 'neuroscience']),
-    ('Hypothalamus function theme: temperature — part of distributed networks, not a solo organ myth.', ['hypothalamus', 'brain_regions', 'neuroscience']),
-    ('Hypothalamus function theme: circadian drive — part of distributed networks, not a solo organ myth.', ['hypothalamus', 'brain_regions', 'neuroscience']),
-    ('Hypothalamus function theme: autonomic control — part of distributed networks, not a solo organ myth.', ['hypothalamus', 'brain_regions', 'neuroscience']),
-    ('Brainstem function theme: arousal — part of distributed networks, not a solo organ myth.', ['brainstem', 'brain_regions', 'neuroscience']),
-    ('Brainstem function theme: cranial nerves — part of distributed networks, not a solo organ myth.', ['brainstem', 'brain_regions', 'neuroscience']),
-    ('Brainstem function theme: cardiorespiratory — part of distributed networks, not a solo organ myth.', ['brainstem', 'brain_regions', 'neuroscience']),
-    ('Brainstem function theme: pain modulation — part of distributed networks, not a solo organ myth.', ['brainstem', 'brain_regions', 'neuroscience']),
-    ('Brainstem function theme: REM circuits — part of distributed networks, not a solo organ myth.', ['brainstem', 'brain_regions', 'neuroscience']),
-    ('Occipital cortex function theme: edge detection — part of distributed networks, not a solo organ myth.', ['occipital_cortex', 'brain_regions', 'neuroscience']),
-    ('Occipital cortex function theme: orientation columns — part of distributed networks, not a solo organ myth.', ['occipital_cortex', 'brain_regions', 'neuroscience']),
-    ('Occipital cortex function theme: visual hierarchy — part of distributed networks, not a solo organ myth.', ['occipital_cortex', 'brain_regions', 'neuroscience']),
-    ('Occipital cortex function theme: binocular integration — part of distributed networks, not a solo organ myth.', ['occipital_cortex', 'brain_regions', 'neuroscience']),
-    ('Occipital cortex function theme: motion stages — part of distributed networks, not a solo organ myth.', ['occipital_cortex', 'brain_regions', 'neuroscience']),
-    ('Parietal cortex function theme: spatial attention — part of distributed networks, not a solo organ myth.', ['parietal_cortex', 'brain_regions', 'neuroscience']),
-    ('Parietal cortex function theme: numerosity — part of distributed networks, not a solo organ myth.', ['parietal_cortex', 'brain_regions', 'neuroscience']),
-    ('Parietal cortex function theme: tool use — part of distributed networks, not a solo organ myth.', ['parietal_cortex', 'brain_regions', 'neuroscience']),
-    ('Parietal cortex function theme: body schema — part of distributed networks, not a solo organ myth.', ['parietal_cortex', 'brain_regions', 'neuroscience']),
-    ('Parietal cortex function theme: multisensory bind — part of distributed networks, not a solo organ myth.', ['parietal_cortex', 'brain_regions', 'neuroscience']),
-    ('Temporal cortex function theme: auditory hierarchy — part of distributed networks, not a solo organ myth.', ['temporal_cortex', 'brain_regions', 'neuroscience']),
-    ('Temporal cortex function theme: object identity — part of distributed networks, not a solo organ myth.', ['temporal_cortex', 'brain_regions', 'neuroscience']),
-    ('Temporal cortex function theme: language meaning — part of distributed networks, not a solo organ myth.', ['temporal_cortex', 'brain_regions', 'neuroscience']),
-    ('Temporal cortex function theme: face pathways — part of distributed networks, not a solo organ myth.', ['temporal_cortex', 'brain_regions', 'neuroscience']),
-    ('Temporal cortex function theme: memory interface — part of distributed networks, not a solo organ myth.', ['temporal_cortex', 'brain_regions', 'neuroscience']),
-    ('Motor cortex function theme: corticospinal output — part of distributed networks, not a solo organ myth.', ['motor_cortex', 'brain_regions', 'neuroscience']),
-    ('Motor cortex function theme: map plasticity — part of distributed networks, not a solo organ myth.', ['motor_cortex', 'brain_regions', 'neuroscience']),
-    ('Motor cortex function theme: force coding — part of distributed networks, not a solo organ myth.', ['motor_cortex', 'brain_regions', 'neuroscience']),
-    ('Motor cortex function theme: direction tuning — part of distributed networks, not a solo organ myth.', ['motor_cortex', 'brain_regions', 'neuroscience']),
-    ('Motor cortex function theme: rehab targets — part of distributed networks, not a solo organ myth.', ['motor_cortex', 'brain_regions', 'neuroscience']),
-    ('Corpus callosum function theme: interhemispheric transfer — part of distributed networks, not a solo organ myth.', ['corpus_callosum', 'brain_regions', 'neuroscience']),
-    ('Corpus callosum function theme: integration — part of distributed networks, not a solo organ myth.', ['corpus_callosum', 'brain_regions', 'neuroscience']),
-    ('Corpus callosum function theme: split-brain lessons — part of distributed networks, not a solo organ myth.', ['corpus_callosum', 'brain_regions', 'neuroscience']),
-    ('Corpus callosum function theme: development myelination — part of distributed networks, not a solo organ myth.', ['corpus_callosum', 'brain_regions', 'neuroscience']),
-    ('Corpus callosum function theme: disconnection risk — part of distributed networks, not a solo organ myth.', ['corpus_callosum', 'brain_regions', 'neuroscience']),
-    ('Massed vs spaced stimulation protocols in LTP research change induction success.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Theta-burst stimulation is a common experimental pattern for inducing potentiation.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Low-frequency stimulation often induces LTD in hippocampal slices under specific conditions.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Pairing protocols link presynaptic activity with postsynaptic depolarization for associative LTP.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Occlusion experiments test whether learning and LTP share mechanisms by saturating one.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Pharmacological blockade of NMDA receptors prevents many classic LTP forms.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Protein kinase cascades (e.g., CaMKII) are central in molecular models of synaptic tagging.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Phosphatase activity contributes to depotentiation and LTD signaling balances.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Structural LTP includes spine head enlargement observable with advanced imaging.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Synaptic pruning in adolescence refines executive and social circuits — sleep and safety matter.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Sensitive caregiving buffers stress hormone impacts on developing hippocampal systems.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Bilingual switching trains control networks that overlap with executive attention systems.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Aerobic exercise meta-analyses link activity to hippocampal volume measures in adults.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Motor skill learning thickens practice-related cortex in longitudinal imaging studies.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Blind Braille readers may recruit occipital areas for tactile language — cross-modal plasticity.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Deaf signers show auditory cortex involvement in visual motion and sign processing studies.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Musician auditory cortex representations expand for trained timbres and pitches.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Taxi driver posterior hippocampal associations remain a landmark expertise-plasticity finding.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Juggling training studies reported transient visual motion area changes after skill acquisition.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Constraint-induced movement therapy dosing is clinical — intensity without injury is the principle.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Error augmentation in rehab can accelerate learning by making mistakes more salient — supervised.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Mirror visual feedback alters perceived ownership and can modulate pain networks clinically.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Sensory discrimination training reopens map boundaries in animal somatosensory experiments.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Enriched housing increases dendritic complexity in rodents — human analog is varied meaningful activity.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Social isolation reduces some plasticity markers in animal models — connection is biological as well as moral.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Chronic unpredictable stress paradigms impair hippocampal LTP in research animals.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Antidepressant research intersects plasticity hypotheses — treatment decisions remain medical.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Ketamine rapid effects involve synaptic signaling cascades under study — clinical only.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Psychedelic research explores plasticity windows; legal and safety constraints are strict.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('SSRIs may influence neurogenesis markers in animal models — human translation nuanced.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Lithium and other mood stabilizers have complex neural effects under psychiatry care.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Stimulant medications for ADHD affect catecholamines — prescription and monitoring required.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Sleep deprivation reduces LTP induction success in many experimental preparations.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Recovery sleep partially restores plasticity potential after deprivation in studies.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Circadian misalignment impairs cognition independent of total sleep time sometimes.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Light therapy for seasonal mood targets circadian pathways — guidance from clinicians.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Blue-blocking claims are often overstated; overall evening light dose matters most.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Caffeine half-life varies; afternoon cutoff helps many protect sleep-dependent learning.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Napping 10–20 minutes can boost alertness without deep-sleep inertia for many.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Long daytime naps may fragment night sleep in some people — individualize.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Spaced physical practice with sleep between sessions often beats one long grinding session.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Interleaved practice of related motor skills improves retention despite worse practice scores.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Self-testing neuro: each retrieval attempt is a plasticity event, not only an assessment.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Highlighting creates fluency illusion without retrieval-driven synaptic strengthening.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Teaching others forces schema reorganization — strong encoding activity.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Dual n-back and similar train near tasks; far IQ transfer remains limited in rigorous reviews.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Chess expertise is mostly domain chunks in memory networks not global IQ alone.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('London cab knowledge consolidation occurs over years of deliberate navigational practice.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Second language after childhood remains possible via adult plasticity with high input and use.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Accent plasticity declines earlier than grammar learning capacity for many learners.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Perfect pitch is more trainable early; adults still improve relative pitch substantially.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Absolute pitch windows relate to critical period concepts in auditory cortex development.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Visual acuity development needs patterned light input during early sensitive periods.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Congenital cataract timing shows how delayed input limits later acuity — clinical urgency.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Amblyopia therapy uses patching and training to rebalance ocular dominance plasticity.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Cochlear implant outcomes depend heavily on brain learning after device activation.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Phantom limb cortical maps can invade neighboring representations — competitive plasticity.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Chronic pain desensitization approaches aim to reverse central sensitization learning.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Fear extinction is new learning of safety, not deletion — relapse can occur with context change.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Renewal effect: extinguished fear returns in original context — important for therapy planning.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Reconsolidation windows are time-limited; clinical applications require trained professionals.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Propranolol research on emotional memory is experimental and regulated — not DIY.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Glucocorticoids modulate memory differently depending on timing before/after learning.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Moderate acute stress can enhance memory for central details of events.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Extreme trauma can fragment narrative memory while strengthening sensory intrusions.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Hippocampal pattern separation helps distinguish similar days so they do not blur.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Pattern completion allows partial cues to reactivate full memory ensembles.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Schema-consistent information is easier to encode into existing cortical knowledge structures.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Prediction error magnitude influences how strongly models update — surprise teaches.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Curiosity states enhance encoding; questions before answers improve retention.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Uncertainty motivates exploration when framed as learnable rather than threatening.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Threat framing narrows attention — useful in danger, costly for broad learning.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Psychological safety in teams enables error reporting that drives organizational learning.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Shame shuts down exploration; guilt about specific acts allows repair and new learning.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Secure base relationships provide the safety that lets nervous systems explore and learn.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Co-regulation: another calm nervous system helps settle arousal so learning can resume.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Polyvagal popularizations are simplified maps — useful metaphors, not complete physiology.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Interoceptive accuracy training is researched for anxiety; results mixed and method-sensitive.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Breath pacing influences autonomic state and can support prefrontal regulation capacity.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('HRV biofeedback is a researched regulation tool for some populations — quality devices vary.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Cold exposure trends outrun evidence; avoid risky challenges without health clearance.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Sauna and heat stress research is emerging; hydration and medical constraints matter.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Strength training supports brain health markers alongside muscle — multimodal fitness.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Balance training recruits cerebellar and vestibular systems — useful across aging.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Dual-task walking tests cognitive-motor interaction in aging assessments.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Cognitive reserve builds through education, language, complexity of work and leisure.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Hearing aids and vision correction reduce cognitive load from degraded sensory input.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Social engagement is a protective correlate in cognitive aging studies.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Loneliness is a health risk factor with neural stress correlates — connection is preventive care.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('Purpose and meaning associate with better outcomes; mechanisms include behavior and stress paths.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
-    ('LEVI atlas neuro pack: mechanisms and regions for offline SI literacy — never a diagnosis engine.', ['neuroplasticity', 'mechanisms', 'learning', 'neuroscience']),
+    (
+        "Hippocampus function theme: episodic binding — part of distributed networks, not a solo organ myth.",
+        ["hippocampus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Hippocampus function theme: spatial maps — part of distributed networks, not a solo organ myth.",
+        ["hippocampus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Hippocampus function theme: stress sensitivity — part of distributed networks, not a solo organ myth.",
+        ["hippocampus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Hippocampus function theme: pattern separation — part of distributed networks, not a solo organ myth.",
+        ["hippocampus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Hippocampus function theme: adult neurogenesis niche — part of distributed networks, not a solo organ myth.",
+        ["hippocampus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Amygdala function theme: threat learning — part of distributed networks, not a solo organ myth.",
+        ["amygdala", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Amygdala function theme: salience — part of distributed networks, not a solo organ myth.",
+        ["amygdala", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Amygdala function theme: emotional memory gain — part of distributed networks, not a solo organ myth.",
+        ["amygdala", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Amygdala function theme: social fear cues — part of distributed networks, not a solo organ myth.",
+        ["amygdala", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Amygdala function theme: extinction targets — part of distributed networks, not a solo organ myth.",
+        ["amygdala", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Prefrontal cortex function theme: inhibition — part of distributed networks, not a solo organ myth.",
+        ["prefrontal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Prefrontal cortex function theme: planning — part of distributed networks, not a solo organ myth.",
+        ["prefrontal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Prefrontal cortex function theme: reappraisal — part of distributed networks, not a solo organ myth.",
+        ["prefrontal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Prefrontal cortex function theme: working memory — part of distributed networks, not a solo organ myth.",
+        ["prefrontal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Prefrontal cortex function theme: social judgment — part of distributed networks, not a solo organ myth.",
+        ["prefrontal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Anterior cingulate function theme: error monitoring — part of distributed networks, not a solo organ myth.",
+        ["anterior_cingulate", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Anterior cingulate function theme: conflict — part of distributed networks, not a solo organ myth.",
+        ["anterior_cingulate", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Anterior cingulate function theme: pain affect — part of distributed networks, not a solo organ myth.",
+        ["anterior_cingulate", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Anterior cingulate function theme: motivation — part of distributed networks, not a solo organ myth.",
+        ["anterior_cingulate", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Anterior cingulate function theme: adaptive control — part of distributed networks, not a solo organ myth.",
+        ["anterior_cingulate", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Insula function theme: interoception — part of distributed networks, not a solo organ myth.",
+        ["insula", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Insula function theme: disgust — part of distributed networks, not a solo organ myth.",
+        ["insula", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Insula function theme: craving — part of distributed networks, not a solo organ myth.",
+        ["insula", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Insula function theme: empathy components — part of distributed networks, not a solo organ myth.",
+        ["insula", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Insula function theme: salience — part of distributed networks, not a solo organ myth.",
+        ["insula", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Cerebellum function theme: timing — part of distributed networks, not a solo organ myth.",
+        ["cerebellum", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Cerebellum function theme: prediction — part of distributed networks, not a solo organ myth.",
+        ["cerebellum", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Cerebellum function theme: motor fine-tune — part of distributed networks, not a solo organ myth.",
+        ["cerebellum", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Cerebellum function theme: cognitive timing — part of distributed networks, not a solo organ myth.",
+        ["cerebellum", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Cerebellum function theme: error learning — part of distributed networks, not a solo organ myth.",
+        ["cerebellum", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Basal ganglia function theme: action selection — part of distributed networks, not a solo organ myth.",
+        ["basal_ganglia", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Basal ganglia function theme: habits — part of distributed networks, not a solo organ myth.",
+        ["basal_ganglia", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Basal ganglia function theme: skill chunking — part of distributed networks, not a solo organ myth.",
+        ["basal_ganglia", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Basal ganglia function theme: reward updating — part of distributed networks, not a solo organ myth.",
+        ["basal_ganglia", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Basal ganglia function theme: vigor — part of distributed networks, not a solo organ myth.",
+        ["basal_ganglia", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Thalamus function theme: sensory relay — part of distributed networks, not a solo organ myth.",
+        ["thalamus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Thalamus function theme: attention gating — part of distributed networks, not a solo organ myth.",
+        ["thalamus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Thalamus function theme: sleep spindles — part of distributed networks, not a solo organ myth.",
+        ["thalamus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Thalamus function theme: motor loops — part of distributed networks, not a solo organ myth.",
+        ["thalamus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Thalamus function theme: alertness — part of distributed networks, not a solo organ myth.",
+        ["thalamus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Hypothalamus function theme: hunger — part of distributed networks, not a solo organ myth.",
+        ["hypothalamus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Hypothalamus function theme: thirst — part of distributed networks, not a solo organ myth.",
+        ["hypothalamus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Hypothalamus function theme: temperature — part of distributed networks, not a solo organ myth.",
+        ["hypothalamus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Hypothalamus function theme: circadian drive — part of distributed networks, not a solo organ myth.",
+        ["hypothalamus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Hypothalamus function theme: autonomic control — part of distributed networks, not a solo organ myth.",
+        ["hypothalamus", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Brainstem function theme: arousal — part of distributed networks, not a solo organ myth.",
+        ["brainstem", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Brainstem function theme: cranial nerves — part of distributed networks, not a solo organ myth.",
+        ["brainstem", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Brainstem function theme: cardiorespiratory — part of distributed networks, not a solo organ myth.",
+        ["brainstem", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Brainstem function theme: pain modulation — part of distributed networks, not a solo organ myth.",
+        ["brainstem", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Brainstem function theme: REM circuits — part of distributed networks, not a solo organ myth.",
+        ["brainstem", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Occipital cortex function theme: edge detection — part of distributed networks, not a solo organ myth.",
+        ["occipital_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Occipital cortex function theme: orientation columns — part of distributed networks, not a solo organ myth.",
+        ["occipital_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Occipital cortex function theme: visual hierarchy — part of distributed networks, not a solo organ myth.",
+        ["occipital_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Occipital cortex function theme: binocular integration — part of distributed networks, not a solo organ myth.",
+        ["occipital_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Occipital cortex function theme: motion stages — part of distributed networks, not a solo organ myth.",
+        ["occipital_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Parietal cortex function theme: spatial attention — part of distributed networks, not a solo organ myth.",
+        ["parietal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Parietal cortex function theme: numerosity — part of distributed networks, not a solo organ myth.",
+        ["parietal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Parietal cortex function theme: tool use — part of distributed networks, not a solo organ myth.",
+        ["parietal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Parietal cortex function theme: body schema — part of distributed networks, not a solo organ myth.",
+        ["parietal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Parietal cortex function theme: multisensory bind — part of distributed networks, not a solo organ myth.",
+        ["parietal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Temporal cortex function theme: auditory hierarchy — part of distributed networks, not a solo organ myth.",
+        ["temporal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Temporal cortex function theme: object identity — part of distributed networks, not a solo organ myth.",
+        ["temporal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Temporal cortex function theme: language meaning — part of distributed networks, not a solo organ myth.",
+        ["temporal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Temporal cortex function theme: face pathways — part of distributed networks, not a solo organ myth.",
+        ["temporal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Temporal cortex function theme: memory interface — part of distributed networks, not a solo organ myth.",
+        ["temporal_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Motor cortex function theme: corticospinal output — part of distributed networks, not a solo organ myth.",
+        ["motor_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Motor cortex function theme: map plasticity — part of distributed networks, not a solo organ myth.",
+        ["motor_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Motor cortex function theme: force coding — part of distributed networks, not a solo organ myth.",
+        ["motor_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Motor cortex function theme: direction tuning — part of distributed networks, not a solo organ myth.",
+        ["motor_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Motor cortex function theme: rehab targets — part of distributed networks, not a solo organ myth.",
+        ["motor_cortex", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Corpus callosum function theme: interhemispheric transfer — part of distributed networks, not a solo organ myth.",
+        ["corpus_callosum", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Corpus callosum function theme: integration — part of distributed networks, not a solo organ myth.",
+        ["corpus_callosum", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Corpus callosum function theme: split-brain lessons — part of distributed networks, not a solo organ myth.",
+        ["corpus_callosum", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Corpus callosum function theme: development myelination — part of distributed networks, not a solo organ myth.",
+        ["corpus_callosum", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Corpus callosum function theme: disconnection risk — part of distributed networks, not a solo organ myth.",
+        ["corpus_callosum", "brain_regions", "neuroscience"],
+    ),
+    (
+        "Massed vs spaced stimulation protocols in LTP research change induction success.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Theta-burst stimulation is a common experimental pattern for inducing potentiation.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Low-frequency stimulation often induces LTD in hippocampal slices under specific conditions.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Pairing protocols link presynaptic activity with postsynaptic depolarization for associative LTP.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Occlusion experiments test whether learning and LTP share mechanisms by saturating one.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Pharmacological blockade of NMDA receptors prevents many classic LTP forms.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Protein kinase cascades (e.g., CaMKII) are central in molecular models of synaptic tagging.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Phosphatase activity contributes to depotentiation and LTD signaling balances.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Structural LTP includes spine head enlargement observable with advanced imaging.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Synaptic pruning in adolescence refines executive and social circuits — sleep and safety matter.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Sensitive caregiving buffers stress hormone impacts on developing hippocampal systems.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Bilingual switching trains control networks that overlap with executive attention systems.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Aerobic exercise meta-analyses link activity to hippocampal volume measures in adults.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Motor skill learning thickens practice-related cortex in longitudinal imaging studies.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Blind Braille readers may recruit occipital areas for tactile language — cross-modal plasticity.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Deaf signers show auditory cortex involvement in visual motion and sign processing studies.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Musician auditory cortex representations expand for trained timbres and pitches.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Taxi driver posterior hippocampal associations remain a landmark expertise-plasticity finding.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Juggling training studies reported transient visual motion area changes after skill acquisition.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Constraint-induced movement therapy dosing is clinical — intensity without injury is the principle.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Error augmentation in rehab can accelerate learning by making mistakes more salient — supervised.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Mirror visual feedback alters perceived ownership and can modulate pain networks clinically.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Sensory discrimination training reopens map boundaries in animal somatosensory experiments.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Enriched housing increases dendritic complexity in rodents — human analog is varied meaningful activity.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Social isolation reduces some plasticity markers in animal models — connection is biological as well as moral.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Chronic unpredictable stress paradigms impair hippocampal LTP in research animals.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Antidepressant research intersects plasticity hypotheses — treatment decisions remain medical.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Ketamine rapid effects involve synaptic signaling cascades under study — clinical only.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Psychedelic research explores plasticity windows; legal and safety constraints are strict.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "SSRIs may influence neurogenesis markers in animal models — human translation nuanced.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Lithium and other mood stabilizers have complex neural effects under psychiatry care.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Stimulant medications for ADHD affect catecholamines — prescription and monitoring required.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Sleep deprivation reduces LTP induction success in many experimental preparations.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Recovery sleep partially restores plasticity potential after deprivation in studies.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Circadian misalignment impairs cognition independent of total sleep time sometimes.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Light therapy for seasonal mood targets circadian pathways — guidance from clinicians.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Blue-blocking claims are often overstated; overall evening light dose matters most.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Caffeine half-life varies; afternoon cutoff helps many protect sleep-dependent learning.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Napping 10–20 minutes can boost alertness without deep-sleep inertia for many.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Long daytime naps may fragment night sleep in some people — individualize.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Spaced physical practice with sleep between sessions often beats one long grinding session.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Interleaved practice of related motor skills improves retention despite worse practice scores.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Self-testing neuro: each retrieval attempt is a plasticity event, not only an assessment.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Highlighting creates fluency illusion without retrieval-driven synaptic strengthening.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Teaching others forces schema reorganization — strong encoding activity.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Dual n-back and similar train near tasks; far IQ transfer remains limited in rigorous reviews.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Chess expertise is mostly domain chunks in memory networks not global IQ alone.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "London cab knowledge consolidation occurs over years of deliberate navigational practice.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Second language after childhood remains possible via adult plasticity with high input and use.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Accent plasticity declines earlier than grammar learning capacity for many learners.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Perfect pitch is more trainable early; adults still improve relative pitch substantially.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Absolute pitch windows relate to critical period concepts in auditory cortex development.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Visual acuity development needs patterned light input during early sensitive periods.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Congenital cataract timing shows how delayed input limits later acuity — clinical urgency.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Amblyopia therapy uses patching and training to rebalance ocular dominance plasticity.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Cochlear implant outcomes depend heavily on brain learning after device activation.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Phantom limb cortical maps can invade neighboring representations — competitive plasticity.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Chronic pain desensitization approaches aim to reverse central sensitization learning.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Fear extinction is new learning of safety, not deletion — relapse can occur with context change.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Renewal effect: extinguished fear returns in original context — important for therapy planning.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Reconsolidation windows are time-limited; clinical applications require trained professionals.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Propranolol research on emotional memory is experimental and regulated — not DIY.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Glucocorticoids modulate memory differently depending on timing before/after learning.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Moderate acute stress can enhance memory for central details of events.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Extreme trauma can fragment narrative memory while strengthening sensory intrusions.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Hippocampal pattern separation helps distinguish similar days so they do not blur.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Pattern completion allows partial cues to reactivate full memory ensembles.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Schema-consistent information is easier to encode into existing cortical knowledge structures.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Prediction error magnitude influences how strongly models update — surprise teaches.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Curiosity states enhance encoding; questions before answers improve retention.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Uncertainty motivates exploration when framed as learnable rather than threatening.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Threat framing narrows attention — useful in danger, costly for broad learning.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Psychological safety in teams enables error reporting that drives organizational learning.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Shame shuts down exploration; guilt about specific acts allows repair and new learning.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Secure base relationships provide the safety that lets nervous systems explore and learn.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Co-regulation: another calm nervous system helps settle arousal so learning can resume.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Polyvagal popularizations are simplified maps — useful metaphors, not complete physiology.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Interoceptive accuracy training is researched for anxiety; results mixed and method-sensitive.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Breath pacing influences autonomic state and can support prefrontal regulation capacity.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "HRV biofeedback is a researched regulation tool for some populations — quality devices vary.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Cold exposure trends outrun evidence; avoid risky challenges without health clearance.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Sauna and heat stress research is emerging; hydration and medical constraints matter.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Strength training supports brain health markers alongside muscle — multimodal fitness.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Balance training recruits cerebellar and vestibular systems — useful across aging.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Dual-task walking tests cognitive-motor interaction in aging assessments.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Cognitive reserve builds through education, language, complexity of work and leisure.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Hearing aids and vision correction reduce cognitive load from degraded sensory input.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Social engagement is a protective correlate in cognitive aging studies.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Loneliness is a health risk factor with neural stress correlates — connection is preventive care.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "Purpose and meaning associate with better outcomes; mechanisms include behavior and stress paths.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
+    (
+        "LEVI atlas neuro pack: mechanisms and regions for offline SI literacy — never a diagnosis engine.",
+        ["neuroplasticity", "mechanisms", "learning", "neuroscience"],
+    ),
 ]

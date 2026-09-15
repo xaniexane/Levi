@@ -5,6 +5,7 @@ each other in one turn. On a (misconfigured) both-flags persona,
 interrogation takes precedence and the conflict is recorded in the trace —
 never mixed, never silent.
 """
+
 from levi.persona.lattice import Persona
 
 from levi.bloodstream.stages import BehaviorKind, RouteKind
@@ -31,8 +32,7 @@ def test_normal_persona_has_no_special_behavior(ctx):
     assert result.route is RouteKind.MODEL
 
 
-def test_conflict_both_flags_interrogation_wins_and_is_recorded(ctx_for,
-                                                               monkeypatch):
+def test_conflict_both_flags_interrogation_wins_and_is_recorded(ctx_for, monkeypatch):
     conflict = Persona(
         id="conflict",
         display_name="Conflict",
@@ -59,8 +59,9 @@ def test_conflict_both_flags_interrogation_wins_and_is_recorded(ctx_for,
     assert result.behavior is not BehaviorKind.NO_HERO
     persona_stage = next(s for s in result.stages if s.stage == "persona")
     assert persona_stage.detail["behavior_conflict"] is True
-    assert (persona_stage.detail["conflict_resolution"]
-            == "interrogation takes precedence")
+    assert (
+        persona_stage.detail["conflict_resolution"] == "interrogation takes precedence"
+    )
 
 
 def test_sequential_turns_keep_behaviors_separate(ctx_for):

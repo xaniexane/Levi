@@ -3,6 +3,7 @@
 Composites are nameable, testable, reversible: register() fails fast on
 dangling part references; unregister() removes the name completely.
 """
+
 import pytest
 
 from levi.bloodstream.composites import Composite, CompositeRegistry
@@ -25,16 +26,22 @@ class _Dict:
 @pytest.fixture
 def parts():
     return dict(
-        skills=_Dict({
-            "file_read": _Part(risk_level=1),
-            "shell_exec": _Part(risk_level=3),
-        }),
-        specialists=_Dict({
-            "researcher": _Part(risk_ceiling=2),
-        }),
-        automations=_Dict({
-            "nightly_digest": _Part(risk_ceiling=1),
-        }),
+        skills=_Dict(
+            {
+                "file_read": _Part(risk_level=1),
+                "shell_exec": _Part(risk_level=3),
+            }
+        ),
+        specialists=_Dict(
+            {
+                "researcher": _Part(risk_ceiling=2),
+            }
+        ),
+        automations=_Dict(
+            {
+                "nightly_digest": _Part(risk_ceiling=1),
+            }
+        ),
     )
 
 
@@ -78,8 +85,7 @@ def test_unregister_is_reversible(parts, registry):
 
 
 def test_registry_persists_and_reloads(parts, registry, data_dir):
-    comp = Composite(name="ops", skill_ids=["shell_exec"],
-                     description="ops bundle")
+    comp = Composite(name="ops", skill_ids=["shell_exec"], description="ops bundle")
     registry.register(comp, **parts)
     reloaded = CompositeRegistry(data_dir=data_dir / "bloodstream")
     got = reloaded.get("ops")

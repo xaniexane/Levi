@@ -8,6 +8,7 @@ They solve different problems:
 Production: reviewed libsignal (or equivalent) + argon2-cffi / libsodium.
 This module is the *protocol spec + safe local demo* — not a home-grown production ratchet.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
@@ -60,10 +61,12 @@ class Argon2idGuide:
     def _detect_backend(self) -> str:
         try:
             import argon2  # noqa: F401
+
             return "argon2-cffi"
         except Exception:
             try:
                 import nacl  # noqa: F401
+
                 return "libsodium-pwhash"
             except Exception:
                 return "demo-hmac-fallback"
@@ -75,7 +78,9 @@ class Argon2idGuide:
     def is_production_ready(self) -> bool:
         return self._backend in ("argon2-cffi", "libsodium-pwhash")
 
-    def derive_cmk(self, passphrase: str, salt: Optional[bytes] = None) -> Tuple[bytes, bytes, str]:
+    def derive_cmk(
+        self, passphrase: str, salt: Optional[bytes] = None
+    ) -> Tuple[bytes, bytes, str]:
         """
         Returns (cmk_32bytes, salt, backend_label).
         Demo path is clearly labeled — not pretended to be Argon2.
@@ -86,6 +91,7 @@ class Argon2idGuide:
 
         if self._backend == "argon2-cffi":
             from argon2.low_level import hash_secret_raw, Type
+
             cmk = hash_secret_raw(
                 secret=passphrase.encode("utf-8"),
                 salt=salt,
@@ -99,6 +105,7 @@ class Argon2idGuide:
 
         if self._backend == "libsodium-pwhash":
             from nacl import pwhash
+
             # opslimit/memlimit approximate policy
             cmk = pwhash.argon2id.kdf(
                 32,
@@ -117,14 +124,20 @@ class Argon2idGuide:
         ).digest()
         # stretch a few rounds so it is obviously a demo, not a password hash
         for i in range(8):
-            material = hmac.new(material, str(i).encode() + salt, hashlib.sha256).digest()
+            material = hmac.new(
+                material, str(i).encode() + salt, hashlib.sha256
+            ).digest()
         return material, salt, "DEMO_HMAC_FALLBACK_NOT_ARGON2"
 
     def status_block(self) -> str:
         lines = [
             "Argon2id — content master key (CMK) at rest",
             f"  backend: {self.backend}"
-            + ("  ✓ production path" if self.is_production_ready() else "  ⚠ demo HMAC only — install argon2-cffi"),
+            + (
+                "  ✓ production path"
+                if self.is_production_ready()
+                else "  ⚠ demo HMAC only — install argon2-cffi"
+            ),
             f"  baseline: {BASELINE_CMK.memory_mib} MiB · t={BASELINE_CMK.time_cost} · p={BASELINE_CMK.parallelism}",
             f"  archival: {ARCHIVAL_RECOVERY.memory_mib} MiB · t={ARCHIVAL_RECOVERY.time_cost} · p={ARCHIVAL_RECOVERY.parallelism}",
             "  job: passphrase → CMK for sealed ~/.levi blobs",
@@ -145,16 +158,20 @@ class RatchetGuide:
         self._demo_chains: Dict[str, bytes] = {}
 
     def protocol_block(self) -> str:
-        return "\n".join([
-            "Signal protocol ratcheting (Phase B guide)",
-            "  X3DH — X25519 identity / ephemeral / prekeys → initial shared secret",
-            "  Double Ratchet — DH ratchet + symmetric chain; one message key per message",
-            "  properties: forward secrecy + post-compromise recovery when DH steps continue",
-            "  production: reviewed libsignal (or equivalent) — NOT home-grown in app code",
-            "  local demo: simplified HMAC chain (tests/education only)",
-        ])
+        return "\n".join(
+            [
+                "Signal protocol ratcheting (Phase B guide)",
+                "  X3DH — X25519 identity / ephemeral / prekeys → initial shared secret",
+                "  Double Ratchet — DH ratchet + symmetric chain; one message key per message",
+                "  properties: forward secrecy + post-compromise recovery when DH steps continue",
+                "  production: reviewed libsignal (or equivalent) — NOT home-grown in app code",
+                "  local demo: simplified HMAC chain (tests/education only)",
+            ]
+        )
 
-    def demo_init_session(self, session_id: str, root_key: Optional[bytes] = None) -> str:
+    def demo_init_session(
+        self, session_id: str, root_key: Optional[bytes] = None
+    ) -> str:
         """Educational only. Returns status string."""
         rk = root_key or secrets.token_bytes(32)
         self._demo_chains[session_id] = rk
@@ -166,11 +183,15 @@ class RatchetGuide:
         chain = self._demo_chains[session_id]
         mk = hmac.new(chain, b"msg", hashlib.sha256).digest()
         # advance chain
-        self._demo_chains[session_id] = hmac.new(chain, b"chain", hashlib.sha256).digest()
+        self._demo_chains[session_id] = hmac.new(
+            chain, b"chain", hashlib.sha256
+        ).digest()
         return mk, "DEMO_HMAC_CHAIN_NOT_SIGNAL"
 
     def status_block(self) -> str:
-        return self.protocol_block() + f"\n  open demo sessions: {len(self._demo_chains)}"
+        return (
+            self.protocol_block() + f"\n  open demo sessions: {len(self._demo_chains)}"
+        )
 
 
 class CryptoProtocol:
@@ -195,15 +216,17 @@ class CryptoProtocol:
         self.ratchet = RatchetGuide()
 
     def complement_block(self) -> str:
-        return "\n".join([
-            "How they complement each other",
-            "  Piece          Job",
-            "  Argon2id       Memory-hard KDF: passphrase → CMK at rest",
-            "  Double Ratchet Session keys evolve so one leak doesn’t open whole history",
-            "",
-            "  Argon2id is not a session protocol; the ratchet is not a password KDF.",
-            "  Refinement: CMK for sealed ~/.levi blobs; ratchet keys for device pairing / sync control-plane.",
-        ])
+        return "\n".join(
+            [
+                "How they complement each other",
+                "  Piece          Job",
+                "  Argon2id       Memory-hard KDF: passphrase → CMK at rest",
+                "  Double Ratchet Session keys evolve so one leak doesn’t open whole history",
+                "",
+                "  Argon2id is not a session protocol; the ratchet is not a password KDF.",
+                "  Refinement: CMK for sealed ~/.levi blobs; ratchet keys for device pairing / sync control-plane.",
+            ]
+        )
 
     def full_report(self) -> str:
         lines = [

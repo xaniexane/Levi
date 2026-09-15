@@ -61,17 +61,38 @@ class RoutePlan:
 # Keyword → fleet category scoring. Kept small and legible; the fleet
 # registry's role text is the tiebreaker, not a second keyword table.
 _CATEGORY_HINTS: List[Tuple[str, Tuple[str, ...]]] = [
-    ("research", ("research", "investigate", "find out", "compare", "survey",
-                  "sources", "evidence")),
-    ("coding", ("code", "bug", "function", "script", "program", "implement",
-                "refactor", "debug")),
+    (
+        "research",
+        (
+            "research",
+            "investigate",
+            "find out",
+            "compare",
+            "survey",
+            "sources",
+            "evidence",
+        ),
+    ),
+    (
+        "coding",
+        (
+            "code",
+            "bug",
+            "function",
+            "script",
+            "program",
+            "implement",
+            "refactor",
+            "debug",
+        ),
+    ),
     ("architect", ("architecture", "system design", "blueprint")),
-    ("document", ("write", "draft", "report", "essay", "memo", "doc",
-                  "summarize", "summary")),
-    ("data", ("data", "csv", "spreadsheet", "dataset", "metrics",
-              "analytics")),
-    ("finance", ("finance", "stocks", "portfolio", "budget", "money",
-                 "invest")),
+    (
+        "document",
+        ("write", "draft", "report", "essay", "memo", "doc", "summarize", "summary"),
+    ),
+    ("data", ("data", "csv", "spreadsheet", "dataset", "metrics", "analytics")),
+    ("finance", ("finance", "stocks", "portfolio", "budget", "money", "invest")),
     ("security", ("security", "vulnerability", "harden", "threat")),
     ("qa", ("test", "qa", "validate", "verify")),
     ("devops", ("deploy", "ci", "docker", "server", "infra")),
@@ -108,6 +129,7 @@ def pick_category(task: str) -> Tuple[str, List[str]]:
     # exist must not leak through.
     try:
         from levi.fleet.categories import get_category
+
         get_category(name)
     except Exception:
         name = "supervisor"
@@ -117,14 +139,15 @@ def pick_category(task: str) -> Tuple[str, List[str]]:
 def _category_tools(category: str) -> List[str]:
     try:
         from levi.fleet.categories import get_category
+
         return list(get_category(category).tools)
     except Exception:
         return []
 
 
-def _learned_pick(complexity: str, heuristic_model: str,
-                  heuristic_category: str,
-                  home=None) -> Optional[Dict[str, Any]]:
+def _learned_pick(
+    complexity: str, heuristic_model: str, heuristic_category: str, home=None
+) -> Optional[Dict[str, Any]]:
     """Ask the ledger which (model, category) actually worked cheapest.
 
     Returns a better pick or None. Requires ≥3 runs and ≥60% success
@@ -132,6 +155,7 @@ def _learned_pick(complexity: str, heuristic_model: str,
     """
     try:
         from levi.control.ledger import LedgerWriter
+
         stats = LedgerWriter(home=home).model_category_stats()
     except Exception:
         return None
@@ -149,16 +173,24 @@ def _learned_pick(complexity: str, heuristic_model: str,
         cost = MODEL_COSTS.get(row["model"], {}).get("cost_per_1k", 1e9)
         if cost < heur_cost:
             if best is None or cost < best["cost"]:
-                best = {"model": row["model"], "category": row["category"],
-                        "cost": cost, "runs": runs,
-                        "success_rate": round(success_rate, 2)}
+                best = {
+                    "model": row["model"],
+                    "category": row["category"],
+                    "cost": cost,
+                    "runs": runs,
+                    "success_rate": round(success_rate, 2),
+                }
     return best
 
 
-def plan(task: str, *, user_id: str = "local",
-         budget_units: Optional[float] = None,
-         privacy: str = "standard",
-         home=None) -> RoutePlan:
+def plan(
+    task: str,
+    *,
+    user_id: str = "local",
+    budget_units: Optional[float] = None,
+    privacy: str = "standard",
+    home=None,
+) -> RoutePlan:
     """Route one task → (model, category, tools, strategy) + explanation."""
     complexity, reasons = classify_complexity(task)
     category, cat_hits = pick_category(task)
@@ -169,21 +201,18 @@ def plan(task: str, *, user_id: str = "local",
         candidates = ["levi-tiny", "levi-0.6b", "levi-4b"]
         explanation.append("privacy=local-only: cloud sources excluded")
 
-    route = plan_route(task, budget_units=budget_units,
-                       candidates=candidates)
-    explanation.append(
-        f"complexity={complexity} ({'; '.join(reasons)})")
+    route = plan_route(task, budget_units=budget_units, candidates=candidates)
+    explanation.append(f"complexity={complexity} ({'; '.join(reasons)})")
     if cat_hits:
-        explanation.append(
-            f"category={category} (keywords: {', '.join(cat_hits)})")
+        explanation.append(f"category={category} (keywords: {', '.join(cat_hits)})")
     else:
-        explanation.append(
-            "category=supervisor (no specialist keywords matched)")
+        explanation.append("category=supervisor (no specialist keywords matched)")
     explanation.append(f"model: {route.reason}")
     if not route.within_budget:
         explanation.append(
             "WARNING: cheapest viable model exceeds the task budget — "
-            "quality bar kept, budget flagged")
+            "quality bar kept, budget flagged"
+        )
 
     learned_from_history = False
     learned = _learned_pick(complexity, route.model, category, home=home)
@@ -193,19 +222,22 @@ def plan(task: str, *, user_id: str = "local",
             f"ledger: {learned['model']} succeeded "
             f"{learned['success_rate'] * 100:.0f}% over {learned['runs']} "
             f"recorded {complexity} runs at lower relative cost — "
-            "preferred over the heuristic pick")
-        route = plan_route(task, budget_units=budget_units,
-                           candidates=[learned["model"]])
+            "preferred over the heuristic pick"
+        )
+        route = plan_route(
+            task, budget_units=budget_units, candidates=[learned["model"]]
+        )
 
     if complexity == "simple":
         strategy, detail = "direct", "single agentic turn, no swarm"
     elif complexity == "medium":
-        strategy, detail = ("single_worker",
-                            f"one {category} worker, ≤8 steps")
+        strategy, detail = ("single_worker", f"one {category} worker, ≤8 steps")
     else:
-        strategy, detail = ("swarm",
-                            f"fleet swarm: supervisor decomposes, "
-                            f"{category} specialists execute, budgets enforced")
+        strategy, detail = (
+            "swarm",
+            f"fleet swarm: supervisor decomposes, "
+            f"{category} specialists execute, budgets enforced",
+        )
 
     return RoutePlan(
         task=task,

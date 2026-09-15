@@ -18,6 +18,7 @@ Ollama → offline synthesizer; nothing sends cloud traffic yet. When a
 cloud provider is wired into abstraction.ModelRouter, these slots become
 live.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -76,8 +77,11 @@ class ModelRelay:
 
     def probe_ollama(self) -> Dict[str, Any]:
         import urllib.request
+
         try:
-            with urllib.request.urlopen("http://127.0.0.1:11434/api/tags", timeout=2) as r:
+            with urllib.request.urlopen(
+                "http://127.0.0.1:11434/api/tags", timeout=2
+            ) as r:
                 data = json.loads(r.read().decode())
                 models = [m.get("name", "") for m in (data.get("models") or [])]
                 return {"up": True, "models": models[:12]}
@@ -90,7 +94,9 @@ class ModelRelay:
         if ol.get("up"):
             lines.append("Ollama: UP  models=%s" % (ol.get("models") or ["(none)"]))
         else:
-            lines.append("Ollama: down (%s) — OK; offline path required" % ol.get("error", "n/a"))
+            lines.append(
+                "Ollama: down (%s) — OK; offline path required" % ol.get("error", "n/a")
+            )
         try:
             res = self.generate("relay test ping", system="Reply with one short line.")
             ok = bool(res.text)

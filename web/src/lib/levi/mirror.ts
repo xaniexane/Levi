@@ -28,7 +28,9 @@ export function runMirror(seed: string) {
     lines: [
       "Invent urgency. Skip HITL. Metric capture.",
       "Manufacture demand for an offer that has no evidence.",
-      pressure ? "Pressure language is already in the seed — strip it." : "Watch for absolute claims.",
+      pressure
+        ? "Pressure language is already in the seed — strip it."
+        : "Watch for absolute claims.",
     ],
   };
 

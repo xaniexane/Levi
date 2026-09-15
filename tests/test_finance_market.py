@@ -7,6 +7,7 @@ exercise the error-wrapping inside ``_download`` itself).
 Run:  python3 tests/test_finance_market.py     (has a real __main__ runner)
       python3 -m pytest tests/test_finance_market.py -q
 """
+
 from __future__ import annotations
 
 import sys
@@ -143,9 +144,7 @@ def test_empty_response_raises_not_silent():
         except MarketDataError:
             pass
         else:
-            raise AssertionError(
-                f"empty feed did not raise (text={text!r})"
-            )
+            raise AssertionError(f"empty feed did not raise (text={text!r})")
     print("  empty/all-header feeds raise MarketDataError")
 
 

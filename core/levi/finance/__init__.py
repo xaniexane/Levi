@@ -63,9 +63,7 @@ def __getattr__(name: str):
     if name in _LAZY_EXPORTS:
         import importlib
 
-        module = importlib.import_module(
-            f"levi.finance.{_LAZY_EXPORTS[name]}"
-        )
+        module = importlib.import_module(f"levi.finance.{_LAZY_EXPORTS[name]}")
         return getattr(module, name)
     raise AttributeError(f"module 'levi.finance' has no attribute {name!r}")
 

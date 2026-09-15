@@ -16,12 +16,12 @@ import uuid
 
 
 class PrimitiveKind(str, Enum):
-    CASCADE = "cascade"           # typed deterministic sequence
-    SPIRAL = "spiral"             # iterative feedback
+    CASCADE = "cascade"  # typed deterministic sequence
+    SPIRAL = "spiral"  # iterative feedback
     CIRCUIT_BREAKER = "circuit_breaker"
     GOVERNOR = "governor"
-    BIBLE = "bible"               # immutable verified canon
-    BANKS = "banks"               # versioned approved stores
+    BIBLE = "bible"  # immutable verified canon
+    BANKS = "banks"  # versioned approved stores
 
 
 @dataclass
@@ -36,20 +36,26 @@ class CascadeStep:
 @dataclass
 class CascadeChain:
     """Deterministic typed execution sequence."""
+
     id: str
     name: str
     steps: List[CascadeStep] = field(default_factory=list)
     halted: bool = False
     halt_reason: str = ""
 
-    def add(self, name: str, action: str, expected: str = "", risk: int = 1) -> "CascadeChain":
-        self.steps.append(CascadeStep(str(uuid.uuid4())[:8], name, action, expected, risk))
+    def add(
+        self, name: str, action: str, expected: str = "", risk: int = 1
+    ) -> "CascadeChain":
+        self.steps.append(
+            CascadeStep(str(uuid.uuid4())[:8], name, action, expected, risk)
+        )
         return self
 
 
 @dataclass
 class SpiralCoil:
     """Iterative feedback workflow — each turn feeds the next."""
+
     id: str
     name: str
     max_iterations: int = 5
@@ -60,12 +66,14 @@ class SpiralCoil:
     def tick(self, observation: str, update: Optional[Dict[str, Any]] = None) -> bool:
         """Returns True if should continue, False if done or maxed."""
         self.iteration += 1
-        self.history.append({
-            "iteration": self.iteration,
-            "observation": observation,
-            "update": update or {},
-            "at": datetime.now(timezone.utc).isoformat(),
-        })
+        self.history.append(
+            {
+                "iteration": self.iteration,
+                "observation": observation,
+                "update": update or {},
+                "at": datetime.now(timezone.utc).isoformat(),
+            }
+        )
         if update:
             self.state.update(update)
         return self.iteration < self.max_iterations
@@ -74,6 +82,7 @@ class SpiralCoil:
 @dataclass
 class CircuitBreaker:
     """Resource / risk / depth limiter — trips closed on breach."""
+
     name: str
     max_depth: int = 8
     max_cost: float = 10.0
@@ -111,6 +120,7 @@ class CircuitBreaker:
 @dataclass
 class Governor:
     """Dynamic budget / complexity controller."""
+
     name: str
     budget: float = 5.0
     spent: float = 0.0
@@ -133,6 +143,7 @@ class Governor:
 @dataclass
 class BibleEntry:
     """Immutable verified canon entry."""
+
     id: str
     title: str
     content: str
@@ -142,11 +153,13 @@ class BibleEntry:
 
 class Bible:
     """Immutable verified canon — write-once entries."""
+
     def __init__(self):
         self._entries: Dict[str, BibleEntry] = {}
 
     def seal(self, title: str, content: str) -> BibleEntry:
         import hashlib
+
         eid = str(uuid.uuid4())[:12]
         h = hashlib.sha256(content.encode()).hexdigest()[:16]
         entry = BibleEntry(
@@ -168,6 +181,7 @@ class Bible:
 
 class Banks:
     """Versioned approved knowledge/artifact stores."""
+
     def __init__(self):
         self._stores: Dict[str, List[Dict[str, Any]]] = {}
 
@@ -183,7 +197,9 @@ class Banks:
         self._stores[bank_name].append(record)
         return version
 
-    def withdraw(self, bank_name: str, version: Optional[int] = None) -> Optional[Dict[str, Any]]:
+    def withdraw(
+        self, bank_name: str, version: Optional[int] = None
+    ) -> Optional[Dict[str, Any]]:
         if bank_name not in self._stores or not self._stores[bank_name]:
             return None
         if version is None:

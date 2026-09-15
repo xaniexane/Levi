@@ -43,6 +43,7 @@ from levi.policy.gates import RiskLevel
 try:
     from levi.control.approvals import ApprovalBlocked
 except Exception:  # control plane unavailable: approvals degrade to refusal
+
     class ApprovalBlocked(Exception):  # type: ignore[no-redef]
         def __init__(self, record=None, reason=""):
             super().__init__(reason or "approval blocked")
@@ -62,8 +63,7 @@ class BudgetExceeded(FleetError):
     """A charter budget was hit. Carries a structured reason."""
 
     def __init__(self, budget: str, limit: Any, spent: Any):
-        super().__init__(f"budget exceeded: {budget} (limit={limit}, "
-                         f"spent={spent})")
+        super().__init__(f"budget exceeded: {budget} (limit={limit}, spent={spent})")
         self.budget = budget
         self.limit = limit
         self.spent = spent
@@ -112,10 +112,14 @@ class Ledger:
 
     def log_tool(self, tool: str, category: str, risk: str, ok: bool) -> None:
         with self.lock:
-            self.tool_log.append({
-                "tool": tool, "category": category,
-                "risk": risk, "ok": ok,
-            })
+            self.tool_log.append(
+                {
+                    "tool": tool,
+                    "category": category,
+                    "risk": risk,
+                    "ok": ok,
+                }
+            )
 
     def risk_summary(self) -> Dict[str, int]:
         with self.lock:
@@ -130,9 +134,10 @@ class Ledger:
                 "agents": self.agents_spawned,
                 "tool_calls": self.tool_calls,
                 "cost_units": self.cost_units,
-                "by_risk": {k: sum(1 for e in self.tool_log
-                                   if e["risk"] == k)
-                            for k in ("info", "low", "moderate")},
+                "by_risk": {
+                    k: sum(1 for e in self.tool_log if e["risk"] == k)
+                    for k in ("info", "low", "moderate")
+                },
             }
 
 
@@ -159,8 +164,7 @@ class Blackboard:
             snap = dict(self._state)
         text = json.dumps(snap, default=str)
         if len(text) > limit:
-            return {"_truncated": True,
-                    "preview": text[:limit]}
+            return {"_truncated": True, "preview": text[:limit]}
         return snap
 
 
@@ -202,7 +206,8 @@ class WorkerContext:
         if self.permissions and tool_name not in self.permissions:
             raise FleetRefusal(
                 f"tool {tool_name!r} is outside this worker's permission "
-                f"grant {self.permissions}")
+                f"grant {self.permissions}"
+            )
 
 
 # ---------------------------------------------------------------------------
@@ -210,8 +215,7 @@ class WorkerContext:
 # ---------------------------------------------------------------------------
 
 
-def _check_budgets(ledger: Ledger, budgets: SwarmBudgets,
-                   deadline: float) -> None:
+def _check_budgets(ledger: Ledger, budgets: SwarmBudgets, deadline: float) -> None:
     with ledger.lock:
         calls, cost = ledger.tool_calls, ledger.cost_units
     if calls >= budgets.max_tool_calls:
@@ -219,13 +223,16 @@ def _check_budgets(ledger: Ledger, budgets: SwarmBudgets,
     if cost >= budgets.max_cost_units:
         raise BudgetExceeded("max_cost_units", budgets.max_cost_units, cost)
     if time.time() >= deadline:
-        raise BudgetExceeded("max_time_seconds", budgets.max_time_seconds,
-                             round(time.time() - (deadline -
-                                                  budgets.max_time_seconds), 1))
+        raise BudgetExceeded(
+            "max_time_seconds",
+            budgets.max_time_seconds,
+            round(time.time() - (deadline - budgets.max_time_seconds), 1),
+        )
 
 
-def make_counting_registry(tool_names: List[str], category: AgentCategory,
-                           ctx: WorkerContext, deadline: float):
+def make_counting_registry(
+    tool_names: List[str], category: AgentCategory, ctx: WorkerContext, deadline: float
+):
     """Build a subset ToolRegistry that counts calls and enforces budgets.
 
     The ``delegate`` tool is always excluded from worker registries:
@@ -241,13 +248,11 @@ def make_counting_registry(tool_names: List[str], category: AgentCategory,
     unit = cost_per_call(category.cost_class)
 
     class CountingRegistry(ToolRegistry):
-        def execute(self, name: str, args: dict,
-                    exec_ctx: Any = None):  # type: ignore[override]
+        def execute(self, name: str, args: dict, exec_ctx: Any = None):  # type: ignore[override]
             ctx.check_permission(name)
             risk_level = tool_risk_level(name)
             if risk_level >= 2 and ctx.approval_engine is not None:
-                _guard_tool_call(ctx, category, name, args or {},
-                                 risk_level)
+                _guard_tool_call(ctx, category, name, args or {}, risk_level)
             _check_budgets(ctx.ledger, ctx.budgets, deadline)
             result = super().execute(name, args, exec_ctx)
             risk = tool_risk_name(name)
@@ -255,17 +260,16 @@ def make_counting_registry(tool_names: List[str], category: AgentCategory,
                 ctx.ledger.tool_calls += 1
                 ctx.ledger.cost_units += unit
                 calls, cost = ctx.ledger.tool_calls, ctx.ledger.cost_units
-            ctx.ledger.log_tool(name, category.name, risk,
-                                bool(result.ok))
+            ctx.ledger.log_tool(name, category.name, risk, bool(result.ok))
             # Post-call check is strictly-greater: it exists only to catch
             # a multi-thread overshoot race. Pre-call >= keeps "exactly N
             # calls allowed" semantics for max_tool_calls=N.
             if calls > ctx.budgets.max_tool_calls:
-                raise BudgetExceeded("max_tool_calls",
-                                     ctx.budgets.max_tool_calls, calls)
+                raise BudgetExceeded(
+                    "max_tool_calls", ctx.budgets.max_tool_calls, calls
+                )
             if cost > ctx.budgets.max_cost_units:
-                raise BudgetExceeded("max_cost_units",
-                                     ctx.budgets.max_cost_units, cost)
+                raise BudgetExceeded("max_cost_units", ctx.budgets.max_cost_units, cost)
             return result
 
     reg = CountingRegistry()
@@ -278,8 +282,13 @@ def make_counting_registry(tool_names: List[str], category: AgentCategory,
     return reg
 
 
-def _guard_tool_call(ctx: WorkerContext, category: AgentCategory,
-                     name: str, args: Dict[str, Any], risk_level: int) -> None:
+def _guard_tool_call(
+    ctx: WorkerContext,
+    category: AgentCategory,
+    name: str,
+    args: Dict[str, Any],
+    risk_level: int,
+) -> None:
     """Route a MODERATE+ tool call through the universal approval engine.
 
     Uses :meth:`ApprovalEngine.require`: approved → proceed; pending or
@@ -288,13 +297,14 @@ def _guard_tool_call(ctx: WorkerContext, category: AgentCategory,
     timeout waits for a human (the CLI decides cross-process); an
     ``approve_once`` decision is claimed exactly once on the next call.
     """
-    arg_preview = ", ".join(
-        f"{k}={str(v)[:60]}" for k, v in sorted(args.items()))
+    arg_preview = ", ".join(f"{k}={str(v)[:60]}" for k, v in sorted(args.items()))
     ctx.approval_engine.require(
         description=f"fleet tool call: {name}({arg_preview})",
         risk_level=RiskLevel(risk_level),
-        reason=(f"worker of category {category.name!r} (run {ctx.run_id}) "
-                f"invoked a {tool_risk_name(name)}-risk tool"),
+        reason=(
+            f"worker of category {category.name!r} (run {ctx.run_id}) "
+            f"invoked a {tool_risk_name(name)}-risk tool"
+        ),
         affected_systems=[f"tool:{name}"],
         estimated_impact=f"args: {arg_preview or '(none)'}",
         reversible=name not in ("shell_exec", "file_write", "file_edit"),
@@ -306,8 +316,7 @@ def _guard_tool_call(ctx: WorkerContext, category: AgentCategory,
     )
 
 
-def select_worker_provider(category: AgentCategory,
-                           ctx: WorkerContext) -> Any:
+def select_worker_provider(category: AgentCategory, ctx: WorkerContext) -> Any:
     """Minimal honest model router (blueprint §7, phase-1 form).
 
     Light (read-only, low-complexity) work stays on the local provider:
@@ -327,8 +336,9 @@ def select_worker_provider(category: AgentCategory,
 WorkerFn = Callable[[PlanNode, AgentCategory, WorkerContext], Dict[str, Any]]
 
 
-def default_worker(node: PlanNode, category: AgentCategory,
-                   ctx: WorkerContext) -> Dict[str, Any]:
+def default_worker(
+    node: PlanNode, category: AgentCategory, ctx: WorkerContext
+) -> Dict[str, Any]:
     """Run one subtask through the existing agentic loop.
 
     Stub categories (finance/payment) refuse: real money movement stays
@@ -338,12 +348,16 @@ def default_worker(node: PlanNode, category: AgentCategory,
         raise FleetRefusal(
             f"category {category.name!r} is a stub: refusing without "
             "explicit human approval wiring. Real money movement stays "
-            "HITL-gated per the control plane (enterprise phase 2).")
+            "HITL-gated per the control plane (enterprise phase 2)."
+        )
     from levi.agent.loop import run_subtask
 
     registry = make_counting_registry(
-        category.tools, category, ctx,
-        deadline=time.time() + ctx.budgets.max_time_seconds)
+        category.tools,
+        category,
+        ctx,
+        deadline=time.time() + ctx.budgets.max_time_seconds,
+    )
     ctx.permissions = [t for t in category.tools if t != "delegate"]
     board = ctx.blackboard.snapshot()
     system_prompt = (
@@ -356,7 +370,9 @@ def default_worker(node: PlanNode, category: AgentCategory,
         "Finish with a concise summary of what you did and the outcome."
     )
     transcript = run_subtask(
-        node.task, registry=registry, max_steps=ctx.max_steps,
+        node.task,
+        registry=registry,
+        max_steps=ctx.max_steps,
         system_prompt=system_prompt,
         provider=select_worker_provider(category, ctx),
     )
@@ -376,14 +392,15 @@ def default_worker(node: PlanNode, category: AgentCategory,
 # ---------------------------------------------------------------------------
 
 
-def spawn_subswarm(objective: str, *, depth: int,
-                   budgets: SwarmBudgets,
-                   **kwargs: Any) -> Dict[str, Any]:
+def spawn_subswarm(
+    objective: str, *, depth: int, budgets: SwarmBudgets, **kwargs: Any
+) -> Dict[str, Any]:
     """Spawn a child swarm. Refused beyond ``max_depth`` — never silent."""
     if depth > budgets.max_depth:
         raise MaxDepthExceeded(
             f"sub-swarm spawn refused: depth {depth} exceeds "
-            f"max_depth={budgets.max_depth}")
+            f"max_depth={budgets.max_depth}"
+        )
     runner = SwarmRunner(budgets=budgets, depth=depth, **kwargs)
     return runner.run(objective)
 
@@ -402,14 +419,17 @@ def _fleet_dir() -> Path:
 class SwarmRunner:
     """Executes a plan DAG under budget with verification and one replan."""
 
-    def __init__(self, budgets: Optional[SwarmBudgets] = None,
-                 depth: int = 0,
-                 worker_fn: Optional[WorkerFn] = None,
-                 verify_fn: Optional[Callable[..., Any]] = None,
-                 semantic_verify: bool = False,
-                 provider: Any = None,
-                 approval_engine: Any = None,
-                 approval_timeout: float = 0.0) -> None:
+    def __init__(
+        self,
+        budgets: Optional[SwarmBudgets] = None,
+        depth: int = 0,
+        worker_fn: Optional[WorkerFn] = None,
+        verify_fn: Optional[Callable[..., Any]] = None,
+        semantic_verify: bool = False,
+        provider: Any = None,
+        approval_engine: Any = None,
+        approval_timeout: float = 0.0,
+    ) -> None:
         self.budgets = budgets or SwarmBudgets()
         self.depth = depth
         self.worker_fn = worker_fn or default_worker
@@ -422,6 +442,7 @@ class SwarmRunner:
         if approval_engine is None:
             try:
                 from levi.control.approvals import ApprovalEngine
+
                 approval_engine = ApprovalEngine()
             except Exception:
                 approval_engine = None
@@ -430,26 +451,38 @@ class SwarmRunner:
 
     # -- public API ------------------------------------------------------
 
-    def run(self, objective: str | Plan,
-            plan: Optional[Plan] = None) -> Dict[str, Any]:
+    def run(self, objective: str | Plan, plan: Optional[Plan] = None) -> Dict[str, Any]:
         """Run an objective (or a prebuilt Plan). Returns a structured report."""
         from levi.fleet.supervisor import plan_objective
 
-        the_plan = plan if plan is not None else (
-            objective if isinstance(objective, Plan)
-            else plan_objective(objective))
+        the_plan = (
+            plan
+            if plan is not None
+            else (
+                objective if isinstance(objective, Plan) else plan_objective(objective)
+            )
+        )
         run_id = uuid.uuid4().hex[:12]
         blackboard = Blackboard()
         ledger = Ledger()
         deadline = time.time() + self.budgets.max_time_seconds
-        ctx = WorkerContext(blackboard=blackboard, ledger=ledger,
-                            budgets=self.budgets, run_id=run_id,
-                            depth=self.depth, provider=self.provider,
-                            approval_engine=self.approval_engine,
-                            approval_timeout=self.approval_timeout)
-        report = self._execute(the_plan, ctx, deadline, run_id,
-                               objective if isinstance(objective, str)
-                               else the_plan.objective)
+        ctx = WorkerContext(
+            blackboard=blackboard,
+            ledger=ledger,
+            budgets=self.budgets,
+            run_id=run_id,
+            depth=self.depth,
+            provider=self.provider,
+            approval_engine=self.approval_engine,
+            approval_timeout=self.approval_timeout,
+        )
+        report = self._execute(
+            the_plan,
+            ctx,
+            deadline,
+            run_id,
+            objective if isinstance(objective, str) else the_plan.objective,
+        )
         self._persist(run_id, report)
         self._record_ledger(run_id, the_plan, report, ctx)
         return report
@@ -466,10 +499,12 @@ class SwarmRunner:
     def _persist(self, run_id: str, report: Dict[str, Any]) -> None:
         # Decision journal for the fleet: every run is recorded.
         (_fleet_dir() / f"{run_id}.json").write_text(
-            json.dumps(report, indent=2, default=str))
+            json.dumps(report, indent=2, default=str)
+        )
 
-    def _record_ledger(self, run_id: str, plan: Plan,
-                       report: Dict[str, Any], ctx: WorkerContext) -> None:
+    def _record_ledger(
+        self, run_id: str, plan: Plan, report: Dict[str, Any], ctx: WorkerContext
+    ) -> None:
         """Write the run into the decision ledger (blueprint §15).
 
         Never fatal: ledger failures must not break a swarm run.
@@ -482,10 +517,11 @@ class SwarmRunner:
         try:
             ledger = LedgerWriter()
             ledger.record_task(
-                run_id, objective=report.get("objective", ""),
-                user_id=ctx.user_id, tenant_id=ctx.tenant_id,
-                plan_version=str(plan.version
-                                 if hasattr(plan, "version") else "1"),
+                run_id,
+                objective=report.get("objective", ""),
+                user_id=ctx.user_id,
+                tenant_id=ctx.tenant_id,
+                plan_version=str(plan.version if hasattr(plan, "version") else "1"),
                 status="running",
             )
             spent = report.get("budgets", {}).get("spent", {})
@@ -500,30 +536,34 @@ class SwarmRunner:
                     agent=f"fleet:{n.get('category', '?')}",
                     category=n.get("category", ""),
                     task_class=complexity,
-                    model=str(n.get("provider", "")
-                              or report.get("provider", "")),
+                    model=str(n.get("provider", "") or report.get("provider", "")),
                     decision_summary=(
-                        f"fleet worker executed plan node: "
-                        f"{task_text[:300]}"
+                        f"fleet worker executed plan node: {task_text[:300]}"
                     ),
                     action=task_text[:500],
-                    expected_result=(node.acceptance
-                                     if node is not None else ""),
+                    expected_result=(node.acceptance if node is not None else ""),
                     actual_result=str(n.get("summary", ""))[:2000],
                     verification={"notes": verification},
                     error=str(n.get("error", ""))[:1000],
                     outcome=str(n.get("status", "")),
                 )
             ledger.set_task_status(
-                run_id, str(report.get("status", "completed")),
+                run_id,
+                str(report.get("status", "completed")),
                 cost_units=float(spent.get("cost_units", 0) or 0),
                 latency_ms=float(spent.get("seconds", 0) or 0) * 1000.0,
             )
         except Exception:
             pass  # ledger is telemetry, never load-bearing
 
-    def _execute(self, plan: Plan, ctx: WorkerContext, deadline: float,
-                 run_id: str, objective: str) -> Dict[str, Any]:
+    def _execute(
+        self,
+        plan: Plan,
+        ctx: WorkerContext,
+        deadline: float,
+        run_id: str,
+        objective: str,
+    ) -> Dict[str, Any]:
         started = time.time()
         nodes: Dict[str, PlanNode] = {n.id: n for n in plan.nodes}
         status: Dict[str, str] = {nid: "pending" for nid in nodes}
@@ -545,9 +585,17 @@ class SwarmRunner:
                 dep_status = [status[d] for d in node.deps]
                 if all(s == "ok" for s in dep_status):
                     out.append(nid)
-                elif any(s in ("failed", "escalated", "skipped", "refused",
-                               "awaiting_approval")
-                         for s in dep_status):
+                elif any(
+                    s
+                    in (
+                        "failed",
+                        "escalated",
+                        "skipped",
+                        "refused",
+                        "awaiting_approval",
+                    )
+                    for s in dep_status
+                ):
                     set_status(nid, "skipped")
             return [nid for nid in out if status[nid] == "pending"]
 
@@ -558,9 +606,9 @@ class SwarmRunner:
             # Budget gate: agents.
             with ctx.ledger.lock:
                 if ctx.ledger.agents_spawned >= self.budgets.max_agents:
-                    raise BudgetExceeded("max_agents",
-                                         self.budgets.max_agents,
-                                         ctx.ledger.agents_spawned)
+                    raise BudgetExceeded(
+                        "max_agents", self.budgets.max_agents, ctx.ledger.agents_spawned
+                    )
                 ctx.ledger.agents_spawned += 1
             _check_budgets(ctx.ledger, ctx.budgets, deadline)
 
@@ -572,41 +620,58 @@ class SwarmRunner:
                 except (BudgetExceeded, MaxDepthExceeded):
                     raise
                 except FleetRefusal as exc:
-                    results[nid] = {"status": "refused", "error": str(exc),
-                                    "attempts": attempts}
+                    results[nid] = {
+                        "status": "refused",
+                        "error": str(exc),
+                        "attempts": attempts,
+                    }
                     set_status(nid, "refused")
-                    escalations.append({"node": nid, "reason": "refused",
-                                        "detail": str(exc)})
+                    escalations.append(
+                        {"node": nid, "reason": "refused", "detail": str(exc)}
+                    )
                     return
                 except ApprovalBlocked as exc:
                     approval_id = exc.record.get("id", "?")
                     results[nid] = {
                         "status": "awaiting_approval",
                         "approval_id": approval_id,
-                        "error": str(exc), "attempts": attempts,
+                        "error": str(exc),
+                        "attempts": attempts,
                     }
                     set_status(nid, "awaiting_approval")
-                    escalations.append({
-                        "node": nid, "reason": "awaiting_approval",
-                        "approval_id": approval_id,
-                        "detail": (f"decide with: "
-                                   f"levi approve approve {approval_id}"),
-                    })
+                    escalations.append(
+                        {
+                            "node": nid,
+                            "reason": "awaiting_approval",
+                            "approval_id": approval_id,
+                            "detail": (
+                                f"decide with: levi approve approve {approval_id}"
+                            ),
+                        }
+                    )
                     return
                 except Exception as exc:  # worker blew up
-                    result = {"ok": False, "summary": "",
-                              "error": f"worker exception: {exc}",
-                              "artifacts": []}
+                    result = {
+                        "ok": False,
+                        "summary": "",
+                        "error": f"worker exception: {exc}",
+                        "artifacts": [],
+                    }
                 # Publish artifacts to the blackboard.
                 for art in result.get("artifacts") or []:
                     name = art.get("name") if isinstance(art, dict) else art
                     if name:
                         ctx.blackboard.publish_artifact(
-                            name, art if isinstance(art, dict) else {})
+                            name, art if isinstance(art, dict) else {}
+                        )
                 verification = verify_node(
-                    node.to_dict(), result, ctx.blackboard,
+                    node.to_dict(),
+                    result,
+                    ctx.blackboard,
                     judge=self.verify_fn,
-                    semantic=self.semantic_verify, provider=ctx.provider)
+                    semantic=self.semantic_verify,
+                    provider=ctx.provider,
+                )
                 if verification.ok:
                     results[nid] = {
                         "status": "ok" if attempts == 1 else "ok_after_retry",
@@ -626,8 +691,13 @@ class SwarmRunner:
                         "verification": verification.notes,
                     }
                     set_status(nid, "escalated")
-                    escalations.append({"node": nid, "reason": "verification",
-                                        "detail": verification.notes})
+                    escalations.append(
+                        {
+                            "node": nid,
+                            "reason": "verification",
+                            "detail": verification.notes,
+                        }
+                    )
 
         try:
             with ThreadPoolExecutor(max_workers=4) as pool:
@@ -635,13 +705,13 @@ class SwarmRunner:
                     batch = ready()
                     if not batch:
                         break
-                    futures = {pool.submit(run_node, nid): nid
-                               for nid in batch}
+                    futures = {pool.submit(run_node, nid): nid for nid in batch}
                     for fut in as_completed(futures):
                         fut.result()  # raises BudgetExceeded outward
                     # One replan after a wave with failures.
-                    failed = [nid for nid, s in status.items()
-                              if s in ("failed", "escalated")]
+                    failed = [
+                        nid for nid, s in status.items() if s in ("failed", "escalated")
+                    ]
                     if failed and not replanned:
                         recovery = replan_remaining(plan, failed)
                         for rn in recovery.nodes:
@@ -650,9 +720,11 @@ class SwarmRunner:
                                 status[rn.id] = "pending"
                         replanned = True
         except (BudgetExceeded, MaxDepthExceeded) as exc:
-            halt_reason = {"type": "budget",
-                           "budget": getattr(exc, "budget", "max_depth"),
-                           "detail": str(exc)}
+            halt_reason = {
+                "type": "budget",
+                "budget": getattr(exc, "budget", "max_depth"),
+                "detail": str(exc),
+            }
         except Exception as exc:  # pragma: no cover — defensive
             halt_reason = {"type": "error", "detail": str(exc)}
 
@@ -675,11 +747,13 @@ class SwarmRunner:
             "status": final_status,
             "halt_reason": halt_reason,
             "depth": self.depth,
-            "nodes": {nid: {"status": s, **results.get(nid, {})}
-                      for nid, s in status.items()},
-            "budgets": {"limits": self.budgets.to_dict(),
-                        "spent": {**ctx.ledger.to_dict(),
-                                  "seconds": elapsed}},
+            "nodes": {
+                nid: {"status": s, **results.get(nid, {})} for nid, s in status.items()
+            },
+            "budgets": {
+                "limits": self.budgets.to_dict(),
+                "spent": {**ctx.ledger.to_dict(), "seconds": elapsed},
+            },
             "tool_audit": list(ctx.ledger.tool_log),
             "escalations": escalations,
             "replanned": replanned,

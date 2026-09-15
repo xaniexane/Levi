@@ -10,6 +10,7 @@ Value rule (non-malicious):
   Increase *value of service provided* and *clarity of need* —
   never manufacture dependency, dark-pattern urgency, or false scarcity.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -30,7 +31,8 @@ class SymbiosisPair:
 # Core symbiotic lattice (expandable)
 PAIRS: List[SymbiosisPair] = [
     SymbiosisPair(
-        "connector_ports", "hitl_gates",
+        "connector_ports",
+        "hitl_gates",
         bond="External tools ↔ permissioned use",
         if_a_alone="Adapters without governance",
         if_b_alone="Gates with no external surface",
@@ -38,16 +40,17 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Auto-connect paid or identity APIs without consent",
     ),
     SymbiosisPair(
-        "interactive_organs_ui", "organ_echo",
+        "interactive_organs_ui",
+        "organ_echo",
         bond="Visible surfaces ↔ decision organs",
         if_a_alone="UI chrome without kernel organs",
         if_b_alone="CLI organs without shared visual surface",
         value_up="Same decision logic in UI and kernel",
         forbidden="UI that hides HITL or fakes completion",
     ),
-
     SymbiosisPair(
-        "demand_pulse", "income_factory",
+        "demand_pulse",
+        "income_factory",
         bond="Need discovery ↔ ethical offer composition",
         if_a_alone="Lists gaps with no responsible path to help",
         if_b_alone="Sells packages without verified demand",
@@ -55,7 +58,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Invent demand or pressure-buy tactics",
     ),
     SymbiosisPair(
-        "hitl_gates", "daemon_core",
+        "hitl_gates",
+        "daemon_core",
         bond="Autonomy ↔ governance",
         if_a_alone="Approvals with nothing to approve",
         if_b_alone="Cycles that can overreach",
@@ -63,7 +67,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Silence-as-consent or hidden execution",
     ),
     SymbiosisPair(
-        "corpus_brain", "memory_hierarchy",
+        "corpus_brain",
+        "memory_hierarchy",
         bond="Evidence ↔ belief trace",
         if_a_alone="Facts without retrieval path",
         if_b_alone="Abstract layers without source links",
@@ -71,7 +76,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Model overwrite of OBSERVED without audit",
     ),
     SymbiosisPair(
-        "model_relay", "offline_companion",
+        "model_relay",
+        "offline_companion",
         bond="Cloud/local generation ↔ always-on care path",
         if_a_alone="Fails closed when net/API down",
         if_b_alone="No deep generation when models available",
@@ -79,7 +85,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Require paid API for basic safety/regulation",
     ),
     SymbiosisPair(
-        "organ_echo", "organ_mandella",
+        "organ_echo",
+        "organ_mandella",
         bond="Parallel options ↔ stake under pressure",
         if_a_alone="Branches without commitment frame",
         if_b_alone="Stakes without alternative map",
@@ -87,7 +94,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Force a stake that removes reversibility silently",
     ),
     SymbiosisPair(
-        "emergency_builder", "software_factory",
+        "emergency_builder",
+        "software_factory",
         bond="Tiered scaffold ↔ stage pipeline",
         if_a_alone="Trees without IDEA→PACKAGE discipline",
         if_b_alone="Stages without emergency-tier authority",
@@ -95,7 +103,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Silent rewrite of production core",
     ),
     SymbiosisPair(
-        "vault_seal", "continuity_shelf",
+        "vault_seal",
+        "continuity_shelf",
         bond="Secrecy ↔ continuity",
         if_a_alone="Encrypted blobs nobody retrieves in flow",
         if_b_alone="Memories stored in clear by default",
@@ -103,7 +112,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Exfiltrate or train on sealed content",
     ),
     SymbiosisPair(
-        "project_phases", "capability_log",
+        "project_phases",
+        "capability_log",
         bond="Client work ↔ skill extraction",
         if_a_alone="Phases that don't feed future skills",
         if_b_alone="Logs without operational practice",
@@ -111,7 +121,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Fake completion metrics or invented case studies",
     ),
     SymbiosisPair(
-        "pulse", "unified_daemon",
+        "pulse",
+        "unified_daemon",
         bond="Periodic sense ↔ full cycle",
         if_a_alone="Checks with no orchestrated response",
         if_b_alone="Cycles without light standing watch",
@@ -119,7 +130,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Spam notifications to create false urgency",
     ),
     SymbiosisPair(
-        "persona_lattice", "core_logic",
+        "persona_lattice",
+        "core_logic",
         bond="Relational fit ↔ structural integrity",
         if_a_alone="Charm without truth/structure",
         if_b_alone="Correctness without bond",
@@ -127,7 +139,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Persona that overrides crisis safety or honesty",
     ),
     SymbiosisPair(
-        "skill_registry", "policy_gates",
+        "skill_registry",
+        "policy_gates",
         bond="Capability ↔ permission",
         if_a_alone="Tools without risk ceiling",
         if_b_alone="Gates with nothing to gate",
@@ -135,7 +148,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Register critical tools as INFO risk",
     ),
     SymbiosisPair(
-        "sandbox_exec", "emergency_builder",
+        "sandbox_exec",
+        "emergency_builder",
         bond="Run generated code ↔ generate under tiers",
         if_a_alone="Sandbox with nothing to run",
         if_b_alone="Code written but never safely tried",
@@ -143,7 +157,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Sandbox escape or host-wide install without HITL",
     ),
     SymbiosisPair(
-        "lwp_model_engine", "story_fabric",
+        "lwp_model_engine",
+        "story_fabric",
         bond="Offline SSA literary spine ↔ cascade beat fabric",
         if_a_alone="Scenes without long-form beat law",
         if_b_alone="Beats without direction/void/ROM locks",
@@ -151,7 +166,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Cloud owns continuity or overwrites ROM",
     ),
     SymbiosisPair(
-        "mirror_cascade", "opportunity_rail",
+        "mirror_cascade",
+        "opportunity_rail",
         bond="Triple-coil veto ↔ HITL automation spine",
         if_a_alone="Insight without fulfillment path",
         if_b_alone="Rail without reverse/shadow discipline",
@@ -159,7 +175,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Skip mirror under time pressure",
     ),
     SymbiosisPair(
-        "pollinations_stills", "lwp_model_engine",
+        "pollinations_stills",
+        "lwp_model_engine",
         bond="Free image stills ↔ scene/beat prose",
         if_a_alone="Images without narrative lock",
         if_b_alone="Prose without visual receipt",
@@ -167,7 +184,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Bill for images as if core required cloud",
     ),
     SymbiosisPair(
-        "emergency_builder", "sandbox_smoke",
+        "emergency_builder",
+        "sandbox_smoke",
         bond="Scaffold/MVP ↔ post-apply verify",
         if_a_alone="Trees without smoke",
         if_b_alone="Smoke with nothing built",
@@ -175,7 +193,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Claim product without workspace isolation",
     ),
     SymbiosisPair(
-        "charter", "nervous_system",
+        "charter",
+        "nervous_system",
         bond="Bound identity ↔ tone/persona regulation",
         if_a_alone="Soul text without runtime mute rules",
         if_b_alone="Persona without non-negotiables",
@@ -183,7 +202,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Persona override of crisis or honesty rails",
     ),
     SymbiosisPair(
-        "monotropism", "offline_companion",
+        "monotropism",
+        "offline_companion",
         bond="Focus tunnels ↔ steady companion replies",
         if_a_alone="Depth tracking without care path",
         if_b_alone="Replies that yank tunnels mid-focus",
@@ -191,7 +211,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Force topic spray as engagement hack",
     ),
     SymbiosisPair(
-        "ops_console_ui", "daemon_kernel",
+        "ops_console_ui",
+        "daemon_kernel",
         bond="Interactive surface ↔ brainstem",
         if_a_alone="Chrome without estop/HITL truth",
         if_b_alone="Power without visible cockpit",
@@ -199,7 +220,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="UI that fakes approve or hides estop",
     ),
     SymbiosisPair(
-        "capability_log", "income_factory",
+        "capability_log",
+        "income_factory",
         bond="What was learned ↔ what can be offered later",
         if_a_alone="Skills with no commercial path",
         if_b_alone="Offers with no proof of prior work",
@@ -207,7 +229,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Sell undelivered capability as fact",
     ),
     SymbiosisPair(
-        "file_vault", "corpus_brain",
+        "file_vault",
+        "corpus_brain",
         bond="Encrypted notes ↔ evidence corpus",
         if_a_alone="Secrets with no reasoning link",
         if_b_alone="Open facts without private shelf",
@@ -215,7 +238,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Encrypt away audit of consequential actions",
     ),
     SymbiosisPair(
-        "pytest_gate", "emergency_builder",
+        "pytest_gate",
+        "emergency_builder",
         bond="Regression authority ↔ code that changes trees",
         if_a_alone="Tests with no build path",
         if_b_alone="Scaffolds that break the ladder",
@@ -223,7 +247,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Ship broken apply as success",
     ),
     SymbiosisPair(
-        "character_graph", "story_fabric",
+        "character_graph",
+        "story_fabric",
         bond="Unlimited characters ↔ cascade story body",
         if_a_alone="Cast with no narrative physics",
         if_b_alone="Beats without living pressure",
@@ -231,7 +256,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Random NPC spam without scar law",
     ),
     SymbiosisPair(
-        "premium_craft", "lwp_model",
+        "premium_craft",
+        "lwp_model",
         bond="Craft lenses ↔ literary SSA engine",
         if_a_alone="Technique without structure",
         if_b_alone="Structure without prose craft",
@@ -239,7 +265,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Generic chatbot purple prose",
     ),
     SymbiosisPair(
-        "corpus_expand", "offline_companion",
+        "corpus_expand",
+        "offline_companion",
         bond="Mass brain ↔ grounded replies",
         if_a_alone="Knowledge without conversation",
         if_b_alone="Talk without retrieval depth",
@@ -247,7 +274,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Hallucinated authority on clinical topics",
     ),
     SymbiosisPair(
-        "crucible", "factory_sandbox",
+        "crucible",
+        "factory_sandbox",
         bond="Constrained trial ↔ project verify",
         if_a_alone="Syntax toys without build path",
         if_b_alone="Build without safety chamber",
@@ -255,7 +283,8 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Unrestricted shell as default",
     ),
     SymbiosisPair(
-        "continuity_shelf", "standing_watch",
+        "continuity_shelf",
+        "standing_watch",
         bond="Resume pointers ↔ sentinel pulse",
         if_a_alone="Memory without alerting",
         if_b_alone="Alerts without thread context",
@@ -263,19 +292,27 @@ PAIRS: List[SymbiosisPair] = [
         forbidden="Cloud-only memory lock-in",
     ),
     SymbiosisPair(
-        "service_mesh", "ops_layer",
+        "service_mesh",
+        "ops_layer",
         bond="Capability catalog ↔ cockpit",
         if_a_alone="Menu without execution surface",
         if_b_alone="Cockpit without discoverable services",
         value_up="Local full-path operator UX",
         forbidden="Remote agent store as core",
     ),
-
 ]
+
+
 def pair_for(asset_id: str) -> List[SymbiosisPair]:
     aid = (asset_id or "").lower()
-    return [p for p in PAIRS if aid in p.asset_a.lower() or aid in p.asset_b.lower()
-            or aid.replace("-", "_") in p.asset_a or aid.replace("-", "_") in p.asset_b]
+    return [
+        p
+        for p in PAIRS
+        if aid in p.asset_a.lower()
+        or aid in p.asset_b.lower()
+        or aid.replace("-", "_") in p.asset_a
+        or aid.replace("-", "_") in p.asset_b
+    ]
 
 
 def orphans(known_assets: List[str]) -> List[str]:
@@ -344,7 +381,9 @@ def value_check(action: str) -> str:
         for h in hits_g:
             lines.append(f"  · {h}")
     if not hits_r and not hits_g:
-        lines.append("No strong signal — default: prefer clarity, reversibility, OBSERVED evidence.")
+        lines.append(
+            "No strong signal — default: prefer clarity, reversibility, OBSERVED evidence."
+        )
     lines.append("")
     lines.append("Symbiosis test: does this strengthen a pair, or starve one half?")
     return "\n".join(lines)

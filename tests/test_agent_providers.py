@@ -3,6 +3,7 @@
 urllib is monkeypatched for the HTTP providers; LocalProvider is pure
 rule-based planning and needs no patching.
 """
+
 import json
 import urllib.error
 
@@ -20,30 +21,48 @@ from levi.agent.providers import (
 )
 
 FILE_TOOLS = [
-    {"name": "file_write", "description": "Write content to a file",
-     "parameters": {"type": "object"}},
-    {"name": "file_read", "description": "Read a file",
-     "parameters": {"type": "object"}},
+    {
+        "name": "file_write",
+        "description": "Write content to a file",
+        "parameters": {"type": "object"},
+    },
+    {
+        "name": "file_read",
+        "description": "Read a file",
+        "parameters": {"type": "object"},
+    },
 ]
 
 
 def scripted_conversation():
     """The canonical multi-step file task: create notes, write 3 lines, read back."""
-    messages = [ChatMessage(role="user",
-                            content="create notes.txt with three lines then read it back")]
+    messages = [
+        ChatMessage(
+            role="user", content="create notes.txt with three lines then read it back"
+        )
+    ]
     p = LocalProvider()
 
     r1 = p.chat(messages, FILE_TOOLS)
-    messages.append(ChatMessage(role="assistant", content=r1.text,
-                                tool_call_id=None))
-    messages.append(ChatMessage(role="tool", name="file_write",
-                                tool_call_id="local-1",
-                                content="wrote 3 lines to notes.txt"))
+    messages.append(ChatMessage(role="assistant", content=r1.text, tool_call_id=None))
+    messages.append(
+        ChatMessage(
+            role="tool",
+            name="file_write",
+            tool_call_id="local-1",
+            content="wrote 3 lines to notes.txt",
+        )
+    )
     r2 = p.chat(messages, FILE_TOOLS)
     messages.append(ChatMessage(role="assistant", content=r2.text))
-    messages.append(ChatMessage(role="tool", name="file_read",
-                                tool_call_id="local-2",
-                                content="Line 1\nLine 2\nLine 3"))
+    messages.append(
+        ChatMessage(
+            role="tool",
+            name="file_read",
+            tool_call_id="local-2",
+            content="Line 1\nLine 2\nLine 3",
+        )
+    )
     r3 = p.chat(messages, FILE_TOOLS)
     return r1, r2, r3
 
@@ -85,8 +104,11 @@ def test_local_deterministic_per_conversation():
 def test_local_never_emits_unknown_tools():
     # Only file_read is offered; file_write is NOT — the planner must not
     # emit it even though the task wants a write first.
-    messages = [ChatMessage(role="user",
-                            content="create notes.txt with three lines then read it back")]
+    messages = [
+        ChatMessage(
+            role="user", content="create notes.txt with three lines then read it back"
+        )
+    ]
     r = LocalProvider().chat(messages, [FILE_TOOLS[1]])
     for call in r.tool_calls:
         assert call.name in {"file_read"}
@@ -114,11 +136,21 @@ def test_local_is_always_available():
 
 
 def test_local_memory_intent():
-    messages = [ChatMessage(role="user",
-                            content="remember that the deploy key is at ~/.ssh/deploy")]
-    r = LocalProvider().chat(messages, [
-        {"name": "memory_write", "description": "Save a note",
-         "parameters": {"type": "object"}}])
+    messages = [
+        ChatMessage(
+            role="user", content="remember that the deploy key is at ~/.ssh/deploy"
+        )
+    ]
+    r = LocalProvider().chat(
+        messages,
+        [
+            {
+                "name": "memory_write",
+                "description": "Save a note",
+                "parameters": {"type": "object"},
+            }
+        ],
+    )
     assert len(r.tool_calls) == 1
     assert r.tool_calls[0].name == "memory_write"
     assert "deploy" in r.tool_calls[0].arguments["text"]
@@ -126,8 +158,11 @@ def test_local_memory_intent():
 
 def test_local_notes_file_without_extension():
     # "create a notes file, write three lines, read it back"
-    messages = [ChatMessage(role="user",
-                            content="create a notes file, write three lines, read it back")]
+    messages = [
+        ChatMessage(
+            role="user", content="create a notes file, write three lines, read it back"
+        )
+    ]
     r1 = LocalProvider().chat(messages, FILE_TOOLS)
     assert r1.tool_calls and r1.tool_calls[0].name == "file_write"
     assert r1.tool_calls[0].arguments["path"] == "notes.txt"
@@ -157,24 +192,32 @@ def patch_urlopen(monkeypatch, responder):
     monkeypatch.setattr("urllib.request.urlopen", responder)
 
 
-OPENAI_TOOL_CALL_JSON = json.dumps({
-    "id": "chatcmpl-x",
-    "model": "gpt-4o-mini",
-    "choices": [{
-        "message": {
-            "role": "assistant",
-            "content": None,
-            "tool_calls": [{
-                "id": "call_1",
-                "type": "function",
-                "function": {"name": "file_read",
-                             "arguments": '{"path": "notes.txt"}'},
-            }],
-        },
-        "finish_reason": "tool_calls",
-    }],
-    "usage": {},
-}).encode("utf-8")
+OPENAI_TOOL_CALL_JSON = json.dumps(
+    {
+        "id": "chatcmpl-x",
+        "model": "gpt-4o-mini",
+        "choices": [
+            {
+                "message": {
+                    "role": "assistant",
+                    "content": None,
+                    "tool_calls": [
+                        {
+                            "id": "call_1",
+                            "type": "function",
+                            "function": {
+                                "name": "file_read",
+                                "arguments": '{"path": "notes.txt"}',
+                            },
+                        }
+                    ],
+                },
+                "finish_reason": "tool_calls",
+            }
+        ],
+        "usage": {},
+    }
+).encode("utf-8")
 
 
 def test_openai_parses_tool_call(monkeypatch):
@@ -189,7 +232,8 @@ def test_openai_parses_tool_call(monkeypatch):
 
     patch_urlopen(monkeypatch, fake)
     r = OpenAICompatibleProvider().chat(
-        [ChatMessage(role="user", content="read notes.txt")], FILE_TOOLS)
+        [ChatMessage(role="user", content="read notes.txt")], FILE_TOOLS
+    )
 
     assert r.error is None
     assert captured["url"] == "https://api.openai.com/v1/chat/completions"
@@ -212,17 +256,26 @@ def test_openai_tool_result_message_roundtrip(monkeypatch):
 
     def fake(req, timeout=None):
         captured["body"] = json.loads(req.data.decode("utf-8"))
-        return FakeResponse(json.dumps({
-            "choices": [{"message": {"role": "assistant",
-                                    "content": "All done."}}],
-        }).encode("utf-8"))
+        return FakeResponse(
+            json.dumps(
+                {
+                    "choices": [
+                        {"message": {"role": "assistant", "content": "All done."}}
+                    ],
+                }
+            ).encode("utf-8")
+        )
 
     patch_urlopen(monkeypatch, fake)
-    r = OpenAICompatibleProvider().chat([
-        ChatMessage(role="user", content="read notes.txt"),
-        ChatMessage(role="tool", name="file_read", tool_call_id="call_1",
-                    content="Line 1"),
-    ], FILE_TOOLS)
+    r = OpenAICompatibleProvider().chat(
+        [
+            ChatMessage(role="user", content="read notes.txt"),
+            ChatMessage(
+                role="tool", name="file_read", tool_call_id="call_1", content="Line 1"
+            ),
+        ],
+        FILE_TOOLS,
+    )
     assert r.error is None
     assert r.text == "All done."
     tool_msg = captured["body"]["messages"][-1]
@@ -237,8 +290,7 @@ def test_openai_network_error_surfaced_not_raised(monkeypatch):
         raise urllib.error.URLError("connection refused")
 
     patch_urlopen(monkeypatch, fake)
-    r = OpenAICompatibleProvider().chat(
-        [ChatMessage(role="user", content="hi")], [])
+    r = OpenAICompatibleProvider().chat([ChatMessage(role="user", content="hi")], [])
     assert r.tool_calls == []
     assert r.error is not None
     assert "connection refused" in r.error
@@ -248,12 +300,10 @@ def test_openai_http_error_surfaced(monkeypatch):
     monkeypatch.setenv("LEVI_OPENAI_API_KEY", "sk-bad")
 
     def fake(req, timeout=None):
-        raise urllib.error.HTTPError(req.full_url, 401, "Unauthorized",
-                                     {}, None)
+        raise urllib.error.HTTPError(req.full_url, 401, "Unauthorized", {}, None)
 
     patch_urlopen(monkeypatch, fake)
-    r = OpenAICompatibleProvider().chat(
-        [ChatMessage(role="user", content="hi")], [])
+    r = OpenAICompatibleProvider().chat([ChatMessage(role="user", content="hi")], [])
     assert r.error is not None
     assert "401" in r.error
 
@@ -273,28 +323,37 @@ def test_openai_base_url_override_used(monkeypatch):
 
     def fake(req, timeout=None):
         captured["url"] = req.full_url
-        return FakeResponse(json.dumps({
-            "choices": [{"message": {"role": "assistant", "content": "ok"}}],
-        }).encode("utf-8"))
+        return FakeResponse(
+            json.dumps(
+                {
+                    "choices": [{"message": {"role": "assistant", "content": "ok"}}],
+                }
+            ).encode("utf-8")
+        )
 
     patch_urlopen(monkeypatch, fake)
-    r = OpenAICompatibleProvider().chat(
-        [ChatMessage(role="user", content="hi")], [])
+    r = OpenAICompatibleProvider().chat([ChatMessage(role="user", content="hi")], [])
     assert r.error is None
     assert captured["url"] == "http://localhost:11434/v1/chat/completions"
 
 
-ANTHROPIC_TOOL_USE_JSON = json.dumps({
-    "id": "msg_1",
-    "type": "message",
-    "model": "claude-sonnet-4-20250514",
-    "content": [
-        {"type": "text", "text": "I'll read it."},
-        {"type": "tool_use", "id": "toolu_1", "name": "file_read",
-         "input": {"path": "notes.txt"}},
-    ],
-    "stop_reason": "tool_use",
-}).encode("utf-8")
+ANTHROPIC_TOOL_USE_JSON = json.dumps(
+    {
+        "id": "msg_1",
+        "type": "message",
+        "model": "claude-sonnet-4-20250514",
+        "content": [
+            {"type": "text", "text": "I'll read it."},
+            {
+                "type": "tool_use",
+                "id": "toolu_1",
+                "name": "file_read",
+                "input": {"path": "notes.txt"},
+            },
+        ],
+        "stop_reason": "tool_use",
+    }
+).encode("utf-8")
 
 
 def test_anthropic_parses_tool_use(monkeypatch):
@@ -308,8 +367,12 @@ def test_anthropic_parses_tool_use(monkeypatch):
 
     patch_urlopen(monkeypatch, fake)
     r = AnthropicProvider().chat(
-        [ChatMessage(role="system", content="You are LEVI."),
-         ChatMessage(role="user", content="read notes.txt")], FILE_TOOLS)
+        [
+            ChatMessage(role="system", content="You are LEVI."),
+            ChatMessage(role="user", content="read notes.txt"),
+        ],
+        FILE_TOOLS,
+    )
 
     assert r.error is None
     assert r.text == "I'll read it."
@@ -363,8 +426,14 @@ def test_anthropic_available_with_key(monkeypatch):
 
 def test_provider_names():
     assert provider_names() == [
-        "levi-tiny", "levi-0.6b", "levi-4b",
-        "local", "levi-brain", "levi-local", "openai", "anthropic",
+        "levi-tiny",
+        "levi-0.6b",
+        "levi-4b",
+        "local",
+        "levi-brain",
+        "levi-local",
+        "openai",
+        "anthropic",
     ]
 
 

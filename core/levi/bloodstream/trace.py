@@ -9,6 +9,7 @@ append-only, local-first.
 Location: ``~/.levi/traces/YYYY-MM-DD.jsonl`` (or ``data_dir/traces/`` when
 a TurnContext overrides the home directory, e.g. in tests).
 """
+
 from __future__ import annotations
 
 import json
@@ -74,13 +75,13 @@ TRACE_FIELDS = (
     "ts",
     "session_id",
     "text_excerpt",
-    "stages",            # [{stage, decision, detail}]
-    "provider",          # provider/model actually used, or "deterministic-fallback"
-    "skills_invoked",    # [skill ids]
+    "stages",  # [{stage, decision, detail}]
+    "provider",  # provider/model actually used, or "deterministic-fallback"
+    "skills_invoked",  # [skill ids]
     "policy_receipt_id",  # None when no consequential act ran
-    "risk_level",        # int 0-4
-    "route",             # RouteKind value
-    "outcome",           # "replied" | "awaiting_permission" | "governed" | "failed"
-    "error",             # None or short error string
-    "composted",         # failure compost record or None
+    "risk_level",  # int 0-4
+    "route",  # RouteKind value
+    "outcome",  # "replied" | "awaiting_permission" | "governed" | "failed"
+    "error",  # None or short error string
+    "composted",  # failure compost record or None
 )

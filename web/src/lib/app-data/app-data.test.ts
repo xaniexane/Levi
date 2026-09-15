@@ -18,8 +18,7 @@ function withWindow<T>(stub: WindowStub, fn: () => T): T {
 }
 
 function fakeJwt(claims: Record<string, unknown>): string {
-  const encode = (value: unknown) =>
-    Buffer.from(JSON.stringify(value)).toString("base64url");
+  const encode = (value: unknown) => Buffer.from(JSON.stringify(value)).toString("base64url");
   return `${encode({ alg: "HS256", typ: "JWT" })}.${encode(claims)}.sig`;
 }
 
@@ -142,14 +141,10 @@ describe("callTool", () => {
     try {
       const circular: Record<string, unknown> = {};
       circular.self = circular;
-      const result = await callTool(
-        "google_drive_search",
-        circular as ToolArgs,
-        {
-          connectorType: ConnectorType.GoogleDrive,
-          token: "opaque-token",
-        },
-      );
+      const result = await callTool("google_drive_search", circular as ToolArgs, {
+        connectorType: ConnectorType.GoogleDrive,
+        token: "opaque-token",
+      });
       assert.equal(result.ok, false);
       assert.match(result.errorMessage ?? "", /circular/i);
     } finally {
@@ -160,15 +155,9 @@ describe("callTool", () => {
 
 describe("isLoginRequired", () => {
   it("is true only for login-required failures", () => {
-    assert.equal(
-      isLoginRequired({ ok: false, data: null, loginRequired: true }),
-      true,
-    );
+    assert.equal(isLoginRequired({ ok: false, data: null, loginRequired: true }), true);
     assert.equal(isLoginRequired({ ok: false, data: null }), false);
-    assert.equal(
-      isLoginRequired({ ok: false, data: null, errorMessage: "access_denied" }),
-      false,
-    );
+    assert.equal(isLoginRequired({ ok: false, data: null, errorMessage: "access_denied" }), false);
     assert.equal(
       isLoginRequired({
         ok: true,
@@ -237,8 +226,7 @@ describe("redirectToLoginIfRequired", () => {
           href: "https://my-app.grok.me/current",
         },
       },
-      () =>
-        redirectToLoginIfRequired({ ok: false, data: null, loginRequired: true }),
+      () => redirectToLoginIfRequired({ ok: false, data: null, loginRequired: true }),
     );
     assert.equal(did, false);
     assert.equal(target, "");

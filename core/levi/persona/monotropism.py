@@ -23,6 +23,7 @@ LEVI uses this to:
 
 Not a diagnosis claim. Operational control surface only.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -36,14 +37,28 @@ import re
 DEFAULT_MONO_PATH = Path.home() / ".levi" / "monotropism.json"
 
 # Lenses that thrive inside a deep interest tunnel
-_TUNNEL_FRIENDLY = frozenset({
-    "philosopher", "strategist", "creative", "observer", "void",
-    "reframe", "normal",
-})
+_TUNNEL_FRIENDLY = frozenset(
+    {
+        "philosopher",
+        "strategist",
+        "creative",
+        "observer",
+        "void",
+        "reframe",
+        "normal",
+    }
+)
 # Lenses that tend to yank attention sideways (use sparingly in deep tunnel)
-_TUNNEL_DISRUPTIVE = frozenset({
-    "manic_pixie", "pirate", "drunk", "alien", "conspiracy", "chaotic_good",
-})
+_TUNNEL_DISRUPTIVE = frozenset(
+    {
+        "manic_pixie",
+        "pirate",
+        "drunk",
+        "alien",
+        "conspiracy",
+        "chaotic_good",
+    }
+)
 
 
 def _tokenize(text: str) -> List[str]:
@@ -56,9 +71,33 @@ def _topic_signature(tokens: List[str], top_n: int = 8) -> str:
         return ""
     freq: Dict[str, int] = {}
     stop = {
-        "the", "and", "for", "that", "this", "with", "you", "your", "have",
-        "what", "when", "where", "how", "why", "can", "will", "just", "like",
-        "from", "they", "them", "been", "were", "are", "was", "not", "but",
+        "the",
+        "and",
+        "for",
+        "that",
+        "this",
+        "with",
+        "you",
+        "your",
+        "have",
+        "what",
+        "when",
+        "where",
+        "how",
+        "why",
+        "can",
+        "will",
+        "just",
+        "like",
+        "from",
+        "they",
+        "them",
+        "been",
+        "were",
+        "are",
+        "was",
+        "not",
+        "but",
     }
     for t in tokens:
         if t in stop:
@@ -71,13 +110,16 @@ def _topic_signature(tokens: List[str], top_n: int = 8) -> str:
 @dataclass
 class InterestTunnel:
     """One active (or recent) monotropic focus."""
+
     signature: str
     label: str = ""
-    depth: float = 0.2          # 0–1 how locked-in
+    depth: float = 0.2  # 0–1 how locked-in
     turns_in: int = 1
     last_tokens: List[str] = field(default_factory=list)
     reinforced: int = 0
-    updated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    updated_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -106,9 +148,12 @@ class InterestTunnel:
 @dataclass
 class MonotropismState:
     """Active tunnel + memory of preferred topics (bond-adjacent)."""
+
     active: Optional[InterestTunnel] = None
     recent: List[InterestTunnel] = field(default_factory=list)  # last few
-    topic_affinity: Dict[str, float] = field(default_factory=dict)  # signature -> preference
+    topic_affinity: Dict[str, float] = field(
+        default_factory=dict
+    )  # signature -> preference
     switch_cost: float = 0.0  # rises when forced out of a deep tunnel
 
     def to_dict(self) -> Dict[str, Any]:
@@ -176,7 +221,9 @@ class MonotropismTracker:
         tmp.replace(self.path)
 
     @staticmethod
-    def _overlap(sig_a: str, sig_b: str, tokens_a: List[str], tokens_b: List[str]) -> float:
+    def _overlap(
+        sig_a: str, sig_b: str, tokens_a: List[str], tokens_b: List[str]
+    ) -> float:
         if not sig_a or not sig_b:
             # token Jaccard fallback
             sa, sb = set(tokens_a), set(tokens_b)
@@ -227,14 +274,17 @@ class MonotropismTracker:
             else:
                 # switch
                 if active.depth >= 0.45:
-                    self.state.switch_cost = min(1.0, self.state.switch_cost + 0.25 + 0.3 * active.depth)
+                    self.state.switch_cost = min(
+                        1.0, self.state.switch_cost + 0.25 + 0.3 * active.depth
+                    )
                 self.state.recent.append(active)
                 self.state.recent = self.state.recent[-8:]
                 label = sig.replace("|", " ")[:48] if sig else "untitled"
                 self.state.active = InterestTunnel(
                     signature=sig,
                     label=label,
-                    depth=self.seed_depth + 0.1 * self.state.topic_affinity.get(sig, 0.0),
+                    depth=self.seed_depth
+                    + 0.1 * self.state.topic_affinity.get(sig, 0.0),
                     turns_in=1,
                     last_tokens=tokens[:16],
                     updated_at=now,
@@ -302,7 +352,9 @@ class MonotropismTracker:
         lines = ["=== Monotropism ===", ""]
         if a:
             lines.append(f"Active tunnel: {a.label or a.signature[:50]}")
-            lines.append(f"  depth={a.depth:.2f}  turns_in={a.turns_in}  reinforced={a.reinforced}")
+            lines.append(
+                f"  depth={a.depth:.2f}  turns_in={a.turns_in}  reinforced={a.reinforced}"
+            )
         else:
             lines.append("Active tunnel: —")
         lines.append(f"Switch cost: {self.state.switch_cost:.2f}")

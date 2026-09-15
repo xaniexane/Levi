@@ -1,4 +1,5 @@
 """Tests for levi.integrations.free_graph — hand-computed fixture assertions."""
+
 from __future__ import annotations
 
 import json
@@ -13,7 +14,11 @@ from levi.integrations.free_graph import (
     FreeGraph,
     build_free_graph,
 )
-from levi.integrations.free_lattice import CATALOG, FreeIntegration, interpenetration_matrix
+from levi.integrations.free_lattice import (
+    CATALOG,
+    FreeIntegration,
+    interpenetration_matrix,
+)
 
 
 def _fixture() -> FreeGraph:
@@ -38,7 +43,13 @@ def _fixture() -> FreeGraph:
 def test_degree_and_weighted_degree():
     g = _fixture()
     assert {n: g.degree(n) for n in "abcde"} == {"a": 3, "b": 2, "c": 2, "d": 1, "e": 0}
-    assert {n: g.weighted_degree(n) for n in "abcde"} == {"a": 3.0, "b": 2.0, "c": 2.0, "d": 1.0, "e": 0.0}
+    assert {n: g.weighted_degree(n) for n in "abcde"} == {
+        "a": 3.0,
+        "b": 2.0,
+        "c": 2.0,
+        "d": 1.0,
+        "e": 0.0,
+    }
 
 
 def test_degree_centrality():
@@ -54,10 +65,10 @@ def test_degree_centrality():
 def test_closeness_centrality():
     g = _fixture()
     cc = g.closeness_centrality()
-    assert cc["a"] == pytest.approx(1.0)    # dists 1,1,1 -> 3/3
-    assert cc["b"] == pytest.approx(0.75)   # dists 1,1,2 -> 3/4
+    assert cc["a"] == pytest.approx(1.0)  # dists 1,1,1 -> 3/3
+    assert cc["b"] == pytest.approx(0.75)  # dists 1,1,2 -> 3/4
     assert cc["c"] == pytest.approx(0.75)
-    assert cc["e"] == pytest.approx(0.0)    # isolated
+    assert cc["e"] == pytest.approx(0.0)  # isolated
 
 
 def test_clustering_coefficient():
@@ -81,16 +92,16 @@ def test_shortest_path():
     g = _fixture()
     assert g.shortest_path("d", "c") == ["d", "a", "c"]
     assert g.shortest_path("a", "a") == ["a"]
-    assert g.shortest_path("d", "e") is None      # disconnected
-    assert g.shortest_path("d", "zzz") is None    # unknown id
-    assert g.shortest_path("zzz", "a") is None    # unknown id
+    assert g.shortest_path("d", "e") is None  # disconnected
+    assert g.shortest_path("d", "zzz") is None  # unknown id
+    assert g.shortest_path("zzz", "a") is None  # unknown id
 
 
 def test_neighborhood():
     g = _fixture()
     assert g.neighborhood("a", 1) == {1: ["b", "c", "d"]}
     assert g.neighborhood("d", 2) == {1: ["a"], 2: ["b", "c"]}
-    assert g.neighborhood("zzz", 1) == {}          # unknown id
+    assert g.neighborhood("zzz", 1) == {}  # unknown id
 
 
 def test_weight_adds_when_both_registries_declare_pair():
@@ -124,7 +135,7 @@ def test_build_dangling_ref_becomes_external_node_and_lint_finding():
     g = _cat(cat)
     assert g.dangling_refs() == ["ghost"]
     assert g.nodes["ghost"].external is True
-    assert g.degree("ghost") == 1          # still wired into the topology
+    assert g.degree("ghost") == 1  # still wired into the topology
     assert g.shortest_path("solo", "ghost") == ["solo", "ghost"]
     assert g.lint()["dangling_refs"] == ["ghost"]
 
@@ -148,8 +159,8 @@ def test_build_symbiosis_pairs_get_weight_2():
     pairs = [SymbiosisPair("x1", "y1", "bond", "a1", "b1", "v", "f")]
     g = build_free_graph(catalog=cat, pairs=pairs)
     assert g.edge_weight("x1", "y1") == pytest.approx(W_SYMBIOSIS)
-    assert g.nodes["y1"].external is True   # symbiosis-only asset kept as node
-    assert g.dangling_refs() == []           # ...but not a dangling combines_with ref
+    assert g.nodes["y1"].external is True  # symbiosis-only asset kept as node
+    assert g.dangling_refs() == []  # ...but not a dangling combines_with ref
 
 
 def test_real_catalog_graph_has_no_orphans():
@@ -167,8 +178,15 @@ def test_json_export_schema():
     g = _fixture()
     payload = json.loads(g.to_json_str())
     assert payload["schema"] == JSON_SCHEMA
-    assert set(payload) == {"schema", "nodes", "edges", "counts",
-                            "orphans", "dangling_refs", "top_bonds"}
+    assert set(payload) == {
+        "schema",
+        "nodes",
+        "edges",
+        "counts",
+        "orphans",
+        "dangling_refs",
+        "top_bonds",
+    }
     by_id = {n["id"]: n for n in payload["nodes"]}
     assert set(by_id) == {"a", "b", "c", "d", "e"}
     a = by_id["a"]
@@ -197,9 +215,11 @@ def test_json_export_real_graph_schema():
 def test_human_matrix_view_enriched_but_backward_compatible():
     text = interpenetration_matrix()
     assert "=== Max Interpenetration Matrix ===" in text
-    assert "json_state <-> corpus" in text          # flat edge list kept
+    assert "json_state <-> corpus" in text  # flat edge list kept
     assert "Symbiosis formal pairs: 30" in text
     assert "Graph model (weighted undirected)" in text
-    assert "weighting: declared combines_with = 1.0; symbiosis formal pair = 2.0;" in text
+    assert (
+        "weighting: declared combines_with = 1.0; symbiosis formal pair = 2.0;" in text
+    )
     assert "orphans are defects" in text
     assert "orphans: none - every asset has an other half" in text

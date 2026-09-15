@@ -7,6 +7,7 @@ real data; nothing asserts a hardcoded genre count.
 Run:  python3 tests/test_genres.py     (has a real __main__ runner)
       python3 -m pytest tests/test_genres.py -q
 """
+
 from __future__ import annotations
 
 import re

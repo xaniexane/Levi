@@ -8,6 +8,7 @@ Three engine families (activated on demand by the daemon, not all-at-once):
 
 Outputs are HYPOTHESIS / INFERENCE until verified in corpus as OBSERVED.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field, asdict
@@ -29,7 +30,9 @@ class DemandSignal:
     evidence: str = ""
     confidence: float = 0.4  # low until observed
     kind: str = "HYPOTHESIS"  # OBSERVED | INFERENCE | HYPOTHESIS
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -44,12 +47,18 @@ class Opportunity:
     serviceability: float
     startup_cost: float  # 0–1 abstract (0 = free-first feasible)
     notes: str = ""
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     @property
     def worth(self) -> float:
         # high demand, high serviceability, low cost
-        return (self.demand_score * 0.4 + self.serviceability * 0.4 + (1.0 - self.startup_cost) * 0.2)
+        return (
+            self.demand_score * 0.4
+            + self.serviceability * 0.4
+            + (1.0 - self.startup_cost) * 0.2
+        )
 
     def to_dict(self) -> Dict[str, Any]:
         d = asdict(self)
@@ -69,10 +78,27 @@ class DemandPulse:
             return
         try:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
-            self.signals = [DemandSignal(**{k: v for k, v in s.items() if k in DemandSignal.__dataclass_fields__}) for s in (raw.get("signals") or [])]
+            self.signals = [
+                DemandSignal(
+                    **{
+                        k: v
+                        for k, v in s.items()
+                        if k in DemandSignal.__dataclass_fields__
+                    }
+                )
+                for s in (raw.get("signals") or [])
+            ]
             self.opportunities = []
             for o in raw.get("opportunities") or []:
-                self.opportunities.append(Opportunity(**{k: v for k, v in o.items() if k in Opportunity.__dataclass_fields__}))
+                self.opportunities.append(
+                    Opportunity(
+                        **{
+                            k: v
+                            for k, v in o.items()
+                            if k in Opportunity.__dataclass_fields__
+                        }
+                    )
+                )
         except Exception:
             pass
 
@@ -129,11 +155,17 @@ class DemandPulse:
         return sorted(self.opportunities, key=lambda o: -o.worth)[:n]
 
     def format_status(self) -> str:
-        lines = ["=== DemandPulse ===", f"signals={len(self.signals)}  opportunities={len(self.opportunities)}", ""]
+        lines = [
+            "=== DemandPulse ===",
+            f"signals={len(self.signals)}  opportunities={len(self.opportunities)}",
+            "",
+        ]
         for o in self.top_opportunities(5):
-            lines.append(f"  worth={o.worth:.2f}  {o.title}  (cost={o.startup_cost:.2f} svc={o.serviceability:.2f})")
+            lines.append(
+                f"  worth={o.worth:.2f}  {o.title}  (cost={o.startup_cost:.2f} svc={o.serviceability:.2f})"
+            )
         if not self.opportunities:
-            lines.append("  (none — seed with: levi demand --scan \"…\")")
+            lines.append('  (none — seed with: levi demand --scan "…")')
         lines.append("")
         lines.append("Labels are HYPOTHESIS until verified OBSERVED in corpus.")
         return "\n".join(lines)

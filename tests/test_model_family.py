@@ -4,6 +4,7 @@ Hermetic: fake HOME / LEVI_MODEL_DIR / LEVI_BRAIN_WEIGHTS everywhere;
 no network, no real weights, no user-HOME writes. CLI tests run the
 real ``python -m levi.cli.main`` subprocess with a scrubbed env.
 """
+
 import json
 import os
 import subprocess
@@ -56,14 +57,20 @@ def test_set_choice_unknown_raises():
 
 def test_register_remix_validates(monkeypatch):
     with pytest.raises(ValueError, match="unknown local_model key"):
-        model_family.register_remix("levi-bogus", base="x", version="1",
-                                    local_key="no-such-key")
+        model_family.register_remix(
+            "levi-bogus", base="x", version="1", local_key="no-such-key"
+        )
     with pytest.raises(ValueError, match="new 'levi-\\*' name"):
-        model_family.register_remix("levi-0.6b", base="x", version="1",
-                                    local_key="qwen3-0.6b")
+        model_family.register_remix(
+            "levi-0.6b", base="x", version="1", local_key="qwen3-0.6b"
+        )
     entry = model_family.register_remix(
-        "levi-test-remix", base="qwen3-0.6b", version="test/1",
-        local_key="qwen3-0.6b", notes="test only")
+        "levi-test-remix",
+        base="qwen3-0.6b",
+        version="test/1",
+        local_key="qwen3-0.6b",
+        notes="test only",
+    )
     try:
         assert entry["kind"] == "remix"
         assert entry["base"] == "qwen3-0.6b"
@@ -82,9 +89,14 @@ def _scrub_env(monkeypatch, tmp_path):
     monkeypatch.setenv("HOME", str(tmp_path / "home"))
     monkeypatch.setenv("LEVI_MODEL_DIR", str(tmp_path / "models"))
     monkeypatch.setenv("LEVI_BRAIN_WEIGHTS", str(tmp_path / "no-weights.pt"))
-    for key in ("LEVI_PROVIDER", "LEVI_LOCAL_MODEL", "LEVI_LLAMA_SERVER",
-                "LEVI_OPENAI_API_KEY", "LEVI_OPENAI_BASE_URL",
-                "LEVI_ANTHROPIC_API_KEY"):
+    for key in (
+        "LEVI_PROVIDER",
+        "LEVI_LOCAL_MODEL",
+        "LEVI_LLAMA_SERVER",
+        "LEVI_OPENAI_API_KEY",
+        "LEVI_OPENAI_BASE_URL",
+        "LEVI_ANTHROPIC_API_KEY",
+    ):
         monkeypatch.delenv(key, raising=False)
 
 
@@ -163,8 +175,7 @@ def test_tiny_preferred_when_native_brain_present(monkeypatch, tmp_path):
     weights = tmp_path / "tiny-gpt.pt"
     weights.write_bytes(b"fake-ckpt")
     monkeypatch.setenv("LEVI_BRAIN_WEIGHTS", str(weights))
-    monkeypatch.setattr("levi.agent.brain_provider.torch_available",
-                        lambda: True)
+    monkeypatch.setattr("levi.agent.brain_provider.torch_available", lambda: True)
     resolved = model_family.resolve_family()
     assert resolved is not None
     assert resolved["entry"] == "levi-tiny"
@@ -227,10 +238,16 @@ def _cli_env(tmp_path):
     env = dict(os.environ)
     env["PYTHONPATH"] = os.pathsep.join([str(ROOT / "core"), *sys.path])
     env["HOME"] = str(tmp_path / "home")
-    for key in ("LEVI_PROVIDER", "LEVI_MODEL_DIR", "LEVI_BRAIN_WEIGHTS",
-                "LEVI_LOCAL_MODEL", "LEVI_LLAMA_SERVER",
-                "LEVI_OPENAI_API_KEY", "LEVI_OPENAI_BASE_URL",
-                "LEVI_ANTHROPIC_API_KEY"):
+    for key in (
+        "LEVI_PROVIDER",
+        "LEVI_MODEL_DIR",
+        "LEVI_BRAIN_WEIGHTS",
+        "LEVI_LOCAL_MODEL",
+        "LEVI_LLAMA_SERVER",
+        "LEVI_OPENAI_API_KEY",
+        "LEVI_OPENAI_BASE_URL",
+        "LEVI_ANTHROPIC_API_KEY",
+    ):
         env.pop(key, None)
     return env
 
@@ -238,8 +255,11 @@ def _cli_env(tmp_path):
 def _levi(tmp_path, *argv):
     return subprocess.run(
         [sys.executable, "-m", "levi.cli.main", *argv],
-        cwd=ROOT, env=_cli_env(tmp_path),
-        capture_output=True, text=True, timeout=60,
+        cwd=ROOT,
+        env=_cli_env(tmp_path),
+        capture_output=True,
+        text=True,
+        timeout=60,
     )
 
 
@@ -262,8 +282,10 @@ def test_cli_model_use_persists(tmp_path):
     proc = _levi(tmp_path, "agent", "model", "use", "levi-4b")
     assert proc.returncode == 0, proc.stderr
     stored = json.loads(
-        (tmp_path / "home" / ".levi" / "agent" / "model_choice.json")
-        .read_text(encoding="utf-8"))
+        (tmp_path / "home" / ".levi" / "agent" / "model_choice.json").read_text(
+            encoding="utf-8"
+        )
+    )
     assert stored == {"model": "levi-4b"}
 
 

@@ -83,8 +83,12 @@ class FactoryProject:
     risk_ceiling: int = 2
     max_iterations: int = 10
     iteration: int = 0
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
-    updated_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
+    updated_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
     metadata: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -170,16 +174,19 @@ class SoftwareFactory:
     def create(self, name: str, idea: str, risk_ceiling: int = 2) -> FactoryProject:
         pid = f"proj.{uuid.uuid4().hex[:10]}"
         proj = FactoryProject(id=pid, name=name, idea=idea, risk_ceiling=risk_ceiling)
-        proj.history.append(StageResult(
-            stage=FactoryStage.IDEA,
-            status="ok",
-            summary=f"Idea captured: {idea[:120]}",
-        ))
+        proj.history.append(
+            StageResult(
+                stage=FactoryStage.IDEA,
+                status="ok",
+                summary=f"Idea captured: {idea[:120]}",
+            )
+        )
         self.projects[pid] = proj
         self._persist()
         # Formula: everything in LEVI interpenetrates — register project on Capability Graph
         try:
             from levi.graph.interpenetration import InterpenetrationEngine
+
             eng = InterpenetrationEngine()
             parts = ["cap.software_factory", "lwp.cascade", "lwp.governor"]
             # Prefer nodes that exist
@@ -205,19 +212,23 @@ class SoftwareFactory:
             return STAGE_ORDER[idx + 1]
         return None
 
-    def advance(self, project_id: str, summary: str = "", artifacts: Optional[List[str]] = None) -> FactoryProject:
+    def advance(
+        self, project_id: str, summary: str = "", artifacts: Optional[List[str]] = None
+    ) -> FactoryProject:
         """Advance one stage with a result. Circuit-breaks on max iterations."""
         proj = self.projects[project_id]
         if proj.stage in (FactoryStage.COMPLETE, FactoryStage.FAILED):
             raise RuntimeError(f"Project already terminal: {proj.stage.value}")
         if proj.iteration >= proj.max_iterations:
             proj.stage = FactoryStage.FAILED
-            proj.history.append(StageResult(
-                stage=proj.stage,
-                status="fail",
-                summary="Circuit breaker: max iterations",
-                error="max_iterations",
-            ))
+            proj.history.append(
+                StageResult(
+                    stage=proj.stage,
+                    status="fail",
+                    summary="Circuit breaker: max iterations",
+                    error="max_iterations",
+                )
+            )
             self._persist()
             return proj
 
@@ -229,6 +240,7 @@ class SoftwareFactory:
         if proj.stage == FactoryStage.ARCHITECTURE:
             try:
                 from levi.factory.sandbox import Sandbox
+
                 sb = Sandbox(proj.id)
                 sr = sb.scaffold_python_cli(proj.name[:40], proj.idea[:200])
                 if sr.ok:
@@ -236,7 +248,9 @@ class SoftwareFactory:
                     stage_summary = f"{stage_summary}; sandbox scaffold: {sr.summary}"
                     proj.metadata["sandbox_path"] = str(sb.work)
                 else:
-                    stage_summary = f"{stage_summary}; scaffold warn: {sr.error or sr.summary}"
+                    stage_summary = (
+                        f"{stage_summary}; scaffold warn: {sr.error or sr.summary}"
+                    )
             except Exception as e:
                 stage_summary = f"{stage_summary}; scaffold error: {e}"
 
@@ -244,6 +258,7 @@ class SoftwareFactory:
         if proj.stage == FactoryStage.SCAFFOLD:
             try:
                 from levi.factory.sandbox import Sandbox
+
                 sb = Sandbox(proj.id)
                 smoke = sb.run_smoke(["status"])
                 proj.metadata["last_smoke"] = {
@@ -261,20 +276,24 @@ class SoftwareFactory:
             except Exception as e:
                 stage_summary = f"{stage_summary}; smoke error: {e}"
 
-        proj.history.append(StageResult(
-            stage=proj.stage,
-            status="ok",
-            summary=stage_summary,
-            artifacts=stage_artifacts,
-        ))
+        proj.history.append(
+            StageResult(
+                stage=proj.stage,
+                status="ok",
+                summary=stage_summary,
+                artifacts=stage_artifacts,
+            )
+        )
         nxt = self._next_stage(proj.stage)
         if nxt is None or nxt == FactoryStage.COMPLETE:
             proj.stage = FactoryStage.COMPLETE
-            proj.history.append(StageResult(
-                stage=FactoryStage.COMPLETE,
-                status="ok",
-                summary="Pipeline complete (scaffold artifacts in sandbox when architecture advanced)",
-            ))
+            proj.history.append(
+                StageResult(
+                    stage=FactoryStage.COMPLETE,
+                    status="ok",
+                    summary="Pipeline complete (scaffold artifacts in sandbox when architecture advanced)",
+                )
+            )
         else:
             proj.stage = nxt
         proj.updated_at = datetime.now(timezone.utc).isoformat()
@@ -289,6 +308,7 @@ class SoftwareFactory:
     def run_smoke_test(self, project_id: str) -> Dict[str, Any]:
         """Execute sandbox main.py status — factory closed loop."""
         from levi.factory.sandbox import Sandbox
+
         proj = self.projects.get(project_id)
         if not proj:
             return {"ok": False, "error": "unknown project"}
@@ -306,12 +326,14 @@ class SoftwareFactory:
 
     def fail(self, project_id: str, error: str) -> FactoryProject:
         proj = self.projects[project_id]
-        proj.history.append(StageResult(
-            stage=proj.stage,
-            status="fail",
-            summary="Stage failed",
-            error=error,
-        ))
+        proj.history.append(
+            StageResult(
+                stage=proj.stage,
+                status="fail",
+                summary="Stage failed",
+                error=error,
+            )
+        )
         proj.stage = FactoryStage.FAILED
         proj.updated_at = datetime.now(timezone.utc).isoformat()
         self._persist()

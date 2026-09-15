@@ -9,12 +9,12 @@ from enum import Enum
 
 
 class Direction(str, Enum):
-    WHY = "why"           # Backward / motivation
-    DIRECT = "direct"     # Current solution
-    NEXT = "next"         # Forward
-    ADJACENT = "adjacent" # Left
-    CROSS = "cross"       # Right / cross-domain
-    FRONTIER = "frontier" # Outward
+    WHY = "why"  # Backward / motivation
+    DIRECT = "direct"  # Current solution
+    NEXT = "next"  # Forward
+    ADJACENT = "adjacent"  # Left
+    CROSS = "cross"  # Right / cross-domain
+    FRONTIER = "frontier"  # Outward
 
 
 @dataclass
@@ -65,7 +65,7 @@ class MotivationGraph:
     def ranked(self) -> List[Possibility]:
         return sorted(
             self.possibilities,
-            key=lambda p: (p.relevance * p.feasibility * p.confidence),
+            key=lambda p: p.relevance * p.feasibility * p.confidence,
             reverse=True,
         )
 

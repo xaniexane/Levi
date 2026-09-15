@@ -151,14 +151,19 @@ A **composite** is a named, testable, reversible bundle:
 from levi.bloodstream.composites import Composite, CompositeRegistry
 
 registry = CompositeRegistry()  # ~/.levi/bloodstream/composites.json
-registry.register(Composite(
-    name="ops",
-    description="ops persona + tools",
-    persona_id="mentor",
-    skill_ids=["file_read", "shell_exec"],
-    specialist_ids=["researcher"],
-    automation_ids=["nightly_digest"],
-), skills=..., specialists=..., automations=...)
+registry.register(
+    Composite(
+        name="ops",
+        description="ops persona + tools",
+        persona_id="mentor",
+        skill_ids=["file_read", "shell_exec"],
+        specialist_ids=["researcher"],
+        automation_ids=["nightly_digest"],
+    ),
+    skills=...,
+    specialists=...,
+    automations=...,
+)
 ```
 
 - `register()` validates every part exists — fail fast, no dangling refs.

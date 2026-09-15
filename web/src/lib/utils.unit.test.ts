@@ -1,14 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  cn,
-  hashHex,
-  hashInt,
-  mulberry32,
-  nowIso,
-  seedFrom,
-  uid,
-} from "./utils";
+import { cn, hashHex, hashInt, mulberry32, nowIso, seedFrom, uid } from "./utils";
 
 describe("hashInt", () => {
   it("is deterministic for the same input", () => {

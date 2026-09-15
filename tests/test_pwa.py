@@ -26,6 +26,7 @@ from levi.pwa import server as pwa_server
 
 class FakeProvider(ChatProvider):
     """Deterministic stand-in for the agentic loop's provider."""
+
     name = "fake"
 
     def chat(self, messages, tools):
@@ -156,8 +157,9 @@ def test_models_endpoint_levi_first(base):
 
 
 def test_chat_returns_loop_reply(base):
-    status, payload = _post(base, "/api/chat",
-                            {"session": "pwa-test", "message": "hello levi"})
+    status, payload = _post(
+        base, "/api/chat", {"session": "pwa-test", "message": "hello levi"}
+    )
     assert status == 200
     assert payload["ok"] is True
     assert payload["provider"] == "fake"
@@ -166,17 +168,21 @@ def test_chat_returns_loop_reply(base):
 
 
 def test_chat_sessions_persist_across_messages(base, monkeypatch, tmp_path):
-    _post(base, "/api/chat",
-          {"session": "persist-me", "message": "first message"})
-    status, payload = _post(base, "/api/chat",
-                            {"session": "persist-me", "message": "second message"})
+    _post(base, "/api/chat", {"session": "persist-me", "message": "first message"})
+    status, payload = _post(
+        base, "/api/chat", {"session": "persist-me", "message": "second message"}
+    )
     assert status == 200
     session_file = tmp_path / "sessions" / "persist-me.jsonl"
     assert session_file.is_file()
-    records = [json.loads(line) for line in
-               session_file.read_text().splitlines() if line.strip()]
-    user_msgs = [r for r in records
-                 if r.get("kind") == "message" and r.get("role") == "user"]
+    records = [
+        json.loads(line)
+        for line in session_file.read_text().splitlines()
+        if line.strip()
+    ]
+    user_msgs = [
+        r for r in records if r.get("kind") == "message" and r.get("role") == "user"
+    ]
     assert [m["content"] for m in user_msgs] == ["first message", "second message"]
 
 
@@ -188,25 +194,30 @@ def test_chat_rejects_bad_session(base):
 
 def test_chat_rejects_unknown_register(base):
     with pytest.raises(urllib.error.HTTPError) as exc:
-        _post(base, "/api/chat", {"session": "s", "message": "x",
-                                  "register": "drunk_pirate"})
+        _post(
+            base,
+            "/api/chat",
+            {"session": "s", "message": "x", "register": "drunk_pirate"},
+        )
     assert exc.value.code == 400
 
 
 def test_chat_with_register_uses_system_prompt(base):
-    status, payload = _post(base, "/api/chat",
-                            {"session": "reg-test", "message": "hi",
-                             "register": "kai_9000_void"})
+    status, payload = _post(
+        base,
+        "/api/chat",
+        {"session": "reg-test", "message": "hi", "register": "kai_9000_void"},
+    )
     assert status == 200
     assert payload["ok"] is True
 
 
 def test_chat_stream_emits_done(base):
     import urllib.error
+
     req = urllib.request.Request(
         base + "/api/chat/stream",
-        data=json.dumps({"session": "stream-test",
-                         "message": "hello"}).encode(),
+        data=json.dumps({"session": "stream-test", "message": "hello"}).encode(),
         headers={"Content-Type": "application/json"},
         method="POST",
     )

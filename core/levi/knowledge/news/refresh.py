@@ -13,6 +13,7 @@ the tiny brain trains on stable knowledge only (see docs/BRAIN_TRAINING.md).
 
 Usage: python3 refresh.py [--date YYYY-MM-DD] [--limit N]
 """
+
 from __future__ import annotations
 
 import html
@@ -34,18 +35,28 @@ DELAY = 0.5
 DEFAULT_LIMIT = 30
 
 SOURCES = [
-    {"id": "bbc-world", "kind": "rss",
-     "url": "https://feeds.bbci.co.uk/news/world/rss.xml"},
-    {"id": "reuters-world", "kind": "rss",
-     "url": "https://www.reuters.com/rssfeed/worldNews"},
-    {"id": "ap-mirror", "kind": "rss",  # AP headlines via feedx.net mirror
-     "url": "https://feedx.net/rss/ap.xml"},
-    {"id": "hackernews", "kind": "hn",
-     "url": "https://hacker-news.firebaseio.com/v0/topstories.json"},
-    {"id": "arxiv-csai", "kind": "rss",
-     "url": "https://export.arxiv.org/rss/cs.AI"},
-    {"id": "arxiv-cscl", "kind": "rss",
-     "url": "https://export.arxiv.org/rss/cs.CL"},
+    {
+        "id": "bbc-world",
+        "kind": "rss",
+        "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+    },
+    {
+        "id": "reuters-world",
+        "kind": "rss",
+        "url": "https://www.reuters.com/rssfeed/worldNews",
+    },
+    {
+        "id": "ap-mirror",
+        "kind": "rss",  # AP headlines via feedx.net mirror
+        "url": "https://feedx.net/rss/ap.xml",
+    },
+    {
+        "id": "hackernews",
+        "kind": "hn",
+        "url": "https://hacker-news.firebaseio.com/v0/topstories.json",
+    },
+    {"id": "arxiv-csai", "kind": "rss", "url": "https://export.arxiv.org/rss/cs.AI"},
+    {"id": "arxiv-cscl", "kind": "rss", "url": "https://export.arxiv.org/rss/cs.CL"},
 ]
 
 
@@ -55,8 +66,13 @@ def _fetch(url: str) -> bytes | None:
         with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
             ctype = resp.headers.get("Content-Type", "")
             body = resp.read(2_000_000)
-            if "html" in ctype and "xml" not in ctype and "rss" not in ctype \
-                    and "json" not in ctype and "text" not in ctype:
+            if (
+                "html" in ctype
+                and "xml" not in ctype
+                and "rss" not in ctype
+                and "json" not in ctype
+                and "text" not in ctype
+            ):
                 return None
             return body
     except Exception:
@@ -104,11 +120,13 @@ def _parse_hn(body: bytes, limit: int) -> list[dict]:
         if it.get("type") != "story":
             continue
         url = it.get("url") or f"https://news.ycombinator.com/item?id={sid}"
-        items.append({
-            "title": _clean(it.get("title")),
-            "summary": f"{it.get('score', 0)} points, {it.get('descendants', 0)} comments",
-            "url": url,
-        })
+        items.append(
+            {
+                "title": _clean(it.get("title")),
+                "summary": f"{it.get('score', 0)} points, {it.get('descendants', 0)} comments",
+                "url": url,
+            }
+        )
     return items
 
 
@@ -161,9 +179,15 @@ def refresh(day: str | None = None, limit: int = DEFAULT_LIMIT) -> dict:
             if it["url"] in known:
                 continue
             known.add(it["url"])
-            records.append({"date": day, "source": sid,
-                            "title": it["title"], "summary": it["summary"],
-                            "url": it["url"]})
+            records.append(
+                {
+                    "date": day,
+                    "source": sid,
+                    "title": it["title"],
+                    "summary": it["summary"],
+                    "url": it["url"],
+                }
+            )
             added += 1
         statuses[sid] = f"ok ({day}): {added} new / {len(items)} fetched"
 

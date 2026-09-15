@@ -13,6 +13,7 @@ HITL, symbiosis value rules, or OBSERVED evidence.
 This is LEVI-original structure — cascade + spiral heritage, not a chatbot
 "devil's advocate" prompt.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -48,17 +49,29 @@ class MirrorReport:
         ]
         for f in self.forward.frames:
             lines.append(f"  · {f}")
-        lines.append("  risks: " + "; ".join(self.forward.risks) if self.forward.risks else "  risks: —")
+        lines.append(
+            "  risks: " + "; ".join(self.forward.risks)
+            if self.forward.risks
+            else "  risks: —"
+        )
         lines.append("")
         lines.append("── REVERSE coil (invert) ──")
         for f in self.reverse.frames:
             lines.append(f"  · {f}")
-        lines.append("  risks: " + "; ".join(self.reverse.risks) if self.reverse.risks else "  risks: —")
+        lines.append(
+            "  risks: " + "; ".join(self.reverse.risks)
+            if self.reverse.risks
+            else "  risks: —"
+        )
         lines.append("")
         lines.append("── SHADOW coil (misuse / carelessness) ──")
         for f in self.shadow.frames:
             lines.append(f"  · {f}")
-        lines.append("  risks: " + "; ".join(self.shadow.risks) if self.shadow.risks else "  risks: —")
+        lines.append(
+            "  risks: " + "; ".join(self.shadow.risks)
+            if self.shadow.risks
+            else "  risks: —"
+        )
         lines.append("")
         lines.append("── SYNTHESIS (survives all three) ──")
         for s in self.synthesis:
@@ -68,7 +81,9 @@ class MirrorReport:
             for v in self.vetoes:
                 lines.append(f"  ✗ {v}")
         lines.append("")
-        lines.append("Unique to LEVI×L.W.P.: parallel coils + evidence/HITL veto — not single-prompt debate.")
+        lines.append(
+            "Unique to LEVI×L.W.P.: parallel coils + evidence/HITL veto — not single-prompt debate."
+        )
         return "\n".join(lines)
 
 
@@ -118,19 +133,36 @@ class MirrorCascade:
         if ctx:
             synthesis.append(f"Context retained for cross-check: {ctx[:80]}")
         low = s.lower()
-        if any(w in low for w in ("shop", "clinic", "local", "site", "booking", "mobile")):
+        if any(
+            w in low for w in ("shop", "clinic", "local", "site", "booking", "mobile")
+        ):
             synthesis.append("Serviceability for local operators beats scale theater")
         if any(w in low for w in ("ai", "automat", "bot")):
-            synthesis.append("Automation stays checklist-level until HITL on customer path")
+            synthesis.append(
+                "Automation stays checklist-level until HITL on customer path"
+            )
         vetoes = [
             "Auto-complete customer contact or payment",
             "Treat silence as approval",
             "Invent demand to feed Income Factory",
         ]
-        if any(w in low for w in ("must buy", "urgent only", "limited time", "act now", "only today")):
-            vetoes.append("Pressure language detected in seed — strip before offer composition")
+        if any(
+            w in low
+            for w in (
+                "must buy",
+                "urgent only",
+                "limited time",
+                "act now",
+                "only today",
+            )
+        ):
+            vetoes.append(
+                "Pressure language detected in seed — strip before offer composition"
+            )
         if any(w in low for w in ("guaranteed", "risk free", "no downside")):
-            vetoes.append("Absolute-claim language — force OBSERVED evidence or drop claim")
+            vetoes.append(
+                "Absolute-claim language — force OBSERVED evidence or drop claim"
+            )
 
         return MirrorReport(
             seed=s,

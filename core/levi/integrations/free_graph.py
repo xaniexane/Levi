@@ -38,6 +38,7 @@ JSON export schema ("levi.free_graph/v1")::
       "top_bonds": [{"a": str, "b": str, "weight": float}]
     }
 """
+
 from __future__ import annotations
 
 import json
@@ -48,8 +49,8 @@ from typing import Dict, Iterable, List, Optional, Set, Tuple
 from levi.integrations.free_lattice import CATALOG
 
 # Weighting law — documented here and re-stated in the human-readable view.
-W_COMBINES_WITH = 1.0   # declared combines_with edge
-W_SYMBIOSIS = 2.0       # symbiosis formal pair (first-class bond)
+W_COMBINES_WITH = 1.0  # declared combines_with edge
+W_SYMBIOSIS = 2.0  # symbiosis formal pair (first-class bond)
 
 JSON_SCHEMA = "levi.free_graph/v1"
 
@@ -65,6 +66,7 @@ def _symbiosis_pairs() -> list:
     """Best-effort load of the symbiosis registry; never crashes the graph."""
     try:
         from levi.graph.symbiosis import PAIRS
+
         return list(PAIRS)
     except Exception:
         return []
@@ -81,8 +83,9 @@ class FreeGraph:
         self._dangling: Set[str] = set()
 
     # -- construction -----------------------------------------------------
-    def add_node(self, node_id: str, era: Optional[str] = None,
-                 external: bool = False) -> GraphNode:
+    def add_node(
+        self, node_id: str, era: Optional[str] = None, external: bool = False
+    ) -> GraphNode:
         if node_id not in self.nodes:
             self.nodes[node_id] = GraphNode(node_id, era, external)
             self.adj[node_id] = {}
@@ -102,9 +105,11 @@ class FreeGraph:
 
     def counts(self) -> Dict[str, float]:
         total = sum(sum(nbrs.values()) for nbrs in self.adj.values()) / 2.0
-        return {"nodes": len(self.nodes),
-                "edges": len(self.edge_kinds),
-                "total_weight": round(total, 6)}
+        return {
+            "nodes": len(self.nodes),
+            "edges": len(self.edge_kinds),
+            "total_weight": round(total, 6),
+        }
 
     # -- metrics ----------------------------------------------------------
     def degree(self, node_id: str) -> int:
@@ -151,7 +156,9 @@ class FreeGraph:
                     e += 1
         return round(2.0 * e / (k * (k - 1)), 6)
 
-    def strongest_bonds(self, limit: int = 10) -> List[Tuple[str, str, float, List[str]]]:
+    def strongest_bonds(
+        self, limit: int = 10
+    ) -> List[Tuple[str, str, float, List[str]]]:
         edges = []
         for key, kinds in self.edge_kinds.items():
             a, b = sorted(key)
@@ -171,8 +178,7 @@ class FreeGraph:
     def lint(self) -> Dict[str, object]:
         orphans = self.orphans()
         dangling = self.dangling_refs()
-        return {"orphans": orphans, "dangling_refs": dangling,
-                "ok": not orphans}
+        return {"orphans": orphans, "dangling_refs": dangling, "ok": not orphans}
 
     # -- queries -----------------------------------------------------------
     def shortest_path(self, a: str, b: str) -> Optional[List[str]]:
@@ -211,18 +217,23 @@ class FreeGraph:
     def to_json_dict(self) -> Dict[str, object]:
         deg_c = self.degree_centrality()
         close_c = self.closeness_centrality()
-        nodes = [{
-            "id": nid,
-            "era": node.era,
-            "external": node.external,
-            "degree": self.degree(nid),
-            "weighted_degree": self.weighted_degree(nid),
-            "degree_centrality": deg_c[nid],
-            "closeness": close_c[nid],
-            "clustering": self.clustering_coefficient(nid),
-        } for nid, node in sorted(self.nodes.items())]
-        edges = [{"a": a, "b": b, "weight": w, "kinds": kinds}
-                 for a, b, w, kinds in self.strongest_bonds(limit=len(self.edge_kinds))]
+        nodes = [
+            {
+                "id": nid,
+                "era": node.era,
+                "external": node.external,
+                "degree": self.degree(nid),
+                "weighted_degree": self.weighted_degree(nid),
+                "degree_centrality": deg_c[nid],
+                "closeness": close_c[nid],
+                "clustering": self.clustering_coefficient(nid),
+            }
+            for nid, node in sorted(self.nodes.items())
+        ]
+        edges = [
+            {"a": a, "b": b, "weight": w, "kinds": kinds}
+            for a, b, w, kinds in self.strongest_bonds(limit=len(self.edge_kinds))
+        ]
         return {
             "schema": JSON_SCHEMA,
             "nodes": nodes,
@@ -230,16 +241,18 @@ class FreeGraph:
             "counts": self.counts(),
             "orphans": self.orphans(),
             "dangling_refs": self.dangling_refs(),
-            "top_bonds": [{"a": a, "b": b, "weight": w}
-                          for a, b, w, _ in self.strongest_bonds(10)],
+            "top_bonds": [
+                {"a": a, "b": b, "weight": w} for a, b, w, _ in self.strongest_bonds(10)
+            ],
         }
 
     def to_json_str(self) -> str:
         return json.dumps(self.to_json_dict(), indent=2)
 
 
-def build_free_graph(catalog: Optional[Iterable] = None,
-                     pairs: Optional[Iterable] = None) -> FreeGraph:
+def build_free_graph(
+    catalog: Optional[Iterable] = None, pairs: Optional[Iterable] = None
+) -> FreeGraph:
     """Assemble the weighted graph from the lattice catalog + symbiosis pairs."""
     entries = list(CATALOG) if catalog is None else list(catalog)
     sym = _symbiosis_pairs() if pairs is None else list(pairs)
@@ -262,6 +275,10 @@ def build_free_graph(catalog: Optional[Iterable] = None,
 
 
 __all__ = [
-    "FreeGraph", "GraphNode", "build_free_graph",
-    "W_COMBINES_WITH", "W_SYMBIOSIS", "JSON_SCHEMA",
+    "FreeGraph",
+    "GraphNode",
+    "build_free_graph",
+    "W_COMBINES_WITH",
+    "W_SYMBIOSIS",
+    "JSON_SCHEMA",
 ]

@@ -56,8 +56,8 @@ class AgentStep:
     index: int
     provider_text: str
     tool_calls: list[dict] = field(default_factory=list)  # {"name":..., "args":...}
-    results: list[dict] = field(default_factory=list)     # {"tool","ok","output","error"}
-    prompt_tokens: int = 0       # usage reported by the provider this step
+    results: list[dict] = field(default_factory=list)  # {"tool","ok","output","error"}
+    prompt_tokens: int = 0  # usage reported by the provider this step
     completion_tokens: int = 0
 
 
@@ -71,7 +71,7 @@ class AgentTranscript:
     final: str = ""
     ok: bool = False
     error: str | None = None
-    prompt_tokens: int = 0       # totals across steps (0 when unreported)
+    prompt_tokens: int = 0  # totals across steps (0 when unreported)
     completion_tokens: int = 0
 
     def to_dict(self) -> dict:
@@ -134,7 +134,9 @@ def _default_system_prompt(tool_schemas: list[dict]) -> str:
         "Available tools:",
     ]
     for t in tool_schemas:
-        gate = " [REQUIRES HUMAN CONFIRMATION]" if t.get("requires_confirmation") else ""
+        gate = (
+            " [REQUIRES HUMAN CONFIRMATION]" if t.get("requires_confirmation") else ""
+        )
         lines.append(f"- {t.get('name')}{gate}: {t.get('description', '')}")
         params = t.get("parameters") or {}
         props = (params.get("properties") or {}).keys()
@@ -211,9 +213,7 @@ def run_subtask(
             workspace_root=workspace_root, consent=consent, confirm=confirm
         )
 
-    exec_ctx = ctx if ctx is not None else ExecContext(
-        consent=consent, confirm=confirm
-    )
+    exec_ctx = ctx if ctx is not None else ExecContext(consent=consent, confirm=confirm)
 
     tool_schemas = [
         {
@@ -231,6 +231,7 @@ def run_subtask(
     if affect:
         try:
             from levi.affect import SessionEI, modulate
+
             _sess = affect_session if affect_session is not None else SessionEI()
             _mod = modulate(task, _sess)
             system = system + "\n\n" + _mod["hint"]

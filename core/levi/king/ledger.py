@@ -28,8 +28,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+
 def _default_data_dir() -> Path:
     return Path.home() / ".levi" / "king"
+
 
 # D-ladder thresholds. Rank advances on EITHER words or banks — this is
 # what makes it "word count + bank count, not word count alone".

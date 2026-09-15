@@ -25,12 +25,12 @@ EMOTIONS = ("joy", "sadness", "anger", "fear", "surprise", "disgust")
 class EmotionReading:
     """One turn's affect read. All scores are heuristic, 0..1 unless noted."""
 
-    valence: float = 0.0            # -1 (very negative) .. +1 (very positive)
-    arousal: float = 0.0            # 0 (flat) .. 1 (highly activated)
+    valence: float = 0.0  # -1 (very negative) .. +1 (very positive)
+    arousal: float = 0.0  # 0 (flat) .. 1 (highly activated)
     emotions: Dict[str, float] = field(default_factory=dict)
-    dominant: str = "neutral"      # top emotion or "neutral"
+    dominant: str = "neutral"  # top emotion or "neutral"
     stress_signals: List[str] = field(default_factory=list)
-    confidence: float = 0.0        # how much lexical evidence was found
+    confidence: float = 0.0  # how much lexical evidence was found
     cues: List[str] = field(default_factory=list)  # matched cue words
 
     def to_dict(self) -> Dict:
@@ -52,73 +52,160 @@ class EmotionReading:
 
 _LEXICON: Dict[str, List[tuple]] = {
     "joy": [
-        ("happy", 0.7), ("joy", 0.8), ("delighted", 0.8), ("excited", 0.7),
-        ("great", 0.5), ("awesome", 0.6), ("wonderful", 0.7), ("love", 0.6),
-        ("glad", 0.6), ("thrilled", 0.8), ("fantastic", 0.6), ("amazing", 0.5),
-        ("lol", 0.4), ("haha", 0.5), ("yay", 0.6), ("relieved", 0.5),
-        ("proud", 0.5), ("grateful", 0.5), ("thank", 0.3), ("thanks", 0.3),
+        ("happy", 0.7),
+        ("joy", 0.8),
+        ("delighted", 0.8),
+        ("excited", 0.7),
+        ("great", 0.5),
+        ("awesome", 0.6),
+        ("wonderful", 0.7),
+        ("love", 0.6),
+        ("glad", 0.6),
+        ("thrilled", 0.8),
+        ("fantastic", 0.6),
+        ("amazing", 0.5),
+        ("lol", 0.4),
+        ("haha", 0.5),
+        ("yay", 0.6),
+        ("relieved", 0.5),
+        ("proud", 0.5),
+        ("grateful", 0.5),
+        ("thank", 0.3),
+        ("thanks", 0.3),
     ],
     "sadness": [
-        ("sad", 0.7), ("depressed", 0.8), ("heartbroken", 0.85),
-        ("grief", 0.8), ("grieving", 0.8), ("lonely", 0.7), ("cry", 0.6),
-        ("crying", 0.65), ("tears", 0.6), ("miss", 0.4), ("lost", 0.45),
-        ("hopeless", 0.75), ("empty", 0.5), ("down", 0.35), ("blue", 0.3),
+        ("sad", 0.7),
+        ("depressed", 0.8),
+        ("heartbroken", 0.85),
+        ("grief", 0.8),
+        ("grieving", 0.8),
+        ("lonely", 0.7),
+        ("cry", 0.6),
+        ("crying", 0.65),
+        ("tears", 0.6),
+        ("miss", 0.4),
+        ("lost", 0.45),
+        ("hopeless", 0.75),
+        ("empty", 0.5),
+        ("down", 0.35),
+        ("blue", 0.3),
     ],
     "anger": [
-        ("angry", 0.7), ("furious", 0.85), ("enraged", 0.85), ("rage", 0.8),
-        ("pissed", 0.75), ("hate", 0.65), ("annoyed", 0.5),
-        ("frustrated", 0.55), ("frustrating", 0.55), ("irritated", 0.5),
-        ("bullshit", 0.7), ("damn", 0.4), ("stupid", 0.55), ("idiot", 0.6),
-        ("screw", 0.55), ("fed up", 0.6), ("sick of", 0.55),
+        ("angry", 0.7),
+        ("furious", 0.85),
+        ("enraged", 0.85),
+        ("rage", 0.8),
+        ("pissed", 0.75),
+        ("hate", 0.65),
+        ("annoyed", 0.5),
+        ("frustrated", 0.55),
+        ("frustrating", 0.55),
+        ("irritated", 0.5),
+        ("bullshit", 0.7),
+        ("damn", 0.4),
+        ("stupid", 0.55),
+        ("idiot", 0.6),
+        ("screw", 0.55),
+        ("fed up", 0.6),
+        ("sick of", 0.55),
     ],
     "fear": [
-        ("afraid", 0.7), ("scared", 0.7), ("terrified", 0.85), ("fear", 0.7),
-        ("anxious", 0.65), ("anxiety", 0.65), ("worried", 0.55),
-        ("worry", 0.5), ("panic", 0.8), ("panicking", 0.8), ("dread", 0.7),
-        ("nightmare", 0.6), ("unsafe", 0.6), ("threat", 0.55),
+        ("afraid", 0.7),
+        ("scared", 0.7),
+        ("terrified", 0.85),
+        ("fear", 0.7),
+        ("anxious", 0.65),
+        ("anxiety", 0.65),
+        ("worried", 0.55),
+        ("worry", 0.5),
+        ("panic", 0.8),
+        ("panicking", 0.8),
+        ("dread", 0.7),
+        ("nightmare", 0.6),
+        ("unsafe", 0.6),
+        ("threat", 0.55),
     ],
     "surprise": [
-        ("surprised", 0.6), ("shocked", 0.7), ("wow", 0.5), ("unbelievable", 0.5),
-        ("suddenly", 0.4), ("unexpected", 0.55), ("whoa", 0.5),
-        ("can't believe", 0.55), ("astonished", 0.65),
+        ("surprised", 0.6),
+        ("shocked", 0.7),
+        ("wow", 0.5),
+        ("unbelievable", 0.5),
+        ("suddenly", 0.4),
+        ("unexpected", 0.55),
+        ("whoa", 0.5),
+        ("can't believe", 0.55),
+        ("astonished", 0.65),
     ],
     "disgust": [
-        ("disgust", 0.7), ("disgusting", 0.75), ("gross", 0.6),
-        ("revolting", 0.7), ("nasty", 0.55), ("sickening", 0.65),
+        ("disgust", 0.7),
+        ("disgusting", 0.75),
+        ("gross", 0.6),
+        ("revolting", 0.7),
+        ("nasty", 0.55),
+        ("sickening", 0.65),
         ("vile", 0.65),
     ],
 }
 
 # Phrases that signal acute stress / crisis regardless of emotion lexicon.
 _STRESS_SIGNALS: List[tuple] = [
-    (r"\b(kill myself|end it all|want to die|self[- ]?harm|suicid\w*)\b",
-     "self-harm-ideation"),
+    (
+        r"\b(kill myself|end it all|want to die|self[- ]?harm|suicid\w*)\b",
+        "self-harm-ideation",
+    ),
     (r"\b(can'?t (breathe|go on|take it|cope|sleep))\b", "overwhelm"),
     (r"\b(breaking point|falling apart|spiraling|spiral\w*)\b", "dysregulation"),
-    (r"\b(burn\w* out|burnt out|no energy|running on empty|exhausted)\b",
-     "exhaustion"),
+    (r"\b(burn\w* out|burnt out|no energy|running on empty|exhausted)\b", "exhaustion"),
     (r"\b(emergency|right now|asap|urgent\w*)\b", "urgency"),
 ]
 
 _INTENSIFIERS = {
-    "very": 1.3, "so": 1.35, "really": 1.3, "extremely": 1.6,
-    "incredibly": 1.5, "super": 1.4, "utterly": 1.5, "completely": 1.3,
-    "totally": 1.3, "absolutely": 1.4,
+    "very": 1.3,
+    "so": 1.35,
+    "really": 1.3,
+    "extremely": 1.6,
+    "incredibly": 1.5,
+    "super": 1.4,
+    "utterly": 1.5,
+    "completely": 1.3,
+    "totally": 1.3,
+    "absolutely": 1.4,
 }
 
 _NEGATIONS = {
-    "not", "no", "never", "n't", "without", "hardly", "barely",
-    "don", "doesn", "didn", "isn", "aren", "wasn", "weren", "won",
+    "not",
+    "no",
+    "never",
+    "n't",
+    "without",
+    "hardly",
+    "barely",
+    "don",
+    "doesn",
+    "didn",
+    "isn",
+    "aren",
+    "wasn",
+    "weren",
+    "won",
 }
 
 _VALENCE: Dict[str, float] = {
-    "joy": 0.8, "surprise": 0.15, "sadness": -0.7, "anger": -0.6,
-    "fear": -0.65, "disgust": -0.55,
+    "joy": 0.8,
+    "surprise": 0.15,
+    "sadness": -0.7,
+    "anger": -0.6,
+    "fear": -0.65,
+    "disgust": -0.55,
 }
 
 _AROUSAL: Dict[str, float] = {
-    "anger": 0.8, "fear": 0.75, "joy": 0.6, "surprise": 0.7,
-    "disgust": 0.5, "sadness": 0.35,
+    "anger": 0.8,
+    "fear": 0.75,
+    "joy": 0.6,
+    "surprise": 0.7,
+    "disgust": 0.5,
+    "sadness": 0.35,
 }
 
 
@@ -158,7 +245,7 @@ def detect(text: str) -> EmotionReading:
                 if " " in phrase or phrase != tok:
                     continue
                 w = weight
-                window = tokens[max(0, i - 3):i]
+                window = tokens[max(0, i - 3) : i]
                 negated = (
                     any(n in window for n in _NEGATIONS)
                     or tok.endswith("n't")
@@ -208,9 +295,13 @@ def detect(text: str) -> EmotionReading:
         # No evidence, or every hit was negated ("not happy") — refuse to
         # read affect into it. Neutral, zero confidence.
         return EmotionReading(
-            valence=0.0, arousal=min(0.2, arousal_boost),
-            emotions={e: 0.0 for e in EMOTIONS}, dominant="neutral",
-            stress_signals=stress, confidence=0.0, cues=cues,
+            valence=0.0,
+            arousal=min(0.2, arousal_boost),
+            emotions={e: 0.0 for e in EMOTIONS},
+            dominant="neutral",
+            stress_signals=stress,
+            confidence=0.0,
+            cues=cues,
         )
 
     # Normalize emotion scores.

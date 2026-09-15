@@ -39,13 +39,12 @@ class TurnResult:
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 
-
-
 def _continuity_block() -> str:
     """Inject profile name, weekly goal, and latest shelf into every ask prompt."""
     bits: List[str] = []
     try:
         from levi.identity.profile import ProfileStore
+
         p = ProfileStore().load()
         if p and getattr(p, "name", None):
             bits.append(f"The human's name is {p.name}.")
@@ -55,10 +54,13 @@ def _continuity_block() -> str:
         pass
     try:
         from levi.identity.shelf import collect_shelf
+
         shelf = collect_shelf()
         if shelf:
             top = shelf[0]
-            bits.append(f'Shelf (recent work): {top.kind} "{top.title}" — {top.summary[:100]}.')
+            bits.append(
+                f'Shelf (recent work): {top.kind} "{top.title}" — {top.summary[:100]}.'
+            )
         else:
             bits.append("Shelf is empty.")
     except Exception:
@@ -96,16 +98,17 @@ class Orchestrator:
         self.control = ControlDaemon()
         self.mono = MonotropismTracker()
 
-
     def _stack_prompt_block(self) -> str:
         stack = getattr(self, "_active_stack", None)
         if not stack:
             return ""
+
         def resolve(pid: str) -> str:
             p = self.lattice.get(pid)
             if not p:
                 return pid
             return f"{p.display_name} ({p.communication_style})"
+
         try:
             return stack.prompt_block(resolve)
         except Exception:
@@ -133,6 +136,7 @@ class Orchestrator:
         shelf_count = 0
         try:
             from levi.identity.shelf import collect_shelf
+
             shelf_count = len(collect_shelf())
         except Exception:
             pass
@@ -166,7 +170,10 @@ class Orchestrator:
         self._wit = None
 
         # Bond reinforcement on collaborative constructive asks
-        if any(w in user_text.lower() for w in ("thank", "please help", "let's", "lets ", "together")):
+        if any(
+            w in user_text.lower()
+            for w in ("thank", "please help", "let's", "lets ", "together")
+        ):
             self.nervous.reinforce_bond(0.03)
 
         # 1. Memory of the interaction
@@ -228,21 +235,44 @@ class Orchestrator:
         lower = user_text.lower()
 
         # High-priority: Software Factory (LEVI-native capability)
-        if any(p in lower for p in (
-            "build me", "build a", "make an app", "make a tool", "create an app",
-            "software factory", "factory create", "create project", "new project",
-            "scaffold",
-        )):
+        if any(
+            p in lower
+            for p in (
+                "build me",
+                "build a",
+                "make an app",
+                "make a tool",
+                "create an app",
+                "software factory",
+                "factory create",
+                "create project",
+                "new project",
+                "scaffold",
+            )
+        ):
             skills_hit.append("factory_create")
-        elif "advance" in lower and ("project" in lower or "factory" in lower or "proj." in lower):
+        elif "advance" in lower and (
+            "project" in lower or "factory" in lower or "proj." in lower
+        ):
             skills_hit.append("factory_advance")
         elif "factory" in lower and "status" in lower:
             skills_hit.append("factory_status")
         elif "automation" in lower and ("list" in lower or "status" in lower):
             skills_hit.append("automation_status")
-        elif any(h in lower for h in ("automate", "every morning", "every day", "schedule a", "whenever i")):
+        elif any(
+            h in lower
+            for h in (
+                "automate",
+                "every morning",
+                "every day",
+                "schedule a",
+                "whenever i",
+            )
+        ):
             skills_hit.append("automation_create")
-        elif "checklist" in lower or (("phase 1" in lower or "phase1" in lower) and "progress" in lower):
+        elif "checklist" in lower or (
+            ("phase 1" in lower or "phase1" in lower) and "progress" in lower
+        ):
             skills_hit.append("phase1_checklist")
         elif "remember" in lower and "this" in lower:
             skills_hit.append("remember")
@@ -254,27 +284,41 @@ class Orchestrator:
             skills_hit.append("companion_status")
         elif lower.strip() in ("status", "system status", "health"):
             skills_hit.append("status")
-        elif "interpenetration" in lower or "capability graph" in lower or lower.strip() == "graph":
+        elif (
+            "interpenetration" in lower
+            or "capability graph" in lower
+            or lower.strip() == "graph"
+        ):
             skills_hit.append("interpenetration_stats")
-        elif "suggest" in lower and ("compose" in lower or "combin" in lower or "interpenetra" in lower):
+        elif "suggest" in lower and (
+            "compose" in lower or "combin" in lower or "interpenetra" in lower
+        ):
             skills_hit.append("suggest_compose")
         elif lower.startswith("compose ") or "compose with" in lower:
             skills_hit.append("compose")
         elif "genre" in lower:
             skills_hit.append("genres")
-        elif any(w in lower for w in ("run agents", "agent run", "delegate specialists")):
+        elif any(
+            w in lower for w in ("run agents", "agent run", "delegate specialists")
+        ):
             skills_hit.append("agent_run")
-        elif any(w in lower for w in ("write a story", "create a story", "story in", "make a story")):
+        elif any(
+            w in lower
+            for w in ("write a story", "create a story", "story in", "make a story")
+        ):
             skills_hit.append("story_create")
         elif "expand" in lower and "story" in lower:
             skills_hit.append("story_expand")
         elif ("modify" in lower and "story" in lower) or any(
-            m in lower for m in ("story void", "story noir", "story interrogation", "story spiral")
+            m in lower
+            for m in ("story void", "story noir", "story interrogation", "story spiral")
         ):
             skills_hit.append("story_modify")
         elif "character archetype" in lower or "list characters" in lower:
             skills_hit.append("list_characters")
-        elif any(w in lower for w in ("compile ir", "nl-ir", "nl→ir", "show ir", "to ir")):
+        elif any(
+            w in lower for w in ("compile ir", "nl-ir", "nl→ir", "show ir", "to ir")
+        ):
             skills_hit.append("compile_ir")
 
         # 6. Constructive confirm (soft UX) — factory/story don't surprise
@@ -282,6 +326,7 @@ class Orchestrator:
         if skills_hit and skills_hit[0] in CONSTRUCTIVE and not self.force_constructive:
             try:
                 from levi.identity.profile import ProfileStore
+
                 if ProfileStore().load().confirm_constructive:
                     skill_id = skills_hit[0]
                     label = {
@@ -307,7 +352,11 @@ class Orchestrator:
                             f"Say **yes, do it** (or **yes**) to proceed, or rephrase.\n"
                             f"Tip: levi init --yes disables this confirm. Templates: levi templates"
                         ),
-                        metadata={"intent_map": intent_map, "pending_constructive": skill_id, "soft_confirm": True},
+                        metadata={
+                            "intent_map": intent_map,
+                            "pending_constructive": skill_id,
+                            "soft_confirm": True,
+                        },
                     )
             except Exception:
                 pass
@@ -317,6 +366,7 @@ class Orchestrator:
         if low in ("yes", "yes, do it", "do it", "confirm", "y", "yes do it"):
             try:
                 from levi.identity.profile import ProfileStore
+
                 prof = ProfileStore().load()
                 if prof.pending_skill and prof.pending_text:
                     skills_hit = [prof.pending_skill]
@@ -359,7 +409,11 @@ class Orchestrator:
                             skills_considered=skills_hit,
                             response=str(result),
                             policy_receipt=receipt.id,
-                            metadata={"intent_map": intent_map, "skill": skill_id, "ei": ei_state.as_dict()},
+                            metadata={
+                                "intent_map": intent_map,
+                                "skill": skill_id,
+                                "ei": ei_state.as_dict(),
+                            },
                         )
                     except Exception as e:
                         return TurnResult(
@@ -369,7 +423,11 @@ class Orchestrator:
                             specialists=specialist_ids,
                             skills_considered=skills_hit,
                             response=f"Skill error: {e}",
-                            metadata={"intent_map": intent_map, "skill": skill_id, "error": str(e)},
+                            metadata={
+                                "intent_map": intent_map,
+                                "skill": skill_id,
+                                "error": str(e),
+                            },
                         )
 
         # 7. Default: model generation with full companion + persona guidance
@@ -377,12 +435,26 @@ class Orchestrator:
         role_str = ", ".join(r.value for r in guidance.primary_roles)
         tone_str = "; ".join(guidance.tone_notes)
         continuity = _continuity_block()
-        protective = "; ".join(guidance.protective_notes) if guidance.protective_notes else ""
+        protective = (
+            "; ".join(guidance.protective_notes) if guidance.protective_notes else ""
+        )
         # Light–dark + ND spectrum wit (muted under distress / grief / crisis)
         # Control daemon may force wit styles; crisis regulation still wins inside calibrate_wit
-        intrigue = bool(getattr(self._active_stack, "intrigue", False)) if self._active_stack else False
-        ut = getattr(guidance, "user_tone", None) or getattr(self.ei.state, "user_tone", None) or "neutral"
-        reg = getattr(guidance, "regulation", None) or getattr(self.ei.state, "tone_regulation", None) or "steady"
+        intrigue = (
+            bool(getattr(self._active_stack, "intrigue", False))
+            if self._active_stack
+            else False
+        )
+        ut = (
+            getattr(guidance, "user_tone", None)
+            or getattr(self.ei.state, "user_tone", None)
+            or "neutral"
+        )
+        reg = (
+            getattr(guidance, "regulation", None)
+            or getattr(self.ei.state, "tone_regulation", None)
+            or "steady"
+        )
         inten = float(getattr(self.ei.state, "user_intensity", None) or 0.3)
         force_styles = None
         try:
@@ -400,7 +472,8 @@ class Orchestrator:
             user_tone=ut,
             intensity=inten,
             regulation=reg,
-            intrigue=intrigue and (getattr(self.mono.state.active, 'depth', 0) or 0) < 0.55,
+            intrigue=intrigue
+            and (getattr(self.mono.state.active, "depth", 0) or 0) < 0.55,
             force_styles=force_styles,
             preferred_styles=preferred_pos or None,
         )
@@ -410,7 +483,9 @@ class Orchestrator:
         try:
             core_logic = self.control.core_logic_block(
                 user_text=user_text,
-                tone_primary=getattr(ut, "primary", None) or str(ut) if ut else "neutral",
+                tone_primary=getattr(ut, "primary", None) or str(ut)
+                if ut
+                else "neutral",
             )
             self.control.tick_turn()
         except Exception:

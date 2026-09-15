@@ -16,12 +16,19 @@ Risk >= 2, factory execute/package stages, and any external send MUST come
 through here. Risk 0–1 still walks all six steps; Permission is simply
 automatic for them.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Optional
 
-from levi.policy.gates import ActionProposal, ActionStatus, PolicyEngine, Receipt, RiskLevel
+from levi.policy.gates import (
+    ActionProposal,
+    ActionStatus,
+    PolicyEngine,
+    Receipt,
+    RiskLevel,
+)
 
 
 @dataclass
@@ -70,10 +77,15 @@ def run_gated(
     outcome = GateOutcome(proposal=proposal, preview=preview, dry_run=dry_run)
 
     # 3. Permission — explicit ceiling wins; otherwise the engine's own.
-    ceiling = (auto_approve_up_to if auto_approve_up_to is not None
-               else engine.auto_approve_up_to)
+    ceiling = (
+        auto_approve_up_to
+        if auto_approve_up_to is not None
+        else engine.auto_approve_up_to
+    )
     if risk_level <= ceiling:
-        engine.approve(proposal.id, note="auto-approved by policy (risk within ceiling)")
+        engine.approve(
+            proposal.id, note="auto-approved by policy (risk within ceiling)"
+        )
         outcome.approved = True
         outcome.auto_approved = True
     elif confirm is not None:
@@ -119,7 +131,11 @@ def run_gated(
     summary = (
         f"dry-run preview only (not executed): {description}"
         if dry_run
-        else (result_summary if outcome.executed else f"approved but not executed: {description}")
+        else (
+            result_summary
+            if outcome.executed
+            else f"approved but not executed: {description}"
+        )
     )
     try:
         outcome.receipt = engine.mark_completed(

@@ -4,6 +4,7 @@ Train LEVI Native LM from scratch on your Brain corpus.
 No Ollama, no external weights — order-N character Markov + word Markov hybrid.
 Original to your data. Not cloud-LLM quality; fully yours.
 """
+
 from __future__ import annotations
 import json
 import random
@@ -34,9 +35,7 @@ def train(char_order: int = 5, word_order: int = 2) -> dict:
         ctx = tuple(words[i : i + word_order])
         nxt = words[i + word_order]
         w_counts[ctx][nxt] += 1
-    word_model = {
-        "||".join(ctx): dict(nxts) for ctx, nxts in w_counts.items()
-    }
+    word_model = {"||".join(ctx): dict(nxts) for ctx, nxts in w_counts.items()}
 
     meta = {
         "name": "LEVI-Native",

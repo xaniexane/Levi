@@ -81,7 +81,11 @@ def chat(
     except ConnectionError as exc:
         return {"ok": False, "endpoint": endpoint, "error": f"unreachable: {exc}"}
     if status != 200:
-        return {"ok": False, "endpoint": endpoint, "error": f"HTTP {status}: {body[:300]}"}
+        return {
+            "ok": False,
+            "endpoint": endpoint,
+            "error": f"HTTP {status}: {body[:300]}",
+        }
     try:
         data = json.loads(body)
         text = data["choices"][0]["message"]["content"]
@@ -95,7 +99,4 @@ def format_probe(result: dict) -> str:
     if not result["ok"]:
         return f"lab chat: probe FAILED — {result.get('error')}"
     models = ", ".join(result["models"][:10]) or "(no models listed)"
-    return (
-        f"lab chat: endpoint reachable — {result['endpoint']}\n"
-        f"  models: {models}"
-    )
+    return f"lab chat: endpoint reachable — {result['endpoint']}\n  models: {models}"

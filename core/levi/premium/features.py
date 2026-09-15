@@ -7,6 +7,7 @@ HITL agents, glass consoles).
 
 Status: active = wired in kernel · surface = UI/CLI exposed · roadmap = specified.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -17,10 +18,10 @@ from typing import List, Optional
 class PremiumFeature:
     id: str
     name: str
-    classic: str          # old/retired software DNA
-    modern: str           # modern counterpart
+    classic: str  # old/retired software DNA
+    modern: str  # modern counterpart
     why: str
-    status: str           # active | surface | roadmap
+    status: str  # active | surface | roadmap
     cli: str = ""
 
 
@@ -250,7 +251,6 @@ FEATURES: List[PremiumFeature] = [
         "active",
         "levi si",
     ),
-
     PremiumFeature(
         "batch_eval_harness",
         "Eval harness hooks",
