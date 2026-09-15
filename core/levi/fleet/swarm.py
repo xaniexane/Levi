@@ -33,9 +33,20 @@ from levi.fleet.categories import (
     AgentCategory,
     cost_per_call,
     get_category,
+    tool_risk_level,
+    tool_risk_name,
 )
 from levi.fleet.supervisor import Plan, PlanNode, replan_remaining
 from levi.fleet.verify import verify_node
+from levi.policy.gates import RiskLevel
+
+try:
+    from levi.control.approvals import ApprovalBlocked
+except Exception:  # control plane unavailable: approvals degrade to refusal
+    class ApprovalBlocked(Exception):  # type: ignore[no-redef]
+        def __init__(self, record=None, reason=""):
+            super().__init__(reason or "approval blocked")
+            self.record = record or {}
 
 
 # ---------------------------------------------------------------------------
@@ -172,6 +183,13 @@ class WorkerContext:
     max_steps: int = 8
     user_id: str = "local"
     tenant_id: str = "local"
+    # Universal approval engine (enterprise phase 2): when set, MODERATE+
+    # tool calls route through it instead of executing ad hoc.
+    # ``approval_timeout``: 0 = non-blocking (pending → escalate at once);
+    # >0 = wait that many seconds for a human decision (cross-process:
+    # the CLI can decide while the worker waits).
+    approval_engine: Any = None
+    approval_timeout: float = 0.0
 
     def check_permission(self, tool_name: str) -> None:
         """Permission-engine check (blueprint §6/§9, phase-1 form).
@@ -218,7 +236,6 @@ def make_counting_registry(tool_names: List[str], category: AgentCategory,
     audit-logged with its risk level (blueprint §8–9).
     """
     from levi.agent.tools import ToolRegistry, build_default_registry
-    from levi.fleet.categories import tool_risk_name
 
     full = build_default_registry()
     unit = cost_per_call(category.cost_class)
@@ -227,6 +244,10 @@ def make_counting_registry(tool_names: List[str], category: AgentCategory,
         def execute(self, name: str, args: dict,
                     exec_ctx: Any = None):  # type: ignore[override]
             ctx.check_permission(name)
+            risk_level = tool_risk_level(name)
+            if risk_level >= 2 and ctx.approval_engine is not None:
+                _guard_tool_call(ctx, category, name, args or {},
+                                 risk_level)
             _check_budgets(ctx.ledger, ctx.budgets, deadline)
             result = super().execute(name, args, exec_ctx)
             risk = tool_risk_name(name)
@@ -255,6 +276,34 @@ def make_counting_registry(tool_names: List[str], category: AgentCategory,
         if tool is not None:
             reg.register(tool)
     return reg
+
+
+def _guard_tool_call(ctx: WorkerContext, category: AgentCategory,
+                     name: str, args: Dict[str, Any], risk_level: int) -> None:
+    """Route a MODERATE+ tool call through the universal approval engine.
+
+    Uses :meth:`ApprovalEngine.require`: approved → proceed; pending or
+    denied → :class:`ApprovalBlocked` and the tool never executes.
+    ``approval_timeout=0`` (default) escalates at once; a positive
+    timeout waits for a human (the CLI decides cross-process); an
+    ``approve_once`` decision is claimed exactly once on the next call.
+    """
+    arg_preview = ", ".join(
+        f"{k}={str(v)[:60]}" for k, v in sorted(args.items()))
+    ctx.approval_engine.require(
+        description=f"fleet tool call: {name}({arg_preview})",
+        risk_level=RiskLevel(risk_level),
+        reason=(f"worker of category {category.name!r} (run {ctx.run_id}) "
+                f"invoked a {tool_risk_name(name)}-risk tool"),
+        affected_systems=[f"tool:{name}"],
+        estimated_impact=f"args: {arg_preview or '(none)'}",
+        reversible=name not in ("shell_exec", "file_write", "file_edit"),
+        action_key=name,
+        workflow_key=ctx.run_id,
+        task_id=ctx.run_id,
+        user_id=ctx.user_id,
+        timeout=ctx.approval_timeout or None,
+    )
 
 
 def select_worker_provider(category: AgentCategory,
@@ -358,13 +407,26 @@ class SwarmRunner:
                  worker_fn: Optional[WorkerFn] = None,
                  verify_fn: Optional[Callable[..., Any]] = None,
                  semantic_verify: bool = False,
-                 provider: Any = None) -> None:
+                 provider: Any = None,
+                 approval_engine: Any = None,
+                 approval_timeout: float = 0.0) -> None:
         self.budgets = budgets or SwarmBudgets()
         self.depth = depth
         self.worker_fn = worker_fn or default_worker
         self.verify_fn = verify_fn
         self.semantic_verify = semantic_verify
         self.provider = provider
+        # Universal approval engine (phase 2): MODERATE+ tool calls in
+        # workers route through it. ``approval_timeout=0`` escalates at
+        # once; pass >0 to wait for a human decision mid-run.
+        if approval_engine is None:
+            try:
+                from levi.control.approvals import ApprovalEngine
+                approval_engine = ApprovalEngine()
+            except Exception:
+                approval_engine = None
+        self.approval_engine = approval_engine
+        self.approval_timeout = approval_timeout
 
     # -- public API ------------------------------------------------------
 
@@ -382,11 +444,14 @@ class SwarmRunner:
         deadline = time.time() + self.budgets.max_time_seconds
         ctx = WorkerContext(blackboard=blackboard, ledger=ledger,
                             budgets=self.budgets, run_id=run_id,
-                            depth=self.depth, provider=self.provider)
+                            depth=self.depth, provider=self.provider,
+                            approval_engine=self.approval_engine,
+                            approval_timeout=self.approval_timeout)
         report = self._execute(the_plan, ctx, deadline, run_id,
                                objective if isinstance(objective, str)
                                else the_plan.objective)
         self._persist(run_id, report)
+        self._record_ledger(run_id, the_plan, report, ctx)
         return report
 
     @staticmethod
@@ -402,6 +467,60 @@ class SwarmRunner:
         # Decision journal for the fleet: every run is recorded.
         (_fleet_dir() / f"{run_id}.json").write_text(
             json.dumps(report, indent=2, default=str))
+
+    def _record_ledger(self, run_id: str, plan: Plan,
+                       report: Dict[str, Any], ctx: WorkerContext) -> None:
+        """Write the run into the decision ledger (blueprint §15).
+
+        Never fatal: ledger failures must not break a swarm run.
+        """
+        try:
+            from levi.control.ledger import LedgerWriter
+            from levi.control.routing import classify_complexity
+        except Exception:
+            return
+        try:
+            ledger = LedgerWriter()
+            ledger.record_task(
+                run_id, objective=report.get("objective", ""),
+                user_id=ctx.user_id, tenant_id=ctx.tenant_id,
+                plan_version=str(plan.version
+                                 if hasattr(plan, "version") else "1"),
+                status="running",
+            )
+            spent = report.get("budgets", {}).get("spent", {})
+            nodes = {n.id: n for n in plan.nodes}
+            for nid, n in report.get("nodes", {}).items():
+                node = nodes.get(nid)
+                task_text = node.task if node is not None else ""
+                complexity, _ = classify_complexity(task_text)
+                verification = n.get("verification", "")
+                ledger.record_step(
+                    run_id,
+                    agent=f"fleet:{n.get('category', '?')}",
+                    category=n.get("category", ""),
+                    task_class=complexity,
+                    model=str(n.get("provider", "")
+                              or report.get("provider", "")),
+                    decision_summary=(
+                        f"fleet worker executed plan node: "
+                        f"{task_text[:300]}"
+                    ),
+                    action=task_text[:500],
+                    expected_result=(node.acceptance
+                                     if node is not None else ""),
+                    actual_result=str(n.get("summary", ""))[:2000],
+                    verification={"notes": verification},
+                    error=str(n.get("error", ""))[:1000],
+                    outcome=str(n.get("status", "")),
+                )
+            ledger.set_task_status(
+                run_id, str(report.get("status", "completed")),
+                cost_units=float(spent.get("cost_units", 0) or 0),
+                latency_ms=float(spent.get("seconds", 0) or 0) * 1000.0,
+            )
+        except Exception:
+            pass  # ledger is telemetry, never load-bearing
 
     def _execute(self, plan: Plan, ctx: WorkerContext, deadline: float,
                  run_id: str, objective: str) -> Dict[str, Any]:
@@ -426,7 +545,8 @@ class SwarmRunner:
                 dep_status = [status[d] for d in node.deps]
                 if all(s == "ok" for s in dep_status):
                     out.append(nid)
-                elif any(s in ("failed", "escalated", "skipped", "refused")
+                elif any(s in ("failed", "escalated", "skipped", "refused",
+                               "awaiting_approval")
                          for s in dep_status):
                     set_status(nid, "skipped")
             return [nid for nid in out if status[nid] == "pending"]
@@ -457,6 +577,21 @@ class SwarmRunner:
                     set_status(nid, "refused")
                     escalations.append({"node": nid, "reason": "refused",
                                         "detail": str(exc)})
+                    return
+                except ApprovalBlocked as exc:
+                    approval_id = exc.record.get("id", "?")
+                    results[nid] = {
+                        "status": "awaiting_approval",
+                        "approval_id": approval_id,
+                        "error": str(exc), "attempts": attempts,
+                    }
+                    set_status(nid, "awaiting_approval")
+                    escalations.append({
+                        "node": nid, "reason": "awaiting_approval",
+                        "approval_id": approval_id,
+                        "detail": (f"decide with: "
+                                   f"levi approve approve {approval_id}"),
+                    })
                     return
                 except Exception as exc:  # worker blew up
                     result = {"ok": False, "summary": "",
