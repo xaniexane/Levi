@@ -4,6 +4,23 @@ The Xeno rebirth, done right. The old "LEVI Ultimate Xeno" single-file
 lineage is composted; its good ideas — an installable chat PWA, a tone
 picker, media commands — are reincarnated here as a proper LEVI organ.
 
+## What it looks like
+
+Dark void theme, near-black throughout. A left sidebar carries the LEVI
+wordmark, a **Register** dropdown (the 14 real KAI-9000 registers), a
+**Session** field, a **Model** card showing the resolved model and an
+honest status note (e.g. *"rules planner — No LEVI weights downloaded …
+`levi agent model pull` to upgrade"*), and a status badge
+(*server reachable*). The main pane has a header — **Levi** /
+*synthetic intelligence · local-first* with a green local dot — the
+chat thread (empty state: *"LEVI PWA ready. Talk, or try /help."*), and
+a bottom input bar with a gold **Send** button. On narrow screens the
+sidebar collapses behind a hamburger menu. When the server is
+unreachable, an offline banner replaces the chat instead of faking it.
+
+![LEVI PWA on desktop](images/pwa-desktop.png)
+![LEVI PWA on mobile](images/pwa-mobile.png)
+
 ## Architecture
 
 ```

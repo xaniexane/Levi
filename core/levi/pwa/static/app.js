@@ -148,8 +148,20 @@
               if (line.startsWith("event:")) event = line.slice(6).trim();
               else if (line.startsWith("data:")) data += line.slice(5).trim();
             });
-            if (event === "done") { onDone(JSON.parse(data)); return; }
-            if (event === "error") { onError(new Error(JSON.parse(data).error || "stream error")); return; }
+            if (event === "done") {
+              let res = null;
+              try { res = JSON.parse(data); } catch (e) { /* malformed payload -> error path */ }
+              reader.cancel().catch(() => {});
+              if (res) { onDone(res); } else { onError(new Error("bad stream payload")); }
+              return;
+            }
+            if (event === "error") {
+              let msg = "stream error";
+              try { msg = JSON.parse(data).error || msg; } catch (e) {}
+              reader.cancel().catch(() => {});
+              onError(new Error(msg));
+              return;
+            }
             // "status" events: liveness only — the typing indicator already covers it.
           }
           return pump();
@@ -208,7 +220,8 @@
       setBusy(false);
       setOnline(true);
       store.set("session", payload.session);
-      const meta = [res.provider, res.steps + " steps",
+      const steps = (typeof res.steps === "number") ? res.steps + " steps" : "";
+      const meta = [res.provider, steps,
         Math.round((res.context_pct || 0) * 100) + "% ctx"]
         .filter(Boolean).join(" · ");
       addMsg("levi", res.reply || "(empty reply)", meta + (res.compressed ? " · compressed" : ""));
