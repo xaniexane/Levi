@@ -1,0 +1,2636 @@
+{
+ "subjects": [
+  {
+   "name": "Systems",
+   "slug": "systems",
+   "courses": [
+    {
+     "code": "CS 61C",
+     "title": "CS 61C: Great Ideas in Computer Architecture (Machine Structures)",
+     "school": "UC Berkeley",
+     "description": "The subjects covered in this course include: C and assembly language programming, translation of high-level programs into machine language, computer organization, caches, performance measurement, parallelism, CPU design, warehouse-scale computing, and related topics.",
+     "links": [
+      "http://www-inst.eecs.berkeley.edu/~cs61c/sp15/",
+      "https://archive.org/details/ucberkeley-webcast-PL-XXv-cvA_iCl2-D-FS5mk0jFF6cYSJs_?sort=titleSorter",
+      "http://www-inst.eecs.berkeley.edu/~cs61c/sp15/#Calendar",
+      "http://www-inst.eecs.berkeley.edu/~cs61c/sp15/#Resources",
+      "https://hkn.eecs.berkeley.edu/exams/course/CS/61C"
+     ],
+     "primary": "http://www-inst.eecs.berkeley.edu/~cs61c/sp15/"
+    },
+    {
+     "code": "CS 107",
+     "title": "CS 107: Computer Organization & Systems",
+     "school": "Stanford University",
+     "description": "CS107 is the third course in Stanford's introductory programming sequence. The course will work from the C programming language down to the microprocessor to de-mystify the machine. With a complete understanding of how computer systems execute programs and manipulate data, you will become a more effective programmer, especially in dealing with issues of debugging, performance, portability, and robustness.",
+     "links": [
+      "https://courseware.stanford.edu/pg/courses/lectures/371747",
+      "https://www.youtube.com/playlist?list=PL08D9FA018A965057&spfreload=10",
+      "http://web.stanford.edu/class/cs107/assignments.html"
+     ],
+     "primary": "https://courseware.stanford.edu/pg/courses/lectures/371747"
+    },
+    {
+     "code": "CS 140",
+     "title": "CS 140: Operating Systems",
+     "school": "Stanford University",
+     "description": "This class introduces the basic facilities provided in modern operating systems. The course divides into three major sections. The first part of the course discusses concurrency. The second part of the course addresses the problem of memory management. The third major part of the course concerns file systems.",
+     "links": [
+      "http://web.stanford.edu/~ouster/cgi-bin/cs140-spring14/lectures.php",
+      "http://web.stanford.edu/~ouster/cgi-bin/cs140-spring14/projects.php"
+     ],
+     "primary": "http://web.stanford.edu/~ouster/cgi-bin/cs140-spring14/lectures.php"
+    },
+    {
+     "code": "6.004",
+     "title": "6.004: Computation Structures",
+     "school": "MIT",
+     "description": "Introduces architecture of digital systems, emphasizing structural principles common to a wide range of technologies. Multilevel implementation strategies; definition of new primitives (e.g., gates, instructions, procedures, processes) and their mechanization using lower-level elements. Analysis of potential concurrency; precedence constraints and performance measures; pipelined and multidimensional systems. Instruction set design issues; architectural support for contemporary software structure",
+     "links": [
+      "https://6004.mit.edu/",
+      "https://www.youtube.com/watch?v=9DWlqtsNGV0&index=1&list=PLmP5iIyVnKPQ-cO_EENdUgEdlRf0u5LYa",
+      "http://computationstructures.org/notes/tradeoffs/notes.html",
+      "http://computationstructures.org/exercises/cmos/lab.html"
+     ],
+     "primary": "https://6004.mit.edu/"
+    },
+    {
+     "code": "CS 162",
+     "title": "CS 162: Operating Systems and Systems Programming",
+     "school": "UC Berkeley",
+     "description": "The purpose of this course is to teach the design of operating systems and operating systems concepts that appear in other advanced systems. Topics we will cover include concepts of operating systems, systems programming, networked and distributed systems, and storage systems, including multiple-program systems (processes, interprocess communication, and synchronization), memory allocation (segmentation, paging), resource allocation and scheduling, file systems, basic networking (sockets, layeri",
+     "links": [
+      "http://cs162.eecs.berkeley.edu/",
+      "http://www.cs.berkeley.edu/~culler/",
+      "https://archive.org/details/ucberkeley-webcast-PL-XXv-cvA_iBDyz-ba4yDskqMDY6A1w_c",
+      "https://inst.eecs.berkeley.edu/~cs162/sp15/"
+     ],
+     "primary": "http://cs162.eecs.berkeley.edu/"
+    },
+    {
+     "code": "CS 168",
+     "title": "CS 168: Introduction to the Internet: Architecture and Protocols",
+     "school": "UC Berkeley",
+     "description": "This course is an introduction to the Internet architecture. We will focus on the concepts and fundamental design principles that have contributed to the Internet's scalability and robustness and survey the various protocols and algorithms used within this architecture. Topics include layering, addressing, intradomain routing, interdomain routing, reliable delivery, congestion control, and the core protocols (e.g., TCP, UDP, IP, DNS, and HTTP) and network technologies (e.g., Ethernet, wireless).",
+     "links": [
+      "https://inst.eecs.berkeley.edu/~cs168/fa14/",
+      "https://inst.eecs.berkeley.edu/~cs168/fa14/class.html"
+     ],
+     "primary": "https://inst.eecs.berkeley.edu/~cs168/fa14/"
+    },
+    {
+     "code": "CS 179",
+     "title": "CS 179: GPU Programming",
+     "school": "Caltech",
+     "description": "This course will cover programming techniques for the GPU. The course will introduce NVIDIA's parallel computing language, CUDA. Beyond covering the CUDA programming model and syntax, the course will also discuss GPU architecture, high performance computing on GPUs, parallel algorithms, CUDA libraries, and applications of GPU computing.",
+     "links": [
+      "http://courses.cms.caltech.edu/cs179/"
+     ],
+     "primary": "http://courses.cms.caltech.edu/cs179/"
+    },
+    {
+     "code": "CS 186",
+     "title": "CS 186: Introduction to Database Systems",
+     "school": "UC Berkeley",
+     "description": "In the project assignments in CS186, you will write a basic database management system called SimpleDB. For this project, you will focus on implementing the core modules required to access stored data on disk; in future projects, you will add support for various query processing operators, as well as transactions, locking, and concurrent queries.",
+     "links": [
+      "https://sites.google.com/site/cs186spring2015/",
+      "https://archive.org/details/ucberkeley-webcast-PL-XXv-cvA_iBVK2QzAV-R7NMA1ZkaiR2y",
+      "https://sites.google.com/site/cs186fall2013/section-notes",
+      "https://sites.google.com/site/cs186fall2013/homeworks"
+     ],
+     "primary": "https://sites.google.com/site/cs186spring2015/"
+    },
+    {
+     "code": "CS 241",
+     "title": "CS 241: Systems Programming (Spring 2016)",
+     "school": "Univ of Illinois, Urbana-Champaign",
+     "description": "System programming refers to writing code that tasks advantage of operating system support for programmers. This course is designed to introduce you to system programming. By the end of this course, you should be proficient at writing programs that take full advantage of operating system support. To be concrete, we need to fix an operating system and we need to choose a programming language for writing programs. We chose the C language running on a Linux/UNIX operating system (which implements t",
+     "links": [
+      "https://courses.engr.illinois.edu/cs241/sp2016/index.html",
+      "https://courses.engr.illinois.edu/cs241/sp2016/mps.html",
+      "https://courses.engr.illinois.edu/cs241/sp2016/labs.html",
+      "http://angrave.github.io/sys/#",
+      "https://github.com/angrave/SystemProgramming/wiki"
+     ],
+     "primary": "https://courses.engr.illinois.edu/cs241/sp2016/index.html"
+    },
+    {
+     "code": "CS 425",
+     "title": "CS 425: Distributed Systems",
+     "school": "Univ of Illinois, Urbana-Champaign",
+     "description": "Brilliant set of lectures and reading material covering fundamental concepts in distributed systems such as Vector clocks, Consensus and Paxos. This is the 2016 version by Prof Indranil Gupta.",
+     "links": [
+      "https://courses.engr.illinois.edu/cs425/fa2016/index.html",
+      "https://courses.engr.illinois.edu/cs425/fa2016/lectures.html",
+      "https://courses.engr.illinois.edu/cs425/fa2016/assignments.html"
+     ],
+     "primary": "https://courses.engr.illinois.edu/cs425/fa2016/index.html"
+    },
+    {
+     "code": "CS 452",
+     "title": "CS 452: Real-Time Programming",
+     "school": "University of Waterloo",
+     "description": "Write a real-time OS microkernel in C, and application code to operate a model train set in response to real-time sensor information. The communication with the train set runs at 2400 baud so it takes about 61 milliseconds to ask all of the sensors for data about the train's possible location.  This makes it particularly challenging because a train can move about 3 centimeters in that time. One of the most challenging and time-consuming courses at the University of Waterloo.",
+     "links": [
+      "http://www.cgl.uwaterloo.ca/~wmcowan/teaching/cs452/s12/",
+      "http://www.cgl.uwaterloo.ca/~wmcowan/teaching/cs452/s12/assignments/index.html",
+      "http://www.cgl.uwaterloo.ca/~wmcowan/teaching/cs452/s12/notes/index.html"
+     ],
+     "primary": "http://www.cgl.uwaterloo.ca/~wmcowan/teaching/cs452/s12/"
+    },
+    {
+     "code": "CS 2043",
+     "title": "CS 2043: Unix Tools & Scripting",
+     "school": "Cornell University",
+     "description": "UNIX-like systems are increasingly being used on personal computers, mobile phones, web servers, and many other systems. They represent a wonderful family of programming environments useful both to computer scientists and to people in many other fields, such as computational biology and computational linguistics, in which data is naturally represented by strings. This course provides an intensive training to develop skills in Unix command line tools and scripting that enable the accomplishment a",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS2043/2014sp/"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS2043/2014sp/"
+    },
+    {
+     "code": "CS 3410",
+     "title": "CS 3410: Computer System Organization and Programming",
+     "school": "Cornell University",
+     "description": "CS3410 provides an introduction to computer organization, systems programming and the hardware/software interface. Topics include instruction sets, computer arithmetic, datapath design, data formats, addressing modes, memory hierarchies including caches and virtual memory, I/O devices, bus-based I/O systems, and multicore architectures. Students learn assembly language programming and design a pipelined RISC processor.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/cs3410/2016fa/",
+      "http://www.cs.cornell.edu/courses/CS3410/2014sp/schedule.html"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/cs3410/2016fa/"
+    },
+    {
+     "code": "CS 4410",
+     "title": "CS 4410: Operating Systems",
+     "school": "Cornell University",
+     "description": "CS 4410 covers systems programming and introductory operating system design and implementation. We will cover the basics of operating systems, namely structure, concurrency, scheduling, synchronization, memory management, filesystems, security and networking. The course is open to any undergraduate who has mastered the material in CS3410/ECE3140.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS4410/2014fa/",
+      "http://www.cs.cornell.edu/courses/CS4410/2014fa/slides/01-intro.pptx",
+      "http://www.cs.cornell.edu/courses/CS4410/2014fa/lectures.php"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS4410/2014fa/"
+    },
+    {
+     "code": "CS 4414",
+     "title": "CS 4414: Operating Systems",
+     "school": "University of Virginia",
+     "description": "A course (that) covers topics including: Analysis process communication and synchronization; resource management; virtual memory management algorithms; file systems; and networking and distributed systems. The primary goal of this course is to improve your ability to build scalable, robust and secure computing systems. It focuses on doing that by understanding what underlies the core abstractions of modern computer systems.",
+     "links": [
+      "http://rust-class.org/index.html",
+      "http://rust-class.org/pages/syllabus.html",
+      "http://rust-class.org/pages/classes.html"
+     ],
+     "primary": "http://rust-class.org/index.html"
+    },
+    {
+     "code": "CS 5412",
+     "title": "CS 5412: Cloud Computing",
+     "school": "Cornell University",
+     "description": "Taught by one of the stalwarts of this field, Prof Ken Birman, this course has a fantastic set of slides that one can go through. The Prof's [book](http://www.amazon.com/Guide-Reliable-Distributed-Systems-High-Assurance/dp/1447124154) is also a gem and recommended as a must read in Google's tutorial on [Distributed System Design](http://www.hpcs.cs.tsukuba.ac.jp/~tatebe/lecture/h23/dsys/dsd-tutorial.html)",
+     "links": [
+      "http://www.cs.cornell.edu/Courses/CS5412/2014sp/",
+      "http://www.amazon.com/Guide-Reliable-Distributed-Systems-High-Assurance/dp/1447124154",
+      "http://www.hpcs.cs.tsukuba.ac.jp/~tatebe/lecture/h23/dsys/dsd-tutorial.html",
+      "http://www.cs.cornell.edu/Courses/CS5412/2014sp/Syllabus.htm"
+     ],
+     "primary": "http://www.cs.cornell.edu/Courses/CS5412/2014sp/"
+    },
+    {
+     "code": "CSCE 3613",
+     "title": "CSCE 3613: Operating Systems",
+     "school": "University of Arkansas (Fayetteville)",
+     "description": "",
+     "links": [
+      "http://comp.uark.edu/~wingning/csce3613/csce3613.html",
+      "http://comp.uark.edu/~wingning/csce3613/CSCE3613.pdf",
+      "http://comp.uark.edu/~wingning/csce3613/Homework3613.html",
+      "http://comp.uark.edu/~wingning/csce3613/CourseNote3613.html",
+      "http://comp.uark.edu/~wingning/csce3613/Link3613.html"
+     ],
+     "primary": "http://comp.uark.edu/~wingning/csce3613/csce3613.html"
+    },
+    {
+     "code": "CSCI-UA.0202: Operating Systems (Undergrad)",
+     "title": "CSCI-UA.0202: Operating Systems (Undergrad): Operating Systems",
+     "school": "NYU",
+     "description": "NYU's operating system course. It's a fundamental course focusing basic ideas of operating systems, including memory management, process scheduling, file system, ect. It also includes some recommended reading materials. What's more, there are a series of hands-on lab materials, helping you easily understand OS.",
+     "links": [
+      "http://www.cs.nyu.edu/~mwalfish/classes/15sp/index.html",
+      "http://www.cs.nyu.edu/~mwalfish/classes/15sp/labs.html",
+      "http://www.cs.nyu.edu/~mwalfish/classes/15sp/syllabus.html",
+      "http://www.cs.nyu.edu/~mwalfish/classes/15sp/exams.html"
+     ],
+     "primary": "http://www.cs.nyu.edu/~mwalfish/classes/15sp/index.html"
+    },
+    {
+     "code": "CSCI 360",
+     "title": "CSCI 360: Computer Architecture 3",
+     "school": "CUNY Hunter College",
+     "description": "A course that covers cache design, buses, memory hierarchies, processor-peripheral interfaces, and multiprocessors, including GPUs.",
+     "links": [
+      "http://compsci.hunter.cuny.edu/~sweiss/course_materials/csci360/csci360_f14.php"
+     ],
+     "primary": "http://compsci.hunter.cuny.edu/~sweiss/course_materials/csci360/csci360_f14.php"
+    },
+    {
+     "code": "CSCI 493.66",
+     "title": "CSCI 493.66: UNIX System Programming (formerly UNIX Tools)",
+     "school": "CUNY Hunter College",
+     "description": "A course that is mostly about writing programs against the UNIX API, covering all of the basic parts of the kernel interface and libraries, including files, processes, terminal control, signals, and threading.",
+     "links": [
+      "http://compsci.hunter.cuny.edu/~sweiss/course_materials/csci493.66/csci493.66_spr12.php"
+     ],
+     "primary": "http://compsci.hunter.cuny.edu/~sweiss/course_materials/csci493.66/csci493.66_spr12.php"
+    },
+    {
+     "code": "CSCI 493.75",
+     "title": "CSCI 493.75: Parallel Computing",
+     "school": "CUNY Hunter College",
+     "description": "The course is an introduction to parallel algorithms and parallel programming in C and C++, using the Message Passing Interface (MPI) and the OpenMP application programming interface. It also includes a brief introduction to parallel architectures and interconnection networks. It is both theoretical and practical, including material on design methodology, performance analysis, and mathematical concepts, as well as details on programming using MPI and OpenMP.",
+     "links": [
+      "http://compsci.hunter.cuny.edu/~sweiss/course_materials/csci493.65/csci493.65_spr14.php"
+     ],
+     "primary": "http://compsci.hunter.cuny.edu/~sweiss/course_materials/csci493.65/csci493.65_spr14.php"
+    },
+    {
+     "code": "Hack the Kernel",
+     "title": "Hack the Kernel: Introduction to Operating Systems",
+     "school": "SUNY University at Buffalo, NY",
+     "description": "This course is an introduction to operating system design and implementation. We study operating systems because they are examples of mature and elegant solutions to a difficult design problem: how to safely and efficiently share system resources and provide abstractions useful to applications.",
+     "links": [
+      "https://www.ops-class.org/",
+      "https://blue.cse.buffalo.edu/people/gwa/",
+      "https://www.ops-class.org/courses/buffalo/CSE421_Spring2016/",
+      "https://www.ops-class.org/slides/",
+      "https://www.youtube.com/playlist?list=PLE6LEE8y2Jp-kbEcVR2W3vfx0Pdca0BD3",
+      "https://www.ops-class.org/asst/0/",
+      "https://www.ops-class.org/exams/"
+     ],
+     "primary": "https://www.ops-class.org/"
+    },
+    {
+     "code": "ECE 459",
+     "title": "ECE 459: Programming for Performance",
+     "school": "University of Waterloo",
+     "description": "Learn techniques for profiling, rearchitecting, and implementing software systems that can handle industrial-sized inputs, and to design and build critical software infrastructure. Learn performance optimization through parallelization, multithreading, async I/O, vectorization and GPU programming, and distributed computing.",
+     "links": [
+      "http://patricklam.ca/p4p/",
+      "https://github.com/patricklam/p4p-2015/tree/master/lectures"
+     ],
+     "primary": "http://patricklam.ca/p4p/"
+    },
+    {
+     "code": "ECGR4101/5101",
+     "title": "ECGR4101/5101: Embedded Systems using the Renesas RX63N Processor",
+     "school": "University of North Carolina at Charlotte",
+     "description": "Introduction to designing microcontroller-based embedded computer systems using assembly and C programs. Examination of Real-time Operating Systems and their impact on performance. Computer engineering applications will be emphasized.",
+     "links": [
+      "https://webpages.uncc.edu/~jmconrad/EducationalMaterials/index.html",
+      "https://www.youtube.com/playlist?list=PLPIqCiMhcdO5gxLJWt_hY5CPMzqg75IU5"
+     ],
+     "primary": "https://webpages.uncc.edu/~jmconrad/EducationalMaterials/index.html"
+    },
+    {
+     "code": "PODC",
+     "title": "PODC: Principles of Distributed Computing",
+     "school": "ETH-Zurich",
+     "description": "Explore essential algorithmic ideas and lower bound techniques, basically the \"pearls\" of distributed computing in an easy-to-read set of lecture notes, combined with complete exercises and solutions.",
+     "links": [
+      "http://dcg.ethz.ch/lectures/podc_allstars/",
+      "http://dcg.ethz.ch/lectures/podc_allstars/lecture/podc.pdf"
+     ],
+     "primary": "http://dcg.ethz.ch/lectures/podc_allstars/"
+    },
+    {
+     "code": "SPAC",
+     "title": "SPAC: Parallelism and Concurrency",
+     "school": "Univ of Washington",
+     "description": "Technically not a course nevertheless an awesome collection of materials used by Prof Dan Grossman to teach parallelism and concurrency concepts to sophomores at UWash",
+     "links": [
+      "http://homes.cs.washington.edu/~djg/teachingMaterials/spac/"
+     ],
+     "primary": "http://homes.cs.washington.edu/~djg/teachingMaterials/spac/"
+    },
+    {
+     "code": "6.824",
+     "title": "6.824: Distributed Systems",
+     "school": "MIT",
+     "description": "MIT's graduate-level DS course with a focus on fault tolerance, replication, and consistency, all taught via awesome lab assignments in Golang!",
+     "links": [
+      "http://css.csail.mit.edu/6.824/2014/index.html",
+      "http://css.csail.mit.edu/6.824/2014/labs/",
+      "http://css.csail.mit.edu/6.824/2014/schedule.html"
+     ],
+     "primary": "http://css.csail.mit.edu/6.824/2014/index.html"
+    },
+    {
+     "code": "6.828",
+     "title": "6.828: Operating Systems",
+     "school": "MIT",
+     "description": "MIT's operating systems course focusing on the fundamentals of OS design including booting, memory management, environments, file systems, multitasking, and more. In a series of lab assignments, you will build JOS, an OS exokernel written in C.",
+     "links": [
+      "http://pdos.csail.mit.edu/6.828/2014/",
+      "http://pdos.csail.mit.edu/6.828/2014/labguide.html",
+      "http://pdos.csail.mit.edu/6.828/2014/schedule.html",
+      "http://pdos.csail.mit.edu/6.828/2011/schedule.html"
+     ],
+     "primary": "http://pdos.csail.mit.edu/6.828/2014/"
+    },
+    {
+     "code": "CSEP 552",
+     "title": "CSEP 552: Distributed Systems",
+     "school": "University of Washington",
+     "description": "CSEP552 is a graduate course on distributed systems. Distributed systems have become central to many aspects of how computers are used, from web applications to e-commerce to content distribution. This course will cover abstractions and implementation techniques for the construction of distributed systems, including client server computing, the web, cloud computing, peer-to-peer systems, and distributed storage systems. Topics will include remote procedure call, maintaining consistency of distri",
+     "links": [
+      "http://courses.cs.washington.edu/courses/csep552/16wi/",
+      "http://courses.cs.washington.edu/courses/csep552/13sp/video/"
+     ],
+     "primary": "http://courses.cs.washington.edu/courses/csep552/16wi/"
+    },
+    {
+     "code": "15-213",
+     "title": "15-213: Introduction to Computer Systems (ICS)",
+     "school": "Carnegie-Mellon University",
+     "description": "The ICS course provides a programmer's view of how computer systems execute programs, store information, and communicate. It enables students to become more effective programmers, especially in dealing with issues of performance, portability and robustness. It also serves as a foundation for courses on compilers, networks, operating systems, and computer architecture, where a deeper understanding of systems-level issues is required. Topics covered include: machine-level code and its generation b",
+     "links": [
+      "http://www.cs.cmu.edu/~213/",
+      "http://www.cs.cmu.edu/~213/schedule.html",
+      "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22b96d90ae-9871-4fae-91e2-b1627b43e25e%22",
+      "http://csapp.cs.cmu.edu/public/labs.html"
+     ],
+     "primary": "http://www.cs.cmu.edu/~213/"
+    },
+    {
+     "code": "15-319/619",
+     "title": "15-319/619: Cloud Computing (ICS)",
+     "school": "Carnegie-Mellon University",
+     "description": "This project-based on-line course focuses on skill building across various aspects of cloud computing. We cover conceptual topics and provide hands-on experience through projects utilizing public cloud infrastructures (Amazon Web Services (AWS), Microsoft Azure and Google Cloud Platform (GCP)). The adoption of cloud computing services continues to grow across a variety of organizations and in many domains. Simply, cloud computing is the delivery of computing as a service over a network, whereby ",
+     "links": [
+      "http://www.cs.cmu.edu/~msakr/15619-s17/recitations.html"
+     ],
+     "primary": "http://www.cs.cmu.edu/~msakr/15619-s17/recitations.html"
+    },
+    {
+     "code": "15-410",
+     "title": "15-410: Operating System Design and Implementation",
+     "school": "Carnegie-Mellon University",
+     "description": "This awesome course covers some fundamental topics of operating system, such as process model, virtual memory concurrency, threads, locking, interrupts, preemptibility, race conditions. It also covers introductory understanding of typical OS topics (file systems, transactions, scheduling, security concepts and technologies, memory consistency)Parallel programming models / frameworks.",
+     "links": [
+      "https://www.cs.cmu.edu/~410/",
+      "https://www.cs.cmu.edu/~410/lecture.html",
+      "https://www.cs.cmu.edu/~410/p1/proj1.html"
+     ],
+     "primary": "https://www.cs.cmu.edu/~410/"
+    },
+    {
+     "code": "15-418",
+     "title": "15-418: Parallel Computer Architecture and Programming",
+     "school": "Carnegie-Mellon University",
+     "description": "The goal of this course is to provide a deep understanding of the fundamental principles and engineering trade-offs involved in designing modern parallel computing systems as well as to teach parallel programming techniques necessary to effectively utilize these machines. Because writing good parallel programs requires an understanding of key machine performance characteristics, this course will cover both parallel hardware and software design.",
+     "links": [
+      "http://15418.courses.cs.cmu.edu/spring2015/",
+      "http://15418.courses.cs.cmu.edu/spring2015/exercises",
+      "http://15418.courses.cs.cmu.edu/spring2015/reading",
+      "https://scs.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx#folderID=%22a5862643-2416-49ef-b46b-13465d1b6df0%22"
+     ],
+     "primary": "http://15418.courses.cs.cmu.edu/spring2015/"
+    },
+    {
+     "code": "15-440",
+     "title": "15-440: Distributed Systems",
+     "school": "Carnegie-Mellon University",
+     "description": "Introduction to distributed systems with a focus on teaching concepts via projects implemented in the Go programming language.",
+     "links": [
+      "http://www.cs.cmu.edu/~dga/15-440/F12/index.html",
+      "http://www.cs.cmu.edu/~dga/15-440/F12/assignments.html"
+     ],
+     "primary": "http://www.cs.cmu.edu/~dga/15-440/F12/index.html"
+    },
+    {
+     "code": "15-721",
+     "title": "15-721: Database Systems",
+     "school": "Carnegie-Mellon University",
+     "description": "This course is a comprehensive study of the internals of modern database management systems. It will cover the core concepts and fundamentals of the components that are used in both high-performance transaction processing systems (OLTP) and large-scale analytical systems (OLAP). The class will stress both efficiency and correctness of the implementation of these ideas. All class projects will be in the context of a real in-memory, multi-core database system. The course is appropriate for graduat",
+     "links": [
+      "http://15721.courses.cs.cmu.edu/spring2016/",
+      "http://15721.courses.cs.cmu.edu/spring2016/syllabus.html",
+      "https://www.youtube.com/playlist?list=PLSE8ODhjZXjbisIGOepfnlbfxeH7TW-8O",
+      "http://15721.courses.cs.cmu.edu/spring2016/schedule.html"
+     ],
+     "primary": "http://15721.courses.cs.cmu.edu/spring2016/"
+    },
+    {
+     "code": "15-445/645",
+     "title": "15-445/645: Database Systems",
+     "school": "Carnegie-Mellon University",
+     "description": "This course covers fundamental topics of DBMS, compared to CMU 15-721.",
+     "links": [
+      "http://15445.courses.cs.cmu.edu/fall2017/",
+      "http://15445.courses.cs.cmu.edu/fall2017/assignments.html",
+      "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYutVzTeAds8xUt1rcmyT7x",
+      "http://15445.courses.cs.cmu.edu/fall2017/schedule.html"
+     ],
+     "primary": "http://15445.courses.cs.cmu.edu/fall2017/"
+    },
+    {
+     "code": "15-749",
+     "title": "15-749: Engineering Distributed Systems",
+     "school": "Carnegie-Mellon University",
+     "description": "A project focused course on Distributed Systems with an awesome list of readings",
+     "links": [
+      "http://www.andrew.cmu.edu/course/15-749/",
+      "http://www.andrew.cmu.edu/course/15-749/READINGS/"
+     ],
+     "primary": "http://www.andrew.cmu.edu/course/15-749/"
+    },
+    {
+     "code": "18-447",
+     "title": "18-447: Introduction to Computer Architecture",
+     "school": "CMU",
+     "description": "Very comprehensive material on Computer Architecture - definitely more than just \"introduction\". Online material is very user-friendly, even the recitation videos available online. This is the Spring'15 version by Prof. [Onur Mutlu ](http://users.ece.cmu.edu/~omutlu/)",
+     "links": [
+      "http://www.ece.cmu.edu/~ece447/s15/doku.php?id=start",
+      "http://users.ece.cmu.edu/~omutlu/",
+      "http://www.ece.cmu.edu/~ece447/s15/doku.php?id=schedule",
+      "http://www.ece.cmu.edu/~ece447/s15/doku.php?id=homeworks",
+      "http://www.ece.cmu.edu/~ece447/s15/doku.php?id=readings"
+     ],
+     "primary": "http://www.ece.cmu.edu/~ece447/s15/doku.php?id=start"
+    }
+   ]
+  },
+  {
+   "name": "Programming Languages / Compilers",
+   "slug": "programming-languages-compilers",
+   "courses": [
+    {
+     "code": "CS 75",
+     "title": "CS 75: Principles of Compiler Design",
+     "school": "Swathmore College",
+     "description": "Modelled after the influential paper on [incremental approach to compiler design](http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf), this course teaches how to build a compiler in OCaml",
+     "links": [
+      "https://www.cs.swarthmore.edu/~jpolitz/cs75/s16/index.html",
+      "http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf",
+      "https://github.com/compilers-course-materials",
+      "https://github.com/compilers-course-materials/cs75-s16-lectures"
+     ],
+     "primary": "https://www.cs.swarthmore.edu/~jpolitz/cs75/s16/index.html"
+    },
+    {
+     "code": "CS 91",
+     "title": "CS 91: Introduction to Programming Languages",
+     "school": "Swathmore College",
+     "description": "Uses the [Pyret](https://www.pyret.org/) programming language & [PAPL](http://papl.cs.brown.edu/2014/) book to understand the fundamentals of programming languages.",
+     "links": [
+      "https://www.cs.swarthmore.edu/~jpolitz/cs91/s15/index.html",
+      "https://www.pyret.org/",
+      "http://papl.cs.brown.edu/2014/",
+      "https://www.cs.swarthmore.edu/~jpolitz/cs91/s15/s_labs.html"
+     ],
+     "primary": "https://www.cs.swarthmore.edu/~jpolitz/cs91/s15/index.html"
+    },
+    {
+     "code": "CIS 194",
+     "title": "CIS 194: Introduction to Haskell",
+     "school": "Penn Engineering",
+     "description": "Explore the joys of functional programming, using Haskell as a vehicle. The aim of the course will be to allow you to use Haskell to easily and conveniently write practical programs.",
+     "links": [
+      "http://www.seas.upenn.edu/~cis194/",
+      "http://www.seas.upenn.edu/~cis194/spring13/index.html"
+     ],
+     "primary": "http://www.seas.upenn.edu/~cis194/"
+    },
+    {
+     "code": "CIS 198",
+     "title": "CIS 198: Rust Programming",
+     "school": "UPenn",
+     "description": "This course covers what makes Rust so unique and applies it to practical systems programming problems. Topics covered include traits and generics; memory safety (move semantics, borrowing, and lifetimes); Rust\u2019s rich macro system; closures; and concurrency.",
+     "links": [
+      "http://cis198-2016s.github.io/",
+      "https://github.com/cis198-2016s/homework"
+     ],
+     "primary": "http://cis198-2016s.github.io/"
+    },
+    {
+     "code": "CMSC 430",
+     "title": "CMSC 430: Introduction to Compilers",
+     "school": "Univ of Maryland",
+     "description": "The goal of CMSC 430 is to arm students with the ability to design, implement, and extend a programming language. Throughout the course, students will design and implement several related languages, and will explore parsing, syntax querying, dataflow analysis, compilation to bytecode, type systems, and language interoperation.",
+     "links": [
+      "http://www.cs.umd.edu/class/spring2015/cmsc430/",
+      "http://www.cs.umd.edu/class/spring2015/cmsc430/Schedule.html",
+      "http://www.cs.umd.edu/class/spring2015/cmsc430/Projects.html"
+     ],
+     "primary": "http://www.cs.umd.edu/class/spring2015/cmsc430/"
+    },
+    {
+     "code": "Corsopl",
+     "title": "Corsopl: Principles of Programming Languages",
+     "school": "Politecnico di Milano",
+     "description": "This course gives an overview of Scheme, Haskell and Erlang while analyzing the languages' similarities and differences. As a result, many important/prevalent concepts and how they manifest differently in different programming languages are explained. Among these are (purely) functional programming, object orientation, type inference and evaluation order.",
+     "links": [
+      "https://pradella.faculty.polimi.it/PL.html"
+     ],
+     "primary": "https://pradella.faculty.polimi.it/PL.html"
+    },
+    {
+     "code": "COS 326",
+     "title": "COS 326: Functional Programming",
+     "school": "Princeton University",
+     "description": "Covers functional programming concepts like closures, tail-call recursion & parallelism using the OCaml programming language",
+     "links": [
+      "http://www.cs.princeton.edu/~dpw/courses/cos326-12/info.php",
+      "http://www.cs.princeton.edu/~dpw/courses/cos326-12/lectures.php",
+      "http://www.cs.princeton.edu/~dpw/courses/cos326-12/assignments.php"
+     ],
+     "primary": "http://www.cs.princeton.edu/~dpw/courses/cos326-12/info.php"
+    },
+    {
+     "code": "CS 143",
+     "title": "CS 143: Compiler construction",
+     "school": "Stanford University",
+     "description": "CS143 is a Stanford's course in the practical and theoretical aspects of compiler construction.",
+     "links": [
+      "https://web.stanford.edu/class/cs143/",
+      "https://web.stanford.edu/class/cs143/syllabus.html",
+      "http://www.keithschwarz.com/cs143/WWW/sum2011/"
+     ],
+     "primary": "https://web.stanford.edu/class/cs143/"
+    },
+    {
+     "code": "CS 164",
+     "title": "CS 164: Hack your language!",
+     "school": "UC Berkeley",
+     "description": "Introduction to programming languages by designing and implementing domain-specific languages.",
+     "links": [
+      "https://sites.google.com/a/bodik.org/cs164/home",
+      "https://archive.org/details/ucberkeley-webcast-PL3A16CFC42CA6EF4F",
+      "https://bitbucket.org/cs164_overlord/"
+     ],
+     "primary": "https://sites.google.com/a/bodik.org/cs164/home"
+    },
+    {
+     "code": "CS 173",
+     "title": "CS 173: Programming Languages",
+     "school": "Brown University",
+     "description": "Course by Prof. Krishnamurthi (author of [HtDP](http://htdp.org/2003-09-26/Book/)) and numerous other [awesome](http://cs.brown.edu/courses/cs173/2012/book/) [books](http://papl.cs.brown.edu/2014/index.html) on programming languages. Uses a custom designed [Pyret](http://www.pyret.org/) programming language to teach the concepts. There was an [online class](http://cs.brown.edu/courses/cs173/2012/OnLine/) hosted in 2012, which includes all lecture videos for you to enjoy.",
+     "links": [
+      "http://cs.brown.edu/courses/cs173/2014/",
+      "http://htdp.org/2003-09-26/Book/",
+      "http://cs.brown.edu/courses/cs173/2012/book/",
+      "http://papl.cs.brown.edu/2014/index.html",
+      "http://www.pyret.org/",
+      "http://cs.brown.edu/courses/cs173/2012/OnLine/",
+      "http://cs.brown.edu/courses/cs173/2012/Videos/",
+      "http://cs.brown.edu/courses/cs173/2014/assignments.html"
+     ],
+     "primary": "http://cs.brown.edu/courses/cs173/2014/"
+    },
+    {
+     "code": "CS 223",
+     "title": "CS 223: Purely Functional Data Structures In Elm",
+     "school": "University of Chicago",
+     "description": "This course teaches functional reactive programming and purely functional data structures based on Chris Okazaki's book and using the Elm programming language.",
+     "links": [
+      "https://www.classes.cs.uchicago.edu/archive/2016/winter/22300-1/",
+      "https://www.classes.cs.uchicago.edu/archive/2015/winter/22300-1/Schedule.html"
+     ],
+     "primary": "https://www.classes.cs.uchicago.edu/archive/2016/winter/22300-1/"
+    },
+    {
+     "code": "CS 240h",
+     "title": "CS 240h: Functional Systems in Haskell",
+     "school": "Stanford University",
+     "description": "Building software systems in Haskell",
+     "links": [
+      "http://www.scs.stanford.edu/14sp-cs240h/",
+      "http://www.scs.stanford.edu/14sp-cs240h/slides/",
+      "http://www.scs.stanford.edu/14sp-cs240h/labs/lab1.html",
+      "http://www.scs.stanford.edu/14sp-cs240h/labs/lab2.html",
+      "http://www.scs.stanford.edu/14sp-cs240h/labs/lab3.html"
+     ],
+     "primary": "http://www.scs.stanford.edu/14sp-cs240h/"
+    },
+    {
+     "code": "CS 421",
+     "title": "CS 421: Programming Languages and Compilers",
+     "school": "Univ of Illinois, Urbana-Champaign",
+     "description": "",
+     "links": [
+      "https://courses.engr.illinois.edu/cs421/fa2014/",
+      "https://courses.engr.illinois.edu/cs421/fa2014/lectures/index.html",
+      "http://recordings.engineering.illinois.edu/ess/portal/section/631edaeb-2a33-4537-b7c8-0c1cba783a4f",
+      "https://courses.engr.illinois.edu/cs421/fa2014/mps/index.html",
+      "https://courses.engr.illinois.edu/cs421/fa2014/exams/index.html"
+     ],
+     "primary": "https://courses.engr.illinois.edu/cs421/fa2014/"
+    },
+    {
+     "code": "CS 3110",
+     "title": "CS 3110: Data Structures and Functional Programming",
+     "school": "Cornell University",
+     "description": "Another course that uses OCaml to teach alternative programming paradigms, especially functional and concurrent programming.",
+     "links": [
+      "http://www.cs.cornell.edu/Courses/cs3110/2014fa/course_info.php",
+      "http://www.cs.cornell.edu/Courses/cs3110/2014fa/lecture_notes.php",
+      "http://www.cs.cornell.edu/Courses/cs3110/2014fa/"
+     ],
+     "primary": "http://www.cs.cornell.edu/Courses/cs3110/2014fa/course_info.php"
+    },
+    {
+     "code": "CS 4120",
+     "title": "CS 4120: Introduction to Compilers",
+     "school": "Cornell University",
+     "description": "An introduction to the specification and implementation of modern compilers. Topics covered include lexical scanning, parsing, type checking, code generation and translation, an introduction to optimization, and compile-time and run-time support for modern programming languages.  As part of the course, students build a working compiler for an object-oriented language.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS4120/2013fa/",
+      "http://www.cs.cornell.edu/courses/CS4120/2013fa/overview.html",
+      "http://www.cs.cornell.edu/courses/CS4120/2013fa/schedule.html",
+      "http://www.cs.cornell.edu/courses/CS4120/2013fa/homework.html"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS4120/2013fa/"
+    },
+    {
+     "code": "CS 4400",
+     "title": "CS 4400: Programming Languages",
+     "school": "Northeastern University",
+     "description": "This is a course on the study, design, and implementation of programming languages.",
+     "links": [
+      "https://pl.barzilay.org/",
+      "https://pl.barzilay.org/syllabus.html",
+      "https://pl.barzilay.org/resources.html"
+     ],
+     "primary": "https://pl.barzilay.org/"
+    },
+    {
+     "code": "CS 4610",
+     "title": "CS 4610: Programming Languages and Compilers",
+     "school": "University of Virginia",
+     "description": "Course that uses OCaml to teach functional programming and programming language design. Each assignment is a part of an interpreter and compiler for an object-oriented language similar to Java, and you are required to use a different language for each assignment (i.e., choose 4 from Python, JS, OCaml, Haskell, Ruby).",
+     "links": [
+      "http://www.cs.virginia.edu/~weimer/4610/",
+      "http://www.cs.virginia.edu/~weimer/4610/lectures.html",
+      "http://www.cs.virginia.edu/~weimer/4610/pa.html"
+     ],
+     "primary": "http://www.cs.virginia.edu/~weimer/4610/"
+    },
+    {
+     "code": "CS 5114",
+     "title": "CS 5114: Network Programming Languages",
+     "school": "Cornell University",
+     "description": "This course provides an introduction to the languages used to program computer networks. It will examine recent proposals based on logic, functional, and distributed languages, as well as tools for establishing correctness using automatic solvers, model checkers, and proof assistants.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS5114/2013sp/index.php",
+      "http://www.cs.cornell.edu/courses/CS5114/2013sp/syllabus.php"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS5114/2013sp/index.php"
+    },
+    {
+     "code": "CS 5142",
+     "title": "CS 5142: Scripting Languages",
+     "school": "Cornell University",
+     "description": "Perl, PHP, JavaScript, VisualBasic -- they are often-requested skills for employment, but most of us do not have the time to find out what they are all about. In this course, you learn how to use scripting languages for rapid prototyping, web programming, data processing, and application extension. Besides covering traditional programming languages concepts as they apply to scripting (e.g., dynamic typing and scoping), this course looks at new concepts rarely found in traditional languages (e.g.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS5142/2013fa/",
+      "http://www.cs.cornell.edu/courses/CS5142/2013fa/#schedule"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS5142/2013fa/"
+    },
+    {
+     "code": "CS 5470",
+     "title": "CS 5470: Compilers",
+     "school": "University of Utah",
+     "description": "If you're a fan of Prof Matt's writing on his [fantastic blog](http://matt.might.net/articles/) you ought to give this a shot. The course covers the design and implementation of compilers, and it explores related topics such as interpreters, virtual machines and runtime systems. Aside from the Prof's witty take on [cheating](http://matt.might.net/teaching/compilers/spring-2015/#collaboration) the page has tons of interesting links on programming languages, parsing and compilers.",
+     "links": [
+      "http://matt.might.net/teaching/compilers/spring-2015/",
+      "http://matt.might.net/articles/",
+      "http://matt.might.net/teaching/compilers/spring-2015/#collaboration",
+      "https://www.dropbox.com/sh/zanwtoflw4pcfu8/5pdT6axS3y",
+      "http://matt.might.net/teaching/compilers/spring-2015/#projects"
+     ],
+     "primary": "http://matt.might.net/teaching/compilers/spring-2015/"
+    },
+    {
+     "code": "CS 6118",
+     "title": "CS 6118: Types and Semantics",
+     "school": "Cornell University",
+     "description": "Types and Semantics is about designing and understand programming languages, whether they be domain specific or general purpose. The goal of this class is to provide a variety of tools for designing custom (programming) languages for whatever task is at hand. Part of that will be a variety of insights on how languages work along with experiences from working with academics and industry on creating new languages such as Ceylon and Kotlin. The class focuses on types and semantics and the interplay",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS6118/2012fa/"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS6118/2012fa/"
+    },
+    {
+     "code": "CSC 253",
+     "title": "CSC 253: CPython internals: A ten-hour codewalk through the Python interpreter source code",
+     "school": "University of Rochester",
+     "description": "Nine lectures walking through the internals of CPython, the canonical Python interpreter implemented in C. They were from the *Dynamic Languages and Software Development* course taught in Fall 2014 at the University of Rochester.",
+     "links": [
+      "http://pgbovine.net/cpython-internals.htm"
+     ],
+     "primary": "http://pgbovine.net/cpython-internals.htm"
+    },
+    {
+     "code": "CSE 341",
+     "title": "CSE 341: Programming Languages",
+     "school": "University of Washington",
+     "description": "Covers non-imperative paradigms and languages such as Ruby, Racket, and ML and the fundamentals of programming languages.",
+     "links": [
+      "http://courses.cs.washington.edu/courses/cse341/16sp/",
+      "https://courses.cs.washington.edu/courses/cse341/16sp/#lectures",
+      "https://courses.cs.washington.edu/courses/cse341/16sp/#homeworks"
+     ],
+     "primary": "http://courses.cs.washington.edu/courses/cse341/16sp/"
+    },
+    {
+     "code": "CSE P 501",
+     "title": "CSE P 501: Compiler Construction",
+     "school": "University of Washington",
+     "description": "Teaches understanding of how a modern compiler is structured and the major algorithms that are used to translate code from high-level to machine language. The best way to do this is to actually build a working compiler, so there will be a significant project to implement one that translates programs written in a core subset of Java into executable x86 assembly language. The compilers themselves will use scanner and parser generator tools and the default implementation language is Java.",
+     "links": [
+      "http://courses.cs.washington.edu/courses/csep501/09au/lectures/video.html",
+      "http://courses.cs.washington.edu/courses/csep501/09au/homework/index.html"
+     ],
+     "primary": "http://courses.cs.washington.edu/courses/csep501/09au/lectures/video.html"
+    },
+    {
+     "code": "DMFP",
+     "title": "DMFP: Discrete Mathematics and Functional Programming",
+     "school": "Wheaton College",
+     "description": "A course that teaches discrete maths concepts with functional programming",
+     "links": [
+      "http://cs.wheaton.edu/~tvandrun/dmfp/",
+      "http://cs.wheaton.edu/~tvandrun/dmfp/source.html"
+     ],
+     "primary": "http://cs.wheaton.edu/~tvandrun/dmfp/"
+    },
+    {
+     "code": "PCPP",
+     "title": "PCPP: Practical Concurrent and Parallel Programming",
+     "school": "IT University of Copenhagen",
+     "description": "In this MSc course you learn how to write correct and efficient concurrent and parallel software, primarily using Java, on standard shared-memory multicore hardware.",
+     "links": [
+      "http://www.itu.dk/people/sestoft/itu/PCPP/E2015/"
+     ],
+     "primary": "http://www.itu.dk/people/sestoft/itu/PCPP/E2015/"
+    },
+    {
+     "code": "6.945",
+     "title": "6.945: Adventures in Advanced Symbolic Programming",
+     "school": "MIT",
+     "description": "Taught by Gerald Sussman of SICP fame, this class deals with concepts and techniques for the design an implementation of large software systems that can be adapted to uses not anticipated by the designer. Applications include compilers, computer-algebra systems, deductive systems, and some artificial intelligence applications.",
+     "links": [
+      "https://groups.csail.mit.edu/mac/users/gjs/6.945/index.html",
+      "https://groups.csail.mit.edu/mac/users/gjs/6.945/assignments.html",
+      "https://groups.csail.mit.edu/mac/users/gjs/6.945/readings/"
+     ],
+     "primary": "https://groups.csail.mit.edu/mac/users/gjs/6.945/index.html"
+    },
+    {
+     "code": "CS 696",
+     "title": "CS 696: Functional Design and Programming",
+     "school": "San Diego State University",
+     "description": "Covers functional programming basis using Clojure.",
+     "links": [
+      "http://www.eli.sdsu.edu/courses/fall15/cs696/index.html"
+     ],
+     "primary": "http://www.eli.sdsu.edu/courses/fall15/cs696/index.html"
+    },
+    {
+     "code": "L28",
+     "title": "L28: Advanced Functional Programming",
+     "school": "University of Cambridge",
+     "description": "This module aims to teach students how to use the features of modern typed functional programming languages (e.g. OCaml, Haskell) to design and implement libraries and DSLs. It aims to demonstrate how such techniques can improve both correctness and efficiency. Students wishing to take the module should have some experience of a typed functional programming language and an understanding of type inference.",
+     "links": [
+      "https://www.cl.cam.ac.uk/teaching/1516/L28/"
+     ],
+     "primary": "https://www.cl.cam.ac.uk/teaching/1516/L28/"
+    }
+   ]
+  },
+  {
+   "name": "Algorithms",
+   "slug": "algorithms",
+   "courses": [
+    {
+     "code": "CS 61B",
+     "title": "CS 61B: Data Structures",
+     "school": "UC Berkeley",
+     "description": "In this course, you will study advanced programming techniques including data structures, encapsulation, abstract data types, interfaces, and algorithms for sorting and searching, and you will get a taste of \u201csoftware engineering\u201d\u2014the design and implementation of large programs.",
+     "links": [
+      "http://datastructur.es/sp16/",
+      "http://datastructur.es/sp16/resources.html",
+      "http://www.cs.berkeley.edu/~jrs/61b/lab/index.html",
+      "https://archive.org/details/ucberkeley-webcast-PL-XXv-cvA_iC2Khb1B5NnbE7SHPQ1-W17"
+     ],
+     "primary": "http://datastructur.es/sp16/"
+    },
+    {
+     "code": "CS 97SI",
+     "title": "CS 97SI: Introduction to Competitive Programming",
+     "school": "Stanford University",
+     "description": "Fantastic repository of theory and practice problems across various topics for students who are interested to participate in ACM-ICPC.",
+     "links": [
+      "http://web.stanford.edu/class/cs97si/",
+      "https://github.com/jaehyunp/stanfordacm"
+     ],
+     "primary": "http://web.stanford.edu/class/cs97si/"
+    },
+    {
+     "code": "CS 224",
+     "title": "CS 224: Advanced Algorithms",
+     "school": "Harvard University",
+     "description": "CS 224 is an advanced course in algorithm design, and topics we will cover include the word RAM model, data structures, amortization, online algorithms, linear programming, semidefinite programming, approximation algorithms, hashing, randomized algorithms, fast exponential time algorithms, graph algorithms, and computational geometry.",
+     "links": [
+      "http://people.seas.harvard.edu/~minilek/cs224/fall14/index.html",
+      "http://people.seas.harvard.edu/~minilek/cs224/fall14/lec.html",
+      "https://www.youtube.com/playlist?list=PL2SOU6wwxB0uP4rJgf5ayhHWgw7akUWSf",
+      "http://people.seas.harvard.edu/~minilek/cs224/fall14/hmwk.html"
+     ],
+     "primary": "http://people.seas.harvard.edu/~minilek/cs224/fall14/index.html"
+    },
+    {
+     "code": "CS 261",
+     "title": "CS 261: A Second Course in Algorithms",
+     "school": "Stanford University",
+     "description": "Algorithms for network optimization: max-flow, min-cost flow, matching, assignment, and min-cut problems. Introduction to linear programming. Use of LP duality for design and analysis of algorithms. Approximation algorithms for NP-complete problems such as Steiner Trees, Traveling Salesman, and scheduling problems. Randomized algorithms. Introduction to online algorithms.",
+     "links": [
+      "http://theory.stanford.edu/~tim/w16/w16.html",
+      "https://www.youtube.com/playlist?list=PLEGCF-WLh2RJh2yDxlJJjnKswWdoO8gAc"
+     ],
+     "primary": "http://theory.stanford.edu/~tim/w16/w16.html"
+    },
+    {
+     "code": "CS 473/573",
+     "title": "CS 473/573: Fundamental Algorithms",
+     "school": "Univ of Illinois, Urbana-Champaign",
+     "description": "Algorithms class covering recursion, randomization, amortization, graph algorithms, network flows and hardness. The lecture notes by Prof. Erikson are comprehensive enough to be a book by themselves. Highly recommended!",
+     "links": [
+      "http://jeffe.cs.illinois.edu/teaching/algorithms/",
+      "http://web.engr.illinois.edu/~jeffe/teaching/algorithms/all-algorithms.pdf",
+      "http://web.engr.illinois.edu/~jeffe/teaching/algorithms/all-hwex.pdf"
+     ],
+     "primary": "http://jeffe.cs.illinois.edu/teaching/algorithms/"
+    },
+    {
+     "code": "CS 2150",
+     "title": "CS 2150: Program & Data Representation",
+     "school": "University of Virginia",
+     "description": "This data structures course introduces C++, linked-lists, stacks, queues, trees, numerical representation, hash tables, priority queues, heaps, huffman coding, graphs, and x86 assembly.",
+     "links": [
+      "https://github.com/aaronbloomfield/pdr",
+      "http://aaronbloomfield.github.io/pdr/slides/",
+      "http://aaronbloomfield.github.io/pdr/labs/"
+     ],
+     "primary": "https://github.com/aaronbloomfield/pdr"
+    },
+    {
+     "code": "CS 4820",
+     "title": "CS 4820: Introduction to Analysis of Algorithms",
+     "school": "Cornell University",
+     "description": "This course develops techniques used in the design and analysis of algorithms, with an emphasis on problems arising in computing applications. Example applications are drawn from systems and networks, artificial intelligence, computer vision, data mining, and computational biology. This course covers four major algorithm design techniques (greedy algorithms, divide and conquer, dynamic programming, and network flow), computability theory focusing on undecidability, computational complexity focus",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS4820/2015sp/",
+      "http://www.cs.cornell.edu/courses/CS4820/2015sp/lectures/",
+      "http://www.cs.cornell.edu/courses/CS4820/2015sp/syllabus/"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS4820/2015sp/"
+    },
+    {
+     "code": "CSCI 104",
+     "title": "CSCI 104: Data Structures and Object Oriented Design",
+     "school": "",
+     "description": "",
+     "links": [
+      "http://www-scf.usc.edu/~csci104/20142/lectures/",
+      "http://www-scf.usc.edu/~csci104/20142/lectures",
+      "http://www-scf.usc.edu/~csci104/20142/labs",
+      "http://www-scf.usc.edu/~csci104/20142/assignments/",
+      "http://www-scf.usc.edu/~csci104/20142/resources.html"
+     ],
+     "primary": "http://www-scf.usc.edu/~csci104/20142/lectures/"
+    },
+    {
+     "code": "CSCI 135",
+     "title": "CSCI 135: Software Design and Analysis I",
+     "school": "",
+     "description": "It is currently an intensive introduction to program development and problem solving. Its emphasis is on the process of designing, implementing, and evaluating small-scale programs. It is not supposed to be a C++ programming course, although much of the course is spent on the details of C++. C++ is an extremely large and complex programming language with many features that interact in unexpected ways. One does not need to know even half of the language to use it well.",
+     "links": [
+      "http://compsci.hunter.cuny.edu/~sweiss/courses/csci135.php",
+      "http://compsci.hunter.cuny.edu/~sweiss/course_materials/csci135/csci135_36_fall12.php"
+     ],
+     "primary": "http://compsci.hunter.cuny.edu/~sweiss/courses/csci135.php"
+    },
+    {
+     "code": "CSCI 235",
+     "title": "CSCI 235: Software Design and Analysis II",
+     "school": "CUNY Hunter College",
+     "description": "Introduces algorithms for a few common problems such as sorting. Practically speaking, it furthers the students' programming skills with topics such as recursion, pointers, and exception handling, and provides a chance to improve software engineering skills and to give the students practical experience for more productive programming.",
+     "links": [
+      "http://compsci.hunter.cuny.edu/~sweiss/courses/csci235.php",
+      "http://compsci.hunter.cuny.edu/~sweiss/course_materials/csci235/csci235_f14.php"
+     ],
+     "primary": "http://compsci.hunter.cuny.edu/~sweiss/courses/csci235.php"
+    },
+    {
+     "code": "CSCI 335",
+     "title": "CSCI 335: Software Design and Analysis III",
+     "school": "",
+     "description": "This includes the introduction of hashes, heaps, various forms of trees, and graphs. It also revisits recursion and the sorting problem from a higher perspective than was presented in the prequels. On top of this, it is intended to introduce methods of algorithmic analysis.",
+     "links": [
+      "http://compsci.hunter.cuny.edu/~sweiss/courses/csci335.php",
+      "http://compsci.hunter.cuny.edu/~sweiss/course_materials/csci335/csci335_s14.php"
+     ],
+     "primary": "http://compsci.hunter.cuny.edu/~sweiss/courses/csci335.php"
+    },
+    {
+     "code": "CSE 331",
+     "title": "CSE 331: Software Design and Implementation",
+     "school": "University of Washington",
+     "description": "Explores concepts and techniques for design and construction of reliable and maintainable software systems in modern high-level languages; program structure and design; program-correctness approaches, including testing.",
+     "links": [
+      "http://courses.cs.washington.edu/courses/cse331/15sp/",
+      "http://courses.cs.washington.edu/courses/cse331/15sp/#all"
+     ],
+     "primary": "http://courses.cs.washington.edu/courses/cse331/15sp/"
+    },
+    {
+     "code": "CSE 373",
+     "title": "CSE 373: Analysis of Algorithms",
+     "school": "Stony Brook University",
+     "description": "Prof Steven Skiena's no stranger to any student when it comes to algorithms. His seminal [book](http://www.algorist.com/) has been touted by many to be best for [getting that job in Google](http://steve-yegge.blogspot.com/2008/03/get-that-job-at-google.html). In addition, he's also well-known for tutoring students in competitive [programming competitions](http://www.programming-challenges.com/pg.php?page=index). If you're looking to brush up your knowledge on Algorithms, you can't go wrong with ",
+     "links": [
+      "http://www3.cs.stonybrook.edu/~skiena/373/",
+      "http://www.algorist.com/",
+      "http://steve-yegge.blogspot.com/2008/03/get-that-job-at-google.html",
+      "http://www.programming-challenges.com/pg.php?page=index",
+      "http://www.cs.sunysb.edu/~algorith/video-lectures/"
+     ],
+     "primary": "http://www3.cs.stonybrook.edu/~skiena/373/"
+    },
+    {
+     "code": "ECS 122A",
+     "title": "ECS 122A: Algorithm Design and Analysis",
+     "school": "UC Davis",
+     "description": "Taught by [Dan Gusfield](http://web.cs.ucdavis.edu/~gusfield/) in 2010, this course is an undergraduate introduction to algorithm design and analysis. It features traditional topics, such as Big Oh notation, as well as an importance on implementing specific algorithms. Also featured are sorting (in linear time), graph algorithms, depth-first search, string matching, dynamic programming, NP-completeness, approximation, and randomization.",
+     "links": [
+      "http://web.cs.ucdavis.edu/~gusfield/cs122f10/",
+      "http://web.cs.ucdavis.edu/~gusfield/",
+      "http://web.cs.ucdavis.edu/~gusfield/cs122f10/syll122.pdf",
+      "http://web.cs.ucdavis.edu/~gusfield/cs122f10/videolist.html"
+     ],
+     "primary": "http://web.cs.ucdavis.edu/~gusfield/cs122f10/"
+    },
+    {
+     "code": "ECS 222A",
+     "title": "ECS 222A: Graduate Level Algorithm Design and Analysis",
+     "school": "UC Davis",
+     "description": "This is the graduate level complement to the ECS 122A undergraduate algorithms course by [Dan Gusfield](http://web.cs.ucdavis.edu/~gusfield/) in 2011. It assumes an undergrad course has already been taken in algorithms, and, while going over some undergraduate algorithms topics, focuses more on increasingly complex and advanced algorithms.",
+     "links": [
+      "http://web.cs.ucdavis.edu/~gusfield/cs222w11/",
+      "http://web.cs.ucdavis.edu/~gusfield/",
+      "http://web.cs.ucdavis.edu/~gusfield/cs222f07/videolist.html",
+      "http://web.cs.ucdavis.edu/~gusfield/cs222w11/syll11.pdf"
+     ],
+     "primary": "http://web.cs.ucdavis.edu/~gusfield/cs222w11/"
+    },
+    {
+     "code": "6.INT",
+     "title": "6.INT: Hacking a Google Interview",
+     "school": "MIT",
+     "description": "This course taught in the MIT Independent Activities Period in 2009 goes over common solution to common interview questions for software engineer interviews at highly selective companies like Apple, Google, and Facebook. They cover time complexity, hash tables, binary search trees, and other common algorithm topics you should have already covered in a different course, but goes more in depth on things you wouldn't otherwise learn in class- like bitwise logic and problem solving tricks.",
+     "links": [
+      "https://courses.csail.mit.edu/iap/interview/index.php",
+      "https://courses.csail.mit.edu/iap/interview/materials.php",
+      "https://courses.csail.mit.edu/iap/interview/calendar.php"
+     ],
+     "primary": "https://courses.csail.mit.edu/iap/interview/index.php"
+    },
+    {
+     "code": "6.006",
+     "title": "6.006: Introduction to Algorithms",
+     "school": "MIT",
+     "description": "This course provides an introduction to mathematical modeling of computational problems. It covers the common algorithms, algorithmic paradigms, and data structures used to solve these problems. The course emphasizes the relationship between algorithms and programming, and introduces basic performance measures and analysis techniques for these problems.",
+     "links": [
+      "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/index.htm",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/lecture-videos/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/assignments/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/readings/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/download-course-materials/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/exams/"
+     ],
+     "primary": "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/index.htm"
+    },
+    {
+     "code": "6.046J/18.410J",
+     "title": "6.046J/18.410J: Design and Analysis of Algorithms",
+     "school": "MIT",
+     "description": "This is an intermediate algorithms course with an emphasis on teaching techniques for the design and analysis of efficient algorithms, emphasizing methods of application. Topics include divide-and-conquer, randomization, dynamic programming, greedy algorithms, incremental improvement, complexity, and cryptography. This course assumes that students know how to analyze simple algorithms and data structures from having taken [6.006](http://ocw.mit.edu/courses/electrical-engineering-and-computer-sci",
+     "links": [
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/index.htm",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/lecture-videos/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/lecture-notes/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/assignments/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/download-course-materials/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/exams/"
+     ],
+     "primary": "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/index.htm"
+    },
+    {
+     "code": "6.851",
+     "title": "6.851: Advanced Data Structures",
+     "school": "MIT",
+     "description": "This is an advanced DS course, you must be done with the [Advanced Algorithms](https://courses.csail.mit.edu/6.854/current/) course before attempting this one.",
+     "links": [
+      "https://courses.csail.mit.edu/6.851/spring21/index.html",
+      "https://courses.csail.mit.edu/6.854/current/",
+      "https://courses.csail.mit.edu/6.851/spring21/lectures/",
+      "https://courses.csail.mit.edu/6.851/spring21/psets/"
+     ],
+     "primary": "https://courses.csail.mit.edu/6.851/spring21/index.html"
+    },
+    {
+     "code": "6.854/18.415J",
+     "title": "6.854/18.415J: Advanced Algorithms",
+     "school": "MIT",
+     "description": "Advanced course in algorithms by Dr. David Karger covering topics such as amortization, randomization, fingerprinting, word-level parallelism, bit scaling, dynamic programming, network flow, linear programming, fixed-parameter algorithms, and approximation algorithms.",
+     "links": [
+      "https://courses.csail.mit.edu/6.854/current/",
+      "http://nb.mit.edu/subscribe?key=D3a8CYpoO2VcR1ZcfaxmR5KbyjCGXd3INNXvL3mxEakYJ7qGJw",
+      "http://nb.mit.edu/"
+     ],
+     "primary": "https://courses.csail.mit.edu/6.854/current/"
+    },
+    {
+     "code": "6.854J/18.415J",
+     "title": "6.854J/18.415J: Advanced Algorithms",
+     "school": "MIT",
+     "description": "This course is a first-year graduate course in algorithms. Emphasis is placed on fundamental algorithms and advanced methods of algorithmic design, analysis, and implementation. Techniques to be covered include amortization, randomization, fingerprinting, word-level parallelism, bit scaling, dynamic programming, network flow, linear programming, fixed-parameter algorithms, and approximation algorithms. Domains include string algorithms, network optimization, parallel algorithms, computational ge",
+     "links": [
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-854j-advanced-algorithms-fall-2005/index.htm",
+      "https://www.youtube.com/playlist?list=PL6ogFv-ieghdoGKGg2Bik3Gl1glBTEu8c",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-854j-advanced-algorithms-fall-2005/lecture-notes/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-854j-advanced-algorithms-fall-2005/assignments/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-854j-advanced-algorithms-fall-2005/readings/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-854j-advanced-algorithms-fall-2005/download-course-materials/"
+     ],
+     "primary": "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-854j-advanced-algorithms-fall-2005/index.htm"
+    },
+    {
+     "code": "15-451/651",
+     "title": "15-451/651: Algorithms",
+     "school": "Carnegie Mellon University",
+     "description": "The required algorithms class that go in depth into all basic algorithms and the proofs behind them. This is one of the heavier algorithms curriculums on this page. Taught by Avrim Blum and [Manuel Blum](http://en.wikipedia.org/wiki/Manuel_Blum) who has a Turing Award due to his contributions to algorithms. Course link includes a very comprehensive set of reference notes by Avrim Blum.",
+     "links": [
+      "http://www.cs.cmu.edu/afs/cs/academic/class/15451-f10/www/",
+      "http://en.wikipedia.org/wiki/Manuel_Blum"
+     ],
+     "primary": "http://www.cs.cmu.edu/afs/cs/academic/class/15451-f10/www/"
+    },
+    {
+     "code": "16s-4102",
+     "title": "16s-4102: Algorithms",
+     "school": "University of Virginia",
+     "description": "",
+     "links": [
+      "http://www.cs.virginia.edu/~shelat/16s-4102/",
+      "https://www.youtube.com/channel/UCxXYk53cSZof2bR_Ax0uJYQ/videos"
+     ],
+     "primary": "http://www.cs.virginia.edu/~shelat/16s-4102/"
+    }
+   ]
+  },
+  {
+   "name": "CS Theory",
+   "slug": "cs-theory",
+   "courses": [
+    {
+     "code": "CIS 500",
+     "title": "CIS 500: Software Foundations",
+     "school": "University of Pennsylvania",
+     "description": "An introduction to formal verification of software using the Coq proof assistant. Topics include basic concepts of logic, computer-assisted theorem proving, functional programming, operational semantics, Hoare logic, and static type systems.",
+     "links": [
+      "http://www.seas.upenn.edu/~cis500/cis500-f14/index.html",
+      "http://www.seas.upenn.edu/~cis500/cis500-f14/index.html#schedule",
+      "http://www.cis.upenn.edu/~bcpierce/sf/current/index.html"
+     ],
+     "primary": "http://www.seas.upenn.edu/~cis500/cis500-f14/index.html"
+    },
+    {
+     "code": "CS 103",
+     "title": "CS 103: Mathematical Foundations of Computing",
+     "school": "Stanford University",
+     "description": "CS103 is a first course in discrete math, computability theory, and complexity theory. In this course, we'll probe the limits of computer power, explore why some problems are harder to solve than others, and see how to reason with mathematical certainty.",
+     "links": [
+      "http://web.stanford.edu/class/cs103/"
+     ],
+     "primary": "http://web.stanford.edu/class/cs103/"
+    },
+    {
+     "code": "CS 173",
+     "title": "CS 173: Discrete Structures",
+     "school": "Univ of Illinois Urbana-Champaign",
+     "description": "This course is an introduction to the theoretical side of computer science. In it, you will learn how to construct proofs, read and write literate formal mathematics, get a quick introduction to key theory topics and become familiar with a range of standard mathematics concepts commonly used in computer science.",
+     "links": [
+      "https://courses.engr.illinois.edu/cs173/fa2014/A-lecture/index.html",
+      "http://web.engr.illinois.edu/~mfleck/building-blocks/",
+      "https://courses.engr.illinois.edu/cs173/fa2014/A-lecture/Homework/index.html",
+      "https://courses.engr.illinois.edu/cs173/fa2014/A-lecture/Exams/index.html"
+     ],
+     "primary": "https://courses.engr.illinois.edu/cs173/fa2014/A-lecture/index.html"
+    },
+    {
+     "code": "CS 276",
+     "title": "CS 276: Foundations of Cryptography",
+     "school": "UC Berkeley",
+     "description": "This course discusses the complexity-theory foundations of modern cryptography, and looks at recent results in the field such as Fully Homomorphic Encryption, Indistinguishability Obfuscation, MPC and so on.",
+     "links": [
+      "http://www.cs.berkeley.edu/~sanjamg/classes/cs276-fall14/"
+     ],
+     "primary": "http://www.cs.berkeley.edu/~sanjamg/classes/cs276-fall14/"
+    },
+    {
+     "code": "CS 278",
+     "title": "CS 278: Complexity Theory",
+     "school": "UC Berkeley",
+     "description": "A graduate level course on complexity theory that introduces P vs NP, the power of randomness, average-case complexity, hardness of approximation, and so on.",
+     "links": [
+      "http://www.cs.berkeley.edu/~luca/cs278-08/"
+     ],
+     "primary": "http://www.cs.berkeley.edu/~luca/cs278-08/"
+    },
+    {
+     "code": "CS 374",
+     "title": "CS 374: Algorithms & Models of Computation (Fall 2014)",
+     "school": "University of Illinois Urbana-Champaign",
+     "description": "CS 498 section 374 (unofficially \"CS 374\") covers fundamental tools and techniques from theoretical computer science, including design and analysis of algorithms, formal languages and automata, computability, and complexity. Specific topics include regular and context-free languages, finite-state automata, recursive algorithms (including divide and conquer, backtracking, dynamic programming, and greedy algorithms), fundamental graph algorithms (including depth- and breadth-first search, topologi",
+     "links": [
+      "https://courses.engr.illinois.edu/cs498374/fa2014/",
+      "https://courses.engr.illinois.edu/cs498374/fa2014/work.html",
+      "https://courses.engr.illinois.edu/cs498374/fa2014/lectures.html",
+      "http://recordings.engineering.illinois.edu/ess/portal/section/115f3def-7371-4e98-b72f-6efe53771b2a"
+     ],
+     "primary": "https://courses.engr.illinois.edu/cs498374/fa2014/"
+    },
+    {
+     "code": "CS 3110",
+     "title": "CS 3110: Data Structures and Functional Programming",
+     "school": "Cornell University",
+     "description": "CS 3110 (formerly CS 312) is the third programming course in the Computer Science curriculum, following CS 1110/1112 and CS 2110. The goal of the course is to help students become excellent programmers and software designers who can design and implement software that is elegant, efficient, and correct, and whose code can be maintained and reused.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS3110/2014fa/",
+      "http://www.cs.cornell.edu/courses/CS3110/2014fa/course_info.php",
+      "http://www.cs.cornell.edu/courses/CS3110/2014fa/lecture_notes.php",
+      "http://www.cs.cornell.edu/courses/CS3110/2014fa/index.php"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS3110/2014fa/"
+    },
+    {
+     "code": "CS 3220",
+     "title": "CS 3220: Introduction to Scientific Computing",
+     "school": "Cornell University",
+     "description": "In this one-semester survey course, we introduce numerical methods for solving linear and nonlinear equations, interpolating data, computing integrals, and solving differential equations, and we describe how to use these tools wisely (we hope!) when solving scientific problems.",
+     "links": [
+      "http://www.cs.cornell.edu/~bindel/class/cs3220-s12/",
+      "http://www.cs.cornell.edu/~bindel/class/cs3220-s12/syllabus.html",
+      "http://www.cs.cornell.edu/~bindel/class/cs3220-s12/lectures.html",
+      "http://www.cs.cornell.edu/~bindel/class/cs3220-s12/assignments.html"
+     ],
+     "primary": "http://www.cs.cornell.edu/~bindel/class/cs3220-s12/"
+    },
+    {
+     "code": "CS 4300",
+     "title": "CS 4300: Information Retrieval",
+     "school": "Cornell University",
+     "description": "Studies the methods used to search for and discover information in large-scale systems. The emphasis is on information retrieval applied to textual materials, but there is some discussion of other formats.The course includes techniques for searching, browsing, and filtering information and the use of classification systems and thesauruses. The techniques are illustrated with examples from web searching and digital libraries.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS4300/2013fa/",
+      "http://www.cs.cornell.edu/courses/CS4300/2013fa/lectures/introduction.pdf",
+      "http://www.cs.cornell.edu/courses/CS4300/2013fa/lectures.htm"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS4300/2013fa/"
+    },
+    {
+     "code": "CS 4810",
+     "title": "CS 4810: Introduction to Theory of Computing",
+     "school": "Cornell University",
+     "description": "This undergraduate course provides a broad introduction to the mathematical foundations of computer science. We will examine basic computational models, especially Turing machines. The goal is to understand what problems can or cannot be solved in these models.",
+     "links": [
+      "https://www.dsteurer.org/toc13/",
+      "https://www.dsteurer.org/toc13/syllabus/",
+      "https://www.dsteurer.org/toc13/lectures/",
+      "https://www.dsteurer.org/toc13/homework/"
+     ],
+     "primary": "https://www.dsteurer.org/toc13/"
+    },
+    {
+     "code": "CS 6810",
+     "title": "CS 6810: Theory of Computing",
+     "school": "Cornell University",
+     "description": "This graduate course gives a broad introduction to complexity theory, including classical results and recent developments. Complexity theory aims to understand the power of efficient computation (when computational resources like time and space are limited). Many compelling conceptual questions arise in this context. Most of these questions are (surprisingly?) difficult and far from being resolved. Nevertheless, a lot of progress has been made toward understanding them (and also why they are dif",
+     "links": [
+      "https://complexity16.dsteurer.org/",
+      "https://complexity16.dsteurer.org/syllabus/",
+      "https://complexity16.dsteurer.org/lectures/",
+      "https://complexity16.dsteurer.org/homework/"
+     ],
+     "primary": "https://complexity16.dsteurer.org/"
+    },
+    {
+     "code": "CSCE 3193",
+     "title": "CSCE 3193: Programming Paradigms",
+     "school": "University of Arkansas (Fayetteville)",
+     "description": "Programming in different paradigms with emphasis on object oriented programming, network programming and functional programming. Survey of programming languages, event driven programming, concurrency, software validation.",
+     "links": [
+      "http://www.csce.uark.edu/~sgauch/3193/S11/index.html",
+      "http://www.csce.uark.edu/~sgauch/3193/S11/syllabus.html",
+      "http://www.csce.uark.edu/~sgauch/3193/S11/notes/index.html",
+      "http://www.csce.uark.edu/~sgauch/3193/S11/hw/index.html",
+      "http://www.csce.uark.edu/~sgauch/3193/S11/exams/index.html"
+     ],
+     "primary": "http://www.csce.uark.edu/~sgauch/3193/S11/index.html"
+    },
+    {
+     "code": "6.045",
+     "title": "6.045: Great Ideas in Theoretical Computer Science",
+     "school": "MIT",
+     "description": "This course provides a challenging introduction to some of the central ideas of theoretical computer science. Beginning in antiquity, the course will progress through finite automata, circuits and decision trees, Turing machines and computability, efficient algorithms and reducibility, the P versus NP problem, NP-completeness, the power of randomness, cryptography and one-way functions, computational learning theory, and quantum computing. It examines the classes of problems that can and cannot ",
+     "links": [
+      "https://stellar.mit.edu/S/course/6/sp15/6.045/index.html",
+      "https://stellar.mit.edu/S/course/6/sp15/6.045/courseMaterial/topics/topic1/syllabus/syllabus2015/syllabus2015.pdf",
+      "https://stellar.mit.edu/S/course/6/sp15/6.045/materials.html",
+      "http://stellar.mit.edu/S/course/6/sp15/6.045/special/videos/index.html"
+     ],
+     "primary": "https://stellar.mit.edu/S/course/6/sp15/6.045/index.html"
+    }
+   ]
+  },
+  {
+   "name": "Introduction to CS",
+   "slug": "introduction-to-cs",
+   "courses": [
+    {
+     "code": "CS 10",
+     "title": "CS 10: The Beauty and Joy of Computing",
+     "school": "UC Berkeley",
+     "description": "CS10 is UCB's introductory computer science class, taught using the beginners' drag-and-drop language. Students learn about history, social implications, great principles, and future of computing. They also learn the joy of programming a computer using a friendly, graphical language, and will complete a substantial team programming project related to their interests.",
+     "links": [
+      "https://inst.eecs.berkeley.edu/~cs10/fa14/",
+      "http://snap.berkeley.edu",
+      "http://bjc.berkeley.edu"
+     ],
+     "primary": "https://inst.eecs.berkeley.edu/~cs10/fa14/"
+    },
+    {
+     "code": "CS 50",
+     "title": "CS 50: Introduction to Computer Science",
+     "school": "Harvard University",
+     "description": "CS50x is Harvard College's introduction to the intellectual enterprises of computer science and the art of programming for majors and non-majors alike, with or without prior programming experience. An entry-level course taught by David J. Malan.",
+     "links": [
+      "https://cs50.harvard.edu/",
+      "http://cs50.tv/2017/fall/#about,lectures",
+      "http://cs50.tv/2017/fall/#about,psets",
+      "https://www.edx.org/course/introduction-computer-science-harvardx-cs50x",
+      "http://cs50.tv"
+     ],
+     "primary": "https://cs50.harvard.edu/"
+    },
+    {
+     "code": "CS 61A",
+     "title": "CS 61A: Structure and Interpretation of Computer Programs [Python]",
+     "school": "UC Berkeley",
+     "description": "In CS 61A, we are interested in teaching you about programming, not about how to use one particular \tprogramming language. We consider a series of techniques for controlling program complexity, such as functional programming, data abstraction, and object-oriented programming. Mastery of a particular programming language is a very useful side effect of studying these general techniques. However, our hope is that once you have learned the essence of programming, you will find that picking up a new",
+     "links": [
+      "http://cs61a.org/",
+      "http://www.infocobuild.com/education/audio-video-courses/computer-science/cs61a-spring2014-berkeley.html",
+      "http://cs61a.org/by_type.html",
+      "http://cs61a.org/by_topic.html",
+      "http://cs61a.org/articles/resources.html",
+      "http://cs61a.org/problems/",
+      "http://cs61a.org/extra.html"
+     ],
+     "primary": "http://cs61a.org/"
+    },
+    {
+     "code": "CS 61AS",
+     "title": "CS 61AS: Structure & Interpretation of Computer Programs [Racket]",
+     "school": "UC Berkeley",
+     "description": "A self-paced version of the CS61 Course but in Racket / Scheme. 61AS is a great introductory course that will ease you into all the amazing concepts that future CS courses will cover, so remember to keep an open mind, have fun, and always respect the data abstraction",
+     "links": [
+      "http://berkeley-cs61as.github.io/",
+      "https://www.youtube.com/course?category=University%2FEngineering%2FComputer%2520Science%2FProgramming%2520Languages&list=EC6D76F0C99A731667",
+      "http://berkeley-cs61as.github.io/textbook.html"
+     ],
+     "primary": "http://berkeley-cs61as.github.io/"
+    },
+    {
+     "code": "CS 101",
+     "title": "CS 101: Computer Science 101",
+     "school": "Stanford University",
+     "description": "CS101 teaches the essential ideas of Computer Science for a zero-prior-experience audience. Participants play and experiment with short bits of \"computer code\" to bring to life to the power and limitations of computers.",
+     "links": [
+      "http://online.stanford.edu/course/computer-science-101-self-paced"
+     ],
+     "primary": "http://online.stanford.edu/course/computer-science-101-self-paced"
+    },
+    {
+     "code": "CS 106A",
+     "title": "CS 106A: Programming Methodology",
+     "school": "Stanford University",
+     "description": "This course is the largest of the introductory programming courses and is one of the largest courses at Stanford. Topics focus on the introduction to the engineering of computer applications emphasizing modern software engineering principles: object-oriented design, decomposition, encapsulation, abstraction, and testing. Programming Methodology teaches the widely-used Java programming language along with good software engineering principles.",
+     "links": [
+      "https://see.stanford.edu/Course/CS106A",
+      "http://see.stanford.edu/materials/icspmcs106a/ProgrammingMethodologyAllMaterials.zip"
+     ],
+     "primary": "https://see.stanford.edu/Course/CS106A"
+    },
+    {
+     "code": "CS 106B",
+     "title": "CS 106B: Programming Abstractions",
+     "school": "Stanford University",
+     "description": "This course is the natural successor to Programming Methodology and covers such advanced programming topics as recursion, algorithmic analysis, and data abstraction using the C++ programming language, which is similar to both C and Java.",
+     "links": [
+      "https://see.stanford.edu/Course/CS106B",
+      "http://see.stanford.edu/materials/icspacs106b/ProgrammingAbstractionsAllMaterials.zip"
+     ],
+     "primary": "https://see.stanford.edu/Course/CS106B"
+    },
+    {
+     "code": "CS 107",
+     "title": "CS 107: Programming Paradigms",
+     "school": "Stanford University",
+     "description": "Topics: Advanced memory management features of C and C++; the differences between imperative and object-oriented paradigms. The functional paradigm (using LISP) and concurrent programming (using C and C++)",
+     "links": [
+      "https://see.stanford.edu/Course/CS107"
+     ],
+     "primary": "https://see.stanford.edu/Course/CS107"
+    },
+    {
+     "code": "CS 109",
+     "title": "CS 109: Programming Practice Using Scala",
+     "school": "KAIST",
+     "description": "This course introduces basic concepts of programming and computer science, such as dynamic and static typing, dynamic memory allocation, objects and methods, binary representation of numbers, using an editor and compiler from the command line, running programs with arguments from the command line, using libraries, and the use of basic data structures such as arrays, lists, sets, and maps. We will use Scala for this course.",
+     "links": [
+      "http://otfried.org/courses/cs109/index.html"
+     ],
+     "primary": "http://otfried.org/courses/cs109/index.html"
+    },
+    {
+     "code": "CS 1109",
+     "title": "CS 1109: Fundamental Programming Concepts",
+     "school": "Cornell University",
+     "description": "This course provides an introduction to programming and problem solving using a high-level programming language. It is designed to increase your knowledge level to comfortably continue to courses CS111x. Our focus will be on generic programming concepts: variables, expressions, control structures, loops, arrays, functions, pseudocode and algorithms. You will learn how to analyze problems and convert your ideas into solutions interpretable by computers. We will use MATLAB; because it provides a p",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS1109/2013su/",
+      "http://www.cs.cornell.edu/courses/CS1109/2013su/syllabus.html",
+      "http://www.cs.cornell.edu/courses/CS1109/2013su/calendar.html"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS1109/2013su/"
+    },
+    {
+     "code": "CS 1110",
+     "title": "CS 1110: Introduction to Computing Using Python",
+     "school": "Cornell University",
+     "description": "Programming and problem solving using Python. Emphasizes principles of software development, style, and testing. Topics include procedures and functions, iteration, recursion, arrays and vectors, strings, an operational model of procedure and function calls, algorithms, exceptions, object-oriented programming, and GUIs (graphical user interfaces). Weekly labs provide guided practice on the computer, with staff present to help. Assignments use graphics and GUIs to help develop fluency and underst",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS1110/2014fa/",
+      "http://www.cs.cornell.edu/courses/CS1110/2014fa/about/grading.php",
+      "http://www.cs.cornell.edu/courses/CS1110/2014fa/lectures/index.php",
+      "http://www.cs.cornell.edu/courses/CS1110/2014fa/assignments/index.php"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS1110/2014fa/"
+    },
+    {
+     "code": "CS 1112",
+     "title": "CS 1112: Introduction to Computing Using Matlab",
+     "school": "Cornell University",
+     "description": "Programming and problem solving using MATLAB. Emphasizes the systematic development of algorithms and programs. Topics include iteration, functions, arrays and vectors, strings, recursion, algorithms, object-oriented programming, and MATLAB graphics. Assignments are designed to build an appreciation for complexity, dimension, fuzzy data, inexact arithmetic, randomness, simulation, and the role of approximation. NO programming experience is necessary; some knowledge of Calculus is required.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS1112/2014fa/",
+      "http://www.cs.cornell.edu/courses/CS1112/2014fa/syllabus.html",
+      "http://www.cs.cornell.edu/courses/CS1112/2014fa/syllabus.html#schedule",
+      "http://www.cs.cornell.edu/courses/CS1112/2014fa/Exercises/exercises.html",
+      "http://www.cs.cornell.edu/courses/CS1112/2014fa/Projects/projects.html"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS1112/2014fa/"
+    },
+    {
+     "code": "CS 1115",
+     "title": "CS 1115: Introduction to Computational Science and Engineering Using Matlab Graphical User Interfaces",
+     "school": "Cornell University",
+     "description": "Programming and problem solving using MATLAB. Emphasizes the systematic development of algorithms and programs. Topics include iteration, functions, arrays and vectors, strings, recursion, algorithms, object-oriented programming, and MATLAB graphics. Assignments are designed to build an appreciation for complexity, dimension, fuzzy data, inexact arithmetic, randomness, simulation, and the role of approximation. NO programming experience is necessary; some knowledge of Calculus is required.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS1115/2013fa/",
+      "http://www.cs.cornell.edu/courses/CS1115/2013fa/syllabus.htm",
+      "http://www.cs.cornell.edu/courses/CS1115/2013fa/lecture_slides.htm",
+      "http://www.cs.cornell.edu/courses/CS1115/2013fa/projects_and_exams.htm"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS1115/2013fa/"
+    },
+    {
+     "code": "CS 1130",
+     "title": "CS 1130: Transition to OO Programming",
+     "school": "Cornell University",
+     "description": "Introduction to object-oriented concepts using Java. Assumes programming knowledge in a language like MATLAB, C, C++, or Fortran. Students who have learned Java but were not exposed heavily to OO programming are welcome.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS1130/2014sp/",
+      "http://www.cs.cornell.edu/courses/CS1130/2014sp/about/overview.php",
+      "http://www.cs.cornell.edu/courses/CS1130/2014sp/web-lectures/index.php",
+      "http://www.cs.cornell.edu/courses/CS1130/2014sp/assignments/index.php"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS1130/2014sp/"
+    },
+    {
+     "code": "CS 1133",
+     "title": "CS 1133: Transition to Python",
+     "school": "Cornell University",
+     "description": "Introduction to the Python programming language. Covers the basic programming constructs of Python, including assignment, conditionals, iteration, functions, object-oriented design, arrays, and vectorized computation. Assumes programming knowledge in a language like Java, Matlab, C, C++, or Fortran.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS1133/2013fa/",
+      "http://www.cs.cornell.edu/courses/CS1133/2013fa/about/overview.php",
+      "http://www.cs.cornell.edu/courses/CS1133/2013fa/lectures/index.php",
+      "http://www.cs.cornell.edu/courses/CS1133/2013fa/assignments/index.php",
+      "http://www.eng.utah.edu/~cs1410-20/",
+      "http://www.eng.utah.edu/~cs2420-20/",
+      "http://www.cs.utah.edu/~mflatt/",
+      "http://www.eng.utah.edu/~cs1410-20/schedule.html",
+      "http://www.eng.utah.edu/~cs2420-20/schedule.html",
+      "http://htdp.org/2003-09-26/Book/curriculum.html",
+      "http://racket-lang.org/"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS1133/2013fa/"
+    },
+    {
+     "code": "CS 2110",
+     "title": "CS 2110: Object-Oriented Programming and Data Structures",
+     "school": "Cornell University",
+     "description": "CS 2110 is an intermediate-level programming course and an introduction to computer science. Topics include program design and development, debugging and testing, object-oriented programming, proofs of correctness, complexity analysis, recursion, commonly used data structures, graph algorithms, and abstract data types. Java is the principal programming language. The course syllabus can easily be extracted by looking at the link to [lectures](http://www.cs.cornell.edu/courses/CS2110/2014fa/lectur",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS2110/2014fa/index.html",
+      "http://www.cs.cornell.edu/courses/CS2110/2014fa/lecturenotes.html",
+      "http://www.cs.cornell.edu/courses/CS2110/2014fa/assignments.html"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS2110/2014fa/index.html"
+    },
+    {
+     "code": "CS 4302",
+     "title": "CS 4302: Web Information Systems",
+     "school": "Cornell University",
+     "description": "This course will introduce you to technologies for building data-centric information systems on the World Wide Web, show the practical applications of such systems, and discuss their design and their social and policy context by examining cross-cutting issues such as citizen science, data journalism and open government. Course work involves lectures and readings as well as weekly homework assignments, and a semester-long project in which the students demonstrate their expertise in building data-",
+     "links": [
+      "http://courses2.cit.cornell.edu/info4302_2012fa/",
+      "http://courses2.cit.cornell.edu/info4302_2012fa/course_information.php",
+      "http://courses2.cit.cornell.edu/info4302_2012fa/lectures.php",
+      "http://courses2.cit.cornell.edu/info4302_2012fa/homeworks.php"
+     ],
+     "primary": "http://courses2.cit.cornell.edu/info4302_2012fa/"
+    },
+    {
+     "code": "CSCE 2004",
+     "title": "CSCE 2004: Programming Foundations I",
+     "school": "University of Arkansas (Fayetteville)",
+     "description": "Introductory course for students majoring in computer science or computer engineering. Software development process: problem specification, program design, implementation, testing and documentation. Programming topics: data representation, conditional and iterative statements, functions, arrays, strings, file I/O, and classes. Using C++ in a UNIX environment.",
+     "links": [
+      "http://www.csce.uark.edu/~sgauch/2004/S14/index.html",
+      "http://www.csce.uark.edu/~sgauch/2004/S14/syllabus.html",
+      "http://www.csce.uark.edu/~sgauch/2004/S14/notes/index.html",
+      "http://www.csce.uark.edu/~sgauch/2004/S14/hw/index.html"
+     ],
+     "primary": "http://www.csce.uark.edu/~sgauch/2004/S14/index.html"
+    },
+    {
+     "code": "CSCI E-1",
+     "title": "CSCI E-1: Understanding Computers and the Internet",
+     "school": "Harvard University Extension College",
+     "description": "This course is all about understanding: understanding what's going on inside your computer when you flip on the switch, why tech support has you constantly rebooting your computer, how everything you do on the Internet can be watched by others, and how your computer can become infected with a worm just by being turned on. Designed for students who use computers and the Internet every day but don't fully understand how it all works, this course fills in the gaps. Through lectures on hardware, sof",
+     "links": [
+      "http://cse1.net/lectures",
+      "http://cse1.net/syllabus",
+      "http://cse1.net/recaps",
+      "http://cse1.net/psets"
+     ],
+     "primary": "http://cse1.net/lectures"
+    },
+    {
+     "code": "CS-for-all",
+     "title": "CS-for-all: CS for All",
+     "school": "Harvey Mudd College",
+     "description": "This book (and course) takes a unique approach to \u201cIntro CS.\u201d In a nutshell, our objective is to provide an introduction to computer science as an intellectually rich and vibrant field rather than focusing exclusively on computer programming. While programming is certainly an important and pervasive element of our approach, we emphasize concepts and problem-solving over syntax and programming language features.",
+     "links": [
+      "http://www.cs.hmc.edu/csforall/",
+      "https://www.cs.hmc.edu/twiki/bin/view/ModularCS1"
+     ],
+     "primary": "http://www.cs.hmc.edu/csforall/"
+    },
+    {
+     "code": "6.001",
+     "title": "6.001: Structure and Interpretation of Computer Programs",
+     "school": "MIT",
+     "description": "Teaches big-picture computing concepts using the Scheme programming language. Students will implement programs in a variety of different programming paradigms (functional, object-oriented, logical). Heavy emphasis on function composition, code-as-data, control abstraction with continuations, and syntactic abstraction through macros. An excellent course if you are looking to build a mental framework on which to hang your programming knowledge.",
+     "links": [
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/index.htm",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/video-lectures",
+      "http://mitpress.mit.edu/sicp/full-text/book/book.html",
+      "https://github.com/sarabander/sicp",
+      "https://github.com/sarabander/sicp-pdf",
+      "http://www.neilvandyke.org/racket-sicp/"
+     ],
+     "primary": "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/index.htm"
+    },
+    {
+     "code": "6.005",
+     "title": "6.005: Software Construction, Fall 2016",
+     "school": "MIT",
+     "description": "This course introduces fundamental principles and techniques of software development. Students learn how to write software that is safe from bugs, easy to understand, and ready for change. Topics include specifications and invariants; testing, test-case generation, and coverage; state machines; abstract data types and representation independence; design patterns for object-oriented programming; concurrent programming, including message passing and shared concurrency, and defending against races ",
+     "links": [
+      "http://web.mit.edu/6.005/www/fa16/"
+     ],
+     "primary": "http://web.mit.edu/6.005/www/fa16/"
+    }
+   ]
+  },
+  {
+   "name": "Machine Learning",
+   "slug": "machine-learning",
+   "courses": [
+    {
+     "code": "DEEPNLP",
+     "title": "DEEPNLP: Deep Learning for Natural Language Processing",
+     "school": "University of Oxford",
+     "description": "This is an applied course focussing on recent advances in analysing and generating speech and text using recurrent neural networks. We introduce the mathematical definitions of the relevant machine learning models and derive their associated optimisation algorithms. The course covers a range of applications of neural networks in NLP including analysing latent dimensions in text, transcribing speech to text, translating between languages, and answering questions. This course is organised by Phil ",
+     "links": [
+      "https://github.com/oxford-cs-deepnlp-2017/",
+      "https://github.com/oxford-cs-deepnlp-2017/lectures"
+     ],
+     "primary": "https://github.com/oxford-cs-deepnlp-2017/"
+    },
+    {
+     "code": "CS20si",
+     "title": "CS20si: Tensorflow for Deep Learning Research",
+     "school": "Stanford University",
+     "description": "This course will cover the fundamentals and contemporary usage of the Tensorflow library for deep learning research. We aim to help students understand the graphical computational model of Tensorflow, explore the functions it has to offer, and learn how to build and structure models best suited for a deep learning project. Through the course, students will use Tensorflow to build models of different complexity, from simple linear/logistic regression to convolutional neural network and recurrent ",
+     "links": [
+      "http://web.stanford.edu/class/cs20si/index.html",
+      "https://github.com/chiphuyen/tf-stanford-tutorials"
+     ],
+     "primary": "http://web.stanford.edu/class/cs20si/index.html"
+    },
+    {
+     "code": "COMS 4771",
+     "title": "COMS 4771: Machine Learning",
+     "school": "Columbia University",
+     "description": "Course taught by [Tony Jebara](http://www.cs.columbia.edu/~jebara/resume.html) introduces topics in Machine Learning for both generative and discriminative estimation. Material will include least squares methods, Gaussian distributions, linear classification, linear regression, maximum likelihood, exponential family distributions, Bayesian networks, Bayesian inference, mixture models, the EM algorithm, graphical models, hidden Markov models, support vector machines, and kernel methods.",
+     "links": [
+      "http://www.cs.columbia.edu/~jebara/4771/index.html",
+      "http://www.cs.columbia.edu/~jebara/resume.html",
+      "http://www.cs.columbia.edu/~jebara/4771/handouts.html"
+     ],
+     "primary": "http://www.cs.columbia.edu/~jebara/4771/index.html"
+    },
+    {
+     "code": "CS 109",
+     "title": "CS 109: Data Science",
+     "school": "Harvard University",
+     "description": "Learning from data in order to gain useful predictions and insights. This course introduces methods for five key facets of an investigation: data wrangling, cleaning, and sampling to get a suitable data set; data management to be able to access big data quickly and reliably; exploratory data analysis to generate hypotheses and intuition; prediction based on statistical methods such as regression and classification; and communication of results through visualization, stories, and interpretable su",
+     "links": [
+      "http://cs109.github.io/2015/",
+      "http://cm.dce.harvard.edu/2015/01/14328/publicationListing.shtml",
+      "http://cs109.github.io/2014/pages/schedule.html",
+      "http://cs109.github.io/2014/pages/homework.html",
+      "http://cs109.github.io/2014/",
+      "http://cm.dce.harvard.edu/2014/01/14328/publicationListing.shtml"
+     ],
+     "primary": "http://cs109.github.io/2015/"
+    },
+    {
+     "code": "CS 156",
+     "title": "CS 156: Learning from Data",
+     "school": "Caltech",
+     "description": "This is an introductory course in machine learning (ML) that covers the basic theory, algorithms, and applications. ML is a key technology in Big Data, and in many financial, medical, commercial, and scientific applications. It enables computational systems to adaptively improve their performance with experience accumulated from the observed data. ML has become one of the hottest fields of study today, taken up by undergraduate and graduate students from 15 different majors at Caltech. This cour",
+     "links": [
+      "https://work.caltech.edu/telecourse.html",
+      "https://work.caltech.edu/lectures.html",
+      "https://work.caltech.edu/homeworks.html",
+      "https://work.caltech.edu/textbook.html"
+     ],
+     "primary": "https://work.caltech.edu/telecourse.html"
+    },
+    {
+     "code": "CS 189",
+     "title": "CS 189: Introduction To Machine Learning",
+     "school": "UC Berkeley",
+     "description": "Introductory ML course covering a wide range of topics: ranging from least squares to convolutional neural networks",
+     "links": [
+      "http://www.eecs189.org/"
+     ],
+     "primary": "http://www.eecs189.org/"
+    },
+    {
+     "code": "CS 224d",
+     "title": "CS 224d: Deep Learning for Natural Language Processing",
+     "school": "Stanford University",
+     "description": "Natural language processing (NLP) is one of the most important technologies of the information age. Understanding complex language utterances is also a crucial part of artificial intelligence. Applications of NLP are everywhere because people communicate most everything in language: web search, advertisement, emails, customer service, language translation, radiology reports, etc. There are a large variety of underlying tasks and machine learning models powering NLP applications. Recently, deep l",
+     "links": [
+      "http://cs224d.stanford.edu/",
+      "http://cs224d.stanford.edu/syllabus.html"
+     ],
+     "primary": "http://cs224d.stanford.edu/"
+    },
+    {
+     "code": "CS 229r",
+     "title": "CS 229r: Algorithms for Big Data",
+     "school": "Harvard University",
+     "description": "Big data is data so large that it does not fit in the main memory of a single machine, and the need to process big data by efficient algorithms arises in Internet search, network traffic monitoring, machine learning, scientific computing, signal processing, and several other areas. This course will cover mathematically rigorous models for developing such algorithms, as well as some provable limitations of algorithms operating in those models.",
+     "links": [
+      "http://people.seas.harvard.edu/~minilek/cs229r/fall15/index.html",
+      "http://people.seas.harvard.edu/~minilek/cs229r/fall15/lec.html",
+      "https://www.youtube.com/playlist?list=PL2SOU6wwxB0v1kQTpqpuu5kEJo2i-iUyf",
+      "http://people.seas.harvard.edu/~minilek/cs229r/fall15/hmwk.html"
+     ],
+     "primary": "http://people.seas.harvard.edu/~minilek/cs229r/fall15/index.html"
+    },
+    {
+     "code": "CS 231n",
+     "title": "CS 231n: Convolutional Neural Networks for Visual Recognition",
+     "school": "Stanford University",
+     "description": "Computer Vision has become ubiquitous in our society, with applications in search, image understanding, apps, mapping, medicine, drones, and self-driving cars. This course is a deep dive into details of the deep learning architectures with a focus on learning end-to-end models for these tasks, particularly image classification. During the 10-week course, students will learn to implement, train and debug their own neural networks and gain a detailed understanding of cutting-edge research in compu",
+     "links": [
+      "http://cs231n.stanford.edu/",
+      "http://cs231n.stanford.edu/syllabus.html",
+      "https://www.youtube.com/watch?v=NfnWJUyUJYU&list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC",
+      "http://cs231n.github.io/"
+     ],
+     "primary": "http://cs231n.stanford.edu/"
+    },
+    {
+     "code": "CS 287",
+     "title": "CS 287: Advanced Robotics",
+     "school": "UC Berkeley",
+     "description": "The course introduces the math and algorithms underneath state-of-the-art robotic systems. The majority of these techniques are heavily based on probabilistic reasoning and optimization---two areas with wide applicability in modern Artificial Intelligence. An intended side-effect of the course is to generally strengthen your expertise in these two areas.",
+     "links": [
+      "http://www.cs.berkeley.edu/~pabbeel/cs287-fa13/",
+      "http://www.cs.berkeley.edu/~pabbeel/cs287-fa13/#syllabus",
+      "http://www.cs.berkeley.edu/~pabbeel/cs287-fa13/#assignments"
+     ],
+     "primary": "http://www.cs.berkeley.edu/~pabbeel/cs287-fa13/"
+    },
+    {
+     "code": "CS 395T",
+     "title": "CS 395T: Statistical and Discrete Methods for Scientific Computing",
+     "school": "University of Texas",
+     "description": "Practical course in applying modern statistical techniques to real data, particularly bioinformatic data and large data sets. The emphasis is on efficient computation and concise coding, mostly in MATLAB and C++.",
+     "links": [
+      "http://www.nr.com/CS395T/",
+      "http://wpressutexas.net/forum/"
+     ],
+     "primary": "http://www.nr.com/CS395T/"
+    },
+    {
+     "code": "CS 4780",
+     "title": "CS 4780: Machine Learning",
+     "school": "Cornell University",
+     "description": "This course will introduce you to technologies for building data-centric information systems on the World Wide Web, show the practical applications of such systems, and discuss their design and their social and policy context by examining cross-cutting issues such as citizen science, data journalism and open government. Course work involves lectures and readings as well as weekly homework assignments, and a semester-long project in which the students demonstrate their expertise in building data-",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS4780/2014fa/"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS4780/2014fa/"
+    },
+    {
+     "code": "CS 4786",
+     "title": "CS 4786: Machine Learning for Data Science",
+     "school": "Cornell University",
+     "description": "An introductory course in machine learning, with a focus on data modeling and related methods and learning algorithms for data sciences. Tentative topic list:",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS4786/2015sp/index.htm",
+      "http://www.cs.cornell.edu/courses/CS4786/2015sp/assignments.htm",
+      "http://www.cs.cornell.edu/courses/CS4786/2015sp/lectures.htm"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS4786/2015sp/index.htm"
+    },
+    {
+     "code": "CVX 101",
+     "title": "CVX 101: Convex Optimization",
+     "school": "Stanford University",
+     "description": "The course concentrates on recognizing and solving convex optimization problems that arise in applications.  Topics addressed include the following.  Convex sets, functions, and optimization problems.  Basics of convex analysis.  Least-squares, linear and quadratic programs, semidefinite programming, minimax, extremal volume, and other problems.  Optimality conditions, duality theory, theorems of alternative, and applications.  Interior-point methods.  Applications to signal processing, statisti",
+     "links": [
+      "https://class.stanford.edu/courses/Engineering/CVX101/Winter2014/info",
+      "http://web.stanford.edu/~boyd/cvxbook/",
+      "https://class.stanford.edu/courses/Engineering/CVX101/Winter2014/courseware/7206c57866504e83821d00b5d3f80793/"
+     ],
+     "primary": "https://class.stanford.edu/courses/Engineering/CVX101/Winter2014/info"
+    },
+    {
+     "code": "DS-GA 1008",
+     "title": "DS-GA 1008: Deep Learning",
+     "school": "New York University",
+     "description": "This increasingly popular course is taught through the Data Science Center at NYU. Originally introduced by [Yann Lecun](http://yann.lecun.com/), it is now led by [Zaid Harchaoui](http://www.harchaoui.eu/), although Prof. Lecun is rumored to still stop by from time to time. It covers the theory, technique, and tricks that are used to achieve very high accuracy for machine learning tasks in computer vision and natural language processing. The assignments are in Lua and hosted on Kaggle.",
+     "links": [
+      "http://cilvr.cs.nyu.edu/doku.php?id=deeplearning2015:schedule",
+      "http://yann.lecun.com/",
+      "http://www.harchaoui.eu/",
+      "http://techtalks.tv/deep-learning-nyu-spring-2015/"
+     ],
+     "primary": "http://cilvr.cs.nyu.edu/doku.php?id=deeplearning2015:schedule"
+    },
+    {
+     "code": "EECS E6893 & EECS E6895",
+     "title": "EECS E6893 & EECS E6895: Big Data Analytics & Advanced Big Data Analytics",
+     "school": "Columbia University",
+     "description": "Students will gain knowledge on analyzing Big Data. It serves as an introductory course for graduate students who are expecting to face Big Data storage, processing, analysis, visualization, and application issues on both workplaces and research environments.",
+     "links": [
+      "http://www.ee.columbia.edu/~cylin/course/bigdata/",
+      "http://researcher.watson.ibm.com/researcher/view.php?person=us-chingyung"
+     ],
+     "primary": "http://www.ee.columbia.edu/~cylin/course/bigdata/"
+    },
+    {
+     "code": "EECS E6894",
+     "title": "EECS E6894: Deep Learning for Computer Vision and Natural Language Processing",
+     "school": "Columbia University",
+     "description": "This graduate level research class focuses on deep learning techniques for vision and natural language processing problems. It gives an overview of the various deep learning models and techniques, and surveys recent advances in the related fields. This course uses Theano as the main programming tool. GPU programming experiences are preferred although not required. Frequent paper presentations and a heavy programming workload are expected.",
+     "links": [
+      "http://llcao.net/cu-deeplearning15/index.html",
+      "http://llcao.net/cu-deeplearning15/reading.html",
+      "http://llcao.net/cu-deeplearning15/programming_problem.html"
+     ],
+     "primary": "http://llcao.net/cu-deeplearning15/index.html"
+    },
+    {
+     "code": "EE103",
+     "title": "EE103: Introduction to Matrix Methods",
+     "school": "Stanford University",
+     "description": "The course covers the basics of matrices and vectors, solving linear equations, least-squares methods, and many applications. It'll cover the mathematics, but the focus will be on using matrix methods in applications such as tomography, image processing, data fitting, time series prediction, finance, and many others. EE103 is based on a book that [Stephen Boyd](http://stanford.edu/~boyd/) and [Lieven Vandenberghe](http://www.seas.ucla.edu/~vandenbe/) are currently writing. Students will use a ne",
+     "links": [
+      "http://stanford.edu/class/ee103/",
+      "http://stanford.edu/~boyd/",
+      "http://www.seas.ucla.edu/~vandenbe/",
+      "http://julialang.org/",
+      "http://stanford.edu/class/ee103/lectures.html",
+      "http://stanford.edu/class/ee103/mma.html",
+      "http://stanford.edu/class/ee103/homework.html",
+      "http://stanford.edu/class/ee103/julia_files",
+      "http://course.fast.ai/ml.html",
+      "http://course.fast.ai/lessonsml1/lessonsml1.html",
+      "https://medium.com/@hiromi_suenaga/machine-learning-1-lesson-1-84a1dc2b5236",
+      "https://github.com/fastai/fastai/tree/master/courses/ml1"
+     ],
+     "primary": "http://stanford.edu/class/ee103/"
+    },
+    {
+     "code": "Info 290",
+     "title": "Info 290: Analyzing Big Data with Twitter",
+     "school": "UC Berkeley school of information",
+     "description": "In this course, UC Berkeley professors and Twitter engineers provide lectures on the most cutting-edge algorithms and software tools for data analytics as applied to Twitter's data. Topics include applied natural language processing algorithms such as sentiment analysis, large scale anomaly detection, real-time search, information diffusion and outbreak detection, trend detection in social streams, recommendation algorithms, and advanced frameworks for distributed computing.",
+     "links": [
+      "http://www.ischool.berkeley.edu/courses/i290-abdt",
+      "http://www.ischool.berkeley.edu/newsandevents/audiovideo/webcast/21963",
+      "http://blogs.ischool.berkeley.edu/i290-abdt-s12/",
+      "https://www.cs.ox.ac.uk/people/nando.defreitas/machinelearning/",
+      "https://github.com/torch/torch7/wiki/Cheatsheet",
+      "https://github.com/oxford-cs-ml-2015/"
+     ],
+     "primary": "http://www.ischool.berkeley.edu/courses/i290-abdt"
+    },
+    {
+     "code": "StatLearning",
+     "title": "StatLearning: Intro to Statistical Learning",
+     "school": "Stanford University",
+     "description": "This is an introductory-level course in supervised learning, with a focus on regression and classification methods. The syllabus includes: linear and polynomial regression, logistic regression and linear discriminant analysis; cross-validation and the bootstrap, model selection and regularization methods (ridge and lasso); nonlinear models, splines and generalized additive models; tree-based methods, random forests and boosting; support-vector machines.",
+     "links": [
+      "https://lagunita.stanford.edu/courses/HumanitiesandScience/StatLearning/Winter2015/about",
+      "http://www-bcf.usc.edu/~gareth/ISL/",
+      "http://statweb.stanford.edu/~tibs/ElemStatLearn/"
+     ],
+     "primary": "https://lagunita.stanford.edu/courses/HumanitiesandScience/StatLearning/Winter2015/about"
+    },
+    {
+     "code": "10-601",
+     "title": "10-601: Machine Learning",
+     "school": "Carnegie Mellon University",
+     "description": "This course covers the theory and practical algorithms for machine learning from a variety of perspectives. It covers topics such as Bayesian networks, decision tree learning, Support Vector Machines, statistical learning methods, unsupervised learning and reinforcement learning. The course covers theoretical concepts such as inductive bias, the PAC learning framework, Bayesian learning methods, margin-based learning, and Occam's Razor. Short programming assignments include hands-on experiments ",
+     "links": [
+      "http://www.cs.cmu.edu/~ninamf/courses/601sp15/",
+      "http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml",
+      "http://www.cs.cmu.edu/~tom/10701_sp11/proj.shtml"
+     ],
+     "primary": "http://www.cs.cmu.edu/~ninamf/courses/601sp15/"
+    },
+    {
+     "code": "10-708",
+     "title": "10-708: Probabilistic Graphical Models",
+     "school": "Carnegie Mellon University",
+     "description": "Many of the problems in artificial intelligence, statistics, computer systems, computer vision, natural language processing, and computational biology, among many other fields, can be viewed as the search for a coherent global conclusion from local information. The probabilistic graphical models framework provides a unified view for this wide range of problems, enabling efficient inference, decision-making and learning in problems with a very large number of attributes and huge datasets. This gr",
+     "links": [
+      "http://www.cs.cmu.edu/~epxing/Class/10708-14/index.html",
+      "http://www.cs.cmu.edu/~epxing/Class/10708-14/lecture.html",
+      "http://www.cs.cmu.edu/~epxing/Class/10708-14/homework.html"
+     ],
+     "primary": "http://www.cs.cmu.edu/~epxing/Class/10708-14/index.html"
+    },
+    {
+     "code": "11-785",
+     "title": "11-785: Deep Learning",
+     "school": "Carnegie Mellon University",
+     "description": "The course presents the subject through a series of seminars and labs, which will explore it from its early beginnings, and work themselves to some of the state of the art. The seminars will cover the basics of deep learning and the underlying theory, as well as the breadth of application areas to which it has been applied, as well as the latest issues on learning from very large amounts of data. We will concentrate largely, although not entirely, on the connectionist architectures that are most",
+     "links": [
+      "http://deeplearning.cs.cmu.edu/"
+     ],
+     "primary": "http://deeplearning.cs.cmu.edu/"
+    },
+    {
+     "code": "CS246",
+     "title": "CS246: Mining Massive Data Sets",
+     "school": "Stanford University",
+     "description": "The course will discuss data mining and machine learning algorithms for analyzing very large amounts of data. The emphasis will be on Map Reduce as a tool for creating parallel algorithms that can process very large amounts of data.",
+     "links": [
+      "http://web.stanford.edu/class/cs246/",
+      "http://www.mmds.org/#mooc",
+      "http://web.stanford.edu/class/cs246/handouts.html",
+      "http://www.mmds.org/#book"
+     ],
+     "primary": "http://web.stanford.edu/class/cs246/"
+    },
+    {
+     "code": "CS276",
+     "title": "CS276: Information Retrieval and Web Search",
+     "school": "Stanford University",
+     "description": "Basic and advanced techniques for text-based information systems: efficient text indexing; Boolean and vector space retrieval models; evaluation and interface issues; Web search including crawling, link-based algorithms, and Web metadata; text/Web clustering, classification; text mining.",
+     "links": [
+      "http://web.stanford.edu/class/cs276/index.html",
+      "http://web.stanford.edu/class/cs276/index.html#syllabus",
+      "http://web.stanford.edu/class/cs276/index.html#books"
+     ],
+     "primary": "http://web.stanford.edu/class/cs276/index.html"
+    },
+    {
+     "code": "Practical_RL",
+     "title": "Practical_RL: Reinforcement Learning in the Wild",
+     "school": "Yandex SDA",
+     "description": "A course on reinforcement learning in the wild. Taught on-campus in HSE and Yandex SDA (russian) and maintained to be friendly to online students (both english and russian).",
+     "links": [
+      "https://github.com/yandexdataschool/Practical_RL",
+      "https://github.com/yandexdataschool/Practical_RL#syllabus"
+     ],
+     "primary": "https://github.com/yandexdataschool/Practical_RL"
+    },
+    {
+     "code": "UvA DEEP LEARNING",
+     "title": "UvA DEEP LEARNING: UvA Deep Learning Course",
+     "school": "University of Amsterdam",
+     "description": "This course is taught in the MSc program in Artificial Intelligence of the University of Amsterdam. In this course we study the theory of deep learning, namely of modern, multi-layered neural networks trained on big data. The course focuses particularly on computer vision and language modelling, which are perhaps two of the most recognizable and impressive applications of the deep learning theory.",
+     "links": [
+      "http://uvadlc.github.io/",
+      "http://uvadlc.github.io/#lecture",
+      "http://uvadlc.github.io/#practicals",
+      "http://uvadlc.github.io/#other-links"
+     ],
+     "primary": "http://uvadlc.github.io/"
+    }
+   ]
+  },
+  {
+   "name": "Security",
+   "slug": "security",
+   "courses": [
+    {
+     "code": "CIS 4930 / CIS 5930",
+     "title": "CIS 4930 / CIS 5930: Offensive Computer Security",
+     "school": "Florida State University",
+     "description": "Course taught by [W. Owen Redwood](http://ww2.cs.fsu.edu/~redwood/) and [Xiuwen Liu](http://www.cs.fsu.edu/~liux/). It covers a wide range of computer security topics, starting from Secure C Coding and Reverse Engineering to Penetration Testing, Exploitation and Web Application Hacking, both from the defensive and the offensive point of view.",
+     "links": [
+      "http://www.cs.fsu.edu/~redwood/OffensiveComputerSecurity/",
+      "http://ww2.cs.fsu.edu/~redwood/",
+      "http://www.cs.fsu.edu/~liux/",
+      "http://www.cs.fsu.edu/~redwood/OffensiveComputerSecurity/lectures.html",
+      "http://www.cs.fsu.edu/~redwood/OffensiveComputerSecurity/assignments.html"
+     ],
+     "primary": "http://www.cs.fsu.edu/~redwood/OffensiveComputerSecurity/"
+    },
+    {
+     "code": "CS 155",
+     "title": "CS 155: Computer and Network Security",
+     "school": "Stanford",
+     "description": "Principles of computer systems security. Attack techniques and how to defend against them. Topics include: network attacks and defenses, operating system holes, application security (web, email, databases), viruses, social engineering attacks, privacy, and digital rights management. Course projects focus on building reliable code. Recommended: Basic Unix. Primarily intended for seniors and first-year graduate students.",
+     "links": [
+      "https://crypto.stanford.edu/cs155/"
+     ],
+     "primary": "https://crypto.stanford.edu/cs155/"
+    },
+    {
+     "code": "CS 161",
+     "title": "CS 161: Computer Security",
+     "school": "UC Berkeley",
+     "description": "Introduction to computer security. Cryptography, including encryption, authentication, hash functions, cryptographic protocols, and applications. Operating system security, access control. Network security, firewalls, viruses, and worms. Software security, defensive programming, and language-based security. Case studies from real-world systems.",
+     "links": [
+      "http://www-inst.eecs.berkeley.edu/~cs161/sp15/"
+     ],
+     "primary": "http://www-inst.eecs.berkeley.edu/~cs161/sp15/"
+    },
+    {
+     "code": "CS 259",
+     "title": "CS 259: Security Modeling and Analysis",
+     "school": "Stanford",
+     "description": "The course will cover a variety of contemporary network protocols and other systems with security properties. The course goal is to give students hands-on experience in using automated tools and related techniques to analyze and evaluate security mechanisms. To understand security properties and requirements, we will look at several network protocols and their properties, including secrecy, authentication, key establishment, and fairness. In parallel, the course will look at several models and t",
+     "links": [
+      "https://courseware.stanford.edu/pg/courses/331628/cs259-winter-2013"
+     ],
+     "primary": "https://courseware.stanford.edu/pg/courses/331628/cs259-winter-2013"
+    },
+    {
+     "code": "CS 261",
+     "title": "CS 261: Internet/Network Security",
+     "school": "UC Berkeley",
+     "description": "This class aims to provide a thorough grounding in network security suitable for those interested in conducting research in the area, as well as students more generally interested in either security or networking. We will also look at broader issues relating to Internet security for which networking plays a role.  Topics include: denial-of-service; capabilities; network intrusion detection; worms; forensics; scanning; traffic analysis / inferring activity; architecture; protocol issues; legality",
+     "links": [
+      "http://www.icir.org/vern/cs261n-Sp14/"
+     ],
+     "primary": "http://www.icir.org/vern/cs261n-Sp14/"
+    },
+    {
+     "code": "CS 5430",
+     "title": "CS 5430: System Security",
+     "school": "Cornell University",
+     "description": "This course discusses security for computers and networked information systems. We focus on abstractions, principles, and defenses for implementing military as well as commercial-grade secure systems.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS5430/2013sp/",
+      "http://www.cs.cornell.edu/courses/CS5430/2013sp/01.intro.html",
+      "http://www.cs.cornell.edu/courses/CS5430/2013sp/02.outline.html"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS5430/2013sp/"
+    },
+    {
+     "code": "CSCI 4968",
+     "title": "CSCI 4968: Modern Binary Exploitation",
+     "school": "Rensselaer Polytechnic Institute",
+     "description": "This repository contains the materials as developed and used by [RPISEC](http://rpis.ec) to",
+     "links": [
+      "https://github.com/RPISEC/MBE",
+      "http://rpis.ec",
+      "http://rpi.edu",
+      "http://security.cs.rpi.edu/courses/binexp-spring2015/lectures/",
+      "https://github.com/RPISEC/MBE/tree/master/src"
+     ],
+     "primary": "https://github.com/RPISEC/MBE"
+    },
+    {
+     "code": "CSCI 4976",
+     "title": "CSCI 4976: Malware Analysis",
+     "school": "Rensselaer Polytechnic Institute",
+     "description": "This repository contains the materials as developed and used by [RPISEC](http://rpis.ec) to",
+     "links": [
+      "https://github.com/RPISEC/Malware",
+      "http://rpis.ec",
+      "http://rpi.edu"
+     ],
+     "primary": "https://github.com/RPISEC/Malware"
+    },
+    {
+     "code": "EECS 588",
+     "title": "EECS 588: Computer & Network Security",
+     "school": "University of Michigan",
+     "description": "Taught by [J. Alex Halderman](https://jhalderm.com/) who has analyzed the security of Electronic Voting Machines in the [US](https://jhalderm.com/pub/papers/dcvoting-fc12.pdf) and [over](https://jhalderm.com/pub/papers/ivoting-ccs14.pdf) [seas](https://jhalderm.com/pub/papers/evm-ccs10.pdf).",
+     "links": [
+      "https://www.eecs.umich.edu/courses/eecs588/",
+      "https://jhalderm.com/",
+      "https://jhalderm.com/pub/papers/dcvoting-fc12.pdf",
+      "https://jhalderm.com/pub/papers/ivoting-ccs14.pdf",
+      "https://jhalderm.com/pub/papers/evm-ccs10.pdf",
+      "https://www.eecs.umich.edu/courses/eecs588/readings.html",
+      "http://www.amazon.com/Practical-Malware-Analysis-Dissecting-Malicious/dp/1593272901",
+      "https://github.com/RPISEC/Malware/tree/master/Lectures",
+      "https://github.com/RPISEC/Malware/tree/master/Labs",
+      "https://github.com/RPISEC/Malware/tree/master/Projects"
+     ],
+     "primary": "https://www.eecs.umich.edu/courses/eecs588/"
+    },
+    {
+     "code": "6.857",
+     "title": "6.857: Computer and Network Security",
+     "school": "MIT",
+     "description": "Emphasis on applied cryptography and may include: basic notion of systems security, cryptographic hash functions, symmetric cryptography (one-time pad, stream ciphers, block ciphers), cryptanalysis, secret-sharing, authentication codes, public-key cryptography (encryption, digital signatures), public-key attacks, web browser security, biometrics, electronic cash, viruses, electronic voting, Assignments include a group final project. Topics may vary year to year.",
+     "links": [
+      "https://courses.csail.mit.edu/6.857/2015/",
+      "https://courses.csail.mit.edu/6.857/2015/handouts",
+      "https://courses.csail.mit.edu/6.857/2015/references"
+     ],
+     "primary": "https://courses.csail.mit.edu/6.857/2015/"
+    },
+    {
+     "code": "6.858",
+     "title": "6.858: Computer Systems Security",
+     "school": "MIT",
+     "description": "Design and implementation of secure computer systems. Lectures cover threat models, attacks that compromise security, and techniques for achieving security, based on recent research papers. Topics include operating system (OS) security, capabilities, information flow control, language security, network protocols, hardware security, and security in web applications.",
+     "links": [
+      "http://css.csail.mit.edu/6.858/2014/",
+      "http://research.microsoft.com/en-us/people/mickens/",
+      "http://people.csail.mit.edu/nickolai/",
+      "http://css.csail.mit.edu/6.858/2014/schedule.html",
+      "http://css.csail.mit.edu/6.858/2014/quiz.html",
+      "http://css.csail.mit.edu/6.858/2014/reference.html",
+      "http://css.csail.mit.edu/6.858/2014/projects.html"
+     ],
+     "primary": "http://css.csail.mit.edu/6.858/2014/"
+    },
+    {
+     "code": "18-636",
+     "title": "18-636: Browser Security",
+     "school": "Stanford",
+     "description": "The Web continues to grow in popularity as platform for retail transactions, financial services, and rapidly evolving forms of communication. It is becoming an increasingly attractive target for attackers who wish to compromise users' systems or steal data from other sites. Browser vendors must stay ahead of these attacks by providing features that support secure web applications. This course will study vulnerabilities in existing web browsers and the applications they render, as well as new tec",
+     "links": [
+      "https://courseware.stanford.edu/pg/courses/334553/18636-spring-2013"
+     ],
+     "primary": "https://courseware.stanford.edu/pg/courses/334553/18636-spring-2013"
+    }
+   ]
+  },
+  {
+   "name": "Artificial Intelligence",
+   "slug": "artificial-intelligence",
+   "courses": [
+    {
+     "code": "CS 188",
+     "title": "CS 188: Introduction to Artificial Intelligence",
+     "school": "UC Berkeley",
+     "description": "This course will introduce the basic ideas and techniques underlying the design of intelligent computer systems. A specific emphasis will be on the statistical and decision-theoretic modeling paradigm. By the end of this course, you will have built autonomous agents that efficiently make decisions in fully informed, partially observable and adversarial settings. Your agents will draw inferences in uncertain environments and optimize actions for arbitrary reward structures. Your machine learning ",
+     "links": [
+      "http://ai.berkeley.edu/home.html",
+      "http://ai.berkeley.edu/lecture_videos.html",
+      "http://ai.berkeley.edu/project_overview.html",
+      "http://ai.berkeley.edu/exams.html"
+     ],
+     "primary": "http://ai.berkeley.edu/home.html"
+    },
+    {
+     "code": "CS 4700",
+     "title": "CS 4700: Foundations of Artificial Intelligence",
+     "school": "Cornell University",
+     "description": "This course will provide an introduction to computer vision, with topics including image formation, feature detection, motion estimation, image mosaics, 3D shape reconstruction, and object and face detection and recognition. Applications of these techniques include building 3D maps, creating virtual characters, organizing photo and video databases, human computer interaction, video surveillance, automatic vehicle navigation, and mobile computer vision. This is a project-based course, in which yo",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS4700/2014fa/"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS4700/2014fa/"
+    },
+    {
+     "code": "CS 6700",
+     "title": "CS 6700: Advanced Artificial Intelligence",
+     "school": "Cornell University",
+     "description": "The design of systems that are among top 10 performers in the world (human, computer, or hybrid human-computer).",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS6700/2013sp/",
+      "http://www.cs.cornell.edu/courses/CS6700/2013sp/lectures/CS6700-Overview_v2.pptx"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS6700/2013sp/"
+    },
+    {
+     "code": "6.868J",
+     "title": "6.868J: The Society of Mind",
+     "school": "MIT",
+     "description": "This course is an introduction, by Prof. [Marvin Minsky](http://www.nytimes.com/2016/01/26/business/marvin-minsky-pioneer-in-artificial-intelligence-dies-at-88.html?_r=0), to the theory that tries to explain how minds are made from collections of simpler processes. It treats such aspects of thinking as vision, language, learning, reasoning, memory, consciousness, ideals, emotions, and personality. It incorporates ideas from psychology, artificial intelligence, and computer science to resolve the",
+     "links": [
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-868j-the-society-of-mind-fall-2011/index.htm",
+      "http://www.nytimes.com/2016/01/26/business/marvin-minsky-pioneer-in-artificial-intelligence-dies-at-88.html?_r=0",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-868j-the-society-of-mind-fall-2011/video-lectures/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-868j-the-society-of-mind-fall-2011/assignments/",
+      "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-868j-the-society-of-mind-fall-2011/readings/"
+     ],
+     "primary": "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-868j-the-society-of-mind-fall-2011/index.htm"
+    }
+   ]
+  },
+  {
+   "name": "Computer Graphics",
+   "slug": "computer-graphics",
+   "courses": [
+    {
+     "code": "CAP 5415",
+     "title": "CAP 5415: Computer Vision",
+     "school": "University of Central Florida",
+     "description": "An introductory level course covering the basic topics of computer vision, and introducing some fundamental approaches for computer vision research.",
+     "links": [
+      "http://crcv.ucf.edu/courses/CAP5415/",
+      "http://crcv.ucf.edu/videos/Lecture_Videos/",
+      "http://crcv.ucf.edu/courses/CAP5415/Fall2014/index.php"
+     ],
+     "primary": "http://crcv.ucf.edu/courses/CAP5415/"
+    },
+    {
+     "code": "CIS 581",
+     "title": "CIS 581: Computer Vision and Computational Photography",
+     "school": "University of Pennsylvania",
+     "description": "An introductory course in computer vision and computational photography focusing on four topics: image features, image morphing, shape matching, and image search.",
+     "links": [
+      "https://alliance.seas.upenn.edu/~cis581/wiki/index.php?title=CIS_581:_Computer_Vision_%26_Computational_Photography",
+      "https://alliance.seas.upenn.edu/~cis581/wiki/index.php?title=Schedule",
+      "https://alliance.seas.upenn.edu/~cis581/wiki/index.php?title=Projects"
+     ],
+     "primary": "https://alliance.seas.upenn.edu/~cis581/wiki/index.php?title=CIS_581:_Computer_Vision_%26_Computational_Photography"
+    },
+    {
+     "code": "CMU 462",
+     "title": "CMU 462: Computer Graphics",
+     "school": "Carnegie Mellon University",
+     "description": "This course provides a comprehensive introduction to computer graphics. Focuses on fundamental concepts and techniques, and their cross-cutting relationship to multiple problem domains in graphics (rendering, animation, geometry, imaging). Topics include: sampling, aliasing, interpolation, rasterization, geometric transformations, parameterization, visibility, compositing, filtering, convolution, curves & surfaces, geometric data structures, subdivision, meshing, spatial hierarchies, ray tracing",
+     "links": [
+      "http://15462.courses.cs.cmu.edu/fall2015",
+      "http://15462.courses.cs.cmu.edu/fall2015/reading",
+      "http://15462.courses.cs.cmu.edu/fall2015/exercises"
+     ],
+     "primary": "http://15462.courses.cs.cmu.edu/fall2015"
+    },
+    {
+     "code": "CS 378",
+     "title": "CS 378: 3D Reconstruction with Computer Vision",
+     "school": "UTexas",
+     "description": "In this lab-based class, we'll dive into practical applications of 3D reconstruction, combining hardware and software to build our own 3D environments from scratch. We'll use open-source frameworks like OpenCV to do the heavy lifting, with the focus on understanding and applying state-of-the art approaches to geometric computer vision",
+     "links": [
+      "https://github.com/ut-cs378-vision-2014fall/course-info",
+      "https://github.com/ut-cs378-vision-2014fall/course-info/tree/master/meeting-notes"
+     ],
+     "primary": "https://github.com/ut-cs378-vision-2014fall/course-info"
+    },
+    {
+     "code": "CS 4620",
+     "title": "CS 4620: Introduction to Computer Graphics",
+     "school": "Cornell University",
+     "description": "The study of creating, manipulating, and using visual images in the computer.",
+     "links": [
+      "http://www.cs.cornell.edu/Courses/CS4620/2014fa/index.shtml#",
+      "http://www.cs.cornell.edu/Courses/CS4620/2014fa/index.shtml#asgn",
+      "http://www.cs.cornell.edu/Courses/CS4620/2014fa/index.shtml#exams"
+     ],
+     "primary": "http://www.cs.cornell.edu/Courses/CS4620/2014fa/index.shtml#"
+    },
+    {
+     "code": "CS 4670",
+     "title": "CS 4670: Introduction to Computer Vision",
+     "school": "Cornell University",
+     "description": "This course will provide an introduction to computer vision, with topics including image formation, feature detection, motion estimation, image mosaics, 3D shape reconstruction, and object and face detection and recognition. Applications of these techniques include building 3D maps, creating virtual characters, organizing photo and video databases, human computer interaction, video surveillance, automatic vehicle navigation, and mobile computer vision. This is a project-based course, in which yo",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS4670/2015sp/",
+      "http://www.cs.cornell.edu/courses/CS4670/2015sp/projects/projects.html",
+      "http://www.cs.cornell.edu/courses/CS4670/2015sp/lectures/lectures.html"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS4670/2015sp/"
+    },
+    {
+     "code": "CS 6670",
+     "title": "CS 6670: Computer Vision",
+     "school": "Cornell University",
+     "description": "Introduction to computer vision. Topics include edge detection, image segmentation, stereopsis, motion and optical flow, image mosaics, 3D shape reconstruction, and object recognition. Students are required to implement several of the algorithms covered in the course and complete a final project.",
+     "links": [
+      "https://canvas.instructure.com/courses/904706",
+      "https://canvas.instructure.com/courses/904706/assignments/syllabus",
+      "https://canvas.instructure.com/courses/904706/assignments"
+     ],
+     "primary": "https://canvas.instructure.com/courses/904706"
+    },
+    {
+     "code": "CSCI 1230",
+     "title": "CSCI 1230: Introduction to Computer Graphics",
+     "school": "Brown University",
+     "description": "This course offers an in-depth exploration of fundamental concepts in 2D and 3D computer graphics. It introduces 2D raster graphics techniques, including scan conversion, simple image processing, interaction techniques and user interface design. The bulk of the course is devoted to 3D modeling, geometric transformations, and 3D viewing and rendering.",
+     "links": [
+      "http://cs.brown.edu/courses/csci1230/index.html",
+      "http://cs.brown.edu/courses/csci1230/lectures.html",
+      "http://cs.brown.edu/courses/csci1230/labs.html",
+      "http://cs.brown.edu/courses/csci1230/demos.html"
+     ],
+     "primary": "http://cs.brown.edu/courses/csci1230/index.html"
+    },
+    {
+     "code": "CSCI-GA.2270-001",
+     "title": "CSCI-GA.2270-001: Graduate Computer Graphics",
+     "school": "New York University",
+     "description": "Step-by-step study computer graphics, with reading and homework at each lecture (Fall2015)",
+     "links": [
+      "https://mrl.nyu.edu/~perlin/courses/fall2015/"
+     ],
+     "primary": "https://mrl.nyu.edu/~perlin/courses/fall2015/"
+    }
+   ]
+  },
+  {
+   "name": "Misc",
+   "slug": "misc",
+   "courses": [
+    {
+     "code": "AM 207",
+     "title": "AM 207: Monte Carlo Methods and Stochastic Optimization",
+     "school": "Harvard University",
+     "description": "This course introduces important principles of Monte Carlo techniques and demonstrates the power of these techniques with simple (but very useful) applications. All of this in Python!",
+     "links": [
+      "http://am207.github.io/2016/index.html",
+      "http://cm.dce.harvard.edu/2015/02/24104/publicationListing.shtml",
+      "http://am207.github.io/2016/homework.html",
+      "http://am207.github.io/2016/lectures.html"
+     ],
+     "primary": "http://am207.github.io/2016/index.html"
+    },
+    {
+     "code": "CS 75",
+     "title": "CS 75: Introduction to Game Development",
+     "school": "Tufts University",
+     "description": "The course taught by [Ming Y. Chow](http://mchow01.github.io) teaches game development initially in PyGame through Python, before moving on to addressing all facets of game development. Topics addressed include game physics, sprites, animation, game development methodology, sound, testing, MMORPGs and online games, and addressing mobile development in Android, HTML5, and iOS. Most to all of the development is focused on PyGame for learning principles",
+     "links": [
+      "http://ocw.tufts.edu/Course/75",
+      "http://mchow01.github.io",
+      "http://ocw.tufts.edu/Course/75/Learningunits",
+      "http://ocw.tufts.edu/Course/75/Assignments",
+      "http://ocw.tufts.edu/Course/75/Labs"
+     ],
+     "primary": "http://ocw.tufts.edu/Course/75"
+    },
+    {
+     "code": "CS 50",
+     "title": "CS 50: Intro to Game Developement",
+     "school": "Harvard University",
+     "description": "This course picks up where Harvard College\u2019s [CS50](https://cs50.harvard.edu/) leaves off, focusing on the development of 2D and 3D interactive games. Students explore the design of such childhood games as Super Mario Bros., Legend of Zelda, and Portal in a quest to understand how video games themselves are implemented. Via lectures and hands-on projects, the course explores principles of 2D and 3D graphics, animation, sound, and collision detection using frameworks like Unity and [L\u00d6VE 2D](http",
+     "links": [
+      "https://cs50.github.io/games/",
+      "https://cs50.harvard.edu/",
+      "https://love2d.org/",
+      "https://cs50.github.io/games/assignments",
+      "https://cs50.github.io/games/lectures"
+     ],
+     "primary": "https://cs50.github.io/games/"
+    },
+    {
+     "code": "CS 100",
+     "title": "CS 100: Open Source Software Construction",
+     "school": "UC Riverside",
+     "description": "This is a course on how to be a hacker. Your first four homework assignments walk you through the process of building your own unix shell. You'll be developing it as an open source project, and you will collaborate with each other at various points.",
+     "links": [
+      "https://github.com/mikeizbicki/ucr-cs100",
+      "https://github.com/mikeizbicki/ucr-cs100/tree/2015winter/assignments"
+     ],
+     "primary": "https://github.com/mikeizbicki/ucr-cs100"
+    },
+    {
+     "code": "CS 108",
+     "title": "CS 108: Object Oriented System Design",
+     "school": "Stanford",
+     "description": "Software design and construction in the context of large OOP libraries. Taught in Java. Topics: OOP design, design patterns, testing, graphical user interface (GUI) OOP libraries, software engineering strategies, approaches to programming in teams.",
+     "links": [
+      "http://web.stanford.edu/class/archive/cs/cs108/cs108.1092/"
+     ],
+     "primary": "http://web.stanford.edu/class/archive/cs/cs108/cs108.1092/"
+    },
+    {
+     "code": "CS 168",
+     "title": "CS 168: Computer Networks",
+     "school": "UC Berkeley",
+     "description": "This is an undergraduate level course covering the fundamental concepts of networking as embodied in the Internet. The course will cover a wide range of topics; see the lecture schedule for more details. While the class has a textbook, we will not follow its order of presentation but will instead use the text as a reference when covering each individual topic. The course will also have several projects that involve programming (in Python).",
+     "links": [
+      "https://inst.eecs.berkeley.edu/~cs168/fa15/"
+     ],
+     "primary": "https://inst.eecs.berkeley.edu/~cs168/fa15/"
+    },
+    {
+     "code": "CS 193a",
+     "title": "CS 193a: Android App Development, Spring 2016",
+     "school": "Stanford University",
+     "description": "Course Description: This course provides an introduction to developing applications for the Android mobile platform.",
+     "links": [
+      "http://web.stanford.edu/class/cs193a/lectures.shtml",
+      "http://web.stanford.edu/class/cs193a/videos.shtml",
+      "https://github.com/VoLuong/Materials-CS193A-Android-App-Development-Standford"
+     ],
+     "primary": "http://web.stanford.edu/class/cs193a/lectures.shtml"
+    },
+    {
+     "code": "CS 193p",
+     "title": "CS 193p: Developing Applications for iOS",
+     "school": "Stanford University",
+     "description": "Updated for iOS 7. Tools and APIs required to build applications for the iPhone and iPad platform using the iOS SDK. User interface designs for mobile devices and unique user interactions using multi-touch technologies. Object-oriented design using model-view-controller paradigm, memory management, Objective-C programming language. Other topics include: object-oriented database API, animation, multi-threading and performance considerations.",
+     "links": [
+      "https://itunes.apple.com/us/course/developing-ios-7-apps-for/id733644550",
+      "https://itunes.apple.com/us/course/programming-abstractions/id495054099",
+      "https://itunes.apple.com/us/course/developing-ios-8-apps-swift/id961180099",
+      "https://itunes.apple.com/us/course/developing-ios-9-apps-swift/id1104579961"
+     ],
+     "primary": "https://itunes.apple.com/us/course/developing-ios-7-apps-for/id733644550"
+    },
+    {
+     "code": "CS 223A",
+     "title": "CS 223A: Introduction to Robotics",
+     "school": "Stanford University",
+     "description": "The purpose of this course is to introduce you to basics of modeling, design, planning, and control of robot systems. In essence, the material treated in this course is a brief survey of relevant results from geometry, kinematics, statics, dynamics, and control.",
+     "links": [
+      "https://see.stanford.edu/Course/CS223A"
+     ],
+     "primary": "https://see.stanford.edu/Course/CS223A"
+    },
+    {
+     "code": "CS 262a",
+     "title": "CS 262a: Advanced Topics in Computer Systems",
+     "school": "UC Berkeley",
+     "description": "CS262a is the first semester of a year-long sequence on computer systems research, including operating systems, database systems, and Internet infrastructure systems.  The goal of the course is to cover a broad array of research topics in computer systems, and to engage you in top-flight systems research.  The first semester is devoted to basic thematic issues and underlying techniques in computer systems, while the second semester goes deeper into topics related to scalable, parallel and distri",
+     "links": [
+      "http://www.cs.berkeley.edu/~brewer/cs262/",
+      "https://cs162.eecs.berkeley.edu/"
+     ],
+     "primary": "http://www.cs.berkeley.edu/~brewer/cs262/"
+    },
+    {
+     "code": "CS 294",
+     "title": "CS 294: Cutting-edge Web Technologies",
+     "school": "Berkeley",
+     "description": "Want to learn what makes future web technologies tick? Join us for the class where we will dive into the internals of many of the newest web technologies, analyze and dissect them. We will conduct survey lectures to provide the background and overview of the area as well as invite guest lecturers from various leading projects to present their technologies.",
+     "links": [
+      "http://inst.eecs.berkeley.edu/~cs294-101/sp15/"
+     ],
+     "primary": "http://inst.eecs.berkeley.edu/~cs294-101/sp15/"
+    },
+    {
+     "code": "CS 411",
+     "title": "CS 411: Software Architecture Design",
+     "school": "Bilkent University",
+     "description": "This course teaches the basic concepts, methods and techniques for designing software architectures. The topics include: rationale for software architecture design, modeling software architecture design, architectural styles/patterns, architectural requirements analysis, comparison and evaluation of architecture design methods, synthesis-based software architecture design, software product-line architectures, domain modeling, domain engineering and application engineering, software architecture ",
+     "links": [
+      "http://video.bilkent.edu.tr/course_videos.php?courseid=10"
+     ],
+     "primary": "http://video.bilkent.edu.tr/course_videos.php?courseid=10"
+    },
+    {
+     "code": "CS 3152",
+     "title": "CS 3152: Introduction to Computer Game Development",
+     "school": "Cornell University",
+     "description": "A project-based course in which programmers and designers collaborate to make a computer game. This course investigates the theory and practice of developing computer games from a blend of technical, aesthetic, and cultural perspectives. Technical aspects of game architecture include software engineering, artificial intelligence, game physics, computer graphics, and networking. Aesthetic and cultural include art and modeling, sound and music, game balance, and player experience.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS3152/2014sp/",
+      "http://www.cs.cornell.edu/courses/CS3152/2014sp/about/faq.php",
+      "http://www.cs.cornell.edu/courses/CS3152/2014sp/lectures/index.php",
+      "http://www.cs.cornell.edu/courses/CS3152/2014sp/assignments/index.php"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS3152/2014sp/"
+    },
+    {
+     "code": "CS 4152",
+     "title": "CS 4152: Advanced Topics in Computer Game Development",
+     "school": "Cornell University",
+     "description": "Project-based follow-up course to CS/INFO 3152. Students work in a multidisciplinary team to develop a game that incorporates innovative game technology. Advanced topics include 3D game development, mobile platforms, multiplayer gaming, and nontraditional input devices. There is a special emphasis on developing games that can be submitted to festivals and competitions, or that can be commercialized.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS4152/2014sp/",
+      "http://www.cs.cornell.edu/courses/CS4152/2014sp/about/faq.php",
+      "http://www.cs.cornell.edu/courses/CS4152/2014sp/sessions/index.php",
+      "http://www.cs.cornell.edu/courses/CS4152/2014sp/assignments/index.php"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS4152/2014sp/"
+    },
+    {
+     "code": "CS 4154",
+     "title": "CS 4154: Analytics-driven Game Design",
+     "school": "Cornell University",
+     "description": "A project-based course in which programmers and designers collaborate to design, implement, and release a video game online through popular game portals. In this course, students will use the internet to gather data anonymously from players. Students will analyze this data in order to improve their game over multiple iterations. Technical aspects of this course include programming, database architecture, and statistical analysis.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS4154/2014fa/",
+      "http://www.cs.cornell.edu/courses/CS4154/2014fa/about/faq.php",
+      "http://www.cs.cornell.edu/courses/CS4154/2014fa/lectures/index.php",
+      "http://www.cs.cornell.edu/courses/CS4154/2014fa/assignments/index.php"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS4154/2014fa/"
+    },
+    {
+     "code": "CS 4812",
+     "title": "CS 4812: Quantum Information Processing",
+     "school": "Cornell University",
+     "description": "Hardware that exploits quantum phenomena can dramatically alter the nature of computation. Though constructing a working quantum computer is a formidable technological challenge, there has been much recent experimental progress. In addition, the theory of quantum computation is of interest in itself, offering strikingly different perspectives on the nature of computation and information, as well as providing novel insights into the conceptual puzzles posed by the quantum theory. The course is in",
+     "links": [
+      "https://courses.cit.cornell.edu/physics4481-7681_2018fa/"
+     ],
+     "primary": "https://courses.cit.cornell.edu/physics4481-7681_2018fa/"
+    },
+    {
+     "code": "CS 4860",
+     "title": "CS 4860: Applied Logic",
+     "school": "Cornell University",
+     "description": "In addition to basic first-order logic, when taught by Computer Science this course involves elements of Formal Methods and Automated Reasoning. Formal Methods is concerned with proving properties of algorithms, specifying programming tasks and synthesizing programs from proofs. We will use formal methods tools such as interactive proof assistants (see [www.nuprl.org](http://www.nuprl.org)). We will also spend two weeks on constructive type theory, the language used by the Coq and Nuprl proof as",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS4860/2012fa/",
+      "http://www.nuprl.org",
+      "http://www.cs.cornell.edu/courses/CS4860/2012fa/schedule.php"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS4860/2012fa/"
+    },
+    {
+     "code": "CS 5150",
+     "title": "CS 5150: Software Engineering",
+     "school": "Cornell University",
+     "description": "Introduction to the practical problems of specifying, designing, building, testing, and delivering reliable software systems",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS5150/2014fa/overview.html",
+      "http://www.cs.cornell.edu/courses/CS5150/2014fa/materials.html",
+      "http://www.cs.cornell.edu/courses/CS5150/2014fa/assignments.html"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS5150/2014fa/overview.html"
+    },
+    {
+     "code": "CS 5220",
+     "title": "CS 5220: Applications of Parallel Computers",
+     "school": "Cornell University",
+     "description": "How do we solve the large-scale problems of science quickly on modern computers? How do we measure the performance of new or existing simulation codes, and what things can we do to make them run faster? How can we best take advantage of features like multicore processors, vector units, and graphics co-processors? These are the types of questions we will address in CS 5220, Applications of Parallel Computers. Topics include:",
+     "links": [
+      "http://www.cs.cornell.edu/~bindel/class/cs5220-f11/",
+      "http://www.cs.cornell.edu/~bindel/class/cs5220-f11/lectures.html",
+      "http://www.cs.cornell.edu/~bindel/class/cs5220-f11/assignments.html"
+     ],
+     "primary": "http://www.cs.cornell.edu/~bindel/class/cs5220-f11/"
+    },
+    {
+     "code": "CS 5540",
+     "title": "CS 5540: Computational Techniques for Analyzing Clinical Data",
+     "school": "Cornell University",
+     "description": "CS5540 is a masters-level course that covers a wide range of clinical problems and their associated computational challenges. The practice of medicine is filled with digitally accessible information about patients, ranging from EKG readings to MRI images to electronic health records. This poses a huge opportunity for computer tools that make sense out of this data. Computation tools can be used to answer seemingly straightforward questions about a single patient's test results (\u201cDoes this patien",
+     "links": [
+      "https://sites.google.com/site/cs5540sp2013/",
+      "https://sites.google.com/site/cs5540sp2013/home/course-description",
+      "https://sites.google.com/site/cs5540sp2013/lectures",
+      "https://sites.google.com/site/cs5540sp2013/assignments"
+     ],
+     "primary": "https://sites.google.com/site/cs5540sp2013/"
+    },
+    {
+     "code": "CS 5724",
+     "title": "CS 5724: Evolutionary Computation",
+     "school": "Cornell University",
+     "description": "This course will cover advanced topics in evolutionary algorithms and their application to open-ended computational design. The field of evolutionary computation tries to address large-scale optimization and planning problems through stochastic population-based methods. It draws inspiration from evolutionary processes in nature and in engineering, and also serves as abstract models for these phenomena. Evolutionary processes are generally weak methods that require little information about the pr",
+     "links": [
+      "http://courses2.cit.cornell.edu/cs5724/",
+      "http://courses2.cit.cornell.edu/cs5724/schedule.htm"
+     ],
+     "primary": "http://courses2.cit.cornell.edu/cs5724/"
+    },
+    {
+     "code": "CS 6452",
+     "title": "CS 6452: Datacenter Networks and Services",
+     "school": "Cornell University",
+     "description": "CS6452 focuses on datacenter networks and services. The emerging demand for web services and cloud computing have created need for large scale data centers. The hardware and software infrastructure for datacenters critically determines the functionality, performance, cost and failure tolerance of applications running on that datacenter. This course will examine design alternatives for both the hardware (networking) infrastructure, and the software infrastructure for datacenters.",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS6452/2012sp/index.php",
+      "http://www.cs.cornell.edu/courses/CS6452/2012sp/lectures.php"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS6452/2012sp/index.php"
+    },
+    {
+     "code": "CS 6630",
+     "title": "CS 6630: Realistic Image Synthesis",
+     "school": "Cornell University",
+     "description": "CS6630 is an introduction to physics-based rendering at the graduate level. Starting from the fundamentals of light transport we will look at formulations of the Rendering Equation, and a series of Monte Carlo methods, from sequential sampling to multiple importance sampling to Markov Chains, for solving the equation to make pictures. We'll look at light reflection from surfaces and scattering in volumes, illumination from luminaries and environments, and diffusion models for translucent materia",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS6630/2012sp/about.stm",
+      "http://www.cs.cornell.edu/courses/CS6630/2012sp/schedule.stm"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS6630/2012sp/about.stm"
+    },
+    {
+     "code": "CS 6640",
+     "title": "CS 6640: Computational Photography",
+     "school": "Cornell University",
+     "description": "A course on the emerging applications of computation in photography. Likely topics include digital photography, unconventional cameras and optics, light field cameras, image processing for photography, techniques for combining multiple images, advanced image editing algorithms, and projector-camera systems.cornell.edu/courses/CS6630/2012sp/about.stm)",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS6640/2012fa/index.shtml#",
+      "http://www.cs.cornell.edu/courses/CS6640/2012fa/index.shtml#schedule",
+      "http://www.cs.cornell.edu/courses/CS6640/2012fa/index.shtml#hw"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS6640/2012fa/index.shtml#"
+    },
+    {
+     "code": "CS 6650",
+     "title": "CS 6650: Computational Motion",
+     "school": "Cornell University",
+     "description": "Covers computational aspects of motion, broadly construed. Topics include the computer representation, modeling, analysis, and simulation of motion, and its relationship to various areas, including computational geometry, mesh generation, physical simulation, computer animation, robotics, biology, computer vision, acoustics, and spatio-temporal databases. Students implement several of the algorithms covered in the course and complete a final project.  This offering will also explore the special ",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS6650/2013fa/"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS6650/2013fa/"
+    },
+    {
+     "code": "CS 6840",
+     "title": "CS 6840: Algorithmic Game Theory",
+     "school": "Cornell University",
+     "description": "Algorithmic Game Theory combines algorithmic thinking with game-theoretic, or, more generally, economic concepts. The course will study a range of topics at this interface",
+     "links": [
+      "http://www.cs.cornell.edu/courses/CS6840/2014sp/"
+     ],
+     "primary": "http://www.cs.cornell.edu/courses/CS6840/2014sp/"
+    },
+    {
+     "code": "CSE 154",
+     "title": "CSE 154: Web Programming",
+     "school": "University of Washington",
+     "description": "This course is an introduction to programming for the World Wide Web. Covers use of HTML, CSS, PHP, JavaScript, AJAX, and SQL.",
+     "links": [
+      "http://courses.cs.washington.edu/courses/cse154/14au/",
+      "http://courses.cs.washington.edu/courses/cse154/14au/lectures.shtml#today",
+      "http://courses.cs.washington.edu/courses/cse154/14au/homework.shtml"
+     ],
+     "primary": "http://courses.cs.washington.edu/courses/cse154/14au/"
+    },
+    {
+     "code": "ESM 296-4F",
+     "title": "ESM 296-4F: GIS & Spatial Analysis",
+     "school": "UC Santa Barbara",
+     "description": "Taught by [James Frew](http://www.bren.ucsb.edu/people/Faculty/james_frew.htm), [Ben Best](http://mgel.env.duke.edu/people/ben-best/), and [Lisa Wedding](http://www.centerforoceansolutions.org/team/lisa-wedding)",
+     "links": [
+      "http://ucsb-bren.github.io/esm296-4f/",
+      "http://www.bren.ucsb.edu/people/Faculty/james_frew.htm",
+      "http://mgel.env.duke.edu/people/ben-best/",
+      "http://www.centerforoceansolutions.org/team/lisa-wedding"
+     ],
+     "primary": "http://ucsb-bren.github.io/esm296-4f/"
+    },
+    {
+     "code": "ICS 314",
+     "title": "ICS 314: Software Engineering",
+     "school": "University of Hawaii",
+     "description": "Taught by [Philip Johnson](http://philipmjohnson.org/)",
+     "links": [
+      "http://philipmjohnson.github.io/ics314f13/",
+      "http://philipmjohnson.org/",
+      "http://philipmjohnson.org/essays/ase-initial-results.html",
+      "http://philipmjohnson.github.io/ics314f13/readings/",
+      "http://philipmjohnson.github.io/ics314f13/experiences/",
+      "http://philipmjohnson.github.io/ics314f13/assessments/"
+     ],
+     "primary": "http://philipmjohnson.github.io/ics314f13/"
+    },
+    {
+     "code": "IGME 582",
+     "title": "IGME 582: Humanitarian Free & Open Source Software Development",
+     "school": "Rochester Institute of Technology",
+     "description": "This course provides students with exposure to the design, creation and production of Open Source Software projects. Students will be introduced to the historic intersections of technology and intellectual property rights and will become familiar with Open Source development processes, tools and practices.",
+     "links": [
+      "http://hfoss-fossrit.rhcloud.com"
+     ],
+     "primary": "http://hfoss-fossrit.rhcloud.com"
+    },
+    {
+     "code": "I485 / H400",
+     "title": "I485 / H400: Biologically Inspired Computation",
+     "school": "Indiana University",
+     "description": "Course taught by [Luis Rocha](http://www.informatics.indiana.edu/rocha/lr_form.html) about the multi-disciplinary field algorithms inspired by naturally occurring phenomenon. This course provides introduces the following areas: L-systems, Cellular Automata, Emergence, Genetic Algorithms, Swarm Intelligence and Artificial Immune Systems. It's aim is to cover the fundamentals and enable readers to build up a proficiency in applying various algorithms to real-world problems.",
+     "links": [
+      "http://www.informatics.indiana.edu/rocha/i-bic/",
+      "http://www.informatics.indiana.edu/rocha/lr_form.html",
+      "http://www.informatics.indiana.edu/rocha/i-bic/#materials",
+      "http://www.informatics.indiana.edu/rocha/i-bic/#labs"
+     ],
+     "primary": "http://www.informatics.indiana.edu/rocha/i-bic/"
+    },
+    {
+     "code": "Open Sourced Elective: Database and Rails",
+     "title": "Open Sourced Elective: Database and Rails: Intro to Ruby on Rails",
+     "school": "University of Texas",
+     "description": "An introductory course in Ruby on Rails open sourced by University of Texas' CS Adjunct Professor, Richard Schneeman.",
+     "links": [
+      "http://www.schneems.com/ut-rails/",
+      "https://www.youtube.com/playlist?list=PL7A85FD7803A8CB1F"
+     ],
+     "primary": "http://www.schneems.com/ut-rails/"
+    },
+    {
+     "code": "SCICOMP",
+     "title": "SCICOMP: An Introduction to Efficient Scientific Computation",
+     "school": "Universit\u00e4t Bremen",
+     "description": "This is a graduate course in scientific computing created and taught by [Oliver Serang](http://colorfulengineering.org/) in 2014, which covers topics in computer science and statistics with applications from biology. The course is designed top-down, starting with a problem and then deriving a variety of solutions from scratch.",
+     "links": [
+      "http://mlecture.uni-bremen.de/ml/index.php?option=com_content&view=article&id=233",
+      "http://colorfulengineering.org/",
+      "https://www.youtube.com/user/fillwithlight/videos"
+     ],
+     "primary": "http://mlecture.uni-bremen.de/ml/index.php?option=com_content&view=article&id=233"
+    },
+    {
+     "code": "14-740",
+     "title": "14-740: Fundamentals of Computer Networks",
+     "school": "CMU",
+     "description": "This is an introductory course on Networking for graduate students. It follows a top-down approach to teaching Computer Networks, so it starts with the Application layer which most of the students are familiar with and as the course unravels we learn more about transport, network and link layers of the protocol stack.",
+     "links": [
+      "http://www.ini740.rocks/F20"
+     ],
+     "primary": "http://www.ini740.rocks/F20"
+    }
+   ]
+  },
+  {
+   "name": "Statistics",
+   "slug": "statistics",
+   "courses": [
+    {
+     "code": "STAT 340",
+     "title": "STAT 340: Applied Regression Methods",
+     "school": "Smith College",
+     "description": "This course covers the beautiful and useful tool of regression, which is the central technique of statistical modeling. By the end of this course you will be able to:",
+     "links": [
+      "https://andrewpbray.github.io/reg/index.html",
+      "https://andrewpbray.github.io/reg/syllabus.html"
+     ],
+     "primary": "https://andrewpbray.github.io/reg/index.html"
+    }
+   ]
+  }
+ ]
+}
