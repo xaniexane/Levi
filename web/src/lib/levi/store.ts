@@ -103,6 +103,7 @@ type LeviState = {
   setPersona: (p: PersonaId) => void;
   addMessage: (role: ChatMsg["role"], text: string) => ChatMsg;
   updateMessage: (id: string, text: string) => void;
+  truncateAfter: (id: string) => void;
   markComposted: (id: string) => void;
   theme: Theme;
   setTheme: (t: Theme) => void;
@@ -214,6 +215,11 @@ export const useLevi = create<LeviState>()(
         set({
           messages: get().messages.map((m) => (m.id === id ? { ...m, text } : m)),
         }),
+      truncateAfter: (id) => {
+        const msgs = get().messages;
+        const idx = msgs.findIndex((m) => m.id === id);
+        if (idx >= 0) set({ messages: msgs.slice(0, idx + 1) });
+      },
       markComposted: (id) =>
         set({
           messages: get().messages.map((m) => (m.id === id ? { ...m, composted: true } : m)),

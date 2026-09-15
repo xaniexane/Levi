@@ -7,6 +7,9 @@ export type ChatMessage = { role: "system" | "user" | "assistant"; content: stri
 // Each authenticated user gets at most 30 xAI completions per minute. The
 // limiter is in-memory (see rate-limit.server.ts); the `authMiddleware` rejects
 // unauthenticated callers before any quota can be spent.
+const LEVI_COMPLETE_LIMIT = 30;
+const LEVI_COMPLETE_WINDOW_MS = 60_000;
+
 const LEVI_STREAM_LIMIT = 30;
 const LEVI_STREAM_WINDOW_MS = 60_000;
 
