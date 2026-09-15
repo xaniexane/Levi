@@ -207,6 +207,7 @@ class ConversationManager:
         consent: bool = False,
         confirm: Any = None,
         workspace_root: Any = None,
+        system_prompt: str | None = None,
     ):
         self.session = ChatSession(session_name)
         if isinstance(provider, ChatProvider):
@@ -219,6 +220,7 @@ class ConversationManager:
         self.consent = bool(consent)
         self.confirm = confirm
         self.workspace_root = workspace_root
+        self.system_prompt = system_prompt
         if ctx_size:
             self.ctx_size = max(1, int(ctx_size))
         elif self.provider_name == "levi-local":
@@ -266,6 +268,7 @@ class ConversationManager:
             consent=use_consent,
             confirm=use_confirm,
             workspace_root=self.workspace_root,
+            system_prompt=self.system_prompt,
         )
 
         # Persist the turn's dialogue (assistant texts, tool exchanges,
@@ -489,7 +492,8 @@ def run_chat_repl(session_name: str = DEFAULT_SESSION, *,
                   max_steps: int = 10,
                   consent: bool = False,
                   confirm: Any = None,
-                  workspace_root: Any = None) -> None:
+                  workspace_root: Any = None,
+                  system_prompt: str | None = None) -> None:
     """Interactive long-conversation REPL. Returns on /quit / EOF."""
     mgr = ConversationManager(
         session_name,
@@ -499,6 +503,7 @@ def run_chat_repl(session_name: str = DEFAULT_SESSION, *,
         consent=consent,
         confirm=confirm,
         workspace_root=workspace_root,
+        system_prompt=system_prompt,
     )
     resumed = len(mgr.session.message_records())
     print("levi agent chat — session %r (provider=%s, ctx=%d tokens%s)" % (

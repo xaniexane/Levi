@@ -1065,6 +1065,24 @@ def cmd_agent(args):
     import sys as _sys
     action = getattr(args, "agent_action", None)
 
+    def _kai_register_system() -> tuple[str | None, str | None]:
+        """Validate --register and return (variant_id, system_prompt).
+
+        Returns (None, None) when no --register was given. Exits 2 with the
+        valid id list on an unknown id.
+        """
+        variant_id = getattr(args, "register", None) or ""
+        variant_id = variant_id.strip()
+        if not variant_id:
+            return None, None
+        from levi.persona.kai9000 import get as _kai_get, all_variants, system_for
+        variant = _kai_get(variant_id)
+        if variant is None:
+            valid = ", ".join(v.id for v in all_variants())
+            print(f"Unknown KAI-9000 register {variant_id!r}. Valid ids: {valid}")
+            raise SystemExit(2)
+        return variant.id, system_for(variant.id)
+
     if action == "serve":
         from levi.agent.server import serve
         serve(host=getattr(args, "host", None) or "127.0.0.1",
@@ -1093,6 +1111,9 @@ def cmd_agent(args):
             workspace_root=getattr(args, "workspace", None) or None,
             consent=consent,
         )
+        register_id, register_system = _kai_register_system()
+        if register_id:
+            print(f"KAI-9000 register: {register_id}\n")
         run_chat_repl(
             getattr(args, "session", None) or "default",
             provider=provider,
@@ -1100,6 +1121,7 @@ def cmd_agent(args):
             max_steps=int(getattr(args, "max_steps", None) or 10),
             consent=consent,
             workspace_root=getattr(args, "workspace", None) or None,
+            system_prompt=register_system,
         )
         return
 
@@ -1220,6 +1242,9 @@ def cmd_agent(args):
         )
         print(f"Running with provider={getattr(provider, 'name', '?')} "
               f"consent={'yes (--yes)' if consent else 'no (gates will prompt/deny)'} ...\n")
+        register_id, register_system = _kai_register_system()
+        if register_id:
+            print(f"KAI-9000 register: {register_id}\n")
         transcript = run_subtask(
             task,
             provider=provider,
@@ -1228,6 +1253,7 @@ def cmd_agent(args):
             confirm=None if consent else _confirm,
             max_steps=int(getattr(args, "max_steps", None) or 10),
             workspace_root=getattr(args, "workspace", None) or None,
+            system_prompt=register_system,
         )
         if getattr(args, "json", False):
             import json as _json
@@ -2312,6 +2338,11 @@ def main():
     ag_run.add_argument("--max-steps", type=int, default=10, help="Max provider turns (default 10)")
     ag_run.add_argument("--workspace", default=None, help="Workspace root for agent file/shell tools")
     ag_run.add_argument("--json", action="store_true", help="Print the transcript as JSON")
+    ag_run.add_argument("--register", default=None, metavar="VARIANT",
+                        help="Speak as a KAI-9000 SI register (e.g. kai_9000_ops). "
+                             "Valid ids: kai_9000, kai_9000_care, kai_9000_ops, kai_9000_challenger, "
+                             "kai_9000_literary, kai_9000_forensic, kai_9000_void, kai_9000_builder, "
+                             "kai_9000_mirror, kai_9000_architect, kai_9000_sentinel, kai_9000_oracle.")
     ag_sub.add_parser("tools", help="List agent tools with descriptions and confirmation flags")
     ag_chat = ag_sub.add_parser("chat", help="Interactive long-conversation chat with session memory")
     ag_chat.add_argument("--session", default="default",
@@ -2322,6 +2353,9 @@ def main():
                          help="Pre-grant consent for gated tools for THIS session only.")
     ag_chat.add_argument("--max-steps", type=int, default=10, help="Max provider turns per message (default 10)")
     ag_chat.add_argument("--workspace", default=None, help="Workspace root for agent file/shell tools")
+    ag_chat.add_argument("--register", default=None, metavar="VARIANT",
+                        help="Speak as a KAI-9000 SI register for the whole session "
+                             "(e.g. kai_9000_care). See `levi agent run --help` for the id list.")
     ag_model = ag_sub.add_parser("model", help="Manage the Levi Local offline model (weights + runner)")
     ag_msub = ag_model.add_subparsers(dest="agent_model_action")
     ag_pull = ag_msub.add_parser("pull", help="Download GGUF weights (and the llama-server runner, best effort)")
