@@ -1,0 +1,35 @@
+# LEVI gitleaks config — auto-discovered by gitleaks-action (repo root).
+#
+# Every allowlist entry below is a documented FALSE POSITIVE: ordinary prose or
+# literal placeholders, never a real credential. Real secrets must never be
+# committed; see web/src/lib/auth/preview.ts (env-injected, fail-closed).
+
+title = "LEVI secret scan"
+
+[extend]
+useDefault = true
+
+# --- generic-api-key: prose in defensive cyber playbooks trips the entropy rule
+# ("token and OTP validation", "FIDO2-certified keys", "Argon2id/bcrypt/scrypt").
+# These files contain no credentials of any kind.
+[[rules]]
+id = "generic-api-key"
+
+[rules.allowlist]
+description = "prose false positives in cyber playbooks (no credentials present)"
+paths = [
+  "core/levi/skill/playbooks/cyber/exploiting-type-juggling-vulnerabilities.md",
+  "core/levi/skill/playbooks/cyber/implementing-hardware-security-key-authentication.md",
+  "core/levi/skill/playbooks/cyber/performing-cryptographic-audit-of-application.md",
+]
+
+# --- curl-auth-header: docs/AGENT.md shows the literal placeholder "<redacted>"
+# in curl examples, never a real bearer token.
+[[rules]]
+id = "curl-auth-header"
+
+[rules.allowlist]
+description = "docs use the literal <redacted> placeholder, not a real token"
+paths = [
+  "docs/AGENT.md",
+]
