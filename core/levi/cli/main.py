@@ -3079,6 +3079,25 @@ def main():
     mcp_p.add_argument("--token", default="", help="http: optional Bearer token (401 without it)")
     mcp_p.add_argument("--consent", action="store_true",
                        help="stdio: pre-authorize confirmation-gated tools (owner only; off by default)")
+    soul_p = sub.add_parser("soul", help="Owner soul: system-prompt override (~/.levi/soul.md)")
+    soul_p.add_argument("action", nargs="?", default="show",
+                        choices=["show", "edit-note"],
+                        help="show the override, or how to edit it")
+    hb_p = sub.add_parser("heartbeat", help="Autonomous self-check: quiet when healthy, digest when not")
+    hb_p.add_argument("heartbeat_action", nargs="?", default="run",
+                      choices=["run", "status"], help="heartbeat action")
+    hb_p.add_argument("--force", action="store_true",
+                      help="run: ignore interval/active-hours gating")
+    hb_p.add_argument("--interval-min", type=int, default=None,
+                      help="run: override the check interval in minutes")
+    lp_p = sub.add_parser("lifepack", help="Life pack: portable LEVI state (export/import)")
+    lp_p.add_argument("lifepack_action", choices=["export", "import"],
+                      help="lifepack action")
+    lp_p.add_argument("file", help="pack file to write (export) or read (import)")
+    lp_p.add_argument("--preview", action="store_true",
+                      help="import: show the diff without writing anything")
+    lp_p.add_argument("--yes", action="store_true",
+                      help="import: confirm non-interactively (otherwise prompts)")
     proj_p.add_argument("project_action", nargs="?", default="status", choices=["status", "log", "hitl", "phases"])
     proj_p.add_argument("--url", default=None, help="Public site URL for archaeology")
     proj_p.add_argument("--run", default=None, help="Run phase id e.g. P0, P1")
@@ -3284,6 +3303,27 @@ def main():
     except Exception:
         pass
     # === MCP-REGION-END ===
+    # === SOUL-REGION-BEGIN: Soul command dispatch ===
+    try:
+        from levi.agent.soul import cmd_soul as _cmd_soul
+        cmds["soul"] = _cmd_soul
+    except Exception:
+        pass
+    # === SOUL-REGION-END ===
+    # === HEARTBEAT-REGION-BEGIN: Heartbeat command dispatch ===
+    try:
+        from levi.daemon.heartbeat import cmd_heartbeat as _cmd_heartbeat
+        cmds["heartbeat"] = _cmd_heartbeat
+    except Exception:
+        pass
+    # === HEARTBEAT-REGION-END ===
+    # === LIFEPACK-REGION-BEGIN: Life-pack command dispatch ===
+    try:
+        from levi.lifepack.pack import cmd_lifepack as _cmd_lifepack
+        cmds["lifepack"] = _cmd_lifepack
+    except Exception:
+        pass
+    # === LIFEPACK-REGION-END ===
     fn = cmds.get(args.command)
     if fn:
         try:
