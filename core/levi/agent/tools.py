@@ -692,6 +692,41 @@ def _register_builtins(
         return ToolResult(ok=True, output="\n".join(lines))
 
     # -- affect (5D emotional-intelligence engine) --------------------------
+    # -- lab_scenario / lab_footprint (LEVI Lab: read-only) --------------------
+    def _lab_scenario(args: dict) -> ToolResult:
+        """Playback a captured LEVI Lab scenario transcript (no execution)."""
+        try:
+            from levi.lab import scenarios as lab_scen
+        except Exception as exc:
+            return ToolResult(ok=False, error=f"lab_scenario: {exc}")
+        sid = str(args.get("scenario") or "").strip()
+        if not sid:
+            lines = ["lab_scenario: LEVI Lab scenarios (playback only, read-only):"]
+            for sc in lab_scen.list_scenarios():
+                lines.append(f"  {sc.id}: {sc.title}")
+            lines.append("Pass {'scenario': '<id>'} for the captured transcript.")
+            return ToolResult(ok=True, output="\n".join(lines))
+        if lab_scen.get_scenario(sid) is None:
+            return ToolResult(ok=False, error=f"lab_scenario: unknown scenario {sid!r}")
+        return ToolResult(ok=True, output=lab_scen.playback(sid))
+
+    def _lab_footprint(args: dict) -> ToolResult:
+        """Estimate a model's RAM envelope. Pure math, read-only."""
+        try:
+            from levi.lab.footprint import footprint as _footprint
+            from levi.lab.footprint import format_footprint as _fmt
+        except Exception as exc:
+            return ToolResult(ok=False, error=f"lab_footprint: {exc}")
+        try:
+            fp = _footprint(
+                args.get("params", "0.6B"),
+                quant=str(args.get("quant", "int4")),
+                ctx=args.get("ctx", "32k"),
+            )
+        except ValueError as exc:
+            return ToolResult(ok=False, error=f"lab_footprint: {exc}")
+        return ToolResult(ok=True, output=_fmt(fp))
+
     def _affect_detect(args: dict) -> ToolResult:
         text = str(args.get("text") or "").strip()
         if not text:
@@ -1179,6 +1214,33 @@ def _register_builtins(
             ),
             parameters=_schema({"domain": {"type": "string"}}, []),
             handler=_capabilities,
+        ),
+        Tool(
+            name="lab_scenario",
+            description=(
+                "Play back a captured LEVI Lab scenario: real transcripts of "
+                "the agentic loop (fail→recover, red→green, research brief, "
+                "effort A/B). Playback only — never executes. Read-only."
+            ),
+            parameters=_schema({"scenario": {"type": "string"}}, []),
+            handler=_lab_scenario,
+        ),
+        Tool(
+            name="lab_footprint",
+            description=(
+                "Estimate a model's RAM envelope: weights (params × "
+                "bytes/param per quant) + KV cache + headroom. Pure math, "
+                "an estimate not a measurement. Read-only."
+            ),
+            parameters=_schema(
+                {
+                    "params": {"type": "string"},
+                    "quant": {"type": "string"},
+                    "ctx": {"type": "string"},
+                },
+                [],
+            ),
+            handler=_lab_footprint,
         ),
         Tool(
             name="affect_detect",

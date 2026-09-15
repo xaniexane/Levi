@@ -1,0 +1,120 @@
+{
+  "scenario": "red-green",
+  "title": "Red → green coding fix",
+  "description": "The loop runs a buggy script (red: real traceback), the harness applies a one-line patch, the loop re-runs it (green).",
+  "provenance": {
+    "captured_utc": "2026-09-15T19:38:55+00:00",
+    "provider": "local",
+    "levi_version": "0.9.5",
+    "live": true,
+    "python": "3.12.3",
+    "scenario": "red-green",
+    "note": "Real transcript from LEVI's agentic loop (run_subtask, local provider). Illustrative of a real run, not live intelligence."
+  },
+  "phases": [
+    {
+      "name": "red",
+      "transcript": {
+        "task": "Run the command `python3 labbug`",
+        "provider_name": "local",
+        "steps": [
+          {
+            "index": 0,
+            "provider_text": "",
+            "tool_calls": [
+              {
+                "name": "shell_exec",
+                "args": {
+                  "cmd": "python3 labbug"
+                }
+              }
+            ],
+            "results": [
+              {
+                "tool": "shell_exec",
+                "ok": false,
+                "output": "Traceback (most recent call last):\n  File \"/tmp/levi-lab-wd/red-green/labbug\", line 1, in <module>\n    print(\"answer:\", 1 // 0)\n                     ~~^^~~\nZeroDivisionError: integer division or modulo by zero\n",
+                "error": "exit code 1"
+              }
+            ],
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          }
+        ],
+        "final": "Done: ran `python3 labbug`. Output: 'Traceback (most recent call last):\\n  File \"/tmp/levi-lab-wd/red-green/labbug\", line 1, in <module>\\n    print(\"answer:\", 1 // 0)\\n                     ~~^^~~\\nZeroDivisionError: integer division or modul'.",
+        "ok": true,
+        "error": null,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "stats": {
+          "steps": 1,
+          "tool_calls": 1,
+          "tools_used": [
+            "shell_exec"
+          ],
+          "failed_tool_calls": 1,
+          "ok": true,
+          "provider": "local",
+          "final": "Done: ran `python3 labbug`. Output: 'Traceback (most recent call last):\\n  File \"/tmp/levi-lab-wd/red-green/labbug\", line 1, in <module>\\n    print(\"answer:\", 1 // 0)\\n                     ~~^^~~\\nZeroDivisionError: integer division or modul'."
+        }
+      }
+    },
+    {
+      "name": "green",
+      "transcript": {
+        "task": "Run the command `python3 labbug`",
+        "provider_name": "local",
+        "steps": [
+          {
+            "index": 0,
+            "provider_text": "",
+            "tool_calls": [
+              {
+                "name": "shell_exec",
+                "args": {
+                  "cmd": "python3 labbug"
+                }
+              }
+            ],
+            "results": [
+              {
+                "tool": "shell_exec",
+                "ok": true,
+                "output": "answer: 42\n",
+                "error": ""
+              }
+            ],
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          }
+        ],
+        "final": "Done: ran `python3 labbug`. Output: 'answer: 42'.",
+        "ok": true,
+        "error": null,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "stats": {
+          "steps": 1,
+          "tool_calls": 1,
+          "tools_used": [
+            "shell_exec"
+          ],
+          "failed_tool_calls": 0,
+          "ok": true,
+          "provider": "local",
+          "final": "Done: ran `python3 labbug`. Output: 'answer: 42'."
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "type": "lab_patch",
+      "file": "labbug",
+      "before": "print(\"answer:\", 1 // 0)",
+      "after": "print(\"answer:\", 42)",
+      "note": "applied by the lab harness, not the agent"
+    }
+  ],
+  "notes": "The patch is applied by the lab harness and recorded as a lab event — the rule-based local provider cannot diagnose a traceback. Real: both test runs, the failure output, the pass."
+}

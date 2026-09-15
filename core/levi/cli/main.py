@@ -1774,6 +1774,106 @@ def cmd_affect(args):
     print("Full spec: docs/AFFECT.md")
 
 
+def cmd_lab(args):
+    """LEVI Lab: on-device agentic AI demos, fixtures, footprint math."""
+    from levi.lab import scenarios as lab_scen
+    from levi.lab.footprint import footprint as lab_footprint_fn
+    from levi.lab.footprint import format_footprint as lab_format_fp
+    from levi.lab import models as lab_models
+    from levi.lab import live as lab_live
+
+    action = getattr(args, "lab_action", None) or "scenarios"
+    arg = getattr(args, "lab_arg", None)
+
+    if action == "scenarios":
+        print("══ LEVI Lab scenarios ══\n")
+        for sc in lab_scen.list_scenarios():
+            fx = "captured" if lab_scen.load_fixture(sc.id) else "not captured"
+            print(f"  {sc.id:15s} {sc.title}  [{fx}]")
+        print("\n`levi lab run <id>` plays back the captured transcript;")
+        print("add --live to execute the loop for real.")
+        return
+
+    if action == "run":
+        if not arg:
+            print("Usage: levi lab run <scenario-id> [--live]")
+            return
+        if getattr(args, "live", False):
+            import tempfile
+            workdir = tempfile.mkdtemp(prefix="levi-lab-")
+            print(f"Running scenario {arg!r} live (workdir {workdir}) …")
+            try:
+                lab_scen.capture(arg, __import__("pathlib").Path(workdir), live=True)
+            except ValueError as exc:
+                print(f"lab: {exc}")
+                return
+            print("Captured. Playback:\n")
+        print(lab_scen.playback(arg))
+        return
+
+    if action == "footprint":
+        try:
+            fp = lab_footprint_fn(
+                getattr(args, "params", "0.6B"),
+                quant=getattr(args, "quant", "int4"),
+                ctx=getattr(args, "ctx", "32k"),
+            )
+        except ValueError as exc:
+            print(f"lab: {exc}")
+            return
+        print(lab_format_fp(fp))
+        return
+
+    if action == "card":
+        if not arg:
+            print("LEVI Lab model cards (models LEVI actually supports):")
+            for key in lab_models.MODEL_CARDS:
+                print(f"  {key}")
+            print("Usage: levi lab card <model>")
+            return
+        card = lab_models.get_card(arg)
+        if card is None:
+            print(f"lab: no card for {arg!r} — LEVI doesn't support that model.")
+            print("Known:", ", ".join(lab_models.MODEL_CARDS))
+            return
+        print(lab_models.format_card(arg.strip().lower(), card))
+        return
+
+    if action == "chat":
+        endpoint = lab_live.resolve_endpoint(getattr(args, "endpoint", None))
+        if not endpoint:
+            print("lab: no endpoint. Pass --endpoint URL or set LEVI_LAB_ENDPOINT.")
+            print("Example: levi lab chat --endpoint http://localhost:8080 --model qwen3-0.6b")
+            print("(Serve one with: levi agent model pull, then llama-server on :8080.)")
+            return
+        model = getattr(args, "model", None) or "qwen3-0.6b"
+        print(lab_live.format_probe(lab_live.probe(endpoint)))
+        if not lab_live.probe(endpoint)["ok"]:
+            return
+        print(f"Chatting with {model} — empty line quits.\n")
+        messages = [{"role": "system",
+                     "content": "You are LEVI, a local-first synthetic-intelligence assistant."}]
+        while True:
+            try:
+                user = input("you> ").strip()
+            except (EOFError, KeyboardInterrupt):
+                print()
+                break
+            if not user:
+                break
+            messages.append({"role": "user", "content": user})
+            res = lab_live.chat(endpoint, model, messages)
+            if not res["ok"]:
+                print(f"levi> [error] {res['error']}")
+                messages.pop()
+                continue
+            print(f"levi> {res['text']}\n")
+            messages.append({"role": "assistant", "content": res["text"]})
+        return
+
+    print(f"lab: unknown action {action!r}")
+
+
 def cmd_vault(args):
     """Encrypt/decrypt local notes (passphrase required)."""
     from levi.vault.seal import VaultSeal
@@ -2859,6 +2959,19 @@ def main():
                        choices=["status", "detect"])
     aff_p.add_argument("affect_arg", nargs="?", default=None,
                        help="text to analyze (for detect)")
+    lab_p = sub.add_parser("lab", help="LEVI Lab: on-device agentic AI demos")
+    lab_p.add_argument("lab_action", nargs="?", default="scenarios",
+                       choices=["scenarios", "run", "footprint", "card", "chat"])
+    lab_p.add_argument("lab_arg", nargs="?", default=None,
+                       help="scenario id (run) or model key (card)")
+    lab_p.add_argument("--live", action="store_true",
+                       help="run: execute the loop live instead of playing back the fixture")
+    lab_p.add_argument("--params", default="0.6B", help="footprint: e.g. 30B")
+    lab_p.add_argument("--quant", default="int4", help="footprint: fp32/fp16/bf16/int8/int4")
+    lab_p.add_argument("--ctx", default="32k", help="footprint: e.g. 32k")
+    lab_p.add_argument("--endpoint", default=None,
+                       help="chat: OpenAI-compatible base URL (or LEVI_LAB_ENDPOINT)")
+    lab_p.add_argument("--model", default=None, help="chat: model id")
     proj_p = sub.add_parser("project", help="Pre-MVP phase runner / HITL / capability log (service capability-discovery)")
     proj_p.add_argument("project_action", nargs="?", default="status", choices=["status", "log", "hitl", "phases"])
     proj_p.add_argument("--url", default=None, help="Public site URL for archaeology")
@@ -3032,7 +3145,7 @@ def main():
         "morning": cmd_morning, "import": cmd_import,
         "export": cmd_export, "templates": cmd_templates,
         "status": cmd_status, "ask": cmd_ask, "turn": cmd_turn, "personas": cmd_personas, "wit": cmd_wit,
-        "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "continue": cmd_continue, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "plugin": cmd_plugin, "finance": cmd_finance, "agent": cmd_agent, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy, "growth": cmd_growth, "brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "courses": cmd_courses, "news": cmd_news, "capabilities": cmd_capabilities, "affect": cmd_affect, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
+        "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "continue": cmd_continue, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "plugin": cmd_plugin, "finance": cmd_finance, "agent": cmd_agent, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy, "growth": cmd_growth, "brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "courses": cmd_courses, "news": cmd_news, "capabilities": cmd_capabilities, "affect": cmd_affect, "lab": cmd_lab, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
         "graph": cmd_graph,
         "image": cmd_image, "story": cmd_story, "genres": cmd_genres, "factory": cmd_factory, "automations": cmd_automations,
         "remember": cmd_remember, "recall": cmd_recall, "cloud": cmd_cloud, "model": cmd_model, "chat": cmd_chat, "enterprise": cmd_enterprise, "scorecard": cmd_scorecard, "si": cmd_si, "cognition": cmd_cognition, "premium": cmd_premium, "kai": cmd_kai, "unique": cmd_unique, "x100": cmd_x100, "max": cmd_max, "max10": cmd_max10, "stress": cmd_stress, "here": cmd_here, "talk": cmd_talk, "profiles": cmd_profiles, "traits": cmd_traits, "retention": cmd_retention, "dna": cmd_dna, "intel": cmd_intel, "giant": cmd_giant, "future": cmd_future, "interpenetrate": cmd_interpenetrate,

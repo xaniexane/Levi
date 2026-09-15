@@ -1,0 +1,181 @@
+{
+  "scenario": "effort-ab",
+  "title": "Reasoning-effort A/B on the same question",
+  "description": "The same file task runs twice: once with the default system prompt, once with an elaborated 'think step by step' prompt. The transcripts are compared.",
+  "provenance": {
+    "captured_utc": "2026-09-15T19:40:00+00:00",
+    "provider": "local",
+    "levi_version": "0.9.5",
+    "live": true,
+    "python": "3.12.3",
+    "scenario": "effort-ab",
+    "note": "Real transcript from LEVI's agentic loop (run_subtask, local provider). Illustrative of a real run, not live intelligence."
+  },
+  "phases": [
+    {
+      "name": "low-effort",
+      "transcript": {
+        "task": "Create effort-note.txt with two lines and read it back",
+        "provider_name": "local",
+        "steps": [
+          {
+            "index": 0,
+            "provider_text": "",
+            "tool_calls": [
+              {
+                "name": "file_write",
+                "args": {
+                  "path": "effort-note.txt",
+                  "content": "Line 1\nLine 2"
+                }
+              }
+            ],
+            "results": [
+              {
+                "tool": "file_write",
+                "ok": true,
+                "output": "wrote /tmp/levi-lab-p_7a_c5z/effort-note.txt",
+                "error": ""
+              }
+            ],
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          },
+          {
+            "index": 1,
+            "provider_text": "",
+            "tool_calls": [
+              {
+                "name": "file_read",
+                "args": {
+                  "path": "effort-note.txt"
+                }
+              }
+            ],
+            "results": [
+              {
+                "tool": "file_read",
+                "ok": true,
+                "output": "Line 1\nLine 2",
+                "error": ""
+              }
+            ],
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          }
+        ],
+        "final": "Done: wrote 2 line(s) to effort-note.txt and read effort-note.txt back. Contents read: 'Line 1\\nLine 2'.",
+        "ok": true,
+        "error": null,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "stats": {
+          "steps": 2,
+          "tool_calls": 2,
+          "tools_used": [
+            "file_read",
+            "file_write"
+          ],
+          "failed_tool_calls": 0,
+          "ok": true,
+          "provider": "local",
+          "final": "Done: wrote 2 line(s) to effort-note.txt and read effort-note.txt back. Contents read: 'Line 1\\nLine 2'."
+        }
+      }
+    },
+    {
+      "name": "high-effort",
+      "transcript": {
+        "task": "Create effort-note.txt with two lines and read it back",
+        "provider_name": "local",
+        "steps": [
+          {
+            "index": 0,
+            "provider_text": "",
+            "tool_calls": [
+              {
+                "name": "file_write",
+                "args": {
+                  "path": "effort-note.txt",
+                  "content": "Line 1\nLine 2"
+                }
+              }
+            ],
+            "results": [
+              {
+                "tool": "file_write",
+                "ok": true,
+                "output": "wrote /tmp/levi-lab-p_7a_c5z/effort-note.txt",
+                "error": ""
+              }
+            ],
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          },
+          {
+            "index": 1,
+            "provider_text": "",
+            "tool_calls": [
+              {
+                "name": "file_read",
+                "args": {
+                  "path": "effort-note.txt"
+                }
+              }
+            ],
+            "results": [
+              {
+                "tool": "file_read",
+                "ok": true,
+                "output": "Line 1\nLine 2",
+                "error": ""
+              }
+            ],
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          }
+        ],
+        "final": "Done: wrote 2 line(s) to effort-note.txt and read effort-note.txt back. Contents read: 'Line 1\\nLine 2'.",
+        "ok": true,
+        "error": null,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "stats": {
+          "steps": 2,
+          "tool_calls": 2,
+          "tools_used": [
+            "file_read",
+            "file_write"
+          ],
+          "failed_tool_calls": 0,
+          "ok": true,
+          "provider": "local",
+          "final": "Done: wrote 2 line(s) to effort-note.txt and read effort-note.txt back. Contents read: 'Line 1\\nLine 2'."
+        }
+      }
+    }
+  ],
+  "events": [],
+  "notes": "With the deterministic local provider both runs are identical — prompt effort changes nothing for a rule-based planner. That negative result is the honest finding; with a real model backend the comparison becomes interesting.",
+  "comparison": {
+    "low_effort": {
+      "steps": 2,
+      "tool_calls": 2,
+      "tools_used": [
+        "file_read",
+        "file_write"
+      ],
+      "ok": true
+    },
+    "high_effort": {
+      "steps": 2,
+      "tool_calls": 2,
+      "tools_used": [
+        "file_read",
+        "file_write"
+      ],
+      "ok": true
+    },
+    "finding": "Identical transcripts: with the deterministic local provider, system-prompt effort changes nothing. Re-run against a real model backend to see effort matter."
+  }
+}

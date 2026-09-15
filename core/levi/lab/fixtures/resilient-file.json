@@ -1,0 +1,136 @@
+{
+  "scenario": "resilient-file",
+  "title": "Resilient file task: fail → diagnose → recover",
+  "description": "The loop tries to read a file that doesn't exist (real tool failure), then a recovery run creates it and reads it back.",
+  "provenance": {
+    "captured_utc": "2026-09-15T19:38:55+00:00",
+    "provider": "local",
+    "levi_version": "0.9.5",
+    "live": true,
+    "python": "3.12.3",
+    "scenario": "resilient-file",
+    "note": "Real transcript from LEVI's agentic loop (run_subtask, local provider). Illustrative of a real run, not live intelligence."
+  },
+  "phases": [
+    {
+      "name": "fail",
+      "transcript": {
+        "task": "Read lab-diary.txt and summarize its contents",
+        "provider_name": "local",
+        "steps": [
+          {
+            "index": 0,
+            "provider_text": "",
+            "tool_calls": [
+              {
+                "name": "file_read",
+                "args": {
+                  "path": "lab-diary.txt"
+                }
+              }
+            ],
+            "results": [
+              {
+                "tool": "file_read",
+                "ok": false,
+                "output": "",
+                "error": "file_read: no such file: 'lab-diary.txt'"
+              }
+            ],
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          }
+        ],
+        "final": "Done: read lab-diary.txt back. Contents read: \"file_read: no such file: 'lab-diary.txt'\".",
+        "ok": true,
+        "error": null,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "stats": {
+          "steps": 1,
+          "tool_calls": 1,
+          "tools_used": [
+            "file_read"
+          ],
+          "failed_tool_calls": 1,
+          "ok": true,
+          "provider": "local",
+          "final": "Done: read lab-diary.txt back. Contents read: \"file_read: no such file: 'lab-diary.txt'\"."
+        }
+      }
+    },
+    {
+      "name": "recover",
+      "transcript": {
+        "task": "Create lab-diary.txt with one line 'Recovered after a missing read' and read it back to confirm",
+        "provider_name": "local",
+        "steps": [
+          {
+            "index": 0,
+            "provider_text": "",
+            "tool_calls": [
+              {
+                "name": "file_write",
+                "args": {
+                  "path": "lab-diary.txt",
+                  "content": "Recovered after a missing read"
+                }
+              }
+            ],
+            "results": [
+              {
+                "tool": "file_write",
+                "ok": true,
+                "output": "wrote /tmp/levi-lab-wd/resilient-file/lab-diary.txt",
+                "error": ""
+              }
+            ],
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          },
+          {
+            "index": 1,
+            "provider_text": "",
+            "tool_calls": [
+              {
+                "name": "file_read",
+                "args": {
+                  "path": "lab-diary.txt"
+                }
+              }
+            ],
+            "results": [
+              {
+                "tool": "file_read",
+                "ok": true,
+                "output": "Recovered after a missing read",
+                "error": ""
+              }
+            ],
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          }
+        ],
+        "final": "Done: wrote 1 line(s) to lab-diary.txt and read lab-diary.txt back. Contents read: 'Recovered after a missing read'.",
+        "ok": true,
+        "error": null,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "stats": {
+          "steps": 2,
+          "tool_calls": 2,
+          "tools_used": [
+            "file_read",
+            "file_write"
+          ],
+          "failed_tool_calls": 0,
+          "ok": true,
+          "provider": "local",
+          "final": "Done: wrote 1 line(s) to lab-diary.txt and read lab-diary.txt back. Contents read: 'Recovered after a missing read'."
+        }
+      }
+    }
+  ],
+  "events": [],
+  "notes": "The diagnosis ('the file is missing, so create it') is performed by the lab harness between runs. The local provider is a deterministic planner: it does not introspect tool errors the way a model would. What IS real: both transcripts, the tool failure, and the recovery."
+}
