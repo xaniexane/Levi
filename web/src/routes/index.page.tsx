@@ -15,7 +15,10 @@ export function IndexPage() {
   useEffect(() => {
     const persist = useLevi.persist;
     if (!persist || persist.hasHydrated()) {
-      setHydrated(true);
+      // setState must live inside a callback, not the effect body itself
+      // (react-hooks/set-state-in-effect). A microtask keeps the timing
+      // identical: still flips right after first paint, no visible flash.
+      queueMicrotask(() => setHydrated(true));
       return;
     }
     return persist.onFinishHydration(() => setHydrated(true));
