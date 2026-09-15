@@ -3044,6 +3044,16 @@ def main():
                        help="chat: OpenAI-compatible base URL (or LEVI_LAB_ENDPOINT)")
     lab_p.add_argument("--model", default=None, help="chat: model id")
     proj_p = sub.add_parser("project", help="Pre-MVP phase runner / HITL / capability log (service capability-discovery)")
+    mcp_p = sub.add_parser("mcp", help="Serve LEVI's tools over MCP (Model Context Protocol)")
+    mcp_p.add_argument("mcp_action", nargs="?", default="serve", choices=["serve"],
+                       help="mcp action")
+    mcp_p.add_argument("--transport", default="stdio", choices=["stdio", "http"],
+                       help="stdio: full owner registry (for local MCP clients); http: restricted cloud-safe profile")
+    mcp_p.add_argument("--host", default="127.0.0.1", help="http: bind address")
+    mcp_p.add_argument("--port", type=int, default=8899, help="http: bind port")
+    mcp_p.add_argument("--token", default="", help="http: optional Bearer token (401 without it)")
+    mcp_p.add_argument("--consent", action="store_true",
+                       help="stdio: pre-authorize confirmation-gated tools (owner only; off by default)")
     proj_p.add_argument("project_action", nargs="?", default="status", choices=["status", "log", "hitl", "phases"])
     proj_p.add_argument("--url", default=None, help="Public site URL for archaeology")
     proj_p.add_argument("--run", default=None, help="Run phase id e.g. P0, P1")
@@ -3242,6 +3252,13 @@ def main():
     except Exception:
         pass
     # === KING-REGION-END ===
+    # === MCP-REGION-BEGIN: MCP server command dispatch ===
+    try:
+        from levi.mcp.cli import cmd_mcp as _cmd_mcp
+        cmds["mcp"] = _cmd_mcp
+    except Exception:
+        pass
+    # === MCP-REGION-END ===
     fn = cmds.get(args.command)
     if fn:
         try:
