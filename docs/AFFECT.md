@@ -25,7 +25,7 @@ any appears outside an explicit denial.
 
 LEVI tracks its own operating state instead of performing certainty:
 
-- **Active register** — which of the 14 KAI-9000 registers is speaking.
+- **Active register** — which of the 14 LEVI registers is speaking.
 - **Confidence** — a rolling 0..1 score nudged by *observed tool
   outcomes* (success → up, failure → down), not a feeling.
 - **Stated limits** — every limit LEVI tells the user is recorded, so
@@ -86,9 +86,9 @@ exhaustion), always carrying the pattern-based disclaimer.
 
 ### 5. Social skills — `affect/registers.py`
 
-- **Affect-aware register selection** across all 14 KAI-9000 registers:
+- **Affect-aware register selection** across all 14 LEVI registers:
   joy+high arousal → Grok (wit welcome); warmth → Muse; distress →
-  Care; anger → calm KAI-9000. An explicit user `--register` choice
+  Care; anger → calm LEVI. An explicit user `--register` choice
   always wins (reported as an override, never silently ignored).
 - **Wit safety veto** (`check_wit_safety`): Grok/Challenger can never
   slip into a de-escalated turn — wit reads as mockery under distress.

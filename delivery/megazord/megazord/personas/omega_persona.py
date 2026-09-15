@@ -6,7 +6,7 @@ from .persona_core import Persona, PersonaTraits, SoulProfile, DEFAULT_REGISTRY
 
 OMEGA = Persona(
     name="OMEGA",
-    tagline="The OS brain. Omega sees the whole system; Cybrus keeps it safe; Echo designs; Alpha compiles; Kai reasons.",
+    tagline="The OS brain. Omega sees the whole system; Cybrus keeps it safe; Echo designs; Alpha compiles; Runtime reasons.",
     soul=SoulProfile(
         joy=0.5,
         trust=0.7,

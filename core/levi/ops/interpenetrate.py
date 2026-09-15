@@ -14,8 +14,8 @@ from typing import Dict, List, Tuple
 
 # edge: (from, to, how they couple)
 EDGES: List[Tuple[str, str, str]] = [
-    ("si", "kai", "KAI registers are SI instruments with forbids"),
-    ("kai", "persona", "KAI ids inject into PersonaLattice"),
+    ("si", "voice", "LEVI registers are SI instruments with forbids"),
+    ("voice", "persona", "LEVI voice ids inject into PersonaLattice"),
     ("persona", "nervous", "stress/bond matrix routes persona pick"),
     ("nervous", "wit", "high distress → wit kill-switch"),
     ("wit", "chat", "calibrated styles layer on companion modes"),
@@ -74,11 +74,11 @@ def smoke() -> Dict[str, object]:
     except Exception as e:
         checks["si"] = str(e)
     try:
-        from levi.persona.kai9000 import all_variants
+        from levi.persona.levi import all_variants
 
-        checks["kai"] = len(all_variants())
+        checks["voice"] = len(all_variants())
     except Exception as e:
-        checks["kai"] = str(e)
+        checks["voice"] = str(e)
     try:
         from levi.persona.lattice import PersonaLattice
 

@@ -7,7 +7,7 @@ picker, media commands — are reincarnated here as a proper LEVI organ.
 ## What it looks like
 
 Dark void theme, near-black throughout. A left sidebar carries the LEVI
-wordmark, a **Register** dropdown (the 14 real KAI-9000 registers), a
+wordmark, a **Register** dropdown (the 14 real LEVI registers), a
 **Session** field, a **Model** card showing the resolved model and an
 honest status note (e.g. *"rules planner — No LEVI weights downloaded …
 `levi agent model pull` to upgrade"*), and a status badge
@@ -32,7 +32,7 @@ core/levi/pwa/server.py   (stdlib ThreadingHTTPServer — no fastapi)
    ├─ POST /api/chat     ──▶ levi.agent.chat.ConversationManager
    │                          (the EXISTING agentic loop — reused, not forked)
    ├─ POST /api/chat/stream (SSE liveness + final payload)
-   ├─ GET  /api/registers (14 real KAI-9000 registers)
+   ├─ GET  /api/registers (14 real LEVI registers)
    ├─ GET  /api/models    (LEVI-first model family, live status)
    └─ POST /api/image     ──▶ levi.media.pollinations (existing pipeline)
 ```
@@ -83,7 +83,7 @@ approval UI is enterprise Phase 2.
 ```bash
 levi pwa serve                      # http://127.0.0.1:8000/
 levi pwa serve --host 0.0.0.0       # LAN — set LEVI_PWA_TOKEN first
-levi pwa serve --register kai_9000_void --provider levi-local
+levi pwa serve --register levi_void --provider levi-local
 ```
 
 The CLI prints the LAN URL for phone access; "Add to Home screen"
@@ -97,8 +97,9 @@ installs the PWA.
 - **Streaming is liveness, not tokens.** The agentic loop doesn't
   stream tokens; `/api/chat/stream` emits progress heartbeats then the
   full reply.
-- **Media is cloud-backed.** `/image` uses Pollinations over the
-  network; it fails honestly (502) when unreachable. Local generation
+- **Media is cloud-backed.** `/image` uses a cloud image source over the
+  network (source: Pollinations — named only here, as the source adapter);
+  it fails honestly (502) when unreachable. Local generation
   is future native work.
 - **No NSFW mode, no joke personalities.** The register picker serves
   LEVI's real registers only — that was a binding constraint from the

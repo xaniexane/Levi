@@ -75,9 +75,9 @@ def run_stress() -> str:
         )
 
     def kai_attr():
-        from levi.persona.kai9000 import format_kai_roster, all_variants
+        from levi.persona.levi import format_levi_roster, all_variants
 
-        text = format_kai_roster()
+        text = format_levi_roster()
         assert "not third-party" in text.lower() or "Original LEVI" in text
         assert len(all_variants()) >= 12
 

@@ -3,7 +3,7 @@
 Reads:
   - core/levi/knowledge/courses/raw/**/*.txt   (ingested course pages)
   - core/levi/knowledge/courses/briefs/*.md   (subject field guides)
-  - levi.persona.kai9000 (14 original SI registers -> identity records)
+  - levi.persona.levi (14 original SI registers -> identity records)
 
 Writes:
   - core/levi/brain/train/corpus.jsonl   (one {"text": ...} record per chunk)
@@ -14,9 +14,9 @@ Cleaning (heuristic, deterministic):
   - drop exact-duplicate lines beyond their first occurrence per file
   - chunk to ~512 whitespace-estimated tokens; skip chunks <100 chars
 
-Identity records teach the tiny brain LEVI's own KAI-9000 voice natively
+Identity records teach the tiny brain LEVI's own voice natively
 (one record per register: name/id, voice, strengths, forbids, system block).
-These registers are LEVI-original (see core/levi/persona/kai9000.py header).
+These registers are LEVI-original (see core/levi/persona/levi.py header).
 
 Usage: python3 prepare_corpus.py [--out DIR]
 """
@@ -74,8 +74,8 @@ def chunk(lines: list[str]) -> list[str]:
 
 
 def identity_records() -> list[dict]:
-    """One training record per KAI-9000 register (LEVI-original voice)."""
-    from levi.persona.kai9000 import all_variants
+    """One training record per LEVI register (LEVI-original voice)."""
+    from levi.persona.levi import all_variants
 
     records = []
     for v in all_variants():

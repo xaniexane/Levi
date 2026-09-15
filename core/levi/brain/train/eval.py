@@ -18,7 +18,7 @@ HERE = Path(__file__).resolve().parent
 
 PROMPTS = [
     "Operating systems manage",
-    "Register: KAI-9000",
+    "Register: LEVI",
     "Machine learning is",
 ]
 

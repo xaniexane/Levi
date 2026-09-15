@@ -87,7 +87,7 @@ def modulate(
     allowed, veto_reason = check_wit_safety(suggestion.register_id, policy)
     if not allowed:
         suggestion = RegisterSuggestion(
-            register_id="kai_9000_care" if policy.crisis else "kai_9000",
+            register_id="levi_care" if policy.crisis else "levi",
             rationale=f"veto: {veto_reason}",
         )
     repair_hint = detect_repair(text)

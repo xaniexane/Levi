@@ -16,7 +16,7 @@ def _build() -> List[Tuple[str, str, Tuple[str, ...]]]:
     # 500 interpenetration drills
     organs = [
         "si",
-        "kai",
+        "levi_voice",
         "persona",
         "wit",
         "hitl",
@@ -69,20 +69,20 @@ def _build() -> List[Tuple[str, str, Tuple[str, ...]]]:
                 ("x10", "care"),
             )
         )
-    # 300 KAI discipline
+    # 300 LEVI voice discipline
     regs = [
-        "kai_9000",
-        "kai_9000_care",
-        "kai_9000_ops",
-        "kai_9000_challenger",
-        "kai_9000_literary",
-        "kai_9000_forensic",
-        "kai_9000_void",
-        "kai_9000_builder",
-        "kai_9000_mirror",
-        "kai_9000_architect",
-        "kai_9000_sentinel",
-        "kai_9000_oracle",
+        "levi",
+        "levi_care",
+        "levi_ops",
+        "levi_challenger",
+        "levi_literary",
+        "levi_forensic",
+        "levi_void",
+        "levi_builder",
+        "levi_mirror",
+        "levi_architect",
+        "levi_sentinel",
+        "levi_oracle",
     ]
     contexts = [
         "crisis",
@@ -99,9 +99,9 @@ def _build() -> List[Tuple[str, str, Tuple[str, ...]]]:
             for n in range(1, 4):
                 raw.append(
                     (
-                        f"X10 KAI {r} @ {c} #{n} — original LEVI register; forbids stay on; not third-party source.",
+                        f"X10 LEVI voice {r} @ {c} #{n} — original LEVI register; forbids stay on.",
                         "OBSERVED",
-                        ("x10", "kai", r, c),
+                        ("x10", "levi_voice", r, c),
                     )
                 )
     # 200 modern UI ops

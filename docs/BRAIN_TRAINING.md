@@ -30,7 +30,7 @@ core/levi/brain/weights/
   eval.json / samples.md  held-out loss + 3 fixed-prompt generations
 ```
 
-The corpus also carries **identity records**: one per KAI-9000 register
+The corpus also carries **identity records**: one per LEVI register
 (14 as of this writing — the count is asserted in tests, never hand-written),
 so the tiny brain meets LEVI's own voice before the course text.
 

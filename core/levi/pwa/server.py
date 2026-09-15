@@ -13,7 +13,7 @@ Endpoints (all JSON unless noted):
   real paths (``/app.js``, ``/styles.css``, ``/manifest.json``,
   ``/sw.js``, ``/icon.svg``).
 * ``GET /api/health`` — ``{"status": "ok", "service": "levi-pwa"}``.
-* ``GET /api/registers`` — LEVI's real registers (the 14 KAI-9000
+* ``GET /api/registers`` — LEVI's real registers (the 14 LEVI
   variants): ``[{"id", "name", "tagline", "voice"}]``. No joke modes.
 * ``GET /api/models`` — the LEVI-first model family with live
   downloaded/runner status, plus the currently resolved default.
@@ -232,7 +232,7 @@ class _PWAHandler(BaseHTTPRequestHandler):
 
     def _manager(self, body: dict):
         from levi.agent.chat import ConversationManager, sanitize_session_name
-        from levi.persona.kai9000 import get as _get, system_for
+        from levi.persona.levi import get as _get, system_for
 
         session = sanitize_session_name(str(body.get("session") or "default"))
         register_id = (
@@ -396,7 +396,7 @@ class _PWAHandler(BaseHTTPRequestHandler):
 
 
 def _list_registers() -> list[dict]:
-    from levi.persona.kai9000 import all_variants
+    from levi.persona.levi import all_variants
 
     return [
         {"id": v.id, "name": v.name, "tagline": v.tagline, "voice": v.voice}

@@ -25,7 +25,7 @@ FORMS: List[IntelForm] = [
         "synthetic",
         "Synthetic Intelligence (SI)",
         "Core identity — engineered cognition substrate",
-        "si pillars, KAI registers, offline core",
+        "si pillars, LEVI registers, offline core",
         "Do not claim consciousness or personhood",
     ),
     IntelForm(
@@ -53,7 +53,7 @@ FORMS: List[IntelForm] = [
         "affective_routing",
         "Affective routing (not fake emotion)",
         "Stress/anxiety/bond → register and wit intensity",
-        "nervous_system, monotropism, Care KAI",
+        "nervous_system, monotropism, Care register",
         "No claimed feelings; no manipulation",
     ),
     IntelForm(
@@ -88,7 +88,7 @@ FORMS: List[IntelForm] = [
         "systems_ecological",
         "Systems / ecological intelligence",
         "Feedback, leverage, second-order effects",
-        "corpus systems pack, KAI Oracle/Architect",
+        "corpus systems pack, LEVI Oracle/Architect",
         "Models are maps; label uncertainty",
     ),
 ]

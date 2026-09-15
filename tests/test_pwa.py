@@ -135,8 +135,8 @@ def test_registers_lists_real_registers(base):
     regs = json.loads(body.decode())["registers"]
     ids = [r["id"] for r in regs]
     assert len(ids) == 14
-    assert "kai_9000" in ids
-    assert "kai_9000_void" in ids
+    assert "levi" in ids
+    assert "levi_void" in ids
     # no joke personalities — every register has a real tagline/voice
     for r in regs:
         assert r["tagline"] and r["voice"]
@@ -206,7 +206,7 @@ def test_chat_with_register_uses_system_prompt(base):
     status, payload = _post(
         base,
         "/api/chat",
-        {"session": "reg-test", "message": "hi", "register": "kai_9000_void"},
+        {"session": "reg-test", "message": "hi", "register": "levi_void"},
     )
     assert status == 200
     assert payload["ok"] is True

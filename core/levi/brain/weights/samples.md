@@ -11,10 +11,10 @@ A Assivigns Sytawen
 En . These sourgoriv ve, courscation we hotphill fo my boste, aquily he
 ```
 
-## prompt: 'Register: KAI-9000'
+## prompt: 'Register: LEVI'
 
 ```
-Register: KAI-900099 Wensorrs. : Wis ryl Compats
+Register: LEVI99 Wensorrs. : Wis ryl Compats
 Scontading ( !), ased S(Unecity7), MADC. Stwø)
 LAR)
 # Krisomple colurplod ] hatep

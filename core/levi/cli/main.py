@@ -1350,7 +1350,7 @@ def cmd_agent(args):
 
     action = getattr(args, "agent_action", None)
 
-    def _kai_register_system() -> tuple[str | None, str | None]:
+    def _levi_register_system() -> tuple[str | None, str | None]:
         """Validate --register and return (variant_id, system_prompt).
 
         Returns (None, None) when no --register was given. Exits 2 with the
@@ -1360,12 +1360,12 @@ def cmd_agent(args):
         variant_id = variant_id.strip()
         if not variant_id:
             return None, None
-        from levi.persona.kai9000 import get as _kai_get, all_variants, system_for
+        from levi.persona.levi import get as _levi_get, all_variants, system_for
 
-        variant = _kai_get(variant_id)
+        variant = _levi_get(variant_id)
         if variant is None:
             valid = ", ".join(v.id for v in all_variants())
-            print(f"Unknown KAI-9000 register {variant_id!r}. Valid ids: {valid}")
+            print(f"Unknown LEVI register {variant_id!r}. Valid ids: {valid}")
             raise SystemExit(2)
         return variant.id, system_for(variant.id)
 
@@ -1413,16 +1413,16 @@ def cmd_agent(args):
             consent=consent,
         )
         _attach_mcp(registry)
-        register_id, register_system = _kai_register_system()
+        register_id, register_system = _levi_register_system()
         if register_id:
-            print(f"KAI-9000 register: {register_id}\n")
+            print(f"LEVI register: {register_id}\n")
         use_affect = bool(getattr(args, "affect", False))
         affect_session = None
         if use_affect:
             from levi.affect import SessionEI
 
             affect_session = SessionEI(
-                register_id=(getattr(args, "register", None) or "kai_9000")
+                register_id=(getattr(args, "register", None) or "levi")
             )
             print("Affect engine: ON (5D EI modulation, docs/AFFECT.md)\n")
             # Rebuild the registry so the affect_state tool shares the live tracker.
@@ -1698,7 +1698,7 @@ def cmd_agent(args):
             from levi.affect import SessionEI
 
             affect_session = SessionEI(
-                register_id=(getattr(args, "register", None) or "kai_9000")
+                register_id=(getattr(args, "register", None) or "levi")
             )
             print("Affect engine: ON (5D EI modulation, docs/AFFECT.md)\n")
         registry = build_default_registry(
@@ -1712,9 +1712,9 @@ def cmd_agent(args):
             f"consent={'yes (--yes)' if consent else 'no (gates will prompt/deny)'} ...\n"
         )
         _attach_mcp(registry)
-        register_id, register_system = _kai_register_system()
+        register_id, register_system = _levi_register_system()
         if register_id:
-            print(f"KAI-9000 register: {register_id}\n")
+            print(f"LEVI register: {register_id}\n")
         transcript = run_subtask(
             task,
             provider=provider,
@@ -2446,7 +2446,7 @@ def cmd_affect(args):
     print("  4. empathy         — lexicon/heuristic affect perception")
     print("                       (valence, arousal, 6 emotion categories).")
     print("  5. social_skills   — affect-aware register selection across")
-    print("                       the 14 KAI-9000 registers + repair/rapport.")
+    print("                       the 14 LEVI registers + repair/rapport.")
     print("\nHonesty rule: this is pattern-based affect modeling, not felt")
     print("emotion. No sentience or subjective-experience claims — ever.")
     print("Full spec: docs/AFFECT.md")
@@ -3380,10 +3380,10 @@ def cmd_premium(args):
         print(format_features(verbose=not getattr(args, "quiet", False)))
 
 
-def cmd_kai(args):
-    """KAI-9000 family — redesigned SI registers."""
-    from levi.persona.kai9000 import (
-        format_kai_roster,
+def cmd_voice(args):
+    """LEVI voice registers — 14 original SI registers."""
+    from levi.persona.levi import (
+        format_levi_roster,
         get,
         register_into_lattice,
         all_variants,
@@ -3392,15 +3392,9 @@ def cmd_kai(args):
     var = getattr(args, "variant", None)
     if var:
         # allow short names: care, ops, ...
-        key = (
-            var
-            if var.startswith("kai_")
-            else f"kai_9000_{var}"
-            if var != "9000"
-            else "kai_9000"
-        )
-        if var in ("9000", "primary", "kai"):
-            key = "kai_9000"
+        key = var if var.startswith("levi_") else f"levi_{var}"
+        if var in ("prime", "primary", "voice"):
+            key = "levi"
         v = get(key) or get(var)
         if not v:
             print(f"Unknown variant: {var}")
@@ -3418,10 +3412,10 @@ def cmd_kai(args):
     if getattr(args, "register", False):
         lat = PersonaLattice()
         n = register_into_lattice(lat)
-        print(f"Registered {n} KAI-9000 variants into persona lattice.")
+        print(f"Registered {n} LEVI variants into persona lattice.")
         print("Total personas:", len(lat.keys()))
         return
-    print(format_kai_roster())
+    print(format_levi_roster())
 
 
 def cmd_unique(args):
@@ -3524,7 +3518,7 @@ def cmd_here(args):
     print("Talk to LEVI now:")
     print('  python -m levi.cli.main chat "Who are you?"')
     print('  python -m levi.cli.main ask "Who are you?"')
-    print('  python -m levi.cli.main chat --persona kai_9000 "Status."')
+    print('  python -m levi.cli.main chat --persona levi "Status."')
     print("")
     print("Story (auto forward + backward):")
     print('  python -m levi.cli.main story --create "A lattice opens" --auto')
@@ -3857,11 +3851,11 @@ def main():
         "--register",
         default=None,
         metavar="VARIANT",
-        help="Speak as a KAI-9000 SI register (e.g. kai_9000_ops). "
-        "Valid ids: kai_9000, kai_9000_care, kai_9000_ops, kai_9000_challenger, "
-        "kai_9000_literary, kai_9000_forensic, kai_9000_void, kai_9000_builder, "
-        "kai_9000_mirror, kai_9000_architect, kai_9000_sentinel, kai_9000_oracle, "
-        "kai_9000_muse, kai_9000_grok.",
+        help="Speak as a LEVI SI register (e.g. levi_ops). "
+        "Valid ids: levi, levi_care, levi_ops, levi_challenger, "
+        "levi_literary, levi_forensic, levi_void, levi_builder, "
+        "levi_mirror, levi_architect, levi_sentinel, levi_oracle, "
+        "levi_companion, levi_wit.",
     )
     ag_run.add_argument(
         "--affect",
@@ -3904,8 +3898,8 @@ def main():
         "--register",
         default=None,
         metavar="VARIANT",
-        help="Speak as a KAI-9000 SI register for the whole session "
-        "(e.g. kai_9000_care). See `levi agent run --help` for the id list.",
+        help="Speak as a LEVI SI register for the whole session "
+        "(e.g. levi_care). See `levi agent run --help` for the id list.",
     )
     ag_chat.add_argument(
         "--affect",
@@ -4476,7 +4470,7 @@ def main():
     chat_p.add_argument("--session", default=None, help="Resume session id")
     chat_p.add_argument("--persona", default=None, help="Lock persona id")
     chat_p.add_argument(
-        "--profile", "-P", default=None, help="spark|workbench|careful|edge|kai|care"
+        "--profile", "-P", default=None, help="spark|workbench|careful|edge|prime|care"
     )
     chat_p.add_argument(
         "--mode",
@@ -4491,18 +4485,18 @@ def main():
     sub.add_parser("si", help="Synthetic intelligence identity")
     sub.add_parser("cognition", help="Personas, wit/sarcasm, cognition map")
     prem = sub.add_parser("premium", help="25 premium must-haves (next-gen offline SI)")
-    kai_p = sub.add_parser(
-        "kai",
-        help="KAI-9000 family (original LEVI registers; reverse-engineered concept, heavily modified)",
+    voice_p = sub.add_parser(
+        "voice",
+        help="LEVI voice registers (14 original SI registers)",
     )
-    kai_p.add_argument(
+    voice_p.add_argument(
         "--variant",
         "-v",
         default=None,
         help="care|ops|challenger|literary|forensic|void|builder|mirror",
     )
-    kai_p.add_argument(
-        "--register", action="store_true", help="Register KAI into persona lattice"
+    voice_p.add_argument(
+        "--register", action="store_true", help="Register LEVI voices into persona lattice"
     )
     sub.add_parser("unique", help="Unique unreplicable LEVI organs")
     sub.add_parser("x100", help="×100 upgrade rail (status · law · next slices)")
@@ -4517,7 +4511,7 @@ def main():
         "--profile",
         "-P",
         default="levi",
-        help="levi|spark|workbench|careful|edge|kai|care",
+        help="levi|spark|workbench|careful|edge|prime|care",
     )
     talk_p.add_argument("--persona", default=None)
     talk_p.add_argument("--mode", default=None)
@@ -4733,7 +4727,7 @@ def main():
         "si": cmd_si,
         "cognition": cmd_cognition,
         "premium": cmd_premium,
-        "kai": cmd_kai,
+        "voice": cmd_voice,
         "unique": cmd_unique,
         "x100": cmd_x100,
         "max": cmd_max,

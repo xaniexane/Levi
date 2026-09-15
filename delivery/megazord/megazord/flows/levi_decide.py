@@ -12,7 +12,7 @@ INTENT_ROUTING = {
     "security": "CYBRUS",
     "build": "ECHO",
     "orchestrate": "OMEGA",
-    "diagnose": "KAI",
+    "diagnose": "RUNTIME",
     "unknown": "ALPHA",
 }
 

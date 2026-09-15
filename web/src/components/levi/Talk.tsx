@@ -324,7 +324,7 @@ export function TalkView() {
         {more && (
           <div className="flex flex-col gap-2 pb-1">
             <div className="text-micro uppercase tracking-[0.18em] text-subtle">
-              KAI-9000 registers
+              LEVI registers
             </div>
             <div className="flex flex-wrap gap-1.5">{REGISTERS.map(personaChip)}</div>
             <div className="text-micro uppercase tracking-[0.18em] text-subtle">

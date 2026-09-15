@@ -35,10 +35,10 @@ def cmd_pwa(args: argparse.Namespace) -> None:
     register = getattr(args, "register", None) or None
 
     if register:
-        from levi.persona.kai9000 import get as _get
+        from levi.persona.levi import get as _get
 
         if _get(register) is None:
-            from levi.persona.kai9000 import all_variants
+            from levi.persona.levi import all_variants
 
             valid = ", ".join(v.id for v in all_variants())
             print(f"Unknown register {register!r}. Valid ids: {valid}")

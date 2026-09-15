@@ -4,7 +4,7 @@ MEGAZORD — LEVI × L.W.P. megazord.
 A single import surface for the combined Levi + L.W.P. organism.
 
 Quick start:
-    from megazord import MegaZord, CYBRUS, ECHO, ALPHA, OMEGA, KAI
+    from megazord import MegaZord, CYBRUS, ECHO, ALPHA, OMEGA, RUNTIME
 
     mz = MegaZord(persona="alpha")
     result = mz.handle("Build me a hitl job tracker")
@@ -15,7 +15,7 @@ from .personas import (
     ECHO,
     ALPHA,
     OMEGA,
-    KAI,
+    RUNTIME,
     Persona,
     PersonaRegistry,
     DEFAULT_REGISTRY,
@@ -36,7 +36,7 @@ __all__ = [
     "ECHO",
     "ALPHA",
     "OMEGA",
-    "KAI",
+    "RUNTIME",
     "Persona",
     "PersonaRegistry",
     "DEFAULT_REGISTRY",

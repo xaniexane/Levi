@@ -187,7 +187,7 @@ class ChatCompanion:
             "Hardwired traits (always on): breadth · craft · careful · edge · precision · care · continuity",
             "Tech-giant quality bars inspired these standards — identity stays LEVI SI.",
             "Try: help me plan today · pressure-test this · who are you?",
-            "Commands: /traits · /mode quiet · /persona kai_9000_care · /help",
+            "Commands: /traits · /mode quiet · /persona levi_care · /help",
         ]
         return "\n".join(lines)
 
@@ -340,7 +340,7 @@ class ChatCompanion:
         if cmd in ("/quit", "/exit"):
             return "__QUIT__"
         return (
-            "Try /help /profile spark|edge|care|kai|workbench|careful /mode /persona\n"
+            "Try /help /profile spark|edge|care|prime|workbench|careful /mode /persona\n"
             f"Unknown command {cmd}. /help for list."
         )
 

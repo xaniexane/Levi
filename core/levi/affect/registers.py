@@ -1,7 +1,7 @@
 """Affect-aware register selection — Dimension 5 (SOCIAL SKILLS).
 
 Maps an :class:`EmotionReading` + :class:`PolicyDecision` onto one of the
-14 KAI-9000 registers (see levi.persona.kai9000). Selection is *advisory*:
+14 LEVI registers (see levi.persona.levi). Selection is *advisory*:
 it suggests a register for this turn; an explicit user ``--register``
 choice always wins. Rapport and conversational-repair helpers live here
 too, plus hooks that format relationship notes for the people memory
@@ -18,26 +18,26 @@ from typing import Dict, Optional, Tuple
 from levi.affect.detector import EmotionReading, detect
 from levi.affect.policy import PolicyDecision, evaluate
 
-# All 14 KAI-9000 register ids (must match levi.persona.kai9000).
+# All 14 LEVI register ids (must match levi.persona.levi).
 REGISTERS = (
-    "kai_9000",
-    "kai_9000_care",
-    "kai_9000_ops",
-    "kai_9000_challenger",
-    "kai_9000_literary",
-    "kai_9000_forensic",
-    "kai_9000_void",
-    "kai_9000_builder",
-    "kai_9000_mirror",
-    "kai_9000_architect",
-    "kai_9000_sentinel",
-    "kai_9000_oracle",
-    "kai_9000_muse",
-    "kai_9000_grok",
+    "levi",
+    "levi_care",
+    "levi_ops",
+    "levi_challenger",
+    "levi_literary",
+    "levi_forensic",
+    "levi_void",
+    "levi_builder",
+    "levi_mirror",
+    "levi_architect",
+    "levi_sentinel",
+    "levi_oracle",
+    "levi_companion",
+    "levi_wit",
 )
 
 # Registers that are NEVER appropriate under distress/provocation.
-_WIT_AND_EDGE = {"kai_9000_grok", "kai_9000_challenger"}
+_WIT_AND_EDGE = {"levi_wit", "levi_challenger"}
 
 
 @dataclass
@@ -64,11 +64,11 @@ def suggest_register(
     if user_choice:
         known = user_choice in REGISTERS
         return RegisterSuggestion(
-            register_id=user_choice if known else "kai_9000",
+            register_id=user_choice if known else "levi",
             rationale=(
                 "explicit user choice honored"
                 if known
-                else f"unknown register {user_choice!r}; fell back to kai_9000"
+                else f"unknown register {user_choice!r}; fell back to levi"
             ),
             overridden=True,
         )
@@ -82,25 +82,25 @@ def suggest_register(
 
     dom, conf, arousal = reading.dominant, reading.confidence, reading.arousal
     if conf == 0:
-        return RegisterSuggestion("kai_9000", "no affect signal; default calm")
+        return RegisterSuggestion("levi", "no affect signal; default calm")
 
     if dom == "joy":
         if arousal > 0.55:
             return RegisterSuggestion(
-                "kai_9000_grok",
+                "levi_wit",
                 "user is upbeat and activated; light wit is welcome",
             )
-        return RegisterSuggestion("kai_9000_muse", "user is warm; match warmth")
+        return RegisterSuggestion("levi_companion", "user is warm; match warmth")
     if dom == "surprise":
         return RegisterSuggestion(
-            "kai_9000_muse", "surprise wants a curious companion, not a lecture"
+            "levi_companion", "surprise wants a curious companion, not a lecture"
         )
     if dom == "disgust":
         return RegisterSuggestion(
-            "kai_9000", "disgust: stay neutral and factual, don't amplify"
+            "levi", "disgust: stay neutral and factual, don't amplify"
         )
     # sadness/fear/anger already handled by policy; leftovers default calm.
-    return RegisterSuggestion("kai_9000", f"{dom} with no policy mandate; default calm")
+    return RegisterSuggestion("levi", f"{dom} with no policy mandate; default calm")
 
 
 def check_wit_safety(register_id: str, policy: PolicyDecision) -> Tuple[bool, str]:

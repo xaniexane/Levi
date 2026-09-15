@@ -122,14 +122,14 @@ _PACK = [
         ("x100", "ethics"),
     ),
     (
-        "KAI — registers are instruments; switch under HITL, not for entertainment under crisis.",
+        "LEVI — registers are instruments; switch under HITL, not for entertainment under crisis.",
         "OBSERVED",
-        ("x100", "kai"),
+        ("x100", "levi_voice"),
     ),
     (
-        "KAI — Care register forbids sarcasm; Ops demands go/no-go owners.",
+        "LEVI — Care register forbids sarcasm; Ops demands go/no-go owners.",
         "OBSERVED",
-        ("x100", "kai"),
+        ("x100", "levi_voice"),
     ),
 ]
 

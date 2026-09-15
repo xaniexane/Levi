@@ -23,10 +23,10 @@ from typing import List, Optional
 
 from levi.affect.detector import EmotionReading, detect
 
-# Registers referenced here must exist in levi.persona.kai9000 (14 total).
-CARE_REGISTER = "kai_9000_care"
-CALM_REGISTER = "kai_9000"
-WIT_REGISTER = "kai_9000_grok"
+# Registers referenced here must exist in levi.persona.levi (14 total).
+CARE_REGISTER = "levi_care"
+CALM_REGISTER = "levi"
+WIT_REGISTER = "levi_wit"
 
 
 @dataclass

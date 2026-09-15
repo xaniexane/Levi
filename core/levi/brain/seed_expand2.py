@@ -10,9 +10,9 @@ _RAW: List[Tuple[str, str, Tuple[str, ...]]] = [
         ("expand2", "ui"),
     ),
     (
-        "Interpenetration — KAI forbids couple to wit kill-switch under distress.",
+        "Interpenetration — LEVI forbids couple to wit kill-switch under distress.",
         "OBSERVED",
-        ("expand2", "kai"),
+        ("expand2", "levi_voice"),
     ),
     (
         "Interpenetration — scar law in story_fabric couples to unique organs list.",
@@ -40,7 +40,7 @@ _RAW: List[Tuple[str, str, Tuple[str, ...]]] = [
         ("expand2", "ui"),
     ),
     (
-        "Condensed UI — tabs: chat, story, model, KAI, MAX, ops — one stage.",
+        "Condensed UI — tabs: chat, story, model, voice, MAX, ops — one stage.",
         "OBSERVED",
         ("expand2", "ui"),
     ),
@@ -59,7 +59,7 @@ _RAW: List[Tuple[str, str, Tuple[str, ...]]] = [
 # densify coupling lines
 _ORGANS = [
     "si",
-    "kai",
+    "levi_voice",
     "persona",
     "wit",
     "hitl",

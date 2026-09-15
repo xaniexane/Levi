@@ -19,7 +19,7 @@ IDEAS: List[Tuple[str, str, str]] = [
     ("phase_b_blob_sync", "Encrypted blob sync dry-run → real transport", "mid"),
     ("signed_skills", "Hash-pinned skill allowlist", "mid"),
     ("voice_local", "Local STT/TTS hooks behind HITL", "mid"),
-    ("eval_golden_kai", "Golden transcripts per KAI register", "mid"),
+    ("eval_golden_voice", "Golden transcripts per LEVI register", "mid"),
     ("multi_approver", "Two-person rule for high-risk agent tools", "mid"),
     ("story_diff", "Beat-level diff for REIM forks", "near"),
     ("life_pack_v2", "Selective namespace export + verify checksum", "near"),

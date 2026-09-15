@@ -275,16 +275,16 @@ class PersonaLattice:
 
     def keys(self) -> List[str]:
         try:
-            ensure_kai_personas(self)
+            ensure_levi_personas(self)
         except Exception:
             pass
         return sorted(self.registry.keys())
 
 
-def ensure_kai_personas(lattice: "PersonaLattice") -> int:
-    """Idempotent KAI-9000 injection."""
+def ensure_levi_personas(lattice: "PersonaLattice") -> int:
+    """Idempotent LEVI injection."""
     try:
-        from levi.persona.kai9000 import register_into_lattice, all_variants
+        from levi.persona.levi import register_into_lattice, all_variants
 
         if all(v.id in lattice.registry for v in all_variants()):
             return 0

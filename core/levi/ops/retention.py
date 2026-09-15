@@ -3,7 +3,7 @@ User retention layer — local-first habits without dark patterns.
 
 High-grade features that increase return *use* without manufactured urgency:
   morning loop, honest sessions, shelf resume, export pride,
-  story quality feedback, KAI register fit, life-pack continuity,
+  story quality feedback, LEVI register fit, life-pack continuity,
   weekly review, opt-in streak (never punishes absence), trust floor.
 """
 
@@ -29,7 +29,7 @@ class RetentionState:
     stories_created: int = 0
     stories_rated: int = 0
     avg_story_score: float = 0.0
-    kai_uses: Dict[str, int] = field(default_factory=dict)
+    register_uses: Dict[str, int] = field(default_factory=dict)
     last_story_id: str = ""
     notes: List[str] = field(default_factory=list)
     # retention+
@@ -46,7 +46,7 @@ class RetentionState:
             "stories_created": self.stories_created,
             "stories_rated": self.stories_rated,
             "avg_story_score": self.avg_story_score,
-            "kai_uses": dict(self.kai_uses),
+            "register_uses": dict(self.register_uses),
             "last_story_id": self.last_story_id,
             "notes": list(self.notes)[-30:],
             "days_active": list(self.days_active)[-90:],
@@ -69,7 +69,7 @@ class RetentionState:
                 stories_created=int(d.get("stories_created") or 0),
                 stories_rated=int(d.get("stories_rated") or 0),
                 avg_story_score=float(d.get("avg_story_score") or 0),
-                kai_uses=dict(d.get("kai_uses") or {}),
+                register_uses=dict(d.get("register_uses") or d.get("kai_uses") or {}),
                 last_story_id=str(d.get("last_story_id") or ""),
                 notes=list(d.get("notes") or []),
                 days_active=list(d.get("days_active") or []),
@@ -200,10 +200,11 @@ def format_retention() -> str:
         "Commands:",
         "  levi retention --touch",
         "  levi morning · levi continue · levi export",
-        "  levi stress · levi kai",
+        "  levi stress · levi voice",
     ]
-    if st.kai_uses:
+    if st.register_uses:
         lines.append(
-            "KAI uses: " + ", ".join(f"{k}={v}" for k, v in sorted(st.kai_uses.items()))
+            "Register uses: "
+            + ", ".join(f"{k}={v}" for k, v in sorted(st.register_uses.items()))
         )
     return "\n".join(lines)

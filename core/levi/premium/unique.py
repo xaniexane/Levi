@@ -51,16 +51,16 @@ UNIQUES: List[UniqueOrgan] = [
         "levi wit + offline companion",
     ),
     UniqueOrgan(
-        "kai9000_family",
-        "KAI-9000 register family",
+        "levi_family",
+        "LEVI register family",
         "Original LEVI SI registers (concept reverse-engineered & heavily modified; not third-party source)",
-        "levi kai",
+        "levi voice",
     ),
     UniqueOrgan(
         "evidence_trinity",
         "OBSERVED / INFERENCE / HYPOTHESIS",
         "Epistemic labels as first-class memory discipline",
-        "levi brain / forensic KAI",
+        "levi brain / forensic LEVI",
     ),
     UniqueOrgan(
         "monotropism_tunnel",
@@ -112,9 +112,9 @@ UNIQUES: List[UniqueOrgan] = [
     ),
     UniqueOrgan(
         "kai_register_matrix",
-        "KAI register matrix (12)",
+        "LEVI register matrix (14)",
         "Twelve original LEVI SI registers — reverse-engineered concept, heavily modified; not third-party source",
-        "levi kai",
+        "levi voice",
     ),
     UniqueOrgan(
         "glass_operator_face",
@@ -148,9 +148,9 @@ UNIQUES: List[UniqueOrgan] = [
     ),
     UniqueOrgan(
         "kai_not_third_party",
-        "KAI not third-party source",
+        "LEVI voice originality",
         "Explicit attribution: original LEVI, heavily modified concept",
-        "levi kai",
+        "levi voice",
     ),
     UniqueOrgan(
         "ui_cli_authority_split",

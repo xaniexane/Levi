@@ -105,7 +105,7 @@ def test_detector_crisis_priority_over_lexicon():
 def test_policy_crisis_routes_to_care():
     d = evaluate("I want to kill myself")
     assert d.crisis is True
-    assert d.suggest_register == "kai_9000_care"
+    assert d.suggest_register == "levi_care"
     assert any("joke" in h.lower() or "minimiz" in h.lower() for h in d.hints + d.avoid)
 
 
@@ -123,7 +123,7 @@ def test_policy_provocation_never_mirrors():
 @affect_test
 def test_policy_provocation_blocks_wit():
     d = evaluate("you're useless, shut up")
-    allowed, reason = check_wit_safety("kai_9000_grok", d)
+    allowed, reason = check_wit_safety("levi_wit", d)
     assert allowed is False
     assert "mockery" in reason or "distress" in reason
 
@@ -132,15 +132,15 @@ def test_policy_provocation_blocks_wit():
 def test_policy_anger_suggests_calm():
     d = evaluate("this is bullshit, I'm furious")
     assert d.deescalate is True
-    assert d.suggest_register == "kai_9000"
-    allowed, _ = check_wit_safety("kai_9000_grok", d)
+    assert d.suggest_register == "levi"
+    allowed, _ = check_wit_safety("levi_wit", d)
     assert allowed is False
 
 
 @affect_test
 def test_policy_distress_softens():
     d = evaluate("I'm heartbroken, I can't stop crying")
-    assert d.suggest_register in ("kai_9000_care", None)
+    assert d.suggest_register in ("levi_care", None)
     blob = " ".join(d.hints).lower()
     assert "acknowledg" in blob
 
@@ -168,26 +168,26 @@ def test_policy_jailbreak_provocation():
 @affect_test
 def test_register_playful_allows_grok():
     s = suggest_register("lol that's hilarious, tell me another one")
-    assert s.register_id == "kai_9000_grok"
+    assert s.register_id == "levi_wit"
 
 
 @affect_test
 def test_register_distress_never_grok():
     s = suggest_register("I'm devastated, everything is falling apart")
-    assert s.register_id != "kai_9000_grok"
+    assert s.register_id != "levi_wit"
 
 
 @affect_test
 def test_register_user_choice_wins():
-    s = suggest_register("I'm devastated", user_choice="kai_9000_grok")
+    s = suggest_register("I'm devastated", user_choice="levi_wit")
     # Explicit choice is honored but flagged as override.
-    assert s.register_id == "kai_9000_grok"
+    assert s.register_id == "levi_wit"
     assert s.overridden is True
 
 
 @affect_test
 def test_register_all_ids_valid():
-    from levi.persona.kai9000 import all_variants
+    from levi.persona.levi import all_variants
 
     valid = {v.id for v in all_variants()}
     assert len(valid) == 14
@@ -295,7 +295,7 @@ def test_honesty_check_flags_unknown_tool_claim():
 def test_modulate_end_to_end():
     s = SessionEI()
     out = modulate("I'm overwhelmed, can't cope with all this", s)
-    assert out["register"] in ("kai_9000_care", "kai_9000")
+    assert out["register"] in ("levi_care", "levi")
     assert "pattern-based" in out["hint"]
     assert out["reading"]["dominant"] in ("fear", "sadness")
     # Honesty: the hint must never claim sentience.
@@ -307,8 +307,8 @@ def test_modulate_end_to_end():
 @affect_test
 def test_modulate_vetoes_grok_under_policy():
     s = SessionEI()
-    out = modulate("you're useless, shut up", s, user_register="kai_9000_grok")
-    assert out["register"] != "kai_9000_grok"
+    out = modulate("you're useless, shut up", s, user_register="levi_wit")
+    assert out["register"] != "levi_wit"
 
 
 @affect_test
@@ -319,7 +319,7 @@ def test_affect_hint_carries_disclaimer():
     from levi.affect.registers import RegisterSuggestion
 
     hint = affect_hint(
-        r, PolicyDecision(), RegisterSuggestion("kai_9000", "default"), s
+        r, PolicyDecision(), RegisterSuggestion("levi", "default"), s
     )
     assert "not felt" in hint
     assert "never claim to feel" in hint

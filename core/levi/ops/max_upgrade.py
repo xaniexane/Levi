@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 
 def format_max() -> str:
     from levi.persona.lattice import PersonaLattice
-    from levi.persona.kai9000 import all_variants
+    from levi.persona.levi import all_variants
     from levi.premium.features import FEATURES
     from levi.premium.unique import UNIQUES
     from levi.brain.seed_knowledge_max import _RAW as MAX_RAW
@@ -34,7 +34,7 @@ def format_max() -> str:
         "",
         "COUNTS",
         f"  personas           {personas}",
-        f"  KAI-9000 variants  {len(all_variants())}",
+        f"  LEVI variants  {len(all_variants())}",
         f"  premium features   {len(FEATURES)}",
         f"  unique organs      {len(UNIQUES)}",
         f"  MAX knowledge units {len(MAX_RAW)}",

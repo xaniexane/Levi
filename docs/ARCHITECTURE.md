@@ -51,7 +51,7 @@ Entry point: `python -m levi.cli.main` (see `docs/CLI.md`). Data stays local
 
 Separate package, separate import surface (`from megazord import MegaZord`).
 Today it is **persona scaffolding + flow stubs**: five persona presets (CYBRUS,
-ECHO, ALPHA, OMEGA, KAI — there is no LEVI persona), a think/decide/act flow
+ECHO, ALPHA, OMEGA, RUNTIME — there is no LEVI persona), a think/decide/act flow
 loop (`megazord_core.py`, `flows/`), and thin bridges (`bridges/`). Single
 process, in-memory, no persistence, no transport, no tests. See its README for
 the full honesty disclaimer. Per P3.6 it stays scoped as scaffolding.

@@ -26,9 +26,9 @@ def snapshot() -> dict:
         ),
         0,
     )
-    kai = _safe(
+    voice = _safe(
         lambda: len(
-            __import__("levi.persona.kai9000", fromlist=["all_variants"]).all_variants()
+            __import__("levi.persona.levi", fromlist=["all_variants"]).all_variants()
         ),
         0,
     )
@@ -58,7 +58,7 @@ def snapshot() -> dict:
     return {
         "at": datetime.now(timezone.utc).isoformat(),
         "personas": personas,
-        "kai_variants": kai,
+        "levi_variants": voice,
         "premium_features": premium,
         "unique_organs": unique,
         "scorecard": round(float(score or 0), 2),
@@ -77,7 +77,7 @@ def next_slices() -> List[str]:
         "Corpus: domain packs (medicine literacy caution, law literacy caution)",
         "Plugin manifest hardening + signed skill allowlist",
         "Voice hooks (local STT/TTS) behind HITL",
-        "Eval harness: golden transcripts for KAI registers",
+        "Eval harness: golden transcripts for LEVI registers",
     ]
 
 
@@ -102,7 +102,7 @@ def format_x100() -> str:
         "",
         "STATUS",
         f"  personas          {s['personas']}",
-        f"  KAI-9000 variants {s['kai_variants']}",
+        f"  LEVI variants {s['levi_variants']}",
         f"  premium features  {s['premium_features']}",
         f"  unique organs     {s['unique_organs']}",
         f"  scorecard         {s['scorecard']}/10",
@@ -120,6 +120,6 @@ def format_x100() -> str:
         lines.append(f"  {i}. {n}")
     lines.append("")
     lines.append(
-        "Commands: levi kai · levi unique · levi premium · levi scorecard · levi enterprise · levi go"
+        "Commands: levi voice · levi unique · levi premium · levi scorecard · levi enterprise · levi go"
     )
     return "\n".join(lines)

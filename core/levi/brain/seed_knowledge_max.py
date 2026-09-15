@@ -404,7 +404,7 @@ def _build() -> List[Tuple[str, str, Tuple[str, ...]]]:
                     ("max", "story", g),
                 )
             )
-    # KAI discipline echoes
+    # LEVI voice discipline echoes
     for reg in [
         "primary",
         "care",
@@ -421,17 +421,17 @@ def _build() -> List[Tuple[str, str, Tuple[str, ...]]]:
     ]:
         raw.append(
             (
-                f"KAI register literacy — {reg}: use as instrument under HITL; switch for fit, not theater.",
+                f"LEVI register literacy — {reg}: use as instrument under HITL; switch for fit, not theater.",
                 "OBSERVED",
-                ("max", "kai", reg),
+                ("max", "levi_voice", reg),
             )
         )
         for topic in ["crisis", "planning", "review", "handoff", "design", "conflict"]:
             raw.append(
                 (
-                    f"KAI×context — {reg} during {topic}: keep forbids active; intensity only as high as safety allows.",
+                    f"LEVI×context — {reg} during {topic}: keep forbids active; intensity only as high as safety allows.",
                     "OBSERVED",
-                    ("max", "kai", reg, topic),
+                    ("max", "levi_voice", reg, topic),
                 )
             )
     # Numbered principles 1..100 style densify
@@ -507,7 +507,7 @@ def _build() -> List[Tuple[str, str, Tuple[str, ...]]]:
         "wit",
         "scorecard",
         "glass_ui",
-        "kai",
+        "levi_voice",
         "scar_law",
         "macros",
     ]
@@ -605,6 +605,6 @@ def format_index() -> str:
     return (
         f"=== MAX knowledge pack ===\n"
         f"units={len(_RAW)}\n"
-        f"domains + A–Z densify + operator grid + KAI literacy\n"
+        f"domains + A–Z densify + operator grid + LEVI voice literacy\n"
         f"Run: python -m levi.cli.main brain --seed-max\n"
     )

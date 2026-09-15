@@ -7,7 +7,7 @@ Personas:
     ECHO     — Blueprint designer, builder, creator
     ALPHA    — No-code AI compiler, executor, operator
     OMEGA    — OS brain, orchestrator, long-game strategist
-    KAI      — Logic runtime, memory, cross-orchestration brain
+    RUNTIME  — Logic runtime, memory, cross-orchestration brain
 """
 
 from .persona_core import Persona, PersonaRegistry, DEFAULT_REGISTRY
@@ -17,7 +17,7 @@ from .cybrus_persona import CYBRUS
 from .echo_persona import ECHO
 from .alpha_persona import ALPHA
 from .omega_persona import OMEGA
-from .kai_persona import KAI
+from .runtime_persona import RUNTIME
 
 __all__ = [
     "Persona",
@@ -27,5 +27,5 @@ __all__ = [
     "ECHO",
     "ALPHA",
     "OMEGA",
-    "KAI",
+    "RUNTIME",
 ]

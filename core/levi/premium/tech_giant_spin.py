@@ -26,8 +26,8 @@ SPINS: List[GiantSpin] = [
     ),
     GiantSpin(
         "Assistant ecosystem",
-        "230 personas + 12 KAI registers under HITL",
-        "levi chat / kai",
+        "230 personas + 14 LEVI registers under HITL",
+        "levi chat / voice",
     ),
     GiantSpin(
         "Cloud sync", "Optional encrypted wing; CMK never server-owned", "levi cloud"
@@ -58,7 +58,7 @@ SPINS: List[GiantSpin] = [
     GiantSpin(
         "Safety center",
         "Crisis floor + wit kill-switch + Care register",
-        "offline companion / kai care",
+        "offline companion / voice care",
     ),
     GiantSpin(
         "Design system", "Condensed glass console · modern density", "levi serve-ui"

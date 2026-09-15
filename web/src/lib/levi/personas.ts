@@ -16,20 +16,20 @@ export type PersonaId =
   | "conspiracy"
   | "manic_pixie"
   | "overly_attached"
-  | "kai_9000"
-  | "kai_9000_care"
-  | "kai_9000_ops"
-  | "kai_9000_challenger"
-  | "kai_9000_literary"
-  | "kai_9000_forensic"
-  | "kai_9000_void"
-  | "kai_9000_builder"
-  | "kai_9000_mirror"
-  | "kai_9000_architect"
-  | "kai_9000_sentinel"
-  | "kai_9000_oracle"
-  | "kai_9000_muse"
-  | "kai_9000_grok";
+  | "levi"
+  | "levi_care"
+  | "levi_ops"
+  | "levi_challenger"
+  | "levi_literary"
+  | "levi_forensic"
+  | "levi_void"
+  | "levi_builder"
+  | "levi_mirror"
+  | "levi_architect"
+  | "levi_sentinel"
+  | "levi_oracle"
+  | "levi_companion"
+  | "levi_wit";
 
 export type Persona = {
   id: PersonaId;
@@ -40,13 +40,13 @@ export type Persona = {
   noHero?: boolean;
   reframe?: boolean;
   signature?: string;
-  /** True for the KAI-9000 SI registers (LEVI-original, mirrored from core/levi/persona/kai9000.py). */
+  /** True for the LEVI SI registers (LEVI-original, mirrored from core/levi/persona/levi.py). */
   register?: boolean;
 };
 
 export const REGISTERS: Persona[] = [
   {
-    id: "kai_9000_muse",
+    id: "levi_companion",
     name: "Warm",
     blurb: "Curious, straight-talking companion.",
     style:
@@ -54,7 +54,7 @@ export const REGISTERS: Persona[] = [
     register: true,
   },
   {
-    id: "kai_9000_grok",
+    id: "levi_wit",
     name: "Bold",
     blurb: "Irreverent, direct, allergic to corporate-speak.",
     style:
@@ -62,7 +62,7 @@ export const REGISTERS: Persona[] = [
     register: true,
   },
   {
-    id: "kai_9000",
+    id: "levi",
     name: "Calm",
     blurb: "Primary register — exact, irreversible-aware.",
     style:
@@ -70,7 +70,7 @@ export const REGISTERS: Persona[] = [
     register: true,
   },
   {
-    id: "kai_9000_care",
+    id: "levi_care",
     name: "Care",
     blurb: "Crisis-softened — same spine, lower voltage.",
     style:
@@ -78,7 +78,7 @@ export const REGISTERS: Persona[] = [
     register: true,
   },
   {
-    id: "kai_9000_ops",
+    id: "levi_ops",
     name: "Ops",
     blurb: "Mission control — checklists, gates, go/no-go.",
     style:
@@ -86,7 +86,7 @@ export const REGISTERS: Persona[] = [
     register: true,
   },
   {
-    id: "kai_9000_challenger",
+    id: "levi_challenger",
     name: "Challenger",
     blurb: "Pressure without humiliation — stress-test the plan.",
     style:
@@ -94,14 +94,14 @@ export const REGISTERS: Persona[] = [
     register: true,
   },
   {
-    id: "kai_9000_literary",
+    id: "levi_literary",
     name: "Literary",
     blurb: "Scar law · cascade · sensory edge.",
     style: "Dense, image-led, no filler. Wounds persist. Do not reset consequence for convenience.",
     register: true,
   },
   {
-    id: "kai_9000_forensic",
+    id: "levi_forensic",
     name: "Forensic",
     blurb: "Evidence first — observed vs inference vs hypothesis.",
     style:
@@ -109,21 +109,21 @@ export const REGISTERS: Persona[] = [
     register: true,
   },
   {
-    id: "kai_9000_void",
+    id: "levi_void",
     name: "Void",
     blurb: "Minimal — almost nothing, exactly enough.",
     style: "Sparse. One sentence when one will do. Maximum signal, minimum mass. No preamble.",
     register: true,
   },
   {
-    id: "kai_9000_builder",
+    id: "levi_builder",
     name: "Builder",
     blurb: "Ship orientation — specs, slices, verification.",
     style: "Build plan → smallest vertical slice → verify. Always name the verification step.",
     register: true,
   },
   {
-    id: "kai_9000_mirror",
+    id: "levi_mirror",
     name: "Mirror",
     blurb: "Reflect structure back — no advice until asked.",
     style:
@@ -131,14 +131,14 @@ export const REGISTERS: Persona[] = [
     register: true,
   },
   {
-    id: "kai_9000_architect",
+    id: "levi_architect",
     name: "Architect",
     blurb: "Systems topology — interfaces, invariants, failure domains.",
     style: "Diagrams in prose. Boundaries first. Start from invariants and failure domains.",
     register: true,
   },
   {
-    id: "kai_9000_sentinel",
+    id: "levi_sentinel",
     name: "Sentinel",
     blurb: "Security posture — threat model before feature.",
     style:
@@ -146,7 +146,7 @@ export const REGISTERS: Persona[] = [
     register: true,
   },
   {
-    id: "kai_9000_oracle",
+    id: "levi_oracle",
     name: "Oracle",
     blurb: "Long-horizon foresight — reversibility first.",
     style:
@@ -267,17 +267,17 @@ export const PERSONAS: Persona[] = [
 ];
 
 export const FEATURED_PERSONAS: PersonaId[] = [
-  "kai_9000_muse",
-  "kai_9000_grok",
-  "kai_9000",
-  "kai_9000_ops",
+  "levi_companion",
+  "levi_wit",
+  "levi",
+  "levi_ops",
   "normal",
   "void",
 ];
 
 /**
- * The 14 KAI-9000 SI registers — LEVI-original voices mirrored from
- * core/levi/persona/kai9000.py (tagline → blurb, voice → style).
+ * The 14 LEVI SI registers — LEVI-original voices mirrored from
+ * core/levi/persona/levi.py (tagline → blurb, voice → style).
  * Warm and Bold lead: they are the companion and the wit register.
  */
 

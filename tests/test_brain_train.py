@@ -49,7 +49,7 @@ def fixture_corpus(tmp_path: Path) -> Path:
 
 
 def test_prepare_corpus_emits_valid_jsonl_and_identity_records(tmp_path: Path):
-    from levi.persona.kai9000 import all_variants
+    from levi.persona.levi import all_variants
 
     out = tmp_path / "out"
     # run against the real raw/ + briefs/ dirs (may be mid-ingest; that's fine)
@@ -66,7 +66,7 @@ def test_prepare_corpus_emits_valid_jsonl_and_identity_records(tmp_path: Path):
             kinds[rec.get("kind")] = kinds.get(rec.get("kind"), 0) + 1
             n += 1
     assert n > 0
-    # identity records must track the KAI-9000 register count exactly
+    # identity records must track the LEVI register count exactly
     assert kinds.get("identity", 0) == len(all_variants()) >= 14
     stats = json.loads((out / "corpus_stats.json").read_text(encoding="utf-8"))
     assert stats["chunks"] == n

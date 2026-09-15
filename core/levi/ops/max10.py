@@ -9,7 +9,7 @@ def format_max10() -> str:
     from levi.brain.seed_knowledge_x10 import _RAW as X10
     from levi.premium.features import FEATURES
     from levi.premium.unique import UNIQUES
-    from levi.persona.kai9000 import all_variants
+    from levi.persona.levi import all_variants
     from levi.persona.lattice import PersonaLattice
     from levi.ops.x100 import laws
 
@@ -37,12 +37,12 @@ def format_max10() -> str:
         f"  combined (if both)  {total}",
         f"  premium features    {len(FEATURES)}",
         f"  unique organs       {len(UNIQUES)}",
-        f"  KAI-9000 variants   {len(all_variants())}",
+        f"  LEVI variants   {len(all_variants())}",
         f"  personas            {len(PersonaLattice().keys())}",
         f"  scorecard           {score:.2f}/10",
         f"  enterprise          {ent}",
         "",
-        "KAI NOTE",
+        "LEVI NOTE",
         "  Original LEVI registers — reverse-engineered concept, heavily modified;",
         "  not third-party source code.",
         "",

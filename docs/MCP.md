@@ -143,3 +143,23 @@ newline-delimited JSON-RPC). Per-call timeout defaults to 30s
 **Honest limits:** no background reconnect loop (reconnect happens on
 each agent start); notifications from servers are ignored; tool calls
 are synchronous with a timeout.
+
+## External providers as named sources (binding)
+
+LEVI's product identity is LEVI-only. Provider and model names — KAI-9000,
+Qwen, LLaMA, Pollinations, OpenAI-compatible endpoints, anything else —
+**never appear as LEVI branding**: not as registers, not as personas, not
+in the UI, not in docs prose. They appear in exactly one place: as the
+**name of a source** you configured.
+
+```bash
+levi mcp add kai_9000 --url https://example.com/mcp      # a provider, as a source
+levi mcp add qwen-cloud --cmd "npx -y some-qwen-mcp"     # a provider, as a source
+levi mcp list-servers                                    # sources, plainly labeled
+```
+
+The same rule covers model weights: `levi agent model pull` downloads
+named sources (`levi-0.6b`, `levi-4b`); the upstream base appears only in
+the download table as source detail. Anything the user sees and talks to
+is LEVI — registers, voices, the PWA, the CLI. Sources stay in the
+source layer, labeled as sources.

@@ -39,7 +39,7 @@ class SelfModel:
     from tool outcomes, not a feeling.
     """
 
-    register_id: str = "kai_9000"
+    register_id: str = "levi"
     confidence: float = 0.7
     limits: List[str] = field(default_factory=list)
     turns_tracked: int = 0
@@ -115,7 +115,7 @@ class SessionEI:
     shown to the user or an auditor verbatim.
     """
 
-    def __init__(self, register_id: str = "kai_9000") -> None:
+    def __init__(self, register_id: str = "levi") -> None:
         self.scores: Dict[str, float] = {
             "self_awareness": 0.7,
             "self_regulation": 0.8,

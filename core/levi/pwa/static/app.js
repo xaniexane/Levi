@@ -100,7 +100,7 @@
         o.title = r.tagline || "";
         registerSel.appendChild(o);
       });
-      const saved = store.get("register", "kai_9000");
+      const saved = store.get("register", "levi");
       if ([...registerSel.options].some((o) => o.value === saved)) registerSel.value = saved;
     } catch (e) { /* registers stay empty; chat still works */ }
 

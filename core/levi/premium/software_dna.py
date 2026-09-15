@@ -89,7 +89,7 @@ PAIRS: List[DnaPair] = [
         "Turbo Pascal / Delphi RAD",
         "Next.js / fast app scaffolds",
         "Ship thin vertical slices",
-        "levi builder / KAI builder",
+        "levi builder / LEVI builder",
     ),
     DnaPair(
         "Emacs / Vim depth",

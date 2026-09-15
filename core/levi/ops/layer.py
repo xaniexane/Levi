@@ -48,7 +48,7 @@ class OpsSnapshot:
 
 
 class OperationalLayer:
-    """Single entry for operator / Kai / Cursor drivers."""
+    """Single entry for operator / LEVI-voice / Cursor drivers."""
 
     def snapshot(self) -> OpsSnapshot:
         snap = OpsSnapshot()

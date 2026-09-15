@@ -6,7 +6,7 @@ provenance so the binary can be verified or reproduced.
 
 - **Run**: `core/levi/brain/train/train.py --steps 600 --seed 1337`
 - **Corpus**: `core/levi/brain/train/corpus.jsonl` — 353 chunks
-  (14 KAI-9000 identity records + 339 course chunks), 847,990 chars.
+  (14 LEVI identity records + 339 course chunks), 847,990 chars.
   News is deliberately excluded (see docs/BRAIN_TRAINING.md §5).
 - **Model**: char-level causal GPT — 4 layers, 256 dim, 4 heads,
   block size 128, vocab 162 chars → **3,271,168 params**.

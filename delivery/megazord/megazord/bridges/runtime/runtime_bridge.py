@@ -1,6 +1,6 @@
 """
-Kai Bridge — logic runtime, persistent memory, cross-orchestration.
-Kai is Levi's second brain: stores memories, resolves context,
+Runtime Bridge — logic runtime, persistent memory, cross-orchestration.
+The runtime brain: stores memories, resolves context,
 and coordinates between personas.
 """
 
@@ -78,11 +78,11 @@ class MemoryStore:
         )
 
 
-class KaiBrain:
-    """Kai's reasoning engine: resolves context, stores facts, coordinates personas."""
+class RuntimeBrain:
+    """Runtime reasoning engine: resolves context, stores facts, coordinates personas."""
 
     def __init__(self):
-        self.levi = LeviBridge(persona="kai")
+        self.levi = LeviBridge(persona="runtime")
         self.store = MemoryStore()
 
     def memorize(
@@ -102,25 +102,25 @@ class KaiBrain:
     def coordinate(self, persona_from: str, message: Dict[str, Any]) -> Dict[str, Any]:
         """Route a coordination message between personas."""
         return {
-            "coordinator": "kai",
+            "coordinator": "runtime",
             "from": persona_from,
             "message": message,
             "context_window": [e.key for e in self.context_window(5)],
-            "soul": self.levi.bridge.build(persona="kai")["soul"],
+            "soul": self.levi.bridge.build(persona="runtime")["soul"],
         }
 
 
-class KaiBridge:
+class RuntimeBridge:
     """
-    Kai's external bridge — wraps KaiBrain with a L.W.P.-compatible interface.
+    Runtime external bridge — wraps RuntimeBrain with a L.W.P.-compatible interface.
     """
 
     def __init__(self):
-        self.brain = KaiBrain()
+        self.brain = RuntimeBrain()
 
     def think(self, prompt: str) -> Dict[str, Any]:
         self.brain.memorize(f"prompt_{uuid.uuid4().hex[:8]}", prompt, tags=["prompt"])
-        return self.brain.coordinate("kai", {"type": "thought", "text": prompt})
+        return self.brain.coordinate("runtime", {"type": "thought", "text": prompt})
 
     def store_memory(
         self, key: str, value: Any, tags: Optional[List[str]] = None
@@ -135,7 +135,7 @@ class KaiBridge:
     def status(self) -> Dict[str, Any]:
         s = self.brain.store.stats()
         return {
-            "persona": "KAI",
+            "persona": "RUNTIME",
             "memory_entries": s["total"],
             "soul": {
                 "joy": 0.3,

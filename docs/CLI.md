@@ -69,7 +69,7 @@ python3 -m levi.cli.main <command> [options]
 | `si` | Synthetic intelligence identity |
 | `cognition` | Personas, wit/sarcasm, cognition map |
 | `premium` | 25 premium must-haves (next-gen offline SI) |
-| `kai` | KAI-9000 family (original LEVI registers; reverse-engineered concept, heavily modified) |
+| `voice` | LEVI voice registers (14 original SI registers) |
 | `unique` | Unique unreplicable LEVI organs |
 | `x100` | ×100 upgrade rail (status · law · next slices) |
 | `max` | MAX upgrade (2500 knowledge · full counts) |

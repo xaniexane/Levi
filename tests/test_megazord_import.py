@@ -9,7 +9,7 @@ import pytest
 import megazord
 from megazord import MegaZord, DEFAULT_REGISTRY
 
-EXPECTED_PERSONAS = {"CYBRUS", "ECHO", "ALPHA", "OMEGA", "KAI"}
+EXPECTED_PERSONAS = {"CYBRUS", "ECHO", "ALPHA", "OMEGA", "RUNTIME"}
 
 
 def test_megazord_imports():
