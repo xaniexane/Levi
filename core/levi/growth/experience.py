@@ -8,6 +8,8 @@ sources it reads.
 Sources (all local-first):
   * agent chat sessions  — ``~/.levi/agent/sessions/*.jsonl``
   * daemon automations   — ``~/.levi/automations/automations.json``
+  * affect signals       — ``~/.levi/affect/signals.jsonl`` (motivation
+    intake for the 5D affect engine: frustration streaks, repairs, rapport)
 
 A watermark per source (``~/.levi/growth/state.json``) keeps cycles
 idempotent: re-running a cycle never re-harvests the same records.
@@ -203,6 +205,64 @@ def harvest_automations(auto_path: Path | None = None) -> list[Experience]:
 # ---------------------------------------------------------------------------
 
 
+def harvest_affect_signals(
+    signals_path: Path | None = None,
+    since: dict[str, str] | None = None,
+) -> tuple[list[Experience], dict[str, str]]:
+    """Harvest motivation signals written by ``levi.affect.modulation``.
+
+    Source: ``~/.levi/affect/signals.jsonl`` (frustration streaks, repair
+    events, rapport, proactive opportunities). Watermarked under the
+    ``"affect"`` key so re-runs never re-harvest. This is the growth
+    loop's intake for Dimension 3 (motivation): observed friction becomes
+    a drive to improve.
+    """
+    import os
+
+    if signals_path is None:
+        base = Path(os.environ.get("LEVI_HOME", Path.home() / ".levi"))
+        signals_path = base / "affect" / "signals.jsonl"
+    since = since or {}
+    mark = since.get("affect", "")
+    experiences: list[Experience] = []
+    latest = mark
+    if signals_path.is_file():
+        try:
+            lines = signals_path.read_text(encoding="utf-8").splitlines()
+        except OSError:
+            lines = []
+        n = 0
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                rec = json.loads(line)
+            except ValueError:
+                continue
+            ts = str(rec.get("ts", "") or "")
+            if ts > latest:
+                latest = ts
+            if mark and ts <= mark:
+                continue
+            kind = str(rec.get("kind", "affect-signal") or "affect-signal")
+            detail = _clean(str(rec.get("detail", "") or ""))
+            if not detail:
+                continue
+            n += 1
+            experiences.append(
+                Experience(
+                    id=f"affect:{n}",
+                    kind="note",
+                    source="affect-signals",
+                    ts=ts,
+                    content=f"[motivation-signal:{kind}] {detail}",
+                    meta={"dimensions": rec.get("dimensions", {})},
+                )
+            )
+    return experiences, ({"affect": latest} if latest else {})
+
+
 def harvest_new(since: dict[str, str] | None = None) -> tuple[list[Experience], dict[str, str]]:
     """Harvest all new experiences across sources.
 
@@ -211,4 +271,7 @@ def harvest_new(since: dict[str, str] | None = None) -> tuple[list[Experience], 
     """
     experiences, watermarks = harvest_sessions(since=since)
     experiences.extend(harvest_automations())
+    aff, aff_marks = harvest_affect_signals(since=since)
+    experiences.extend(aff)
+    watermarks.update(aff_marks)
     return experiences, watermarks

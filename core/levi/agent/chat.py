@@ -208,6 +208,8 @@ class ConversationManager:
         confirm: Any = None,
         workspace_root: Any = None,
         system_prompt: str | None = None,
+        affect: bool = False,
+        affect_session: Any = None,
     ):
         self.session = ChatSession(session_name)
         if isinstance(provider, ChatProvider):
@@ -221,6 +223,17 @@ class ConversationManager:
         self.confirm = confirm
         self.workspace_root = workspace_root
         self.system_prompt = system_prompt
+        self.affect = bool(affect)
+        if affect_session is not None:
+            self.affect_session = affect_session
+        else:
+            self.affect_session = None
+            if self.affect:
+                try:
+                    from levi.affect import SessionEI
+                    self.affect_session = SessionEI()
+                except Exception:
+                    self.affect_session = None
         if ctx_size:
             self.ctx_size = max(1, int(ctx_size))
         elif self.provider_name == "levi-local":
@@ -269,6 +282,8 @@ class ConversationManager:
             confirm=use_confirm,
             workspace_root=self.workspace_root,
             system_prompt=self.system_prompt,
+            affect=self.affect,
+            affect_session=self.affect_session,
         )
 
         # Persist the turn's dialogue (assistant texts, tool exchanges,
@@ -493,7 +508,9 @@ def run_chat_repl(session_name: str = DEFAULT_SESSION, *,
                   consent: bool = False,
                   confirm: Any = None,
                   workspace_root: Any = None,
-                  system_prompt: str | None = None) -> None:
+                  system_prompt: str | None = None,
+                  affect: bool = False,
+                  affect_session: Any = None) -> None:
     """Interactive long-conversation REPL. Returns on /quit / EOF."""
     mgr = ConversationManager(
         session_name,
@@ -504,6 +521,8 @@ def run_chat_repl(session_name: str = DEFAULT_SESSION, *,
         confirm=confirm,
         workspace_root=workspace_root,
         system_prompt=system_prompt,
+        affect=affect,
+        affect_session=affect_session,
     )
     resumed = len(mgr.session.message_records())
     print("levi agent chat — session %r (provider=%s, ctx=%d tokens%s)" % (

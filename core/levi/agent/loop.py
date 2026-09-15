@@ -160,6 +160,8 @@ def run_subtask(
     system_prompt: str | None = None,
     ctx: ExecContext | None = None,
     history: list[ChatMessage] | None = None,
+    affect: bool = False,
+    affect_session: Any = None,
 ) -> AgentTranscript:
     """Run one task through the step-level tool loop.
 
@@ -171,6 +173,13 @@ def run_subtask(
     ``history`` is prior conversation (``levi.agent.chat`` sessions): it
     is inserted between the system prompt and the new user message so the
     model sees the whole dialogue. Single-shot callers leave it ``None``.
+
+    ``affect`` enables the 5D emotional-intelligence engine
+    (``levi.affect``): the task text is affect-scanned and a prompt
+    addendum (register suggestion, de-escalation hints, the pattern-based
+    disclaimer) is appended to the system prompt. ``affect_session`` may
+    be a :class:`levi.affect.SessionEI` to carry per-session state;
+    otherwise a throwaway session is used.
 
     ``ctx`` is the glue parameter the ``delegate`` tool in
     :mod:`levi.agent.tools` passes when it recurses into this function:
@@ -206,6 +215,16 @@ def run_subtask(
     ]
     system = system_prompt or _default_system_prompt(tool_schemas)
     provider_name = getattr(prov, "name", None) or prov.__class__.__name__
+
+    # Affect engine: scan the task, append the modulation hint.
+    if affect:
+        try:
+            from levi.affect import SessionEI, modulate
+            _sess = affect_session if affect_session is not None else SessionEI()
+            _mod = modulate(task, _sess)
+            system = system + "\n\n" + _mod["hint"]
+        except Exception:
+            pass  # affect is advisory; never break a run
 
     messages = [
         ChatMessage(role="system", content=system),

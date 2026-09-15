@@ -305,6 +305,7 @@ def _register_builtins(
     workspace_root: Path,
     memory_dir: Path,
     skills_dir: Path,
+    affect_tracker: Any = None,
 ) -> None:
     # -- shell_exec ---------------------------------------------------------
     def _shell_exec(args: dict) -> ToolResult:
@@ -689,6 +690,52 @@ def _register_builtins(
             lines.append(f"Limits: {'; '.join(d['known_limits'])}")
         lines.append("\nHonesty rule: if it is not in this atlas or the tool list, say so — do not improvise abilities.")
         return ToolResult(ok=True, output="\n".join(lines))
+
+    # -- affect (5D emotional-intelligence engine) --------------------------
+    def _affect_detect(args: dict) -> ToolResult:
+        text = str(args.get("text") or "").strip()
+        if not text:
+            return ToolResult(ok=False, error="affect_detect: 'text' is required")
+        try:
+            from levi.affect import detect
+        except Exception as exc:
+            return ToolResult(ok=False, error=f"affect_detect: {exc}")
+        r = detect(text)
+        d = r.to_dict()
+        return ToolResult(
+            ok=True,
+            output=(
+                "affect_detect (pattern-based heuristic, not felt emotion): "
+                f"dominant={d['dominant']} valence={d['valence']} "
+                f"arousal={d['arousal']} confidence={d['confidence']} "
+                f"stress={d['stress_signals'] or 'none'}"
+            ),
+        )
+
+    def _affect_state(args: dict) -> ToolResult:
+        try:
+            from levi.affect import SessionEI
+        except Exception as exc:
+            return ToolResult(ok=False, error=f"affect_state: {exc}")
+        tracker = affect_tracker if affect_tracker is not None else SessionEI()
+        rep = tracker.report()
+        dims = ", ".join(
+            f"{k}={v:.2f}" for k, v in rep["dimensions"].items()
+        )
+        sm = rep["self_model"]
+        return ToolResult(
+            ok=True,
+            output=(
+                "affect_state — LEVI's tracked EI conduct this session "
+                "(pattern-based, not felt emotion):\n"
+                f"  dimensions: {dims}\n"
+                f"  turns: {rep['turns']}  "
+                f"frustration_streak: {rep['frustration_streak']}\n"
+                f"  self-model: register={sm['register_id']} "
+                f"confidence={sm['confidence']:.2f} "
+                f"limits={sm['limits'] or 'none stated'}"
+            ),
+        )
 
     # -- delegate -----------------------------------------------------------
     def _delegate(args: dict) -> ToolResult:
@@ -1134,6 +1181,28 @@ def _register_builtins(
             handler=_capabilities,
         ),
         Tool(
+            name="affect_detect",
+            description=(
+                "Run LEVI's pattern-based affect detector on a text: returns "
+                "valence, arousal, dominant emotion, stress signals. "
+                "Heuristic labels for conduct shaping — not felt emotion, "
+                "not a diagnosis. Read-only."
+            ),
+            parameters=_schema({"text": {"type": "string"}}, ["text"]),
+            handler=_affect_detect,
+        ),
+        Tool(
+            name="affect_state",
+            description=(
+                "Report LEVI's tracked 5D emotional-intelligence state for "
+                "this session (self-awareness, self-regulation, motivation, "
+                "empathy, social skills) plus its self-model: active "
+                "register, confidence, stated limits. Read-only."
+            ),
+            parameters=_schema({}, []),
+            handler=_affect_state,
+        ),
+        Tool(
             name="delegate",
             description=(
                 "Run a subtask in a worker thread with an isolated context. "
@@ -1225,16 +1294,21 @@ def build_default_registry(
     confirm: Callable[[str], bool] | None = None,
     memory_dir: Path | None = None,
     skills_dir: Path | None = None,
+    affect_tracker: Any = None,
 ) -> ToolRegistry:
     """Build a registry with all built-in tools.
 
     Defaults (all created lazily on first use):
     ``~/.levi/agent_workspace/``, ``~/.levi/agent_memory/``,
     ``~/.levi/skills/``.
+
+    ``affect_tracker`` is an optional :class:`levi.affect.SessionEI`
+    shared with the ``affect_state`` tool so the agent can report its
+    live session state.
     """
     root = Path(workspace_root) if workspace_root else _default_workspace_root()
     mem = Path(memory_dir) if memory_dir else _default_memory_dir()
     sk = Path(skills_dir) if skills_dir else _default_skills_dir()
     registry = ToolRegistry(default_consent=consent, default_confirm=confirm)
-    _register_builtins(registry, root, mem, sk)
+    _register_builtins(registry, root, mem, sk, affect_tracker)
     return registry

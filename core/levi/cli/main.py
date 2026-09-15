@@ -1114,6 +1114,20 @@ def cmd_agent(args):
         register_id, register_system = _kai_register_system()
         if register_id:
             print(f"KAI-9000 register: {register_id}\n")
+        use_affect = bool(getattr(args, "affect", False))
+        affect_session = None
+        if use_affect:
+            from levi.affect import SessionEI
+            affect_session = SessionEI(
+                register_id=(getattr(args, "register", None) or "kai_9000"))
+            print("Affect engine: ON (5D EI modulation, docs/AFFECT.md)\n")
+            # Rebuild the registry so the affect_state tool shares the live tracker.
+            from levi.agent.tools import build_default_registry as _bdr
+            registry = _bdr(
+                workspace_root=getattr(args, "workspace", None) or None,
+                consent=consent,
+                affect_tracker=affect_session,
+            )
         run_chat_repl(
             getattr(args, "session", None) or "default",
             provider=provider,
@@ -1122,6 +1136,8 @@ def cmd_agent(args):
             consent=consent,
             workspace_root=getattr(args, "workspace", None) or None,
             system_prompt=register_system,
+            affect=use_affect,
+            affect_session=affect_session,
         )
         return
 
@@ -1252,10 +1268,18 @@ def cmd_agent(args):
             return answer in ("y", "yes")
 
         provider = select_provider(getattr(args, "provider", None) or None)
+        use_affect = bool(getattr(args, "affect", False))
+        affect_session = None
+        if use_affect:
+            from levi.affect import SessionEI
+            affect_session = SessionEI(
+                register_id=(getattr(args, "register", None) or "kai_9000"))
+            print("Affect engine: ON (5D EI modulation, docs/AFFECT.md)\n")
         registry = build_default_registry(
             workspace_root=getattr(args, "workspace", None) or None,
             consent=consent,
             confirm=None if consent else _confirm,
+            affect_tracker=affect_session,
         )
         print(f"Running with provider={getattr(provider, 'name', '?')} "
               f"consent={'yes (--yes)' if consent else 'no (gates will prompt/deny)'} ...\n")
@@ -1271,6 +1295,8 @@ def cmd_agent(args):
             max_steps=int(getattr(args, "max_steps", None) or 10),
             workspace_root=getattr(args, "workspace", None) or None,
             system_prompt=register_system,
+            affect=use_affect,
+            affect_session=affect_session,
         )
         if getattr(args, "json", False):
             import json as _json
@@ -1665,6 +1691,42 @@ def cmd_capabilities(args):
         print(f"Tools: {', '.join(d['tools'])}")
         print(f"Limits: {'; '.join(d['known_limits'])}\n")
     print("Honesty rule: if it is not in this atlas or the tool list, the agent says so.")
+
+
+def cmd_affect(args):
+    """5D emotional-intelligence engine: detect affect or show the spec."""
+    action = getattr(args, "affect_action", None) or "status"
+    if action == "detect":
+        from levi.affect import detect, evaluate, suggest_register
+        text = getattr(args, "affect_arg", None) or ""
+        if not text:
+            print("Usage: levi affect detect \"some text\"")
+            return
+        r = detect(text)
+        d = evaluate(text, r)
+        s = suggest_register(text, r, d)
+        print(f"dominant : {r.dominant} (valence {r.valence:+.2f}, "
+              f"arousal {r.arousal:.2f}, confidence {r.confidence:.2f})")
+        print(f"stress   : {', '.join(r.stress_signals) or 'none'}")
+        print(f"policy   : {d.reason}")
+        print(f"register : {s.register_id} — {s.rationale}")
+        print("Note: pattern-based heuristic, not felt emotion.")
+        return
+    # status — the honest spec summary
+    print("══ LEVI affect engine — Goleman's 5 dimensions ══\n")
+    print("  1. self_awareness  — LEVI tracks its own operating state")
+    print("                       (register, confidence, stated limits).")
+    print("  2. self_regulation — de-escalation policy: never mirrors")
+    print("                       hostility; crisis routes to Care register.")
+    print("  3. motivation      — frustration/repair signals feed the")
+    print("                       growth loop as a drive to improve.")
+    print("  4. empathy         — lexicon/heuristic affect perception")
+    print("                       (valence, arousal, 6 emotion categories).")
+    print("  5. social_skills   — affect-aware register selection across")
+    print("                       the 14 KAI-9000 registers + repair/rapport.")
+    print("\nHonesty rule: this is pattern-based affect modeling, not felt")
+    print("emotion. No sentience or subjective-experience claims — ever.")
+    print("Full spec: docs/AFFECT.md")
 
 
 def cmd_vault(args):
@@ -2625,6 +2687,9 @@ def main():
                              "kai_9000_literary, kai_9000_forensic, kai_9000_void, kai_9000_builder, "
                              "kai_9000_mirror, kai_9000_architect, kai_9000_sentinel, kai_9000_oracle, "
                              "kai_9000_muse, kai_9000_grok.")
+    ag_run.add_argument("--affect", action="store_true",
+                        help="Enable the 5D affect engine: per-turn affect scan, "
+                             "de-escalation policy, register hints (docs/AFFECT.md).")
     ag_sub.add_parser("tools", help="List agent tools with descriptions and confirmation flags")
     ag_chat = ag_sub.add_parser("chat", help="Interactive long-conversation chat with session memory")
     ag_chat.add_argument("--session", default="default",
@@ -2638,6 +2703,9 @@ def main():
     ag_chat.add_argument("--register", default=None, metavar="VARIANT",
                         help="Speak as a KAI-9000 SI register for the whole session "
                              "(e.g. kai_9000_care). See `levi agent run --help` for the id list.")
+    ag_chat.add_argument("--affect", action="store_true",
+                         help="Enable the 5D affect engine for the session "
+                              "(docs/AFFECT.md).")
     ag_model = ag_sub.add_parser("model", help="Manage the Levi Local offline model (weights + runner)")
     ag_msub = ag_model.add_subparsers(dest="agent_model_action")
     ag_pull = ag_msub.add_parser("pull", help="Download GGUF weights (and the llama-server runner, best effort)")
@@ -2732,6 +2800,11 @@ def main():
     news_p.add_argument("--limit", type=int, default=10)
     sub.add_parser("capabilities", help="Honest capability atlas: what LEVI can do").add_argument(
         "domain", nargs="?", default=None, help="domain id (optional)")
+    aff_p = sub.add_parser("affect", help="5D emotional-intelligence engine")
+    aff_p.add_argument("affect_action", nargs="?", default="status",
+                       choices=["status", "detect"])
+    aff_p.add_argument("affect_arg", nargs="?", default=None,
+                       help="text to analyze (for detect)")
     proj_p = sub.add_parser("project", help="Pre-MVP phase runner / HITL / capability log (service capability-discovery)")
     proj_p.add_argument("project_action", nargs="?", default="status", choices=["status", "log", "hitl", "phases"])
     proj_p.add_argument("--url", default=None, help="Public site URL for archaeology")
@@ -2905,7 +2978,7 @@ def main():
         "morning": cmd_morning, "import": cmd_import,
         "export": cmd_export, "templates": cmd_templates,
         "status": cmd_status, "ask": cmd_ask, "personas": cmd_personas, "wit": cmd_wit,
-        "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "continue": cmd_continue, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "plugin": cmd_plugin, "finance": cmd_finance, "agent": cmd_agent, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy, "growth": cmd_growth, "brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "courses": cmd_courses, "news": cmd_news, "capabilities": cmd_capabilities, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
+        "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "continue": cmd_continue, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "plugin": cmd_plugin, "finance": cmd_finance, "agent": cmd_agent, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy, "growth": cmd_growth, "brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "courses": cmd_courses, "news": cmd_news, "capabilities": cmd_capabilities, "affect": cmd_affect, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
         "graph": cmd_graph,
         "image": cmd_image, "story": cmd_story, "genres": cmd_genres, "factory": cmd_factory, "automations": cmd_automations,
         "remember": cmd_remember, "recall": cmd_recall, "cloud": cmd_cloud, "model": cmd_model, "chat": cmd_chat, "enterprise": cmd_enterprise, "scorecard": cmd_scorecard, "si": cmd_si, "cognition": cmd_cognition, "premium": cmd_premium, "kai": cmd_kai, "unique": cmd_unique, "x100": cmd_x100, "max": cmd_max, "max10": cmd_max10, "stress": cmd_stress, "here": cmd_here, "talk": cmd_talk, "profiles": cmd_profiles, "traits": cmd_traits, "retention": cmd_retention, "dna": cmd_dna, "intel": cmd_intel, "giant": cmd_giant, "future": cmd_future, "interpenetrate": cmd_interpenetrate,
