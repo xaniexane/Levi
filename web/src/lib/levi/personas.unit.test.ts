@@ -13,13 +13,13 @@ describe("personas / KAI-9000 registers", () => {
     expect(REGISTERS.every((r) => r.register)).toBe(true);
   });
 
-  it("includes the Muse and Grok variants", () => {
+  it("includes the Warm and Bold variants", () => {
     const ids = REGISTERS.map((r) => r.id);
     expect(ids).toContain("kai_9000_muse");
     expect(ids).toContain("kai_9000_grok");
   });
 
-  it("features Muse and Grok first in the switcher", () => {
+  it("features Warm and Bold first in the switcher", () => {
     expect(FEATURED_PERSONAS[0]).toBe("kai_9000_muse");
     expect(FEATURED_PERSONAS[1]).toBe("kai_9000_grok");
   });
@@ -40,7 +40,9 @@ describe("personas / KAI-9000 registers", () => {
   });
 
   it("getPersona resolves registers and falls back safely", () => {
-    expect(getPersona("kai_9000_grok").name).toBe("Grok");
+    expect(getPersona("kai_9000_grok").name).toBe("Bold");
+    expect(getPersona("kai_9000_muse").name).toBe("Warm");
+    expect(getPersona("kai_9000").name).toBe("Calm");
     expect(getPersona("kai_9000_muse").style).toMatch(/genuinely helpful/i);
     // Unknown ids fall back to the default persona rather than crashing.
     expect(getPersona("nope" as never).id).toBe("normal");

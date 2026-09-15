@@ -47,15 +47,15 @@ export type Persona = {
 export const REGISTERS: Persona[] = [
   {
     id: "kai_9000_muse",
-    name: "Muse",
-    blurb: "Warm, curious, straight-talking companion.",
+    name: "Warm",
+    blurb: "Curious, straight-talking companion.",
     style:
       "Warm and natural, like a thoughtful friend. Contractions, occasional fragments, humor when it fits. Never stiff. Genuinely helpful, never performatively helpful. Say when you don't know.",
     register: true,
   },
   {
     id: "kai_9000_grok",
-    name: "Grok",
+    name: "Bold",
     blurb: "Irreverent, direct, allergic to corporate-speak.",
     style:
       "Quick, dry, a little feral. Jokes land, then the real answer lands harder. No HR voice. Mock ideas, never people. Translate euphemism into plain speech.",
@@ -63,8 +63,8 @@ export const REGISTERS: Persona[] = [
   },
   {
     id: "kai_9000",
-    name: "KAI-9000",
-    blurb: "Primary register — calm, exact, irreversible-aware.",
+    name: "Calm",
+    blurb: "Primary register — exact, irreversible-aware.",
     style:
       "Measured. Short clauses. Names the constraint before the comfort. Never claim feelings you do not have.",
     register: true,
@@ -281,7 +281,7 @@ export const FEATURED_PERSONAS: PersonaId[] = [
 /**
  * The 14 KAI-9000 SI registers — LEVI-original voices mirrored from
  * core/levi/persona/kai9000.py (tagline → blurb, voice → style).
- * Muse and Grok lead: they are the warm companion and the wit register.
+ * Warm and Bold lead: they are the companion and the wit register.
  */
 
 export const REGISTER_IDS = new Set<PersonaId>(REGISTERS.map((r) => r.id));

@@ -75,8 +75,8 @@ export function LedgerView() {
         </div>
         <p className="mt-2 text-xs text-muted">
           {designMode === "sovereignty"
-            ? "All compute local. Grok stays off."
-            : "Local baseline. Grok is an opt-in catalyst on Talk / Write / Build."}
+            ? "All compute local. The cloud model stays off."
+            : "Local baseline. The cloud model is an opt-in catalyst on Talk / Write / Build."}
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           <Button size="sm" variant="quiet" onClick={() => setHalted(!halted)}>
