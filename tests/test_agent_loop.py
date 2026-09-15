@@ -160,7 +160,8 @@ def test_transcript_to_dict_json_round_trip(tmp_path):
     t = run_subtask("remember a note", provider=prov, registry=reg,
                     consent=True)
     d = t.to_dict()
-    assert set(d) == {"task", "provider_name", "steps", "final", "ok", "error"}
+    assert set(d) == {"task", "provider_name", "steps", "final", "ok", "error",
+                      "prompt_tokens", "completion_tokens"}
     rt = json.loads(json.dumps(d))
     assert rt == d
     assert rt["task"] == "remember a note"
@@ -168,7 +169,8 @@ def test_transcript_to_dict_json_round_trip(tmp_path):
     assert rt["ok"] is True
     assert isinstance(rt["steps"], list) and len(rt["steps"]) == 1
     assert set(rt["steps"][0]) == {
-        "index", "provider_text", "tool_calls", "results"
+        "index", "provider_text", "tool_calls", "results",
+        "prompt_tokens", "completion_tokens",
     }
 
 

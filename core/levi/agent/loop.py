@@ -56,6 +56,8 @@ class AgentStep:
     provider_text: str
     tool_calls: list[dict] = field(default_factory=list)  # {"name":..., "args":...}
     results: list[dict] = field(default_factory=list)     # {"tool","ok","output","error"}
+    prompt_tokens: int = 0       # usage reported by the provider this step
+    completion_tokens: int = 0
 
 
 @dataclass
@@ -68,6 +70,8 @@ class AgentTranscript:
     final: str = ""
     ok: bool = False
     error: str | None = None
+    prompt_tokens: int = 0       # totals across steps (0 when unreported)
+    completion_tokens: int = 0
 
     def to_dict(self) -> dict:
         """JSON-serializable form (used by ``levi.agent.server``)."""
@@ -78,6 +82,8 @@ class AgentTranscript:
             "final": self.final,
             "ok": self.ok,
             "error": self.error,
+            "prompt_tokens": self.prompt_tokens,
+            "completion_tokens": self.completion_tokens,
         }
 
     def __str__(self) -> str:
@@ -153,13 +159,18 @@ def run_subtask(
     workspace_root: Any = None,
     system_prompt: str | None = None,
     ctx: ExecContext | None = None,
+    history: list[ChatMessage] | None = None,
 ) -> AgentTranscript:
     """Run one task through the step-level tool loop.
 
     ``provider`` may be a :class:`ChatProvider` instance, a provider name
-    string (``"local"`` | ``"openai"`` | ``"anthropic"``), or ``None`` to
-    use :func:`select_provider`. ``registry`` may be a
+    string (``"local"`` | ``"levi-local"`` | ``"openai"`` | ``"anthropic"``),
+    or ``None`` to use :func:`select_provider`. ``registry`` may be a
     :class:`ToolRegistry` or ``None`` to build the default one.
+
+    ``history`` is prior conversation (``levi.agent.chat`` sessions): it
+    is inserted between the system prompt and the new user message so the
+    model sees the whole dialogue. Single-shot callers leave it ``None``.
 
     ``ctx`` is the glue parameter the ``delegate`` tool in
     :mod:`levi.agent.tools` passes when it recurses into this function:
@@ -198,15 +209,23 @@ def run_subtask(
 
     messages = [
         ChatMessage(role="system", content=system),
-        ChatMessage(role="user", content=task),
     ]
+    if history:
+        messages.extend(history)
+    messages.append(ChatMessage(role="user", content=task))
     steps: list[AgentStep] = []
+    prompt_total = 0
+    completion_total = 0
+
+    def _totals() -> tuple[int, int]:
+        return prompt_total, completion_total
 
     for i in range(max(1, max_steps)):
         resp = prov.chat(messages, tool_schemas)
 
         if resp.error:
             # Honest failure: the provider itself reports what went wrong.
+            ptot, ctot = _totals()
             return AgentTranscript(
                 task=task,
                 provider_name=provider_name,
@@ -217,17 +236,25 @@ def run_subtask(
                 ),
                 ok=False,
                 error=resp.error,
+                prompt_tokens=ptot,
+                completion_tokens=ctot,
             )
+
+        prompt_total += resp.prompt_tokens or 0
+        completion_total += resp.completion_tokens or 0
 
         messages.append(ChatMessage(role="assistant", content=resp.text or ""))
 
         if not resp.tool_calls:
+            ptot, ctot = _totals()
             return AgentTranscript(
                 task=task,
                 provider_name=provider_name,
                 steps=steps,
                 final=resp.text or "",
                 ok=True,
+                prompt_tokens=ptot,
+                completion_tokens=ctot,
             )
 
         tool_calls = [
@@ -279,11 +306,14 @@ def run_subtask(
                 provider_text=resp.text or "",
                 tool_calls=tool_calls,
                 results=results,
+                prompt_tokens=resp.prompt_tokens or 0,
+                completion_tokens=resp.completion_tokens or 0,
             )
         )
 
         if gate_tripped is not None:
             # Do not loop on denials: end the run, honestly.
+            ptot, ctot = _totals()
             return AgentTranscript(
                 task=task,
                 provider_name=provider_name,
@@ -291,8 +321,11 @@ def run_subtask(
                 final=gate_tripped,
                 ok=False,
                 error="confirmation_required",
+                prompt_tokens=ptot,
+                completion_tokens=ctot,
             )
 
+    ptot, ctot = _totals()
     return AgentTranscript(
         task=task,
         provider_name=provider_name,
@@ -304,6 +337,8 @@ def run_subtask(
         ),
         ok=False,
         error="max_steps_exceeded",
+        prompt_tokens=ptot,
+        completion_tokens=ctot,
     )
 
 

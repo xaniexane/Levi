@@ -17,9 +17,17 @@ is kept clean on purpose. Ollama discovery is not reimplemented here: the
 override with zero code change.
 
 Selection is offline-first: explicit preference flag > ``LEVI_PROVIDER``
-env var > ``LocalProvider`` default. A preferred provider that is not
+env var > ``levi-local`` (LEVI's own offline model, when set up) >
+``LocalProvider`` rule-based default. A preferred provider that is not
 available falls back to ``LocalProvider`` (honestly — the loop can always
 report which provider it ended up with via ``ChatResponse.provider``).
+
+``levi-local`` lives in :mod:`levi.agent.local_model` (lazy-imported by
+:func:`select_provider` because that module subclasses this one) and
+shares this module's OpenAI-compatible chat path against a
+LEV-managed ``llama-server``. The name reuses the ``levi-local`` label
+the generation router (:mod:`levi.model.abstraction`) already uses for
+its local path; the interfaces stay separate.
 
 Stdlib only: ``urllib`` for HTTP. No SDK dependencies, no new third-party
 imports in ``core/levi``.
@@ -75,6 +83,10 @@ class ChatResponse:
     provider: str = ""
     latency_ms: float = 0.0
     error: str | None = None
+    # Token usage reported by the backend (0 when the backend does not
+    # report it). llama.cpp's /v1/chat/completions fills `usage`.
+    prompt_tokens: int = 0
+    completion_tokens: int = 0
 
 
 class ChatProvider(ABC):
@@ -149,6 +161,7 @@ class LocalProvider(ChatProvider):
                 "concretely?",
             )
 
+        turn = self._turn_messages(messages)
         for tool_name, args in self._plan(intent, params):
             if tool_name in called:
                 continue
@@ -166,7 +179,7 @@ class LocalProvider(ChatProvider):
             )
             return self._finish(t0, "", [call])
 
-        return self._finish(t0, self._summary(intent, params, called, messages))
+        return self._finish(t0, self._summary(intent, params, called, turn))
 
     # -- history / state derivation (no instance state) ---------------------
 
@@ -182,15 +195,35 @@ class LocalProvider(ChatProvider):
         )
 
     @staticmethod
+    def _turn_messages(messages: list[ChatMessage]) -> list[ChatMessage]:
+        """Messages belonging to the current turn: everything after the
+        most recent user message. History from earlier chat turns is
+        context for the model, but must not count as progress toward the
+        current task."""
+        idx = max(
+            (i for i, m in enumerate(messages) if m.role == "user"),
+            default=-1,
+        )
+        return messages[idx + 1:]
+
+    @staticmethod
     def _called_tools(messages: list[ChatMessage]) -> list[str]:
-        """Tool names already executed, in order, derived from tool results."""
-        return [m.name for m in messages if m.role == "tool" and m.name]
+        """Tool names already executed in the current turn, in order,
+        derived from tool results."""
+        return [
+            m.name for m in LocalProvider._turn_messages(messages)
+            if m.role == "tool" and m.name
+        ]
 
     @staticmethod
     def _task_text(messages: list[ChatMessage]) -> str:
+        # The LAST user message is the current task. In single-shot runs
+        # there is only one, so this changes nothing there; in chat
+        # sessions (history prepended by run_subtask) it keeps the
+        # planner focused on the newest turn.
         user_texts = [m.content for m in messages if m.role == "user" and m.content]
         if user_texts:
-            return user_texts[0]
+            return user_texts[-1]
         return ""
 
     # -- intent classification ----------------------------------------------
@@ -369,7 +402,8 @@ class OpenAICompatibleProvider(ChatProvider):
         t0 = time.perf_counter()
         key, base_url, _overridden, model = self._config()
 
-        def finish(text="", tool_calls=None, error=None) -> ChatResponse:
+        def finish(text="", tool_calls=None, error=None,
+                   prompt_tokens=0, completion_tokens=0) -> ChatResponse:
             return ChatResponse(
                 text=text,
                 tool_calls=tool_calls or [],
@@ -377,6 +411,8 @@ class OpenAICompatibleProvider(ChatProvider):
                 provider=self.name,
                 latency_ms=(time.perf_counter() - t0) * 1000.0,
                 error=error,
+                prompt_tokens=prompt_tokens,
+                completion_tokens=completion_tokens,
             )
 
         if not messages:
@@ -452,10 +488,21 @@ class OpenAICompatibleProvider(ChatProvider):
                     name=fn.get("name", ""),
                     arguments=args if isinstance(args, dict) else {},
                 ))
+            usage = data.get("usage") or {}
+            try:
+                prompt_tokens = int(usage.get("prompt_tokens") or 0)
+            except (TypeError, ValueError):
+                prompt_tokens = 0
+            try:
+                completion_tokens = int(usage.get("completion_tokens") or 0)
+            except (TypeError, ValueError):
+                completion_tokens = 0
         except (KeyError, IndexError, TypeError) as e:
             return finish(error="unexpected response shape: %s" % e)
 
-        return finish(text=text, tool_calls=calls)
+        return finish(text=text, tool_calls=calls,
+                      prompt_tokens=prompt_tokens,
+                      completion_tokens=completion_tokens)
 
     @staticmethod
     def _to_openai_message(m: ChatMessage, i: int) -> dict:
@@ -617,7 +664,7 @@ class AnthropicProvider(ChatProvider):
 
 
 # ---------------------------------------------------------------------------
-# Selection — explicit flag > LEVI_PROVIDER env > local-first default
+# Selection — explicit flag > LEVI_PROVIDER env > levi-local > local
 # ---------------------------------------------------------------------------
 
 
@@ -628,23 +675,41 @@ _PROVIDER_CLASSES = {
 }
 
 
+def _levi_local_provider() -> ChatProvider:
+    # Lazy: levi.agent.local_model subclasses OpenAICompatibleProvider,
+    # so it imports this module — importing it at top level here would
+    # be circular.
+    from levi.agent.local_model import LocalModelProvider
+    return LocalModelProvider()
+
+
 def provider_names() -> list[str]:
     """Names of all known chat providers, in preference order."""
-    return ["local", "openai", "anthropic"]
+    return ["local", "levi-local", "openai", "anthropic"]
 
 
 def select_provider(preference: str | None = None) -> ChatProvider:
-    """Pick a chat provider: flag > ``LEVI_PROVIDER`` env > local default.
+    """Pick a chat provider.
 
-    A preferred provider that is not available falls back to
-    ``LocalProvider`` (offline-first); unknown names also fall back to
-    local rather than failing.
+    Chain: explicit ``preference`` > ``LEVI_PROVIDER`` env var >
+    ``levi-local`` (when its weights + runner are set up) >
+    ``LocalProvider`` rule-based fallback. A named preference that is
+    unavailable (or unknown) falls back to ``LocalProvider`` rather
+    than failing — the loop reports the provider it actually used, so
+    the fallback is always visible.
     """
-    name = (preference or os.environ.get("LEVI_PROVIDER") or "local").strip().lower()
+    name = (preference or os.environ.get("LEVI_PROVIDER") or "").strip().lower()
+    if not name:
+        # No preference: LEVI's own offline model when it is set up,
+        # otherwise the rule-based planner.
+        provider = _levi_local_provider()
+        return provider if provider.is_available() else LocalProvider()
+    if name == "levi-local":
+        provider = _levi_local_provider()
+        return provider if provider.is_available() else LocalProvider()
     cls = _PROVIDER_CLASSES.get(name)
-    if cls is None or cls is LocalProvider:
-        return LocalProvider()
-    provider = cls()
-    if not provider.is_available():
-        return LocalProvider()
-    return provider
+    if cls is not None and cls is not LocalProvider:
+        provider = cls()
+        if provider.is_available():
+            return provider
+    return LocalProvider()

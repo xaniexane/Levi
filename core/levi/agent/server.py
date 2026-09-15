@@ -24,6 +24,12 @@ tool with ``consent=false`` is honestly denied (the run ends with
 caller accepts responsibility for the gated actions in that run — the
 gate is bypassed by the caller's explicit choice, logged in the request,
 not by a server-side switch.
+
+``/v1/agent/chat`` is the same discipline for long conversations: one
+request is one turn inside a persistent server-side session
+(``{"session_id", "message"}``), with the same context management as
+``levi agent chat`` (rolling summaries, durable facts, never silent
+truncation). ``session_id`` is restricted to safe filename characters.
 """
 
 from __future__ import annotations
@@ -107,7 +113,7 @@ class _AgentHandler(BaseHTTPRequestHandler):
         self._send_json(404, {"error": "not found"})
 
     def do_POST(self) -> None:  # noqa: N802 (stdlib method name)
-        if self.path != "/v1/agent/run":
+        if self.path not in ("/v1/agent/run", "/v1/agent/chat"):
             self._send_json(404, {"error": "not found"})
             return
         if not self._require_auth():
@@ -118,6 +124,17 @@ class _AgentHandler(BaseHTTPRequestHandler):
         except ValueError:
             length = 0
         if length > MAX_BODY_BYTES:
+            # Drain the body before answering so the client reliably
+            # receives the 413 instead of a connection reset mid-upload.
+            remaining = length
+            try:
+                while remaining > 0:
+                    chunk = self.rfile.read(min(remaining, 65536))
+                    if not chunk:
+                        break
+                    remaining -= len(chunk)
+            except Exception:
+                pass
             self._send_json(413, {"error": "request body too large (>1MB)"})
             return
         raw = self.rfile.read(length) if length > 0 else b""
@@ -131,23 +148,35 @@ class _AgentHandler(BaseHTTPRequestHandler):
             self._send_json(400, {"error": "body must be a JSON object"})
             return
 
+        if self.path == "/v1/agent/chat":
+            self._handle_chat(body)
+            return
+        self._handle_run(body)
+
+    def _run_kwargs(self, body: dict) -> tuple[dict | None, dict | None]:
+        """Validate the shared run/chat fields. Returns (kwargs, error)."""
+        provider = body.get("provider")
+        if provider is not None and not isinstance(provider, str):
+            return None, {"error": "'provider' must be a string when given"}
+        try:
+            max_steps = int(body.get("max_steps", 10))
+        except (TypeError, ValueError):
+            return None, {"error": "'max_steps' must be an integer"}
+        max_steps = max(1, min(max_steps, MAX_STEPS_CAP))
+        consent = body.get("consent", False)
+        if not isinstance(consent, bool):
+            return None, {"error": "'consent' must be a boolean"}
+        return {"provider": provider, "max_steps": max_steps,
+                "consent": consent}, None
+
+    def _handle_run(self, body: dict) -> None:
         task = body.get("task")
         if not isinstance(task, str) or not task.strip():
             self._send_json(400, {"error": "'task' is required and must be a non-empty string"})
             return
-        provider = body.get("provider")
-        if provider is not None and not isinstance(provider, str):
-            self._send_json(400, {"error": "'provider' must be a string when given"})
-            return
-        try:
-            max_steps = int(body.get("max_steps", 10))
-        except (TypeError, ValueError):
-            self._send_json(400, {"error": "'max_steps' must be an integer"})
-            return
-        max_steps = max(1, min(max_steps, MAX_STEPS_CAP))
-        consent = body.get("consent", False)
-        if not isinstance(consent, bool):
-            self._send_json(400, {"error": "'consent' must be a boolean"})
+        kwargs, err = self._run_kwargs(body)
+        if err:
+            self._send_json(400, err)
             return
 
         from levi.agent.loop import run_subtask
@@ -157,13 +186,56 @@ class _AgentHandler(BaseHTTPRequestHandler):
         # has accepted responsibility (see module docstring).
         transcript = run_subtask(
             task,
-            provider=provider,
+            provider=kwargs["provider"],
             registry=None,
-            consent=consent,
+            consent=kwargs["consent"],
             confirm=None,
-            max_steps=max_steps,
+            max_steps=kwargs["max_steps"],
         )
         self._send_json(200, {"transcript": transcript.to_dict()})
+
+    def _handle_chat(self, body: dict) -> None:
+        """One chat turn inside a persistent server-side session."""
+        from levi.agent.chat import ConversationManager, sanitize_session_name
+
+        session_id = body.get("session_id")
+        if not isinstance(session_id, str) or not session_id.strip():
+            self._send_json(400, {"error": "'session_id' is required and must be a non-empty string"})
+            return
+        try:
+            session_id = sanitize_session_name(session_id)
+        except ValueError as exc:
+            self._send_json(400, {"error": str(exc)})
+            return
+        message = body.get("message")
+        if not isinstance(message, str) or not message.strip():
+            self._send_json(400, {"error": "'message' is required and must be a non-empty string"})
+            return
+        kwargs, err = self._run_kwargs(body)
+        if err:
+            self._send_json(400, err)
+            return
+
+        # Non-interactive by construction: confirm=None (same discipline
+        # as /v1/agent/run).
+        manager = ConversationManager(
+            session_id,
+            provider=kwargs["provider"],
+            max_steps=kwargs["max_steps"],
+            consent=kwargs["consent"],
+            confirm=None,
+        )
+        try:
+            result = manager.turn(message)
+        except ValueError as exc:
+            self._send_json(400, {"error": str(exc)})
+            return
+        self._send_json(200, {
+            "session_id": session_id,
+            "transcript": result.transcript.to_dict(),
+            "context_pct": result.context_pct,
+            "compressed": result.compressed,
+        })
 
 
 def serve(host: str = "127.0.0.1", port: int = 8765) -> None:

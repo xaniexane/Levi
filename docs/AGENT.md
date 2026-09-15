@@ -1,8 +1,9 @@
 # LEVI Agent Runtime — the step-level tool-using agentic loop
 
 Offline-first, stdlib-only. No `pip install`, no daemons, no API key needed
-to get a working agent: the default provider is a deterministic local
-planner, and cloud models attach as wings when you configure them.
+to get a working agent: when Levi Local is set up (`levi agent model pull`)
+it becomes the default provider; otherwise the deterministic local planner
+fills in honestly, and cloud models attach as wings when you configure them.
 
 This document was written against the real code and every count below was
 re-verified programmatically (tool list, endpoint list, env-var list).
@@ -10,14 +11,16 @@ If a number here ever disagrees with the code, the code is right.
 
 ## 1. Architecture
 
-Four modules under `core/levi/agent/`, one job each:
+Five modules under `core/levi/agent/`, one job each:
 
 | Module | Job |
 |---|---|
 | `tools.py` | The **tool-execution registry**: 15 named built-in tools, sandboxed handlers, confirmation gates. |
-| `providers.py` | The **chat/tool-calling provider chain**: local-first selection, OpenAI-compatible and Anthropic providers over stdlib `urllib`. |
+| `providers.py` | The **chat/tool-calling provider chain**: local-first selection, Levi Local, OpenAI-compatible and Anthropic providers over stdlib `urllib`. |
+| `local_model.py` | **Levi Local** (§1.2b): LEVI's own offline inference stack — a LEVI-managed `llama-server` running a local GGUF, exposed through the OpenAI-compatible chat path. |
 | `loop.py` | The **step-level loop** (`run_subtask`): model → tool calls → tool results → repeat, until the model answers without calling tools. |
-| `server.py` | The **HTTP front door**: stdlib `ThreadingHTTPServer` skin over `run_subtask`, bearer-token auth. Adds no capabilities, only a network address. |
+| `chat.py` | **Long conversations** (§1.6): persistent named sessions, context accounting, rolling-summary compression with durable facts. |
+| `server.py` | The **HTTP front door**: stdlib `ThreadingHTTPServer` skin over `run_subtask` / chat turns, bearer-token auth. Adds no capabilities, only a network address. |
 
 ### 1.1 The tool registry (`tools.py`)
 
@@ -57,12 +60,14 @@ success. Pinned by `test_delegate_propagates_subtask_failure`.
 ### 1.2 The provider chain (`providers.py`)
 
 Selection order: explicit `provider=` argument → `LEVI_PROVIDER` env var →
-**`LocalProvider` default**. A preferred provider that is unavailable falls
-back to `LocalProvider` (offline-first, honestly — the loop always reports
-which provider it ended up with).
+**`levi-local` if it is set up** → **`LocalProvider` fallback**. A
+preferred provider that is unavailable falls back down the chain
+(offline-first, honestly — the loop always reports which provider it ended
+up with).
 
 | Provider | Name | `is_available()` when |
 |---|---|---|
+| `LocalModelProvider` | `levi-local` | a `.gguf` weights file **and** a `llama-server` runner are present (§1.2b) |
 | `LocalProvider` | `local` | always (deterministic rule-based planner, no network) |
 | `OpenAICompatibleProvider` | `openai` | `LEVI_OPENAI_API_KEY` set **or** `LEVI_OPENAI_BASE_URL` overridden |
 | `AnthropicProvider` | `anthropic` | `LEVI_ANTHROPIC_API_KEY` set |
@@ -75,17 +80,67 @@ timeout on cloud calls: 60s. Provider errors never raise and never fake a
 response: they come back as `ChatResponse.error`, and the loop ends
 honestly.
 
+`provider` may be a name string (`"local"` / `"levi-local"` /
+`"openai"` / `"anthropic"`), a `ChatProvider` instance, or `None` for
+`select_provider()`. The loop also accepts prior conversation via
+`history=[ChatMessage(...), ...]`; `LocalProvider` reads the **last**
+user message so multi-turn histories work. Transcripts carry token
+totals (`prompt_tokens`, `completion_tokens`; 0 when the backend does
+not report them) per step and across the run.
+
+### 1.2b Levi Local (`local_model.py`) — LEVI's own offline inference stack
+
+Levi Local is a real locally-hosted model, not the rule-based planner:
+a LEVI-managed `llama-server` process running a GGUF weights file,
+reached over loopback through the OpenAI-compatible chat path
+(`/v1/chat/completions`). No Ollama daemon, no cloud, no new pip
+dependencies — stdlib only. The only network this module ever initiates
+is an explicit `levi agent model pull`; inference itself is
+loopback-only.
+
+Setup (explicit, user-initiated):
+
+```
+$ levi agent model status     # reports weights/runner present or missing,
+                              # with exact install guidance
+$ levi agent model pull       # downloads the default small model (~640 MB)
+$ levi agent model pull --model qwen3-4b   # the larger model (~2.5 GB)
+```
+
+Two honest model choices (Apache-2.0 Qwen3 GGUFs):
+
+| Choice | File | Size | Tradeoff |
+|---|---|---|---|
+| `qwen3-0.6b` (default) | `Qwen3-0.6B-Q8_0.gguf` | ~640 MB | runs on modest machines; a 0.6B model — capable for tool-use loops and chat, not a reasoning giant |
+| `qwen3-4b` | `Qwen3-4B-Q4_K_M.gguf` | ~2.5 GB | smarter, needs ~4–6 GB free RAM |
+
+The server starts lazily on first chat (ephemeral loopback port,
+readiness polled on `/health`, one shared process per runner/weights
+pair, `atexit` cleanup). Context window: `LEVI_LOCAL_CTX_SIZE`, default
+32768, clamped to the model's native context read from the GGUF
+`<arch>.context_length` metadata — LEVI never asks a model for more
+context than it was built for. If weights or the runner are missing,
+`chat()` returns a plain-spoken error naming exactly what is missing and
+the chain falls back to the deterministic `local` planner; capability
+claims stay honest (on-device synthetic-intelligence inference, not
+"superintelligence").
+
 ### 1.3 The loop (`loop.py`)
 
 ```python
-run_subtask(task, *, provider=None, registry=None, consent=False,
-            confirm=None, max_steps=10, workspace_root=None,
-            system_prompt=None, ctx=None) -> AgentTranscript
+run_subtask(task, *, provider=None, registry=None, history=None,
+            consent=False, confirm=None, max_steps=10,
+            workspace_root=None, system_prompt=None, ctx=None) -> AgentTranscript
 ```
 
 - `provider` may be a `ChatProvider` instance, a name string
-  (`"local"` / `"openai"` / `"anthropic"`), or `None` for
-  `select_provider()`.
+  (`"local"` / `"levi-local"` / `"openai"` / `"anthropic"`), or `None`
+  for `select_provider()`.
+- `history` is a list of `ChatMessage` carried between turns (used by
+  `chat.py` for sessions); it is inserted between the system prompt and
+  the current user message. `LocalProvider` plans from the **last** user
+  message, and tool-progress detection is scoped to the current turn so
+  earlier turns' tool calls are never mistaken for new ones.
 - Each step: provider chat → execute tool calls (unknown tools and handler
   exceptions become honest `ok=False` results, never fatal) → feed results
   back as `role="tool"` messages → repeat.
@@ -99,13 +154,14 @@ run_subtask(task, *, provider=None, registry=None, consent=False,
 
 ### 1.4 The HTTP server (`server.py`)
 
-3 endpoints, verified against the routing code:
+4 endpoints, verified against the routing code:
 
 | Endpoint | Auth | Behavior |
 |---|---|---|
 | `GET /healthz` | open | `{"status": "ok", "service": "levi-agent"}` — for load balancers |
 | `GET /v1/tools` | Bearer | the 15 tool descriptors with `requires_confirmation` flags |
 | `POST /v1/agent/run` | Bearer | runs the loop non-interactively; returns `{"transcript": {...}}` |
+| `POST /v1/agent/chat` | Bearer | one chat turn inside a persistent session (§1.6); `{"session_id", "message"}` → `{"session_id", "transcript", "context_pct", "compressed"}` |
 
 Auth: `Authorization: Bearer <token>` compared with `hmac.compare_digest`;
 wrong or missing → `401 {"error": "unauthorized"}`. `serve()` refuses to
@@ -114,7 +170,10 @@ than ever serving unauthenticated. Body > 1 MiB → `413`. Missing `task` →
 `400`. Step count is clamped to `[1, 50]`. `/v1/agent/run` is
 non-interactive by construction (`confirm=None`): with `consent=false` a
 gated tool is honestly denied; with `consent=true` the caller accepts
-responsibility for that run's gated actions.
+responsibility for that run's gated actions. `/v1/agent/chat` applies the
+same discipline to each turn; `session_id` is restricted to safe filename
+characters (`A-Za-z0-9_-`, max 64).
+
 
 ### 1.5 Reconciliation with the canonical neighbors (blueprint §1.2)
 
@@ -136,20 +195,57 @@ One implementation per concept — this runtime merges nothing:
 - `levi.skill.registry` — the canonical **skill/capability catalog**;
   `skill_list` bridges to it.
 
+### 1.6 Long conversations (`chat.py`)
+
+`levi agent chat` is an interactive REPL for multi-turn dialogue with a
+real memory of the conversation — not single-shot tasks. Every turn runs
+the full agentic loop with tools, and the dialogue persists per session
+as JSONL under `~/.levi/agent/sessions/<name>.jsonl`
+(`LEVI_AGENT_SESSIONS_DIR` overrides). Re-running with the same
+`--session` resumes where you left off.
+
+Context management (no silent truncation, ever):
+
+- Each turn reports context usage: the provider's real prompt-token
+  count when it reports one, else a documented conservative
+  character-based estimate (`~4 chars/token`). The REPL prints the
+  percentage after every turn (`/context` shows the estimate any time).
+- At 80% of the window, the oldest turns are compressed **before** the
+  next turn runs: the provider writes a rolling `SUMMARY:` / `FACTS:`
+  response, durable facts are persisted through the `memory_write` tool
+  (one file per session: `chat-<name>`), and a `note` record in the log
+  names what was compressed. The JSONL log keeps every original message
+  — compression marks a `summary` record covering the first N messages
+  and the working context starts after it.
+- If the model cannot summarize (or summarization fails), history is
+  kept whole and the failure is recorded — nothing is dropped to make
+  the window fit. With the rule-based `local` planner (which cannot
+  write summaries) an extractive fallback is used and labeled as such.
+
+REPL commands: `/help`, `/summary` (current rolling summary), `/facts`
+(durable facts for the session), `/context`, `/quit` (Ctrl-D also
+saves and exits).
+
 ## 2. Provider configuration
 
-Every environment variable read by `core/levi/agent/*.py` (9, verified by
+Every environment variable read by `core/levi/agent/*.py` (15, verified by
 grep against the sources):
 
 | Variable | Used by | Meaning |
 |---|---|---|
-| `LEVI_PROVIDER` | `select_provider()` | `local` / `openai` / `anthropic`; default `local` |
+| `LEVI_PROVIDER` | `select_provider()` | `local` / `levi-local` / `openai` / `anthropic`; default chain is levi-local-first |
 | `LEVI_OPENAI_API_KEY` | `OpenAICompatibleProvider` | Bearer key for cloud OpenAI (omit for keyless local servers) |
 | `LEVI_OPENAI_BASE_URL` | `OpenAICompatibleProvider` | default `https://api.openai.com/v1`; set to `http://localhost:11434/v1` for Ollama |
 | `LEVI_OPENAI_MODEL` | `OpenAICompatibleProvider` | default `gpt-4o-mini` |
 | `LEVI_ANTHROPIC_API_KEY` | `AnthropicProvider` | `x-api-key` for api.anthropic.com |
 | `LEVI_ANTHROPIC_MODEL` | `AnthropicProvider` | default `claude-sonnet-4-20250514` |
 | `LEVI_AGENT_TOKEN` | `server.serve()` | required bearer secret; server exits 2 without it |
+| `LEVI_MODEL_DIR` | `local_model` | weights/runner dir, default `~/.levi/models` |
+| `LEVI_LLAMA_SERVER` | `local_model` | explicit runner binary path (else `llama-server` on `PATH`) |
+| `LEVI_LOCAL_MODEL` | `local_model` | weights filename override (else first alphabetical `.gguf`) |
+| `LEVI_LOCAL_CTX_SIZE` | `local_model` | context window, default 32768, clamped to the GGUF's native context |
+| `LEVI_LOCAL_READY_TIMEOUT` | `local_model` | seconds to wait for `/health` on startup, default 120 |
+| `LEVI_AGENT_SESSIONS_DIR` | `chat` | session JSONL dir, default `~/.levi/agent/sessions` |
 | `LEVI_OFFLINE` | web tools | set to `1` to force honest "network unavailable" failures |
 | `LEVI_AUTOMATIONS_DIR` | `schedule_*` tools | overrides the `AutomationRegistry` data dir (used by tests) |
 
@@ -281,11 +377,19 @@ for step in transcript.steps:   # provider_text, tool_calls, results
 ### 5.4 CLI reference
 
 ```
-levi agent run "<task>" [--provider local|openai|anthropic] [--yes]
+levi agent run "<task>" [--provider local|levi-local|openai|anthropic] [--yes]
                         [--max-steps N] [--workspace DIR] [--json]
+levi agent chat [--session NAME] [--provider ...] [--yes]
+                [--max-steps N] [--workspace DIR]
 levi agent tools
 levi agent serve [--host 127.0.0.1] [--port 8765]   # needs LEVI_AGENT_TOKEN
+levi agent model status
+levi agent model pull [--model qwen3-0.6b|qwen3-4b] [--force]
 ```
+
+`agent chat` resumes the named session (`default` if omitted); every turn
+runs the full loop with tools, context % is printed per turn, and
+`/summary`, `/facts`, `/context`, `/quit` are available in the REPL.
 
 ## 6. Tests
 
@@ -293,14 +397,29 @@ Hermetic (no network, no user HOME writes):
 
 - `tests/test_agent_tools.py` — 47 tests: registry basics, gating,
   denylist, sandboxing, all 15 tools, delegate honesty.
-- `tests/test_agent_providers.py` — 27 tests: provider chain, Ollama
-  compatibility, honest error surfacing.
+- `tests/test_agent_providers.py` — 27 tests: provider chain
+  (levi-local-first selection), Ollama compatibility, honest error
+  surfacing.
 - `tests/test_agent_loop.py` — 10 tests: tool execution and result
   feedback, `max_steps`, confirmation gate, provider errors, transcript
-  JSON round-trip, provider-as-instance/name/None.
-- `tests/test_agent_server.py` — 11 tests: real server on an ephemeral
-  port — `/healthz`, auth on `/v1/*`, loop driving, 400/404/413, token
-  refusal.
-- `tests/test_cli.py` — `levi agent tools` exit code and tool listing.
+  JSON round-trip (incl. token totals), provider-as-instance/name/None.
+- `tests/test_agent_server.py` — 17 tests: real server on an ephemeral
+  port — `/healthz`, auth on `/v1/*`, loop driving, `/v1/agent/chat`
+  auth/validation/session accumulation, 400/404/413, token refusal.
+- `tests/test_agent_chat.py` — 16 tests: session-name validation,
+  JSONL persistence/resume, history across turns, no duplicate user
+  message, compression trigger with history preserved, model-written
+  summaries with durable facts via `memory_write`, failed-summarization
+  keeps history, summary-format parsing.
+- `tests/test_local_model.py` — 32 tests: discovery/availability
+  (incl. managed `bin/` dir), provider-chain fallback, fake-runner
+  chat/tool-call round-trip, shared process + shutdown, honest errors,
+  download manifest/SHA round-trip and cleanup, pinned authoritative
+  SHA-256 enforcement, runner-asset selection, safe multi-file release
+  extraction, GGUF context parsing and clamping, `-c` spawn flag, CLI
+  `model status` output.
+- `tests/test_cli.py` — 5 tests: CLI surface incl. `levi agent tools`
+  exit code and tool listing.
 
-Run: `python3 -m pytest tests/ -q` from the repo root.
+Run: `python3 -m pytest tests/ -q` from the repo root (450 passed,
+1 skipped, hermetic).

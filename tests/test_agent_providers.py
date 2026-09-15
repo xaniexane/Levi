@@ -363,14 +363,16 @@ def test_anthropic_available_with_key(monkeypatch):
 
 
 def test_provider_names():
-    assert provider_names() == ["local", "openai", "anthropic"]
+    assert provider_names() == ["local", "levi-local", "openai", "anthropic"]
 
 
-def test_select_default_is_local(monkeypatch):
+def test_select_default_is_local(monkeypatch, tmp_path):
     monkeypatch.delenv("LEVI_PROVIDER", raising=False)
     monkeypatch.delenv("LEVI_OPENAI_API_KEY", raising=False)
     monkeypatch.delenv("LEVI_OPENAI_BASE_URL", raising=False)
     monkeypatch.delenv("LEVI_ANTHROPIC_API_KEY", raising=False)
+    # levi-local must not be set up, or it would win the default chain.
+    monkeypatch.setenv("LEVI_MODEL_DIR", str(tmp_path / "empty-models"))
     p = select_provider()
     assert isinstance(p, LocalProvider)
 
@@ -389,9 +391,10 @@ def test_select_env_wins_over_default(monkeypatch):
     assert isinstance(p, AnthropicProvider)
 
 
-def test_select_unavailable_preferred_falls_back_to_local(monkeypatch):
+def test_select_unavailable_preferred_falls_back_to_local(monkeypatch, tmp_path):
     monkeypatch.delenv("LEVI_PROVIDER", raising=False)
     monkeypatch.delenv("LEVI_ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.setenv("LEVI_MODEL_DIR", str(tmp_path / "empty-models"))
     p = select_provider("anthropic")
     assert isinstance(p, LocalProvider)
     monkeypatch.setenv("LEVI_PROVIDER", "openai")
