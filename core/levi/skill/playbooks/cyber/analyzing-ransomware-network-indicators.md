@@ -35,8 +35,12 @@ Extract network indicators from ransomware activity — C2, staging, exfiltratio
 14. Map the affiliate's tooling downloads: RMM tools, PsExec, and credential dumpers fetched from the internet reveal the operator's toolkit.
 15. Check for pre-ransom reconnaissance traffic: internal scanning and AD enumeration (LDAP/SMB) in the days before encryption.
 16. Document the egress chokepoints observed: which firewall or proxy the traffic left through — this is where future detections belong.
-17. Produce the network timeline: first access → staging → exfiltration → C2 → encryption, each row tied to a log source.
-18. Share sanitized indicators with ISAC/partners per your sharing policy.
+17. Set expiry dates on every kill-list entry: stale blocks accumulate and cause outages.
+18. Verify blocks via DNS logs post-deployment: blocked C2 still trying confirms the indicator was right.
+19. Check proxy logs for blocked attempts: they reveal infected hosts you haven't found yet.
+20. Document residual risk explicitly: which attacker capabilities the blocks don't cover.
+21. Produce the network timeline: first access → staging → exfiltration → C2 → encryption, each row tied to a log source.
+22. Share sanitized indicators with ISAC/partners per your sharing policy.
 
 ## Key tools & commands
 
@@ -75,6 +79,18 @@ Extract network indicators from ransomware activity — C2, staging, exfiltratio
 - Forgetting IPv6 egress when writing blocks — dual-stack environments leak around v4-only rules.
 - Not informing the SOC of kill-list changes — blocks without context get reverted.
 - Assuming encryption-time traffic is the whole story — pre-encryption staging matters more.
+- Forgetting to monitor the kill list's effectiveness — blocks need verification.
+- Not documenting who approved each block — accountability matters.
+- Assuming the affiliate won't retool — schedule re-hunts.
+- Missing backup-traffic baselines — restores look like exfiltration.
+- Forgetting to remove temporary blocks after the incident — technical debt.
+- Not sharing IOCs with the sector ISAC — others are being hit too.
+- Ransomware C2 often goes quiet after encryption — hunt the pre-encryption beaconing window.
+- Data exfiltration can precede encryption by days — widen the time window backward.
+- Legitimate admin tools (RMM, PsExec) serving as the "C2" — do not dismiss signed binaries.
+- SMB lateral movement blending with admin traffic — baseline normal admin behavior first.
+- DGA domains resolving once — passive DNS history matters more than live resolution.
+- Blocking IOCs without removing persistence — the actor re-enters through the same hole.
 
 See also: analyzing-ransomware-encryption-mechanisms.md
 

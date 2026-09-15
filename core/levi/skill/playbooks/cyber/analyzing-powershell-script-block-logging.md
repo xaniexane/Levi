@@ -38,7 +38,11 @@ Use PowerShell Script Block Logging (Event ID 4104) as a primary detection and f
 14. Reconstruct download cradles: extract URLs from `DownloadString`/`Invoke-WebRequest` blocks and check proxy logs for who else fetched them.
 15. Check for runspace-based evasion: code executed through raw runspaces can bypass 4104 — correlate with Sysmon ImageLoad events for System.Management.Automation.
 16. Document the deobfuscation chain: each transformation layer recorded with input/output hashes for reproducibility.
-17. Preserve the raw 4104 exports; note the GPO state and any coverage gaps in the findings memo.
+17. Check PowerShell transcription logs (`Start-Transcript` output) as a complementary source where enabled.
+18. Hunt WMI-launched PowerShell: `wmic process call create` with a PowerShell payload bypasses process-name hunts.
+19. Review AppLocker/WDAC block events in the same window: blocked attempts reveal what the attacker tried next.
+20. Baseline normal admin PowerShell use first: without it, every admin script looks suspicious.
+21. Preserve the raw 4104 exports; note the GPO state and any coverage gaps in the findings memo.
 
 ## Key tools & commands
 
@@ -76,6 +80,20 @@ Use PowerShell Script Block Logging (Event ID 4104) as a primary detection and f
 - Ignoring constrained-language-mode bypasses in the same window.
 - Forgetting transcription logs (`Start-Transcript`) as a complementary source.
 - Correlating by hostname only in VDI/non-persistent environments — use session IDs.
+- Forgetting PowerShell 7 (`pwsh`) has separate logging configuration.
+- Not checking GPO precedence — a higher-precedence GPO may disable logging.
+- Assuming 4104 covers everything — reflection-loaded .NET assemblies appear elsewhere.
+- Missing scripts launched via `wmic` or `schtasks` — the parent isn't powershell.exe.
+- Not exporting the operational log before it rolls over.
+- Hunting decoded strings that are unique per run — use structural patterns.
+- Module logging without Script Block Logging — enable both (4103 and 4104).
+- Event 4104 truncates around 4KB — reassemble multi-part blocks by ScriptBlockId.
+- Protected Event Logging without key custody — logs become unreadable; plan for it.
+- Obfuscation defeating keyword searches — hunt AMSI/ETW tampering events instead.
+- Log volume overwhelming the forwarder — filter noise at the source with XPath.
+- Attackers clearing the log — 1102/104 events are themselves the indicator.
+- ScriptBlockId reuse across hosts — correlate the same obfuscated block enterprise-wide.
+- Not comparing script-block volume against the host's normal baseline.
 
 ## References
 

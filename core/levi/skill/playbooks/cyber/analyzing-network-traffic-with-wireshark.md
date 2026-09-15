@@ -82,6 +82,18 @@ Perform structured, repeatable packet-level analysis with Wireshark — from cap
 - Relying on the default column layout — add custom columns (e.g., http.host) for triage speed.
 - Ignoring Expert Info severity levels — errors and warnings mean different things.
 - Analyzing decrypted TLS without documenting the key source — note how decryption was achieved.
+- Sorting by the wrong column and missing the actual top talker.
+- Forgetting that "Follow Stream" shows reassembled data, not raw packets.
+- Applying a display filter and forgetting it's active — "where did my packets go."
+- Not saving the capture filter used — irreproducible captures.
+- Overlooking Statistics → Endpoints for quick IP/MAC inventories.
+- Trusting protocol dissectors on tunneled traffic — verify with "Decode As."
+- Capturing on the wrong interface — verify with `dumpcap -D` before a long session.
+- Display filters versus capture filters — a wrong capture filter loses data permanently.
+- TCP reassembly hiding packet-level anomalies — toggle it when hunting evasion.
+- Huge captures freezing the GUI — use `tshark`/`dumpcap` with ring buffers for long runs.
+- Name resolution rewriting addresses — disable it when documenting indicators.
+- Forgetting snaplen truncation — truncated packets break signature matching silently.
 
 See also: analyzing-network-traffic-for-incidents.md, analyzing-network-traffic-of-malware.md
 

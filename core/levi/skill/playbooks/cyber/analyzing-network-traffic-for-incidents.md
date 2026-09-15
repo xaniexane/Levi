@@ -80,6 +80,18 @@ Turn raw network evidence — pcaps, flow records, proxy and DNS logs — into a
 - Forgetting backup and recovery infrastructure — attackers target it deliberately.
 - Presenting byte counts as exfiltration facts to leadership — qualify with confidence levels.
 - Skipping the lessons-learned capture while details are still fresh.
+- Writing the timeline from memory instead of from the logs — every row needs a source.
+- Letting the incident window creep without documenting why — scope changes need reasons.
+- Forgetting to preserve firewall configs — rules get changed during containment.
+- Assuming DHCP leases are stable across a multi-day window — verify with lease logs.
+- Not recording analyst actions — your own queries can look like attacker activity later.
+- Closing the ticket before the detection rules are deployed and tested.
+- Tunnel vision on the initial alert IP — always pivot to sibling infrastructure.
+- No traffic baseline means every anomaly judgment is guesswork — build one first.
+- Ignoring encrypted-traffic metadata — JA3, SNI, and byte counts still tell a story.
+- Correlating by wall-clock across sources with unsynced clocks — verify NTP first.
+- Closing the incident before checking persistence channels and scheduled beacons.
+- Forgetting to preserve full packets — NetFlow alone cannot answer payload questions later.
 
 See also: analyzing-network-traffic-of-malware.md, analyzing-network-traffic-with-wireshark.md
 

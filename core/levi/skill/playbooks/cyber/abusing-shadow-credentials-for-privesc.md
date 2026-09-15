@@ -43,14 +43,16 @@ and durable hardening.
    Get-ADUser -Filter * -Properties msDS-KeyCredentialLink |
      Where-Object { $_.'msDS-KeyCredentialLink' } |
      Select-Object SamAccountName, DistinguishedName
-   ``` Repeat for computer objects with `Get-ADComputer`. Compare against your known-good inventory — hybrid-joined devices and Windows Hello for Business enrollments legitimately populate this attribute.
+   ```
+   Repeat for computer objects with `Get-ADComputer`. Compare against your known-good inventory — hybrid-joined devices and Windows Hello for Business enrollments legitimately populate this attribute.
 3. **Hunt for unauthorized writes.** On domain controllers, search the Security log for event 4662 with access to `msDS-KeyCredentialLink` or write access against user/computer objects outside change windows. Correlate the caller's identity — service accounts and helpdesk accounts writing key credentials they never wrote before are high priority. Note: this requires "Audit Directory Service Changes" enabled *before* the incident.
 4. **Hunt for anomalous PKINIT authentication.** Look for Kerberos TGT requests (4768) using certificate-based pre-authentication for accounts with no legitimate Hello-for-Business enrollment. A password-only service account suddenly authenticating via PKINIT is a strong signal. Build the expected-PKINIT population from your Hello for Business deployment records.
 5. **Trace the write path.** Determine *how* the attacker gained the write: check ACLs on the victim object for GenericWrite/GenericAll/WriteProperty grants, review group memberships granting those rights (Account Operators, custom helpdesk groups), and map the path with BloodHound if available. Document each hop — remediation must break the path, not just clear the attribute.
 6. **Check for persistence beyond the attribute.** Attackers who add shadow credentials often modify other attributes too. Review `whenChanged`/`whenCreated` on the victim object and diff recent attribute changes with replication metadata:
    ```powershell
    repadmin /showobjmeta <DC> "<victim DN>"
-   ``` Look for concurrent changes to `servicePrincipalName` (Kerberoasting setup), group memberships, or `userAccountControl`.
+   ```
+   Look for concurrent changes to `servicePrincipalName` (Kerberoasting setup), group memberships, or `userAccountControl`.
 7. **Assess what the shadow credential was used for.** Correlate the PKINIT logons with subsequent activity: which hosts were accessed, which resources touched, whether DCSync or further privilege escalation followed. This determines whether this was a foothold, a persistence mechanism, or the actual privilege-escalation step — each drives different scoping.
 8. **Contain.** With authorization: remove the rogue KeyCredentialLink values, disable or reset the foothold account, and revoke Kerberos tickets issued via the abused key (force a password reset, which invalidates the key-material binding). Verify removal by re-querying the attribute afterward — don't assume.
 9. **Eradicate the write path.** Remove the excessive ACL grant or group membership that permitted the write. Do not just clear the attribute — the attacker will re-add it if the path remains. Re-run the ACL enumeration to confirm the path is closed.

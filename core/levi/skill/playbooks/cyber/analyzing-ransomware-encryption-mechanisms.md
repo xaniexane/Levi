@@ -35,8 +35,12 @@ Determine how a ransomware sample encrypts files — algorithm, key management, 
 14. Analyze the ransom note for OPSEC mistakes: contact emails, onion addresses, and wallet addresses are intelligence — record them without engaging.
 15. Check for double-encryption markers: layered extensions and multiple ransom notes indicate two families ran — compounding recovery difficulty.
 16. Test whether newly created files still get encrypted: a live encryptor process changes the priority from "recover" to "isolate first."
-17. Document the full mechanism: algorithm(s), mode, key lifecycle, file markers, targeting rules, and the flaw analysis with evidence.
-18. Hand the assessment to the recovery team with a clear verdict: decryptable (with method), partially recoverable (which file types), or not decryptable — plus the IOCs for containment.
+17. Check the binary's PDB path for attribution: leftover debug paths sometimes name the builder's environment.
+18. Look for configuration files dropped alongside the binary: affiliate IDs and targeting options live there.
+19. Test file-type targeting empirically: place canaries of each claimed type and confirm which actually get encrypted.
+20. Compare data-theft claims in the note against actual exfiltration evidence — notes exaggerate.
+21. Document the full mechanism: algorithm(s), mode, key lifecycle, file markers, targeting rules, and the flaw analysis with evidence.
+22. Hand the assessment to the recovery team with a clear verdict: decryptable (with method), partially recoverable (which file types), or not decryptable — plus the IOCs for containment.
 
 ## Key tools & commands
 
@@ -75,6 +79,18 @@ Determine how a ransomware sample encrypts files — algorithm, key management, 
 - Re-detonating on the same VM and overwriting canary evidence — snapshot discipline.
 - Forgetting to check for Linux/ESXi variants of the same family in mixed estates.
 - Declaring "not decryptable" without checking No More Ransom first.
+- Running the sample with internet access "just to see" — key exfil completes in seconds.
+- Forgetting to snapshot before detonation — no clean re-runs.
+- Not testing whether the decryptor handles partial encryption.
+- Missing the Linux/ESXi variant — check all platforms in the estate.
+- Forgetting to image the patient-zero host before remediation.
+- Reusing canary filenames across runs — collisions confuse the analysis.
+- Confusing wiper behavior with failed encryption — check for key exfiltration first.
+- Partial or intermittent encryption defeating full-file carving assumptions.
+- Per-file keys wrapped by a master key — recover the wrapping, not each file key.
+- Memory holds keys only during the encryption window — capture RAM mid-incident.
+- Assuming no decryption is possible — check NoMoreRansom for the exact variant first.
+- Key material lingers in crash dumps and hibernation files — collect them before reboot.
 
 See also: analyzing-ransomware-network-indicators.md
 

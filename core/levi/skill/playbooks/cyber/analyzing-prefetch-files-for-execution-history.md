@@ -35,8 +35,13 @@ Reconstruct program execution history on Windows from Prefetch (`.pf`) files —
 12. Check Prefetch for evidence of cleanup tools: `CIPHER`, `SDELETE`, or `WEvtUtil` executions indicate anti-forensics — and timestamp the cover-up.
 13. Correlate Prefetch run counts with UserAssist: disagreements between the two can indicate one artifact was tampered with.
 14. Look for Prefetch entries of installers: legitimate-looking names (`UPDATE-*.pf`, `SETUP-*.pf`) sometimes mask renamed malware — verify the executable's hash.
-15. Note the Prefetch caveats in your findings: max 128 entries on modern Windows (old entries age out), and `.pf` creation requires the Prefetcher/SysMain service — absence of a `.pf` is not proof of non-execution.
-16. Build the execution timeline rows: executable, path hash, first/last run, run count, and corroborating artifacts.
+15. Parse `C:\Windows\Prefetch\Layout.ini`: it reveals which files the prefetcher prioritized — corroborating the `.pf` story.
+16. Use volume serial numbers in `.pf` files for USB attribution: match them against `USBSTOR` registry keys.
+17. Check Prefetch for admin tools (`REGEDIT`, `MMC`, `EVENTVWR`): their execution times show when the attacker worked interactively.
+18. Correlate with RecentDocs: files the attacker opened should appear in both artifacts.
+19. Look for Prefetch entries created while the system was supposedly idle — scheduled malicious execution stands out.
+20. Note the Prefetch caveats in your findings: max 128 entries on modern Windows (old entries age out), and `.pf` creation requires the Prefetcher/SysMain service — absence of a `.pf` is not proof of non-execution.
+21. Build the execution timeline rows: executable, path hash, first/last run, run count, and corroborating artifacts.
 
 ## Key tools & commands
 
@@ -72,6 +77,22 @@ Reconstruct program execution history on Windows from Prefetch (`.pf`) files —
 - Volume serial numbers in `.pf` files identify the source drive — useful for USB attribution.
 - Not hashing `.pf` files at acquisition — chain of custody applies to artifacts too.
 - Ignoring `Layout.ini` — it reveals which files the prefetcher prioritized.
+- Forgetting Prefetch tracks the first seconds of execution — short-lived processes are underrepresented.
+- Not checking the Prefetch directory's own timestamps — they bound activity.
+- Assuming `.pf` run counts are exact — they're counters; treat as approximate.
+- Missing Prefetch for processes run from removable media — volume serials tell the story.
+- Overlooking that Windows tracks up to 8 last-run timestamps — use all of them.
+- Not comparing against a known-good host's Prefetch set.
+- Prefetch is capped (128 entries on older Windows) — absence is not proof of non-execution.
+- `Amcache.hve` corroborates better than Prefetch alone — always cross-reference.
+- Prefetch timestamps reflect the last run, not the first — do not use them for initial-access dating.
+- Copying `.pf` files on a running system risks torn reads — prefer image-based collection.
+- Prefetch disabled by GPO in hardened builds — verify `EnablePrefetcher` before concluding.
+- Embedded paths may reference old locations after OS upgrades — verify, do not assume.
+- Hash the `.pf` set at collection — chain of custody applies to artifacts too.
+- Ignoring `Layout.ini` — it reveals which files the prefetcher prioritized at boot.
+- Forgetting that disabled Prefetch still leaves `Layout.ini` clues.
+- Overlooking `.pf` files for DLL side-loading victims — the host process executes, the DLL doesn't.
 
 See also: analyzing-windows-prefetch-with-python.md
 

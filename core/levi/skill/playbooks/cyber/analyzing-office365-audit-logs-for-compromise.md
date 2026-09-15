@@ -82,6 +82,18 @@ Detect mailbox and tenant compromise in Microsoft 365 unified audit logs — ano
 - Missing guest/B2B account activity — scope includes external users.
 - Confusing "MFA succeeded" with "legitimate" — session-cookie theft passes MFA.
 - Not checking Conditional Access policy exclusions the attacker may have added.
+- Searching only the primary mailbox — check archives and litigation holds.
+- Forgetting that audit-log retention varies by license — E3 vs. E5 matters.
+- Not exporting the raw JSON — CSV exports lose nested fields.
+- Assuming one compromised account — check for lateral consent grants.
+- Missing Teams private-channel activity in the audit scope.
+- Closing the case before the 24-hour re-check for delayed log arrival.
+- Unified Audit Log disabled by default in some tenants — enable it before you need it.
+- 90-day retention on E3 — export to Sentinel/SIEM or evidence ages out.
+- `Search-UnifiedAuditLog` throttles on large result sets — page with `-SessionId`.
+- Service-principal sign-ins do not appear where user sign-ins do — check both.
+- UAL timestamps are UTC — convert before correlating with local logs.
+- Mailbox audit bypass — verify `AuditBypassEnabled` is not set on target mailboxes.
 
 ## References
 

@@ -43,7 +43,8 @@ and fleet-wide hunting.
    Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4663} |
      Where-Object { $_.Message -match 'Protect' } |
      Select-Object -First 20 TimeCreated, Message
-   ``` Normal readers are limited: the user's own processes at logon, `lsass.exe`, and the DPAPI service path. Reads by scripting hosts, LOLBins, or unsigned binaries are suspicious.
+   ```
+   Normal readers are limited: the user's own processes at logon, `lsass.exe`, and the DPAPI service path. Reads by scripting hosts, LOLBins, or unsigned binaries are suspicious.
 3. **Review the DPAPI operational log.** The channel `Microsoft-Windows-Crypto-DPAPI/Operational` logs masterkey backup, restore, and protection operations. Look for backup-key usage and any entries generated outside interactive logon windows. Correlate these timestamps with the suspect process runtime from step 1.
 4. **Enumerate which credential stores were touched.** Check for access to the Credential Manager store (`%APPDATA%\Microsoft\Credentials\`), the Web Credentials vault (`%LOCALAPPDATA%\Microsoft\Vault\`), browser Login Data files, and wireless profiles:
    ```powershell
@@ -51,7 +52,8 @@ and fleet-wide hunting.
    vaultcmd /listcreds:"Windows Credentials"
    netsh wlan show profiles
    dir "$env:LOCALAPPDATA\Microsoft\Vault" -Recurse
-   ``` Correlate last-access timestamps on these paths with the suspect process's runtime to determine which stores were actually read.
+   ```
+   Correlate last-access timestamps on these paths with the suspect process's runtime to determine which stores were actually read.
 5. **Look for DPAPI domain backup-key abuse.** On domain-joined hosts, the DPAPI backup key (published in AD) lets an attacker decrypt any domain user's masterkey. Monitor AD for reads of the backup-key object and for DCSync-like replication traffic that includes it. Treat any non-DC host touching backup-key material as critical and escalate immediately.
 6. **Check for LSASS interaction.** DPAPI credential theft frequently pairs with LSASS access (T1003.001). Hunt for `lsass.exe` handle opens with `PROCESS_VM_READ` from unexpected callers, Security events 4656/4663 against LSASS, and Sysmon event ID 10 (ProcessAccess) targeting `lsass.exe` with suspicious granted-access masks.
 7. **Capture full process context.** For the suspect process, collect the image hash, signature status, parent chain back to the initial execution vector, and network connections at the time of the alert. Check the binary against threat intel. Determine the delivery mechanism (phishing, drive-by, lateral movement) to scope the incident beyond one host.

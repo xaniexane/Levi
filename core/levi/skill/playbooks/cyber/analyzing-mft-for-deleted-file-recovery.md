@@ -22,7 +22,7 @@ Recover evidence of deleted files — names, sizes, timestamps, and data-run loc
 1. Verify the image hash, then locate and extract the $MFT:
    `mmls image.E01` to find the NTFS partition offset, then
    `icat -o <offset> image.E01 0 > mft.bin` (inode 0 is $MFT).
-   Alternatively parse in place with `MFTECmd -f image.E01 --vss` style workflows or mount read-only.
+   Alternatively, mount the image read-only and point `MFTECmd` at the mounted volume path — `MFTECmd` takes files or directories, not raw images, so always extract or mount first.
 2. Parse the MFT into a structured timeline:
    `python analyzeMFT.py -f mft.bin -o mft.csv`
    or `MFTECmd.exe -f mft.bin --csv ./out --csvf mft.csv`

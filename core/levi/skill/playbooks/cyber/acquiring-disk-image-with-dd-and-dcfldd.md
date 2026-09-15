@@ -42,27 +42,30 @@ legal proceedings.
    ```bash
    lsblk -o NAME,SIZE,MODEL,SERIAL,TRAN
    sudo fdisk -l
-   ``` Triple-check `/dev/sdX` — writing to the wrong device destroys evidence. When in doubt, physically disconnect other drives. Record the exact device node and serial in your notes.
+   ```
+   Triple-check `/dev/sdX` — writing to the wrong device destroys evidence. When in doubt, physically disconnect other drives. Record the exact device node and serial in your notes.
 2. **Attach through a write blocker** (hardware preferred). If software-only, remount read-only and confirm with `blockdev --getro /dev/sdX` returning `1`. Document which method you used — "hardware write blocker" reads better in court than "I was careful."
 3. **Hash the source before imaging** (proves the acquisition captured the device as found):
    ```bash
    sudo dcfldd if=/dev/sdX hash=sha256 hashlog=source_hash.txt
-   ``` With plain `dd`, hash separately. Note: hashing multi-terabyte sources takes significant time — start early and parallelize preparation work.
+   ```
+   With plain `dd`, hash separately. Note: hashing multi-terabyte sources takes significant time — start early and parallelize preparation work.
 4. **Acquire with dcfldd (preferred).** It hashes on the fly, logs progress, and can split output:
    ```bash
    sudo dcfldd if=/dev/sdX of=evidence/case042_disk.img \
      hash=sha256 hashlog=evidence/case042_hash.log \
      bs=64K conv=noerror,sync status=on
-   ``` - `conv=noerror,sync` keeps going past read errors, padding bad sectors
-     with zeros — note errors in your log; they are findings, not noise. - For multi-file splits add `split=4G splitformat=aa` (useful for FAT32
-     destinations or evidence systems with file-size limits). - `bs=64K` is a reasonable throughput default; larger blocks speed
-     healthy drives but worsen granularity around bad sectors.
+   ```
+   - `conv=noerror,sync` keeps going past read errors, padding bad sectors with zeros — note errors in your log; they are findings, not noise.
+   - For multi-file splits add `split=4G splitformat=aa` (useful for FAT32 destinations or evidence systems with file-size limits).
+   - `bs=64K` is a reasonable throughput default; larger blocks speed healthy drives but worsen granularity around bad sectors.
 5. **If only plain dd is available**, replicate the essentials manually:
    ```bash
    sudo dd if=/dev/sdX of=evidence/case042_disk.img bs=64K \
      conv=noerror,sync status=progress
    sha256sum evidence/case042_disk.img | tee evidence/image_hash.txt
-   ``` Then compare against the source hash from step 3. `status=progress` gives periodic throughput output — log it as evidence of an uninterrupted run.
+   ```
+   Then compare against the source hash from step 3. `status=progress` gives periodic throughput output — log it as evidence of an uninterrupted run.
 6. **Verify the image.** Re-hash the image file and confirm it matches the source hash exactly. Also verify the image size equals the source device size (`blockdev --getsize64` on both, compared in bytes). A hash match with a size mismatch means a truncated copy — investigate before proceeding.
 7. **Handle partial or interrupted runs.** If acquisition is interrupted, do not simply re-run over the same output file — that risks a mixed image. Either resume with `seek`/`skip` calculated precisely (document the math) or start fresh. When in doubt, start fresh; storage is cheaper than doubt.
 8. **Record everything.** Log the exact command lines, start/end times, tool versions (`dcfldd --version`), hashes, byte counts, throughput, and any read errors into the case notes and chain-of-custody form. Your notes should let a stranger reproduce the acquisition exactly.

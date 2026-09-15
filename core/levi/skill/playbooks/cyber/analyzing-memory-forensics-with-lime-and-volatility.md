@@ -52,7 +52,7 @@ Acquire a forensically sound full-memory image from a live Linux host with LiME 
 14. Check for hidden files and suspicious mounts:
     `vol -f mem.lime linux.mountinfo` and `vol -f mem.lime linux.check_syscall` / `linux.check_idt` for hooks.
 15. Dump suspicious process address spaces for offline review:
-    `vol -f mem.lime linux.proc --pid <PID> --dump-dir ./dumps/`
+    `vol -f mem.lime linux.memmap --pid <PID> --dump`
     Analyze strings and YARA hits inside your contained lab.
 16. Check for syscall and IDT hooks indicating a kernel rootkit:
     `vol -f mem.lime linux.check_syscall` and `vol -f mem.lime linux.check_idt`
@@ -75,7 +75,7 @@ Acquire a forensically sound full-memory image from a live Linux host with LiME 
 - `vol -f <image> linux.check_idt` — interrupt descriptor table hook detection.
 - `vol -f <image> linux.elfs` — ELF binaries mapped in memory.
 - `vol -f <image> linux.mountinfo` — mount points visible to the kernel.
-- `vol -f <image> linux.proc --pid <PID> --dump-dir` — per-process memory dumps.
+- `vol -f <image> linux.memmap --pid <PID> --dump` — per-process memory dumps.
 - `dwarfdump` / distribution debuginfo packages — building symbols when profiles are missing.
 - YARA + `strings` — offline review of dumped process memory.
 - `sha256sum`, `nc` — hashing and TCP transfer of the image.

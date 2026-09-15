@@ -45,7 +45,8 @@ See also: analyzing-tls-certificate-transparency-logs.md, analyzing-typosquattin
    # Pull recent certs matching a keyword via crt.sh JSON, then inspect
    curl -s "https://crt.sh/?q=%25brandkeyword%25&output=json" \
      | jq -r '.[].name_value' | sort -u
-   ``` Tune the window: too wide and you're triaging history; too narrow and you miss slow-burn staging.
+   ```
+   Tune the window: too wide and you're triaging history; too narrow and you miss slow-burn staging.
 4. **Enrich each suspect certificate.** For every candidate: resolve the domain (does it point at a live host?), fetch the site safely (sandboxed browser or `curl` — never a production browser), screenshot it, and compare against your brand assets. Note the issuing CA, issuance date, and full SAN list — phishing kits often bundle multiple lure domains in one certificate, giving you the campaign's domain list for free.
 5. **Pivot to infrastructure.** From confirmed phishing domains, pivot on: shared IP/hosting ASN, reused certificates covering multiple phishing domains, name-server patterns, registrar, and creation-time clustering. This turns one phish into the campaign's infrastructure map — and often reveals sibling campaigns impersonating other brands on the same kit.
 6. **Assess campaign readiness.** A certificate issued but a domain not yet resolving or serving content = staging. Prioritize monitoring; prepare takedown evidence packages (screenshots, cert details, brand-impersonation comparison, WHOIS) so the takedown request fires the moment the lure goes live rather than after victims report it.

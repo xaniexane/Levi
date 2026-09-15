@@ -44,13 +44,15 @@ permission that should never have existed.
    $obj.ObjectSecurity.GetAccessRules($true,$true,
      [System.Security.Principal.SecurityIdentifier]) |
      Select-Object IdentityReference, ActiveDirectoryRights, AccessControlType
-   ``` For broad sweeps, script this across OUs and privileged groups; store raw output versioned so you can diff over time.
+   ```
+   For broad sweeps, script this across OUs and privileged groups; store raw output versioned so you can diff over time.
 2. **Prioritize dangerous rights on high-value targets.** Rank findings: GenericAll/WriteDacl/WriteOwner on the domain object, AdminSDHolder, Domain Admins/Enterprise Admins groups, GPOs linked at domain level, and KRBTGT-adjacent objects first. Then GenericWrite/WriteProperty on user and computer objects — these enable targeted Kerberoasting via SPN writes, shadow credentials via KeyCredentialLink writes, and RBCD via `msDS-AllowedToActOnBehalfOfOtherIdentity`.
 3. **Distinguish legitimate from excessive.** Built-in principals (SYSTEM, Domain Admins, Enterprise Admins, the object's own SELF where expected) are normal. Flag: helpdesk groups with GenericWrite on all users, service accounts with WriteDacl anywhere, any non-admin with rights over privileged groups or GPOs, and delegated "account management" groups whose scope quietly expanded beyond their OU.
 4. **Attribute suspected writes to actors.** For each abused permission, pull replication metadata to find what changed and when:
    ```powershell
    repadmin /showobjmeta <DC> "<distinguished name>"
-   ``` Correlate with DC Security event 4662 (directory service access) for the writer's identity, and 5136 for before/after values. This turns "a bad permission exists" into "this account used it at this time."
+   ```
+   Correlate with DC Security event 4662 (directory service access) for the writer's identity, and 5136 for before/after values. This turns "a bad permission exists" into "this account used it at this time."
 5. **Map the full attack path.** In BloodHound, trace from the attacker's foothold principal through group nesting to the abused right to the target. Document each hop — remediation must break the *path*, and nested groups are where paths hide. Export the path as evidence; "remove user X from group Y" is an actionable ticket, "fix AD" is not.
 6. **Check for persistence the ACL enabled.** Common follow-ons once write access exists: DCSync rights (Replicating Directory Changes) granted to non-DCs, GPO modifications pushing malicious settings, SID-history injection, `msDS-KeyCredentialLink` writes, and SPN additions for Kerberoasting. If the ACL abuse is confirmed, sweep for each — assume the attacker used the access until evidence says otherwise.
 7. **Remediate the permission.** With authorization, remove the excessive ACE. Prefer removing the principal from the granting group over editing the ACL directly when the grant came via group nesting — group-based remediation is auditable and survives SDPropagator cycles. Re-run the enumeration to confirm the path is closed, and diff before/after.

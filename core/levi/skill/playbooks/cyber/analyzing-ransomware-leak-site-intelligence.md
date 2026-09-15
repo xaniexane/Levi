@@ -35,8 +35,13 @@ Collect and analyze ransomware data-leak site (DLS) postings about victim organi
 14. Screenshot the actor's victim-list page structure: consistent formatting enables future automation and change detection.
 15. Note the actor's leak cadence: the time from claimed breach to publication reveals their double-extortion playbook timing.
 16. Cross-reference actor attribution with ransomware-intel feeds: copycat sites mimic major brands.
-17. Produce the intelligence brief: what is claimed, evidence quality, recommended actions (notification, credential rotation for exposed accounts, monitoring for leaked data reuse).
-18. Retain captures per policy; do not redistribute victim data or full listing contents beyond the authorized audience.
+17. Verify the listing through a second source: another tracker or intel feed confirming the victim reduces false-claim risk.
+18. Record the listing's URL structure: stable patterns enable automated monitoring later.
+19. Note the countdown state and any "negotiation" status indicators — they change the urgency assessment.
+20. Check the actor's other victims for sector patterns: it informs who to warn next.
+21. Record the site's published PGP key if present: it authenticates future actor communications.
+22. Produce the intelligence brief: what is claimed, evidence quality, recommended actions (notification, credential rotation for exposed accounts, monitoring for leaked data reuse).
+23. Retain captures per policy; do not redistribute victim data or full listing contents beyond the authorized audience.
 
 ## Key tools & commands
 
@@ -73,6 +78,22 @@ Collect and analyze ransomware data-leak site (DLS) postings about victim organi
 - Treating victim "removal" as payment — listings also expire or get rebranded.
 - Collecting beyond the intelligence requirement — scope creep creates legal exposure.
 - Bookmarked onion addresses going stale — re-verify via intel feeds each session.
+- Using a personal device for leak-site research — always the isolated VM.
+- Forgetting to harden the research browser — fingerprinting risk is real.
+- Not recording which onion address was used — rotations make reproduction hard.
+- Assuming the listing language is accurate — translate carefully.
+- Missing the actor's "rules" page — it reveals targeting preferences.
+- Forgetting to check for updates on a schedule — one look is not monitoring.
+- Leak sites move constantly — track the current onion via a trusted tracker, not memory.
+- Screenshot with timestamps — posts get edited and deleted without notice.
+- Victim naming ambiguity — confirm via sample data, never the headline alone.
+- Countdown timers resetting — do not treat them as reliable publication dates.
+- Accessing leak sites from corporate IPs — use isolated infrastructure with documented authorization.
+- Ransomware rebrands — map old names to new ones before closing intel gaps.
+- A listing does not always mean encryption — some gangs list stolen data without deploying ransomware.
+- Treat exfiltrated sample data as untrusted input in your own tooling.
+- Not archiving the actor's PGP key — future communications need it for verification.
+- Trusting machine-translated negotiation messages without analyst review.
 
 See also: analyzing-ransomware-payment-wallets.md
 

@@ -83,6 +83,18 @@ Parse, dissect, and statistically analyze packet captures programmatically with 
 - IPv6 extension headers breaking hardcoded layer offsets — iterate layers instead.
 - `wrpcap` appends across runs without labels — keep provenance clear per write.
 - Using `sr()`/`sendp()` outside the lab — even a "test" packet to a production host is unauthorized scanning.
+- Assuming Scapy's defaults match your interface MTU — mismatches corrupt crafted packets.
+- Forgetting `conf.verb = 0` in scripts — noisy output pollutes case logs.
+- Parsing captures with a foreign link type without setting the DLT — silent misdecode.
+- Hardcoding port numbers in filters instead of variables — brittle triage scripts.
+- Not testing on a small pcap slice first — debug on 100 packets, not 10 million.
+- Ignoring raw-socket privilege warnings — capture calls fail cryptically without them.
+- `rdpcap()` loads the entire capture into memory — use `PcapReader` for multi-GB files.
+- Forgetting `conf.verb = 0` floods stdout and slows batch jobs to a crawl.
+- Scapy's `sr()` retransmits silently; set `timeout` and `retry` explicitly or scans take forever.
+- BPF filter mistakes fail silently — validate with `tcpdump -d` before a long capture.
+- On Windows, Scapy needs Npcap in WinPcap-compatible mode or sniffing returns nothing.
+- Crafted packets may carry stale checksums after field edits — recalculate before sending.
 
 ## References
 

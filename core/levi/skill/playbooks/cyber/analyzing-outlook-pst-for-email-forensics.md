@@ -81,6 +81,18 @@ Extract and analyze mailbox content from Outlook PST/OST files — messages, att
 - Missing embedded message/rfc822 attachments — they're separate messages; triage them too.
 - Assuming the PST is complete — compare against server-side retention and journaling.
 - Forensic-suite preview panes fetching remote content — disable network first.
+- Exporting with the wrong codepage — garbled non-ASCII subjects.
+- Forgetting the Sync Issues folder — it reveals mailbox sync anomalies.
+- Not recording the PST format (ANSI vs. Unicode) — affects parsing.
+- Overlooking embedded voting buttons — they can carry tracking URLs.
+- Assuming folder names are in English — localized Outlook uses localized names.
+- Skipping transport-header analysis for internal relays — spoofing happens inside too.
+- Opening the original PST in Outlook mutates metadata — work on a hashed copy.
+- Deleted items are recoverable only until compaction — image quickly.
+- MAPI property timezones need careful conversion for timelines.
+- Embedded attachments can nest — recurse fully through each layer.
+- S/MIME-encrypted messages are unreadable without the key — document the gap.
+- Large PSTs corrupting mid-parse — validate parser counts against item totals.
 
 See also: analyzing-email-headers-for-phishing-investigation.md
 

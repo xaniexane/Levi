@@ -82,6 +82,18 @@ Systematically enumerate every common Linux persistence location — systemd uni
 - Missing cron for deleted users — check `/var/spool/cron/` directly.
 - Overlooking `~/.config/autostart` on Linux desktops — GUI session persistence.
 - Documenting findings without hashes — hashes make the record defensible.
+- Checking only systemd and missing SysV init on older distros.
+- Forgetting `~/.profile` vs. `~/.bashrc` — login vs. interactive shells differ.
+- Not checking root's `authorized_keys` separately — the highest-value target.
+- Overlooking `cron.allow` semantics — its absence changes everything.
+- Trusting `systemctl is-enabled` on a compromised host — verify unit files directly.
+- Missing kernel-module persistence via initramfs — rebuild and compare.
+- Checking only systemd — cron, at, shell rc files, and `ld.so.preload` are classics too.
+- Container persistence via restarted images — the host, not the container, is the anchor.
+- Timestamps lie — verify with the package manager (`rpm -V`, `debsums`), not mtime.
+- Overlooking user-level units in `~/.config/systemd/user/`.
+- Kernel-mode rootkits hiding the persistence — cross-check from a live image or memory dump.
+- SSH `authorized_keys` in non-standard homes — enumerate all users, not just root.
 
 ## References
 

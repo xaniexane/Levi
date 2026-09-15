@@ -36,8 +36,12 @@ Identify and analyze remnants of PowerShell Empire (and its forks) on Windows ho
 14. Extract the agent's delay, jitter, and kill-date from the launcher: these parameters distinguish Empire from lookalike custom implants.
 15. Review PowerShell Module Logging (Event ID 4103) alongside 4104: Empire's module loads appear here even when script blocks arrive fragmented.
 16. Check memory dumps of long-dead agents for the default staging key: it sometimes survives in unallocated process memory.
-17. Preserve launcher samples and logs with hashes; document decoded configurations in the case file.
-18. Remediation must include killing agents, removing persistence, blocking C2 at egress, and rotating credentials the agent could have harvested.
+17. On a seized Empire server, list listeners: each listener maps a port to a profile — every one is a separate detection opportunity.
+18. Review the obfuscation settings used: launcher obfuscation changes appearance but not the decoded behavior — decode, don't eyeball.
+19. Map the agent kill-date: agents with kill-dates in the past may linger — verify they're actually dead.
+20. Document the C2 profile as structured data (URIs, headers, user agent) for SIEM ingestion.
+21. Preserve launcher samples and logs with hashes; document decoded configurations in the case file.
+22. Remediation must include killing agents, removing persistence, blocking C2 at egress, and rotating credentials the agent could have harvested.
 
 ## Key tools & commands
 
@@ -76,6 +80,19 @@ Identify and analyze remnants of PowerShell Empire (and its forks) on Windows ho
 - Missing Empire's Python/Linux agents — the framework isn't Windows-only.
 - Treating agent "lost" status as eviction — check for persistence and re-staging.
 - Hardcoded credentials in recovered configs — rotate anything the config touched.
+- Searching only for "Empire" strings — operators rename everything.
+- Forgetting that Empire agents can migrate processes — track by C2, not PID.
+- Not checking for Empire's default kill-date — expired agents may still beacon.
+- Missing the agents database on seized servers — it's the operator's own notes.
+- Confusing Empire staging with Cobalt Strike — verify with framework-specific markers.
+- Assuming HTTP-only — Empire supports multiple listener types.
+- Empire's default profiles are well-signatured — hunt for modified jitter and custom modules.
+- Stagers live in memory only — disk forensics alone misses reflective injection; take memory.
+- AMSI bypass variants evolve — never rely on a single bypass signature.
+- Overlooking WMI event subscriptions as the persistence paired with the agent.
+- Agent check-in jitter defeating fixed-interval detection — use statistical beaconing analysis.
+- Confusing Empire with sibling frameworks — verify via module/tasking artifacts before attributing.
+- Not capturing the full stager URI path — the profile name lives in the path.
 
 ## References
 

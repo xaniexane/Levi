@@ -40,14 +40,16 @@ changed what in the cloud," not "who read which blob."
    AzureActivity
    | summarize min(TimeGenerated), max(TimeGenerated), count()
      by SubscriptionId
-   ``` Gaps here are a finding — you cannot hunt what you did not retain. Also confirm diagnostic settings exist on the subscriptions themselves, not just resource groups.
+   ```
+   Gaps here are a finding — you cannot hunt what you did not retain. Also confirm diagnostic settings exist on the subscriptions themselves, not just resource groups.
 2. **Baseline the control plane.** Identify normal high-privilege actors: which service principals create resources, which humans hold Owner/User Access Administrator roles, what deployment pipelines look like (caller identities, operation patterns, timing). Document them; every hunt below excludes or scrutinizes against this list. Undocumented automation is your biggest false-positive source.
 3. **Hunt privilege escalation.** Query for role-assignment changes, especially grants of Owner, Contributor, or User Access Administrator:
    ```kusto
    AzureActivity
    | where OperationNameValue endswith "roleAssignments/write"
    | project TimeGenerated, Caller, CallerIpAddress, Properties_d
-   ``` Flag grants by unusual callers, grants to newly created principals, grants at odd hours, and grants scoped at subscription or management-group level. Cross-check the grantor's own authority — escalation often starts with a compromised mid-privilege account granting upward.
+   ```
+   Flag grants by unusual callers, grants to newly created principals, grants at odd hours, and grants scoped at subscription or management-group level. Cross-check the grantor's own authority — escalation often starts with a compromised mid-privilege account granting upward.
 4. **Hunt persistence via service principals and apps.** Look for new application/service-principal registrations and credential additions:
    ```kusto
    AzureActivity
@@ -55,7 +57,8 @@ changed what in the cloud," not "who read which blob."
       or OperationNameValue has "servicePrincipals"
    | where ActivitySubstatusValue == "Created"
       or OperationNameValue endswith "/write"
-   ``` Correlate with Microsoft Entra audit logs for `Add service principal credentials` — a new secret on an existing app is the quieter persistence path and won't show as a "new" principal.
+   ```
+   Correlate with Microsoft Entra audit logs for `Add service principal credentials` — a new secret on an existing app is the quieter persistence path and won't show as a "new" principal.
 5. **Hunt resource abuse.** Watch for VM/VMSS creation in unusual regions or SKUs (crypto-mining pattern: large GPU SKUs in regions you never use), new storage accounts with public access, new container registries, and firewall/NSG rule changes opening management ports (22/3389/5985-5986). Pair with cost-anomaly alerts from Cost Management — miners show up on the bill fast.
 6. **Review policy and diagnostic tampering.** Attackers disable logging to hide. Alert on operations that stop diagnostic settings, delete or purge Log Analytics workspaces, or modify Azure Policy assignments and exemptions:
    ```kusto
@@ -63,7 +66,8 @@ changed what in the cloud," not "who read which blob."
    | where OperationNameValue has "diagnosticSettings"
       or OperationNameValue has "policies"
    | where ActivityStatusValue == "Succeeded"
-   ``` Treat any success here by a non-change-control identity as critical — this is the attacker blinding you.
+   ```
+   Treat any success here by a non-change-control identity as critical — this is the attacker blinding you.
 7. **Investigate Key Vault access-policy changes.** `vaults/write` operations that add access policies or change network ACLs precede secret theft. List which identities gained `get`/`list` on secrets and keys, and whether those identities ever used them legitimately. A new access policy followed by no legitimate use is a theft setup.
 8. **Check automation-account and Run Command abuse.** Hunt for new Automation Accounts, runbook creation/modification, and `virtualMachines/runCommand` operations — Run Command is effectively remote code execution on the VM and a favorite post-compromise tool. Any Run Command outside your patching automation deserves investigation.
 9. **Reconstruct the incident timeline.** For a confirmed compromise: order all write operations by the suspect caller, identify the first anomalous action, enumerate created/modified resources and role grants, and scope which data-plane assets (VMs, storage, databases, Key Vaults) those grants could reach. This scoping drives the data-impact assessment.
