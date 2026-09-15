@@ -32,6 +32,7 @@ Consequential-action discipline (blueprint §1.5):
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import subprocess
@@ -517,6 +518,160 @@ def _register_builtins(
         except OSError as exc:
             return ToolResult(ok=False, error=f"skill_load: {exc}")
 
+    # -- course_brief / course_search (curriculum knowledge base) -----------
+    def _courses_dir() -> Path:
+        return Path(__file__).resolve().parent.parent / "knowledge" / "courses"
+
+    def _course_catalog() -> dict:
+        path = _courses_dir() / "catalog.json"
+        if not path.exists():
+            return {"subjects": []}
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    def _course_brief(args: dict) -> ToolResult:
+        subject = str(args.get("subject") or "").strip().lower().replace("_", "-")
+        brief = _courses_dir() / "briefs" / f"{subject}.md"
+        if not brief.is_file():
+            known = [s["slug"] for s in _course_catalog().get("subjects", [])]
+            return ToolResult(
+                ok=False,
+                error=f"course_brief: unknown subject {subject!r}; "
+                f"known: {', '.join(known) or '(catalog not ingested)'}",
+            )
+        try:
+            return ToolResult(ok=True, output=_truncate(brief.read_text(encoding="utf-8"), 100_000))
+        except OSError as exc:
+            return ToolResult(ok=False, error=f"course_brief: {exc}")
+
+    def _course_search(args: dict) -> ToolResult:
+        query = str(args.get("query") or "").strip()
+        if not query:
+            return ToolResult(ok=False, error="course_search: 'query' is required")
+        terms = [t.lower() for t in re.findall(r"[a-z0-9]+", query.lower()) if len(t) > 2]
+        if not terms:
+            return ToolResult(ok=False, error="course_search: query has no searchable terms")
+        catalog = _course_catalog()
+        hits: list[str] = []
+        for subj in catalog.get("subjects", []):
+            for course in subj["courses"]:
+                hay = f"{course['title']} {course['school']} {course.get('description','')}".lower()
+                score = sum(hay.count(t) for t in terms)
+                snippet = ""
+                raw_path = _courses_dir() / "raw" / subj["slug"]
+                if raw_path.is_dir() and score:
+                    for fp in sorted(raw_path.glob("*.txt")):
+                        try:
+                            txt = fp.read_text(encoding="utf-8", errors="replace").lower()
+                        except OSError:
+                            continue
+                        for t in terms:
+                            i = txt.find(t)
+                            if i != -1:
+                                snippet = "..." + " ".join(
+                                    txt[max(0, i - 120):i + 200].split()) + "..."
+                                break
+                        if snippet:
+                            break
+                if score:
+                    line = f"[{subj['slug']}] {course['title']} ({course['school']}) — {course['primary']}"
+                    if snippet:
+                        line += f"\n    {snippet}"
+                    hits.append((score, line))
+        hits.sort(key=lambda h: -h[0])
+        if not hits:
+            return ToolResult(ok=True, output=f"course_search: no matches for {query!r}")
+        out = "\n".join(h[1] for h in hits[:10])
+        return ToolResult(
+            ok=True,
+            output=f"course_search: {len(hits)} match(es) for {query!r} (top 10):\n{out}")
+
+    # -- news_latest / news_search (dated current-events recall) ------------
+    def _news_dir() -> Path:
+        return Path(__file__).resolve().parent.parent / "knowledge" / "news"
+
+    def _news_items() -> list[dict]:
+        days = _news_dir() / "days"
+        items: list[dict] = []
+        if not days.is_dir():
+            return items
+        for fp in sorted(days.glob("*.jsonl")):
+            try:
+                for line in fp.read_text(encoding="utf-8").splitlines():
+                    line = line.strip()
+                    if line:
+                        items.append(json.loads(line))
+            except (OSError, ValueError):
+                continue
+        return items
+
+    def _fmt_news(it: dict) -> str:
+        return (f"[{it.get('date', '?')}] ({it.get('source', '?')}) "
+                f"{it.get('title', '')}\n    {it.get('summary', '')}\n    {it.get('url', '')}")
+
+    def _news_latest(args: dict) -> ToolResult:
+        try:
+            limit = max(1, min(int(args.get("limit", 10)), 50))
+        except (TypeError, ValueError):
+            return ToolResult(ok=False, error="news_latest: 'limit' must be an int")
+        items = _news_items()
+        if not items:
+            return ToolResult(ok=True, output="news_latest: no ingested news yet — run `levi news refresh`.")
+        items.sort(key=lambda r: r.get("date", ""), reverse=True)
+        out = "\n".join(_fmt_news(it) for it in items[:limit])
+        newest = items[0].get("date", "?")
+        return ToolResult(
+            ok=True,
+            output=f"news_latest: newest ingested date is {newest} "
+                   f"(dated recall — cite dates, do not imply freshness):\n{out}")
+
+    def _news_search(args: dict) -> ToolResult:
+        query = str(args.get("query") or "").strip()
+        if not query:
+            return ToolResult(ok=False, error="news_search: 'query' is required")
+        terms = [t.lower() for t in re.findall(r"[a-z0-9]+", query.lower()) if len(t) > 2]
+        if not terms:
+            return ToolResult(ok=False, error="news_search: query has no searchable terms")
+        hits = []
+        for it in _news_items():
+            hay = f"{it.get('title', '')} {it.get('summary', '')}".lower()
+            score = sum(hay.count(t) for t in terms)
+            if score:
+                hits.append((score, it.get("date", ""), it))
+        hits.sort(key=lambda h: (-h[0], h[1]), reverse=False)
+        hits.sort(key=lambda h: -h[0])
+        if not hits:
+            return ToolResult(ok=True, output=f"news_search: no matches for {query!r} in ingested news.")
+        out = "\n".join(_fmt_news(it) for _, _, it in hits[:10])
+        return ToolResult(
+            ok=True,
+            output=f"news_search: {len(hits)} match(es) for {query!r} (top 10, dates shown):\n{out}")
+
+    # -- capabilities (honest capability atlas) ------------------------------
+    def _capabilities(args: dict) -> ToolResult:
+        path = Path(__file__).resolve().parent.parent / "knowledge" / "capabilities" / "atlas.json"
+        if not path.is_file():
+            return ToolResult(ok=False, error="capabilities: atlas.json not found")
+        try:
+            atlas = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            return ToolResult(ok=False, error=f"capabilities: {exc}")
+        domain = str(args.get("domain") or "").strip()
+        domains = atlas.get("domains", [])
+        if domain:
+            match = next((d for d in domains if d["id"] == domain), None)
+            if not match:
+                known = ", ".join(d["id"] for d in domains)
+                return ToolResult(ok=False, error=f"capabilities: unknown domain {domain!r}; known: {known}")
+            domains = [match]
+        lines = ["LEVI capability atlas — what the agent can do, honestly:"]
+        for d in domains:
+            lines.append(f"\n## {d['name']} [{d['id']}]")
+            lines.append(d["description"])
+            lines.append(f"Tools: {', '.join(d['tools'])}")
+            lines.append(f"Limits: {'; '.join(d['known_limits'])}")
+        lines.append("\nHonesty rule: if it is not in this atlas or the tool list, say so — do not improvise abilities.")
+        return ToolResult(ok=True, output="\n".join(lines))
+
     # -- delegate -----------------------------------------------------------
     def _delegate(args: dict) -> ToolResult:
         task = args.get("task")
@@ -907,6 +1062,58 @@ def _register_builtins(
             description="Load a markdown skill playbook from the skills directory.",
             parameters=_schema({"name": {"type": "string"}}, ["name"]),
             handler=_skill_load,
+        ),
+        Tool(
+            name="course_brief",
+            description=(
+                "Return the field guide for one awesome-courses subject "
+                "(start-here picks, topic keywords, full course list). "
+                "Subjects: systems, programming-languages-compilers, "
+                "algorithms, cs-theory, introduction-to-cs, "
+                "machine-learning, security, artificial-intelligence, "
+                "computer-graphics, misc, statistics. Read-only."
+            ),
+            parameters=_schema({"subject": {"type": "string"}}, ["subject"]),
+            handler=_course_brief,
+        ),
+        Tool(
+            name="course_search",
+            description=(
+                "Search the awesome-courses catalog and ingested course texts "
+                "for a query; returns matching courses with text snippets. "
+                "Read-only."
+            ),
+            parameters=_schema({"query": {"type": "string"}}, ["query"]),
+            handler=_course_search,
+        ),
+        Tool(
+            name="news_latest",
+            description=(
+                "Newest ingested news headlines with dates and sources. "
+                "Dated recall, not live awareness — always cite the dates. Read-only."
+            ),
+            parameters=_schema({"limit": {"type": "string"}}, []),
+            handler=_news_latest,
+        ),
+        Tool(
+            name="news_search",
+            description=(
+                "Search ingested news by query; results always show their dates. "
+                "Dated recall, not live awareness. Read-only."
+            ),
+            parameters=_schema({"query": {"type": "string"}}, ["query"]),
+            handler=_news_search,
+        ),
+        Tool(
+            name="capabilities",
+            description=(
+                "Return LEVI's honest capability atlas (what the agent can do, "
+                "which tools serve each domain, known limits). Use to answer "
+                "'what can you do?' truthfully instead of improvising. Optional "
+                "'domain' arg narrows to one domain. Read-only."
+            ),
+            parameters=_schema({"domain": {"type": "string"}}, []),
+            handler=_capabilities,
         ),
         Tool(
             name="delegate",

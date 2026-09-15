@@ -692,6 +692,11 @@ class SkillRegistry:
         from levi.skill.cyber_skills import CYBER_SKILLS
         for s in CYBER_SKILLS:
             self.register(s)
+        # LEVI curriculum skill pack (awesome-courses subjects).
+        # Data-driven: course_skills scans knowledge/courses/catalog.json.
+        from levi.skill.course_skills import COURSE_SKILLS
+        for s in COURSE_SKILLS:
+            self.register(s)
 
     def register(self, skill: Skill) -> None:
         self._skills[skill.id] = skill

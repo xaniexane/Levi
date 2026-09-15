@@ -1458,6 +1458,81 @@ def cmd_relay(args):
     print(r.status())
 
 
+def cmd_news(args):
+    """Current-events ingest: refresh / latest / search (dated recall)."""
+    import json
+    import subprocess
+    import sys
+    from pathlib import Path
+    base = Path(__file__).resolve().parent.parent / "knowledge" / "news"
+    action = getattr(args, "news_action", None) or "latest"
+
+    if action == "refresh":
+        script = base / "refresh.py"
+        rc = subprocess.run([sys.executable, str(script)]).returncode
+        return
+
+    days = base / "days"
+    items: list[dict] = []
+    if days.is_dir():
+        for fp in sorted(days.glob("*.jsonl")):
+            try:
+                for line in fp.read_text(encoding="utf-8").splitlines():
+                    if line.strip():
+                        items.append(json.loads(line))
+            except (OSError, ValueError):
+                continue
+    if not items:
+        print("No ingested news yet — run: levi news refresh")
+        return
+
+    def fmt(it: dict) -> str:
+        return (f"[{it.get('date', '?')}] ({it.get('source', '?')}) {it.get('title', '')}\n"
+                f"    {it.get('summary', '')}\n    {it.get('url', '')}")
+
+    if action == "search":
+        q = (getattr(args, "news_arg", None) or "").strip().lower()
+        if not q:
+            print("Usage: levi news search <query>")
+            return
+        terms = [t for t in q.split() if len(t) > 2]
+        hits = [it for it in items
+                if any(t in f"{it.get('title', '')} {it.get('summary', '')}".lower() for t in terms)]
+        hits.sort(key=lambda it: it.get("date", ""), reverse=True)
+        print(f"{len(hits)} match(es) for {q!r} (dates shown — dated recall):")
+        for it in hits[:20]:
+            print(fmt(it))
+        return
+
+    # latest
+    limit = getattr(args, "limit", 10) or 10
+    items.sort(key=lambda it: it.get("date", ""), reverse=True)
+    print(f"Latest ingested headlines (newest date: {items[0].get('date', '?')} — dated recall):")
+    for it in items[:limit]:
+        print(fmt(it))
+
+
+def cmd_capabilities(args):
+    """Print the honest capability atlas (all or one domain)."""
+    import json
+    from pathlib import Path
+    path = Path(__file__).resolve().parent.parent / "knowledge" / "capabilities" / "atlas.json"
+    atlas = json.loads(path.read_text(encoding="utf-8"))
+    domain = getattr(args, "domain", None)
+    domains = atlas["domains"]
+    if domain:
+        domains = [d for d in domains if d["id"] == domain]
+        if not domains:
+            print(f"Unknown domain {domain!r}. Known: {', '.join(d['id'] for d in atlas['domains'])}")
+            return
+    for d in domains:
+        print(f"## {d['name']} [{d['id']}]")
+        print(d["description"])
+        print(f"Tools: {', '.join(d['tools'])}")
+        print(f"Limits: {'; '.join(d['known_limits'])}\n")
+    print("Honesty rule: if it is not in this atlas or the tool list, the agent says so.")
+
+
 def cmd_vault(args):
     """Encrypt/decrypt local notes (passphrase required)."""
     from levi.vault.seal import VaultSeal
@@ -2496,6 +2571,21 @@ def main():
     vault_p.add_argument("--put", default=None)
     vault_p.add_argument("--text", default=None)
     vault_p.add_argument("--get", default=None)
+    crs_p = sub.add_parser("courses", help="awesome-courses curriculum knowledge base")
+    crs_p.add_argument("courses_action", nargs="?", default="list",
+                       choices=["list", "brief", "coverage"])
+    crs_p.add_argument("subject", nargs="?", default=None,
+                       help="subject slug (for brief)")
+    crs_p.add_argument("--subject", dest="subject_filter", default=None,
+                       help="expand one subject in list")
+    news_p = sub.add_parser("news", help="Current-events ingest (dated recall, not live)")
+    news_p.add_argument("news_action", nargs="?", default="latest",
+                        choices=["refresh", "latest", "search"])
+    news_p.add_argument("news_arg", nargs="?", default=None,
+                        help="query for search")
+    news_p.add_argument("--limit", type=int, default=10)
+    sub.add_parser("capabilities", help="Honest capability atlas: what LEVI can do").add_argument(
+        "domain", nargs="?", default=None, help="domain id (optional)")
     proj_p = sub.add_parser("project", help="Pre-MVP phase runner / HITL / capability log (service capability-discovery)")
     proj_p.add_argument("project_action", nargs="?", default="status", choices=["status", "log", "hitl", "phases"])
     proj_p.add_argument("--url", default=None, help="Public site URL for archaeology")
@@ -2669,7 +2759,7 @@ def main():
         "morning": cmd_morning, "import": cmd_import,
         "export": cmd_export, "templates": cmd_templates,
         "status": cmd_status, "ask": cmd_ask, "personas": cmd_personas, "wit": cmd_wit,
-        "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "continue": cmd_continue, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "plugin": cmd_plugin, "finance": cmd_finance, "agent": cmd_agent, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy,"brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
+        "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "continue": cmd_continue, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "plugin": cmd_plugin, "finance": cmd_finance, "agent": cmd_agent, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy,"brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "courses": cmd_courses, "news": cmd_news, "capabilities": cmd_capabilities, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
         "graph": cmd_graph,
         "image": cmd_image, "story": cmd_story, "genres": cmd_genres, "factory": cmd_factory, "automations": cmd_automations,
         "remember": cmd_remember, "recall": cmd_recall, "cloud": cmd_cloud, "model": cmd_model, "chat": cmd_chat, "enterprise": cmd_enterprise, "scorecard": cmd_scorecard, "si": cmd_si, "cognition": cmd_cognition, "premium": cmd_premium, "kai": cmd_kai, "unique": cmd_unique, "x100": cmd_x100, "max": cmd_max, "max10": cmd_max10, "stress": cmd_stress, "here": cmd_here, "talk": cmd_talk, "profiles": cmd_profiles, "traits": cmd_traits, "retention": cmd_retention, "dna": cmd_dna, "intel": cmd_intel, "giant": cmd_giant, "future": cmd_future, "interpenetrate": cmd_interpenetrate,
