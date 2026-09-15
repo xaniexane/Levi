@@ -32,6 +32,7 @@ namespace {
 
 struct EngineState {
     llama_model* model = nullptr;
+    const llama_vocab* vocab = nullptr;  // owned by the model; valid while model lives
     llama_context* ctx = nullptr;
     int n_ctx = 0;
     std::mutex mutex;
@@ -69,6 +70,7 @@ void unload_locked(EngineState& st) {
     if (st.model) {
         llama_model_free(st.model);
         st.model = nullptr;
+        st.vocab = nullptr;
     }
     st.n_ctx = 0;
 }
@@ -88,12 +90,12 @@ bool eval_tokens(llama_context* ctx, const llama_token* tokens, int n, int n_pas
     return ok;
 }
 
-std::string token_piece(llama_model* model, llama_token tok) {
+std::string token_piece(const llama_vocab* vocab, llama_token tok) {
     char buf[256];
-    int n = llama_token_to_piece(model, tok, buf, sizeof(buf), 0, true);
+    int n = llama_token_to_piece(vocab, tok, buf, sizeof(buf), 0, true);
     if (n < 0) {
         std::vector<char> big(static_cast<size_t>(-n));
-        n = llama_token_to_piece(model, tok, big.data(), static_cast<int32_t>(big.size()), 0, true);
+        n = llama_token_to_piece(vocab, tok, big.data(), static_cast<int32_t>(big.size()), 0, true);
         if (n <= 0) return {};
         return std::string(big.data(), static_cast<size_t>(n));
     }
@@ -131,7 +133,7 @@ bool generate_locked(JNIEnv* env, EngineState& st, const std::string& prompt,
 
     // Tokenize the prompt; keep a slice that fits with room for output.
     std::vector<llama_token> toks(static_cast<size_t>(st.n_ctx));
-    int n_prompt = llama_tokenize(st.model, prompt.c_str(),
+    int n_prompt = llama_tokenize(st.vocab, prompt.c_str(),
                                   static_cast<int32_t>(prompt.size()), toks.data(),
                                   static_cast<int32_t>(toks.size()), true, true);
     if (n_prompt <= 0) return false;
@@ -168,10 +170,10 @@ bool generate_locked(JNIEnv* env, EngineState& st, const std::string& prompt,
     out_text.reserve(1024);
     for (int i = 0; i < max_tokens; i++) {
         const llama_token tok = llama_sampler_sample(sampler.s, st.ctx, -1);
-        if (llama_token_is_eog(st.model, tok)) break;
+        if (llama_vocab_is_eog(st.vocab, tok)) break;
         llama_sampler_accept(sampler.s, tok);
 
-        const std::string piece = token_piece(st.model, tok);
+        const std::string piece = token_piece(st.vocab, tok);
         out_text += piece;
 
         if (on_token) {
@@ -222,6 +224,7 @@ Java_dev_levi_inference_LlamaBridge_nativeLoad(JNIEnv* env, jobject /*thiz*/,
         unload_locked(st);
         return JNI_FALSE;
     }
+    st.vocab = llama_model_get_vocab(st.model);
     st.n_ctx = llama_n_ctx(st.ctx);
     return JNI_TRUE;
 }
@@ -279,7 +282,7 @@ Java_dev_levi_inference_LlamaBridge_nativeBenchmark(JNIEnv* env, jobject /*thiz*
 
     const std::string prompt_s = jstring_to_utf8(env, prompt);
     std::vector<llama_token> toks(static_cast<size_t>(st.n_ctx));
-    int n_prompt = llama_tokenize(st.model, prompt_s.c_str(),
+    int n_prompt = llama_tokenize(st.vocab, prompt_s.c_str(),
                                   static_cast<int32_t>(prompt_s.size()), toks.data(),
                                   static_cast<int32_t>(toks.size()), true, true);
     if (n_prompt <= 0) return -1.0f;
@@ -296,7 +299,7 @@ Java_dev_levi_inference_LlamaBridge_nativeBenchmark(JNIEnv* env, jobject /*thiz*
     int produced = 0;
     for (int i = 0; i < n_tokens; i++) {
         const llama_token tok = llama_sampler_sample(sampler.s, st.ctx, -1);
-        if (llama_token_is_eog(st.model, tok)) break;
+        if (llama_vocab_is_eog(st.vocab, tok)) break;
         llama_sampler_accept(sampler.s, tok);
         if (!eval_tokens(st.ctx, &tok, 1, n_prompt + produced)) break;
         produced++;

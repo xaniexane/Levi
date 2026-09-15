@@ -92,8 +92,7 @@ for ABI in "${ABIS[@]}"; do
         -DANDROID_ABI="$ABI" \
         -DANDROID_PLATFORM="android-$MIN_PLATFORM" \
         -DCMAKE_BUILD_TYPE=Release \
-        -DLLAMA_CPP_REF="$LLAMA_CPP_REF" \
-        -DLLAMA_CPP_URL="$LLAMA_CPP_URL"
+        -DLLAMA_CPP_REF="$LLAMA_CPP_REF"
     cmake --build "$BDIR" -- -j"$NPROC"
 
     OUT="$JNILIBS_DIR/$ABI"
