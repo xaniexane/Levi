@@ -94,6 +94,7 @@ jobs:
     name: Android assembleDebug (${{ matrix.app }})
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         app: [vyve-messenger, levi-android]
     defaults:
