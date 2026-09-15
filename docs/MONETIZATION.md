@@ -30,6 +30,45 @@ agent-hours and completed tasks, not messages. Every paid tier is framed as
 - Publish a public "bang-per-dollar" page: agent-hours per dollar vs.
   competitors' rate limits (e.g. Plus ≈ 50 messages/3h).
 
+## Positioning: sell what they don't (2026-09-15)
+
+> Direction: lead with what other providers *don't* have; spend less breath
+> on what they do. Chat, images, code help, an API — table stakes, matched
+> quietly. The pitch is the gaps.
+
+**What the giants don't have:**
+
+1. **Offline-first and fully local.** Works in a bunker, on a plane, in a
+   country that blocks the cloud. No account required, nothing to harvest.
+   Their "local" plays are thin clients with a cloud leash.
+2. **Free core forever.** The intelligence is not a subscription hostage.
+   Their free tiers are crippled, ad-supported funnels.
+3. **A workforce, not a chatbot.** Fleet swarms with budgets, independent
+   verification, and human approvals — priced in agent-hours, sold on
+   outcomes. They sell a copilot; we sell the crew.
+4. **Fearless.** Answers what the giants refuse to touch — no refusal
+   theater, no lecture. "The AI that doesn't flinch."
+5. **Collective learning.** Every consenting user makes every LEVI smarter
+   through learning packs. Their models forget you; ours compounds.
+6. **Yours.** Installable PWA, downloadable weights, exportable everything
+   (life-pack). No app-store gatekeeper, no deplatforming, no "trust us"
+   cloud.
+7. **Trust architecture.** Vault, consent gates, approval engine, parental
+   controls — built for people who have been burned before.
+
+**Pack pitches rewritten through this lens:**
+
+- *Cloud Solo $12:* "The $20 chatbots rent you a conversation. LEVI is free
+  on your own hardware forever — $12 only when you want our cloud to do the
+  heavy lifting."
+- *Fleet:* "They sell you a copilot. We sell you the crew — with receipts."
+- *NeighborOS:* "They sell software with an AI upsell. We sell the workforce
+  itself, and it never sleeps."
+- *Micro-credits:* "No subscription, no commitment. Pennies when you need
+  the cloud, nothing when you don't."
+- *Opt-in rewards:* "Your attention funds your own usage — voluntarily, or
+  not at all."
+
 ## Pack 1 — LEVI Cloud (the $20-killer)
 
 | Tier | Price | What you get |
