@@ -15,7 +15,7 @@ levi/
 │       ├── apotheosis/   single-file monolith: levi.py (vApotheosis-Apex-1.2)
 │       └── xenomax/      single-file monolith: levi.py (v32.0.0 Hyperdrive XenoMax)
 ├── web/                  TanStack Start app (TypeScript) — talks to xAI, NOT to the core
-└── apps/vyve-messenger/  Android app + FastAPI backend (OAuth + messaging) — separate product
+└── apps/vyve-messenger/  LEVI's messenger — Android app + FastAPI backend (OAuth + messaging), an organ of the organism
 ```
 
 ## The Python core (`core/levi/`)
@@ -78,10 +78,11 @@ app that was built in the Grok sandbox (`web/AGENTS.md` is that scaffold's
 house rules, not this repo's). Dead WebRTC `/api/rtc` signaling client code was
 removed in Phase 3 — the endpoint never existed.
 
-## VYVE (`apps/vyve-messenger/`)
+## VYVE (`apps/vyve-messenger/`) — LEVI's messenger
 
-A separate product: an Android app plus a FastAPI **backend** with two
-services — `backend/oauth/` (OAuth2 + PKCE server, RS256 JWTs) and
+It's all LEVI: Vyve is not a separate product but LEVI's messaging organ —
+an Android app plus a FastAPI **backend** with two services —
+`backend/oauth/` (OAuth2 + PKCE server, RS256 JWTs) and
 `backend/messaging/` (messaging + WebSocket). See `docs/RUNBOOK.md` and
 `docs/SECURITY.md` for operations and the Phase 1 security hardening.
 

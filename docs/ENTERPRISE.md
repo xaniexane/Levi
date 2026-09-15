@@ -14,6 +14,10 @@ LEVI grows from a personal synthetic intelligence into a global AI enterprise wh
 - **Fearless and unblocked** apply to the enterprise too: no corporate refusal theater in the workforce product.
 - **Human control is architectural.** The HITL control plane is not a feature; it's a load-bearing wall (see phase 2).
 
+## It's all LEVI (binding)
+
+The fleet, the factory, the marketplace, the messenger, the cloud — these are not separate products or sub-brands. They are organs of one organism. Everything ships as LEVI, presents as LEVI, and answers to LEVI's mission. No fragmented identities, no competing brands inside the house. Vyve is LEVI's messenger. The workforce is LEVI's workforce. The enterprise is LEVI, at scale.
+
 ## 35-section gap map (honest, 2026-09-15)
 
 Status: **HAVE** = built · **PARTIAL** = real pieces exist · **GAP** = not built · **INFRA** = needs real-world infrastructure beyond this repo.
