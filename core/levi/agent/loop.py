@@ -176,7 +176,8 @@ def run_subtask(
     """Run one task through the step-level tool loop.
 
     ``provider`` may be a :class:`ChatProvider` instance, a provider name
-    string (``"local"`` | ``"levi-local"`` | ``"openai"`` | ``"anthropic"``),
+    string (``"levi-tiny"`` | ``"levi-0.6b"`` | ``"levi-4b"`` | ``"local"`` |
+    ``"levi-brain"`` | ``"levi-local"`` | ``"openai"`` | ``"anthropic"``),
     or ``None`` to use :func:`select_provider`. ``registry`` may be a
     :class:`ToolRegistry` or ``None`` to build the default one.
 

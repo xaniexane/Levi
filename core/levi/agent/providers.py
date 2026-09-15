@@ -16,18 +16,24 @@ is kept clean on purpose. Ollama discovery is not reimplemented here: the
 ``http://localhost:11434/v1``, vLLM, ...) via the ``LEVI_OPENAI_BASE_URL``
 override with zero code change.
 
-Selection is offline-first: explicit preference flag > ``LEVI_PROVIDER``
-env var > ``LocalProvider`` rule-based default. Two explicit-only
-providers extend the chain:
+Selection is LEVI-first: explicit preference flag > ``LEVI_PROVIDER``
+env var > best available LEVI family weight > ``LocalProvider``
+rule-based fallback. The LEVI family (:mod:`levi.agent.model_family`)
+is the default slot:
 
-* ``levi-brain`` — LEVI's OWN native brain (see
+* ``levi-tiny`` — LEVI's OWN native brain (see
   :mod:`levi.agent.brain_provider`): a transformer trained from scratch
-  on LEVI's own corpus. No LLaMA weights, no llama.cpp. Explicit-only
-  until the native brain is tool-capable; it earns the default slot by
-  growing, not by branding.
-* ``levi-local`` — LEGACY llama-server + third-party GGUF path (see
-  :mod:`levi.agent.local_model`). Kept working for compatibility, but no
-  longer in the automatic chain and no longer the local-model story.
+  on LEVI's own corpus. No LLaMA weights, no llama.cpp. Wins the
+  default slot automatically when its weights are present — prose
+  answers only for now (no tool calls yet); the honest quality limits
+  are in ``docs/BRAIN_TRAINING.md`` and ``docs/MODELS.md``.
+* ``levi-0.6b`` / ``levi-4b`` — "Levi remixes": Qwen3-based GGUF bases,
+  honestly attributed (``base: qwen3-0.6b``), packaged by LEVI and
+  served by LEVI's own local runner (:mod:`levi.agent.local_model`).
+  Win the default slot when downloaded (largest first).
+
+``levi-brain`` and ``levi-local`` remain valid explicit names — they
+are the providers behind ``levi-tiny`` and the ``levi-*`` remixes.
 
 A preferred provider that is not available falls back to
 ``LocalProvider`` (honestly — the loop can always report which provider
@@ -35,8 +41,9 @@ it ended up with via ``ChatResponse.provider``).
 
 ``levi-local`` lives in :mod:`levi.agent.local_model` (lazy-imported by
 :func:`select_provider` because that module subclasses this one). It is
-the LEGACY llama-server backend: functional, but superseded by
-:mod:`levi.agent.brain_provider` (``levi-brain``), LEVI's native brain.
+the local runner backend that serves the LEVI family's ``levi-*``
+remixes; the bare ``levi-local`` name still selects it explicitly with
+whatever GGUF ``LEVI_LOCAL_MODEL`` (or the first found) points at.
 The name reuses the ``levi-local`` label the generation router
 (:mod:`levi.model.abstraction`) already uses for its local path; the
 interfaces stay separate.
@@ -676,13 +683,23 @@ class AnthropicProvider(ChatProvider):
 
 
 # ---------------------------------------------------------------------------
-# Selection — explicit flag > LEVI_PROVIDER env > local (rules)
+# Selection — explicit flag > LEVI_PROVIDER env > best LEVI family weight
+# > deterministic rules fallback
 #
-# levi-brain (native brain) and levi-local (legacy llama-server) are
-# explicit-only: named via --provider or LEVI_PROVIDER, never automatic.
-# The default tool loop stays on the deterministic rules planner until
-# the native brain is tool-capable — it earns the default slot by
-# growing, not by branding.
+# LEVI is the model; everything else is a selectable source. The default
+# slot belongs to the LEVI family (see :mod:`levi.agent.model_family`):
+# the persisted `levi agent model use` choice when downloaded, else the
+# native brain (levi-tiny) when its weights are present, else the
+# largest downloaded levi-* remix served by LEVI's own local runner.
+# When no LEVI weight is available, the deterministic rule-based
+# ``LocalProvider`` planner fills in honestly.
+#
+# ``levi-brain`` / ``levi-local`` remain valid explicit names (they are
+# the providers behind ``levi-tiny`` and the ``levi-*`` remixes).
+# ``levi-local`` is no longer "legacy" — it is the runner that serves
+# LEVI's remixes. A named preference that is unavailable (or unknown)
+# falls back to ``LocalProvider`` rather than failing — the loop
+# reports the provider it actually used, so the fallback is visible.
 # ---------------------------------------------------------------------------
 
 
@@ -709,26 +726,48 @@ def _levi_local_provider() -> ChatProvider:
 
 
 def provider_names() -> list[str]:
-    """Names of all known chat providers, in preference order."""
-    return ["local", "levi-brain", "levi-local", "openai", "anthropic"]
+    """Names of all known chat providers, LEVI family first."""
+    from levi.agent import model_family
+
+    return (model_family.family_names()
+            + ["local", "levi-brain", "levi-local", "openai", "anthropic"])
+
+
+def _remix_names() -> set[str]:
+    from levi.agent import model_family
+
+    return {e["name"] for e in model_family.entries()
+            if e["kind"] == "remix"}
 
 
 def select_provider(preference: str | None = None) -> ChatProvider:
     """Pick a chat provider.
 
-    Chain: explicit ``preference`` > ``LEVI_PROVIDER`` env var >
-    ``LocalProvider`` rule-based fallback. ``levi-brain`` (LEVI's native
-    brain) and ``levi-local`` (legacy llama-server backend) are
-    explicit-only: they run when named and available, never by default.
-    A named preference that is unavailable (or unknown) falls back to
-    ``LocalProvider`` rather than failing — the loop reports the
-    provider it actually used, so the fallback is always visible.
+    Chain: explicit ``preference`` > ``LEVI_PROVIDER`` env var > best
+    available LEVI family weight (:func:`levi.agent.model_family.resolve_family`)
+    > ``LocalProvider`` rule-based fallback.
+
+    ``levi-tiny`` selects the native brain; ``levi-0.6b``/``levi-4b``
+    (and any future remix) select the local runner pinned to that
+    remix's GGUF via ``LEVI_LOCAL_MODEL`` — an explicit
+    ``LEVI_LOCAL_MODEL`` the user already set is respected and never
+    overwritten. A named preference that is unavailable (or unknown)
+    falls back to ``LocalProvider`` rather than failing.
     """
+    from levi.agent import model_family
+
     name = (preference or os.environ.get("LEVI_PROVIDER") or "").strip().lower()
-    if name == "levi-brain":
+    if name in ("levi-tiny", "levi-brain"):
         provider = _levi_brain_provider()
         return provider if provider.is_available() else LocalProvider()
-    if name == "levi-local":
+    if name == "levi-local" or (name and name in _remix_names()):
+        entry = model_family.get_entry(name)
+        if entry is not None and entry["kind"] == "remix":
+            gguf = model_family.gguf_file_for(name)
+            if gguf:
+                # Pin this remix's weights; an explicit user-set
+                # LEVI_LOCAL_MODEL always wins over our pin.
+                os.environ.setdefault("LEVI_LOCAL_MODEL", gguf)
         provider = _levi_local_provider()
         return provider if provider.is_available() else LocalProvider()
     cls = _PROVIDER_CLASSES.get(name)
@@ -736,4 +775,23 @@ def select_provider(preference: str | None = None) -> ChatProvider:
         provider = cls()
         if provider.is_available():
             return provider
+        return LocalProvider()
+    if name in ("", "local"):
+        if name == "local":
+            return LocalProvider()
+        # Default slot: best available LEVI family weight.
+        resolved = model_family.resolve_family()
+        if resolved is not None:
+            if resolved["provider"] == "levi-brain":
+                provider = _levi_brain_provider()
+                if provider.is_available():
+                    return provider
+            elif resolved["provider"] == "levi-local":
+                gguf = model_family.gguf_file_for(resolved["entry"])
+                if gguf:
+                    os.environ.setdefault("LEVI_LOCAL_MODEL", gguf)
+                provider = _levi_local_provider()
+                if provider.is_available():
+                    return provider
+        return LocalProvider()
     return LocalProvider()

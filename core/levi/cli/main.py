@@ -1197,13 +1197,67 @@ def cmd_agent(args):
         return
 
     if action == "model":
-        from levi.agent import local_model
+        from levi.agent import local_model, model_family
         maction = getattr(args, "agent_model_action", None)
+
+        def _print_family(active_name):
+            print("== LEVI model family ==  (LEVI is the model; everything else is a selectable source)\n")
+            for info in model_family.entries():
+                st = info["status"]
+                mark = "*" if info["name"] == active_name else " "
+                if st["downloaded"]:
+                    state = "DOWNLOADED"
+                    if info["kind"] == "remix" and not st["runner_present"]:
+                        state = "downloaded, no runner"
+                else:
+                    state = "missing"
+                extra = ", base %s" % info["base"] if info["kind"] == "remix" else ""
+                mb = info["approx_bytes"] / 1e6
+                print(f" {mark} {info['name']:<10} [{info['kind']:<6}]  {state:<22} (~{mb:.0f}MB{extra})")
+                print(f"      {info['blurb']}")
+            print("\n  * = active default (what the agent uses with no --provider)")
+
+        def _print_other_sources():
+            from levi.agent import providers as _pv
+            oai = _pv.OpenAICompatibleProvider()
+            ant = _pv.AnthropicProvider()
+            print("== Other selectable sources ==\n")
+            print(f"  openai     {'available' if oai.is_available() else 'not configured'}   (LEVI_OPENAI_API_KEY, or LEVI_OPENAI_BASE_URL for Ollama/vLLM)")
+            print(f"  anthropic  {'available' if ant.is_available() else 'not configured'}   (LEVI_ANTHROPIC_API_KEY)")
+            print("  local      always available   (deterministic rules planner — the honest fallback)")
+
+        if maction == "list":
+            resolved = model_family.resolve_family()
+            _print_family(resolved["entry"] if resolved else None)
+            print()
+            _print_other_sources()
+            print("\nPick a source per run with --provider, or persist a LEVI weight with: levi agent model use <name>")
+            return
+        if maction == "use":
+            name = (getattr(args, "name", None) or "").strip()
+            try:
+                model_family.set_choice(name)
+            except ValueError as exc:
+                print(f"error: {exc}")
+                raise SystemExit(2) from None
+            print(f"Default LEVI weight set to '{name}'.")
+            print("It takes effect once downloaded; until then the best available")
+            print("LEVI weight is used (see `levi agent model status`).")
+            return
         if maction == "status":
-            from levi.agent import local_model
             from levi.agent import brain_provider
+            resolved = model_family.resolve_family()
+            active_name = resolved["entry"] if resolved else None
+            print("== Active model ==\n")
+            if resolved:
+                print(f"  {resolved['entry']}  — {resolved['reason']}")
+            else:
+                print("  (no LEVI weight available — the deterministic rules planner fills in)")
+            print()
+            _print_family(active_name)
+            print()
             brain = brain_provider.NativeBrainProvider().status()
-            print("══ Native brain (levi-brain) status ══\n")
+            print("-- levi-tiny: native brain detail --\n")
             if brain["weights_present"]:
                 print(f"  Weights   : PRESENT  {Path(brain['weights']).name}")
                 if brain["params"]:
@@ -1216,40 +1270,46 @@ def cmd_agent(args):
                 print("  Weights   : MISSING — no trained native brain yet")
                 print("              Fix: train one — see docs/BRAIN_TRAINING.md")
             print(f"  torch     : {'AVAILABLE' if brain['torch_available'] else 'MISSING (pip install torch to run the brain)'}")
+            print("  Limits    : prose continuations only — no tool calls; at tiny scale the")
+            print("              output is fluent-ish gibberish with corpus flavor (docs/BRAIN_TRAINING.md).")
+            print("              It earns the loop's default slot by growing, not by branding.")
             print()
-            if brain["available"]:
-                print("  Provider  : AVAILABLE — select with --provider levi-brain or LEVI_PROVIDER=levi-brain")
-            else:
-                print("  Provider  : UNAVAILABLE — explicit requests fall back to the rule-based `local` planner")
-            print()
-            print("── Legacy llama-server path (levi-local) ──\n")
+            print("-- levi-* remixes: runner detail --\n")
             report = local_model.status_report()
             print(f"  Model dir : {report['model_dir']}")
             if report["weights"]:
                 mb = (report["weights_bytes"] or 0) / 1e6
                 sha = (report["weights_sha256"] or "")[:16]
                 print(f"  Weights   : PRESENT  {Path(report['weights']).name} "
-                      f"({mb:.0f}MB{', sha256 ' + sha + '…' if sha else ''})")
+                      f"({mb:.0f}MB{', sha256 ' + sha + '...' if sha else ''})")
                 native = report.get("weights_native_ctx")
                 print(f"  Context   : {report['ctx_size']} tokens"
                       f"{' (model native: %d; set LEVI_LOCAL_CTX_SIZE to change)' % native if native else ''}")
             else:
                 print("  Weights   : MISSING — no .gguf file in the model dir")
-                print("              (legacy path; the native brain above is the supported direction)")
+                print("              Pull one: levi agent model pull levi-0.6b")
             if report["runner"]:
                 print(f"  Runner    : PRESENT  {report['runner']}")
             else:
-                print("  Runner    : MISSING — llama-server not found on PATH")
+                print("  Runner    : MISSING — llama-server not found (pull fetches it best-effort)")
             print()
-            if report["available"]:
-                print("  Provider  : AVAILABLE (legacy) — select explicitly with --provider levi-local")
-                print("              It is NOT in the automatic chain anymore.")
-            else:
-                print("  Provider  : UNAVAILABLE — explicit requests fall back to the rule-based `local` planner")
-                print("              The system says so honestly; it never pretends the model exists.")
+            _print_other_sources()
             return
         if maction == "pull":
-            model_key = getattr(args, "model", None) or local_model.DEFAULT_MODEL_KEY
+            fam_name = (getattr(args, "name", None) or "").strip() or None
+            legacy_key = getattr(args, "model", None)
+            if fam_name:
+                entry = model_family.get_entry(fam_name)
+                if entry is None:
+                    print(f"Unknown model {fam_name!r} (known: {', '.join(model_family.family_names())})")
+                    raise SystemExit(2)
+                if entry["kind"] == "native":
+                    print("levi-tiny is LEVI's native brain — it is trained, not downloaded.")
+                    print("See docs/BRAIN_TRAINING.md to train it; check status with: levi agent model status")
+                    return
+                model_key = entry["local_key"]
+            else:
+                model_key = legacy_key or local_model.DEFAULT_MODEL_KEY
             force = bool(getattr(args, "force", False))
 
             def _progress(done, total):
@@ -1264,12 +1324,15 @@ def cmd_agent(args):
             if spec is None:
                 print(f"Unknown model {model_key!r} (known: {', '.join(sorted(local_model.MODELS))})")
                 raise SystemExit(2)
-            if getattr(args, "model", None) is None:
-                print("Available models (intelligence-per-RAM tradeoff — bigger is smarter, not magic):")
-                for key in sorted(local_model.MODELS):
+            if fam_name is None and legacy_key is None:
+                print("LEVI family remixes (intelligence-per-RAM tradeoff — bigger is smarter, not magic):")
+                for info in model_family.entries():
+                    if info["kind"] != "remix":
+                        continue
+                    key = info["local_key"]
                     s = local_model.MODELS[key]
                     mark = "  [default]" if key == local_model.DEFAULT_MODEL_KEY else ""
-                    print(f"  {key}{mark}: {s['display']} (~{s['approx_bytes']/1e6:.0f}MB)")
+                    print(f"  {info['name']}{mark}: {s['display']} (~{s['approx_bytes']/1e6:.0f}MB, base {info['base']})")
                     print(f"      {s['blurb']}")
                     print(f"      {s['ram_note']}")
                 print()
@@ -1278,7 +1341,7 @@ def cmd_agent(args):
                 print(f"Weights already present: {dest}")
                 print("Use --force to re-download.")
             else:
-                print(f"Downloading {spec['display']} (~{spec['approx_bytes']/1e6:.0f}MB)…")
+                print(f"Downloading {spec['display']} (~{spec['approx_bytes']/1e6:.0f}MB)...")
                 print(f"  {spec['ram_note']}")
                 print(f"  {spec['url']}")
                 try:
@@ -1298,9 +1361,11 @@ def cmd_agent(args):
                 print(f"  Could not fetch automatically.\n{err}")
             print("\nVerify with: levi agent model status")
             return
-        print("Usage: levi agent model <pull|status>")
+        print("Usage: levi agent model <list|status|pull|use>")
+        print("  levi agent model list")
         print("  levi agent model status")
-        print("  levi agent model pull [--model qwen3-0.6b] [--force]")
+        print("  levi agent model pull [name] [--force]   (name: levi-0.6b | levi-4b)")
+        print("  levi agent model use <name>              (persist the default LEVI weight)")
         return
 
     if action == "run":
@@ -1380,7 +1445,7 @@ def cmd_agent(args):
     print("  levi agent chat [--session NAME] [--provider ...] [--yes] [--workspace DIR]")
     print("  levi agent tools")
     print("  levi agent serve [--host 127.0.0.1] [--port 8765]   (requires LEVI_AGENT_TOKEN)")
-    print("  levi agent model <status|pull>   (Levi Local offline model management)")
+    print("  levi agent model <list|status|pull|use>   (the LEVI model family)")
     raise SystemExit(2)
 
 def cmd_builder(args):
@@ -2799,6 +2864,16 @@ def _local_model_choices() -> list[str]:
         return ["qwen3-0.6b"]
 
 
+def _provider_choices() -> list[str]:
+    """`--provider` choices: LEVI family first, then other sources. Lazy
+    import keeps `levi` startup fast; falls back to the legacy list."""
+    try:
+        from levi.agent.providers import provider_names
+        return provider_names()
+    except Exception:
+        return ["local", "levi-brain", "levi-local", "openai", "anthropic"]
+
+
 def main():
     parser = argparse.ArgumentParser(description="LEVI × L.W.P. Kernel")
     parser.add_argument("--personality", "-p", default=None)
@@ -2943,8 +3018,8 @@ def main():
     ag_sub = ag_p.add_subparsers(dest="agent_action")
     ag_run = ag_sub.add_parser("run", help="Run a task through the step-level tool loop")
     ag_run.add_argument("task", help="Task description for the agent")
-    ag_run.add_argument("--provider", choices=["local", "levi-brain", "levi-local", "openai", "anthropic"], default=None,
-                        help="Chat provider (default: select_provider chain, levi-local-first)")
+    ag_run.add_argument("--provider", choices=_provider_choices(), default=None,
+                        help="Chat provider (default: LEVI-first chain — best available LEVI weight, else rules planner)")
     ag_run.add_argument("--yes", action="store_true",
                         help="Pre-grant consent for gated tools for THIS run only. "
                              "There is no global gate-disabling flag. Without --yes, "
@@ -2965,8 +3040,8 @@ def main():
     ag_chat = ag_sub.add_parser("chat", help="Interactive long-conversation chat with session memory")
     ag_chat.add_argument("--session", default="default",
                          help="Session name (default: default). Re-running resumes it.")
-    ag_chat.add_argument("--provider", choices=["local", "levi-brain", "levi-local", "openai", "anthropic"], default=None,
-                         help="Chat provider (default: select_provider chain, levi-local-first)")
+    ag_chat.add_argument("--provider", choices=_provider_choices(), default=None,
+                         help="Chat provider (default: LEVI-first chain — best available LEVI weight, else rules planner)")
     ag_chat.add_argument("--yes", action="store_true",
                          help="Pre-grant consent for gated tools for THIS session only.")
     ag_chat.add_argument("--max-steps", type=int, default=10, help="Max provider turns per message (default 10)")
@@ -2977,14 +3052,19 @@ def main():
     ag_chat.add_argument("--affect", action="store_true",
                          help="Enable the 5D affect engine for the session "
                               "(docs/AFFECT.md).")
-    ag_model = ag_sub.add_parser("model", help="Manage the Levi Local offline model (weights + runner)")
+    ag_model = ag_sub.add_parser("model", help="The LEVI model family: list, status, pull, use")
     ag_msub = ag_model.add_subparsers(dest="agent_model_action")
-    ag_pull = ag_msub.add_parser("pull", help="Download GGUF weights (and the llama-server runner, best effort)")
+    ag_msub.add_parser("list", help="List the LEVI family first, then other selectable sources")
+    ag_use = ag_msub.add_parser("use", help="Persist the default LEVI weight (~/.levi/agent/model_choice.json)")
+    ag_use.add_argument("name", help="LEVI family member: levi-tiny | levi-0.6b | levi-4b")
+    ag_pull = ag_msub.add_parser("pull", help="Download a LEVI remix's GGUF weights (and the runner, best effort)")
+    ag_pull.add_argument("name", nargs="?", default=None,
+                         help="LEVI family remix to pull: levi-0.6b | levi-4b (levi-tiny is trained, not downloaded)")
     ag_pull.add_argument("--model", default=None, choices=sorted(_local_model_choices()),
-                         help="Model to download (default: qwen3-0.6b).")
+                         help="Legacy base-model key (default: qwen3-0.6b). Prefer the positional LEVI name.")
     ag_pull.add_argument("--force", action="store_true",
                          help="Re-download even if the weights file is already present")
-    ag_msub.add_parser("status", help="Report Levi Local readiness: weights, runner, provider availability")
+    ag_msub.add_parser("status", help="Report the active LEVI weight, family readiness, and other sources")
     ag_serve = ag_sub.add_parser("serve", help="Serve the agent over HTTP (requires LEVI_AGENT_TOKEN)")
     ag_serve.add_argument("--host", default="127.0.0.1", help="Bind address (default 127.0.0.1)")
     ag_serve.add_argument("--port", type=int, default=8765, help="Port (default 8765)")

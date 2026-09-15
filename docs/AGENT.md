@@ -1,7 +1,7 @@
 # LEVI Agent Runtime — the step-level tool-using agentic loop
 
 Offline-first, stdlib-only. No `pip install`, no daemons, no API key needed
-to get a working agent: when Levi Local is set up (`levi agent model pull`)
+to get a working agent: when a LEVI family weight is ready (`levi agent model pull levi-0.6b`)
 it becomes the default provider; otherwise the deterministic local planner
 fills in honestly, and cloud models attach as wings when you configure them.
 
@@ -16,7 +16,7 @@ Five modules under `core/levi/agent/`, one job each:
 | Module | Job |
 |---|---|
 | `tools.py` | The **tool-execution registry**: 15 named built-in tools, sandboxed handlers, confirmation gates. |
-| `providers.py` | The **chat/tool-calling provider chain**: local-first selection, Levi Local, OpenAI-compatible and Anthropic providers over stdlib `urllib`. |
+| `providers.py` | The **chat/tool-calling provider chain**: LEVI-first selection (`model_family`), the local runner, OpenAI-compatible and Anthropic providers over stdlib `urllib`. |
 | `local_model.py` | **Levi Local** (§1.2b): LEVI's own offline inference stack — a LEVI-managed `llama-server` running a local GGUF, exposed through the OpenAI-compatible chat path. |
 | `loop.py` | The **step-level loop** (`run_subtask`): model → tool calls → tool results → repeat, until the model answers without calling tools. |
 | `chat.py` | **Long conversations** (§1.6): persistent named sessions, context accounting, rolling-summary compression with durable facts. |
@@ -59,22 +59,23 @@ success. Pinned by `test_delegate_propagates_subtask_failure`.
 
 ### 1.2 The provider chain (`providers.py`)
 
-Selection order: explicit `provider=` argument → `LEVI_PROVIDER` env var →
-**`LocalProvider` fallback** (deterministic rule-based planner). Two
-explicit-only providers extend the chain: **`levi-brain`** — LEVI's own
-native brain, a transformer trained from scratch on LEVI's own corpus (no
-LLaMA weights, no llama.cpp); and **`levi-local`** — the legacy
-llama-server + third-party GGUF path, kept working but no longer
-automatic. A preferred provider that is unavailable falls back down the
-chain (offline-first, honestly — the loop always reports which provider
-it ended up with). The native brain earns the default slot when it is
-tool-capable — by measurement, never by branding.
+**LEVI is the model; everything else is a selectable source.**
+Selection order: explicit `provider=` argument → `LEVI_PROVIDER` env
+var → best available **LEVI family weight**
+(`model_family.resolve_family()`) → `LocalProvider` fallback
+(deterministic rule-based planner). The default slot belongs to the
+family (see `docs/MODELS.md`): the persisted `levi agent model use`
+choice when downloaded, else the `levi-tiny` native brain when its
+weights are present, else the largest downloaded `levi-*` remix served
+by LEVI's own local runner. A preferred provider that is unavailable
+falls back down the chain (offline-first, honestly — the loop always
+reports which provider it ended up with).
 
 | Provider | Name | `is_available()` when |
 |---|---|---|
-| `NativeBrainProvider` | `levi-brain` | trained native weights (`brain/weights/tiny-gpt.pt`) **and** torch importable — explicit-only (§1.2b) |
-| `LocalModelProvider` | `levi-local` | LEGACY: a `.gguf` weights file **and** a `llama-server` runner are present — explicit-only (§1.2b) |
-| `LocalProvider` | `local` | always (deterministic rule-based planner, no network) |
+| `NativeBrainProvider` | `levi-brain` (family: `levi-tiny`) | trained native weights (`brain/weights/tiny-gpt.pt`) **and** torch importable — the default when present |
+| `LocalModelProvider` | `levi-local` (family: `levi-0.6b`, `levi-4b`) | a `levi-*` remix `.gguf` **and** a `llama-server` runner are present — the default when downloaded |
+| `LocalProvider` | `local` | always (deterministic rule-based planner, no network) — the honest fallback |
 | `OpenAICompatibleProvider` | `openai` | `LEVI_OPENAI_API_KEY` set **or** `LEVI_OPENAI_BASE_URL` overridden |
 | `AnthropicProvider` | `anthropic` | `LEVI_ANTHROPIC_API_KEY` set |
 
@@ -86,15 +87,16 @@ timeout on cloud calls: 60s. Provider errors never raise and never fake a
 response: they come back as `ChatResponse.error`, and the loop ends
 honestly.
 
-`provider` may be a name string (`"local"` / `"levi-brain"` / `"levi-local"` /
+`provider` may be a name string (LEVI family: `"levi-tiny"` / `"levi-0.6b"` /
+`"levi-4b"`; providers: `"local"` / `"levi-brain"` / `"levi-local"` /
 `"openai"` / `"anthropic"`), a `ChatProvider` instance, or `None` for
-`select_provider()`. The loop also accepts prior conversation via
+`select_provider()` (which resolves the LEVI-first default chain). The loop also accepts prior conversation via
 `history=[ChatMessage(...), ...]`; `LocalProvider` reads the **last**
 user message so multi-turn histories work. Transcripts carry token
 totals (`prompt_tokens`, `completion_tokens`; 0 when the backend does
 not report them) per step and across the run.
 
-### 1.2b Levi Local (`local_model.py`) — LEVI's own offline inference stack
+### 1.2b Levi Local (`local_model.py`) — the runner behind LEVI's remixes
 
 Levi Local is a real locally-hosted model, not the rule-based planner:
 a LEVI-managed `llama-server` process running a GGUF weights file,
@@ -102,23 +104,25 @@ reached over loopback through the OpenAI-compatible chat path
 (`/v1/chat/completions`). No Ollama daemon, no cloud, no new pip
 dependencies — stdlib only. The only network this module ever initiates
 is an explicit `levi agent model pull`; inference itself is
-loopback-only.
+loopback-only. It is the engine that serves the LEVI family's
+`levi-*` remixes (see `docs/MODELS.md`) — no longer a "legacy" path.
 
 Setup (explicit, user-initiated):
 
 ```
-$ levi agent model status     # reports weights/runner present or missing,
-                              # with exact install guidance
-$ levi agent model pull       # downloads the default small model (~640 MB)
-$ levi agent model pull --model qwen3-4b   # the larger model (~2.5 GB)
+$ levi agent model list       # LEVI family first, then other sources
+$ levi agent model status     # active weight, readiness, honest limits
+$ levi agent model pull levi-0.6b
+$ levi agent model pull levi-4b   # the larger remix (~2.5 GB)
+$ levi agent model use levi-4b    # persist the default LEVI weight
 ```
 
-Two honest model choices (Apache-2.0 Qwen3 GGUFs):
+Two honest remix choices (Apache-2.0 Qwen3 GGUF bases, LEVI-packaged):
 
-| Choice | File | Size | Tradeoff |
-|---|---|---|---|
-| `qwen3-0.6b` (default) | `Qwen3-0.6B-Q8_0.gguf` | ~640 MB | runs on modest machines; a 0.6B model — capable for tool-use loops and chat, not a reasoning giant |
-| `qwen3-4b` | `Qwen3-4B-Q4_K_M.gguf` | ~2.5 GB | smarter, needs ~4–6 GB free RAM |
+| LEVI name | Base | File | Size | Tradeoff |
+|---|---|---|---|---|
+| `levi-0.6b` (default) | `qwen3-0.6b` | `Qwen3-0.6B-Q8_0.gguf` | ~640 MB | runs on modest machines; a 0.6B model — capable for tool-use loops and chat, not a reasoning giant |
+| `levi-4b` | `qwen3-4b` | `Qwen3-4B-Q4_K_M.gguf` | ~2.5 GB | smarter, needs ~4–6 GB free RAM |
 
 The server starts lazily on first chat (ephemeral loopback port,
 readiness polled on `/health`, one shared process per runner/weights
@@ -140,8 +144,9 @@ run_subtask(task, *, provider=None, registry=None, history=None,
 ```
 
 - `provider` may be a `ChatProvider` instance, a name string
-  (`"local"` / `"levi-brain"` / `"levi-local"` / `"openai"` / `"anthropic"`),
-  or `None` for `select_provider()`.
+  (LEVI family `"levi-tiny"` / `"levi-0.6b"` / `"levi-4b"`, or `"local"` /
+  `"levi-brain"` / `"levi-local"` / `"openai"` / `"anthropic"`),
+  or `None` for `select_provider()` (LEVI-first default chain).
 - `history` is a list of `ChatMessage` carried between turns (used by
   `chat.py` for sessions); it is inserted between the system prompt and
   the current user message. `LocalProvider` plans from the **last** user
@@ -239,7 +244,7 @@ grep against the sources):
 
 | Variable | Used by | Meaning |
 |---|---|---|
-| `LEVI_PROVIDER` | `select_provider()` | `local` / `levi-brain` / `levi-local` / `openai` / `anthropic`; default chain is rules-only, levi-brain + levi-local are explicit-only |
+| `LEVI_PROVIDER` | `select_provider()` | `levi-tiny` / `levi-0.6b` / `levi-4b` / `local` / `levi-brain` / `levi-local` / `openai` / `anthropic`; default chain is LEVI-first (best available family weight, else rules planner) |
 | `LEVI_OPENAI_API_KEY` | `OpenAICompatibleProvider` | Bearer key for cloud OpenAI (omit for keyless local servers) |
 | `LEVI_OPENAI_BASE_URL` | `OpenAICompatibleProvider` | default `https://api.openai.com/v1`; set to `http://localhost:11434/v1` for Ollama |
 | `LEVI_OPENAI_MODEL` | `OpenAICompatibleProvider` | default `gpt-4o-mini` |

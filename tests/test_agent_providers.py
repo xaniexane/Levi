@@ -362,12 +362,15 @@ def test_anthropic_available_with_key(monkeypatch):
 
 
 def test_provider_names():
-    assert provider_names() == ["local", "levi-brain", "levi-local", "openai", "anthropic"]
+    assert provider_names() == [
+        "levi-tiny", "levi-0.6b", "levi-4b",
+        "local", "levi-brain", "levi-local", "openai", "anthropic",
+    ]
 
 
 def test_select_default_is_local(monkeypatch, tmp_path):
-    # The default chain is rules-only: levi-brain and levi-local are
-    # explicit-only and never win the default slot.
+    # The default chain is LEVI-first: with no family weight downloaded
+    # and no native-brain weights, it falls back to the rules planner.
     monkeypatch.delenv("LEVI_PROVIDER", raising=False)
     monkeypatch.delenv("LEVI_OPENAI_API_KEY", raising=False)
     monkeypatch.delenv("LEVI_OPENAI_BASE_URL", raising=False)

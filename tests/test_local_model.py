@@ -419,10 +419,10 @@ def test_cli_model_status_reports_missing_pieces(tmp_path):
     proc = _run_model_status(tmp_path)
     assert proc.returncode == 0, proc.stderr
     out = proc.stdout
-    assert "levi-brain" in out
+    assert "levi-tiny" in out
     assert "Weights   : MISSING" in out
     assert "Runner    : MISSING" in out
-    assert "UNAVAILABLE" in out
+    assert "no LEVI weight available" in out
 
 
 def test_cli_model_status_reports_ready(tmp_path):
@@ -431,7 +431,7 @@ def test_cli_model_status_reports_ready(tmp_path):
     bin_dir.mkdir(parents=True)
     mdir = Path(env["LEVI_MODEL_DIR"])
     mdir.mkdir(parents=True)
-    (mdir / "q.gguf").write_bytes(b"GGUF")
+    (mdir / "Qwen3-0.6B-Q8_0.gguf").write_bytes(b"GGUF")
     runner = _write_executable(bin_dir / "llama-server", "#!/bin/sh\nexit 0\n")
     assert runner.exists()
     proc = subprocess.run(
@@ -445,7 +445,8 @@ def test_cli_model_status_reports_ready(tmp_path):
     assert proc.returncode == 0, proc.stderr
     assert "Weights   : PRESENT" in proc.stdout
     assert "Runner    : PRESENT" in proc.stdout
-    assert "AVAILABLE" in proc.stdout
+    assert "levi-0.6b" in proc.stdout
+    assert "* levi-0.6b" in proc.stdout  # active default marker
 
 
 # ---------------------------------------------------------------------------
