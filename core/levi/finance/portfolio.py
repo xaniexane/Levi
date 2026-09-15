@@ -21,6 +21,9 @@ Design notes:
 from __future__ import annotations
 
 import json
+import math
+import warnings
+from collections.abc import Mapping
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -36,6 +39,37 @@ def _r2(value: float) -> float:
     return round(value + 0.0, 2)
 
 
+def _require_number(name: str, value: object) -> float:
+    """Coerce to float, rejecting bools, non-numerics and non-finite."""
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ValueError(f"{name} must be a number, got {value!r}")
+    result = float(value)
+    if not math.isfinite(result):
+        raise ValueError(f"{name} must be finite, got {value!r}")
+    return result
+
+
+def _require_positive(name: str, value: object) -> float:
+    result = _require_number(name, value)
+    if result <= 0:
+        raise ValueError(f"{name} must be positive, got {value!r}")
+    return result
+
+
+def _require_prices(prices: object) -> dict[str, float]:
+    """Validate a symbol->price map: every key a string, every price finite."""
+    if not isinstance(prices, Mapping):
+        raise ValueError(
+            f"prices must be a mapping of symbol to price, got {type(prices).__name__}"
+        )
+    clean: dict[str, float] = {}
+    for symbol, price in prices.items():
+        if not isinstance(symbol, str) or not symbol.strip():
+            raise ValueError(f"price map has an invalid symbol key: {symbol!r}")
+        clean[symbol] = _require_number(f"price for {symbol!r}", price)
+    return clean
+
+
 @dataclass
 class Position:
     """One held (or previously held) symbol."""
@@ -44,6 +78,21 @@ class Position:
     qty: float
     avg_cost: float
     realized_pnl: float = 0.0
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.symbol, str) or not self.symbol.strip():
+            raise ValueError(
+                f"position symbol must be a non-empty string, got {self.symbol!r}"
+            )
+        self.qty = _require_number("position qty", self.qty)
+        self.avg_cost = _require_number("position avg_cost", self.avg_cost)
+        self.realized_pnl = _require_number("position realized_pnl", self.realized_pnl)
+        if self.qty < 0:
+            raise ValueError(f"position qty is never negative, got {self.qty!r}")
+        if self.avg_cost < 0:
+            raise ValueError(
+                f"position avg_cost is never negative, got {self.avg_cost!r}"
+            )
 
     def to_dict(self) -> dict:
         data = asdict(self)
@@ -68,12 +117,24 @@ class Portfolio:
     cash: float = 0.0
     positions: dict[str, Position] = field(default_factory=dict)
 
+    def __post_init__(self) -> None:
+        self.cash = _require_number("portfolio cash", self.cash)
+        if not isinstance(self.positions, dict):
+            raise ValueError(
+                f"positions must be a dict, got {type(self.positions).__name__}"
+            )
+        for symbol, pos in self.positions.items():
+            if not isinstance(pos, Position):
+                raise ValueError(
+                    f"positions[{symbol!r}] must be a Position, "
+                    f"got {type(pos).__name__}"
+                )
+
     # -- funding ---------------------------------------------------------
 
     def deposit(self, amount: float) -> None:
         """Add cash to the portfolio. ``amount`` must be positive."""
-        if amount <= 0:
-            raise ValueError(f"deposit amount must be positive, got {amount!r}")
+        amount = _require_positive("deposit amount", amount)
         self.cash += amount
 
     # -- fills -----------------------------------------------------------
@@ -88,10 +149,10 @@ class Portfolio:
         """
         if side not in ("buy", "sell"):
             raise ValueError(f"side must be 'buy' or 'sell', got {side!r}")
-        if qty <= 0:
-            raise ValueError(f"qty must be positive, got {qty!r}")
-        if price <= 0:
-            raise ValueError(f"price must be positive, got {price!r}")
+        if not isinstance(symbol, str) or not symbol.strip():
+            raise ValueError(f"symbol must be a non-empty string, got {symbol!r}")
+        qty = _require_positive("qty", qty)
+        price = _require_positive("price", price)
 
         if side == "buy":
             self.cash -= qty * price
@@ -138,6 +199,7 @@ class Portfolio:
         Symbols missing from ``prices`` are valued at their average cost
         and listed in ``warnings`` — never silently priced at 0.
         """
+        prices = _require_prices(prices)
         warnings: list[str] = []
         total = self.cash
         for symbol, pos in self.positions.items():
@@ -152,6 +214,7 @@ class Portfolio:
         Symbols missing from ``prices`` are valued at average cost, so
         their unrealized P&L is 0 rather than silently mis-priced.
         """
+        prices = _require_prices(prices)
         warnings: list[str] = []
         per: dict[str, float] = {}
         for symbol, pos in self.positions.items():
@@ -219,16 +282,38 @@ class Portfolio:
 
     @classmethod
     def load(cls, path: Path = DEFAULT_PATH) -> "Portfolio":
-        """Load the ledger; a missing file yields an empty portfolio."""
+        """Load the ledger.
+
+        A missing file yields an empty portfolio. A corrupt file yields
+        an empty portfolio *with a loud warning* — never a traceback and
+        never half-parsed accounting data.
+        """
         path = Path(path)
         if not path.exists():
             return cls(cash=0.0)
-        data = json.loads(path.read_text())
-        positions = {
-            symbol: Position.from_dict(pdata)
-            for symbol, pdata in data.get("positions", {}).items()
-        }
-        return cls(cash=float(data.get("cash", 0.0)), positions=positions)
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            if not isinstance(data, dict):
+                raise ValueError("top level must be an object")
+            cash = _require_number("cash", data.get("cash", 0.0))
+            raw_positions = data.get("positions", {})
+            if not isinstance(raw_positions, dict):
+                raise ValueError("'positions' must be an object")
+            positions = {}
+            for symbol, pdata in raw_positions.items():
+                if not isinstance(symbol, str) or not isinstance(pdata, dict):
+                    raise ValueError(f"invalid position entry for {symbol!r}")
+                positions[symbol] = Position.from_dict(pdata)
+            return cls(cash=cash, positions=positions)
+        except Exception as exc:
+            warnings.warn(
+                f"portfolio file {path} is unreadable "
+                f"({type(exc).__name__}); starting with an empty ledger. "
+                "Back up or delete the file to silence this warning.",
+                UserWarning,
+                stacklevel=2,
+            )
+            return cls(cash=0.0)
 
 
 def load(path: Path = DEFAULT_PATH) -> Portfolio:

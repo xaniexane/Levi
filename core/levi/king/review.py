@@ -42,6 +42,13 @@ def _new_id(prefix: str = "rev") -> str:
     return f"{prefix}.{uuid.uuid4().hex[:10]}"
 
 
+def _bucket(raw: Any) -> List[Dict[str, Any]]:
+    """Structural filter for loaded buckets: lists of dicts only."""
+    if not isinstance(raw, list):
+        return []
+    return [i for i in raw if isinstance(i, dict)]
+
+
 class ReviewError(Exception):
     """Unknown id, or a decision on an already-decided item."""
 
@@ -69,10 +76,10 @@ class ReviewQueue:
             return
         if not isinstance(raw, dict):
             return
-        self.pending = raw.get("pending", []) or []
-        self.approved = raw.get("approved", []) or []
-        self.denied = raw.get("denied", []) or []
-        self.decisions = raw.get("decisions", []) or []
+        self.pending = _bucket(raw.get("pending"))
+        self.approved = _bucket(raw.get("approved"))
+        self.denied = _bucket(raw.get("denied"))
+        self.decisions = _bucket(raw.get("decisions"))
 
     def _persist(self) -> None:
         _write_json_600(
@@ -89,13 +96,29 @@ class ReviewQueue:
 
     def queue_pack(self, pack: Dict[str, Any]) -> Dict[str, Any]:
         """Add a generated social pack as a pending review item."""
+        if not isinstance(pack, dict):
+            raise ValueError(f"queue_pack needs a pack dict, got {type(pack).__name__}")
+        caption = pack.get("caption")
+        if not isinstance(caption, str) or not caption.strip():
+            raise ValueError("queue_pack: pack needs a non-empty string 'caption'")
+        hashtags = pack.get("hashtags", [])
+        if not isinstance(hashtags, list) or any(
+            not isinstance(t, str) for t in hashtags
+        ):
+            raise ValueError("queue_pack: pack 'hashtags' must be a list of strings")
+        platform = pack.get("platform")
+        title = pack.get("title", "")
+        if platform is not None and not isinstance(platform, str):
+            raise ValueError("queue_pack: pack 'platform' must be a string")
+        if not isinstance(title, str):
+            raise ValueError("queue_pack: pack 'title' must be a string")
         item = {
             "id": _new_id(),
             "kind": "social-pack",
-            "platform": pack.get("platform"),
-            "title": pack.get("title", ""),
-            "caption": pack.get("caption"),
-            "hashtags": list(pack.get("hashtags", [])),
+            "platform": platform,
+            "title": title,
+            "caption": caption,
+            "hashtags": list(hashtags),
             "status": _PENDING,
             "created_ts": _utcnow(),
             "decided_ts": None,
@@ -119,6 +142,12 @@ class ReviewQueue:
         return self._decide(item_id, _DENIED, note)
 
     def _decide(self, item_id: str, verdict: str, note: str) -> Dict[str, Any]:
+        if not isinstance(item_id, str) or not item_id.strip():
+            raise ReviewError(
+                f"Cannot {verdict} {item_id!r}: item id must be a non-empty string."
+            )
+        if not isinstance(note, str):
+            raise ValueError(f"decision note must be a string, got {note!r}")
         for i, item in enumerate(self.pending):
             if item.get("id") == item_id:
                 decided = dict(item)
@@ -147,6 +176,10 @@ class ReviewQueue:
 
     def log_decision(self, action: str, detail: str = "") -> Dict[str, Any]:
         """Audit-log an engine pass-through decision (deny/approve/rupture…)."""
+        if not isinstance(action, str) or not action.strip():
+            raise ValueError(f"log_decision action must be a non-empty string, got {action!r}")
+        if not isinstance(detail, str):
+            raise ValueError(f"log_decision detail must be a string, got {detail!r}")
         entry = {"ts": _utcnow(), "action": action, "detail": detail}
         self.decisions.append(entry)
         self._persist()

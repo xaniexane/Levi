@@ -53,6 +53,15 @@ class Corpus:
         source: str = "",
         tags: Optional[List[str]] = None,
     ) -> CorpusUnit:
+        """Append one unit. Raises ValueError on empty text or bad tags."""
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError("Corpus.add: text must be a non-empty string")
+        if not isinstance(source, str):
+            raise ValueError("Corpus.add: source must be a string")
+        if tags is not None and (
+            not isinstance(tags, list) or any(not isinstance(t, str) for t in tags)
+        ):
+            raise ValueError("Corpus.add: tags must be a list of strings")
         u = CorpusUnit(
             id=str(uuid.uuid4())[:8],
             kind=kind,
@@ -65,6 +74,10 @@ class Corpus:
         return u
 
     def list(self, limit: int = 50, kind: Optional[str] = None) -> List[CorpusUnit]:
+        if not isinstance(limit, int) or limit < 1:
+            raise ValueError(
+                "Corpus.list: limit must be a positive int, got %r" % (limit,)
+            )
         if not self.path.exists():
             return []
         rows: List[CorpusUnit] = []
@@ -75,6 +88,16 @@ class Corpus:
                     continue
                 try:
                     d = json.loads(line)
+                except ValueError:
+                    # Corrupt line: skip loudly, keep the rest (partial ingestion).
+                    print("brain corpus: skipping corrupt line in %s" % self.path.name)
+                    continue
+                if not isinstance(d, dict):
+                    print(
+                        "brain corpus: skipping non-object line in %s" % self.path.name
+                    )
+                    continue
+                try:
                     u = CorpusUnit(
                         id=d.get("id") or "",
                         kind=d.get("kind") or "UNKNOWN",
@@ -86,11 +109,20 @@ class Corpus:
                     if kind and u.kind != kind.upper():
                         continue
                     rows.append(u)
-                except Exception:
+                except Exception as exc:
+                    print("brain corpus: skipping malformed row (%s)" % exc)
                     continue
         return rows[-limit:]
 
     def search(self, query: str, limit: int = 20) -> List[CorpusUnit]:
+        if not isinstance(query, str):
+            raise ValueError(
+                "Corpus.search: query must be a string, got %s" % type(query).__name__
+            )
+        if not isinstance(limit, int) or limit < 1:
+            raise ValueError(
+                "Corpus.search: limit must be a positive int, got %r" % (limit,)
+            )
         q = (query or "").lower()
         hits = [
             u
@@ -100,6 +132,10 @@ class Corpus:
         return hits[-limit:]
 
     def format(self, limit: int = 20) -> str:
+        if not isinstance(limit, int) or limit < 1:
+            raise ValueError(
+                "Corpus.format: limit must be a positive int, got %r" % (limit,)
+            )
         units = list(reversed(self.list(limit)))
         if not units:
             return 'Corpus empty. Add with: levi brain corpus --add "…" --kind OBSERVED'

@@ -43,7 +43,14 @@ def new_cycle_id() -> str:
 
 
 def append_entry(entry: dict[str, Any]) -> dict[str, Any]:
-    """Append one journal record. Returns the record with id/ts filled in."""
+    """Append one journal record. Returns the record with id/ts filled in.
+
+    Raises ValueError when ``entry`` is not a dict.
+    """
+    if not isinstance(entry, dict):
+        raise ValueError(
+            "append_entry: entry must be a dict, got %s" % type(entry).__name__
+        )
     entry = dict(entry)
     entry.setdefault("id", new_cycle_id())
     entry.setdefault("ts", _now())
@@ -55,10 +62,26 @@ def append_entry(entry: dict[str, Any]) -> dict[str, Any]:
 
 def read_entries(limit: int = 50) -> list[dict[str, Any]]:
     """Latest-first journal records (tolerates corrupt lines)."""
+    if not isinstance(limit, int) or limit < 1:
+        raise ValueError(
+            "read_entries: limit must be a positive int, got %r" % (limit,)
+        )
     try:
         lines = journal_path().read_text(encoding="utf-8").splitlines()
     except OSError:
         return []
+    out: list[dict[str, Any]] = []
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            rec = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(rec, dict):
+            out.append(rec)
+    return out[-limit:][::-1]
     out: list[dict[str, Any]] = []
     for line in lines:
         line = line.strip()
@@ -102,6 +125,12 @@ _STAGES = [
 
 
 def developmental_stage(learnings: int, cycles: int) -> tuple[str, str]:
+    for name, val in (("learnings", learnings), ("cycles", cycles)):
+        if not isinstance(val, int) or val < 0:
+            raise ValueError(
+                "developmental_stage: %s must be a non-negative int, got %r"
+                % (name, val)
+            )
     name, blurb = "newborn", _STAGES[0][2]
     for threshold, sname, sblurb in _STAGES:
         if learnings >= threshold:

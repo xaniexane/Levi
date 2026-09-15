@@ -26,6 +26,7 @@ for one — its id and display name say "stub".
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from .registry import (
@@ -39,6 +40,49 @@ from .registry import (
 #: In-memory outbox: every loopback "post", newest last. Tests assert
 #: against this to prove the pipeline reached the connector.
 OUTBOX: list[dict[str, Any]] = []
+
+#: Input bounds for the loopback payload (the stub is a stand-in for
+#: real platforms, which all cap caption/tag sizes).
+_PLATFORM_RE = re.compile(r"^[A-Za-z0-9_-]{1,32}$")
+_MAX_CAPTION_CHARS = 10_000
+_MAX_HASHTAGS = 30
+_MAX_HASHTAG_CHARS = 64
+
+
+def _validate_publish_params(params: dict[str, Any]) -> tuple[str, str, list[str]]:
+    platform = str(params.get("platform") or "").strip()
+    if not _PLATFORM_RE.match(platform):
+        raise InvalidParams(
+            f"publish needs a platform of 1-32 [A-Za-z0-9_-] chars, "
+            f"got {platform!r} — nothing recorded."
+        )
+    caption = str(params.get("caption") or "")
+    if not caption.strip():
+        raise InvalidParams("publish needs a non-empty caption — nothing recorded.")
+    if len(caption) > _MAX_CAPTION_CHARS:
+        raise InvalidParams(
+            f"caption is {len(caption)} chars; the limit is "
+            f"{_MAX_CAPTION_CHARS} — nothing recorded."
+        )
+    raw_tags = params.get("hashtags") or []
+    if isinstance(raw_tags, str) or not isinstance(raw_tags, (list, tuple)):
+        raise InvalidParams(
+            "publish 'hashtags' must be a list of strings, "
+            f"got {raw_tags!r} — nothing recorded."
+        )
+    tags = [str(t).strip() for t in raw_tags]
+    if len(tags) > _MAX_HASHTAGS:
+        raise InvalidParams(
+            f"too many hashtags ({len(tags)}); the limit is {_MAX_HASHTAGS} "
+            "— nothing recorded."
+        )
+    for tag in tags:
+        if not tag or len(tag) > _MAX_HASHTAG_CHARS:
+            raise InvalidParams(
+                f"invalid hashtag {tag!r}: each must be 1-"
+                f"{_MAX_HASHTAG_CHARS} chars — nothing recorded."
+            )
+    return platform, caption, tags
 
 
 class SocialStubConnector(Connector):
@@ -76,13 +120,7 @@ class SocialStubConnector(Connector):
             raise InvalidParams(
                 f"unknown operation {operation!r} for social-stub — nothing recorded."
             )
-        platform = str(params.get("platform") or "").strip()
-        caption = str(params.get("caption") or "")
-        hashtags = params.get("hashtags") or []
-        if not platform:
-            raise InvalidParams("publish needs a platform — nothing recorded.")
-        if not caption.strip():
-            raise InvalidParams("publish needs a non-empty caption — nothing recorded.")
+        platform, caption, hashtags = _validate_publish_params(params)
         if transport is not None:
             # Tests inject a fake transport here; the loopback defers to it.
             return transport(
@@ -94,7 +132,7 @@ class SocialStubConnector(Connector):
         record = {
             "platform": platform,
             "caption": caption,
-            "hashtags": list(hashtags),
+            "hashtags": hashtags,
             "loopback": True,
         }
         OUTBOX.append(record)

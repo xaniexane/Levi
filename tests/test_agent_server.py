@@ -331,3 +331,17 @@ def test_agent_chat_turns_accumulate_in_one_session(srv, monkeypatch, tmp_path):
     session_file = tmp_path / "sessions" / "e2e.jsonl"
     assert session_file.exists()
     assert "remember the sky is green" in session_file.read_text()
+
+
+def test_serve_validates_host_and_port(monkeypatch):
+    monkeypatch.setenv("LEVI_AGENT_TOKEN", "test-token-long-enough")
+    with pytest.raises(ValueError, match="'port' must be an integer"):
+        agent_server.serve(port="not-a-port")  # type: ignore[arg-type]
+    with pytest.raises(ValueError, match="'port' must be an integer"):
+        agent_server.serve(port=0)
+    with pytest.raises(ValueError, match="'port' must be an integer"):
+        agent_server.serve(port=70000)
+    with pytest.raises(ValueError, match="'host' must be a non-empty string"):
+        agent_server.serve(host="")
+    with pytest.raises(ValueError, match="'host' must be a non-empty string"):
+        agent_server.serve(host=None)  # type: ignore[arg-type]

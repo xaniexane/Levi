@@ -18,10 +18,56 @@ Schema (blueprint §15 fields):
 from __future__ import annotations
 
 import json
+import math
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+
+class LedgerError(ValueError):
+    """Invalid input to the decision ledger."""
+
+
+def _require_task_id(task_id: Any) -> str:
+    if not isinstance(task_id, str) or not task_id.strip():
+        raise LedgerError(
+            f"invalid task_id {task_id!r}: must be a non-empty string"
+        )
+    return task_id
+
+
+def _require_str(value: Any, *, field: str) -> str:
+    if not isinstance(value, str):
+        raise LedgerError(
+            f"invalid {field}: must be a string, got {type(value).__name__}"
+        )
+    return value
+
+
+def _require_nonneg_finite(value: Any, *, field: str) -> float:
+    try:
+        num = float(value)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        raise LedgerError(
+            f"invalid {field} {value!r}: must be a number"
+        ) from None
+    if not math.isfinite(num) or num < 0:
+        raise LedgerError(
+            f"invalid {field} {value!r}: must be a finite value >= 0"
+        )
+    return num
+
+
+def _safe_json_loads(text: Any, default: Any) -> Any:
+    """Parse a JSON column, degrading to ``default`` on corrupt rows so one
+    bad row cannot take down the whole task view."""
+    if not isinstance(text, str):
+        return default
+    try:
+        return json.loads(text)
+    except ValueError:
+        return default
 
 
 _SCHEMA = """
@@ -122,6 +168,12 @@ class LedgerWriter:
         plan_version: str = "1",
         status: str = "running",
     ) -> None:
+        task_id = _require_task_id(task_id)
+        objective = _require_str(objective, field="objective")
+        user_id = _require_str(user_id, field="user_id")
+        tenant_id = _require_str(tenant_id, field="tenant_id")
+        plan_version = _require_str(plan_version, field="plan_version")
+        status = _require_str(status, field="status")
         now = _now()
         with self._connect() as conn:
             conn.execute(
@@ -150,6 +202,10 @@ class LedgerWriter:
         cost_units: float = 0.0,
         latency_ms: float = 0.0,
     ) -> None:
+        task_id = _require_task_id(task_id)
+        status = _require_str(status, field="status")
+        cost_units = _require_nonneg_finite(cost_units, field="cost_units")
+        latency_ms = _require_nonneg_finite(latency_ms, field="latency_ms")
         with self._connect() as conn:
             conn.execute(
                 """UPDATE tasks SET status=?, cost_units=cost_units+?,
@@ -184,6 +240,36 @@ class LedgerWriter:
         chain-of-thought. Keep it to what a reviewer needs to understand
         why this action was chosen.
         """
+        task_id = _require_task_id(task_id)
+        for field, value in (
+            ("agent", agent),
+            ("category", category),
+            ("task_class", task_class),
+            ("model", model),
+            ("model_version", model_version),
+            ("decision_summary", decision_summary),
+            ("action", action),
+            ("expected_result", expected_result),
+            ("actual_result", actual_result),
+            ("error", error),
+            ("recovery", recovery),
+            ("outcome", outcome),
+        ):
+            _require_str(value, field=field)
+        if tools_used is not None and (
+            not isinstance(tools_used, list)
+            or any(not isinstance(t, str) for t in tools_used)
+        ):
+            raise LedgerError(
+                "invalid tools_used: must be a list of strings or None"
+            )
+        if verification is not None and not isinstance(verification, dict):
+            raise LedgerError(
+                f"invalid verification: must be a dict or None, "
+                f"got {type(verification).__name__}"
+            )
+        cost_units = _require_nonneg_finite(cost_units, field="cost_units")
+        latency_ms = _require_nonneg_finite(latency_ms, field="latency_ms")
         with self._connect() as conn:
             cur = conn.execute(
                 """INSERT INTO steps(task_id, agent, category, task_class,
@@ -217,6 +303,16 @@ class LedgerWriter:
             return int(cur.lastrowid)
 
     def record_feedback(self, task_id: str, rating: int = 0, comment: str = "") -> int:
+        task_id = _require_task_id(task_id)
+        if (
+            not isinstance(rating, int)
+            or isinstance(rating, bool)
+            or not 0 <= rating <= 5
+        ):
+            raise LedgerError(
+                f"invalid rating {rating!r}: must be an integer 0-5"
+            )
+        comment = _require_str(comment, field="comment")
         with self._connect() as conn:
             cur = conn.execute(
                 "INSERT INTO feedback(task_id, rating, comment, created_at)"
@@ -228,6 +324,7 @@ class LedgerWriter:
     # -- reads -----------------------------------------------------------
 
     def get_task(self, task_id: str) -> Optional[Dict[str, Any]]:
+        _require_task_id(task_id)
         with self._connect() as conn:
             row = conn.execute(
                 "SELECT * FROM tasks WHERE task_id=?", (task_id,)
@@ -242,8 +339,9 @@ class LedgerWriter:
                 )
             ]
             for s in steps:
-                s["tools_used"] = json.loads(s["tools_used"])
-                s["verification"] = json.loads(s["verification"])
+                # One corrupt JSON column must not sink the whole task view.
+                s["tools_used"] = _safe_json_loads(s["tools_used"], [])
+                s["verification"] = _safe_json_loads(s["verification"], {})
             task["steps"] = steps
             task["feedback"] = [
                 dict(r)
@@ -301,6 +399,14 @@ class LedgerWriter:
             return [dict(r) for r in rows]
 
     def recent_tasks(self, limit: int = 20) -> List[Dict[str, Any]]:
+        if (
+            not isinstance(limit, int)
+            or isinstance(limit, bool)
+            or limit < 0
+        ):
+            raise LedgerError(
+                f"invalid limit {limit!r}: must be an integer >= 0"
+            )
         with self._connect() as conn:
             return [
                 dict(r)

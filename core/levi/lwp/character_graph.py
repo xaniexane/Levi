@@ -183,12 +183,23 @@ class CharacterGraph:
             return
         try:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
-            for n in raw.get("nodes") or []:
-                self.nodes[n["id"]] = CharacterNode(**n)
-            for e in raw.get("edges") or []:
-                self.edges.append(CharacterEdge(**e))
-        except Exception:
-            pass
+        except (OSError, ValueError):
+            return
+        if not isinstance(raw, dict):
+            return
+        for n in raw.get("nodes") or []:
+            # One malformed node never aborts the whole load.
+            if isinstance(n, dict) and isinstance(n.get("id"), str) and n["id"]:
+                try:
+                    self.nodes[n["id"]] = CharacterNode(**n)
+                except TypeError:
+                    continue
+        for e in raw.get("edges") or []:
+            if isinstance(e, dict):
+                try:
+                    self.edges.append(CharacterEdge(**e))
+                except TypeError:
+                    continue
 
     def _persist(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -221,6 +232,21 @@ class CharacterGraph:
         era: Optional[str] = None,
         seed: Optional[str] = None,
     ) -> CharacterNode:
+        axes = {
+            "drive": (drive, DRIVES),
+            "wound": (wound, WOUNDS),
+            "method": (method, METHODS),
+            "voice": (voice, VOICES),
+            "domain": (domain, DOMAINS),
+            "era": (era, ERAS),
+        }
+        for axis, (value, options) in axes.items():
+            if value is not None and value not in options:
+                raise ValueError(
+                    f"unknown {axis} {value!r}: choose one of {options}"
+                )
+        if seed is not None and not isinstance(seed, str):
+            raise ValueError(f"seed must be a string or None, got {seed!r}")
         rng = hashlib.sha1((seed or str(len(self.nodes))).encode()).hexdigest()
 
         def pick(opts, i):
@@ -260,12 +286,26 @@ class CharacterGraph:
         return node
 
     def mint_batch(self, n: int = 5, seed: Optional[str] = None) -> List[CharacterNode]:
+        if isinstance(n, bool) or not isinstance(n, int):
+            raise ValueError(f"mint_batch n must be an int, got {n!r}")
+        if seed is not None and not isinstance(seed, str):
+            raise ValueError(f"seed must be a string or None, got {seed!r}")
         out = []
         for i in range(max(1, min(n, 50))):
             out.append(self.mint(seed=f"{seed or 'batch'}-{i}"))
         return out
 
     def link(self, a: str, b: str, relation: Optional[str] = None) -> CharacterEdge:
+        for label, node_id in (("a", a), ("b", b)):
+            if not isinstance(node_id, str) or not node_id:
+                raise ValueError(f"link {label} must be a non-empty node id string")
+            if node_id not in self.nodes:
+                raise ValueError(
+                    f"link {label}: unknown character {node_id!r} "
+                    f"(known: {len(self.nodes)} nodes)"
+                )
+        if relation is not None and relation not in BONDS:
+            raise ValueError(f"unknown relation {relation!r}: choose one of {BONDS}")
         relation = relation or BONDS[len(self.edges) % len(BONDS)]
         tension = f"{relation} under competing drives"
         e = CharacterEdge(a=a, b=b, relation=relation, tension=tension)
@@ -274,6 +314,8 @@ class CharacterGraph:
         return e
 
     def weave(self, n_chars: int = 4) -> str:
+        if isinstance(n_chars, bool) or not isinstance(n_chars, int):
+            raise ValueError(f"weave n_chars must be an int, got {n_chars!r}")
         chars = self.mint_batch(n_chars)
         lines = [
             "=== L.W.P. Character Graph Weave ===",

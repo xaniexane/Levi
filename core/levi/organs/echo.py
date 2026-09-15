@@ -12,6 +12,18 @@ import hashlib
 
 
 def run_echo(seed: str, cycles: int = 3) -> Dict:
+    """Explore taken / not-taken / wild parallel paths for ``seed``.
+
+    Raises ValueError when ``cycles`` is not a non-negative int.
+    """
+    if not isinstance(seed, str):
+        raise ValueError(
+            "run_echo: seed must be a string, got %s" % type(seed).__name__
+        )
+    if isinstance(cycles, bool) or not isinstance(cycles, int) or cycles < 0:
+        raise ValueError(
+            "run_echo: cycles must be a non-negative int, got %r" % (cycles,)
+        )
     s = (seed or "silence").strip()
     h = int(hashlib.sha256(s.encode()).hexdigest()[:8], 16)
     taken = [
@@ -67,7 +79,17 @@ def run_echo(seed: str, cycles: int = 3) -> Dict:
 
 
 def format_echo(result: Dict) -> str:
-    lines = [f"=== Echo (seed: {result['seed'][:60]}) ===", ""]
+    """Render a :func:`run_echo` result.
+
+    Raises ValueError when ``result`` lacks the expected echo keys (a
+    malformed record renders as an explicit error, not a KeyError).
+    """
+    if not isinstance(result, dict):
+        raise ValueError("format_echo: result must be a dict")
+    for key in ("seed", "branches", "insight"):
+        if key not in result:
+            raise ValueError("format_echo: result is missing key %r" % key)
+    lines = [f"=== Echo (seed: {str(result['seed'])[:60]}) ===", ""]
     for b in result["branches"]:
         lines.append(f"[{b['kind']}] {b['label']}  risk={b['risk']}")
         lines.append(f"  {b['summary']}")

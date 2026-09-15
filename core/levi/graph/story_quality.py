@@ -37,6 +37,8 @@ def _unique_ratio(text: str) -> float:
 
 
 def rate_text(text: str) -> QualityReport:
+    if not isinstance(text, str):
+        raise ValueError(f"rate_text needs a string, got {type(text).__name__}")
     notes: List[str] = []
     words = text.split()
     n = len(words)

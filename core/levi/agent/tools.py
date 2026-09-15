@@ -73,6 +73,31 @@ class Tool:
     handler: Callable[[dict], ToolResult]
     requires_confirmation: bool = False
 
+    def __post_init__(self) -> None:
+        if not isinstance(self.name, str) or not self.name.strip():
+            raise ValueError(
+                f"Tool: 'name' must be a non-empty string, got {self.name!r}"
+            )
+        if not isinstance(self.description, str) or not self.description.strip():
+            raise ValueError(
+                f"Tool {self.name!r}: 'description' must be a non-empty string"
+            )
+        if not isinstance(self.parameters, dict):
+            raise ValueError(
+                f"Tool {self.name!r}: 'parameters' must be a dict, "
+                f"got {type(self.parameters).__name__}"
+            )
+        if not callable(self.handler):
+            raise ValueError(
+                f"Tool {self.name!r}: 'handler' must be callable, "
+                f"got {type(self.handler).__name__}"
+            )
+        if not isinstance(self.requires_confirmation, bool):
+            raise ValueError(
+                f"Tool {self.name!r}: 'requires_confirmation' must be a bool, "
+                f"got {self.requires_confirmation!r}"
+            )
+
 
 class ConfirmationRequired(Exception):
     """Raised by ``ToolRegistry.execute`` when a gated tool runs without
@@ -91,6 +116,17 @@ class ExecContext:
     consent: bool = False
     confirm: Callable[[str], bool] | None = None
 
+    def __post_init__(self) -> None:
+        if not isinstance(self.consent, bool):
+            raise ValueError(
+                f"ExecContext: 'consent' must be a bool, got {self.consent!r}"
+            )
+        if self.confirm is not None and not callable(self.confirm):
+            raise ValueError(
+                f"ExecContext: 'confirm' must be callable or None, "
+                f"got {type(self.confirm).__name__}"
+            )
+
 
 # ---------------------------------------------------------------------------
 # Registry
@@ -106,6 +142,16 @@ class ToolRegistry:
         default_consent: bool = False,
         default_confirm: Callable[[str], bool] | None = None,
     ) -> None:
+        if not isinstance(default_consent, bool):
+            raise ValueError(
+                f"ToolRegistry: 'default_consent' must be a bool, "
+                f"got {default_consent!r}"
+            )
+        if default_confirm is not None and not callable(default_confirm):
+            raise ValueError(
+                f"ToolRegistry: 'default_confirm' must be callable or None, "
+                f"got {type(default_confirm).__name__}"
+            )
         self._tools: dict[str, Tool] = {}
         self._default_consent = default_consent
         self._default_confirm = default_confirm
@@ -114,11 +160,17 @@ class ToolRegistry:
         self._active_ctx: ExecContext | None = None
 
     def register(self, tool: Tool) -> None:
-        if not tool.name:
-            raise ValueError("tool must have a non-empty name")
+        if not isinstance(tool, Tool):
+            raise ValueError(
+                f"register: expected a Tool, got {type(tool).__name__}"
+            )
+        # Tool.__post_init__ already validated the fields.
         self._tools[tool.name] = tool
 
     def get(self, name: str) -> Tool | None:
+        # Benign lookup: a non-string name simply misses.
+        if not isinstance(name, str):
+            return None
         return self._tools.get(name)
 
     def list(self) -> list[Tool]:
@@ -134,6 +186,21 @@ class ToolRegistry:
         (if provided) with a human-readable preview; a declined or
         missing callback raises :class:`ConfirmationRequired`.
         """
+        if not isinstance(name, str) or not name.strip():
+            known = ", ".join(sorted(self._tools)) or "(none)"
+            return ToolResult(
+                ok=False,
+                error=f"unknown tool {name!r}. Known tools: {known}",
+            )
+        if not isinstance(args, dict):
+            raise ValueError(
+                f"execute: 'args' must be a dict, got {type(args).__name__}"
+            )
+        if ctx is not None and not isinstance(ctx, ExecContext):
+            raise ValueError(
+                f"execute: 'ctx' must be an ExecContext or None, "
+                f"got {type(ctx).__name__}"
+            )
         tool = self._tools.get(name)
         if tool is None:
             known = ", ".join(sorted(self._tools)) or "(none)"

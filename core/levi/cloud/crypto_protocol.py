@@ -55,6 +55,10 @@ class Argon2idGuide:
     """Derive a CMK. Prefer argon2-cffi; fall back to labeled HMAC demo."""
 
     def __init__(self, policy: Argon2idPolicy = BASELINE_CMK):
+        if not isinstance(policy, Argon2idPolicy):
+            raise ValueError(
+                "policy must be an Argon2idPolicy, got %s" % type(policy).__name__
+            )
         self.policy = policy
         self._backend = self._detect_backend()
 
@@ -84,10 +88,13 @@ class Argon2idGuide:
         """
         Returns (cmk_32bytes, salt, backend_label).
         Demo path is clearly labeled — not pretended to be Argon2.
+        ``salt`` must be bytes (16+ recommended) or None for a fresh random salt.
         """
-        if not passphrase:
-            raise ValueError("passphrase required")
-        salt = salt or os.urandom(16)
+        if not isinstance(passphrase, str) or not passphrase:
+            raise ValueError("passphrase required: pass a non-empty string")
+        if salt is not None and not isinstance(salt, (bytes, bytearray)):
+            raise ValueError("salt must be bytes or None, got %s" % type(salt).__name__)
+        salt = bytes(salt) if salt else os.urandom(16)
 
         if self._backend == "argon2-cffi":
             from argon2.low_level import hash_secret_raw, Type
@@ -173,11 +180,19 @@ class RatchetGuide:
         self, session_id: str, root_key: Optional[bytes] = None
     ) -> str:
         """Educational only. Returns status string."""
-        rk = root_key or secrets.token_bytes(32)
+        if not isinstance(session_id, str) or not session_id:
+            raise ValueError("session_id must be a non-empty string")
+        if root_key is not None and not isinstance(root_key, (bytes, bytearray)):
+            raise ValueError(
+                "root_key must be bytes or None, got %s" % type(root_key).__name__
+            )
+        rk = bytes(root_key) if root_key else secrets.token_bytes(32)
         self._demo_chains[session_id] = rk
         return f"demo session {session_id[:12]}… root established (HMAC chain — NOT libsignal)"
 
     def demo_next_message_key(self, session_id: str) -> Tuple[bytes, str]:
+        if not isinstance(session_id, str) or not session_id:
+            raise ValueError("session_id must be a non-empty string")
         if session_id not in self._demo_chains:
             raise KeyError("unknown demo session — call demo_init_session first")
         chain = self._demo_chains[session_id]

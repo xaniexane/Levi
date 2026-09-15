@@ -47,11 +47,15 @@ MORE_DETAIL_TRIGGERS = (
 
 
 def wants_final_answer(text: str) -> bool:
+    if not isinstance(text, str):
+        return False
     lower = text.lower().strip()
     return any(t in lower for t in EXPLICIT_ANSWER_TRIGGERS)
 
 
 def wants_more_detail(text: str) -> bool:
+    if not isinstance(text, str):
+        return False
     lower = text.lower().strip()
     return any(t in lower for t in MORE_DETAIL_TRIGGERS)
 
@@ -72,7 +76,24 @@ def interrogation_turn(
     - One precise clarifying question at a time.
     - Circles / digs; does not synthesize or dump.
     Returns (response_text, is_final_answer)
+
+    Raises ValueError on a non-string ``user_text`` or negative
+    ``prior_clarifications``.
     """
+    if not isinstance(user_text, str):
+        raise ValueError(
+            "interrogation_turn: user_text must be a string, got %s"
+            % type(user_text).__name__
+        )
+    if (
+        isinstance(prior_clarifications, bool)
+        or not isinstance(prior_clarifications, int)
+        or prior_clarifications < 0
+    ):
+        raise ValueError(
+            "interrogation_turn: prior_clarifications must be a non-negative int, "
+            "got %r" % (prior_clarifications,)
+        )
     if wants_final_answer(user_text):
         return (
             "[Interrogation released]\n"
@@ -116,7 +137,23 @@ def no_hero_turn(
     - Does not divulge the whole big picture.
     - Expands one layer when user asks for more detail.
     Returns (response_text, new_detail_level)
+
+    Raises ValueError on bad ``user_text`` or ``detail_level``.
     """
+    if not isinstance(user_text, str):
+        raise ValueError(
+            "no_hero_turn: user_text must be a string, got %s"
+            % type(user_text).__name__
+        )
+    if (
+        isinstance(detail_level, bool)
+        or not isinstance(detail_level, int)
+        or detail_level < 0
+    ):
+        raise ValueError(
+            "no_hero_turn: detail_level must be a non-negative int, got %r"
+            % (detail_level,)
+        )
     if wants_more_detail(user_text) or wants_final_answer(user_text):
         layers = [
             "Pick one need people already pay for. Build the smallest offline-first thing that fulfills it. Charge for the outcome. Keep a human on the money.",

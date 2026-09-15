@@ -1,5 +1,7 @@
 """LEVI Fleet — digital workforce foundation (Enterprise Phase 1, §2–4)."""
 
+from __future__ import annotations
+
 from levi.fleet.categories import (
     AgentCategory,
     list_categories,

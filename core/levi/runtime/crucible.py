@@ -23,6 +23,9 @@ import uuid
 
 DEFAULT_ROOT = Path.home() / ".levi" / "crucible"
 
+#: Upper bound on the content a single file_smoke probe may write.
+_MAX_SMOKE_CONTENT = 10_000_000
+
 
 @dataclass
 class CrucibleResult:
@@ -44,6 +47,38 @@ class Crucible:
         p.mkdir(parents=True, exist_ok=True)
         return p
 
+    @staticmethod
+    def _check_rel_name(rel_name: str) -> None:
+        """Reject names that cannot live inside a chamber, before any
+        chamber directory is created."""
+        if not isinstance(rel_name, str) or not rel_name.strip():
+            raise ValueError("file_smoke: 'rel_name' must be a non-empty string")
+        candidate = Path(rel_name)
+        if candidate.is_absolute() or ".." in candidate.parts:
+            raise ValueError(
+                "file_smoke: 'rel_name' must be a relative path inside the "
+                f"chamber, got {rel_name!r}"
+            )
+
+    @staticmethod
+    def _safe_rel_path(chamber: Path, rel_name: str) -> Path:
+        """Resolve ``rel_name`` inside ``chamber`` or raise ValueError.
+
+        The smoke test writes caller-controlled names to disk, so the
+        name must be a relative path that stays inside the chamber:
+        absolute paths, ``..`` segments, and names that resolve outside
+        the chamber (e.g. via symlinks) are refused before any disk
+        write happens.
+        """
+        Crucible._check_rel_name(rel_name)
+        resolved = (chamber / rel_name).resolve()
+        if resolved != chamber.resolve() and chamber.resolve() not in resolved.parents:
+            raise ValueError(
+                "file_smoke: 'rel_name' escapes the chamber, "
+                f"got {rel_name!r}"
+            )
+        return resolved
+
     FORBIDDEN_SNIPPETS = (
         "__import__",
         "subprocess",
@@ -56,6 +91,23 @@ class Crucible:
 
     def syntax_probe(self, code: str) -> CrucibleResult:
         cid = str(uuid.uuid4())[:8]
+        if not isinstance(code, str):
+            return CrucibleResult(
+                id=cid,
+                mode="syntax",
+                ok=False,
+                detail="syntax_probe: 'code' must be a string",
+            )
+        if len(code) > _MAX_SMOKE_CONTENT:
+            return CrucibleResult(
+                id=cid,
+                mode="syntax",
+                ok=False,
+                detail=(
+                    "syntax_probe: 'code' exceeds the "
+                    f"{_MAX_SMOKE_CONTENT} character probe limit"
+                ),
+            )
         low = code.lower()
         for bad in self.FORBIDDEN_SNIPPETS:
             if bad.lower() in low:
@@ -72,8 +124,37 @@ class Crucible:
 
     def file_smoke(self, rel_name: str, content: str) -> CrucibleResult:
         cid = str(uuid.uuid4())[:8]
+        if not isinstance(content, str):
+            return CrucibleResult(
+                id=cid,
+                mode="file_smoke",
+                ok=False,
+                detail="file_smoke: 'content' must be a string",
+            )
+        if len(content) > _MAX_SMOKE_CONTENT:
+            return CrucibleResult(
+                id=cid,
+                mode="file_smoke",
+                ok=False,
+                detail=(
+                    "file_smoke: 'content' exceeds the "
+                    f"{_MAX_SMOKE_CONTENT} character smoke-test limit"
+                ),
+            )
+        try:
+            self._check_rel_name(rel_name)
+        except ValueError as exc:
+            return CrucibleResult(
+                id=cid, mode="file_smoke", ok=False, detail=str(exc)
+            )
         chamber = self._chamber()
-        path = chamber / rel_name
+        try:
+            path = self._safe_rel_path(chamber, rel_name)
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except ValueError as exc:
+            return CrucibleResult(
+                id=cid, mode="file_smoke", ok=False, detail=str(exc)
+            )
         path.write_text(content, encoding="utf-8")
         if path.suffix == ".py":
             try:

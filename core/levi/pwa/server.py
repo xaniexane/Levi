@@ -416,7 +416,7 @@ def _model_status() -> dict:
         "resolved": resolved,
         "note": (
             "LEVI-first: native brain and remixes head the list; "
-            "other providers are selectable sources."
+            "other providers are selectable references."
         ),
     }
 
@@ -424,6 +424,19 @@ def _model_status() -> dict:
 # ---------------------------------------------------------------------------
 # serve()
 # ---------------------------------------------------------------------------
+
+
+def _check_bind(host: str, port: int) -> tuple[str, int]:
+    """Validate a server bind address. Raises ValueError on garbage."""
+    if not isinstance(host, str) or not host.strip():
+        raise ValueError(f"host must be a non-empty string, got {host!r}")
+    host = host.strip()
+    if isinstance(port, bool) or not isinstance(port, int):
+        raise ValueError(f"port must be an integer, got {port!r}")
+    if not 0 <= port <= 65535:
+        # 0 is the standard "let the OS pick a free ephemeral port" idiom.
+        raise ValueError(f"port must be in 0-65535, got {port!r}")
+    return host, port
 
 
 def serve(
@@ -439,6 +452,7 @@ def serve(
     ``provider_factory`` lets tests inject a stub provider; production
     uses :func:`levi.agent.providers.select_provider`.
     """
+    host, port = _check_bind(host, port)
     if token is None:
         token = os.environ.get("LEVI_PWA_TOKEN", "").strip()
     if host != "127.0.0.1" and host != "localhost" and not token:

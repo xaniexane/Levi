@@ -144,15 +144,23 @@ def craft_menu() -> str:
 
 
 def pick_cascade_beat(expand_index: int) -> str:
+    if isinstance(expand_index, bool) or not isinstance(expand_index, int):
+        raise ValueError(
+            f"pick_cascade_beat expand_index must be an int, got {expand_index!r}"
+        )
     return PREMIUM_CASCADE[expand_index % len(PREMIUM_CASCADE)]
 
 
 def scene_goal(seed: str) -> str:
+    if not isinstance(seed, str):
+        raise ValueError(f"scene_goal seed must be a string, got {seed!r}")
     h = int(hashlib.sha1(seed.encode()).hexdigest()[:8], 16)
     return SCENE_GOALS[h % len(SCENE_GOALS)]
 
 
 def sequel_move(seed: str) -> str:
+    if not isinstance(seed, str):
+        raise ValueError(f"sequel_move seed must be a string, got {seed!r}")
     h = int(hashlib.sha1(("s" + seed).encode()).hexdigest()[:8], 16)
     return SEQUEL_MOVES[h % len(SEQUEL_MOVES)]
 
@@ -167,6 +175,18 @@ def premium_opening(
     voice: str = "",
 ) -> str:
     """Offline premium opening: in medias res + objective correlative + micro-tension."""
+    for label, value in (
+        ("lead_name", lead_name),
+        ("genre", genre),
+        ("premise", premise),
+        ("want", want),
+        ("need", need),
+        ("wound", wound),
+    ):
+        if not isinstance(value, str):
+            raise ValueError(f"premium_opening {label} must be a string")
+    if not isinstance(voice, str):
+        raise ValueError("premium_opening voice must be a string")
     g = genre.replace("_", " ")
     goal = scene_goal(premise or lead_name)
     # Avoid explaining the genre; embody it
@@ -199,6 +219,19 @@ def premium_expand_paragraph(
     wound: str,
     expand_index: int,
 ) -> str:
+    for label, value in (
+        ("beat_name", beat_name),
+        ("lead", lead),
+        ("genre", genre),
+        ("premise", premise),
+        ("wound", wound),
+    ):
+        if not isinstance(value, str):
+            raise ValueError(f"premium_expand_paragraph {label} must be a string")
+    if isinstance(expand_index, bool) or not isinstance(expand_index, int):
+        raise ValueError(
+            f"premium_expand_paragraph expand_index must be an int, got {expand_index!r}"
+        )
     g = genre.replace("_", " ")
     goal = scene_goal(f"{beat_name}{expand_index}")
     sequel = sequel_move(f"{beat_name}{expand_index}")
@@ -224,6 +257,9 @@ def premium_beats(
     lead: str, ant: str, genre: str, premise: str
 ) -> List[Dict[str, Any]]:
     """Richer default spine than bare 6-beat list."""
+    for label, value in (("lead", lead), ("ant", ant), ("genre", genre), ("premise", premise)):
+        if not isinstance(value, str):
+            raise ValueError(f"premium_beats {label} must be a string")
     g = genre.replace("_", " ")
     return [
         {

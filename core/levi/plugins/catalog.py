@@ -48,14 +48,26 @@ class PluginCatalog:
         ]
 
     def format(self, category: str | None = None) -> str:
-        entries = self.list()
+        # One pass over the registry: reuse the connectors for both the
+        # entries and the describe() blocks instead of calling
+        # list_connectors() twice.
+        connectors = list_connectors()
+        entries = [
+            CatalogEntry(
+                id=c.id,
+                display_name=c.display_name,
+                credential_env_var=c.credential_env_var,
+                requires_confirmation=c.requires_confirmation,
+            )
+            for c in connectors
+        ]
         if category:
             entries = [e for e in entries if e.category == category]
             if not entries:
                 return f"No plugin connectors in category {category!r}."
         if not entries:
             return "No plugin connectors registered."
-        by_id = {c.id: c for c in list_connectors()}
+        by_id = {c.id: c for c in connectors}
         blocks = ["=== LEVI Plugin Catalog ===", ""]
         for e in entries:
             blocks.append(describe(by_id[e.id]))

@@ -11,12 +11,14 @@ Outputs are HYPOTHESIS / INFERENCE until verified in corpus as OBSERVED.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field, asdict
-from typing import Any, Dict, List, Optional
-from pathlib import Path
-from datetime import datetime, timezone
-import json
 import hashlib
+import json
+import math
+import warnings
+from dataclasses import asdict, dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 
 from levi.demand.scoring import (
@@ -43,6 +45,29 @@ class DemandSignal:
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
     )
 
+    def __post_init__(self) -> None:
+        if not isinstance(self.id, str) or not self.id.strip():
+            raise ValueError(f"signal id must be a non-empty string, got {self.id!r}")
+        if not isinstance(self.need, str) or not self.need.strip():
+            raise ValueError("signal need must be a non-empty string")
+        if not isinstance(self.segment, str) or not self.segment.strip():
+            raise ValueError(
+                f"signal segment must be a non-empty string, got {self.segment!r}"
+            )
+        if (
+            isinstance(self.confidence, bool)
+            or not isinstance(self.confidence, (int, float))
+            or not math.isfinite(self.confidence)
+            or not 0.0 <= self.confidence <= 1.0
+        ):
+            raise ValueError(
+                f"signal confidence must be a number in [0, 1], got {self.confidence!r}"
+            )
+        if self.kind not in ("OBSERVED", "INFERENCE", "HYPOTHESIS"):
+            raise ValueError(
+                f"signal kind must be OBSERVED/INFERENCE/HYPOTHESIS, got {self.kind!r}"
+            )
+
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
 
@@ -59,6 +84,30 @@ class Opportunity:
     created_at: str = field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
     )
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.id, str) or not self.id.strip():
+            raise ValueError(
+                f"opportunity id must be a non-empty string, got {self.id!r}"
+            )
+        if not isinstance(self.demand_id, str) or not self.demand_id.strip():
+            raise ValueError(
+                f"opportunity demand_id must be a non-empty string, "
+                f"got {self.demand_id!r}"
+            )
+        if not isinstance(self.title, str) or not self.title.strip():
+            raise ValueError("opportunity title must be a non-empty string")
+        for name in ("demand_score", "serviceability", "startup_cost"):
+            value = getattr(self, name)
+            if (
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
+                or not math.isfinite(value)
+                or not 0.0 <= value <= 1.0
+            ):
+                raise ValueError(
+                    f"opportunity {name} must be a number in [0, 1], got {value!r}"
+                )
 
     @property
     def worth(self) -> float:
@@ -77,6 +126,10 @@ class Opportunity:
 
 class DemandPulse:
     def __init__(self, path: Optional[Path] = None):
+        if path is not None and not isinstance(path, (str, Path)):
+            raise ValueError(
+                f"path must be a str/Path or None, got {type(path).__name__}"
+            )
         self.path = Path(path) if path else DEFAULT
         self.signals: List[DemandSignal] = []
         self.opportunities: List[Opportunity] = []
@@ -88,35 +141,52 @@ class DemandPulse:
             return
         try:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
-            self.signals = [
-                DemandSignal(
-                    **{
-                        k: v
-                        for k, v in s.items()
-                        if k in DemandSignal.__dataclass_fields__
-                    }
-                )
-                for s in (raw.get("signals") or [])
-            ]
-            self.opportunities = []
-            for o in raw.get("opportunities") or []:
-                self.opportunities.append(
-                    Opportunity(
-                        **{
-                            k: v
-                            for k, v in o.items()
-                            if k in Opportunity.__dataclass_fields__
-                        }
-                    )
-                )
+            if not isinstance(raw, dict):
+                raise ValueError("top level must be an object")
+            for kind, cls, attr in (
+                ("signals", DemandSignal, "signals"),
+                ("opportunities", Opportunity, "opportunities"),
+            ):
+                items = raw.get(kind) or []
+                if not isinstance(items, list):
+                    raise ValueError(f"{kind!r} must be a list")
+                kept = []
+                for s in items:
+                    if not isinstance(s, dict):
+                        continue
+                    try:
+                        kept.append(
+                            cls(
+                                **{
+                                    k: v
+                                    for k, v in s.items()
+                                    if k in cls.__dataclass_fields__
+                                }
+                            )
+                        )
+                    except Exception:
+                        continue  # one corrupt entry must not kill the rest
+                setattr(self, attr, kept)
             self.score_cards = []
-            for c in raw.get("score_cards") or []:
+            cards = raw.get("score_cards") or []
+            if not isinstance(cards, list):
+                raise ValueError("'score_cards' must be a list")
+            for c in cards:
                 try:
                     self.score_cards.append(ScoreCard.from_dict(c))
                 except Exception:
                     continue
-        except Exception:
-            pass
+        except Exception as exc:
+            warnings.warn(
+                f"demand pulse file {self.path} is unreadable "
+                f"({type(exc).__name__}); starting empty. "
+                "Back up or delete the file to silence this warning.",
+                UserWarning,
+                stacklevel=3,
+            )
+            self.signals = []
+            self.opportunities = []
+            self.score_cards = []
 
     def _persist(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -130,14 +200,31 @@ class DemandPulse:
         tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
         tmp.replace(self.path)
 
+    def _check01(self, name: str, value: float) -> float:
+        """Public-boundary 0-1 score check: rejects garbage, no silent clamping."""
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(value)
+        ):
+            raise ValueError(f"{name} must be a number in [0, 1], got {value!r}")
+        value = float(value)
+        if not 0.0 <= value <= 1.0:
+            raise ValueError(f"{name} must be in [0, 1], got {value!r}")
+        return value
+
     def scan_seed(self, text: str, segment: str = "general") -> DemandSignal:
         """Register a demand signal from user/context text (not invented market data)."""
-        t = (text or "").strip()
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError(f"text must be a non-empty string, got {text!r}")
+        if not isinstance(segment, str) or not segment.strip():
+            raise ValueError(f"segment must be a non-empty string, got {segment!r}")
+        t = text.strip()
         hid = hashlib.sha256(t.encode()).hexdigest()[:8]
         sig = DemandSignal(
             id=hid,
             need=t[:300],
-            segment=segment,
+            segment=segment.strip(),
             evidence="user_or_context_seed",
             confidence=0.35,
             kind="HYPOTHESIS",
@@ -155,20 +242,38 @@ class DemandPulse:
         startup_cost: float = 0.3,
         notes: str = "",
     ) -> Opportunity:
+        """Score an opportunity; scores must already be on the 0-1 scale.
+
+        Wrong types, non-finite values, and out-of-range numbers are
+        all rejected — a public boundary never silently clamps garbage
+        into a plausible-looking score.
+        """
+        if not isinstance(demand_id, str) or not demand_id.strip():
+            raise ValueError(f"demand_id must be a non-empty string, got {demand_id!r}")
+        if not isinstance(title, str) or not title.strip():
+            raise ValueError("title must be a non-empty string")
+        if not isinstance(notes, str):
+            raise ValueError(f"notes must be a string, got {type(notes).__name__}")
         opp = Opportunity(
             id=hashlib.sha256(f"{demand_id}{title}".encode()).hexdigest()[:8],
-            demand_id=demand_id,
-            title=title,
-            demand_score=max(0.0, min(1.0, demand_score)),
-            serviceability=max(0.0, min(1.0, serviceability)),
-            startup_cost=max(0.0, min(1.0, startup_cost)),
+            demand_id=demand_id.strip(),
+            title=title.strip(),
+            demand_score=self._check01("demand_score", demand_score),
+            serviceability=self._check01("serviceability", serviceability),
+            startup_cost=self._check01("startup_cost", startup_cost),
             notes=notes,
         )
         self.opportunities.append(opp)
         self._persist()
         return opp
 
+    def _check_n(self, name: str, n: int) -> int:
+        if isinstance(n, bool) or not isinstance(n, int) or n < 1:
+            raise ValueError(f"{name} must be a positive integer, got {n!r}")
+        return n
+
     def top_opportunities(self, n: int = 5) -> List[Opportunity]:
+        n = self._check_n("n", n)
         return sorted(self.opportunities, key=lambda o: -o.worth)[:n]
 
     def score_five_factor(
@@ -187,6 +292,10 @@ class DemandPulse:
         Every factor requires a non-empty basis — the honesty guardrail.
         Pure scoring; the card is then persisted.
         """
+        if not isinstance(demand_id, str) or not demand_id.strip():
+            raise ValueError(f"demand_id must be a non-empty string, got {demand_id!r}")
+        if not isinstance(title, str) or not title.strip():
+            raise ValueError("title must be a non-empty string")
         card_id = hashlib.sha256(f"{demand_id}{title}ff".encode()).hexdigest()[:8]
         card = score_card(
             card_id, title, factors, weights=weights, threshold=threshold, notes=notes
@@ -196,6 +305,7 @@ class DemandPulse:
         return card
 
     def top_score_cards(self, n: int = 5) -> List[ScoreCard]:
+        n = self._check_n("n", n)
         return rank_cards(self.score_cards)[:n]
 
     def format_status(self) -> str:
@@ -213,9 +323,7 @@ class DemandPulse:
             lines.append("five-factor score cards:")
             for c in self.top_score_cards(5):
                 flag = " ALERT" if c.alert else ""
-                lines.append(
-                    f"  {c.composite:6.2f} [{c.tier}]{flag}  {c.title}"
-                )
+                lines.append(f"  {c.composite:6.2f} [{c.tier}]{flag}  {c.title}")
         if not self.opportunities and not self.score_cards:
             lines.append('  (none — seed with: levi demand --scan "…")')
         lines.append("")

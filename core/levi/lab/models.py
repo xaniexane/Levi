@@ -84,12 +84,40 @@ MODEL_CARDS: dict[str, dict] = {
 
 
 def get_card(model: str) -> dict | None:
-    """Return the card for a model key, or None when LEVI doesn't support it."""
+    """Return the card for a model key, or None when LEVI doesn't support it.
+
+    Raises ValueError when ``model`` is not a string.
+    """
+    if not isinstance(model, str):
+        raise ValueError(
+            "get_card: model must be a string, got %s" % type(model).__name__
+        )
     return MODEL_CARDS.get(model.strip().lower())
 
 
 def format_card(key: str, card: dict) -> str:
-    """Human-readable rendering of a model card."""
+    """Human-readable rendering of a model card.
+
+    Raises ValueError when ``card`` lacks the expected card keys.
+    """
+    if not isinstance(card, dict):
+        raise ValueError("format_card: card must be a dict")
+    for required in (
+        "name",
+        "params",
+        "provider",
+        "status",
+        "license",
+        "ctx_tokens",
+        "ctx_note",
+        "ram_envelope_gb",
+        "ram_note",
+        "quants",
+        "capabilities",
+        "get",
+    ):
+        if required not in card:
+            raise ValueError("format_card: model card is missing key %r" % required)
     lines = [
         f"══ {card['name']} ══",
         f"  key      : {key}",

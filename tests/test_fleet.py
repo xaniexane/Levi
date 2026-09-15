@@ -386,3 +386,64 @@ def test_cli_categories_lists_thirty():
 
 def test_swarm_status_missing_run():
     assert SwarmRunner.load("no-such-run-id") is None
+
+
+# -- hardening: validation ---------------------------------------------------
+
+def test_plan_rejects_blank_objective():
+    with pytest.raises(ValueError, match="objective"):
+        Plan(objective="   ", nodes=[], method="heuristic")
+
+
+def test_plan_node_rejects_blank_task():
+    with pytest.raises(ValueError, match="task"):
+        PlanNode(id="n1", category="planning", task="", acceptance="done")
+
+
+def test_replan_remaining_rejects_bad_failed_ids():
+    plan = Plan(
+        objective="do things",
+        nodes=[PlanNode(id="n1", category="planning", task="t1", acceptance="a1")],
+        method="heuristic",
+    )
+    # contract: failed_ids must be a list of non-empty node-id strings
+    for bad in (None, 123, ["n1", ""], ["n1", None], "n1"):
+        with pytest.raises(ValueError, match="failed_ids"):
+            replan_remaining(plan, bad)
+    # a well-formed but unknown id is a no-op, not an error
+    replanned = replan_remaining(plan, ["no-such-node"])
+    assert replanned.objective == "do things (replanned)"
+
+
+def test_swarm_budgets_reject_non_positive():
+    for kwargs in [
+        {"max_depth": 0},
+        {"max_agents": -1},
+        {"max_time_seconds": "600"},
+        {"max_tool_calls": True},
+        {"max_cost_units": 1.5},
+    ]:
+        with pytest.raises(ValueError):
+            SwarmBudgets(**kwargs)
+
+
+def test_swarm_load_rejects_malicious_run_id():
+    for bad in ("../secret", "a/b", "x" * 65, "", None, 123):
+        with pytest.raises(ValueError, match="run_id"):
+            SwarmRunner.load(bad)
+
+
+def test_swarm_load_corrupt_json_warns_and_returns_none(monkeypatch, tmp_path):
+    runs_dir = tmp_path / "runs"
+    runs_dir.mkdir()
+    (runs_dir / "r1.json").write_text("{corrupt", encoding="utf-8")
+    monkeypatch.setattr("levi.fleet.swarm._fleet_dir", lambda: runs_dir)
+    with pytest.warns(UserWarning, match="unreadable"):
+        assert SwarmRunner.load("r1") is None
+
+
+def test_swarm_load_missing_returns_none(monkeypatch, tmp_path):
+    runs_dir = tmp_path / "runs"
+    runs_dir.mkdir()
+    monkeypatch.setattr("levi.fleet.swarm._fleet_dir", lambda: runs_dir)
+    assert SwarmRunner.load("nope") is None

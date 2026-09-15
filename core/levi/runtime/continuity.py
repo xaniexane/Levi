@@ -17,6 +17,15 @@ import json
 
 DEFAULT = Path.home() / ".levi" / "continuity_shelf.json"
 
+#: Hard cap on snapshot text fields — continuity is pointers, not a dump.
+_LAST_ASK_LIMIT = 500
+_LAST_REPLY_LIMIT = 240
+_HISTORY_LIMIT = 40
+
+
+class ContinuityError(ValueError):
+    """Invalid input to the continuity shelf."""
+
 
 @dataclass
 class ContinuityFrame:
@@ -45,24 +54,40 @@ class ContinuityShelf:
             return
         try:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
-            self.history = list(raw.get("history") or [])[-40:]
-        except Exception:
+        except (OSError, ValueError):
             self.history = []
+            return
+        history = raw.get("history") if isinstance(raw, dict) else []
+        # One corrupt shelf must not poison resume: keep dict frames only.
+        self.history = [h for h in history if isinstance(h, dict)][
+            -_HISTORY_LIMIT:
+        ] if isinstance(history, list) else []
 
     def _persist(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         payload = {
-            "history": self.history[-40:],
+            "history": self.history[-_HISTORY_LIMIT:],
             "updated": datetime.now(timezone.utc).isoformat(),
         }
         tmp = self.path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-        tmp.replace(self.path)
+        try:
+            tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+            tmp.replace(self.path)
+        except OSError as exc:
+            raise ContinuityError(
+                f"cannot persist continuity shelf to {self.path}: {exc}"
+            ) from exc
 
     def snapshot(self, last_ask: str = "", last_reply: str = "") -> ContinuityFrame:
+        for field, value in (("last_ask", last_ask), ("last_reply", last_reply)):
+            if not isinstance(value, str):
+                raise ContinuityError(
+                    f"snapshot: {field!r} must be a string, "
+                    f"got {type(value).__name__}"
+                )
         frame = ContinuityFrame(at=datetime.now(timezone.utc).isoformat())
-        frame.last_ask = (last_ask or "")[:500]
-        frame.last_reply_head = (last_reply or "")[:240]
+        frame.last_ask = last_ask[:_LAST_ASK_LIMIT]
+        frame.last_reply_head = last_reply[:_LAST_REPLY_LIMIT]
         try:
             from levi.project.hitl import HITLGate
 

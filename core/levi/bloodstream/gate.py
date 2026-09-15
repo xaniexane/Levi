@@ -144,6 +144,8 @@ def run_gated(
             verified=outcome.verified,
             details={"dry_run": dry_run, "auto_approved": outcome.auto_approved},
         )
-    except KeyError:
+    except (KeyError, ValueError):
+        # PolicyEngine raises ValueError for unknown proposals (used to be a
+        # raw KeyError); either way the receipt degrades, never crashes.
         outcome.error = (outcome.error or "") + " [receipt failed: proposal lost]"
     return outcome

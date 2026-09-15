@@ -289,6 +289,7 @@ def read_user_tone(text: str, context: Optional[Dict[str, Any]] = None) -> UserT
 
     if not hits:
         primary, intensity, cues = "neutral", 0.25, []
+        secondary = None
         # mild collaborative if soft please/help
         if re.search(r"\b(please|help|could you)\b", lower):
             primary, intensity = "collaborative", 0.4
@@ -313,7 +314,6 @@ def read_user_tone(text: str, context: Optional[Dict[str, Any]] = None) -> UserT
         secondary = hits[1][0] if len(hits) > 1 else None
 
     reg = _REGULATION.get(primary, _REGULATION["neutral"])
-    secondary = hits[1][0] if len(hits) > 1 else None
 
     return UserTone(
         primary=primary,

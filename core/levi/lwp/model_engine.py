@@ -205,6 +205,64 @@ class ModelState:
         return cls(**known)
 
 
+# Expected value shapes for configure() — keeps setattr() from silently
+# storing a wrong-typed value into manuscript state.
+_CONFIG_INT_KEYS = frozenset({"words", "events", "ruptures"})
+_CONFIG_STR_KEYS = frozenset(
+    {"direction", "phase", "power", "pov", "seed", "ghost", "last_text", "last_id"}
+)
+_CONFIG_STRLIST_KEYS = frozenset({"genres", "bible_facts", "bible_scars", "causal_notes"})
+_CONFIG_DICTLIST_KEYS = frozenset({"scenes", "vault", "tracks"})
+_CONFIG_ENUMS = {"direction": DIRS, "phase": PHASES, "power": POWERS}
+
+
+def _validate_config_value(key: str, value: Any) -> None:
+    """Raise an actionable ValueError when a configure() value is mistyped."""
+    if key in _CONFIG_INT_KEYS:
+        if isinstance(value, bool) or not isinstance(value, int):
+            raise ValueError(f"configure: {key} must be an int, got {value!r}")
+        if value < 0:
+            raise ValueError(f"configure: {key} must be >= 0, got {value}")
+        return
+    if key in _CONFIG_STR_KEYS:
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(
+                f"configure: {key} must be a non-empty string, got {value!r}"
+            )
+        allowed = _CONFIG_ENUMS.get(key)
+        if allowed is not None and value not in allowed:
+            raise ValueError(
+                f"configure: {key}={value!r} unknown — choose: {', '.join(sorted(allowed))}"
+            )
+        return
+    if key in _CONFIG_STRLIST_KEYS:
+        if not isinstance(value, list) or any(
+            not isinstance(v, str) or not v for v in value
+        ):
+            raise ValueError(
+                f"configure: {key} must be a list of non-empty strings, got {value!r}"
+            )
+        return
+    if key in _CONFIG_DICTLIST_KEYS:
+        if not isinstance(value, list) or any(
+            not isinstance(v, dict) for v in value
+        ):
+            raise ValueError(
+                f"configure: {key} must be a list of dicts, got {value!r}"
+            )
+        return
+    if key == "rom":
+        if value is not None and not isinstance(value, dict):
+            raise ValueError(f"configure: rom must be a dict or None, got {value!r}")
+        return
+    if key == "crowned":
+        if value is not None and not isinstance(value, str):
+            raise ValueError(
+                f"configure: crowned must be a string or None, got {value!r}"
+            )
+        return
+
+
 class LWPModelEngine:
     """Offline SSA literary engine — continuity under L.W.P. locks."""
 
@@ -494,10 +552,15 @@ class LWPModelEngine:
         for k, v in kwargs.items():
             if v is None:
                 continue
+            if k not in ModelState.__dataclass_fields__:
+                raise ValueError(
+                    f"unknown manuscript setting {k!r}: choose from "
+                    f"{sorted(ModelState.__dataclass_fields__)}"
+                )
             if k == "genres" and isinstance(v, str):
                 v = [x.strip() for x in v.split(",") if x.strip()]
-            if hasattr(st, k):
-                setattr(st, k, v)
+            _validate_config_value(k, v)
+            setattr(st, k, v)
         self._persist()
         return self.status()
 

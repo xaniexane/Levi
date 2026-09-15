@@ -17,10 +17,39 @@ from typing import Optional
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 import os
+import re
 import hashlib
 
 
 DEFAULT_DIR = Path.home() / ".levi" / "media"
+
+_MAX_DIMENSION = 2048
+_MAX_PROMPT_LEN = 2000
+_MODEL_FILE_RE = re.compile(r"[^A-Za-z0-9_.-]+")
+
+
+def _validate_dimensions(width: int, height: int) -> tuple[int, int]:
+    for label, value in (("width", width), ("height", height)):
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, int)
+            or not 1 <= value <= _MAX_DIMENSION
+        ):
+            raise ValueError(
+                "%s must be an integer 1-%d, got %r" % (label, _MAX_DIMENSION, value)
+            )
+    return width, height
+
+
+def _validate_model(model: str) -> str:
+    if not isinstance(model, str) or not model.strip():
+        raise ValueError("model must be a non-empty string")
+    return model.strip()[:64]
+
+
+def _safe_model_filename(model: str) -> str:
+    """Model name scrubbed for use inside a filename (no path separators)."""
+    return _MODEL_FILE_RE.sub("_", model).strip("._") or "model"
 
 
 @dataclass
@@ -51,7 +80,16 @@ def image_url(
     seed: Optional[int] = None,
     nologo: bool = True,
 ) -> str:
-    enc = quote(prompt.strip() or "abstract form")
+    """Build the Pollinations image URL. Validates dimensions/prompt/model."""
+    if not isinstance(prompt, str) or not prompt.strip():
+        raise ValueError("prompt must be a non-empty string")
+    width, height = _validate_dimensions(width, height)
+    model = _validate_model(model)
+    if seed is not None and (
+        isinstance(seed, bool) or not isinstance(seed, int) or seed < 0
+    ):
+        raise ValueError("seed must be a non-negative integer or None")
+    enc = quote(prompt.strip()[:_MAX_PROMPT_LEN] or "abstract form")
     q = f"width={width}&height={height}&model={quote(model)}"
     if seed is not None:
         q += f"&seed={int(seed)}"
@@ -79,17 +117,31 @@ def generate(
     save: bool = True,
     timeout: int = 90,
 ) -> PollinationsImage:
+    """Generate an image via Pollinations. Network failure returns the URL
+    with a download-failure note — never a traceback, never a leaked key."""
+    if not isinstance(prompt, str) or not prompt.strip():
+        raise ValueError("prompt must be a non-empty string")
+    model = _validate_model(model)
+    if (
+        isinstance(timeout, bool)
+        or not isinstance(timeout, (int, float))
+        or timeout <= 0
+    ):
+        raise ValueError("timeout must be a positive number of seconds")
     if seed is None:
         seed = int(hashlib.sha256(prompt.encode()).hexdigest()[:8], 16) % (2**31)
     url = image_url(prompt, width=width, height=height, model=model, seed=seed)
     path = None
     if save:
         DEFAULT_DIR.mkdir(parents=True, exist_ok=True)
-        fname = f"img_{seed}_{model}.jpg"
+        # model is user-controlled — never let it become a path.
+        fname = f"img_{seed}_{_safe_model_filename(model)}.jpg"
         dest = DEFAULT_DIR / fname
         req = Request(url, headers={"User-Agent": "LEVI-LWP/1.0"})
         key = _api_key()
         if key:
+            # The key goes to Pollinations only, in the header — it is never
+            # logged, printed, or included in any error text below.
             req.add_header("Authorization", f"Bearer {key}")
         try:
             with urlopen(req, timeout=timeout) as resp:
@@ -105,6 +157,13 @@ def generate(
 def story_still(
     story_title: str, genre: str, beat: str = "midpoint"
 ) -> PollinationsImage:
+    """Generate a cinematic still for a story beat."""
+    if not isinstance(story_title, str) or not story_title.strip():
+        raise ValueError("story_title must be a non-empty string")
+    if not isinstance(genre, str) or not genre.strip():
+        raise ValueError("genre must be a non-empty string")
+    if not isinstance(beat, str) or not beat.strip():
+        raise ValueError("beat must be a non-empty string")
     prompt = (
         f"Cinematic still, {genre.replace('_', ' ')} mood, "
         f"scene for story '{story_title}', beat {beat}, "

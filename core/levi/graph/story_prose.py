@@ -137,6 +137,20 @@ def expand_paragraph(
 
     Hardened: no duplicate atmosphere, less formula scaffolding, denser sensory.
     """
+    for label, value in (
+        ("beat_name", beat_name),
+        ("lead", lead),
+        ("genre", genre),
+        ("premise", premise),
+    ):
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"expand_paragraph {label} must be a non-empty string")
+    if not isinstance(wound, str):
+        raise ValueError("expand_paragraph wound must be a string")
+    if isinstance(index, bool) or not isinstance(index, int):
+        raise ValueError(f"expand_paragraph index must be an int, got {index!r}")
+    if supporting is not None and not isinstance(supporting, str):
+        raise ValueError("expand_paragraph supporting must be a string or None")
     seed = f"{beat_name}|{lead}|{genre}|{premise}|{index}"
     r = _rng(seed)
     genre_key = genre.strip().lower().replace(" ", "_")

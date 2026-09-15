@@ -14,6 +14,7 @@ everything; a dead host never crashes the run.
 from __future__ import annotations
 
 import http.client
+import math
 import re
 import socket
 import ssl
@@ -21,7 +22,7 @@ import time
 import urllib.request
 from typing import Dict, List, Optional
 
-from levi.bounty.scope import ScopeStore, check_scope
+from levi.bounty.scope import ScopeStore, check_scope, normalize_domain
 
 UA = "LEVI-bounty-recon/1.0 (authorized bug-bounty recon; in-scope targets only)"
 TIMEOUT = 8
@@ -51,10 +52,45 @@ def _tcp_open(host: str, port: int, timeout: int = TIMEOUT) -> bool:
         return False
 
 
+def _check_delay(delay: float) -> float:
+    """Validate a politeness delay. Raises ValueError on garbage."""
+    if isinstance(delay, bool) or not isinstance(delay, (int, float)):
+        raise ValueError(
+            f"delay must be a non-negative number of seconds, got {delay!r}"
+        )
+    if not math.isfinite(delay) or delay < 0:
+        raise ValueError(
+            f"delay must be a non-negative number of seconds, got {delay!r}"
+        )
+    return float(delay)
+
+
+def _check_ports(ports: Optional[List[int]]) -> List[int]:
+    """Validate an explicit port list. Raises ValueError on garbage.
+
+    ``None`` (or an empty list, the historical default) selects
+    :data:`COMMON_PORTS`.
+    """
+    if not ports:
+        return list(COMMON_PORTS)
+    checked: List[int] = []
+    for p in ports:
+        if isinstance(p, bool) or not isinstance(p, int) or not 1 <= p <= 65535:
+            raise ValueError(f"invalid port {p!r}: expected an int in 1-65535")
+        checked.append(p)
+    return checked
+
+
 def _http_get(
     host: str, port: int, use_tls: bool, timeout: int = TIMEOUT
 ) -> Optional[Dict[str, object]]:
-    """Ordinary GET /. Returns response facts or None. Never raises."""
+    """Ordinary GET /. Returns response facts or None. Never raises.
+
+    The returned dict carries the decoded ``body`` and the fetched ``url``
+    alongside the facts so callers (the pipeline) can hand page bodies to
+    content discovery instead of re-fetching the same homepage — one GET
+    per live page, not two.
+    """
     scheme = "https" if use_tls else "http"
     url = f"{scheme}://{host}:{port}/"
     req = urllib.request.Request(url, headers={"User-Agent": UA})
@@ -62,10 +98,12 @@ def _http_get(
         if use_tls:
             ctx = ssl.create_default_context()
             with urllib.request.urlopen(req, timeout=timeout, context=ctx) as resp:
-                return _response_facts(resp)
+                facts = _response_facts(resp)
         else:
             with urllib.request.urlopen(req, timeout=timeout) as resp:
-                return _response_facts(resp)
+                facts = _response_facts(resp)
+        facts["url"] = url
+        return facts
     except Exception:
         return None
 
@@ -76,7 +114,12 @@ def _response_facts(resp) -> Dict[str, object]:
     facts: Dict[str, object] = {
         "status": resp.status,
         "title": _clean_title(body),
-        "tech": [f"{_TECH_HINTS[k]}: {headers[k]}" for k in _TECH_HINTS if k in headers],
+        "tech": [
+            f"{_TECH_HINTS[k]}: {headers[k]}" for k in _TECH_HINTS if k in headers
+        ],
+        # Captured once here so the pipeline can hand page bodies to
+        # content discovery instead of re-fetching the same homepage.
+        "body": body,
     }
     gen = _GENERATOR_RE.search(body)
     if gen:
@@ -121,9 +164,16 @@ def probe_host(
     ports: Optional[List[int]] = None,
     delay: float = REQUEST_DELAY,
 ) -> Dict[str, object]:
-    """Probe one host. Scope gate runs before the first packet."""
+    """Probe one host: open ports, TLS cert, HTTP(S) facts.
+
+    Scope gate runs before the first packet. Returns ``page_bodies``
+    (fetched URL -> decoded body, capped per page) so later pipeline
+    stages can mine JS/endpoints without issuing a second homepage GET.
+    """
     check_scope(host, store)  # raises ScopeError if out of scope
-    ports = ports or COMMON_PORTS
+    host = normalize_domain(host)  # canonical host everywhere below
+    ports = _check_ports(ports)
+    delay = _check_delay(delay)
 
     open_ports: List[int] = []
     for port in ports:
@@ -133,18 +183,27 @@ def probe_host(
 
     http_facts: Dict[str, object] = {}
     tls_facts: Dict[str, str] = {}
+    page_bodies: Dict[str, str] = {}
     web_ports = [p for p in open_ports if p in (80, 8080, 8000, 8888, 3000, 5000, 9000)]
     tls_ports = [p for p in open_ports if p in (443, 8443)]
     for port in web_ports[:3]:
         facts = _http_get(host, port, use_tls=False)
         if facts:
             http_facts[f"http:{port}"] = facts
+            body = facts.get("body")
+            url = facts.get("url")
+            if isinstance(body, str) and body and isinstance(url, str):
+                page_bodies[url] = body
             break
         time.sleep(delay)
     for port in tls_ports[:2]:
         facts = _http_get(host, port, use_tls=True)
         if facts:
             http_facts[f"https:{port}"] = facts
+            body = facts.get("body")
+            url = facts.get("url")
+            if isinstance(body, str) and body and isinstance(url, str):
+                page_bodies[url] = body
             break
         time.sleep(delay)
     if 443 in open_ports:
@@ -155,4 +214,5 @@ def probe_host(
         "open_ports": open_ports,
         "http": http_facts,
         "tls": tls_facts,
+        "page_bodies": page_bodies,
     }

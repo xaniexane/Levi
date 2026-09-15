@@ -366,3 +366,251 @@ def test_cli_scope_and_findings(tmp_path):
     assert r.returncode == 0
     # scope files landed under the isolated HOME only
     assert (home / ".levi" / "bounty" / "scope.json").exists()
+
+
+# -- IDN / punycode --------------------------------------------------------
+
+_IDN_CASES = [
+    ("münchen.de", "xn--mnchen-3ya.de"),
+    ("BÜCHER.de", "xn--bcher-kva.de"),
+    ("https://münchen.de/some/path", "xn--mnchen-3ya.de"),
+    ("user@münchen.de:8080", "xn--mnchen-3ya.de"),
+]
+
+
+@pytest.mark.parametrize("raw,expected", _IDN_CASES)
+def test_normalize_domain_idn_to_punycode(raw, expected):
+    """Unicode domains normalize to canonical punycode, no network needed."""
+    assert normalize_domain(raw) == expected
+
+
+@pytest.mark.parametrize("raw", [None, 123, 4.5, ["example.com"], {"d": 1}, b"example.com"])
+def test_normalize_domain_rejects_non_string(raw):
+    with pytest.raises(ValueError, match="not a valid domain"):
+        normalize_domain(raw)
+
+
+@pytest.mark.parametrize("raw", ["1.2.3.4", "::1", "2001:db8::1", "999.999.999.999"])
+def test_normalize_domain_rejects_ip_literals(raw):
+    with pytest.raises(ValueError, match="not a valid domain"):
+        normalize_domain(raw)
+
+
+def test_invalid_domains_never_touch_network(monkeypatch):
+    """Garbage input is rejected before any socket/HTTP/DNS call."""
+    called = []
+
+    def _boom(*a, **k):
+        called.append((a, k))
+        raise AssertionError("network touched for invalid input")
+
+    for mod in (enum_mod, probe_mod, content_mod):
+        monkeypatch.setattr(mod, "_fetch_text", _boom, raising=False)
+    monkeypatch.setattr(enum_mod, "_resolve", _boom)
+    monkeypatch.setattr(probe_mod, "_tcp_open", _boom)
+    store = ScopeStore(path=Path("/nonexistent-scope.json"))
+    for raw in ("", "not a domain", "1.2.3.4", None, 123):
+        with pytest.raises(ValueError):
+            enum_mod.enumerate_subdomains(raw, store=store, delay=0)
+        with pytest.raises(ValueError):
+            probe_mod.probe_host(raw, store=store, delay=0)
+    assert called == []
+
+
+# -- DNS cache --------------------------------------------------------------
+
+def test_enum_dns_cache_resolves_each_host_once(scoped, monkeypatch):
+    calls = []
+
+    def _counting_resolve(host):
+        calls.append(host)
+        return ["93.184.216.34"]
+
+    monkeypatch.setattr(enum_mod, "_resolve", _counting_resolve)
+    cache = {}
+    first = enum_mod.enumerate_subdomains(
+        "example.com", store=scoped, use_crtsh=False, use_wordlist=True,
+        delay=0, dns_cache=cache,
+    )
+    assert len(calls) > 0
+    assert len(calls) == len(cache) == len(first)
+    # a second enumeration with the same cache must not re-resolve
+    second = enum_mod.enumerate_subdomains(
+        "example.com", store=scoped, use_crtsh=False, use_wordlist=True,
+        delay=0, dns_cache=cache,
+    )
+    assert len(calls) == len(first)
+    assert [s["subdomain"] for s in second] == [s["subdomain"] for s in first]
+
+
+def test_enum_dns_cache_defaults_to_fresh_per_call(scoped, monkeypatch):
+    calls = []
+    monkeypatch.setattr(
+        enum_mod, "_resolve", lambda host: calls.append(host) or ["1.2.3.4"]
+    )
+    enum_mod.enumerate_subdomains(
+        "example.com", store=scoped, use_crtsh=False, use_wordlist=True, delay=0
+    )
+    n = len(calls)
+    enum_mod.enumerate_subdomains(
+        "example.com", store=scoped, use_crtsh=False, use_wordlist=True, delay=0
+    )
+    assert len(calls) == 2 * n  # no shared cache -> resolves again
+
+
+# -- no duplicate homepage fetch --------------------------------------------
+
+def test_probe_host_returns_page_bodies(scoped, monkeypatch):
+    html = "<html><head><title>T</title></head></html>"
+    monkeypatch.setattr(probe_mod, "_tcp_open", lambda h, p, timeout=8: p == 80)
+    monkeypatch.setattr(
+        probe_mod,
+        "_http_get",
+        lambda h, p, use_tls, timeout=8: {
+            "status": 200,
+            "title": "T",
+            "tech": [],
+            "body": html,
+            "url": f"http://{h}:{p}/",
+        },
+    )
+    monkeypatch.setattr(probe_mod, "_tls_cert", lambda h, port=443, timeout=8: {})
+    facts = probe_mod.probe_host("example.com", store=scoped, delay=0)
+    assert facts["page_bodies"] == {"http://example.com:80/": html}
+
+
+def test_pipeline_reuses_probe_bodies_no_duplicate_fetch(scoped, fstore, monkeypatch):
+    """The pipeline must not re-GET a homepage the probe already fetched.
+
+    Counts every HTTP fetch: probe GETs + content's own fetches (homepage
+    fallback and wayback are counted separately).
+    """
+    html = "<html><head><title>Example</title></head></html>"
+    fetches = {"probe": 0, "content_homepage": 0, "wayback": 0}
+
+    def _fake_http_get(host, port, use_tls=False, timeout=8):
+        fetches["probe"] += 1
+        scheme = "https" if use_tls else "http"
+        return {
+            "status": 200,
+            "title": "Example",
+            "tech": [],
+            "body": html,
+            "url": f"{scheme}://{host}:{port}/",
+        }
+
+    def _fake_content_fetch(url, timeout=10):
+        if "web.archive.org" in url:
+            fetches["wayback"] += 1
+            return ""
+        fetches["content_homepage"] += 1
+        return html
+
+    monkeypatch.setattr(enum_mod, "enumerate_subdomains", lambda *a, **k: [])
+    monkeypatch.setattr(probe_mod, "_tcp_open", lambda h, p, timeout=8: p == 80)
+    monkeypatch.setattr(probe_mod, "_http_get", _fake_http_get)
+    monkeypatch.setattr(probe_mod, "_tls_cert", lambda h, port=443, timeout=8: {})
+    monkeypatch.setattr(content_mod, "_fetch_text", _fake_content_fetch)
+
+    report = run_recon("example.com", store=scoped, findings=fstore, delay=0)
+    assert report["errors"] == []
+    assert fetches["probe"] == 1  # probe fetched the homepage once
+    assert fetches["content_homepage"] == 0  # content must NOT fetch it again
+    assert fetches["wayback"] == 1  # passive archive lookup still runs
+
+
+def test_content_falls_back_to_own_fetch_without_probe_bodies(scoped, monkeypatch):
+    """Without probe bodies, content discovery still fetches the homepage itself."""
+    html = "<html><head><title>Example</title></head></html>"
+    fetched = []
+    monkeypatch.setattr(
+        content_mod, "_fetch_text", lambda url, timeout=10: fetched.append(url) or (
+            "" if "web.archive.org" in url else html
+        ),
+    )
+    out = content_mod.collect_content("example.com", store=scoped)
+    assert any(u == "https://example.com/" for u in fetched)
+    assert out["js_files"] == []
+
+
+# -- corrupt persisted JSON --------------------------------------------------
+
+def test_corrupt_scope_file_warns_and_fails_closed(tmp_path):
+    path = tmp_path / "scope.json"
+    path.write_text("{not valid json", encoding="utf-8")
+    with pytest.warns(UserWarning, match="unreadable"):
+        store = ScopeStore(path=path)
+    assert store.domains == []
+    with pytest.raises(ScopeError):
+        store.check("example.com")  # nothing enrolled -> gate refuses
+
+
+def test_corrupt_findings_file_warns_and_starts_empty(tmp_path):
+    path = tmp_path / "findings.json"
+    path.write_text("[1,2,3", encoding="utf-8")
+    with pytest.warns(UserWarning, match="unreadable"):
+        store = FindingStore(path=path)
+    assert store.list() == []
+    f, is_new = store.add("h.example.com", "example.com", "open_port", "tcp/80 open")
+    assert is_new is True
+
+
+def test_corrupt_findings_entry_skipped_not_fatal(tmp_path):
+    path = tmp_path / "findings.json"
+    good = {
+        "id": "abc123",
+        "target": "h.example.com",
+        "scope": "example.com",
+        "kind": "open_port",
+        "detail": "tcp/80 open",
+        "evidence": "",
+        "first_seen": "2026-01-01T00:00:00",
+        "last_seen": "2026-01-01T00:00:00",
+    }
+    bad = {"id": "", "target": 123}  # invalid entry
+    path.write_text(json.dumps({"findings": [good, bad], "runs": []}))
+    store = FindingStore(path=path)
+    assert [f.id for f in store.list()] == ["abc123"]
+
+
+def test_finding_add_rejects_blank_fields(fstore):
+    with pytest.raises(ValueError):
+        fstore.add("", "example.com", "open_port", "tcp/80 open")
+    with pytest.raises(ValueError):
+        fstore.add("h.example.com", "example.com", "", "tcp/80 open")
+
+
+# -- stage-by-stage degradation ----------------------------------------------
+
+def test_run_recon_degrades_stage_by_stage(scoped, fstore, monkeypatch):
+    """A network outage in every stage yields error entries, never a traceback."""
+    monkeypatch.setattr(
+        enum_mod, "enumerate_subdomains",
+        lambda *a, **k: (_ for _ in ()).throw(ConnectionError("dns down")),
+    )
+    monkeypatch.setattr(
+        probe_mod, "probe_host",
+        lambda *a, **k: (_ for _ in ()).throw(ConnectionError("tcp down")),
+    )
+    monkeypatch.setattr(
+        content_mod, "collect_content",
+        lambda *a, **k: (_ for _ in ()).throw(ConnectionError("http down")),
+    )
+    report = run_recon("example.com", store=scoped, findings=fstore, delay=0)
+    assert report["subdomains"] == []
+    assert report["hosts_probed"] == 0
+    assert len(report["errors"]) == 3
+    assert any(e.startswith("enum:") for e in report["errors"])
+    assert any("probe example.com" in e for e in report["errors"])
+    assert any(e.startswith("content:") for e in report["errors"])
+    assert fstore.record_run(report["domain"], report["started_at"], [])["finding_ids"] == []
+
+
+@pytest.mark.parametrize("bad_delay", [-1, float("inf"), float("nan"), "0.5", None])
+def test_invalid_delay_rejected_fast(scoped, fstore, bad_delay):
+    with pytest.raises(ValueError, match="delay"):
+        run_recon("example.com", store=scoped, findings=fstore, delay=bad_delay)
+    with pytest.raises(ValueError, match="delay"):
+        enum_mod.enumerate_subdomains("example.com", store=scoped, delay=bad_delay)
+    with pytest.raises(ValueError, match="delay"):
+        probe_mod.probe_host("example.com", store=scoped, delay=bad_delay)

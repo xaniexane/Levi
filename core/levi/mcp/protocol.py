@@ -33,6 +33,10 @@ from levi.agent.tools import (
 PROTOCOL_VERSION = "2024-11-05"
 SERVER_NAME = "levi"
 
+#: Upper bound on a JSON-RPC batch: a batch is a convenience, not a
+#: bulk-upload channel.
+_MAX_BATCH_SIZE = 256
+
 
 def _version() -> str:
     try:
@@ -124,6 +128,13 @@ class MCPServer:
         when the message was a notification.
         """
         if isinstance(message, list):
+            if len(message) > _MAX_BATCH_SIZE:
+                return error_response(
+                    None,
+                    -32600,
+                    f"invalid request: batch of {len(message)} exceeds the "
+                    f"limit of {_MAX_BATCH_SIZE}",
+                )
             responses = [self.handle(m) for m in message]
             responses = [r for r in responses if r is not None]
             return responses or None

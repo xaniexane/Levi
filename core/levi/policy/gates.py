@@ -68,6 +68,35 @@ class Receipt:
     details: Dict[str, Any] = field(default_factory=dict)
 
 
+def _as_risk_level(value: Any, *, field: str = "risk_level") -> RiskLevel:
+    """Coerce ints to RiskLevel; reject anything else with an actionable error."""
+    if isinstance(value, RiskLevel):
+        return value
+    if isinstance(value, int) and not isinstance(value, bool):
+        try:
+            return RiskLevel(value)
+        except ValueError:
+            pass
+    raise ValueError(
+        f"{field} must be a levi.policy.gates.RiskLevel (or int 0-4), "
+        f"got {value!r}"
+    )
+
+
+def _non_empty_str(value: Any, *, field: str) -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"{field} must be a non-empty string, got {value!r}")
+    return value
+
+
+def _str_list(value: Any, *, field: str) -> List[str]:
+    if value is None:
+        return []
+    if not isinstance(value, list) or any(not isinstance(v, str) for v in value):
+        raise ValueError(f"{field} must be a list of strings, got {value!r}")
+    return list(value)
+
+
 class PolicyEngine:
     """
     Enforces risk-based approval.
@@ -76,7 +105,9 @@ class PolicyEngine:
     """
 
     def __init__(self, auto_approve_up_to: RiskLevel = RiskLevel.LOW):
-        self.auto_approve_up_to = auto_approve_up_to
+        self.auto_approve_up_to = _as_risk_level(
+            auto_approve_up_to, field="auto_approve_up_to"
+        )
         self._pending: Dict[str, ActionProposal] = {}
         self._history: List[ActionProposal] = []
         self._receipts: Dict[str, Receipt] = {}
@@ -91,18 +122,48 @@ class PolicyEngine:
         permissions_required: Optional[List[str]] = None,
         reversible: bool = True,
     ) -> ActionProposal:
+        description = _non_empty_str(description, field="description")
+        reason = _non_empty_str(reason, field="reason")
+        risk_level = _as_risk_level(risk_level)
+        affected = _str_list(affected_systems, field="affected_systems")
+        permissions = _str_list(permissions_required, field="permissions_required")
+        if not isinstance(estimated_impact, str):
+            raise ValueError(
+                f"estimated_impact must be a string, got {estimated_impact!r}"
+            )
+        if not isinstance(reversible, bool):
+            raise ValueError(f"reversible must be a bool, got {reversible!r}")
         proposal = ActionProposal(
             id=str(uuid.uuid4()),
             description=description,
             risk_level=risk_level,
             reason=reason,
-            affected_systems=affected_systems or [],
+            affected_systems=affected,
             estimated_impact=estimated_impact,
-            permissions_required=permissions_required or [],
+            permissions_required=permissions,
             reversible=reversible,
         )
         self._pending[proposal.id] = proposal
         return proposal
+
+    def _get_pending(self, proposal_id: str, *, action: str) -> ActionProposal:
+        """Fetch a pending proposal, or raise an actionable ValueError.
+
+        Unknown ids used to leak a raw KeyError; they now say exactly
+        what went wrong and which ids are still pending.
+        """
+        if not isinstance(proposal_id, str) or not proposal_id:
+            raise ValueError(f"{action}: proposal id must be a non-empty string")
+        try:
+            return self._pending[proposal_id]
+        except KeyError:
+            known = sorted(self._pending)[:5]
+            hint = f" (pending: {known})" if known else " (nothing pending)"
+            raise ValueError(
+                f"{action}: unknown proposal {proposal_id!r}{hint} — "
+                "proposals leave the pending set once denied or completed; "
+                "approved proposals stay listed until mark_completed()"
+            ) from None
 
     def preview(self, proposal_id: str) -> Optional[Dict[str, Any]]:
         p = self._pending.get(proposal_id)
@@ -121,21 +182,22 @@ class PolicyEngine:
         }
 
     def request_permission(self, proposal_id: str) -> ActionProposal:
-        p = self._pending[proposal_id]
+        p = self._get_pending(proposal_id, action="request_permission")
         if p.risk_level <= self.auto_approve_up_to:
             return self.approve(proposal_id, note="auto-approved by policy")
         p.status = ActionStatus.AWAITING_PERMISSION
         return p
 
     def approve(self, proposal_id: str, note: str = "") -> ActionProposal:
-        p = self._pending[proposal_id]
+        p = self._get_pending(proposal_id, action="approve")
         p.status = ActionStatus.APPROVED
         p.decided_at = datetime.now(timezone.utc).isoformat()
         p.decision_note = note or "approved"
         return p
 
     def deny(self, proposal_id: str, note: str = "") -> ActionProposal:
-        p = self._pending.pop(proposal_id)
+        p = self._get_pending(proposal_id, action="deny")
+        del self._pending[proposal_id]
         p.status = ActionStatus.DENIED
         p.decided_at = datetime.now(timezone.utc).isoformat()
         p.decision_note = note or "denied"
@@ -149,10 +211,17 @@ class PolicyEngine:
         verified: bool = True,
         details: Optional[Dict[str, Any]] = None,
     ) -> Receipt:
+        if not isinstance(result_summary, str) or not result_summary.strip():
+            raise ValueError("mark_completed: result_summary must be a non-empty string")
+        if details is not None and not isinstance(details, dict):
+            raise ValueError("mark_completed: details must be a dict or None")
         p = self._pending.pop(proposal_id, None)
         if p is None:
-            # already moved?
-            raise KeyError(f"Proposal {proposal_id} not found")
+            # Already moved out of pending (or never existed): say so plainly.
+            raise ValueError(
+                f"mark_completed: unknown proposal {proposal_id!r} — "
+                "proposals leave the pending set once approved/denied/completed"
+            )
         p.status = ActionStatus.COMPLETED
         p.result_summary = result_summary
         receipt = Receipt(

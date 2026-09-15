@@ -17,6 +17,7 @@ of the bloodstream enforces the composite ceiling on the whole turn.
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Dict, List, Optional
@@ -50,6 +51,42 @@ class Composite:
             automation_ids=list(data.get("automation_ids", [])),
         )
 
+    @classmethod
+    def validated(cls, name: Any, data: Any) -> Optional["Composite"]:
+        """Build from an untrusted persisted record.
+
+        Returns None for malformed records (skipped, never aborting the
+        whole load). String-id lists must be actual lists of strings —
+        a bare string is rejected, not char-split.
+        """
+        if not isinstance(data, dict):
+            return None
+        if not isinstance(name, str) or not name:
+            return None
+        comp_name = data.get("name", name)
+        if not isinstance(comp_name, str) or not comp_name:
+            return None
+        description = data.get("description", "")
+        if not isinstance(description, str):
+            return None
+        persona_id = data.get("persona_id")
+        if persona_id is not None and not isinstance(persona_id, str):
+            return None
+        id_lists = {}
+        for key in ("skill_ids", "specialist_ids", "automation_ids"):
+            ids = data.get(key, [])
+            if not isinstance(ids, list) or any(
+                not isinstance(i, str) for i in ids
+            ):
+                return None
+            id_lists[key] = list(ids)
+        return cls(
+            name=comp_name,
+            description=description,
+            persona_id=persona_id,
+            **id_lists,
+        )
+
 
 class CompositeRegistry:
     """Named composites, persisted as JSON. Reversible by design."""
@@ -67,17 +104,25 @@ class CompositeRegistry:
     def _load(self) -> None:
         try:
             raw = json.loads(self._path.read_text(encoding="utf-8"))
-            for name, data in raw.items():
-                self._items[name] = Composite.from_dict(data)
         except (OSError, ValueError):
-            pass
+            return
+        if not isinstance(raw, dict):
+            return  # corrupt root: start empty rather than crash
+        for name, data in raw.items():
+            comp = Composite.validated(name, data)
+            if comp is not None:
+                self._items[comp.name] = comp
+            # malformed records are skipped individually; the rest load
 
     def _persist(self) -> None:
         try:
-            self._path.write_text(
-                json.dumps({n: c.to_dict() for n, c in self._items.items()}, indent=2),
-                encoding="utf-8",
+            payload = json.dumps(
+                {n: c.to_dict() for n, c in self._items.items()}, indent=2
             )
+            tmp = self._path.with_suffix(".tmp")
+            tmp.write_text(payload, encoding="utf-8")
+            os.chmod(tmp, 0o600)
+            tmp.replace(self._path)
         except OSError:
             pass
 
@@ -92,6 +137,21 @@ class CompositeRegistry:
     ) -> Composite:
         """Name a composite. Validates every part exists — fail fast, never
         a dangling reference. Returns the composite (reversible via unregister)."""
+        if not isinstance(composite, Composite):
+            raise ValueError(
+                f"register() needs a Composite, got {type(composite).__name__}"
+            )
+        if not isinstance(composite.name, str) or not composite.name.strip():
+            raise ValueError("composite needs a non-empty string name")
+        for key in ("skill_ids", "specialist_ids", "automation_ids"):
+            ids = getattr(composite, key)
+            if not isinstance(ids, list) or any(
+                not isinstance(i, str) or not i for i in ids
+            ):
+                raise ValueError(
+                    f"composite {composite.name!r}: {key} must be a list of "
+                    "non-empty string ids"
+                )
         missing = self._missing_parts(composite, skills, specialists, automations)
         if missing:
             raise ValueError(
@@ -103,6 +163,8 @@ class CompositeRegistry:
         return composite
 
     def unregister(self, name: str) -> bool:
+        if not isinstance(name, str):
+            return False
         if name in self._items:
             del self._items[name]
             self._persist()
@@ -110,6 +172,8 @@ class CompositeRegistry:
         return False
 
     def get(self, name: str) -> Optional[Composite]:
+        if not isinstance(name, str):
+            return None
         return self._items.get(name)
 
     def list(self) -> List[Composite]:

@@ -79,7 +79,22 @@ def _snip(text: str, limit: int = 220) -> str:
 
 
 def reflect_rules(experiences: list[Experience]) -> list[Learning]:
-    """Deterministic heuristic reflection. No model, no network."""
+    """Deterministic heuristic reflection. No model, no network.
+
+    Raises ValueError when ``experiences`` is not a list of Experience
+    objects.
+    """
+    if not isinstance(experiences, list):
+        raise ValueError(
+            "reflect_rules: experiences must be a list, got %s"
+            % type(experiences).__name__
+        )
+    for e in experiences:
+        if not isinstance(e, Experience):
+            raise ValueError(
+                "reflect_rules: experiences must contain Experience objects, got %s"
+                % type(e).__name__
+            )
     learnings: list[Learning] = []
     seen: set[str] = set()
 
@@ -291,7 +306,20 @@ def reflect(
     third-party provider must not receive another user's content.
     Cloud experiences are distilled separately by
     :func:`reflect_cloud`.
+
+    Raises ValueError when ``experiences`` is not a list of Experience
+    objects.
     """
+    if not isinstance(experiences, list):
+        raise ValueError(
+            "reflect: experiences must be a list, got %s" % type(experiences).__name__
+        )
+    for e in experiences:
+        if not isinstance(e, Experience):
+            raise ValueError(
+                "reflect: experiences must contain Experience objects, got %s"
+                % type(e).__name__
+            )
     if not experiences:
         return [], "rules"
     local = [e for e in experiences if e.meta.get("origin") != "cloud"]
@@ -366,7 +394,21 @@ def reflect_cloud(experiences: list[Experience]) -> list[Learning]:
     source model's verbatim output — becomes a procedural learning
     tagged ``learned_from: <source>``. Bad-outcome sessions distill
     nothing.
+
+    Raises ValueError when ``experiences`` is not a list of Experience
+    objects.
     """
+    if not isinstance(experiences, list):
+        raise ValueError(
+            "reflect_cloud: experiences must be a list, got %s"
+            % type(experiences).__name__
+        )
+    for e in experiences:
+        if not isinstance(e, Experience):
+            raise ValueError(
+                "reflect_cloud: experiences must contain Experience objects, got %s"
+                % type(e).__name__
+            )
     cloud = [e for e in experiences if e.meta.get("origin") == "cloud"]
     if not cloud:
         return []

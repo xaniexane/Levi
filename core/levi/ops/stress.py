@@ -74,7 +74,7 @@ def run_stress() -> str:
             f"       fabric story {rep.score}/10 ({rep.grade}) words={rep.words}"
         )
 
-    def kai_attr():
+    def levi_attr():
         from levi.persona.levi import format_levi_roster, all_variants
 
         text = format_levi_roster()
@@ -98,7 +98,7 @@ def run_stress() -> str:
 
     check("story_prose_batch_quality", story_batch)
     check("story_fabric_create_rate", fabric_create)
-    check("kai_attribution", kai_attr)
+    check("levi_attribution", levi_attr)
     check("interpenetrate_smoke", mesh)
     check("enterprise_checklist", enterprise)
 

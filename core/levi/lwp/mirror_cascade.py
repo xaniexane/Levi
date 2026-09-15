@@ -89,6 +89,10 @@ class MirrorReport:
 
 class MirrorCascade:
     def run(self, seed: str, context: str = "") -> MirrorReport:
+        if seed is not None and not isinstance(seed, str):
+            raise ValueError(f"mirror seed must be a string, got {seed!r}")
+        if not isinstance(context, str):
+            raise ValueError(f"mirror context must be a string, got {context!r}")
         s = (seed or "").strip() or "empty"
         ctx = (context or "").strip()
         h = hashlib.sha256(f"{s}|{ctx}".encode()).hexdigest()[:12]

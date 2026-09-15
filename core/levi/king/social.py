@@ -49,6 +49,10 @@ _BLANK = re.compile(r"\n{3,}")
 
 def sanitize(text: str) -> str:
     """Strip markdown syntax from source text. Pure function."""
+    if text is None:
+        return ""
+    if not isinstance(text, str):
+        raise ValueError(f"sanitize needs a string, got {type(text).__name__}")
     if not text:
         return ""
     out = text
@@ -93,6 +97,10 @@ def hashtags_from(text: str, limit: int = 5) -> List[str]:
     Frequency-ranked, ties broken alphabetically — same input, same
     tags, every run. Never emits a tag for a stopword.
     """
+    if not isinstance(text, str):
+        raise ValueError(f"hashtags_from needs a string, got {type(text).__name__}")
+    if isinstance(limit, bool) or not isinstance(limit, int) or limit < 0:
+        raise ValueError(f"hashtags_from limit must be a non-negative int, got {limit!r}")
     counts: Dict[str, int] = {}
     for m in _WORD.finditer(text.lower()):
         w = m.group(0).strip("'")
@@ -137,10 +145,12 @@ def build_pack(
     excerpt plus a trailing hashtag block; it is guaranteed to satisfy
     the sanitize contract (asserted by the test suite on real output).
     """
-    if platform not in PLATFORMS:
+    if not isinstance(platform, str) or platform not in PLATFORMS:
         raise ValueError(
             f"Unknown platform {platform!r}. Choose: {', '.join(sorted(PLATFORMS))}"
         )
+    if not isinstance(title, str):
+        raise ValueError(f"title must be a string, got {type(title).__name__}")
     spec = PLATFORMS[platform]
     clean = sanitize(source_text)
     if not clean:
@@ -168,6 +178,8 @@ def build_pack(
 
 def assert_pack_clean(pack: Dict[str, object]) -> None:
     """Enforce the sanitize contract on a built pack. Raises AssertionError."""
+    if not isinstance(pack, dict):
+        raise ValueError(f"assert_pack_clean needs a pack dict, got {type(pack).__name__}")
     caption = str(pack.get("caption", ""))
     assert "**" not in caption, "markdown bold leaked into caption"
     assert "__" not in caption, "markdown bold leaked into caption"

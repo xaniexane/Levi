@@ -1,6 +1,7 @@
 """
 Model Abstraction Layer — Local-first
-Discovery: Ollama → local OpenAI-compatible → deterministic offline fallback
+Discovery: local model-runner (reference: Ollama) → local OpenAI-compatible
+→ deterministic offline fallback
 Cloud is optional accelerator (disabled by default).
 
 This is the canonical "try local model, else fall back" module — every other
@@ -17,6 +18,62 @@ import json
 import time
 import urllib.request
 import urllib.error
+import urllib.parse
+
+
+def _validate_base_url(base_url: Any) -> str:
+    """Validate a provider base URL before any request is built from it.
+
+    Only http/https with a real host are accepted — a ``base_url`` becomes
+    the request target, so ``file://``, empty hosts, and non-strings are
+    rejected loudly instead of failing (or worse) at request time.
+    """
+    if not isinstance(base_url, str) or not base_url.strip():
+        raise ValueError(f"base_url must be a non-empty string, got {base_url!r}")
+    parsed = urllib.parse.urlparse(base_url.strip())
+    if parsed.scheme not in ("http", "https") or not parsed.hostname:
+        raise ValueError(
+            f"base_url must be an http(s) URL with a host, got {base_url!r}"
+        )
+    return base_url.strip().rstrip("/")
+
+
+def _validate_model_id(model_id: Any) -> str:
+    if not isinstance(model_id, str) or not model_id.strip():
+        raise ValueError(f"model_id must be a non-empty string, got {model_id!r}")
+    return model_id.strip()
+
+
+def _validate_request(request: Any) -> "GenerationRequest":
+    """Validate a GenerationRequest's wire-relevant fields before sending."""
+    if not isinstance(request, GenerationRequest):
+        raise ValueError(
+            f"request must be a GenerationRequest, got {type(request).__name__}"
+        )
+    if not isinstance(request.prompt, str) or not request.prompt.strip():
+        raise ValueError("request.prompt must be a non-empty string")
+    if request.system is not None and not isinstance(request.system, str):
+        raise ValueError("request.system must be a string or None")
+    if (
+        isinstance(request.max_tokens, bool)
+        or not isinstance(request.max_tokens, int)
+        or not (1 <= request.max_tokens <= 131072)
+    ):
+        raise ValueError(
+            f"request.max_tokens must be an int in 1..131072, got {request.max_tokens!r}"
+        )
+    if not isinstance(request.temperature, (int, float)) or not (
+        0.0 <= request.temperature <= 2.0
+    ):
+        raise ValueError(
+            f"request.temperature must be a number in 0.0..2.0, got {request.temperature!r}"
+        )
+    if request.stop is not None and (
+        not isinstance(request.stop, list)
+        or any(not isinstance(s, str) for s in request.stop)
+    ):
+        raise ValueError("request.stop must be a list of strings or None")
+    return request
 
 
 class ModelTier(str, Enum):
@@ -98,6 +155,8 @@ class DeterministicFallbackProvider(ModelProvider):
         return True
 
     def generate(self, model_id: str, request: GenerationRequest) -> GenerationResult:
+        model_id = _validate_model_id(model_id)
+        request = _validate_request(request)
         prompt = request.prompt.strip()
         # Full offline companion synthesizer (tone, continuity, alchemy, xyz, chess)
         try:
@@ -119,10 +178,14 @@ class DeterministicFallbackProvider(ModelProvider):
 
 
 class OllamaProvider(ModelProvider):
-    """Full chat via Ollama HTTP API when available."""
+    """Full chat via the local model-runner HTTP API when available.
+
+    "Ollama" here names the local model-runner reference protocol
+    (model ids ``ollama:<name>``); LEVI's identity is its own.
+    """
 
     def __init__(self, base_url: str = "http://127.0.0.1:11434"):
-        self.base_url = base_url.rstrip("/")
+        self.base_url = _validate_base_url(base_url)
         self._available: Optional[bool] = None
         self._models: List[ModelInfo] = []
 
@@ -136,7 +199,10 @@ class OllamaProvider(ModelProvider):
                     return False
                 data = json.loads(resp.read().decode("utf-8"))
                 self._models = []
-                for m in data.get("models", []):
+                models = data.get("models", []) if isinstance(data, dict) else []
+                for m in models:
+                    if not isinstance(m, dict):
+                        continue
                     name = m.get("name") or m.get("model") or "unknown"
                     self._models.append(
                         ModelInfo(
@@ -176,6 +242,8 @@ class OllamaProvider(ModelProvider):
         return list(self._models)
 
     def generate(self, model_id: str, request: GenerationRequest) -> GenerationResult:
+        model_id = _validate_model_id(model_id)
+        request = _validate_request(request)
         t0 = time.time()
         # model_id like "ollama:llama3.2" or raw name
         name = (

@@ -36,6 +36,18 @@ class PlanNode:
     acceptance: str
     deps: List[str] = field(default_factory=list)
 
+    def __post_init__(self) -> None:
+        for name in ("id", "category", "task", "acceptance"):
+            value = getattr(self, name)
+            if not isinstance(value, str) or not value.strip():
+                raise ValueError(
+                    f"PlanNode.{name} must be a non-empty string, got {value!r}"
+                )
+        if not isinstance(self.deps, list) or not all(
+            isinstance(d, str) and d.strip() for d in self.deps
+        ):
+            raise ValueError("PlanNode.deps must be a list of non-empty strings")
+
     def to_dict(self) -> Dict[str, Any]:
         return {
             "id": self.id,
@@ -53,6 +65,17 @@ class Plan:
     objective: str
     nodes: List[PlanNode] = field(default_factory=list)
     method: str = "heuristic"  # heuristic | model
+
+    def __post_init__(self) -> None:
+        _check_objective(self.objective)
+        if not isinstance(self.nodes, list) or not all(
+            isinstance(n, PlanNode) for n in self.nodes
+        ):
+            raise ValueError("Plan.nodes must be a list of PlanNode")
+        if not isinstance(self.method, str) or not self.method.strip():
+            raise ValueError(
+                f"Plan.method must be a non-empty string, got {self.method!r}"
+            )
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -158,8 +181,15 @@ def _heuristic_categories(objective: str) -> List[str]:
     return hits
 
 
+def _check_objective(objective: str) -> str:
+    if not isinstance(objective, str) or not objective.strip():
+        raise ValueError(f"objective must be a non-empty string, got {objective!r}")
+    return objective.strip()
+
+
 def heuristic_plan(objective: str) -> Plan:
     """Deterministic keyword-routed plan. Honest first draft, not genius."""
+    objective = _check_objective(objective)
     cats = _heuristic_categories(objective)
     nodes: List[PlanNode] = []
     seq = 0
@@ -270,6 +300,7 @@ Objective: {objective}"""
 
 def model_plan(objective: str, provider: Any = None) -> Plan:
     """Decompose via the existing agentic loop; falls back to heuristic."""
+    objective = _check_objective(objective)
     from levi.agent.loop import run_subtask
 
     cats = ", ".join(
@@ -334,6 +365,14 @@ def replan_remaining(plan: Plan, failed_ids: List[str]) -> Plan:
     nodes (``<id>-r``); dependents of failed nodes are re-pointed at the
     recovery nodes so the DAG stays valid. Returns a new Plan.
     """
+    if not isinstance(plan, Plan):
+        raise ValueError(
+            f"plan must be a levi.fleet.supervisor.Plan, got {type(plan).__name__}"
+        )
+    if not isinstance(failed_ids, (list, tuple)) or not all(
+        isinstance(fid, str) and fid.strip() for fid in failed_ids
+    ):
+        raise ValueError("failed_ids must be a list of non-empty node-id strings")
     failed = set(failed_ids)
     remap = {fid: f"{fid}-r" for fid in failed}
     nodes: List[PlanNode] = []

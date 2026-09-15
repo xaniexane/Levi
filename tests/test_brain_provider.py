@@ -153,3 +153,28 @@ def test_select_explicit_brain_available(monkeypatch, tmp_path):
     monkeypatch.delenv("LEVI_PROVIDER", raising=False)
     p = select_provider("levi-brain")
     assert isinstance(p, NativeBrainProvider)
+
+
+def test_generate_validates_inputs_without_torch():
+    """_generate validates n_chars/temperature before importing torch."""
+    from levi.agent.brain_provider import NativeBrainProvider
+
+    prov = NativeBrainProvider()
+    with pytest.raises(ValueError, match="n_chars"):
+        prov._generate("hello", n_chars=0)
+    with pytest.raises(ValueError, match="n_chars"):
+        prov._generate("hello", n_chars="many")  # type: ignore[arg-type]
+    with pytest.raises(ValueError, match="temperature"):
+        prov._generate("hello", temperature=0.0)
+    with pytest.raises(ValueError, match="temperature"):
+        prov._generate("hello", temperature=float("nan"))
+    with pytest.raises(ValueError, match="temperature"):
+        prov._generate("hello", temperature="hot")  # type: ignore[arg-type]
+
+
+def test_chat_rejects_empty_messages():
+    from levi.agent.brain_provider import NativeBrainProvider
+
+    prov = NativeBrainProvider()
+    with pytest.raises(ValueError, match="non-empty list"):
+        prov.chat([], [])

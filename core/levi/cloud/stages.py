@@ -121,6 +121,8 @@ class StageMap:
         return [self.phases[k] for k in ("A", "B", "C")]
 
     def get(self, pid: str) -> Optional[StageDef]:
+        if not isinstance(pid, str):
+            return None
         return self.phases.get(pid.upper())
 
     def status_block(self) -> str:

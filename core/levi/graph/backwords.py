@@ -14,12 +14,18 @@ import re
 
 def split_units(text: str) -> List[str]:
     """Split prose into reversible units (sentences)."""
-    parts = re.split(r"(?<=[.!?])\s+", (text or "").strip())
+    if text is None:
+        return []
+    if not isinstance(text, str):
+        raise ValueError(f"split_units needs a string, got {type(text).__name__}")
+    parts = re.split(r"(?<=[.!?])\s+", text.strip())
     return [p.strip() for p in parts if p.strip()]
 
 
 def reverse_units(units: List[str]) -> List[str]:
     """Last → first (backwords order)."""
+    if not isinstance(units, list):
+        raise ValueError(f"reverse_units needs a list, got {type(units).__name__}")
     return list(reversed(units))
 
 
@@ -31,6 +37,8 @@ def dual_passage(forward_text: str) -> Tuple[str, str, List[str]]:
 
 
 def format_dual_block(title: str, forward_text: str) -> str:
+    if not isinstance(title, str):
+        raise ValueError(f"format_dual_block title must be a string")
     fwd, bak, units = dual_passage(forward_text)
     lines = [
         "### " + title,

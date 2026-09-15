@@ -20,17 +20,13 @@ from typing import Any, Dict, List, Optional
 from pathlib import Path
 from datetime import datetime, timezone
 import json
+import os
 
 from levi.project.capability_log import CapabilityLog
 from levi.project.hitl import HITLGate
 
 
 DEFAULT_STATE = Path.home() / ".levi" / "project_phases.json"
-
-
-# backward-compatible name
-def _alias_phases():
-    return SERVICE_PHASES
 
 
 # Generic service workflow (any client site/business — not one brand)
@@ -205,12 +201,30 @@ class PhaseRunner:
     def _persist(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.state.updated_at = datetime.now(timezone.utc).isoformat()
+        # Atomic + owner-only: project state may reference client work.
         tmp = self.path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(self.state.to_dict(), indent=2), encoding="utf-8")
-        tmp.replace(self.path)
+        fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as fh:
+                json.dump(self.state.to_dict(), fh, indent=2)
+        except BaseException:
+            try:
+                tmp.unlink()
+            except OSError:
+                pass
+            raise
+        os.replace(tmp, self.path)
 
     def set_url(self, url: str) -> None:
-        self.state.public_url = (url or "").strip()
+        """Set the public site URL. Empty clears; non-empty must be http(s)."""
+        cleaned = url.strip() if isinstance(url, str) else ""
+        if cleaned and not (
+            cleaned.startswith("http://") or cleaned.startswith("https://")
+        ):
+            raise ValueError(
+                "url must start with http:// or https:// (public sites only)"
+            )
+        self.state.public_url = cleaned
         self._persist()
 
     def status(self) -> str:
@@ -386,7 +400,13 @@ class PhaseRunner:
         return lines
 
     def complete(self, phase_id: str) -> str:
-        pid = phase_id.upper()
+        """Mark a phase complete. Unknown phase ids are rejected, not logged."""
+        known = [p["id"] for p in SERVICE_PHASES]
+        pid = phase_id.upper() if isinstance(phase_id, str) else ""
+        if pid not in known:
+            raise ValueError(
+                "unknown phase %r — known phases: %s" % (phase_id, ", ".join(known))
+            )
         if pid not in self.state.completed:
             self.state.completed.append(pid)
         # advance current to next incomplete
@@ -404,6 +424,9 @@ class PhaseRunner:
         return f"Completed {pid}. Current → {self.state.current_phase}"
 
     def add_log_note(self, text: str, phase: str = "", skill: str = "") -> str:
+        """Append a free-text note to the capability log."""
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError("log note text must be a non-empty string")
         e = self.log.log(
             task=text[:200],
             result="completed",

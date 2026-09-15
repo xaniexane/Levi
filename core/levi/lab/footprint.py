@@ -46,15 +46,19 @@ _CTX_RE = re.compile(r"^\s*(\d+(?:\.\d+)?)\s*([k]?)\s*$", re.IGNORECASE)
 def parse_params(text: str | int | float) -> int:
     """Parse '30B', '0.6B', '600M', '3.3M', '1.2T', '500K' (or a number) to a param count."""
     if isinstance(text, (int, float)):
-        return int(text)
-    m = _PARAM_RE.match(str(text))
-    if not m:
-        raise ValueError(
-            f"parse_params: cannot parse {text!r} (try '30B', '600M', '3.3M')"
-        )
-    value, suffix = float(m.group(1)), m.group(2).lower()
-    mult = {"": 1, "k": 1e3, "m": 1e6, "b": 1e9, "t": 1e12}[suffix]
-    return int(value * mult)
+        n = int(text)
+    else:
+        m = _PARAM_RE.match(str(text))
+        if not m:
+            raise ValueError(
+                f"parse_params: cannot parse {text!r} (try '30B', '600M', '3.3M')"
+            )
+        value, suffix = float(m.group(1)), m.group(2).lower()
+        mult = {"": 1, "k": 1e3, "m": 1e6, "b": 1e9, "t": 1e12}[suffix]
+        n = int(value * mult)
+    if n <= 0:
+        raise ValueError(f"parse_params: param count must be positive, got {text!r}")
+    return n
 
 
 def parse_ctx(text: str | int) -> int:
@@ -64,17 +68,23 @@ def parse_ctx(text: str | int) -> int:
     for the 32768-token context window.
     """
     if isinstance(text, int):
-        return text
-    m = _CTX_RE.match(str(text))
-    if not m:
-        raise ValueError(f"parse_ctx: cannot parse {text!r} (try '32k', '4096')")
-    value, suffix = float(m.group(1)), m.group(2).lower()
-    return int(value * (1024 if suffix == "k" else 1))
+        n = text
+    else:
+        m = _CTX_RE.match(str(text))
+        if not m:
+            raise ValueError(f"parse_ctx: cannot parse {text!r} (try '32k', '4096')")
+        value, suffix = float(m.group(1)), m.group(2).lower()
+        n = int(value * (1024 if suffix == "k" else 1))
+    if n <= 0:
+        raise ValueError(f"parse_ctx: token count must be positive, got {text!r}")
+    return n
 
 
 def weight_bytes(params: int, quant: str = "int4") -> float:
     """Weight memory in bytes for a param count at a quantization."""
-    q = quant.lower()
+    if isinstance(params, bool) or not isinstance(params, int) or params <= 0:
+        raise ValueError(f"weight_bytes: params must be a positive int, got {params!r}")
+    q = quant.lower() if isinstance(quant, str) else quant
     if q not in BYTES_PER_PARAM:
         raise ValueError(
             f"weight_bytes: unknown quant {quant!r}; choose from {sorted(BYTES_PER_PARAM)}"
@@ -94,9 +104,22 @@ def kv_cache_bytes(
     KV heads in real checkpoints; this formula uses the dense upper bound,
     which is the honest choice for capacity planning.
     """
-    if layers <= 0 or hidden_dim <= 0 or ctx_tokens <= 0:
+    if (
+        any(
+            isinstance(v, bool) or not isinstance(v, int)
+            for v in (layers, hidden_dim, ctx_tokens)
+        )
+        or layers <= 0
+        or hidden_dim <= 0
+        or ctx_tokens <= 0
+    ):
         raise ValueError(
-            "kv_cache_bytes: layers, hidden_dim, ctx_tokens must be positive"
+            "kv_cache_bytes: layers, hidden_dim, ctx_tokens must be positive ints"
+        )
+    if not isinstance(bytes_per_elem, (int, float)) or bytes_per_elem <= 0:
+        raise ValueError(
+            "kv_cache_bytes: bytes_per_elem must be positive, got %r"
+            % (bytes_per_elem,)
         )
     return 2.0 * layers * hidden_dim * ctx_tokens * bytes_per_elem
 
@@ -135,6 +158,34 @@ def footprint(
     Returns a dict with weights_gb, kv_cache_gb, headroom_gb, total_gb,
     and the arch used (with ``arch_estimated`` True when guessed).
     """
+    try:
+        headroom_gb = float(headroom_gb)
+    except (TypeError, ValueError):
+        raise ValueError(
+            "footprint: headroom_gb must be a number, got %r" % (headroom_gb,)
+        ) from None
+    try:
+        overhead = float(overhead)
+    except (TypeError, ValueError):
+        raise ValueError(
+            "footprint: overhead must be a number, got %r" % (overhead,)
+        ) from None
+    if headroom_gb < 0:
+        raise ValueError("footprint: headroom_gb must be >= 0, got %r" % (headroom_gb,))
+    if overhead <= 0:
+        raise ValueError("footprint: overhead must be > 0, got %r" % (overhead,))
+    if layers is not None and (
+        isinstance(layers, bool) or not isinstance(layers, int) or layers <= 0
+    ):
+        raise ValueError("footprint: layers must be a positive int, got %r" % (layers,))
+    if hidden_dim is not None and (
+        isinstance(hidden_dim, bool)
+        or not isinstance(hidden_dim, int)
+        or hidden_dim <= 0
+    ):
+        raise ValueError(
+            "footprint: hidden_dim must be a positive int, got %r" % (hidden_dim,)
+        )
     n_params = parse_params(params)
     n_ctx = parse_ctx(ctx)
     arch_estimated = False
@@ -166,7 +217,27 @@ def footprint(
 
 
 def format_footprint(fp: dict) -> str:
-    """Human-readable rendering of :func:`footprint`."""
+    """Human-readable rendering of :func:`footprint`.
+
+    Raises ValueError when ``fp`` lacks the expected footprint keys.
+    """
+    if not isinstance(fp, dict):
+        raise ValueError("format_footprint: expected a footprint dict")
+    for key in (
+        "layers",
+        "hidden_dim",
+        "arch_estimated",
+        "params",
+        "quant",
+        "ctx_tokens",
+        "weights_gb",
+        "kv_cache_gb",
+        "headroom_gb",
+        "overhead",
+        "total_gb",
+    ):
+        if key not in fp:
+            raise ValueError("format_footprint: footprint dict is missing key %r" % key)
     arch = f"{fp['layers']} layers × {fp['hidden_dim']} hidden"
     if fp["arch_estimated"]:
         arch += " (typical — estimated)"

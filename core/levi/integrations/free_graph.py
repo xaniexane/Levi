@@ -86,12 +86,28 @@ class FreeGraph:
     def add_node(
         self, node_id: str, era: Optional[str] = None, external: bool = False
     ) -> GraphNode:
+        if not isinstance(node_id, str) or not node_id:
+            raise ValueError("node_id must be a non-empty string")
         if node_id not in self.nodes:
             self.nodes[node_id] = GraphNode(node_id, era, external)
             self.adj[node_id] = {}
         return self.nodes[node_id]
 
     def add_edge(self, a: str, b: str, weight: float, kind: str) -> None:
+        if not isinstance(a, str) or not a or not isinstance(b, str) or not b:
+            raise ValueError("edge endpoints must be non-empty strings")
+        if (
+            isinstance(weight, bool)
+            or not isinstance(weight, (int, float))
+            or weight != weight  # NaN
+            or weight == float("inf")
+            or weight == float("-inf")
+        ):
+            raise ValueError("edge weight must be a finite number, got %r" % (weight,))
+        if weight < 0:
+            raise ValueError("edge weight must be >= 0, got %r" % (weight,))
+        if not isinstance(kind, str) or not kind:
+            raise ValueError("edge kind must be a non-empty string")
         if a == b:  # self-loops would corrupt degree/clustering; skip
             return
         self.add_node(a)
@@ -159,6 +175,9 @@ class FreeGraph:
     def strongest_bonds(
         self, limit: int = 10
     ) -> List[Tuple[str, str, float, List[str]]]:
+        """Top edges by weight. ``limit`` must be a non-negative int."""
+        if isinstance(limit, bool) or not isinstance(limit, int) or limit < 0:
+            raise ValueError("limit must be a non-negative integer")
         edges = []
         for key, kinds in self.edge_kinds.items():
             a, b = sorted(key)
@@ -204,7 +223,9 @@ class FreeGraph:
 
     def neighborhood(self, node_id: str, depth: int = 1) -> Dict[int, List[str]]:
         """Assets at each hop distance 1..depth. {} for unknown ids."""
-        if node_id not in self.nodes or depth < 1:
+        if isinstance(depth, bool) or not isinstance(depth, int) or depth < 1:
+            raise ValueError("depth must be a positive integer")
+        if node_id not in self.nodes:
             return {}
         dist = self._bfs_distances(node_id)
         layers: Dict[int, List[str]] = {}

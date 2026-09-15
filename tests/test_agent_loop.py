@@ -239,3 +239,29 @@ def test_local_provider_end_to_end_through_name_string(tmp_path, monkeypatch):
     assert t.ok is True
     assert (tmp_path / "ws" / "notes.txt").is_file()
     assert "Contents read" in t.final
+
+
+# -- (c) input validation ----------------------------------------------------
+
+
+def test_run_subtask_rejects_blank_task():
+    import pytest
+
+    for bad in ("", "   ", None, 123):
+        with pytest.raises(ValueError, match="non-empty string"):
+            run_subtask(bad)  # type: ignore[arg-type]
+
+
+def test_run_subtask_rejects_bad_max_steps():
+    import pytest
+
+    for bad in (0, -3, 101, "many", None):
+        with pytest.raises(ValueError, match="max_steps"):
+            run_subtask("do a thing", max_steps=bad)  # type: ignore[arg-type]
+
+
+def test_run_subtask_rejects_bad_provider_type():
+    import pytest
+
+    with pytest.raises(ValueError, match="provider"):
+        run_subtask("do a thing", provider=123)  # type: ignore[arg-type]

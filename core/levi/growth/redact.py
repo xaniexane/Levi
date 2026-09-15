@@ -51,7 +51,14 @@ _WS = re.compile(r"\s+")
 
 
 def redact_text(text: str) -> str:
-    """Scrub secrets/PII from ``text``. Best-effort, never total."""
+    """Scrub secrets/PII from ``text``. Best-effort, never total.
+
+    Raises ValueError when ``text`` is not a string.
+    """
+    if not isinstance(text, str):
+        raise ValueError(
+            "redact_text: text must be a string, got %s" % type(text).__name__
+        )
     text = _CREDENTIAL_ASSIGN.sub(
         lambda m: m.group(0).split(":", 1)[0].split("=", 1)[0] + "=[redacted]", text
     )
@@ -83,6 +90,11 @@ def redact_cloud_experiences(experiences: list[Experience]) -> list[Experience]:
     """
     out: list[Experience] = []
     for exp in experiences:
+        if not isinstance(exp, Experience):
+            raise ValueError(
+                "redact_cloud_experiences: expected Experience objects, got %s"
+                % type(exp).__name__
+            )
         meta = dict(exp.meta or {})
         meta["origin"] = "cloud"
         meta["redacted"] = True

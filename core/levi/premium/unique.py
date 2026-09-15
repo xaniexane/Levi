@@ -111,7 +111,7 @@ UNIQUES: List[UniqueOrgan] = [
         "levi si",
     ),
     UniqueOrgan(
-        "kai_register_matrix",
+        "levi_register_matrix",
         "LEVI register matrix (14)",
         "Twelve original LEVI SI registers — reverse-engineered concept, heavily modified; not third-party source",
         "levi voice",
@@ -147,7 +147,7 @@ UNIQUES: List[UniqueOrgan] = [
         "levi brain --seed-x10",
     ),
     UniqueOrgan(
-        "kai_not_third_party",
+        "levi_voice_originality",
         "LEVI voice originality",
         "Explicit attribution: original LEVI, heavily modified concept",
         "levi voice",

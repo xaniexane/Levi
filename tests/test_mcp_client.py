@@ -383,3 +383,103 @@ def test_cli_add_probes_and_lists(http_stub, tmp_path, monkeypatch, capsys):
     assert "Removed" in capsys.readouterr().out
     assert mc.list_servers() == {}
     mc.close_all()
+
+
+# ---------------------------------------------------------------------------
+# Client-side boundary validation
+# ---------------------------------------------------------------------------
+
+
+def test_add_server_validates_url_shape(tmp_path):
+    home = tmp_path / "home"
+    for bad in ("not-a-url", "ftp://host/x", "http://", "gopher://h:1"):
+        with pytest.raises(mc.MCPClientError):
+            mc.add_server("s", transport="http", url=bad, home=home)
+    cfg = mc.add_server("s", transport="http", url="https://h:1/mcp", home=home)
+    assert cfg["url"] == "https://h:1/mcp"
+
+
+def test_add_server_validates_command_shape(tmp_path):
+    home = tmp_path / "home"
+    with pytest.raises(mc.MCPClientError):
+        mc.add_server("s", transport="stdio", command="npx server", home=home)
+    with pytest.raises(mc.MCPClientError):
+        mc.add_server("s", transport="stdio", command=[], home=home)
+    with pytest.raises(mc.MCPClientError):
+        mc.add_server("s", transport="stdio", command=["ok", ""], home=home)
+    cfg = mc.add_server("s", transport="stdio", command=["npx", "server"], home=home)
+    assert cfg["command"] == ["npx", "server"]
+
+
+def test_add_server_validates_timeout_and_headers(tmp_path):
+    home = tmp_path / "home"
+    for bad in ("soon", -1, 0, float("inf"), float("nan"), 3600):
+        with pytest.raises(mc.MCPClientError):
+            mc.add_server("s", transport="http", url="http://h/", timeout=bad, home=home)
+    with pytest.raises(mc.MCPClientError):
+        mc.add_server(
+            "s", transport="http", url="http://h/", headers={"X-A": 1}, home=home
+        )
+    cfg = mc.add_server(
+        "s",
+        transport="http",
+        url="http://h/",
+        timeout=12,
+        headers={"X-A": "b"},
+        home=home,
+    )
+    assert cfg["timeout"] == 12.0 and cfg["headers"] == {"X-A": "b"}
+
+
+def test_stdio_transport_validates_command():
+    with pytest.raises(mc.MCPClientError):
+        mc.StdioTransport("not-a-list")  # type: ignore[arg-type]
+    with pytest.raises(mc.MCPClientError):
+        mc.StdioTransport([])
+
+
+def test_transports_reject_bad_timeouts_and_methods(http_stub):
+    url = _url(http_stub)
+    with pytest.raises(mc.MCPClientError):
+        mc.HttpTransport("not a url")
+    t = mc.HttpTransport(url)
+    for bad in ("soon", -1, 0, float("nan")):
+        with pytest.raises(mc.MCPClientError):
+            t.request("ping", {}, timeout=bad)
+    with pytest.raises(mc.MCPClientError):
+        t.request("", {})
+    with pytest.raises(mc.MCPClientError):
+        t.notify("")
+
+
+def test_mcp_client_validates_transport_and_call_tool():
+    with pytest.raises(mc.MCPClientError):
+        mc.MCPClient(object())
+    with pytest.raises(mc.MCPClientError):
+        mc.MCPClient(SimpleNamespace(request=lambda *a, **k: None), timeout=-5)
+
+    client = mc.MCPClient(SimpleNamespace(request=lambda *a, **k: None))
+    with pytest.raises(mc.MCPClientError):
+        client.call_tool("")
+    with pytest.raises(mc.MCPClientError):
+        client.call_tool("tool", arguments="nope")  # type: ignore[arg-type]
+
+
+def test_connect_server_rejects_malformed_configs():
+    # Non-dict config never reaches transport setup.
+    with pytest.raises(mc.MCPClientError, match="must be a dict"):
+        mc.connect_server("s", "not-a-dict")  # type: ignore[arg-type]
+    with pytest.raises(mc.MCPClientError, match="must be a dict"):
+        mc.connect_server("s", None)  # type: ignore[arg-type]
+    # Non-string argv elements are rejected, not str()-converted.
+    with pytest.raises(mc.MCPClientError, match="argv element"):
+        mc.connect_server(
+            "s", {"transport": "stdio", "command": ["npx", 123]}
+        )
+    with pytest.raises(mc.MCPClientError, match="non-empty list of strings"):
+        mc.connect_server("s", {"transport": "stdio", "command": "npx server"})
+    with pytest.raises(mc.MCPClientError, match="every argv element"):
+        mc.connect_server("s", {"transport": "stdio", "command": ["npx", ""]})
+    # Unknown transport is a clean error, not a crash.
+    with pytest.raises(mc.MCPClientError, match="unknown transport"):
+        mc.connect_server("s", {"transport": "carrier-pigeon"})

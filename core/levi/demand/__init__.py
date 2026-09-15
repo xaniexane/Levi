@@ -1,5 +1,7 @@
 """DemandPulse — perception of demand, gaps, opportunities."""
 
+from __future__ import annotations
+
 from levi.demand.pulse import DemandPulse
 from levi.demand.scoring import (
     DEFAULT_THRESHOLD,

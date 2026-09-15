@@ -26,6 +26,7 @@ Honest design notes:
 
 from __future__ import annotations
 
+import math
 import os
 import time
 from pathlib import Path
@@ -108,9 +109,22 @@ class NativeBrainProvider(ChatProvider):
             self._load_error = f"cannot load native brain: {exc}"
             return False
         try:
+            # weights_only=True: the checkpoint must be plain tensors +
+            # containers. A full pickle load would execute arbitrary code
+            # from the file (LEVI_BRAIN_WEIGHTS can point anywhere), so a
+            # checkpoint needing object reconstruction is refused outright.
             ckpt = torch.load(
-                str(weights_path()), map_location="cpu", weights_only=False
+                str(weights_path()), map_location="cpu", weights_only=True
             )
+            if (
+                not isinstance(ckpt, dict)
+                or not isinstance(ckpt.get("chars"), list)
+                or not isinstance(ckpt.get("model_state"), dict)
+            ):
+                raise ValueError(
+                    "not a LEVI brain checkpoint: expected a mapping with "
+                    "'chars' (list), 'config' (dict), 'model_state' (dict)"
+                )
             chars = ckpt["chars"]
             cfg = ckpt.get("config", {})
             model = TinyGPT(
@@ -159,6 +173,23 @@ class NativeBrainProvider(ChatProvider):
     def _generate(
         self, prompt: str, n_chars: int = 280, temperature: float = 0.9
     ) -> str:
+        # Validate before importing torch: these are caller errors, and
+        # torch may not even be installed.
+        if not isinstance(n_chars, int) or isinstance(n_chars, bool) or n_chars < 1:
+            raise ValueError(
+                f"_generate: 'n_chars' must be an integer >= 1, got {n_chars!r}"
+            )
+        try:
+            temperature = float(temperature)
+        except (TypeError, ValueError):
+            raise ValueError(
+                f"_generate: 'temperature' must be a number, got {temperature!r}"
+            ) from None
+        if not (temperature > 0) or not math.isfinite(temperature):
+            raise ValueError(
+                f"_generate: 'temperature' must be a finite positive number, "
+                f"got {temperature!r}"
+            )
         import torch
         import torch.nn.functional as F
 
@@ -183,6 +214,10 @@ class NativeBrainProvider(ChatProvider):
 
     def chat(self, messages: list[ChatMessage], tools: list[dict]) -> ChatResponse:
         t0 = time.time()
+        if not isinstance(messages, list) or not messages:
+            raise ValueError(
+                "chat: 'messages' must be a non-empty list of ChatMessage"
+            )
         if not self._ensure_model():
             return ChatResponse(
                 error=self._load_error or "native brain unavailable",

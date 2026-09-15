@@ -66,7 +66,11 @@ class UnifiedDaemon:
 
     def compose(self, task: str) -> Composition:
         """Self-composition: pick smallest useful capability set."""
-        t = (task or "").lower()
+        if not isinstance(task, str) or not task.strip():
+            raise ValueError(
+                f"compose: 'task' must be a non-empty string, got {task!r}"
+            )
+        t = task.lower()
         caps: List[str] = ["memory", "cognition"]
         tools: List[str] = ["memory.recall"]
         mem = ["corpus", "brain_table"]
@@ -128,6 +132,11 @@ class UnifiedDaemon:
         Run one daemon cycle. execute=False → plan only (safe default).
         execute=True still respects HITL/estop/cost — never silent money moves.
         """
+        if not isinstance(execute, bool):
+            raise ValueError(
+                f"run_cycle: 'execute' must be True or False, "
+                f"got {execute!r}"
+            )
         if self.kernel.state.estop:
             return "EMERGENCY STOP active. clear with: levi unified --clear-estop"
 

@@ -7,6 +7,8 @@ exploits anything — findings are inventory (hosts, ports, banners,
 archived URLs, exposed references), never exploit results.
 """
 
+from __future__ import annotations
+
 from levi.bounty.scope import ScopeStore, ScopeError, check_scope
 from levi.bounty.enum import enumerate_subdomains
 from levi.bounty.probe import probe_host

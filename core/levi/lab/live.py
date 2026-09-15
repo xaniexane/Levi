@@ -9,6 +9,7 @@ reachability plus ``GET /v1/models``; ``chat()`` posts to
 from __future__ import annotations
 
 import json
+import math
 import os
 import urllib.request
 import urllib.error
@@ -45,12 +46,40 @@ def _post(url: str, payload: dict, timeout: float) -> tuple[int, str]:
         raise ConnectionError(str(exc)) from exc
 
 
-def probe(endpoint: str, timeout: float = 8.0) -> dict:
-    """Check an endpoint: reachable + GET /v1/models. Never raises."""
+def _validate_endpoint(endpoint: object) -> str | None:
+    if not isinstance(endpoint, str) or not endpoint.strip():
+        return None
+    return endpoint.strip().rstrip("/")
+
+
+def _validate_timeout(timeout: object) -> float | None:
     try:
-        status, body = _get(endpoint + "/v1/models", timeout)
+        t = float(timeout)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return None
+    if not math.isfinite(t) or t <= 0:
+        return None
+    return t
+
+
+def probe(endpoint: str, timeout: float = 8.0) -> dict:
+    """Check an endpoint: reachable + GET /v1/models. Never raises.
+
+    Failures — including invalid arguments — come back as dicts.
+    """
+    ep = _validate_endpoint(endpoint)
+    t = _validate_timeout(timeout)
+    if ep is None or t is None:
+        return {
+            "ok": False,
+            "endpoint": endpoint,
+            "error": "invalid endpoint or timeout "
+            "(endpoint must be a non-empty URL string, timeout a positive number)",
+        }
+    try:
+        status, body = _get(ep + "/v1/models", t)
     except ConnectionError as exc:
-        return {"ok": False, "endpoint": endpoint, "error": f"unreachable: {exc}"}
+        return {"ok": False, "endpoint": ep, "error": f"unreachable: {exc}"}
     try:
         data = json.loads(body)
         models = [m.get("id", "?") for m in data.get("data", [])]
@@ -58,7 +87,7 @@ def probe(endpoint: str, timeout: float = 8.0) -> dict:
         models = []
     return {
         "ok": status == 200,
-        "endpoint": endpoint,
+        "endpoint": ep,
         "http_status": status,
         "models": models,
         "error": None if status == 200 else f"HTTP {status}: {body[:200]}",
@@ -72,31 +101,72 @@ def chat(
     timeout: float = 60.0,
 ) -> dict:
     """POST /v1/chat/completions passthrough. Never raises (failures -> dict)."""
-    try:
-        status, body = _post(
-            endpoint + "/v1/chat/completions",
-            {"model": model, "messages": messages},
-            timeout,
-        )
-    except ConnectionError as exc:
-        return {"ok": False, "endpoint": endpoint, "error": f"unreachable: {exc}"}
-    if status != 200:
+    ep = _validate_endpoint(endpoint)
+    t = _validate_timeout(timeout)
+    if ep is None or t is None:
         return {
             "ok": False,
             "endpoint": endpoint,
+            "error": "invalid endpoint or timeout "
+            "(endpoint must be a non-empty URL string, timeout a positive number)",
+        }
+    if not isinstance(model, str) or not model.strip():
+        return {
+            "ok": False,
+            "endpoint": ep,
+            "error": "model must be a non-empty string",
+        }
+    if (
+        not isinstance(messages, list)
+        or not messages
+        or any(not isinstance(m, dict) for m in messages)
+    ):
+        return {
+            "ok": False,
+            "endpoint": ep,
+            "error": "messages must be a non-empty list of message dicts",
+        }
+    for i, m in enumerate(messages):
+        if not isinstance(m.get("content"), str):
+            return {
+                "ok": False,
+                "endpoint": ep,
+                "error": f"messages[{i}] needs a string 'content'",
+            }
+    try:
+        status, body = _post(
+            ep + "/v1/chat/completions",
+            {"model": model.strip(), "messages": messages},
+            t,
+        )
+    except ConnectionError as exc:
+        return {"ok": False, "endpoint": ep, "error": f"unreachable: {exc}"}
+    if status != 200:
+        return {
+            "ok": False,
+            "endpoint": ep,
             "error": f"HTTP {status}: {body[:300]}",
         }
     try:
         data = json.loads(body)
         text = data["choices"][0]["message"]["content"]
     except (ValueError, KeyError, IndexError, TypeError) as exc:
-        return {"ok": False, "endpoint": endpoint, "error": f"bad response: {exc}"}
-    return {"ok": True, "endpoint": endpoint, "model": model, "text": text}
+        return {"ok": False, "endpoint": ep, "error": f"bad response: {exc}"}
+    return {"ok": True, "endpoint": ep, "model": model, "text": text}
 
 
 def format_probe(result: dict) -> str:
-    """One-line human-readable rendering of :func:`probe`."""
-    if not result["ok"]:
-        return f"lab chat: probe FAILED — {result.get('error')}"
+    """One-line human-readable rendering of :func:`probe`.
+
+    Tolerates malformed results: renders a FAILED line rather than a
+    KeyError.
+    """
+    if not isinstance(result, dict) or not result.get("ok"):
+        err = (
+            result.get("error", "invalid probe result")
+            if isinstance(result, dict)
+            else "invalid probe result"
+        )
+        return f"lab chat: probe FAILED — {err}"
     models = ", ".join(result["models"][:10]) or "(no models listed)"
     return f"lab chat: endpoint reachable — {result['endpoint']}\n  models: {models}"

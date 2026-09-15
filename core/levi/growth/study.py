@@ -210,8 +210,15 @@ _WORD_RE = re.compile(r"[a-z][a-z0-9'-]*")
 
 
 def extract_key_terms(text: str, top_n: int = 8) -> list[str]:
-    """Key terms = frequent long content words. Crude, deterministic."""
-    words = _WORD_RE.findall(text.lower())
+    """Key terms = frequent long content words. Crude, deterministic.
+
+    Raises ValueError when ``top_n`` is not a positive int.
+    """
+    if not isinstance(top_n, int) or top_n < 1:
+        raise ValueError(
+            "extract_key_terms: top_n must be a positive int, got %r" % (top_n,)
+        )
+    words = _WORD_RE.findall((text or "").lower())
     counts = Counter(w for w in words if len(w) >= 5 and w not in _STOPWORDS)
     ranked = sorted(
         counts.items(), key=lambda kv: (kv[1] * len(kv[0]), kv[0]), reverse=True
@@ -220,7 +227,14 @@ def extract_key_terms(text: str, top_n: int = 8) -> list[str]:
 
 
 def make_question(lesson: dict[str, Any]) -> dict[str, Any]:
-    """Build a cloze-style recall question from the lesson text."""
+    """Build a cloze-style recall question from the lesson text.
+
+    Raises ValueError when ``lesson`` is not a dict.
+    """
+    if not isinstance(lesson, dict):
+        raise ValueError(
+            "make_question: lesson must be a dict, got %s" % type(lesson).__name__
+        )
     topic = str(lesson.get("topic", "untitled"))
     text = str(lesson.get("text", ""))
     key_terms = extract_key_terms(text)
@@ -255,7 +269,15 @@ def recall_by_topic(
     the cued topic (case-insensitive), or None when the topic draws a
     blank. A removed or renamed topic scores 0; a partially-damaged topic
     scores partially — that is the honest signal this proxy carries.
+
+    Raises ValueError when ``lessons`` is not a list.
     """
+    if not isinstance(lessons, list):
+        raise ValueError(
+            "recall_by_topic: lessons must be a list, got %s" % type(lessons).__name__
+        )
+    if not isinstance(topic, str) or not topic.strip():
+        return None
     cue = topic.strip().lower()
     texts = [
         str(lesson.get("text", ""))
@@ -274,7 +296,16 @@ def grade(
     """Score = fraction of key terms present in the recalled lesson text.
 
     This is a recall-integrity proxy, NOT a comprehension test.
+    Raises ValueError when ``question`` is not a dict.
     """
+    if not isinstance(question, dict):
+        raise ValueError(
+            "grade: question must be a dict, got %s" % type(question).__name__
+        )
+    if recalled is not None and not isinstance(recalled, dict):
+        raise ValueError(
+            "grade: recalled must be a dict or None, got %s" % type(recalled).__name__
+        )
     key_terms = question.get("key_terms") or []
     if not key_terms or recalled is None:
         return {"score": 0.0, "matched": 0, "total": len(key_terms), "blank_hit": False}
@@ -293,7 +324,21 @@ def grade(
 def run_quiz(
     lessons: Optional[list[dict[str, Any]]] = None, *, sample_size: Optional[int] = None
 ) -> dict[str, Any]:
-    """Quiz LEVI on a sample of curriculum lessons. Returns the result dict."""
+    """Quiz LEVI on a sample of curriculum lessons. Returns the result dict.
+
+    Raises ValueError when ``lessons`` is not a list/None or
+    ``sample_size`` is not a positive int.
+    """
+    if lessons is not None and not isinstance(lessons, list):
+        raise ValueError(
+            "run_quiz: lessons must be a list or None, got %s" % type(lessons).__name__
+        )
+    if sample_size is not None and (
+        not isinstance(sample_size, int) or sample_size < 1
+    ):
+        raise ValueError(
+            "run_quiz: sample_size must be a positive int, got %r" % (sample_size,)
+        )
     all_lessons = lessons if lessons is not None else get_lessons()
     n = sample_size if sample_size is not None else quiz_sample_size()
     result: dict[str, Any] = {
@@ -400,7 +445,12 @@ def run_study(
 
 
 def study_trend(limit: int = 10) -> list[dict[str, Any]]:
-    """Score history for the trend view: chronological, oldest first."""
+    """Score history for the trend view: chronological, oldest first.
+
+    Raises ValueError when ``limit`` is not a positive int.
+    """
+    if not isinstance(limit, int) or limit < 1:
+        raise ValueError("study_trend: limit must be a positive int, got %r" % (limit,))
     entries = [
         e for e in _journal.read_entries(limit=limit) if e.get("kind") == "study"
     ]

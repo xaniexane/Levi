@@ -62,3 +62,16 @@ def test_intent_skill_registered_and_runs():
     out = reg.invoke("intent_map", {"text": "plan my week"})
     assert "literal_request" in out
     assert "plan my week" in out
+
+
+def test_nlir_rejects_non_string_input():
+    import pytest
+
+    from levi.orchestration.nl_ir import NLIRCompiler
+
+    c = NLIRCompiler()
+    for bad in (None, 123, ""):
+        with pytest.raises(ValueError, match="non-empty string"):
+            c.classify(bad)  # type: ignore[arg-type]
+        with pytest.raises(ValueError, match="non-empty string"):
+            c.compile(bad)  # type: ignore[arg-type]

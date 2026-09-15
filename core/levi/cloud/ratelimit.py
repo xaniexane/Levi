@@ -31,7 +31,17 @@ class RateLimiter:
     """Thread-safe token buckets keyed by an opaque bucket id."""
 
     def __init__(self, per_minute: int | None = None) -> None:
-        self.per_minute = per_minute or per_minute_limit()
+        if per_minute is None:
+            per_minute = per_minute_limit()
+        if (
+            isinstance(per_minute, bool)
+            or not isinstance(per_minute, int)
+            or per_minute < 1
+        ):
+            raise ValueError(
+                "per_minute must be an integer >= 1, got %r" % (per_minute,)
+            )
+        self.per_minute = per_minute
         self._buckets: dict[str, tuple[float, float]] = {}  # id -> (tokens, last_ts)
         self._lock = threading.Lock()
 
@@ -45,6 +55,7 @@ class RateLimiter:
 
     def check(self, bucket_id: str) -> tuple[bool, float]:
         """Consume one token. Returns ``(allowed, retry_after_secs)``."""
+        _validate_bucket_id(bucket_id)
         now = time.monotonic()
         with self._lock:
             tokens = self._refill(bucket_id, now)
@@ -57,5 +68,13 @@ class RateLimiter:
             return False, retry_after
 
     def reset(self, bucket_id: str) -> None:
+        """Clear a bucket (e.g. after key rotation)."""
+        _validate_bucket_id(bucket_id)
         with self._lock:
             self._buckets.pop(bucket_id, None)
+
+
+def _validate_bucket_id(bucket_id: str) -> str:
+    if not isinstance(bucket_id, str) or not bucket_id:
+        raise ValueError("bucket_id must be a non-empty string")
+    return bucket_id

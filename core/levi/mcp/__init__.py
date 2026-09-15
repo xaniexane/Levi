@@ -20,6 +20,7 @@ explicit consent, so confirmation-gated tools (shell_exec, file_write,
 There is no MCP-native confirmation flow in protocol version 2024-11-05.
 """
 
+from __future__ import annotations
 from levi.mcp.protocol import (
     PROTOCOL_VERSION,
     SERVER_NAME,

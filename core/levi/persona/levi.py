@@ -309,8 +309,8 @@ def format_levi_roster() -> str:
         lines.append(f"  intensity: {v.intensity:.2f}")
         lines.append("")
     lines.append('Use: levi chat --persona levi "…"')
-    lines.append("     levi kai")
-    lines.append("     levi kai --variant care")
+    lines.append("     levi voice")
+    lines.append("     levi voice --variant care")
     return "\n".join(lines)
 
 

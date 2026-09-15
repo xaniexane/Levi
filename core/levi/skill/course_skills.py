@@ -15,6 +15,8 @@ They do not confer expertise — see docs/COURSES.md for honest limits.
 from __future__ import annotations
 
 import json
+import re
+import sys
 from pathlib import Path
 from typing import Dict, List
 
@@ -23,8 +25,12 @@ from levi.skill.registry import Skill, SkillRisk
 COURSES_DIR = Path(__file__).resolve().parent.parent / "knowledge" / "courses"
 BRIEFS_DIR = COURSES_DIR / "briefs"
 
+_SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+
 
 def _brief_for(slug: str) -> str:
+    if not _SLUG_RE.match(slug):
+        return f"Invalid subject slug {slug!r}."
     path = BRIEFS_DIR / f"{slug}.md"
     if path.exists():
         return path.read_text(encoding="utf-8", errors="replace")
@@ -39,20 +45,56 @@ def _make_handler(slug: str):
 
 
 def _load() -> List[Skill]:
+    """Build the curriculum skills from the catalog.
+
+    Never raises: a missing or corrupt catalog degrades to no course
+    skills (with a stderr note), and malformed subject entries are
+    skipped so one bad record cannot hide the valid ones.
+    """
     catalog_path = COURSES_DIR / "catalog.json"
     if not catalog_path.exists():
         return []
-    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    try:
+        catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        print(
+            f"[levi:course_skills] corrupt catalog {catalog_path}: {exc} — "
+            "no curriculum skills registered.",
+            file=sys.stderr,
+        )
+        return []
+    if not isinstance(catalog, dict):
+        print(
+            f"[levi:course_skills] catalog {catalog_path} is not an object — "
+            "no curriculum skills registered.",
+            file=sys.stderr,
+        )
+        return []
     skills: List[Skill] = []
-    for subj in catalog.get("subjects", []):
-        slug = subj["slug"]
-        n = len(subj["courses"])
+    subjects = catalog.get("subjects", [])
+    if not isinstance(subjects, list):
+        return []
+    for subj in subjects:
+        if not isinstance(subj, dict):
+            continue
+        slug = subj.get("slug")
+        name = subj.get("name")
+        courses = subj.get("courses")
+        if (
+            not isinstance(slug, str)
+            or not _SLUG_RE.match(slug)
+            or not isinstance(name, str)
+            or not name.strip()
+            or not isinstance(courses, list)
+        ):
+            continue
+        n = len(courses)
         skills.append(
             Skill(
                 id="course_" + slug.replace("-", "_"),
-                name=f"Curriculum: {subj['name']}",
+                name=f"Curriculum: {name}",
                 description=(
-                    f"Field guide for {subj['name']}: {n} awesome-courses "
+                    f"Field guide for {name}: {n} awesome-courses "
                     f"entries with schools, topic keywords, and start-here "
                     f"picks (extractive, read-only)."
                 ),

@@ -19,10 +19,119 @@ from typing import Any, Dict, List, Optional
 from datetime import datetime, timezone
 from pathlib import Path
 import json
+import math
+import sys
 import uuid
 
 
 DEFAULT_CONTROL_PATH = Path.home() / ".levi" / "control_daemon.json"
+
+
+class ControlError(ValueError):
+    """Invalid input to the control daemon (bad directive, bad value)."""
+
+
+# Every kind ControlDaemon._apply() understands. Unknown kinds are
+# rejected at issue()/load time — a directive that applies to nothing
+# is a silent no-op, worse than an error.
+DIRECTIVE_KINDS = frozenset(
+    {
+        "lock_persona",
+        "unlock_persona",
+        "boost_persona",
+        "suppress_persona",
+        "lock_wit",
+        "boost_wit",
+        "suppress_wit",
+        "force_alchemy",
+        "force_life_equation",
+        "force_life_chess",
+        "force_ugly_truth",
+        "force_leverage",
+        "force_game_tester",
+        "force_capability_mod",
+        "force_chisel",
+        "clear",
+    }
+)
+
+
+def _validate_kind(kind: Any) -> str:
+    if kind not in DIRECTIVE_KINDS:
+        raise ControlError(
+            f"invalid directive kind {kind!r}: must be one of "
+            f"{sorted(DIRECTIVE_KINDS)}"
+        )
+    return kind
+
+
+def _validate_strength(value: Any, *, field: str = "strength") -> float:
+    """Strength/intensity must be a finite number in 0..1.
+
+    Rejected — not clamped — so a caller passing NaN, infinity, or an
+    out-of-range value learns about it instead of getting a silently
+    rewritten directive.
+    """
+    try:
+        num = float(value)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        raise ControlError(
+            f"invalid {field} {value!r}: must be a number between 0 and 1"
+        ) from None
+    if not math.isfinite(num) or not 0.0 <= num <= 1.0:
+        raise ControlError(
+            f"invalid {field} {value!r}: must be a finite number between "
+            "0 and 1"
+        )
+    return num
+
+
+def _validate_turns(value: Any) -> int:
+    if (
+        not isinstance(value, int)
+        or isinstance(value, bool)
+        or value < 1
+    ):
+        raise ControlError(
+            f"invalid turns {value!r}: must be an integer >= 1"
+        )
+    return value
+
+
+def _finite_intensity(value: Any, default: float) -> float:
+    """Stance intensity from a stored record: finite numbers pass through
+    (clamped to 0..1); anything else degrades to the default rather than
+    poisoning the stance."""
+    try:
+        num = float(value)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return default
+    if not math.isfinite(num):
+        return default
+    return max(0.0, min(1.0, num))
+
+
+def _str_or_none(value: Any) -> Optional[str]:
+    return value if isinstance(value, str) else None
+
+
+def _str_list(value: Any) -> List[str]:
+    return [v for v in value if isinstance(v, str)] if isinstance(value, list) else []
+
+
+def _weight_map(value: Any) -> Dict[str, float]:
+    """boosts/suppress maps: keep finite numeric weights, drop the rest."""
+    if not isinstance(value, dict):
+        return {}
+    out: Dict[str, float] = {}
+    for k, v in value.items():
+        try:
+            num = float(v)  # type: ignore[arg-type]
+        except (TypeError, ValueError):
+            continue
+        if math.isfinite(num) and isinstance(k, str):
+            out[k] = num
+    return out
 
 
 @dataclass
@@ -45,14 +154,42 @@ class ControlDirective:
 
     @classmethod
     def from_dict(cls, d: Dict[str, Any]) -> "ControlDirective":
+        """Rebuild one stored directive; raises ControlError when the
+        record is malformed so _load() can skip just this record."""
+        if not isinstance(d, dict):
+            raise ControlError(f"invalid directive record {d!r}: must be an object")
+        directive_id = d.get("id") or str(uuid.uuid4())[:8]
+        if not isinstance(directive_id, str):
+            raise ControlError("directive record has a non-string 'id'")
+        kind = _validate_kind(d.get("kind") or "clear")
+        target = d.get("target") or ""
+        if not isinstance(target, str):
+            raise ControlError(f"directive {directive_id!r}: 'target' must be a string")
+        strength = _validate_strength(d.get("strength", 0.5))
+        turns_remaining = d.get("turns_remaining", 5)
+        if (
+            not isinstance(turns_remaining, int)
+            or isinstance(turns_remaining, bool)
+            or turns_remaining < 1
+        ):
+            raise ControlError(
+                f"directive {directive_id!r}: 'turns_remaining' must be an "
+                f"integer >= 1, got {turns_remaining!r}"
+            )
+        reason = d.get("reason") or ""
+        if not isinstance(reason, str):
+            raise ControlError(f"directive {directive_id!r}: 'reason' must be a string")
+        created_at = d.get("created_at") or datetime.now(timezone.utc).isoformat()
+        if not isinstance(created_at, str):
+            created_at = datetime.now(timezone.utc).isoformat()
         return cls(
-            id=d.get("id") or str(uuid.uuid4())[:8],
-            kind=d.get("kind") or "clear",
-            target=d.get("target") or "",
-            strength=float(d.get("strength", 0.5)),
-            turns_remaining=int(d.get("turns_remaining", 5)),
-            reason=d.get("reason") or "",
-            created_at=d.get("created_at") or datetime.now(timezone.utc).isoformat(),
+            id=directive_id,
+            kind=kind,
+            target=target,
+            strength=strength,
+            turns_remaining=turns_remaining,
+            reason=reason,
+            created_at=created_at,
         )
 
 
@@ -634,55 +771,57 @@ class ControlDaemon:
             return
         try:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
-            self.directives = [
-                ControlDirective.from_dict(d) for d in raw.get("directives", [])
-            ]
-            a = raw.get("alchemy") or {}
+        except (OSError, ValueError):
+            return
+        if not isinstance(raw, dict):
+            return
+        try:
+            directives = []
+            records = raw.get("directives", [])
+            for d in records if isinstance(records, list) else []:
+                try:
+                    directives.append(ControlDirective.from_dict(d))
+                except ControlError as exc:
+                    # One bad record must not discard the good ones.
+                    print(
+                        f"[levi:control] skipping bad directive: {exc}",
+                        file=sys.stderr,
+                    )
+            self.directives = directives
+
+            def _stance(raw_key: str, cls, default_intensity: float, **extra):
+                a = raw.get(raw_key) or {}
+                if not isinstance(a, dict):
+                    a = {}
+                return cls(
+                    enabled=bool(a.get("enabled", True)),
+                    intensity=_finite_intensity(
+                        a.get("intensity", default_intensity), default_intensity
+                    ),
+                    **extra,
+                )
+
+            alchemy_raw = raw.get("alchemy")
+            alchemy_raw = alchemy_raw if isinstance(alchemy_raw, dict) else {}
             self.alchemy = AlchemyStance(
-                enabled=bool(a.get("enabled", True)),
-                intensity=float(a.get("intensity", 0.55)),
-                respect_pain=bool(a.get("respect_pain", True)),
+                enabled=bool(alchemy_raw.get("enabled", True)),
+                intensity=_finite_intensity(
+                    alchemy_raw.get("intensity", 0.55), 0.55
+                ),
+                respect_pain=bool(alchemy_raw.get("respect_pain", True)),
             )
-            le = raw.get("life_equation") or {}
-            self.life_equation = LifeEquationStance(
-                enabled=bool(le.get("enabled", True)),
-                intensity=float(le.get("intensity", 0.55)),
-            )
-            lc = raw.get("life_chess") or {}
-            self.life_chess = LifeChessStance(
-                enabled=bool(lc.get("enabled", True)),
-                intensity=float(lc.get("intensity", 0.55)),
-            )
-            ut = raw.get("ugly_truth") or {}
-            self.ugly_truth = UglyTruthStance(
-                enabled=bool(ut.get("enabled", True)),
-                intensity=float(ut.get("intensity", 0.55)),
-            )
-            lv = raw.get("leverage") or {}
-            self.leverage = LeverageStance(
-                enabled=bool(lv.get("enabled", True)),
-                intensity=float(lv.get("intensity", 0.55)),
-            )
-            gt = raw.get("game_tester") or {}
-            self.game_tester = GameTesterStance(
-                enabled=bool(gt.get("enabled", True)),
-                intensity=float(gt.get("intensity", 0.50)),
-            )
-            cm = raw.get("capability_mod") or {}
-            self.capability_mod = CapabilityModStance(
-                enabled=bool(cm.get("enabled", True)),
-                intensity=float(cm.get("intensity", 0.50)),
-            )
-            ch = raw.get("chisel") or {}
-            self.chisel = ChiselStance(
-                enabled=bool(ch.get("enabled", True)),
-                intensity=float(ch.get("intensity", 0.55)),
-            )
+            self.life_equation = _stance("life_equation", LifeEquationStance, 0.55)
+            self.life_chess = _stance("life_chess", LifeChessStance, 0.55)
+            self.ugly_truth = _stance("ugly_truth", UglyTruthStance, 0.55)
+            self.leverage = _stance("leverage", LeverageStance, 0.55)
+            self.game_tester = _stance("game_tester", GameTesterStance, 0.50)
+            self.capability_mod = _stance("capability_mod", CapabilityModStance, 0.50)
+            self.chisel = _stance("chisel", ChiselStance, 0.55)
             self._force_core_always_on()
-            self.locked_persona = raw.get("locked_persona")
-            self.locked_wit_styles = list(raw.get("locked_wit_styles") or [])
-            self.boosts = dict(raw.get("boosts") or {})
-            self.suppress = dict(raw.get("suppress") or {})
+            self.locked_persona = _str_or_none(raw.get("locked_persona"))
+            self.locked_wit_styles = _str_list(raw.get("locked_wit_styles"))
+            self.boosts = _weight_map(raw.get("boosts"))
+            self.suppress = _weight_map(raw.get("suppress"))
         except Exception:
             pass
 
@@ -707,7 +846,6 @@ class ControlDaemon:
                     st.intensity = 0.50
 
     def _persist(self) -> None:
-
         self.path.parent.mkdir(parents=True, exist_ok=True)
         payload = {
             "directives": [d.to_dict() for d in self.directives],
@@ -726,8 +864,27 @@ class ControlDaemon:
             "updated_at": datetime.now(timezone.utc).isoformat(),
         }
         tmp = self.path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-        tmp.replace(self.path)
+        try:
+            tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+            tmp.replace(self.path)
+        except OSError as exc:
+            raise ControlError(
+                f"cannot persist control daemon state to {self.path}: {exc}"
+            ) from exc
+
+    def _tune_stance(self, name: str, enabled: bool, intensity: float) -> None:
+        """Shared validation for the set_* stance tuners: reject bad
+        input instead of silently clamping it."""
+        if not isinstance(enabled, bool):
+            raise ControlError(
+                f"invalid enabled {enabled!r}: must be True or False"
+            )
+        intensity = _validate_strength(intensity, field="intensity")
+        st = getattr(self, name)
+        st.enabled = enabled
+        st.intensity = intensity
+        self._force_core_always_on()
+        self._persist()
 
     # ----- directive API -----
 
@@ -739,12 +896,23 @@ class ControlDaemon:
         turns: int = 8,
         reason: str = "",
     ) -> ControlDirective:
+        kind = _validate_kind(kind)
+        if not isinstance(target, str):
+            raise ControlError(
+                f"invalid target {target!r}: must be a string"
+            )
+        strength = _validate_strength(strength)
+        turns = _validate_turns(turns)
+        if not isinstance(reason, str):
+            raise ControlError(
+                f"invalid reason {reason!r}: must be a string"
+            )
         d = ControlDirective(
             id=str(uuid.uuid4())[:8],
             kind=kind,
             target=target,
-            strength=max(0.0, min(1.0, strength)),
-            turns_remaining=max(1, turns),
+            strength=strength,
+            turns_remaining=turns,
             reason=reason or kind,
         )
         self.directives.append(d)
@@ -829,57 +997,36 @@ class ControlDaemon:
         self._persist()
 
     def set_alchemy(self, enabled: bool = True, intensity: float = 0.55) -> None:
-        self.alchemy.enabled = enabled
-        self.alchemy.intensity = max(0.0, min(1.0, intensity))
-        self._force_core_always_on()
-        self._persist()
+        self._tune_stance("alchemy", enabled, intensity)
 
     def set_life_equation(self, enabled: bool = True, intensity: float = 0.55) -> None:
-        self.life_equation.enabled = enabled
-        self.life_equation.intensity = max(0.0, min(1.0, intensity))
-        self._force_core_always_on()
-        self._persist()
+        self._tune_stance("life_equation", enabled, intensity)
 
     def set_life_chess(self, enabled: bool = True, intensity: float = 0.55) -> None:
-        self.life_chess.enabled = enabled
-        self.life_chess.intensity = max(0.0, min(1.0, intensity))
-        self._force_core_always_on()
-        self._persist()
+        self._tune_stance("life_chess", enabled, intensity)
 
     def set_ugly_truth(self, enabled: bool = True, intensity: float = 0.55) -> None:
-        self.ugly_truth.enabled = enabled
-        self.ugly_truth.intensity = max(0.0, min(1.0, intensity))
-        self._force_core_always_on()
-        self._persist()
+        self._tune_stance("ugly_truth", enabled, intensity)
 
     def set_leverage(self, enabled: bool = True, intensity: float = 0.55) -> None:
-        self.leverage.enabled = enabled
-        self.leverage.intensity = max(0.0, min(1.0, intensity))
-        self._force_core_always_on()
-        self._persist()
+        self._tune_stance("leverage", enabled, intensity)
 
     def set_game_tester(self, enabled: bool = True, intensity: float = 0.50) -> None:
-        self.game_tester.enabled = enabled
-        self.game_tester.intensity = max(0.0, min(1.0, intensity))
-        self._force_core_always_on()
-        self._persist()
+        self._tune_stance("game_tester", enabled, intensity)
 
     def set_capability_mod(self, enabled: bool = True, intensity: float = 0.50) -> None:
-        self.capability_mod.enabled = enabled
-        self.capability_mod.intensity = max(0.0, min(1.0, intensity))
-        self._force_core_always_on()
-        self._persist()
+        self._tune_stance("capability_mod", enabled, intensity)
 
     def set_chisel(self, enabled: bool = True, intensity: float = 0.55) -> None:
-        self.chisel.enabled = enabled
-        self.chisel.intensity = max(0.0, min(1.0, intensity))
-        self._force_core_always_on()
-        self._persist()
+        self._tune_stance("chisel", enabled, intensity)
 
     # ----- read API for nervous / wit / loop -----
 
     def persona_bias(self, persona_id: str) -> float:
         """Additive score bias for scoring matrix (−1 .. +1)."""
+        if not isinstance(persona_id, str):
+            # Scoring hot path: a non-string id is neutral, not a crash.
+            return 0.0
         if self.locked_persona and self.locked_persona != persona_id:
             return -0.85
         if self.locked_persona == persona_id:

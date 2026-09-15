@@ -12,10 +12,22 @@ from typing import Any, Dict, List, Optional
 from pathlib import Path
 from datetime import datetime, timezone
 import json
+import os
 import uuid
 
 
 DEFAULT_PATH = Path.home() / ".levi" / "capability_log.json"
+
+_RESULT_VALUES = ("completed", "partial", "failed", "blocked")
+_COMPLEXITY_VALUES = ("low", "medium", "high")
+_AUTOMATABLE_VALUES = ("yes", "partial", "no")
+
+
+def _clamp_limit(limit: int, default: int = 20) -> int:
+    """Positive-int guard for display limits (never unbounded)."""
+    if isinstance(limit, bool) or not isinstance(limit, int) or limit < 1:
+        return default
+    return min(limit, 1000)
 
 
 @dataclass
@@ -85,9 +97,19 @@ class CapabilityLog:
             "entries": [e.to_dict() for e in self.entries[-500:]],
             "updated_at": datetime.now(timezone.utc).isoformat(),
         }
+        # Atomic + owner-only: log entries describe the user's real work.
         tmp = self.path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-        tmp.replace(self.path)
+        fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as fh:
+                json.dump(payload, fh, indent=2)
+        except BaseException:
+            try:
+                tmp.unlink()
+            except OSError:
+                pass
+            raise
+        os.replace(tmp, self.path)
 
     def log(
         self,
@@ -106,6 +128,29 @@ class CapabilityLog:
         future_skill: str = "",
         phase: str = "",
     ) -> CapEntry:
+        # The log is evidence for future skills — garbage in, garbage out.
+        if not isinstance(task, str) or not task.strip():
+            raise ValueError("CapabilityLog.log: task must be a non-empty string")
+        if result not in _RESULT_VALUES:
+            raise ValueError(
+                "CapabilityLog.log: result must be one of %s, got %r"
+                % (", ".join(_RESULT_VALUES), result)
+            )
+        if complexity not in _COMPLEXITY_VALUES:
+            raise ValueError(
+                "CapabilityLog.log: complexity must be one of %s, got %r"
+                % (", ".join(_COMPLEXITY_VALUES), complexity)
+            )
+        if automatable not in _AUTOMATABLE_VALUES:
+            raise ValueError(
+                "CapabilityLog.log: automatable must be one of %s, got %r"
+                % (", ".join(_AUTOMATABLE_VALUES), automatable)
+            )
+        if tools is not None and (
+            not isinstance(tools, (list, tuple))
+            or any(not isinstance(t, str) for t in tools)
+        ):
+            raise ValueError("CapabilityLog.log: tools must be a list of str (or None)")
         e = CapEntry(
             id=str(uuid.uuid4())[:8],
             task=task,
@@ -128,6 +173,7 @@ class CapabilityLog:
         return e
 
     def list_entries(self, limit: int = 20) -> List[CapEntry]:
+        limit = _clamp_limit(limit)
         return list(reversed(self.entries[-limit:]))
 
     def skill_candidates(self) -> List[str]:

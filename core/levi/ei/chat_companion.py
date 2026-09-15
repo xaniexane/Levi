@@ -374,6 +374,9 @@ class ChatCompanion:
         return "\n".join(lines)
 
     def history(self, n: int = 10) -> str:
+        """Last ``n`` messages; ``n`` must be a positive int."""
+        if isinstance(n, bool) or not isinstance(n, int) or n < 1:
+            raise ValueError("history: n must be a positive int, got %r" % (n,))
         msgs = self.session.messages[-n:]
         lines = [f"Session {self.session.id} · last {len(msgs)}"]
         for m in msgs:

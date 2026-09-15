@@ -27,8 +27,15 @@ from pathlib import Path
 from datetime import datetime, timezone
 from enum import Enum
 import json
-import uuid
+import os
 import re
+import uuid
+
+
+# Reused for names coming back out of persisted state: a hand-edited
+# emergency_builder.json must not be able to smuggle a path traversal
+# into the workspace layout.
+_SAFE_NAME_RE = re.compile(r"[^a-zA-Z0-9_-]+")
 
 
 class BuildTier(str, Enum):
@@ -73,6 +80,25 @@ STAGES = [
     "harden",  # tests + policy
     "product",  # package + handoff
 ]
+
+
+def _sanitize_name(name: str) -> str:
+    """Filesystem-safe project name; never empty, never a path."""
+    return _SAFE_NAME_RE.sub("_", str(name or "")).strip("_") or "new_project"
+
+
+def _goal_literal(goal: str, limit: int) -> str:
+    """Python string literal for embedding a goal in generated code.
+
+    Uses json.dumps so quotes/backslashes/newlines in the goal cannot
+    break out of the literal and inject code into the generated file.
+    """
+    return json.dumps(str(goal or "")[:limit])
+
+
+def _goal_toml(goal: str, limit: int) -> str:
+    """TOML basic-string literal for the goal (same escaping rationale)."""
+    return json.dumps(str(goal or "")[:limit].replace("\n", " "))
 
 
 @dataclass
@@ -132,9 +158,19 @@ class EmergencyBuilder:
             "jobs": [j.to_dict() for j in self.jobs[-50:]],
             "updated_at": datetime.now(timezone.utc).isoformat(),
         }
+        # Atomic + owner-only: job goals are the user's raw plans.
         tmp = self.state_path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-        tmp.replace(self.state_path)
+        fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as fh:
+                json.dump(payload, fh, indent=2)
+        except BaseException:
+            try:
+                tmp.unlink()
+            except OSError:
+                pass
+            raise
+        os.replace(tmp, self.state_path)
 
     def plan(
         self,
@@ -143,11 +179,15 @@ class EmergencyBuilder:
         target: str = "independent",
         project_name: str = "new_project",
     ) -> BuildJob:
+        if not isinstance(goal, str) or not goal.strip():
+            raise ValueError("goal must be a non-empty string")
+        if not isinstance(project_name, str) or not project_name.strip():
+            raise ValueError("project_name must be a non-empty string")
+        if not isinstance(tier, str):
+            raise ValueError("tier must be one of E3, E4, E5, E6")
         t = BuildTier(tier.upper() if tier.upper() in BuildTier.__members__ else "E4")
         meta = TIER_META[t]
-        safe_name = (
-            re.sub(r"[^a-zA-Z0-9_-]+", "_", project_name).strip("_") or "new_project"
-        )
+        safe_name = _sanitize_name(project_name)
         steps = [
             f"Tier {t.value}: {meta['name']} — {meta['desc']}",
             f"Target: {target} / {safe_name}",
@@ -201,7 +241,10 @@ class EmergencyBuilder:
         if not job:
             return f"No job {job_id}"
         if job.requires_hitl and not force:
-            # check HITL approved
+            # Hard gate: the HITL request must exist AND be approved in
+            # history. A missing/empty hitl_id (e.g. propose() threw during
+            # plan) is treated as NOT approved — never as a silent pass.
+            approved = False
             try:
                 from levi.project.hitl import HITLGate
 
@@ -212,19 +255,20 @@ class EmergencyBuilder:
                         f"HITL still pending ({job.hitl_id}). "
                         f"Approve: levi project hitl --approve {job.hitl_id} then re-apply."
                     )
-                # if never approved and still awaiting
-                if job.status == "awaiting_hitl" and job.hitl_id:
-                    # allow if not in pending (was decided) — check history
-                    approved = any(
-                        h.id == job.hitl_id and h.status == "approved"
-                        for h in g.history
-                    )
-                    if not approved:
-                        return f"HITL not approved for {job.hitl_id}"
+                approved = bool(job.hitl_id) and any(
+                    h.id == job.hitl_id and h.status == "approved" for h in g.history
+                )
             except Exception as e:
                 return f"HITL check failed: {e}"
+            if not approved:
+                return (
+                    f"HITL not approved for {job.hitl_id or 'unknown request'} — "
+                    "refusing to apply"
+                )
 
-        name = job.target.split(":")[-1]
+        # Re-sanitize: job.target comes from persisted JSON, which may have
+        # been hand-edited. The name must never be a path.
+        name = _sanitize_name(job.target.split(":")[-1])
         root = self.workspace / name
         root.mkdir(parents=True, exist_ok=True)
         artifacts = []
@@ -254,12 +298,15 @@ class EmergencyBuilder:
         artifacts.append(str(init))
 
         main = pkg / "main.py"
+        # The goal is embedded via json-escaped literals so quotes / newlines /
+        # backslashes in it cannot break the generated code (code injection).
+        goal_lit = _goal_literal(job.goal, 60)
         if job.tier in ("E5", "E6"):
             main.write_text(
-                f'"""MVP entrypoint for {name} — LEVI Emergency Builder {job.tier}."""\n'
+                f'"""{name} — MVP entrypoint (LEVI Emergency Builder {job.tier})."""\n'
                 f"from __future__ import annotations\n\n"
                 f"def status() -> str:\n"
-                f'    return "{name} MVP OK — tier {job.tier} — goal: {job.goal[:60]}"\n\n'
+                f"    return {name!r} + ' MVP OK — tier {job.tier} — goal: ' + {goal_lit}\n\n"
                 f"def main(argv: list | None = None) -> int:\n"
                 f"    import sys\n"
                 f"    args = list(argv or sys.argv[1:])\n"
@@ -275,9 +322,11 @@ class EmergencyBuilder:
             )
         else:
             main.write_text(
-                f'"""Entrypoint stub for {name}."""\n'
+                f'"""{name} — entrypoint stub (LEVI Emergency Builder)."""\n'
+                f"def status() -> str:\n"
+                f"    return {name!r} + ' scaffold OK — tier {job.tier}'\n\n"
                 f"def main():\n"
-                f'    print("{name} scaffold OK — tier {job.tier}")\n'
+                f"    print(status())\n"
                 f"\n"
                 f'if __name__ == "__main__":\n'
                 f"    main()\n",
@@ -285,10 +334,11 @@ class EmergencyBuilder:
             )
         artifacts.append(str(main))
 
-        # pyproject for runnable package
+        # pyproject for runnable package (goal escaped as a TOML string)
         pyproject = root / "pyproject.toml"
         pyproject.write_text(
-            f'[project]\nname = "{name}"\nversion = "0.1.0"\ndescription = "{job.goal[:80]}"\n'
+            f'[project]\nname = "{name}"\nversion = "0.1.0"\n'
+            f"description = {_goal_toml(job.goal, 80)}\n"
             f'requires-python = ">=3.10"\n\n'
             f'[tool.setuptools.packages.find]\nwhere = ["src"]\n',
             encoding="utf-8",

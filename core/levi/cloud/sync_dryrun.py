@@ -53,9 +53,29 @@ class SyncDryRun:
     """Inventories local state; writes manifest under ~/.levi/ — never transmits."""
 
     SKIP_NAMES = {".DS_Store", "__pycache__", MANIFEST_NAME}
+    _HASH_CHUNK = 1024 * 1024  # 1 MiB — bounded memory even on multi-GB blobs
 
     def __init__(self, root: Optional[Path] = None):
+        if root is not None and not isinstance(root, (str, Path)):
+            raise ValueError("root must be a str or pathlib.Path")
         self.root = Path(root) if root else DEFAULT_LEVI
+
+    @staticmethod
+    def _hash_file(path: Path) -> tuple[int, str] | None:
+        """(size, sha256) reading in bounded chunks — never whole-file in RAM."""
+        h = hashlib.sha256()
+        size = 0
+        try:
+            with open(path, "rb") as fh:
+                while True:
+                    chunk = fh.read(SyncDryRun._HASH_CHUNK)
+                    if not chunk:
+                        break
+                    h.update(chunk)
+                    size += len(chunk)
+        except OSError:
+            return None
+        return size, h.hexdigest()
 
     def _kind(self, path: Path) -> str:
         if path.suffix == ".seal":
@@ -84,15 +104,12 @@ class SyncDryRun:
                 if name in self.SKIP_NAMES or name.startswith("."):
                     continue
                 path = Path(dirpath) / name
-                try:
-                    data = path.read_bytes()
-                except Exception:
+                hashed = self._hash_file(path)
+                if hashed is None:
                     continue
+                size, h = hashed
                 rel = str(path.relative_to(self.root))
-                h = hashlib.sha256(data).hexdigest()
-                entry = BlobEntry(
-                    rel=rel, size=len(data), sha256=h, kind=self._kind(path)
-                )
+                entry = BlobEntry(rel=rel, size=size, sha256=h, kind=self._kind(path))
                 manifest.blobs.append(entry)
                 manifest.total_bytes += entry.size
 
@@ -103,7 +120,19 @@ class SyncDryRun:
         m = manifest or self.inventory()
         self.root.mkdir(parents=True, exist_ok=True)
         out = self.root / MANIFEST_NAME
-        out.write_text(json.dumps(m.to_dict(), indent=2), encoding="utf-8")
+        # Atomic + owner-only: the manifest inventories private local state.
+        tmp = out.with_suffix(".json.tmp")
+        fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as fh:
+                json.dump(m.to_dict(), fh, indent=2)
+        except BaseException:
+            try:
+                tmp.unlink()
+            except OSError:
+                pass
+            raise
+        os.replace(tmp, out)
         return out
 
     def report(self) -> str:

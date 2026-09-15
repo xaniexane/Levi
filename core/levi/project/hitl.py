@@ -12,10 +12,23 @@ from typing import Any, Dict, List, Optional
 from pathlib import Path
 from datetime import datetime, timezone
 import json
+import os
 import uuid
 
 
 DEFAULT_PATH = Path.home() / ".levi" / "hitl_pending.json"
+
+_RISK_LEVELS = ("LOW", "MEDIUM", "HIGH", "CRITICAL")
+_DECISIONS = {
+    "approve": "approved",
+    "approved": "approved",
+    "yes": "approved",
+    "deny": "denied",
+    "denied": "denied",
+    "no": "denied",
+    "edit": "edited",
+    "edited": "edited",
+}
 
 # Domains that always require HITL (Easy Touch master prompt + LEVI policy)
 ALWAYS_HITL = frozenset(
@@ -118,9 +131,19 @@ class HITLGate:
             "history": [h.to_dict() for h in self.history[-100:]],
             "updated_at": datetime.now(timezone.utc).isoformat(),
         }
+        # Atomic + owner-only: pending approvals are consequential.
         tmp = self.path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-        tmp.replace(self.path)
+        fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as fh:
+                json.dump(payload, fh, indent=2)
+        except BaseException:
+            try:
+                tmp.unlink()
+            except OSError:
+                pass
+            raise
+        os.replace(tmp, self.path)
 
     @staticmethod
     def requires_hitl(domain: str, risk: str = "LOW") -> bool:
@@ -141,16 +164,31 @@ class HITLGate:
         if_denied: str = "",
         domain: str = "general",
     ) -> HITLRequest:
+        # A HITL card with an empty "what" is a safety hole — the human must
+        # see exactly what they are being asked to approve.
+        for label, value in (("what", what), ("why", why), ("changes", changes)):
+            if not isinstance(value, str) or not value.strip():
+                raise ValueError(f"HITL propose: {label} must be a non-empty string")
+        if not isinstance(domain, str) or not domain.strip():
+            raise ValueError("HITL propose: domain must be a non-empty string")
+        if not isinstance(cost, str):
+            raise ValueError("HITL propose: cost must be a string")
+        risk = risk.upper() if isinstance(risk, str) else ""
+        if risk not in _RISK_LEVELS:
+            raise ValueError(
+                "HITL propose: risk must be one of %s, got %r"
+                % (", ".join(_RISK_LEVELS), risk)
+            )
         req = HITLRequest(
             id=str(uuid.uuid4())[:8],
             what=what,
             why=why,
             changes=changes,
             cost=cost,
-            risk=risk.upper(),
-            benefit=benefit,
-            if_approved=if_approved,
-            if_denied=if_denied,
+            risk=risk,
+            benefit=benefit if isinstance(benefit, str) else "",
+            if_approved=if_approved if isinstance(if_approved, str) else "",
+            if_denied=if_denied if isinstance(if_denied, str) else "",
             domain=domain,
         )
         self.pending[req.id] = req
@@ -158,17 +196,19 @@ class HITLGate:
         return req
 
     def decide(self, req_id: str, decision: str, note: str = "") -> HITLRequest:
+        if not isinstance(req_id, str) or not req_id:
+            raise KeyError("HITL decide: req_id must be a non-empty string")
         req = self.pending.get(req_id)
         if not req:
             raise KeyError(f"No pending HITL request {req_id}")
-        decision = decision.lower().strip()
-        if decision in ("approve", "approved", "yes"):
-            req.status = "approved"
-        elif decision in ("deny", "denied", "no"):
-            req.status = "denied"
-        else:
-            req.status = "edited"
-        req.decision_note = note
+        key = decision.lower().strip() if isinstance(decision, str) else ""
+        if key not in _DECISIONS:
+            raise ValueError(
+                "HITL decide: decision must be one of %s, got %r"
+                % (", ".join(sorted(set(_DECISIONS))), decision)
+            )
+        req.status = _DECISIONS[key]
+        req.decision_note = note if isinstance(note, str) else ""
         req.decided_at = datetime.now(timezone.utc).isoformat()
         self.history.append(req)
         del self.pending[req_id]

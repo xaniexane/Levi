@@ -96,23 +96,107 @@ def extract_text(html_text: str) -> str:
     return "\n".join(lines)
 
 
+def _load_catalog() -> dict:
+    """Load and schema-validate catalog.json. Raises ValueError on corrupt
+    data (never a raw KeyError/JSONDecodeError traceback)."""
+    path = BASE / "catalog.json"
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        raise ValueError("ingest: catalog not found at %s" % path) from None
+    except (OSError, ValueError) as exc:
+        raise ValueError("ingest: catalog.json is not valid JSON: %s" % exc) from exc
+    if not isinstance(raw, dict) or not isinstance(raw.get("subjects"), list):
+        raise ValueError(
+            "ingest: catalog.json must be {subjects: [...]}; "
+            "fix catalog.json before ingesting"
+        )
+    for i, subj in enumerate(raw["subjects"]):
+        if (
+            not isinstance(subj, dict)
+            or not isinstance(subj.get("slug"), str)
+            or not subj["slug"]
+        ):
+            raise ValueError(
+                "ingest: catalog subject #%d is missing a non-empty 'slug'" % i
+            )
+        if not isinstance(subj.get("courses"), list):
+            raise ValueError(
+                "ingest: catalog subject %r is missing a 'courses' list"
+                % subj.get("slug")
+            )
+        for j, course in enumerate(subj["courses"]):
+            if not isinstance(course, dict):
+                raise ValueError(
+                    "ingest: subject %r course #%d is not an object" % (subj["slug"], j)
+                )
+            for field in ("code", "title", "school", "primary"):
+                if not isinstance(course.get(field), str) or not course[field].strip():
+                    raise ValueError(
+                        "ingest: subject %r course #%d is missing non-empty %r"
+                        % (subj["slug"], j, field)
+                    )
+    return raw
+
+
+def _load_coverage(refetch: bool) -> dict[str, dict]:
+    """Load coverage.json, tolerating nothing but silence on first run."""
+    coverage: dict[str, dict] = {}
+    if not COVERAGE.exists() or refetch:
+        return coverage
+    try:
+        raw = json.loads(COVERAGE.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        raise ValueError(
+            "ingest: coverage.json is not valid JSON (%s); delete it to start "
+            "fresh, or fix it" % exc
+        ) from exc
+    if not isinstance(raw, list):
+        raise ValueError(
+            "ingest: coverage.json must be a list of records; "
+            "delete it to start fresh, or fix it"
+        )
+    for rec in raw:
+        if isinstance(rec, dict) and isinstance(rec.get("id"), str):
+            coverage[rec["id"]] = rec
+    return coverage
+
+
+def _checkpoint(coverage: dict[str, dict]) -> None:
+    """Atomically persist coverage so an interrupted run keeps progress."""
+    tmp = COVERAGE.with_suffix(".json.tmp")
+    tmp.write_text(
+        json.dumps(sorted(coverage.values(), key=lambda r: r["id"]), indent=1),
+        encoding="utf-8",
+    )
+    tmp.replace(COVERAGE)
+
+
 def main(argv: list[str]) -> int:
     limit = None
     only_subject = None
     refetch = False
     for a in argv:
         if a.startswith("--limit="):
-            limit = int(a.split("=", 1)[1])
+            try:
+                limit = int(a.split("=", 1)[1])
+            except ValueError:
+                print("ingest: --limit must be a positive integer")
+                return 2
+            if limit < 1:
+                print("ingest: --limit must be a positive integer")
+                return 2
         elif a.startswith("--subject="):
             only_subject = a.split("=", 1)[1]
         elif a == "--refetch":
             refetch = True
 
-    catalog = json.loads((BASE / "catalog.json").read_text(encoding="utf-8"))
-    coverage: dict[str, dict] = {}
-    if COVERAGE.exists() and not refetch:
-        for rec in json.loads(COVERAGE.read_text(encoding="utf-8")):
-            coverage[rec["id"]] = rec
+    try:
+        catalog = _load_catalog()
+        coverage = _load_coverage(refetch)
+    except ValueError as exc:
+        print(exc)
+        return 2
 
     records: list[dict] = []
     done = 0
@@ -166,15 +250,17 @@ def main(argv: list[str]) -> int:
             done += 1
             time.sleep(DELAY)
             if done % 25 == 0:
-                print(f"  ...{done} attempted", flush=True)
+                _checkpoint(coverage)
+                print(f"  ...{done} attempted (checkpointed)", flush=True)
 
     # keep previously-recorded subjects when filtering
     if only_subject or limit:
+        seen = {r["id"] for r in records}
         for cid, rec in coverage.items():
-            if cid not in {r["id"] for r in records}:
+            if cid not in seen:
                 records.append(rec)
     records.sort(key=lambda r: r["id"])
-    COVERAGE.write_text(json.dumps(records, indent=1), encoding="utf-8")
+    _checkpoint({r["id"]: r for r in records})
 
     from collections import Counter
 

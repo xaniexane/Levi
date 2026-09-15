@@ -33,6 +33,20 @@ from urllib.parse import urlparse, parse_qs
 from levi.mcp.protocol import MCPServer, error_response
 
 
+#: Upper bound on one JSON-RPC request body (HTTP or stdio). MCP
+#: messages are small control frames; a larger payload is rejected
+#: before it can exhaust memory.
+_MAX_JSON_BODY = 1_000_000
+
+
+class _BadBody(Exception):
+    """Malformed or oversized HTTP request body (HTTP 400)."""
+
+
+class _BadJSON(Exception):
+    """Request body is not valid JSON (JSON-RPC -32700 parse error)."""
+
+
 # ---------------------------------------------------------------------------
 # stdio
 # ---------------------------------------------------------------------------
@@ -49,6 +63,17 @@ def serve_stdio(
     for raw in inp:
         line = raw.strip()
         if not line:
+            continue
+        if len(line) > _MAX_JSON_BODY:
+            _write(
+                out,
+                error_response(
+                    None,
+                    -32700,
+                    f"message too large ({len(line)} bytes; "
+                    f"limit is {_MAX_JSON_BODY} bytes)",
+                ),
+            )
             continue
         try:
             message = json.loads(line)
@@ -114,9 +139,35 @@ class _Handler(BaseHTTPRequestHandler):
         self._send_json(401, {"error": "unauthorized"})
 
     def _read_json(self) -> Any:
-        length = int(self.headers.get("Content-Length") or 0)
+        """Read and decode the request body as JSON.
+
+        Raises :class:`_BadBody` when the ``Content-Length`` header is
+        missing, malformed, negative, or beyond the body limit; raises
+        :class:`_BadJSON` when the body is not valid JSON.
+        """
+        raw_len = self.headers.get("Content-Length") or "0"
+        try:
+            length = int(str(raw_len).strip())
+        except (TypeError, ValueError):
+            raise _BadBody(
+                f"invalid Content-Length: {raw_len!r}; expected a byte count"
+            ) from None
+        if length < 0:
+            raise _BadBody(
+                f"invalid Content-Length: {length}; must be >= 0"
+            )
+        if length > _MAX_JSON_BODY:
+            raise _BadBody(
+                f"request body too large ({length} bytes; "
+                f"limit is {_MAX_JSON_BODY} bytes)"
+            )
         raw = self.rfile.read(length) if length else b""
-        return json.loads(raw.decode("utf-8")) if raw else None
+        if not raw:
+            return None
+        try:
+            return json.loads(raw.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise _BadJSON(f"parse error: {exc}") from exc
 
     def log_message(self, *args: Any) -> None:  # quieter than default
         pass
@@ -143,7 +194,10 @@ class _Handler(BaseHTTPRequestHandler):
             return
         try:
             message = self._read_json()
-        except ValueError:
+        except _BadBody as exc:
+            self._send_json(400, {"error": str(exc)})
+            return
+        except _BadJSON:
             self._send_json(200, error_response(None, -32700, "parse error"))
             return
         if message is None:

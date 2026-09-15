@@ -492,3 +492,184 @@ def test_fleet_run_recorded_in_decision_ledger(isolated_home, tmp_path: Path):
     assert "decision_summary" in step and step["decision_summary"]
     # No hidden chain-of-thought column exists.
     assert "chain_of_thought" not in step
+
+
+# ---------------------------------------------------------------------------
+# Approval engine input hardening
+# ---------------------------------------------------------------------------
+
+
+def test_request_validates_inputs(engine: ApprovalEngine):
+    from levi.control.approvals import ApprovalError
+
+    with pytest.raises(ApprovalError, match="non-empty string"):
+        engine.request("", RiskLevel.LOW)
+    with pytest.raises(ApprovalError, match="must be a RiskLevel"):
+        engine.request("do x", "high")  # type: ignore[arg-type]
+    with pytest.raises(ApprovalError, match="must be a string"):
+        engine.request("do x", RiskLevel.LOW, reason=None)  # type: ignore[arg-type]
+    # Empty reason still works (neutral placeholder for the policy layer).
+    rec = engine.request("do x", RiskLevel.LOW)
+    assert rec["status"] == "approved"
+
+
+def test_guard_validates_timeout_and_poll_interval(engine: ApprovalEngine):
+    from levi.control.approvals import ApprovalError
+
+    with pytest.raises(ApprovalError, match="timeout"):
+        engine.guard("do x", RiskLevel.LOW, timeout=float("nan"))
+    with pytest.raises(ApprovalError, match="timeout"):
+        engine.guard("do x", RiskLevel.LOW, timeout=-1)
+    with pytest.raises(ApprovalError, match="poll_interval"):
+        engine.guard("do x", RiskLevel.LOW, timeout=1, poll_interval=0)
+    with pytest.raises(ApprovalError, match="poll_interval"):
+        engine.guard("do x", RiskLevel.LOW, timeout=1, poll_interval="fast")  # type: ignore[arg-type]
+
+
+def test_decision_methods_validate_ids(engine: ApprovalEngine):
+    from levi.control.approvals import ApprovalError
+
+    for fn in (engine.get, engine.approve_once, engine.deny):
+        with pytest.raises(ApprovalError, match="approval_id"):
+            fn(None)  # type: ignore[arg-type]
+        with pytest.raises(ApprovalError, match="approval_id"):
+            fn("   ")
+    with pytest.raises(ApprovalError, match="note"):
+        engine.deny("x", note=None)  # type: ignore[arg-type]
+    with pytest.raises(ApprovalError, match="workflow_key"):
+        engine.approve_for_workflow("x", workflow_key=5)  # type: ignore[arg-type]
+
+
+def test_history_limit_validation(engine: ApprovalEngine):
+    from levi.control.approvals import ApprovalError
+
+    with pytest.raises(ApprovalError, match="limit"):
+        engine.history(limit=-1)
+    with pytest.raises(ApprovalError, match="limit"):
+        engine.history(limit="many")  # type: ignore[arg-type]
+    assert engine.history(limit=0) == []
+
+
+def test_corrupt_approval_store_degrades_per_section(home: Path):
+    import json
+
+    from levi.control.approvals import ApprovalEngine
+
+    d = home / ".levi" / "control"
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "approvals.json").write_text(
+        json.dumps(
+            {
+                "pending": ["not-a-dict", {"id": "a1", "created_at": ""}],
+                "history": {"bad": "shape"},
+                "grants": {"g1": "not-a-dict"},
+            }
+        )
+    )
+    eng = ApprovalEngine(home=home)
+    assert eng.pending() == [] or all(isinstance(r, dict) for r in eng.pending())
+    assert eng.history() == []
+
+
+# ---------------------------------------------------------------------------
+# Ledger input hardening
+# ---------------------------------------------------------------------------
+
+
+def test_ledger_rejects_bad_ids_and_numbers(home: Path):
+    from levi.control.ledger import LedgerError, LedgerWriter
+
+    ledger = LedgerWriter(home=home)
+    with pytest.raises(LedgerError, match="task_id"):
+        ledger.record_task("")
+    with pytest.raises(LedgerError, match="task_id"):
+        ledger.record_task(None)  # type: ignore[arg-type]
+    with pytest.raises(LedgerError, match="cost_units"):
+        ledger.set_task_status("t", "running", cost_units=float("nan"))
+    with pytest.raises(LedgerError, match="latency_ms"):
+        ledger.set_task_status("t", "running", latency_ms=-1)
+    with pytest.raises(LedgerError, match="cost_units"):
+        ledger.record_step("t", cost_units="many")  # type: ignore[arg-type]
+    with pytest.raises(LedgerError, match="tools_used"):
+        ledger.record_step("t", tools_used=["ok", 5])  # type: ignore[list-item]
+    with pytest.raises(LedgerError, match="verification"):
+        ledger.record_step("t", verification="fine")  # type: ignore[arg-type]
+    with pytest.raises(LedgerError, match="rating"):
+        ledger.record_feedback("t", rating=6)
+    with pytest.raises(LedgerError, match="rating"):
+        ledger.record_feedback("t", rating=True)  # type: ignore[arg-type]
+    with pytest.raises(LedgerError, match="limit"):
+        ledger.recent_tasks(limit=-2)
+
+
+def test_ledger_corrupt_json_columns_degrade_per_row(home: Path):
+    import sqlite3
+
+    from levi.control.ledger import LedgerWriter
+
+    ledger = LedgerWriter(home=home)
+    ledger.record_task("t1")
+    ledger.record_step("t1", outcome="ok")
+    with sqlite3.connect(str(ledger.path)) as conn:
+        conn.execute(
+            "UPDATE steps SET tools_used='[broken', verification='{oops' "
+            "WHERE task_id='t1'"
+        )
+    task = ledger.get_task("t1")
+    assert task is not None
+    assert task["steps"][0]["tools_used"] == []
+    assert task["steps"][0]["verification"] == {}
+
+
+# ---------------------------------------------------------------------------
+# Router / routing input hardening
+# ---------------------------------------------------------------------------
+
+
+def test_routing_rejects_bad_input():
+    from levi.control.router import pick_category, plan
+    from levi.control.routing import (
+        RoutingError,
+        classify_complexity,
+        estimate_tokens,
+        plan_route,
+        record_actual,
+    )
+
+    with pytest.raises(RoutingError, match="must be a string"):
+        classify_complexity(123)  # type: ignore[arg-type]
+    with pytest.raises(RoutingError, match="must be a string"):
+        pick_category(None)  # type: ignore[arg-type]
+    with pytest.raises(RoutingError, match="complexity"):
+        estimate_tokens("task", "extreme")
+    with pytest.raises(RoutingError, match="non-empty string"):
+        plan_route("")
+    with pytest.raises(RoutingError, match="budget_units"):
+        plan_route("hi", budget_units=float("nan"), only_downloaded=False)
+    with pytest.raises(RoutingError, match="needs_tools"):
+        plan_route("hi", needs_tools="yes", only_downloaded=False)  # type: ignore[arg-type]
+    with pytest.raises(RoutingError, match="candidates"):
+        plan_route("hi", candidates="levi-tiny", only_downloaded=False)  # type: ignore[arg-type]
+    with pytest.raises(RoutingError, match="non-empty string"):
+        plan("")
+    with pytest.raises(RoutingError, match="privacy"):
+        plan("hi", privacy="turbo")
+    route = plan_route("hi", budget_units=10, only_downloaded=False)
+    with pytest.raises(RoutingError, match="input_tokens"):
+        record_actual("t", route, input_tokens=-1, output_tokens=0, outcome="ok")
+    with pytest.raises(RoutingError, match="latency_ms"):
+        record_actual(
+            "t", route, input_tokens=1, output_tokens=1,
+            outcome="ok", latency_ms=float("inf"),
+        )
+
+
+def test_router_still_routes_cleanly():
+    from levi.control.router import plan
+    from levi.control.routing import plan_route
+
+    p = plan("research quantum networks", privacy="local-only")
+    assert p.model in ("levi-tiny", "levi-0.6b", "levi-4b")
+    assert p.strategy == "swarm"
+    r = plan_route("what is 2 + 2?", only_downloaded=False)
+    assert r.within_budget and r.quality_ok

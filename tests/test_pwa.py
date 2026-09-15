@@ -284,3 +284,29 @@ def test_token_gate(monkeypatch, tmp_path):
 def test_sanitize_session_name_rejects_traversal():
     with pytest.raises(ValueError):
         sanitize_session_name("../x")
+
+
+# -- hardening: bind validation -----------------------------------------------
+
+from levi.pwa.server import _check_bind  # noqa: E402
+
+
+def test_check_bind_accepts_os_assigned_port_zero():
+    assert _check_bind("127.0.0.1", 0) == ("127.0.0.1", 0)
+
+
+def test_check_bind_rejects_garbage():
+    for host, port in [
+        ("", 8000),
+        ("   ", 8000),
+        (None, 8000),
+        (123, 8000),
+        ("127.0.0.1", -1),
+        ("127.0.0.1", 65536),
+        ("127.0.0.1", True),
+        ("127.0.0.1", "8000"),
+        ("127.0.0.1", 8000.0),
+        ("127.0.0.1", None),
+    ]:
+        with pytest.raises(ValueError):
+            _check_bind(host, port)

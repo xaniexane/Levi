@@ -8,6 +8,7 @@ finding stored carries the scope entry that authorized it.
 
 from __future__ import annotations
 
+import math
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -20,6 +21,20 @@ from levi.bounty.scope import ScopeStore, check_scope, normalize_domain
 from levi.bounty.store import FindingStore
 
 
+def _check_delay(delay: float) -> float:
+    """Fail fast on a garbage politeness delay (garbage in one stage
+    must not become N confusing per-host errors)."""
+    if isinstance(delay, bool) or not isinstance(delay, (int, float)):
+        raise ValueError(
+            f"delay must be a non-negative number of seconds, got {delay!r}"
+        )
+    if not math.isfinite(delay) or delay < 0:
+        raise ValueError(
+            f"delay must be a non-negative number of seconds, got {delay!r}"
+        )
+    return float(delay)
+
+
 def run_recon(
     domain: str,
     store: Optional[ScopeStore] = None,
@@ -30,11 +45,16 @@ def run_recon(
     """Run the full recon pipeline against an in-scope domain.
 
     Raises ScopeError before any network touch if the domain is not enrolled.
+    Each stage degrades gracefully: a network outage in one stage produces
+    an error entry with partial results, never a traceback. Probe-captured
+    page bodies are forwarded to content discovery so a successfully
+    probed homepage is fetched exactly once.
     """
     scope = store or ScopeStore()
     fstore = findings or FindingStore()
     scope_entry = check_scope(domain, scope)  # gate at entry
     target = normalize_domain(domain)
+    delay = _check_delay(delay)
     started_at = datetime.now(timezone.utc).isoformat()
 
     report: Dict[str, object] = {
@@ -56,9 +76,7 @@ def run_recon(
             report["findings_new"] += 1  # type: ignore[operator]
 
     try:
-        subs = enum_mod.enumerate_subdomains(
-            target, store=scope, delay=delay
-        )
+        subs = enum_mod.enumerate_subdomains(target, store=scope, delay=delay)
     except Exception as exc:  # resolvable errors never crash a run
         report["errors"].append(f"enum: {exc}")
         subs = []
@@ -67,7 +85,9 @@ def run_recon(
     hosts = [target] + [s["subdomain"] for s in subs]
     for s in subs:
         _add(
-            s["subdomain"], "subdomain", f"resolves to {', '.join(s['ips'])}",
+            s["subdomain"],
+            "subdomain",
+            f"resolves to {', '.join(s['ips'])}",
             evidence=f"source={s['source']}",
         )
 
@@ -89,13 +109,16 @@ def run_recon(
             if tech:
                 detail += f" [{tech}]"
             _add(host, "http_service", detail)
-            # stash one body for JS harvesting (re-fetch is wasteful;
-            # page_bodies expects url->html; probe doesn't return bodies,
-            # so content.py fetches the page itself when given none)
+        # Probe already fetched each live homepage; hand the captured
+        # bodies to content discovery so it does not GET them again.
+        bodies = facts.get("page_bodies")
+        if isinstance(bodies, dict):
+            page_bodies.update({str(k): str(v) for k, v in bodies.items()})
         tls = facts.get("tls") or {}
         if tls:
             _add(
-                host, "tls_cert",
+                host,
+                "tls_cert",
                 f"subject={tls.get('subject', '?')} not_after={tls.get('not_after', '?')}",
                 evidence=f"issuer={tls.get('issuer', '?')}",
             )
@@ -115,7 +138,8 @@ def run_recon(
             _add(target, "js_endpoint", f"{js['js_url'][:120]} -> {ep}")  # type: ignore[index]
         for exp in js.get("possible_exposures", []):  # type: ignore[union-attr]
             _add(
-                target, "possible_exposure",
+                target,
+                "possible_exposure",
                 f"{exp} pattern in {js['js_url'][:120]}",  # type: ignore[index]
                 evidence="verify manually — pattern match only, never tested",
             )

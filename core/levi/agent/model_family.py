@@ -129,8 +129,17 @@ def register_remix(
     """
     from levi.agent import local_model
 
-    if not name.startswith("levi-") or name in family_names():
+    if not isinstance(name, str) or not name.startswith("levi-") or name in family_names():
         raise ValueError("remix name must be a new 'levi-*' name, got %r" % name)
+    if not isinstance(base, str) or not base.strip():
+        raise ValueError(
+            "remix base must be a non-empty string naming the base weights, "
+            "got %r" % (base,)
+        )
+    if not isinstance(version, str) or not version.strip():
+        raise ValueError(
+            "remix version must be a non-empty string, got %r" % (version,)
+        )
     if local_key not in local_model.MODELS:
         raise ValueError(
             "unknown local_model key %r (known: %s)"

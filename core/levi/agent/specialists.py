@@ -115,6 +115,11 @@ class SpecialistRegistry:
 
     def select_for_intent(self, intent_text: str) -> List[Specialist]:
         """Lightweight heuristic selection. Full routing comes later."""
+        if not isinstance(intent_text, str) or not intent_text.strip():
+            raise ValueError(
+                "select_for_intent: 'intent_text' must be a non-empty string, "
+                f"got {intent_text!r}"
+            )
         lower = intent_text.lower()
         selected = [self._roster["supervisor"], self._roster["companion"]]
 

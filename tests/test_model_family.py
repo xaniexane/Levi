@@ -64,6 +64,14 @@ def test_register_remix_validates(monkeypatch):
         model_family.register_remix(
             "levi-0.6b", base="x", version="1", local_key="qwen3-0.6b"
         )
+    with pytest.raises(ValueError, match="base must be a non-empty string"):
+        model_family.register_remix(
+            "levi-bogus", base="", version="1", local_key="qwen3-0.6b"
+        )
+    with pytest.raises(ValueError, match="version must be a non-empty string"):
+        model_family.register_remix(
+            "levi-bogus", base="qwen3-0.6b", version="  ", local_key="qwen3-0.6b"
+        )
     entry = model_family.register_remix(
         "levi-test-remix",
         base="qwen3-0.6b",

@@ -32,6 +32,7 @@ from __future__ import annotations
 import datetime
 import json
 import platform
+import re
 import threading
 from dataclasses import dataclass, field
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -123,9 +124,23 @@ SCENARIOS: dict[str, Scenario] = {
 }
 
 
+def _valid_scenario_id(scenario_id: str) -> str:
+    """Validate a scenario id (registry keys are safe slugs)."""
+    if not isinstance(scenario_id, str) or not scenario_id.strip():
+        raise ValueError(
+            "scenario id must be a non-empty string, got %r" % (scenario_id,)
+        )
+    sid = scenario_id.strip()
+    if not re.fullmatch(r"[a-z0-9_-]{1,64}", sid):
+        raise ValueError(
+            "invalid scenario id %r (expected [a-z0-9_-]{1,64})" % (scenario_id,)
+        )
+    return sid
+
+
 def get_scenario(scenario_id: str) -> Scenario | None:
-    """Return a scenario by id, or None."""
-    return SCENARIOS.get(scenario_id)
+    """Return a scenario by id, or None. Raises ValueError on a bad id."""
+    return SCENARIOS.get(_valid_scenario_id(scenario_id))
 
 
 def list_scenarios() -> list[Scenario]:
@@ -330,7 +345,8 @@ _RUNNERS = {
 
 
 def fixture_path(scenario_id: str) -> Path:
-    return FIXTURE_DIR / f"{scenario_id}.json"
+    """Fixture path for a scenario (id validated; no path separators)."""
+    return FIXTURE_DIR / f"{_valid_scenario_id(scenario_id)}.json"
 
 
 def capture(scenario_id: str, workdir: Path, live: bool = True) -> Dict[str, Any]:
@@ -338,6 +354,9 @@ def capture(scenario_id: str, workdir: Path, live: bool = True) -> Dict[str, Any
     sc = get_scenario(scenario_id)
     if sc is None:
         raise ValueError(f"unknown scenario {scenario_id!r}")
+    if not isinstance(workdir, (str, Path)):
+        raise ValueError("capture: workdir must be a path, got %r" % (workdir,))
+    workdir = Path(workdir)
     workdir.mkdir(parents=True, exist_ok=True)
     result = _RUNNERS[scenario_id](workdir)
     fixture = {
@@ -359,11 +378,27 @@ def capture(scenario_id: str, workdir: Path, live: bool = True) -> Dict[str, Any
 
 
 def load_fixture(scenario_id: str) -> Dict[str, Any] | None:
-    """Load a captured fixture, or None when not captured yet."""
+    """Load a captured fixture, or None when not captured yet.
+
+    Raises ValueError on a bad scenario id or a corrupt fixture file
+    (never a raw JSONDecodeError).
+    """
     fp = fixture_path(scenario_id)
     if not fp.is_file():
         return None
-    return json.loads(fp.read_text(encoding="utf-8"))
+    try:
+        data = json.loads(fp.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        raise ValueError(
+            "lab: fixture for %r is corrupt (%s); delete %s to re-capture"
+            % (scenario_id, exc, fp)
+        ) from exc
+    if not isinstance(data, dict):
+        raise ValueError(
+            "lab: fixture for %r is not a JSON object; delete %s to re-capture"
+            % (scenario_id, fp)
+        )
+    return data
 
 
 def playback(scenario_id: str) -> str:

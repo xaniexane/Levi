@@ -183,6 +183,50 @@ class Connector(ABC):
         returns an ``ExecutionResult`` with ``ok=False``; success is only
         reported after the transport actually ran.
         """
+        # Validate the call shape before any credential or network access.
+        if not isinstance(operation, str) or not operation.strip():
+            return ExecutionResult(
+                connector=self.id,
+                operation=str(operation),
+                ok=False,
+                status="invalid_params",
+                message=(
+                    f"invalid operation {operation!r}: must be a non-empty "
+                    "string — nothing was sent."
+                ),
+            )
+        if params is not None and not isinstance(params, dict):
+            return ExecutionResult(
+                connector=self.id,
+                operation=operation,
+                ok=False,
+                status="invalid_params",
+                message=(
+                    f"invalid params {params!r}: must be a dict — nothing was sent."
+                ),
+            )
+        if not isinstance(confirm, bool):
+            return ExecutionResult(
+                connector=self.id,
+                operation=operation,
+                ok=False,
+                status="invalid_params",
+                message=(
+                    f"invalid confirm {confirm!r}: must be True or False — "
+                    "nothing was sent."
+                ),
+            )
+        if transport is not None and not callable(transport):
+            return ExecutionResult(
+                connector=self.id,
+                operation=operation,
+                ok=False,
+                status="invalid_params",
+                message=(
+                    f"invalid transport {transport!r}: must be callable or None "
+                    "— nothing was sent."
+                ),
+            )
         params = dict(params or {})
 
         op = self._operation(operation)
@@ -247,6 +291,21 @@ class Connector(ABC):
                 ok=False,
                 status="invalid_params",
                 message=str(exc),
+            )
+        except Exception as exc:  # noqa: BLE001 — a connector bug must never
+            # crash the caller; report it honestly without the credential.
+            # Only the exception TYPE is reported: exception text can echo
+            # URLs, headers, or response bodies that carry secrets.
+            return ExecutionResult(
+                connector=self.id,
+                operation=operation,
+                ok=False,
+                status="internal_error",
+                message=(
+                    f"connector '{self.id}' failed unexpectedly on "
+                    f"{operation!r} ({type(exc).__name__}) — nothing "
+                    "was sent."
+                ),
             )
         return ExecutionResult(
             connector=self.id,

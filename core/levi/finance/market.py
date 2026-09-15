@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import csv
 import io
+import math
 import re
 import urllib.error
 import urllib.request
@@ -62,8 +63,27 @@ class Bar:
             raise ValueError(
                 f"Bar.date must be YYYY-MM-DD, got {self.date!r}"
             ) from None
-        for field in ("open", "high", "low", "close", "volume"):
-            setattr(self, field, float(getattr(self, field)))
+        for name in ("open", "high", "low", "close", "volume"):
+            raw = getattr(self, name)
+            if isinstance(raw, bool):
+                raise ValueError(f"Bar.{name} must be a number, got {raw!r}")
+            if isinstance(raw, str):
+                # Stooq-style numeric strings are still accepted; anything
+                # else (blank, text) is a data error, not silently 0.0.
+                try:
+                    raw = float(raw.strip())
+                except ValueError:
+                    raise ValueError(
+                        f"Bar.{name} must be a number, got {raw!r}"
+                    ) from None
+            if not isinstance(raw, (int, float)):
+                raise ValueError(f"Bar.{name} must be a number, got {raw!r}")
+            value = float(raw)
+            if not math.isfinite(value):
+                raise ValueError(f"Bar.{name} must be finite, got {raw!r}")
+            if value < 0:
+                raise ValueError(f"Bar.{name} is never negative, got {raw!r}")
+            setattr(self, name, value)
 
 
 class MarketDataProvider(ABC):

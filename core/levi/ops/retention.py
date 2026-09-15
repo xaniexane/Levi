@@ -192,7 +192,7 @@ def format_retention() -> str:
         "  4. Story craft scores — improve writing, not addiction",
         "  5. Export pride — life-pack; continuity is yours",
         "  6. Trust floor — offline crisis · HITL · wit mute",
-        "  7. Register fit — KAI match, not novelty churn",
+        "  7. Register fit — LEVI register fit, not novelty churn",
         "  8. Weekly review — what worked · what to cut",
         "  9. Goal shelf — small reversible next moves",
         " 10. Quality feedback loop — stress / story rater",

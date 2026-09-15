@@ -159,10 +159,23 @@ def create_bundle(home: Optional[Path] = None) -> Dict[str, Any]:
 
 
 def write_bundle(path: Path, bundle: Dict[str, Any]) -> Path:
+    """Write ``bundle`` atomically to ``path``. Raises ValueError on bad
+    inputs, TorchError on write failure."""
+    if not isinstance(bundle, dict):
+        raise ValueError(
+            "write_bundle: bundle must be a dict, got %s" % type(bundle).__name__
+        )
+    if not path:
+        raise ValueError("write_bundle: path must be a non-empty path")
     path = Path(path).expanduser()
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(bundle, indent=2, ensure_ascii=False), encoding="utf-8")
-    tmp.replace(path)
+    try:
+        tmp = path.with_suffix(path.suffix + ".tmp")
+        tmp.write_text(
+            json.dumps(bundle, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+        tmp.replace(path)
+    except (OSError, ValueError, TypeError) as exc:
+        raise TorchError("cannot write bundle to %s: %s" % (path, exc)) from exc
     return path
 
 
@@ -180,26 +193,51 @@ def read_bundle(path: Path) -> Dict[str, Any]:
 
 
 def validate_bundle(bundle: Dict[str, Any]) -> Dict[str, Any]:
+    """Deep-ish schema check: format, version, section presence and shapes.
+
+    Raises TorchError (never a raw TypeError/ValueError) on any malformed
+    input.
+    """
     if not isinstance(bundle, dict):
         raise TorchError("bundle is not a JSON object")
     if bundle.get("format") != FORMAT:
         raise TorchError("not a torch bundle (format=%r)" % (bundle.get("format"),))
-    if int(bundle.get("version", 0)) != TORCH_VERSION:
+    try:
+        version = int(bundle.get("version", 0))
+    except (TypeError, ValueError):
+        raise TorchError(
+            "torch bundle has a non-integer version %r" % (bundle.get("version"),)
+        ) from None
+    if version != TORCH_VERSION:
         raise TorchError(
             "unsupported torch version %r (this LEVI reads %d)"
             % (bundle.get("version"), TORCH_VERSION)
         )
     sections = bundle.get("sections")
     if not isinstance(sections, dict):
-        raise TorchError("bundle has no sections")
+        raise TorchError("bundle has no sections object")
     for required in ("lifepack", "curriculum", "journal_highlights", "founders_note"):
         if required not in sections:
             raise TorchError("bundle missing section %r" % required)
+    # section shapes the reader depends on
+    if not isinstance(sections["curriculum"], dict):
+        raise TorchError("bundle 'curriculum' section is not an object")
+    if not isinstance(sections["journal_highlights"], list):
+        raise TorchError("bundle 'journal_highlights' section is not a list")
+    if not isinstance(sections["founders_note"], dict):
+        raise TorchError("bundle 'founders_note' section is not an object")
+    for i, h in enumerate(sections["journal_highlights"]):
+        if not isinstance(h, dict):
+            raise TorchError("bundle highlight #%d is not an object" % i)
     return bundle
 
 
 def preview_read(bundle: Dict[str, Any]) -> List[str]:
-    """Plan step: human-readable summary of what ingest would do."""
+    """Plan step: human-readable summary of what ingest would do.
+
+    Raises TorchError on a malformed bundle.
+    """
+    bundle = validate_bundle(bundle)
     sections = bundle["sections"]
     cur = sections["curriculum"]
     highlights = sections["journal_highlights"]
@@ -405,16 +443,14 @@ def ingest_bundle(
 
     added = 0
     stamped = 0
+    # One store listing for all highlights — was re-listed per highlight.
+    store_entries = list(store.list(limit=5000))
     for h in sections["journal_highlights"]:
         content = str(h.get("content", "")).strip()
         if not content:
             continue
         dup = next(
-            (
-                e
-                for e in store.list(limit=5000)
-                if _content_overlap(content, e.content) >= 0.8
-            ),
+            (e for e in store_entries if _content_overlap(content, e.content) >= 0.8),
             None,
         )
         if dup is None:
@@ -482,7 +518,15 @@ def ingest_bundle(
 
 
 def sign_bundle(path: Path, *, by: str, note: str = "") -> Dict[str, Any]:
-    """Chauncey signs the founder's note in place."""
+    """Chauncey signs the founder's note in place.
+
+    Raises ValueError when ``by`` is empty (a founder's signature can't
+    be blank), TorchError on a malformed bundle.
+    """
+    if not isinstance(by, str) or not by.strip():
+        raise ValueError("sign_bundle: 'by' must be a non-empty signer name")
+    if not isinstance(note, str):
+        raise ValueError("sign_bundle: note must be a string")
     bundle = read_bundle(path)
     entry = bundle["sections"]["founders_note"]
     entry["note"] = note.strip() or entry.get("note") or FOUNDERS_NOTE_PLACEHOLDER

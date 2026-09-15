@@ -400,6 +400,11 @@ def _mtf_confluence(
 def score_bars(symbol: str, bars: list[Bar]) -> Signal:
     """Score daily bars into a deterministic advisory ``Signal``.
 
+    ``symbol`` must be a non-empty string and ``bars`` a list of
+    :class:`~levi.finance.market.Bar` (empty is allowed — it yields the
+    honest insufficient-data signal). Anything else raises ``ValueError``
+    before any indicator math runs.
+
     Review-brief rule set (exactly what the code below implements):
 
     1. **Trend** (trend-following) — close vs SMA(20): close above → +1
@@ -469,6 +474,14 @@ def score_bars(symbol: str, bars: list[Bar]) -> Signal:
     randomness). ``generated_at`` is the only field that varies, because
     it records when scoring ran.
     """
+    if not isinstance(symbol, str) or not symbol.strip():
+        raise ValueError(f"symbol must be a non-empty string, got {symbol!r}")
+    if not isinstance(bars, (list, tuple)) or not all(isinstance(b, Bar) for b in bars):
+        raise ValueError(
+            "bars must be a list of levi.finance.market.Bar "
+            f"(got {type(bars).__name__})"
+        )
+    bars = list(bars)
     n = len(bars)
     if n < MIN_BARS:
         return Signal(
@@ -808,10 +821,18 @@ def generate_signal(
     ``provider`` defaults to :class:`~levi.finance.market.StooqProvider`
     (keyless). A ``MarketDataError`` from the provider propagates
     honestly — this function never fabricates bars or a signal from a
-    failed fetch.
+    failed fetch. ``days`` must be a positive integer; a provider without
+    a ``daily_bars`` method is rejected with ``ValueError``.
     """
     if provider is None:
         provider = StooqProvider()
+    if not hasattr(provider, "daily_bars"):
+        raise ValueError(
+            f"provider must expose daily_bars(symbol, days=...), "
+            f"got {type(provider).__name__}"
+        )
+    if isinstance(days, bool) or not isinstance(days, int) or days <= 0:
+        raise ValueError(f"days must be a positive integer, got {days!r}")
     bars = provider.daily_bars(symbol, days=days)
     return score_bars(symbol, bars)
 
@@ -843,6 +864,10 @@ def narrate(signal: Signal) -> str:
     used for signal commentary). Never raises for narration reasons:
     narration is commentary, not data.
     """
+    if not isinstance(signal, Signal):
+        raise ValueError(
+            f"signal must be a levi.finance.signals.Signal, got {type(signal).__name__}"
+        )
     prompt = (
         "Rewrite these deterministic market-signal facts as 2-4 sentences of "
         "plain-language commentary for a paper-trading research notebook. "
@@ -886,6 +911,10 @@ def fallback_narrative(signal: Signal) -> str:
     fallback inside :func:`narrate`. Reads as plain-language advice and
     always carries the advisory wording and the paper-only disclaimer.
     """
+    if not isinstance(signal, Signal):
+        raise ValueError(
+            f"signal must be a levi.finance.signals.Signal, got {type(signal).__name__}"
+        )
     confidence_pct = f"{signal.confidence:.0%}"
     if signal.rationale:
         reasons = " ".join(signal.rationale)

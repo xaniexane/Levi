@@ -19,6 +19,7 @@ from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional, Tuple
 from pathlib import Path
 import json
+import math
 import random
 
 DEFAULT_BOND_PATH = Path.home() / ".levi" / "persona_bond.json"
@@ -154,6 +155,19 @@ class CompositionEngine:
         tmp.replace(self.bond_path)
 
     def reinforce(self, stack: PersonaStack, amount: float = 0.04) -> None:
+        """Bond affinity update; raises ValueError on bad inputs."""
+        if not isinstance(stack, PersonaStack):
+            raise ValueError(
+                "reinforce: stack must be a PersonaStack, got %s" % type(stack).__name__
+            )
+        try:
+            amount = float(amount)
+        except (TypeError, ValueError):
+            raise ValueError(
+                "reinforce: amount must be a number, got %r" % (amount,)
+            ) from None
+        if not math.isfinite(amount):
+            raise ValueError("reinforce: amount must be finite, got %r" % (amount,))
         for i, pid in enumerate(stack.members()):
             w = amount * (1.0 if i == 0 else 0.6 if i == 1 else 0.35)
             self.bond.affinity[pid] = max(

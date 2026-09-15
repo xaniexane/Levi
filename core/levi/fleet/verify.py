@@ -29,6 +29,10 @@ def structural_check(
     node: Dict[str, Any], result: Dict[str, Any], blackboard: Any
 ) -> Verification:
     """Deterministic checks: success flag, non-empty summary, artifacts."""
+    if not isinstance(node, dict):
+        raise ValueError(f"node must be a dict, got {type(node).__name__}")
+    if not isinstance(result, dict):
+        raise ValueError(f"result must be a dict, got {type(result).__name__}")
     if not result.get("ok"):
         return Verification(False, "worker reported failure", "structural")
     summary = (result.get("summary") or "").strip()

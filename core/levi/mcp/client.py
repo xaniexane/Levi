@@ -27,6 +27,7 @@ Server configs live in ``~/.levi/mcp/servers.json`` (owner-only 0o600).
 from __future__ import annotations
 
 import json
+import math
 import os
 import queue
 import re
@@ -36,12 +37,18 @@ import sys
 import threading
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 from typing import Any, Optional
 
 PROTOCOL_VERSION = "2024-11-05"
 DEFAULT_TIMEOUT = 30.0
+#: Hard cap on any single MCP timeout: a longer wait is a stuck client.
+_MAX_TIMEOUT = 600.0
+#: Cap on stashed out-of-order stdio responses: the map cannot grow
+#: without bound on a chatty server.
+_MAX_STASHED = 1024
 _NAME_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}\Z")
 
 
@@ -104,6 +111,83 @@ def _validate_name(name: str) -> str:
     return name
 
 
+def _validate_timeout(value: Any, *, what: str = "timeout") -> float:
+    """A timeout must be a finite positive number of seconds (≤ cap)."""
+    try:
+        tmo = float(value)
+    except (TypeError, ValueError):
+        raise MCPClientError(
+            f"invalid MCP {what} {value!r}: must be a number of seconds"
+        ) from None
+    if not math.isfinite(tmo) or tmo <= 0 or tmo > _MAX_TIMEOUT:
+        raise MCPClientError(
+            f"invalid MCP {what} {value!r}: must be in (0, {_MAX_TIMEOUT:g}] seconds"
+        )
+    return tmo
+
+
+def _validate_url(url: Any) -> str:
+    """An MCP http URL must be an http(s) URL with a host."""
+    if not isinstance(url, str) or not url.strip():
+        raise MCPClientError(
+            f"invalid MCP server url {url!r}: must be a non-empty http(s) URL"
+        )
+    parsed = urllib.parse.urlparse(url.strip())
+    if parsed.scheme not in ("http", "https") or not parsed.netloc:
+        raise MCPClientError(
+            f"invalid MCP server url {url!r}: "
+            "must look like http(s)://host[:port][/path]"
+        )
+    return url.strip()
+
+
+def _validate_command(command: Any) -> list[str]:
+    """A stdio command must be a non-empty list of non-empty strings.
+
+    A bare string is rejected (iterating it would spawn one-char argv).
+    """
+    if (
+        isinstance(command, str)
+        or not isinstance(command, (list, tuple))
+        or not command
+    ):
+        raise MCPClientError(
+            f"invalid MCP server command {command!r}: "
+            "must be a non-empty list of strings, e.g. ['npx', 'server']"
+        )
+    for c in command:
+        if not isinstance(c, str) or not c.strip():
+            raise MCPClientError(
+                f"invalid MCP server command {command!r}: "
+                "every argv element must be a non-empty string"
+            )
+    return list(command)
+
+
+def _validate_headers(headers: Any) -> dict:
+    if headers is None:
+        return {}
+    if not isinstance(headers, dict):
+        raise MCPClientError(
+            f"invalid MCP headers {headers!r}: must be a dict of str → str"
+        )
+    for key, value in headers.items():
+        if not isinstance(key, str) or not isinstance(value, str):
+            raise MCPClientError(
+                "invalid MCP headers: keys and values must be strings, "
+                f"got {key!r}: {value!r}"
+            )
+    return dict(headers)
+
+
+def _validate_method(method: Any) -> str:
+    if not isinstance(method, str) or not method.strip():
+        raise MCPClientError(
+            f"invalid MCP method {method!r}: must be a non-empty string"
+        )
+    return method
+
+
 def add_server(
     name: str,
     *,
@@ -127,19 +211,17 @@ def add_server(
     name = _validate_name(name)
     transport = (transport or "").strip().lower()
     if transport == "http":
-        if not url:
-            raise MCPClientError("http transport requires a url")
+        url = _validate_url(url)
         cfg: dict[str, Any] = {"transport": "http", "url": url}
+        headers = _validate_headers(headers)
         if headers:
-            cfg["headers"] = dict(headers)
+            cfg["headers"] = headers
     elif transport == "stdio":
-        if not command:
-            raise MCPClientError("stdio transport requires a command")
-        cfg = {"transport": "stdio", "command": [str(c) for c in command]}
+        cfg = {"transport": "stdio", "command": _validate_command(command)}
     else:
         raise MCPClientError(f"unknown MCP transport {transport!r} (http|stdio)")
-    if timeout:
-        cfg["timeout"] = float(timeout)
+    if timeout is not None:
+        cfg["timeout"] = _validate_timeout(timeout)
     if reference:
         provider = _refs.validate_provider_name(reference)
         cfg["reference"] = provider
@@ -208,9 +290,10 @@ class StdioTransport:
     """JSON-RPC over a child process's stdin/stdout (newline-delimited)."""
 
     def __init__(self, command: list[str]) -> None:
+        command = _validate_command(command)
         try:
             self._proc = subprocess.Popen(
-                [str(c) for c in command],
+                command,
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.DEVNULL,
@@ -245,6 +328,8 @@ class StdioTransport:
         params: Optional[dict] = None,
         timeout: float = DEFAULT_TIMEOUT,
     ) -> Any:
+        method = _validate_method(method)
+        timeout = _validate_timeout(timeout)
         with self._lock:
             self._next_id += 1
             rid = self._next_id
@@ -280,9 +365,16 @@ class StdioTransport:
                 return _unwrap(msg, method)
             # Responses for other ids (or server notifications) are stashed.
             if isinstance(msg, dict) and "id" in msg:
+                # Bounded: a chatty server cannot grow this map forever.
+                while len(self._stashed) >= _MAX_STASHED:
+                    try:
+                        self._stashed.pop(next(iter(self._stashed)))
+                    except (StopIteration, KeyError):
+                        break
                 self._stashed[msg["id"]] = msg
 
     def notify(self, method: str, params: Optional[dict] = None) -> None:
+        method = _validate_method(method)
         payload = {"jsonrpc": "2.0", "method": method, "params": params or {}}
         try:
             assert self._proc.stdin is not None
@@ -307,9 +399,9 @@ class HttpTransport:
         headers: Optional[dict] = None,
         timeout: float = DEFAULT_TIMEOUT,
     ) -> None:
-        self._url = url.rstrip("/")
-        self._headers = dict(headers or {})
-        self._timeout = timeout
+        self._url = _validate_url(url).rstrip("/")
+        self._headers = _validate_headers(headers)
+        self._timeout = _validate_timeout(timeout)
         self._session_id: Optional[str] = None
         self._legacy_endpoint: Optional[str] = None  # set after SSE handshake
         self._next_id = 0
@@ -385,7 +477,8 @@ class HttpTransport:
         params: Optional[dict] = None,
         timeout: Optional[float] = None,
     ) -> Any:
-        timeout = self._timeout if timeout is None else timeout
+        method = _validate_method(method)
+        timeout = self._timeout if timeout is None else _validate_timeout(timeout)
         with self._lock:
             self._next_id += 1
             rid = self._next_id
@@ -425,6 +518,7 @@ class HttpTransport:
             raise MCPClientError(f"MCP {method}: invalid JSON response: {exc}") from exc
 
     def notify(self, method: str, params: Optional[dict] = None) -> None:
+        method = _validate_method(method)
         payload = {"jsonrpc": "2.0", "method": method, "params": params or {}}
         try:
             self._post(self._legacy_endpoint or self._url, payload, self._timeout)
@@ -453,8 +547,12 @@ class MCPClient:
     """One connected MCP server session (initialize → tools)."""
 
     def __init__(self, transport: Any, timeout: float = DEFAULT_TIMEOUT) -> None:
+        if not hasattr(transport, "request"):
+            raise MCPClientError(
+                f"invalid MCP transport {transport!r}: must provide a request() method"
+            )
         self._t = transport
-        self._timeout = timeout
+        self._timeout = _validate_timeout(timeout)
         self.server_info: dict = {}
         self._closed = False
 
@@ -487,6 +585,14 @@ class MCPClient:
         arguments: Optional[dict] = None,
         timeout: Optional[float] = None,
     ) -> Any:
+        if not isinstance(name, str) or not name.strip():
+            raise MCPClientError(
+                f"invalid tool name {name!r}: must be a non-empty string"
+            )
+        if arguments is not None and not isinstance(arguments, dict):
+            raise MCPClientError(
+                f"invalid tool arguments {arguments!r}: must be a dict"
+            )
         return self._t.request(
             "tools/call",
             {"name": name, "arguments": arguments or {}},
@@ -511,20 +617,30 @@ def connect_server(
     """Build a transport from a server config and run the handshake."""
     _ = home  # configs already resolved by the caller
     name = _validate_name(name)
+    if not isinstance(cfg, dict):
+        raise MCPClientError(
+            f"MCP server {name!r}: config must be a dict, "
+            f"got {type(cfg).__name__}"
+        )
     transport = (cfg.get("transport") or "").lower()
-    tmo = float(cfg.get("timeout") or timeout or DEFAULT_TIMEOUT)
+    raw_tmo = cfg.get("timeout", None)
+    if raw_tmo is None:
+        raw_tmo = timeout if timeout is not None else DEFAULT_TIMEOUT
+    try:
+        tmo = _validate_timeout(raw_tmo)
+    except MCPClientError as exc:
+        raise MCPClientError(f"MCP server {name!r}: {exc}") from None
     if transport == "http":
         url = cfg.get("url") or ""
         if not url:
             raise MCPClientError(f"MCP server {name!r}: http transport needs a url")
         t: Any = HttpTransport(url, headers=cfg.get("headers"), timeout=tmo)
     elif transport == "stdio":
-        command = cfg.get("command") or []
-        if not command:
-            raise MCPClientError(
-                f"MCP server {name!r}: stdio transport needs a command"
-            )
-        t = StdioTransport([str(c) for c in command])
+        try:
+            command = _validate_command(cfg.get("command"))
+        except MCPClientError as exc:
+            raise MCPClientError(f"MCP server {name!r}: {exc}") from None
+        t = StdioTransport(command)
     else:
         raise MCPClientError(f"MCP server {name!r}: unknown transport {transport!r}")
     client = MCPClient(t, timeout=tmo)

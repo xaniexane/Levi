@@ -107,7 +107,7 @@ def check_wit_safety(register_id: str, policy: PolicyDecision) -> Tuple[bool, st
     """Veto wit/edgy registers when the policy forbids them.
 
     Returns (allowed, reason). Called before a register switch takes
-    effect so Grok can never slip into a distressed turn.
+    effect so LEVI never slips into a distressed turn.
     """
     if register_id in _WIT_AND_EDGE and (
         policy.crisis or policy.deescalate or policy.provoked

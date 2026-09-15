@@ -2,7 +2,7 @@
 Interpenetration map — every major organ points at the others.
 
 LEVI is not a pile of features; it is a mesh:
-  SI identity ↔ KAI registers ↔ personas ↔ wit/HITL
+  SI identity ↔ LEVI registers ↔ personas ↔ wit/HITL
   ↔ corpus/knowledge ↔ story/L.W.P. ↔ cloud model phases
   ↔ enterprise gates ↔ premium/unique ↔ UI console
 """

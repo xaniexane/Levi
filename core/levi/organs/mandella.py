@@ -42,6 +42,19 @@ OPTIONS: Dict[str, List[tuple]] = {
 
 
 def run_mandella(domain: str = "build", seed: str = "") -> Dict:
+    """Stake selection under domain pressure.
+
+    Unknown ``domain`` values fall back to ``build`` (documented);
+    non-string inputs raise ValueError.
+    """
+    if not isinstance(domain, str):
+        raise ValueError(
+            "run_mandella: domain must be a string, got %s" % type(domain).__name__
+        )
+    if not isinstance(seed, str):
+        raise ValueError(
+            "run_mandella: seed must be a string, got %s" % type(seed).__name__
+        )
     d = (domain or "build").lower()
     if d not in DOMAINS:
         d = "build"

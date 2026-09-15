@@ -99,7 +99,25 @@ def consolidate(
 
     Returns a report: ``{accepted, corroborated, skipped, writes}`` where
     ``writes`` lists the new entry ids (empty on dry-run).
+
+    Raises ValueError when ``learnings`` is not a list or
+    ``dedup_threshold`` is not within 0..1.
     """
+    if not isinstance(learnings, list):
+        raise ValueError(
+            "consolidate: learnings must be a list, got %s" % type(learnings).__name__
+        )
+    try:
+        dedup_threshold = float(dedup_threshold)
+    except (TypeError, ValueError):
+        raise ValueError(
+            "consolidate: dedup_threshold must be a number, got %r" % (dedup_threshold,)
+        ) from None
+    if not 0.0 <= dedup_threshold <= 1.0:
+        raise ValueError(
+            "consolidate: dedup_threshold must be within 0..1, got %r"
+            % (dedup_threshold,)
+        )
     report: dict[str, Any] = {
         "accepted": 0,
         "corroborated": 0,
@@ -113,8 +131,16 @@ def consolidate(
         store = MemoryStore()
 
     growth_entries = [e for e in store.list(limit=5000) if "growth" in e.tags]
+    # Precompute word sets once — was recomputed for every
+    # learning x existing-entry pair (O(learnings x entries) tokenizations).
+    entry_words: list[tuple[Any, frozenset]] = [
+        (entry, _words(entry.content or "")) for entry in growth_entries
+    ]
 
     for learning in learnings:
+        if not isinstance(learning, Learning):
+            report["skipped"] += 1
+            continue
         if learning.kind not in _KIND_TO_TYPE:
             report["skipped"] += 1
             continue
@@ -127,8 +153,8 @@ def consolidate(
         lw = _words(content)
         best = None
         best_score = 0.0
-        for entry in growth_entries:
-            score = _jaccard(lw, _words(entry.content))
+        for entry, ew in entry_words:
+            score = _jaccard(lw, ew)
             if score > best_score:
                 best_score = score
                 best = entry
@@ -168,7 +194,7 @@ def consolidate(
                 "shareable": shareable_learning(learning),
             },
         )
-        growth_entries.append(entry)
+        entry_words.append((entry, _words(content)))
         report["accepted"] += 1
         report["writes"].append(entry.id)
 

@@ -197,29 +197,30 @@ class King:
         story = fab.expand(story.id)
         words = _words(story.body) - before_words
         banks = max(1, len(story.beats) - beats_before)
-        self.ledger.register_entity(
-            story.id,
-            "story",
-            story.title,
-            {"genre": story.genre, "beats": len(story.beats)},
-        )
-        for c in story.characters[:8]:
+        with self.ledger.transaction():  # one persist for the whole pulse
             self.ledger.register_entity(
-                f"{story.id}:{c.id}",
-                "character",
-                c.name,
-                {
-                    "archetype": c.archetype.value
-                    if hasattr(c.archetype, "value")
-                    else str(c.archetype)
-                },
+                story.id,
+                "story",
+                story.title,
+                {"genre": story.genre, "beats": len(story.beats)},
             )
-        new_beat = story.beats[-1] if story.beats else None
-        if new_beat:
-            beat_id = f"{story.id}:beat:{new_beat.order}"
-            self.ledger.register_entity(beat_id, "beat", new_beat.name)
-            self.ledger.add_edge(story.id, beat_id, "advances", new_beat.summary[:120])
-        self._harvest("story_fabric", words, banks, f"pulse {story.id}")
+            for c in story.characters[:8]:
+                self.ledger.register_entity(
+                    f"{story.id}:{c.id}",
+                    "character",
+                    c.name,
+                    {
+                        "archetype": c.archetype.value
+                        if hasattr(c.archetype, "value")
+                        else str(c.archetype)
+                    },
+                )
+            new_beat = story.beats[-1] if story.beats else None
+            if new_beat:
+                beat_id = f"{story.id}:beat:{new_beat.order}"
+                self.ledger.register_entity(beat_id, "beat", new_beat.name)
+                self.ledger.add_edge(story.id, beat_id, "advances", new_beat.summary[:120])
+            self._harvest("story_fabric", words, banks, f"pulse {story.id}")
         return (
             f"=== King pulse (story_fabric) ===\n"
             f"story={story.id} title={story.title!r}\n"
@@ -245,16 +246,17 @@ class King:
         words = eng.state.words - before_words
         new_scenes = eng.state.scenes[scenes_before:]
         banks = max(1, len(new_scenes))
-        self._manuscript_node()
-        for sc in new_scenes:
-            self.ledger.register_entity(
-                f"scene:{sc.get('id')}",
-                "scene",
-                (sc.get("event") or "")[:80],
-                {"words": sc.get("words"), "status": sc.get("status")},
-            )
-            self.ledger.add_edge("manuscript", f"scene:{sc.get('id')}", "contains")
-        self._harvest("model_engine", words, banks, f"expand {n} scene(s)")
+        with self.ledger.transaction():  # one persist for the whole pulse
+            self._manuscript_node()
+            for sc in new_scenes:
+                self.ledger.register_entity(
+                    f"scene:{sc.get('id')}",
+                    "scene",
+                    (sc.get("event") or "")[:80],
+                    {"words": sc.get("words"), "status": sc.get("status")},
+                )
+                self.ledger.add_edge("manuscript", f"scene:{sc.get('id')}", "contains")
+            self._harvest("model_engine", words, banks, f"expand {n} scene(s)")
         return (
             f"=== King manuscript pulse (model_engine) ===\n{out}\n"
             f"harvested: +{words} words, +{banks} bank(s)\n"
@@ -269,19 +271,20 @@ class King:
         if eng is None:
             return "LWPModelEngine unavailable — reim skipped."
         out = eng.reim_forks(seed=seed, tracks=tracks)
-        self._manuscript_node()
-        for t in eng.state.tracks:
-            tid = f"track:{t.get('id')}"
-            self.ledger.register_entity(
-                tid,
-                "reim_track",
-                f"track {t.get('index')}",
-                {"direction": t.get("direction"), "words": t.get("words")},
-            )
-            self.ledger.add_edge("manuscript", tid, "forks")
-        # Forks are not canon until crowned: harvest records the drive
-        # with zero words/banks so the audit trail stays honest.
-        self._harvest("model_engine", 0, 0, f"reim {len(eng.state.tracks)} tracks")
+        with self.ledger.transaction():  # one persist for the whole reim
+            self._manuscript_node()
+            for t in eng.state.tracks:
+                tid = f"track:{t.get('id')}"
+                self.ledger.register_entity(
+                    tid,
+                    "reim_track",
+                    f"track {t.get('index')}",
+                    {"direction": t.get("direction"), "words": t.get("words")},
+                )
+                self.ledger.add_edge("manuscript", tid, "forks")
+            # Forks are not canon until crowned: harvest records the drive
+            # with zero words/banks so the audit trail stays honest.
+            self._harvest("model_engine", 0, 0, f"reim {len(eng.state.tracks)} tracks")
         self.review.log_decision("reim", f"{len(eng.state.tracks)} tracks forked")
         return out
 
@@ -325,16 +328,19 @@ class King:
         eng = self._engine()
         if eng is None:
             return "LWPModelEngine unavailable — rupture skipped."
+        if not isinstance(lens, str) or not lens.strip():
+            raise ValueError(f"rupture lens must be a non-empty string, got {lens!r}")
         before = eng.state.words
         out = eng.wyrd_rupture(lens=lens)
         words = eng.state.words - before
-        self.ledger.register_entity(
-            f"rom:{lens}",
-            "rom_lock",
-            f"manuscript ROM ({lens})",
-            {"words": words},
-        )
-        self._harvest("model_engine", words, 1, f"wyrd-rupture/{lens}")
+        with self.ledger.transaction():  # one persist for entity + harvest
+            self.ledger.register_entity(
+                f"rom:{lens}",
+                "rom_lock",
+                f"manuscript ROM ({lens})",
+                {"words": words},
+            )
+            self._harvest("model_engine", words, 1, f"wyrd-rupture/{lens}")
         self.review.log_decision("rupture", f"manuscript wyrd-rupture lens={lens}")
         return out
 

@@ -15,10 +15,15 @@ from datetime import datetime, timezone
 from pathlib import Path
 from enum import Enum
 import json
+import math
 import uuid
 
 
 DEFAULT_KERNEL_PATH = Path.home() / ".levi" / "daemon_kernel.json"
+
+
+class KernelError(Exception):
+    """Domain error for daemon kernel failures (bad input, bad state)."""
 
 
 class SafetyLevel(str, Enum):
@@ -57,14 +62,47 @@ class KernelState:
 
     @classmethod
     def from_dict(cls, d: Dict[str, Any]) -> "KernelState":
+        """Rebuild state, validating each field with a safe default.
+
+        A corrupt field degrades to its default; only a wholly
+        non-object record falls back to a fresh state.
+        """
+        if not isinstance(d, dict):
+            return cls()
+        safety = d.get("safety") or SafetyLevel.NORMAL.value
+        if safety not in {s.value for s in SafetyLevel}:
+            safety = SafetyLevel.NORMAL.value
+        try:
+            cycle = int(d.get("cycle", 0))
+        except (TypeError, ValueError):
+            cycle = 0
+        cycle = max(0, cycle)
+        try:
+            spent = float(d.get("cost_units_session", 0.0))
+        except (TypeError, ValueError):
+            spent = 0.0
+        if not math.isfinite(spent) or spent < 0:
+            spent = 0.0
+        try:
+            budget = float(d.get("cost_budget", 100.0))
+        except (TypeError, ValueError):
+            budget = 100.0
+        if not math.isfinite(budget) or budget <= 0:
+            budget = 100.0
+        last_event_id = d.get("last_event_id") or ""
+        if not isinstance(last_event_id, str):
+            last_event_id = ""
+        updated_at = d.get("updated_at") or datetime.now(timezone.utc).isoformat()
+        if not isinstance(updated_at, str):
+            updated_at = datetime.now(timezone.utc).isoformat()
         return cls(
-            safety=d.get("safety") or SafetyLevel.NORMAL.value,
-            cycle=int(d.get("cycle", 0)),
-            last_event_id=d.get("last_event_id") or "",
-            cost_units_session=float(d.get("cost_units_session", 0.0)),
-            cost_budget=float(d.get("cost_budget", 100.0)),
+            safety=safety,
+            cycle=cycle,
+            last_event_id=last_event_id,
+            cost_units_session=spent,
+            cost_budget=budget,
             estop=bool(d.get("estop", False)),
-            updated_at=d.get("updated_at") or datetime.now(timezone.utc).isoformat(),
+            updated_at=updated_at,
         )
 
 
@@ -89,8 +127,14 @@ class DaemonKernel:
         try:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
             self.state = KernelState.from_dict(raw.get("state") or {})
-            self._audit = list(raw.get("audit") or [])[-200:]
-            self._tools = dict(raw.get("tools") or {})
+            audit = raw.get("audit") or []
+            self._audit = list(audit)[-200:] if isinstance(audit, list) else []
+            tools = raw.get("tools") or {}
+            self._tools = (
+                {str(k): str(v) for k, v in tools.items()}
+                if isinstance(tools, dict)
+                else {}
+            )
         except (json.JSONDecodeError, TypeError, ValueError, OSError, KeyError):
             self.state = KernelState()
 
@@ -103,8 +147,13 @@ class DaemonKernel:
             "tools": self._tools,
         }
         tmp = self.path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-        tmp.replace(self.path)
+        try:
+            tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+            tmp.replace(self.path)
+        except OSError as exc:
+            raise KernelError(
+                f"cannot persist daemon kernel state to {self.path}: {exc}"
+            ) from exc
 
     def _register_builtin_tools(self) -> None:
         defaults = {
@@ -129,6 +178,14 @@ class DaemonKernel:
 
     # --- Event bus ---
     def emit(self, kind: str, payload: Optional[Dict[str, Any]] = None) -> KernelEvent:
+        if not isinstance(kind, str) or not kind.strip():
+            raise ValueError(
+                f"emit: 'kind' must be a non-empty string, got {kind!r}"
+            )
+        if payload is not None and not isinstance(payload, dict):
+            raise ValueError(
+                f"emit: 'payload' must be a dict or None, got {type(payload).__name__}"
+            )
         if self.state.estop or self.state.safety == SafetyLevel.STOPPED.value:
             ev = KernelEvent(
                 id=str(uuid.uuid4())[:8],
@@ -152,6 +209,14 @@ class DaemonKernel:
         return ev
 
     def on(self, kind: str, handler: Callable[[KernelEvent], None]) -> None:
+        if not isinstance(kind, str) or not kind.strip():
+            raise ValueError(
+                f"on: 'kind' must be a non-empty string, got {kind!r}"
+            )
+        if not callable(handler):
+            raise ValueError(
+                f"on: 'handler' must be callable, got {type(handler).__name__}"
+            )
         self._handlers.setdefault(kind, []).append(handler)
 
     # --- Permission / safety ---
@@ -167,6 +232,10 @@ class DaemonKernel:
         return True
 
     def emergency_stop(self, reason: str = "") -> None:
+        if not isinstance(reason, str):
+            raise ValueError(
+                f"emergency_stop: 'reason' must be a string, got {type(reason).__name__}"
+            )
         self.state.estop = True
         self.state.safety = SafetyLevel.STOPPED.value
         self._audit_log("estop", {"reason": reason})
@@ -181,6 +250,20 @@ class DaemonKernel:
     # --- Cost ---
     def charge(self, units: float, label: str = "") -> bool:
         """Return False if over budget (prefer free/local)."""
+        try:
+            units = float(units)  # type: ignore[arg-type]
+        except (TypeError, ValueError):
+            raise ValueError(
+                f"charge: 'units' must be a number, got {units!r}"
+            ) from None
+        if not math.isfinite(units):
+            raise ValueError(
+                f"charge: 'units' must be finite, got {units!r}"
+            )
+        if not isinstance(label, str):
+            raise ValueError(
+                f"charge: 'label' must be a string, got {type(label).__name__}"
+            )
         if units <= 0:
             return True
         if self.state.cost_units_session + units > self.state.cost_budget:
@@ -195,6 +278,14 @@ class DaemonKernel:
         return dict(self._tools)
 
     def register_tool(self, name: str, description: str) -> None:
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError(
+                f"register_tool: 'name' must be a non-empty string, got {name!r}"
+            )
+        if not isinstance(description, str) or not description.strip():
+            raise ValueError(
+                "register_tool: 'description' must be a non-empty string"
+            )
         self._tools[name] = description
         self._persist()
 

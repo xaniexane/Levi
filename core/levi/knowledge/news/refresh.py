@@ -80,7 +80,7 @@ def _fetch(url: str) -> bytes | None:
 
 
 def _clean(text: str | None) -> str:
-    if not text:
+    if not isinstance(text, str):
         return ""
     text = re.sub(r"<[^>]+>", " ", text)
     text = html.unescape(text)
@@ -107,6 +107,8 @@ def _parse_hn(body: bytes, limit: int) -> list[dict]:
         ids = json.loads(body.decode("utf-8", "replace"))
     except Exception:
         return []
+    if not isinstance(ids, list):
+        return []  # unexpected shape from the HN API — degrade, don't crash
     items = []
     for sid in ids[:limit]:
         time.sleep(DELAY)
@@ -117,7 +119,7 @@ def _parse_hn(body: bytes, limit: int) -> list[dict]:
             it = json.loads(raw.decode("utf-8", "replace"))
         except Exception:
             continue
-        if it.get("type") != "story":
+        if not isinstance(it, dict) or it.get("type") != "story":
             continue
         url = it.get("url") or f"https://news.ycombinator.com/item?id={sid}"
         items.append(
@@ -135,26 +137,51 @@ def _known_urls(day: str) -> set[str]:
     if DAYS.exists():
         for fp in sorted(DAYS.glob("*.jsonl")):
             try:
-                for line in fp.read_text(encoding="utf-8").splitlines():
-                    u = json.loads(line).get("url")
-                    if u:
-                        known.add(u)
+                text = fp.read_text(encoding="utf-8")
             except OSError:
                 continue
+            for lineno, line in enumerate(text.splitlines(), 1):
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    rec = json.loads(line)
+                except ValueError:
+                    # Corrupt line in a prior day's harvest: skip it loudly
+                    # rather than aborting the whole refresh.
+                    print(f"  warn: {fp.name}:{lineno}: corrupt JSON line, skipping")
+                    continue
+                if isinstance(rec, dict) and rec.get("url"):
+                    known.add(rec["url"])
     return known
 
 
 def refresh(day: str | None = None, limit: int = DEFAULT_LIMIT) -> dict:
     day = day or date.today().isoformat()
+    try:
+        date.fromisoformat(day)
+    except (ValueError, TypeError):
+        raise ValueError("refresh: day must be YYYY-MM-DD, got %r" % (day,)) from None
+    if not isinstance(limit, int) or limit < 1:
+        raise ValueError("refresh: limit must be a positive int, got %r" % (limit,))
     DAYS.mkdir(parents=True, exist_ok=True)
     known = _known_urls(day)
     records: list[dict] = []
     statuses: dict[str, str] = {}
     if SOURCES_JSON.exists():
         try:
-            statuses = json.loads(SOURCES_JSON.read_text(encoding="utf-8"))
-        except Exception:
-            statuses = {}
+            loaded = json.loads(SOURCES_JSON.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            raise ValueError(
+                "refresh: sources.json is corrupt (%s); fix or delete %s"
+                % (exc, SOURCES_JSON)
+            ) from exc
+        if not isinstance(loaded, dict):
+            raise ValueError(
+                "refresh: sources.json must be a JSON object, got %s; "
+                "fix or delete %s" % (type(loaded).__name__, SOURCES_JSON)
+            )
+        statuses = loaded
 
     for src in SOURCES:
         sid = src["id"]
@@ -211,8 +238,19 @@ def main(argv: list[str]) -> int:
         if a.startswith("--date="):
             day = a.split("=", 1)[1]
         elif a.startswith("--limit="):
-            limit = int(a.split("=", 1)[1])
-    refresh(day, limit)
+            try:
+                limit = int(a.split("=", 1)[1])
+            except ValueError:
+                print(
+                    "refresh: --limit must be a positive integer, got %r"
+                    % a.split("=", 1)[1]
+                )
+                return 2
+    try:
+        refresh(day, limit)
+    except ValueError as exc:
+        print("refresh: %s" % exc)
+        return 2
     return 0
 
 

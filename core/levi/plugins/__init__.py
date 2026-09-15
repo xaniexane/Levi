@@ -14,6 +14,7 @@ default to ``requires_confirmation=True`` with no per-feature override
 (blueprint §1.5); the registry enforces this at class-definition time.
 """
 
+from __future__ import annotations
 from . import github, registry  # noqa: F401
 from .github import GitHubConnector  # noqa: F401
 from .registry import (  # noqa: F401

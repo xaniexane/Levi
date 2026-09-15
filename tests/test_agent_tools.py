@@ -483,3 +483,81 @@ def test_delegate_reports_subtask_success(tmp_path, monkeypatch):
     res = reg.execute("delegate", {"task": "do an ok thing"}, ExecContext(consent=True))
     assert res.ok is True
     assert "all good" in res.output
+
+
+# -- input hardening --------------------------------------------------------
+
+
+def _good_tool(**over):
+    kw = dict(
+        name="demo",
+        description="Does demo things",
+        parameters={"type": "object"},
+        handler=lambda args: ToolResult(ok=True, output="hi"),
+    )
+    kw.update(over)
+    return Tool(**kw)
+
+
+def test_tool_rejects_bad_fields():
+    with pytest.raises(ValueError, match="non-empty string"):
+        _good_tool(name="")
+    with pytest.raises(ValueError, match="non-empty string"):
+        _good_tool(name=123)
+    with pytest.raises(ValueError, match="description"):
+        _good_tool(description="  ")
+    with pytest.raises(ValueError, match="parameters"):
+        _good_tool(parameters=[])
+    with pytest.raises(ValueError, match="callable"):
+        _good_tool(handler="nope")
+    with pytest.raises(ValueError, match="requires_confirmation"):
+        _good_tool(requires_confirmation="yes")
+
+
+def test_exec_context_rejects_bad_fields():
+    with pytest.raises(ValueError, match="consent"):
+        ExecContext(consent="yes")
+    with pytest.raises(ValueError, match="confirm"):
+        ExecContext(confirm="nope")
+
+
+def test_registry_init_validates_defaults():
+    from levi.agent.tools import ToolRegistry
+
+    with pytest.raises(ValueError, match="default_consent"):
+        ToolRegistry(default_consent="yes")
+    with pytest.raises(ValueError, match="default_confirm"):
+        ToolRegistry(default_confirm=42)
+
+
+def test_register_rejects_non_tool(tmp_path):
+    from levi.agent.tools import ToolRegistry
+
+    reg = ToolRegistry()
+    with pytest.raises(ValueError, match="expected a Tool"):
+        reg.register("not-a-tool")  # type: ignore[arg-type]
+    reg.register(_good_tool())
+    assert reg.get("demo") is not None
+
+
+def test_get_is_total_on_bad_names(tmp_path):
+    reg = _reg(tmp_path)
+    assert reg.get(None) is None
+    assert reg.get(["x"]) is None
+    assert reg.get("missing-tool") is None
+
+
+def test_execute_validates_shape(tmp_path):
+    reg = _reg(tmp_path)
+    reg.register(_good_tool())
+    with pytest.raises(ValueError, match="'args' must be a dict"):
+        reg.execute("demo", "nope")  # type: ignore[arg-type]
+    with pytest.raises(ValueError, match="'ctx' must be an ExecContext"):
+        reg.execute("demo", {}, ctx="nope")  # type: ignore[arg-type]
+    # Non-string names are "unknown", never a crash.
+    res = reg.execute("", {})
+    assert res.ok is False and "unknown tool" in res.error
+    res = reg.execute(None, {})  # type: ignore[arg-type]
+    assert res.ok is False and "unknown tool" in res.error
+    # Happy path still works.
+    assert reg.execute("demo", {}).ok is True

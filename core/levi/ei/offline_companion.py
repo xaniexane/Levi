@@ -10,8 +10,8 @@ Uses tone, continuity (name/goal/shelf), alchemy, life equation, life chess,
 and monotropism state to produce useful, structured replies offline.
 
 This is not a fake LLM: it is deterministic structured care + planning.
-When Ollama/cloud is available, ModelRouter prefers those; this is the
-always-on path that makes the system real.
+When a configured model provider is available, ModelRouter may prefer it;
+this is the always-on path that makes the system real.
 """
 
 from __future__ import annotations
@@ -157,7 +157,7 @@ def synthesize(
             "A–Z knowledge, alchemy (no pure loss), life equation x+y=z, life chess, monotropism, HITL. "
             "Chat: levi chat · Model: levi model · Knowledge: levi brain --seed-knowledge · "
             "Score: levi scorecard. "
-            "Cloud is optional wings — never owns keys or continuity. Ollama optional for free-form generation."
+            "Cloud is optional wings — never owns keys or continuity. An external model is optional for free-form generation."
         )
 
     # --- Goal queries ---
@@ -469,7 +469,7 @@ def synthesize(
     if mono:
         lines.append(f"Interest tunnel: {mono}")
     lines.append(
-        "Offline companion path is active (full generation needs Ollama). "
+        "Offline companion path is active (full neural generation needs a configured model provider). "
         "Useful moves right now:\n"
         "  · Clarify z in one sentence\n"
         "  · Inventory x (what you already have)\n"

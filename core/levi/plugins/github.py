@@ -65,6 +65,24 @@ def _positive_int(value: Any, what: str) -> int:
     return number
 
 
+#: GitHub API payload limits: issue titles truncate at ~256 chars, and
+#: issue/comment bodies cap at 65536. Validate before transport so an
+#: oversized payload fails here, not mid-request.
+_MAX_ISSUE_TITLE = 256
+_MAX_BODY_CHARS = 65536
+
+
+def _bounded_str(value: Any, what: str, limit: int) -> str:
+    """A text param that must fit the GitHub API limit."""
+    text = str(value or "").strip()
+    if len(text) > limit:
+        raise InvalidParams(
+            f"invalid {what}: {len(text)} chars exceeds the GitHub limit of "
+            f"{limit} — shorten it; nothing was sent."
+        )
+    return text
+
+
 class GitHubConnector(Connector):
     id = "github"
     display_name = "GitHub"
@@ -212,8 +230,8 @@ class GitHubConnector(Connector):
             owner = _slug(params["owner"], "owner")
             repo = _slug(params["repo"], "repo")
             body = {
-                "title": str(params["title"]).strip(),
-                "body": str(params.get("body", "") or ""),
+                "title": _bounded_str(params["title"], "title", _MAX_ISSUE_TITLE),
+                "body": _bounded_str(params.get("body", ""), "body", _MAX_BODY_CHARS),
             }
             data = self._request(
                 "POST", f"/repos/{owner}/{repo}/issues", token, body, transport
@@ -228,7 +246,9 @@ class GitHubConnector(Connector):
             owner = _slug(params["owner"], "owner")
             repo = _slug(params["repo"], "repo")
             number = _positive_int(params["issue_number"], "issue_number")
-            body = {"body": str(params["body"]).strip()}
+            body = {
+                "body": _bounded_str(params["body"], "body", _MAX_BODY_CHARS),
+            }
             data = self._request(
                 "POST",
                 f"/repos/{owner}/{repo}/issues/{number}/comments",

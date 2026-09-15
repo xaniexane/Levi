@@ -1,4 +1,8 @@
-"""Pulse check — surface pending HITL, project phase, shelf, mono (local only)."""
+"""Pulse check — LEVI periodic self-check (original; not a third-party heartbeat).
+
+Surfaces pending HITL, project phase, capability log size, opportunity rail
+and kernel state. Local only — never takes external action.
+"""
 
 from __future__ import annotations
 

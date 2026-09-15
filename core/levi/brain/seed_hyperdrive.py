@@ -111,7 +111,7 @@ UNITS: Tuple[Tuple[str, str, Tuple[str, ...]], ...] = (
         ("enterprise"),
     ),
     (
-        "Model relay order: local Ollama → optional cloud endpoints → offline synthesizer.",
+        "Model relay order: local model runner → optional cloud endpoints → offline synthesizer.",
         "OBSERVED",
         ("relay", "model"),
     ),

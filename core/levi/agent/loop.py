@@ -203,6 +203,35 @@ def run_subtask(
     Confirmation discipline: a :class:`ConfirmationRequired` ends the run
     at once with ``ok=False`` — the loop never retries a denied gate.
     """
+    if not isinstance(task, str) or not task.strip():
+        raise ValueError(
+            f"run_subtask: 'task' must be a non-empty string, got {task!r}"
+        )
+    if (
+        not isinstance(max_steps, int)
+        or isinstance(max_steps, bool)
+    ):
+        raise ValueError(
+            f"run_subtask: 'max_steps' must be an integer, got {max_steps!r}"
+        )
+    if max_steps < 1:
+        raise ValueError(
+            f"run_subtask: 'max_steps' must be an integer >= 1, got {max_steps!r}"
+        )
+    if max_steps > 100:
+        raise ValueError(
+            f"run_subtask: 'max_steps' must be <= 100, got {max_steps!r}"
+        )
+    if history is not None and not isinstance(history, list):
+        raise ValueError(
+            f"run_subtask: 'history' must be a list of ChatMessage, got "
+            f"{type(history).__name__}"
+        )
+    if provider is not None and not isinstance(provider, (ChatProvider, str)):
+        raise ValueError(
+            "run_subtask: 'provider' must be a ChatProvider, a provider-name "
+            f"string, or None, got {type(provider).__name__}"
+        )
     if isinstance(provider, ChatProvider):
         prov = provider
     else:
@@ -251,7 +280,7 @@ def run_subtask(
     def _totals() -> tuple[int, int]:
         return prompt_total, completion_total
 
-    for i in range(max(1, max_steps)):
+    for i in range(max_steps):  # validated: int in [1, 100]
         resp = prov.chat(messages, tool_schemas)
 
         if resp.error:

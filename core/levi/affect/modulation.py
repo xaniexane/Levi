@@ -79,7 +79,17 @@ def modulate(
 
     Returns a dict with the reading, policy, register suggestion, and the
     prompt hint. Pure except for updating ``session`` scores.
+
+    Raises ValueError on a wrong ``session`` or non-string ``text``.
     """
+    if not isinstance(session, SessionEI):
+        raise ValueError(
+            "modulate: session must be a SessionEI, got %s" % type(session).__name__
+        )
+    if not isinstance(text, str):
+        raise ValueError(
+            "modulate: text must be a string, got %s" % type(text).__name__
+        )
     reading = session.observe_user(text)
     policy = evaluate(text, reading)
     suggestion = suggest_register(text, reading, policy, user_choice=user_register)
@@ -120,6 +130,14 @@ def _signals_path() -> Path:
     return base / "affect" / "signals.jsonl"
 
 
+_SIGNAL_KINDS = (
+    "frustration-streak",
+    "repair",
+    "rapport-positive",
+    "proactive-opportunity",
+)
+
+
 def record_signal(
     session: SessionEI,
     kind: str,
@@ -130,7 +148,24 @@ def record_signal(
 
     ``kind``: "frustration-streak" | "repair" | "rapport-positive" |
     "proactive-opportunity". Returns the record written.
+
+    Raises ValueError on a wrong ``session``, unknown ``kind``, or
+    non-string ``detail``.
     """
+    if not isinstance(session, SessionEI):
+        raise ValueError(
+            "record_signal: session must be a SessionEI, got %s"
+            % type(session).__name__
+        )
+    if kind not in _SIGNAL_KINDS:
+        raise ValueError(
+            "record_signal: unknown kind %r (expected one of: %s)"
+            % (kind, ", ".join(_SIGNAL_KINDS))
+        )
+    if not isinstance(detail, str):
+        raise ValueError(
+            "record_signal: detail must be a string, got %s" % type(detail).__name__
+        )
     target = Path(path) if path else _signals_path()
     target.parent.mkdir(parents=True, exist_ok=True)
     record = {

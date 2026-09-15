@@ -21,9 +21,11 @@ category tool subsets. Does NOT fork them.
 from __future__ import annotations
 
 import json
+import re
 import threading
 import time
 import uuid
+import warnings
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -89,6 +91,20 @@ class SwarmBudgets:
     max_time_seconds: int = 600
     max_tool_calls: int = 200
     max_cost_units: int = 400
+
+    def __post_init__(self) -> None:
+        for name in (
+            "max_depth",
+            "max_agents",
+            "max_time_seconds",
+            "max_tool_calls",
+            "max_cost_units",
+        ):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+                raise ValueError(
+                    f"SwarmBudgets.{name} must be a positive integer, got {value!r}"
+                )
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -396,6 +412,14 @@ def spawn_subswarm(
     objective: str, *, depth: int, budgets: SwarmBudgets, **kwargs: Any
 ) -> Dict[str, Any]:
     """Spawn a child swarm. Refused beyond ``max_depth`` — never silent."""
+    if not isinstance(objective, str) or not objective.strip():
+        raise ValueError(f"objective must be a non-empty string, got {objective!r}")
+    if isinstance(depth, bool) or not isinstance(depth, int) or depth < 0:
+        raise ValueError(f"depth must be a non-negative integer, got {depth!r}")
+    if not isinstance(budgets, SwarmBudgets):
+        raise ValueError(
+            f"budgets must be a SwarmBudgets, got {type(budgets).__name__}"
+        )
     if depth > budgets.max_depth:
         raise MaxDepthExceeded(
             f"sub-swarm spawn refused: depth {depth} exceeds "
@@ -416,6 +440,9 @@ def _fleet_dir() -> Path:
     return d
 
 
+_RUN_ID_RE = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
+
+
 class SwarmRunner:
     """Executes a plan DAG under budget with verification and one replan."""
 
@@ -431,6 +458,12 @@ class SwarmRunner:
         approval_timeout: float = 0.0,
     ) -> None:
         self.budgets = budgets or SwarmBudgets()
+        if not isinstance(self.budgets, SwarmBudgets):
+            raise ValueError(
+                f"budgets must be a SwarmBudgets, got {type(self.budgets).__name__}"
+            )
+        if isinstance(depth, bool) or not isinstance(depth, int) or depth < 0:
+            raise ValueError(f"depth must be a non-negative integer, got {depth!r}")
         self.depth = depth
         self.worker_fn = worker_fn or default_worker
         self.verify_fn = verify_fn
@@ -489,10 +522,35 @@ class SwarmRunner:
 
     @staticmethod
     def load(run_id: str) -> Optional[Dict[str, Any]]:
+        """Load a past run report. Returns None when missing or unreadable.
+
+        ``run_id`` is strictly validated (``[A-Za-z0-9_-]{1,64}``) so it
+        can never become a path traversal — it is interpolated into a
+        filename under the fleet runs directory.
+        """
+        if not isinstance(run_id, str) or not _RUN_ID_RE.match(run_id):
+            raise ValueError(f"run_id must match [A-Za-z0-9_-]{{1,64}}, got {run_id!r}")
         path = _fleet_dir() / f"{run_id}.json"
         if not path.exists():
             return None
-        return json.loads(path.read_text())
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            warnings.warn(
+                f"fleet run file {path} is unreadable "
+                f"({type(exc).__name__}); treating as missing.",
+                UserWarning,
+                stacklevel=2,
+            )
+            return None
+        if not isinstance(data, dict):
+            warnings.warn(
+                f"fleet run file {path} does not hold an object; treating as missing.",
+                UserWarning,
+                stacklevel=2,
+            )
+            return None
+        return data
 
     # -- internals -------------------------------------------------------
 

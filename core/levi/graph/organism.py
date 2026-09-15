@@ -89,7 +89,7 @@ ORGANS: List[Tuple[str, str, str, str]] = [
     (
         "media.pollinations",
         "media",
-        "Pollinations stills",
+        "Media stills (reference: Pollinations)",
         "Free beat stills under narrative lock",
     ),
     (
@@ -238,7 +238,7 @@ def register_into_graph() -> str:
         from levi.graph.interpenetration import GraphEdge
 
         added = 0
-        existing = {(e.source, e.target, e.relation) for e in g.edges}
+        existing = {(e.source_id, e.target_id, e.relation) for e in g.edges}
         for a, b, rel in BLOODSTREAM:
             key = (a, b, rel)
             if key in existing:

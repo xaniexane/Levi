@@ -36,6 +36,7 @@ from levi.identity.profile import ProfileStore
 from levi.identity.shelf import collect_shelf, format_shelf, latest_item
 from levi.identity.export_life import export_life_pack, import_life_pack
 from levi.identity.templates import list_templates, apply_template
+
 # >>> LEVI backup module — minimal hook (backup coordinator); logic in levi/backup/
 from levi.backup.cli import cmd_backup, register_backup_parser
 # <<< LEVI backup module
@@ -1826,16 +1827,24 @@ def cmd_demand(args):
             if getattr(args, "five_factor", False):
                 _cmd_demand_five_factor(dp, s.id, args)
             else:
-                o = dp.score_opportunity(
-                    s.id,
-                    args.title,
-                    demand_score=float(getattr(args, "demand_score", 0.6) or 0.6),
-                    serviceability=float(getattr(args, "serviceability", 0.6) or 0.6),
-                    startup_cost=float(getattr(args, "cost", 0.2) or 0.2),
-                )
+                try:
+                    o = dp.score_opportunity(
+                        s.id,
+                        args.title,
+                        demand_score=float(getattr(args, "demand_score", 0.6) or 0.6),
+                        serviceability=float(
+                            getattr(args, "serviceability", 0.6) or 0.6
+                        ),
+                        startup_cost=float(getattr(args, "cost", 0.2) or 0.2),
+                    )
+                except ValueError as exc:
+                    print(f"Opportunity scoring rejected: {exc}")
+                    return
                 print(f"Opportunity worth={o.worth:.2f}: {o.title}")
     elif getattr(args, "five_factor", False):
-        print("Five-factor scoring needs --scan \"...\" --title \"...\" plus the --ff-* factors.")
+        print(
+            'Five-factor scoring needs --scan "..." --title "..." plus the --ff-* factors.'
+        )
     print(dp.format_status())
 
 
@@ -1852,12 +1861,16 @@ def _cmd_demand_five_factor(dp, demand_id, args):
     }
     missing = [f for f in FACTORS if getattr(args, flag_for[f], None) is None]
     if missing:
-        print(f"Five-factor scoring needs values for: {', '.join(missing)} "
-              f"(flags --ff-demand/--ff-market/--ff-gap/--ff-velocity/--ff-feasibility, 0-100).")
+        print(
+            f"Five-factor scoring needs values for: {', '.join(missing)} "
+            f"(flags --ff-demand/--ff-market/--ff-gap/--ff-velocity/--ff-feasibility, 0-100)."
+        )
         return
     basis = getattr(args, "ff_basis", None)
     if not basis or not basis.strip():
-        print("Five-factor scoring needs --ff-basis: a note on why these scores were assigned.")
+        print(
+            "Five-factor scoring needs --ff-basis: a note on why these scores were assigned."
+        )
         return
     weights = None
     if getattr(args, "ff_weights", None):
@@ -1867,12 +1880,28 @@ def _cmd_demand_five_factor(dp, demand_id, args):
             print(f"Bad --ff-weights: {e}")
             return
     try:
+        factor_vals = {}
+        for f in FACTORS:
+            raw = getattr(args, flag_for[f])
+            try:
+                val = float(raw)
+            except (TypeError, ValueError):
+                raise ValueError(
+                    f"--ff-{f.replace('_', '-')} must be a number 0-100, got {raw!r}"
+                )
+            factor_vals[f] = (val, basis)
+        try:
+            threshold = float(getattr(args, "ff_threshold", 75.0) or 75.0)
+        except (TypeError, ValueError):
+            raise ValueError(
+                f"--ff-threshold must be numeric, got {getattr(args, 'ff_threshold')!r}"
+            )
         card = dp.score_five_factor(
             demand_id,
             args.title,
-            {f: (float(getattr(args, flag_for[f])), basis) for f in FACTORS},
+            factor_vals,
             weights=weights,
-            threshold=float(getattr(args, "ff_threshold", 75.0) or 75.0),
+            threshold=threshold,
         )
     except ValueError as e:
         print(f"Five-factor scoring rejected: {e}")
@@ -2482,11 +2511,13 @@ def cmd_academy(args):
         phase = rs.week_phase_for(syllabus, day)
         try:
             from levi.academy import corpus_ingest as aci
+
             cstats = aci.corpus_stats()
         except Exception:
             cstats = {"records": 0, "chars": 0}
         try:
             from levi.academy import concepts as acon
+
             rstats = acon.retention_stats()
         except Exception:
             rstats = {}
@@ -2499,26 +2530,38 @@ def cmd_academy(args):
             bar = "#" * (n * 30 // 30) + "-" * (30 - n * 30 // 30)
             name = syllabus["track_names"][t]
             print(f"  [{t}] {name:38s} [{bar}] {n}/30")
-        print("  pass streaks (current/best): " +
-              "  ".join(f"{t} {streaks[t]['current']}/{streaks[t]['best']}"
-                        for t in ("A", "B", "C", "S")))
+        print(
+            "  pass streaks (current/best): "
+            + "  ".join(
+                f"{t} {streaks[t]['current']}/{streaks[t]['best']}"
+                for t in ("A", "B", "C", "S")
+            )
+        )
         if rstats:
-            print("  retention — review drill hit rate "
-                  "(completion without retention is failure):")
+            print(
+                "  retention — review drill hit rate "
+                "(completion without retention is failure):"
+            )
             for t in ("A", "B", "C", "S"):
                 r = rstats.get(t, {})
                 hr = r.get("hit_rate", 0.0)
                 bar = "#" * int(hr * 20) + "-" * (20 - int(hr * 20))
-                print(f"    [{t}] [{bar}] {hr:.0%} "
-                      f"({r.get('concepts', 0)} concepts, "
-                      f"{r.get('reviewed', 0)} reviewed)")
+                print(
+                    f"    [{t}] [{bar}] {hr:.0%} "
+                    f"({r.get('concepts', 0)} concepts, "
+                    f"{r.get('reviewed', 0)} reviewed)"
+                )
         pending = progress.get("pending_remedial")
         if pending:
-            print(f"  ! pending remediation: day {pending['day']} block "
-                  f"{pending['block']} (attempt {pending.get('attempts', 0) + 1}) "
-                  f"— next run remediates before any new session")
-        print(f"  brain corpus: {cstats['records']} academy records, "
-              f"{cstats['chars']:,} chars (post-mastery knowledge only)")
+            print(
+                f"  ! pending remediation: day {pending['day']} block "
+                f"{pending['block']} (attempt {pending.get('attempts', 0) + 1}) "
+                f"— next run remediates before any new session"
+            )
+        print(
+            f"  brain corpus: {cstats['records']} academy records, "
+            f"{cstats['chars']:,} chars (post-mastery knowledge only)"
+        )
         if progress.get("graduated"):
             print("  status: GRADUATED")
         return 0
@@ -2531,6 +2574,8 @@ def cmd_academy(args):
         return rs.main(["--day", str(day), "--block", str(block)])
     print(f"Unknown academy action: {action}")
     return 2
+
+
 # --- end academy-owned block ---
 
 
@@ -2866,16 +2911,14 @@ def cmd_security(args):
     fresh with defensive blue-team framing (detection + hardening, no
     attack how-tos). Works with zero network access.
     """
-    import json
-    from pathlib import Path
+    from levi.knowledge.security.catalog import CatalogError, load_catalog
 
-    base = Path(__file__).resolve().parent.parent / "knowledge" / "security"
-    catalog_p = base / "catalog.json"
-    if not catalog_p.exists():
-        print("Security index not built yet.")
+    try:
+        catalog = load_catalog()
+    except CatalogError as exc:
+        print(f"Security index unavailable: {exc}")
         return
-    catalog = json.loads(catalog_p.read_text(encoding="utf-8"))
-    entries = catalog["entries"]
+    entries = catalog.domains
     action = getattr(args, "security_action", None) or "list"
 
     if action == "search":
@@ -2886,18 +2929,18 @@ def cmd_security(args):
         hits = [
             e
             for e in entries
-            if q in e["name"].lower()
-            or q in e["defensive_summary"].lower()
-            or q in e["detection_notes"].lower()
-            or q in e["hardening_notes"].lower()
-            or any(q in c.lower() for c in e["key_concepts"])
+            if q in e.name.lower()
+            or q in e.defensive_summary.lower()
+            or q in e.detection_notes.lower()
+            or q in e.hardening_notes.lower()
+            or any(q in c.lower() for c in e.key_concepts)
         ]
         if not hits:
             print(f"No security domains match {q!r}.")
             return
         print(f"══ {len(hits)} match(es) for {q!r} ══")
         for e in hits:
-            print(f"  {e['id']:44s} {e['name']}")
+            print(f"  {e.id:44s} {e.name}")
         return
 
     if action == "show":
@@ -2905,28 +2948,28 @@ def cmd_security(args):
         if not sid:
             print("Usage: levi security show <id>")
             return
-        entry = next((e for e in entries if e["id"] == sid), None)
+        entry = next((e for e in entries if e.id == sid), None)
         if entry is None:
             print(f"Unknown security domain {sid!r}.")
             print("Use: levi security list")
             return
-        print(f"══ {entry['name']} [{entry['id']}] ══\n")
-        print(entry["defensive_summary"] + "\n")
-        if entry.get("attack_relevant") and entry.get("attack_profile"):
+        print(f"══ {entry.name} [{entry.id}] ══\n")
+        print(entry.defensive_summary + "\n")
+        if entry.attack_relevant and entry.attack_profile:
             print("-- attack profile (threat knowledge, not instructions) --")
-            print(entry["attack_profile"] + "\n")
+            print(entry.attack_profile + "\n")
         print("-- detection --")
-        print(entry["detection_notes"] + "\n")
+        print(entry.detection_notes + "\n")
         print("-- hardening --")
-        print(entry["hardening_notes"] + "\n")
+        print(entry.hardening_notes + "\n")
         print("-- key concepts --")
-        print("  " + ", ".join(entry["key_concepts"]) + "\n")
-        print(f"-- reference --\n  {entry['reference']}")
+        print("  " + ", ".join(entry.key_concepts) + "\n")
+        print(f"-- reference --\n  {entry.reference or '(unlisted)'}")
         return
 
     # action == "list"
     for e in entries:
-        print(f"  {e['id']:44s} {e['name']}")
+        print(f"  {e.id:44s} {e.name}")
     print(
         f"\n{len(entries)} security domains. "
         "Use: levi security search <query> | levi security show <id>"
@@ -2995,12 +3038,21 @@ def cmd_bounty(args):
             try:
                 ports = [int(p) for p in str(praw).split(",") if p.strip()]
             except ValueError:
-                print("Invalid --ports (expected comma-separated integers).")
+                print(
+                    "Invalid --ports (expected comma-separated integers, e.g. --ports 80,443)."
+                )
+                return
+            bad = [p for p in ports if not 1 <= p <= 65535]
+            if bad:
+                print(f"Invalid --ports: port numbers must be 1-65535, got {bad}.")
                 return
         try:
             report = run_recon(dom, ports=ports)
         except ScopeError as exc:
             print(f"SCOPE REFUSED: {exc}")
+            return
+        except ValueError as exc:
+            print(f"Invalid target: {exc}")
             return
         print(f"══ recon {report['domain']} [scope: {report['scope']}] ══")
         print(f"  subdomains alive : {len(report['subdomains'])}")
@@ -3031,12 +3083,12 @@ def cmd_bounty(args):
     # cmd == "findings" (default)
     fstore = FindingStore()
     items = (
-        fstore.new_since_last_run()
-        if getattr(args, "new", False)
-        else fstore.list()
+        fstore.new_since_last_run() if getattr(args, "new", False) else fstore.list()
     )
     if not items:
-        print("No findings stored yet. Enroll a scope, then: levi bounty recon <domain>")
+        print(
+            "No findings stored yet. Enroll a scope, then: levi bounty recon <domain>"
+        )
         return
     label = "new findings" if getattr(args, "new", False) else "findings"
     print(f"══ {len(items)} {label} ══")
@@ -3044,6 +3096,36 @@ def cmd_bounty(args):
         print(f"  [{f.kind:16s}] {f.target}: {f.detail[:110]}")
         if f.kind == "possible_exposure":
             print(f"      evidence: {f.evidence}")
+
+
+def cmd_console(args):
+    """Interactive text dashboard — menu-driven, built on the ux effects kit.
+
+    Every screen calls existing module functions only; the console adds no
+    new capabilities. Requires an interactive terminal.
+    """
+    from levi.console.app import run
+
+    raise SystemExit(run())
+
+
+def cmd_sim(args):
+    """Bounded text simulations — clearly labeled, deterministic, zero network."""
+    from levi.sim import SCENARIOS, run_scenario
+
+    if getattr(args, "list", False) or not getattr(args, "scenario", None):
+        print("Available simulations (all clearly labeled SIMULATION, zero network):")
+        for name, fn in SCENARIOS.items():
+            doc = (fn.__doc__ or "").strip().splitlines()
+            blurb = doc[0] if doc else ""
+            print(f"  {name:16s} {blurb}")
+        print("\nUsage: levi sim <scenario> [--seed N]")
+        return
+    name = args.scenario
+    if name not in SCENARIOS:
+        print(f"Unknown scenario {name!r}. See: levi sim --list")
+        return
+    raise SystemExit(run_scenario(name, seed=getattr(args, "seed", None)))
 
 
 def cmd_project(args):
@@ -4276,17 +4358,26 @@ def main():
     dem_p.add_argument("--demand-score", dest="demand_score", type=float, default=0.6)
     dem_p.add_argument("--serviceability", type=float, default=0.6)
     dem_p.add_argument("--cost", type=float, default=0.2)
-    dem_p.add_argument("--five-factor", action="store_true",
-                       help="Score --title with the five-factor model instead of worth")
+    dem_p.add_argument(
+        "--five-factor",
+        action="store_true",
+        help="Score --title with the five-factor model instead of worth",
+    )
     dem_p.add_argument("--ff-demand", type=float, default=None)
     dem_p.add_argument("--ff-market", type=float, default=None)
     dem_p.add_argument("--ff-gap", type=float, default=None)
     dem_p.add_argument("--ff-velocity", type=float, default=None)
     dem_p.add_argument("--ff-feasibility", type=float, default=None)
-    dem_p.add_argument("--ff-basis", default=None,
-                       help="Basis note recorded for every factor (required)")
-    dem_p.add_argument("--ff-weights", default=None,
-                       help='Override weights, e.g. "0.3,0.25,0.2,0.15,0.1"')
+    dem_p.add_argument(
+        "--ff-basis",
+        default=None,
+        help="Basis note recorded for every factor (required)",
+    )
+    dem_p.add_argument(
+        "--ff-weights",
+        default=None,
+        help='Override weights, e.g. "0.3,0.25,0.2,0.15,0.1"',
+    )
     dem_p.add_argument("--ff-threshold", type=float, default=75.0)
     inc_p = sub.add_parser(
         "income", help="Income Factory (capability, not whole purpose)"
@@ -4455,7 +4546,9 @@ def main():
         default=None,
         help="expand one subject in list",
     )
-    sec_p = sub.add_parser("security", help="offline defensive security knowledge index")
+    sec_p = sub.add_parser(
+        "security", help="offline defensive security knowledge index"
+    )
     sec_p.add_argument(
         "security_action",
         nargs="?",
@@ -4465,7 +4558,9 @@ def main():
     sec_p.add_argument(
         "query", nargs="?", default=None, help="search query or entry id (for show)"
     )
-    bty_p = sub.add_parser("bounty", help="bug-bounty recon: scoped, polite, recon-only")
+    bty_p = sub.add_parser(
+        "bounty", help="bug-bounty recon: scoped, polite, recon-only"
+    )
     bty_cmd = bty_p.add_subparsers(dest="bounty_cmd")
     bty_scope = bty_cmd.add_parser("scope", help="manage enrolled program scopes")
     bty_scope_cmd = bty_scope.add_subparsers(dest="scope_cmd")
@@ -4473,7 +4568,9 @@ def main():
         _p = bty_scope_cmd.add_parser(_sc)
         if _sc in ("add", "remove"):
             _p.add_argument("domain", help="program domain to enroll/remove")
-    bty_recon = bty_cmd.add_parser("recon", help="run enum -> probe -> content -> store")
+    bty_recon = bty_cmd.add_parser(
+        "recon", help="run enum -> probe -> content -> store"
+    )
     bty_recon.add_argument("domain", help="target domain (must be in scope)")
     bty_recon.add_argument(
         "--ports", default=None, help="comma-separated ports, e.g. 80,443,8080"
@@ -4481,11 +4578,26 @@ def main():
     bty_find = bty_cmd.add_parser("findings", help="list stored findings")
     bty_find.add_argument("--new", action="store_true", help="only new since last run")
     bty_cmd.add_parser("monitor", help="recon all scopes, print only new findings")
+    con_p = sub.add_parser(
+        "console", help="interactive text dashboard (security, bounty, demand)"
+    )
+    sim_p = sub.add_parser(
+        "sim", help="bounded text simulations (clearly labeled, zero network)"
+    )
+    sim_p.add_argument(
+        "scenario",
+        nargs="?",
+        default=None,
+        help="scenario to run (see: levi sim --list)",
+    )
+    sim_p.add_argument("--list", action="store_true", help="list available scenarios")
+    sim_p.add_argument("--seed", type=int, default=None, help="deterministic seed")
     # >>> LEVI backup module — minimal hook (backup coordinator)
     register_backup_parser(sub)
     # <<< LEVI backup module
     news_p = sub.add_parser(
-        "news", help="Current-events ingest (dated recall, not live)"    )
+        "news", help="Current-events ingest (dated recall, not live)"
+    )
     news_p.add_argument(
         "news_action",
         nargs="?",
@@ -4531,7 +4643,9 @@ def main():
     )
     lab_p.add_argument("--model", default=None, help="chat: model id")
     # --- LEVI Boot Camp: 30-day 24/7 program (academy-owned block) ---
-    acad_p = sub.add_parser("academy", help="LEVI Boot Camp: 30-day 24/7 training program")
+    acad_p = sub.add_parser(
+        "academy", help="LEVI Boot Camp: 30-day 24/7 training program"
+    )
     acad_p.add_argument(
         "academy_action",
         nargs="?",
@@ -4842,7 +4956,9 @@ def main():
         help="care|ops|challenger|literary|forensic|void|builder|mirror",
     )
     voice_p.add_argument(
-        "--register", action="store_true", help="Register LEVI voices into persona lattice"
+        "--register",
+        action="store_true",
+        help="Register LEVI voices into persona lattice",
     )
     sub.add_parser("unique", help="Unique unreplicable LEVI organs")
     sub.add_parser("x100", help="×100 upgrade rail (status · law · next slices)")
@@ -5052,6 +5168,8 @@ def main():
         "courses": cmd_courses,
         "security": cmd_security,
         "bounty": cmd_bounty,
+        "console": cmd_console,
+        "sim": cmd_sim,
         # >>> LEVI backup module — minimal hook (backup coordinator)
         "backup": cmd_backup,
         # <<< LEVI backup module

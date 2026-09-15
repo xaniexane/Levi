@@ -241,6 +241,93 @@ def test_sell_to_flat_keeps_realized_pnl():
 # ---------------------------------------------------------------------------
 
 
+def test_load_corrupt_file_warns_and_returns_empty(tmp_path):
+    import warnings
+
+    path = tmp_path / "portfolio.json"
+    path.write_text("{corrupt", encoding="utf-8")
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        p = Portfolio.load(path)
+    assert p.cash == 0.0 and p.positions == {}
+    assert any("unreadable" in str(w.message) for w in caught)
+
+
+def test_load_wrong_shape_warns_and_returns_empty(tmp_path):
+    import warnings
+
+    for bad in ('[1,2,3]', '{"cash": "lots"}', '{"cash": 1, "positions": {"A": "x"}}'):
+        path = tmp_path / "p.json"
+        path.write_text(bad, encoding="utf-8")
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            p = Portfolio.load(path)
+        assert p.cash == 0.0 and p.positions == {}, bad
+        assert any("unreadable" in str(w.message) for w in caught), bad
+
+
+def test_deposit_rejects_garbage_types():
+    p = Portfolio()
+    for bad in ("50", None, True, float("nan"), float("inf"), [50]):
+        try:
+            p.deposit(bad)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"deposit({bad!r}) did not raise ValueError")
+    assert p.cash == 0.0
+
+
+def test_apply_fill_rejects_garbage():
+    p = Portfolio()
+    p.deposit(1000.0)
+    for args in [
+        ("", "buy", 1, 10.0),
+        (123, "buy", 1, 10.0),
+        ("AAPL", "buy", True, 10.0),
+        ("AAPL", "buy", 1, float("nan")),
+        ("AAPL", "buy", "1", 10.0),
+        ("AAPL", "hold", 1, 10.0),
+    ]:
+        try:
+            p.apply_fill(*args)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"apply_fill{args} did not raise ValueError")
+    assert p.positions == {}
+
+
+def test_market_value_rejects_bad_price_map():
+    p = Portfolio()
+    p.deposit(100.0)
+    p.apply_fill("AAPL", "buy", 1, 150.0)
+    for bad in (None, [("AAPL", 1.0)], {"AAPL": "high"}, {"AAPL": float("inf")}, {"": 5.0}):
+        try:
+            p.market_value(bad)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"market_value({bad!r}) did not raise ValueError")
+
+
+def test_position_direct_construction_validated():
+    from levi.finance.portfolio import Position
+
+    for kwargs in [
+        {"symbol": "", "qty": 1, "avg_cost": 10.0},
+        {"symbol": "A", "qty": -1, "avg_cost": 10.0},
+        {"symbol": "A", "qty": 1, "avg_cost": float("inf")},
+        {"symbol": "A", "qty": True, "avg_cost": 10.0},
+    ]:
+        try:
+            Position(**kwargs)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"Position{kwargs} did not raise ValueError")
+
+
 def _run_all():
     import inspect
 

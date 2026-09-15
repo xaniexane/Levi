@@ -41,6 +41,8 @@ class OpsSnapshot:
             "demand_signals": self.demand_signals,
             "income_plans": self.income_plans,
             "corpus_units": self.corpus_units,
+            "relay_offline_ok": self.relay_offline_ok,
+            "ollama_up": self.ollama_up,
             "cost_session": self.cost_session,
             "notes": self.notes,
             "at": datetime.now(timezone.utc).isoformat(),

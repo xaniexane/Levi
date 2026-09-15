@@ -65,6 +65,12 @@ def _fetch_text(url: str, timeout: int = TIMEOUT) -> Optional[str]:
 
 def wayback_urls(domain: str, delay: float = REQUEST_DELAY) -> List[str]:
     """Archived URLs for *.domain from the Wayback CDX API (passive)."""
+    if not isinstance(domain, str) or not domain.strip():
+        raise ValueError(f"domain must be a non-empty string, got {domain!r}")
+    if isinstance(delay, bool) or not isinstance(delay, (int, float)) or delay < 0:
+        raise ValueError(
+            f"delay must be a non-negative number of seconds, got {delay!r}"
+        )
     body = _fetch_text(WAYBACK_CDX.format(domain=domain))
     time.sleep(delay)
     if not body:
@@ -114,6 +120,15 @@ def harvest_js(
     ``page_bodies`` maps page URL -> HTML (as captured during probing).
     Returns a list of {js_url, endpoints, possible_exposures}.
     """
+    if not isinstance(page_bodies, dict):
+        raise ValueError(
+            f"page_bodies must be a dict mapping page URL to HTML, "
+            f"got {type(page_bodies).__name__}"
+        )
+    if isinstance(delay, bool) or not isinstance(delay, (int, float)) or delay < 0:
+        raise ValueError(
+            f"delay must be a non-negative number of seconds, got {delay!r}"
+        )
     results: List[Dict[str, object]] = []
     for page_url, html in page_bodies.items():
         for js_url in _script_urls(page_url, html):
@@ -141,10 +156,20 @@ def collect_content(
     store: Optional[ScopeStore] = None,
     page_bodies: Optional[Dict[str, str]] = None,
 ) -> Dict[str, object]:
-    """Content discovery for an in-scope domain. Scope gate at entry."""
+    """Content discovery for an in-scope domain. Scope gate at entry.
+
+    When ``page_bodies`` carries the homepage bodies captured during
+    probing, no second GET is issued for them (the fallback fetch only
+    runs when probing captured nothing).
+    """
     check_scope(domain, store)  # raises ScopeError if out of scope
     target = normalize_domain(domain)
     archived = wayback_urls(target)
+    if page_bodies is not None and not isinstance(page_bodies, dict):
+        raise ValueError(
+            f"page_bodies must be a dict mapping page URL to HTML, "
+            f"got {type(page_bodies).__name__}"
+        )
     bodies = dict(page_bodies or {})
     if not bodies:
         # fetch the target's own homepage so JS harvesting has something

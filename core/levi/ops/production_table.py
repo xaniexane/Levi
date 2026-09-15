@@ -22,7 +22,7 @@ ENGINES: List[Tuple[str, str, str, str]] = [
     (
         "modern",
         "Model relay chain",
-        "Local Ollama → offline synth; cloud config-ready",
+        "Local model runner (reference: Ollama) → offline synth; cloud config-ready",
         "prod",
     ),
     ("modern", "Event bus / daemon cycle", "OBSERVE…OPTIMIZE operating loop", "prod"),
@@ -97,7 +97,7 @@ ENGINES: List[Tuple[str, str, str, str]] = [
     ("levi-unique", "Monotropism tracker", "Tunnel depth under focus load", "prod"),
     (
         "modern",
-        "Pollinations stills",
+        "Media stills (reference: Pollinations)",
         "Optional image URL generation for beats",
         "prod",
     ),

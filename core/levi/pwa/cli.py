@@ -57,6 +57,13 @@ def cmd_pwa(args: argparse.Namespace) -> None:
     else:
         print("  phone:  (no LAN address detected — use --host 0.0.0.0 on your LAN)")
     print("  tip:    'Add to Home screen' in your phone browser to install it.")
+    from levi.pwa.server import _check_bind as _check_pwa_bind  # same-subsystem helper
+
+    try:
+        host, port = _check_pwa_bind(host, port)
+    except ValueError as exc:
+        print(f"invalid bind address: {exc}")
+        raise SystemExit(2)
     run(host, port, provider_factory=_factory, default_register=register)
 
 

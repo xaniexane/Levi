@@ -30,3 +30,14 @@ def test_orchestrator_turn_does_not_require_network():
     orch = Orchestrator()
     result = orch.turn("help")
     assert "offline" in result.response.lower() or result.response
+
+
+def test_turn_rejects_blank_input():
+    from levi.orchestration.loop import Orchestrator
+
+    orch = Orchestrator()
+    import pytest
+
+    for bad in ("", "   ", None, 123):
+        with pytest.raises(ValueError, match="non-empty string"):
+            orch.turn(bad)  # type: ignore[arg-type]

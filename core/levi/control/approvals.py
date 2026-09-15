@@ -21,6 +21,7 @@ unblocks a worker waiting in another.
 from __future__ import annotations
 
 import json
+import math
 import os
 import time
 from dataclasses import dataclass
@@ -122,9 +123,24 @@ class ApprovalEngine:
             data = json.loads(self._path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             data = {}
-        self._pending: Dict[str, Dict[str, Any]] = data.get("pending", {})
-        self._history: List[Dict[str, Any]] = data.get("history", [])
-        self._grants: Dict[str, Dict[str, Any]] = data.get("grants", {})
+        if not isinstance(data, dict):
+            data = {}
+        pending = data.get("pending", {})
+        self._pending = (
+            {str(k): v for k, v in pending.items() if isinstance(v, dict)}
+            if isinstance(pending, dict)
+            else {}
+        )
+        history = data.get("history", [])
+        self._history = [r for r in history if isinstance(r, dict)] if isinstance(
+            history, list
+        ) else []
+        grants = data.get("grants", {})
+        self._grants = (
+            {str(k): v for k, v in grants.items() if isinstance(v, dict)}
+            if isinstance(grants, dict)
+            else {}
+        )
 
     def _save(self) -> None:
         data = {
@@ -133,12 +149,17 @@ class ApprovalEngine:
             "grants": self._grants,
         }
         tmp = self._path.with_suffix(".json.tmp")
-        tmp.write_text(json.dumps(data, indent=2), encoding="utf-8")
         try:
-            os.chmod(tmp, 0o600)
-        except OSError:
-            pass
-        os.replace(tmp, self._path)
+            tmp.write_text(json.dumps(data, indent=2), encoding="utf-8")
+            try:
+                os.chmod(tmp, 0o600)
+            except OSError:
+                pass
+            os.replace(tmp, self._path)
+        except OSError as exc:
+            raise ApprovalError(
+                f"cannot persist approvals to {self._path}: {exc}"
+            ) from exc
 
     # -- requests --------------------------------------------------------
 
@@ -161,6 +182,21 @@ class ApprovalEngine:
         L0/L1 (or a matching workflow grant) → ``approved`` immediately.
         L2+ → ``awaiting_permission`` and persisted in the pending queue.
         """
+        if not isinstance(description, str) or not description.strip():
+            raise ApprovalError(
+                f"request: 'description' must be a non-empty string, "
+                f"got {description!r}"
+            )
+        if not isinstance(risk_level, RiskLevel):
+            raise ApprovalError(
+                f"request: 'risk_level' must be a RiskLevel, "
+                f"got {risk_level!r}"
+            )
+        if not isinstance(reason, str):
+            raise ApprovalError(
+                f"request: 'reason' must be a string, "
+                f"got {type(reason).__name__}"
+            )
         self._load()
         grant = self._find_grant(action_key, workflow_key)
         if grant is None:
@@ -179,7 +215,9 @@ class ApprovalEngine:
         proposal = self._policy.propose(
             description=description,
             risk_level=risk_level,
-            reason=reason,
+            # PolicyEngine requires a non-empty reason; keep the public
+            # default ("") working with a neutral placeholder.
+            reason=reason.strip() or "no reason given",
             affected_systems=affected_systems,
             estimated_impact=estimated_impact,
             reversible=reversible,
@@ -236,6 +274,28 @@ class ApprovalEngine:
         timeout elapses; on timeout the record keeps status
         ``awaiting_permission`` and gains ``timed_out: True``.
         """
+        if timeout is not None:
+            try:
+                timeout = float(timeout)  # type: ignore[arg-type]
+            except (TypeError, ValueError):
+                raise ApprovalError(
+                    f"guard: 'timeout' must be a number or None, got {timeout!r}"
+                ) from None
+            if not math.isfinite(timeout) or timeout < 0:
+                raise ApprovalError(
+                    f"guard: 'timeout' must be a finite value >= 0, got {timeout!r}"
+                )
+        try:
+            poll_interval = float(poll_interval)  # type: ignore[arg-type]
+        except (TypeError, ValueError):
+            raise ApprovalError(
+                f"guard: 'poll_interval' must be a number, got {poll_interval!r}"
+            ) from None
+        if not math.isfinite(poll_interval) or poll_interval <= 0:
+            raise ApprovalError(
+                f"guard: 'poll_interval' must be a finite value > 0, "
+                f"got {poll_interval!r}"
+            )
         record = self.request(description, risk_level, **kwargs)
         if record["status"] != ActionStatus.AWAITING_PERMISSION.value:
             return record
@@ -272,7 +332,25 @@ class ApprovalEngine:
 
     # -- decisions -------------------------------------------------------
 
+    @staticmethod
+    def _require_id(approval_id: Any, what: str) -> str:
+        if not isinstance(approval_id, str) or not approval_id.strip():
+            raise ApprovalError(
+                f"{what}: 'approval_id' must be a non-empty string, "
+                f"got {approval_id!r}"
+            )
+        return approval_id
+
+    @staticmethod
+    def _require_note(note: Any, what: str) -> str:
+        if not isinstance(note, str):
+            raise ApprovalError(
+                f"{what}: 'note' must be a string, got {type(note).__name__}"
+            )
+        return note
+
     def get(self, approval_id: str) -> Dict[str, Any]:
+        approval_id = self._require_id(approval_id, "get")
         self._load()
         if approval_id in self._pending:
             return self._pending[approval_id]
@@ -286,11 +364,21 @@ class ApprovalEngine:
         return sorted(self._pending.values(), key=lambda r: r.get("created_at", ""))
 
     def history(self, limit: int = 50) -> List[Dict[str, Any]]:
+        if (
+            not isinstance(limit, int)
+            or isinstance(limit, bool)
+            or limit < 0
+        ):
+            raise ApprovalError(
+                f"history: 'limit' must be an integer >= 0, got {limit!r}"
+            )
         self._load()
-        return list(reversed(self._history[-limit:]))
+        return list(reversed(self._history[-limit:] if limit else []))
 
     def approve_once(self, approval_id: str, note: str = "") -> Dict[str, Any]:
         """Approve exactly one action."""
+        approval_id = self._require_id(approval_id, "approve_once")
+        note = self._require_note(note, "approve_once")
         self._load()
         record = self._pending.pop(approval_id, None)
         if record is None:
@@ -304,6 +392,8 @@ class ApprovalEngine:
         return record
 
     def deny(self, approval_id: str, note: str = "") -> Dict[str, Any]:
+        approval_id = self._require_id(approval_id, "deny")
+        note = self._require_note(note, "deny")
         self._load()
         record = self._pending.pop(approval_id, None)
         if record is None:
@@ -321,6 +411,13 @@ class ApprovalEngine:
     ) -> Dict[str, Any]:
         """Approve this action and grant the same ``action_key`` for the
         rest of ``workflow_key`` (e.g. a fleet run id)."""
+        approval_id = self._require_id(approval_id, "approve_for_workflow")
+        note = self._require_note(note, "approve_for_workflow")
+        if not isinstance(workflow_key, str):
+            raise ApprovalError(
+                f"approve_for_workflow: 'workflow_key' must be a string, "
+                f"got {type(workflow_key).__name__}"
+            )
         self._load()
         record = self._pending.pop(approval_id, None)
         if record is None:

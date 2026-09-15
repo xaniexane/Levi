@@ -12,8 +12,9 @@ model generation enhances when Ollama is available.
 """
 
 from __future__ import annotations
+from contextlib import contextmanager
 from dataclasses import dataclass, field, asdict
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Iterator, List, Optional
 from enum import Enum
 from datetime import datetime, timezone
 import uuid
@@ -188,6 +189,7 @@ class StoryFabric:
         self.data_dir.mkdir(parents=True, exist_ok=True)
         self.genres = GenreRegistry()
         self.stories: Dict[str, Story] = {}
+        self._defer = 0  # >0 while inside _batch(): persist deferred
         self._load()
 
     def _load(self) -> None:
@@ -230,6 +232,8 @@ class StoryFabric:
             pass
 
     def _persist(self) -> None:
+        if self._defer > 0:
+            return  # deferred until the outermost _batch() exits
         path = self.data_dir / "stories.json"
         payload = {
             "updated_at": datetime.now(timezone.utc).isoformat(),
@@ -238,6 +242,44 @@ class StoryFabric:
         tmp = path.with_suffix(".tmp")
         tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
         tmp.replace(path)
+
+    @contextmanager
+    def _batch(self) -> Iterator["StoryFabric"]:
+        """Batch many beat expansions into a single persist.
+
+        ``auto_forward`` calls ``expand()`` per beat and each ``expand()``
+        persists the whole stories file; batching collapses N+1 writes
+        into 1. Internal only. On exception the mutations so far are
+        still persisted before propagating.
+        """
+        self._defer += 1
+        try:
+            yield self
+        except BaseException:
+            self._defer -= 1
+            if self._defer <= 0:
+                self._defer = 0
+                try:
+                    self._persist()
+                except OSError:
+                    pass
+            raise
+        self._defer -= 1
+        if self._defer <= 0:
+            self._defer = 0
+            self._persist()
+
+    def _story(self, story_id: str) -> Story:
+        """Fetch a story or raise an actionable ValueError (never a raw KeyError)."""
+        if not isinstance(story_id, str) or not story_id:
+            raise ValueError(f"story id must be a non-empty string, got {story_id!r}")
+        try:
+            return self.stories[story_id]
+        except KeyError:
+            raise ValueError(
+                f"Unknown story {story_id!r} — "
+                f"{len(self.stories)} stor{'y' if len(self.stories) == 1 else 'ies'} loaded"
+            ) from None
 
     def list_archetypes(self) -> List[str]:
         return [a.value for a in CharacterArchetype]
@@ -252,6 +294,21 @@ class StoryFabric:
         archetypes: Optional[List[str]] = None,
     ) -> List[Character]:
         """Create varied cast with optional archetype choices."""
+        if not isinstance(genre, str) or not genre.strip():
+            raise ValueError(
+                f"generate_characters genre must be a non-empty string, got {genre!r}"
+            )
+        if isinstance(count, bool) or not isinstance(count, int) or count < 1:
+            raise ValueError(
+                f"generate_characters count must be a positive int, got {count!r}"
+            )
+        if archetypes is not None and (
+            not isinstance(archetypes, list)
+            or any(not isinstance(a, str) for a in archetypes)
+        ):
+            raise ValueError(
+                "generate_characters archetypes must be a list of strings or None"
+            )
         genre = genre.strip().lower().replace(" ", "_")
         if not self.genres.get(genre):
             # still allow — note unknown
@@ -424,6 +481,25 @@ class StoryFabric:
         archetypes: Optional[List[str]] = None,
         title: Optional[str] = None,
     ) -> Story:
+        if not isinstance(premise, str) or not premise.strip():
+            raise ValueError(
+                f"create_story premise must be a non-empty string, got {premise!r}"
+            )
+        if not isinstance(genre, str) or not genre.strip():
+            raise ValueError(f"create_story genre must be a non-empty string, got {genre!r}")
+        if isinstance(character_count, bool) or not isinstance(character_count, int):
+            raise ValueError(
+                f"create_story character_count must be an int, got {character_count!r}"
+            )
+        if archetypes is not None and (
+            not isinstance(archetypes, list)
+            or any(not isinstance(a, str) for a in archetypes)
+        ):
+            raise ValueError("create_story archetypes must be a list of strings or None")
+        if title is not None and not isinstance(title, str):
+            raise ValueError(
+                f"create_story title must be a string or None, got {type(title).__name__}"
+            )
         genre = genre.strip().lower().replace(" ", "_")
         if not self.genres.get(genre):
             # Blueprint §5.3 rule: never silently accept or fall back on a
@@ -643,7 +719,9 @@ class StoryFabric:
         Expand in cascade order — not random append.
         next_beat advances the next named stage; body section matches beat order.
         """
-        story = self.stories[story_id]
+        story = self._story(story_id)
+        if not isinstance(focus, str):
+            raise ValueError(f"expand focus must be a string, got {focus!r}")
         story.mode_history.append(f"expand:{focus}")
         lead = story.characters[0].name if story.characters else "The lead"
         genre_l = story.genre.replace("_", " ")
@@ -779,18 +857,20 @@ class StoryFabric:
 
         Same words / same prose machinery as backwards — only the direction differs.
         """
-        story = self.stories[story_id]
+        story = self._story(story_id)
+        if isinstance(beats, bool) or not isinstance(beats, int):
+            raise ValueError(f"auto_forward beats must be an int, got {beats!r}")
         forward_count = sum(1 for b in story.beats if getattr(b, "order", 0) > 0)
         if beats and beats > 0:
             target = beats
         else:
             target = max(3, 8 - forward_count) if forward_count < 8 else 3
         story.mode_history.append(f"forward:{target}")
-        for _ in range(target):
-            self.expand(story_id, focus="next_beat")
-        story = self.stories[story_id]
-        story.updated_at = datetime.now(timezone.utc).isoformat()
-        self._persist()
+        with self._batch():  # one persist for the whole forward run
+            for _ in range(target):
+                self.expand(story_id, focus="next_beat")
+            story = self._story(story_id)
+            story.updated_at = datetime.now(timezone.utc).isoformat()
         return story
 
     def auto_backward(self, story_id: str, depth: int = 3) -> "Story":
@@ -799,8 +879,10 @@ class StoryFabric:
         If forward prose exists, reverse its sentence units.
         Otherwise generate cascade paragraphs first, then reverse them.
         """
-        story = self.stories[story_id]
-        depth = max(1, min(int(depth or 3), 12))
+        story = self._story(story_id)
+        if isinstance(depth, bool) or not isinstance(depth, int):
+            raise ValueError(f"auto_backward depth must be an int, got {depth!r}")
+        depth = max(1, min(depth, 12))
         story.mode_history.append(f"backwords:{depth}")
         lead = story.characters[0].name if story.characters else "The lead"
         wound = story.characters[0].wound if story.characters else ""
@@ -858,17 +940,22 @@ class StoryFabric:
         self, story_id: str, forward: int = 0, backward: int = 3
     ) -> "Story":
         """Forward cascade + Backwords (same units, last→first) at once."""
-        story = self.stories[story_id]
+        story = self._story(story_id)
+        for label, value in (("forward", forward), ("backward", backward)):
+            if isinstance(value, bool) or not isinstance(value, int):
+                raise ValueError(
+                    f"auto_generate {label} must be an int, got {value!r}"
+                )
         story.mode_history.append(f"forward+backwords:fwd={forward}:bak={backward}")
-        # Forward push
-        self.auto_forward(story_id, beats=forward if forward and forward > 0 else 0)
-        # Backwords: same cascade words, reversed unit order
-        if backward and backward > 0:
-            self.auto_backward(story_id, depth=backward)
-        story = self.stories[story_id]
-        story.mode_history.append("forward+backwords:complete")
-        story.updated_at = datetime.now(timezone.utc).isoformat()
-        self._persist()
+        with self._batch():  # one persist for the whole generate run
+            # Forward push
+            self.auto_forward(story_id, beats=forward if forward and forward > 0 else 0)
+            # Backwords: same cascade words, reversed unit order
+            if backward and backward > 0:
+                self.auto_backward(story_id, depth=backward)
+            story = self._story(story_id)
+            story.mode_history.append("forward+backwords:complete")
+            story.updated_at = datetime.now(timezone.utc).isoformat()
         return story
 
     def create_bidirectional(
@@ -888,7 +975,13 @@ class StoryFabric:
         Modes interpenetrate with persona lenses / L.W.P. primitives:
         void, interrogation, reframe, noir_shift, horror_pressure, compress, soft_landing
         """
-        story = self.stories[story_id]
+        story = self._story(story_id)
+        if not isinstance(mode, str) or not mode.strip():
+            raise ValueError(f"modify mode must be a non-empty string, got {mode!r}")
+        if not isinstance(instruction, str):
+            raise ValueError(
+                f"modify instruction must be a string, got {type(instruction).__name__}"
+            )
         mode = mode.strip().lower().replace(" ", "_")
         story.mode_history.append(f"modify:{mode}")
         lead = story.characters[0].name if story.characters else "They"

@@ -304,7 +304,11 @@ PAIRS: List[SymbiosisPair] = [
 
 
 def pair_for(asset_id: str) -> List[SymbiosisPair]:
-    aid = (asset_id or "").lower()
+    if asset_id is None:
+        asset_id = ""
+    if not isinstance(asset_id, str):
+        raise ValueError(f"pair_for asset_id must be a string, got {asset_id!r}")
+    aid = asset_id.lower()
     return [
         p
         for p in PAIRS
@@ -350,7 +354,9 @@ def format_symbiosis(asset_id: Optional[str] = None) -> str:
 
 def value_check(action: str) -> str:
     """Heuristic: is this action aligned with non-malicious value increase?"""
-    a = (action or "").lower()
+    if not isinstance(action, str):
+        raise ValueError(f"value_check action must be a string, got {action!r}")
+    a = action.lower()
     red = [
         ("fake scarcity", "Creates false scarcity"),
         ("must buy now", "Pressure urgency"),

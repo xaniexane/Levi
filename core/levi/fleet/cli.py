@@ -94,12 +94,16 @@ def _cmd_plan(args) -> int:
 def _cmd_run(args) -> int:
     from levi.fleet import SwarmBudgets, SwarmRunner, plan_objective
 
-    budgets = SwarmBudgets(
-        max_agents=args.max_agents,
-        max_time_seconds=int(args.max_minutes * 60),
-        max_tool_calls=args.max_tool_calls,
-        max_cost_units=args.max_cost,
-    )
+    try:
+        budgets = SwarmBudgets(
+            max_agents=args.max_agents,
+            max_time_seconds=int(args.max_minutes * 60),
+            max_tool_calls=args.max_tool_calls,
+            max_cost_units=args.max_cost,
+        )
+    except ValueError as exc:
+        print(f"invalid budget: {exc}")
+        return 2
     plan = plan_objective(args.objective, use_model=args.model)
     print(f"Plan: {len(plan.nodes)} nodes ({plan.method}). Running swarm…")
     runner = SwarmRunner(budgets=budgets)

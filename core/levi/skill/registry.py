@@ -784,6 +784,14 @@ class SkillRegistry:
         return sorted(results, key=lambda s: s.id)
 
     def invoke(self, skill_id: str, args: Optional[Dict[str, Any]] = None) -> Any:
+        if not isinstance(skill_id, str) or not skill_id.strip():
+            raise ValueError(
+                f"invoke: 'skill_id' must be a non-empty string, got {skill_id!r}"
+            )
+        if args is not None and not isinstance(args, dict):
+            raise ValueError(
+                f"invoke: 'args' must be a dict or None, got {type(args).__name__}"
+            )
         skill = self.get(skill_id)
         if not skill:
             raise KeyError(f"Unknown skill: {skill_id}")

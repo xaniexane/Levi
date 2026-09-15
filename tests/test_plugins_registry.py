@@ -177,3 +177,40 @@ def test_registry_rejects_connector_without_credential_env_var():
 
     with pytest.raises(ValueError, match="credential_env_var"):
         register_connector(_Bad)
+
+
+def test_execute_validates_call_shape_before_anything(monkeypatch):
+    monkeypatch.setenv("LEVI_TEST_STUB_TOKEN", "tok")
+    c = _ReadStub()
+
+    res = c.execute("", {})
+    assert res.ok is False and res.status == "invalid_params"
+    assert res.request_made is False
+
+    res = c.execute("ping", "not-a-dict")  # type: ignore[arg-type]
+    assert res.ok is False and res.status == "invalid_params"
+
+    res = c.execute("ping", {}, confirm="yes")  # type: ignore[arg-type]
+    assert res.ok is False and res.status == "invalid_params"
+
+    res = c.execute("ping", {}, transport="nope")  # type: ignore[arg-type]
+    assert res.ok is False and res.status == "invalid_params"
+
+
+def test_execute_turns_unexpected_connector_failure_into_safe_result(monkeypatch):
+    class _Boom(_ReadStub):
+        id = "stub-boom"
+
+        def perform(self, operation, params, token, transport):
+            # Exception text may carry secrets (URLs, headers, bodies) —
+            # it must never reach the result message.
+            raise RuntimeError("kaboom: bearer tok")
+
+    monkeypatch.setenv("LEVI_TEST_STUB_TOKEN", "tok")
+    res = _Boom().execute("ping", {})
+    assert res.ok is False
+    assert res.status == "internal_error"
+    assert "RuntimeError" in res.message
+    assert "kaboom" not in res.message
+    assert "tok" not in res.message
+    assert res.request_made is False

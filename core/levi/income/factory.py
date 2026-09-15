@@ -10,12 +10,13 @@ Produces plans that require HITL before payment, production, or customer contact
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field, asdict
-from typing import Any, Dict, List, Optional
-from pathlib import Path
-from datetime import datetime, timezone
 import json
 import uuid
+import warnings
+from dataclasses import asdict, dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 
 DEFAULT = Path.home() / ".levi" / "income_factory.json"
@@ -36,6 +37,33 @@ class ServicePlan:
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
     )
 
+    def __post_init__(self) -> None:
+        if not isinstance(self.id, str) or not self.id.strip():
+            raise ValueError(f"plan id must be a non-empty string, got {self.id!r}")
+        if (
+            not isinstance(self.opportunity_title, str)
+            or not self.opportunity_title.strip()
+        ):
+            raise ValueError("plan opportunity_title must be a non-empty string")
+        if not isinstance(self.service, str) or not self.service.strip():
+            raise ValueError("plan service must be a non-empty string")
+        if self.status not in ("draft", "awaiting_hitl", "approved", "rejected"):
+            raise ValueError(
+                f"plan status must be draft/awaiting_hitl/approved/rejected, "
+                f"got {self.status!r}"
+            )
+        for name in ("offer_steps", "automation_steps", "requires_hitl", "value_flags"):
+            steps = getattr(self, name)
+            if not isinstance(steps, list) or not all(
+                isinstance(s, str) for s in steps
+            ):
+                raise ValueError(f"plan {name} must be a list of strings")
+        if not isinstance(self.demand_signal_id, str):
+            raise ValueError(
+                f"plan demand_signal_id must be a string, "
+                f"got {type(self.demand_signal_id).__name__}"
+            )
+
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
 
@@ -51,19 +79,36 @@ class IncomeFactory:
             return
         try:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
+            if not isinstance(raw, dict):
+                raise ValueError("top level must be an object")
+            plans = raw.get("plans") or []
+            if not isinstance(plans, list):
+                raise ValueError("'plans' must be a list")
             self.plans = []
-            for p in raw.get("plans") or []:
-                self.plans.append(
-                    ServicePlan(
-                        **{
-                            k: v
-                            for k, v in p.items()
-                            if k in ServicePlan.__dataclass_fields__
-                        }
+            for p in plans:
+                if not isinstance(p, dict):
+                    continue
+                try:
+                    self.plans.append(
+                        ServicePlan(
+                            **{
+                                k: v
+                                for k, v in p.items()
+                                if k in ServicePlan.__dataclass_fields__
+                            }
+                        )
                     )
-                )
-        except Exception:
-            pass
+                except Exception:
+                    continue  # one corrupt plan must not kill the rest
+        except Exception as exc:
+            warnings.warn(
+                f"income factory file {self.path} is unreadable "
+                f"({type(exc).__name__}); starting empty. "
+                "Back up or delete the file to silence this warning.",
+                UserWarning,
+                stacklevel=3,
+            )
+            self.plans = []
 
     def _persist(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -81,6 +126,19 @@ class IncomeFactory:
         service: str = "service modernization",
         demand_signal_id: Optional[str] = None,
     ) -> ServicePlan:
+        """Compose a draft service plan. Never charges or contacts anyone."""
+        if not isinstance(opportunity_title, str) or not opportunity_title.strip():
+            raise ValueError(
+                f"opportunity_title must be a non-empty string, "
+                f"got {opportunity_title!r}"
+            )
+        if not isinstance(service, str) or not service.strip():
+            raise ValueError(f"service must be a non-empty string, got {service!r}")
+        if demand_signal_id is not None and not isinstance(demand_signal_id, str):
+            raise ValueError(
+                f"demand_signal_id must be a string or None, "
+                f"got {type(demand_signal_id).__name__}"
+            )
         # Extract signal id from title tag if present
         sig = (demand_signal_id or "").strip()
         title = opportunity_title

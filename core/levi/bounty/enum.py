@@ -12,6 +12,7 @@ a subdomain of an enrolled domain is authorized by that enrollment.
 from __future__ import annotations
 
 import json
+import math
 import socket
 import time
 import urllib.request
@@ -27,16 +28,83 @@ CRTSH_URL = "https://crt.sh/?q=%25.{domain}&output=json"
 
 # Modest built-in wordlist: common names only, no aggressive guessing.
 WORDLIST = [
-    "www", "mail", "ftp", "api", "dev", "test", "staging", "stage", "prod",
-    "beta", "alpha", "demo", "portal", "admin", "vpn", "ssh", "blog",
-    "shop", "store", "app", "apps", "mobile", "cdn", "static", "assets",
-    "media", "img", "images", "docs", "support", "help", "status", "monitor",
-    "grafana", "kibana", "jenkins", "git", "gitlab", "jira", "confluence",
-    "wiki", "cms", "crm", "erp", "hr", "auth", "login", "sso", "oauth",
-    "idp", "directory", "ldap", "db", "sql", "mongo", "redis", "cache",
-    "queue", "search", "analytics", "metrics", "logs", "backup", "old",
-    "legacy", "new", "internal", "intranet", "extranet", "partner",
-    "secure", "private", "public", "remote", "cloud", "edge", "origin",
+    "www",
+    "mail",
+    "ftp",
+    "api",
+    "dev",
+    "test",
+    "staging",
+    "stage",
+    "prod",
+    "beta",
+    "alpha",
+    "demo",
+    "portal",
+    "admin",
+    "vpn",
+    "ssh",
+    "blog",
+    "shop",
+    "store",
+    "app",
+    "apps",
+    "mobile",
+    "cdn",
+    "static",
+    "assets",
+    "media",
+    "img",
+    "images",
+    "docs",
+    "support",
+    "help",
+    "status",
+    "monitor",
+    "grafana",
+    "kibana",
+    "jenkins",
+    "git",
+    "gitlab",
+    "jira",
+    "confluence",
+    "wiki",
+    "cms",
+    "crm",
+    "erp",
+    "hr",
+    "auth",
+    "login",
+    "sso",
+    "oauth",
+    "idp",
+    "directory",
+    "ldap",
+    "db",
+    "sql",
+    "mongo",
+    "redis",
+    "cache",
+    "queue",
+    "search",
+    "analytics",
+    "metrics",
+    "logs",
+    "backup",
+    "old",
+    "legacy",
+    "new",
+    "internal",
+    "intranet",
+    "extranet",
+    "partner",
+    "secure",
+    "private",
+    "public",
+    "remote",
+    "cloud",
+    "edge",
+    "origin",
 ]
 
 
@@ -84,12 +152,26 @@ def _resolve(host: str, timeout: int = TIMEOUT) -> List[str]:
         socket.setdefaulttimeout(prev)
 
 
+def _check_delay(delay: float) -> float:
+    """Validate a politeness delay. Raises ValueError on garbage."""
+    if isinstance(delay, bool) or not isinstance(delay, (int, float)):
+        raise ValueError(
+            f"delay must be a non-negative number of seconds, got {delay!r}"
+        )
+    if not math.isfinite(delay) or delay < 0:
+        raise ValueError(
+            f"delay must be a non-negative number of seconds, got {delay!r}"
+        )
+    return float(delay)
+
+
 def enumerate_subdomains(
     domain: str,
     store: Optional[ScopeStore] = None,
     use_crtsh: bool = True,
     use_wordlist: bool = True,
     delay: float = REQUEST_DELAY,
+    dns_cache: Optional[Dict[str, List[str]]] = None,
 ) -> List[Dict[str, object]]:
     """Enumerate subdomains of ``domain``.
 
@@ -97,9 +179,17 @@ def enumerate_subdomains(
     is re-checked (defense in depth — all will be subdomains of an enrolled
     domain, but the check is cheap and structural).
     Returns a list of {subdomain, ips, source} dicts, deduped and sorted.
+
+    ``dns_cache`` is an optional hostname → IP-list dict shared across
+    calls: within one call candidates are already deduped, but repeated
+    enumerations (e.g. monitor loops) skip re-resolution for hosts the
+    caller has seen. When omitted, a fresh per-call cache is used. The
+    caller's dict is updated in place.
     """
-    scope_entry = check_scope(domain, store)  # raises ScopeError if out of scope
+    check_scope(domain, store)  # raises ScopeError if out of scope
     target = normalize_domain(domain)
+    delay = _check_delay(delay)
+    cache: Dict[str, List[str]] = {} if dns_cache is None else dns_cache
 
     candidates: Dict[str, str] = {}
     if use_crtsh:
@@ -123,10 +213,11 @@ def enumerate_subdomains(
 
     results: List[Dict[str, object]] = []
     for sub in sorted(candidates):
-        ips = _resolve(sub)
+        ips = cache.get(sub)
+        if ips is None:
+            ips = _resolve(sub)  # keep the call mock-compatible (one arg)
+            cache[sub] = ips
         if ips:
-            results.append(
-                {"subdomain": sub, "ips": ips, "source": candidates[sub]}
-            )
+            results.append({"subdomain": sub, "ips": ips, "source": candidates[sub]})
         time.sleep(delay)
     return results

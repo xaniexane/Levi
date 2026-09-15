@@ -13,8 +13,37 @@ they are not prices and must never be presented as money.
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
+
+
+class RoutingError(ValueError):
+    """Invalid input to the cost-aware router."""
+
+
+def _require_task(task: Any, *, field: str = "task") -> str:
+    if not isinstance(task, str):
+        raise RoutingError(
+            f"invalid {field}: must be a string, got {type(task).__name__}"
+        )
+    return task
+
+
+def _require_budget(budget_units: Any) -> Optional[float]:
+    if budget_units is None:
+        return None
+    try:
+        budget = float(budget_units)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        raise RoutingError(
+            f"invalid budget_units {budget_units!r}: must be a number or None"
+        ) from None
+    if not math.isfinite(budget) or budget < 0:
+        raise RoutingError(
+            f"invalid budget_units {budget_units!r}: must be a finite value >= 0"
+        )
+    return budget
 
 COST_UNIT_NOTE = (
     "Cost units are RELATIVE (levi-tiny = 1). They rank models against "
@@ -115,7 +144,7 @@ def classify_complexity(task: str) -> Tuple[str, List[str]]:
     ``simple`` = short single question; ``medium`` = compositional work;
     ``hard`` = research/planning/building language or long input.
     """
-    text = (task or "").strip()
+    text = _require_task(task).strip()
     lowered = text.lower()
     words = set(lowered.replace("-", " ").split())
     reasons: List[str] = []
@@ -142,7 +171,13 @@ def classify_complexity(task: str) -> Tuple[str, List[str]]:
 
 def estimate_tokens(task: str, complexity: str) -> Tuple[int, int]:
     """(input_tokens, output_tokens) — rough heuristic, ~4 chars/token."""
-    in_tokens = max(8, len(task or "") // 4 + 64)  # +64: system prompt share
+    task = _require_task(task)
+    if complexity not in _OUTPUT_TOKENS:
+        raise RoutingError(
+            f"invalid complexity {complexity!r}: must be one of "
+            f"{sorted(_OUTPUT_TOKENS)}"
+        )
+    in_tokens = max(8, len(task) // 4 + 64)  # +64: system prompt share
     return in_tokens, _OUTPUT_TOKENS[complexity]
 
 
@@ -218,9 +253,24 @@ def plan_route(
     present (via :mod:`levi.agent.model_family`); falls back to the full
     family when the check is unavailable.
     """
+    task = _require_task(task)
+    if not task.strip():
+        raise RoutingError("invalid task: must be a non-empty string")
+    budget_units = _require_budget(budget_units)
+    if needs_tools is not None and not isinstance(needs_tools, bool):
+        raise RoutingError(
+            f"invalid needs_tools {needs_tools!r}: must be a bool or None"
+        )
+    if candidates is not None and (
+        not isinstance(candidates, list)
+        or any(not isinstance(c, str) for c in candidates)
+    ):
+        raise RoutingError(
+            "invalid candidates: must be a list of model-name strings or None"
+        )
     complexity, reasons = classify_complexity(task)
     if needs_tools is None:
-        lowered = (task or "").lower()
+        lowered = task.lower()
         needs_tools = any(
             verb in lowered
             for verb in (
@@ -328,6 +378,35 @@ def record_actual(
     """Track actuals back into the ledger as a router step row."""
     from levi.control.ledger import LedgerWriter
 
+    _require_task(task_id, field="task_id")
+    if not isinstance(route, Route):
+        raise RoutingError(
+            f"invalid route: must be a levi.control.routing.Route, "
+            f"got {type(route).__name__}"
+        )
+    for field, value in (("input_tokens", input_tokens), ("output_tokens", output_tokens)):
+        if (
+            not isinstance(value, int)
+            or isinstance(value, bool)
+            or value < 0
+        ):
+            raise RoutingError(
+                f"invalid {field} {value!r}: must be an integer >= 0"
+            )
+    try:
+        latency_ms = float(latency_ms)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        raise RoutingError(
+            f"invalid latency_ms {latency_ms!r}: must be a number"
+        ) from None
+    if not math.isfinite(latency_ms) or latency_ms < 0:
+        raise RoutingError(
+            f"invalid latency_ms {latency_ms!r}: must be a finite value >= 0"
+        )
+    if not isinstance(outcome, str) or not outcome.strip():
+        raise RoutingError(
+            f"invalid outcome {outcome!r}: must be a non-empty string"
+        )
     per_1k = MODEL_COSTS.get(route.model, {}).get("cost_per_1k", 0.0)
     actual_cost = (input_tokens + output_tokens) / 1000.0 * per_1k
     ledger = LedgerWriter(home=home)

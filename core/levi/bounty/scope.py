@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import re
+import warnings
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -27,13 +28,35 @@ class ScopeError(Exception):
     """Raised when a target is not inside an enrolled program scope."""
 
 
+def _to_ascii(domain: str, raw: object) -> str:
+    """Convert a (possibly internationalized) domain to ASCII/punycode.
+
+    Pure encoding — no network, no DNS lookup. Raises ValueError on
+    anything the IDNA codec cannot encode (never a traceback from the
+    codec itself).
+    """
+    try:
+        return domain.encode("idna").decode("ascii")
+    except (UnicodeError, ValueError) as exc:
+        raise ValueError(f"not a valid domain: {raw!r} ({exc})") from None
+
+
 def normalize_domain(raw: str) -> str:
-    """Normalize user input to a bare lowercase domain.
+    """Normalize user input to a bare lowercase ASCII domain.
 
     Strips scheme, userinfo, port, path, query, fragment and trailing dot.
-    Raises ValueError on anything that is not a plausible DNS domain.
+    Internationalized names are converted to punycode via the IDNA codec
+    (``münchen.de`` → ``xn--mnchen-3ya.de``) before validation, so IDN
+    input is accepted in its canonical ASCII form. IP literals
+    (``1.2.3.4``, ``::1``) and malformed input are rejected — this
+    function never performs a network call and never raises anything
+    but ``ValueError``.
     """
-    t = (raw or "").strip().lower()
+    if not isinstance(raw, str):
+        raise ValueError(
+            f"not a valid domain: {raw!r} (expected a string, got {type(raw).__name__})"
+        )
+    t = raw.strip().lower()
     # strip scheme
     if "://" in t:
         t = t.split("://", 1)[1]
@@ -41,12 +64,16 @@ def normalize_domain(raw: str) -> str:
     if "@" in t:
         t = t.split("@", 1)[1]
     # strip path/query/fragment
-    t = re.split(r"[/?#]", t, 1)[0]
+    t = re.split(r"[/?#]", t, maxsplit=1)[0]
     # strip port (but not IPv6 colons — we reject IPs anyway)
     if t.count(":") == 1:
         t = t.split(":", 1)[0]
     t = t.rstrip(".")
-    if not t or not _HOST_RE.match(t):
+    if not t:
+        raise ValueError(f"not a valid domain: {raw!r}")
+    # IDN → punycode BEFORE the hostname regex (pure encoding, no network)
+    t = _to_ascii(t, raw)
+    if not _HOST_RE.match(t):
         raise ValueError(f"not a valid domain: {raw!r}")
     return t
 
@@ -60,6 +87,10 @@ class ScopeStore:
     """Persistent set of enrolled bug-bounty program scopes."""
 
     def __init__(self, path: Optional[Path] = None):
+        if path is not None and not isinstance(path, (str, Path)):
+            raise ValueError(
+                f"scope path must be a str/Path or None, got {type(path).__name__}"
+            )
         self.path = Path(path) if path else DEFAULT_PATH
         self.domains: List[str] = []
         self._load()
@@ -72,7 +103,18 @@ class ScopeStore:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
             doms = raw.get("domains") or []
             self.domains = sorted({normalize_domain(d) for d in doms})
-        except Exception:
+        except Exception as exc:
+            # Corrupt scope file: fail CLOSED (nothing enrolled, so the
+            # gate refuses everything) and say so loudly instead of
+            # silently dropping the hunter's enrolled programs.
+            warnings.warn(
+                f"bounty scope file {self.path} is unreadable "
+                f"({type(exc).__name__}); starting with no enrolled scopes. "
+                "Back up or delete the file, then re-enroll with "
+                "'levi bounty scope add <domain>'.",
+                UserWarning,
+                stacklevel=3,
+            )
             self.domains = []
 
     def _persist(self) -> None:

@@ -31,14 +31,68 @@ __all__ = [
 ]
 
 
+def _require_bars(name: str, bars) -> list:
+    """Validate a bar container: a list/tuple whose every row is a Bar.
+
+    Runs *before* any ``len()`` so a wrong-typed container raises an
+    actionable ``ValueError`` instead of leaking a ``TypeError``.
+    """
+    from levi.finance.market import Bar  # local import: avoids a cycle
+
+    if isinstance(bars, (str, bytes)) or not isinstance(bars, (list, tuple)):
+        raise ValueError(
+            f"{name}() expects a list/tuple of Bar rows, got {type(bars).__name__}"
+        )
+    for i, bar in enumerate(bars):
+        if not isinstance(bar, Bar):
+            raise ValueError(
+                f"{name}() expects Bar rows, got {type(bar).__name__} at index {i}"
+            )
+    return list(bars)
+
+
 def _require_period(period: int) -> None:
     if not isinstance(period, int) or isinstance(period, bool) or period < 1:
         raise ValueError(f"period must be a positive int, got {period!r}")
 
 
+def _require_mult(mult: float) -> float:
+    """Validate a Bollinger-band width multiplier: finite non-negative number."""
+    if isinstance(mult, bool) or not isinstance(mult, (int, float)):
+        raise ValueError(f"mult must be a number, got {mult!r}")
+    mult = float(mult)
+    if not math.isfinite(mult):
+        raise ValueError(f"mult must be finite, got {mult!r}")
+    if mult < 0:
+        raise ValueError(f"mult must be non-negative, got {mult!r}")
+    return mult
+
+
+def _require_values(values: list[float]) -> list[float]:
+    """Validate a price series: a list/tuple of finite real numbers.
+
+    Bools, strings, None, NaN/inf and non-sequences are rejected with an
+    actionable ``ValueError`` instead of leaking a ``TypeError`` from the
+    arithmetic below. Values are coerced to ``float`` for uniformity.
+    """
+    if isinstance(values, (str, bytes)) or not isinstance(values, (list, tuple)):
+        raise ValueError(
+            f"values must be a list/tuple of numbers, got {type(values).__name__}"
+        )
+    clean: list[float] = []
+    for i, v in enumerate(values):
+        if isinstance(v, bool) or not isinstance(v, (int, float)):
+            raise ValueError(f"values[{i}] must be a number, got {v!r}")
+        if not math.isfinite(v):
+            raise ValueError(f"values[{i}] must be finite, got {v!r}")
+        clean.append(float(v))
+    return clean
+
+
 def sma(values: list[float], period: int) -> list[float | None]:
     """Simple moving average, ``None``-padded before the first window."""
     _require_period(period)
+    values = _require_values(values)
     out: list[float | None] = [None] * len(values)
     if len(values) < period:
         return out
@@ -57,6 +111,7 @@ def ema(values: list[float], period: int) -> list[float | None]:
     earlier entries are ``None``.
     """
     _require_period(period)
+    values = _require_values(values)
     out: list[float | None] = [None] * len(values)
     if len(values) < period:
         return out
@@ -76,6 +131,7 @@ def rsi(values: list[float], period: int = 14) -> list[float | None]:
     values → all ``None``.
     """
     _require_period(period)
+    values = _require_values(values)
     out: list[float | None] = [None] * len(values)
     if len(values) < period + 1:
         return out
@@ -109,6 +165,7 @@ def macd(
     """
     for p in (fast, slow, signal):
         _require_period(p)
+    values = _require_values(values)
     n = len(values)
     fast_line = ema(values, fast)
     slow_line = ema(values, slow)
@@ -143,8 +200,8 @@ def bollinger(
     A constant series has stdev 0, so upper == middle == lower there.
     """
     _require_period(period)
-    if mult < 0:
-        raise ValueError(f"mult must be non-negative, got {mult!r}")
+    mult = _require_mult(mult)
+    values = _require_values(values)
     n = len(values)
     middle = sma(values, period)
     upper: list[float | None] = [None] * n
@@ -170,15 +227,11 @@ def atr(bars: list, period: int = 14) -> list[float | None]:
     ATR value is the mean of the first ``period`` true ranges. Flat bars
     yield 0.0 (never ``None``) once warmed up.
     """
-    from levi.finance.market import Bar  # local import: avoids a cycle
-
+    bars = _require_bars("atr", bars)
     _require_period(period)
     out: list[float | None] = [None] * len(bars)
     if len(bars) < period:
         return out
-    for bar in bars:
-        if not isinstance(bar, Bar):
-            raise ValueError(f"atr() expects Bar rows, got {type(bar).__name__}")
     true_ranges: list[float] = []
     for i, bar in enumerate(bars):
         if i == 0:
@@ -219,14 +272,10 @@ def stochastic(
     %K above %D is bullish momentum; below is bearish. Readings above
     80 / below 20 are the conventional overbought / oversold zones.
     """
-    from levi.finance.market import Bar  # local import: avoids a cycle
-
+    bars = _require_bars("stochastic", bars)
     _require_period(k_period)
     _require_period(d_period)
     n = len(bars)
-    for bar in bars:
-        if not isinstance(bar, Bar):
-            raise ValueError(f"stochastic() expects Bar rows, got {type(bar).__name__}")
     k: list[float | None] = [None] * n
     for i in range(k_period - 1, n):
         window = bars[i - k_period + 1 : i + 1]
@@ -255,12 +304,9 @@ def obv(bars: list) -> list[float]:
     arbitrary — the slope (accumulation vs distribution) is the signal.
     Never ``None``: defined for every bar once data exists.
     """
-    from levi.finance.market import Bar  # local import: avoids a cycle
-
+    bars = _require_bars("obv", bars)
     out: list[float] = [0.0] * len(bars)
     for i, bar in enumerate(bars):
-        if not isinstance(bar, Bar):
-            raise ValueError(f"obv() expects Bar rows, got {type(bar).__name__}")
         if i == 0:
             continue
         prev = bars[i - 1].close
@@ -302,13 +348,9 @@ def adx(bars: list, period: int = 14) -> dict[str, list[float | None]]:
     ADX means a strong trend (up or down), low ADX means no trend —
     direction comes from comparing +DI and -DI.
     """
-    from levi.finance.market import Bar  # local import: avoids a cycle
-
+    bars = _require_bars("adx", bars)
     _require_period(period)
     n = len(bars)
-    for bar in bars:
-        if not isinstance(bar, Bar):
-            raise ValueError(f"adx() expects Bar rows, got {type(bar).__name__}")
     plus_dm = [0.0] * n
     minus_dm = [0.0] * n
     tr = [0.0] * n
@@ -375,14 +417,11 @@ def vwap(bars: list) -> list[float]:
     Price above VWAP means the market is paying up versus the average
     traded price; below means it is paying down.
     """
-    from levi.finance.market import Bar  # local import: avoids a cycle
-
+    bars = _require_bars("vwap", bars)
     out: list[float] = []
     cum_pv = 0.0
     cum_v = 0.0
     for bar in bars:
-        if not isinstance(bar, Bar):
-            raise ValueError(f"vwap() expects Bar rows, got {type(bar).__name__}")
         typical = (bar.high + bar.low + bar.close) / 3.0
         cum_pv += typical * bar.volume
         cum_v += bar.volume
@@ -423,6 +462,9 @@ def classify_regime(bars: list, adx_period: int = 14, atr_period: int = 14) -> d
     ``{"regime": "unknown", "adx": None, "atr_pct": None}`` — the
     caller never guesses a regime from insufficient data.
     """
+    bars = _require_bars("classify_regime", bars)
+    _require_period(adx_period)
+    _require_period(atr_period)
     need = max(2 * adx_period, atr_period)
     if len(bars) < need:
         return {"regime": "unknown", "adx": None, "atr_pct": None}

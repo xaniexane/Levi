@@ -3,12 +3,14 @@ LEVI Core — Local-First Intelligence Kernel
 Part of VYVE Multi-Industry Venture Ecosystem
 """
 
+from __future__ import annotations
+
+from typing import Dict, Final
+
 __version__ = "0.9.5"
 __status__ = "levi 0.9.5"
 
-from typing import Final
-
-POWER_LEVELS: Final = {
+POWER_LEVELS: Final[Dict[int, str]] = {
     0: "Basic Assistant",
     1: "Personal Assistant",
     2: "Operator",

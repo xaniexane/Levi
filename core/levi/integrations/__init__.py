@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from levi.integrations.free_lattice import (
     free_catalog,
     format_catalog,

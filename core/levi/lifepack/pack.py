@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from datetime import datetime, timezone
@@ -109,8 +110,10 @@ def looks_secret(name: str) -> bool:
 
     Separators are stripped so ``LEVIL_API_KEY``, ``oauth-token`` and
     ``apiKey``-style names all match. The list is intentionally broad:
-    when in doubt, skip.
+    when in doubt, skip. Non-string input is never a secret name.
     """
+    if not isinstance(name, str):
+        return False
     joined = re.sub(r"[^a-z0-9]", "", name.lower())
     return any(hint.replace("_", "") in joined for hint in SECRET_KEY_HINTS)
 
@@ -186,6 +189,19 @@ def export_pack(home: Optional[Path] = None) -> Dict[str, Any]:
 # ── Validation ─────────────────────────────────────────────────────
 
 
+def _safe_settings_name(fname: Any) -> bool:
+    """A settings key is only acceptable when it names one of the known
+    root JSON files — no separators, no traversal, no absolute paths."""
+    return (
+        isinstance(fname, str)
+        and fname in SETTINGS_FILES
+        and "/" not in fname
+        and "\\" not in fname
+        and ".." not in fname
+        and not fname.startswith(".")
+    )
+
+
 def validate_pack(pack: Dict[str, Any]) -> None:
     if not isinstance(pack, dict):
         raise LifepackError("life pack must be a JSON object")
@@ -204,6 +220,36 @@ def validate_pack(pack: Dict[str, Any]) -> None:
     for name in ("identity", "settings", "memory", "skills"):
         if name not in sections:
             raise LifepackError(f"life pack is missing section {name!r}")
+    identity = sections["identity"]
+    if not isinstance(identity, dict):
+        raise LifepackError("life pack 'identity' section must be an object")
+    settings = sections["settings"]
+    if not isinstance(settings, dict):
+        raise LifepackError("life pack 'settings' section must be an object")
+    for fname, payload in settings.items():
+        if not _safe_settings_name(fname):
+            raise LifepackError(
+                f"life pack settings key {fname!r} is not a known settings file "
+                f"(expected one of {list(SETTINGS_FILES)})"
+            )
+        if not isinstance(payload, dict):
+            raise LifepackError(
+                f"life pack settings file {fname!r} must contain a JSON object"
+            )
+    memory = sections["memory"]
+    if not isinstance(memory, list):
+        raise LifepackError("life pack 'memory' section must be a list")
+    for i, entry in enumerate(memory):
+        if not isinstance(entry, dict):
+            raise LifepackError(f"life pack memory entry #{i} must be an object")
+        if not isinstance(entry.get("id"), str) or not entry["id"]:
+            raise LifepackError(f"life pack memory entry #{i} needs a non-empty string 'id'")
+    skills = sections["skills"]
+    if not isinstance(skills, dict) or not isinstance(skills.get("manifest"), list):
+        raise LifepackError("life pack 'skills' section must be an object with a 'manifest' list")
+    for i, item in enumerate(skills["manifest"]):
+        if not isinstance(item, dict) or not isinstance(item.get("id"), str):
+            raise LifepackError(f"life pack skill manifest entry #{i} must be an object with a string 'id'")
 
 
 # ── Preview (read-only diff) ───────────────────────────────────────
@@ -327,6 +373,7 @@ def _atomic_write_text(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
     tmp.write_text(text, encoding="utf-8")
+    os.chmod(tmp, 0o600)  # settings may carry personal data — owner-only
     tmp.replace(path)
 
 
@@ -348,7 +395,13 @@ def _import_settings(incoming: Dict[str, Any], home: Path) -> Dict[str, Any]:
     written: List[str] = []
     skipped: List[str] = []
     for fname, payload in incoming.items():
+        # Belt-and-braces: import_pack() already runs validate_pack(), but
+        # _import_settings must never write an attacker-chosen path on its own.
+        if not _safe_settings_name(fname):
+            skipped.append(str(fname))
+            continue
         if not isinstance(payload, dict):
+            skipped.append(fname)
             continue
         clean, file_skipped = _strip_secrets({fname: payload})
         skipped.extend(file_skipped)
@@ -372,6 +425,8 @@ def _import_memory(incoming: List[Dict[str, Any]], home: Path) -> Dict[str, Any]
     added, changed, secrets_skipped = 0, 0, []
     dirty = False
     for raw in incoming:
+        if not isinstance(raw, dict):
+            continue  # malformed entry: skip, don't abort the whole import
         try:
             entry = MemoryEntry.from_dict(dict(raw))
         except Exception:

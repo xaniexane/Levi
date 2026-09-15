@@ -42,8 +42,12 @@ _PBKDF2_ITERATIONS = 600_000
 _NAME_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}\Z")
 
 
-class VaultError(Exception):
-    """The vault could not be unlocked or the request was invalid."""
+class VaultError(ValueError):
+    """Vault errors: invalid requests or an unlock failure.
+
+    Subclasses ValueError so boundary validation is catchable as such;
+    existing ``except VaultError`` handlers keep working unchanged.
+    """
 
 
 def _sanitize_name(name: str) -> str:
@@ -56,8 +60,15 @@ def _sanitize_name(name: str) -> str:
 
 class VaultSeal:
     def __init__(self, passphrase: str, directory: Optional[Path] = None):
-        if not passphrase:
-            raise ValueError("passphrase required")
+        if not isinstance(passphrase, str) or not passphrase:
+            raise ValueError(
+                "passphrase required: pass a non-empty string (getpass prompt preferred)"
+            )
+        if directory is not None and not isinstance(directory, (str, Path)):
+            raise ValueError(
+                "directory must be a str or pathlib.Path, got %s"
+                % type(directory).__name__
+            )
         try:
             from cryptography.fernet import Fernet, InvalidToken  # type: ignore
             from cryptography.hazmat.primitives.kdf.pbkdf2 import (  # type: ignore
@@ -114,9 +125,19 @@ class VaultSeal:
     # -- primitives --------------------------------------------------------
 
     def encrypt_bytes(self, data: bytes) -> bytes:
-        return self._fernet.encrypt(data)
+        """Encrypt raw bytes with the v2 key. Raises ValueError if not bytes."""
+        if not isinstance(data, (bytes, bytearray)):
+            raise ValueError(
+                "encrypt_bytes requires bytes, got %s" % type(data).__name__
+            )
+        return self._fernet.encrypt(bytes(data))
 
     def decrypt_bytes(self, data: bytes) -> bytes:
+        """Decrypt with the v2 key, falling back to the legacy v1 key."""
+        if not isinstance(data, (bytes, bytearray)):
+            raise ValueError(
+                "decrypt_bytes requires bytes, got %s" % type(data).__name__
+            )
         try:
             return self._fernet.decrypt(data)
         except self._InvalidToken:
@@ -132,7 +153,10 @@ class VaultSeal:
     # -- entries -----------------------------------------------------------
 
     def put(self, name: str, text: str) -> Path:
+        """Encrypt ``text`` under entry ``name`` (atomic, owner-only)."""
         name = _sanitize_name(name)
+        if not isinstance(text, str):
+            raise ValueError("put requires text as str, got %s" % type(text).__name__)
         path = self.dir / f"{name}.seal"
         # Atomic, owner-only from creation: write to a temp file opened with
         # 0o600 (no window with default permissions), then rename over the
@@ -152,11 +176,15 @@ class VaultSeal:
         return path
 
     def get(self, name: str) -> str:
+        """Decrypt and return the entry ``name`` as text."""
         name = _sanitize_name(name)
         path = self.dir / f"{name}.seal"
         if not path.exists():
-            raise FileNotFoundError(name)
+            raise FileNotFoundError("vault entry not found: %r" % (name,))
         return self.decrypt_bytes(path.read_bytes()).decode("utf-8")
 
     def list_names(self) -> list:
-        return [p.stem for p in self.dir.glob("*.seal")]
+        # Only surface names that would pass put()/get() validation — a
+        # hand-planted file like "foo bar.seal" must never appear as a
+        # valid entry name.
+        return sorted(p.stem for p in self.dir.glob("*.seal") if _NAME_RE.match(p.stem))

@@ -434,6 +434,11 @@ def ingest_pack(
         raise PackError(f"pack version {version} is not newer than installed {newest}")
     store = store or MemoryStore()
     growth_entries = [e for e in store.list(limit=10000) if "growth" in (e.tags or [])]
+    # Word sets computed once per entry — was recomputed for every
+    # pack-entry x existing-entry pair.
+    growth_words: list[tuple[Any, Any, frozenset]] = [
+        (e, e.content or "", _words(e.content or "")) for e in growth_entries
+    ]
 
     accepted = 0
     corroborated = 0
@@ -442,8 +447,8 @@ def ingest_pack(
         words = _words(content)
         best = None
         best_score = 0.0
-        for existing in growth_entries:
-            score = _jaccard(words, _words(existing.content or ""))
+        for existing, _, ew in growth_words:
+            score = _jaccard(words, ew)
             if score > best_score:
                 best_score = score
                 best = existing
@@ -475,6 +480,7 @@ def ingest_pack(
             },
         )
         growth_entries.append(entry)
+        growth_words.append((entry, content, _words(content)))
         accepted += 1
 
     _record_installed(version, digest, len(pack["entries"]))
@@ -531,7 +537,23 @@ def ingest_pack_file(
 def fetch_latest_pack(
     server: str, api_key: str, *, timeout: int = 30
 ) -> dict[str, Any]:
-    """GET /v1/learning/packs/latest → {"manifest", "pack"}."""
+    """GET /v1/learning/packs/latest → {"manifest", "pack"}.
+
+    Raises ValueError on invalid ``server``/``timeout``; PackError on
+    transport or payload problems.
+    """
+    if not isinstance(server, str) or not server.strip():
+        raise ValueError("fetch_latest_pack: server must be a non-empty URL string")
+    if not isinstance(api_key, str) or not api_key:
+        raise ValueError("fetch_latest_pack: api_key must be a non-empty string")
+    try:
+        timeout = int(timeout)
+    except (TypeError, ValueError):
+        raise ValueError(
+            "fetch_latest_pack: timeout must be a number, got %r" % (timeout,)
+        ) from None
+    if timeout < 1:
+        raise ValueError("fetch_latest_pack: timeout must be >= 1 second")
     url = server.rstrip("/") + "/v1/learning/packs/latest"
     req = urllib.request.Request(url, headers={"Authorization": "Bearer " + api_key})
     try:

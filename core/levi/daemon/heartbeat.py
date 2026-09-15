@@ -24,6 +24,7 @@ item and never crashes the run.
 from __future__ import annotations
 
 import json
+import math
 import os
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
@@ -76,12 +77,30 @@ def _local_now(now: Optional[datetime] = None) -> datetime:
 
 
 def _resolve_interval(interval_min: Optional[int] = None) -> int:
+    """Resolve the heartbeat interval in minutes.
+
+    An explicit argument must be a genuine integer >= 1 — zero,
+    negatives, floats, and bools are rejected rather than silently
+    mangled (a 0-minute interval would spin the daemon hot). The env
+    var is untrusted config: garbage or non-positive values degrade
+    to the default instead of crashing the heartbeat.
+    """
     if interval_min is not None:
-        return int(interval_min)
+        if (
+            not isinstance(interval_min, int)
+            or isinstance(interval_min, bool)
+            or interval_min < 1
+        ):
+            raise ValueError(
+                f"invalid heartbeat interval {interval_min!r}: must be an "
+                f"integer >= 1 (minutes)"
+            )
+        return interval_min
     try:
-        return int(os.environ.get(ENV_INTERVAL, "") or DEFAULT_INTERVAL_MIN)
+        value = int(os.environ.get(ENV_INTERVAL, "") or DEFAULT_INTERVAL_MIN)
     except (TypeError, ValueError):
         return DEFAULT_INTERVAL_MIN
+    return value if value >= 1 else DEFAULT_INTERVAL_MIN
 
 
 def _parse_ts(raw: Any) -> Optional[datetime]:
@@ -252,12 +271,19 @@ _CHECKS: List[tuple] = [
 
 
 def _study_interval_hours() -> float:
+    """Study-hall cadence in hours. The env var is untrusted config:
+    garbage, non-finite, or non-positive values degrade to the default
+    rather than breaking the study schedule (NaN would silently
+    disable the interval gate; 0 would study every run)."""
     try:
-        return float(
+        value = float(
             os.environ.get(STUDY_ENV_INTERVAL, "") or STUDY_DEFAULT_INTERVAL_HOURS
         )
     except (TypeError, ValueError):
         return float(STUDY_DEFAULT_INTERVAL_HOURS)
+    if not math.isfinite(value) or value <= 0:
+        return float(STUDY_DEFAULT_INTERVAL_HOURS)
+    return value
 
 
 def _maybe_run_study(home: Path, state: Dict[str, Any], now_utc: datetime) -> str:

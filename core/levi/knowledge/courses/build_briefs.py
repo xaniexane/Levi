@@ -47,16 +47,59 @@ def keywords(texts: list[str], n: int = 25) -> list[tuple[str, int]]:
     return counts.most_common(n)
 
 
+def _load_briefs_inputs() -> tuple[dict, dict[str, dict]]:
+    """Load catalog.json + coverage.json with actionable schema errors.
+
+    Returns ``(catalog, coverage_by_id)``. Raises ValueError (never a raw
+    JSONDecodeError/KeyError traceback) when files are missing or malformed.
+    """
+    try:
+        catalog = json.loads((BASE / "catalog.json").read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        raise ValueError(
+            "build-briefs: catalog.json not found; run ingest first"
+        ) from None
+    except (OSError, ValueError) as exc:
+        raise ValueError(
+            "build-briefs: catalog.json is not valid JSON: %s" % exc
+        ) from exc
+    if not isinstance(catalog, dict) or not isinstance(catalog.get("subjects"), list):
+        raise ValueError(
+            "build-briefs: catalog.json must be {subjects: [...]}; fix catalog.json"
+        )
+    coverage: dict[str, dict] = {}
+    cov_path = BASE / "coverage.json"
+    if cov_path.exists():
+        try:
+            raw = json.loads(cov_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            raise ValueError(
+                "build-briefs: coverage.json is not valid JSON: %s" % exc
+            ) from exc
+        if not isinstance(raw, list):
+            raise ValueError("build-briefs: coverage.json must be a list of records")
+        for rec in raw:
+            if isinstance(rec, dict) and isinstance(rec.get("id"), str):
+                coverage[rec["id"]] = rec
+    return catalog, coverage
+
+
 def main() -> int:
-    catalog = json.loads((BASE / "catalog.json").read_text(encoding="utf-8"))
-    coverage = {}
-    if (BASE / "coverage.json").exists():
-        for rec in json.loads((BASE / "coverage.json").read_text(encoding="utf-8")):
-            coverage[rec["id"]] = rec
+    try:
+        catalog, coverage = _load_briefs_inputs()
+    except ValueError as exc:
+        print(exc)
+        return 2
     BRIEFS.mkdir(parents=True, exist_ok=True)
 
     for subj in catalog["subjects"]:
         slug = subj["slug"]
+        # O(1) coverage lookup per course (was an O(coverage) scan per course)
+        by_title = {
+            rec.get("title"): rec
+            for cid, rec in coverage.items()
+            if cid.startswith(slug + "/") and isinstance(rec.get("title"), str)
+        }
         texts: list[str] = []
         rows: list[str] = []
         live: list[dict] = []
@@ -64,16 +107,7 @@ def main() -> int:
             rows.append(f"- **{course['title']}** — {course['school'] or 'n/a'}")
             if course.get("description"):
                 rows.append(f"  - {course['description'][:220]}")
-            cid = next(
-                (
-                    k
-                    for k in coverage
-                    if k.startswith(slug + "/")
-                    and coverage[k]["title"] == course["title"]
-                ),
-                None,
-            )
-            rec = coverage.get(cid) if cid else None
+            rec = by_title.get(course["title"])
             status = rec["status"] if rec else "unaccounted"
             rows.append(f"  - [{status}] {course['primary']}")
             if rec and rec["status"] == "ok" and rec.get("file"):

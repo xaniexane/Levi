@@ -322,3 +322,40 @@ def test_cli_plugin_exec_unknown_connector():
     proc = _cli("plugin", "exec", "nope", "whoami")
     assert proc.returncode == 2
     assert "Unknown connector" in proc.stdout
+
+
+def test_create_issue_rejects_oversized_title(conn, with_token):
+    fake = _FakeTransport()
+    res = conn.execute(
+        "create_issue",
+        {"owner": "o", "repo": "r", "title": "t" * 257},
+        confirm=True,
+        transport=fake,
+    )
+    assert not res.ok
+    assert "exceeds" in res.message
+    assert fake.calls == []  # nothing was sent
+
+
+def test_create_issue_accepts_title_at_limit(conn, with_token):
+    fake = _FakeTransport({"number": 1, "html_url": "u", "state": "open"})
+    res = conn.execute(
+        "create_issue",
+        {"owner": "o", "repo": "r", "title": "t" * 256},
+        confirm=True,
+        transport=fake,
+    )
+    assert res.ok and fake.calls != []
+
+
+def test_create_comment_rejects_oversized_body(conn, with_token):
+    fake = _FakeTransport()
+    res = conn.execute(
+        "create_comment",
+        {"owner": "o", "repo": "r", "issue_number": "3", "body": "b" * 65537},
+        confirm=True,
+        transport=fake,
+    )
+    assert not res.ok
+    assert "exceeds" in res.message
+    assert fake.calls == []

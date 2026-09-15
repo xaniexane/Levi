@@ -9,6 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List
 from datetime import datetime, timezone
+import math
 import uuid
 
 from levi.agent.specialists import SpecialistRegistry, Specialist
@@ -42,6 +43,17 @@ class AgentRuntime:
         auto_approve_up_to: RiskLevel = RiskLevel.LOW,
         budget: float = 3.0,
     ):
+        try:
+            budget = float(budget)  # type: ignore[arg-type]
+        except (TypeError, ValueError):
+            raise ValueError(
+                f"AgentRuntime: 'budget' must be a number, got {budget!r}"
+            ) from None
+        if not math.isfinite(budget) or budget < 0:
+            raise ValueError(
+                f"AgentRuntime: 'budget' must be a finite value >= 0, "
+                f"got {budget!r}"
+            )
         self.specialists = SpecialistRegistry()
         self.skills = SkillRegistry()
         self.policy = PolicyEngine(auto_approve_up_to=auto_approve_up_to)
@@ -53,6 +65,20 @@ class AgentRuntime:
         )
 
     def run(self, intent: str, max_steps: int = 4) -> AgentRun:
+        if not isinstance(intent, str) or not intent.strip():
+            raise ValueError(
+                f"AgentRuntime.run: 'intent' must be a non-empty string, "
+                f"got {intent!r}"
+            )
+        if (
+            not isinstance(max_steps, int)
+            or isinstance(max_steps, bool)
+            or not 1 <= max_steps <= 100
+        ):
+            raise ValueError(
+                f"AgentRuntime.run: 'max_steps' must be an integer 1..100, "
+                f"got {max_steps!r}"
+            )
         run = AgentRun(id=f"run.{uuid.uuid4().hex[:10]}", intent=intent)
         selected = self.specialists.select_for_intent(intent)
         if not selected:

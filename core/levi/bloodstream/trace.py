@@ -13,10 +13,28 @@ a TurnContext overrides the home directory, e.g. in tests).
 from __future__ import annotations
 
 import json
+import re
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+
+_DAY_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+
+def _validate_day(day: Optional[str]) -> str:
+    """Resolve/validate the day label used as a trace filename component.
+
+    Only strict ``YYYY-MM-DD`` labels are accepted — a day label becomes
+    a filename, so anything else is rejected instead of sanitized.
+    """
+    day = day or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    if not isinstance(day, str) or not _DAY_RE.match(day):
+        raise ValueError(
+            f"invalid trace day {day!r}: expected YYYY-MM-DD (e.g. 2026-09-15)"
+        )
+    return day
 
 
 def new_trace_id() -> str:
@@ -38,11 +56,12 @@ class TraceWriter:
             pass  # write() will report the failure; never raise into the turn
 
     def _path_for(self, day: Optional[str] = None) -> Path:
-        day = day or datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        return self.base_dir / f"{day}.jsonl"
+        return self.base_dir / f"{_validate_day(day)}.jsonl"
 
     def write(self, trace: Dict[str, Any]) -> Optional[Path]:
         """Append one trace record. Returns the file path, or None on failure."""
+        if not isinstance(trace, dict):
+            return None
         record = dict(trace)
         record.setdefault("trace_id", new_trace_id())
         record.setdefault("ts", datetime.now(timezone.utc).isoformat())
@@ -55,15 +74,25 @@ class TraceWriter:
             return None
 
     def read_day(self, day: Optional[str] = None) -> List[Dict[str, Any]]:
-        """Read back one day's traces (for tests / inspection)."""
+        """Read back one day's traces (for tests / inspection).
+
+        Corrupt lines are skipped individually — one bad line never
+        aborts the read of an otherwise healthy day file.
+        """
         path = self._path_for(day)
         out: List[Dict[str, Any]] = []
         try:
             with path.open(encoding="utf-8") as fh:
                 for line in fh:
                     line = line.strip()
-                    if line:
-                        out.append(json.loads(line))
+                    if not line:
+                        continue
+                    try:
+                        record = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue  # corrupt line: skip, keep the rest
+                    if isinstance(record, dict):
+                        out.append(record)
         except OSError:
             pass
         return out

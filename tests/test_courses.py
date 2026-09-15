@@ -101,3 +101,68 @@ def test_course_skills_registered():
     assert "course_systems" in ids
     assert "course_machine_learning" in ids
     assert len([i for i in ids if i.startswith("course_")]) == 11
+
+
+# ---------------------------------------------------------------------------
+# Catalog-load hardening (monkeypatched COURSES_DIR)
+# ---------------------------------------------------------------------------
+
+
+def _load_with(monkeypatch, tmp_path, catalog_content):
+    import levi.skill.course_skills as cs
+
+    courses_dir = tmp_path / "courses"
+    courses_dir.mkdir()
+    if catalog_content is not None:
+        (courses_dir / "catalog.json").write_text(catalog_content)
+    monkeypatch.setattr(cs, "COURSES_DIR", courses_dir)
+    monkeypatch.setattr(cs, "BRIEFS_DIR", courses_dir / "briefs")
+    return cs._load()
+
+
+def test_load_missing_catalog_is_empty(monkeypatch, tmp_path):
+    assert _load_with(monkeypatch, tmp_path, None) == []
+
+
+def test_load_corrupt_catalog_degrades_loudly(monkeypatch, tmp_path, capsys):
+    skills = _load_with(monkeypatch, tmp_path, "{not json")
+    assert skills == []
+    assert "corrupt catalog" in capsys.readouterr().err
+
+
+def test_load_non_object_catalog_degrades(monkeypatch, tmp_path, capsys):
+    skills = _load_with(monkeypatch, tmp_path, '["a list"]')
+    assert skills == []
+    assert "not an object" in capsys.readouterr().err
+
+
+def test_load_skips_bad_subjects_keeps_good(monkeypatch, tmp_path):
+    import json
+
+    catalog = {
+        "subjects": [
+            {"slug": "systems", "name": "Systems", "courses": [{"t": 1}]},
+            {"slug": "../evil", "name": "Evil", "courses": []},  # bad slug
+            {"slug": "noname", "courses": []},  # missing name
+            {"slug": "nocourses", "name": "No Courses"},  # missing courses
+            "not-a-dict",
+            {"slug": "machine-learning", "name": "ML", "courses": []},
+        ]
+    }
+    skills = _load_with(monkeypatch, tmp_path, json.dumps(catalog))
+    ids = {s.id for s in skills}
+    assert ids == {"course_systems", "course_machine_learning"}
+
+
+def test_brief_for_rejects_bad_slug():
+    from levi.skill.course_skills import _brief_for
+
+    assert "Invalid subject slug" in _brief_for("../etc/passwd")
+    assert "Invalid subject slug" in _brief_for("")
+
+
+def test_brief_for_missing_file_is_honest(monkeypatch, tmp_path):
+    import levi.skill.course_skills as cs
+
+    monkeypatch.setattr(cs, "BRIEFS_DIR", tmp_path)
+    assert "No field guide" in cs._brief_for("systems")

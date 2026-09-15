@@ -22,6 +22,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
+import math
 import random
 
 
@@ -284,7 +285,24 @@ def calibrate_wit(
 ) -> WitConfig:
     """
     Decide whether the spectrum layer is on, which styles, and how sharp.
+
+    Raises ValueError on non-string tone/regulation or a non-finite
+    intensity.
     """
+    if not isinstance(user_tone, str) or not isinstance(regulation, str):
+        raise ValueError("calibrate_wit: user_tone and regulation must be strings")
+    try:
+        intensity = float(intensity)
+    except (TypeError, ValueError):
+        raise ValueError(
+            "calibrate_wit: intensity must be a number, got %r" % (intensity,)
+        ) from None
+    if not math.isfinite(intensity) or intensity < 0 or intensity > 1:
+        raise ValueError(
+            "calibrate_wit: intensity must be within 0..1, got %r" % (intensity,)
+        )
+    if force_styles is not None and not isinstance(force_styles, list):
+        raise ValueError("calibrate_wit: force_styles must be a list or None")
     rng = rng or random.Random()
 
     if locked_force:

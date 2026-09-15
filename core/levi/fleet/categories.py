@@ -463,7 +463,12 @@ def list_categories() -> List[AgentCategory]:
 
 def get_category(name: str) -> AgentCategory:
     """Look up one category by name; raises KeyError on unknown."""
-    role, tools, cost_class, prompt, stub = _CATEGORIES[name]
+    try:
+        role, tools, cost_class, prompt, stub = _CATEGORIES[name]
+    except KeyError:
+        raise KeyError(
+            f"unknown fleet category {name!r}; valid categories: {sorted(_CATEGORIES)}"
+        ) from None
     return AgentCategory(
         name=name,
         role=role,
@@ -476,7 +481,12 @@ def get_category(name: str) -> AgentCategory:
 
 def cost_per_call(cost_class: str) -> int:
     """Relative cost units per tool call for a cost class (not dollars)."""
-    return COST_PER_CALL[cost_class]
+    try:
+        return COST_PER_CALL[cost_class]
+    except KeyError:
+        raise KeyError(
+            f"unknown cost class {cost_class!r}; valid classes: {sorted(COST_PER_CALL)}"
+        ) from None
 
 
 def validate() -> List[str]:

@@ -22,6 +22,7 @@ from enum import Enum
 from datetime import datetime, timezone
 import uuid
 import json
+import os
 from pathlib import Path
 
 
@@ -167,11 +168,34 @@ class SoftwareFactory:
             "updated_at": datetime.now(timezone.utc).isoformat(),
             "projects": [p.to_dict() for p in self.projects.values()],
         }
+        # Atomic + owner-only: projects hold the user's raw ideas.
         tmp = index.with_suffix(".tmp")
-        tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-        tmp.replace(index)
+        fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as fh:
+                json.dump(payload, fh, indent=2)
+        except BaseException:
+            try:
+                tmp.unlink()
+            except OSError:
+                pass
+            raise
+        os.replace(tmp, index)
 
     def create(self, name: str, idea: str, risk_ceiling: int = 2) -> FactoryProject:
+        """Create a project. Validates name/idea/risk_ceiling at the boundary."""
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError("project name must be a non-empty string")
+        if not isinstance(idea, str) or not idea.strip():
+            raise ValueError("project idea must be a non-empty string")
+        if (
+            isinstance(risk_ceiling, bool)
+            or not isinstance(risk_ceiling, int)
+            or risk_ceiling < 0
+        ):
+            raise ValueError(
+                "risk_ceiling must be a non-negative integer, got %r" % (risk_ceiling,)
+            )
         pid = f"proj.{uuid.uuid4().hex[:10]}"
         proj = FactoryProject(id=pid, name=name, idea=idea, risk_ceiling=risk_ceiling)
         proj.history.append(
@@ -216,9 +240,16 @@ class SoftwareFactory:
         self, project_id: str, summary: str = "", artifacts: Optional[List[str]] = None
     ) -> FactoryProject:
         """Advance one stage with a result. Circuit-breaks on max iterations."""
-        proj = self.projects[project_id]
+        proj = self.projects.get(project_id)
+        if proj is None:
+            raise KeyError("unknown factory project: %r" % (project_id,))
         if proj.stage in (FactoryStage.COMPLETE, FactoryStage.FAILED):
             raise RuntimeError(f"Project already terminal: {proj.stage.value}")
+        if artifacts is not None and (
+            not isinstance(artifacts, (list, tuple))
+            or any(not isinstance(a, str) for a in artifacts)
+        ):
+            raise ValueError("artifacts must be a list/tuple of str (or None)")
         if proj.iteration >= proj.max_iterations:
             proj.stage = FactoryStage.FAILED
             proj.history.append(
@@ -246,7 +277,7 @@ class SoftwareFactory:
                 if sr.ok:
                     stage_artifacts.extend(sr.artifacts)
                     stage_summary = f"{stage_summary}; sandbox scaffold: {sr.summary}"
-                    proj.metadata["sandbox_path"] = str(sb.work)
+                    proj.metadata["sandbox_path"] = str(sb.root)
                 else:
                     stage_summary = (
                         f"{stage_summary}; scaffold warn: {sr.error or sr.summary}"
@@ -325,7 +356,12 @@ class SoftwareFactory:
         return result
 
     def fail(self, project_id: str, error: str) -> FactoryProject:
-        proj = self.projects[project_id]
+        """Mark a project FAILED with an error note."""
+        proj = self.projects.get(project_id)
+        if proj is None:
+            raise KeyError("unknown factory project: %r" % (project_id,))
+        if not isinstance(error, str) or not error.strip():
+            raise ValueError("error must be a non-empty string")
         proj.history.append(
             StageResult(
                 stage=proj.stage,

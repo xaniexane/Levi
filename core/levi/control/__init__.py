@@ -12,6 +12,7 @@
 Stdlib only. Reuses existing organs; forks none.
 """
 
+from __future__ import annotations
 from levi.control.approvals import (
     ApprovalEngine,
     ApprovalBlocked,

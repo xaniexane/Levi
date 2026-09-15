@@ -45,7 +45,16 @@ def run_cycle(
     dry_run: bool = False,
     store: Any = None,
 ) -> dict[str, Any]:
-    """Run one growth cycle. Returns a full report dict."""
+    """Run one growth cycle. Returns a full report dict.
+
+    Raises ValueError when ``store`` is provided but lacks the
+    memory-store interface (``add``/``update``).
+    """
+    if store is not None and not (hasattr(store, "add") and hasattr(store, "update")):
+        raise ValueError(
+            "run_cycle: store must provide add() and update(), got %s"
+            % type(store).__name__
+        )
     cycle_id = _journal.new_cycle_id()
     state = _journal.load_state()
     watermarks = dict(state.get("watermarks", {}))

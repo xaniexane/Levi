@@ -5,6 +5,7 @@ no randomness: every assertion is deterministic.
 """
 
 import pytest
+import json as _json
 
 from levi.demand import scoring
 from levi.demand.pulse import DemandPulse
@@ -222,3 +223,158 @@ def test_pulse_rejects_basisless_card(tmp_path):
 def test_default_threshold_constant():
     assert DEFAULT_THRESHOLD == 75.0
     assert scoring.DEFAULT_THRESHOLD == 75.0
+
+
+# -- boundary validation (hardening) -----------------------------------------
+
+
+
+def test_coerce_factor_rejects_malformed_input():
+    from levi.demand.scoring import _coerce_factor
+
+    with pytest.raises(ValueError, match="needs 'value' and 'basis'"):
+        _coerce_factor("demand", {"value": 80})  # missing basis
+    with pytest.raises(ValueError, match="needs 'value' and 'basis'"):
+        _coerce_factor("demand", {"basis": "x"})  # missing value
+    with pytest.raises(ValueError, match="must be a FactorScore"):
+        _coerce_factor("demand", 80)
+    with pytest.raises(ValueError, match="must be a FactorScore"):
+        _coerce_factor("demand", "80,basis")
+    with pytest.raises(ValueError, match="exactly \\(value, basis\\)"):
+        _coerce_factor("demand", (80, "basis", "extra"))
+
+
+def test_tier_for_rejects_non_finite():
+    for bad in ("high", None, float("nan"), float("inf"), True):
+        with pytest.raises(ValueError, match="finite number"):
+            tier_for(bad)
+
+
+def test_composite_score_rejects_garbage():
+    card = score_card("id1", "t", _factors())
+    with pytest.raises(ValueError):
+        composite_score(["not", "factors"], card.weights)
+    with pytest.raises(ValueError):
+        composite_score(card.factors, [("demand", 0.3)])
+
+
+def test_score_card_rejects_blank_ids():
+    with pytest.raises(ValueError):
+        score_card("", "title", _factors())
+    with pytest.raises(ValueError):
+        score_card("id1", "  ", _factors())
+
+
+def test_rank_cards_rejects_garbage():
+    with pytest.raises(ValueError):
+        rank_cards("not a list")
+    with pytest.raises(ValueError):
+        rank_cards([{"composite": 1}])
+
+
+# -- DemandPulse boundaries ---------------------------------------------------
+
+def test_pulse_scan_seed_rejects_empty(tmp_path):
+    pulse = DemandPulse(path=tmp_path / "dp.json")
+    for bad in ("", "   ", None, 123):
+        with pytest.raises(ValueError):
+            pulse.scan_seed(bad)
+
+
+def test_pulse_score_opportunity_rejects_garbage(tmp_path):
+    pulse = DemandPulse(path=tmp_path / "dp.json")
+    with pytest.raises(ValueError):
+        pulse.score_opportunity("", "title")
+    with pytest.raises(ValueError):
+        pulse.score_opportunity("d1", "")
+    with pytest.raises(ValueError, match="must be a number"):
+        pulse.score_opportunity("d1", "t", demand_score="high")
+    with pytest.raises(ValueError, match="must be a number"):
+        pulse.score_opportunity("d1", "t", serviceability=float("nan"))
+    # out-of-range numerics are REJECTED, never silently clamped
+    with pytest.raises(ValueError, match="must be in \\[0, 1\\]"):
+        pulse.score_opportunity("d1", "t", demand_score=5.0)
+    with pytest.raises(ValueError, match="must be in \\[0, 1\\]"):
+        pulse.score_opportunity("d1", "t", startup_cost=-2.0)
+    opp = pulse.score_opportunity("d1", "t")
+    assert opp.demand_score == 0.5 and opp.startup_cost == 0.3
+
+
+def test_pulse_top_n_rejects_garbage(tmp_path):
+    pulse = DemandPulse(path=tmp_path / "dp.json")
+    for bad in (0, -1, "5", 2.5, True):
+        with pytest.raises(ValueError):
+            pulse.top_opportunities(bad)
+        with pytest.raises(ValueError):
+            pulse.top_score_cards(bad)
+
+
+def test_pulse_corrupt_file_warns_and_starts_empty(tmp_path):
+    path = tmp_path / "dp.json"
+    path.write_text("{corrupt", encoding="utf-8")
+    with pytest.warns(UserWarning, match="unreadable"):
+        pulse = DemandPulse(path=path)
+    assert pulse.signals == [] and pulse.opportunities == []
+
+
+def test_pulse_skips_corrupt_entries_not_whole_file(tmp_path):
+    path = tmp_path / "dp.json"
+    good_signal = {
+        "id": "s1", "need": "need x", "segment": "general", "evidence": "",
+        "confidence": 0.4, "kind": "HYPOTHESIS",
+        "created_at": "2026-01-01T00:00:00",
+    }
+    bad_signal = {"id": "", "need": "", "confidence": "high"}
+    path.write_text(
+        _json.dumps({"signals": [good_signal, bad_signal], "opportunities": []})
+    )
+    pulse = DemandPulse(path=path)
+    assert [s.id for s in pulse.signals] == ["s1"]
+
+
+def test_pulse_score_five_factor_rejects_blank_ids(tmp_path):
+    pulse = DemandPulse(path=tmp_path / "dp.json")
+    with pytest.raises(ValueError):
+        pulse.score_five_factor("", "t", _factors())
+    with pytest.raises(ValueError):
+        pulse.score_five_factor("d1", "", _factors())
+
+
+# -- hardened input contracts ------------------------------------------------
+
+def test_validate_factors_requires_mapping():
+    for bad in (None, 42, "demand", [("demand", (80, "x"))], {"demand"}):
+        with pytest.raises(ValueError, match="must be a mapping"):
+            validate_factors(bad)
+
+
+def test_validate_weights_requires_mapping():
+    for bad in (42, "0.3", [("demand", 0.3)], {("demand", 0.3)}):
+        with pytest.raises(ValueError, match="must be a mapping"):
+            validate_weights(bad)
+    assert validate_weights(None) == dict(DEFAULT_WEIGHTS)
+
+
+def test_composite_score_rejects_wrong_factor_set():
+    good = [FactorScore(name, v, "basis note long enough") for name, v in
+            (("demand", 80), ("market_size", 70), ("competition_gap", 60),
+             ("trend_velocity", 50), ("entry_feasibility", 40))]
+    w = validate_weights(None)
+    with pytest.raises(ValueError, match="exactly"):
+        composite_score(good[:4], w)  # missing one factor
+    with pytest.raises(ValueError, match="exactly"):
+        composite_score(good + [good[0]], w)  # duplicate
+    with pytest.raises(ValueError, match="weights must cover exactly"):
+        composite_score(good, {"demand": 1.0})  # missing weights -> no KeyError
+    assert composite_score(good, w) == pytest.approx(65.0, abs=0.01)
+
+
+def test_parse_weights_type_and_conversion_diagnostics():
+    with pytest.raises(ValueError, match="must be a string"):
+        parse_weights(None)
+    with pytest.raises(ValueError, match="must be a string"):
+        parse_weights(0.3)
+    with pytest.raises(ValueError, match="needs 5 comma-separated"):
+        parse_weights("0.3,0.25")
+    with pytest.raises(ValueError, match="non-numeric"):
+        parse_weights("0.3,0.25,0.2,0.15,abc")

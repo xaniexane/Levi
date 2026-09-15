@@ -52,6 +52,8 @@ _WS = re.compile(r"\s+")
 
 
 def _clean(text: str, limit: int = 1200) -> str:
+    if not isinstance(limit, int) or limit < 1:
+        raise ValueError("_clean: limit must be a positive int, got %r" % (limit,))
     text = _WS.sub(" ", (text or "").strip())
     return text[:limit]
 
@@ -81,8 +83,13 @@ def harvest_sessions(
 
     ``since`` maps session name -> ISO timestamp watermark; only records
     with ``ts`` strictly greater than the watermark are harvested.
+    Files whose (mtime, size) fingerprint is unchanged since the last
+    cycle are skipped entirely (``__stat__:<name>`` watermarks) so
+    repeat cycles don't rescan gigabytes of session JSONL.
     Returns ``(experiences, new_watermarks)``.
     """
+    if since is not None and not isinstance(since, dict):
+        raise ValueError("harvest_sessions: since must be a dict or None")
     if sessions_dir is None:
         try:
             from levi.agent.chat import sessions_dir as _sd
@@ -99,6 +106,17 @@ def harvest_sessions(
     for path in sorted(sessions_dir.glob("*.jsonl")):
         name = path.stem
         mark = since.get(name, "")
+        stat_key = f"__stat__:{name}"
+        try:
+            st = path.stat()
+            sig = f"{st.st_mtime_ns}:{st.st_size}"
+        except OSError:
+            continue  # unreadable; harvesting is best-effort
+        if since.get(stat_key) == sig:
+            # Untouched since the last cycle: nothing new to harvest.
+            watermarks[name] = mark
+            watermarks[stat_key] = sig
+            continue
         latest = mark
         n = 0
         for rec in _session_records(path):
@@ -162,6 +180,7 @@ def harvest_sessions(
                     )
                 )
         watermarks[name] = latest
+        watermarks[stat_key] = sig
     return experiences, watermarks
 
 
@@ -178,9 +197,16 @@ def harvest_automations(auto_path: Path | None = None) -> list[Experience]:
         raw = json.loads(auto_path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return []
+    if not isinstance(raw, dict) or not isinstance(raw.get("automations"), list):
+        return []  # malformed source; harvesting is best-effort
     out: list[Experience] = []
-    for a in raw.get("automations", []):
-        runs = int(a.get("run_count", 0) or 0)
+    for a in raw["automations"]:
+        if not isinstance(a, dict):
+            continue
+        try:
+            runs = int(a.get("run_count", 0) or 0)
+        except (TypeError, ValueError):
+            continue
         if runs <= 0:
             continue
         name = a.get("name", a.get("id", "?"))
@@ -224,10 +250,22 @@ def harvest_affect_signals(
         base = Path(os.environ.get("LEVI_HOME", Path.home() / ".levi"))
         signals_path = base / "affect" / "signals.jsonl"
     since = since or {}
+    if not isinstance(since, dict):
+        raise ValueError("harvest_affect_signals: since must be a dict or None")
     mark = since.get("affect", "")
+    stat_key = "__stat__:affect"
     experiences: list[Experience] = []
     latest = mark
+    sig = ""
     if signals_path.is_file():
+        try:
+            st = signals_path.stat()
+            sig = f"{st.st_mtime_ns}:{st.st_size}"
+        except OSError:
+            sig = ""
+        if sig and since.get(stat_key) == sig:
+            # Untouched since the last cycle: nothing new to harvest.
+            return [], ({"affect": mark, stat_key: sig} if mark else {stat_key: sig})
         try:
             lines = signals_path.read_text(encoding="utf-8").splitlines()
         except OSError:
@@ -240,6 +278,8 @@ def harvest_affect_signals(
             try:
                 rec = json.loads(line)
             except ValueError:
+                continue
+            if not isinstance(rec, dict):
                 continue
             ts = str(rec.get("ts", "") or "")
             if ts > latest:
@@ -261,7 +301,10 @@ def harvest_affect_signals(
                     meta={"dimensions": rec.get("dimensions", {})},
                 )
             )
-    return experiences, ({"affect": latest} if latest else {})
+    marks = {"affect": latest} if latest else {}
+    if sig:
+        marks[stat_key] = sig
+    return experiences, marks
 
 
 def harvest_new(
@@ -278,6 +321,8 @@ def harvest_new(
     Returns ``(experiences, watermarks)`` where watermarks should be
     persisted by the caller (see :mod:`levi.growth.cycle`).
     """
+    if since is not None and not isinstance(since, dict):
+        raise ValueError("harvest_new: since must be a dict or None")
     experiences, watermarks = harvest_sessions(since=since)
     experiences.extend(harvest_automations())
     aff, aff_marks = harvest_affect_signals(since=since)

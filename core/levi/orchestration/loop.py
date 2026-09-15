@@ -126,6 +126,10 @@ class Orchestrator:
         self.nervous.unlock()
 
     def turn(self, user_text: str) -> TurnResult:
+        if not isinstance(user_text, str) or not user_text.strip():
+            raise ValueError(
+                f"turn: 'user_text' must be a non-empty string, got {user_text!r}"
+            )
         # UNDERSTAND — structured intent sketch; never allowed to break the turn
         try:
             intent_map = build_intent_map(user_text).to_dict()

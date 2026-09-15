@@ -175,3 +175,47 @@ def test_broken_source_does_not_crash(home):
     result = run_heartbeat(home=home, now=_at(15, 14), force=True)
     assert result.silent is False
     assert any("heartbeat check" in item for item in result.attention)
+
+
+# ---------------------------------------------------------------------------
+# Interval validation hardening
+# ---------------------------------------------------------------------------
+
+
+def test_resolve_interval_rejects_bad_explicit_values():
+    from levi.daemon.heartbeat import _resolve_interval
+
+    assert _resolve_interval(30) == 30
+    assert _resolve_interval(None) == 30  # default when env unset
+    for bad in (0, -5, 1.5, True, "30", float("nan")):
+        with pytest.raises(ValueError, match="integer >= 1"):
+            _resolve_interval(bad)
+
+
+def test_resolve_interval_env_degrades_to_default(monkeypatch):
+    from levi.daemon.heartbeat import _resolve_interval, ENV_INTERVAL
+
+    monkeypatch.setenv(ENV_INTERVAL, "not-a-number")
+    assert _resolve_interval() == 30
+    monkeypatch.setenv(ENV_INTERVAL, "-10")
+    assert _resolve_interval() == 30
+    monkeypatch.setenv(ENV_INTERVAL, "0")
+    assert _resolve_interval() == 30
+    monkeypatch.setenv(ENV_INTERVAL, "45")
+    assert _resolve_interval() == 45
+
+
+def test_study_interval_hours_rejects_bad_env(monkeypatch):
+    from levi.daemon.heartbeat import (
+        _study_interval_hours,
+        STUDY_ENV_INTERVAL,
+        STUDY_DEFAULT_INTERVAL_HOURS,
+    )
+
+    for bad in ("garbage", "nan", "inf", "-2", "0"):
+        monkeypatch.setenv(STUDY_ENV_INTERVAL, bad)
+        assert _study_interval_hours() == float(STUDY_DEFAULT_INTERVAL_HOURS)
+    monkeypatch.setenv(STUDY_ENV_INTERVAL, "6")
+    assert _study_interval_hours() == 6.0
+    monkeypatch.delenv(STUDY_ENV_INTERVAL, raising=False)
+    assert _study_interval_hours() == float(STUDY_DEFAULT_INTERVAL_HOURS)

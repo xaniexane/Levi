@@ -170,7 +170,17 @@ class NLIRCompiler:
         "on startup",
     )
 
+    def _require_text(self, text: str, what: str) -> str:
+        """Natural-language input must be a non-empty string."""
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError(
+                f"NLIRCompiler.{what}: 'text' must be a non-empty string, "
+                f"got {text!r}"
+            )
+        return text
+
     def classify(self, text: str) -> IRKind:
+        text = self._require_text(text, "classify")
         t = text.lower().strip()
         auto_score = sum(1 for h in self.AUTO_HINTS if h in t)
         build_score = sum(1 for h in self.BUILD_HINTS if h in t)
@@ -183,6 +193,7 @@ class NLIRCompiler:
         return IRKind.UNKNOWN
 
     def compile(self, text: str) -> BuildIR | AutomateIR:
+        text = self._require_text(text, "compile")
         kind = self.classify(text)
         if kind == IRKind.AUTOMATE:
             return self.compile_automate(text)
@@ -192,6 +203,7 @@ class NLIRCompiler:
         return self.compile_build(text)
 
     def compile_build(self, text: str) -> BuildIR:
+        text = self._require_text(text, "compile_build")
         t = text.lower()
         notes: List[str] = []
         features: List[str] = []
@@ -283,6 +295,7 @@ class NLIRCompiler:
         )
 
     def compile_automate(self, text: str) -> AutomateIR:
+        text = self._require_text(text, "compile_automate")
         t = text.lower()
         trigger = "manual"
         schedule = None

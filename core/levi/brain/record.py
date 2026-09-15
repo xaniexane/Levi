@@ -11,6 +11,13 @@ from levi.brain.table import BrainTable
 
 
 def export_markdown(out_path: Optional[Path] = None) -> Path:
+    """Export corpus + brain table to markdown. Raises ValueError on a
+    non-path ``out_path``."""
+    if out_path is not None and not isinstance(out_path, (str, Path)):
+        raise ValueError(
+            "export_markdown: out_path must be a path or None, got %s"
+            % type(out_path).__name__
+        )
     out = (
         Path(out_path)
         if out_path

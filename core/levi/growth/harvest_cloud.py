@@ -88,6 +88,8 @@ def harvest_cloud_sessions(
     """
     if not cloud_learn_enabled():
         return [], {}
+    if since is not None and not isinstance(since, dict):
+        raise ValueError("harvest_cloud_sessions: since must be a dict or None")
     sessions_dir = _sessions_dir()
     if not sessions_dir or not sessions_dir.is_dir():
         return [], {}
@@ -111,7 +113,18 @@ def harvest_cloud_sessions(
         key_name = str(key_rec.get("name", "?"))
 
         mark_key = "cloud:" + stem
+        stat_key = f"__stat__:{mark_key}"
         mark = since.get(mark_key, "")
+        try:
+            st = path.stat()
+            sig = f"{st.st_mtime_ns}:{st.st_size}"
+        except OSError:
+            continue
+        if since.get(stat_key) == sig:
+            # Untouched since the last cycle: nothing new to harvest.
+            watermarks[mark_key] = mark
+            watermarks[stat_key] = sig
+            continue
         latest = mark
         n = 0
         provider = "?"  # from the most recent turn-meta record
@@ -155,4 +168,5 @@ def harvest_cloud_sessions(
                     )
                 )
         watermarks[mark_key] = latest
+        watermarks[stat_key] = sig
     return experiences, watermarks

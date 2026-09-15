@@ -8,9 +8,10 @@ blueprint §3 and the King precedent):
     else fall back" logic lives. It owns the provider chain:
     Ollama (if up) → deterministic offline companion synthesizer.
   * This module adds: a persisted RelayConfig (~/.levi/model_relay.json),
-    an Ollama probe, and a self-test/status surface used by the CLI
-    (`levi relay`) and ops/health callers. generate() delegates to the
-    router — it does not reimplement the chain.
+    a probe for the local model-runner reference (Ollama protocol), and a
+    self-test/status surface used by the CLI (`levi relay`) and ops/health
+    callers. generate() delegates to the router — it does not reimplement
+    the chain.
 
 Note: RelayConfig.cloud_endpoints is a declared-but-unwired contract
 (config-ready slots; keys via env, never hardcoded). The chain today is
@@ -45,23 +46,56 @@ class RelayConfig:
         return asdict(self)
 
     @classmethod
+    def _clean_endpoints(cls, raw: Any) -> List[Dict[str, str]]:
+        """Filter a persisted endpoint list down to well-formed entries.
+
+        Config files are user-editable, so malformed entries degrade to
+        "dropped" rather than raising — the relay still starts.
+        """
+        if not isinstance(raw, list):
+            return []
+        cleaned: List[Dict[str, str]] = []
+        for entry in raw:
+            if not isinstance(entry, dict):
+                continue
+            url = entry.get("url", "")
+            if not isinstance(url, str) or not url.strip():
+                continue
+            cleaned.append(
+                {
+                    k: str(v)
+                    for k, v in entry.items()
+                    if isinstance(k, str) and isinstance(v, (str, int, float, bool))
+                }
+            )
+        return cleaned
+
+    @classmethod
     def load(cls, path: Optional[Path] = None) -> "RelayConfig":
-        p = Path(path) if path else DEFAULT
+        p = Path(path).expanduser() if path else DEFAULT
         if not p.exists():
             return cls()
         try:
             d = json.loads(p.read_text(encoding="utf-8"))
+            if not isinstance(d, dict):
+                return cls()
             return cls(
                 prefer_local=bool(d.get("prefer_local", True)),
-                cloud_endpoints=list(d.get("cloud_endpoints") or []),
+                cloud_endpoints=cls._clean_endpoints(d.get("cloud_endpoints")),
             )
-        except Exception:
+        except (OSError, ValueError):
             return cls()
 
     def save(self, path: Optional[Path] = None) -> None:
-        p = Path(path) if path else DEFAULT
+        p = Path(path).expanduser() if path else DEFAULT
         p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(json.dumps(self.to_dict(), indent=2), encoding="utf-8")
+        tmp = p.with_suffix(".tmp")
+        tmp.write_text(json.dumps(self.to_dict(), indent=2), encoding="utf-8")
+        try:
+            tmp.chmod(0o600)
+        except OSError:
+            pass
+        tmp.replace(p)
 
 
 class ModelRelay:
@@ -72,6 +106,10 @@ class ModelRelay:
         self.router = ModelRouter()
 
     def generate(self, prompt: str, system: Optional[str] = None) -> GenerationResult:
+        if not isinstance(prompt, str) or not prompt.strip():
+            raise ValueError("relay prompt must be a non-empty string")
+        if system is not None and not isinstance(system, str):
+            raise ValueError("relay system must be a string or None")
         req = GenerationRequest(prompt=prompt, system=system)
         return self.router.generate(req)
 
@@ -83,8 +121,15 @@ class ModelRelay:
                 "http://127.0.0.1:11434/api/tags", timeout=2
             ) as r:
                 data = json.loads(r.read().decode())
-                models = [m.get("name", "") for m in (data.get("models") or [])]
-                return {"up": True, "models": models[:12]}
+                entries = (
+                    data.get("models") if isinstance(data, dict) else None
+                ) or []
+                models = [
+                    m.get("name", "")
+                    for m in entries
+                    if isinstance(m, dict)
+                ]
+                return {"up": True, "models": [m for m in models if m][:12]}
         except Exception as e:
             return {"up": False, "error": str(e)[:120], "models": []}
 
@@ -92,10 +137,14 @@ class ModelRelay:
         lines = ["=== Model Relay TEST ===", ""]
         ol = self.probe_ollama()
         if ol.get("up"):
-            lines.append("Ollama: UP  models=%s" % (ol.get("models") or ["(none)"]))
+            lines.append(
+                "Local model-runner (Ollama reference): UP  models=%s"
+                % (ol.get("models") or ["(none)"])
+            )
         else:
             lines.append(
-                "Ollama: down (%s) — OK; offline path required" % ol.get("error", "n/a")
+                "Local model-runner (Ollama reference): down (%s) — OK; offline path required"
+                % ol.get("error", "n/a")
             )
         try:
             res = self.generate("relay test ping", system="Reply with one short line.")

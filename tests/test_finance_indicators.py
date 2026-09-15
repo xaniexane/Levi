@@ -34,6 +34,8 @@ from levi.finance.indicators import (  # noqa: E402
 )
 from levi.finance.market import Bar  # noqa: E402
 
+import pytest  # noqa: E402
+
 _TESTS = []
 
 
@@ -463,3 +465,55 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+# -- boundary validation (hardening) -----------------------------------------
+
+
+def _hbars(n=20):
+    return [
+        Bar(
+            date=f"2026-09-{d:02d}",
+            open=100, high=110, low=95, close=105, volume=1000,
+        )
+        for d in range(1, n + 1)
+    ]
+
+
+@pytest.mark.parametrize(
+    "fn",
+    [atr, stochastic, obv, adx, vwap, classify_regime],
+)
+def test_bar_functions_reject_non_containers(fn):
+    for bad in (None, 42, "bars", {"bars": []}, b"bars"):
+        with pytest.raises(ValueError, match="expects a list/tuple"):
+            fn(bad)
+
+
+@pytest.mark.parametrize(
+    "fn",
+    [atr, stochastic, obv, adx, vwap, classify_regime],
+)
+def test_bar_functions_reject_non_bar_rows(fn):
+    bad = _hbars(20)
+    bad[3] = {"not": "a bar"}
+    with pytest.raises(ValueError, match="expects Bar rows"):
+        fn(bad)
+
+
+def test_bollinger_rejects_bad_mult():
+    values = [100.0] * 25
+    for bad in (float("nan"), float("inf"), -1.0, "2", None, True):
+        with pytest.raises(ValueError, match="mult"):
+            bollinger(values, 20, bad)
+    out = bollinger(values, 20, 0.0)
+    assert out["upper"] == out["middle"] == out["lower"]
+
+
+def test_bar_functions_reject_bad_periods():
+    bars = _hbars(30)
+    for bad in (0, -1, "14", 1.5, True, None):
+        with pytest.raises(ValueError, match="period"):
+            atr(bars, bad)
+        with pytest.raises(ValueError, match="period"):
+            classify_regime(bars, adx_period=bad)

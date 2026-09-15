@@ -39,8 +39,12 @@ _PREFIX_LEN = 12  # public, log-safe: "levi_sk_" + 4 chars
 _NAME_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}\Z")
 
 
-class KeyError(Exception):
-    """An API-key operation failed (bad name, duplicate, unknown key)."""
+class KeyError(ValueError):
+    """An API-key operation failed (bad name, duplicate, unknown key).
+
+    Subclasses ValueError so identifier validation is catchable as such;
+    existing ``except apikeys.KeyError`` handlers keep working unchanged.
+    """
 
 
 def cloud_dir() -> Path:
@@ -64,10 +68,23 @@ def _utcnow() -> str:
 
 
 def _validate_name(name: str) -> str:
-    name = (name or "").strip()
+    if not isinstance(name, str):
+        raise KeyError("key name must be a string, got %s" % type(name).__name__)
+    name = name.strip()
     if not _NAME_RE.match(name):
         raise KeyError("invalid key name %r: use 1-64 chars of [A-Za-z0-9_-]" % (name,))
     return name
+
+
+def _validate_ident(name_or_prefix: str) -> str:
+    if not isinstance(name_or_prefix, str):
+        raise KeyError(
+            "key identifier must be a string, got %s" % type(name_or_prefix).__name__
+        )
+    ident = name_or_prefix.strip()
+    if not ident:
+        raise KeyError("a key name or prefix is required")
+    return ident
 
 
 def _load() -> list[dict]:
@@ -134,9 +151,7 @@ def create_key(name: str, *, learn: bool = True) -> tuple[str, dict]:
 
 def set_learn(name_or_prefix: str, learn: bool) -> dict:
     """Toggle growth-learning consent for a key. Returns metadata."""
-    ident = (name_or_prefix or "").strip()
-    if not ident:
-        raise KeyError("a key name or prefix is required")
+    ident = _validate_ident(name_or_prefix)
     records = _load()
     for r in records:
         if r.get("revoked"):
@@ -158,9 +173,7 @@ def list_keys(*, include_revoked: bool = True) -> list[dict]:
 
 def revoke_key(name_or_prefix: str) -> dict:
     """Revoke by name or by key prefix. Returns the revoked metadata."""
-    ident = (name_or_prefix or "").strip()
-    if not ident:
-        raise KeyError("a key name or prefix is required")
+    ident = _validate_ident(name_or_prefix)
     records = _load()
     for r in records:
         if r.get("revoked"):
@@ -177,7 +190,7 @@ def find_key(raw: str) -> dict | None:
     """Return the active key record for a presented bearer value, or
     None. Comparison is constant-time over stored digests; the raw
     value is never persisted or logged."""
-    if not raw or not raw.startswith(KEY_SCHEME):
+    if not isinstance(raw, str) or not raw or not raw.startswith(KEY_SCHEME):
         return None
     candidate = _digest(raw)
     for r in _load():

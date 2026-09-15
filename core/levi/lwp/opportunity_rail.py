@@ -71,6 +71,41 @@ class RailCar:
         return asdict(self)
 
 
+_VALID_GATES = {g.value for g in Gate}
+_CAR_STR_FIELDS = (
+    "title",
+    "signal_text",
+    "mirror_fingerprint",
+    "plan_id",
+    "demand_signal_id",
+    "status",
+    "created_at",
+)
+_CAR_LIST_FIELDS = ("hitl_ids", "checklist", "log")
+
+
+def _validated_car(d: Any) -> Optional[RailCar]:
+    """Build a RailCar from untrusted persisted data, or None when malformed."""
+    if not isinstance(d, dict):
+        return None
+    data = {k: v for k, v in d.items() if k in RailCar.__dataclass_fields__}
+    if not isinstance(data.get("id"), str) or not data["id"]:
+        return None
+    gate = data.get("gate", Gate.SIGNAL.value)
+    if gate not in _VALID_GATES:
+        return None
+    for key in _CAR_STR_FIELDS:
+        if key in data and not isinstance(data[key], str):
+            return None
+    for key in _CAR_LIST_FIELDS:
+        if key in data and not isinstance(data[key], list):
+            return None
+    try:
+        return RailCar(**data)
+    except TypeError:
+        return None
+
+
 class OpportunityRail:
     def __init__(self, path: Optional[Path] = None):
         self.path = Path(path) if path else DEFAULT
@@ -82,13 +117,18 @@ class OpportunityRail:
             return
         try:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
-            for d in raw.get("cars") or []:
-                c = RailCar(
-                    **{k: v for k, v in d.items() if k in RailCar.__dataclass_fields__}
-                )
-                self.cars[c.id] = c
-        except Exception:
-            pass
+        except (OSError, ValueError):
+            return
+        if not isinstance(raw, dict):
+            return
+        cars = raw.get("cars") or []
+        if not isinstance(cars, list):
+            return
+        for d in cars:
+            car = _validated_car(d)
+            if car is not None:
+                self.cars[car.id] = car
+            # malformed cars are skipped individually; the rest load
 
     def _persist(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -97,14 +137,25 @@ class OpportunityRail:
             "updated_at": datetime.now(timezone.utc).isoformat(),
         }
         tmp = self.path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-        tmp.replace(self.path)
+        try:
+            tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+            tmp.replace(self.path)
+        except OSError as exc:
+            raise OSError(
+                f"opportunity rail persist failed at {self.path}: {exc}"
+            ) from exc
 
     def _log(self, car: RailCar, msg: str) -> None:
         car.log.append(f"{datetime.now(timezone.utc).isoformat()[:19]}Z {msg}")
         car.log = car.log[-40:]
 
     def start(self, signal_text: str, title: str = "") -> RailCar:
+        if not isinstance(signal_text, str) or not signal_text.strip():
+            raise ValueError(
+                f"rail start needs a non-empty signal_text string, got {signal_text!r}"
+            )
+        if not isinstance(title, str):
+            raise ValueError(f"rail title must be a string, got {title!r}")
         car = RailCar(
             id=str(uuid.uuid4())[:8],
             title=title or signal_text[:60],
@@ -127,10 +178,15 @@ class OpportunityRail:
         return car
 
     def advance(self, car_id: str, hitl_approved: bool = False) -> str:
+        if not isinstance(car_id, str) or not car_id:
+            return f"Unknown car {car_id!r}"
         car = self.cars.get(car_id)
         if not car:
             return f"Unknown car {car_id}"
-        gate = Gate(car.gate)
+        try:
+            gate = Gate(car.gate)
+        except ValueError:
+            return f"Car {car.id} has an unrecognized gate {car.gate!r} — BLOCKED"
 
         if gate == Gate.MIRROR:
             from levi.lwp.mirror_cascade import MirrorCascade

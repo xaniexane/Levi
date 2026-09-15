@@ -322,3 +322,89 @@ def test_mcp_http_bearer_token():
         assert status == 200 and body["result"] == {}
     finally:
         httpd.shutdown()
+
+
+# ---------------------------------------------------------------------------
+# Transport hardening: body bounds, Content-Length validation, batch cap
+# ---------------------------------------------------------------------------
+
+
+def _raw_post(port, raw_body: bytes, content_length: str | None):
+    """POST /mcp with a hand-set Content-Length header."""
+    import http.client
+
+    conn = http.client.HTTPConnection("127.0.0.1", port, timeout=10)
+    headers = {"Content-Type": "application/json"}
+    if content_length is not None:
+        headers["Content-Length"] = content_length
+        body = raw_body
+    else:
+        body = None  # no Content-Length header at all
+    conn.request("POST", "/mcp", body=body, headers=headers)
+    resp = conn.getresponse()
+    body = resp.read()
+    conn.close()
+    try:
+        return resp.status, json.loads(body)
+    except ValueError:
+        return resp.status, None
+
+
+def test_mcp_http_rejects_garbage_content_length():
+    from levi.mcp.transports import _MAX_JSON_BODY  # noqa: F401
+
+    httpd, port = _serve_in_thread(build_http_server())
+    try:
+        status, body = _raw_post(port, b"{}", "not-a-number")
+        assert status == 400
+        assert "Content-Length" in body["error"]
+    finally:
+        httpd.shutdown()
+
+
+def test_mcp_http_rejects_negative_content_length():
+    httpd, port = _serve_in_thread(build_http_server())
+    try:
+        status, body = _raw_post(port, b"{}", "-5")
+        assert status == 400
+        assert "Content-Length" in body["error"]
+    finally:
+        httpd.shutdown()
+
+
+def test_mcp_http_rejects_oversized_body():
+    from levi.mcp.transports import _MAX_JSON_BODY
+
+    httpd, port = _serve_in_thread(build_http_server())
+    try:
+        status, body = _raw_post(port, b"{}", str(_MAX_JSON_BODY + 1))
+        assert status == 400
+        assert "too large" in body["error"]
+    finally:
+        httpd.shutdown()
+
+
+def test_mcp_batch_over_limit_is_rejected():
+    from levi.mcp.protocol import _MAX_BATCH_SIZE, build_owner_server
+
+    server = build_owner_server()
+    batch = [
+        {"jsonrpc": "2.0", "id": i, "method": "ping", "params": {}}
+        for i in range(_MAX_BATCH_SIZE + 1)
+    ]
+    resp = server.handle(batch)
+    assert resp["error"]["code"] == -32600
+    assert "batch" in resp["error"]["message"]
+
+
+def test_mcp_batch_within_limit_still_works():
+    from levi.mcp.protocol import build_owner_server
+
+    server = build_owner_server()
+    batch = [
+        {"jsonrpc": "2.0", "id": i, "method": "ping", "params": {}}
+        for i in range(3)
+    ]
+    resp = server.handle(batch)
+    assert isinstance(resp, list) and len(resp) == 3
+    assert all(r["result"] == {} for r in resp)

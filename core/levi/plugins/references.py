@@ -54,12 +54,21 @@ def _refs_file(home: Optional[Path] = None) -> Path:
 # ---------------------------------------------------------------------------
 
 
+_IDENTITY_TOKENS_CACHE: set[str] | None = None
+
+
 def _levi_identity_tokens() -> set[str]:
     """Normalized tokens that are LEVI's own identity — off-limits.
 
     Lazily imports the persona registers so this module never creates an
-    import cycle (persona/ must stay dependency-light).
+    import cycle (persona/ must stay dependency-light). The token set is
+    built once and cached: every provider/reference validation calls
+    this, and rebuilding the persona register each time is pure
+    duplicate work.
     """
+    global _IDENTITY_TOKENS_CACHE
+    if _IDENTITY_TOKENS_CACHE is not None:
+        return _IDENTITY_TOKENS_CACHE
     tokens: set[str] = set()
     try:
         from levi.persona.levi import all_variants
@@ -70,7 +79,8 @@ def _levi_identity_tokens() -> set[str]:
     except Exception:
         pass
     tokens.add("levi")
-    return {t for t in tokens if t}
+    _IDENTITY_TOKENS_CACHE = {t for t in tokens if t}
+    return _IDENTITY_TOKENS_CACHE
 
 
 def assert_not_levi_identity(name: str, *, what: str = "reference") -> str:
