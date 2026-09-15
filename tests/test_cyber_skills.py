@@ -11,7 +11,8 @@ frontmatter block. These tests assert:
   land in the same directory);
 - all 100 batch-1 slugs from tests/fixtures/cyber_batch1_slugs.txt are
   registered, and all 718 batch-2 slugs from
-  tests/fixtures/cyber_batch2_slugs.txt are registered (818 total);
+  tests/fixtures/cyber_batch2_slugs.txt are registered (818 batch total,
+  plus any later playbooks added to the same directory);
 - safety invariants: unique ids, risk within the SkillRisk enum,
   MODERATE skills confirmation-gated, defensive lens (no offensive
   tradecraft markers).
@@ -189,8 +190,9 @@ def test_batch2_slugs_all_registered():
     registered = {s.id for s in _cyber_skills()}
     missing = sorted(want - registered)
     assert not missing, f"batch-2 skills not registered: {missing}"
-    # Full library: every slug from both batches registered, no extras lost.
-    assert len(registered) == 818, f"expected 818 cyber skills, got {len(registered)}"
+    # Full library: every slug from both batches registered, plus any later
+    # defensive playbooks added to the same directory (e.g. phase-derived).
+    assert len(registered) >= 818, f"expected at least 818 cyber skills, got {len(registered)}"
 
 
 @_test
