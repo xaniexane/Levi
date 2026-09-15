@@ -3450,6 +3450,17 @@ def main():
         pass
     # === KING-REGION-END ===
 
+    # === FLEET-REGION-BEGIN: Fleet command registration ===
+    # Parallel tracks: keep ALL fleet wiring inside this delimited region —
+    # do not scatter fleet hunks elsewhere in this file.
+    try:
+        from levi.fleet.cli import register_fleet as _fleet_register
+        _fleet_register(sub)
+    except Exception:
+        # Fleet degrades: the CLI still boots without the workforce layer.
+        pass
+    # === FLEET-REGION-END ===
+
     args = parser.parse_args()
     if not args.command:
         banner()
@@ -3486,6 +3497,13 @@ def main():
     except Exception:
         pass
     # === MCP-REGION-END ===
+    # === FLEET-REGION-BEGIN: Fleet command dispatch ===
+    try:
+        from levi.fleet.cli import cmd_fleet as _cmd_fleet
+        cmds["fleet"] = _cmd_fleet
+    except Exception:
+        pass
+    # === FLEET-REGION-END ===
     # === SOUL-REGION-BEGIN: Soul command dispatch ===
     try:
         from levi.agent.soul import cmd_soul as _cmd_soul
