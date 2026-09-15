@@ -15,19 +15,20 @@ export const Route = createRootRoute({
         name: "description",
         content: "LEVI — companion intelligence. Friend, mentor, challenger, protector.",
       },
-      { name: "theme-color", content: "#0a0a0b" },
+      { name: "theme-color", content: "#0a0a0c" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap",
-      },
       { rel: "manifest", href: "/__grok/manifest.webmanifest" },
       { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
+    ],
+    scripts: [
+      {
+        // Pre-paint theme: reads the same levi-life key the store persists,
+        // so the void/light choice applies before first paint (no flash).
+        children: `(function(){try{var s=localStorage.getItem('levi-life');var t=s&&JSON.parse(s).state&&JSON.parse(s).state.theme;document.documentElement.dataset.theme=(t==='light')?'light':'void';}catch(e){document.documentElement.dataset.theme='void';}})();`,
+      },
     ],
   }),
   component: () => (

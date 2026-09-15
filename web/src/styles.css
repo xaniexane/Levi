@@ -1,21 +1,35 @@
 @import "tailwindcss";
 
+/*
+ * LEVI theme system — dark-first "void" (default) + light.
+ * All color flows through these variables; views reference the Tailwind
+ * tokens (bg-bg, text-fg, bg-elevated, …) so switching is one attribute:
+ * <html data-theme="light">. Persisted via the levi-life store.
+ *
+ * Type: refined system stacks only — no runtime webfont CDN.
+ */
 @theme {
-  --color-bg: #0a0a0b;
-  --color-surface: #121214;
-  --color-elevated: #1a1a1e;
+  /* Void (dark) — the default. Near-black, warm paper text, amber signal. */
+  --color-bg: #0a0a0c;
+  --color-surface: #121215;
+  --color-elevated: #1b1b20;
   --color-fg: #f0eee8;
-  --color-muted: #9a9890;
-  --color-subtle: #6e6c66;
-  --color-accent: #c8ccd4;
-  --color-accent-fg: #0a0a0b;
+  --color-muted: #9b998f;
+  --color-subtle: #6f6d67;
+  --color-accent: #e2a63d;
+  --color-accent-fg: #141005;
   --color-border: color-mix(in oklab, var(--color-fg) 12%, transparent);
-  --color-border-strong: color-mix(in oklab, var(--color-fg) 22%, transparent);
+  --color-border-strong: color-mix(in oklab, var(--color-fg) 24%, transparent);
   --color-danger: #c45c4a;
+  --color-ok: #6fbf73;
+  --color-live: #e2a63d;
 
-  --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
-  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+    "Noto Serif", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans",
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo,
+    Consolas, monospace;
 
   --text-micro: 0.6875rem;
   --tracking-kicker: 0.18em;
@@ -27,6 +41,29 @@
   --radius-xl: 24px;
 
   --shadow-soft: 0 12px 40px color-mix(in oklab, #000 45%, transparent);
+  --shadow-glow: 0 0 24px color-mix(in oklab, var(--color-accent) 28%, transparent);
+}
+
+/* Light theme — same tokens, warm paper. */
+[data-theme="light"] {
+  --color-bg: #faf8f4;
+  --color-surface: #ffffff;
+  --color-elevated: #f1ede6;
+  --color-fg: #1b1a17;
+  --color-muted: #6d6a61;
+  --color-subtle: #a5a198;
+  --color-accent: #b97f1f;
+  --color-accent-fg: #fffaf0;
+  --color-danger: #b04a38;
+  --color-ok: #3f8f44;
+  --color-live: #b97f1f;
+  --shadow-soft: 0 12px 32px color-mix(in oklab, #3a2f1a 14%, transparent);
+  --shadow-glow: 0 0 20px color-mix(in oklab, var(--color-accent) 22%, transparent);
+  color-scheme: light;
+}
+
+:root {
+  color-scheme: dark;
 }
 
 @layer base {
@@ -46,6 +83,12 @@
   body {
     font-family: var(--font-sans);
     line-height: 1.5;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    body {
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
   }
 
   h1,
@@ -75,6 +118,50 @@
 @layer utilities {
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Message entrance — gentle rise, Muse calm. */
+  .animate-msg-in {
+    animation: msg-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Streaming pulse — the lively heartbeat on the active bubble. */
+  .streaming-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Calm typing indicator: three dots, shipboard patience. */
+  .typing-dot {
+    animation: typing-breathe 1.2s ease-in-out infinite;
+  }
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.18s;
+  }
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.36s;
+  }
+}
+
+@keyframes msg-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typing-breathe {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
   }
 }
 

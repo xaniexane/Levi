@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { uid } from "@/lib/utils";
 import type { PersonaId } from "./personas";
+import { DEFAULT_THEME, applyTheme, type Theme } from "./theme";
 import { compileBuild, nextStage, type BuildIR, type Stage } from "./nl-ir";
 import { greeting, scaffoldFromIR } from "./local";
 import { nextStreak } from "./retention";
@@ -101,7 +102,10 @@ type LeviState = {
   setView: (v: View) => void;
   setPersona: (p: PersonaId) => void;
   addMessage: (role: ChatMsg["role"], text: string) => ChatMsg;
+  updateMessage: (id: string, text: string) => void;
   markComposted: (id: string) => void;
+  theme: Theme;
+  setTheme: (t: Theme) => void;
   setPending: (p: LeviState["pending"]) => void;
   addStory: (s: Omit<Story, "id" | "updatedAt" | "modes">) => Story;
   updateStory: (id: string, patch: Partial<Story>) => void;
@@ -140,6 +144,7 @@ const empty = {
   loop: "companion" as Loop,
   view: "home" as View,
   persona: "normal" as PersonaId,
+  theme: DEFAULT_THEME as Theme,
   messages: [] as ChatMsg[],
   stories: [] as Story[],
   activeStoryId: null as string | null,
@@ -196,11 +201,19 @@ export const useLevi = create<LeviState>()(
       updateProfile: (p) => set(p),
       setView: (view) => set({ view }),
       setPersona: (persona) => set({ persona }),
+      setTheme: (theme) => {
+        set({ theme });
+        if (typeof document !== "undefined") applyTheme(theme);
+      },
       addMessage: (role, text) => {
         const msg: ChatMsg = { id: uid("m"), role, text, at: Date.now() };
         set({ messages: [...get().messages, msg].slice(-80) });
         return msg;
       },
+      updateMessage: (id, text) =>
+        set({
+          messages: get().messages.map((m) => (m.id === id ? { ...m, text } : m)),
+        }),
       markComposted: (id) =>
         set({
           messages: get().messages.map((m) => (m.id === id ? { ...m, composted: true } : m)),
