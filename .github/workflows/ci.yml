@@ -104,7 +104,26 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - uses: android-actions/setup-android@v3
+      # android-actions/setup-android@v3 is broken: it unconditionally runs
+      # `sdkmanager tools`, but the obsolete `tools` package no longer exists
+      # in the SDK repository, so the step fails. Install exactly what the
+      # app needs (compileSdk/targetSdk 36) explicitly instead.
+      - name: Install Android SDK (API 36)
+        run: |
+          set -euo pipefail
+          SDK_ROOT="${RUNNER_TEMP}/android-sdk"
+          mkdir -p "${SDK_ROOT}/cmdline-tools"
+          curl -fsSL -o /tmp/cmdtools.zip \
+            https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip
+          unzip -q /tmp/cmdtools.zip -d "${SDK_ROOT}/cmdline-tools"
+          mv "${SDK_ROOT}/cmdline-tools/cmdline-tools" "${SDK_ROOT}/cmdline-tools/latest"
+          export PATH="${SDK_ROOT}/cmdline-tools/latest/bin:${PATH}"
+          yes | sdkmanager --sdk_root="${SDK_ROOT}" --licenses > /dev/null
+          sdkmanager --sdk_root="${SDK_ROOT}" \
+            "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+          echo "ANDROID_HOME=${SDK_ROOT}" >> "${GITHUB_ENV}"
+          echo "ANDROID_SDK_ROOT=${SDK_ROOT}" >> "${GITHUB_ENV}"
+          echo "${SDK_ROOT}/platform-tools" >> "${GITHUB_PATH}"
 
       - name: Assemble debug APK
         run: ./gradlew assembleDebug --no-daemon

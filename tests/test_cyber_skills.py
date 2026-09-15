@@ -9,8 +9,9 @@ frontmatter block. These tests assert:
 - every playbook body has the required sections;
 - registered count == .md file count (not a fixed number: later batches
   land in the same directory);
-- all 100 batch-1 slugs from ~/workspace/cyber_skills_batch1.txt are
-  registered;
+- all 100 batch-1 slugs from tests/fixtures/cyber_batch1_slugs.txt are
+  registered, and all 718 batch-2 slugs from
+  tests/fixtures/cyber_batch2_slugs.txt are registered (818 total);
 - safety invariants: unique ids, risk within the SkillRisk enum,
   MODERATE skills confirmation-gated, defensive lens (no offensive
   tradecraft markers).
@@ -34,7 +35,10 @@ from levi.skill.registry import SkillRegistry, SkillRisk  # noqa: E402
 from levi.skill import cyber_skills  # noqa: E402
 
 PLAYBOOK_DIR = ROOT / "core" / "levi" / "skill" / "playbooks" / "cyber"
-BATCH1_SLUGS = Path("/home/hatch/workspace/cyber_skills_batch1.txt")
+# Batch slug lists live in the repo (tests/fixtures) so the suite is
+# hermetic — it must not depend on files outside the checkout.
+BATCH1_SLUGS = ROOT / "tests" / "fixtures" / "cyber_batch1_slugs.txt"
+BATCH2_SLUGS = ROOT / "tests" / "fixtures" / "cyber_batch2_slugs.txt"
 
 # Required body sections (frontmatter stripped before checking).
 REQUIRED_SECTIONS = [
@@ -89,12 +93,16 @@ def _md_files():
     return sorted(PLAYBOOK_DIR.glob("*.md"))
 
 
-def _batch1_ids():
+def _batch_ids(path):
     return {
         "cyber_" + slug.replace("-", "_")
-        for slug in BATCH1_SLUGS.read_text(encoding="utf-8").split()
+        for slug in Path(path).read_text(encoding="utf-8").split()
         if slug.strip()
     }
+
+
+def _batch1_ids():
+    return _batch_ids(BATCH1_SLUGS)
 
 
 def _cyber_skills():
@@ -172,6 +180,17 @@ def test_batch1_slugs_all_registered():
     registered = {s.id for s in _cyber_skills()}
     missing = sorted(want - registered)
     assert not missing, f"batch-1 skills not registered: {missing}"
+
+
+@_test
+def test_batch2_slugs_all_registered():
+    want = _batch_ids(BATCH2_SLUGS)
+    assert len(want) == 718, f"batch2 list has {len(want)} slugs, expected 718"
+    registered = {s.id for s in _cyber_skills()}
+    missing = sorted(want - registered)
+    assert not missing, f"batch-2 skills not registered: {missing}"
+    # Full library: every slug from both batches registered, no extras lost.
+    assert len(registered) == 818, f"expected 818 cyber skills, got {len(registered)}"
 
 
 @_test
