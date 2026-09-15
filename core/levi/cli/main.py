@@ -1477,6 +1477,78 @@ def cmd_vault(args):
     print("Vault names:", v.list_names())
 
 
+def cmd_courses(args):
+    """Awesome-courses curriculum knowledge base (ingested, extractive).
+
+    Subcommands: `list [--subject SLUG]`, `brief <subject>`, `coverage`.
+    All data comes from core/levi/knowledge/courses/ (catalog.json,
+    briefs/, coverage.json) — counts are computed live, never hand-written.
+    """
+    import json
+    from pathlib import Path
+    base = Path(__file__).resolve().parent.parent / "knowledge" / "courses"
+    catalog_p = base / "catalog.json"
+    if not catalog_p.exists():
+        print("Curriculum not ingested yet.")
+        print("Run: python3 core/levi/knowledge/courses/ingest.py")
+        return
+    catalog = json.loads(catalog_p.read_text(encoding="utf-8"))
+    action = getattr(args, "courses_action", None) or "list"
+
+    if action == "brief":
+        slug = (getattr(args, "subject", None) or "").strip().lower().replace("_", "-")
+        if not slug:
+            print("Usage: levi courses brief <subject>")
+            print("Subjects:", ", ".join(s["slug"] for s in catalog["subjects"]))
+            return
+        brief_p = base / "briefs" / f"{slug}.md"
+        if not brief_p.is_file():
+            print(f"No field guide for {slug!r} yet — run build_briefs.py after ingesting.")
+            return
+        print(brief_p.read_text(encoding="utf-8"))
+        return
+
+    if action == "coverage":
+        cov_p = base / "coverage.json"
+        if not cov_p.exists():
+            print("No coverage.json yet — run ingest.py first.")
+            return
+        records = json.loads(cov_p.read_text(encoding="utf-8"))
+        from collections import Counter
+        total = Counter(r["status"] for r in records)
+        print("══ Curriculum coverage (from coverage.json) ══\n")
+        print(f"  cataloged courses : {len(records)}")
+        for status in ("ok", "dead", "skipped-video", "skipped-binary"):
+            n = total.get(status, 0)
+            print(f"  {status:14s}: {n}")
+        print("\n  by subject:")
+        for subj in catalog["subjects"]:
+            c = Counter(r["status"] for r in records if r["subject"] == subj["slug"])
+            print(f"    {subj['slug']:32s} ok={c.get('ok',0):3d} "
+                  f"dead={c.get('dead',0):3d} video={c.get('skipped-video',0):3d} "
+                  f"bin={c.get('skipped-binary',0):3d}")
+        chars = sum(int((r.get("detail") or "0").split()[0])
+                    for r in records if r["status"] == "ok")
+        print(f"\n  ingested text: ~{chars:,} chars across "
+              f"{sum(1 for r in records if r['status']=='ok')} course pages")
+        return
+
+    # action == "list"
+    filt = (getattr(args, "subject_filter", None) or "").strip().lower().replace("_", "-")
+    for subj in catalog["subjects"]:
+        if filt and subj["slug"] != filt:
+            continue
+        print(f"══ {subj['name']} [{subj['slug']}] — {len(subj['courses'])} courses")
+        if filt:
+            for c in subj["courses"]:
+                print(f"  - {c['title']} ({c['school'] or 'n/a'})")
+                print(f"    {c['primary']}")
+    if not filt:
+        total = sum(len(s["courses"]) for s in catalog["subjects"])
+        print(f"\n{total} courses across {len(catalog['subjects'])} subjects. "
+              f"Use --subject <slug> to expand one.")
+
+
 def cmd_project(args):
     """Pre-MVP service capability-discovery phase runner + HITL + capability log."""
     from levi.project.phases import PhaseRunner
@@ -2342,7 +2414,8 @@ def main():
                         help="Speak as a KAI-9000 SI register (e.g. kai_9000_ops). "
                              "Valid ids: kai_9000, kai_9000_care, kai_9000_ops, kai_9000_challenger, "
                              "kai_9000_literary, kai_9000_forensic, kai_9000_void, kai_9000_builder, "
-                             "kai_9000_mirror, kai_9000_architect, kai_9000_sentinel, kai_9000_oracle.")
+                             "kai_9000_mirror, kai_9000_architect, kai_9000_sentinel, kai_9000_oracle, "
+                             "kai_9000_muse, kai_9000_grok.")
     ag_sub.add_parser("tools", help="List agent tools with descriptions and confirmation flags")
     ag_chat = ag_sub.add_parser("chat", help="Interactive long-conversation chat with session memory")
     ag_chat.add_argument("--session", default="default",

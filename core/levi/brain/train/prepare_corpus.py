@@ -3,7 +3,7 @@
 Reads:
   - core/levi/knowledge/courses/raw/**/*.txt   (ingested course pages)
   - core/levi/knowledge/courses/briefs/*.md   (subject field guides)
-  - levi.persona.kai9000 (12 original SI registers -> identity records)
+  - levi.persona.kai9000 (14 original SI registers -> identity records)
 
 Writes:
   - core/levi/brain/train/corpus.jsonl   (one {"text": ...} record per chunk)

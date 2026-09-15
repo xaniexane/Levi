@@ -4,7 +4,7 @@ Covers the Phase-2 KAI-9000 addition:
 - bad --register id exits 2 and lists the valid ids
 - system_for() content actually reaches the provider as the system message
   (both run_subtask and the chat ConversationManager paths)
-- prepare_corpus emits exactly 12 identity records (LEVI-original registers)
+- prepare_corpus emits exactly 14 identity records (LEVI-original registers)
 """
 import subprocess
 import sys
@@ -43,14 +43,30 @@ def _system_text(messages: list[ChatMessage]) -> str:
     return ""
 
 
-def test_twelve_registers():
-    assert len(all_variants()) == 12
+def test_fourteen_registers():
+    assert len(all_variants()) == 14
     assert set(VALID_IDS) == {
         "kai_9000", "kai_9000_care", "kai_9000_ops", "kai_9000_challenger",
         "kai_9000_literary", "kai_9000_forensic", "kai_9000_void",
         "kai_9000_builder", "kai_9000_mirror", "kai_9000_architect",
         "kai_9000_sentinel", "kai_9000_oracle",
+        "kai_9000_muse", "kai_9000_grok",
     }
+
+
+def test_muse_system_block():
+    text = system_for("kai_9000_muse")
+    assert "KAI-9000 Muse" in text
+    assert "companion register" in text
+    assert get("kai_9000_muse").intensity == 0.45
+
+
+def test_grok_system_block():
+    text = system_for("kai_9000_grok")
+    assert "wit register" in text
+    assert "KAI-9000 Grok" in text
+    assert "Care register" in text
+    assert get("kai_9000_grok").intensity == 0.7
 
 
 def test_get_unknown_returns_none():
@@ -104,19 +120,22 @@ def test_cli_bad_register_lists_valid_ids():
         assert vid in p.stdout
 
 
-def test_prepare_corpus_has_twelve_identity_records(tmp_path):
+def test_prepare_corpus_has_fourteen_identity_records(tmp_path):
     sys.path.insert(0, str(REPO / "core" / "levi" / "brain" / "train"))
     try:
         import prepare_corpus
     finally:
         sys.path.pop(0)
     recs = prepare_corpus.identity_records()
-    assert len(recs) == 12
+    assert len(recs) == 14
+    ids = {r.get("register") for r in recs}
+    assert "kai_9000_muse" in ids
+    assert "kai_9000_grok" in ids
     for rec in recs:
         assert rec["kind"] == "identity"
         for marker in ("Register:", "Voice:", "Strengths:", "Never:", "System:"):
             assert marker in rec["text"], marker
-    # full run on an empty fixture dir still yields exactly the 12
+    # full run on an empty fixture dir still yields exactly the 14
     out = tmp_path / "out"
     old_raw, old_briefs = prepare_corpus.RAW, prepare_corpus.BRIEFS
     prepare_corpus.RAW = tmp_path / "noraw"
@@ -126,5 +145,5 @@ def test_prepare_corpus_has_twelve_identity_records(tmp_path):
     finally:
         prepare_corpus.RAW, prepare_corpus.BRIEFS = old_raw, old_briefs
     stats = __import__("json").loads((out / "corpus_stats.json").read_text())
-    assert stats["identity_records"] == 12
-    assert stats["chunks"] == 12
+    assert stats["identity_records"] == 14
+    assert stats["chunks"] == 14
