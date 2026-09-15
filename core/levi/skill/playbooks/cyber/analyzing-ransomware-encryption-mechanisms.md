@@ -32,8 +32,11 @@ Determine how a ransomware sample encrypts files — algorithm, key management, 
 11. Check for interrupted-encryption states: partially encrypted files and ransom notes in some directories but not others mean the process was killed mid-run — these hosts may hold recoverable originals from interrupted writes.
 12. Test shadow-copy and backup-deletion claims empirically in the lab-cloned environment (`vssadmin list shadows`, backup repository checks) rather than trusting the ransom note.
 13. Record the exact ransom-note filenames and appended extensions — these are high-value fleet-hunt pivots.
-14. Document the full mechanism: algorithm(s), mode, key lifecycle, file markers, targeting rules, and the flaw analysis with evidence.
-15. Hand the assessment to the recovery team with a clear verdict: decryptable (with method), partially recoverable (which file types), or not decryptable — plus the IOCs for containment.
+14. Analyze the ransom note for OPSEC mistakes: contact emails, onion addresses, and wallet addresses are intelligence — record them without engaging.
+15. Check for double-encryption markers: layered extensions and multiple ransom notes indicate two families ran — compounding recovery difficulty.
+16. Test whether newly created files still get encrypted: a live encryptor process changes the priority from "recover" to "isolate first."
+17. Document the full mechanism: algorithm(s), mode, key lifecycle, file markers, targeting rules, and the flaw analysis with evidence.
+18. Hand the assessment to the recovery team with a clear verdict: decryptable (with method), partially recoverable (which file types), or not decryptable — plus the IOCs for containment.
 
 ## Key tools & commands
 
@@ -67,6 +70,11 @@ Determine how a ransomware sample encrypts files — algorithm, key management, 
 - Fake decryptors distributed as malware — only use vetted sources such as No More Ransom.
 - Paying does not guarantee working keys — factor that into the verdict honestly.
 - Testing decryptors on originals instead of copies — a failed run can destroy the only copy.
+- Ransom notes threatening DDoS or harassment — note it, don't engage.
+- Assuming one key per victim — some families use per-file keys with different protection.
+- Re-detonating on the same VM and overwriting canary evidence — snapshot discipline.
+- Forgetting to check for Linux/ESXi variants of the same family in mixed estates.
+- Declaring "not decryptable" without checking No More Ransom first.
 
 See also: analyzing-ransomware-network-indicators.md
 
@@ -75,6 +83,7 @@ See also: analyzing-ransomware-network-indicators.md
 - MITRE ATT&CK T1486 (Data Encrypted for Impact), T1029 (Scheduled Transfer), T1490 (Inhibit System Recovery)
 - CISA #StopRansomware guidance: https://www.cisa.gov/stopransomware
 - No More Ransom — vetted decryptors: https://www.nomoreransom.org
+- FBI FLASH alerts on ransomware variants (public)
 - NIST SP 800-61 Rev. 2, Computer Security Incident Handling Guide
 
 ---

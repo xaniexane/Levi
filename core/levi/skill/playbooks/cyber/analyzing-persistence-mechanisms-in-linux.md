@@ -39,7 +39,10 @@ Systematically enumerate every common Linux persistence location — systemd uni
 15. Check cron alternatives: `at` jobs (`atq`), `anacron` (`/etc/anacrontab`), and batch queues — attackers use the scheduler you forgot.
 16. Review `/etc/security/access.conf` and MOTD scripts: modified access controls or login scripts can hide or enable access.
 17. Inspect shared-object hijacking beyond `ld.so.preload`: writable directories in `/etc/ld.so.conf.d/` and `LD_LIBRARY_PATH` in service unit environments.
-18. For each finding, record: location, content, file timestamps, owning package (or "not owned by any package"), and hash. Remove only after evidence preservation, and re-verify after reboot that nothing returns.
+18. Check `/etc/cron.allow` and `/etc/cron.deny`: restrictive files that vanished indicate tampering with the scheduling policy itself.
+19. Review kernel command-line parameters (`/proc/cmdline`): malicious `init=` entries or module parameters persist across reboots.
+20. Check for lingering sessions: `loginctl list-sessions` and `who` — an attacker session may still be active.
+21. For each finding, record: location, content, file timestamps, owning package (or "not owned by any package"), and hash. Remove only after evidence preservation, and re-verify after reboot that nothing returns.
 
 ## Key tools & commands
 
@@ -74,11 +77,17 @@ Systematically enumerate every common Linux persistence location — systemd uni
 - Breaking sudo with a bad edit — always use `visudo`, never edit the file directly.
 - Trusting package-manager verification when the package database itself may be tampered — verify from offline media.
 - Skipping the reboot verification — some persistence only triggers on boot.
+- Racing the attacker: re-added persistence while you clean — isolate the host first.
+- Reinstalling packages from a compromised mirror — verify package signatures.
+- Missing cron for deleted users — check `/var/spool/cron/` directly.
+- Overlooking `~/.config/autostart` on Linux desktops — GUI session persistence.
+- Documenting findings without hashes — hashes make the record defensible.
 
 ## References
 
 - MITRE ATT&CK T1543.002 (Systemd Service), T1053.003 (Cron), T1098 (Account Manipulation), T1556 (Modify Authentication Process), T1574.006 (Dynamic Linker Hijacking)
 - Linux-PAM documentation: https://linux-pam.org
+- systemd.unit man page — service unit reference
 - NIST SP 800-61 Rev. 2, Computer Security Incident Handling Guide
 - Distribution hardening guides (CIS Benchmarks for Linux)
 

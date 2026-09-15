@@ -84,6 +84,9 @@ Recover evidence of deleted files — names, sizes, timestamps, and data-run loc
 - USN Journal wraparound silently losing the history you need — check journal size and age first.
 - Attackers disabling VSS (T1490) — verify shadows exist before assuming the VSS route is available.
 - Carving false positives on fragmented files — validate carved output against expected sizes and magic bytes.
+- ADS content missed by tools that only parse the default data stream — always enumerate all streams per record.
+- MFT record slack can hold fragments of previous records — examine slack for historical filenames.
+- Compressed files: `icat` output may need decompression handling — verify content, not just size.
 
 ## References
 
@@ -91,6 +94,7 @@ Recover evidence of deleted files — names, sizes, timestamps, and data-run loc
 - Eric Zimmerman's MFTECmd documentation
 - libvshadow documentation (VSS access)
 - Carrier, B. — "File System Forensic Analysis" (Addison-Wesley)
+- Microsoft Learn — NTFS file system documentation
 - MITRE ATT&CK T1070.004 (File Deletion), T1070.006 (Timestomp), T1490 (Inhibit System Recovery)
 - NIST SP 800-86, Guide to Integrating Forensic Techniques into Incident Response
 

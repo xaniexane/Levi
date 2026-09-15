@@ -18,13 +18,24 @@ ID scheme:  cyber_<slug with hyphens replaced by underscores>
 Risk policy: read-only analysis playbooks are INFO/LOW. Anything that
 acquires evidence images or touches live systems is MODERATE with
 requires_confirmation=True.
+
+REGISTRATION DESIGN (batch 1 + beyond):
+  The 100 batch-1 skills are curated below in CURATED_CYBER_SKILLS with
+  hand-reviewed risk levels, permissions, and tags. Playbooks added later
+  (e.g. the 718-skill batch 2) live in the same playbooks/cyber/ directory
+  and are registered data-driven by _discover_extra_playbooks(): any
+  *.md not already curated is picked up automatically. Optional YAML
+  frontmatter (restricted subset, parsed with stdlib only) may override
+  name/description/risk/permissions/requires_confirmation/tags/version;
+  files without frontmatter are registered from their "# Title" and
+  "## Purpose" with safe defaults (LOW, no permissions). CYBER_SKILLS is
+  the full registration list (curated + discovered) and is what
+  SkillRegistry consumes.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Dict, List, Optional
-
 from levi.skill.registry import Skill, SkillRisk
 
 PLAYBOOK_DIR = Path(__file__).parent / "playbooks" / "cyber"
@@ -66,8 +77,15 @@ def _cyber(
     )
 
 
+INFO = SkillRisk.INFO
+LOW = SkillRisk.LOW
 MOD = SkillRisk.MODERATE
-CYBER_SKILLS: List[Skill] = [
+HIGH = SkillRisk.HIGH
+CRITICAL = SkillRisk.CRITICAL
+# ---------------------------------------------------------------------------
+# Curated batch-1 skills (100). ids are cyber_<slug_with_underscores>.
+# ---------------------------------------------------------------------------
+CURATED_CYBER_SKILLS: List[Skill] = [
     _cyber("abusing-dpapi-for-credential-access",
            "Detecting DPAPI Abuse for Credential Access",
            "Detect and investigate Windows DPAPI abuse for credential theft: artifact locations, event-log signals, and hardening.",
@@ -480,3 +498,127 @@ CYBER_SKILLS: List[Skill] = [
            risk=MOD, permissions=["network.write"], requires_confirmation=True,
            tags=["malware-analysis"]),
 ]
+
+
+# ---------------------------------------------------------------------------
+# Data-driven discovery: register playbooks added after batch 1 (e.g. the
+# 718-skill batch 2) without editing this module. Any *.md in PLAYBOOK_DIR
+# that is not already curated is registered automatically.
+# ---------------------------------------------------------------------------
+
+_FRONTMATTER_RISK = {
+    "info": INFO, "low": LOW, "moderate": MOD,
+    "high": HIGH, "critical": CRITICAL,
+}
+
+
+def _parse_frontmatter(path: Path) -> Dict[str, object]:
+    """Parse a restricted YAML-frontmatter subset using stdlib only.
+
+    Supports ``key: value``, ``key: [a, b]`` inline lists and true/false.
+    Returns {} when no frontmatter block is present.
+    """
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError:
+        return {}
+    if not text.startswith("---\n"):
+        return {}
+    end = text.find("\n---", 4)
+    if end == -1:
+        return {}
+    meta: Dict[str, object] = {}
+    for raw in text[4:end].splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or ":" not in line:
+            continue
+        key, _, value = line.partition(":")
+        key = key.strip()
+        value = value.strip()
+        if value.startswith("[") and value.endswith("]"):
+            value = [  # type: ignore[assignment]
+                item.strip().strip("'\"")
+                for item in value[1:-1].split(",")
+                if item.strip()
+            ]
+        elif value.lower() in ("true", "false"):
+            value = value.lower() == "true"  # type: ignore[assignment]
+        else:
+            value = value.strip("'\"")  # type: ignore[assignment]
+        if key:
+            meta[key] = value
+    return meta
+
+
+def _derive_metadata(path: Path, meta: Dict[str, object]) -> Dict[str, object]:
+    """Fill missing frontmatter fields from the playbook content itself."""
+    text = ""
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError:
+        pass
+    if "name" not in meta:
+        title = next(
+            (ln[2:].strip() for ln in text.splitlines() if ln.startswith("# ")),
+            "",
+        )
+        meta["name"] = title or path.stem.replace("-", " ").title()
+    if "description" not in meta:
+        desc = ""
+        in_purpose = False
+        for ln in text.splitlines():
+            if ln.strip().lower() == "## purpose":
+                in_purpose = True
+                continue
+            if in_purpose:
+                if ln.startswith("##"):
+                    break
+                if ln.strip():
+                    desc = ln.strip()
+                    break
+        meta["description"] = desc or meta["name"]
+    meta.setdefault("risk", "low")
+    meta.setdefault("permissions", [])
+    meta.setdefault("requires_confirmation", False)
+    meta.setdefault("tags", [])
+    meta.setdefault("version", "1.0.0")
+    return meta
+
+
+def _discover_extra_playbooks() -> List[Skill]:
+    """Register non-curated playbooks found in PLAYBOOK_DIR."""
+    known = {skill.id for skill in CURATED_CYBER_SKILLS}
+    extra: List[Skill] = []
+    if not PLAYBOOK_DIR.is_dir():
+        return extra
+    for path in sorted(PLAYBOOK_DIR.glob("*.md")):
+        skill_id = "cyber_" + path.stem.replace("-", "_")
+        if skill_id in known:
+            continue
+        meta = _derive_metadata(path, _parse_frontmatter(path))
+        risk_name = str(meta.get("risk", "low")).lower()
+        risk = _FRONTMATTER_RISK.get(risk_name, LOW)
+        requires_confirmation = bool(meta.get("requires_confirmation", False))
+        if risk is MOD and not requires_confirmation:
+            # Policy: live-system/evidence skills stay confirmation-gated.
+            requires_confirmation = True
+        extra.append(
+            Skill(
+                id=skill_id,
+                name=str(meta.get("name", skill_id)),
+                description=str(meta.get("description", "")),
+                category="cybersecurity",
+                version=str(meta.get("version", "1.0.0")),
+                risk_level=risk,
+                permissions=[str(p) for p in meta.get("permissions", [])],  # type: ignore[union-attr]
+                requires_confirmation=requires_confirmation,
+                tags=[str(t) for t in meta.get("tags", [])],  # type: ignore[union-attr]
+                handler=_playbook_handler(path.stem),
+            )
+        )
+    return extra
+
+
+# Full registration list: curated batch 1 + data-driven discovery.
+# This is what SkillRegistry consumes.
+CYBER_SKILLS: List[Skill] = CURATED_CYBER_SKILLS + _discover_extra_playbooks()

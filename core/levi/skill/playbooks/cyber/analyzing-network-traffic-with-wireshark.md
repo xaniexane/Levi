@@ -39,8 +39,11 @@ Perform structured, repeatable packet-level analysis with Wireshark — from cap
 14. Use Analyze → Decode As to force the right dissector on non-standard ports — misdissected traffic hides in plain sight.
 15. Graph TCP behavior: Statistics → TCP Stream Graphs → Round Trip Time exposes latency anomalies indicating tunneling or proxying.
 16. Apply temporary coloring rules for your IOCs — malicious flows become visually obvious when presenting to stakeholders.
-17. Document the exact display filters used alongside each conclusion so another analyst can reproduce the view.
-18. Export evidence: filtered pcaps via File → Export Specified Packets, with hashes recorded.
+17. Add custom columns (e.g., `http.host`, `dns.qry.name`) to the packet list for faster triage.
+18. Export key dissections as text (`tshark -r in.pcap -Y <filter> -T text -V`) for inclusion in the written report.
+19. Save the display-filter set and coloring rules with the case file — the next analyst replays your exact views.
+20. Document the exact display filters used alongside each conclusion so another analyst can reproduce the view.
+21. Export evidence: filtered pcaps via File → Export Specified Packets, with hashes recorded.
 
 ## Key tools & commands
 
@@ -74,6 +77,11 @@ Perform structured, repeatable packet-level analysis with Wireshark — from cap
 - Automatic name resolution leaking investigation targets to the corporate resolver.
 - Display-filter vs. capture-filter syntax confusion producing empty results.
 - Opening multi-gigabyte pcaps in the GUI before triaging with tshark — the UI will hang.
+- Trusting "Decode As" guesses on ambiguous ports — verify against the endpoint's actual service.
+- Forgetting to clear display filters before exporting — a filtered view silently drops packets.
+- Relying on the default column layout — add custom columns (e.g., http.host) for triage speed.
+- Ignoring Expert Info severity levels — errors and warnings mean different things.
+- Analyzing decrypted TLS without documenting the key source — note how decryption was achieved.
 
 See also: analyzing-network-traffic-for-incidents.md, analyzing-network-traffic-of-malware.md
 

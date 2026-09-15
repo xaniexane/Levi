@@ -37,8 +37,12 @@ Extract and analyze mailbox content from Outlook PST/OST files — messages, att
 14. Extract message rules stored in the PST: client-side rules that auto-forward or delete mail are an attacker persistence mechanism inside the mailbox.
 15. Check for hidden attachments: embedded images and OLE objects that never render in the body can still carry payloads — enumerate all attachment parts, not just visible ones.
 16. Correlate attachment hashes with the email-header investigation to link the lure to its delivery infrastructure.
-17. Build a timeline: received timestamps vs. user open/reply actions (read flags) to determine whether the payload was triggered.
-18. Preserve exports with hashes; document every search term used so the review is reproducible and defensible.
+17. Carve unallocated PST space for wiped messages: deleted items often remain recoverable with forensic tools.
+18. Check the RSS Feeds folder — it has been abused to hide auto-forwarded content.
+19. Review contacts for attacker-added entries: new external contacts support follow-on social engineering.
+20. Compare per-folder counts before and after export to catch items the export skipped.
+21. Build a timeline: received timestamps vs. user open/reply actions (read flags) to determine whether the payload was triggered.
+22. Preserve exports with hashes; document every search term used so the review is reproducible and defensible.
 
 ## Key tools & commands
 
@@ -72,12 +76,18 @@ Extract and analyze mailbox content from Outlook PST/OST files — messages, att
 - OST files may hold unsynced items the server copy lacks — check both when available.
 - Password-protected PSTs — document how access was obtained for the case record.
 - Confusing internal client timestamps with actual delivery timestamps.
+- `pffexport` silently skipping corrupt items — compare exported counts against `pffinfo`.
+- Timezone-naive analysis of internal timestamps — normalize before timeline building.
+- Missing embedded message/rfc822 attachments — they're separate messages; triage them too.
+- Assuming the PST is complete — compare against server-side retention and journaling.
+- Forensic-suite preview panes fetching remote content — disable network first.
 
 See also: analyzing-email-headers-for-phishing-investigation.md
 
 ## References
 
 - libpff / pffexport documentation: https://github.com/libyal/libpff
+- Microsoft — PST file format documentation (MS-PST)
 - MITRE ATT&CK T1566 (Phishing), T1114.002 (Remote Email Collection)
 - NIST SP 800-86, Guide to Integrating Forensic Techniques into Incident Response
 

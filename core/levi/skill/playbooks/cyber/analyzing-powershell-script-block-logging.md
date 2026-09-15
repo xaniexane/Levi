@@ -34,7 +34,11 @@ Use PowerShell Script Block Logging (Event ID 4104) as a primary detection and f
 10. Check for AMSI bypass attempts in the same window: 4104 content referencing `amsiInitFailed`, reflection-based patching of AMSI internals, or `Set-MpPreference` disabling Defender shows the attacker fought the protection stack.
 11. Review PowerShell Module Logging (Event ID 4103) as a fallback where Script Block Logging was off — pipeline execution details partially compensate for the gap.
 12. Correlate with Event IDs 4105/4106 (script block invocation start/stop) when that auditing is enabled, to confirm execution rather than just logging.
-13. Preserve the raw 4104 exports; note the GPO state and any coverage gaps in the findings memo.
+13. Hunt encoded-command launchers fleet-wide: search Sysmon/EDR for `-EncodedCommand` / `-Enc` with abnormally long arguments.
+14. Reconstruct download cradles: extract URLs from `DownloadString`/`Invoke-WebRequest` blocks and check proxy logs for who else fetched them.
+15. Check for runspace-based evasion: code executed through raw runspaces can bypass 4104 — correlate with Sysmon ImageLoad events for System.Management.Automation.
+16. Document the deobfuscation chain: each transformation layer recorded with input/output hashes for reproducibility.
+17. Preserve the raw 4104 exports; note the GPO state and any coverage gaps in the findings memo.
 
 ## Key tools & commands
 
@@ -67,11 +71,17 @@ Use PowerShell Script Block Logging (Event ID 4104) as a primary detection and f
 - 4104 truncation of very long scripts — check MessageNumber sequences for gaps.
 - Event-log overwrites on busy hosts silently losing the incident window.
 - GPO enabled but log forwarding broken — the events exist locally but never reached the SIEM.
+- Case-sensitivity mistakes in hunt queries — PowerShell is case-insensitive, your SIEM may not be.
+- Searching only `powershell.exe` — `pwsh`, custom hosts, and WMI-launched script bypass process-name hunts.
+- Ignoring constrained-language-mode bypasses in the same window.
+- Forgetting transcription logs (`Start-Transcript`) as a complementary source.
+- Correlating by hostname only in VDI/non-persistent environments — use session IDs.
 
 ## References
 
 - Microsoft: "PowerShell Script Block Logging" documentation
 - Microsoft: Antimalware Scan Interface (AMSI) documentation
+- Microsoft — PowerShell logging documentation (transcription, module logging)
 - MITRE ATT&CK T1059.001 (PowerShell), T1027 (Obfuscated Files or Information), T1105 (Ingress Tool Transfer), T1562.002 (Disable Windows Event Logging)
 - SANS FOR508: PowerShell forensics guidance
 

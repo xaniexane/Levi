@@ -32,8 +32,11 @@ Extract network indicators from ransomware activity — C2, staging, exfiltratio
 11. Hunt for affiliate infrastructure reuse: the same staging IPs and domains often serve multiple victims — pivot on them in threat intel to warn potential next targets.
 12. Check for double-extortion traffic separately: connections to leak-site infrastructure or large uploads to file-sharing services after encryption indicate data publication is in progress.
 13. Validate that backup and recovery traffic paths are not on the kill list — blocking your own recovery tooling mid-incident is a real and painful failure mode.
-14. Produce the network timeline: first access → staging → exfiltration → C2 → encryption, each row tied to a log source.
-15. Share sanitized indicators with ISAC/partners per your sharing policy.
+14. Map the affiliate's tooling downloads: RMM tools, PsExec, and credential dumpers fetched from the internet reveal the operator's toolkit.
+15. Check for pre-ransom reconnaissance traffic: internal scanning and AD enumeration (LDAP/SMB) in the days before encryption.
+16. Document the egress chokepoints observed: which firewall or proxy the traffic left through — this is where future detections belong.
+17. Produce the network timeline: first access → staging → exfiltration → C2 → encryption, each row tied to a log source.
+18. Share sanitized indicators with ISAC/partners per your sharing policy.
 
 ## Key tools & commands
 
@@ -67,6 +70,11 @@ Extract network indicators from ransomware activity — C2, staging, exfiltratio
 - Blocking backup and recovery traffic paths with the kill list — review allowlists first.
 - Over-blocking shared-hosting or CDN IPs — collateral damage to legitimate services.
 - Kill-list staleness as attacker infrastructure rotates — re-verify hits on a schedule.
+- Kill-list entries without expiry dates — stale blocks accumulate and cause outages.
+- Blocking at the firewall but not the proxy (or vice versa) — cover all egress paths.
+- Forgetting IPv6 egress when writing blocks — dual-stack environments leak around v4-only rules.
+- Not informing the SOC of kill-list changes — blocks without context get reverted.
+- Assuming encryption-time traffic is the whole story — pre-encryption staging matters more.
 
 See also: analyzing-ransomware-encryption-mechanisms.md
 
@@ -75,6 +83,7 @@ See also: analyzing-ransomware-encryption-mechanisms.md
 - MITRE ATT&CK T1071 (Application Layer Protocol), T1041 (Exfiltration Over C2 Channel), T1021 (Remote Services), T1486 (Data Encrypted for Impact)
 - CISA #StopRansomware guidance: https://www.cisa.gov/stopransomware
 - CISA Automated Indicator Sharing (AIS) documentation
+- MISP documentation — structured indicator sharing
 - NIST SP 800-61 Rev. 2, Computer Security Incident Handling Guide
 
 ---

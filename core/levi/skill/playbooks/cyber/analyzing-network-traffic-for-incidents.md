@@ -34,9 +34,12 @@ Turn raw network evidence — pcaps, flow records, proxy and DNS logs — into a
 13. Review VPN and remote-access logs for the window: attacker logons via VPN precede internal movement — confirm the entry account and source IP.
 14. Check cloud audit logs if the environment is hybrid: Entra ID sign-ins and M365 audit events fill gaps the on-prem logs miss.
 15. Identify data-staging hosts: internal systems with large inbound transfers from multiple hosts before any external exfiltration.
-16. Produce the incident network timeline: timestamp, source, destination, protocol, bytes, and the evidence file each row came from.
-17. Validate containment: after isolation, confirm beaconing stops in fresh captures — residual C2 means the scope was wrong.
-18. Write detection improvements: IDS signatures, proxy blocks, and EDR network rules for the observed patterns.
+16. Check backup and recovery infrastructure logs: attackers target backups — confirm they weren't touched.
+17. Write the executive summary with confidence levels per claim — leadership acts on this, so qualify what's proven vs. suspected.
+18. Schedule the lessons-learned review while details are fresh; assign owners to each detection gap.
+19. Produce the incident network timeline: timestamp, source, destination, protocol, bytes, and the evidence file each row came from.
+20. Validate containment: after isolation, confirm beaconing stops in fresh captures — residual C2 means the scope was wrong.
+21. Write detection improvements: IDS signatures, proxy blocks, and EDR network rules for the observed patterns.
 
 ## Key tools & commands
 
@@ -71,6 +74,12 @@ Turn raw network evidence — pcaps, flow records, proxy and DNS logs — into a
 - Tunnel vision on the first compromised host in both directions — earlier access gets missed, scope gets over-expanded.
 - Dismissing low-severity precursor alerts that turn out to be the initial access.
 - Declaring "no exfiltration" from flow data alone — flows have no payload.
+- Alert fatigue: precursors dismissed before the incident never get re-examined.
+- Assuming the first compromised host is the entry point — keep hunting backward in time.
+- Over-scoping: adding every host with a single DNS hit without behavioral confirmation.
+- Forgetting backup and recovery infrastructure — attackers target it deliberately.
+- Presenting byte counts as exfiltration facts to leadership — qualify with confidence levels.
+- Skipping the lessons-learned capture while details are still fresh.
 
 See also: analyzing-network-traffic-of-malware.md, analyzing-network-traffic-with-wireshark.md
 
@@ -79,6 +88,7 @@ See also: analyzing-network-traffic-of-malware.md, analyzing-network-traffic-wit
 - MITRE ATT&CK T1071 (Application Layer Protocol), T1021 (Remote Services), T1041 (Exfiltration Over C2 Channel), T1595 (Active Scanning)
 - Zeek documentation: https://docs.zeek.org
 - CISA incident reporting guidance: https://www.cisa.gov/report
+- SANS Incident Handler's Handbook (public)
 - NIST SP 800-61 Rev. 2, Computer Security Incident Handling Guide
 
 ---

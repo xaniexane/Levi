@@ -44,7 +44,8 @@ Use NetFlow/IPFIX flow records to reconstruct who talked to whom, when, and how 
 11. Run a baseline-deviation check: compare the window's per-host external byte counts against the prior 30-day average from the collector, and document the comparison method so it is defensible.
 12. Identify C2 fallback infrastructure: secondary destinations showing beaconing patterns similar to the primary C2.
 13. Check for internal scanning: one internal host touching many internal hosts on a single port suggests reconnaissance or worm-like spread — pivot to host forensics.
-14. Export the evidence flows with hashes:
+14. Correlate with DHCP logs to resolve address-to-host mappings across the full window before naming machines in the report.
+15. Export the evidence flows with hashes:
     `nfdump -r nfcapd.current -w evidence_flows.nfcapd "host 10.1.5.23"`
     and record the exact filter used so the result is reproducible.
 
@@ -81,12 +82,17 @@ Use NetFlow/IPFIX flow records to reconstruct who talked to whom, when, and how 
 - Daylight-saving shifts in collector timestamps creating phantom gaps or duplicates.
 - Aggregated exports hiding low-volume beacons inside high-volume legitimate traffic.
 - DHCP churn misattributing an address to the wrong host — join with DHCP logs before naming a machine.
+- Exporter clock drift — validate timestamps against a known event before trusting ordering.
+- Encapsulated traffic (MPLS/VXLAN): inner headers are invisible to the exporter — note it in findings.
+- Asymmetric routing: return traffic may pass a different exporter — check both directions.
+- Short flow timeouts splitting long sessions — reassemble by 5-tuple before beacon analysis.
+- Collector disk-full gaps misread as quiet periods — check collector health logs.
 
 ## References
 
 - nfdump documentation: https://github.com/phaag/nfdump
 - SiLK documentation: https://tools.netsa.cert.org/silk/
-- RFC 7011 — IPFIX; RFC 3954 — NetFlow v9
+- RFC 7011 — IPFIX; RFC 3954 — NetFlow v9; RFC 5470 — IPFIX architecture
 - MITRE ATT&CK T1041 (Exfiltration Over C2 Channel), T1048 (Exfiltration Over Alternative Protocol), T1021 (Remote Services), T1071 (Application Layer Protocol)
 - NIST SP 800-86, Guide to Integrating Forensic Techniques into Incident Response
 

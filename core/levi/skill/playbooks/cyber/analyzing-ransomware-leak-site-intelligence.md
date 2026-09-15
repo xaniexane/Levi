@@ -32,8 +32,11 @@ Collect and analyze ransomware data-leak site (DLS) postings about victim organi
 11. Check for victim-data reuse: set up alerts on unique descriptive strings from the listing (not the data itself) to catch secondary extortion or fraud using the leaked material.
 12. Record the actor's claimed initial-access vector when stated — leak-site posts sometimes name it, which informs defensive priorities.
 13. Maintain a leak-site monitoring log: date, actor, victims added/removed, notes — trends beat one-off checks.
-14. Produce the intelligence brief: what is claimed, evidence quality, recommended actions (notification, credential rotation for exposed accounts, monitoring for leaked data reuse).
-15. Retain captures per policy; do not redistribute victim data or full listing contents beyond the authorized audience.
+14. Screenshot the actor's victim-list page structure: consistent formatting enables future automation and change detection.
+15. Note the actor's leak cadence: the time from claimed breach to publication reveals their double-extortion playbook timing.
+16. Cross-reference actor attribution with ransomware-intel feeds: copycat sites mimic major brands.
+17. Produce the intelligence brief: what is claimed, evidence quality, recommended actions (notification, credential rotation for exposed accounts, monitoring for leaked data reuse).
+18. Retain captures per policy; do not redistribute victim data or full listing contents beyond the authorized audience.
 
 ## Key tools & commands
 
@@ -65,6 +68,11 @@ Collect and analyze ransomware data-leak site (DLS) postings about victim organi
 - Stale onion addresses leading to phishing clone sites — verify addresses via intel feeds.
 - Clone sites harvesting researcher IPs — confirm site authenticity before browsing.
 - Countdown-timer pressure distorting assessments — timers are a negotiation tactic.
+- Screenshots containing your VM hostname or timezone — scrub before sharing.
+- Assuming English-only sites — translate carefully, never with auto-translate on sensitive context.
+- Treating victim "removal" as payment — listings also expire or get rebranded.
+- Collecting beyond the intelligence requirement — scope creep creates legal exposure.
+- Bookmarked onion addresses going stale — re-verify via intel feeds each session.
 
 See also: analyzing-ransomware-payment-wallets.md
 
@@ -73,6 +81,7 @@ See also: analyzing-ransomware-payment-wallets.md
 - MITRE ATT&CK T1486 (Data Encrypted for Impact), T1567 (Exfiltration Over Web Service — double-extortion context)
 - CISA #StopRansomware guidance: https://www.cisa.gov/stopransomware
 - FBI IC3 ransomware reporting guidance
+- Public leak-site trackers (e.g., ransomware.live) — for monitoring, with OPSEC
 
 ---
 *Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

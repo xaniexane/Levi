@@ -2,25 +2,43 @@
 
 ## Purpose
 
-Detect Cobalt Strike command-and-control that has been customized with Malleable C2 profiles — where default beacon signatures no longer apply — by analyzing traffic shaping, header/URI anomalies, TLS fingerprints, and beaconing behavior, and by deriving detection logic directly from recovered profiles. Defensive use only: this is about finding customized C2, not building it.
+Detect Cobalt Strike command-and-control customized with Malleable C2
+profiles — where default beacon signatures no longer apply — by analyzing
+traffic shaping, header/URI anomalies, TLS fingerprints, and beaconing
+behavior, and by deriving detection logic directly from recovered profiles.
+Defensive use only: finding customized C2, not building it.
 
 ## When to use
 
-- Beacon traffic is suspected but default Cobalt Strike signatures are not firing (the operator customized the profile).
-- You recovered a Malleable C2 profile (from a team-server seizure, leaked config, or red-team artifact shared with defenders) and need detection logic derived from it.
+- Beacon traffic is suspected but default Cobalt Strike signatures are not
+  firing (the operator customized the profile).
+- You recovered a Malleable C2 profile (team-server seizure, leaked config,
+  or red-team artifact shared with defenders) and need detection logic from
+  it.
 - Threat hunting for "low-and-slow" C2 that blends into normal web traffic.
-- Validating that your IDS/EDR actually detects profile-customized beacons, not just default configurations.
-- Purple-team exercises: testing whether your stack catches the exact profile your red team uses.
+- Validating that your IDS/EDR detects profile-customized beacons, not just
+  default configurations.
+- Purple-team exercises: testing whether your stack catches the exact
+  profile your red team uses.
 
 See also: analyzing-cobalt-strike-beacon-configuration.md, analyzing-command-and-control-communication.md
 
 ## Prerequisites
 
-- Written authorization from the asset/network owner to capture and analyze the traffic in question, including any TLS interception (which has privacy and legal implications — get explicit approval).
-- Chain-of-custody notes for any recovered profile or sample: source, hash, collection context.
-- Full-packet capture or proxied traffic samples of the suspect C2, plus baseline captures of legitimate traffic to the same destinations for comparison.
-- Familiarity with Malleable C2 profile structure (http-get/http-post/http-stager blocks, headers, transforms) from the official documentation — read the authoritative docs, not third-party copies of unknown provenance.
-- A lab where you can replay traffic through your detection stack for validation.
+- Written authorization from the asset/network owner to capture and analyze
+  the traffic, including any TLS interception (privacy and legal
+  implications — get explicit approval, don't assume it).
+- Chain-of-custody notes for any recovered profile or sample: source, hash,
+  collection context.
+- Full-packet capture or proxied traffic samples of the suspect C2, plus
+  baseline captures of legitimate traffic to the same destinations for
+  comparison.
+- Familiarity with Malleable C2 profile structure (http-get/http-post /
+  http-stager blocks, headers, transforms) from the official documentation
+  — read the authoritative docs, not third-party copies of unknown
+  provenance.
+- A lab where you can replay traffic through your detection stack for
+  validation.
 
 ## Procedure
 
@@ -33,38 +51,65 @@ See also: analyzing-cobalt-strike-beacon-configuration.md, analyzing-command-and
 7. **Test your detections against the profile.** If you have a lab team-server artifact or a red-team engagement using the profile, replay the traffic through your IDS/EDR/proxy and confirm every derived signature fires. A detection you've never tested is a hope, not a control. Record the replay results as evidence the control works.
 8. **Deploy layered detections.** No single signature survives the next profile tweak: deploy URI/header signatures *plus* JA3/JA4 mismatch *plus* beaconing analytics *plus* endpoint behaviors (named pipes, injection, spawn-to anomalies). Document which layer catches which profile feature so future tuning is surgical instead of wholesale.
 9. **Share carefully.** Profile-derived IOCs (exact URIs, header values) are high-confidence but short-lived; share them with context and expiry expectations. Prefer sharing the *detection method* (e.g., "alert on header-order mismatch for this SaaS") with trusted peers over raw strings that age out in days.
-10. **Re-validate periodically.** Operators rotate profiles. Schedule quarterly re-validation: fresh traffic samples against your signatures, updated baselines of the mimicked applications (which also change), and confirmation that each detection layer still fires.
+10. **Re-validate periodically.**
+    Operators rotate profiles.
+    Schedule quarterly re-validation: fresh traffic samples against your
+    signatures, updated baselines of the mimicked applications (which also
+    change), and confirmation that each detection layer still fires.
 
 ## Key tools & commands
 
-- Wireshark/tshark — packet-level comparison of suspect vs. baseline traffic; e.g. `tshark -r cap.pcap -Y http -T fields -e http.host -e http.request.uri -e http.user_agent`.
-- JA3/JA4 fingerprinting (via Zeek, Suricata, or standalone fingerprinting tools) — TLS client mismatch detection.
-- RITA / beaconing-analytics tooling — statistical detection of periodic C2 callbacks in NetFlow/Zeek logs.
-- Suricata/Snort — IDS signature deployment for profile-derived URIs, headers, and content patterns.
-- The recovered profile itself, interpreted against the official Malleable C2 documentation — the authoritative reference for what each block means.
+- Wireshark/tshark — packet-level comparison of suspect vs. baseline
+  traffic:
+  `tshark -r cap.pcap -Y http -T fields -e http.host -e http.request.uri
+  -e http.user_agent`.
+- JA3/JA4 fingerprinting (via Zeek, Suricata, or standalone fingerprinting
+  tools) — TLS client mismatch detection.
+- RITA / beaconing-analytics tooling — statistical detection of periodic C2
+  callbacks in NetFlow/Zeek logs.
+- Suricata/Snort — IDS signature deployment for profile-derived URIs,
+  headers, and content patterns.
+- The recovered profile itself, interpreted against the official Malleable
+  C2 documentation — the authoritative reference for what each block means.
 
 ## Expected outputs
 
-- A profile-to-detection mapping: each profile block translated into specific signatures and analytics.
-- Traffic-comparison report: suspect vs. legitimate baseline deviations, documented per feature with packet references.
+- A profile-to-detection mapping: each profile block translated into
+  specific signatures and analytics.
+- Traffic-comparison report: suspect vs. legitimate baseline deviations,
+  documented per feature with packet references.
 - Tested, deployed layered detections with replay-test evidence.
-- Short-lived IOC package shared with expiry guidance and method-level sharing for peers.
+- Short-lived IOC package shared with expiry guidance and method-level
+  sharing for peers.
 - A re-validation schedule with an owner.
 
 ## Pitfalls
 
-- Chasing exact-match signatures alone: one profile edit defeats them. Behavioral layers (timing, TLS mismatch) are the durable investment — fund those first.
-- False positives from legitimate apps that genuinely beacon (updaters, sync clients, monitoring agents) — baseline before alerting, and expect to tune per environment.
-- Assuming the profile you recovered is the profile currently in use: operators rotate profiles, sometimes per campaign. Re-validate against fresh traffic.
-- Handling a recovered team-server profile as a trophy rather than evidence: document chain of custody; it may matter legally, and it definitely matters for intel confidence.
-- Over-fitting to one profile while the operator runs three: if you find one customized beacon, hunt for differently-customized siblings before declaring the environment clean.
+- Chasing exact-match signatures alone: one profile edit defeats them.
+  Behavioral layers (timing, TLS mismatch) are the durable investment —
+  fund those first.
+- False positives from legitimate apps that genuinely beacon (updaters,
+  sync clients, monitoring agents) — baseline before alerting, and expect
+  to tune per environment.
+- Assuming the profile you recovered is the profile currently in use:
+  operators rotate profiles, sometimes per campaign. Re-validate against
+  fresh traffic.
+- Handling a recovered team-server profile as a trophy rather than evidence:
+  document chain of custody; it may matter legally, and it definitely
+  matters for intel confidence.
+- Over-fitting to one profile while the operator runs three: if you find one
+  customized beacon, hunt for differently-customized siblings before
+  declaring the environment clean.
 
 ## References
 
-- MITRE ATT&CK: S0154 (Cobalt Strike), T1071.001 (Web Protocols), T1573 (Encrypted Channel), T1008 (Fallback Channels)
-- Official Malleable C2 profile documentation (profile block structure, transforms, and header semantics)
+- MITRE ATT&CK: S0154 (Cobalt Strike), T1071.001 (Web Protocols), T1573
+  (Encrypted Channel), T1008 (Fallback Channels)
+- Official Malleable C2 profile documentation (profile block structure,
+  transforms, and header semantics)
 - JA3/JA4 fingerprinting method references
-- Suricata rule-writing documentation (rule options for URI/header/content matching)
+- Suricata rule-writing documentation (rule options for URI/header/content
+  matching)
 
 ---
 *Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

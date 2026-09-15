@@ -32,8 +32,11 @@ Reconstruct program execution history on Windows from Prefetch (`.pf`) files —
 9. Hunt lateral-movement tools specifically: `PSEXESVC`, `WMIADAP`, and `RUNDLL32` with odd parents; renamed Sysinternals binaries show up as hash-named `.pf` files whose embedded paths reveal the true executable name.
 10. Mind parser versions: Windows 10+ Prefetch uses its own compression scheme — an outdated parser silently misparses new formats, so keep PECmd current.
 11. Compare Prefetch last-run times against the executable's MFT timestamps to spot timestomped binaries hiding their true age.
-12. Note the Prefetch caveats in your findings: max 128 entries on modern Windows (old entries age out), and `.pf` creation requires the Prefetcher/SysMain service — absence of a `.pf` is not proof of non-execution.
-13. Build the execution timeline rows: executable, path hash, first/last run, run count, and corroborating artifacts.
+12. Check Prefetch for evidence of cleanup tools: `CIPHER`, `SDELETE`, or `WEvtUtil` executions indicate anti-forensics — and timestamp the cover-up.
+13. Correlate Prefetch run counts with UserAssist: disagreements between the two can indicate one artifact was tampered with.
+14. Look for Prefetch entries of installers: legitimate-looking names (`UPDATE-*.pf`, `SETUP-*.pf`) sometimes mask renamed malware — verify the executable's hash.
+15. Note the Prefetch caveats in your findings: max 128 entries on modern Windows (old entries age out), and `.pf` creation requires the Prefetcher/SysMain service — absence of a `.pf` is not proof of non-execution.
+16. Build the execution timeline rows: executable, path hash, first/last run, run count, and corroborating artifacts.
 
 ## Key tools & commands
 
@@ -64,6 +67,11 @@ Reconstruct program execution history on Windows from Prefetch (`.pf`) files —
 - Outdated parsers silently misparsing Windows 10+ Prefetch compression — keep PECmd current.
 - Prefetch disabled via registry (`EnablePrefetcher=0`) — check the configuration before concluding.
 - Filename hash collisions (rare) — always verify via the embedded path.
+- Prefetch on SSDs with SysMain disabled — many enterprise images disable it; check the config.
+- Misattributing `.pf` files after OS upgrades — embedded paths may reference old locations.
+- Volume serial numbers in `.pf` files identify the source drive — useful for USB attribution.
+- Not hashing `.pf` files at acquisition — chain of custody applies to artifacts too.
+- Ignoring `Layout.ini` — it reveals which files the prefetcher prioritized.
 
 See also: analyzing-windows-prefetch-with-python.md
 
@@ -71,6 +79,7 @@ See also: analyzing-windows-prefetch-with-python.md
 
 - Eric Zimmerman's PECmd documentation
 - NirSoft WinPrefetchView documentation
+- Russinovich et al. — "Windows Internals" (Prefetcher chapter)
 - MITRE ATT&CK T1070 (Indicator Removal — artifact wiping context)
 - SANS FOR500 Windows forensic analysis methodology
 

@@ -37,8 +37,11 @@ Parse, dissect, and statistically analyze packet captures programmatically with 
 14. Analyze TCP retransmission and RST patterns: aggressive RSTs or SYN-only flows indicate scanning or blocked C2 connection attempts.
 15. Extract and review DHCP and ARP traffic: rogue DHCP servers or ARP-spoofing patterns reveal man-in-the-middle positioning.
 16. Summarize findings per endpoint: one paragraph per suspicious host — what it did, when, and the evidence — for the incident report.
-17. Export findings: write IOC lists (IPs, domains, JA3-relevant fields you extracted) and the analysis script itself into the case file so the work is reproducible.
-18. If testing a detection, craft the suspect packet pattern in the lab only:
+17. Fingerprint operating systems passively: TCP window sizes, TTL values, and option ordering per host enrich attribution.
+18. Look for covert timing channels: analyze inter-packet delay distributions for encoded exfiltration patterns.
+19. Validate the script against the baseline pcap first — any "finding" that fires on clean traffic is a bug, not an IOC.
+20. Export findings: write IOC lists (IPs, domains, JA3-relevant fields you extracted) and the analysis script itself into the case file so the work is reproducible.
+21. If testing a detection, craft the suspect packet pattern in the lab only:
     build with Scapy layers, send with `sendp()` on the lab interface, and confirm your IDS/EDR fires.
 
 ## Key tools & commands
@@ -74,10 +77,17 @@ Parse, dissect, and statistically analyze packet captures programmatically with 
 - Loading multi-gigabyte pcaps into RAM with `rdpcap` — use `PcapReader` or pre-filter with tshark.
 - TLS 1.3 encrypting handshake details your script expects — design for metadata-only analysis.
 - Wrong link-layer type assumptions mis-decoding every packet — check `capinfos` first.
+- Scapy's stream reassembly is manual — handle retransmissions and overlaps explicitly in code.
+- Malformed packets crashing naive dissectors — wrap parsing in try/except.
+- BPF syntax vs. display-filter syntax confusion in `sniff(filter=...)`.
+- IPv6 extension headers breaking hardcoded layer offsets — iterate layers instead.
+- `wrpcap` appends across runs without labels — keep provenance clear per write.
+- Using `sr()`/`sendp()` outside the lab — even a "test" packet to a production host is unauthorized scanning.
 
 ## References
 
 - Scapy documentation: https://scapy.readthedocs.io
+- tcpdump man page — BPF filter syntax reference
 - MITRE ATT&CK T1071 (Application Layer Protocol), T1041 (Exfiltration Over C2 Channel), T1027 (Obfuscated Files or Information), T1040 (Network Sniffing)
 - Wireshark/tshark field reference for cross-validation
 

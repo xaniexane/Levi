@@ -38,8 +38,12 @@ Detect mailbox and tenant compromise in Microsoft 365 unified audit logs — ano
 14. Check mailbox delegation: `Add-MailboxPermission` operations or folder-level delegation grants the attacker persistent access without needing the password.
 15. Review sent-mail flow for the forwarding rules' effects: search Sent Items during the compromise window for auto-forwarded sensitive content.
 16. Check for attacker-registered MFA methods: new phone numbers or authenticator registrations signal account-takeover persistence.
-17. Remediate per account: revoke sessions, reset credentials, delete malicious inbox rules and OAuth grants, then re-run the searches to verify cleanliness.
-18. Preserve the exported logs with hashes; note the exact search parameters so the export is reproducible.
+17. Check Conditional Access policies for attacker-added exclusions that would survive credential resets.
+18. Review app registrations (not just consent grants): attacker-created apps with mail permissions are full backdoors.
+19. Check Teams chat for attacker-sent messages — compromised accounts get reused for internal phishing.
+20. Cross-check with Defender/MCAS alerts for the same accounts and timeframe before closing.
+21. Remediate per account: revoke sessions, reset credentials, delete malicious inbox rules and OAuth grants, then re-run the searches to verify cleanliness.
+22. Preserve the exported logs with hashes; note the exact search parameters so the export is reproducible.
 
 ## Key tools & commands
 
@@ -73,11 +77,17 @@ Detect mailbox and tenant compromise in Microsoft 365 unified audit logs — ano
 - Purging audit logs before the retention review is complete.
 - Missing app-only (daemon) permissions that operate with no user context.
 - Shared mailboxes lacking sign-in logs — use the audit log instead of assuming no access.
+- Unified audit log latency: events can lag by hours — re-run searches before closing.
+- `Search-UnifiedAuditLog` date parameters are UTC — local-time queries shift the window.
+- Missing guest/B2B account activity — scope includes external users.
+- Confusing "MFA succeeded" with "legitimate" — session-cookie theft passes MFA.
+- Not checking Conditional Access policy exclusions the attacker may have added.
 
 ## References
 
 - Microsoft Purview auditing documentation: https://learn.microsoft.com/purview/audit-log-search
 - Microsoft Entra sign-in log documentation: https://learn.microsoft.com/entra/id-protection/concept-identity-protection-sign-in-risk
+- Microsoft — investigating compromised accounts guidance
 - MITRE ATT&CK T1137 (Office Application Startup / inbox rules), T1528 (Steal Application Access Token), T1114.002 (Remote Email Collection), T1136 (Create Account)
 - CISA guidance on Microsoft 365 compromise detection
 

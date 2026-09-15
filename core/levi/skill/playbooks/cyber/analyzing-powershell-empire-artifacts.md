@@ -33,8 +33,11 @@ Identify and analyze remnants of PowerShell Empire (and its forks) on Windows ho
 11. Check for Empire's default HTTPS listener certificate in network captures: default Empire HTTPS uses a recognizable self-signed certificate — extract and fingerprint it as an additional IOC.
 12. If an Empire server was seized, parse its SQLite database in the lab: agent tasking history there reconstructs the full operator timeline.
 13. Distinguish Empire from its forks (Starkiller, SilentTrinity) by their distinct default strings before attributing the framework.
-14. Preserve launcher samples and logs with hashes; document decoded configurations in the case file.
-15. Remediation must include killing agents, removing persistence, blocking C2 at egress, and rotating credentials the agent could have harvested.
+14. Extract the agent's delay, jitter, and kill-date from the launcher: these parameters distinguish Empire from lookalike custom implants.
+15. Review PowerShell Module Logging (Event ID 4103) alongside 4104: Empire's module loads appear here even when script blocks arrive fragmented.
+16. Check memory dumps of long-dead agents for the default staging key: it sometimes survives in unallocated process memory.
+17. Preserve launcher samples and logs with hashes; document decoded configurations in the case file.
+18. Remediation must include killing agents, removing persistence, blocking C2 at egress, and rotating credentials the agent could have harvested.
 
 ## Key tools & commands
 
@@ -68,11 +71,17 @@ Identify and analyze remnants of PowerShell Empire (and its forks) on Windows ho
 - Confusing Empire with its forks — check fork-specific default strings before attributing.
 - Assuming agent death equals eviction — persistence mechanisms survive process kills.
 - Empire version differences (3.x/4.x/5.x) changing defaults — note the version indicators.
+- Trusting decade-old blog posts on Empire 2.x defaults — verify against the version in play.
+- Custom profiles making default-hunting useless — always pair with behavioral hunting.
+- Missing Empire's Python/Linux agents — the framework isn't Windows-only.
+- Treating agent "lost" status as eviction — check for persistence and re-staging.
+- Hardcoded credentials in recovered configs — rotate anything the config touched.
 
 ## References
 
 - PowerShell Empire archived project documentation (public repository)
 - BC Security Empire documentation (public repository)
+- Empire default profile documentation (public repo)
 - MITRE ATT&CK T1059.001 (PowerShell), T1071.001 (Web Protocols), T1053 (Scheduled Task/Job), T1047 (WMI)
 - Microsoft: PowerShell Script Block Logging documentation
 
