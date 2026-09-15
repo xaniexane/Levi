@@ -1,0 +1,26 @@
+# LEVI Android shell — version catalog.
+# Versions mirror apps/vyve-messenger/android (verified 2026-09-15):
+# AGP 9.4.0 + Kotlin 2.4.20, compileSdk/targetSdk 36. Do not bump the
+# *-marked items without re-verifying (minCompileSdk 37 is unpublished).
+
+[versions]
+agp = "9.4.0"
+kotlin = "2.4.20"
+
+# coreKtx 1.18.0 (minCompileSdk 36): do NOT bump to 1.19.0 — it declares
+# minCompileSdk 37, which Google has not published (same constraint as vyve).
+coreKtx = "1.18.0"
+appcompat = "1.8.0"
+material = "1.13.0"
+activity = "1.13.0"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+# NOTE (AGP 9+): org.jetbrains.kotlin.android must NOT be applied — AGP 9
+# has built-in Kotlin support and fails the build if it is present.
+
+[libraries]
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }

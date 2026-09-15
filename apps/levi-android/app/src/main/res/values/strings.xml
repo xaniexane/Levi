@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LEVI</string>
+    <string name="settings_title">Server settings</string>
+
+    <string name="empty_title">No server configured</string>
+    <string name="empty_body">Point LEVI at the machine serving your LEVI web client, then come back here.</string>
+    <string name="open_settings">Open settings</string>
+
+    <string name="error_title">Couldn\'t reach LEVI</string>
+    <string name="error_load">Load failed: %1$s. Check the server URL and that your machine is reachable.</string>
+    <string name="error_unknown">unknown error</string>
+    <string name="retry">Retry</string>
+
+    <string name="settings_server_label">LEVI server URL</string>
+    <string name="settings_url_hint">http://192.168.1.10:8080</string>
+    <string name="save">Save</string>
+    <string name="error_url_invalid">Enter a full URL starting with http:// or https:// (empty clears it).</string>
+    <string name="url_saved">Server URL saved: %1$s</string>
+    <string name="url_cleared">Server URL cleared.</string>
+    <string name="settings_help">On your computer, run the LEVI web client (in the repo: cd web &amp;&amp; npm run dev), find your computer\'s LAN address, and enter it here as http://&lt;lan-ip&gt;:8080. Away from home, expose it with a tunnel (e.g. cloudflared) and use the https:// tunnel URL. Full steps: docs/ANDROID_APP.md</string>
+</resources>

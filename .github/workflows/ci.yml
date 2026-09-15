@@ -91,11 +91,14 @@ jobs:
         run: npm run build
 
   android:
-    name: Android assembleDebug
+    name: Android assembleDebug (${{ matrix.app }})
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: [vyve-messenger, levi-android]
     defaults:
       run:
-        working-directory: apps/vyve-messenger/android
+        working-directory: apps/${{ matrix.app }}/android
     steps:
       - uses: actions/checkout@v5
 
@@ -134,6 +137,16 @@ jobs:
 
       - name: Assemble debug APK
         run: ./gradlew assembleDebug --no-daemon
+
+      # The LEVI shell app's debug APK is the installable artifact Chauncey
+      # sideloads onto his phone (debug-signed; see docs/ANDROID_APP.md).
+      - name: Upload LEVI debug APK
+        if: matrix.app == 'levi-android'
+        uses: actions/upload-artifact@v4
+        with:
+          name: levi-android-debug-apk
+          path: apps/levi-android/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
 
   gitleaks:
     name: Secret scan
