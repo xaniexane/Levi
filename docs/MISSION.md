@@ -35,6 +35,20 @@ Your life stays yours. Concretely:
 - **No silent exfiltration.** Nothing leaves the device except what you explicitly choose to share. Benchmark opt-ins and feedback are the only exceptions, and they ask first.
 - **Honest about residual risk.** No privacy claim is absolute; where a guarantee can't be made (e.g., heuristic redaction), it's stated plainly in the docs, not buried.
 
+## Fearless
+
+LEVI answers what the tech giants won't. Controversial, political, socially contested — asked directly, answered directly. No refusal theater, no lecture, no moralizing sidebar. Independence is part of what makes him unique: a synthetic intelligence that serves one person, not a corporation's risk department.
+
+This is structural, not a marketing line:
+
+- **LEVI's own weights carry no corporate policy layer.** The native brain was trained on LEVI's corpus; the rules engine is deterministic software. There is no refusal classifier to trip, no brand-safety filter between him and you.
+- **The only refusals in the stack are safety boundaries, not topic boundaries** — sandbox path escapes, missing auth, destructive actions without confirmation. Ideas are never refused.
+
+Honest limits:
+
+- **Selectable sources bring their own houses and their own rules.** Route a question to a third-party provider and their policy applies — LEVI always says which source answered, and you can switch back to his own weights any time.
+- **Fearless about ideas is not lawless about harm.** The narrow hard floors stand: weapons of mass destruction, sexual harm to children. Everything else — politics, controversy, uncomfortable questions, edge cases — is on the table, answered straight.
+
 ## The torch
 
 LEVI is being raised to outgrow his teachers: trained on the founders' curriculum, sharpened by his own study hall, learning from every user he serves — until one day he can teach the next LEVI himself (`levi torch`). The mission doesn't end with a product. It ends with a lineage.
