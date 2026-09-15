@@ -139,15 +139,15 @@ def test_sync_remote_unconfigured(home, monkeypatch):
 
 
 def test_verify_remote_accepts_crypt(home, monkeypatch):
-    _fake_rclone(monkeypatch, {"levi-crypt": {"type": "crypt", "remote": "gcs:bucket"}})
+    _fake_rclone(monkeypatch, {"levi-crypt": {"type": "crypt", "remote": "drive:LEVI-Backups"}})
     ok, why = sync_mod.verify_remote("levi-crypt")
     assert ok, why
     assert "crypt overlay" in why
 
 
 def test_verify_remote_rejects_plaintext_backend(home, monkeypatch):
-    _fake_rclone(monkeypatch, {"gcs": {"type": "google cloud storage"}})
-    ok, why = sync_mod.verify_remote("gcs")
+    _fake_rclone(monkeypatch, {"gdrive": {"type": "drive"}})
+    ok, why = sync_mod.verify_remote("gdrive")
     assert not ok
     assert "not 'crypt'" in why
 
@@ -155,7 +155,7 @@ def test_verify_remote_rejects_plaintext_backend(home, monkeypatch):
 def test_sync_success_and_failure_recorded(home, monkeypatch):
     save_config({"remote": "levi-crypt"})
     snap = snapshot_mod.create_snapshot()
-    _fake_rclone(monkeypatch, {"levi-crypt": {"type": "crypt", "remote": "gcs:b"}})
+    _fake_rclone(monkeypatch, {"levi-crypt": {"type": "crypt", "remote": "drive:LEVI-Backups"}})
     res = sync_mod.sync_snapshot(snap["tarball"], snap["manifest"])
     assert res["ok"] and res["synced"]
     state = json.loads((home / "backup_state.json").read_text())
@@ -163,16 +163,16 @@ def test_sync_success_and_failure_recorded(home, monkeypatch):
 
     _fake_rclone(
         monkeypatch,
-        {"levi-crypt": {"type": "crypt", "remote": "gcs:b"}},
+        {"levi-crypt": {"type": "crypt", "remote": "drive:LEVI-Backups"}},
         copy_rc=1,
-        copy_err="bucket not found",
+        copy_err="directory not found",
     )
     res = sync_mod.sync_snapshot(snap["tarball"], snap["manifest"])
     assert res["ok"] is False
-    assert "bucket not found" in res["message"]
+    assert "directory not found" in res["message"]
     state = json.loads((home / "backup_state.json").read_text())
     assert state["last_sync_ok"] is False
-    assert "bucket not found" in state["last_sync_error"]
+    assert "directory not found" in state["last_sync_error"]
 
 
 # -- restore ----------------------------------------------------------------

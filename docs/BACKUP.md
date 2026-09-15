@@ -36,7 +36,11 @@ levi backup status
 levi backup daily
 ```
 
-## Setting up the encrypted remote (Google Cloud Storage)
+## Setting up the encrypted remote (Google Drive)
+
+The primary remote is **Google Drive** via rclone, behind the `levi-crypt`
+crypt overlay. Drive files are private to the account by default — and the
+crypt overlay means Google only ever sees ciphertext anyway.
 
 ### 1. Install rclone
 
@@ -51,33 +55,46 @@ chmod +x ~/bin/rclone
 
 `levi backup` finds rclone on `PATH`, falling back to `~/bin/rclone`.
 
-### 2. Create a PRIVATE GCS bucket
+### 2. Connect your Google account (one-time, needs YOU)
 
-In the Google Cloud Console (or `gcloud`):
-
-1. Create a bucket, e.g. `levi-backups-<yourname>`.
-2. **Uniform bucket-level access: ON** (disables per-object ACLs entirely).
-3. **Public access prevention: enforced** — the bucket cannot go public even
-   by accident.
-4. Add a lifecycle rule: delete objects older than 90 days (the crypt
-   filenames are opaque; old snapshots are just rotation).
-5. Create a service account with **only** `roles/storage.objectAdmin` on
-   *that bucket* (least privilege), and download its JSON key.
-
-### 3. Configure rclone: GCS + crypt overlay
+Run this on a machine where you can open a browser (the sandbox can't do
+the OAuth click for you):
 
 ```bash
 rclone config
 # n) New remote
-# name: gcs
-# Storage: Google Cloud Storage ("google cloud storage")
-# service_account_file: /path/to/service-account-key.json
-# (accept defaults for the rest; "Auto config" n for headless)
+# name: gdrive
+# Storage: Google Drive ("drive")
+# client_id / client_secret: leave empty (rclone's default app) — or supply
+#   your own Google Cloud OAuth client if you prefer
+# scope: drive.file ("Access to files created by rclone only") — RECOMMENDED.
+#   rclone then only ever sees files IT created, never your whole Drive.
+# root_folder_id: leave empty (uses the root of Drive)
+# service_account_file: leave empty
+# Edit advanced config? n
+# Use web browser to automatically authenticate rclone with Google? y
+#   -> your browser opens, you sign in with YOUR Google account and approve
+```
 
+When OAuth completes, rclone stores a token in
+`~/.config/rclone/rclone.conf`. Verify it works:
+
+```bash
+rclone mkdir gdrive:LEVI-Backups
+rclone lsd gdrive:
+```
+
+Optional hygiene: in Drive's web UI, keep `LEVI-Backups` unshared — Drive
+folders are private by default; just don't create share links for it.
+
+### 3. Add the crypt overlay (passphrase typed by YOU)
+
+```bash
+rclone config
 # n) New remote
 # name: levi-crypt
 # Storage: Crypt ("crypt")
-# remote: gcs:levi-backups-<yourname>
+# remote: gdrive:LEVI-Backups
 # filename_encryption: standard   (encrypts filenames too)
 # directory_name_encryption: true
 # password:  <— ENTER YOUR PASSPHRASE INTERACTIVELY HERE
@@ -102,7 +119,7 @@ levi backup now   # snapshots AND syncs
 
 ## Fallback: archive.org (S3-compatible, private/dark)
 
-If GCS is unavailable, archive.org exposes an S3-compatible API at
+If Google Drive is unavailable, archive.org exposes an S3-compatible API at
 `s3.us.archive.org`. Items **must stay private/dark** — set
 `x-archive-meta-collection` appropriately and never mark the item public.
 
@@ -132,10 +149,10 @@ Get S3 keys at https://archive.org/account/s3.php (logged in).
 ## Verify your privacy checklist
 
 - [ ] `levi backup status` shows `remote check: OK — ... crypt overlay ...`
-- [ ] GCS bucket has uniform access + public access prevention enforced
-- [ ] Service account key is scoped to the one bucket only
+- [ ] Drive scope is `drive.file` (rclone sees only its own files, not your whole Drive)
+- [ ] The `LEVI-Backups` folder has NO share links / collaborators in the Drive UI
 - [ ] `rclone lsd levi-crypt:` shows opaque encrypted names (not real filenames)
-- [ ] `rclone cat levi-crypt:levi-backups/<file>` returns ciphertext, not JSON
+- [ ] `rclone cat levi-crypt:LEVI-Backups/<file>` returns ciphertext, not JSON
 - [ ] rclone.conf (`~/.config/rclone/rclone.conf`) has mode 0600 and is itself
       backed up somewhere safe (without it + the passphrase, restores fail)
 
@@ -171,7 +188,7 @@ crashes the scheduler.
 ## Threat model (honest)
 
 - Protects against: machine loss, disk failure, accidental deletion,
-  bucket misconfiguration (ciphertext only), provider-side snooping.
+  folder mis-sharing (ciphertext only), provider-side snooping.
 - Does **not** protect against: losing the crypt passphrase (unrecoverable),
   an attacker with root on this machine *before* encryption, or rclone.conf
   theft combined with the passphrase. Guard both.

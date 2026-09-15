@@ -27,7 +27,11 @@ def register_backup_parser(sub) -> None:
 
     cmds.add_parser("status", help="show backup status")
 
-    cfg_p = cmds.add_parser("configure", help="set/verify the encrypted remote")
+    cfg_p = cmds.add_parser(
+        "configure",
+        help="set/verify the encrypted remote (Google Drive + crypt overlay; "
+        "see docs/BACKUP.md for setup)",
+    )
     cfg_p.add_argument("--remote", required=True, help="rclone crypt remote name")
 
     cmds.add_parser("daily", help="daily job: snapshot always, sync when configured")

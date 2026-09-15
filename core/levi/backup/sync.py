@@ -1,10 +1,10 @@
 """Ship snapshots off-machine with rclone — always behind a crypt overlay.
 
 Privacy design: the configured remote MUST be an rclone ``crypt`` remote
-wrapping the real backend (GCS or archive.org S3). Plaintext never touches
-the wire or the bucket: even a misconfigured-public bucket only holds
-client-side-encrypted blobs. ``verify_remote()`` enforces this before any
-sync; sync refuses to run against a non-crypt remote.
+wrapping the real backend (Google Drive or archive.org S3). Plaintext never
+touches the wire or the cloud: even a misconfigured-shared Drive folder only
+holds client-side-encrypted blobs. ``verify_remote()`` enforces this before
+any sync; sync refuses to run against a non-crypt remote.
 """
 from __future__ import annotations
 
