@@ -139,6 +139,29 @@ jobs:
       - name: Assemble debug APK
         run: ./gradlew assembleDebug --no-daemon
 
+      # On-device inference (levi-android only): install the NDK, compile
+      # llama.cpp + the JNI bridge for all ABIs via the standalone superbuild,
+      # then assemble the :inference module's JVM tests + AAR. Kept as a
+      # separate step so the app APK above stays green independently.
+      - name: Install Android NDK (r27)
+        if: matrix.app == 'levi-android'
+        run: |
+          set -euo pipefail
+          export PATH="${ANDROID_HOME}/cmdline-tools/latest/bin:${PATH}"
+          set +o pipefail
+          yes | sdkmanager --sdk_root="${ANDROID_HOME}" --licenses > /dev/null
+          set -o pipefail
+          sdkmanager --sdk_root="${ANDROID_HOME}" "ndk;27.2.12479018"
+          echo "ANDROID_NDK_HOME=${ANDROID_HOME}/ndk/27.2.12479018" >> "${GITHUB_ENV}"
+
+      - name: Build on-device inference native libs
+        if: matrix.app == 'levi-android'
+        run: ./gradlew :inference:buildNativeLibs --no-daemon
+
+      - name: Test + assemble inference module
+        if: matrix.app == 'levi-android'
+        run: ./gradlew :inference:testDebugUnitTest :inference:assembleDebug --no-daemon
+
       # The LEVI shell app's debug APK is the installable artifact Chauncey
       # sideloads onto his phone (debug-signed; see docs/ANDROID_APP.md).
       - name: Upload LEVI debug APK
