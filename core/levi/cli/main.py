@@ -1892,6 +1892,74 @@ def cmd_vault(args):
     print("Vault names:", v.list_names())
 
 
+def _cmd_cloud_keys(args):
+    """`levi cloud keys create <name>|list|revoke <name|prefix>`."""
+    from levi.cloud import apikeys
+
+    rest = list(getattr(args, "cloud_args", None) or [])
+    keys_action = rest[0].lower() if rest else ""
+    target = rest[1] if len(rest) > 1 else None
+    if keys_action == "create":
+        if not target:
+            print("Usage: levi cloud keys create <name>")
+            raise SystemExit(2)
+        try:
+            raw, record = apikeys.create_key(target)
+        except apikeys.KeyError as exc:
+            print(f"Error: {exc}")
+            raise SystemExit(1) from None
+        # The raw key is printed ONCE and never stored. Warn loudly.
+        print(raw)
+        print()
+        print("API key created for %r (prefix %s)." % (record["name"], record["prefix"]))
+        print("This is the ONLY time the full key is shown — copy it now.")
+        print("It is stored as a SHA-256 hash only; it cannot be recovered.")
+        return
+    if keys_action == "list":
+        keys = apikeys.list_keys()
+        if not keys:
+            print("No API keys.")
+            return
+        for k in keys:
+            status = "REVOKED" if k.get("revoked") else "active"
+            print(f"  {k['name']:20} {k.get('prefix', '?'):14} "
+                  f"created {k.get('created', '?')}  {status}")
+        return
+    if keys_action == "revoke":
+        if not target:
+            print("Usage: levi cloud keys revoke <name|prefix>")
+            raise SystemExit(2)
+        try:
+            record = apikeys.revoke_key(target)
+        except apikeys.KeyError as exc:
+            print(f"Error: {exc}")
+            raise SystemExit(1) from None
+        print("Revoked key %r (prefix %s)." % (record["name"], record["prefix"]))
+        return
+    print("Usage: levi cloud keys {create <name>|list|revoke <name|prefix>}")
+    raise SystemExit(2)
+
+
+def _cmd_cloud_usage(args):
+    """`levi cloud usage [--key NAME] [--limit N]`."""
+    from levi.cloud import metering
+
+    records = metering.read_usage(
+        key_name=getattr(args, "cloud_key_filter", None),
+        limit=getattr(args, "cloud_limit", None) or 20,
+    )
+    if not records:
+        print("No usage recorded yet.")
+        return
+    for r in records:
+        line = (f"  {r.get('ts', '?')}  {r.get('key_name', '?'):<16} "
+                f"{r.get('endpoint', '?'):<16} steps={r.get('steps', 0)} "
+                f"ok={r.get('ok', '?')}")
+        if not r.get("ok"):
+            line += f" error={r.get('error')}"
+        print(line)
+
+
 def cmd_courses(args):
     """Awesome-courses curriculum knowledge base (ingested, extractive).
 
@@ -2305,7 +2373,15 @@ def cmd_recall(args):
 
 
 def cmd_cloud(args):
-    """Phase A/B/C + crypto + ZK + sync dry-run — fused cloud wings surface."""
+    """Phase A/B/C + crypto + ZK + sync dry-run — fused cloud wings surface.
+
+    Also routes the LEVI-as-cloud API surface: ``keys`` and ``usage``.
+    """
+    action = (getattr(args, "cloud_action", None) or "all").lower()
+    if action == "keys":
+        return _cmd_cloud_keys(args)
+    if action == "usage":
+        return _cmd_cloud_usage(args)
     from levi.cloud.surface import CloudSurface
     surf = CloudSurface()
     action = (getattr(args, "cloud_action", None) or "all").lower()
@@ -3105,12 +3181,25 @@ def main():
     model_p.add_argument("--limit", type=int, default=0)
     model_p.add_argument("--polish", action="store_true", help="optional relay polish")
 
-    cloud_p = sub.add_parser("cloud", help="Product stages A/B/C + crypto protocol + ZK + sync dry-run")
+    cloud_p = sub.add_parser("cloud", help="LEVI-as-cloud API keys/usage + product stages A/B/C + crypto protocol + ZK + sync dry-run")
     cloud_p.add_argument(
         "cloud_action",
         nargs="?",
         default="all",
-        help="all|stages|argon2|ratchet|crypto|zk|sync|demo  (alias: phases)",
+        help="keys|usage|all|stages|argon2|ratchet|crypto|zk|sync|demo  (alias: phases)",
+    )
+    cloud_p.add_argument(
+        "cloud_args",
+        nargs="*",
+        help="extra args for 'keys' (create <name> | list | revoke <name|prefix>)",
+    )
+    cloud_p.add_argument(
+        "--key", dest="cloud_key_filter", default=None,
+        help="usage: only show records for this key name",
+    )
+    cloud_p.add_argument(
+        "--limit", dest="cloud_limit", type=int, default=20,
+        help="usage: most recent N records (default 20)",
     )
 
     # === KING-REGION-BEGIN: King control plane (core/levi/king) ===
