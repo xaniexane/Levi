@@ -21,6 +21,7 @@ writes anywhere else.
 
 from __future__ import annotations
 
+import os
 import re
 from typing import Any
 
@@ -57,6 +58,31 @@ def _jaccard(a: frozenset, b: frozenset) -> float:
     if not a or not b:
         return 0.0
     return len(a & b) / len(a | b)
+
+
+def contribute_enabled() -> bool:
+    """Owner opt-in to pack their own local learnings for the collective.
+
+    Cloud-distilled learnings (consent verified at harvest) pack by
+    default; the owner's own sessions need this explicit opt-in.
+    """
+    return os.environ.get("LEVI_GROWTH_CONTRIBUTE", "0").strip().lower() in (
+        "1", "true", "yes",
+    )
+
+
+def shareable_learning(learning: Learning) -> bool:
+    """Whether this learning may ever travel in a learning pack.
+
+    Technique-only (procedural) AND consented origin. The pack builder
+    re-verifies independently; this mark is the first of two gates.
+    """
+    if learning.kind != "procedural":
+        return False
+    prov = learning.provenance or {}
+    if str(prov.get("mode", "")) == "rules:cloud-distill":
+        return True
+    return contribute_enabled()
 
 
 def consolidate(
@@ -135,6 +161,9 @@ def consolidate(
                 "cycle_id": cycle_id,
                 "status": "provisional",
                 "corroborated_count": 0,
+                # First gate for learning-pack distribution; the pack
+                # builder re-verifies independently (see levi.growth.sync).
+                "shareable": shareable_learning(learning),
             },
         )
         growth_entries.append(entry)

@@ -7,6 +7,7 @@ Power complexity is soft by default; use --verbose for internals.
 from __future__ import annotations
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -1656,6 +1657,8 @@ def cmd_growth(args):
     forget (--id ID | --tag TAG) — remove learnings (parental control)
     curriculum [load|list] — ingest or list the founders' seed curriculum
     study [run|trend] — study hall: full cycle + self-quiz, or quiz trend
+    pack [--build] [--ingest FILE] [--sync] [--pack-list] — learning-pack
+        distribution: build versioned packs, ingest files, or sync from cloud
     """
     from levi.growth import cycle as _cycle
     from levi.growth import journal as _journal
@@ -1813,6 +1816,64 @@ def cmd_growth(args):
             print(_study.format_trend(_study.study_trend(limit=limit)))
             return
         print(f"Unknown study action: {sub}")
+        return
+
+    if action == "pack":
+        from levi.growth import sync as _sync
+
+        if getattr(args, "build", False):
+            min_corr = int(getattr(args, "min_corroboration", 0) or 0)
+            report = _sync.build_pack(min_corroboration=min_corr)
+            print(f"pack v{report['version']}: {report['entries']} technique(s), "
+                  f"{len(report['excluded'])} excluded")
+            print(f"  file: {report['path']}")
+            print(f"  sha256: {report['manifest']['sha256'][:16]}…")
+            for ex in report["excluded"][:10]:
+                print(f"  excluded [{ex['id'][:8]}]: {ex['reason']}")
+            if len(report["excluded"]) > 10:
+                print(f"  … and {len(report['excluded']) - 10} more excluded")
+            return
+
+        if getattr(args, "ingest", ""):
+            try:
+                report = _sync.ingest_pack_file(args.ingest)
+            except _sync.PackError as exc:
+                print(f"ingest refused: {exc}")
+                return
+            print(f"ingested pack v{report['version']}: "
+                  f"{report['accepted']} new, {report['corroborated']} corroborated")
+            return
+
+        if getattr(args, "sync", False):
+            server = (getattr(args, "server", "") or "").strip() \
+                or os.environ.get("LEVI_CLOUD_SERVER", "").strip() \
+                or "http://127.0.0.1:8765"
+            api_key = (getattr(args, "api_key", "") or "").strip() \
+                or os.environ.get("LEVI_API_KEY", "").strip() \
+                or os.environ.get("LEVI_AGENT_TOKEN", "").strip()
+            if not api_key:
+                print("sync needs an API key: --api-key, LEVI_API_KEY, or LEVI_AGENT_TOKEN")
+                return
+            try:
+                report = _sync.sync_from_server(server, api_key)
+            except _sync.PackError as exc:
+                print(f"sync failed: {exc}")
+                return
+            if report["status"] == "no-packs":
+                print("server has published no learning packs yet")
+            else:
+                print(f"synced pack v{report['version']}: "
+                      f"{report['accepted']} new, {report['corroborated']} corroborated")
+            return
+
+        # default: list installed packs
+        installed = _sync.installed_packs()
+        if not installed:
+            print("No learning packs installed yet.")
+            return
+        for rec in installed:
+            print(f"v{rec['version']}: {rec['entry_count']} technique(s), "
+                  f"ingested {rec['ingested_at']}, sha {rec['sha256'][:16]}…")
         return
 
     print(f"Unknown growth action: {action}")
@@ -3186,7 +3247,7 @@ def main():
     mh_p.add_argument("--why", default=None, help="Trace belief to evidence")
     gr_p = sub.add_parser("growth", help="Raise baby Levi: developmental learning loop")
     gr_p.add_argument("growth_action", nargs="?", default="status",
-                      choices=["status", "cycle", "journal", "learnings", "forget", "curriculum", "study"])
+                      choices=["status", "cycle", "journal", "learnings", "forget", "curriculum", "study", "pack"])
     gr_p.add_argument("curriculum_action", nargs="?", default="load",
                       choices=["load", "list", "run", "trend"],
                       help="curriculum: load|list; study: run|trend "
@@ -3202,6 +3263,20 @@ def main():
     gr_p.add_argument("--id", dest="forget_id", default="",
                       help="forget: learning id prefix to remove")
     gr_p.add_argument("--tag", default="", help="forget: remove learnings with this tag")
+    gr_p.add_argument("--build", action="store_true",
+                      help="pack: build a versioned learning pack from shareable learnings")
+    gr_p.add_argument("--ingest", default="",
+                      help="pack: ingest a learning pack file (offline fallback)")
+    gr_p.add_argument("--sync", action="store_true",
+                      help="pack: pull the latest learning pack from the cloud server and ingest it")
+    gr_p.add_argument("--pack-list", action="store_true",
+                      help="pack: list installed learning packs")
+    gr_p.add_argument("--min-corroboration", type=int, default=0,
+                      help="pack build: only include learnings corroborated at least N times")
+    gr_p.add_argument("--server", default="",
+                      help="pack sync: cloud server base URL (or LEVI_CLOUD_SERVER)")
+    gr_p.add_argument("--api-key", default="",
+                      help="pack sync: API key or owner token (or LEVI_API_KEY / LEVI_AGENT_TOKEN)")
     brain_p = sub.add_parser("brain", help="Corpus + indexed brain table + export")
     brain_p.add_argument("brain_action", nargs="?", default="table", choices=["table", "corpus", "set", "export", "atlas"])
     brain_p.add_argument("--seed-atlas", action="store_true", help="Pre-load offline brain A-Z atlas")
@@ -3507,6 +3582,17 @@ def main():
         pass
     # === FLEET-REGION-END ===
 
+    # === CONTROL-REGION-BEGIN: Control-plane command registration ===
+    # Parallel tracks: keep ALL control-plane wiring inside this delimited
+    # region — do not scatter control hunks elsewhere in this file.
+    try:
+        from levi.control.cli import register_control as _control_register
+        _control_register(sub)
+    except Exception:
+        # Control degrades: the CLI still boots without the control plane.
+        pass
+    # === CONTROL-REGION-END ===
+
     # === PWA-REGION-BEGIN: PWA command registration ===
     # Parallel tracks: keep ALL pwa wiring inside this delimited region —
     # do not scatter pwa hunks elsewhere in this file.
@@ -3561,6 +3647,19 @@ def main():
     except Exception:
         pass
     # === FLEET-REGION-END ===
+    # === CONTROL-REGION-BEGIN: Control-plane command dispatch ===
+    try:
+        from levi.control.cli import (
+            cmd_approve as _cmd_approve,
+            cmd_ledger as _cmd_ledger,
+            cmd_route as _cmd_route,
+        )
+        cmds["approve"] = _cmd_approve
+        cmds["ledger"] = _cmd_ledger
+        cmds["route"] = _cmd_route
+    except Exception:
+        pass
+    # === CONTROL-REGION-END ===
     # === PWA-REGION-BEGIN: PWA command dispatch ===
     try:
         from levi.pwa.cli import cmd_pwa as _cmd_pwa

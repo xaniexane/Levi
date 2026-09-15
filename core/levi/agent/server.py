@@ -229,6 +229,21 @@ class _AgentHandler(BaseHTTPRequestHandler):
                 },
             )
             return
+        if self.path == "/v1/learning/packs/latest":
+            if not self._require_auth():
+                return
+            from levi.growth import sync as _sync
+
+            try:
+                payload = _sync.latest_pack_payload()
+            except Exception:  # never leak internals
+                self._meter("/v1/learning/packs/latest", ok=False,
+                            error="pack read failed")
+                self._send_json(500, {"error": "could not read learning packs"})
+                return
+            self._meter("/v1/learning/packs/latest")
+            self._send_json(200, payload)
+            return
         self._send_json(404, {"error": "not found"})
 
     def do_POST(self) -> None:  # noqa: N802 (stdlib method name)
