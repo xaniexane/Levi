@@ -4,6 +4,8 @@
 
 LEVI is a local-first symbiotic intelligence kernel — a single organism built from interpenetrating subsystems that don't just coexist, they *need* each other to function.
 
+**Mission:** LEVI is the next-generation LLM-variant synthetic intelligence — offline-first and privacy-oriented. Read [`docs/MISSION.md`](docs/MISSION.md); it is the prime directive for every build decision.
+
 ---
 
 ## What LEVI Is
