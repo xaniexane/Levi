@@ -134,8 +134,21 @@ class VaultSeal:
     def put(self, name: str, text: str) -> Path:
         name = _sanitize_name(name)
         path = self.dir / f"{name}.seal"
-        path.write_bytes(self.encrypt_bytes(text.encode("utf-8")))
-        os.chmod(path, 0o600)
+        # Atomic, owner-only from creation: write to a temp file opened with
+        # 0o600 (no window with default permissions), then rename over the
+        # target — same pattern as the salt file.
+        tmp = self.dir / f"{name}.seal.tmp"
+        fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+        try:
+            with os.fdopen(fd, "wb") as fh:
+                fh.write(self.encrypt_bytes(text.encode("utf-8")))
+        except BaseException:
+            try:
+                tmp.unlink()
+            except OSError:
+                pass
+            raise
+        os.replace(tmp, path)
         return path
 
     def get(self, name: str) -> str:

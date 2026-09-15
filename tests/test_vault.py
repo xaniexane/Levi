@@ -37,6 +37,9 @@ def test_vault_files_are_owner_only(tmp_path):
     path = seal.put("perms", "x")
     mode = stat.S_IMODE(path.stat().st_mode)
     assert mode == 0o600, f"expected 0o600, got {oct(mode)}"
+    # Atomic write leaves no temp file behind, even on the happy path.
+    assert not (tmp_path / "vault" / "perms.seal.tmp").exists()
+    assert seal.get("perms") == "x"
 
 
 def test_vault_salt_is_unique_per_vault(tmp_path):
