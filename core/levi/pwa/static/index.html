@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#0a0a12"/>
+<title>LEVI</title>
+<link rel="manifest" href="/manifest.json"/>
+<link rel="icon" href="/icon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+  <div class="logo">LEVI</div>
+  <label class="field-label" for="register">Register</label>
+  <select id="register" aria-label="Register"></select>
+  <label class="field-label" for="session">Session</label>
+  <input id="session" value="default" maxlength="64" spellcheck="false" aria-label="Session"/>
+  <div class="model-card">
+    <div class="model-card-title">Model</div>
+    <div id="modelName" class="model-name">…</div>
+    <div id="modelNote" class="model-note"></div>
+  </div>
+  <div class="badge" id="statusBadge">connecting…</div>
+</aside>
+<div class="main">
+  <header class="header">
+    <button id="menuBtn" class="icon-btn" aria-label="Menu">☰</button>
+    <div><strong>Levi</strong><br/><small class="muted">synthetic intelligence · local-first</small></div>
+    <div class="header-right"><span id="providerDot" class="dot"></span><span id="providerName" class="muted"></span></div>
+  </header>
+  <div id="offlineBanner" class="offline-banner hidden">Cannot reach the LEVI server. The app shell is cached; chat needs the local server running.</div>
+  <div id="chat" role="log" aria-live="polite"></div>
+  <div class="controls">
+    <input id="input" placeholder="/help · /image a sunset over water · just talk" autocomplete="off" aria-label="Message"/>
+    <button id="sendBtn">Send</button>
+  </div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

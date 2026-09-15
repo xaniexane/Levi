@@ -1102,6 +1102,51 @@ def cmd_finance(args):
     print(f"Unknown finance action {action!r}")
     raise SystemExit(2)
 
+def _record_agent_ledger(task, transcript, provider) -> None:
+    """Write one ``levi agent run`` into the decision ledger (phase 2).
+
+    Telemetry only — never fatal to the agent run.
+    """
+    try:
+        import uuid as _uuid
+        from levi.control.ledger import LedgerWriter
+        from levi.control.routing import classify_complexity
+        task_id = _uuid.uuid4().hex[:12]
+        complexity, _ = classify_complexity(task or "")
+        ledger = LedgerWriter()
+        ledger.record_task(task_id, objective=(task or "")[:2000],
+                           status="running")
+        tools_used: list = []
+        for step in getattr(transcript, "steps", []) or []:
+            for call in getattr(step, "tool_calls", []) or []:
+                name = call.get("name") if isinstance(call, dict) else None
+                if name:
+                    tools_used.append(name)
+        ledger.record_step(
+            task_id,
+            agent="agent_cli",
+            category="agent_run",
+            task_class=complexity,
+            model=str(getattr(provider, "name", None)
+                      or getattr(transcript, "provider_name", "")),
+            decision_summary=(
+                "agent run via `levi agent run`; per-step rationales "
+                "live in the transcript, not stored here"),
+            action=(task or "")[:2000],
+            actual_result=str(getattr(transcript, "final", "")
+                              or getattr(transcript, "error", ""))[:2000],
+            error=str(getattr(transcript, "error", "") or "")[:1000],
+            outcome="ok" if getattr(transcript, "ok", False) else "failed",
+            cost_units=float(len(tools_used)),
+        )
+        ledger.set_task_status(
+            task_id,
+            "ok" if getattr(transcript, "ok", False) else "failed",
+            cost_units=float(len(tools_used)),
+        )
+    except Exception:
+        pass  # ledger is telemetry, never load-bearing
+
 def cmd_agent(args):
     """Agent runtime (blueprint §7): run a task through the step-level tool
     loop, list tools, or serve the agent over HTTP. Agent modules are
@@ -1418,6 +1463,7 @@ def cmd_agent(args):
             affect=use_affect,
             affect_session=affect_session,
         )
+        _record_agent_ledger(task, transcript, provider)
         if getattr(args, "json", False):
             import json as _json
             print(_json.dumps(transcript.to_dict(), indent=2))
@@ -3461,6 +3507,17 @@ def main():
         pass
     # === FLEET-REGION-END ===
 
+    # === PWA-REGION-BEGIN: PWA command registration ===
+    # Parallel tracks: keep ALL pwa wiring inside this delimited region —
+    # do not scatter pwa hunks elsewhere in this file.
+    try:
+        from levi.pwa.cli import register_pwa as _pwa_register
+        _pwa_register(sub)
+    except Exception:
+        # PWA degrades: the CLI still boots without the chat UI layer.
+        pass
+    # === PWA-REGION-END ===
+
     args = parser.parse_args()
     if not args.command:
         banner()
@@ -3504,6 +3561,13 @@ def main():
     except Exception:
         pass
     # === FLEET-REGION-END ===
+    # === PWA-REGION-BEGIN: PWA command dispatch ===
+    try:
+        from levi.pwa.cli import cmd_pwa as _cmd_pwa
+        cmds["pwa"] = _cmd_pwa
+    except Exception:
+        pass
+    # === PWA-REGION-END ===
     # === SOUL-REGION-BEGIN: Soul command dispatch ===
     try:
         from levi.agent.soul import cmd_soul as _cmd_soul
