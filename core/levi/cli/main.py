@@ -1914,18 +1914,23 @@ def cmd_vault(args):
 
 
 def _cmd_cloud_keys(args):
-    """`levi cloud keys create <name>|list|revoke <name|prefix>`."""
+    """`levi cloud keys create <name> [--no-learn]|list|revoke <name|prefix>|learn <name|prefix> on|off`."""
     from levi.cloud import apikeys
 
     rest = list(getattr(args, "cloud_args", None) or [])
     keys_action = rest[0].lower() if rest else ""
-    target = rest[1] if len(rest) > 1 else None
+    flags = {a for a in rest if a.startswith("--")}
+    positionals = [a for a in rest[1:] if not a.startswith("--")]
+    target = positionals[0] if positionals else None
     if keys_action == "create":
         if not target:
-            print("Usage: levi cloud keys create <name>")
+            print("Usage: levi cloud keys create <name> [--no-learn]")
             raise SystemExit(2)
+        learn = "--no-learn" not in flags and not bool(
+            getattr(args, "cloud_no_learn", False)
+        )
         try:
-            raw, record = apikeys.create_key(target)
+            raw, record = apikeys.create_key(target, learn=learn)
         except apikeys.KeyError as exc:
             print(f"Error: {exc}")
             raise SystemExit(1) from None
@@ -3275,6 +3280,12 @@ def main():
         "cloud_args",
         nargs="*",
         help="extra args for 'keys' (create <name> | list | revoke <name|prefix>)",
+    )
+    cloud_p.add_argument(
+        "--no-learn",
+        dest="cloud_no_learn",
+        action="store_true",
+        help="keys create: opt this key out of growth learning",
     )
     cloud_p.add_argument(
         "--key", dest="cloud_key_filter", default=None,
