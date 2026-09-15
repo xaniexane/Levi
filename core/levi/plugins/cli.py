@@ -57,7 +57,9 @@ def cmd_reference(args) -> None:
         return
 
     if action == "remove":
-        rid = (getattr(args, "ref_id", None) or "").strip()
+        rid = (
+            getattr(args, "ref_id", None) or getattr(args, "provider", None) or ""
+        ).strip()
         if not rid:
             print("Usage: levi reference remove <id>")
             raise SystemExit(2)
