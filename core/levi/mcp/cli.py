@@ -49,7 +49,9 @@ def _cmd_mcp_client(args, action: str) -> None:
             cfg = servers[name]
             t = cfg.get("transport", "?")
             where = cfg.get("url") or " ".join(cfg.get("command", []))
-            print(f"  {name}  [{t}]  {where}")
+            ref = cfg.get("reference")
+            tag = f"  (reference: {ref})" if ref else ""
+            print(f"  {name}  [{t}]  {where}{tag}")
         print("\n`levi agent run` attaches these servers' tools automatically.")
         return
 
@@ -77,6 +79,7 @@ def _cmd_mcp_client(args, action: str) -> None:
                 command=command,
                 headers=headers or None,
                 timeout=getattr(args, "timeout", None) or None,
+                reference=getattr(args, "reference", None) or None,
             )
         except _mc.MCPClientError as exc:
             print(f"mcp add failed: {exc}")
@@ -91,7 +94,9 @@ def _cmd_mcp_client(args, action: str) -> None:
             print(f"Saved {name!r}, but the server did not answer: {exc}")
             print("Fix the URL/command, or `levi mcp remove` it.")
             raise SystemExit(1) from None
-        print(f"Added MCP server {name!r} ({transport}) — {n} tool(s) available.")
+        ref = cfg.get("reference")
+        tag = f"  [reference: {ref}]" if ref else ""
+        print(f"Added MCP server {name!r} ({transport}){tag} — {n} tool(s) available.")
         return
 
     if action == "remove":

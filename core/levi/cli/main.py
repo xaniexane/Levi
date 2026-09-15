@@ -884,6 +884,12 @@ def cmd_plugins(args):
     print(PluginCatalog().format(category=getattr(args, "category", None) or None))
 
 
+def cmd_reference(args):
+    from levi.plugins.cli import cmd_reference as _cmd
+
+    _cmd(args)
+
+
 def cmd_plugin(args):
     """Plugin connectors (blueprint §3): list registered connectors or
     execute one operation. Writes require --yes (HITL gate); without a
@@ -3779,6 +3785,36 @@ def main():
         "--yes", action="store_true", help="Confirm a write operation (HITL gate)"
     )
     plug2_e.add_argument("--json", action="store_true", help="Print the result as JSON")
+    ref_p = sub.add_parser(
+        "reference",
+        help="Universal provider references: plug external providers in as references",
+    )
+    ref_p.add_argument(
+        "reference_action",
+        nargs="?",
+        default="list",
+        choices=["add", "remove", "list"],
+        help="reference action",
+    )
+    ref_p.add_argument("provider", nargs="?", default=None, help="add: provider name")
+    ref_p.add_argument(
+        "--kind",
+        default="other",
+        choices=["mcp-server", "plugin", "model", "media", "other"],
+        help="add: what the reference is plugged into",
+    )
+    ref_p.add_argument(
+        "--detail",
+        action="append",
+        default=[],
+        help="add: extra detail as k=v (repeatable)",
+    )
+    ref_p.add_argument(
+        "--id",
+        dest="ref_id",
+        default=None,
+        help="add: local id (default ref-<slug>); remove: id to unplug",
+    )
     fin_p = sub.add_parser(
         "finance",
         help="Paper-only finance: quotes, indicators, signals, paper orders (blueprint §5)",
@@ -4245,6 +4281,12 @@ def main():
         help="add: per-call timeout in seconds (default 30)",
     )
     mcp_p.add_argument(
+        "--reference",
+        default=None,
+        help="add: external provider behind this server, recorded as a "
+        "reference (e.g. KAI-9000) — never a source, never LEVI identity",
+    )
+    mcp_p.add_argument(
         "--transport",
         default="stdio",
         choices=["stdio", "http"],
@@ -4688,6 +4730,7 @@ def main():
         "sandbox": cmd_sandbox,
         "plugins": cmd_plugins,
         "plugin": cmd_plugin,
+        "reference": cmd_reference,
         "finance": cmd_finance,
         "agent": cmd_agent,
         "builder": cmd_builder,

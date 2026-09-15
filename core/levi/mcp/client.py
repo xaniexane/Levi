@@ -112,9 +112,18 @@ def add_server(
     command: Optional[list[str]] = None,
     headers: Optional[dict] = None,
     timeout: Optional[float] = None,
+    reference: Optional[str] = None,
     home: Optional[Path] = None,
 ) -> dict:
-    """Add (or replace) a server config. Returns the stored config."""
+    """Add (or replace) a server config. Returns the stored config.
+
+    ``reference`` is the external provider behind this server, recorded
+    as a *reference* (never a source, never LEVI identity) in the
+    universal registry (``levi.plugins.references``) as well as on the
+    server config itself.
+    """
+    from levi.plugins import references as _refs
+
     name = _validate_name(name)
     transport = (transport or "").strip().lower()
     if transport == "http":
@@ -131,20 +140,44 @@ def add_server(
         raise MCPClientError(f"unknown MCP transport {transport!r} (http|stdio)")
     if timeout:
         cfg["timeout"] = float(timeout)
+    if reference:
+        provider = _refs.validate_provider_name(reference)
+        cfg["reference"] = provider
     servers = load_servers(home)
     servers[name] = cfg
     save_servers(servers, home)
+    if reference:
+        target = url or (" ".join(command) if command else "")
+        # Replacing a server: drop the old linked reference record first so
+        # a stale provider label can never linger.
+        _refs.remove_references_where(
+            lambda r: r.kind == "mcp-server" and r.detail.get("mcp_server") == name,
+            home=home,
+        )
+        _refs.add_reference(
+            provider,
+            kind="mcp-server",
+            detail={"mcp_server": name, "transport": transport, "target": target},
+            home=home,
+        )
     return cfg
 
 
 def remove_server(name: str, home: Optional[Path] = None) -> None:
     """Remove a server config. Raises MCPClientError when unknown."""
+    from levi.plugins import references as _refs
+
     name = _validate_name(name)
     servers = load_servers(home)
     if name not in servers:
         raise MCPClientError(f"unknown MCP server {name!r}")
     del servers[name]
     save_servers(servers, home)
+    _refs.remove_references_where(
+        lambda r: r.kind == "mcp-server"
+        and r.detail.get("mcp_server") == name,
+        home=home,
+    )
 
 
 def list_servers(home: Optional[Path] = None) -> dict:

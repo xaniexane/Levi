@@ -102,6 +102,10 @@ class Connector(ABC):
     capabilities: ClassVar[tuple[Capability, ...]] = ()
     operations: ClassVar[tuple[Operation, ...]] = ()
     requires_confirmation: ClassVar[bool] = False
+    #: External provider names this connector touches, as *references*
+    #: (never sources, never LEVI identity — see levi.plugins.references).
+    #: Validated at class-definition time.
+    references: ClassVar[tuple[str, ...]] = ()
 
     def __init_subclass__(cls, **kwargs: Any) -> None:
         super().__init_subclass__(**kwargs)
@@ -114,6 +118,14 @@ class Connector(ABC):
         )
         if writes:
             cls.requires_confirmation = True
+        # Identity rule: provider names a connector touches are references,
+        # never LEVI identity. Validate at class-definition time.
+        if cls.references:
+            from levi.plugins.references import validate_provider_name
+
+            cls.references = tuple(
+                validate_provider_name(r) for r in cls.references
+            )
 
     # -- credential handling ----------------------------------------------
 
@@ -308,11 +320,13 @@ def describe(connector: Connector) -> str:
         f"{c.name}{'*' if c.write else ''}" for c in connector.capabilities
     )
     ops = ", ".join(f"{o.name}{'*' if o.write else ''}" for o in connector.operations)
+    refs = ", ".join(connector.references) if connector.references else "(none)"
     return (
         f"{connector.id} — {connector.display_name}\n"
         f"  credential: {connector.credential_env_var} "
         f"({'present' if connector.credential() else 'missing'})\n"
         f"  capabilities: {caps or '(none)'}\n"
         f"  operations: {ops or '(none)'}  (* = write)\n"
+        f"  references: {refs}  (external providers — references, never LEVI sources)\n"
         f"  requires_confirmation: {connector.requires_confirmation}"
     )

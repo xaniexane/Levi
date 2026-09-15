@@ -154,9 +154,16 @@ anything LEVI draws capability from. A reference is a pointer for
 comparison or attribution — nothing more.
 
 ```bash
-levi mcp add kai_9000 --url https://example.com/mcp      # a provider, as a reference
+levi mcp add kai_9000 --url https://example.com/mcp --reference KAI-9000
 levi mcp list-servers                                    # references, plainly labeled
+levi reference list                                      # every plugged-in provider, one view
 ```
+
+References plug in universally — MCP servers, plugin connectors
+(`references = (...)` on the connector class), models, media — through
+`levi.plugins.references`, the one registry for the rule. A reference
+can never collide with LEVI identity: the registry refuses names like
+`LEVI` or `levi-care`. See `docs/REFERENCES.md`.
 
 The same rule covers model weights: `levi agent model pull` ships
 LEVI-named weights (`levi-0.6b`, `levi-4b`); the upstream base appears
