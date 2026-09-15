@@ -1,14 +1,17 @@
-# LEVI as an MCP Server
+# LEVI and MCP (Model Context Protocol)
 
 **MCP (Model Context Protocol)** is an open standard (Anthropic, 2024) that
-lets AI apps talk to external tools over JSON-RPC: a *client* (Claude
-Desktop, an editor, another agent) connects to a *server* that advertises
-tools, and calls them by name with JSON arguments. LEVI ships an MCP
-server so any MCP-compatible app can consume LEVI's tool registry —
-LEVI becomes a tool provider for other intelligences, not just a
-standalone agent.
+lets AI apps talk to external tools over JSON-RPC: a *client* connects to
+a *server* that advertises tools, and calls them by name with JSON
+arguments. LEVI speaks MCP in **both** directions:
 
-## Quickstart
+* **Server** (`levi mcp serve`) — any MCP-compatible app can consume LEVI's
+  tool registry; LEVI becomes a tool provider for other intelligences.
+* **Client** (`levi mcp add …`) — LEVI connects *out* to external MCP
+  servers and merges their tools into the agent's own registry, so
+  `levi agent run` can use third-party tools.
+
+## LEVI as an MCP server
 
 **Local client (full tools, owner):**
 
@@ -93,3 +96,50 @@ the restricted tools — keep it on localhost or behind your own TLS.
   complete path.
 * `tools/call` is synchronous: a long-running tool holds the HTTP
   worker thread until it returns.
+
+---
+
+## LEVI as an MCP client
+
+LEVI can also consume tools from *other* MCP servers — a second LEVI
+instance, a local dev-tools server, any third-party MCP server. Added
+servers are probed at `add` time and re-contacted on every
+`levi agent run` / `levi agent chat` start (unreachable servers are
+skipped with a warning, never fatal).
+
+```bash
+# Streamable HTTP server
+levi mcp add notes --url http://127.0.0.1:8899/mcp
+
+# Local stdio server
+levi mcp add files --cmd "npx -y some-mcp-server"
+
+levi mcp list-servers
+levi mcp remove files
+```
+
+Remote tools appear in the agent registry as
+`mcp__<server>__<tool>` (e.g. `mcp__notes__search`) and are callable
+like any built-in:
+
+```bash
+levi agent run "search my notes for the vault passphrase" --yes
+```
+
+Configs live in `~/.levi/mcp/servers.json` (owner-only 0o600):
+`{transport: http|stdio, url|command, headers?, timeout?}`.
+
+**Trust model:** adding a server is the explicit trust decision —
+remote tools are *not* confirmation-gated. Only add servers you trust,
+exactly like installing a plugin. Server configs never store secrets
+in plain sight beyond what you pass as headers (prefer env-injected
+tokens via your own wrapper).
+
+**Transports:** Streamable HTTP (`POST /mcp`, with automatic fallback
+to the legacy HTTP+SSE handshake) and stdio (subprocess,
+newline-delimited JSON-RPC). Per-call timeout defaults to 30s
+(overridable per server).
+
+**Honest limits:** no background reconnect loop (reconnect happens on
+each agent start); notifications from servers are ignored; tool calls
+are synchronous with a timeout.

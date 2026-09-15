@@ -1127,6 +1127,16 @@ def cmd_agent(args):
             raise SystemExit(2)
         return variant.id, system_for(variant.id)
 
+    def _attach_mcp(registry):
+        """Merge configured external MCP servers' tools (never breaks startup)."""
+        try:
+            from levi.mcp.client import attach_mcp_tools as _attach
+            attached = _attach(registry)
+            if attached:
+                print(f"MCP client: attached {', '.join(attached)}\n")
+        except Exception as e:
+            print(f"[levi:mcp] client attach failed: {e}")
+
     if action == "serve":
         from levi.agent.server import serve
         serve(host=getattr(args, "host", None) or "127.0.0.1",
@@ -1155,6 +1165,7 @@ def cmd_agent(args):
             workspace_root=getattr(args, "workspace", None) or None,
             consent=consent,
         )
+        _attach_mcp(registry)
         register_id, register_system = _kai_register_system()
         if register_id:
             print(f"KAI-9000 register: {register_id}\n")
@@ -1326,6 +1337,7 @@ def cmd_agent(args):
         )
         print(f"Running with provider={getattr(provider, 'name', '?')} "
               f"consent={'yes (--yes)' if consent else 'no (gates will prompt/deny)'} ...\n")
+        _attach_mcp(registry)
         register_id, register_system = _kai_register_system()
         if register_id:
             print(f"KAI-9000 register: {register_id}\n")
@@ -3044,9 +3056,22 @@ def main():
                        help="chat: OpenAI-compatible base URL (or LEVI_LAB_ENDPOINT)")
     lab_p.add_argument("--model", default=None, help="chat: model id")
     proj_p = sub.add_parser("project", help="Pre-MVP phase runner / HITL / capability log (service capability-discovery)")
-    mcp_p = sub.add_parser("mcp", help="Serve LEVI's tools over MCP (Model Context Protocol)")
-    mcp_p.add_argument("mcp_action", nargs="?", default="serve", choices=["serve"],
+    mcp_p = sub.add_parser("mcp", help="MCP: serve LEVI's tools, or connect LEVI out to external MCP servers")
+    mcp_p.add_argument("mcp_action", nargs="?", default="serve",
+                       choices=["serve", "add", "remove", "list-servers"],
                        help="mcp action")
+    mcp_p.add_argument("name", nargs="?", default=None,
+                       help="add/remove: server name")
+    mcp_p.add_argument("--url", default=None,
+                       help="add: Streamable-HTTP endpoint URL (e.g. http://host:8899/mcp)")
+    mcp_p.add_argument("--cmd", default=None,
+                       help="add: stdio server command line, quoted (e.g. \"npx -y some-mcp-server\")")
+    mcp_p.add_argument("--client-transport", default="",
+                       help="add: http|stdio (auto-detected from --url/--cmd by default)")
+    mcp_p.add_argument("--header", action="append", default=[],
+                       help="add: extra HTTP header as KEY=VALUE (repeatable)")
+    mcp_p.add_argument("--timeout", type=float, default=None,
+                       help="add: per-call timeout in seconds (default 30)")
     mcp_p.add_argument("--transport", default="stdio", choices=["stdio", "http"],
                        help="stdio: full owner registry (for local MCP clients); http: restricted cloud-safe profile")
     mcp_p.add_argument("--host", default="127.0.0.1", help="http: bind address")
