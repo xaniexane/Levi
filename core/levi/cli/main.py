@@ -2461,6 +2461,79 @@ def cmd_affect(args):
     print("Full spec: docs/AFFECT.md")
 
 
+# --- LEVI Boot Camp: 30-day 24/7 program (academy-owned block) ---
+def cmd_academy(args):
+    """LEVI Boot Camp: 30-day x 4-block training program status and sessions."""
+    from levi.academy import run_session as rs
+
+    action = getattr(args, "academy_action", None) or "status"
+    if action == "status":
+        syllabus = rs.load_syllabus()
+        progress = rs.load_progress()
+        done = progress.get("completed", [])
+        per_track = {"A": 0, "B": 0, "C": 0, "S": 0}
+        for sid in done:
+            try:
+                n = (int(sid[1:].split("b")[0]) - 1) * 4 + int(sid.split("b")[1])
+                per_track[{1: "A", 2: "B", 3: "C", 0: "S"}[n % 4]] += 1
+            except Exception:
+                continue
+        day = min(len(done) // 4 + 1, 30)
+        phase = rs.week_phase_for(syllabus, day)
+        try:
+            from levi.academy import corpus_ingest as aci
+            cstats = aci.corpus_stats()
+        except Exception:
+            cstats = {"records": 0, "chars": 0}
+        try:
+            from levi.academy import concepts as acon
+            rstats = acon.retention_stats()
+        except Exception:
+            rstats = {}
+        streaks = rs.get_streaks(progress)
+        print("LEVI Boot Camp — 30-day 24/7 program")
+        print(f"  day: {day}/30 ({phase})")
+        print(f"  sessions completed: {len(done)}/120")
+        for t in ("A", "B", "C", "S"):
+            n = per_track[t]
+            bar = "#" * (n * 30 // 30) + "-" * (30 - n * 30 // 30)
+            name = syllabus["track_names"][t]
+            print(f"  [{t}] {name:38s} [{bar}] {n}/30")
+        print("  pass streaks (current/best): " +
+              "  ".join(f"{t} {streaks[t]['current']}/{streaks[t]['best']}"
+                        for t in ("A", "B", "C", "S")))
+        if rstats:
+            print("  retention — review drill hit rate "
+                  "(completion without retention is failure):")
+            for t in ("A", "B", "C", "S"):
+                r = rstats.get(t, {})
+                hr = r.get("hit_rate", 0.0)
+                bar = "#" * int(hr * 20) + "-" * (20 - int(hr * 20))
+                print(f"    [{t}] [{bar}] {hr:.0%} "
+                      f"({r.get('concepts', 0)} concepts, "
+                      f"{r.get('reviewed', 0)} reviewed)")
+        pending = progress.get("pending_remedial")
+        if pending:
+            print(f"  ! pending remediation: day {pending['day']} block "
+                  f"{pending['block']} (attempt {pending.get('attempts', 0) + 1}) "
+                  f"— next run remediates before any new session")
+        print(f"  brain corpus: {cstats['records']} academy records, "
+              f"{cstats['chars']:,} chars (post-mastery knowledge only)")
+        if progress.get("graduated"):
+            print("  status: GRADUATED")
+        return 0
+    if action == "session":
+        day = getattr(args, "day", None)
+        block = getattr(args, "block", None)
+        if day is None or block is None:
+            print("Usage: levi academy session --day N --block M")
+            return 2
+        return rs.main(["--day", str(day), "--block", str(block)])
+    print(f"Unknown academy action: {action}")
+    return 2
+# --- end academy-owned block ---
+
+
 def cmd_lab(args):
     """LEVI Lab: on-device agentic AI demos, fixtures, footprint math."""
     from levi.lab import scenarios as lab_scen
@@ -4457,6 +4530,17 @@ def main():
         help="chat: OpenAI-compatible base URL (or LEVI_LAB_ENDPOINT)",
     )
     lab_p.add_argument("--model", default=None, help="chat: model id")
+    # --- LEVI Boot Camp: 30-day 24/7 program (academy-owned block) ---
+    acad_p = sub.add_parser("academy", help="LEVI Boot Camp: 30-day 24/7 training program")
+    acad_p.add_argument(
+        "academy_action",
+        nargs="?",
+        default="status",
+        choices=["status", "session"],
+    )
+    acad_p.add_argument("--day", type=int, default=None, help="session: day 1-30")
+    acad_p.add_argument("--block", type=int, default=None, help="session: block 1-4")
+    # --- end academy-owned block ---
     proj_p = sub.add_parser(
         "project",
         help="Pre-MVP phase runner / HITL / capability log (service capability-discovery)",

@@ -741,16 +741,41 @@ class SkillRegistry:
 
         for s in COURSE_SKILLS:
             self.register(s)
+        # LEVI academy skill pack (defensive analyst capabilities).
+        # Read-only INFO-risk helpers: detection advisor, hunt hypotheses,
+        # hardening checks, plus per-day study briefs.
+        from levi.skill.academy_skills import ACADEMY_SKILLS
+
+        for s in ACADEMY_SKILLS:
+            self.register(s)
 
     def register(self, skill: Skill) -> None:
+        if not isinstance(skill, Skill):
+            raise ValueError(
+                f"register: 'skill' must be a Skill, got {type(skill).__name__}"
+            )
+        if not isinstance(skill.id, str) or not skill.id.strip():
+            raise ValueError(
+                f"register: skill id must be a non-empty string, got {skill.id!r}"
+            )
         self._skills[skill.id] = skill
 
     def get(self, skill_id: str) -> Optional[Skill]:
+        if not isinstance(skill_id, str):
+            raise ValueError(
+                f"get: 'skill_id' must be a string, got {type(skill_id).__name__}"
+            )
         return self._skills.get(skill_id)
 
     def list(
         self, category: Optional[str] = None, tag: Optional[str] = None
     ) -> List[Skill]:
+        for what, value in (("category", category), ("tag", tag)):
+            if value is not None and not isinstance(value, str):
+                raise ValueError(
+                    f"list: {what!r} must be a string or None, got "
+                    f"{type(value).__name__}"
+                )
         results = list(self._skills.values())
         if category:
             results = [s for s in results if s.category == category]
