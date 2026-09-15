@@ -42,3 +42,13 @@ version = { attr = "levi.__version__" }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+# Sane subset: pycodestyle errors, pyflakes, bugbear. No formatting churn
+# (ruff format is intentionally NOT adopted; keep diffs reviewable).
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "B"]
+[tool.ruff.lint.isort]
+known-first-party = ["levi"]
