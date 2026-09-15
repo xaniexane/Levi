@@ -48,6 +48,14 @@ sqlcipher = "4.9.0"            # * new artifact net.zetetic:sqlcipher-android
 securityCrypto = "1.1.0"       # stable (was 1.1.0-alpha06)
 biometric = "1.1.0"            # stable (was 1.2.0-alpha05)
 datastore = "1.2.1"
+# sqlite-android carries the androidx.sqlite.db.* interfaces that
+# sqlcipher-android 4.9.0's classes extend. Do NOT rely on the transitive
+# androidx.sqlite:sqlite artifact: datastore 1.2.1 forces it to 2.5.0, and
+# since 2.5.0 that artifact publishes NO classes jar (KMP metadata only) —
+# without this explicit dep, compileDebugKotlin fails with "Cannot access
+# 'androidx.sqlite.db.SupportSQLiteDatabase'". Keep on the datastore sqlite
+# line (2.5.x).
+sqliteAndroid = "2.5.0"
 work = "2.11.2"
 timber = "5.0.1"
 
@@ -100,6 +108,10 @@ retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = 
 retrofit-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
 
 sqlcipher = { group = "net.zetetic", name = "sqlcipher-android", version.ref = "sqlcipher" }
+# Explicit: the androidx.sqlite.db.* supertypes of sqlcipher's classes.
+# (The transitive androidx.sqlite:sqlite resolves to 2.5.0 via datastore and
+# ships no classes jar — see the sqliteAndroid version note above.)
+sqlite-android = { group = "androidx.sqlite", name = "sqlite-android", version.ref = "sqliteAndroid" }
 security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "securityCrypto" }
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 biometric = { group = "androidx.biometric", name = "biometric", version.ref = "biometric" }

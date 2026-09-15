@@ -2,6 +2,9 @@ package com.cybrus.vyve.data
 
 import android.content.ContentValues
 import android.content.Context
+import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteOpenHelper
+import net.zetetic.database.DefaultDatabaseErrorHandler
 import net.zetetic.database.sqlcipher.SQLiteDatabase
 import net.zetetic.database.sqlcipher.SQLiteOpenHelper
 import timber.log.Timber
@@ -9,11 +12,25 @@ import timber.log.Timber
 // ══════════════════════════════════════════════════════════════════════════
 // SQLCipher-encrypted local store (net.zetetic:sqlcipher-android:4.9.0).
 //
-// The old code mixed android.database.sqlite.SQLiteOpenHelper with
-// net.sqlcipher.* imports (a name collision that could never compile) and
-// called a non-existent openOrCreateDatabase(provider) API. SQLCipher's
-// SQLiteOpenHelper takes the passphrase on getWritableDatabase() /
-// getReadableDatabase() — the database file is encrypted with it.
+// 4.x API notes (verified against the 4.9.0 AAR bytecode — the old
+// net.sqlcipher.* API this file was first written against does not exist
+// here):
+//   • SQLiteDatabase.loadLibs() is GONE. The AAR never loads its own .so,
+//     so the host app must call System.loadLibrary("sqlcipher") once per
+//     process (done in init below).
+//   • The passphrase is constructor-injected (String overload → UTF-8 bytes
+//     internally); getWritableDatabase()/getReadableDatabase() take no args.
+//     Consequence: the key lives in the helper for its lifetime, so key
+//     rotation means building a new DatabaseHelper instance.
+//   • The androidx.sqlite.db.* supertypes need the explicit
+//     androidx.sqlite:sqlite-android dep (see libs.versions.toml).
+//   • SQLiteOpenHelper also implements SupportSQLiteOpenHelper, whose
+//     getWritableDatabase()/getReadableDatabase() bridge methods collide with
+//     the concrete ones (same name+arity, different return type) — Kotlin
+//     cannot resolve the call. We go through the support interface instead;
+//     the bridge delegates to the same keyed database, so behavior is
+//     identical. (insertWithOnConflict → insert(table, CONFLICT_*, values),
+//     rawQuery → query.)
 // ══════════════════════════════════════════════════════════════════════════
 
 data class StoredMessage(
@@ -40,8 +57,20 @@ data class StoredConversation(
 
 class DatabaseHelper(
     context: Context,
-    private val passphraseProvider: () -> CharArray,
-) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+    passphraseProvider: () -> CharArray,
+) : SQLiteOpenHelper(
+    context,
+    DATABASE_NAME,
+    // 4.x takes the key at construction (String → UTF-8 bytes internally).
+    // Resolved once here; rotating the key requires a new helper instance.
+    passphraseProvider().concatToString(),
+    null, // CursorFactory
+    DATABASE_VERSION,
+    0, // minimumSupportedVersion
+    DefaultDatabaseErrorHandler(),
+    null, // hook
+    false, // enableWriteAheadLogging (library default)
+) {
 
     companion object {
         private const val DATABASE_NAME = "vyve.db"
@@ -49,13 +78,19 @@ class DatabaseHelper(
     }
 
     init {
-        // Loads the native libsqlcipher.so before any database access.
-        SQLiteDatabase.loadLibs(context)
+        // 4.x removed SQLiteDatabase.loadLibs(); the AAR never loads its own
+        // libsqlcipher.so, so the host app must load it once per process.
+        System.loadLibrary("sqlcipher")
     }
 
-    private fun writable(): SQLiteDatabase = getWritableDatabase(passphraseProvider())
+    // Via the SupportSQLiteOpenHelper interface: the concrete no-arg
+    // getWritableDatabase()/getReadableDatabase() are unresolvable from Kotlin
+    // (bridge-method collision), and the interface bridges delegate to them.
+    private fun writable(): SupportSQLiteDatabase =
+        (this as SupportSQLiteOpenHelper).writableDatabase
 
-    private fun readable(): SQLiteDatabase = getReadableDatabase(passphraseProvider())
+    private fun readable(): SupportSQLiteDatabase =
+        (this as SupportSQLiteOpenHelper).readableDatabase
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(
@@ -109,21 +144,20 @@ class DatabaseHelper(
             put("sent_at", message.sentAt)
             put("status", message.status)
         }
-        writable().insertWithOnConflict(
+        writable().insert(
             "messages",
-            null,
-            values,
             SQLiteDatabase.CONFLICT_REPLACE,
+            values,
         )
     }
 
     fun getMessages(conversationId: String, limit: Int = 50): List<StoredMessage> {
         val messages = mutableListOf<StoredMessage>()
-        readable().rawQuery(
+        readable().query(
             "SELECT message_id, conversation_id, sender_key_id, sender_id, ciphertext," +
                 " nonce, ephemeral_pubkey, signature, sent_at, status" +
                 " FROM messages WHERE conversation_id = ? ORDER BY sent_at DESC LIMIT ?",
-            arrayOf(conversationId, limit.toString()),
+            arrayOf<Any>(conversationId, limit.toString()),
         ).use { cursor ->
             val idx = { name: String -> cursor.getColumnIndexOrThrow(name) }
             while (cursor.moveToNext()) {
@@ -154,20 +188,18 @@ class DatabaseHelper(
             put("participants", conversation.participantsJson)
             put("last_activity", conversation.lastActivity)
         }
-        writable().insertWithOnConflict(
+        writable().insert(
             "conversations",
-            null,
-            values,
             SQLiteDatabase.CONFLICT_REPLACE,
+            values,
         )
     }
 
     fun getConversations(): List<StoredConversation> {
         val conversations = mutableListOf<StoredConversation>()
-        readable().rawQuery(
+        readable().query(
             "SELECT conversation_id, conversation_type, name, participants, last_activity" +
                 " FROM conversations ORDER BY last_activity DESC",
-            null,
         ).use { cursor ->
             val idx = { name: String -> cursor.getColumnIndexOrThrow(name) }
             while (cursor.moveToNext()) {

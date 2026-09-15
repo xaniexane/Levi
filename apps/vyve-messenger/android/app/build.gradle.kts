@@ -155,6 +155,9 @@ dependencies {
 
     // Encrypted database (SQLCipher) + encrypted prefs + DataStore
     implementation(libs.sqlcipher)
+    // sqlite-android: the androidx.sqlite.db.* supertypes sqlcipher's classes
+    // extend (the transitive sqlite artifact ships no classes jar at 2.5.0).
+    implementation(libs.sqlite.android)
     implementation(libs.security.crypto)
     implementation(libs.datastore.preferences)
 

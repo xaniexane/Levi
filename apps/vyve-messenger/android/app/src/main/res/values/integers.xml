@@ -2,8 +2,8 @@
 <resources>
     <integer name="max_messages_per_page">20</integer>
     <integer name="max_retry_count">3</integer>
-    <integer name="message_edit_window">10 minutes</integer>
+    <integer name="message_edit_window">10</integer>  <!-- minutes -->
     <integer name="offline_sync_interval">300000</integer>  <!-- 5 minutes -->
-    <integer name="notification_icon_size">48dp</integer>
+    <dimen name="notification_icon_size">48dp</dimen>
     <integer name="max_attachments_per_message">10</integer>
 </resources>
