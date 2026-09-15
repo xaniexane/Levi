@@ -2,7 +2,10 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    // NOTE (AGP 9+): org.jetbrains.kotlin.android must NOT be applied — AGP 9
+    // has built-in Kotlin support and fails the build if it is present.
+    // Kotlin compiler plugins that are still required (Compose, serialization)
+    // keep their org.jetbrains.kotlin.plugin.* aliases below.
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)

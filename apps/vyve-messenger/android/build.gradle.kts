@@ -3,7 +3,9 @@
 
 plugins {
     alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.kotlin.android) apply false
+    // NOTE (AGP 9+): org.jetbrains.kotlin.android is intentionally absent —
+    // AGP 9.0+ has built-in Kotlin support and fails the build if the plugin
+    // is applied (see app/build.gradle.kts).
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.ksp) apply false
