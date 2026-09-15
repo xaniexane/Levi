@@ -1608,9 +1608,12 @@ def cmd_growth(args):
     journal [--limit N] — read the growth journal (baby book)
     learnings [--kind KIND] — list Levi's self-taught learnings
     forget (--id ID | --tag TAG) — remove learnings (parental control)
+    curriculum [load|list] — ingest or list the founders' seed curriculum
+    study [run|trend] — study hall: full cycle + self-quiz, or quiz trend
     """
     from levi.growth import cycle as _cycle
     from levi.growth import journal as _journal
+    from levi.growth import study as _study
 
     action = getattr(args, "growth_action", "status") or "status"
 
@@ -1722,6 +1725,48 @@ def cmd_growth(args):
         _journal.append_entry({"kind": "forget", "removed": removed,
                                "by_id": bool(target_id), "tag": tag or None})
         print(f"Forgot {removed} learning(s).")
+        return
+
+    if action == "curriculum":
+        from levi.growth import curriculum as _curriculum
+        sub = (getattr(args, "curriculum_action", "load") or "load").strip()
+        if sub == "load":
+            report = _curriculum.load_curriculum()
+            print(f"curriculum: {report['total']} lessons — "
+                  f"{report['accepted']} accepted, "
+                  f"{report['corroborated']} already present, "
+                  f"{report['skipped']} skipped")
+            return
+        if sub == "list":
+            topics = _curriculum.curriculum_topics()
+            total = sum(topics.values())
+            print(f"curriculum: {total} seed lessons loaded")
+            for topic, count in sorted(topics.items()):
+                print(f"  {topic}: {count}")
+            return
+        print(f"Unknown curriculum action: {sub}")
+        return
+
+    if action == "study":
+        # the study sub-action shares the curriculum_action positional slot
+        sub = (getattr(args, "curriculum_action", "load") or "load").strip()
+        if sub not in ("run", "trend"):
+            sub = "run"  # bare `levi growth study`
+        if sub == "run":
+            use_model = bool(getattr(args, "study_model", False))
+            dry = bool(getattr(args, "dry_run", False))
+            print("Running study hall"
+                  + (" (dry run — nothing will be written)" if dry else "")
+                  + (" (model reflection)" if use_model else " (rules only)")
+                  + " …")
+            report = _study.run_study(use_model=use_model, dry_run=dry)
+            print(_study.format_study_report(report))
+            return
+        if sub == "trend":
+            limit = int(getattr(args, "limit", 10) or 10)
+            print(_study.format_trend(_study.study_trend(limit=limit)))
+            return
+        print(f"Unknown study action: {sub}")
         return
 
     print(f"Unknown growth action: {action}")
@@ -3095,7 +3140,13 @@ def main():
     mh_p.add_argument("--why", default=None, help="Trace belief to evidence")
     gr_p = sub.add_parser("growth", help="Raise baby Levi: developmental learning loop")
     gr_p.add_argument("growth_action", nargs="?", default="status",
-                      choices=["status", "cycle", "journal", "learnings", "forget"])
+                      choices=["status", "cycle", "journal", "learnings", "forget", "curriculum", "study"])
+    gr_p.add_argument("curriculum_action", nargs="?", default="load",
+                      choices=["load", "list", "run", "trend"],
+                      help="curriculum: load|list; study: run|trend "
+                           "(shared second positional; the action picks its own)")
+    gr_p.add_argument("--study-model", action="store_true",
+                      help="study: allow model reflection instead of rules-only")
     gr_p.add_argument("--dry-run", action="store_true",
                       help="cycle: preview without writing anything")
     gr_p.add_argument("--no-model", action="store_true",
@@ -3204,6 +3255,18 @@ def main():
                       help="run: ignore interval/active-hours gating")
     hb_p.add_argument("--interval-min", type=int, default=None,
                       help="run: override the check interval in minutes")
+    to_p = sub.add_parser("torch", help="Pass the torch: mentor bundle for a new LEVI instance")
+    to_p.add_argument("torch_action", nargs="?", default="create",
+                      choices=["create", "read", "sign"],
+                      help="create: package a bundle; read: ingest one as seed; sign: sign the founder's note")
+    to_p.add_argument("path", nargs="?", default="",
+                      help="bundle file (create: optional output path; read/sign: required)")
+    to_p.add_argument("--yes", action="store_true",
+                      help="read: ingest after the preview (Plan→Preview→Permission)")
+    to_p.add_argument("--by", dest="sign_by", default="",
+                      help="sign: who is signing the founder's note")
+    to_p.add_argument("--note", dest="sign_note", default="",
+                      help="sign: the founder's note text")
     lp_p = sub.add_parser("lifepack", help="Life pack: portable LEVI state (export/import)")
     lp_p.add_argument("lifepack_action", choices=["export", "import"],
                       help="lifepack action")
@@ -3444,6 +3507,13 @@ def main():
     except Exception:
         pass
     # === LIFEPACK-REGION-END ===
+    # === TORCH-REGION-BEGIN: Pass-the-torch command dispatch ===
+    try:
+        from levi.torch import cmd_torch as _cmd_torch
+        cmds["torch"] = _cmd_torch
+    except Exception:
+        pass
+    # === TORCH-REGION-END ===
     fn = cmds.get(args.command)
     if fn:
         try:
