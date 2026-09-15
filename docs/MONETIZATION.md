@@ -96,6 +96,9 @@ equivalent human VA cost by 10x — the story writes itself).
 
 ## Pack 3 — PL-01 NeighborOS SaaS (per home-services business)
 
+> The flagship. The original pay plan: NeighborOS is the business LEVI's
+> workforce operates. Everything else funds and feeds it.
+
 Competitor anchors (verified 2026): Housecall Pro $59–$299/mo annual
 ($79–$329 monthly); Jobber $19–$49 solo → $344–$699 team tiers. Both charge
 extra for AI add-ons (HCP: proposal tool $40, GPS $20/vehicle, price book
@@ -200,9 +203,15 @@ cost-neutral, so growth never punishes us and we never need to squeeze.
 
 ## Launch order
 
-1. Cloud Solo ($12) — smallest infra lift, biggest wedge vs. $20 chatbots.
-2. NeighborOS Solo ($39) — PL-01 is the most specified product line; home
-   services is a proven SaaS market with clear anchors to undercut.
+> Direction 2026-09-15 (Chauncey): NeighborOS is the original pay plan —
+> the flagship paid product. Cloud follows in support, not the other way
+> around.
+
+1. NeighborOS Solo ($39) — the flagship. PL-01 is the most specified
+   product line; home services is a proven SaaS market with clear anchors
+   to undercut; lead-gen is the fattest margin in the whole plan.
+2. Cloud Solo ($12) — smallest infra lift, biggest wedge vs. $20 chatbots;
+   supports the fleet that operates NeighborOS.
 3. Fleet Starter ($29) — once Phase 2 control plane proves trustworthy.
 4. Marketplace 10% — once creators exist to sell.
 5. Enterprise — inbound-driven.
