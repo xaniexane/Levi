@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_memory_forensics_with_lime_and_volatility
+name: Analyzing Memory Forensics with LiME and Volatility
+description: Acquire Linux memory with LiME and analyze it with Volatility.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, linux]
+version: 1.0.0
+---
 # Analyzing Memory Forensics with LiME and Volatility
 
 ## Purpose

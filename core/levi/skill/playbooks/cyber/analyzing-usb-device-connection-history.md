@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_usb_device_connection_history
+name: Analyzing USB Device Connection History
+description: Reconstruct USB connections: registry, logs, and setupapi artifacts.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, windows]
+version: 1.0.0
+---
 # Analyzing USB Device Connection History
 
 ## Purpose

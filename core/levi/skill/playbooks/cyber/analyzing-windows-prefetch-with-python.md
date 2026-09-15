@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_windows_prefetch_with_python
+name: Analyzing Windows Prefetch with Python
+description: Parse Prefetch files programmatically in Python for timeline building.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, windows]
+version: 1.0.0
+---
 # Analyzing Windows Prefetch with Python
 
 See also: analyzing-prefetch-files-for-execution-history.md

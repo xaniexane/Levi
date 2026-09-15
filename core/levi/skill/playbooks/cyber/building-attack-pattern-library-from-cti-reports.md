@@ -1,3 +1,13 @@
+---
+skill_id: cyber_building_attack_pattern_library_from_cti_reports
+name: Building an Attack Pattern Library from CTI Reports
+description: Distill CTI reports into reusable ATT&CK-mapped detection patterns.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [threat-intel]
+version: 1.0.0
+---
 # Building an Attack Pattern Library from CTI Reports
 
 ## Purpose

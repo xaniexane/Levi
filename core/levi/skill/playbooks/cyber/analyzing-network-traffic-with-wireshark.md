@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_network_traffic_with_wireshark
+name: Analyzing Network Traffic with Wireshark
+description: Deep packet inspection with Wireshark: filters, streams, and expert analysis.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [network]
+version: 1.0.0
+---
 # Analyzing Network Traffic with Wireshark
 
 ## Purpose

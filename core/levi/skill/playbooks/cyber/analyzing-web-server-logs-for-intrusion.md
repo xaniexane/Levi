@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_web_server_logs_for_intrusion
+name: Analyzing Web Server Logs for Intrusion
+description: Detect web intrusions: traversal, injection, and webshell indicators.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [network, siem]
+version: 1.0.0
+---
 # Analyzing Web Server Logs for Intrusion
 
 ## Purpose

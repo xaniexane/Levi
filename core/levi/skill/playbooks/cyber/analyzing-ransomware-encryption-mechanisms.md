@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_ransomware_encryption_mechanisms
+name: Analyzing Ransomware Encryption Mechanisms
+description: Understand ransomware crypto: key management, speed, and recovery options.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [ransomware, malware-analysis]
+version: 1.0.0
+---
 # Analyzing Ransomware Encryption Mechanisms
 
 ## Purpose

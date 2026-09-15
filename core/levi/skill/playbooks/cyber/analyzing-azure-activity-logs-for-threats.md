@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_azure_activity_logs_for_threats
+name: Analyzing Azure Activity Logs for Threats
+description: Hunt threats in Azure Activity logs: control-plane abuse, policy changes, and anomalous principals.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [cloud, siem]
+version: 1.0.0
+---
 # Analyzing Azure Activity Logs for Threats
 
 ## Purpose

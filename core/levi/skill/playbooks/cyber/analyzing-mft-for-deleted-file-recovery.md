@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_mft_for_deleted_file_recovery
+name: Analyzing the MFT for Deleted File Recovery
+description: Recover deleted files via $MFT analysis: resident vs non-resident data runs.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, windows]
+version: 1.0.0
+---
 # Analyzing the MFT for Deleted File Recovery
 
 ## Purpose

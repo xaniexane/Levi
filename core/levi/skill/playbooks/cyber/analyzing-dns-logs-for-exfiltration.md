@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_dns_logs_for_exfiltration
+name: Analyzing DNS Logs for Exfiltration
+description: Detect DNS tunneling and exfiltration: entropy, query volume, and rare record types.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [network]
+version: 1.0.0
+---
 # Analyzing DNS Logs for Exfiltration
 
 ## Purpose

@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_cobaltstrike_malleable_c2_profiles
+name: Detecting Cobalt Strike Malleable C2 Profiles
+description: Fingerprint malleable C2 profiles from traffic: JA3, headers, and URI patterns.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [network, threat-intel]
+version: 1.0.0
+---
 # Detecting Cobalt Strike Malleable C2 Profiles
 
 ## Purpose

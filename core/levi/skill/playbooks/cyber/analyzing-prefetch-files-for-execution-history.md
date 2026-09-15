@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_prefetch_files_for_execution_history
+name: Analyzing Prefetch Files for Execution History
+description: Reconstruct program execution from Windows Prefetch files.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, windows]
+version: 1.0.0
+---
 # Analyzing Prefetch Files for Execution History
 
 ## Purpose

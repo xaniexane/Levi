@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_email_headers_for_phishing_investigation
+name: Analyzing Email Headers for Phishing Investigations
+description: Trace phishing email origins: authentication results, received chains, and header anomalies.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [email, threat-intel]
+version: 1.0.0
+---
 # Analyzing Email Headers for Phishing Investigations
 
 ## Purpose

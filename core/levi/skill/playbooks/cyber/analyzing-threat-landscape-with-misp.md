@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_threat_landscape_with_misp
+name: Analyzing the Threat Landscape with MISP
+description: Correlate threats in MISP: galaxies, sightings, and event triage.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [threat-intel]
+version: 1.0.0
+---
 # Analyzing the Threat Landscape with MISP
 
 See also: analyzing-threat-intelligence-feeds.md

@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_ransomware_leak_site_intelligence
+name: Analyzing Ransomware Leak Site Intelligence
+description: Monitor ransomware leak sites safely: victim tracking and OPSEC.
+risk: low
+permissions: [network.read]
+requires_confirmation: false
+tags: [ransomware, threat-intel]
+version: 1.0.0
+---
 # Analyzing Ransomware Leak Site Intelligence
 
 ## Purpose

@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_network_flow_data_with_netflow
+name: Analyzing Network Flow Data with NetFlow
+description: Hunt lateral movement and exfiltration in NetFlow/IPFIX records.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [network]
+version: 1.0.0
+---
 # Analyzing Network Flow Data with NetFlow
 
 ## Purpose

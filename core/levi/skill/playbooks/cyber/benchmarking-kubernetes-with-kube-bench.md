@@ -1,3 +1,13 @@
+---
+skill_id: cyber_benchmarking_kubernetes_with_kube_bench
+name: Benchmarking Kubernetes with kube-bench
+description: Run CIS Kubernetes Benchmarks with kube-bench: scoring and remediation.
+risk: moderate
+permissions: [k8s.read]
+requires_confirmation: true
+tags: [kubernetes, compliance]
+version: 1.0.0
+---
 # Benchmarking Kubernetes with kube-bench
 
 ## Purpose

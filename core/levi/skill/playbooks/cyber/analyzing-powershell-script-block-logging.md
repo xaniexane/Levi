@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_powershell_script_block_logging
+name: Analyzing PowerShell Script Block Logging
+description: Hunt obfuscated PowerShell via Script Block Logging (Event 4104).
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [windows, siem]
+version: 1.0.0
+---
 # Analyzing PowerShell Script Block Logging
 
 ## Purpose

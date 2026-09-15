@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_windows_event_logs_in_splunk
+name: Analyzing Windows Event Logs in Splunk
+description: Windows event analytics in Splunk: high-value Event IDs and detection SPL.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [windows, siem]
+version: 1.0.0
+---
 # Analyzing Windows Event Logs in Splunk
 
 See also: analyzing-security-logs-with-splunk.md

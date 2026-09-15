@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_linux_kernel_rootkits
+name: Analyzing Linux Kernel Rootkits
+description: Detect kernel-mode rootkits: syscall-table hooks, module hiding, and memory forensics.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [malware-analysis, linux]
+version: 1.0.0
+---
 # Analyzing Linux Kernel Rootkits
 
 ## Purpose

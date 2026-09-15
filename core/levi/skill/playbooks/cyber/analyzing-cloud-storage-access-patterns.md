@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_cloud_storage_access_patterns
+name: Analyzing Cloud Storage Access Patterns
+description: Detect anomalous cloud storage access: exfiltration-shaped reads and anonymous exposure.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [cloud]
+version: 1.0.0
+---
 # Analyzing Cloud Storage Access Patterns
 
 ## Purpose

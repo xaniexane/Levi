@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_command_and_control_communication
+name: Analyzing Command-and-Control Communication
+description: Identify C2 channels: beaconing, tunneling, and covert-channel indicators.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [network, threat-intel]
+version: 1.0.0
+---
 # Analyzing Command-and-Control Communication
 
 ## Purpose

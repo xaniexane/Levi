@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_certificate_transparency_for_phishing
+name: Analyzing Certificate Transparency Logs for Phishing
+description: Hunt phishing infrastructure in CT logs: lookalike domains and suspicious issuers.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [threat-intel, network]
+version: 1.0.0
+---
 # Analyzing Certificate Transparency Logs for Phishing
 
 ## Purpose

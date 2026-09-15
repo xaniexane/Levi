@@ -1,3 +1,13 @@
+---
+skill_id: cyber_auditing_foundry_smart_contract_security
+name: Auditing Smart Contract Security with Foundry
+description: Security testing with Foundry: fuzz, invariant tests, and Slither triage.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [blockchain]
+version: 1.0.0
+---
 # Auditing Smart Contract Security with Foundry
 
 ## Purpose

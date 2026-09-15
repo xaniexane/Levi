@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_powershell_empire_artifacts
+name: Analyzing PowerShell Empire Artifacts
+description: Detect Empire framework residue: stagers, modules, and logging artifacts.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [malware-analysis, windows]
+version: 1.0.0
+---
 # Analyzing PowerShell Empire Artifacts
 
 ## Purpose

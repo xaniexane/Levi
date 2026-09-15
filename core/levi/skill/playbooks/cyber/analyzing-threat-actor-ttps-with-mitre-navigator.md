@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_threat_actor_ttps_with_mitre_navigator
+name: Analyzing Threat Actor TTPs with MITRE Navigator
+description: Visualize TTP overlap across actors with ATT&CK Navigator layers.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [threat-intel]
+version: 1.0.0
+---
 # Analyzing Threat Actor TTPs with MITRE Navigator
 
 See also: analyzing-threat-actor-ttps-with-mitre-attack.md, analyzing-apt-group-with-mitre-navigator.md

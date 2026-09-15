@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_campaign_attribution_evidence
+name: Analyzing Campaign Attribution Evidence
+description: Weigh attribution evidence for intrusion campaigns: confidence levels and analytic pitfalls.
+risk: info
+permissions: []
+requires_confirmation: false
+tags: [threat-intel]
+version: 1.0.0
+---
 # Analyzing Campaign Attribution Evidence
 
 ## Purpose

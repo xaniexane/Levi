@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_malicious_pdf_with_peepdf
+name: Analyzing Malicious PDFs with peepdf
+description: Dissect malicious PDFs with peepdf: objects, streams, and embedded exploits.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [malware-analysis]
+version: 1.0.0
+---
 # Analyzing Malicious PDFs with peepdf
 
 ## Purpose

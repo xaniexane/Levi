@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_office365_audit_logs_for_compromise
+name: Analyzing Office 365 Audit Logs for Compromise
+description: Detect M365 compromise: impossible travel, inbox rules, and consent grants.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [cloud, siem]
+version: 1.0.0
+---
 # Analyzing Office 365 Audit Logs for Compromise
 
 ## Purpose

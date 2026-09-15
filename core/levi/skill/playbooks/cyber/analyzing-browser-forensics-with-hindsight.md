@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_browser_forensics_with_hindsight
+name: Analyzing Browser Forensics with Hindsight
+description: Extract Chrome history, downloads, and session artifacts with Hindsight.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, windows]
+version: 1.0.0
+---
 # Analyzing Browser Forensics with Hindsight
 
 ## Purpose

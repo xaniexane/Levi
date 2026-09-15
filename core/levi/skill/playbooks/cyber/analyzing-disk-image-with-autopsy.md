@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_disk_image_with_autopsy
+name: Analyzing Disk Images with Autopsy
+description: Examine disk images with Autopsy: timeline, keyword search, and artifact modules.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics]
+version: 1.0.0
+---
 # Analyzing Disk Images with Autopsy
 
 ## Purpose

@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_malicious_url_with_urlscan
+name: Analyzing Malicious URLs with urlscan.io
+description: Detonate suspicious URLs with urlscan.io: DOM, network, and verdict analysis.
+risk: low
+permissions: [network.read]
+requires_confirmation: false
+tags: [threat-intel, network]
+version: 1.0.0
+---
 # Analyzing Malicious URLs with urlscan.io
 
 ## Purpose

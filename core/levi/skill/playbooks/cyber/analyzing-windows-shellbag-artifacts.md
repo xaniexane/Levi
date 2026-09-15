@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_windows_shellbag_artifacts
+name: Analyzing Windows Shellbag Artifacts
+description: Reconstruct folder access history from Shellbags.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, windows]
+version: 1.0.0
+---
 # Analyzing Windows Shellbag Artifacts
 
 ## Purpose

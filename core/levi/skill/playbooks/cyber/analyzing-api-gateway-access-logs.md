@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_api_gateway_access_logs
+name: Analyzing API Gateway Access Logs
+description: Detect abuse in API gateway logs: auth failures, scraping, injection probes, and rate anomalies.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [network, cloud]
+version: 1.0.0
+---
 # Analyzing API Gateway Access Logs
 
 ## Purpose

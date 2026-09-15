@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_network_packets_with_scapy
+name: Analyzing Network Packets with Scapy
+description: Packet-level analysis with Scapy: dissect, filter, and reassemble.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [network]
+version: 1.0.0
+---
 # Analyzing Network Packets with Scapy
 
 ## Purpose

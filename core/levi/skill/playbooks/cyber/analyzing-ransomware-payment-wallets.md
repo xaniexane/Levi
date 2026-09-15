@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_ransomware_payment_wallets
+name: Analyzing Ransomware Payment Wallets
+description: Trace ransomware payments on-chain: clustering and exchange touchpoints.
+risk: low
+permissions: [network.read]
+requires_confirmation: false
+tags: [ransomware, blockchain]
+version: 1.0.0
+---
 # Analyzing Ransomware Payment Wallets
 
 See also: analyzing-ransomware-leak-site-intelligence.md, analyzing-ransomware-network-indicators.md

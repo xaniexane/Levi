@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_linux_audit_logs_for_intrusion
+name: Analyzing Linux Audit Logs for Intrusion
+description: Detect Linux intrusions via auditd: execve anomalies, privilege use, and persistence.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [linux, siem]
+version: 1.0.0
+---
 # Analyzing Linux Audit Logs for Intrusion
 
 ## Purpose

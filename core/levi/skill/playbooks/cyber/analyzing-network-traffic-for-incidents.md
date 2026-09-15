@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_network_traffic_for_incidents
+name: Analyzing Network Traffic for Incidents
+description: Incident-driven traffic analysis: scoping, timeline, and C2 confirmation.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [network]
+version: 1.0.0
+---
 # Analyzing Network Traffic for Incidents
 
 ## Purpose

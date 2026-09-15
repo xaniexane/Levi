@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_bootkit_and_rootkit_samples
+name: Analyzing Bootkit and Rootkit Samples
+description: Analyze bootkit/rootkit samples safely: boot-chain artifacts and persistence indicators.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [malware-analysis, forensics]
+version: 1.0.0
+---
 # Analyzing Bootkit and Rootkit Samples
 
 ## Purpose

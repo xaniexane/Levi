@@ -1,3 +1,13 @@
+---
+skill_id: cyber_auditing_kubernetes_rbac_privilege_escalation
+name: Auditing Kubernetes RBAC for Privilege Escalation Paths
+description: Map RBAC privilege-escalation paths: role aggregation and node proxy abuse.
+risk: moderate
+permissions: [k8s.read]
+requires_confirmation: true
+tags: [kubernetes]
+version: 1.0.0
+---
 # Auditing Kubernetes RBAC for Privilege Escalation Paths
 
 ## Purpose

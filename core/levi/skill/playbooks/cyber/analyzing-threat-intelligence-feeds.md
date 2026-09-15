@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_threat_intelligence_feeds
+name: Analyzing Threat Intelligence Feeds
+description: Evaluate and operationalize threat feeds: scoring, aging, and false positives.
+risk: low
+permissions: [network.read]
+requires_confirmation: false
+tags: [threat-intel]
+version: 1.0.0
+---
 # Analyzing Threat Intelligence Feeds
 
 See also: analyzing-threat-landscape-with-misp.md

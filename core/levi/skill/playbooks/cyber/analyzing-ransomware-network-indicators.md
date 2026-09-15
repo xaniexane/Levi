@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_ransomware_network_indicators
+name: Analyzing Ransomware Network Indicators
+description: Block ransomware at the network layer: pre-encryption indicators and C2.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [ransomware, network]
+version: 1.0.0
+---
 # Analyzing Ransomware Network Indicators
 
 ## Purpose

@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_kubernetes_audit_logs
+name: Analyzing Kubernetes Audit Logs
+description: Hunt cluster intrusions in the Kubernetes audit log: anomalous verbs and service accounts.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [kubernetes]
+version: 1.0.0
+---
 # Analyzing Kubernetes Audit Logs
 
 ## Purpose

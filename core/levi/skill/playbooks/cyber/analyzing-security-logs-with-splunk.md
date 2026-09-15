@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_security_logs_with_splunk
+name: Analyzing Security Logs with Splunk
+description: Security analytics in Splunk: SPL patterns for common attack classes.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [siem]
+version: 1.0.0
+---
 # Analyzing Security Logs with Splunk
 
 See also: analyzing-windows-event-logs-in-splunk.md

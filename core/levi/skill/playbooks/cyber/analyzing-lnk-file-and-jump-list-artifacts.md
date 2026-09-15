@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_lnk_file_and_jump_list_artifacts
+name: Analyzing LNK File and Jump List Artifacts
+description: Reconstruct execution history from LNK files and Jump Lists.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, windows]
+version: 1.0.0
+---
 # Analyzing LNK File and Jump List Artifacts
 
 ## Purpose

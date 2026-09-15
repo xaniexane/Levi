@@ -1,3 +1,13 @@
+---
+skill_id: cyber_abusing_shadow_credentials_for_privesc
+name: Detecting Shadow Credential Abuse for Privilege Escalation
+description: Detect shadow-credential persistence in Active Directory: msDS-KeyCredentialLink anomalies and remediation.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [identity, active-directory]
+version: 1.0.0
+---
 # Detecting Shadow Credential Abuse for Privilege Escalation
 
 ## Purpose

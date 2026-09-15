@@ -1,3 +1,13 @@
+---
+skill_id: cyber_auditing_azure_active_directory_configuration
+name: Auditing Azure Active Directory Configuration
+description: Audit Azure AD/Entra ID configuration: legacy auth, admin roles, and app consents.
+risk: moderate
+permissions: [cloud.read]
+requires_confirmation: true
+tags: [cloud, identity]
+version: 1.0.0
+---
 # Auditing Azure Active Directory Configuration
 
 ## Purpose

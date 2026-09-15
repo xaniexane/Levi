@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_linux_system_artifacts
+name: Analyzing Linux System Artifacts
+description: Collect Linux post-compromise artifacts: journals, auth logs, cron, and shell history.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, linux]
+version: 1.0.0
+---
 # Analyzing Linux System Artifacts
 
 ## Purpose

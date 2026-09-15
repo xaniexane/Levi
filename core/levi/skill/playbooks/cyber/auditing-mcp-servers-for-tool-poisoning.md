@@ -1,3 +1,13 @@
+---
+skill_id: cyber_auditing_mcp_servers_for_tool_poisoning
+name: Auditing MCP Servers for Tool Poisoning
+description: Audit Model Context Protocol servers: tool schemas, prompt injection, and poisoning.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [ai-security]
+version: 1.0.0
+---
 # Auditing MCP Servers for Tool Poisoning
 
 ## Purpose

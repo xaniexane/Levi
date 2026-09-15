@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_windows_lnk_files_for_artifacts
+name: Analyzing Windows LNK Files for Artifacts
+description: Parse Windows shortcut files for execution and exfiltration evidence.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, windows]
+version: 1.0.0
+---
 # Analyzing Windows LNK Files for Artifacts
 
 See also: analyzing-lnk-file-and-jump-list-artifacts.md

@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_ethereum_smart_contract_vulnerabilities
+name: Analyzing Ethereum Smart Contract Vulnerabilities
+description: Find common smart-contract flaws: reentrancy, access control, and oracle issues.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [blockchain]
+version: 1.0.0
+---
 # Analyzing Ethereum Smart Contract Vulnerabilities
 
 ## Purpose

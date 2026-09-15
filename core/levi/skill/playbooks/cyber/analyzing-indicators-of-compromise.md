@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_indicators_of_compromise
+name: Analyzing Indicators of Compromise
+description: Build and validate IOC sets: collection, deduplication, and confidence scoring.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [threat-intel]
+version: 1.0.0
+---
 # Analyzing Indicators of Compromise
 
 ## Purpose

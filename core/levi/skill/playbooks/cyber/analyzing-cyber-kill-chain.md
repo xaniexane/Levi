@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_cyber_kill_chain
+name: Applying the Cyber Kill Chain
+description: Map intrusions to kill-chain phases to find detection gaps and disruption points.
+risk: info
+permissions: []
+requires_confirmation: false
+tags: [threat-intel]
+version: 1.0.0
+---
 # Applying the Cyber Kill Chain
 
 ## Purpose

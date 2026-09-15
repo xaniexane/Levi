@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_sbom_for_supply_chain_vulnerabilities
+name: Analyzing SBOMs for Supply Chain Vulnerabilities
+description: Turn SBOMs into findings: vulnerable components and policy gates.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [supply-chain]
+version: 1.0.0
+---
 # Analyzing SBOMs for Supply Chain Vulnerabilities
 
 See also: analyzing-supply-chain-malware-artifacts.md

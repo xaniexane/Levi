@@ -1,3 +1,13 @@
+---
+skill_id: cyber_auditing_cloud_with_cis_benchmarks
+name: Auditing Cloud Environments with CIS Benchmarks
+description: Assess cloud posture against CIS Benchmarks: scoring and remediation.
+risk: moderate
+permissions: [cloud.read]
+requires_confirmation: true
+tags: [cloud, compliance]
+version: 1.0.0
+---
 # Auditing Cloud Environments with CIS Benchmarks
 
 ## Purpose

@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_apt_group_with_mitre_navigator
+name: Analyzing APT Groups with MITRE Navigator
+description: Profile APT groups with MITRE ATT&CK Navigator: technique overlays and gap analysis.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [threat-intel]
+version: 1.0.0
+---
 # Analyzing APT Groups with MITRE Navigator
 
 ## Purpose

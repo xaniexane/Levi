@@ -1,3 +1,13 @@
+---
+skill_id: cyber_building_adversary_infrastructure_tracking_system
+name: Building an Adversary Infrastructure Tracking System
+description: Track adversary infrastructure: passive DNS, certificates, and pivoting.
+risk: low
+permissions: [network.read]
+requires_confirmation: false
+tags: [threat-intel]
+version: 1.0.0
+---
 # Building an Adversary Infrastructure Tracking System
 
 ## Purpose

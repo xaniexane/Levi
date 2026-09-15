@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_persistence_mechanisms_in_linux
+name: Analyzing Persistence Mechanisms in Linux
+description: Enumerate Linux persistence: systemd, cron, rc files, and kernel modules.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [linux, malware-analysis]
+version: 1.0.0
+---
 # Analyzing Persistence Mechanisms in Linux
 
 ## Purpose

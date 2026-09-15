@@ -1,3 +1,13 @@
+---
+skill_id: cyber_auditing_tls_certificate_transparency_logs
+name: Auditing TLS Certificate Transparency Logs
+description: Continuous CT monitoring for your domains: alerting on unauthorized issuance.
+risk: low
+permissions: [network.read]
+requires_confirmation: false
+tags: [threat-intel, network]
+version: 1.0.0
+---
 # Auditing TLS Certificate Transparency Logs
 
 ## Purpose

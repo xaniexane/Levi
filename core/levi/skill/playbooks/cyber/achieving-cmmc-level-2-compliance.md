@@ -1,3 +1,13 @@
+---
+skill_id: cyber_achieving_cmmc_level_2_compliance
+name: Achieving CMMC Level 2 Compliance
+description: Roadmap for CMMC Level 2: 110 practices across 14 domains, scoping, POA&M, and assessment readiness.
+risk: info
+permissions: []
+requires_confirmation: false
+tags: [compliance]
+version: 1.0.0
+---
 # Achieving CMMC Level 2 Compliance
 
 ## Purpose

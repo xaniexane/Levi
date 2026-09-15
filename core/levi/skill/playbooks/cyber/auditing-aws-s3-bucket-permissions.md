@@ -1,3 +1,13 @@
+---
+skill_id: cyber_auditing_aws_s3_bucket_permissions
+name: Auditing AWS S3 Bucket Permissions
+description: Audit S3 buckets for public exposure and misconfigured policies.
+risk: moderate
+permissions: [cloud.read]
+requires_confirmation: true
+tags: [cloud]
+version: 1.0.0
+---
 # Auditing AWS S3 Bucket Permissions
 
 ## Purpose

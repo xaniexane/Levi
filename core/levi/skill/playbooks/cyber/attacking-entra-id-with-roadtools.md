@@ -1,3 +1,13 @@
+---
+skill_id: cyber_attacking_entra_id_with_roadtools
+name: Detecting Entra ID Attacks Using Roadtools Techniques
+description: Detect Roadtools-style Entra ID tradecraft: token abuse and PRT signals.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [identity, cloud]
+version: 1.0.0
+---
 # Detecting Entra ID Attacks Using Roadtools Techniques
 
 ## Purpose

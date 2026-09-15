@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_cobalt_strike_beacon_configuration
+name: Detecting Cobalt Strike Beacon Configurations
+description: Detect and dissect Cobalt Strike beacons: config extraction and network signatures.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [network, threat-intel]
+version: 1.0.0
+---
 # Detecting Cobalt Strike Beacon Configurations
 
 ## Purpose

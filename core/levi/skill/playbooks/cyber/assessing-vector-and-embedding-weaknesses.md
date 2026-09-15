@@ -1,3 +1,13 @@
+---
+skill_id: cyber_assessing_vector_and_embedding_weaknesses
+name: Assessing Vector and Embedding Weaknesses
+description: Assess AI embedding/vector-store risks: poisoning, leakage, and inversion.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [ai-security]
+version: 1.0.0
+---
 # Assessing Vector and Embedding Weaknesses
 
 ## Purpose

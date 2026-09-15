@@ -1,3 +1,13 @@
+---
+skill_id: cyber_auditing_uefi_firmware_with_chipsec
+name: Auditing UEFI Firmware with CHIPSEC
+description: Audit platform firmware with CHIPSEC: SPI protections and Secure Boot state.
+risk: moderate
+permissions: [system.read]
+requires_confirmation: true
+tags: [firmware]
+version: 1.0.0
+---
 # Auditing UEFI Firmware with CHIPSEC
 
 ## Purpose

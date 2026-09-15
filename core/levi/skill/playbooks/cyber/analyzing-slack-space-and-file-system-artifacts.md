@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_slack_space_and_file_system_artifacts
+name: Analyzing Slack Space and File System Artifacts
+description: Recover slack-space remnants and file-system artifacts.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics]
+version: 1.0.0
+---
 # Analyzing Slack Space and File System Artifacts
 
 ## Purpose

@@ -1,3 +1,13 @@
+---
+skill_id: cyber_automating_ioc_enrichment
+name: Automating IOC Enrichment
+description: Build IOC enrichment pipelines: VT/OTX lookups, scoring, and SIEM push.
+risk: low
+permissions: [network.read]
+requires_confirmation: false
+tags: [threat-intel]
+version: 1.0.0
+---
 # Automating IOC Enrichment
 
 ## Purpose

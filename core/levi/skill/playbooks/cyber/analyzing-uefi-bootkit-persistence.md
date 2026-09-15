@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_uefi_bootkit_persistence
+name: Analyzing UEFI Bootkit Persistence
+description: Detect UEFI bootkit persistence: SPI flash, boot variables, and Secure Boot.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [firmware, malware-analysis]
+version: 1.0.0
+---
 # Analyzing UEFI Bootkit Persistence
 
 See also: analyzing-bootkit-and-rootkit-samples.md

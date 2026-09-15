@@ -1,3 +1,13 @@
+---
+skill_id: cyber_abusing_dpapi_for_credential_access
+name: Detecting DPAPI Abuse for Credential Access
+description: Detect and investigate Windows DPAPI abuse for credential theft: artifact locations, event-log signals, and hardening.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [identity, windows, forensics]
+version: 1.0.0
+---
 # Detecting DPAPI Abuse for Credential Access
 
 ## Purpose

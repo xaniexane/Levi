@@ -1,3 +1,13 @@
+---
+skill_id: cyber_auditing_terraform_infrastructure_for_security
+name: Auditing Terraform Infrastructure for Security
+description: Static security review of Terraform: tfsec/checkov and state hygiene.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [cloud, supply-chain]
+version: 1.0.0
+---
 # Auditing Terraform Infrastructure for Security
 
 ## Purpose

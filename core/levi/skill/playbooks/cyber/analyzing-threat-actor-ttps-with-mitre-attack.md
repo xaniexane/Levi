@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_threat_actor_ttps_with_mitre_attack
+name: Analyzing Threat Actor TTPs with MITRE ATT&CK
+description: Map adversary behavior to ATT&CK: technique mapping and coverage gaps.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [threat-intel]
+version: 1.0.0
+---
 # Analyzing Threat Actor TTPs with MITRE ATT&CK
 
 See also: analyzing-threat-actor-ttps-with-mitre-navigator.md

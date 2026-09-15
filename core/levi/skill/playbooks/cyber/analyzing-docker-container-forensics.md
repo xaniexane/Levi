@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_docker_container_forensics
+name: Analyzing Docker Container Forensics
+description: Forensics for compromised containers: layer diffs, exec history, and runtime artifacts.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, cloud]
+version: 1.0.0
+---
 # Analyzing Docker Container Forensics
 
 ## Purpose

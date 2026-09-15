@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_outlook_pst_for_email_forensics
+name: Analyzing Outlook PST Files for Email Forensics
+description: Extract email evidence from PST files: messages, attachments, and metadata.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, email]
+version: 1.0.0
+---
 # Analyzing Outlook PST Files for Email Forensics
 
 ## Purpose

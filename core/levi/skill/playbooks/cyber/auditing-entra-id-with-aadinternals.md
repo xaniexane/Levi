@@ -1,3 +1,13 @@
+---
+skill_id: cyber_auditing_entra_id_with_aadinternals
+name: Auditing Entra ID with AADInternals
+description: Deep Entra ID assessment with AADInternals: recon, misconfigurations, and drift.
+risk: moderate
+permissions: [cloud.read]
+requires_confirmation: true
+tags: [identity, cloud]
+version: 1.0.0
+---
 # Auditing Entra ID with AADInternals
 
 ## Purpose

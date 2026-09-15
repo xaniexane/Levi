@@ -1,3 +1,13 @@
+---
+skill_id: cyber_auditing_kubernetes_cluster_rbac
+name: Auditing Kubernetes Cluster RBAC
+description: Audit Kubernetes RBAC: cluster-admin bindings and wildcard verbs.
+risk: moderate
+permissions: [k8s.read]
+requires_confirmation: true
+tags: [kubernetes]
+version: 1.0.0
+---
 # Auditing Kubernetes Cluster RBAC
 
 ## Purpose

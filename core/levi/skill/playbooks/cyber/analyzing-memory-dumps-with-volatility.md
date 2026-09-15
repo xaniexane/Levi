@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_memory_dumps_with_volatility
+name: Analyzing Memory Dumps with Volatility
+description: Memory forensics with Volatility: processes, network, and injection artifacts.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, malware-analysis]
+version: 1.0.0
+---
 # Analyzing Memory Dumps with Volatility
 
 ## Purpose

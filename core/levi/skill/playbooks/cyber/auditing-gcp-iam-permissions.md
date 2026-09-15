@@ -1,3 +1,13 @@
+---
+skill_id: cyber_auditing_gcp_iam_permissions
+name: Auditing GCP IAM Permissions
+description: Audit GCP IAM: over-privileged bindings and primitive-role usage.
+risk: moderate
+permissions: [cloud.read]
+requires_confirmation: true
+tags: [cloud]
+version: 1.0.0
+---
 # Auditing GCP IAM Permissions
 
 ## Purpose

@@ -1,3 +1,13 @@
+---
+skill_id: cyber_attacking_oauth_with_device_code_phishing
+name: Detecting OAuth Device Code Phishing
+description: Detect device-code phishing: flow anomalies and Conditional Access hardening.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [identity]
+version: 1.0.0
+---
 # Detecting OAuth Device Code Phishing
 
 ## Purpose

@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_ios_app_security_with_objection
+name: Analyzing iOS App Security with Objection
+description: Dynamic iOS analysis with Objection: SSL-pinning tests and runtime inspection.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [malware-analysis, mobile]
+version: 1.0.0
+---
 # Analyzing iOS App Security with Objection
 
 ## Purpose

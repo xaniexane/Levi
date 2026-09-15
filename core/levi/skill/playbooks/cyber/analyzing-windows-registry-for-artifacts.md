@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_windows_registry_for_artifacts
+name: Analyzing the Windows Registry for Artifacts
+description: Systematic registry forensics: hives, keys, and timeline correlation.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, windows]
+version: 1.0.0
+---
 # Analyzing the Windows Registry for Artifacts
 
 ## Purpose

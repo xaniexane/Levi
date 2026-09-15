@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_active_directory_acl_abuse
+name: Analyzing Active Directory ACL Abuse
+description: Hunt dangerous AD ACLs and attack paths: BloodHound-style analysis and remediation priority.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [identity, active-directory]
+version: 1.0.0
+---
 # Analyzing Active Directory ACL Abuse
 
 ## Purpose

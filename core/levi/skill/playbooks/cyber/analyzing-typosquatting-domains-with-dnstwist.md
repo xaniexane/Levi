@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_typosquatting_domains_with_dnstwist
+name: Analyzing Typosquatting Domains with dnstwist
+description: Find typosquat domains with dnstwist: permutations and registration checks.
+risk: low
+permissions: [network.read]
+requires_confirmation: false
+tags: [threat-intel]
+version: 1.0.0
+---
 # Analyzing Typosquatting Domains with dnstwist
 
 See also: analyzing-certificate-transparency-for-phishing.md

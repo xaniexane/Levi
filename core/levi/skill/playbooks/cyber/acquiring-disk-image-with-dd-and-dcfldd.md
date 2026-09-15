@@ -1,3 +1,13 @@
+---
+skill_id: cyber_acquiring_disk_image_with_dd_and_dcfldd
+name: Acquiring Disk Images with dd and dcfldd
+description: Forensically sound disk imaging with dd/dcfldd: write-blocking, hashing, and chain of custody.
+risk: moderate
+permissions: [evidence.acquire]
+requires_confirmation: true
+tags: [forensics]
+version: 1.0.0
+---
 # Acquiring Disk Images with dd and dcfldd
 
 ## Purpose

@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_windows_amcache_artifacts
+name: Analyzing Windows Amcache Artifacts
+description: Extract program execution evidence from Amcache.hve.
+risk: low
+permissions: []
+requires_confirmation: false
+tags: [forensics, windows]
+version: 1.0.0
+---
 # Analyzing Windows Amcache Artifacts
 
 ## Purpose

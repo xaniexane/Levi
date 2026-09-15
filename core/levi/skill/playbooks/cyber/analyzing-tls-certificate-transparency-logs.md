@@ -1,3 +1,13 @@
+---
+skill_id: cyber_analyzing_tls_certificate_transparency_logs
+name: Analyzing TLS Certificate Transparency Logs
+description: Audit CT logs for rogue and lookalike certificates.
+risk: low
+permissions: [network.read]
+requires_confirmation: false
+tags: [threat-intel, network]
+version: 1.0.0
+---
 # Analyzing TLS Certificate Transparency Logs
 
 See also: auditing-tls-certificate-transparency-logs.md, analyzing-certificate-transparency-for-phishing.md
