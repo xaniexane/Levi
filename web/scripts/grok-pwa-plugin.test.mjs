@@ -1,3 +1,18 @@
+/**
+ * Product decision (2026-09-15, documented in web/docs/share-card-injection.md):
+ *
+ * Share-card injection is HERMITIC. `injectGrokPwaHead` / `createHeadInjector`
+ * use exactly the context they are given and never read ambient workspace
+ * state: without an explicit `ctx.cwd`, no `src/lib/og/site.json` or
+ * `public/og.jpg` is consulted, even when one exists under `process.cwd()`.
+ * Workspace discovery is the caller's job — the Vite plugin passes its root
+ * as `cwd` (dev/preview), the Nitro middleware passes a baked `site`
+ * (deployed). This keeps tests deterministic and stops one workspace's
+ * branding from leaking into another app's injection.
+ *
+ * Title precedence (unchanged): baked/explicit `site.title` > the document's
+ * own `<title>` > the published `*.grok.me` host slug > the `appName` argument.
+ */
 import assert from "node:assert/strict";
 import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";

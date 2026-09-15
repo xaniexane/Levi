@@ -10,7 +10,13 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+# Only touch sys.path when the package isn't already importable (e.g. a fresh
+# checkout without `pip install -e .`). When installed, the `levi` console
+# script and plain `import levi` work without any path mutation.
+try:
+    import levi  # noqa: F401
+except ImportError:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from levi import __version__
 from levi.orchestration.loop import Orchestrator
@@ -308,6 +314,8 @@ def cmd_nervous(args):
             a.uses = 0
             a.last_used_at = None
         ns._last_selected = None
+        ns._incumbent_turns = 0
+        ns._last_blend = None
         ns._persist()
         print("Nervous system affect + usage reset.")
     print(ns.format_status())
@@ -552,9 +560,41 @@ def cmd_perfection(args):
     print(perfection_report())
 
 def cmd_free(args):
+    from levi.integrations.free_graph import build_free_graph
     from levi.integrations.free_lattice import format_catalog, interpenetration_matrix
+    if getattr(args, "path", None):
+        import json
+        a, b = args.path
+        route = build_free_graph().shortest_path(a, b)
+        if getattr(args, "json", False):
+            print(json.dumps({"schema": "levi.free_graph.path/v1", "from": a,
+                              "to": b, "path": route}, indent=2))
+        elif route is None:
+            print(f"no path: {a} !-> {b} (unknown asset id or disconnected)")
+        else:
+            print(" -> ".join(route))
+        return
+    if getattr(args, "neighborhood", None):
+        import json
+        nid = args.neighborhood
+        depth = getattr(args, "depth", 1) or 1
+        layers = build_free_graph().neighborhood(nid, depth=depth)
+        if getattr(args, "json", False):
+            print(json.dumps({"schema": "levi.free_graph.neighborhood/v1", "id": nid,
+                              "depth": depth,
+                              "layers": {str(k): v for k, v in layers.items()}}, indent=2))
+        elif not layers:
+            print(f"unknown asset id (or no neighbors within depth {depth}): {nid}")
+        else:
+            print(f"neighborhood of {nid} (depth {depth}):")
+            for d in sorted(layers):
+                print(f"  hop {d}: {', '.join(layers[d])}")
+        return
     if getattr(args, "matrix", False):
-        print(interpenetration_matrix())
+        if getattr(args, "json", False):
+            print(build_free_graph().to_json_str())
+        else:
+            print(interpenetration_matrix())
         return
     print(format_catalog())
     print("")
@@ -667,6 +707,443 @@ def cmd_sandbox(args):
 def cmd_plugins(args):
     from levi.plugins.catalog import PluginCatalog
     print(PluginCatalog().format(category=getattr(args, "category", None) or None))
+
+def cmd_plugin(args):
+    """Plugin connectors (blueprint §3): list registered connectors or
+    execute one operation. Writes require --yes (HITL gate); without a
+    credential the connector reports exactly what is missing and sends
+    nothing."""
+    import json as _json
+    from levi.plugins.registry import describe, get_connector, list_connectors
+    import levi.plugins.github  # noqa: F401  (registers the GitHub connector)
+
+    action = getattr(args, "plugin_action", None) or "list"
+    if action == "list":
+        conns = list_connectors()
+        if not conns:
+            print("No plugin connectors registered.")
+            return
+        for i, conn in enumerate(conns):
+            if i:
+                print()
+            print(describe(conn))
+        return
+
+    conn = get_connector(getattr(args, "connector", None) or "")
+    if conn is None:
+        print(f"Unknown connector {getattr(args, 'connector', None)!r}. Try: levi plugin list")
+        raise SystemExit(2)
+    params = {}
+    for item in getattr(args, "param", None) or []:
+        if "=" not in item:
+            print(f"Ignoring malformed --param {item!r} (want k=v)")
+            continue
+        key, value = item.split("=", 1)
+        params[key.strip()] = value
+    result = conn.execute(
+        getattr(args, "operation", None) or "",
+        params,
+        confirm=bool(getattr(args, "yes", False)),
+    )
+    if getattr(args, "json", False):
+        print(_json.dumps({
+            "connector": result.connector,
+            "operation": result.operation,
+            "ok": result.ok,
+            "status": result.status,
+            "message": result.message,
+            "data": result.data,
+            "request_made": result.request_made,
+        }, indent=2))
+    else:
+        verdict = "OK" if result.ok else "FAILED"
+        print(f"[{result.connector}/{result.operation}] {verdict} ({result.status})")
+        print(result.message)
+        if result.data:
+            print(_json.dumps(result.data, indent=2))
+    if not result.ok:
+        raise SystemExit(2)
+
+def cmd_finance(args):
+    """Paper-only finance domain (blueprint §5.4/5.5): quotes, indicator
+    snapshots, advisory signals, a paper portfolio ledger, and paper
+    orders behind an explicit HITL gate.
+
+    Nothing here can reach a live account. The only broker reachable
+    from this command is ``PaperBroker``; ``AlpacaConnector`` is never
+    imported, and live trading is structurally disabled in this build.
+    Market-data failures are reported honestly (exit 1) — numbers are
+    never fabricated.
+    """
+    import os as _os
+    import json as _json
+    from levi.finance import market as _market
+    from levi.finance import indicators as _indicators
+    from levi.finance import signals as _signals
+    from levi.finance import portfolio as _portfolio
+    from levi.finance import broker as _broker
+
+    ADVISORY_BANNER = "══ ADVISORY ONLY — paper only, not financial advice ══"
+
+    def _bars_for(symbol: str, days: int = 120) -> list:
+        provider = _market.StooqProvider()
+        try:
+            return provider.daily_bars(symbol, days=days)
+        except _market.MarketDataError as exc:
+            # Honest failure: name what happened, print no numbers, exit 1.
+            print(f"Market data unavailable for {symbol}: {exc}")
+            raise SystemExit(1)
+
+    def _fmt(value, need: int, have: int, decimals: int = 4) -> str:
+        if value is None:
+            return f"n/a (needs {need} bars, have {have})"
+        return f"{value:.{decimals}f}"
+
+    action = getattr(args, "finance_action", None)
+
+    # -- quote -----------------------------------------------------------
+    if action == "quote":
+        symbol = str(getattr(args, "sym", "") or "").upper()
+        bars = _bars_for(symbol, days=10)
+        last = bars[-1]
+        payload = {
+            "symbol": symbol,
+            "date": last.date,
+            "close": last.close,
+            "day_high": last.high,
+            "day_low": last.low,
+            "volume": last.volume,
+        }
+        if getattr(args, "json", False):
+            print(_json.dumps(payload, indent=2))
+        else:
+            print(f"{symbol}  close ${last.close:,.2f}  ({last.date})")
+            print(f"  day range ${last.low:,.2f} – ${last.high:,.2f}  "
+                  f"volume {last.volume:,.0f}")
+            print("  source: Stooq daily bars (keyless)")
+        return
+
+    # -- indicators -------------------------------------------------------
+    if action == "indicators":
+        symbol = str(getattr(args, "sym", "") or "").upper()
+        bars = _bars_for(symbol)
+        closes = [b.close for b in bars]
+        last = bars[-1]
+        n = len(closes)
+        sma20 = _indicators.sma(closes, 20)[-1]
+        ema12 = _indicators.ema(closes, 12)[-1]
+        ema26 = _indicators.ema(closes, 26)[-1]
+        rsi14 = _indicators.rsi(closes, 14)[-1]
+        macd_res = _indicators.macd(closes)
+        macd_line = macd_res["macd_line"][-1]
+        macd_signal = macd_res["signal_line"][-1]
+        macd_hist = macd_res["histogram"][-1]
+        bands = _indicators.bollinger(closes, 20, 2.0)
+        bb_upper = bands["upper"][-1]
+        bb_middle = bands["middle"][-1]
+        bb_lower = bands["lower"][-1]
+        atr14 = _indicators.atr(bars, 14)[-1]
+        stoch = _indicators.stochastic(bars)
+        stoch_k = stoch["k"][-1]
+        stoch_d = stoch["d"][-1]
+        obv_val = _indicators.obv(bars)[-1]
+        adx_res = _indicators.adx(bars)
+        adx14 = adx_res["adx"][-1]
+        plus_di14 = adx_res["plus_di"][-1]
+        minus_di14 = adx_res["minus_di"][-1]
+        vwap_val = _indicators.vwap(bars)[-1]
+        regime = _indicators.classify_regime(bars)
+        print(f"══ {symbol} indicators — latest bar {last.date}, "
+              f"close ${last.close:,.2f} ══")
+        print(f"  SMA20            {_fmt(sma20, 20, n)}")
+        print(f"  EMA12            {_fmt(ema12, 12, n)}")
+        print(f"  EMA26            {_fmt(ema26, 26, n)}")
+        print(f"  RSI14            {_fmt(rsi14, 15, n, decimals=1)}")
+        print(f"  MACD line        {_fmt(macd_line, 26, n)}")
+        print(f"  MACD signal      {_fmt(macd_signal, 34, n)}")
+        print(f"  MACD histogram   {_fmt(macd_hist, 34, n)}")
+        print(f"  Bollinger 20     upper {_fmt(bb_upper, 20, n)}  "
+              f"middle {_fmt(bb_middle, 20, n)}  lower {_fmt(bb_lower, 20, n)}")
+        print(f"  ATR14            {_fmt(atr14, 14, n)}")
+        print(f"  Stoch %K/%D      {_fmt(stoch_k, 14, n, decimals=1)} / "
+              f"{_fmt(stoch_d, 16, n, decimals=1)}")
+        print(f"  OBV              {obv_val:,.0f}")
+        print(f"  ADX14            {_fmt(adx14, 28, n, decimals=1)}")
+        print(f"  +DI14/-DI14      {_fmt(plus_di14, 15, n, decimals=1)} / "
+              f"{_fmt(minus_di14, 15, n, decimals=1)}")
+        print(f"  VWAP             {_fmt(vwap_val, 1, n)}")
+        if regime["regime"] == "unknown":
+            print(f"  Regime           n/a (needs 28 bars, have {n})")
+        else:
+            print(f"  Regime           {regime['regime']} "
+                  f"(ADX14 {regime['adx']:.1f}, ATR% {regime['atr_pct']:.2f})")
+        return
+
+    # -- signal ------------------------------------------------------------
+    if action == "signal":
+        symbol = str(getattr(args, "sym", "") or "").upper()
+        try:
+            signal = _signals.generate_signal(symbol, provider=_market.StooqProvider())
+        except _market.MarketDataError as exc:
+            # Never fabricate a signal from a failed fetch.
+            print(f"Market data unavailable for {symbol}: {exc}")
+            raise SystemExit(1)
+        narrative = _signals.narrate(signal)
+        if getattr(args, "json", False):
+            print(_json.dumps({
+                "symbol": signal.symbol,
+                "direction": signal.direction,
+                "confidence": signal.confidence,
+                "rationale": signal.rationale,
+                "indicator_snapshot": signal.indicator_snapshot,
+                "generated_at": signal.generated_at,
+                "advisory": signal.advisory,
+                "narrative": narrative,
+            }, indent=2))
+            return
+        print(ADVISORY_BANNER)
+        print(f"Signal for {signal.symbol}: {signal.direction.upper()}  "
+              f"(confidence {signal.confidence:.2f})")
+        print("\nRationale:")
+        for line in signal.rationale:
+            print(f"  • {line}")
+        print("\nIndicator snapshot:")
+        for key, value in signal.indicator_snapshot.items():
+            print(f"  {key}: {value}")
+        print("\nNarrated:")
+        for line in narrative.splitlines():
+            print(f"  {line}")
+        print("\n" + ADVISORY_BANNER)
+        return
+
+    # -- portfolio ----------------------------------------------------------
+    if action == "portfolio":
+        portfolio = _portfolio.load(_portfolio.DEFAULT_PATH)
+        provider = _market.StooqProvider()
+        prices: dict[str, float] = {}
+        fetch_failures: list[str] = []
+        for symbol, pos in portfolio.positions.items():
+            if pos.qty <= 0:
+                continue
+            try:
+                bars = provider.daily_bars(symbol, days=10)
+            except _market.MarketDataError:
+                # Unknown symbols are valued at average cost downstream,
+                # never zeroed; record the failure instead.
+                fetch_failures.append(symbol)
+                continue
+            prices[symbol] = bars[-1].close
+        summary = portfolio.summary(prices)
+        positions = summary.get("positions", {})
+        missing = [s for s in summary.get("warnings", [])
+                   if positions.get(s, {}).get("qty", 0) > 0]
+        if getattr(args, "json", False):
+            if fetch_failures:
+                summary["fetch_failures"] = fetch_failures
+            print(_json.dumps(summary, indent=2))
+            return
+        print("══ Paper portfolio (SIMULATED — no real money) ══")
+        print(f"  cash: ${summary['cash']:,.2f}")
+        for symbol, pos in positions.items():
+            if pos.get("qty", 0) > 0:
+                line = (f"  {symbol}: qty {pos['qty']:g} @ avg "
+                        f"${pos['avg_cost']:,.2f}")
+                if "unrealized_pnl" in pos:
+                    line += f"  unrealized ${pos['unrealized_pnl']:+,.2f}"
+                print(line)
+        if not any(pos.get("qty", 0) > 0 for pos in positions.values()):
+            print("  (no open positions — deposit and place paper orders to start)")
+        print(f"  realized P&L:   ${summary.get('realized_pnl', 0.0):+,.2f}")
+        print(f"  unrealized P&L: ${summary.get('unrealized_pnl', 0.0):+,.2f}")
+        print(f"  market value:   ${summary.get('market_value', 0.0):,.2f}")
+        print(f"  total P&L:      ${summary.get('total_pnl', 0.0):+,.2f}")
+        if missing:
+            print("  warnings: could not fetch latest prices for "
+                  + ", ".join(missing)
+                  + " — valued at average cost, not zeroed")
+        return
+
+    # -- order ---------------------------------------------------------------
+    if action == "order":
+        symbol = str(getattr(args, "sym", "") or "").upper()
+        # Live trading is structurally impossible in this build. Refuse any
+        # live-shaped request first — never let it fall through to a broker
+        # silently, and never reach AlpacaConnector from this command.
+        if getattr(args, "live", False) or _os.environ.get("LEVI_BROKER_LIVE"):
+            print("Live trading is NOT enabled in this build. The order was NOT placed.")
+            print("This command can only ever place paper orders.")
+            print("Enabling live trading would require (none of it is wired here):")
+            print("  1. a deliberate dependency decision with sign-off (blueprint §1.1)")
+            print("  2. a wired AlpacaConnector transport (stdlib urllib or an approved SDK)")
+            print("  3. LEVI_ALPACA_KEY and LEVI_ALPACA_SECRET in the environment")
+            print("  4. LEVI_BROKER_LIVE=1 (explicit opt-in)")
+            print("  5. per-order human confirmation")
+            print("Until all five hold, AlpacaConnector reports transport_not_wired:")
+            print("live trading is structurally impossible in this build.")
+            raise SystemExit(2)
+        side = str(getattr(args, "side", "") or "").lower()
+        try:
+            qty = float(getattr(args, "qty", 0) or 0)
+        except (TypeError, ValueError):
+            qty = 0.0
+        # HITL gate (blueprint §1.5): a paper order is still a consequential
+        # action — without explicit --yes this command refuses to place it.
+        if not getattr(args, "yes", False):
+            print("Order NOT placed: paper orders require an explicit --yes "
+                  "(HITL gate, blueprint §1.5).")
+            print(f"  Would have placed: {side or '?'} {qty:g} {symbol} "
+                  "@ latest Stooq close (paper).")
+            print("  Nothing was placed and nothing was saved.")
+            print("  Re-run with --yes to confirm this paper order.")
+            raise SystemExit(2)
+        # Validate before touching anything.
+        try:
+            order = _broker.Order(symbol=symbol, qty=qty, side=side)
+        except _broker.InvalidOrder as exc:
+            print(f"Order NOT placed: {exc}")
+            raise SystemExit(2)
+        # Reference price comes from real market data — never invented.
+        bars = _bars_for(symbol, days=10)
+        ref_price = bars[-1].close
+        # Paper only. AlpacaConnector is never reachable from this command.
+        broker = _broker.PaperBroker()
+        try:
+            fill = broker.place_order(order, confirm=True, reference_price=ref_price)
+        except (_broker.InvalidOrder, _broker.OrderNotConfirmed,
+                _broker.NoReferencePrice) as exc:
+            print(f"Order NOT placed: {exc}")
+            raise SystemExit(2)
+        portfolio = _portfolio.load(_portfolio.DEFAULT_PATH)
+        try:
+            portfolio.apply_fill(fill.symbol, fill.side, fill.qty, fill.fill_price)
+        except ValueError as exc:
+            print(f"Paper ledger rejected the fill: {exc}")
+            print("Nothing was saved.")
+            raise SystemExit(2)
+        saved_path = portfolio.save(_portfolio.DEFAULT_PATH)
+        print(fill)  # Fill.__str__ always says SIMULATED
+        print(f"Applied to the paper ledger and saved: {saved_path}")
+        print(f"Paper cash is now ${portfolio.cash:,.2f} "
+              "(SIMULATED — no real money)")
+        return
+
+    # -- deposit --------------------------------------------------------------
+    if action == "deposit":
+        try:
+            amount = float(getattr(args, "amount", 0) or 0)
+        except (TypeError, ValueError):
+            amount = 0.0
+        portfolio = _portfolio.load(_portfolio.DEFAULT_PATH)
+        try:
+            portfolio.deposit(amount)
+        except ValueError as exc:
+            print(f"Deposit refused: {exc}")
+            raise SystemExit(2)
+        saved_path = portfolio.save(_portfolio.DEFAULT_PATH)
+        print(f"Deposited ${amount:,.2f} into the PAPER portfolio "
+              "(SIMULATED — no real money).")
+        print(f"Paper cash is now ${portfolio.cash:,.2f}  (saved: {saved_path})")
+        return
+
+    if action is None:
+        print("Usage: levi finance <quote|indicators|signal|portfolio|order|deposit>")
+        print("  levi finance quote <SYM>                    — latest close + day range (Stooq)")
+        print("  levi finance indicators <SYM>               — SMA/EMA/RSI/MACD/Bollinger/ATR/Stoch/OBV/ADX/VWAP + regime snapshot")
+        print("  levi finance signal <SYM>                   — advisory signal (paper-only, not financial advice)")
+        print("  levi finance portfolio [--json]             — paper ledger: cash, positions, P&L")
+        print("  levi finance order <SYM> <QTY> --side buy|sell [--yes]  — paper order (needs --yes)")
+        print("  levi finance deposit <AMOUNT>               — fund the paper portfolio")
+        return
+
+    print(f"Unknown finance action {action!r}")
+    raise SystemExit(2)
+
+def cmd_agent(args):
+    """Agent runtime (blueprint §7): run a task through the step-level tool
+    loop, list tools, or serve the agent over HTTP. Agent modules are
+    imported lazily here so `levi` startup stays fast."""
+    import sys as _sys
+    action = getattr(args, "agent_action", None)
+
+    if action == "serve":
+        from levi.agent.server import serve
+        serve(host=getattr(args, "host", None) or "127.0.0.1",
+              port=int(getattr(args, "port", None) or 8765))
+        return
+
+    if action == "tools":
+        from levi.agent.tools import build_default_registry
+        registry = build_default_registry()
+        print("══ Agent tools ══\n")
+        for tool in registry.list():
+            gate = " [requires confirmation]" if tool.requires_confirmation else ""
+            print(f"  {tool.name}{gate}")
+            print(f"    {tool.description[:110]}")
+        print("\nGated tools need --yes on `levi agent run`, or an interactive yes.")
+        return
+
+    if action == "run":
+        from levi.agent.loop import run_subtask
+        from levi.agent.providers import select_provider
+        from levi.agent.tools import build_default_registry
+
+        task = getattr(args, "task", None) or ""
+        if not task.strip():
+            print("Usage: levi agent run \"<task>\" [--provider local|openai|anthropic] [--yes] [--max-steps N]")
+            raise SystemExit(2)
+        consent = bool(getattr(args, "yes", False))
+
+        def _confirm(preview: str) -> bool:
+            # Interactive gate: prompt ONLY on a TTY; otherwise deny honestly.
+            if not _sys.stdin.isatty():
+                return False
+            answer = input(f"{preview}\nApprove? [y/N]: ").strip().lower()
+            return answer in ("y", "yes")
+
+        provider = select_provider(getattr(args, "provider", None) or None)
+        registry = build_default_registry(
+            workspace_root=getattr(args, "workspace", None) or None,
+            consent=consent,
+            confirm=None if consent else _confirm,
+        )
+        print(f"Running with provider={getattr(provider, 'name', '?')} "
+              f"consent={'yes (--yes)' if consent else 'no (gates will prompt/deny)'} ...\n")
+        transcript = run_subtask(
+            task,
+            provider=provider,
+            registry=registry,
+            consent=consent,
+            confirm=None if consent else _confirm,
+            max_steps=int(getattr(args, "max_steps", None) or 10),
+            workspace_root=getattr(args, "workspace", None) or None,
+        )
+        if getattr(args, "json", False):
+            import json as _json
+            print(_json.dumps(transcript.to_dict(), indent=2))
+        else:
+            for step in transcript.steps:
+                print(f"── step {step.index + 1} ──")
+                if step.provider_text:
+                    print(f"  agent: {step.provider_text[:300]}")
+                for call, result in zip(step.tool_calls, step.results):
+                    args_preview = {k: (str(v)[:80]) for k, v in (call.get("args") or {}).items()}
+                    verdict = "ok" if result.get("ok") else "FAILED"
+                    print(f"  tool {call.get('name')} {args_preview} → {verdict}")
+                    if result.get("output"):
+                        print(f"    out: {result['output'][:400]}")
+                    if result.get("error"):
+                        print(f"    err: {result['error'][:400]}")
+            print(f"\n══ final ({'ok' if transcript.ok else 'FAILED'}) ══")
+            print(transcript.final)
+        if not transcript.ok:
+            raise SystemExit(1)
+        return
+
+    print("Usage: levi agent <run|tools|serve>")
+    print("  levi agent run \"<task>\" [--provider local|openai|anthropic] [--yes] [--max-steps N] [--workspace DIR]")
+    print("  levi agent tools")
+    print("  levi agent serve [--host 127.0.0.1] [--port 8765]   (requires LEVI_AGENT_TOKEN)")
+    raise SystemExit(2)
 
 def cmd_builder(args):
     from levi.builder.emergency import EmergencyBuilder
@@ -844,10 +1321,11 @@ def cmd_relay(args):
 def cmd_vault(args):
     """Encrypt/decrypt local notes (passphrase required)."""
     from levi.vault.seal import VaultSeal
+    import getpass
     pw = getattr(args, "passphrase", None) or ""
     if not pw:
-        print("Need --passphrase")
-        return
+        # Non-echoing prompt; avoids leaving the passphrase in shell history.
+        pw = getpass.getpass("Vault passphrase: ")
     v = VaultSeal(pw)
     if getattr(args, "put", None) and getattr(args, "text", None) is not None:
         path = v.put(args.put, args.text)
@@ -1026,13 +1504,23 @@ def cmd_story(args):
             )
             print("══ Forward + Backwords (Joyner-style: first→last / last→first, same units)")
         elif fwd is not None or bak is not None:
-            s = fab.create_story(args.create, genre=genre, title=getattr(args, "title", None))
+            try:
+                s = fab.create_story(args.create, genre=genre, title=getattr(args, "title", None))
+            except ValueError:
+                # Loud refusal (blueprint §5.3): re-raise so the CLI's
+                # structured-error surface reports it with a non-zero exit —
+                # never print-and-return-0, which reads as success.
+                raise
             if bak is not None and int(bak) > 0:
                 s = fab.auto_backward(s.id, depth=int(bak))
             if fwd is not None and int(fwd) >= 0:
                 s = fab.auto_forward(s.id, beats=int(fwd))
         else:
-            s = fab.create_story(args.create, genre=genre, title=getattr(args, "title", None))
+            try:
+                s = fab.create_story(args.create, genre=genre, title=getattr(args, "title", None))
+            except ValueError:
+                # Loud refusal (blueprint §5.3) — see above.
+                raise
         words = len((s.body or "").split())
         print(f"══ Created {s.id}")
         print(f"title={s.title}  genre={s.genre}  chars={len(s.characters)}  beats={len(s.beats)}  words≈{words}")
@@ -1196,7 +1684,7 @@ def cmd_cloud(args):
     from levi.cloud.surface import CloudSurface
     surf = CloudSurface()
     action = (getattr(args, "cloud_action", None) or "all").lower()
-    if action in ("phase", "phases", "map"):
+    if action in ("stage", "stages", "map", "phase", "phases"):
         print(surf.report_phases())
     elif action in ("argon2", "argon2id", "argon"):
         print(surf.report_argon2())
@@ -1253,7 +1741,12 @@ def cmd_model(args):
         print(m.genres_list())
     elif action in ("story",):
         premise = getattr(args, "seed", None) or "A lattice opens under weather law."
-        print(m.story_create(premise, genre=getattr(args, "genres", None) or "literary"))
+        try:
+            print(m.story_create(premise, genre=getattr(args, "genres", None) or "literary"))
+        except ValueError:
+            # Loud refusal (blueprint §5.3): let the structured-error
+            # surface report it with a non-zero exit, never swallow it.
+            raise
     elif action in ("characters", "cast"):
         print(m.characters(genre=getattr(args, "genres", None) or "literary"))
     elif action in ("mirror",):
@@ -1621,6 +2114,14 @@ def main():
     sub.add_parser("perfection", help="Perfection layer score")
     free_p = sub.add_parser("free", help="Free integration lattice + interpenetration matrix")
     free_p.add_argument("--matrix", action="store_true")
+    free_p.add_argument("--json", action="store_true",
+                        help="JSON export (with --matrix: full graph; with --path/--neighborhood: query result)")
+    free_p.add_argument("--path", nargs=2, metavar=("A", "B"), default=None,
+                        help="Shortest interpenetration path between two asset ids")
+    free_p.add_argument("--neighborhood", default=None, metavar="ID",
+                        help="Assets within --depth hops of an asset id")
+    free_p.add_argument("--depth", type=int, default=1,
+                        help="Hop depth for --neighborhood (default 1)")
     sub.add_parser("production", help="Production table: prehistoric+modern+LEVI-unique")
     sub.add_parser("go", help="Fast path: integrate+ladder+ops")
     sub.add_parser("integrate", help="Cross-module integration audit")
@@ -1644,6 +2145,52 @@ def main():
     sb_p.add_argument("--path", default=".")
     plug_p = sub.add_parser("plugins", help="Closed-source capability/plugin catalog")
     plug_p.add_argument("--category", default=None)
+    plug2_p = sub.add_parser("plugin", help="Plugin connectors: list + execute (blueprint §3)")
+    plug2_sub = plug2_p.add_subparsers(dest="plugin_action")
+    plug2_sub.add_parser("list", help="List registered plugin connectors")
+    plug2_e = plug2_sub.add_parser("exec", help="Execute a connector operation")
+    plug2_e.add_argument("connector")
+    plug2_e.add_argument("operation")
+    plug2_e.add_argument("--param", action="append", default=[], help="k=v params (repeatable)")
+    plug2_e.add_argument("--yes", action="store_true", help="Confirm a write operation (HITL gate)")
+    plug2_e.add_argument("--json", action="store_true", help="Print the result as JSON")
+    fin_p = sub.add_parser("finance", help="Paper-only finance: quotes, indicators, signals, paper orders (blueprint §5)")
+    fin_sub = fin_p.add_subparsers(dest="finance_action")
+    fin_q = fin_sub.add_parser("quote", help="Latest close + day range via Stooq")
+    fin_q.add_argument("sym", help="US symbol, e.g. AAPL")
+    fin_q.add_argument("--json", action="store_true", help="Print the quote as JSON")
+    fin_i = fin_sub.add_parser("indicators", help="Indicator snapshot for the latest bar")
+    fin_i.add_argument("sym", help="US symbol, e.g. AAPL")
+    fin_s = fin_sub.add_parser("signal", help="Advisory signal (paper-only, not financial advice)")
+    fin_s.add_argument("sym", help="US symbol, e.g. AAPL")
+    fin_s.add_argument("--json", action="store_true", help="Print the signal as JSON")
+    fin_pf = fin_sub.add_parser("portfolio", help="Show the paper portfolio ledger")
+    fin_pf.add_argument("--json", action="store_true", help="Print the portfolio summary as JSON")
+    fin_o = fin_sub.add_parser("order", help="Paper order (HITL: needs --yes)")
+    fin_o.add_argument("sym", help="US symbol, e.g. AAPL")
+    fin_o.add_argument("qty", type=float, help="Quantity (> 0)")
+    fin_o.add_argument("--side", required=True, choices=["buy", "sell"], help="buy or sell")
+    fin_o.add_argument("--yes", action="store_true", help="Explicit human confirmation (HITL gate)")
+    fin_o.add_argument("--live", action="store_true", help="Refused: live trading is not enabled in this build")
+    fin_d = fin_sub.add_parser("deposit", help="Fund the paper portfolio")
+    fin_d.add_argument("amount", type=float, help="Amount (> 0)")
+    ag_p = sub.add_parser("agent", help="Agent runtime: step-level tool loop, tools, HTTP service (blueprint §7)")
+    ag_sub = ag_p.add_subparsers(dest="agent_action")
+    ag_run = ag_sub.add_parser("run", help="Run a task through the step-level tool loop")
+    ag_run.add_argument("task", help="Task description for the agent")
+    ag_run.add_argument("--provider", choices=["local", "openai", "anthropic"], default=None,
+                        help="Chat provider (default: select_provider chain, local-first)")
+    ag_run.add_argument("--yes", action="store_true",
+                        help="Pre-grant consent for gated tools for THIS run only. "
+                             "There is no global gate-disabling flag. Without --yes, "
+                             "gate trips prompt interactively (TTY only) or are denied.")
+    ag_run.add_argument("--max-steps", type=int, default=10, help="Max provider turns (default 10)")
+    ag_run.add_argument("--workspace", default=None, help="Workspace root for agent file/shell tools")
+    ag_run.add_argument("--json", action="store_true", help="Print the transcript as JSON")
+    ag_sub.add_parser("tools", help="List agent tools with descriptions and confirmation flags")
+    ag_serve = ag_sub.add_parser("serve", help="Serve the agent over HTTP (requires LEVI_AGENT_TOKEN)")
+    ag_serve.add_argument("--host", default="127.0.0.1", help="Bind address (default 127.0.0.1)")
+    ag_serve.add_argument("--port", type=int, default=8765, help="Port (default 8765)")
     bld_p = sub.add_parser("builder", help="E3-E6 Emergency Builder (scaffold to product)")
     bld_p.add_argument("--plan", default=None, help="Goal text")
     bld_p.add_argument("--tier", default="E4", help="E3|E4|E5|E6")
@@ -1724,6 +2271,8 @@ def main():
     nerv = sub.add_parser("nervous", help="Affect matrix + persona activation scores")
     nerv.add_argument("--unlock", action="store_true", help="Clear explicit persona lock")
     nerv.add_argument("--reset", action="store_true", help="Reset affect and usage counters")
+    nerv.add_argument("--verbose", "-v", action="store_true",
+                      help="Dump full status JSON (affect, blend, hysteresis)")
     sub.add_parser("skills")
     sub.add_parser("agents")
     g = sub.add_parser("graph")
@@ -1836,13 +2385,24 @@ def main():
     model_p.add_argument("--limit", type=int, default=0)
     model_p.add_argument("--polish", action="store_true", help="optional relay polish")
 
-    cloud_p = sub.add_parser("cloud", help="Phase A/B/C map + crypto protocol + ZK + sync dry-run")
+    cloud_p = sub.add_parser("cloud", help="Product stages A/B/C + crypto protocol + ZK + sync dry-run")
     cloud_p.add_argument(
         "cloud_action",
         nargs="?",
         default="all",
-        help="all|phases|argon2|ratchet|crypto|zk|sync|demo",
+        help="all|stages|argon2|ratchet|crypto|zk|sync|demo  (alias: phases)",
     )
+
+    # === KING-REGION-BEGIN: King control plane (core/levi/king) ===
+    # Parallel tracks: keep ALL King wiring inside this delimited region —
+    # do not scatter King hunks elsewhere in this file.
+    try:
+        from levi.king.cli import register_king as _king_register
+        _king_register(sub)
+    except Exception:
+        # King degrades: the CLI still boots without the control plane.
+        pass
+    # === KING-REGION-END ===
 
     args = parser.parse_args()
     if not args.command:
@@ -1860,14 +2420,37 @@ def main():
         "morning": cmd_morning, "import": cmd_import,
         "export": cmd_export, "templates": cmd_templates,
         "status": cmd_status, "ask": cmd_ask, "personas": cmd_personas, "wit": cmd_wit,
-        "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "continue": cmd_continue, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy,"brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
+        "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "continue": cmd_continue, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "plugin": cmd_plugin, "finance": cmd_finance, "agent": cmd_agent, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy,"brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
         "graph": cmd_graph,
         "image": cmd_image, "story": cmd_story, "genres": cmd_genres, "factory": cmd_factory, "automations": cmd_automations,
         "remember": cmd_remember, "recall": cmd_recall, "cloud": cmd_cloud, "model": cmd_model, "chat": cmd_chat, "enterprise": cmd_enterprise, "scorecard": cmd_scorecard, "si": cmd_si, "cognition": cmd_cognition, "premium": cmd_premium, "kai": cmd_kai, "unique": cmd_unique, "x100": cmd_x100, "max": cmd_max, "max10": cmd_max10, "stress": cmd_stress, "here": cmd_here, "talk": cmd_talk, "profiles": cmd_profiles, "traits": cmd_traits, "retention": cmd_retention, "dna": cmd_dna, "intel": cmd_intel, "giant": cmd_giant, "future": cmd_future, "interpenetrate": cmd_interpenetrate,
     }
+    # === KING-REGION-BEGIN: King command dispatch ===
+    # Parallel tracks: keep ALL King wiring inside this delimited region.
+    try:
+        from levi.king.cli import cmd_king as _cmd_king
+        cmds["king"] = _cmd_king
+    except Exception:
+        pass
+    # === KING-REGION-END ===
     fn = cmds.get(args.command)
     if fn:
-        fn(args)
+        try:
+            fn(args)
+        except (KeyboardInterrupt, SystemExit):
+            raise
+        except Exception as e:
+            # Structured error surface (levi.ops.errors) — never a raw
+            # traceback for operators; still non-zero exit for scripts.
+            from levi.ops.errors import LeviError
+            err = LeviError(
+                code="cli:%s" % (args.command or "unknown"),
+                message=str(e)[:200] or e.__class__.__name__,
+                recoverable=True,
+                detail={"command": args.command or ""},
+            )
+            print(err.format(), file=sys.stderr)
+            sys.exit(1)
     else:
         parser.print_help()
 

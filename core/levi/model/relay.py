@@ -1,11 +1,22 @@
 """
-Model Relay — LEVI-original multi-provider chain (local primacy).
+Model Relay — config + diagnostics wrapper over the canonical router.
 
-  1) Local Ollama (if up)
-  2) Optional cloud OpenAI-compatible endpoints from config
-  3) Deterministic offline companion synthesizer
+Deliberate division of labor (not a competing implementation — see
+blueprint §3 and the King precedent):
 
-Config: ~/.levi/model_relay.json
+  * levi.model.abstraction.ModelRouter is the ONE place "try local model,
+    else fall back" logic lives. It owns the provider chain:
+    Ollama (if up) → deterministic offline companion synthesizer.
+  * This module adds: a persisted RelayConfig (~/.levi/model_relay.json),
+    an Ollama probe, and a self-test/status surface used by the CLI
+    (`levi relay`) and ops/health callers. generate() delegates to the
+    router — it does not reimplement the chain.
+
+Note: RelayConfig.cloud_endpoints is a declared-but-unwired contract
+(config-ready slots; keys via env, never hardcoded). The chain today is
+Ollama → offline synthesizer; nothing sends cloud traffic yet. When a
+cloud provider is wired into abstraction.ModelRouter, these slots become
+live.
 """
 from __future__ import annotations
 

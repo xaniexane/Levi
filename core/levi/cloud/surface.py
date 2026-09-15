@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from typing import Any, Dict
 
-from levi.cloud.phases import PhaseMap
+from levi.cloud.stages import StageMap
 from levi.cloud.crypto_protocol import CryptoProtocol
 from levi.cloud.sync_dryrun import SyncDryRun
 from levi.cloud.zk import ZeroKnowledgeDesign
@@ -15,7 +15,7 @@ class CloudSurface:
     """Single entry used by `levi cloud` and ops integration."""
 
     def __init__(self) -> None:
-        self.phases = PhaseMap()
+        self.phases = StageMap()
         self.crypto = CryptoProtocol()
         self.sync = SyncDryRun()
         self.zk = ZeroKnowledgeDesign()

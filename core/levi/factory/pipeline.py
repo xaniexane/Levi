@@ -1,6 +1,10 @@
 """
 LEVI Constructive DNA — Software Factory (embedded, not a side feature)
 
+Builds software: idea→requirements→architecture→scaffold→implement→build→
+test→debug→security→package. Not the Income Factory (levi.income.factory),
+which composes service/offer plans — different job, different package.
+
 LEVI × L.W.P. × Factory = one coherent super-system.
 Factory stages are L.W.P. cascade instances under governor/circuit-breaker/policy.
 Companion integrity still applies while building.

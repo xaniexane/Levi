@@ -3,8 +3,8 @@ LEVI Core — Local-First Intelligence Kernel
 Part of VYVE Multi-Industry Venture Ecosystem
 """
 
-__version__ = "0.1.0-alpha"
-__status__ = "Phase 1 Foundation"
+__version__ = "0.9.5"
+__status__ = "levi 0.9.5"
 
 from typing import Final
 

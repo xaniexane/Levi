@@ -1,4 +1,9 @@
-"""Echo — taken / not-taken / wild parallel paths (kernel organ)."""
+"""Echo — taken / not-taken / wild parallel paths (kernel organ).
+
+The one echo / branch-exploration implementation in this tree. A prior
+lineage's graph/echoverse.py was correctly rejected at merge time to avoid
+a second, competing implementation of the same concept — do not reintroduce
+one; extend this module instead."""
 from __future__ import annotations
 
 from typing import Dict, List

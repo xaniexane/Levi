@@ -48,7 +48,6 @@ ENV/
 
 # JS / node
 node_modules/
-package-lock.json
 
 # Android
 *.apk
@@ -56,6 +55,9 @@ package-lock.json
 *.dex
 *.class
 *.jar
+*.keystore
+*.jks
+local.properties
 .gradle/
 build/
 

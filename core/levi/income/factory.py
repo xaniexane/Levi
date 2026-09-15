@@ -1,6 +1,9 @@
 """
 Income Factory — service / offer / automation composition.
 
+Not the Software Factory (levi.factory.pipeline builds code through
+idea→requirements→…→package). This one composes income-side service plans
+and opportunities with HITL before payment, production, or customer contact.
 Capability under LEVI, not the whole system. Never auto-charges money.
 Produces plans that require HITL before payment, production, or customer contact.
 """

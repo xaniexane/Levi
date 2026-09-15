@@ -38,6 +38,11 @@ export type GrokHeadContext = {
   creator?: string;
   creatorId?: string;
   host?: string | null;
+  /**
+   * Workspace root for OG discovery (site.json, public/og.jpg). Optional on
+   * purpose: when omitted, injection is hermetic — no ambient
+   * process.cwd() reads — and `site` (or `{}`) is used verbatim.
+   */
   cwd?: string;
   site?: OgSite;
 };

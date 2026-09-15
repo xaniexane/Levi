@@ -1,42 +1,55 @@
-# LEVI × L.W.P. MEGAZORD
+# MEGAZORD
 
-The combined organism of **LEVI** (Soul/Genome + 5D Emotional Intelligence) and
-**L.W.P.** (Lightweight Workspace Protocol). A single, deployable package that
-plugs Levi into any external surface — Omega OS, third-party tools, automations,
-browsers, devices, terminals — through a tiny, soul-aware protocol.
+> **Scope disclaimer:** this is persona scaffolding + flow stubs, **not a real
+> engine.** Five persona presets, a think/decide/act flow loop, and thin
+> adapters — single-process, in-memory, no persistence, no transport, no tests.
+> Anything beyond that is planned work, not what is here.
 
-## Why "megazord"?
-Each subsystem is a small, focused robot. Together they form one organism:
+Persona scaffolding + flow stubs that sit on top of the LEVI core. Today this
+package is five persona presets (CYBRUS, ECHO, ALPHA, OMEGA, KAI — there is no
+LEVI persona), a think/decide/act flow loop, and thin persona adapters.
+
+> **Status: alpha.** Single-process, in-memory, no persistence, no transport
+> layer, no tests, no docs/ or scripts/ directories yet. Anything this README
+> (or the root README) says about an L.W.P. protocol, gateways, or smoke tests
+> describes planned work, not what is here.
+
+## Layout
 
 | Subsystem | Role |
 |-----------|------|
-| `personas/` | Cybrus, Echo, Alpha, Omega, Kai — Levi's voices |
-| `flows/`    | How Levi thinks, decides, and acts over time |
-| `bridges/`  | Adapters into Omega OS, Kai runtime, Echo compiler, Cybrus security |
-| `lwp/`      | The transport that ties it all together (mirrored from `omega_os/lwp/`) |
-| `tests/`    | Roundtrip validation for envelopes, souls, and personas |
-| `docs/`     | Architecture, threat model, persona reference |
-| `scripts/`  | Run, build, deploy, and test helpers |
+| `megazord/personas/` | Persona presets: `cybrus_persona.py`, `echo_persona.py`, `alpha_persona.py`, `omega_persona.py`, `kai_persona.py` + `persona_core.py` (`Persona`, `PersonaRegistry`, `DEFAULT_REGISTRY`) |
+| `megazord/flows/` | Flow engine core + the think/decide/act steps: `flow_core.py`, `levi_think.py`, `levi_decide.py`, `levi_act.py` |
+| `megazord/bridges/` | Adapters: `levi_bridge.py` plus `alpha/`, `cybrus/`, `echo/`, `kai/` bridge modules |
+| `megazord/megazord_core.py` | `MegaZord` — the unified think→decide→act loop over a chosen persona |
 
-## Install (dev)
+## Personas
+
+The five voices of the megazord, as declared in `personas/__init__.py`:
+
+| Persona | Role |
+|---------|------|
+| **CYBRUS** | Security, gatekeeping, threat assessment |
+| **ECHO** | Blueprint designer, builder, creator |
+| **ALPHA** | No-code AI compiler, executor, operator |
+| **OMEGA** | OS brain, orchestrator, long-game strategist |
+| **KAI** | Logic runtime, memory, cross-orchestration brain |
+
+## Use (dev)
+
 ```bash
-cd megazord
-pip install -r ../core/requirements.txt
-python -m tests.smoke
-```
-
-## Run
-```bash
-# Start the Levi gateway (HTTP + WebSocket)
-python -m bridges.omega.gateway --port 7860
-
-# In another shell, send a soul-aware prompt
-python -m examples.send_prompt "Levi, run a diagnostic"
+cd delivery/megazord
+PYTHONPATH=. python -c "
+from megazord import MegaZord
+z = MegaZord(persona='alpha')
+print(z.think('Levi, run a diagnostic'))
+"
 ```
 
 ## Quick API
+
 ```python
-from bridges.levi_bridge import LeviBridge
+from megazord.bridges.levi_bridge import LeviBridge
 
 bridge = LeviBridge(persona="alpha")
 event  = bridge.dispatch(raw_envelope_bytes)              # inbound
@@ -46,6 +59,8 @@ action = bridge.build_action("system.diagnostic", "levi",
 ```
 
 ## Spec & Status
-- L.W.P. version: **0.1.0** — see `lwp/protocol/SPEC.md`
-- Levi runtime:   **v34 (hardened core)** — see `../core/README.md`
-- Status:         **alpha** — single-process, in-memory, no persistence yet
+
+- Personas: CYBRUS, ECHO, ALPHA, OMEGA, KAI — see `megazord/personas/__init__.py`
+- Levi runtime: v34 (hardened core) — see `core/levi`
+- Status: **alpha** — persona scaffolding + flow stubs only; single-process,
+  in-memory, no persistence, no transport, no tests yet

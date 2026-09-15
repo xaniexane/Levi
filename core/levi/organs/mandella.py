@@ -1,4 +1,9 @@
-"""Mandella — stake selection under domain pressure (kernel organ)."""
+"""Mandella — stake selection under domain pressure (kernel organ).
+
+The one stakes/scenario-generation implementation in this tree; pairs with
+organs/echo.py. A prior lineage's graph/mandella.py was correctly rejected
+at merge time to avoid a competing implementation — do not reintroduce one;
+extend this module instead."""
 from __future__ import annotations
 
 from typing import Dict, List

@@ -21,7 +21,7 @@ LEVI is not an app. It is a **living organism** of 32 organs, 6 governance layer
 
 ```
 levi/
-├── core/levi/              ← Main engine: 143 Python modules, 23K+ lines
+├── core/levi/              ← Main engine: 144 Python modules, 23K+ lines
 │   ├── agent/              ← Agent runtime + specialists
 │   ├── brain/              ← Knowledge corpus + seeds
 │   ├── bridges/            ← Cross-system integration
@@ -53,9 +53,7 @@ levi/
 │   └── vault/              ← Seal + vault subsystem
 │
 ├── delivery/               ← Hardened delivery system + megazord
-│   ├── megazord/           ← 4-persona megazord (Levi, Omega, Kai, Echo)
-│   ├── relay/              ← Relay infrastructure
-│   ├── dashboard/          ← TUI dashboard
+│   ├── megazord/           ← 5-persona megazord (Cybrus, Echo, Alpha, Omega, Kai)
 │   ├── knowledge/          ← Apotheosis + Xenomax knowledge
 │   └── runtimes/           ← Runtime configurations
 │
@@ -69,18 +67,21 @@ levi/
 ## Quick Start
 
 ```bash
-# Install
-pip install -e core/
+# One true install from a repo checkout:
+pip install -e .
 
-# Run CLI
-levi
+# Run the CLI:
+levi --help
 
-# Or import in Python
+# Or import from Python once installed:
+python -c "
 from levi import __version__
 from levi.orchestration.loop import Orchestrator
 
+print(__version__)
 orchestrator = Orchestrator()
-result = orchestrator.run("help")
+result = orchestrator.run('help')
+"
 ```
 
 ## Power Levels

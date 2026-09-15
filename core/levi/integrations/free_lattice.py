@@ -295,22 +295,55 @@ def format_catalog() -> str:
 
 
 def interpenetration_matrix() -> str:
+    """Human-readable interpenetration view: flat edge list + graph metrics.
+
+    The flat edge list is kept for backward compatibility; the graph-model
+    summary below it is the canonical diagnostic — computed from the real
+    graph in levi.integrations.free_graph, not prose.
+    """
+    from levi.integrations.free_graph import build_free_graph
+
+    g = build_free_graph()
     lines = ["=== Max Interpenetration Matrix ===", ""]
-    edges = 0
+    declared = 0
     for c in CATALOG:
         for p in c.combines_with:
             lines.append(f"  {c.id} <-> {p}")
-            edges += 1
+            declared += 1
+    pair_count = 0
     try:
         from levi.graph.symbiosis import PAIRS
+        pair_count = len(PAIRS)
         lines.append("")
-        lines.append(f"Symbiosis formal pairs: {len(PAIRS)}")
+        lines.append(f"Symbiosis formal pairs: {pair_count}")
         for pair in PAIRS:
             lines.append(f"  {pair.asset_a} <-> {pair.asset_b}  ({pair.bond[:50]})")
-            edges += 1
     except Exception as e:
         lines.append(f"symbiosis: {e}")
+    counts = g.counts()
     lines.append("")
-    lines.append(f"Total declared interpenetration edges: {edges}")
+    lines.append("--- Graph model (weighted undirected) ---")
+    lines.append(f"  nodes: {counts['nodes']}  edges: {counts['edges']}  "
+                 f"total bond weight: {counts['total_weight']:.1f}")
+    lines.append("  weighting: declared combines_with = 1.0; symbiosis formal pair = 2.0;")
+    lines.append("             same pair declared in both registries => weights add (3.0)")
+    dang = g.dangling_refs()
+    lines.append(f"  dangling refs: {len(dang)}" + ("" if not dang else f" ({', '.join(dang)})"))
+    lines.append("    (combines_with targets with no catalog entry; kept as external nodes)")
+    lines.append("  strongest bonds:")
+    for a, b, w, kinds in g.strongest_bonds(5):
+        lines.append(f"    {a} <-> {b}  (w={w:.1f})")
+    lines.append("  top assets by weighted degree:")
+    top = sorted(((n, g.weighted_degree(n)) for n in g.nodes),
+                 key=lambda t: (-t[1], t[0]))[:5]
+    for nid, w in top:
+        lines.append(f"    {nid}  (wdeg={w:.1f}, deg={g.degree(nid)})")
+    orphans = g.orphans()
+    if orphans:
+        lines.append(f"  ORPHAN DEFECTS: {', '.join(orphans)}")
+    else:
+        lines.append("  orphans: none - every asset has an other half")
+    lines.append("")
+    lines.append(f"Total declared interpenetration edges: {declared + pair_count}")
     lines.append("Rule: orphans are defects — every asset needs an other half.")
     return "\n".join(lines)

@@ -63,8 +63,8 @@ def evaluate() -> Tuple[List[ScoreRow], float]:
         return (10.0 if n >= 100 else 7.0), f"personas={n}"
 
     def phases():
-        from levi.cloud.phases import PhaseMap, current_phase
-        return (10.0 if current_phase().id == "A" and len(PhaseMap().all()) == 3 else 5.0), f"current={current_phase().id}"
+        from levi.cloud.stages import StageMap, current_stage
+        return (10.0 if current_stage().id == "A" and len(StageMap().all()) == 3 else 5.0), f"current={current_stage().id}"
 
     def crypto_zk():
         from levi.cloud.crypto_protocol import CryptoProtocol

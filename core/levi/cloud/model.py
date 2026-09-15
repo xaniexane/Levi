@@ -16,7 +16,7 @@ from typing import Any, Dict, List, Optional
 from datetime import datetime, timezone
 
 from levi.lwp.model_engine import LWPModelEngine, DIRS, PHASES, POWERS, ROM_LENSES
-from levi.cloud.phases import PhaseMap, current_phase
+from levi.cloud.stages import StageMap, current_stage
 from levi.cloud.crypto_protocol import CryptoProtocol
 from levi.cloud.sync_dryrun import SyncDryRun
 from levi.cloud.zk import ZeroKnowledgeDesign
@@ -57,7 +57,7 @@ class FullCloudModel:
 
     def __init__(self) -> None:
         self.engine = LWPModelEngine()
-        self.phases = PhaseMap()
+        self.phases = StageMap()
         self.crypto = CryptoProtocol()
         self.sync = SyncDryRun()
         self.zk = ZeroKnowledgeDesign()
@@ -130,8 +130,8 @@ class FullCloudModel:
 
     def snapshot(self) -> Dict[str, Any]:
         snap = self.engine.full_snapshot()
-        snap["phase_abc"] = current_phase().id
-        snap["phase_abc_status"] = current_phase().status
+        snap["phase_abc"] = current_stage().id
+        snap["phase_abc_status"] = current_stage().status
         return snap
 
     # ── Story fabric bridge ────────────────────────────────────
@@ -153,11 +153,11 @@ class FullCloudModel:
         from levi.graph.genres import GenreRegistry
         r = GenreRegistry()
         info = r.integrity_check()
-        lines = [f"Genres: {r.count()}/97  Integrity: {'OK' if info.get('ok') else 'FAIL'}"]
+        lines = [f"Genres: {r.count()}/{info['expected']}  Integrity: {'OK' if info.get('ok') else 'FAIL'}"]
         # category counts if available
         try:
             from collections import Counter
-            cats = Counter(g.category.value for g in r.all())
+            cats = Counter(g.category.value for g in r.list())
             for c, n in sorted(cats.items()):
                 lines.append(f"  {c}: {n}")
         except Exception:

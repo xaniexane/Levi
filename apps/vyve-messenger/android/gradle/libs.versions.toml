@@ -1,0 +1,100 @@
+# VYVE Messenger — version catalog.
+# Every version below was verified against Maven Central / Google Maven on
+# 2026-09-15 (see P2.4 handoff notes). Do not bulk-bump: the *-marked items
+# are breaking-risk majors and each deserves its own change + test pass.
+
+[versions]
+agp = "9.4.0"                  # min/default Gradle 9.6.0 per the official AGP 9.4.0
+                               # release notes (verified 2026-09-15) — Gradle 9.4.1
+                               # is too old and AGP refuses to run on it.
+kotlin = "2.4.20"              # released 2026-09-07
+ksp = "2.3.12"                 # * LATEST KSP as of 2026-09-15; NO KSP for Kotlin 2.4.x
+                               #   exists yet (google/ksp has only an upgrade-kotlin-2.4.0
+                               #   branch). KSP 2.3.10+ understands Kotlin 2.4 module
+                               #   names; build will prove it out.
+hilt = "2.59.2"
+composeBom = "2026.08.00"
+
+coreKtx = "1.19.0"
+appcompat = "1.8.0"
+material = "1.13.0"
+activityCompose = "1.13.0"
+lifecycle = "2.10.0"
+navigationCompose = "2.9.8"
+hiltNavigationCompose = "1.2.0"
+hiltWork = "1.2.0"
+
+coroutines = "1.11.0"
+serialization = "1.11.0"
+datetime = "0.8.0"
+
+okhttp = "5.4.0"               # * 4.x -> 5.x major
+retrofit = "3.0.0"             # * 2.x -> 3.x major; converter artifact renamed
+sqlcipher = "4.9.0"            # * new artifact net.zetetic:sqlcipher-android
+                               #   (android-database-sqlcipher is deprecated;
+                               #   4.5.4 lacks 16 KB page-size support)
+securityCrypto = "1.1.0"       # stable (was 1.1.0-alpha06)
+biometric = "1.1.0"            # stable (was 1.2.0-alpha05)
+datastore = "1.2.1"
+work = "2.11.2"
+timber = "5.0.1"
+
+junit = "4.13.2"
+mockito = "5.12.0"
+mockitoKotlin = "5.4.0"
+testExtJunit = "1.2.1"
+espresso = "3.6.1"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+
+[libraries]
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+lifecycle-service = { group = "androidx.lifecycle", name = "lifecycle-service", version.ref = "lifecycle" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltWork" }
+
+coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "datetime" }
+
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
+
+sqlcipher = { group = "net.zetetic", name = "sqlcipher-android", version.ref = "sqlcipher" }
+security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "securityCrypto" }
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+biometric = { group = "androidx.biometric", name = "biometric", version.ref = "biometric" }
+work-runtime = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work" }
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
+test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "testExtJunit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }

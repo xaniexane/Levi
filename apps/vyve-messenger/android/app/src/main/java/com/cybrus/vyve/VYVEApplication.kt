@@ -6,9 +6,10 @@ import timber.log.Timber
 
 /**
  * VYVE Application entry point.
- * 
- * Initializes Hilt dependency injection and logging.
- * In production builds, Timber is only initialized if BuildConfig.DEBUG is false.
+ *
+ * Initializes Hilt dependency injection and logging. Debug builds plant a
+ * logcat tree; release builds plant a no-op-by-default tree that should be
+ * wired to the crash-reporting provider of choice.
  */
 @HiltAndroidApp
 class VYVEApplication : Application() {

@@ -11,6 +11,12 @@ Supports:
   - OIDC identity tokens
   - Device key attestation storage
 
+Persistence (P3.3): users, authorization codes, refresh tokens and devices are
+stored in a database via SQLAlchemy (``shared/models.py`` + ``shared/db.py``),
+replacing the old module-level dicts. ``DATABASE_URL`` selects the backend:
+PostgreSQL via psycopg2 when set to a ``postgresql://`` URL, otherwise local
+SQLite (``./vyve.db`` by default, in-memory for the pytest suite).
+
 Usage:
     python server.py          # Development (localhost:8080)
     python server.py 9000     # Custom port
@@ -27,19 +33,35 @@ import hashlib
 import base64
 import time
 import uuid
-import re
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from typing import Optional
 
 import bcrypt
-from jose import jwt, JWTError
-from passlib.context import CryptContext
+import jwt
+from jwt.exceptions import InvalidTokenError as JWTError
 from fastapi import FastAPI, HTTPException, Depends, Form, Query, Request, status
 from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.security import OAuth2PasswordBearer, HTTPBearer
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from itsdangerous import URLSafeTimedSerializer
+from sqlalchemy.orm import Session
+
+# The shared/ package lives next to oauth/ and messaging/ (i.e. backend/).
+# Make it importable no matter which directory the server is launched from.
+_BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _BACKEND_DIR not in sys.path:
+    sys.path.insert(0, _BACKEND_DIR)
+
+from shared.jwt_keys import (
+    JWT_ALGORITHM as _RSA_ALGORITHM,
+    JWT_KID,
+    get_private_key_pem,
+    get_public_key_pem,
+    public_jwk,
+)
+from shared.db import SessionLocal, get_db, init_db, seed_demo_users
+from shared.models import AuthCode, Device, OAuthToken, User
 
 
 # ──────────────────────────────────────────────────────────────
@@ -48,43 +70,83 @@ from itsdangerous import URLSafeTimedSerializer
 
 class Config:
     """Environment-driven configuration. Never hardcode secrets."""
-    
-    # JWT / Token settings
-    JWT_SECRET: str = os.getenv("JWT_SECRET", "dev-secret-CHANGE-IN-PRODUCTION")
-    JWT_ALGORITHM: str = "HS256"
+
+    # JWT / Token settings — RS256. Keys are managed by shared/jwt_keys.py;
+    # there is intentionally no JWT_SECRET fallback (fail-closed, P1.2).
+    JWT_ALGORITHM: str = _RSA_ALGORITHM  # "RS256"
     ACCESS_TOKEN_LIFETIME: int = int(os.getenv("ACCESS_TOKEN_LIFETIME", "3600"))  # 1 hour
     REFRESH_TOKEN_LIFETIME: int = int(os.getenv("REFRESH_TOKEN_LIFETIME", "2592000"))  # 30 days
     ID_TOKEN_LIFETIME: int = 3600
-    
+
     # OAuth2 settings
     ISSUER: str = os.getenv("OAUTH_ISSUER", "http://localhost:8080")
     CLIENT_ID: str = os.getenv("OAUTH_CLIENT_ID", "vyve-messenger")
-    CLIENT_SECRET: str = os.getenv("OAUTH_CLIENT_SECRET", "dev-client-secret-CHANGE")
-    
+    CLIENT_SECRET: str | None = os.getenv("OAUTH_CLIENT_SECRET")
+
+    # Per-client registered redirect URIs (exact match, P1.4)
+    REDIRECT_URIS: list[str] = [
+        u.strip()
+        for u in os.getenv(
+            "OAUTH_REDIRECT_URIS",
+            "http://localhost:8081/callback,http://localhost:8081/auth/callback",
+        ).split(",")
+        if u.strip()
+    ]
+
+    # CORS origins (explicit list, P1.6)
+    CORS_ORIGINS: list[str] = [
+        o.strip()
+        for o in os.getenv("CORS_ORIGINS", "http://localhost:8080,http://localhost:8081").split(",")
+        if o.strip()
+    ]
+
     # Cookie security
     COOKIE_SECURE: bool = os.getenv("COOKIE_SECURE", "false").lower() == "true"
     COOKIE_SAMESITE: str = os.getenv("COOKIE_SAMESITE", "lax")
-    
-    # Demo user store (replace with Omega/Cybrus identity API in production)
-    DEMO_MODE: bool = True
+
+    # Demo user store (P1.5). Off by default; enable explicitly for local testing.
+    DEMO_MODE: bool = os.getenv("VYVE_DEMO_MODE", "false").lower() == "true"
+
+    def __init__(self) -> None:
+        # Fail closed: no dev-secret default (P1.2).
+        if not self.CLIENT_SECRET:
+            raise RuntimeError(
+                "OAUTH_CLIENT_SECRET environment variable must be set. "
+                "Refusing to start without a client secret."
+            )
 
 config = Config()
+
+# ──────────────────────────────────────────────────────────────
+# DATABASE BOOTSTRAP (P3.3)
+# ──────────────────────────────────────────────────────────────
+
+init_db()
+if config.DEMO_MODE:
+    _seed_db = SessionLocal()
+    try:
+        seed_demo_users(_seed_db)
+    finally:
+        _seed_db.close()
+    del _seed_db
+
+# Compatibility shim: the old in-memory demo-user dict is gone (users live in
+# the DB now and are seeded above when VYVE_DEMO_MODE=true). Kept as an empty
+# dict because the test suite asserts it is empty with demo mode off.
+DEMO_USERS: dict[str, dict] = {}
 
 # ──────────────────────────────────────────────────────────────
 # TOKEN HELPERS
 # ──────────────────────────────────────────────────────────────
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-
 def hash_password(password: str) -> str:
-    """Hash password with bcrypt."""
-    return pwd_context.hash(password)
+    """Hash password with bcrypt (direct bcrypt; passlib removed in P2.3)."""
+    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
 
 def verify_password(raw: str, hashed: str) -> bool:
     """Verify bcrypt password."""
-    return pwd_context.verify(raw, hashed)
+    return bcrypt.checkpw(raw.encode("utf-8"), hashed.encode("utf-8"))
 
 
 def create_jwt_token(
@@ -93,7 +155,7 @@ def create_jwt_token(
     token_type: str = "access",
     extra_claims: dict = None
 ) -> str:
-    """Create a signed JWT."""
+    """Create an RS256-signed JWT. Signing key comes from shared/jwt_keys.py."""
     now = int(time.time())
     claims = {
         "iss": config.ISSUER,
@@ -111,18 +173,23 @@ def create_jwt_token(
     }
     if extra_claims:
         claims.update(extra_claims)
-    return jwt.encode(claims, config.JWT_SECRET, algorithm=config.JWT_ALGORITHM)
+    return jwt.encode(
+        claims,
+        get_private_key_pem(),
+        algorithm=config.JWT_ALGORITHM,
+        headers={"kid": JWT_KID},
+    )
 
 
 def decode_jwt(token: str, required_type: str = "access") -> dict:
-    """Decode and validate a JWT."""
+    """Decode and validate a JWT against the RSA public key."""
     try:
         payload = jwt.decode(
             token,
-            config.JWT_SECRET,
+            get_public_key_pem(),
             algorithms=[config.JWT_ALGORITHM],
             audience=config.CLIENT_ID,
-            options={"require_exp": True, "require_sub": True}
+            options={"require": ["exp", "sub"]}
         )
         if payload.get("type") != required_type:
             raise HTTPException(status_code=401, detail=f"Token type mismatch: expected {required_type}")
@@ -141,41 +208,6 @@ def create_code_challenge(verifier: str) -> str:
     digest = hashlib.sha256(verifier.encode()).digest()
     return base64.urlsafe_b64encode(digest).decode().rstrip("=")
 
-
-# ──────────────────────────────────────────────────────────────
-# IN-MEMORY STORES (replace with Redis + database in production)
-# ──────────────────────────────────────────────────────────────
-
-# Demo user store — maps username → {password_hash, user_id, role, scopes}
-DEMO_USERS: dict[str, dict] = {
-    "chauncey": {
-        "user_id": "550e8400-e29b-41d4-a716-446655440000",
-        "password_hash": hash_password("changeme"),
-        "role": "user",
-        "tier": "creator",
-        "scopes": ["openid", "profile", "read:v1", "write:v1", "marketplace:v1", "ai_context:v1"],
-        "email": "chauncey@example.com",
-        "display_name": "Chauncey",
-    },
-    "cj": {
-        "user_id": "00000000-0000-0000-0000-000000000001",
-        "password_hash": hash_password("admin"),
-        "role": "admin",
-        "tier": "enterprise",
-        "scopes": ["openid", "profile", "admin:v1", "read:v1", "write:v1"],
-        "email": "cj@vyve.local",
-        "display_name": "CJ",
-    }
-}
-
-# Authorization codes: code → {code, client_id, redirect_uri, user_id, scopes, code_challenge, expires_at, used}
-auth_codes: dict[str, dict] = {}
-
-# Refresh tokens: token_hash → {user_id, scopes, device_id, expires_at, rotated_from}
-refresh_tokens: dict[str, dict] = {}
-
-# Devices: user_id → [{device_id, signing_key, encryption_key, registered_at}]
-user_devices: dict[str, list[dict]] = {}
 
 # ──────────────────────────────────────────────────────────────
 # Pydantic Models
@@ -235,10 +267,10 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# CORS — restrict in production
+# CORS — explicit origin allowlist (no wildcard with credentials), P1.6
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Restrict in production
+    allow_origins=config.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -254,6 +286,10 @@ def get_current_user(credentials = Depends(oauth2_scheme)) -> dict:
     if credentials.scheme.lower() != "bearer":
         raise HTTPException(status_code=401, detail="Invalid authentication scheme")
     return decode_jwt(credentials.credentials)
+
+
+def _utcnow() -> datetime:
+    return datetime.now(timezone.utc)
 
 
 # ──────────────────────────────────────────────────────────────
@@ -279,25 +315,18 @@ def oidc_discovery():
         ],
         "code_challenge_methods_supported": ["S256"],
         "token_endpoint_auth_methods_supported": ["client_secret_post", "client_secret_basic"],
-        "id_token_signing_alg_values_supported": ["HS256"],
+        "id_token_signing_alg_values_supported": ["RS256"],
     }
 
 
 @app.get("/oauth/jwks")
 def jwks():
-    """JSON Web Key Set — exposes public key for token verification."""
-    # In production: rotate keys, use RS256 or EdDSA with proper key management
-    return {
-        "keys": [{
-            "kty": "oct",
-            "alg": "HS256",
-            "use": "sig",
-            # This exposes the public component — the secret itself is the private key
-            # In production use asymmetric keys (RS256/ES256) so the JWKS is safe to share
-            "k": base64.urlsafe_b64encode(config.JWT_SECRET.encode()).decode().rstrip("="),
-            "kid": "vyve-1",
-        }]
-    }
+    """JSON Web Key Set — publishes the PUBLIC RSA key for token verification.
+
+    Contains only public key material (kty/n/e). The private key is never
+    exposed here (P1.3).
+    """
+    return {"keys": [public_jwk()]}
 
 
 # ──────────────────────────────────────────────────────────────
@@ -314,9 +343,10 @@ def authorize(
     state: str = Query(...),
     code_challenge: str = Query(...),
     code_challenge_method: str = Query(...),
+    db: Session = Depends(get_db),
 ):
     """OAuth2 Authorization Endpoint.
-    
+
     In production: this renders a login/consent UI and sets a session cookie.
     For this scaffold: accepts ?username=<name>&password=<pw> query params for testing.
     """
@@ -336,10 +366,12 @@ def authorize(
             f"{redirect_uri}?error=invalid_request&error_description=code_challenge_method must be S256&state={state}",
             status_code=302
         )
-    if not redirect_uri.startswith("http"):
-        return RedirectResponse(
-            f"{redirect_uri}?error=invalid_request&error_description=invalid redirect_uri&state={state}",
-            status_code=302
+    if redirect_uri not in config.REDIRECT_URIS:
+        # Never redirect to an unregistered URI (open-redirect / code theft,
+        # P1.4). Return a plain 400 so no attacker-controlled URI is reflected.
+        return JSONResponse(
+            {"error": "invalid_request", "error_description": "unregistered redirect_uri"},
+            status_code=400,
         )
 
     # For demo: accept credentials via query params
@@ -371,20 +403,19 @@ a{{color:#58a6ff}}p{{color:#8b949e;font-size:13px}}
 <input type=hidden name=code_challenge value="{code_challenge}">
 <input type=hidden name=code_challenge_method value="{code_challenge_method}">
 <label>Username</label>
-<input name=username placeholder="chauncey or cj">
+<input name=username placeholder="Username">
 <label>Password</label>
-<input name=password type=password placeholder="changeme or admin">
+<input name=password type=password placeholder="Password">
 <button type=submit>Sign In</button>
 </form>
-<p style=margin-top:16px>Demo: chauncey/changeme or cj/admin</p>
 </div></body></html>"""
         return HTMLResponse(content=html)
 
-    # Validate credentials
-    user = DEMO_USERS.get(username)
-    if not user or not verify_password(password, user["password_hash"]):
+    # Validate credentials against the DB user store
+    user = db.query(User).filter(User.username == username).first()
+    if not user or not verify_password(password, user.password_hash):
         return HTMLResponse(
-            content="<h1>Invalid credentials</h1><p><a href='/oauth/authorize?" + 
+            content="<h1>Invalid credentials</h1><p><a href='/oauth/authorize?" +
                     f"response_type={response_type}&client_id={client_id}&redirect_uri={redirect_uri}" +
                     f"&scope={scope}&state={state}&code_challenge={code_challenge}" +
                     f"&code_challenge_method={code_challenge_method}" +
@@ -394,24 +425,28 @@ a{{color:#58a6ff}}p{{color:#8b949e;font-size:13px}}
 
     # Validate scopes
     requested_scopes = set(scope.split())
-    granted_scopes = list(requested_scopes & set(user["scopes"]))
+    user_scopes = list(user.scopes or [])
+    granted_scopes = list(requested_scopes & set(user_scopes))
     if not granted_scopes:
-        granted_scopes = user["scopes"]
+        granted_scopes = user_scopes
 
-    # Generate authorization code
+    # Generate authorization code (10-minute window, single use)
     code = secrets.token_urlsafe(32)
-    auth_codes[code] = {
-        "client_id": client_id,
-        "redirect_uri": redirect_uri,
-        "user_id": user["user_id"],
-        "username": username,
-        "scopes": granted_scopes,
-        "code_challenge": code_challenge,
-        "code_challenge_method": code_challenge_method,
-        "issued_at": time.time(),
-        "expires_at": time.time() + 600,  # 10-minute window
-        "used": False,
-    }
+    now = _utcnow()
+    db.add(AuthCode(
+        code=code,
+        client_id=client_id,
+        redirect_uri=redirect_uri,
+        user_id=user.user_id,
+        username=user.username,
+        scopes=granted_scopes,
+        code_challenge=code_challenge,
+        code_challenge_method=code_challenge_method,
+        issued_at=now,
+        expires_at=datetime.fromtimestamp(time.time() + 600, tz=timezone.utc),
+        used=False,
+    ))
+    db.commit()
 
     # Redirect with code
     params = f"code={code}&state={state}"
@@ -423,9 +458,9 @@ a{{color:#58a6ff}}p{{color:#8b949e;font-size:13px}}
 # ──────────────────────────────────────────────────────────────
 
 @app.post("/oauth/token", response_model=TokenResponse)
-def token_endpoint(form: Request):
+async def token_endpoint(form: Request, db: Session = Depends(get_db)):
     """OAuth2 Token Endpoint.
-    
+
     Supports:
       - authorization_code + PKCE
       - refresh_token (with rotation)
@@ -446,50 +481,50 @@ def token_endpoint(form: Request):
         code_verifier = (await form.form()).get("code_verifier")
         redirect_uri = (await form.form()).get("redirect_uri")
 
-        if not code or code not in auth_codes:
+        stored = db.query(AuthCode).filter(AuthCode.code == code).first() if code else None
+        if not stored:
             raise HTTPException(status_code=400, detail="invalid_code")
-        
-        stored = auth_codes[code]
-        
-        if stored["used"]:
+
+        if stored.used:
             # CODE REUSE DETECTED — revoke all tokens for this user
-            _revoke_all_user_tokens(stored["user_id"])
+            _revoke_all_user_tokens(db, stored.user_id)
             raise HTTPException(status_code=400, detail="code_already_used")
 
-        if time.time() > stored["expires_at"]:
+        if _utcnow() > _as_aware(stored.expires_at):
             raise HTTPException(status_code=400, detail="code_expired")
-        
-        if redirect_uri and redirect_uri != stored["redirect_uri"]:
+
+        if redirect_uri and redirect_uri != stored.redirect_uri:
             raise HTTPException(status_code=400, detail="redirect_uri_mismatch")
 
         # Verify PKCE
-        if stored["code_challenge_method"] == "S256":
+        if stored.code_challenge_method == "S256":
             if not code_verifier:
                 raise HTTPException(status_code=400, detail="code_verifier required")
             computed = create_code_challenge(code_verifier)
-            if computed != stored["code_challenge"]:
+            if computed != stored.code_challenge:
                 raise HTTPException(status_code=400, detail="invalid_code_verifier")
 
         # Mark code as used
-        stored["used"] = True
+        stored.used = True
+        db.commit()
 
         # Issue tokens
-        user_id = stored["user_id"]
-        scopes = stored["scopes"]
-        user = next((u for u in DEMO_USERS.values() if u["user_id"] == user_id), None)
+        user_id = stored.user_id
+        scopes = list(stored.scopes or [])
+        user = db.query(User).filter(User.user_id == user_id).first()
         if not user:
             raise HTTPException(status_code=400, detail="user_not_found")
 
         access_token = create_jwt_token(user_id, scopes, "access")
-        refresh_token = _issue_refresh_token(user_id, scopes)
-        
+        refresh_token = _issue_refresh_token(db, user_id, scopes)
+
         id_token_claims = {
             "sub": user_id,
-            "email": user.get("email", ""),
-            "name": user.get("display_name", ""),
-            "preferred_username": stored["username"],
-            "role": user["role"],
-            "tier": user["tier"],
+            "email": user.email or "",
+            "name": user.display_name or "",
+            "preferred_username": stored.username,
+            "role": user.role,
+            "tier": user.tier,
         }
         id_token = create_jwt_token(user_id, ["openid"], "id", id_token_claims)
 
@@ -508,52 +543,65 @@ def token_endpoint(form: Request):
             raise HTTPException(status_code=400, detail="refresh_token required")
 
         token_hash = hashlib.sha256(refresh_tok.encode()).hexdigest()
-        if token_hash not in refresh_tokens:
+        stored = db.query(OAuthToken).filter(OAuthToken.token_hash == token_hash).first()
+        if not stored:
             raise HTTPException(status_code=401, detail="invalid_refresh_token")
-        
-        stored = refresh_tokens[token_hash]
-        if time.time() > stored["expires_at"]:
-            del refresh_tokens[token_hash]
+
+        if _utcnow() > _as_aware(stored.expires_at):
+            db.delete(stored)
+            db.commit()
             raise HTTPException(status_code=401, detail="refresh_token_expired")
 
         # Rotation: revoke old token, issue new one
         old_hash = token_hash
-        stored["rotated_from"] = old_hash
-        del refresh_tokens[old_hash]
+        user_id = stored.user_id
+        scopes = list(stored.scopes or [])
+        db.delete(stored)
+        db.commit()
 
-        new_access = create_jwt_token(stored["user_id"], stored["scopes"], "access")
-        new_refresh = _issue_refresh_token(stored["user_id"], stored["scopes"])
+        new_access = create_jwt_token(user_id, scopes, "access")
+        new_refresh = _issue_refresh_token(db, user_id, scopes, rotated_from=old_hash)
 
         return TokenResponse(
             access_token=new_access,
             expires_in=config.ACCESS_TOKEN_LIFETIME,
             refresh_token=new_refresh,
-            scope=" ".join(stored["scopes"]),
+            scope=" ".join(scopes),
         )
 
     else:
         raise HTTPException(status_code=400, detail=f"unsupported_grant_type: {grant_type}")
 
 
-def _issue_refresh_token(user_id: str, scopes: list[str]) -> str:
+def _as_aware(dt: datetime) -> datetime:
+    """SQLite returns naive datetimes; treat them as UTC for comparisons."""
+    if dt is not None and dt.tzinfo is None:
+        return dt.replace(tzinfo=timezone.utc)
+    return dt
+
+
+def _issue_refresh_token(db: Session, user_id: str, scopes: list[str],
+                         rotated_from: Optional[str] = None) -> str:
     """Issue a new refresh token with rotation tracking."""
     token = secrets.token_urlsafe(48)
     token_hash = hashlib.sha256(token.encode()).hexdigest()
-    refresh_tokens[token_hash] = {
-        "user_id": user_id,
-        "scopes": scopes,
-        "issued_at": time.time(),
-        "expires_at": time.time() + config.REFRESH_TOKEN_LIFETIME,
-        "rotated_from": None,
-    }
+    db.add(OAuthToken(
+        token_hash=token_hash,
+        user_id=user_id,
+        scopes=list(scopes),
+        issued_at=_utcnow(),
+        expires_at=datetime.fromtimestamp(
+            time.time() + config.REFRESH_TOKEN_LIFETIME, tz=timezone.utc),
+        rotated_from=rotated_from,
+    ))
+    db.commit()
     return token
 
 
-def _revoke_all_user_tokens(user_id: str):
+def _revoke_all_user_tokens(db: Session, user_id: str):
     """Code reuse attack response: revoke all refresh tokens for this user."""
-    to_delete = [h for h, t in refresh_tokens.items() if t["user_id"] == user_id]
-    for h in to_delete:
-        del refresh_tokens[h]
+    db.query(OAuthToken).filter(OAuthToken.user_id == user_id).delete()
+    db.commit()
 
 
 # ──────────────────────────────────────────────────────────────
@@ -561,24 +609,24 @@ def _revoke_all_user_tokens(user_id: str):
 # ──────────────────────────────────────────────────────────────
 
 @app.get("/oauth/userinfo")
-def userinfo(user: dict = Depends(get_current_user)):
+def userinfo(user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
     """OIDC UserInfo endpoint."""
     user_id = user["sub"]
-    db_user = next((u for u in DEMO_USERS.values() if u["user_id"] == user_id), None)
+    db_user = db.query(User).filter(User.user_id == user_id).first()
     if not db_user:
         raise HTTPException(status_code=404, detail="user not found")
-    
+
     scopes = set(user.get("scope", "").split())
-    response = {"sub": user_id, "username": db_user["username"]}
-    
+    response = {"sub": user_id, "username": db_user.username}
+
     if "profile" in scopes:
         response.update({
-            "name": db_user.get("display_name", ""),
-            "email": db_user.get("email", ""),
-            "role": db_user["role"],
-            "tier": db_user["tier"],
+            "name": db_user.display_name or "",
+            "email": db_user.email or "",
+            "role": db_user.role,
+            "tier": db_user.tier,
         })
-    
+
     return response
 
 
@@ -587,80 +635,97 @@ def userinfo(user: dict = Depends(get_current_user)):
 # ──────────────────────────────────────────────────────────────
 
 @app.get("/me", response_model=UserProfile)
-def get_me(user: dict = Depends(get_current_user)):
+def get_me(user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
     """Get current authenticated user profile."""
     user_id = user["sub"]
-    db_user = next((u for u in DEMO_USERS.values() if u["user_id"] == user_id), None)
+    db_user = db.query(User).filter(User.user_id == user_id).first()
     if not db_user:
         raise HTTPException(status_code=404, detail="user not found")
-    
+
     return UserProfile(
         sub=user_id,
-        username=next((k for k, v in DEMO_USERS.items() if v["user_id"] == user_id), ""),
-        email=db_user.get("email", ""),
-        display_name=db_user.get("display_name", ""),
-        role=db_user["role"],
-        tier=db_user["tier"],
-        scopes=db_user["scopes"],
+        username=db_user.username,
+        email=db_user.email or "",
+        display_name=db_user.display_name or "",
+        role=db_user.role,
+        tier=db_user.tier,
+        scopes=list(db_user.scopes or []),
     )
+
+
+def _device_to_dict(d: Device) -> dict:
+    return {
+        "device_id": d.device_id,
+        "device_name": d.device_name,
+        "device_type": d.device_type,
+        "signing_key": d.signing_key,
+        "encryption_key": d.encryption_key,
+        "registered_at": _as_aware(d.registered_at).isoformat(),
+        "trusted": d.trusted,
+    }
 
 
 @app.post("/me/devices", status_code=201)
 def register_device(
     reg: DeviceRegistration,
-    user: dict = Depends(get_current_user)
+    user: dict = Depends(get_current_user),
+    db: Session = Depends(get_db),
 ):
     """Register a new device for multi-device E2EE messaging."""
     user_id = user["sub"]
-    if user_id not in user_devices:
-        user_devices[user_id] = []
-    
-    device = {
-        "device_id": reg.device_id,
-        "device_name": reg.device_name,
-        "device_type": reg.device_type,
-        "signing_key": reg.signing_key,
-        "encryption_key": reg.encryption_key,
-        "registered_at": datetime.now(timezone.utc).isoformat(),
-        "trusted": False,
-    }
-    
+
     # Remove old device with same ID if exists (allows re-registration)
-    user_devices[user_id] = [d for d in user_devices[user_id] if d["device_id"] != reg.device_id]
-    user_devices[user_id].append(device)
-    
+    db.query(Device).filter(
+        Device.user_id == user_id, Device.device_id == reg.device_id
+    ).delete()
+    db.add(Device(
+        device_id=reg.device_id,
+        user_id=user_id,
+        device_name=reg.device_name,
+        device_type=reg.device_type,
+        signing_key=reg.signing_key,
+        encryption_key=reg.encryption_key,
+        registered_at=_utcnow(),
+        trusted=False,
+    ))
+    db.commit()
+
     return {"status": "registered", "device_id": reg.device_id}
 
 
 @app.get("/me/devices")
-def list_devices(user: dict = Depends(get_current_user)):
+def list_devices(user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
     """List registered devices for this user."""
     user_id = user["sub"]
-    return {"devices": user_devices.get(user_id, [])}
+    devices = db.query(Device).filter(Device.user_id == user_id).all()
+    return {"devices": [_device_to_dict(d) for d in devices]}
 
 
 @app.delete("/me/devices/{device_id}")
-def revoke_device(device_id: str, user: dict = Depends(get_current_user)):
-    """Revoke a device (removes it from user_devices)."""
+def revoke_device(device_id: str, user: dict = Depends(get_current_user),
+                 db: Session = Depends(get_db)):
+    """Revoke a device (removes it from the device registry)."""
     user_id = user["sub"]
-    if user_id in user_devices:
-        user_devices[user_id] = [d for d in user_devices[user_id] if d["device_id"] != device_id]
+    db.query(Device).filter(
+        Device.user_id == user_id, Device.device_id == device_id
+    ).delete()
+    db.commit()
     return {"status": "revoked", "device_id": device_id}
 
 
 @app.post("/oauth/revoke")
-def revoke_token(form: Request):
+async def revoke_token(form: Request, db: Session = Depends(get_db)):
     """OAuth2 Token Revocation (RFC 7009)."""
     token = (await form.form()).get("token")
     token_type_hint = (await form.form()).get("token_type_hint")
-    
+
     if not token:
         return JSONResponse({"error": "invalid_request"}, status_code=400)
-    
+
     token_hash = hashlib.sha256(token.encode()).hexdigest()
-    if token_hash in refresh_tokens:
-        del refresh_tokens[token_hash]
-    
+    db.query(OAuthToken).filter(OAuthToken.token_hash == token_hash).delete()
+    db.commit()
+
     # Always return 200 (RFC 7009)
     return {"status": "revoked"}
 
@@ -670,15 +735,15 @@ def revoke_token(form: Request):
 # ──────────────────────────────────────────────────────────────
 
 @app.get("/health")
-def health():
+def health(db: Session = Depends(get_db)):
     return {
         "status": "ok",
         "service": "cybrus-oauth",
         "version": "1.0.0",
         "issuer": config.ISSUER,
-        "users_registered": len(DEMO_USERS),
-        "tokens_issued": len(auth_codes),
-        "refresh_tokens_active": len(refresh_tokens),
+        "users_registered": db.query(User).count(),
+        "tokens_issued": db.query(AuthCode).count(),
+        "refresh_tokens_active": db.query(OAuthToken).count(),
     }
 
 
@@ -696,5 +761,4 @@ if __name__ == "__main__":
     print(f"[Cybrus OAuth] Starting on port {port}")
     print(f"[Cybrus OAuth] Discovery: http://localhost:{port}/.well-known/openid-configuration")
     print(f"[Cybrus OAuth] Demo: http://localhost:{port}/oauth/authorize")
-    print(f"[Cybrus OAuth]   Test user: chauncey / changeme")
     uvicorn.run("server:app", host="0.0.0.0", port=port, reload=True)

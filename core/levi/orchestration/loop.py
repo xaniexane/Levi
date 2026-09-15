@@ -22,6 +22,7 @@ from levi.skill.registry import SkillRegistry
 from levi.policy.gates import PolicyEngine, RiskLevel
 from levi.memory.store import MemoryStore
 from levi.memory.types import MemoryType
+from levi.orchestration.intent import build_intent_map
 from levi.model.abstraction import ModelRouter, GenerationRequest
 
 
@@ -122,6 +123,11 @@ class Orchestrator:
         self.nervous.unlock()
 
     def turn(self, user_text: str) -> TurnResult:
+        # UNDERSTAND — structured intent sketch; never allowed to break the turn
+        try:
+            intent_map = build_intent_map(user_text).to_dict()
+        except Exception:
+            intent_map = {"literal_request": user_text or "", "confidence": 0.0}
         # Nervous system: score stress/anxiety/workload/bond → persona lens
         # (skipped when user locked a persona via --personality / set_persona)
         shelf_count = 0
@@ -210,6 +216,7 @@ class Orchestrator:
                 response=response_text,
                 is_special_behavior=True,
                 metadata={
+                    "intent_map": intent_map,
                     "ei": ei_state.as_dict(),
                     "clarifications": self._clarification_counts.get(session_key, 0),
                     "detail_level": self._detail_levels.get(session_key, 0),
@@ -300,7 +307,7 @@ class Orchestrator:
                             f"Say **yes, do it** (or **yes**) to proceed, or rephrase.\n"
                             f"Tip: levi init --yes disables this confirm. Templates: levi templates"
                         ),
-                        metadata={"pending_constructive": skill_id, "soft_confirm": True},
+                        metadata={"intent_map": intent_map, "pending_constructive": skill_id, "soft_confirm": True},
                     )
             except Exception:
                 pass
@@ -352,7 +359,7 @@ class Orchestrator:
                             skills_considered=skills_hit,
                             response=str(result),
                             policy_receipt=receipt.id,
-                            metadata={"skill": skill_id, "ei": ei_state.as_dict()},
+                            metadata={"intent_map": intent_map, "skill": skill_id, "ei": ei_state.as_dict()},
                         )
                     except Exception as e:
                         return TurnResult(
@@ -362,7 +369,7 @@ class Orchestrator:
                             specialists=specialist_ids,
                             skills_considered=skills_hit,
                             response=f"Skill error: {e}",
-                            metadata={"skill": skill_id, "error": str(e)},
+                            metadata={"intent_map": intent_map, "skill": skill_id, "error": str(e)},
                         )
 
         # 7. Default: model generation with full companion + persona guidance
@@ -455,6 +462,7 @@ class Orchestrator:
             skills_considered=skills_hit,
             response=result.text,
             metadata={
+                "intent_map": intent_map,
                 "model": result.model_id,
                 "local": result.is_local,
                 "ei": ei_state.as_dict(),

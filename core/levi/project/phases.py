@@ -1,6 +1,10 @@
 """
 Phase runner for capability-discovery / service-delivery projects — pre-MVP.
 
+P0–P15 are executable workflow phases (state machine + HITL + capability log).
+Not to be confused with the product stage map A/B/C (levi.cloud.stages):
+those are maturity stages, not a runner.
+
 LEVI can run these phases before the full product exists:
   - Autonomous on low-risk execution
   - HITL before consequences

@@ -147,6 +147,7 @@ class AutomationRegistry:
         linked_personas: Optional[List[str]] = None,
         linked_genres: Optional[List[str]] = None,
         tags: Optional[List[str]] = None,
+        trigger_config: Optional[Dict[str, Any]] = None,
     ) -> Automation:
         # Risk ceiling at least max of action risks
         action_risk = max((a.risk_level for a in actions), default=0)
@@ -156,6 +157,7 @@ class AutomationRegistry:
             name=name,
             description=description,
             trigger=trigger,
+            trigger_config=trigger_config or {},
             actions=actions,
             risk_ceiling=ceiling,
             linked_personas=linked_personas or [],
@@ -165,6 +167,14 @@ class AutomationRegistry:
         self._autos[auto.id] = auto
         self._persist()
         return auto
+
+    def remove(self, auto_id: str) -> bool:
+        """Delete an automation. Returns False when the id is unknown."""
+        if auto_id not in self._autos:
+            return False
+        del self._autos[auto_id]
+        self._persist()
+        return True
 
     def activate(self, auto_id: str) -> Automation:
         a = self._autos[auto_id]

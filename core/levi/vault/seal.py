@@ -1,10 +1,16 @@
 """
 Vault Seal — encrypt/decrypt local blobs (LEVI-original).
 
-Uses stdlib hashlib + a simple XOR stream derived from passphrase when
-cryptography package is unavailable; prefers Fernet if installed.
+Fail-closed design: encryption is provided exclusively by the ``cryptography``
+package's Fernet (AES-128-CBC + HMAC-SHA256 authenticated encryption).
+Instantiating :class:`VaultSeal` without ``cryptography`` installed raises
+``RuntimeError`` telling the user to ``pip install cryptography`` — there is
+no XOR/plaintext-equivalent fallback.
 
-Not a substitute for full HSM. Good enough for local private chat/notes at rest.
+The vault directory is restricted to the owner (0o700) at creation, and every
+``.seal`` file is written with owner-only permissions (0o600).
+
+Not a substitute for a full HSM. Good enough for local private chat/notes at rest.
 """
 from __future__ import annotations
 
@@ -22,40 +28,32 @@ class VaultSeal:
     def __init__(self, passphrase: str, directory: Optional[Path] = None):
         if not passphrase:
             raise ValueError("passphrase required")
+        try:
+            from cryptography.fernet import Fernet  # type: ignore
+        except ImportError as exc:
+            raise RuntimeError(
+                "The 'cryptography' package is required for the vault seal. "
+                "Install it with: pip install cryptography"
+            ) from exc
         self.key = hashlib.sha256(passphrase.encode("utf-8")).digest()
         self.dir = Path(directory) if directory else DEFAULT_DIR
         self.dir.mkdir(parents=True, exist_ok=True)
-        self._fernet = None
-        try:
-            from cryptography.fernet import Fernet  # type: ignore
-
-            fkey = base64.urlsafe_b64encode(self.key)
-            self._fernet = Fernet(fkey)
-        except Exception:
-            self._fernet = None
-
-    def _xor(self, data: bytes) -> bytes:
-        key = self.key
-        return bytes(b ^ key[i % len(key)] for i, b in enumerate(data))
+        # Fail closed on permissions: vault directory owner-only, even if it
+        # already existed with looser permissions.
+        os.chmod(self.dir, 0o700)
+        fkey = base64.urlsafe_b64encode(self.key)
+        self._fernet = Fernet(fkey)
 
     def encrypt_bytes(self, data: bytes) -> bytes:
-        if self._fernet:
-            return self._fernet.encrypt(data)
-        # prefix version byte for XOR path
-        return b"X1" + self._xor(data)
+        return self._fernet.encrypt(data)
 
     def decrypt_bytes(self, data: bytes) -> bytes:
-        if self._fernet and not data.startswith(b"X1"):
-            return self._fernet.decrypt(data)
-        if data.startswith(b"X1"):
-            return self._xor(data[2:])
-        if self._fernet:
-            return self._fernet.decrypt(data)
-        return self._xor(data)
+        return self._fernet.decrypt(data)
 
     def put(self, name: str, text: str) -> Path:
         path = self.dir / f"{name}.seal"
         path.write_bytes(self.encrypt_bytes(text.encode("utf-8")))
+        os.chmod(path, 0o600)
         return path
 
     def get(self, name: str) -> str:

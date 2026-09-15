@@ -1,6 +1,11 @@
 """
 Offline companion synthesizer — full LEVI logic without a neural model.
 
+The deterministic reply engine behind ModelRouter's offline path
+(levi.model.abstraction.DeterministicFallbackProvider). Sibling of
+ei.companion (guidance layer used by the turn loop) and ei.chat_companion
+(session REPL) — same care standards, different layer.
+
 Uses tone, continuity (name/goal/shelf), alchemy, life equation, life chess,
 and monotropism state to produce useful, structured replies offline.
 

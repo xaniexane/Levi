@@ -1,6 +1,11 @@
 """
 L.W.P. Story Fabric — characters, genre-directed creation, modify/expand.
 
+This is the MULTI-STORY content engine: optimized for managing many distinct
+stories (per-story Direction/Modes/Form). It is a genuinely different job
+from lwp.model_engine (single continuous manuscript with REIM/RIEM/ROM) —
+not a competing implementation of the same job. Do not merge the two.
+
 Interpenetrates with: 97 genres, personas, Factory DNA, memory, companion roles.
 Local-first: structured outlines + deterministic prose templates;
 model generation enhances when Ollama is available.
@@ -363,6 +368,17 @@ class StoryFabric:
         title: Optional[str] = None,
     ) -> Story:
         genre = genre.strip().lower().replace(" ", "_")
+        if not self.genres.get(genre):
+            # Blueprint §5.3 rule: never silently accept or fall back on a
+            # genre the kernel registry does not actually have. A UI chip or
+            # CLI arg that silently degrades is worse than a loud error.
+            known = self.genres.ids()
+            hint = [g for g in known if genre in g or g in genre][:5]
+            raise ValueError(
+                f"Unknown genre {genre!r} — not in the {self.genres.count()}-genre "
+                f"registry. {('Did you mean: ' + ', '.join(hint) + '? ') if hint else ''}"
+                "See `levi story --genres` for the full list."
+            )
         chars = self.generate_characters(genre, count=character_count, archetypes=archetypes)
         beats = self._default_beats(genre, chars, premise)
         resolved_title = title or self._title_from(premise, genre)

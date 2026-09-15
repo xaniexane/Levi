@@ -1,6 +1,12 @@
 """
 L.W.P. Model Engine — offline literary spine (SSA).
 
+This is the SINGLE-CONTINUOUS-MANUSCRIPT engine: REIM forks, RIEM/void
+ghost, ROM / Wyrd-Rupture locks, Phase/Power/word-count gold path toward a
+target. It is a genuinely different job from graph.story_fabric (multi-story
+content engine) — not a competing implementation of the same job.
+Do not merge the two.
+
 Ported from the L.W.P. Model UI: directions, phases, powers, modes, feared arts,
 genres, REIM forks, RIEM/void ghost, ROM / Wyrd-Rupture locks, manuscript.
 

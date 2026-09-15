@@ -254,6 +254,9 @@ export function readOgSite(cwd = process.cwd()) {
 
 /** Public path of an on-disk share card, or "" if neither file exists. */
 export function ogCardPublicPath(cwd = process.cwd()) {
+  // An explicitly empty cwd means "no workspace" (hermetic injection) — it
+  // must not fall through to a relative path resolved against process.cwd().
+  if (!cwd) return "";
   if (existsSync(join(cwd, "public/og.jpg"))) return "/og.jpg";
   if (existsSync(join(cwd, "public/og.png"))) return "/og.png";
   return "";
@@ -401,16 +404,18 @@ function insertBeforeHeadClose(html, snippet) {
 }
 
 export function normalizeHeadContext(ctx = {}) {
-  const cwd = ctx.cwd ?? process.cwd();
-  // Middleware passes a baked `site`. Still consult the workspace so a
-  // public/og.jpg generated after that snapshot (or missed by a wrong cwd)
-  // wins over the og.grok.me placeholder. Vercel has no public/ to read, so
-  // a correct bake is unchanged.
-  const site = applyCustomCardFromFs(
-    ctx.site !== undefined ? ctx.site : snapshotOgIdentity(cwd).site,
-    cwd,
-  );
-  const appName = resolveOgTitle(site, ctx.appName ?? DEFAULT_APP_NAME, ctx.host ?? "");
+  // Hermetic by default: workspace discovery (src/lib/og/site.json,
+  // public/og.jpg) runs only when the caller passes an explicit `cwd`.
+  // Without one, injection uses exactly the context given — no ambient
+  // process.cwd() reads — so tests and ad-hoc callers are deterministic and
+  // one workspace's branding can never leak into another app's injection.
+  // The Vite plugin passes its root as `cwd` (dev/preview keep discovering);
+  // the Nitro middleware passes a baked `site` (deployed keeps its bake).
+  const cwd = ctx.cwd ?? "";
+  const site =
+    ctx.site !== undefined ? { ...ctx.site } : cwd ? snapshotOgIdentity(cwd).site : {};
+  const discovered = cwd ? applyCustomCardFromFs(site, cwd) : site;
+  const appName = resolveOgTitle(discovered, ctx.appName ?? DEFAULT_APP_NAME, ctx.host ?? "");
   return {
     appName,
     projectId: ctx.projectId ?? readGrokProjectId(),
@@ -418,7 +423,7 @@ export function normalizeHeadContext(ctx = {}) {
     creatorId: ctx.creatorId ?? readXCreatorId(),
     host: ctx.host ?? "",
     cwd,
-    site,
+    site: discovered,
   };
 }
 

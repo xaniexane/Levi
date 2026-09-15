@@ -101,8 +101,8 @@ class OperationalLayer:
             snap.notes.append(f"relay: {e}")
 
         try:
-            from levi.cloud.phases import current_phase
-            snap.notes.append("phase=%s/%s" % (current_phase().id, current_phase().status))
+            from levi.cloud.stages import current_stage
+            snap.notes.append("phase=%s/%s" % (current_stage().id, current_stage().status))
         except Exception as e:
             snap.notes.append(f"phase: {e}")
 

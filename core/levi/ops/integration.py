@@ -93,16 +93,16 @@ def run_integration_audit() -> str:
             )
         )
 
-    def cloud_phases():
-        from levi.cloud.phases import PhaseMap, current_phase
+    def cloud_stages():
+        from levi.cloud.stages import StageMap, current_stage
         from levi.cloud.surface import CloudSurface
-        m = PhaseMap()
-        assert current_phase().id == "A"
+        m = StageMap()
+        assert current_stage().id == "A"
         s = CloudSurface()
         demo = s.demo()
         return (
             len(m.all()) == 3 and demo.get("cmk_len") == 32,
-            "phases=%d current=%s cmk_backend=%s" % (len(m.all()), current_phase().id, demo.get("cmk_backend")),
+            "stages=%d current=%s cmk_backend=%s" % (len(m.all()), current_stage().id, demo.get("cmk_backend")),
         )
 
     def offline_crisis():
@@ -120,7 +120,7 @@ def run_integration_audit() -> str:
         ("charter", charter_bound),
         ("symbiosis", symbiosis_pairs),
         ("offline-crisis", offline_crisis),
-        ("cloud-phases", cloud_phases),
+        ("cloud-stages", cloud_stages),
         ("full-cloud-model", full_cloud_model),
         ("chat-companion", chat_companion),
         ("lwp-model", lwp_model),

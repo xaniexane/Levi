@@ -68,8 +68,8 @@ def run_enterprise_checklist() -> List[Check]:
         return s.get("seal") == "L.W.P.", f"rank={s.get('rank')} words={s.get('words')}"
 
     def phases():
-        from levi.cloud.phases import current_phase, PhaseMap
-        return current_phase().id == "A" and len(PhaseMap().all()) == 3, f"current={current_phase().id}"
+        from levi.cloud.stages import current_stage, StageMap
+        return current_stage().id == "A" and len(StageMap().all()) == 3, f"current={current_stage().id}"
 
     def daemon():
         from levi.daemon.kernel import DaemonKernel

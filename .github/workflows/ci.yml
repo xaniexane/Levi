@@ -1,0 +1,120 @@
+# LEVI × L.W.P. — continuous integration
+#
+# Jobs:
+#   python   — root pytest suite (core + megazord) + VYVE backend tests
+#   web      — typecheck, lint, node --test suite, vitest unit tests, build
+#   android  — assembleDebug (P2.4 rebuild landed 2026-09-15; must stay green)
+#   gitleaks — secret scanning
+#
+# Action majors verified 2026-09-15: the Node-20 runtime deprecation forces
+# checkout@v5, setup-python@v6, setup-node@v5, gitleaks-action@v3 (all node24).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  python:
+    name: Python core + megazord + VYVE backend
+    runs-on: ubuntu-latest
+    env:
+      # P3.1 root packaging is not landed yet, so `pip install -e .` is not
+      # possible; expose the two Python products via PYTHONPATH instead.
+      PYTHONPATH: ${{ github.workspace }}/core:${{ github.workspace }}/delivery/megazord
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install test deps
+        # httpx2 is required by starlette's TestClient (used by the VYVE
+        # backend tests); it is deliberately not in backend/requirements.txt
+        # (runtime-only pins), so CI installs it here.
+        run: pip install pytest cryptography httpx2 pyyaml
+
+      - name: Byte-compile everything
+        run: python -m compileall -q core delivery apps/vyve-messenger/backend
+
+      - name: Root pytest suite (core + megazord)
+        run: python -m pytest tests/ -q
+
+      - name: Install VYVE backend deps
+        run: pip install -r apps/vyve-messenger/backend/requirements.txt
+
+      - name: VYVE backend tests (auth/token paths)
+        run: python -m pytest apps/vyve-messenger/backend/tests/ -q
+
+      - name: OpenAPI consistency check (P3.4)
+        # Fails when any route in either VYVE backend server is missing from
+        # docs/openapi.yaml or vice versa. Runs after the backend deps are
+        # installed; PyYAML comes from the "Install test deps" step above.
+        run: python3 apps/vyve-messenger/docs/check_openapi.py
+
+  web:
+    name: Web UI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      # web/package-lock.json exists untracked in the working tree; it must be
+      # committed (per audit P3.8) for `npm ci` to work in CI.
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Existing node --test suite
+        run: npm run test
+
+      - name: Vitest unit tests
+        run: npm run test:unit
+
+      - name: Production build
+        run: npm run build
+
+  android:
+    name: Android assembleDebug
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/vyve-messenger/android
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Assemble debug APK
+        run: ./gradlew assembleDebug --no-daemon
+
+  gitleaks:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: gitleaks/gitleaks-action@v3

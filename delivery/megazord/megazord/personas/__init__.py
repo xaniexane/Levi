@@ -10,7 +10,7 @@ Personas:
     KAI      — Logic runtime, memory, cross-orchestration brain
 """
 
-from .persona_core import Persona, PersonaRegistry
+from .persona_core import Persona, PersonaRegistry, DEFAULT_REGISTRY
 
 # Pre-built personas
 from .cybrus_persona import CYBRUS
@@ -20,6 +20,6 @@ from .omega_persona  import OMEGA
 from .kai_persona    import KAI
 
 __all__ = [
-    "Persona", "PersonaRegistry",
+    "Persona", "PersonaRegistry", "DEFAULT_REGISTRY",
     "CYBRUS", "ECHO", "ALPHA", "OMEGA", "KAI",
 ]

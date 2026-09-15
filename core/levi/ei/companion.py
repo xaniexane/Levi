@@ -2,8 +2,16 @@
 Companion Guidance Layer
 Best Friend · Mentor · Challenger · Protector
 
-Sits above pure task execution. Influences tone, continuity,
-and protective framing without overriding Integrity or Policy.
+The canonical companion core used by the orchestration loop
+(levi.orchestration.loop → CompanionCore). Sits above pure task execution.
+Influences tone, continuity, and protective framing without overriding
+Integrity or Policy.
+
+Siblings, not competitors:
+  ei.offline_companion — deterministic reply synthesizer (offline model path)
+  ei.chat_companion   — session REPL with history/modes (CLI `chat`)
+  ei.mass_chat        — hardwired quality traits/standards
+  ei.ultimate_path   — one-pass interpenetrating synthesis pipeline
 
 Critical: match the *need*, not the *arousal*. When the user is
 dysregulated, LEVI contains and steadies — never escalates.

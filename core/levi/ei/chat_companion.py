@@ -1,6 +1,11 @@
 """
 Chat Companion — enterprise-ready conversational surface for LEVI × L.W.P.
 
+The session layer: wraps Orchestrator + offline synthesizer + persona lattice
++ nervous system + daemon control + memory into a session with history, modes,
+and REPL. Sibling of ei.companion (guidance layer) and ei.offline_companion
+(reply engine) — this one owns the session.
+
 Wraps Orchestrator + offline synthesizer + persona lattice + nervous system +
 daemon control + memory into a session with history, modes, and REPL.
 
@@ -375,8 +380,8 @@ class ChatCompanion:
         except Exception:
             pass
         try:
-            from levi.cloud.phases import current_phase
-            cp = current_phase()
+            from levi.cloud.stages import current_stage
+            cp = current_stage()
             lines.append(f"phase: {cp.id}/{cp.status}")
         except Exception:
             pass

@@ -1,143 +1,190 @@
 package com.cybrus.vyve.data
 
+import android.content.ContentValues
 import android.content.Context
-import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
-import net.sqlcipher.database.SQLiteDatabase
-import net.sqlcipher.database.SQLiteException
-import java.security.Security
+import net.zetetic.database.sqlcipher.SQLiteDatabase
+import net.zetetic.database.sqlcipher.SQLiteOpenHelper
+import timber.log.Timber
 
-class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, "vyve_db", null, 1) {
-    private var db: SQLiteDatabase? = null
+// ══════════════════════════════════════════════════════════════════════════
+// SQLCipher-encrypted local store (net.zetetic:sqlcipher-android:4.9.0).
+//
+// The old code mixed android.database.sqlite.SQLiteOpenHelper with
+// net.sqlcipher.* imports (a name collision that could never compile) and
+// called a non-existent openOrCreateDatabase(provider) API. SQLCipher's
+// SQLiteOpenHelper takes the passphrase on getWritableDatabase() /
+// getReadableDatabase() — the database file is encrypted with it.
+// ══════════════════════════════════════════════════════════════════════════
+
+data class StoredMessage(
+    val messageId: String,
+    val conversationId: String,
+    val senderKeyId: String? = null,
+    val senderId: String? = null,
+    val ciphertext: String,
+    val nonce: String,
+    val ephemeralPubkey: String? = null,
+    val signature: String? = null,
+    val sentAt: String? = null,
+    val status: String? = null,
+)
+
+data class StoredConversation(
+    val conversationId: String,
+    val conversationType: String? = null,
+    val name: String? = null,
+    /** JSON array of participant user-ids. */
+    val participantsJson: String = "[]",
+    val lastActivity: String? = null,
+)
+
+class DatabaseHelper(
+    context: Context,
+    private val passphraseProvider: () -> CharArray,
+) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+
+    companion object {
+        private const val DATABASE_NAME = "vyve.db"
+        private const val DATABASE_VERSION = 1
+    }
+
+    init {
+        // Loads the native libsqlcipher.so before any database access.
+        SQLiteDatabase.loadLibs(context)
+    }
+
+    private fun writable(): SQLiteDatabase = getWritableDatabase(passphraseProvider())
+
+    private fun readable(): SQLiteDatabase = getReadableDatabase(passphraseProvider())
 
     override fun onCreate(db: SQLiteDatabase) {
-        try {
-            // Enable encryption
-            val cipher = Security.getProvider("SQLCipher")
-            if (cipher == null) {
-                throw SQLiteException("SQLCipher provider not found")
-            }
-            db = SQLiteDatabase.openOrCreateDatabase(
-                context.filesDir?.absolutePath + "/vyve_db",
-                cipher
+        db.execSQL(
+            """
+            CREATE TABLE messages (
+                message_id      TEXT PRIMARY KEY,
+                conversation_id TEXT NOT NULL,
+                sender_key_id   TEXT,
+                sender_id       TEXT,
+                ciphertext      TEXT NOT NULL,
+                nonce           TEXT NOT NULL,
+                ephemeral_pubkey TEXT,
+                signature       TEXT,
+                sent_at         TEXT,
+                status          TEXT
             )
-            db.enableWriteAheadLogging(true)
-            
-            // Create tables
-            db.execSQL("CREATE TABLE messages (
-                message_id TEXT PRIMARY KEY,
-                conversation_id TEXT,
-                sender_key_id TEXT,
-                ciphertext BLOB,
-                nonce BLOB,
-                sent_at INTEGER,
-                read_receipts TEXT,
-                size_bucket TEXT,
-                UNIQUE (conversation_id, sender_key_id)
-            )")
-            
-            db.execSQL("CREATE TABLE conversations (
-                conversation_id TEXT PRIMARY KEY,
-                participants TEXT,
-                created_at INTEGER,
-                last_message_id TEXT,
-                last_seen_at INTEGER,
-                unread_count INTEGER DEFAULT 0
-            )")
-            
-            db.execSQL("CREATE TABLE devices (
-                device_id TEXT PRIMARY KEY,
-                user_id TEXT,
-                device_name TEXT,
-                device_type TEXT,
-                signing_key BLOB,
-                encryption_key BLOB,
-                registered_at INTEGER,
-                trusted BOOLEAN DEFAULT 1,
-                last_seen_at INTEGER,
-                revoked_at INTEGER
-            )")
-            
-        } catch (e: Exception) {
-            throw SQLiteException("Database creation failed:", e)
-        }
+            """.trimIndent(),
+        )
+        db.execSQL("CREATE INDEX idx_messages_conversation ON messages(conversation_id)")
+
+        db.execSQL(
+            """
+            CREATE TABLE conversations (
+                conversation_id   TEXT PRIMARY KEY,
+                conversation_type TEXT,
+                name              TEXT,
+                participants      TEXT NOT NULL DEFAULT '[]',
+                last_activity     TEXT
+            )
+            """.trimIndent(),
+        )
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        // Simplified — in production, handle migrations gracefully
-        db.execSQL("DROP TABLE IF EXISTS messages")
-        db.execSQL("DROP TABLE IF EXISTS conversations")
-        onCreate(db)
+        // v1 is the first shipped schema; add migrations here when v2 lands.
+        Timber.w("Database upgrade %d -> %d: no migrations defined", oldVersion, newVersion)
     }
 
-    fun insertMessage(
-        conversationId: String,
-        senderKeyId: String,
-        ciphertext: String,
-        nonce: String,
-        sentAt: Long
-    ): Long {
-        val writable = db?.writableDatabase
-        if (writable == null) return -1
-        
-        val stmt = writable.rawQuery("INSERT INTO messages (
-            message_id,
-            conversation_id,
-            sender_key_id,
-            ciphertext,
-            nonce,
-            sent_at,
-            read_receipts,
-            size_bucket
-        ) VALUES (?,?,?,?,?,?,?,?)")
-        
-        val messageId = writable.insertWithOnConflict(
-            null,
-            null,
-            "",
-            conversationId,
-            senderKeyId,
-            ciphertext,
-            nonce,
-            sentAt,
-            ""
-        )
-        return messageId
-    }
+    // ── Messages ──────────────────────────────────────────────────────────
 
-    fun getMessages(conversationId: String): List<MessageEntity> {
-        val readable = db?.readableDatabase
-        if (readable == null) return emptyList()
-        val cursor = readable.rawQuery(
-            "SELECT * FROM messages WHERE conversation_id = ?",
-            arrayOf(conversationId)
-        )
-        val messages = mutableListOf<MessageEntity>()
-        while (cursor.moveToNext()) {
-            val msg = MessageEntity(
-                id = cursor.getLong(cursor.getColumnIndex("message_id")),
-                conversationId = cursor.getString(cursor.getColumnIndex("conversation_id")),
-                senderKeyId = cursor.getString(cursor.getColumnIndex("sender_key_id")),
-                ciphertext = cursor.getString(cursor.getColumnIndex("ciphertext")),
-                nonce = cursor.getString(cursor.getColumnIndex("nonce")),
-                sentAt = cursor.getLong(cursor.getColumnIndex("sent_at")),
-                readReceipts = cursor.getString(cursor.getColumnIndex("read_receipts")),
-                sizeBucket = cursor.getString(cursor.getColumnIndex("size_bucket"))
-            )
-            messages.add(msg)
+    fun insertMessage(message: StoredMessage) {
+        val values = ContentValues().apply {
+            put("message_id", message.messageId)
+            put("conversation_id", message.conversationId)
+            put("sender_key_id", message.senderKeyId)
+            put("sender_id", message.senderId)
+            put("ciphertext", message.ciphertext)
+            put("nonce", message.nonce)
+            put("ephemeral_pubkey", message.ephemeralPubkey)
+            put("signature", message.signature)
+            put("sent_at", message.sentAt)
+            put("status", message.status)
         }
-        cursor.close()
+        writable().insertWithOnConflict(
+            "messages",
+            null,
+            values,
+            SQLiteDatabase.CONFLICT_REPLACE,
+        )
+    }
+
+    fun getMessages(conversationId: String, limit: Int = 50): List<StoredMessage> {
+        val messages = mutableListOf<StoredMessage>()
+        readable().rawQuery(
+            "SELECT message_id, conversation_id, sender_key_id, sender_id, ciphertext," +
+                " nonce, ephemeral_pubkey, signature, sent_at, status" +
+                " FROM messages WHERE conversation_id = ? ORDER BY sent_at DESC LIMIT ?",
+            arrayOf(conversationId, limit.toString()),
+        ).use { cursor ->
+            val idx = { name: String -> cursor.getColumnIndexOrThrow(name) }
+            while (cursor.moveToNext()) {
+                messages += StoredMessage(
+                    messageId = cursor.getString(idx("message_id")),
+                    conversationId = cursor.getString(idx("conversation_id")),
+                    senderKeyId = cursor.getString(idx("sender_key_id")),
+                    senderId = cursor.getString(idx("sender_id")),
+                    ciphertext = cursor.getString(idx("ciphertext")),
+                    nonce = cursor.getString(idx("nonce")),
+                    ephemeralPubkey = cursor.getString(idx("ephemeral_pubkey")),
+                    signature = cursor.getString(idx("signature")),
+                    sentAt = cursor.getString(idx("sent_at")),
+                    status = cursor.getString(idx("status")),
+                )
+            }
+        }
         return messages
     }
 
-    data class MessageEntity(
-        val id: Long,
-        val conversationId: String,
-        val senderKeyId: String,
-        val ciphertext: String,
-        val nonce: String,
-        val sentAt: Long,
-        val readReceipts: String,
-        val sizeBucket: String
-    )
+    // ── Conversations ─────────────────────────────────────────────────────
+
+    fun upsertConversation(conversation: StoredConversation) {
+        val values = ContentValues().apply {
+            put("conversation_id", conversation.conversationId)
+            put("conversation_type", conversation.conversationType)
+            put("name", conversation.name)
+            put("participants", conversation.participantsJson)
+            put("last_activity", conversation.lastActivity)
+        }
+        writable().insertWithOnConflict(
+            "conversations",
+            null,
+            values,
+            SQLiteDatabase.CONFLICT_REPLACE,
+        )
+    }
+
+    fun getConversations(): List<StoredConversation> {
+        val conversations = mutableListOf<StoredConversation>()
+        readable().rawQuery(
+            "SELECT conversation_id, conversation_type, name, participants, last_activity" +
+                " FROM conversations ORDER BY last_activity DESC",
+            null,
+        ).use { cursor ->
+            val idx = { name: String -> cursor.getColumnIndexOrThrow(name) }
+            while (cursor.moveToNext()) {
+                conversations += StoredConversation(
+                    conversationId = cursor.getString(idx("conversation_id")),
+                    conversationType = cursor.getString(idx("conversation_type")),
+                    name = cursor.getString(idx("name")),
+                    participantsJson = cursor.getString(idx("participants")) ?: "[]",
+                    lastActivity = cursor.getString(idx("last_activity")),
+                )
+            }
+        }
+        return conversations
+    }
+
+    fun deleteConversation(conversationId: String) {
+        writable().delete("messages", "conversation_id = ?", arrayOf(conversationId))
+        writable().delete("conversations", "conversation_id = ?", arrayOf(conversationId))
+    }
 }

@@ -2,6 +2,10 @@
 Model Abstraction Layer — Local-first
 Discovery: Ollama → local OpenAI-compatible → deterministic offline fallback
 Cloud is optional accelerator (disabled by default).
+
+This is the canonical "try local model, else fall back" module — every other
+caller routes through ModelRouter. For the persisted-config + diagnostics
+wrapper used by the CLI and ops surfaces, see levi.model.relay.
 """
 
 from __future__ import annotations

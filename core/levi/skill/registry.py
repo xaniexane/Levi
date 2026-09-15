@@ -285,6 +285,31 @@ def _skill_agent_run(args: Dict[str, Any] | None = None) -> str:
 
 
 
+def _skill_intent_map(args: Dict[str, Any] | None = None) -> str:
+    from levi.orchestration.intent import motivation_graph_for
+    import json
+    args = args or {}
+    raw = (args.get("text") or args.get("request") or "").strip()
+    if not raw:
+        return "Provide text to map."
+    skill_ids = list(args.get("skills") or [])
+    g = motivation_graph_for(raw, skill_ids)
+    out = {
+        "intent": g.intent.to_dict(),
+        "possibilities": [
+            {
+                "direction": p.direction.value,
+                "description": p.description,
+                "relevance": p.relevance,
+                "feasibility": p.feasibility,
+                "confidence": p.confidence,
+            }
+            for p in g.ranked()
+        ],
+    }
+    return json.dumps(out, indent=2)
+
+
 def _skill_compile_ir(args: Dict[str, Any] | None = None) -> str:
     from levi.orchestration.nl_ir import NLIRCompiler
     import json
@@ -637,6 +662,15 @@ BUILTIN_SKILLS: List[Skill] = [
         tags=["story", "character"],
     ),
     Skill(
+        id="intent_map",
+        name="Intent Map",
+        description="Map a request to a structured intent (objective, why, constraints, direction)",
+        category="orchestration",
+        risk_level=SkillRisk.INFO,
+        handler=_skill_intent_map,
+        tags=["intent", "orchestration"],
+    ),
+    Skill(
         id="agent_run",
         name="Agent Run",
         description="Bounded specialist execution loop under governor/breaker",
@@ -652,6 +686,11 @@ class SkillRegistry:
     def __init__(self):
         self._skills: Dict[str, Skill] = {}
         for s in BUILTIN_SKILLS:
+            self.register(s)
+        # LEVI cybersecurity skill pack (100 original playbooks).
+        # Lazy import: cyber_skills imports Skill/SkillRisk from this module.
+        from levi.skill.cyber_skills import CYBER_SKILLS
+        for s in CYBER_SKILLS:
             self.register(s)
 
     def register(self, skill: Skill) -> None:

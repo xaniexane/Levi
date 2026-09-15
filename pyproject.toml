@@ -1,0 +1,44 @@
+# LEVI — root project file (P3.1 modernization)
+#
+# ONE true install command from a checkout:
+#     pip install -e .
+# which installs the `levi` package found under core/ and the `levi`
+# console script. The stale per-package file at core/levi/pyproject.toml
+# (name `levi-lwp`, broken readme/packages config) was removed.
+#
+# Version is single-sourced from core/levi/__init__.py::__version__
+# via [tool.setuptools.dynamic]; bump it there, nowhere else.
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "levi"
+description = "LEVI — local-first symbiotic intelligence kernel (proprietary, closed source)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+authors = [{ name = "Chauncey J. Logan / Cybrus AI Systems" }]
+dynamic = ["version"]
+dependencies = [
+    # Hard dep: vault/seal.py fail-closes without it. Bounds per P2.1 policy
+    # (next-major cap; kept in sync with root requirements.txt).
+    "cryptography>=44,<51",
+]
+
+[project.scripts]
+levi = "levi.cli.main:main"
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
+[tool.setuptools.packages.find]
+where = ["core"]
+include = ["levi*"]
+
+[tool.setuptools.dynamic]
+version = { attr = "levi.__version__" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

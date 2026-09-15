@@ -1,105 +1,163 @@
+###############################################################################
+# VYVE Messenger API — OpenAPI 3.0 contract
+#
+# GENERATED FROM CODE (P3.4). Source of truth:
+#   apps/vyve-messenger/backend/oauth/server.py      — Cybrus OAuth 2.0 / OIDC
+#     provider, listens on :8080 (OAuth2 authorization code + PKCE S256,
+#     refresh rotation, JWKS, userinfo, devices, token revocation)
+#   apps/vyve-messenger/backend/messaging/server.py — VYVE messaging service,
+#     listens on :8081 (conversations, E2EE messages, receipts, offline queue,
+#     real-time WebSocket; authenticates RS256 access tokens issued by the
+#     OAuth provider against its public key)
+#
+# The two physical services share this one document; every operation declares
+# its service explicitly with an operation-level `servers` entry. There is NO
+# /v1 prefix anywhere in the code — paths below are the literal route paths.
+#
+# Re-verify after ANY backend route/model change:
+#   python3 apps/vyve-messenger/docs/check_openapi.py
+# (also enforced in CI: .github/workflows/ci.yml, job "python", step
+# "OpenAPI consistency check"). The checker walks both FastAPI apps'
+# app.routes and fails if any real route is missing from this file, or any
+# path here is missing from the code.
+###############################################################################
 openapi: 3.0.3
 info:
   title: VYVE Messenger API
   version: 1.0.0
   description: |
-    API for VYVE Messenger — the private, end-to-end encrypted communication
-    layer of LEVI SIOS. Authentication is handled by Cybrus OAuth 2.0.
-    
-    ## Security Model
-    - All endpoints require valid OAuth2 bearer token
-    - Message content is end-to-end encrypted client-side
-    - Server NEVER receives plaintext message content
-    - All timestamps are rounded to 1-hour buckets for metadata privacy
+    HTTP API contract for the two VYVE backend services (OAuth provider on
+    :8080, messaging service on :8081).
+
+    ## Two services, one contract
+    - **Cybrus OAuth 2.0 provider (`:8080`)** — OAuth2 authorization code flow
+      with PKCE (S256 enforced), refresh-token rotation with reuse detection,
+      OIDC discovery / JWKS / userinfo, per-user device registry, RFC 7009
+      token revocation.
+    - **VYVE messaging service (`:8081`)** — E2EE conversations and messages
+      (the server only ever stores ciphertext, key IDs, nonces and
+      signatures — never plaintext), delivery/read receipts, offline delivery
+      queue, and a real-time WebSocket.
+
+    ## Authentication
+    Every protected endpoint expects `Authorization: Bearer <access-token>`,
+    where the token is an **RS256-signed JWT** issued by the OAuth provider's
+    `/oauth/token` endpoint (10-minute access lifetime by default). Messaging
+    verifies the signature against the RSA public key published at
+    `GET /oauth/jwks` (`kid: "vyve-1"`), requires `iss` =
+    `OAUTH_ISSUER`, `aud` = `OAUTH_CLIENT_ID` (`vyve-messenger` by default),
+    plus `exp`, `sub`, and `type == "access"`. ID tokens carry `type == "id"`.
+
+    ## Errors
+    All errors are `{"detail": "..."}` unless noted. 401 = missing/invalid/
+    expired bearer token or token-type mismatch. 403 = authenticated but not
+    a participant / not the owner. 404 = row not found. 400 = malformed
+    request with a machine-readable `detail` string (see each operation).
+    422 = FastAPI/Pydantic request-body validation failure.
+
+    ## Privacy model
+    Timestamps are ISO-8601 UTC strings. The messaging service knows WHO sent
+    a message and to whom, but never WHAT: content is XChaCha20-Poly1305
+    ciphertext sealed client-side with libsodium; see the `EncryptedMessage`
+    schema. The `size_bucket` on message upload is *recomputed server-side*
+    from ciphertext length — any value the client sends is ignored.
 
   contact:
     name: VYVE Engineering
     email: engineering@vyve.local
 
-  license:
-    name: Proprietary
-    url: https://vyve.local/license
-
 servers:
-  - url: https://api.vyve.local/v1
-    description: Production
-  - url: http://localhost:8080/v1
-    description: Local development
+  - url: http://localhost:8080
+    description: Cybrus OAuth 2.0 / OIDC provider (development)
+  - url: http://localhost:8081
+    description: VYVE messaging service (development)
 
 tags:
   - name: OAuth
-    description: Cybrus OAuth 2.0 endpoints
+    description: OAuth2 authorization code + PKCE flow (Cybrus provider, :8080)
+  - name: Discovery
+    description: OIDC discovery document and JWKS (public, no auth)
   - name: Identity
-    description: User identity and device management
+    description: Authenticated user profile and device registry (:8080)
   - name: Messaging
-    description: Encrypted message exchange
+    description: E2EE message exchange (:8081)
   - name: Conversations
-    description: Conversation management
-  - name: Social
-    description: Social graph and posts
-  - name: Marketplace
-    description: 🔐💲💎 vendor and product endpoints
-
-security:
-  - bearerAuth: []
+    description: Conversation management (:8081)
+  - name: Queue
+    description: Offline delivery queue (:8081)
+  - name: WebSocket
+    description: Real-time delivery over WebSocket (:8081)
+  - name: Health
+    description: Service health (served by both services, no auth)
 
 paths:
-  /oauth/token:
-    post:
-      tags: [OAuth]
-      summary: Exchange authorization code for access token
+  # ══════════════════════════════════════════════════════════════════
+  # OAUTH PROVIDER (:8080)
+  # ══════════════════════════════════════════════════════════════════
+
+  /.well-known/openid-configuration:
+    get:
+      tags: [Discovery]
+      summary: OIDC discovery document
       description: |
-        Implements OAuth 2.0 Authorization Code flow with PKCE.
-        Returns access_token, refresh_token, and id_token (OIDC).
+        Standard OpenID Connect discovery. Public, no authentication.
+        The document body is byte-for-byte what `GET /.well-known/
+        openid-configuration` returns: endpoint URLs are derived from the
+        `OAUTH_ISSUER` env var (default `http://localhost:8080`).
+      servers:
+        - url: http://localhost:8080
+          description: Cybrus OAuth 2.0 / OIDC provider
       security: []
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              required:
-                - grant_type
-                - code
-                - code_verifier
-                - client_id
-                - redirect_uri
-              properties:
-                grant_type:
-                  type: string
-                  enum: [authorization_code, refresh_token]
-                code:
-                  type: string
-                  description: Authorization code (from /oauth/authorize)
-                code_verifier:
-                  type: string
-                  description: PKCE code verifier
-                client_id:
-                  type: string
-                redirect_uri:
-                  type: string
-                refresh_token:
-                  type: string
-                  description: Required when grant_type=refresh_token
       responses:
         '200':
-          description: Token issued
+          description: Discovery document
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TokenResponse'
-        '400':
-          description: Invalid request
-        '401':
-          description: Invalid credentials
+                $ref: '#/components/schemas/DiscoveryDocument'
+
+  /oauth/jwks:
+    get:
+      tags: [Discovery]
+      summary: JSON Web Key Set (public RSA key)
+      description: |
+        Publishes the RSA **public** key used to verify RS256 access/ID
+        tokens. Contains only public key material (`kty`, `n`, `e`); the
+        private signing key is never exposed here.
+      servers:
+        - url: http://localhost:8080
+          description: Cybrus OAuth 2.0 / OIDC provider
+      security: []
+      responses:
+        '200':
+          description: JWKS with the single active signing key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JWKS'
 
   /oauth/authorize:
     get:
       tags: [OAuth]
-      summary: Authorization endpoint
+      summary: OAuth2 authorization endpoint (code + PKCE S256)
       description: |
-        User authenticates with Cybrus and grants permission to VYVE.
-        On success, redirects to client with authorization code.
+        Starts the authorization code flow. `redirect_uri` must be an
+        **exact match** against the client's registered redirect URIs
+        (`OAUTH_REDIRECT_URIS`; default `http://localhost:8081/callback` and
+        `http://localhost:8081/auth/callback`) — anything else yields a 400
+        and the server will NOT redirect to it (open-redirect protection).
+
+        In production this renders a login/consent page and sets a session
+        cookie. In this build it accepts `username`/`password` as query
+        params (or renders a simple HTML login form when they are absent).
+
+        On success: 302 to `{redirect_uri}?code={code}&state={state}` where
+        `code` is a single-use, 10-minute authorization code bound to the
+        PKCE `code_challenge`. Code reuse revokes **all** refresh tokens of
+        the user.
+      servers:
+        - url: http://localhost:8080
+          description: Cybrus OAuth 2.0 / OIDC provider
       security: []
       parameters:
         - name: response_type
@@ -113,16 +171,19 @@ paths:
           required: true
           schema:
             type: string
+            example: vyve-messenger
         - name: redirect_uri
           in: query
           required: true
           schema:
             type: string
+            description: Must exactly match a registered redirect URI
         - name: scope
           in: query
           required: true
           schema:
             type: string
+            description: Space-separated scopes, e.g. "openid profile read:v1"
         - name: state
           in: query
           required: true
@@ -133,45 +194,249 @@ paths:
           required: true
           schema:
             type: string
+            description: Base64url SHA256 of the PKCE code verifier (S256)
         - name: code_challenge_method
           in: query
           required: true
           schema:
             type: string
             enum: [S256]
+        - name: username
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: password
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '302':
-          description: Redirect with authorization code
+          description: >
+            Redirect to the registered redirect_uri with
+            `?code=<auth code>&state=<state>` (or `?error=<code>&state=<state>`
+            for client/usage errors: `unsupported_response_type`,
+            `invalid_client`, `invalid_request`)
+        '200':
+          description: HTML login form (when username/password were not supplied)
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Unregistered redirect_uri — no redirect is performed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: invalid_request
+                  error_description:
+                    type: string
+                    example: unregistered redirect_uri
+        '401':
+          description: Invalid credentials (HTML page)
+
+  /oauth/token:
+    post:
+      tags: [OAuth]
+      summary: Token endpoint (authorization_code + PKCE, refresh_token)
+      description: |
+        Issues RS256 access tokens. Two grants, selected by `grant_type`:
+
+        * **authorization_code** — requires `code`, `code_verifier` (checked
+          against the stored S256 challenge) and, if sent, `redirect_uri`
+          must equal the one used at authorize time. Response always includes
+          an OIDC `id_token` (type `id`, scopes `["openid"]`) in addition to
+          the access token.
+        * **refresh_token** — rotates: the presented refresh token is
+          deleted and a fresh pair issued. Presenting an expired refresh
+          token deletes it and returns 401.
+
+        Client authentication is via the `client_secret` form field (must
+        match `OAUTH_CLIENT_SECRET`; the server refuses to start without
+        one — fail-closed). `client_id` must equal `OAUTH_CLIENT_ID`.
+
+        Access token claims: `iss`, `sub`, `aud`, `exp`, `iat`, `jti`,
+        `scope` (space-joined), `type` (`"access"`). Signed RS256, header
+        `kid: "vyve-1"`.
+      servers:
+        - url: http://localhost:8080
+          description: Cybrus OAuth 2.0 / OIDC provider
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [grant_type]
+              properties:
+                grant_type:
+                  type: string
+                  enum: [authorization_code, refresh_token]
+                code:
+                  type: string
+                  description: Required for grant_type=authorization_code
+                code_verifier:
+                  type: string
+                  description: PKCE verifier; required for grant_type=authorization_code
+                redirect_uri:
+                  type: string
+                  description: If sent, must match the authorize-time redirect_uri
+                refresh_token:
+                  type: string
+                  description: Required for grant_type=refresh_token
+                client_id:
+                  type: string
+                  description: Defaults to OAUTH_CLIENT_ID when omitted
+                client_secret:
+                  type: string
+                  description: Required; must match OAUTH_CLIENT_SECRET
+      responses:
+        '200':
+          description: Tokens issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '400':
+          description: >
+            invalid_code | code_already_used (all user refresh tokens revoked)
+            | code_expired | redirect_uri_mismatch | code_verifier required
+            | invalid_code_verifier | user_not_found | refresh_token required
+            | unsupported_grant_type
+        '401':
+          description: invalid_client | invalid_refresh_token | refresh_token_expired
+
+  /oauth/userinfo:
+    get:
+      tags: [Identity]
+      summary: OIDC UserInfo endpoint
+      description: |
+        Returns claims about the bearer-token holder. `sub` and `username`
+        are always present; `name`, `email`, `role`, `tier` are included
+        only when the access token's scope contains `profile`.
+      servers:
+        - url: http://localhost:8080
+          description: Cybrus OAuth 2.0 / OIDC provider
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: User claims
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfo'
+        '401':
+          description: Missing or invalid bearer token
+        '404':
+          description: Token subject no longer exists
+
+  /oauth/revoke:
+    post:
+      tags: [OAuth]
+      summary: Token revocation (RFC 7009)
+      description: |
+        Revokes an opaque refresh token (looked up by SHA-256 hash).
+        Per RFC 7009 the endpoint returns 200 even for unknown tokens, so
+        callers cannot probe token validity. Access tokens are stateless
+        JWTs and cannot be revoked individually — they expire.
+      servers:
+        - url: http://localhost:8080
+          description: Cybrus OAuth 2.0 / OIDC provider
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [token]
+              properties:
+                token:
+                  type: string
+                  description: The refresh token to revoke
+                token_type_hint:
+                  type: string
+                  description: Accepted but ignored (only refresh tokens are stored)
+      responses:
+        '200':
+          description: Always 200 on a well-formed request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: revoked
+        '400':
+          description: token field missing
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: invalid_request
 
   /me:
     get:
       tags: [Identity]
-      summary: Get current user profile
+      summary: Current authenticated user's profile
+      servers:
+        - url: http://localhost:8080
+          description: Cybrus OAuth 2.0 / OIDC provider
+      security:
+        - bearerAuth: []
       responses:
         '200':
-          description: User profile
+          description: Full profile record
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          description: Missing or invalid bearer token
+        '404':
+          description: Token subject no longer exists
 
   /me/devices:
     get:
       tags: [Identity]
-      summary: List user's registered devices
+      summary: List the caller's registered devices
+      servers:
+        - url: http://localhost:8080
+          description: Cybrus OAuth 2.0 / OIDC provider
+      security:
+        - bearerAuth: []
       responses:
         '200':
-          description: List of devices
+          description: Device list (wrapper object, not a bare array)
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Device'
-
+                $ref: '#/components/schemas/DeviceList'
+        '401':
+          description: Missing or invalid bearer token
     post:
       tags: [Identity]
-      summary: Register a new device
+      summary: Register (or re-register) a device
+      description: |
+        Upserts on (`user_id`, `device_id`): registering an already-known
+        device_id replaces the old record, so re-registration is safe.
+        New devices are created with `trusted: false`.
+      servers:
+        - url: http://localhost:8080
+          description: Cybrus OAuth 2.0 / OIDC provider
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -184,75 +449,90 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Device'
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: registered
+                  device_id:
+                    type: string
+        '401':
+          description: Missing or invalid bearer token
+        '422':
+          description: Request body failed validation
 
   /me/devices/{device_id}:
     delete:
       tags: [Identity]
       summary: Revoke a device
+      description: Deletes the caller's device record (idempotent).
+      servers:
+        - url: http://localhost:8080
+          description: Cybrus OAuth 2.0 / OIDC provider
+      security:
+        - bearerAuth: []
       parameters:
         - name: device_id
           in: path
           required: true
           schema:
             type: string
-            format: uuid
-      responses:
-        '204':
-          description: Device revoked
-
-  /me/keys:
-    get:
-      tags: [Identity]
-      summary: Get user's public keys
       responses:
         '200':
-          description: Public keys
+          description: Device revoked (200, not 204)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublicKeyBundle'
-    put:
-      tags: [Identity]
-      summary: Upload new public keys (key rotation)
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PublicKeyBundle'
-      responses:
-        '200':
-          description: Keys updated
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: revoked
+                  device_id:
+                    type: string
+        '401':
+          description: Missing or invalid bearer token
+
+  # ══════════════════════════════════════════════════════════════════
+  # MESSAGING SERVICE (:8081)
+  # ══════════════════════════════════════════════════════════════════
 
   /conversations:
     get:
       tags: [Conversations]
-      summary: List conversations
-      parameters:
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 50
-        - name: before
-          in: query
-          schema:
-            type: string
-            format: date-time
+      summary: List the caller's conversations
+      description: Returns only conversations the caller actively participates in.
+      servers:
+        - url: http://localhost:8081
+          description: VYVE messaging service
+      security:
+        - bearerAuth: []
       responses:
         '200':
-          description: List of conversations
+          description: Conversation list (wrapper object, not a bare array)
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Conversation'
-
+                type: object
+                properties:
+                  conversations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conversation'
+        '401':
+          description: Missing or invalid bearer token
     post:
       tags: [Conversations]
-      summary: Create a new conversation
+      summary: Create a conversation
+      description: |
+        The caller is always added as a participant. Duplicate ids in
+        `participant_ids` are de-duplicated. Returns the created
+        conversation directly (201, NOT wrapped in an object).
+      servers:
+        - url: http://localhost:8081
+          description: VYVE messaging service
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -266,80 +546,147 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Conversation'
+        '401':
+          description: Missing or invalid bearer token
+        '422':
+          description: Request body failed validation
 
   /conversations/{conversation_id}:
     get:
       tags: [Conversations]
-      summary: Get conversation details
+      summary: Get one conversation
+      servers:
+        - url: http://localhost:8081
+          description: VYVE messaging service
+      security:
+        - bearerAuth: []
       parameters:
         - name: conversation_id
           in: path
           required: true
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
-          description: Conversation details
+          description: Conversation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Conversation'
-
+        '401':
+          description: Missing or invalid bearer token
+        '403':
+          description: Caller is not a participant
+        '404':
+          description: Conversation not found
     delete:
       tags: [Conversations]
-      summary: Delete a conversation (user-side)
+      summary: Leave a conversation
+      description: |
+        Removes the caller from the participant list (user-side leave). If
+        no participants remain, the conversation row itself is deleted.
+      servers:
+        - url: http://localhost:8081
+          description: VYVE messaging service
+      security:
+        - bearerAuth: []
       parameters:
         - name: conversation_id
           in: path
           required: true
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '204':
-          description: Conversation deleted
+          description: Left (empty body)
+        '401':
+          description: Missing or invalid bearer token
+        '403':
+          description: Caller is not a participant
+        '404':
+          description: Conversation not found
 
   /conversations/{conversation_id}/messages:
     get:
       tags: [Messaging]
-      summary: Get messages in a conversation
+      summary: List encrypted messages, newest first
+      description: |
+        Returns ciphertext envelopes only — the server cannot decrypt.
+        `before` is an ISO-8601 string compared lexicographically against
+        message timestamps. `total` is the count after the `before` filter
+        but before the `limit` is applied.
+      servers:
+        - url: http://localhost:8081
+          description: VYVE messaging service
+      security:
+        - bearerAuth: []
       parameters:
         - name: conversation_id
           in: path
           required: true
           schema:
-            type: integer
+            type: string
+            format: uuid
         - name: limit
           in: query
+          required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 200
             default: 50
         - name: before
           in: query
+          required: false
           schema:
             type: string
             format: date-time
+            description: Return messages sent strictly before this timestamp
       responses:
         '200':
-          description: List of encrypted messages
+          description: Paginated envelope list
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EncryptedMessage'
-
+                $ref: '#/components/schemas/MessageList'
+        '401':
+          description: Missing or invalid bearer token
+        '403':
+          description: Caller is not a participant
+        '404':
+          description: Conversation not found
     post:
       tags: [Messaging]
       summary: Send an encrypted message
       description: |
-        Server stores the ciphertext but cannot decrypt it.
-        Each recipient device receives its own ciphertext variant.
+        The server stores the ciphertext envelope and fans it out: connected
+        recipients get it over their WebSocket (`new_message` frames), all
+        other participants get a row in their offline queue. The response
+        is the stored message envelope (201, NOT wrapped).
+
+        Server-side behavior the client must know:
+        * `sender_key_id` is **derived server-side** as
+          `sha256("<sub>-<first recipient_key_id>")[:8]` — it is NOT taken
+          from the request.
+        * `size_bucket` is **recomputed** from the base64 ciphertext length
+          (tiny <500B, small <5KB, medium <50KB, large <500KB, else xlarge) —
+          any value the client sends is ignored.
+        * `status` starts as `"queued"`; `sent_at` is the server clock.
+        * The new message also bumps the conversation's `last_activity`.
+      servers:
+        - url: http://localhost:8081
+          description: VYVE messaging service
+      security:
+        - bearerAuth: []
       parameters:
         - name: conversation_id
           in: path
           required: true
           schema:
-            type: integer
+            type: string
+            format: uuid
       requestBody:
         required: true
         content:
@@ -348,530 +695,680 @@ paths:
               $ref: '#/components/schemas/EncryptedMessageUpload'
       responses:
         '201':
-          description: Message queued
+          description: Message stored (envelope)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EncryptedMessage'
+                $ref: '#/components/schemas/Message'
+        '401':
+          description: Missing or invalid bearer token
+        '403':
+          description: Caller is not a participant
+        '404':
+          description: Conversation not found
+        '422':
+          description: Request body failed validation
 
   /messages/{message_id}:
     get:
       tags: [Messaging]
-      summary: Get a specific message
+      summary: Get one encrypted message
+      description: |
+        Caller must be a participant in the message's conversation. Deleted
+        messages return a tombstone envelope (`status: "deleted"`).
+      servers:
+        - url: http://localhost:8081
+          description: VYVE messaging service
+      security:
+        - bearerAuth: []
       parameters:
         - name: message_id
           in: path
           required: true
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
-          description: Encrypted message
+          description: Envelope, or tombstone if deleted
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EncryptedMessage'
-
+                oneOf:
+                  - $ref: '#/components/schemas/Message'
+                  - $ref: '#/components/schemas/MessageTombstone'
+        '401':
+          description: Missing or invalid bearer token
+        '403':
+          description: Caller is not a participant
+        '404':
+          description: Message not found
     delete:
       tags: [Messaging]
-      summary: Delete a message (user-side)
+      summary: Delete a message (sender only)
+      description: |
+        Soft delete — the row becomes a tombstone (`status: "deleted"` with
+        `deleted_at`); the envelope is still returned by reads. Only the
+        original sender may delete.
+      servers:
+        - url: http://localhost:8081
+          description: VYVE messaging service
+      security:
+        - bearerAuth: []
       parameters:
         - name: message_id
           in: path
           required: true
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '204':
-          description: Message deleted
+          description: Tombstoned (empty body)
+        '401':
+          description: Missing or invalid bearer token
+        '403':
+          description: Caller is not the sender
+        '404':
+          description: Message not found
 
-  /posts:
+  /messages/{message_id}/deliver:
     get:
-      tags: [Social]
-      summary: Get feed posts
+      tags: [Messaging]
+      summary: Record a delivery receipt
+      description: |
+        Adds the caller to the message's `delivery_receipts` map with the
+        server timestamp and flips the message status to `"delivered"`.
+        NOTE: the implementation does NOT verify the caller participates
+        in the conversation — any authenticated user can record a receipt
+        for any message id. Clients should treat receipts as advisory.
+      servers:
+        - url: http://localhost:8081
+          description: VYVE messaging service
+      security:
+        - bearerAuth: []
       parameters:
-        - name: feed_type
-          in: query
-          schema:
-            type: string
-            enum: [chronological, personalized, following, community, vendor, discovery]
-        - name: limit
-          in: query
-          schema:
-            type: integer
-        - name: before
-          in: query
-          schema:
-            type: string
-            format: date-time
-      responses:
-        '200':
-          description: List of posts
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Post'
-
-    post:
-      tags: [Social]
-      summary: Create a post
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostCreate'
-      responses:
-        '201':
-          description: Post created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Post'
-
-  /posts/{post_id}:
-    get:
-      tags: [Social]
-      summary: Get a post
-      parameters:
-        - name: post_id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Post
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Post'
-
-    delete:
-      tags: [Social]
-      summary: Delete a post
-      parameters:
-        - name: post_id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Post deleted
-
-  /marketplace/vendors:
-    get:
-      tags: [Marketplace]
-      summary: List vendors
-      parameters:
-        - name: category
-          in: query
-          schema:
-            type: string
-        - name: limit
-          in: query
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: List of vendors
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Vendor'
-
-    post:
-      tags: [Marketplace]
-      summary: Register as a vendor
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VendorCreate'
-      responses:
-        '201':
-          description: Vendor registered
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Vendor'
-
-  /marketplace/vendors/{vendor_id}/products:
-    get:
-      tags: [Marketplace]
-      summary: Get vendor's products
-      parameters:
-        - name: vendor_id
+        - name: message_id
           in: path
           required: true
           schema:
             type: string
+            format: uuid
       responses:
         '200':
-          description: List of products
+          description: Receipt recorded
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: delivered
+                  delivered_at:
+                    type: string
+                    format: date-time
+        '401':
+          description: Missing or invalid bearer token
+        '404':
+          description: Message not found
 
+  /queue:
+    get:
+      tags: [Queue]
+      summary: Drain the caller's offline message queue
+      description: |
+        Returns all queued envelopes for the caller in FIFO order and then
+        **deletes** them from the queue (read-once). Messages are enqueued
+        when they arrive while the recipient has no active WebSocket.
+        Queue rows are also flushed on WebSocket connect.
+      servers:
+        - url: http://localhost:8081
+          description: VYVE messaging service
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Drained queue
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Message'
+                  count:
+                    type: integer
+        '401':
+          description: Missing or invalid bearer token
+
+  /ws/{user_id}:
+    # OpenAPI 3.0 cannot express an HTTP→WebSocket protocol upgrade, so this
+    # path is documented by hand (no `get:`/`post:` operation). The CI
+    # consistency checker explicitly allowlists it: see check_openapi.py.
+    x-websocket: true
+    x-websocket-protocol:
+      summary: Real-time delivery channel
+      description: |
+        Connect: `ws(s)://<host>:8081/ws/{user_id}`.
+
+        **Authentication (mandatory first step):** the first frame the client
+        sends MUST be JSON `{"type": "auth", "token": "<access-token>"}`.
+        The server validates the RS256 JWT (`exp` required) and closes the
+        socket when the token's `sub` differs from the `{user_id}` path
+        parameter. Close codes: `4001` (no/invalid auth frame), `4002`
+        (invalid token), `4003` (token sub ≠ user_id).
+
+        On connect the server (1) flushes the caller's offline queue as a
+        single `queued_messages` frame and deletes those queue rows, then
+        (2) sends a `connected` frame with the server time.
+
+        Server→client frames:
+        * `{"type": "queued_messages", "messages": [...]}` — offline backlog
+        * `{"type": "connected", "user_id": "...", "server_time": "..."}`
+        * `{"type": "new_message", "conversation_id": "...", "message": {...}}`
+        * `{"type": "conversation_created", "conversation": {...}}`
+        * `{"type": "typing", "conversation_id": "...", "user_id": "..."}`
+        * `{"type": "pong"}` — reply to client `ping`
+
+        Client→server frames:
+        * `{"type": "auth", "token": "..."}` — required first frame
+        * `{"type": "typing", "conversation_id": "..."}` — rebroadcast to
+          the other active participants
+        * `{"type": "read_receipt", "message_id": "..."}` — adds the caller
+          to the message's `read_receipts` map (no participant check)
+        * `{"type": "ping"}` → `{"type": "pong"}` keepalive
+
+  # SHARED PATH: served by both services with different bodies
+  # ══════════════════════════════════════════════════════════════════
+
+  /health:
+    get:
+      tags: [Health]
+      summary: Service health (both services, no auth)
+      description: |
+        Served by BOTH the OAuth provider (:8080) and the messaging
+        service (:8081); the response body shape depends on which service
+        answers (see `oneOf` below).
+      servers:
+        - url: http://localhost:8080
+          description: Cybrus OAuth 2.0 / OIDC provider
+        - url: http://localhost:8081
+          description: VYVE messaging service
+      security: []
+      responses:
+        '200':
+          description: Health payload for the answering service
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/OAuthHealth'
+                  - $ref: '#/components/schemas/MessagingHealth'
 components:
   securitySchemes:
+    # The bearer token is an RS256 JWT issued by the OAuth provider
+    # (/oauth/token). Both services accept it; the messaging service
+    # validates the signature against the public key from /oauth/jwks.
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+      description: |
+        `Authorization: Bearer <access-token>` where the token is an RS256
+        JWT from the OAuth provider. Requires `type == "access"`, valid
+        `exp`/`sub`, `iss` = OAUTH_ISSUER and `aud` = OAUTH_CLIENT_ID.
+    oauth2:
+      type: oauth2
+      description: |
+        OAuth2 authorization-code flow with PKCE (S256 enforced) as
+        implemented by the Cybrus provider on :8080. `authorizationUrl` and
+        `tokenUrl` serve the routes documented under the OAuth tag; refresh
+        tokens are rotated at the same token endpoint.
+      flows:
+        authorizationCode:
+          authorizationUrl: http://localhost:8080/oauth/authorize
+          tokenUrl: http://localhost:8080/oauth/token
+          refreshUrl: http://localhost:8080/oauth/token
+          scopes:
+            openid: OpenID Connect identity
+            profile: Basic profile claims (name, email, role, tier)
+            email: Email claim (reserved)
+            read:v1: Read messaging data
+            write:v1: Write messaging data
+            social:v1: Social features (reserved — no routes yet)
+            marketplace:v1: Marketplace features (reserved — no routes yet)
+            ai_context:v1: AI context features (reserved — no routes yet)
+            admin:v1: Admin operations (reserved — no routes yet)
 
   schemas:
+    DiscoveryDocument:
+      type: object
+      properties:
+        issuer:
+          type: string
+          example: http://localhost:8080
+        authorization_endpoint:
+          type: string
+          example: http://localhost:8080/oauth/authorize
+        token_endpoint:
+          type: string
+          example: http://localhost:8080/oauth/token
+        userinfo_endpoint:
+          type: string
+          example: http://localhost:8080/oauth/userinfo
+        jwks_uri:
+          type: string
+          example: http://localhost:8080/oauth/jwks
+        response_types_supported:
+          type: array
+          items:
+            type: string
+          example: [code]
+        grant_types_supported:
+          type: array
+          items:
+            type: string
+          example: [authorization_code, refresh_token]
+        scopes_supported:
+          type: array
+          items:
+            type: string
+          example: [openid, profile, email, read:v1, write:v1, social:v1, marketplace:v1, ai_context:v1, admin:v1]
+        code_challenge_methods_supported:
+          type: array
+          items:
+            type: string
+          example: [S256]
+        token_endpoint_auth_methods_supported:
+          type: array
+          items:
+            type: string
+          example: [client_secret_post, client_secret_basic]
+        id_token_signing_alg_values_supported:
+          type: array
+          items:
+            type: string
+          example: [RS256]
+
+    JWK:
+      type: object
+      description: Public RSA key (`kty`/`n`/`e` only — never private material)
+      properties:
+        kty:
+          type: string
+          example: RSA
+        alg:
+          type: string
+          example: RS256
+        use:
+          type: string
+          example: sig
+        kid:
+          type: string
+          example: vyve-1
+        n:
+          type: string
+          description: Base64url-encoded RSA modulus
+        e:
+          type: string
+          description: Base64url-encoded RSA public exponent
+
+    JWKS:
+      type: object
+      required: [keys]
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/JWK'
+
     TokenResponse:
       type: object
-      required: [access_token, token_type, expires_in, refresh_token]
+      required: [access_token, token_type, expires_in, refresh_token, scope]
       properties:
         access_token:
           type: string
-          description: JWT access token
+          description: RS256 JWT, `type` claim = "access"
         token_type:
           type: string
           enum: [bearer]
+          description: Lowercase "bearer"
         expires_in:
           type: integer
-          description: Lifetime in seconds
+          description: Access-token lifetime in seconds (default 3600)
+          example: 3600
         refresh_token:
           type: string
-          description: Opaque refresh token
+          description: Opaque, single-use-rotated refresh token
         id_token:
           type: string
-          description: OIDC ID token (JWT with user claims)
+          description: >
+            RS256 JWT, `type` claim = "id". Present on the
+            authorization_code grant; omitted on refresh_token grant.
         scope:
           type: string
-          description: Granted scopes (space-separated)
+          description: Granted scopes, space-separated
+          example: "openid profile read:v1"
 
-    User:
+    UserInfo:
       type: object
+      required: [sub, username]
       properties:
-        user_id:
+        sub:
           type: string
-          format: uuid
+          description: User id (UUID string)
         username:
+          type: string
+        name:
+          type: string
+          description: display_name; present only with the `profile` scope
+        email:
+          type: string
+          description: Present only with the `profile` scope
+        role:
+          type: string
+          description: Present only with the `profile` scope
+        tier:
+          type: string
+          description: Present only with the `profile` scope
+
+    UserProfile:
+      type: object
+      required: [sub, username, email, display_name, role, tier, scopes]
+      properties:
+        sub:
+          type: string
+          description: User id (UUID string)
+        username:
+          type: string
+        email:
           type: string
         display_name:
           type: string
-        bio:
+        role:
           type: string
-        avatar_url:
-          type: string
-        public_keys:
-          $ref: '#/components/schemas/PublicKeyBundle'
-        created_at:
-          type: string
-          format: date-time
         tier:
           type: string
-          enum: [free, creator, pro, developer, business, enterprise]
+        scopes:
+          type: array
+          items:
+            type: string
 
-    PublicKeyBundle:
+    DeviceRegistration:
       type: object
+      required: [device_id, device_name, device_type, signing_key, encryption_key]
       properties:
-        identity_signing_key:
+        device_id:
           type: string
-          format: byte
-          description: Ed25519 public key
-        identity_encryption_key:
+          description: Client-generated device id (any string; the code does not validate format)
+        device_name:
           type: string
-          format: byte
-          description: X25519 public key
-        key_id:
+        device_type:
           type: string
-          format: uuid
-        created_at:
+          description: Free-form in code; use one of android/ios/web/desktop
+        signing_key:
           type: string
-          format: date-time
+          description: Ed25519 public signing key (base64)
+        encryption_key:
+          type: string
+          description: X25519 public encryption key (base64)
 
     Device:
       type: object
       properties:
         device_id:
           type: string
-          format: uuid
         device_name:
           type: string
         device_type:
           type: string
-          enum: [android, ios, web, desktop]
-        public_signing_key:
+        signing_key:
           type: string
-          format: byte
-        public_encryption_key:
+        encryption_key:
           type: string
-          format: byte
         registered_at:
-          type: string
-          format: date-time
-        last_seen:
           type: string
           format: date-time
         trusted:
           type: boolean
+          description: False until explicitly trusted out-of-band (no trust API yet)
 
-    DeviceRegistration:
+    DeviceList:
       type: object
-      required: [device_name, device_type, public_signing_key, public_encryption_key]
       properties:
-        device_name:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Device'
+
+    ConversationCreate:
+      type: object
+      required: [conversation_type, participant_ids]
+      properties:
+        conversation_type:
           type: string
-        device_type:
+          enum: [direct, group, channel]
+        participant_ids:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            description: User id (sub/UUID string); caller is added automatically
+        name:
           type: string
-          enum: [android, ios, web, desktop]
-        public_signing_key:
-          type: string
-          format: byte
-        public_encryption_key:
-          type: string
-          format: byte
-        attestation:
-          type: string
-          description: Hardware attestation token (optional)
+          description: Optional group/channel name
 
     Conversation:
       type: object
       properties:
         conversation_id:
-          type: integer
+          type: string
+          format: uuid
         conversation_type:
           type: string
           enum: [direct, group, channel]
         participants:
           type: array
           items:
-            $ref: '#/components/schemas/User'
+            type: string
+            description: User id (sub) strings — NOT full user objects
+        name:
+          type: string
+          nullable: true
         created_at:
           type: string
           format: date-time
-        last_message:
-          $ref: '#/components/schemas/EncryptedMessage'
-        unread_count:
-          type: integer
-        encryption_metadata:
-          type: object
-          description: Per-participant encryption details
-
-    ConversationCreate:
-      type: object
-      required: [conversation_type, participants]
-      properties:
-        conversation_type:
-          type: string
-          enum: [direct, group, channel]
-        participants:
-          type: array
-          items:
-            type: string
-            format: uuid
-        name:
-          type: string
-        encryption_keys:
-          type: object
-          description: Initial encryption keys for the conversation
-
-    EncryptedMessage:
-      type: object
-      properties:
-        message_id:
-          type: integer
-        conversation_id:
-          type: integer
-        sender_key_id:
-          type: string
-          format: uuid
-        recipient_key_ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-        ephemeral_pubkey:
-          type: string
-          format: byte
-        nonce:
-          type: string
-          format: byte
-        ciphertext:
-          type: string
-          format: byte
-        signature:
-          type: string
-          format: byte
-        timestamp:
+        last_activity:
           type: string
           format: date-time
-          description: Rounded to 1-hour bucket
-        size_bucket:
-          type: string
-          enum: [tiny, small, medium, large, xlarge]
-        status:
-          type: string
-          enum: [queued, delivered, read, failed]
+        unread_count:
+          type: object
+          description: >
+            Map of user_id → unread count. Excludes the conversation
+            creator (who was added as a participant but has no unread entry).
+          additionalProperties:
+            type: integer
 
     EncryptedMessageUpload:
       type: object
-      required: [ciphertext, recipient_key_ids, ephemeral_pubkey, nonce, signature]
+      required: [recipient_key_ids, ephemeral_pubkey, nonce, ciphertext, signature]
       properties:
         recipient_key_ids:
           type: array
           items:
             type: string
-            format: uuid
+          description: Target device key ids
         ephemeral_pubkey:
           type: string
-          format: byte
+          description: Base64 ephemeral X25519 public key
         nonce:
           type: string
-          format: byte
+          description: Base64 XChaCha20 nonce
         ciphertext:
           type: string
-          format: byte
+          description: Base64 XChaCha20-Poly1305 ciphertext (opaque to the server)
         signature:
           type: string
-          format: byte
+          description: Base64 Ed25519 signature over the envelope
+        size_bucket:
+          type: string
+          enum: [tiny, small, medium, large, xlarge]
+          default: small
+          description: >
+            Accepted but IGNORED — the server recomputes it from the
+            ciphertext length.
+        attachment_ids:
+          type: array
+          default: []
+          items:
+            type: string
+        reply_to:
+          type: string
+          format: uuid
+          nullable: true
+          description: message_id being replied to
+        forward_policy:
+          type: string
+          default: allowed
+          description: Stored with the envelope; not enforced server-side
+
+    Message:
+      type: object
+      properties:
+        message_id:
+          type: string
+          format: uuid
+        conversation_id:
+          type: string
+          format: uuid
+        sender_key_id:
+          type: string
+          description: Derived server-side as sha256("<sub>-<first recipient_key_id>")[:8]
+        sender_id:
+          type: string
+          description: Sender's user id (sub). The server knows WHO, not WHAT.
+        recipient_key_ids:
+          type: array
+          items:
+            type: string
+        ephemeral_pubkey:
+          type: string
+        nonce:
+          type: string
+        ciphertext:
+          type: string
+        signature:
+          type: string
+        size_bucket:
+          type: string
+          enum: [tiny, small, medium, large, xlarge]
+        sent_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [queued, delivered]
+          description: Starts "queued"; flips to "delivered" on first receipt
         attachment_ids:
           type: array
           items:
             type: string
-            format: uuid
         reply_to:
-          type: integer
-          description: ID of message being replied to
-        forward_policy:
           type: string
-          enum: [allowed, restricted, forbidden]
-
-    Post:
-      type: object
-      properties:
-        post_id:
-          type: integer
-        author:
-          $ref: '#/components/schemas/User'
-        content:
-          type: string
-        attachments:
-          type: array
-          items:
-            type: string
-            format: uuid
-        visibility:
-          type: string
-          enum: [public, followers, community, private]
-        community_id:
-          type: integer
-        created_at:
-          type: string
-          format: date-time
-        reactions:
+          format: uuid
+          nullable: true
+        delivery_receipts:
           type: object
+          description: user_id → ISO-8601 receipt timestamp; present only when non-empty
           additionalProperties:
-            type: integer
-        comment_count:
-          type: integer
-        repost_count:
-          type: integer
-
-    PostCreate:
-      type: object
-      required: [content, visibility]
-      properties:
-        content:
-          type: string
-          maxLength: 10000
-        attachments:
-          type: array
-          items:
             type: string
-            format: uuid
-        visibility:
-          type: string
-          enum: [public, followers, community, private]
-        community_id:
-          type: integer
-
-    Vendor:
-      type: object
-      properties:
-        vendor_id:
-          type: string
-          format: uuid
-        vendor_name:
-          type: string
-        description:
-          type: string
-        logo_url:
-          type: string
-        verified:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-        rating:
-          type: number
-          format: float
-        review_count:
-          type: integer
-        categories:
-          type: array
-          items:
-            type: string
-
-    VendorCreate:
-      type: object
-      required: [vendor_name, description]
-      properties:
-        vendor_name:
-          type: string
-        description:
-          type: string
-        logo_url:
-          type: string
-        categories:
-          type: array
-          items:
-            type: string
-        payout_details:
+            format: date-time
+        read_receipts:
           type: object
-          description: Sent to payment provider, never stored on VYVE
+          description: user_id → ISO-8601 receipt timestamp; present only when non-empty
+          additionalProperties:
+            type: string
+            format: date-time
 
-    Product:
+    MessageTombstone:
       type: object
+      description: Envelope returned for soft-deleted messages
       properties:
-        product_id:
+        message_id:
           type: string
           format: uuid
-        vendor_id:
+        conversation_id:
           type: string
           format: uuid
-        title:
+        status:
           type: string
-        description:
-          type: string
-        price:
-          type: number
-        currency:
-          type: string
-        product_type:
-          type: string
-          enum: [digital_good, service, course, template, consulting]
-        file_size:
-          type: integer
-        download_count:
-          type: integer
-        rating:
-          type: number
-          format: float
-        created_at:
+          enum: [deleted]
+        deleted_at:
           type: string
           format: date-time
+        sender_id:
+          type: string
+
+    MessageList:
+      type: object
+      properties:
+        messages:
+          type: array
+          description: Newest first
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/Message'
+              - $ref: '#/components/schemas/MessageTombstone'
+        total:
+          type: integer
+          description: Count after the `before` filter, before `limit`
+
+    # /health is served by BOTH services; the shape differs per service.
+    OAuthHealth:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        service:
+          type: string
+          example: cybrus-oauth
+        version:
+          type: string
+          example: 1.0.0
+        issuer:
+          type: string
+        users_registered:
+          type: integer
+        tokens_issued:
+          type: integer
+          description: Authorization-code rows ever issued
+        refresh_tokens_active:
+          type: integer
+
+    MessagingHealth:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        service:
+          type: string
+          example: vyve-messaging
+        version:
+          type: string
+          example: 1.0.0
+        conversations:
+          type: integer
+        messages:
+          type: integer
+        queued_messages:
+          type: integer
+        active_connections:
+          type: integer
+          description: Currently open WebSocket connections
+
+  # ══════════════════════════════════════════════════════════════════
