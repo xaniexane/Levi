@@ -107,9 +107,14 @@ def _digest(raw: str) -> str:
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
-def create_key(name: str) -> tuple[str, dict]:
+def create_key(name: str, *, learn: bool = True) -> tuple[str, dict]:
     """Create a key. Returns ``(raw_key, record)`` — the raw key is
-    returned **once** and never stored; only its SHA-256 goes to disk."""
+    returned **once** and never stored; only its SHA-256 goes to disk.
+
+    ``learn`` controls cross-user growth learning for this key's
+    sessions (``levi cloud keys create <name> --no-learn`` opts out).
+    Opted-out keys' sessions are never even opened by the harvester.
+    """
     name = _validate_name(name)
     records = _load()
     if any(r.get("name") == name and not r.get("revoked") for r in records):
@@ -122,10 +127,27 @@ def create_key(name: str) -> tuple[str, dict]:
         "created": _utcnow(),
         "revoked": False,
         "revoked_at": None,
+        "learn": bool(learn),
     }
     records.append(record)
     _save(records)
     return raw, {k: v for k, v in record.items() if k != "key_hash"}
+
+
+def set_learn(name_or_prefix: str, learn: bool) -> dict:
+    """Toggle growth-learning consent for a key. Returns metadata."""
+    ident = (name_or_prefix or "").strip()
+    if not ident:
+        raise KeyError("a key name or prefix is required")
+    records = _load()
+    for r in records:
+        if r.get("revoked"):
+            continue
+        if r.get("name") == ident or r.get("prefix") == ident:
+            r["learn"] = bool(learn)
+            _save(records)
+            return {k: v for k, v in r.items() if k != "key_hash"}
+    raise KeyError("no active key matching %r" % (ident,))
 
 
 def list_keys(*, include_revoked: bool = True) -> list[dict]:

@@ -265,12 +265,143 @@ def reflect(
     ``mode`` is ``"model:<name>"`` when the provider succeeded, else
     ``"rules"``. Model failures fall back to rules silently-but-honestly:
     the mode always says which engine actually ran.
+
+    Privacy rule: experiences with ``meta["origin"] == "cloud"`` (other
+    users' sessions) are NEVER sent to the model reflector — a
+    third-party provider must not receive another user's content.
+    Cloud experiences are distilled separately by
+    :func:`reflect_cloud`.
     """
     if not experiences:
         return [], "rules"
-    if use_model:
+    local = [e for e in experiences if e.meta.get("origin") != "cloud"]
+    if use_model and local:
         try:
-            return _reflect_model(experiences)
+            return _reflect_model(local)
         except Exception:
             pass
-    return reflect_rules(experiences), "rules"
+    # Cloud experiences are never reflected here at all — even by the
+    # offline rules, which could otherwise lift another user's
+    # preferences/facts. They are distilled only by reflect_cloud().
+    return reflect_rules(local), "rules"
+
+
+# ---------------------------------------------------------------------------
+# Cross-user distillation: learn techniques from other providers' turns
+# ---------------------------------------------------------------------------
+
+# Provider names that are LEVI's own engines — learning "from" these is
+# just self-learning, not cross-model distillation.
+_LEVI_PROVIDERS = {"local"}
+_LEVI_PREFIX = "levi"
+
+
+def _is_external_source(provider: str) -> bool:
+    p = (provider or "").strip().lower()
+    return bool(p) and p != "?" and p not in _LEVI_PROVIDERS and not p.startswith(_LEVI_PREFIX)
+
+
+def _technique_from_tools(tool_names: list[str]) -> str | None:
+    """Describe the *technique* structurally — never quote outputs."""
+    if not tool_names:
+        return None
+    uniq = list(dict.fromkeys(tool_names))
+    if len(tool_names) >= 2 and len(set(tool_names)) == 1:
+        return (
+            "When gathering information, issue several focused '%s' calls "
+            "in sequence before composing the final answer, rather than "
+            "answering from the first result." % tool_names[0]
+        )
+    if len(tool_names) >= 2:
+        seq = " → ".join("'%s'" % t for t in uniq[:4])
+        return (
+            "For multi-part tasks, chain tools in a deliberate order "
+            "(%s), gathering each piece of evidence before moving on, "
+            "then synthesize everything into one answer." % seq
+        )
+    return (
+        "Reach for the '%s' tool early when the task calls for it, then "
+        "build the answer on the tool's result." % uniq[0]
+    )
+
+
+def reflect_cloud(experiences: list[Experience]) -> list[Learning]:
+    """Distill techniques from cloud sessions served by other models.
+
+    Heuristic "good outcome" signals (documented as heuristics, not
+    truth):
+
+    * the user kept the conversation going (≥2 user turns) or
+      explicitly approved the result (thanks / perfect / …);
+    * at least one tool call succeeded, or no tool errors at all;
+    * no user correction / retry language in the session;
+    * the turn was served by a non-LEVI source.
+
+    When all hold, the *technique* — the shape of the work, never the
+    source model's verbatim output — becomes a procedural learning
+    tagged ``learned_from: <source>``. Bad-outcome sessions distill
+    nothing.
+    """
+    cloud = [e for e in experiences if e.meta.get("origin") == "cloud"]
+    if not cloud:
+        return []
+
+    by_session: dict[str, list[Experience]] = {}
+    for e in cloud:
+        by_session.setdefault(str(e.meta.get("session", e.source)), []).append(e)
+
+    learnings: list[Learning] = []
+    seen: set[str] = set()
+    for session, exps in sorted(by_session.items()):
+        providers = {str(e.meta.get("provider", "?") or "?") for e in exps}
+        external = sorted(p for p in providers if _is_external_source(p))
+        if not external:
+            continue  # LEVI's own engines — not cross-model learning
+        user_turns = [e for e in exps if e.kind == "user-said"]
+        levi_turns = [e for e in exps if e.kind == "levi-did"]
+        if not user_turns or not levi_turns:
+            continue
+        if any(_CORRECTION.search(e.content) for e in user_turns):
+            continue  # user had to correct — not a good outcome
+        tool_calls: list[str] = []
+        tool_errors = 0
+        for e in levi_turns:
+            if e.content.startswith("[tool "):
+                tool = e.content.split("]")[0].replace("[tool ", "")
+                tool_calls.append(tool)
+                if _ERROR_HINT.search(e.content):
+                    tool_errors += 1
+        if tool_errors:
+            continue
+        approved = any(_APPROVAL.search(e.content) for e in user_turns)
+        engaged = len(user_turns) >= 2
+        if not (approved or engaged):
+            continue
+        technique = _technique_from_tools(tool_calls)
+        if not technique:
+            continue
+        source = external[0]
+        key = ("procedural", technique.lower(), source)
+        if key in seen:
+            continue
+        seen.add(key)
+        key_name = str(exps[0].meta.get("key_name", "?"))
+        learnings.append(
+            Learning(
+                kind="procedural",
+                content=(
+                    "Technique observed working well (source model %s): %s"
+                    % (source, technique)
+                ),
+                confidence=0.5,
+                provenance={
+                    "mode": "rules:cloud-distill",
+                    "source": "cloud:" + key_name,
+                    "session": session,
+                    "learned_from": source,
+                    "experience_ids": [e.id for e in exps],
+                    "ts": max((e.ts for e in exps), default=""),
+                },
+            )
+        )
+    return learnings

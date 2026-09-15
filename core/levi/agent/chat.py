@@ -147,6 +147,21 @@ class ChatSession:
     def append_note(self, text: str) -> None:
         self._append({"kind": "note", "content": text})
 
+    def append_turn_meta(self, *, provider: str, ok: bool, steps: int) -> None:
+        """Machine-readable provenance for one completed turn.
+
+        Recorded so later analysis (e.g. the growth loop) can attribute
+        a turn to the provider/source that served it. Ignored by the
+        dialogue readers (``messages()`` / ``notes()``) and by the
+        local session harvester.
+        """
+        self._append({
+            "kind": "turn-meta",
+            "provider": provider or "?",
+            "ok": bool(ok),
+            "steps": int(steps),
+        })
+
     # -- readers ----------------------------------------------------------
 
     def message_records(self) -> list[dict]:
@@ -297,6 +312,14 @@ class ConversationManager:
                                             name=call.get("name"))
         if transcript.final:
             self.session.append_message("assistant", transcript.final)
+
+        # Provenance for later analysis (growth loop, audits): which
+        # provider served this turn and whether the loop succeeded.
+        self.session.append_turn_meta(
+            provider=self.provider_name,
+            ok=transcript.ok,
+            steps=len(transcript.steps),
+        )
 
         pct = self._context_pct(transcript, history, text)
         summary, _ = self.session.summary()

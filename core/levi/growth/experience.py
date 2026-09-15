@@ -266,6 +266,12 @@ def harvest_affect_signals(
 def harvest_new(since: dict[str, str] | None = None) -> tuple[list[Experience], dict[str, str]]:
     """Harvest all new experiences across sources.
 
+    Sources: local chat sessions, automations, affect signals, and —
+    consent-gated — cloud API chat sessions (see
+    :mod:`levi.growth.harvest_cloud`). Cloud experiences carry
+    ``meta["origin"] = "cloud"``; everything else is ``"local"``
+    (tagged here so downstream counts are total).
+
     Returns ``(experiences, watermarks)`` where watermarks should be
     persisted by the caller (see :mod:`levi.growth.cycle`).
     """
@@ -274,4 +280,14 @@ def harvest_new(since: dict[str, str] | None = None) -> tuple[list[Experience], 
     aff, aff_marks = harvest_affect_signals(since=since)
     experiences.extend(aff)
     watermarks.update(aff_marks)
+    try:
+        from levi.growth.harvest_cloud import harvest_cloud_sessions
+
+        cloud_exps, cloud_marks = harvest_cloud_sessions(since=since)
+    except Exception:
+        cloud_exps, cloud_marks = [], {}
+    experiences.extend(cloud_exps)
+    watermarks.update(cloud_marks)
+    for exp in experiences:
+        exp.meta.setdefault("origin", "local")
     return experiences, watermarks

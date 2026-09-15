@@ -22,7 +22,21 @@ from typing import Any
 from levi.growth import journal as _journal
 from levi.growth.consolidate import consolidate
 from levi.growth.experience import harvest_new
-from levi.growth.reflect import reflect
+from levi.growth.redact import redact_cloud_experiences
+from levi.growth.reflect import reflect, reflect_cloud
+
+
+def _source_breakdown(experiences: list) -> dict:
+    """Counts by origin, plus per-provider counts for cloud."""
+    by_origin: dict[str, int] = {}
+    providers: dict[str, int] = {}
+    for e in experiences:
+        origin = str(e.meta.get("origin", "local") or "local")
+        by_origin[origin] = by_origin.get(origin, 0) + 1
+        if origin == "cloud":
+            p = str(e.meta.get("provider", "?") or "?")
+            providers[p] = providers.get(p, 0) + 1
+    return {"by_origin": by_origin, "cloud_providers": providers}
 
 
 def run_cycle(
@@ -38,10 +52,20 @@ def run_cycle(
 
     experiences, new_marks = harvest_new(since=watermarks)
 
+    # Cloud experiences go through the redaction gate BEFORE any
+    # reflection, and are distilled separately (techniques only —
+    # never another user's facts/preferences).
+    local_exps = [e for e in experiences if e.meta.get("origin") != "cloud"]
+    cloud_exps = redact_cloud_experiences(
+        [e for e in experiences if e.meta.get("origin") == "cloud"]
+    )
+    sources = _source_breakdown(experiences)
+
     report: dict[str, Any] = {
         "cycle_id": cycle_id,
         "dry_run": dry_run,
         "experiences": len(experiences),
+        "sources": sources,
         "mode": "rules",
         "learnings_proposed": 0,
         "learnings": [],
@@ -50,8 +74,11 @@ def run_cycle(
     }
 
     if experiences:
-        learnings, mode = reflect(experiences, use_model=use_model)
+        learnings, mode = reflect(local_exps, use_model=use_model)
         report["mode"] = mode
+        cloud_learnings = reflect_cloud(cloud_exps)
+        learnings = list(learnings) + cloud_learnings
+        report["cloud_learnings"] = len(cloud_learnings)
         report["learnings_proposed"] = len(learnings)
         report["learnings"] = [learning.to_dict() for learning in learnings]
         report["consolidation"] = consolidate(
@@ -70,8 +97,10 @@ def run_cycle(
                 "id": cycle_id,
                 "kind": "cycle",
                 "experiences": report["experiences"],
+                "sources": report["sources"],
                 "mode": report["mode"],
                 "learnings_proposed": report["learnings_proposed"],
+                "cloud_learnings": report.get("cloud_learnings", 0),
                 "accepted": report["consolidation"]["accepted"],
                 "corroborated": report["consolidation"]["corroborated"],
                 "memory_writes": report["consolidation"]["writes"],
@@ -102,6 +131,7 @@ def status(store: Any = None) -> dict[str, Any]:
 
     # pending = experiences newer than the watermark
     pending, _ = harvest_new(since=dict(state.get("watermarks", {})))
+    pending_sources = _source_breakdown(pending)
     stage_name, stage_blurb = _journal.developmental_stage(learnings, cycles)
     entries = _journal.read_entries(limit=1)
     last = entries[0] if entries else None
@@ -112,12 +142,14 @@ def status(store: Any = None) -> dict[str, Any]:
         "learnings_consolidated": learnings,
         "learnings_by_kind": by_kind,
         "experiences_pending": len(pending),
+        "pending_by_source": pending_sources,
         "last_cycle": (
             {
                 "id": last.get("id"),
                 "ts": last.get("ts"),
                 "mode": last.get("mode"),
                 "accepted": last.get("accepted"),
+                "sources": last.get("sources"),
             }
             if last
             else None

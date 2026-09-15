@@ -40,9 +40,10 @@ curl -s http://SERVER:8765/v1/tools \
 ## Key lifecycle
 
 ```bash
-levi cloud keys create <name>    # prints the key once; only a SHA-256 hash is stored
-levi cloud keys list             # name, prefix, created, active/revoked (hashes never shown)
+levi cloud keys create <name> [--no-learn]  # prints the key once; only a SHA-256 hash is stored
+levi cloud keys list             # name, prefix, created, active/revoked, learn flag (hashes never shown)
 levi cloud keys revoke <name|prefix>
+levi cloud keys learn <name|prefix> on|off   # toggle growth-learning consent for a key
 levi cloud usage [--key <name>] [--limit 20]
 ```
 
@@ -100,6 +101,52 @@ Every `/v1/` call appends one JSONL record to
 `~/.levi/cloud/usage.jsonl`: timestamp, key name, key prefix,
 endpoint, steps, outcome. Read it with `levi cloud usage`. Only the
 key prefix is recorded — never a raw key.
+
+## Growth: learning from cloud usage
+
+When your LEVI serves other users, their sessions can teach LEVI new
+*techniques* — how another model decomposed a task, chained tools, or
+structured an answer. This is **cross-user distillation**, and it is
+consent-gated and privacy-scrubbed by design.
+
+**What is learned.** Only generalized *techniques*, as procedural
+memory tagged `learned_from: <source>` — e.g. "when gathering
+information, issue several focused searches before composing the
+answer". A learning is distilled only when heuristic good-outcome
+signals hold: the user kept the conversation going (or explicitly
+approved), tool calls succeeded, and no correction/retry language
+appeared. These are heuristics, not truth — documented as such in
+`core/levi/growth/reflect.py`.
+
+**What is never learned or stored.**
+
+- Never another user's verbatim output, facts, or preferences.
+- Never secrets or PII: a redaction gate (`core/levi/growth/redact.py`)
+  scrubs API keys, tokens, `password=` assignments, emails, phone
+  numbers, and card/SSN-like digit runs *before* reflection, and user
+  speech is generalized to short pattern stubs.
+- Cloud experiences are never sent to the model-assisted reflector
+  (a third-party provider must not receive another user's content);
+  distillation is rules-only.
+- Only persistent `/v1/agent/chat` sessions are harvestable. One-shot
+  `/v1/agent/run` calls leave no session record — nothing to learn from.
+
+**Consent.** Per-key opt-out: `levi cloud keys create <name> --no-learn`,
+or `levi cloud keys learn <name> off` later. Opted-out keys are skipped
+*entirely* — their session files are never opened. Global kill switch:
+`LEVI_GROWTH_CLOUD_LEARN=0` disables cloud harvest for all keys.
+Consent defaults to opt-in for new keys (a missing `learn` field on
+older records also means opted in); the flag is shown in
+`levi cloud keys list`.
+
+**Observability.** `levi growth status` shows pending experiences by
+source (`local` vs `cloud`, per provider). Journal entries carry source
+provenance (`sources.by_origin`, `sources.cloud_providers`).
+
+**Residual risk, stated plainly.** Regex redaction is heuristic — an
+unusually phrased secret or PII the patterns miss can slip through.
+The gate reduces exposure; it is not a proof of absence. If a key's
+sessions must never touch the growth loop at all, use `--no-learn`.
 
 ## Honest limits
 

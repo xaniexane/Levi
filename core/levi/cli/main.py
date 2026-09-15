@@ -1559,6 +1559,15 @@ def cmd_growth(args):
             kinds = ", ".join(f"{k}={v}" for k, v in sorted(s["learnings_by_kind"].items()))
             print(f"by kind: {kinds}")
         print(f"experiences pending: {s['experiences_pending']}")
+        pending = s.get("pending_by_source") or {}
+        by_origin = (pending.get("by_origin") or {})
+        if by_origin:
+            parts = ", ".join(f"{k}={v}" for k, v in sorted(by_origin.items()))
+            print(f"pending by source: {parts}")
+        providers = pending.get("cloud_providers") or {}
+        if providers:
+            parts = ", ".join(f"{k}={v}" for k, v in sorted(providers.items()))
+            print(f"cloud providers pending: {parts}")
         last = s["last_cycle"]
         if last:
             print(f"last cycle: {last['id']} at {last['ts']} "
@@ -1926,6 +1935,9 @@ def _cmd_cloud_keys(args):
         print("API key created for %r (prefix %s)." % (record["name"], record["prefix"]))
         print("This is the ONLY time the full key is shown — copy it now.")
         print("It is stored as a SHA-256 hash only; it cannot be recovered.")
+        print("Growth learning: %s (change with `levi cloud keys learn %s off|on`)."
+              % ("enabled" if record.get("learn", True) else "disabled",
+                 record["name"]))
         return
     if keys_action == "list":
         keys = apikeys.list_keys()
@@ -1934,8 +1946,9 @@ def _cmd_cloud_keys(args):
             return
         for k in keys:
             status = "REVOKED" if k.get("revoked") else "active"
+            learn = "learn" if k.get("learn", True) else "no-learn"
             print(f"  {k['name']:20} {k.get('prefix', '?'):14} "
-                  f"created {k.get('created', '?')}  {status}")
+                  f"created {k.get('created', '?')}  {status}  {learn}")
         return
     if keys_action == "revoke":
         if not target:
@@ -1948,7 +1961,23 @@ def _cmd_cloud_keys(args):
             raise SystemExit(1) from None
         print("Revoked key %r (prefix %s)." % (record["name"], record["prefix"]))
         return
-    print("Usage: levi cloud keys {create <name>|list|revoke <name|prefix>}")
+    if keys_action == "learn":
+        if not target or (len(positionals) > 1 and positionals[1].lower() not in ("on", "off")):
+            print("Usage: levi cloud keys learn <name|prefix> on|off")
+            raise SystemExit(2)
+        want = positionals[1].lower() if len(positionals) > 1 else ""
+        if want not in ("on", "off"):
+            print("Usage: levi cloud keys learn <name|prefix> on|off")
+            raise SystemExit(2)
+        try:
+            record = apikeys.set_learn(target, want == "on")
+        except apikeys.KeyError as exc:
+            print(f"Error: {exc}")
+            raise SystemExit(1) from None
+        print("Key %r: growth learning %s."
+              % (record["name"], "enabled" if record.get("learn") else "disabled"))
+        return
+    print("Usage: levi cloud keys {create <name> [--no-learn]|list|revoke <name|prefix>|learn <name|prefix> on|off}")
     raise SystemExit(2)
 
 

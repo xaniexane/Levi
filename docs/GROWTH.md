@@ -83,6 +83,13 @@ consolidated learnings (engagement copy, not a cognitive claim):
   `~/.levi/growth` resets development without touching other memory.
 - **Offline-first**: the rules engine runs with no model and no
   network; model reflection is a wing, never a dependency.
+- **Cross-user learning is consent-gated**: cloud API sessions are
+  harvested only for keys that opt in (`--no-learn` opts out,
+  `LEVI_GROWTH_CLOUD_LEARN=0` kills it globally), pass a redaction
+  gate before reflection, distill only generalized techniques tagged
+  `learned_from: <source>` (never another user's words/facts), and
+  are never sent to the model-assisted reflector. Full disclosure in
+  `docs/CLOUD_API.md` ("Growth: learning from cloud usage").
 
 ## Files
 
