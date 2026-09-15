@@ -2857,6 +2857,119 @@ def cmd_security(args):
     )
 
 
+def cmd_bounty(args):
+    """Bug-bounty recon pipeline — scoped, polite, recon-only.
+
+    Subcommands:
+      scope add|remove|list     manage enrolled program scopes
+      recon <domain>            run enum -> probe -> content -> store
+      findings [--new]          list stored findings (optionally only new)
+      monitor --once            recon every enrolled scope, print only new
+    """
+    from levi.bounty.pipeline import run_monitor, run_recon
+    from levi.bounty.scope import ScopeError, ScopeStore
+    from levi.bounty.store import FindingStore
+
+    cmd = getattr(args, "bounty_cmd", None) or "findings"
+
+    if cmd == "scope":
+        store = ScopeStore()
+        scmd = getattr(args, "scope_cmd", None) or "list"
+        if scmd == "add":
+            dom = getattr(args, "domain", None)
+            if not dom:
+                print("Usage: levi bounty scope add <domain>")
+                return
+            try:
+                added = store.add(dom)
+            except ValueError as exc:
+                print(f"scope add refused: {exc}")
+                return
+            print(f"Scope enrolled: {added}")
+            print("Recon is authorized for this domain and its subdomains only.")
+        elif scmd == "remove":
+            dom = getattr(args, "domain", None)
+            if not dom:
+                print("Usage: levi bounty scope remove <domain>")
+                return
+            try:
+                ok = store.remove(dom)
+            except ValueError as exc:
+                print(f"scope remove refused: {exc}")
+                return
+            print(f"Scope removed: {dom}" if ok else f"Not enrolled: {dom}")
+        else:  # list
+            doms = store.list()
+            if not doms:
+                print("No scopes enrolled. Use: levi bounty scope add <domain>")
+                return
+            print("Enrolled scopes (domain + subdomains):")
+            for d in doms:
+                print(f"  {d}")
+        return
+
+    if cmd == "recon":
+        dom = getattr(args, "domain", None)
+        if not dom:
+            print("Usage: levi bounty recon <domain> [--ports 80,443,...]")
+            return
+        ports = None
+        praw = getattr(args, "ports", None)
+        if praw:
+            try:
+                ports = [int(p) for p in str(praw).split(",") if p.strip()]
+            except ValueError:
+                print("Invalid --ports (expected comma-separated integers).")
+                return
+        try:
+            report = run_recon(dom, ports=ports)
+        except ScopeError as exc:
+            print(f"SCOPE REFUSED: {exc}")
+            return
+        print(f"══ recon {report['domain']} [scope: {report['scope']}] ══")
+        print(f"  subdomains alive : {len(report['subdomains'])}")
+        print(f"  hosts probed     : {report['hosts_probed']}")
+        print(f"  findings new     : {report['findings_new']}")
+        print(f"  findings total   : {report['findings_total']}")
+        if report["errors"]:
+            print("  errors:")
+            for e in report["errors"][:5]:
+                print(f"    - {e}")
+        return
+
+    if cmd == "monitor":
+        try:
+            result = run_monitor()
+        except Exception as exc:
+            print(f"monitor failed: {exc}")
+            return
+        new = result["new_findings"]
+        if not new:
+            print("monitor: no new findings since last run.")
+            return
+        print(f"══ monitor: {len(new)} new finding(s) ══")
+        for f in new:
+            print(f"  [{f['kind']}] {f['target']}: {f['detail'][:100]}")
+        return
+
+    # cmd == "findings" (default)
+    fstore = FindingStore()
+    items = (
+        fstore.new_since_last_run()
+        if getattr(args, "new", False)
+        else fstore.list()
+    )
+    if not items:
+        print("No findings stored yet. Enroll a scope, then: levi bounty recon <domain>")
+        return
+    label = "new findings" if getattr(args, "new", False) else "findings"
+    print(f"══ {len(items)} {label} ══")
+    for f in items:
+        print(f"  [{f.kind:16s}] {f.target}: {f.detail[:110]}")
+        if f.kind == "possible_exposure":
+            print(f"      evidence: {f.evidence}")
+
+
 def cmd_project(args):
     """Pre-MVP service capability-discovery phase runner + HITL + capability log."""
     from levi.project.phases import PhaseRunner
@@ -4276,6 +4389,22 @@ def main():
     sec_p.add_argument(
         "query", nargs="?", default=None, help="search query or entry id (for show)"
     )
+    bty_p = sub.add_parser("bounty", help="bug-bounty recon: scoped, polite, recon-only")
+    bty_cmd = bty_p.add_subparsers(dest="bounty_cmd")
+    bty_scope = bty_cmd.add_parser("scope", help="manage enrolled program scopes")
+    bty_scope_cmd = bty_scope.add_subparsers(dest="scope_cmd")
+    for _sc in ("add", "remove", "list"):
+        _p = bty_scope_cmd.add_parser(_sc)
+        if _sc in ("add", "remove"):
+            _p.add_argument("domain", help="program domain to enroll/remove")
+    bty_recon = bty_cmd.add_parser("recon", help="run enum -> probe -> content -> store")
+    bty_recon.add_argument("domain", help="target domain (must be in scope)")
+    bty_recon.add_argument(
+        "--ports", default=None, help="comma-separated ports, e.g. 80,443,8080"
+    )
+    bty_find = bty_cmd.add_parser("findings", help="list stored findings")
+    bty_find.add_argument("--new", action="store_true", help="only new since last run")
+    bty_cmd.add_parser("monitor", help="recon all scopes, print only new findings")
     news_p = sub.add_parser(
         "news", help="Current-events ingest (dated recall, not live)"    )
     news_p.add_argument(
@@ -4832,6 +4961,7 @@ def main():
         "vault": cmd_vault,
         "courses": cmd_courses,
         "security": cmd_security,
+        "bounty": cmd_bounty,
         "news": cmd_news,
         "capabilities": cmd_capabilities,
         "affect": cmd_affect,
