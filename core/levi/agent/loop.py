@@ -34,6 +34,7 @@ from dataclasses import asdict, dataclass, field
 from typing import Any, Union
 
 from levi.agent.providers import ChatMessage, ChatProvider, select_provider
+from levi.agent.soul import apply_soul
 from levi.agent.tools import (
     ConfirmationRequired,
     ExecContext,
@@ -104,6 +105,15 @@ class AgentTranscript:
 # ---------------------------------------------------------------------------
 # System prompt
 # ---------------------------------------------------------------------------
+
+
+def _build_system_prompt(
+    tool_schemas: list[dict],
+    system_prompt: str | None = None,
+) -> str:
+    """Final system prompt for a run: caller override or the default,
+    with the owner's ``~/.levi/soul.md`` prepended when one exists."""
+    return apply_soul(system_prompt or _default_system_prompt(tool_schemas))
 
 
 def _default_system_prompt(tool_schemas: list[dict]) -> str:
@@ -213,7 +223,7 @@ def run_subtask(
         }
         for t in registry.list()
     ]
-    system = system_prompt or _default_system_prompt(tool_schemas)
+    system = _build_system_prompt(tool_schemas, system_prompt)
     provider_name = getattr(prov, "name", None) or prov.__class__.__name__
 
     # Affect engine: scan the task, append the modulation hint.
