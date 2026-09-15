@@ -8,8 +8,8 @@ ORIGIN / ATTRIBUTION
   non-personhood, intensity discipline.
 
   All code, prompts, forbids, and lattice wiring here are original to LEVI.
-  External provider names never appear as product identity: providers are
-  named only as *sources* (see docs/MCP.md — ``levi mcp add <source>``).
+  Provider names appear only as *references* (see docs/MCP.md) — never as
+  LEVI identity, and never as anything LEVI is sourced from.
 
 BEHAVIOR
   Precision SI registers: calm · systems-aware · high agency · low theatrics ·

@@ -118,8 +118,8 @@ $ levi agent model use levi-4b    # persist the default LEVI weight
 ```
 
 Two honest remix choices (Apache-2.0 Qwen3 GGUF bases, LEVI-packaged).
-Provider base names appear only here, as the named *source* of each
-download — everywhere else LEVI speaks LEVI (see `docs/MCP.md`).
+The base name appears only here, as a *reference* note on each download —
+everywhere else LEVI speaks LEVI (see `docs/MCP.md`).
 
 | LEVI name | Base | File | Size | Tradeoff |
 |---|---|---|---|---|

@@ -98,7 +98,7 @@ installs the PWA.
   stream tokens; `/api/chat/stream` emits progress heartbeats then the
   full reply.
 - **Media is cloud-backed.** `/image` uses a cloud image source over the
-  network (source: Pollinations — named only here, as the source adapter);
+  network (reference: Pollinations — named only here);
   it fails honestly (502) when unreachable. Local generation
   is future native work.
 - **No NSFW mode, no joke personalities.** The register picker serves
