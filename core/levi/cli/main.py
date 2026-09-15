@@ -1129,8 +1129,31 @@ def cmd_agent(args):
         from levi.agent import local_model
         maction = getattr(args, "agent_model_action", None)
         if maction == "status":
+            from levi.agent import local_model
+            from levi.agent import brain_provider
+            brain = brain_provider.NativeBrainProvider().status()
+            print("══ Native brain (levi-brain) status ══\n")
+            if brain["weights_present"]:
+                log = brain_provider.train_log()
+                print(f"  Weights   : PRESENT  {Path(brain['weights']).name}")
+                if brain["params"]:
+                    print(f"  Params    : {brain['params']:,}")
+                if brain["steps"]:
+                    lf = f"{brain['loss_first']:.4f} -> " if brain["loss_first"] else ""
+                    ll = f"{brain['loss_last']:.4f}" if brain["loss_last"] else "?"
+                    print(f"  Training  : {brain['steps']} steps, loss {lf}{ll}")
+            else:
+                print("  Weights   : MISSING — no trained native brain yet")
+                print("              Fix: train one — see docs/BRAIN_TRAINING.md")
+            print(f"  torch     : {'AVAILABLE' if brain['torch_available'] else 'MISSING (pip install torch to run the brain)'}")
+            print()
+            if brain["available"]:
+                print("  Provider  : AVAILABLE — select with --provider levi-brain or LEVI_PROVIDER=levi-brain")
+            else:
+                print("  Provider  : UNAVAILABLE — explicit requests fall back to the rule-based `local` planner")
+            print()
+            print("── Legacy llama-server path (levi-local) ──\n")
             report = local_model.status_report()
-            print("══ Levi Local (levi-local) status ══\n")
             print(f"  Model dir : {report['model_dir']}")
             if report["weights"]:
                 mb = (report["weights_bytes"] or 0) / 1e6
@@ -1142,23 +1165,17 @@ def cmd_agent(args):
                       f"{' (model native: %d; set LEVI_LOCAL_CTX_SIZE to change)' % native if native else ''}")
             else:
                 print("  Weights   : MISSING — no .gguf file in the model dir")
-                print("              Fix: levi agent model pull")
+                print("              (legacy path; the native brain above is the supported direction)")
             if report["runner"]:
                 print(f"  Runner    : PRESENT  {report['runner']}")
             else:
                 print("  Runner    : MISSING — llama-server not found on PATH")
-                print("              Fix: levi agent model pull (tries a best-effort fetch), or install manually:")
-                _instr = "\n".join(
-                    "              " + ln.strip()
-                    for ln in local_model.RUNNER_INSTALL_INSTRUCTIONS.strip().splitlines()[1:]
-                )
-                print(_instr)
             print()
             if report["available"]:
-                print("  Provider  : AVAILABLE — `levi agent run` will use levi-local by default")
-                print("              (override with --provider local|openai|anthropic or LEVI_PROVIDER)")
+                print("  Provider  : AVAILABLE (legacy) — select explicitly with --provider levi-local")
+                print("              It is NOT in the automatic chain anymore.")
             else:
-                print("  Provider  : UNAVAILABLE — falling back to the rule-based `local` planner")
+                print("  Provider  : UNAVAILABLE — explicit requests fall back to the rule-based `local` planner")
                 print("              The system says so honestly; it never pretends the model exists.")
             return
         if maction == "pull":
@@ -2593,7 +2610,7 @@ def main():
     ag_sub = ag_p.add_subparsers(dest="agent_action")
     ag_run = ag_sub.add_parser("run", help="Run a task through the step-level tool loop")
     ag_run.add_argument("task", help="Task description for the agent")
-    ag_run.add_argument("--provider", choices=["local", "levi-local", "openai", "anthropic"], default=None,
+    ag_run.add_argument("--provider", choices=["local", "levi-brain", "levi-local", "openai", "anthropic"], default=None,
                         help="Chat provider (default: select_provider chain, levi-local-first)")
     ag_run.add_argument("--yes", action="store_true",
                         help="Pre-grant consent for gated tools for THIS run only. "
@@ -2612,7 +2629,7 @@ def main():
     ag_chat = ag_sub.add_parser("chat", help="Interactive long-conversation chat with session memory")
     ag_chat.add_argument("--session", default="default",
                          help="Session name (default: default). Re-running resumes it.")
-    ag_chat.add_argument("--provider", choices=["local", "levi-local", "openai", "anthropic"], default=None,
+    ag_chat.add_argument("--provider", choices=["local", "levi-brain", "levi-local", "openai", "anthropic"], default=None,
                          help="Chat provider (default: select_provider chain, levi-local-first)")
     ag_chat.add_argument("--yes", action="store_true",
                          help="Pre-grant consent for gated tools for THIS session only.")

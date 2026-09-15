@@ -185,7 +185,13 @@ def test_select_env_levi_local_falls_back_when_unset_up(model_home, monkeypatch)
 
 
 def test_select_levi_local_when_available(model_home, monkeypatch):
+    # levi-local is LEGACY and explicit-only: even fully set up, it no
+    # longer wins the default chain — only an explicit selection does.
     _install_fake_stack(model_home, monkeypatch)
+    monkeypatch.delenv("LEVI_PROVIDER", raising=False)
+    p = select_provider()
+    assert isinstance(p, LocalProvider)
+    monkeypatch.setenv("LEVI_PROVIDER", "levi-local")
     p = select_provider()
     assert isinstance(p, LocalModelProvider)
     assert p.name == "levi-local"
@@ -413,9 +419,9 @@ def test_cli_model_status_reports_missing_pieces(tmp_path):
     proc = _run_model_status(tmp_path)
     assert proc.returncode == 0, proc.stderr
     out = proc.stdout
+    assert "levi-brain" in out
     assert "Weights   : MISSING" in out
     assert "Runner    : MISSING" in out
-    assert "levi agent model pull" in out
     assert "UNAVAILABLE" in out
 
 

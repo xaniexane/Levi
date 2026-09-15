@@ -1,11 +1,20 @@
-"""Levi Local — LEVI's own self-sufficient offline model provider.
+"""Levi Local — LEGACY offline model provider (llama-server backend).
 
 Provider name: ``levi-local``.
 
-This is LEVI's own offline inference stack: a ``llama-server`` process
-(managed by LEVI, no Ollama daemon, no cloud) serving a GGUF model from
-``~/.levi/models``. The agent runtime talks to it over the exact same
-OpenAI-compatible ``/v1/chat/completions`` path as the cloud providers
+.. deprecated::
+    This llama-server + third-party GGUF path is LEGACY. It still works
+    when explicitly selected (``--provider levi-local`` /
+    ``LEVI_PROVIDER=levi-local``), but it is no longer in the automatic
+    provider chain and is no longer LEVI's local-model story. The
+    supported path is :mod:`levi.agent.brain_provider` (``levi-brain``):
+    LEVI's own native brain, trained from scratch on LEVI's own corpus —
+    no LLaMA weights, no llama.cpp.
+
+This module manages a ``llama-server`` process (no Ollama daemon, no
+cloud) serving a GGUF model from ``~/.levi/models``. The agent runtime
+talks to it over the exact same OpenAI-compatible
+``/v1/chat/completions`` path as the cloud providers
 (see :class:`levi.agent.providers.OpenAICompatibleProvider`) — the
 difference is that the server is spawned and owned by this module.
 

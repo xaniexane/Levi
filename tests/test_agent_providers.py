@@ -363,15 +363,17 @@ def test_anthropic_available_with_key(monkeypatch):
 
 
 def test_provider_names():
-    assert provider_names() == ["local", "levi-local", "openai", "anthropic"]
+    assert provider_names() == ["local", "levi-brain", "levi-local", "openai", "anthropic"]
 
 
 def test_select_default_is_local(monkeypatch, tmp_path):
+    # The default chain is rules-only: levi-brain and levi-local are
+    # explicit-only and never win the default slot.
     monkeypatch.delenv("LEVI_PROVIDER", raising=False)
     monkeypatch.delenv("LEVI_OPENAI_API_KEY", raising=False)
     monkeypatch.delenv("LEVI_OPENAI_BASE_URL", raising=False)
     monkeypatch.delenv("LEVI_ANTHROPIC_API_KEY", raising=False)
-    # levi-local must not be set up, or it would win the default chain.
+    monkeypatch.setenv("LEVI_BRAIN_WEIGHTS", str(tmp_path / "no-weights.pt"))
     monkeypatch.setenv("LEVI_MODEL_DIR", str(tmp_path / "empty-models"))
     p = select_provider()
     assert isinstance(p, LocalProvider)

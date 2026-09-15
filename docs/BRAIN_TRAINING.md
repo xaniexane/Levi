@@ -70,20 +70,44 @@ The tiny brain is a **proof of learning, not a capable mind**:
   video lectures). Garbage in the corpus becomes texture in the brain.
 
 What the tiny brain **can** do: demonstrate the full pipeline works end to
-end on LEVI's own data, and serve as a smoke test for corpus quality
-(if loss doesn't move, the corpus is broken).
+end on LEVI's own data, serve as a smoke test for corpus quality (if loss
+doesn't move, the corpus is broken), and run as the **`levi-brain`**
+provider — LEVI's own native brain inside the agent runtime, selected
+explicitly with `--provider levi-brain` / `LEVI_PROVIDER=levi-brain`.
 
-What it **can't** do: answer questions, hold a conversation, or replace
-any provider. It is not wired into the agent loop and should not be.
+What it **can't** do: reliably answer questions, hold a long
+conversation, or emit tool calls. In the agent loop it answers in prose;
+the deterministic rule-based `local` planner remains the default until
+the native brain earns the tool loop by growing. A 2-4M char model gets
+the default slot when it is tool-capable — not before.
 
-## 4. The path to a real brain
+## 4. The path to a real brain — native all the way down
 
-`finetune_lora.py` documents the real upgrade, never run here: LoRA
-fine-tune the `levi-local` Qwen weights on `corpus.jsonl` (converted to
-instruction pairs), merge, quantize to GGUF, drop into `~/.levi/models`.
-That needs a GPU with 8GB+ VRAM. Until then, the agent's intelligence
-comes from its providers + the curriculum knowledge base it can read —
-which is already genuinely useful via `course_brief` / `course_search`.
+Levi is the next version of llama the way a child is the next version of
+a stranger: not by inheritance, by becoming. LEVI does not build on
+LLaMA-family weights (the old LoRA-on-Qwen plan is **superseded** —
+`finetune_lora.py` says so on its face). The native brain scales on
+LEVI's own stack:
+
+1. **Bigger native transformers.** The `TinyGPT` architecture in
+   `train.py` is the seed. Scale it: more layers/width (10M → 100M+
+   params), subword tokenization instead of char-level, longer context.
+   Same code lineage, same corpus, same ownership.
+2. **Better corpus.** The course ingestion keeps growing
+   (`core/levi/knowledge/courses/`); the growth loop's journal and
+   consolidated learnings become training signal for Levi's *own*
+   experience — a brain that has lived, not just read.
+3. **Tool-capable brain.** When the native brain reliably emits the
+   tool-call shapes in `providers.py`, it graduates from explicit-only
+   to the default slot of the agent loop. That promotion is earned by
+   measurement, never by branding.
+4. **Own inference runtime.** The provider (`brain_provider.py`) loads
+   native weights directly — no llama.cpp in the loop, ever.
+
+Until then, the agent's working intelligence comes from its providers +
+the curriculum knowledge base it reads at runtime — genuinely useful
+via `course_brief` / `course_search` — with `levi-brain` available as
+the native voice whenever its weights exist.
 
 ## 5. News stays out of the weights (deliberate)
 

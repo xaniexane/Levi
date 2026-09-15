@@ -60,14 +60,20 @@ success. Pinned by `test_delegate_propagates_subtask_failure`.
 ### 1.2 The provider chain (`providers.py`)
 
 Selection order: explicit `provider=` argument → `LEVI_PROVIDER` env var →
-**`levi-local` if it is set up** → **`LocalProvider` fallback**. A
-preferred provider that is unavailable falls back down the chain
-(offline-first, honestly — the loop always reports which provider it ended
-up with).
+**`LocalProvider` fallback** (deterministic rule-based planner). Two
+explicit-only providers extend the chain: **`levi-brain`** — LEVI's own
+native brain, a transformer trained from scratch on LEVI's own corpus (no
+LLaMA weights, no llama.cpp); and **`levi-local`** — the legacy
+llama-server + third-party GGUF path, kept working but no longer
+automatic. A preferred provider that is unavailable falls back down the
+chain (offline-first, honestly — the loop always reports which provider
+it ended up with). The native brain earns the default slot when it is
+tool-capable — by measurement, never by branding.
 
 | Provider | Name | `is_available()` when |
 |---|---|---|
-| `LocalModelProvider` | `levi-local` | a `.gguf` weights file **and** a `llama-server` runner are present (§1.2b) |
+| `NativeBrainProvider` | `levi-brain` | trained native weights (`brain/weights/tiny-gpt.pt`) **and** torch importable — explicit-only (§1.2b) |
+| `LocalModelProvider` | `levi-local` | LEGACY: a `.gguf` weights file **and** a `llama-server` runner are present — explicit-only (§1.2b) |
 | `LocalProvider` | `local` | always (deterministic rule-based planner, no network) |
 | `OpenAICompatibleProvider` | `openai` | `LEVI_OPENAI_API_KEY` set **or** `LEVI_OPENAI_BASE_URL` overridden |
 | `AnthropicProvider` | `anthropic` | `LEVI_ANTHROPIC_API_KEY` set |
@@ -80,7 +86,7 @@ timeout on cloud calls: 60s. Provider errors never raise and never fake a
 response: they come back as `ChatResponse.error`, and the loop ends
 honestly.
 
-`provider` may be a name string (`"local"` / `"levi-local"` /
+`provider` may be a name string (`"local"` / `"levi-brain"` / `"levi-local"` /
 `"openai"` / `"anthropic"`), a `ChatProvider` instance, or `None` for
 `select_provider()`. The loop also accepts prior conversation via
 `history=[ChatMessage(...), ...]`; `LocalProvider` reads the **last**
@@ -134,8 +140,8 @@ run_subtask(task, *, provider=None, registry=None, history=None,
 ```
 
 - `provider` may be a `ChatProvider` instance, a name string
-  (`"local"` / `"levi-local"` / `"openai"` / `"anthropic"`), or `None`
-  for `select_provider()`.
+  (`"local"` / `"levi-brain"` / `"levi-local"` / `"openai"` / `"anthropic"`),
+  or `None` for `select_provider()`.
 - `history` is a list of `ChatMessage` carried between turns (used by
   `chat.py` for sessions); it is inserted between the system prompt and
   the current user message. `LocalProvider` plans from the **last** user
@@ -233,7 +239,7 @@ grep against the sources):
 
 | Variable | Used by | Meaning |
 |---|---|---|
-| `LEVI_PROVIDER` | `select_provider()` | `local` / `levi-local` / `openai` / `anthropic`; default chain is levi-local-first |
+| `LEVI_PROVIDER` | `select_provider()` | `local` / `levi-brain` / `levi-local` / `openai` / `anthropic`; default chain is rules-only, levi-brain + levi-local are explicit-only |
 | `LEVI_OPENAI_API_KEY` | `OpenAICompatibleProvider` | Bearer key for cloud OpenAI (omit for keyless local servers) |
 | `LEVI_OPENAI_BASE_URL` | `OpenAICompatibleProvider` | default `https://api.openai.com/v1`; set to `http://localhost:11434/v1` for Ollama |
 | `LEVI_OPENAI_MODEL` | `OpenAICompatibleProvider` | default `gpt-4o-mini` |
@@ -377,7 +383,7 @@ for step in transcript.steps:   # provider_text, tool_calls, results
 ### 5.4 CLI reference
 
 ```
-levi agent run "<task>" [--provider local|levi-local|openai|anthropic] [--yes]
+levi agent run "<task>" [--provider local|levi-brain|levi-local|openai|anthropic] [--yes]
                         [--max-steps N] [--workspace DIR] [--json]
 levi agent chat [--session NAME] [--provider ...] [--yes]
                 [--max-steps N] [--workspace DIR]

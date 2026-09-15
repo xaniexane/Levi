@@ -17,17 +17,29 @@ is kept clean on purpose. Ollama discovery is not reimplemented here: the
 override with zero code change.
 
 Selection is offline-first: explicit preference flag > ``LEVI_PROVIDER``
-env var > ``levi-local`` (LEVI's own offline model, when set up) >
-``LocalProvider`` rule-based default. A preferred provider that is not
-available falls back to ``LocalProvider`` (honestly — the loop can always
-report which provider it ended up with via ``ChatResponse.provider``).
+env var > ``LocalProvider`` rule-based default. Two explicit-only
+providers extend the chain:
+
+* ``levi-brain`` — LEVI's OWN native brain (see
+  :mod:`levi.agent.brain_provider`): a transformer trained from scratch
+  on LEVI's own corpus. No LLaMA weights, no llama.cpp. Explicit-only
+  until the native brain is tool-capable; it earns the default slot by
+  growing, not by branding.
+* ``levi-local`` — LEGACY llama-server + third-party GGUF path (see
+  :mod:`levi.agent.local_model`). Kept working for compatibility, but no
+  longer in the automatic chain and no longer the local-model story.
+
+A preferred provider that is not available falls back to
+``LocalProvider`` (honestly — the loop can always report which provider
+it ended up with via ``ChatResponse.provider``).
 
 ``levi-local`` lives in :mod:`levi.agent.local_model` (lazy-imported by
-:func:`select_provider` because that module subclasses this one) and
-shares this module's OpenAI-compatible chat path against a
-LEV-managed ``llama-server``. The name reuses the ``levi-local`` label
-the generation router (:mod:`levi.model.abstraction`) already uses for
-its local path; the interfaces stay separate.
+:func:`select_provider` because that module subclasses this one). It is
+the LEGACY llama-server backend: functional, but superseded by
+:mod:`levi.agent.brain_provider` (``levi-brain``), LEVI's native brain.
+The name reuses the ``levi-local`` label the generation router
+(:mod:`levi.model.abstraction`) already uses for its local path; the
+interfaces stay separate.
 
 Stdlib only: ``urllib`` for HTTP. No SDK dependencies, no new third-party
 imports in ``core/levi``.
@@ -664,7 +676,13 @@ class AnthropicProvider(ChatProvider):
 
 
 # ---------------------------------------------------------------------------
-# Selection — explicit flag > LEVI_PROVIDER env > levi-local > local
+# Selection — explicit flag > LEVI_PROVIDER env > local (rules)
+#
+# levi-brain (native brain) and levi-local (legacy llama-server) are
+# explicit-only: named via --provider or LEVI_PROVIDER, never automatic.
+# The default tool loop stays on the deterministic rules planner until
+# the native brain is tool-capable — it earns the default slot by
+# growing, not by branding.
 # ---------------------------------------------------------------------------
 
 
@@ -673,6 +691,13 @@ _PROVIDER_CLASSES = {
     "openai": OpenAICompatibleProvider,
     "anthropic": AnthropicProvider,
 }
+
+
+def _levi_brain_provider() -> ChatProvider:
+    # Lazy: levi.agent.brain_provider imports torch lazily and must not
+    # slow down or break stdlib-only imports of this module.
+    from levi.agent.brain_provider import NativeBrainProvider
+    return NativeBrainProvider()
 
 
 def _levi_local_provider() -> ChatProvider:
@@ -685,24 +710,23 @@ def _levi_local_provider() -> ChatProvider:
 
 def provider_names() -> list[str]:
     """Names of all known chat providers, in preference order."""
-    return ["local", "levi-local", "openai", "anthropic"]
+    return ["local", "levi-brain", "levi-local", "openai", "anthropic"]
 
 
 def select_provider(preference: str | None = None) -> ChatProvider:
     """Pick a chat provider.
 
     Chain: explicit ``preference`` > ``LEVI_PROVIDER`` env var >
-    ``levi-local`` (when its weights + runner are set up) >
-    ``LocalProvider`` rule-based fallback. A named preference that is
-    unavailable (or unknown) falls back to ``LocalProvider`` rather
-    than failing — the loop reports the provider it actually used, so
-    the fallback is always visible.
+    ``LocalProvider`` rule-based fallback. ``levi-brain`` (LEVI's native
+    brain) and ``levi-local`` (legacy llama-server backend) are
+    explicit-only: they run when named and available, never by default.
+    A named preference that is unavailable (or unknown) falls back to
+    ``LocalProvider`` rather than failing — the loop reports the
+    provider it actually used, so the fallback is always visible.
     """
     name = (preference or os.environ.get("LEVI_PROVIDER") or "").strip().lower()
-    if not name:
-        # No preference: LEVI's own offline model when it is set up,
-        # otherwise the rule-based planner.
-        provider = _levi_local_provider()
+    if name == "levi-brain":
+        provider = _levi_brain_provider()
         return provider if provider.is_available() else LocalProvider()
     if name == "levi-local":
         provider = _levi_local_provider()
