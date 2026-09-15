@@ -1814,15 +1814,61 @@ def cmd_demand(args):
         s = dp.scan_seed(args.scan, segment=getattr(args, "segment", None) or "general")
         print(f"Signal [{s.id}] kind={s.kind}: {s.need[:80]}")
         if getattr(args, "title", None):
-            o = dp.score_opportunity(
-                s.id,
-                args.title,
-                demand_score=float(getattr(args, "demand_score", 0.6) or 0.6),
-                serviceability=float(getattr(args, "serviceability", 0.6) or 0.6),
-                startup_cost=float(getattr(args, "cost", 0.2) or 0.2),
-            )
-            print(f"Opportunity worth={o.worth:.2f}: {o.title}")
+            if getattr(args, "five_factor", False):
+                _cmd_demand_five_factor(dp, s.id, args)
+            else:
+                o = dp.score_opportunity(
+                    s.id,
+                    args.title,
+                    demand_score=float(getattr(args, "demand_score", 0.6) or 0.6),
+                    serviceability=float(getattr(args, "serviceability", 0.6) or 0.6),
+                    startup_cost=float(getattr(args, "cost", 0.2) or 0.2),
+                )
+                print(f"Opportunity worth={o.worth:.2f}: {o.title}")
+    elif getattr(args, "five_factor", False):
+        print("Five-factor scoring needs --scan \"...\" --title \"...\" plus the --ff-* factors.")
     print(dp.format_status())
+
+
+def _cmd_demand_five_factor(dp, demand_id, args):
+    """Score one opportunity on the five-factor model from CLI flags."""
+    from levi.demand.scoring import FACTORS, parse_weights
+
+    flag_for = {
+        "demand": "ff_demand",
+        "market_size": "ff_market",
+        "competition_gap": "ff_gap",
+        "trend_velocity": "ff_velocity",
+        "entry_feasibility": "ff_feasibility",
+    }
+    missing = [f for f in FACTORS if getattr(args, flag_for[f], None) is None]
+    if missing:
+        print(f"Five-factor scoring needs values for: {', '.join(missing)} "
+              f"(flags --ff-demand/--ff-market/--ff-gap/--ff-velocity/--ff-feasibility, 0-100).")
+        return
+    basis = getattr(args, "ff_basis", None)
+    if not basis or not basis.strip():
+        print("Five-factor scoring needs --ff-basis: a note on why these scores were assigned.")
+        return
+    weights = None
+    if getattr(args, "ff_weights", None):
+        try:
+            weights = parse_weights(args.ff_weights)
+        except ValueError as e:
+            print(f"Bad --ff-weights: {e}")
+            return
+    try:
+        card = dp.score_five_factor(
+            demand_id,
+            args.title,
+            {f: (float(getattr(args, flag_for[f])), basis) for f in FACTORS},
+            weights=weights,
+            threshold=float(getattr(args, "ff_threshold", 75.0) or 75.0),
+        )
+    except ValueError as e:
+        print(f"Five-factor scoring rejected: {e}")
+        return
+    print(card.explain())
 
 
 def cmd_income(args):
@@ -3935,6 +3981,18 @@ def main():
     dem_p.add_argument("--demand-score", dest="demand_score", type=float, default=0.6)
     dem_p.add_argument("--serviceability", type=float, default=0.6)
     dem_p.add_argument("--cost", type=float, default=0.2)
+    dem_p.add_argument("--five-factor", action="store_true",
+                       help="Score --title with the five-factor model instead of worth")
+    dem_p.add_argument("--ff-demand", type=float, default=None)
+    dem_p.add_argument("--ff-market", type=float, default=None)
+    dem_p.add_argument("--ff-gap", type=float, default=None)
+    dem_p.add_argument("--ff-velocity", type=float, default=None)
+    dem_p.add_argument("--ff-feasibility", type=float, default=None)
+    dem_p.add_argument("--ff-basis", default=None,
+                       help="Basis note recorded for every factor (required)")
+    dem_p.add_argument("--ff-weights", default=None,
+                       help='Override weights, e.g. "0.3,0.25,0.2,0.15,0.1"')
+    dem_p.add_argument("--ff-threshold", type=float, default=75.0)
     inc_p = sub.add_parser(
         "income", help="Income Factory (capability, not whole purpose)"
     )

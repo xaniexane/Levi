@@ -19,6 +19,15 @@ import json
 import hashlib
 
 
+from levi.demand.scoring import (
+    DEFAULT_THRESHOLD,
+    FactorInput,
+    ScoreCard,
+    rank_cards,
+    score_card,
+)
+
+
 DEFAULT = Path.home() / ".levi" / "demand_pulse.json"
 
 
@@ -71,6 +80,7 @@ class DemandPulse:
         self.path = Path(path) if path else DEFAULT
         self.signals: List[DemandSignal] = []
         self.opportunities: List[Opportunity] = []
+        self.score_cards: List[ScoreCard] = []
         self._load()
 
     def _load(self) -> None:
@@ -99,6 +109,12 @@ class DemandPulse:
                         }
                     )
                 )
+            self.score_cards = []
+            for c in raw.get("score_cards") or []:
+                try:
+                    self.score_cards.append(ScoreCard.from_dict(c))
+                except Exception:
+                    continue
         except Exception:
             pass
 
@@ -107,6 +123,7 @@ class DemandPulse:
         payload = {
             "signals": [s.to_dict() for s in self.signals[-100:]],
             "opportunities": [o.to_dict() for o in self.opportunities[-100:]],
+            "score_cards": [c.to_dict() for c in self.score_cards[-100:]],
             "updated_at": datetime.now(timezone.utc).isoformat(),
         }
         tmp = self.path.with_suffix(".tmp")
@@ -154,6 +171,33 @@ class DemandPulse:
     def top_opportunities(self, n: int = 5) -> List[Opportunity]:
         return sorted(self.opportunities, key=lambda o: -o.worth)[:n]
 
+    def score_five_factor(
+        self,
+        demand_id: str,
+        title: str,
+        factors: Dict[str, FactorInput],
+        weights: Optional[Dict[str, float]] = None,
+        threshold: float = DEFAULT_THRESHOLD,
+        notes: str = "",
+    ) -> ScoreCard:
+        """Score an opportunity on the five-factor model.
+
+        ``factors`` maps each factor name to a FactorScore, a
+        ``(value, basis)`` pair, or a ``{"value":.., "basis":..}`` mapping.
+        Every factor requires a non-empty basis — the honesty guardrail.
+        Pure scoring; the card is then persisted.
+        """
+        card_id = hashlib.sha256(f"{demand_id}{title}ff".encode()).hexdigest()[:8]
+        card = score_card(
+            card_id, title, factors, weights=weights, threshold=threshold, notes=notes
+        )
+        self.score_cards.append(card)
+        self._persist()
+        return card
+
+    def top_score_cards(self, n: int = 5) -> List[ScoreCard]:
+        return rank_cards(self.score_cards)[:n]
+
     def format_status(self) -> str:
         lines = [
             "=== DemandPulse ===",
@@ -164,7 +208,15 @@ class DemandPulse:
             lines.append(
                 f"  worth={o.worth:.2f}  {o.title}  (cost={o.startup_cost:.2f} svc={o.serviceability:.2f})"
             )
-        if not self.opportunities:
+        if self.score_cards:
+            lines.append("")
+            lines.append("five-factor score cards:")
+            for c in self.top_score_cards(5):
+                flag = " ALERT" if c.alert else ""
+                lines.append(
+                    f"  {c.composite:6.2f} [{c.tier}]{flag}  {c.title}"
+                )
+        if not self.opportunities and not self.score_cards:
             lines.append('  (none — seed with: levi demand --scan "…")')
         lines.append("")
         lines.append("Labels are HYPOTHESIS until verified OBSERVED in corpus.")
