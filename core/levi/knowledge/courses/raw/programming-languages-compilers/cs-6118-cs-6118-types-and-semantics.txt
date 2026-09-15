@@ -1,0 +1,161 @@
+# CS 6118: Types and Semantics
+# Cornell University
+# source: http://www.cs.cornell.edu/courses/CS6118/2012fa/
+
+CS6118 - Types and Semantics
+Skip to main content
+Cornell University
+Computer Science
+CS 6118 (Fall 2012) - Types and Semantics
+Overview
+CS6118 - Types and Semantics is about designing and understand programming languages, whether they be domain specific or general purpose. The goal of this class is to provide a variety of tools for designing custom (programming) languages for whatever task is at hand. Part of that will be a variety of insights on how languages work along with experiences from working with academics and industry on creating new languages such as Ceylon and Kotlin . The class focuses on types and semantics and the interplay between them. This means category theory and constructive type theory (e.g. Coq and richer variations) are ancillary topics of the class. The class also covers unconventional semantic domains such as classical linear type theory in order to both break students from convential thinking and to provide powerful targets capable of formalizing thinks like networking protocols, resource-sensitive computation, and concurrency constructs. The class project is to design and formalize a (programming) language for a purpose of the student's choosing, and assignments are designed to ensure students have had a chance to practice applying the techniques learned in class before culminating these skills in the class project.
+Class Times : TuTh 2:55-4:10
+Location : Snee Hall 1120
+Instructor :
+Ross Tate
+Office: 4136 Upson Hall
+Office Hours: Wed. 1:00-2:00 and by appointment
+Grading There will be seven homework assignments, a project, a midterm, and a (non-cummulative) final. The breakdown is:
+Assignments: 35%
+Project: 25%
+Midterm: 20%
+Final: 20%
+Related Reading
+Abstract and Concrete Categories - The Joy of Cats by Jiri Adamek, Horst Herrlich, and George E. Strecker (2004)
+Using Category Theory to Design Implicit Conversions and Generic Operators by John C. Reynolds (1980)
+Schedule
+Date Topic Notes Assignments
+Week 1
+Aug 23
+Goals of the Course
+Discussion of Student Interests
+Overview of Language Design Challenges
+(none)
+Week 2
+Aug 28
+Semantics of Subtyping
+Basic Category Theory: Categories and Functors
+Lecture 2
+Aug 30
+WAT
+Naturality of Operators
+Static/Dynamic Behavorial Subtyping
+Principal Types
+Lecture 3
+Week 3
+Sep 4
+Introduction to Coq
+Inductive Data Types
+Dependent Matches
+Lecture 4
+Coq Code
+Sep 6
+Equality in Coq
+Formalizing Subtyping in Coq
+Lecture 5
+Coq Code
+Homework Code
+Week 4
+Sep 11
+Lists and Comprehensions
+Lecture 6
+Sep 13
+SQL and Opfibrations
+Lecture 7
+Homework 1 Due
+Week 5
+Sep 18
+Opfibrations in Detail
+Lecture 8
+Opfibration Notes
+Sep 20
+SQL Joins: Products in Opfibrations
+Lecture 9
+Week 6
+Sep 25
+Aggregation: Monad Algebras
+Lecture 10
+Sep 27
+Lifting Expressions: Monoidal Functors
+Lecture 11
+Homework 2 Due
+Week 7
+Oct 2
+Midterm Review
+Lecture 12
+Bring Questions!!!
+Oct 4
+Midterm
+Week 8
+Oct 9
+No Class
+Celebrate Canadian Thanksgiving!
+Oct 11
+Intuitionist Logic
+Curry-Howard Isomorphism
+System PJ
+Week 9
+Oct 16
+Classical Linear Type Theory
+Multiplicatives
+Parallelism and Multicut Extensions
+Lecture 15
+Sequent Calculus
+Oct 18
+Duality
+Additives
+Lecture 16
+Week 10
+Oct 23
+Additive Extensions
+Exponential Modalities
+Lecture 17
+Oct 25
+Contraction and Weakening Extensions
+Constructive Classical Logic?!
+Lecture 18
+First Half of Homework 3 Due
+Week 11
+Oct 30
+Strictness vs. Laziness
+Lecture 19
+Nov 1
+Effects
+Monads
+Lecture 20
+Second Half of Homework 3 Due
+Week 12
+Nov 6
+Effectors
+Productors
+Lecture 21
+Nov 8
+Premonoidal Categories
+Parallelism
+Lecture 22
+Week 13
+Nov 13
+Inductive Types
+Coinductive Types
+Lecture 23
+Nov 15
+(Constructive) Domain Theory
+Lecture 24
+Homework 4 Due
+Week 14
+Nov 20
+Quotient Types
+Lecture 25
+Nov 22
+No Class
+Celebrate American Thanksgiving!
+Week 15
+Nov 27
+Final Review
+Lecture 26
+Bring Questions!!!
+Nov 29
+Final
+Homework 5 Due
+Homework Policies
+Cornell University has a Code of Academic Integrity , with which you should be familiar. Violations of this code are treated very seriously by Cornell and can have long-term repercussions. In this course, you are encouraged to discuss the content of the course with other students, and you may also discuss homework problems with other students. However, you must do your own work, write up assignments yourself, and if you discuss a problem with another student, you are expected to document this fact in your write-up. It is a violation of the code to copy work, including programs, from other students; it is also a violation to use solutions to homework problems from previous iterations of the same course. Note that Cornell holds responsible for the code violation both the recipient and the donor of improper information.

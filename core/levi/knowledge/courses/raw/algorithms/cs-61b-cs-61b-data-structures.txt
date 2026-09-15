@@ -1,0 +1,355 @@
+# CS 61B: Data Structures
+# UC Berkeley
+# source: http://datastructur.es/sp16/
+
+`
+Main | CS 61B Spring 2016
+CS 61B
+Data Structures, Spring 2016
+Instructor: Josh Hug
+Lecture: MWF 3-4 PM, Wheeler Auditorium
+Main
+Course Info
+Staff
+Assignments
+Resources
+Piazza
+Announcements
+[ Past Announcements ]
+Date
+Announcement
+5/17
+The top student-submitted seam carving masterpieces can be found here !
+5/8
+The final will take place on Wednesday, May 11, 7-10 PM in RSF Fieldhouse and 2050 VLSB. Check the linked Piazza post for more information.
+5/7
+You may request any grade lower than your earned grade. Your request can also be conditional on receiving a particular score in the class.
+5/1
+Please register your instructional accounts as we'll be listing finalized assignment grades on glookup.
+4/16
+Cal Day 2016 presentation can be found at this link .
+Calendar
+Week
+Date
+Reading
+Lecture
+Discussion
+Lab
+Assignments/Exams
+1
+Wed 1/20
+HFJ 1-26
+Intro, Hello World Java
+[ video ]
+[ slides ]
+[ code ]
+Intro to Java
+[ Solution ]
+javac, java, git
+Setting Up Your Computer
+HW0: Basic Java Programs (optional)
+Fri 1/22
+HFJ 27-36, 50-62, 72-79, 83-86
+Defining and Using Classes
+[ video ]
+[ slides ]
+[ code ]
+2
+Mon 1/25
+HFJ 80-82, 9.2.2 and 9.2.3, sad tale
+Binary Representations, Primitive and Reference Types, IntLists
+[ video ]
+[ slides ]
+[ code ]
+Scope, Pass-by-Value, Static
+[ Solution ]
+IDEs IntelliJ Home Setup
+Project 0: NBody (due 1/29)
+Wed 1/27
+JRS Notes
+SLists, Nested Classes, Sentinel Nodes
+[ video ]
+[ slides ]
+[ code ]
+Fri 1/29
+JRS Notes , HFJ 670, 59-61, 83, 114-116
+DLists, Arrays, Loops vs. Recursion
+[ video ]
+[ slides ]
+[ code ]
+3
+Mon 2/1
+Dynamic array
+ALists, Resizing, vs. SLists
+[ video ]
+[ slides ]
+[ code ]
+Linked Lists, Arrays
+[ Solution ]
+Testing, Debugging JUnit Setup
+Project 1A: Data Structures (due 2/6)
+Wed 2/3
+TDD is dead , Unit Tests Are Waste , Response
+Testing
+[ video ]
+[ slides ]
+[ code ]
+Fri 2/5
+HFJ 168-191, 224-227
+Inheritance, Implements
+[ video ]
+[ slides ]
+[ code ]
+4
+Mon 2/8
+HFJ 208-218, 219-224
+Extends, Casting, Higher Order Functions
+[ video ]
+[ slides ]
+[ code ]
+Inheritance
+[ Solution ]
+Project Workday + MT Prep
+Project 1B/C: Testing and HoFs (due 2/11)
+Wed 2/10
+Oracle Tutorial
+Abstract Classes, More HoFs
+[ video ]
+[ slides ]
+[ code ]
+Fri 2/12
+None
+Midterm 1 Review
+[video]
+[ slides ]
+[ code ]
+Midterm 1 (2/12, 7-9 PM) Material up to 2/8
+5
+Mon 2/15
+Academic Holiday
+Wed 2/17
+HFJ Chapter 5, 6, esp 154-160, HFJ 587-590
+Packages, ADTs in Java, Java Libraries
+[ video ]
+[ slides ]
+[ code ]
+Selecting ADTs
+[ Solution ]
+Getting Started: Project 2
+HW 1: Java Syntax and Sound Synthesis (due 2/26)
+Fri 2/19
+HFJ 131-137, 287-293, 529-550, 568-575
+Generics, Autoboxing
+[ video ]
+[ slides ]
+[ code ]
+6
+Mon 2/22
+JRS Notes
+More Generics, Iterators, Iterable, Exceptions
+[ video ]
+[ slides ]
+[ code ]
+Immutability, Encapsulation Practices
+[ Solution ]
+Immutable Classes, Exploiting Vulnerable Classes -->
+HugLife
+Wed 2/24
+Editor
+Exceptions, Access Control, Objects
+[ video ]
+[ slides ]
+Fri 2/26
+Algs 28-29, 64, 96-101, 105-106, 126-127
+Encapsulation, Lists, Delegation vs. Extension
+[ video ]
+[ slides ]
+7
+Mon 2/29
+Algs 170-198 (top paragraph)
+Asymptotics I
+[ video ]
+[ slides ]
+[ guide ]
+Asymptotic analysis
+[ Solution ]
+Work on Project 2
+Project 2: Editor (due 3/7)
+Wed 3/2
+Algs 170-198
+Asymptotics II
+[ video ]
+[ slides ]
+[ guide ]
+Fri 3/4
+Algs 170-198
+Asymptotics III
+[ video ]
+[ slides ]
+[ guide ]
+8
+Mon 3/7
+Algs 216-233
+Disjoint Sets
+[ video ]
+[ slides ]
+[ guide ]
+Asymptotics
+[ Solution ]
+Tree Maps
+Wed 3/9
+Algs 396-406
+Trees, BSTs
+[ video ]
+[ slides ]
+[ guide ]
+HW 2: Percolation (due 3/16)
+Fri 3/11
+Algs 424-431, 432-448 (extra)
+Balanced BSTs
+[ video ]
+[ slides ]
+[ guide ]
+9
+Mon 3/14
+Algs 458-468, 478-479, 468-475 (extra)
+Hashing
+[ video ]
+[ slides ]
+[ guide ]
+Hashing
+[ Solution ]
+Hash Maps
+Wed 3/16
+Algs 308-320
+Heaps
+[ video ]
+[ slides ]
+[ guide ]
+Fri 3/18
+None
+Advanced Trees, incl. Geometric
+[ video ]
+[ slides ]
+[ guide ]
+HW 3: Hashing (due 3/30)
+Spring Break (March 21-25)
+10
+Mon 3/28
+Algs 515-537
+Graphs
+[ video ]
+[ slides ]
+[ guide ]
+MT2 Prep
+[ Solution ]
+Heap MinPQ
+Wed 3/30
+None
+Midterm 2 Review
+[ video ]
+[ slides ]
+Midterm 2 (3/31, 6-8 PM)
+Fri 4/1
+Algs 538-542, 566-583
+Graph Traversals
+[ video ]
+[ slides ]
+[ guide ]
+HW 4: 8 Puzzle (due 4/7)
+11
+Mon 4/4
+Algs 638-657
+Shortest Paths
+[ video ]
+[ slides ]
+[ guide ]
+Graphs
+[ Solution ]
+Graphs
+Wed 4/6
+Algs 604-630
+MSTs
+[ video ]
+[ slides ]
+[ guide ]
+Fri 4/8
+Sections 6.1 and 6.2
+Dynamic Programming
+[ video ]
+[ slides ]
+[ guide ]
+Project 3: BearMaps (due 4/18)
+12
+Mon 4/11
+Algs 244-275, 323-327
+Basic Sorting Algorithms
+[ video ]
+[ slides ]
+[ guide ]
+Graphs, Sorting
+[ Solution ]
+Merge and Quick Sort
+Wed 4/13
+Algs 288-296, 302
+Basic Sorts, Quick Sort
+[ video ]
+[ slides ]
+[ guide ]
+Fri 4/15
+Algs 341-347
+More Quick Sort, Stability, Shuffling
+[ video ]
+[ slides ]
+[ guide ]
+13
+Mon 4/18
+Algs 279-282
+Sorting and Algorithmic Bounds
+[ video ]
+[ slides ]
+[ guide ]
+More Sorting
+[ Solution ]
+Radix Sort
+Wed 4/20
+Algs 702-718
+Radix Sorts
+[ video ]
+[ slides ]
+[ guide ]
+HW 5: Seam Carving (due 4/27)
+Fri 4/22
+Algs 730-752
+Overview, Tries
+[ video ]
+[ slides ]
+[ guide ]
+14
+Mon 4/25
+None
+Compression
+[ video ]
+[ slides ]
+[guide]
+NAME OF DISCUSSION -->
+Solution ] -->
+Goodbye, Fun
+Fractal Sound
+Wed 4/27
+None
+Reductions, Algorithmic Bounds, NP Completeness
+[ video ]
+[ slides ]
+[guide]
+Fri 4/29
+None
+Summary, Fun
+[ slides ]
+[guide]
+HW 6/7: Boggle / Compression (due 5/6)
+RRR Week (May 2-6)
+Finals Week (May 9-13)
+Lab/Discussion Schedule
+Office Hour Schedule
+Note : Office hours are located in the northwest corner of Garbarini Lounge ( map here ). Note that students are not allowed to spill over beyond that corner as we don't have the rest of Garbarini Lounge booked. On Thursdays and Fridays, feel free to come to lab with your questions.

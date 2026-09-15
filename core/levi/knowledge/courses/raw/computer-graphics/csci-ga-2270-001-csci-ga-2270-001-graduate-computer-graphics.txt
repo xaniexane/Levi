@@ -1,0 +1,148 @@
+# CSCI-GA.2270-001: Graduate Computer Graphics
+# New York University
+# source: https://mrl.nyu.edu/~perlin/courses/fall2015/
+
+CSCI-GA.2270-001
+Graduate Computer Graphics
+Warren Weaver Hall
+251 Mercer St, room 101
+Wednesdays, 5:10pm-7:00pm
+Office hours:
+Tuesday, 4-5pm
+What we will cover:
+There are many courses that can teach you how
+to use commercial computer graphics packages
+and APIs.
+This course, in contrast, will teach you how
+to build 3D computer graphics from the ground up.
+This will include 3D modeling, animation, and
+rendering.
+At the end of the semester you will have built
+your own complete working real-time 3D
+computer graphics systems that runs
+in web browsers.
+What you should already know:
+If you are already familiar with JavaScript, that's great.
+If you are already familiar with Java, C++ or any
+similar high level language, you will not have any trouble
+picking up enough JavaScript to do this course.
+Since this is a graduate course, I will assume that
+you are already an experienced programmer.
+If you are not,
+then I do not suggest you take this course,
+as there will be weekly programming assignments,
+and you would not be able to keep up.
+Computer graphics uses a lot of matrix math and some
+calculus.
+During the semester we will go over
+all of the matrix and vector math that you will
+need.
+Text:
+Class notes
+(so make sure you come to class!),
+will be posted on-line after each lecture.
+A useful (but not required) reference:
+Computer Graphics: Principles and Practice (3rd Edition)
+Graders:
+To be announced
+Discussion list:
+TBA
+Rough outline of possible topics (this may change):
+Sept 2: Introductory lecture
+Sept 9: Introduction to shaders
+Introduction to ray tracing
+Procedural noise based texture
+More ray tracing
+Introduction to matrices
+Various
+Parametric shapes
+Introduction to splines
+Introduction to WebGL
+More WebGL
+A WebGL based modeler, part 1
+Using a high level modeler / renderer package
+Final projects and advanced topics, part 1
+Final projects and advanced topics, part 2
+Setting up a homepage and access to computers:
+Most of you have the homepage and computers thing
+already figured out. But just to make sure you have
+at least one way to show your work on line,
+here are some suggestions:
+(1) Post your work using CIMS web hosting.
+Here's their web page on it:
+http://cims.nyu.edu/webapps/content/systems/userservices/webhosting
+(2) NYU Sites seem like a great option for students to
+make their own webpages. The instructions for that are here:
+https://nyu.service-now.com/servicelink/kb_search.do?id=041203716051606
+There is also an NYU-hosted WordPress option, but I'm not sure whether that will let you run javascript:
+http://www.nyu.edu/life/resources-and-services/information-technology/websites-storage-and-sharing/web-publishing/getting-started.html
+To post assignments
+for this class, you should set up a subdirectory
+of your web site.
+Name this subdirectory "graphics".
+It should have a main "index.html" file, and
+that file should link to the various
+homework assignments.
+After the first class, you will send the grader
+an email, with subject line "graphics",
+telling him the URL.
+Sept 2: Introductory Lecture
+We went over, at a high level, the topics
+we will cover in the class.
+I showed the following videos:
+TRON LightCycle scene (MAGI, 1982)
+The Works (NYIT, 1984)
+Real time caustics in WebGL (Evan Wallace, 2012)
+World Builder (Bruce Branit, 2009)
+Then we broke into small groups where people
+brainstormed about possible future computer graphic interfaces they might create,
+should Moore's Law continue for another few decades.
+Your assignment for Wednesday Sept 9 is to:
+Create or choose a web site for this class, as per the instructions above;
+Send me an email with the title "GRAPHICS", giving me the URL of that web site.
+Post an essay on that page, telling me why you are taking the class,
+what you hope to get out of it,
+and any particular topics you would like me to discuss.
+You should call this essay "Assignment 0".
+Sept 9: Introduction to shaders
+The notes and assignment for this class are here .
+Sept 16: Introduction to ray tracing
+The notes and assignment for this class are here .
+Sept 23: Procedural noise based texture
+The notes and assignment for this class are here .
+Sept 30: Even More ray tracing
+The notes and assignment for this class are here .
+October 7: Introduction to matrices
+The notes and assignment for this class are here .
+October 14: Various
+This week I just talked about various things, rather than pushing
+forward on new material, so that you would have a chance to catch
+up on the homework, since a number of you seem to be struggling.
+In class I implemented an example of using the matrix package to create a pair
+of walking legs. As you develop your own matrix object, you can
+try it with that example .
+At the end of the class, we showed the classia animated short
+Gas Planet from 1992.
+October 21: Parametric shapes
+The notes and assignment for this class are here .
+October 28: Introduction to splines
+The notes and assignment for this class are here .
+November 4: Introduction to WebGL
+The notes and assignment for this class are here .
+November 11: More WebGL
+The notes and assignment for this class are here .
+November 18: A WebGL based modeler, part 1
+In this lecture we started to examine, in depth, what it would
+take to create a full modeler software package on top of WebGL.
+Because we only got part of the way through the topic, and
+because this coming week is Thanksgiving, I am not going to be
+assigning any new homework.
+This is a chance for you to fix up any old homeworks, do extra
+credits that you never got around to, and in general work
+through any bugs and difficulties you may have had.
+I am hoping that by the time we meet again after the Thanksgiving
+break, everyone will be all caught up. If you are experiencing
+any difficulties, please drop me an email, and I will help
+you work through them.
+December 2: Using a high level modeler / renderer package
+The notes and assignment for this class are here .

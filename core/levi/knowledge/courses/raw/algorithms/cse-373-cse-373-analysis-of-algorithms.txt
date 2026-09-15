@@ -1,0 +1,336 @@
+# CSE 373: Analysis of Algorithms
+# Stony Brook University
+# source: http://www3.cs.stonybrook.edu/~skiena/373/
+
+Steven Skiena
+-->
+Steven Skiena
+Books
+Teaching
+Email
+Twitter
+Data Science Lab
+CSE 373 - Analysis of Algorithms
+Fall 2026
+Course Time: 2:00PM - 3:20PM Tuesday-Thursday
+Place: Engineering 145
+The Zoom link is available on Piazza if you can't find it on Blackboard
+-->
+Steven Skiena's office hours are 12:30PM-3:20PM Tuesday-Thursday,
+and by appointment.
+You can also catch me right after class.
+The course is currently full, although I am trying to figure out a solution
+for those in need of taking it. Show up the first day of class: I will do nothing to admit anyone before then.
+-->
+The course bulletin board will be Piazza .
+Sign up by clicking here .
+The graduate-level TAs are given below along with their office hours.    Please feel free to stop by for help on the homeworks and course material:
+Yuyang Cao yuyang.cao.1@stonybrook.edu (Head TA)
+Pritom Kundu prkundu@cs.stonybrook.edu
+Rory Bennett (Head TA).
+His email address is
+rory.bennett@stonybrook.edu .
+His office hours will be 10:30AM-noon on Monday and 11:30-1PM Wednesday
+in the CS TA room 2217 old Computer Science.
+Cristina Mata .
+Her email address is
+cristina.mata@stonybrook.edu .
+Her office hours will be 10:00-11AM, Tuesday and Thursday and 2:00-3PM Wednesday
+in the CS TA room 2217 old Computer Science.
+Yao Li (grader).
+His email address is
+yaoli2@cs.stonybrook.edu .
+Tianchi Mo (Maverick).
+His email address is
+timo@cs.stonybrook.edu .
+His office hours will be Wednesday 3PM-5PM and Friday 4-5PM in
+the CS TA room 2207 old Computer Science.
+Maverick serves as the head TA for CSE 373 -- all discussions about
+HW or exam regrades go to him, not Prof. Skiena!
+-->
+Yao Li.
+His email address is
+yaoli2@cs.stonybrook.edu .
+His office hours will be 2PM to 3PM on Monday in the CS TA room 2203 old Computer Science.
+-->
+Dzejla Medjedovic (pronounced Jayla).
+Her email address is
+dmededov@cs.stonybrook.edu .
+She will have office hours Monday and Wednesday from 1PM to 2:30PM in room 1306 Computer Science.
+-->
+The undergraduate course assistants are listed below.
+The Undergrad TAs will have office hours on the following schedule.All will be held in the Old CS TA room, room 2126 Old Computer Science
+Maxime Kushnir Wednesdays  12 - 3PM.
+Atri Vyas
+Monday 12:30 - 3:30PM
+Kevi Chen
+Tuesday 6:30 - 8:30PM and Friday 2 - 3PM
+-->
+Omar Amin (omar.amin@stonybrook.edu).
+Office hour: Wednesday 4:00-5PM.
+Gaurav Gandhi (gaurav.gandhi@stonybrook.edu).
+Office hour: Monday 4:30-5:30PM.
+Danny Guo (danny.guo.1@stonybrook.edu).
+Office hour: Tuesday 10:00-11AM.
+Ricky Wu (ricky.wu@stonybrook.edu).
+Office hour: Wednesday 2:00-3PM.
+-->
+The undergraduate TAs will have one review session each week on Zoom (two before midterms).
+The schedule is:
+9/18 -- Ricky and Gaurav -- Group 2
+9/23 -- Group 1
+9/25 -- Midterm 1 extra review -- Both groups . (8-9PM)
+10/2 -- Group 2
+10/9 -- Group 2
+10/16 -- Group 1
+10/23 -- Group 2
+10/30 -- Group 1
+11/6 -- Group 2
+11/13 -- Group 1
+11/18 -- Midterm 2 extra review -- Both groups (8-9PM)
+11/20 -- Group 2
+12/4 -- Group 1
+-->
+Here is a calendar
+of all TA office hours and review sessions.
+-->
+The CEAS tutoring services claims to offer help in CSE 373 every Monday (6:00-8:00PM) evening, in Engineering room 236B.
+Students may request tutoring information by visiting or calling the CEAS Undergraduate Student Office or visiting the CEAS Tutoring Services Website .
+-->
+The course final exam will be held on Thursday, December 20
+from 11:15AM-1:45PM.
+Students whose last name begins A-H will take the exam New Computer Science 120.
+Students whose last name begins H-Z will take the exam in the assigned exam room.
+It will be cumulative and cover everything we did this semester.
+Good luck!
+-->
+Lecture Notes
+Lecture notes from
+current semester .
+Video and audio lectures with links to lecture notes from previous offerings
+of my course are available at
+my YouTube channel or
+http://www.cs.stonybrook.edu/~skiena/373/videos/ .
+http://www.cs.stonybrook.edu/~algorith/video-lectures/ .
+-->
+The associated lecture notes from these old offerings are available
+here .
+Even older lecture notes from previous semesters are available
+in HTML ,
+postscript
+and
+pdf
+formats.
+The complete set is 300 pages -- do not print them on departmental machines!
+-->
+There is a Wiki
+with possible solutions to odd numbered problems from the book.
+Adam Conrad wrote an extensive set of blog posts based on auditing my
+algorithms course via video.
+These notes include Javascript implementations of algorithms and
+might be helpful to those learning the material.
+An excellent way to impress the Prof would be for someone to volunteer
+to moderate the Wiki to eliminate spam (not necessarily wrong answers).
+This involves getting mediawiki privileges, and figuring out
+ccount settings to minimize this.
+Spam from writable web sites (like Algowiki) are primarily about adding
+links to spam sites (gives them page rank for web search algorithms).
+-->
+Lecture notes from previous semesters
+with audio
+and (maybe, but probably not)
+video
+are available online!
+Full-lecture
+audio
+from Fall 2004 is also available, although they are not keyed directly to
+the lecture notes.
+-->
+Course Documents
+Course Syllabus and lecture schedule
+in
+pdf
+format.
+Daily Homework Problems in
+pdf
+format.
+A list of hard problems suitable to challenge me on.
+Homework Assignments
+Homework 1 - DUE 9/15/26 in
+pdf
+format.
+An answer key is now available.
+-->
+Come by my office door to sign up for Pizza with the Prof, September 11 at 12PM.
+Registration is limited to the first 15 students to sign up.
+-->
+HW1
+programs for experimenting with execution times.
+Note that one of them must be compiled with the -lm option..
+-->
+Homework 2 - DUE 10/1/26 in
+pdf
+format.
+An answer key is now available.
+-->
+Midterm 1 will be held Thursday, September 24 and will cover
+big oh, data structures, and sorting.
+I have posted a copy of a prior year's Midterm 1 to
+help you study.
+Note: we will not provide an answer key, especially for the multiple choice
+problems, to encourage you to work them out on your own.
+Here is the answer key for this year's Midterm 1 .
+-->
+Students whose last names begin A-I will take the midterm in New Computer Science 120.
+Students j-Z should go to the usual classroom Javits 102.
+-->
+Midterm 1 grade breakdown
+-->
+Come by my office door to sign up for Pizza with the Prof, Wednesday October 23 at 12PM.
+Registration is limited to the first 15 students to sign up.
+-->
+Many students in the class have been submitting homeworks with strong resemblance
+to previous answer keys.
+This is a self-defeating strategy.
+My TAs identified 39 students who submitted blatant copies of the key.
+The copiers average on Midterm 1 was 52.74, compared to an average of 63.57 for the
+rest of the class.
+The key to doing well in CSE 373 is beating your head on the HW problems, and
+getting help when you are stuck.
+-->
+Homework 3 - DUE 10/22/26 in
+pdf
+format.
+The four testfiles for Homework 3 are
+file 1 ,
+file 2 ,
+file 3 ,
+file 4 .
+The first number represents the number of edges, the second the number
+of vertices, and each subsequent line represents an edge between the pair
+of numbered vertices.
+An answer key is now available.
+-->
+Come by my office door to sign up for Pizza with the Prof, November 13 at 12PM.
+Registration is limited to the first 15 students to sign up.
+-->
+CSE 392 backtracking Lecture Notes in
+html and
+PDF .
+-->
+Homework 4 - DUE 11/5/26 in
+pdf
+format.
+Test your program on our collection of
+datasets for HW4 .
+datasets for HW4 .
+Contest results for HW4.
+-->
+Homework 4
+Solutions
+-->
+Midterm 2 will be held Tuesday, November 17 and will cover
+graph algorithms, backtracking, and dynamic programming.
+I have posted a copy of a prior year's Midterm 2 to
+help you study.
+Note: we will not provide an answer key, especially for the multiple choice
+problems, to encourage you to work them out on your own.
+Here is the score distribution and answer key for this year's Midterm 2 .
+-->
+Midterm 2 .
+-->
+Students whose last names begin A-H will take the midterm in New Computer Science 120.
+Students I-Z should go to the usual classroom Javits 102.
+-->
+Graph Traversal Lecture Notes in
+html and
+PDF .
+-->
+Homework 4 Solutions
+-->
+Midterm 2 solution -- Fall 2016
+-->
+Homework 5 - DUE 12/3/26 in
+pdf . Try to do the dynamic programming problems before the midterm.
+answer key is now available.
+-->
+Please fill out the course evaluation form on line.
+I do value your feedback to improve the course the next time it is offered.
+-->
+Related Links
+A picture of the
+highest degree node in the road network that I am aware of.
+A competing claim from New Delhi, India connects 12 roads through a hexagonal structure, but I need to see the park paved before I will accept it.
+Dupont Circle in Washington DC appears to have degree 10 to 13 , depending on whether
+a divided two-way road counts as 1 or 2 edges.
+But the circle needs to be paved over in any case.
+Paris is a city of circles with many connections, like
+the Arc de Triomphe .
+It also contains nodes of
+degree at least seven .
+The third edition of The Algorithm Design Manual
+is now available!
+The course textbook as the way to get a job at Google
+Check out this comprehensive collection of algorithm animations from Steve Halim at the National University of Singapore.
+Videos of sorting algorithms as folk dances .
+Extra Credit
+Interested students
+not taking
+CSE 392
+-->
+may attempt the following
+extra credit programming challenges from
+Skiena/Revilla
+for a small amount of
+additional points -- small enough that you should be motivated primarily
+by interest and not greed.
+The solutions to these problems must be submitted on
+www.programming-challenges.com .
+Register for an account and join my CSE 373 extra credit class if you
+are intersted.
+-->
+You can submit these problems through
+the UVA Online Judge .
+I have given the corresponding UVA Judge number for each problem in parentheses.
+Google "
+A schedule for doing these problems that is somewhat consistant
+with this course is:
+week 1: 110101 3n+1 (100)
+week 2: 110201 Jolly Jumpers (10038)
+week 3: 110303 Common Permutation (10252)
+week 4: 110401 Vito's family (10041)
+week 5: 110405 Shoemakers problem (10026)
+week 6: 111101 Is Bigger Smarter? (10131)
+week 7: 111104 Unidirectional TSP (116)
+week 8: 110801 Little Bishops (861)
+week 9: 110901 Bicoloring (10004)
+week 10: 110902 Playing with Wheels (10067)
+week 11: 111006 Tourist Guide (10099)
+week 12: 111105 Cutting Sticks (10003)
+week 13: 110806 Garden of Eden (10001)
+week 14: 111005 War (10158)
+week 15: 110805 Tug of War (10032)
+Send me all your work at the end of the semester to receive credit.
+Objectives
+Read about the CS accreditation ABET program.
+The ABET objectives for the course are
+Provide a rigorous introduction to worst-case asymptotic algorithm analysis.
+Develop classical graph and combinatorial algorithms for such problems as sorting, shortest paths and minimum spanning trees.
+Introduce the concept of computational intractability and NP completeness.
+The course will also satisfy the following
+program objective :
+(S6) have a solid understanding of computational theory and
+foundational mathematics.
+Professor
+Steven S. Skiena
+251 New Computer Science Building
+Department of Computer Science
+State University of New York at Stony Brook
+Stony Brook, NY 11794-2424, USA
+skiena@cs.stonybrook.edu
+631-632-9026
+Send Skiena mail
+Finger Skiena
+-->
+Join the
+Stony Brook Computer Science Society

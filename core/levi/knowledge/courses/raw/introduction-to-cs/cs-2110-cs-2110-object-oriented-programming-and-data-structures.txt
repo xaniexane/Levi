@@ -1,0 +1,104 @@
+# CS 2110: Object-Oriented Programming and Data Structures
+# Cornell University
+# source: http://www.cs.cornell.edu/courses/CS2110/2014fa/index.html
+
+CS 2110 Fall 2014
+Announcements
+Course Info
+Consulting & Office Hours
+Lecture Notes
+Assignments
+Exams
+FAQ
+Resources
+Links
+CS 2110:
+Object-Oriented Programming and Data Structures
+Professors David Gries and Doug James/ Fall 2014
+Announcements
+30Sept
+Gates Hall Dedication, CS 50th Anniversary Symposium
+Wed, 4:30PM Live-stream of Gates-Skorton discussion in Bailey Hall:
+www.cornell.edu/video/bill-gates-future-of-higher-education
+CS 50th anniversary symposium. All events streamed at cis.webcast.video.cornell.edu/mediasite
+Symposium website: http://www.cs.cornell.edu/events/50years
+Wed 9:00AM. Welcome Remarks (Haym B. Hirsh, Dean of the Faculty of CIS)
+Turing Laureates Panel: Edmund M. Clarke, Juris Hartmanis, John Hopcroft
+Invited Talk: Rohan Murty: Some Challenges in Industrializing IT Services
+Live stream: Play/c463fa0243974137a10c4d7bf17128e41d
+Wed 1:15 Session 2
+Robert Cook: Computer graphics research at Pixar
+Cynthia Dwork:
+A surprising application of differential privacy
+Daniel Rus: One robot for every task
+Live stream:
+Play/ba870f5d3a614f5f89461587ab2592ee1d
+Wed 3:00 Session 3
+Amit Singhal: The future of search
+Social networks panel: Jon Kleinberg, Lars Backstrom, Steven Strogatz, Duncan Watts
+Live stream: Play/6f1a219222db4a4fbfb6c7ac115c6ccc1d
+Thurs 9:00 Session 4
+Graphics panel: Don Greenberg, Michael Cohen, Baining Guo, Marc Levoy, Hollu Rushmeier
+Distributed systems panel: Ken BIrman, Lorenzo Alvisi, Michael Reiter
+Live stream: Play/6312584c8752491f88db839fcde0a4d71d
+Thurs 11:00 Session 5
+Tom Henzinger: A resaerch institute as start-up
+Programming language panel: Bob Constable,
+David Gries, Alex Aiken, Bob Harper, Stephanie Weirich
+Scott Aaronson: Quantum computing and the limits of the efficiently
+computable
+Live stream:
+Play/6536bbeee39e422981f464a481ac74281d
+10 August
+Welcome to the CS2110 Course website
+Click on Course Info above to find out more about the course ---times and venues, what the course is about, its expected outcomes, its official programming language prerequisite, the instructors, and more.
+Programming prerequisite for CS 2110
+CS 2110 does not require knowledge of or experience with Java. It does not require knowledge of or experience with object-oriented (OO) programming. Over 60% of the students in CS 2110 have no knowledge of Java. They may have seen a little bit of OO in CS 1110 (Python based) or CS1112 (Matlab based), but many students entering CS 211o did not take one of those courses.
+So: rest easy if you don't know Java or OO. Our job is to teach them to you.
+CS 2110 does require fluency is some procedural language ---fluency with assignment, if-statements, loops, string manipulation, arrays, two-dimensional arrays, and declarations of functions and procedures as well as calls on them. if you are not fluent, you may find yourself in difficulty.
+By fluent we mean that you can easily see how to map a computational task to
+code, implement the code yourself, debug it (including testing it
+thoroughly), and understand how to use comments to document your logic.
+But by "some procedural language" we mean any programming language at all
+that includes these kinds of mechanisms. It definitely doesn't need to
+be Java.
+If you completed Cornell's CS 1110 or CS 1112 with a grade of B- or better you are
+prepared for CS 2110. If you took one of those courses but had a weaker
+grade, you will want to sign up for CS 2111, plan to start
+assignments early, and work hard on your programming skills.
+If you learned to program elsewhere, that's fine, but make sure you are ready for this course.
+It may be helpful to understand exactly what we do expect. At the end of this announcement are examples of the sorts of programs you should be able to easily write. To test yourself, consider launching the editor you used when you learned to program and actually write, test, and debug these little problems. If you find these sample problems difficult, you may want to spend some time this summer practicing programming in your favorite programming language.
+CS 2111
+CS 2111 is a 1-credit, S/U enrichment course offered to
+students in CS 2110. You take the
+normal CS 2110 course and a CS 2110 recitation section, but with this extra
+1-hour-per-week CS 2111 help, you'll get a bit of extra help on topics that might have
+otherwise gone a bit quickly for you. We recommend CS 2111
+to anyone who received a grade less than B- in a prior programming course.
+CS 2111 is open to all students in CS 2110. In Spring 2013, the students who took CS 2111 felt
+that they did much better on CS 2110 exams than they would have without the
+extra enrichment material.
+AEW course
+The College of Engineering also offers special courses to help people in
+courses like CS 2110 and CS1110. These are
+called Academic Excellence Workshops (AEW). They are open to
+anyone, although Engineering students get priority if they fill up. AEW
+runs special study sections and offers help with homework and other questions. Visit this webpage for information:
+www.engineering.cornell.edu/aew
+Study Java on your own?
+You could try to learn Java a bit on your own this summer (it isn't necessary,
+but it certainly won't harm you!). One way is to work through the online material for course CS1130, which teaches OO using Java to students who already know some programming language. It has online lectures for you to look at ---powerpoint slides with Gries talking. See this website:
+www.cs.cornell.edu/courses/cs1130/2012sp/1130selfpaced/
+Examples of problem students taking CS 2110 should be able to do
+Write a function that returns true if its string parameter is a palindrome (and false otherwise). A palindrome is a string that reads the same backwards or forwards, e.g. "Madam, I'm Adam." Actually, this string would fail the test because it contains white space and punctuation. With parameter "madamimadam", the function would return true.
+Write a function that returns its string parameter but with punctuation and spaces removed and letters turned into lower case. Now if you call your function from problem 1 with the output of this new function, "Madam, I'm Adam." would pass the test.
+Ideally, use some existing string function in the language you are familiar with to test for white space and punctuation and to map upper case to lower. No need to reinvent the wheel.
+In CS 2110 we prefer to use the provided language features, including prebuilt library methods, to full effect. The best programmers are the ones who are most effective in using the tools available to them: they write less code, and their code is more expressive and more exact, so they make fewer mistakes.
+Compute the median of a one-dimensional array x containing integers, or count the number of zeros in x (each of these actions would be a separate method, returning an integer value). Compute the mean as a floating point number.
+Given integers b and c, compute b/c as an integer (rounded to the nearest integer).
+That is, round down if the remainder is less than 1/2, and up if the
+remainder is 1/2 or more.  The value returned by the method should be
+an integer, not a floating point number.
+Count the number of zeroes in a rectangular matrix y. For a square array square, determine whether all the diagonal elements have the same value.
+Define the "balance" of a rectangular matrix y to be the number of elements larger than the mean value (rounded to an integer using the method of question 4) minus the number of elements smaller than the mean. Given an integer matrix, compute its mean and balance.
+(Binary search). Given a sorted integer array segment b[h..k] and an integer x, find the position j such that b[h..j-1] <= x and b[j..k] > x. (by b[h..j-1] <= x, we mean that all values of b[h..j-1] are <= x). Your program should run in time proportional to the logarithm of k+1-h. (Did you have binary search in your previous course? If so, this should be easy.)

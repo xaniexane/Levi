@@ -528,6 +528,15 @@ def _register_builtins(
             return {"subjects": []}
         return json.loads(path.read_text(encoding="utf-8"))
 
+    def _course_coverage() -> list:
+        path = _courses_dir() / "coverage.json"
+        if not path.exists():
+            return []
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return []
+
     def _course_brief(args: dict) -> ToolResult:
         subject = str(args.get("subject") or "").strip().lower().replace("_", "-")
         brief = _courses_dir() / "briefs" / f"{subject}.md"
@@ -551,27 +560,36 @@ def _register_builtins(
         if not terms:
             return ToolResult(ok=False, error="course_search: query has no searchable terms")
         catalog = _course_catalog()
+        coverage = _course_coverage()
+        # Map each course to its OWN ingested raw file (via coverage.json),
+        # so snippets always come from that course's text — never a neighbor's.
+        raw_by_title: dict[tuple[str, str], Path] = {}
+        for rec in coverage:
+            if rec.get("status") == "ok" and rec.get("file"):
+                fp = _courses_dir() / rec["file"]
+                if fp.is_file():
+                    raw_by_title[(rec.get("subject", ""), rec.get("title", ""))] = fp
         hits: list[str] = []
         for subj in catalog.get("subjects", []):
             for course in subj["courses"]:
                 hay = f"{course['title']} {course['school']} {course.get('description','')}".lower()
                 score = sum(hay.count(t) for t in terms)
                 snippet = ""
-                raw_path = _courses_dir() / "raw" / subj["slug"]
-                if raw_path.is_dir() and score:
-                    for fp in sorted(raw_path.glob("*.txt")):
+                if score:
+                    fp = raw_by_title.get((subj["slug"], course["title"]))
+                    if fp is not None:
                         try:
-                            txt = fp.read_text(encoding="utf-8", errors="replace").lower()
+                            txt = fp.read_text(encoding="utf-8", errors="replace")
                         except OSError:
-                            continue
+                            txt = ""
+                        low = txt.lower()
                         for t in terms:
-                            i = txt.find(t)
+                            i = low.find(t)
                             if i != -1:
-                                snippet = "..." + " ".join(
-                                    txt[max(0, i - 120):i + 200].split()) + "..."
+                                snippet = ("...[from this course's ingested text] "
+                                           + " ".join(txt[max(0, i - 120):i + 200].split())
+                                           + "...")
                                 break
-                        if snippet:
-                            break
                 if score:
                     line = f"[{subj['slug']}] {course['title']} ({course['school']}) — {course['primary']}"
                     if snippet:

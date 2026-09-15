@@ -1,0 +1,358 @@
+# CS 4812: Quantum Information Processing
+# Cornell University
+# source: https://courses.cit.cornell.edu/physics4481-7681_2018fa/
+
+P4481-P7681 Fall 2018
+Physics
+Physics 4481-7681: Quantum Information Processing
+Fall 2018
+Tue/Thu 2:55-4:10 PM, Rockefeller 231
+3 credits, S/U Optional
+Note: This is the course website from Fall 2018.
+A newer website is here: Fall '20
+Professor: Paul Ginsparg (452 PSB, gins parg "at" cornell .edu)
+Office hours: Wed 1-2 PM (or by appointment)
+Course website: https://courses.cit.cornell.edu/physics4481-7681_2018fa/ (this page)
+Prerequisite: An introductory Quantum Mechanics course, or permission of instructor
+Textbook:
+N.D. Mermin, Quantum Computer Science: An Introduction , Cambridge Univ Press (2007)
+Supplemented by Quantum Computation and Quantum Information (Nielsen and Chuang),
+Quantum Computing since Democritus (Aaronson), and other on-line resources
+Hardware that exploits quantum phenomena can dramatically alter the nature of computation. Though constructing a working quantum computer remains a formidable technological challenge, there has been much recent experimental progress.
+In addition, the theory of quantum computation is of interest in itself, offering new perspectives on the nature of computation and information, as well as providing novel insights into the conceptual puzzles posed by quantum theory.
+The course is intended for physicists, unfamiliar with computational complexity theory or cryptography, and for computer scientists and mathematicians with some prior exposure to quantum mechanics. The prerequisites are an intro quantum mechanics course, familiarity (and comfort) with finite dimensional vector spaces over the complex numbers, and some standard group theory.
+(If this seems too vague, please peruse a copy of the course text in the library to assess its accessibility. Notes on which the text was based are still available here .
+The most recent previous syllabus is here: Fall 2016 )
+Announcements:
+–  1 Nov
+Problem Set 5 due Thu 8 Nov 2018
+(in class on Thu, or via course upload site ) -->
+–  26 Nov -->
+Full Problem Set 7 posted, due Wed 5 Dec 2018
+–  9 Nov
+Brief synopsis of course project ,
+updated suggestions were later added
+upload site )-->
+–  22 Sep
+Schedule for A.Zeilinger's Bethe Lectures on quantum info, rescheduled to 28-30 Nov -->
+–  13 Oct
+Note: the problem sets in this course are not intended to be group projects. It is permitted to discuss with other students at
+intermediate stages, but anything turned in must be entirely your own. In addition, to be in compliance with
+the Cornell Academic Integrity Code (which has been linked at the bottom of this website from the outset), you should explicitly credit any discussions you've had.
+–  15 Nov
+Let me know if you're interested in TA'ing for Info 2950 "Intro to Data Science" (Spr '17). Uses elementary probability and statistics, plus python programming.
+-->
+Syllabus:
+Date Lecture Reading
+Week 1
+Thu 8/23 1. Intro
+Began with historical overview,
+see, e.g.,
+chapter 1 of
+Preskill notes , see also
+The Feynman Lectures on Computation (Hey and Allen),
+and described topics in these (Preskill) notes as goals for end of course
+(see also these (Aaronson) notes ).
+Some other popular expositions of
+reversible and
+quantum computing. -->
+reversible and
+quantum computing.
+A couple other popular refs mentioned (access from within Cornell network):
+The Fundamental Physical Limits of Computation
+(Bennett and Landauer, SciAm Jul 1985);
+Demons, Engines and the Second Law
+(Bennett, SciAm Nov 1987)
+Maxwell demon video and description
+Assignment: read 1801.00862 and Appendix A of Mermin text
+Week 2
+Tue 8/28 2. Cbits
+Mentioned recent result (Jun 2018) suggesting BQP not in PH
+Recent refs describing experimental verification of Landauer principle:
+Viewpoint (May 2018) describing
+pure quantum verification ( M.Feng et al, 2018 ,
+[ 1803.10424 ]);
+also mentions recent classical tests
+( Y. Jun et al (2014) ,
+[ 1408.5089 ]; and
+E. Lutz et al (2012) ) plus
+contemporaneous News and Views re the latter
+Covered roughly pp 1-4 (1.1-1.2) of course text: intro, Cbits vs Qbits
+(For background on vector spaces and notation, see Appendix A of course text.)
+and pp 4-16 (1.2-1.4) of course text: reversible operations (inversion, swap, cNOT), Hadamard
+Thu 8/30 3. qubits I
+continued discussion of swap, cNOT and Hadamard, covered Appendix B material for probset 1
+-->
+Week 3
+Tue 9/4 medical break Read appendices A,B of Mermin text
+Thu 9/6 4. qubits II
+More on SU(2)/Z 2 as origin of fermions and bosons, 2d rotation group, half-wave plates, Hadamard as reflection about π/8,
+covered pp 17-19 (1.5) states of Qbits,
+discussion of entanglement (see these notes for discussion of SVD criterion for whether two subsystems are entangled),
+then reversible operations on Qbits (1.6, pp. 19-20)
+Week 4
+Tue 9/11
+5. Born again
+Discussed prob set 1 solutions (permutations, rotations, icosahedral qubit benchmarking , and the 120-cell )
+Mentioned gate universality (see " The Solovay-Kitaev Algorithm " for technical review)
+Covered pp 21-34 (1.7-1.11) of the course text: circuit diagrams,
+measurement gates, Born rule, generalized Born rule, state preparation,
+constructing arbitrary 1- and 2-Qbit states (just started the latter)
+Thu 9/13 6. functions
+finish 2-Qbit states (see also page added to notes ), Cover pp. 34-42 (1.12-2.2): Cbit vs Qbit summary,
+Discussion of general computational process (2.1),
+functions, no-cloning and Deutch's problem
+Problem Set 2 (due by Fri 21 Sep 2018) -->
+Week 5
+Tue 9/18 7. quantum speed-up
+Finished Deutch's problem (2.2, pp. 41-46),
+mentioned Two Quadrillionth Bit of π is 0 ,
+then covered Bernstein-Vazirani problem (2.4, pp. 50-54, clarification of eq.(2.32) is here )
+See " pre-review " of algorithms to come (Deutsch -> Deutsch-Jozsa -> Bernstein-Vazirani -> Simon -> Shor; then Grover)
+Thu 9/20 8. exponential speed-up
+why additional Qbits don't mess things up, (2.3, pp 46-50)
+Simon's problem (2.5 and appendix G) [now halfway through standard algorithms ]
+Started quantum Toffoli gates (2.6, pp 58-61)
+Week 6
+Tue 9/25 9.
+√ X
+Final comments on Simon's problem (see Appendix G of text)
+quantum Toffoli gates (2.6, pp 58-61)
+[stray comments on the Wason selection task ], then
+started quantum cakes
+Thu 9/27
+10. GHZ etc
+finished
+quantum cakes (see also Appendix D on the Hardy state)
+appendix H of text on realizing C Z ,
+some comments on "Bell states" and maximal entanglement,
+see fig 4 of arXiv:1402.4848
+(also arXiv:1004.4324 : fig 3c,
+arXiv:1004.4246 : fig 1b), w-states and GHZ states,
+started discussion of quantum tomography using ipython notebook
+Week 7
+Tue 10/2 11. GHZ vs EPR
+comments on measuring operators, quantum tomography,
+discussion of GHZ states (6.5 in text) and how their measurement excludes "local reality",
+plus game theoretic version (a ⊕ b ⊕ c = r ∨ s ∨ t, where r,s,t ∈ {000, 011, 101, 110});
+intro to group theory and modular arithmetic (App. I, then sec. 3.1)
+Thu 10/4 12. FLT -> RSA
+("What is the probability that 4 Oct is Thursday "?)
+finished number theoretic preliminaries and Fermat's little theorem (3.2), RSA (3.3),
+then started discussion of quantum period finding (3.4)
+Week 8
+Tue 10/9 fall break
+Thu 10/11
+13. RSA -> QFT
+Recall Euclid's algorithm (appendix J, see also cs 2800
+notes
+or pp 39-60
+here ),
+factoring (3.10), breaking RSA without factoring (3.3), started quantum fourier transform (3.5)
+Wilson's Theorem ", -->
+Week 9
+Tue 10/16
+14. QFT and period finding
+Continued quantum fourier transform and implementation (see also 3.5), eliminate 2-qubit gates (3.6)
+Some comments on RSA numbers
+(largest factored RSA number has 232 decimal digits, factored in late 2009 ),
+( google , the
+book , googol )
+Thu 10/18 15. =3×5
+then finding the period (3.7),
+See review of algorithms for Simon/Shor comparison
+how to factor N=15 ,
+probset 4 #6) -->
+finish (3.7)
+Week 10
+Tue 10/23 16. Other factors
+finished finding factors, and comments on phases (3.7-3.9), continued fractions (App. K), described
+qubit recycling ,
+modular exponent is O(n 3 )
+Also some factoring "records" discussed:
+Shor factoring: 3×5 ('01) (NMR),
+3×5 ('07a) and
+3×5 ('07b) (both photonic),
+3×5 ('09) (photonic chip),
+3×7 ('11) (photonic, with qubit recycling),
+3×5 ('12) (superconducting)
+Adiabatic "factoring": 11×13 ('13), 233×241 ('14),
+(same 4 qubit experiment as 11×13), 499×401 ('16, D-wave)
+Pretend "factoring": N20000 ('13)
+(20000 bits = 6021 decimal digits, using compiled/recycled qubits), see Table 1 therein
+in the news:
+The Next Tech Talent Shortage: Quantum Computing Researchers (NYTimes, 21Oct'18)
+Thu 10/25 17. Quantum annealing, Grover
+Additional comments on above refs (end lec. 16), N20000 and promised jupyter notebook: N==p*q
+Comments on D-Wave and quantum annealing (see most recent ;
+see also past comments here ; also this related overview ;
+by contrast current state of circuit
+" quantum supremacy ")
+then Grover iteration (4.1-4.2)
+Week 11
+Tue 10/30 18. Grover cont'd
+Comments on recent 72 qubit "quantum supremacy": popular version (Mar 2018),
+see 1608.00263 (since published 2018 with many changes),
+some competition ;
+other recent technical articles: 1807.10749 ,
+1709.06678
+(and earlier popular treatment: " Google's plan revealed ")
+Finished Grover chpt 4, pp. 94-98 (4.3-4.5), generalization to several marked, one of four items, construction of W;
+see also pedagogical reviews:
+Grover's
+and Lavor et al.'s .
+Some comments on N 1/2 optimality of Grover, and the
+N 1/3 quantum collision algorithm .
+The optimality of Grover's algorithm is shown
+here , and implications
+here
+[Now finished the basic basic quantum algorithms .]
+Thu 11/1 19. QKD
+Comments on no-go speedup for XOR/Parity
+and OR
+Comments on quant-ph/9801041 (nonlinear QM solves NP-complete and #P problems, see also Aaronson , pp. 7-8)
+Covered quantum key distribution (6.2, 137-141)
+Some older articles on quantum key distribution :
+● Jul 2016 Chinese satellite
+(see also this news item )
+● 2008 Quantum channel between Earth and Space (2 x 1485km, "boffins bounce photons ",
+newscientist ,
+and this description ) -->
+● satellite quantum communications
+and 7000 km (2015, using satellite mirror)
+● 2008 quantum repeater
+(and news article "Quantum cryptography can go the distance")
+● 2011 quantum key distribution in Tokyo metropolitan area: 1103.3566 ,
+● Entanglement based quantum communication over 144 km optical free-space link :
+quant-ph/0607182 (2006),
+0902.2015 (2009)
+● quantum key distribution over 184km optical fibre (2008),
+over 144km (2007) and 300km (2010)
+● quant-ph/0607177 : 1 Mbit/sec for 20km
+Week 12
+Tue 11/6 20. QKD -> QEC I
+Update (5Nov'18) on quantum supremacy,
+key materials for QKD (ACS, 2017),
+1200km record for bell pair (Science, 2017), secured videoconf (2018),
+recent QKD review (1707.03613)
+B92 protocol,
+E91 protocol
+started quantum error correction, 5.1-5.3 (pp 99-113)
+Thu 11/8 21. QEC II
+Some articles about Rigetti's plan for 128 qubit chip:
+Forbes ('18) ,
+TR ('18) ,
+FC ('18)
+Some articles on photon entanglements:
+1605.08547 (10 photons, '16 [10 7 Bell pairs/sec]),
+1810.04823 (12 photons, '18),
+1801.04043 (six photons = 18 qubits, '18)
+10 bits per photon (Sep '16) -->
+Simon's foundation " it from qubit " program still running (page also quotes Wheeler's 1990 "it from bit ... that which we call reality arises in the last analysis from the posing of yes-or-no questions")
+Continued measuring operators, then started 5 qubit code, 5.4-5.5 (pp 113-118)
+Week 13
+Tue 11/13 22. QEC III, teleportation
+Comments on course project
+Finished 5 qubit code (118-120), note that error correcting operator algebras can also be manipulated using python or matlab, e.g., this sample code.
+mentioned the 29:28--29:43 section in this video (J. Martinis talk at Google LA, Oct '13),
+with claim that "if you can be at a .1% error here, and make a few thousand qubits,
+you can hold a qubit state, this fragile quantum state, for the lifetime of the universe." [note that entire video is worth watching]
+Bell states (6.1), quantum teleportation (6.5, p.149-154)
+Thu 11/15 23. QEC IV
+finished teleportation of entanglement (6.5) and Bell states (6.1)
+discussed "delayed choice entanglement swapping" ( slide ), first pointed out here
+quant-ph/9904042 (Peres, '99),
+and confirmed experimentally (refs from Zeilinger et al):
+quant-ph/0104047 ,
+quant-ph/0201134 ,
+0811.3129 ,
+1203.4834 ,
+1407.2930 (review, '14),
+with implications for tests of local realism
+The comment in class about "brain entanglement" reminded me of this blog entry (Aaronson, Sep '18: "It's hard to think when someone Hadamards your brain", worth reading) which makes
+a few related points about the Copenhagen interpretation (using the same Hardy state covered in appendix D of the course text)
+then 7-qubit code (5.6-5.7, p.121-126)
+experimental review
+(See also Sympy Physics Module , specifically
+quantum computation ).
+-->
+Week 14
+Tue 11/20 24. surface code
+finished 5.7 (cNOT in 7-qubit code),
+further comments on fault tolerance, difficulties realizing 5- and 7-qubit codes with current qubit fidelities,
+universal gates;
+then surface code, see arXiv:1208.0928 , sections II-VI, pp.3-10
+Thu 11/22 Thanksgiving
+Week 15
+Tue 11/27 25. surface -> supremacy -> square
+More on surface code, see arXiv:1208.0928 ,
+see also sections VIII, XIII, XIV, see especially pp 29-30, XIV C,D for CNOT
+Comments on quantum supremacy. 20 qubit demo: 1709.06678 (Martinis et al.),
+earlier proposal from overlapping group: 1608.00263 ,
+proof that random circuit sampling satisfies an average-case hardness condition:
+1803.04402 (Vazirani et al.)
+Last words for hidden variables, see 1802.10119 (Mermin, 1993) for
+Mermin magic square and occult pentagram (sections 5, 6; see also fig.3 in
+original version )
+Thu 11/29 26. supremacy -> pentagram
+more comments on quantum supremacy, including Porter-Thomas distribution Pr(Np)=exp(-Np),
+completed discussion of "occult" pentagram (Mermin '91 1802.10119 )
+Then started superconducting qubits: overview , Martinis notes on CNOT (see also recent comprehensive review , and references therein), also
+cond-mat/0402415 (Martinis/Osborne, 2004)
+here or 0809.4368 ).
+For recent progress, see viewpoint
+on 1403.1524 ; or 1602.02840 ; or this overview of 1603.04512 ,
+or this popularization: Monroe/Wineland (Sci. Am., 2008). -->
+last words for hidden variables, see fig. 3 (Mermin, 1993)
+hidden variables, Occult pentagon, experimental overview
+Finished Mermin (1993) argument (fig 4).
+See Aspect overview (Dec '15) of three experiments closing all the loopholes simultaneously:
+1508.05949 ,
+1511.03189 ,
+1511.03190
+(plus this year's 1611.04604 ) -->
+more discussion of E91 protocol in probset7 #7,
+lower limit on "speed" of spooky influence [ 0808.3316 ]
+(and info can't be transmitted, same argument as App.P p.216 in course text),
+monogamy of entanglement and firewall paradox (see pp. 49-54 in Aaaronson notes ).
+Continued discussion of CNOT gates for trapped ions,
+then started NMR (see Nielsen/Chuang section 7.7, pp. 324-342, or this recent review: 1501.01353 ) -->
+Comments on "Verschränkung" vs. spaghetti, and "Spukhafte Fernwirkung" (from Zeilinger).
+From here : latest microsoft hires , possible polynomial time algorithm for variant of CVP (alas already withdrawn). -->
+Week 16
+Thu 12/4 27. transmons, BQP, and all that
+Started with this discussion of
+nytimes 03Dec18 article on the race to quantum encryption (also refers to recent other articles discussed
+nytimes 21Oct18 on quantum computing jobs, and nytimes 13Nov18 on qc research)
+discussed microwave resonances (see Nielsen-Chuang text, sec 7.2.2 for microwave Hamiltonian), and Martinis notes on CNOT
+Comments on qudits and d-fold Toffoli , and experimental use of qutrit to speed up creation of a GHZ entangled state.
+Some parting comments on P, NP, et al. and
+BQP et al. ,
+also P vs. NP , and
+3-SAT
+(see also
+Preskill notes chpt 6 , pp. 5-10, 22-24, 26-28, chapts 6-10 of "Quantum Computing since Democritus", and the abbreviated
+Petting Zoo ).
+Mentioned " Quantum Algorithm Zoo ": compendium of quantum algorithms.
+For a more computational complexity oriented take on the material for the semester, see Scott Aaronson's
+course notes (2017)
+Closed with mention of the recent (May '18) oracle separation between BQP and PH (see
+popular account )
+Course Topics:
+1. A quick review of quantum mechanics, simplified by focus on relevant applications (i.e., measurement, not dynamics)
+2. Some simple, if artificial, quantum algorithms that are surprisingly more efficient than their classical counterparts
+3. Shor's super-efficient period finding (factoring) algorithm and and its threat to cryptographic security
+4. Grover's efficient search algorithm
+5. Quantum error correction
+6. Other forms of quantum information processing and conundra: quantum cryptography; superdense coding; teleportation; applications of Bell's theorem; firewalls; AdS/cft
+7. Experimental realizations (xmons, ions, vacancies, annealers, ...)
+Academic integrity policy:
+You are expected to abide by the
+Cornell University Code of Academic Integrity .
+(In particular, the work you submit for course assignments must be your own.
+You may discuss homework assignments with other students at a high
+level, by for example discussing general methods or strategies to
+solve a problem, but you must cite the other student in your submission.
+Any work you submit must be your own understanding of the solution,
+the details of which you personally and individually worked out, and
+written in your own words.)

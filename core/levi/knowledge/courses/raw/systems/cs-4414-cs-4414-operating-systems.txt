@@ -1,0 +1,333 @@
+# CS 4414: Operating Systems
+# University of Virginia
+# source: http://rust-class.org/index.html
+
+cs4414: Operating Systems
+cs4414: Operating Systems
+Forum
+·
+PS0
+PS1
+PS2
+PS3
+PS4
+·
+Pages
+Classes
+Calendar
+Tutorial
+Archives
+Logged in as username -->
+University of Virginia
+Spring 2014
+David Evans
+Calendar · Forum
+Syllabus
+· Classes
+Problem Sets
+0: Getting Started
+1: zhttpo web server
+2: gash shell
+3: Zhtta web server
+4: IronKernel
+Challenges
+3: Zhtta web server
+4: Project · Results
+-->
+Challenges
+-->
+Classes
+1: OS
+2: Rust
+3: First Billion
+4: Processes
+5: Shells
+6: Virtualizing Memory
+7: Faults
+8: Managing Memory
+9: Pointers in Rust
+10: goto fail;
+11: Scheduling
+12: Linux, Web Scheduling
+13: The Internet
+14: Kernel Development
+15: IronKernel
+16: Storage
+17: Flash!
+18: System Calls
+19: Synchronization
+20: Mutual Exclusion
+21: Bakers and Philosophers
+22: Microkernels
+23: The Future!
+8: Rust Pointers
+9: Multi-Tasking
+10: Scheduling
+11: Smarter Scheduling
+12: Synchronization
+13: Trust
+14: Server Scheduling
+15: Benchmarking
+16: Access Control
+17: Trick-or-Treat
+18: Nohl on SIM Cards
+19: Making a Process
+20: System Calls
+21: Virtual Memory
+22: Fork in Depth
+23: Zhou on SSO
+24: Storage Systems
+25: Scaling eBay
+26: Invent the Future
+27: Project Demos
+-->
+Fall 2013 Course · Wrapup
+Using These Materials
+-->
+Class 23: Invent the Future!
+Making Predictions
+»Det er svært at spå, især om fremtiden«.    — Robert Storm Petersen Correct attribution is hard, especially for the past
+Google Translate may not quite be ready for legal contracts, but it does impressively well on Danish!
+1964 World's Fair
+Isaac Asimov, Visit to the World's Fair of 2014 . August 1964. The First Look at How Google's Self-Driving Car Handles City Streets , The Atlantic, 28 April 2014.
+Gadgetry will continue to relieve mankind of tedious jobs. Kitchen units will be devised that will prepare "automeals," heating water and converting it to coffee; toasting bread; frying, poaching or scrambling eggs, grilling bacon, and so on. Breakfasts will be "ordered" the night before to be ready by a specified hour the next morning. Complete lunches and dinners, with the food semiprepared, will be stored in the freezer until ready for processing. I suspect, though, that even in 2014 it will still be advisable to have a small corner in the kitchen unit where the more individual meals can be prepared by hand, especially when company is coming.
+Robots will neither be common nor very good in 2014, but they will be in existence. The I.B.M. exhibit at the present fair has no robots but it is dedicated to computers, which are shown in all their amazing complexity, notably in the task of translating Russian into English. If machines are that smart today, what may not be in the works 50 years hence? It will be such computers, much miniaturized, that will serve as the "brains" of robots. In fact, the I.B.M. building at the 2014 World's Fair may have, as one of its prime exhibits, a robot housemaid*large, clumsy, slow-moving but capable of general picking-up, arranging, cleaning and manipulation of various appliances. It will undoubtedly amuse the fairgoers to scatter debris over the floor in order to see the robot lumberingly remove it and classify it into "throw away" and "set aside." (Robots for gardening work will also have made their appearance.)
+You Will
+(but the company that brought it to you won't be AT&T)
+1993-1994 AT&T Ad Campaign
+Before we make fun of AT&T's commercials, let's not forget the momentous contributions Bell Labs made. True Innovation , New York Times, 25 Feb 2012
+( Poll from Fall 2013 )
+Skype was created by three Estonians who were college students when the AT&T ads ran. It is now used 2 Billion minutes a day .
+Sir Tim Berners-Lee envisioned the World Wide Web and built the first web server and browser in 1990. In mid-1993, there were 130 websites in the world. Today, there are over 785 million .
+The web really took off when the NCSA Mosaic browser was released. It was built by Marc Andreesen, then a student at the University of Illinois, and Eric Bina, a staff member at NCSA. Andreesen went on to found Netscape and build the Netscape Navigator browser (but without using any source code from Mosaic). Navigator evolved into Mozilla's open source Firefox browser, used by over 450 million people.
+Satellite navigation started within just a few years of Sputnik (1957). The Transit satellites in the mid-1960s were probably the first satellites that could be reprogrammed after launch .
+GPS became widely available for civilian purposes after the encryption dither was turned off during the first Gulf War, and now is supported by billions of devices.
+Amazon launched in 1995.
+I don't carry my medical records in my wallet because my doctor is too primitive to have electronic records, but I do carry my genome (at least 1M markers of it) on my Android phone.
+Everything involving computation should be expected to improve at "Moore's Law" rates — halving cost every 18 months. Genome sequencing is mostly about computation.
+The dramatically faster improvements, are due mostly to better algorithms (which are harder to predict).
+Lots of people are working on this! Not many things you buy have gone from costing $57M to ~$1500 between 2007 and 2009.
+23andME API
+The last two are things I don't think people are frequently doing today, and we're not quite at the point where software can provide an assistant as good as a good executive assistant. But, it shouldn't take too much longer.
+Ending World Poverty
+Also see: Hans Rosling's Quiz
+Pace of Progress
+The 50 Greatest Breakthroughs Since the Wheel , The Atlantic, 23 October 2013.
+List of Breakthroughs
+There may be some bias because the survey was done today, but almost all the breakthroughs happened relatively recently!
+Zooming in on the past 1000 years.
+Breakthroughs begat other breakthroughs. The printing press enables rapid sharing and distribution of new knowledge. Electricity enabled light which extended working hours, and enabled semiconductors, which enabled personal computers and the Internet.
+I can't predict which inventions will happen or have the biggest impact on our society, but I can predict there will be many that will have huge impacts.
+Endless Golden Ages
+Science's Endless Golden Age
+Neil DeGrasse Tyson, Science's Endless Golden Age - [Download PDF]
+According to Growth rates of modern science: A bibliometric analysis
+based on the number of publications and cited
+references , the rate of growth is
+somewhere between every 8 years and every 29 years, so Tyson's estimate
+of every 15 years is very reasonable.
+Exponential growth is astounding and incomprehensible to humans. We can't even notice 4% for most things, but just increasing 4% every month means 1000x increase in 15 years. It's not just astrophysics. Any scientific or technological field where new results can build on old ones, and where there do not appear to be any real limits to what can be done, has an endless golden age.
+Being in a non-golden age field tends to make people bitter and anti-progress:
+There follows this unforgettable observation: "Several university presidents and provosts have lamented to me that when a scientist comes into their office, it's to announce some exciting new research opportunity and demand the resources to pursue it. When a humanities scholar drops by, it’s to plead for respect for the way things have always been done. — Crimes Against Humanities: Now science wants to invade the liberal arts. Don't let it happen , Leon Wieseltier's response to Steven Pinker's Science is Not Your Enemy .
+In the end, we can’t lose, we have William Shakespeare. — Mark Edmundson, quoted in As Interest Fades in the Humanities, Colleges Worry , New York Times, 30 October 2013.
+"Koomey's Law": Assessing Trends in the Electrical Efficiency of Computation Over Time
+SEAS Strategic Plan : yes, the #1 goal of the School of Engineering's administration really is to not make progress! (Note: the goal of not making progress does not apply to student tuition or the bloat of the administration. Those things should continue to increase exponentially, its just the rest of progress the School wants to halt!)
+Golden Ages or Golden Catastrophes?
+US/World Population
+About That Overpopulation Problem , Slate, 9 Jan 2013.
+This looks pretty scary! But remember, population was increasing over this time period also. (If you are wondering where wind and solar are on this graph, what they produce is so insignificant it doesn't show up.)
+Per-capita looks a lot better, especially if you remember how much the quality of life has improved during the last 40 years, with fairly little increase in per-capita energy consumption. This is a strong sign that efficiency has improved dramatically.
+And Chili’s is optimistic that the tablets will pay for themselves by bringing in extra revenue from impulse orders and at-the-table gaming. Not only will you not have to talk to a waiter when you want to order something, you won’t have to talk to your kids, either! — Of Course Applebee's Is Going to Replace Waiters With Tablets , Slate, 3 Dec 2013
+If the ordinary wage-earner worked four hours a day, there would be enough for everybody and no unemployment -- assuming a certain very moderate amount of sensible organization. This idea shocks the well-to-do, because they are convinced that the poor would not know how to use so much leisure. In America men often work long hours even when they are well off; such men, naturally, are indignant at the idea of leisure for wage-earners, except as the grim punishment of unemployment; in fact, they dislike leisure even for their sons. Bertrand Russell, In Praise of Idleness (1932)
+Actually, Churchill didn't say this (thanks to Pat Kerr for pointing this out!), but Charles Vest did say that Churchill said it, and as Mark Warner has said about other Churchill quotes, "If Churchill didn't say it, he should have." and Paul Graham did say Churchill said, "When you see a quote attributed to Winston Churchill, assume by default I didn't say it." . Hopefully, we'll figure out a model that works for society before all wealth is concentrated in a very small fraction of the population that is doing the productive, creative work. Whether we will, and what it will be, is much harder to predict than the reality of technological progress automating nearly all tedious human work.
+Modern methods of production have given us the possibility of ease
+and security for all; we have chosen, instead, to have overwork for some
+and starvation for others. Hitherto we have continued to be as energetic
+as we were before there were machines; in this we have been foolish, but
+there is no reason to go on being foolish forever.
+Bertrand Russell, In Praise of Idleness (1932) (Note: you should wait to adopt Russell's philosophy until after you finish your project and your other classes!)
+#
+Class 24: Project Presentations
+Optional (for most of your) Final Exam (due at 11:59pm on Friday, 2 May). See Submitting Projects for details on the final.
+Project Presentations
+Chris Grochmal, Audrey Choi, Mark Valieras, Tommy Curley, Maggie Orr
+Anat Gilboa, Jyotiska Biswas, Michael Recacinas
+Man Wang, Hangchen Qu, Zihao Wang
+Brian Uosseph, Raymond Vargas
+Patrick Ryan, Dan O'Connor, David Laden
+Piyapath Siratarnsophon, Kamonphop Srisopha, Peeratham Techapalokul, Phanwadee Sinthong
+James Wang, Mitchell Smith
+Megan Kelly, Rainier Rabena
+Muntaser Ahmed, Andrew Becker, Gautam Kanumuru
+Andy Barron, Christine Danzi, Ami Jagodara, Alex Kuck
+Jacob Baldwin, Stephen Boris, Garrett Durig, Karen Pan
+Alex Looney, Ankit Gupta, Michael Paris, Babak Pourkazemi
+Justin Ingram, Vikram Bhasin, Alex Aberman, Justin Dao
+Britton Vermaaten
+Final Submissions
+See Submitting Projects for details.
+Everyone should submit these two web forms by 11:59pm on Monday, 5 May :
+Final Project Team Submission (one per team)
+Final Project Individual Submission (one per person)
+Earlier is better if you are ready.
+Final Thoughts
+From Peter Norvig's Keynote Address at the U.C. Berkeley Computer Science Commencement , 21 May 2006.
+So my advice to you is to pick one of the 10,000 categories, or invent
+category number 10,001, and make some progress in it. Pick problems
+that are ambitious enough that your expected value over the next 20
+years is at least your $3.4M/yr share. But worry about the value you
+produce, not just the money. America's first great scientist, Ben
+Franklin, said "we should be glad of an opportunity to serve others by
+any invention of ours". So be happy and productive, don't be evil, and
+be glad of an opportunity to serve others.
+If you enjoyed this class, you may want to take my cs6501:
+Course to be Determined
+class in the fall.
+comments powered by Disqus
+Submitting Projects (Sun 27 April 2014)
+More...
+-->
+Presentations (Tue 22 April 2014)
+More...
+-->
+Preparation for Class 23 (Sun 20 April 2014)
+More...
+-->
+Class 22: Microkernels and Beyond (Thu 17 April 2014)
+More...
+-->
+Class 21: Bakers and Philosophers (Tue 15 April 2014)
+More...
+-->
+Class 20: Mutual Exclusion (Thu 10 April 2014)
+More...
+-->
+Class 19: Synchronization (Tue 08 April 2014)
+More...
+-->
+Submitting PS4 (Sat 05 April 2014)
+More...
+-->
+Class 18: System Calls (Thu 03 April 2014)
+More...
+-->
+PS3 Reference Solution (Wed 02 April 2014)
+More...
+-->
+Class 17: Flash! (Tue 01 April 2014)
+More...
+-->
+Class 16: Storage (Thu 27 March 2014)
+More...
+-->
+Class 15: IronKernel Developers (Thu 20 March 2014)
+More...
+-->
+Class 14: Entering Ring Naught (Tue 18 March 2014)
+More...
+-->
+Exam 1 Comments (Sun 16 March 2014)
+More...
+-->
+Class 13: The Internet (Thu 06 March 2014)
+More...
+-->
+Class 12: Scheduling in Linux and Web Servers (Tue 04 March 2014)
+More...
+-->
+PS3 Demos and Submission (Sun 02 March 2014)
+More...
+-->
+Problem Set 3 Benchmarking (Fri 28 February 2014)
+More...
+-->
+Class 11: Smarter Scheduling (Thu 27 February 2014)
+More...
+-->
+Class 10: SSL, Sharing, and Scheduling (Tue 25 February 2014)
+More...
+-->
+Class 9: Pointers in Rust (Tue 18 February 2014)
+More...
+-->
+Problem Set 3 (Sun 16 February 2014)
+More...
+-->
+PS2 Reference Solution (Fri 14 February 2014)
+More...
+-->
+Class 8: Managing Memory (Tue 11 February 2014)
+More...
+-->
+Updates (Sun 09 February 2014)
+More...
+-->
+Submitting PS2 (Sat 08 February 2014)
+More...
+-->
+Class 7: Double Faults (Thu 06 February 2014)
+More...
+-->
+Class 6: Making a Process (Virtualizing Memory) (Tue 04 February 2014)
+More...
+-->
+PS2 Demos, Videos (Mon 03 February 2014)
+More...
+-->
+Class 5: Gash Has No Privileges (Thu 30 January 2014)
+More...
+-->
+Class 4: Once Upon a Process (Tue 28 January 2014)
+More...
+-->
+PS1 Submission (Sun 26 January 2014)
+More...
+-->
+Class 3: Zero to a Billion in 4.86 Years (Thu 23 January 2014)
+More...
+-->
+Survey Comments (Thu 23 January 2014)
+More...
+-->
+Improving Rust's Error Messages (Wed 22 January 2014)
+More...
+-->
+PS1 and Tutorial (Mon 20 January 2014)
+More...
+-->
+Class 2: Getting Rustified (Thu 16 January 2014)
+More...
+-->
+Class 1: What is an Operating System? (Tue 14 January 2014)
+More...
+-->
+Spring 2014 cs4414 Course (Sat 11 January 2014)
+More...
+-->
+Pages
+Amazon EC2
+Challenges
+Classes
+Forum
+Getting Started with Github
+IRC
+Open Discussion Forum
+Pages
+Problem Set 3 - Zhtta Server - Benchmarking
+Projects
+Problem Set 0 - Tutorial and Course Registration
+Problem Set 1 - zhttpto Web Server
+Problem Set 2 - The Good Auld Shell
+Problem Set 2 - Exploration 1
+Problem Set 2 - Exploration 2
+Problem Set 3 - Zhtta Web Server
+Problem Set 4 - IronKernel
+PS4 - Setup Commands
+Open Enrollment
+Survey Comments
+Syllabus
+Forum
+Using Materials
+VirtualBox
+Working on Github in cs4414
+Setting up your Zhtta Server on EC2

@@ -1,0 +1,354 @@
+# CS 193a: Android App Development, Spring 2016
+# Stanford University
+# source: http://web.stanford.edu/class/cs193a/lectures.shtml
+
+CS 193A: Android Application Development - Lectures
+CS 193A: Android App Development, Winter 2019
+NOTE: This web site is out of date .
+This is the course web site from a past quarter, Winter 2019 .
+If you are a current student taking the course, this is not your class web site, and you should visit the current class web site instead at http://cs193a.stanford.edu/ .
+If you are already at cs193a.stanford.edu, the web page may not be updated yet for the new quarter.
+Please be advised that courses change with each new quarter and instructor.
+Any information on this out-of-date page may not apply to you this quarter.
+Home
+Syllabus
+Lectures
+Homework
+Sections
+Piazza
+A.Studio
+Library
+Videos
+Links
+API
+193A Style Guide
+-->
+Lectures
+- ( jump to today's lecture )
+This calendar displays what we have covered each day and may also contain rough estimates of what we will cover in the future.
+Information listed about future dates is speculative and may change over time, except for exam dates.
+Videos of Lectures
+(NOTE: videos are low-quality, and not all lectures will be recorded!)
+Gracie's Java review notes
+(a review of Java features that are useful for CS 193A students)
+Week
+Tue
+Thu
+1
+01-08
+course introduction; Android basics;
+creating a first Android app
+slides:
+Java review ,
+introduction ,
+first app ,
+Kotlin
+lecture video
+API:
+Activity ,
+View ,
+Toast
+activity_main.xml
+lecture01-Berkeley.zip
+MainActivity.kt
+01-10
+layout; GUI widgets
+slides:
+layout ,
+widgets
+lecture video
+HW1 assigned
+API:
+Button ,
+TextView ,
+EditText
+activity_layout.xml
+LayoutActivity.kt
+lecture02-LayoutDemo.zip
+2
+01-15
+more widgets; lists
+Stanford Android library
+-->
+slides:
+widgets ,
+lists
+lecture video
+API:
+ListView ,
+ArrayAdapter
+Lib:
+SimpleActivity ,
+SimpleList
+-->
+activity_tmnt.xml
+lecture03-TMNT.zip
+TmntActivity.kt
+01-17
+file processing
+slides:
+files
+media player
+-->
+lecture video
+HW2 assigned
+API:
+File ,
+Scanner ,
+BufferedReader ,
+PrintStream
+Lib:
+SimpleIO
+-->
+activity_dictionary.xml
+DictionaryActivity.kt
+grewords.txt
+lecture04-Dictionary.zip
+3
+01-22
+multiple activities and Intents
+slides:
+intents
+lecture video
+API:
+Intent
+activity_add_word.xml
+activity_dictionary.xml
+AddWordActivity.kt
+DictionaryActivity.kt
+01-24
+activity lifecycle;
+state and preferences
+slides:
+activity lifecycle ,
+preferences
+lecture video
+API:
+Bundle ,
+SharedPreferences
+4
+01-29
+multimedia; fragments; landscape orientation
+slides:
+media ,
+fragments
+lecture video
+HW3 assigned
+API:
+Fragment ,
+FragmentManager
+activity_details.xml
+activity_pokedex.xml
+activity_pokedex_layout-land.xml
+DetailsActivity.kt
+DetailsFragment.kt
+fragment_details.xml
+fragment_pokedex.xml
+lecture07-Pokedex.zip
+PokedexActivity.kt
+PokedexFragment.kt
+01-31
+dynamic UIs with LayoutInflater; dialogs
+slides:
+dynamic UI ,
+dialogs
+lecture video
+API:
+ViewGroup ,
+LayoutParams ,
+LayoutInflater ,
+AlertDialog
+activity_flags.xml
+flag.xml
+FlagsActivity.kt
+lecture08-FlagsOfTheWorld.zip
+5
+02-05
+libraries:
+Picasso ,
+Ion ,
+Animations ,
+Bootstrap ,
+Anko
+slides:
+libraries
+lecture video
+activity_puppy.xml
+AndroidManifest.xml
+build.gradle
+lecture09-PuppyPower.zip
+PuppyActivity.kt
+strings.xml
+02-07
+RESTful web APIs ( list );
+libraries:
+Ion ,
+Klaxon ,
+GSON ,
+Retrofit ,
+Glide
+slides:
+RESTful APIs
+lecture video
+HW4 assigned
+API:
+JSONObject
+activity_rest.xml
+build.gradle
+lecture10-RestAPIs.zip
+RestActivity.kt
+6
+02-12
+LECTURE CANCELED
+02-14
+local databases and SQL
+slides:
+databases/SQL
+lecture video
+API:
+SQLiteDatabase ,
+Cursor ,
+ContentValues
+activity_name_surfer.xml
+babynames.sql
+lecture11-NameSurfer.zip
+NameSurferActivity.kt
+SqliteTest.apk
+SqliteTest.zip
+7
+02-19
+remote databases; Firebase ( docs )
+slides:
+Firebase
+lecture video
+HW5 assigned
+Firebase API :
+DatabaseReference ,
+Query ,
+DataSnapshot ,
+FirebaseAuth
+activity_grades.xml
+activity_login.xml
+Grade.kt
+GradesActivity.kt
+lecture12-SimpsonGrades.zip
+LoginActivity.kt
+Student.kt
+02-21
+2D graphics
+slides:
+2D graphics
+lecture video
+API:
+View ,
+Canvas ,
+Paint ,
+Typeface
+Lib:
+GCanvas ,
+GObject ,
+GOval ,
+GRect
+activity_ball.xml
+BallActivity.kt
+BouncingBallCanvas.kt
+BouncingBallView.kt
+lecture13-BouncingBall.zip
+8
+02-26
+basic 2D games
+slides:
+games
+lecture video
+Lib:
+GCanvas ,
+GSprite
+activity_lander.xml
+LanderActivity.kt
+LanderCanvas.kt
+lecture14-LunarLander-starter.zip
+lecture14-LunarLander.zip
+02-28
+localization
+(guest presenter: CA Sarah Egler)
+slides:
+localization
+(no lecture video! see archives)
+HW6 assigned
+API:
+Resources ,
+Locale ,
+NumberFormat ,
+DateFormat
+activity_mc.xml
+lecture15-McDelivery-starter.zip
+lecture15-McDelivery.zip
+McActivity.kt
+strings.xml
+9
+03-05
+services; notifications
+slides:
+services ,
+notifications
+lecture video
+API:
+Service ,
+IntentService ,
+BroadcastReceiver ,
+Notification
+Lib:
+SimpleService ,
+SimpleNotification
+-->
+activity_downloader.xml
+Downloader.kt
+DownloaderActivity.kt
+DownloadService.kt
+lecture16-Downloader.zip
+03-07
+more services;
+user login/authentication
+slides:
+user login
+lecture video
+Lib:
+SimpleSpeech ,
+SimpleCamera
+-->
+activity_jukebox.xml
+JukeboxActivity.kt
+JukeboxService.kt
+lecture17-Jukebox.zip
+10
+03-12
+maps, location/GPS
+slides:
+maps
+lecture video
+HW7 assigned
+activity_city_finder.xml
+activity_maps_test.xml
+AndroidManifest.xml
+build.gradle
+cities.txt
+City.kt
+CityFinderActivity.kt
+lecture18-CityFinder.zip
+MapsTestActivity.kt
+03-14
+React Native ;
+course wrap-up
+publishing to the App Store
+-->
+slides:
+react native
+what's next
+-->
+lecture video
+see also: CS 47
+App.js
+lecture19-Berkeley-ReactNative.zip
+This document and its content are copyright © Marty Stepp, 2017.
+All rights reserved.
+Any redistribution, reproduction, transmission, or storage of part or all of the contents in any form is prohibited without the authors' expressed written permission.

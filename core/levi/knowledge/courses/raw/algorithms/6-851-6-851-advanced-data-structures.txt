@@ -1,0 +1,279 @@
+# 6.851: Advanced Data Structures
+# MIT
+# source: https://courses.csail.mit.edu/6.851/spring21/index.html
+
+Advanced Data Structures (6.851)
+-->
+6.851: Advanced Data Structures (Spring'21)
+Prof. Erik Demaine
+TAs: Josh Brunner, Jenny Diomidova, Della Hendrickson
+[Home] [ Lectures ]
+[ Problem Sets ] [ Project ]
+[ Coauthor ]
+[ GitHub ]
+[ Accessibility ]
+sample frame from lecture videos ( L02 )
+Data structures play a central role in modern computer science.
+You interact with data structures even more often than with algorithms
+(think Google, your mail server, and even your network routers).
+In addition, data structures are essential building blocks in obtaining
+efficient algorithms. This course covers major results and current
+research directions in data structures:
+TIME TRAVEL
+We can remember the past efficiently (a technique
+called persistence), but in general it's difficult to change the past and
+see the outcomes on the present (retroactivity). So alas,
+Back To The Future isn't really possible.
+GEOMETRY
+When data has more than one dimension
+(e.g. maps, database tables).
+DYNAMIC OPTIMALITY
+Is there one binary search tree that's as
+good as all others? We still don't know, but we're close.
+MEMORY HIERARCHY
+Real computers have multiple levels of caches.
+We can optimize the number of cache misses, often without even knowing
+the size of the cache.
+HASHING
+Hashing is the most used data structure in
+computer science. And it's still an active area of research.
+INTEGERS
+Logarithmic time is too easy. By careful analysis of
+the information you're dealing with, you can often reduce the operation
+times substantially, sometimes even to constant. We will also cover lower
+bounds that illustrate when this is not possible.
+DYNAMIC GRAPHS
+A network link went down, or you just added or
+deleted a friend in a social network. We can still maintain essential
+information about the connectivity as it changes.
+STRINGS
+Searching for phrases in giant text (think Google or DNA).
+SUCCINCT
+Most “linear size” data structures you
+know are much larger than they need to be, often by an order of magnitude.
+Some data structures require almost no space beyond the raw data but are
+still fast (think heaps, but much cooler).
+Inverted Lectures
+This year, we're experimenting with inverted lectures:
+most material is covered in video lectures
+recorded in 2012 (already watched by over 100,000 people), which you can
+conveniently play at faster speed than real time.
+In-class time will be divided between answers to questions ,
+new material presented by the professor and/or guest lecturers,
+and in-class problem solving , with a focus on problem solving.
+Particularly unusual is that the problems we'll solve in groups will include
+problem-set style problems with known solutions, coding
+problems, and open research problems that no one knows the answer to,
+with the goal of publishing papers about whatever we discover.
+(Past offerings of 6.851 have led to over a dozen published papers.)
+You can work on whatever type of problem most interests you.
+To facilitate collaboration, we'll be using a new
+open-source software platform
+called Coauthor ,
+along with GitHub for
+(optional) coding.
+-->
+Fully Online Format
+Most course material is covered in video lectures
+recorded in 2010 (already watched by over 350,000 people), which you can
+conveniently play at faster speed than real time.
+There may also be some new material presented by the professor and/or
+guest lecturers, which will be recorded for asynchronous viewing.
+But synchronous meeting time (also online) will focus on collaborative
+problem solving with your fellow students and the course staff.
+Particularly unusual is that the problems we'll solve in groups will include
+a choose-your-own-mix of
+problem-set style problems with known solutions,
+coding problems for those who love programming,
+and open research problems that no one knows the answer to,
+with the goal of publishing papers about whatever we discover.
+(Past offerings of this class have led to several published papers.)
+You can work on whatever type of problem most interests you.
+To facilitate collaboration, we'll be using our
+open-source software platform
+called Coauthor ,
+along with GitHub for
+(optional) coding.
+Times for synchronous session(s) will be scheduled to accommodate students'
+schedules and timezones.
+Please sign up to the
+6851-students mailing list
+if you might be interested in taking the class,
+so you can help decide the schedule.
+We recommend a drawing tablet for online collaboration, so be sure to apply for
+one if you don't have one. We'll be using a bunch of custom bleeding-edge
+open-source software tools for online collaboration, including
+our own Coauthor ,
+Cocreate , and
+Comingle ,
+which aim to reproduce the in-person experience as best as possible.
+Join us to help make this possible!
+Specifics
+Synchronous Class Time:
+Mondays at 4:00pm–5:30pm Eastern and/or
+Thursdays at 7:00–8:30pm Eastern
+Attending both sessions is strongly recommended;
+for-credit students must attend at least one.
+Synchronous session(s) will be scheduled to accommodate students'
+schedules and timezones —
+sign up to the mailing list to participate.
+-->
+Synchronous Class Room:
+online, via Comingle
+(Fill out the sign-up form and join the mailing list (see below)
+to get the private link to the class.)
+First Class:
+Thursday, February 18, 2021 at 7:00–8:30pm Eastern
+TBD -->
+Second Class:
+Monday, February 22, 2021 at 4:00–5:30pm Eastern
+Office Hours:
+Mondays at noon Eastern
+Tuesday evenings at 7:00pm Eastern
+Wednesday evenings at 10:00pm Eastern
+Problem Session Time:
+TBD
+Problem Session Room:
+TBD
+-->
+Professor:
+Erik Demaine ,
+edemaine at mit.edu
+32 - G680 -->
+TAs:
+Josh Brunner, brunnerj at mit.edu
+Jenny Diomidova, diomidova at mit.edu
+Della Hendrickson, della at mit.edu
+Staff Email:
+6851-staff at csail.mit.edu
+Problem Session    Co-organizer:
+Timothy Abbott
+-->
+Units:
+3-0-9
+Prerequisites:
+6.046 or equivalent background in discrete mathematics and algorithms.
+6.046 (Design and Analysis
+of Algorithms) , or an equivalently thorough undergraduate algorithms
+class from another school (e.g., covering much of
+CLRS ).
+-->
+Alternatively, permission from the instructor.
+Credit:
+H-level and TCS AAGS credit
+Requirements :
+Scribe a few lectures, research-oriented project, and short presentation.
+Details .
+-->
+Assuming there is interest, there will be an optional problem
+solving session, in which we will discuss and try to solve
+current open problems.
+-->
+Recommended Reading
+There's no perfect textbook for this class, but there are some relevant books:
+Data Structures and Network Algorithms by Robert E. Tarjan (covers BSTs, splay trees, link-cut trees)
+Open Data Structures by Pat Morin (covers BSTs, B-trees, hashing, and some integer data structures)
+Participating
+We welcome both undergraduate and graduate students from MIT and its affiliated
+universities, as well as all universities in the Boston area.
+We generally welcome students from all universities, but in the online format,
+we need to ensure we don't grow beyond capacity, so all such students will need
+to request permission from the professor.
+If you are interested in attending the class, for credit or as a listener,
+please do the following:
+Preregister if you're from MIT/Harvard.
+If you're not from MIT/Harvard, email Erik for permission.
+Join the
+6851-students mailing list .
+Sign up for an account on Coauthor .
+Sign up for an account on GitHub.com if you don't have one (this is different from github.mit.edu).
+Fill out
+this signup form .
+Prerequisites
+The required prerequisite is
+6.046, Design and Analysis of
+Algorithms or an equivalently thorough undergraduate algorithms class
+from another school (e.g., covering much of
+CLRS ).
+The recommended prerequisite is
+6.854, Advanced Algorithms .
+This is the broad entry-level graduate course in Theory/Algorithms, and it
+normally makes sense to start there before jumping into deeper graduate
+courses. If you haven't taken 6.854, you must have a strong understanding
+of algorithms at the undergraduate level, such as receiving an A in 6.046,
+having had a relevant UROP, involvement in computer competitions, etc.
+-->
+Requirements & Grading
+There are six components to the class, some of which are required:
+required
+Watch all video lectures ,
+measured by thumbs-upping
+completion questions on Coauthor .
+required
+Watch recorded portions of synchronous classes that you didn't attend.
+required
+Participate during synchronous classes, at least one per week
+(email 6851-staff about exceptions)
+required
+Participate in class discussion,
+measured as coauthoring at least one nontrivial Coauthor post each week.
+See your
+statistics view to check for zero weeks.
+(Example of a trivial post for a solved problem: "Use a tree."
+Example of a nontrivial post for a solved problem: Describing the solution
+techniques you tried but failed.
+Deleted and unpublished posts do not count, but private posts do.)
+choice
+Problem sets .
+Problem sets will be posted weekly, and follow a “one-page in,
+one-page out” rule.
+choice
+Project write-up and presentation
+based on in-class work.
+We're experimenting with a flexible grading scheme this semester:
+20% for watching lectures [required]
+40% for in-class participation [required]
+40% for problem sets
+40% for project(s)
+Each component will be graded on a 100-point scale, then weighted according to
+the percentages above, then summed to produce your overall score.
+Your letter grade (A, B, etc.) will be assigned according to this score
+(where 90+ = A, 80+ = B, 70+ = C, 60+ = D, <60 = F).
+However, we reserve flexibility in assigning the annotation (+, −, or
+straight letter) according to other factors such as going above and beyond
+in participation or just scraping by.
+The percentage weights sum to 140%, so you can skip the project (40%)
+or the problem sets (40%) and still get to 100% total work.
+Alternatively, you can make up for lost points in any component by
+working on the other components.
+The intent is to make projects optional, but reward those who do them
+by requiring fewer problem sets.
+One additional rule is that you cannot pass the class without both watching
+most of the lectures and in-class participation most weeks
+(according to the fairly minimal requirements above),
+which is the meaning of "required".
+Revise existing scribe notes for one lecture
+(or maybe two), according to your own inspiration for improvement
+and feedback from fellow students.
+The entire calendar for the course has been posted,
+so you can select a lecture that interests you.
+We will circulate a sign-up sheet during the second week.
+Scribe notes are generally due noon on Tuesday after the corresponding
+class (but extensions are possible).
+Research-oriented final project
+(paper and presentation).
+We allow theoretical, experimental, survey, and Wikipedia final projects.
+-->
+Past and Future
+The class is offered once every two years or so. It was given in
+Spring 2003
+and
+Spring 2005
+as 6.897, and in
+Spring 2007 ,
+Spring 2010 ,
+Spring 2012 ,
+Spring 2014 ,
+and
+Fall 2017 ,
+as 6.851.

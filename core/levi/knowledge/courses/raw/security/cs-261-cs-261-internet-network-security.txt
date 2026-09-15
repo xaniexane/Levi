@@ -1,0 +1,373 @@
+# CS 261: Internet/Network Security
+# UC Berkeley
+# source: http://www.icir.org/vern/cs261n-Sp14/
+
+CS 261N: Internet/Network Security
+Administrative
+Overview
+Lecture
+Homeworks
+Project
+Grading
+Syllabus
+Piazza
+CS 261N: Internet/Network Security
+Spring 2014
+Instructor:
+Vern Paxson , office hours Mon 2:30-3:30PM (737 Soda) and by appointment
+Lectures:
+Tue/Thu, 12:40PM-2:00PM, 310 Soda
+Addresses:
+Web page:
+http://www.icir.org/vern/cs261n/
+Announcements, questions:
+the class Piazza site , which you sign up for here .
+Feel free to email any question/comment you want to make privately to the instructor at
+vern@berkeley.edu .
+Course Description:
+CS 261N: Internet/Network Security . Prerequisite: EE 122 or equivalent, CS 161 or equivalent, basic probability/statistics. (Undergraduates must receive instructor approval.)
+This class aims to provide a thorough grounding in network security suitable
+for those interested in conducting research in the area, as well as students
+more generally interested in either security or networking. We will also
+look at broader issues relating to Internet security for which networking
+plays a role. The
+syllabus
+has overlap with portions of the
+SEC prelim.
+Topics include:
+denial-of-service; capabilities; network intrusion detection; worms;
+forensics; scanning; traffic analysis / inferring activity;
+architecture; protocol issues;
+legality and ethics; web attacks;
+anonymity;
+honeypots; botnets; spam; the underground
+economy;
+research pitfalls.
+The course is taught with an emphasis on seminal papers rather than
+bleeding-edge for a given topic. It includes a
+major project
+that students generally
+undertake in teams of two.
+Three hours of lecture per week. 4 units, due to the significant workload.
+A note on ethics:
+We will be discussing attacks , some of them quite nasty, and
+also powerful eavesdropping technology. None of this is in any way an
+invitation to undertake these in any fashion other than with informed
+consent of all involved parties. If in any context you are uncertain
+about where to draw the line, come talk with me first.
+INFORMATION ON THIS WEB PAGE IS TENTATIVE prior to the course starting
+on August 24.
+-->
+Lectures:
+This lecture schedule may be revised as the course progresses.
+Data
+Topic
+Readings
+Notes
+1/21
+Overview and Logistics
+(none)
+1/23
+Denial-of-Service
+Inferring Internet Denial of Service Activity , Moore, Voelker and Savage, USENIX Security 2001
+Lecture materials
+1/28
+Traceback
+Practical Network Support for IP Traceback , Savage et al., SIGCOMM 2000
+Lecture materials
+1/30
+No lecture (IEEE S&P PC Meeting)
+1/31
+PROJECT
+Project Initial Thoughts due (evening)
+2/4
+DoS Defense
+SIFF: A Stateless Internet Flow Filter to Mitigate DDoS Flooding Attacks , Yaar, Perrig, and Song, IEEE S&P 2004 Lecture materials
+2/6
+Network Intrusion Detection Systems
+Bro: A System for Detecting Network Intruders in Real-Time , Vern Paxson, Computer Networks, 31(23-24), pp. 2435-2463, 14 Dec. 1999.
+Lecture materials
+2/11
+No lecture (NSF Cybersecurity Futures Meeting)
+2/13
+Fundamental NIDS Issues
+Network Intrusion Detection: Evasion, Traffic Normalization, and End-to-End Protocol Semantics , Mark Handley, Christian Kreibich and Vern Paxson, USENIX Security 2001
+Lecture materials
+2/14
+PROJECT
+Project Proposal due (evening) . Schedule a meeting with me to discuss.
+2/18
+NIDS Evaluation
+Testing Intrusion Detection Systems: A Critique of the 1998 and 1999 DARPA Off-line Intrusion Detection System Evaluation as Performed by Lincoln Laboratory , John McHugh, ACM Transactions on Information and System Security, 3(4). November, 2000.
+Lecture materials
+2/20
+The Threat of Worms
+How to 0wn the Internet in Your Spare Time , Stuart Staniford, Vern Paxson and Nicholas Weaver, USENIX Security 2002
+Lecture materials
+2/25
+Worm Detection/Defense
+Scalability, fidelity, and containment in the Potemkin virtual honeyfarm , Michael Vrable et al, SOSP 2005 . Can we contain Internet worms? , Manuel Costa, Jon Crowcroft, Miguel Castro and Antony Rowstron, HotNets III 2004 , and its public review (pp. 12-13) .
+Lecture materials
+2/27
+Scanning
+Fast Portscan Detection Using Sequential Hypothesis Testing , Jaeyeon Jung, Vern Paxson, Arthur Berger, and Hari Balakrishnan, IEEE S&P 2004
+Lecture materials
+3/4
+Inferring Activity
+Timing Analysis of Keystrokes and Timing Attacks on SSH , Dawn Song, David Wagner, Xuqing Tian, USENIX Security 2001
+Lecture materials
+3/6
+Forensics
+Toward a Framework for Internet Forensic Analysis , Vyas Sekar et al, HotNets 2004 , and its public review (pp. 13-14)
+Lecture materials
+3/7
+PROJECT
+Related Work Writeup due (evening)
+3/11
+Securing Protocols
+Guidelines for Writing RFC Text on Security Considerations , E. Rescorla and B. Korver, RFC 3552, 2003
+Lecture materials
+3/13
+Securing Protocols, con't
+No paper assigned.
+Lecture materials
+3/18
+Anonymity / Censorship
+Tor: The Second-Generation Onion Router , Roger Dingledine, Nick Mathewson, Paul Syverson, USENIX Security 2004
+Lecture materials
+3/20
+Architecture
+Ethane: Taking Control of the Enterprise , Martin Casado et al., SIGCOMM 2007
+Lecture materials
+3/25
+Spring Break
+3/27
+Spring Break
+4/1
+Legality and Ethics
+Conducting Cybersecurity Research Legally and Ethically , Aaron Burstein, First USENIX Workshop on Large-scale Exploits and Emergent Threats (LEET '08). Designing and Conducting Phishing Experiments , Peter Finn and Markus Jakobsson, IEEE Technology and Society Magazine, Special Issue on Usability and Security, 2007.
+Lecture materials
+4/3
+Authentication
+Conditioned-safe Ceremonies and a User Study of an Application to Web Authentication , Chris Karlof, J.D. Tygar, and David Wagner, NDSS 2009
+Lecture materials
+4/8
+Authentication, con't
+No paper assigned.
+Lecture materials
+4/10
+No lecture (EECS Departmental Retreat)
+4/11
+PROJECT
+Status Report due (evening) .
+4/15
+Web Attacks & Defenses
+Secure Content Sniffing for Web Browsers, or How to Stop Papers from Reviewing Themselves , Adam Barth, Juan Caballero, and Dawn Song, IEEE S&P 2009
+Lecture materials
+4/17
+Web Security / Botnets
+Your Botnet is My Botnet: Analysis of a Botnet Takeover , Brett Stone-Gross et al, CCS 2009
+Lecture materials
+4/22
+Spam
+Spamming Botnets: Signatures and Characteristics , Yinglian Xie, Fang Yu, Kannan Achan, Rina Panigrahy, Geoff Hulten, and Ivan Osipkov, SIGCOMM 2008
+Lecture materials
+4/24
+Spam / Underground Economy
+Examining the Impact of Website Take-down on Phishing , Tylor Moore and Richard Clayton, Proc. Anti-Phishing Working Group eCrime Researchers Summit 2007.
+Lecture materials
+4/29
+Underground Economy, con't
+Click Trajectories: End-to-End Analysis of the Spam Value Chain , Kirill Levchenko et al., IEEE S&P 2011
+Lecture materials
+5/1
+Project presentations: Rebecca; Sakshi; HKN course evaluation
+5/6
+RRR
+Project presentations: Peter/Soumya; Mukul/Ryan; Chang/David
+5/8
+RRR
+Project presentations: Isaac/Harsha; Frank; Qifan/Jeff
+5/13
+PROJECT
+Project Report due (1PM)
+Homework / Readings:
+Link to
+the homeworks assigned so far .
+There is no required textbook.
+All reading will be from papers.
+A tentative list of these is available from the
+syllabus .
+We will definitely cover most of these topics (and primary papers), but
+may make some changes over the course of the semester.
+Homework for the course primarily consists of writing
+a reflection upon each paper you read. In general you are
+only responsible for reading the first paper listed for a given
+topic. If you want to read and assess a different paper instead,
+clear your choice with me in advance.
+Submit your writeup, via email (plain text preferred),
+by Monday 9:30AM for papers
+discussed during a Tuesday lecture,
+and Wednesday 10AM for
+papers discussed during a Thursday lecture.
+These deadlines are sharp .
+Typically the assignment will be for you to
+sketch different facets of the paper, such as:
+What are the paper's main contributions?
+What parts of the paper do you find unclear? (Optional)
+What parts of the paper are questionable? (E.g., methodology,
+omissions, relevance, presentation.)
+Most homeworks will include an additional specific question
+(or several)
+regarding the topic, such as challenging you to come up
+with and defend a proposed solution.
+Your assessment does not need to be particularly formal, but it needs to
+reflect a thoughtful assessment of the paper. Writeups should generally
+aim for a total of around 2 pages of thoughtful content. They can be shorter
+if you write concisely; if longer, that may mean you have trouble
+trimming your discussion effectively (a skill researchers need to develop!).
+It is understandable that
+you may find parts of some papers baffling or inaccessible. Flag these
+and don't kill yourself trying to absorb them - same goes for technical
+fine points - but use prudence in this regard. You should be able to
+extract a solid amount of technical material from each paper.
+In general, I try to provide feedback on homework assignments.
+However,
+the size of the class may make it infeasible for
+me to do so for each student for each assignment. If so, I may limit
+the feedback I provide for some of your assignments.
+That said, if there are particular elements of your assessment
+for which you'd like direct feedback, indicate them in your writeup.
+Note, homework assignments are to be done individually . It's fine
+to discuss the readings with your fellow students or others in order
+to gain comprehension, but the writeup should reflect your own views
+and framing.
+You should turn in your homework via email and as plain text ,
+and with the word " Homework " in the subject line, lest you risk me
+overlooking your mail during my relentless email processing crunch.
+Late homeworks risk losing 50% credit off the top
+(a bit less if only a few minutes late). Writeups turned in after the
+corresponding lecture or posting of the corresponding exemplar (see below)
+will not receive any credit unless you have discussed this with me in advance.
+In assessing your overall homework grade, I will skip your 4 lowest-scoring
+assignments . This means you can omit turning in up to 4 writeups
+without an overall penalty, and/or you can make up for some late assignments.
+If you won't be turning in a given assignment, I'd appreciate a note
+letting me know by the assignment deadline.
+Homework "exemplars" :
+Students can benefit from seeing examples of homework writeups that
+did particularly well at addressing an assignment. I will make
+such "exemplars" available a little while after an assignment's due date.
+Most of the exemplars come from past offerings of the class
+(made available with the students' permission), though I will also select
+some of the assignments done this semester. Please do not redistribute
+exemplars.
+Project
+A research-oriented project is the most significant element of
+your effort in the class.
+You undertake your project in pairs or (with instructor approval)
+individually.
+Projects may cover any topic of interest in network security,
+interpreted broadly (it need not be a topic discussed in class);
+ties with current research are encouraged.
+See the
+project description
+for details due dates --> regarding the different elements.
+You are encouraged to start thinking of topics of interest early.
+Be ambitious!
+Grading
+-->
+Class project: 50% (based on deliveries at milestones and, especially, final report)
+Homework: 40%
+Lecture participation: 10%
+Syllabus
+Here are the currently planned lecture topics for the course (subject to
+change). Usually, for each lecture the first paper is required reading
+and needs to be written up for homework prior to the lecture, while the
+remaining papers are optional.
+Denial-of-Service
+Inferring Internet Denial of Service Activity , David Moore, Geoffrey Voelker, and Stefan Savage, USENIX Security 2001
+Internet Denial-of-Service Considerations , M. Handley and E. Rescorla, ed., RFC 4732, 2006
+Worldwide Infrastructure Security Report , Arbor Networks, 2010 Report (contact me regarding the 2011 report)
+An Analysis of Using Reflectors for Distributed Denial-of-Service Attacks , Vern Paxson, Computer Communication Review 31(3), 2001
+Denial of Service via Algorithmic Complexity Attacks , Scott Crosby and Dan Wallach, USENIX Security 2003
+Traceback
+Practical Network Support for IP Traceback , Stefan Savage, David Wetherall, Anna Karlin and Tom Anderson, SIGCOMM 2000
+Single-Packet IP Traceback , Alex Snoeren et al, IEEE/ACM Transactions on Networking 10(6), 2002
+Advanced and Authenticated Marking Schemes for IP Traceback , Dawn Song and Adrian Perrig, INFOCOM 2001
+DoS Defense
+SIFF: A Stateless Internet Flow Filter to Mitigate DDoS Flooding Attacks , Abraham Yaar, Adrian Perrig, and Dawn Song, IEEE S&P 2004
+PI: A Path Identification Mechanism to Defend against DDoS Attacks , Abraham Yaar, Adrian Perrig and Dawn Song, IEEE S&P 2003
+Network Intrusion Detection Systems
+Bro: A System for Detecting Network Intruders in Real-Time , Vern Paxson, Computer Networks, 31(23-24), pp. 2435-2463, 14 Dec. 1999.
+Snort - Lightweight Intrusion Detection for Networks , Martin Roesch, LISA '99
+Intrusion and intrusion detection , John McHugh, International Journal of Information Security 1(1), 14-35, 2001
+NetSTAT: A Network-based Intrusion Detection System , Giovanni Vigna and Richard Kemmerer, Journal of Computer Security 7(1), pp 37-71, 1999
+Fundamental NIDS Issues
+Network Intrusion Detection: Evasion, Traffic Normalization, and End-to-End Protocol Semantics , Mark Handley, Christian Kreibich and Vern Paxson, USENIX Security 2001
+Insertion, Evasion, and Denial Of Service: Eluding Network Intrusion Detection , Thomas H. Ptacek and Timothy N. Newsham, Secure Networks techncial report, 1998
+Robust TCP Stream Reassembly in the Presence of Adversaries , Sarang Dharmapurikar and Vern Paxson, USENIX Security 2005
+NIDS Evaluation
+Testing Intrusion Detection Systems: A Critique of the 1998 and 1999 DARPA Off-line Intrusion Detection System Evaluation as Performed by Lincoln Laboratory , John McHugh, ACM Transactions on Information and System Security, 3(4). November, 2000.
+Outside the Closed World: On Using Machine Learning For Network Intrusion Detection , Robin Sommer and Vern Paxson, IEEE S&P 2010
+Prudent Practices for Designing Malware Experiments: Status Quo and Outlook , C. Rossow, C. J. Dietrich, C. Kreibich, C. Grier, V. Paxson, N. Pohlmann, H. Bos, and M. van Steen, IEEE S&P 2012
+Strategies for Sound Internet Measurement , Vern Paxson, Proc. ACM IMC 2004
+The Threat of Worms
+How to 0wn the Internet in Your Spare Time , Stuart Staniford, Vern Paxson and Nicholas Weaver, USENIX Security 2002
+Conficker Working Group: Lessons Learned , Conficker Working Group, January 2011
+Cracking Stuxnet, a 21st-century cyber weapon , Ralph Langner, March 2011
+With microscope and tweezers: An analysis of the Internet virus of November 1988 , Mark Eichin and Jon Rochlis, IEEE S&P 1989
+A Worst-Case Worm , Nicholas Weaver and Vern Paxson, Proc. WEIS 2004
+Worm Detection/Defense
+Scalability, fidelity, and containment in the Potemkin virtual honeyfarm , Michael Vrable et al, SOSP 2005
+A behavioral approach to worm detection , Daniel Ellis, John Aiken, Kira Attwood, Scott Tenaglia, WORM 2004
+Design Space and Analysis of Worm Defense Strategies , David Brumley, Li-Hao Liu, Pongsin Poosankam and Dawn Song, ASIACCS'06
+Can we contain Internet worms? , Manuel Costa, Jon Crowcroft, Miguel Castro and Antony Rowstron, HotNets III 2004
+Scanning
+Fast Portscan Detection Using Sequential Hypothesis Testing , Jaeyeon Jung, Vern Paxson, Arthur Berger, and Hari Balakrishnan, IEEE S&P 2004
+The Art of Port Scanning , Fyodor, Phrack Magazine 7(51), 1997
+DNS-based Detection of Scanning Worms in an Enterprise Network , David Whyte, Evangelos Kranakis, Paul C. van Oorschot, NDSS 2005
+A Brief History of Scanning , Mark Allman, Vern Paxson and Jeff Terrell, Proc. ACM IMC 2007
+Inferring Activity
+Timing Analysis of Keystrokes and Timing Attacks on SSH , Dawn Song, David Wagner, Xuqing Tian, USENIX Security 2001
+Detecting stepping stones , Yin Zhang and Vern Paxson, USENIX Security 2000
+Statistical Identification of Encrypted Web Browsing Traffic , Qixiang Sun et al, IEEE S&P 2002
+BLINC: Multilevel Traffic Classification in the Dark , Thomas Karagiannis, Konstantina Papagiannaki, Michalis Faloutsos, SIGCOMM 2005
+Side-Channel Leaks in Web Applications: a Reality Today, a Challenge Tomorrow , Shuo Chen, Rui Wang, XiaoFeng Wang, and Kehuan Zhang, IEEE S&P 2010
+Forensics
+Toward a Framework for Internet Forensic Analysis , Vyas Sekar, Yinglian Xie, David A. Maltz, Michael K. Reiter and Hui Zhang, HotNets 2004
+Public Review of 'Toward a Framework for Internet Forensic Analysis' , Alex Snoeren, HotNets 2004 Public Reviews (pp. 13-14)
+Exploiting Underlying Structure for Detailed Reconstruction of an Internet Scale Event , Abhishek Kumar, Vern Paxson and Nicholas Weaver, Proc. ACM IMC, October 2005
+Analysis of Credential Stealing Attacks in an Open Networked Environment , A. Sharma, Z. Kalbarczyk, R. Iyer and J. Barlow, Proc. Network and System Security, September 2010
+Securing Protocols
+Guidelines for Writing RFC Text on Security Considerations , E. Rescorla and B. Korver, RFC 3552, 2003
+A Survey of BGP Security Issues and Solutions , Kevin Butler, Toni Farley, Patrick McDaniel, and Jennifer Rexford, Proc. IEEE 98(1), January 2010
+A Fundamental Look at DNSSEC, Deployment, and DNS Security Extensions , Geoff Huston, CircleID, 2006
+Security Assessment of the Internet Protocol Version 4 , F. Gont, RFC 6274, 2011
+Anonymity / Censorship
+Tor: The Second-Generation Onion Router , Roger Dingledine, Nick Mathewson, Paul Syverson, USENIX Security 2004
+Telex: Anticensorship in the Network Infrastructure , Eric Wustrow, Scott Wolchok, Ian Goldberg, J. Alex Halderman, USENIX Security 2011
+Architecture
+Ethane: Taking Control of the Enterprise , Martin Casado et al, SIGCOMM 2007
+SCION: Scalability, Control, and Isolation On Next-Generation Networks , Xin Zhang, Hsu-Chun Hsiao, Geoffrey Hasker, Haowen Chan, Adrian Perrig and David G. Andersen, IEEE S&P 2011
+A DoS-limiting network architecture , Xiaowei Yang, David Wetherall, Thomas Anderson, SIGCOMM 2005
+Tussle in Cyberspace: Defining Tomorrow's Internet , David D. Clark, John Wroclawski, Karen Sollins and Robert Braden, SIGCOMM 2002
+Legality and Ethics
+Conducting Cybersecurity Research Legally and Ethically , Aaron Burstein, LEET 2008
+Designing and Conducting Phishing Experiments , Peter Finn and Markus Jakobsson, IEEE Technology and Society Magazine Special Issue on Usability and Security, 2007
+The Menlo Report: Ethical Principles Guiding Information and Communication Technology Research , M. Bailey et al., Draft of September 15, 2011
+Authentication
+Conditioned-safe Ceremonies and a User Study of an Application to Web Authentication , Chris Karlof, J.D. Tygar, and David Wagner, NDSS 2009
+Robust Defenses for Cross-Site Request Forgery , Adam Barth, Collin Jackson, and John C. Mitchell, CCS 2008
+Web Attacks & Defenses
+Secure Content Sniffing for Web Browsers, or How to Stop Papers from Reviewing Themselves , Adam Barth, Juan Caballero, and Dawn Song, IEEE S&P 2009
+Securing Frame Communication in Browsers , Adam Barth, Collin Jackson, and John C. Mitchell, CACM 52(6), June 2009
+BLUEPRINT: Robust Prevention of Cross-site Scripting Attacks for Existing Browsers , Mike Ter Louw and V.N. Venkatakrishnan, IEEE Security S&P 2009
+How to Shop for Free Online - Security Analysis of Cashier-as-a-Service Based Web Stores , Rui Wang, Shuo Chen, XiaoFeng Wang, and Shaz Qadeer, IEEE S&P 2011
+Clickjacking: Attacks and Defenses , Lin-Shung Huang, Alex Moshchuk, Helen J. Wang, Stuart Schechter and Collin Jackson, IEEE S&P 2012
+E-Commerce / Botnets
+Your Botnet is My Botnet: Analysis of a Botnet Takeover , Brett Stone-Gross et al, CCS 2009
+Studying Spamming Botnets Using Botlab , John P.John, Alexander Moshchuk, Steven D. Gribble, and Arvind Krishnamurthy, NSDI 2009
+A Multifaceted Approach to Understanding the Botnet Phenomenon , Moheeb Abu Rajab, Jay Zarfoss, Fabian Monrose, Andreas Terzis, Proc. ACM IMC 2006
+Botnets, con't
+Measuring Pay-per-Install: The Commoditizatio

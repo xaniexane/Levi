@@ -1,0 +1,123 @@
+# CS 473/573: Fundamental Algorithms
+# Univ of Illinois, Urbana-Champaign
+# source: http://jeffe.cs.illinois.edu/teaching/algorithms/
+
+Algorithms by Jeff Erickson
+Algorithms
+by Jeff Erickson
+🔥 1st edition, June 2019 🔥
+(Amazon links: US ,
+UK ,
+DE ,
+ES ,
+FR ,
+IT ,
+JP )
+This web page contains a free electronic version of my self-published textbook Algorithms , along with other lecture notes I have written for various theoretical computer science classes at the University of Illinois, Urbana-Champaign since 1998.
+More information
+Get the book
+More algorithms lecture notes
+Models of computation notes
+Report an error (separate page)
+Coursework archive (separate page)
+🔥 Japanese translation by inzkyk
+( PDF available for purchase )
+More Information
+Context.
+This material is the primary reference for two regularly-offered theoretical computer science courses at Illinois: CS 374
+and
+CS 473 . I taught these courses most recently in Fall 2023
+and Fall 2024 , respectively.
+I maintain a complete archive of my past homeworks, exams, and lab handouts on a separate page.
+Prerequisites. This textbook is not intended to be a first introduction to data structures and algorithms. It assumes familiarty of discrete math (especially induction) and basic data structures and algorithms (especially recursion) consistent with the prerequisite courses CS 173 and CS 225 at Illinois. For example, the book does not cover stacks, queues, dynamic arrays, priority queues, balanced search trees, hash tables, amortized analysis, or other fundamental data-structure topics. (See the preface for more details.) For a thorough overview of prerequisite material, I strongly recommend the following resources:
+Building Blocks for Theoretical Computer Science by Margaret Fleck
+Mathematics for Computer Science by Eric Lehman, Tom Leighton, and Albert Meyer. (I strongly recommend searching for the most recent revision.)
+Open Data Structures by Pat Morin
+datastructures by Don Sheehy
+Publication.
+A black-and-white paperback edition of the textbook can be purchased from Amazon for $27.50. The full-color electronic version will remain freely available here indefinitely. (If there is enough demand, I may publish a full-color printed version of the next edition. Color printing is considerably more expensive; a full-color printed version of the current book would cost about $75.)
+Bug reports.
+After years of trying and failing to manage bug reports by email, I now maintain an issue-tracking page at GitHub . If you find an error in the textbook, in the lecture notes, or in any other materials, please submit a bug report . All other feedback is welcome as well.
+Permissions.
+Anyone is welcome to download, print, use, copy, and/or distribute anything on this page, either electronically or on paper. You do not need to ask my permission, although I would appreciate hearing from you if you find this material useful. If you redistribute any of this material, please include a link back to this web page , either directly or through the mnemomic shortcut http://algorithms.wtf . Specifically:
+The textbook Algorithms (in both paper and electronic forms) is licensed under a Creative Commons Attribution 4.0 International license .
+All other lecture notes are licensed under a more restrictive Attribution-NonCommercial-ShareAlike 4.0 International license.
+Please do not ask me for solutions to the exercises. See the course materials page for an explanation.
+Get the Book
+Entire book (1st edition, June 2019, 472 pages)
+one page per page (for screens)
+two pages per page (for printing)
+GitHub (bug tracking)
+Internet Archive (permanent archival copy, currently the 0th edition)
+Individual chapters: These were extracted from the full book PDF file, to keep page numbers consistent; however, hyperlinks in these files do not work.
+Front matter: Cover, copyright, table of contents, preface (18 pages)
+Introduction (20 pages)
+Recursion (50 pages)
+Backtracking (26 pages)
+Dynamic Programming (62 pages)
+Greedy Algorithms (28 pages)
+Basic Graph Algorithms (38 pages)
+Depth-First Search (32 pages)
+Minimum Spanning Trees (16 pages)
+Shortest Paths (36 pages)
+All-Pairs Shortest Paths (18 pages)
+Maximum Flows & Minimum Cuts (26 pages)
+Applications of Flows and Cuts (26 pages)
+NP-Hardness (50 pages)
+Back matter: Indices, image credits, colophon (26 pages)
+More Algorithms Lecture Notes
+Both the topical coverage (except for flows) and the level of difficulty of the textbook material (mostly) reflect the algorithmic content of CS 374. The remainder of these notes cover either more advanced aspects of topics from the book, or other topics that appear only in our more advanced algorithms class CS 473. Don't be fooled by the fancy typesetting; these notes are considerably less polished than the textbook.
+Extended Dance Remix: These are notes on more advanced material directly related to the textbook. The notes are ordered roughly to match the textbook chapters.
+Fast Fourier Transforms (17 pages)
+Fast Exponential Algorithms (14 pages)
+Dynamic Programming for Formal Languages and Automata (7 pages, unfinished)
+Advanced Dynamic Programming (18 pages)
+Matroids (8 pages)
+Balances and Pseudoflows (13 pages)
+Minimum-Cost Flows (16 pages)
+Linear Programming (21 pages)
+Linear Programming Algorithms (18 pages)
+Approximation Algorithms (25 pages)
+Director's Cut: These are notes on topics not covered in the textbook. The numbering is completely independent os the textbook; I just started over at 1. We regularly cover some of the randomized algorithms material in CS 473, but I haven't used the amortized analysis or lower bounds notes in many years.
+Discrete Probability (22 pages)
+Nuts and Bolts (13 pages)
+Treaps and Skip Lists (14 pages)
+Tail Inequalities (10 pages)
+Hashing (19 pages)
+Filtering and Streaming (6 pages)
+String Matching (14 pages)
+Randomized Minimum Cut (7 pages)
+Amortized Analysis (14 pages)
+Scapegoat and Splay Trees (15 pages)
+Disjoint Sets (14 pages)
+Lower Bounds (6 pages)
+Adversary Arguments (8 pages)
+Appendix I. Proof by Induction (30 pages)
+Appendix II. Solving Recurrences (22 pages)
+Models of Computation
+These notes cover (a superset of) the automata and formal languages material in CS 374. Some of these notes are a lot more polished than others.
+Everything (155 pages)
+Individual notes:
+Cover and preface (3 pages)
+Strings (17 pages)
+Regular languages (12 pages)
+Finite-state automata (24 pages)
+Nondeterministic automata (21 pages)
+Context-free languages (20 pages)
+Turing machings (20 pages)
+Undecidability (20 pages)
+Universal models (8 pages, unfinished)
+Nondeterministic Turing machines (6 pages, unfinished)
+If were not a little mad and generally silly
+I should give you my advice upon the subject, willy-nilly;
+I should show you in a moment how to grapple with the question,
+And you'd really be astonished at the force of my suggestion.
+On the subject I shall write you a most valuable letter,
+Full of excellent suggestions when I feel a little better,
+But at present I'm afraid I am as mad as any hatter,
+So I'll keep 'em to myself, for my opinion doesn't matter!
+—W. S. Gilbert and Arthur Sullivan, "My Eyes are Fully Open" , Ruddigore; or, The Witch's Curse (1887)
+It is time we did away with “publish or perish” and replace it with “publish and perish.”
+Nothing will be more blasphemous than writing a textbook that anyone can go out and buy.
+— Daniel J. Woodhouse , “An Open Letter to the Mathematical Community” , McSweeny’s (January 15, 2019)
+Jeff Erickson — 15 Jun 2019

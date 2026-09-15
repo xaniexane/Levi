@@ -1,0 +1,98 @@
+# Open Sourced Elective: Database and Rails: Intro to Ruby on Rails
+# University of Texas
+# source: http://www.schneems.com/ut-rails/
+
+UT on Rails
+UT on Rails
+11 Nov 2013
+Reddit
+Bsky
+Lobste.rs
+Hacker News
+Last year I held a series of non credit Rails courses for University of Texas Students , i’m happy to announce that i’ve been granted an Adjunct Professor position at the UT and I’m teaching a for credit course in Databases and Rails. Lucky for you, i’m a sucker for online learning, so i’ll be putting all my course material online, right here.
+The Course
+This Ruby on Rails course is 10 weeks long and assumes you know very little about programming and have not used Ruby, Rails, or Databases previously. The videos are broken up by topic, so if you know one topic you can safely skip that video. Some weeks have exercises and quizes, this is the most important part of the course. Learning a new programming language or framework is like learning a new language, you have to practice to get good at it.
+I’m taking a fairly non traditional approach to teaching Rails, so even if you’ve been coding for a year or so, you’ll still likely get something out of the course, especially the exercises. Please enjoy and share the material (all Creative Commons Attribution) and as always if you have any comments you can find me on Github and Twitter @schneems . If you’re new to programming don’t forget to check out command line basics .
+Week 1: Introduction to Databases
+This first week we focus on databases and won’t get into Rails until the second week. Skipping around is encouraged however if you don’t understand something please go back and check the previous material.
+The first part of this lecture covers the format and content of the course, why we use databases, and how the web is structured around data and data storage. It’s fairly non technical, so feel free to skip if you already know how data on say Facebook gets saved when you submit a status update.
+More
+Exercise:
+Watch command line basics , and then
+install Ruby & Rails on your system
+Week 2: Modeling Relationships in Databases and with Rails
+The first video in this series covers modeling a relationship between a car’s user and the car in databases. There are many different ways we could represent that relationship so this lecture covers quite a few of them, and talks about why or why not to represent your data using one of the methods.
+More
+Exercise:
+1) Find 5 real world relationships and describe them using the database vocabulary we talked about in class. Has many, belongs to, has many and belongs to many, and one more we didn’t discuss has many through.
+2) Build your first Ruby on Rails app . This exercise is about seeing the potential of Rails and getting you introduced to the technology. Don’t worry if you don’t understand all the directions, we will cover them ail in depth in later classes.
+Week 3: Pure Ruby Views
+This week we will be focused on building cool things with Pure Ruby (no Rails). We’re going to cover some Ruby basics, and then dive into an exercise where we build an HTML generator using only Ruby. The students really enjoyed the exercise, and got quite a bit out of it, so you shouldn’t skip it. Even if you’ve been using rails for years, the exercise might give you new insight into how exactly some of that Rails magic works.
+More
+Exercise:
+This week’s exercise will cover building a ruby backed website with no rails. First go to the Building Views in Ruby Exercise . Then fork and clone the project to your local machine. Continue by following directions in the readme.
+Week 4: Rails Routes
+In this week’s videos we will be focused on URLs and HTTP wich are used in all of the web, not just for Rails. We’ll then take a look at how these two things can be brought together to form routes for our website, and how to map routes to views.
+</embed>
+More
+Exercise:
+This week’s exercise use all of our view knowledge and all of our model knowledge together to build a website that allows us to view and add data to and from our database. We’ll also use the info we covered about HTTP and URLs in the videos. First go to the [Routes Model View Exercise]( https://github.com/schneems/routes_controller_exercise]
+Then fork and clone the project to your local machine. Continue by following directions in the readme.
+Week 5: Controllers
+Welcome back, so far we’ve taken a deep dive on models, views, and routes. While we’ve talked about controllers we haven’t talked about what they do, or what they’re good for. Guess what we’re talking about this week (hint, it’s controllers).
+</embed>
+More
+Exercise:
+Add full CRUD and move logic from the view to the controller
+Week 6: Data Visualization with Javascript
+Now that we’ve got the basics of a Rails app down, lets spice things up by adding some javascript powered visualizations to our app. We’ll talk about javascript and the Rails Asset pipeline. In the exercise we’ll be adding a HighChart powered pie chart, and adding the ability to change the price of our products without reloading the page using AJAX!.
+</embed>
+More
+Exercise:
+Add javascript charts and AJAX to Rails project
+Week 7: Active Record Deep Dive
+If you’re new to Rails and Active Record, or you’ve been using them for some time, there are likely methods you’ve been overlooking. This week I take a look at the most common SQL Query interfaces for Active Record .
+More
+Exercise:
+Arrays, Active Record and Hashes
+Week 8
+This week we’re going to tackle some important concepts in Ruby like Dealing with Nil and using Modules in Ruby. We are also going to cover importing data from a spreadsheet, rake, rubygems, bundler, and talk a little about Rail’s testing ecosystem.
+More
+Exercise:
+This week we’ll start a Hero’s journey to build a site similar to Reddit. You’ll need to use everything we’ve learned so far. This isn’t a follow along copy and paste tutorial, this is how I work when I’m making websites. Good luck, you’ll need it. Building Building Reddit in Rails
+Week 9
+We are close to wrapping up our 10 week Rails Course. This week we will cover a handful of topics commonly encountered in Rails projects. We then wrap up with part 2 of our Reddit on Rails exercise!
+By now you should be hard at work on your personal projects. The students in the course just presented in front of the class with some live demos and a brief intro to to the problems their app were solving. Maybe set aside some time this week to show someone your progress, block off 5 minutes and describe what goal you are working towards, the current state of the project (is it almost done, just getting started, needs UI, etc.), and then show them a quick demo of the app. Explain what type of feedback you are looking for (conceptual, design, usability, etc.) and see what they have to say.
+More
+Exercise:
+Reddit on Rails part 2
+Week 10
+Now that you’ve spent 40+ hours pouring over videos, exercises, and quizzes where do you go from here? To answer this question I made a short video.
+More
+Exercise:
+Reddit on Rails part 3:
+The End
+You’re done. Go home, celebrate. Follow me on Twitter @schneems , and don’t forget to tell a friend how much you learned from this course.
+Share on
+Reddit
+Bsky
+Lobste.rs
+Hacker News
+Subscribe to my Newsletter 😻 🤠
+Join thousands of developers who get new code, writing, and programming links from me delivered to their inboxes.
+Keep Reading 🚀
+Cinnamon Buns & Commit Bits: A RubyConf Story
+RubyConf 2026 is coming up soon! The deadline to buy a ticket and enter the VIP raffle by buying a RubyConf ticket is July 1st. That’s only 2 days from this post’s publication. This personal essay explores why a language-specific conference in the age of AI is still important and why events are still important for bringing developers together.
+Read More
+RubyGems Fracture Incident Report
+This is a copy of the canonical report I published on RubyCentral’s site . I recommend reading there for the most updated copy. This document attempts to give closure to the Ruby community about the events that led to the incident, September 10-18, 2025, which I’ve named “RubyGems Fracture.”
+Read More
+How to "Sustain Heroku"
+This is a personal essay (I speak for me and my views, not for my employer) about what exactly a “Sustaining Engineering Model” is, in the context of the recent Heroku announcement, and the book “The Innovator’s Dilemma,” as seen by someone who has worked at the company for the past 14 years.
+Read More
+Non-Violent Comments: Calling out or Calling in?
+Now that programmers are at war with the robots (Gen AI) for our jobs, we need to lean into the things that they cannot do. Today, I’m going to be talking about how to be a human and communicate with other humans in the most hostile of scenarios, “in conflict (drama).”
+Read More
+Disallow code usage with a custom `clippy.toml`
+I recently discovered that adding a clippy.toml file to the root of a Rust project gives the ability to disallow a method or a type when running cargo clippy . This has been really useful. I want to share two quick ways that I’ve used it: Enhancing std::fs calls via fs_err and protecting CWD threadsafety in tests.
+Read More

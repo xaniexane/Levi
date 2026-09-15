@@ -1,0 +1,236 @@
+# CS 4780: Machine Learning
+# Cornell University
+# source: http://www.cs.cornell.edu/courses/CS4780/2014fa/
+
+CS4780 Machine Learning Course, T. Joachims, Cornell University
+Thorsten Joachims
+machine learning course
+21
+Machine Learning
+CS4780 / CS 5780
+Fall 2014
+Prof. Thorsten Joachims
+Cornell University, Department of Computer Science
+Shortcuts: [ Slides ] [ Piazza ] [ CMS ]
+Time and Place
+First lecture: August 28, 2014
+Last lecture: December 4, 2014
+Tuesdays,
+1:25pm - 2:40pm in Ives 305
+2:55pm - 4:10pm in Gates G01
+Thursdays,
+1:25pm - 2:40pm in Ives 305
+2:55pm - 4:10pm in Gates G01
+First Prelim Exam: October 16
+Second Prelim Exam: November 25
+Project Poster Session: December 4
+Final Project: December 10 and December 15
+Syllabus
+Machine learning is concerned with the question of how to make
+computers learn from experience. The ability to learn is not only central to
+most aspects of intelligent behavior, but machine learning techniques have
+become key components of many software systems. For examples, machine learning
+techniques are used to create spam filters, to analyze customer purchase data,
+to understand natural language, or to detect fraudulent credit card
+transactions.
+This course will introduce the fundamental set of techniques and
+algorithms that constitute machine learning as of today, ranging from
+classification methods like decision trees and support vector machines, over
+structured models like hidden Markov models, to clustering and matrix
+factorization methods for recommendation. The course will not only discuss
+individual algorithms and methods, but also tie principles and approaches
+together from a theoretical perspective. In particular, the course will cover
+the following topics:
+Instance-based Learning   :
+K-Nearest Neighbors, collaborative filtering
+Decision Trees   :
+TDIDT, attribute selection, pruning and overfitting
+Linear Rules   :
+Perceptron, logistic regression, linear regression, duality
+Support Vector Machines   :
+Optimal hyperplane, margin, kernels, stability
+Generative Models   :
+Na�ve Bayes, linear discriminant analysis
+Hidden Markov Models:   probabilistic
+model, estimation, Viterbi
+Structured Output Prediction   :
+predicting sequences, rankings, etc.
+Statistical Learning Theory   : PAC
+learning, VC dimension, generalization error bounds
+Online Learning   : experts, bandits, online mistake bounds
+Clustering   : HAC,
+k-means, mixture of Gaussians
+Recommender Systems : Similarity based methods, matrix
+factorization, embeddings
+ML Experimentation   :
+Hypothesis tests, cross validation, resampling estimates
+The prerequisites for the class are: Programming skills (e.g. CS 2110 or CS 3110), and basic knowledge of linear algebra (e.g. MATH 2940), and probability theory (e.g. CS 2800).
+Slides
+08/28: Introduction [ slides ] [ slides 6up ]
+What is learning?
+What is machine learning used for?
+Overview of course, course policies, and contact info.
+09/02: Instance-Based Learning [ slides ] [ slides 6up ]
+Definition of concept learning / binary classification, instance space, target function, training examples.
+Unweighted k-nearest neighbor (kNN) rule.
+Weighted kNN.
+Effect of selecting k.
+Supervised learning for binary classification, multi-class classification, regression, and stuctured output prediction.
+kNN for regression and collaborative filtering.
+09/04: Decision-Tree Learning [ slides ] [ slides 6up ]
+Hypothesis space, consistency, and version space
+List-then-eliminate algorithm
+Classifying with a decision tree
+Representational power of decision trees
+TDIDT decision tree learning algorithm
+Splitting criteria for TDIDT learning
+09/09: Prediction and Overfitting [ slides ] [ slides 6up ]
+Training error, test error, prediction error
+Independently identically distributed (iid) data
+Overfitting
+Occam's razor
+09/11: Model Selection and Assessment [ slides ] [ slides 6up ]
+Model selection
+Controlling overfitting in decision trees
+Train, validation, test split
+Model Assessment
+What is the true error of a classification rule?
+09/16: Linear Classifiers and Perceptrons [ slides ] [ slides 6up ]
+Model Assessment
+Is rule h1 more accurate than h2?
+Is learning algorithm A1 more accurate than A2?
+k-fold Cross-Validation
+Linear classification rules
+Batch Perceptron learning algorithm
+09/18: Online Learning and Perceptron Mistake Bound [ slides ] [ slides 6up ]
+Online learning model
+Online Perceptron learning algorithm
+Margin of linear classifier
+Perceptron mistake bound
+09/23: Support Vector Machines: Optimal Hyperplanes and Soft Margin [ slides ] [ slides 6up ]
+Optimal hyperplanes and margins
+Hard-margin Support Vector Machine
+Soft-margin Support Vector Machine
+Primal optimization problems
+09/25: Support Vector Machines: Duality and Leave-one-out [ slides ] [ slides 6up ]
+Dual Perceptron
+Dual SVM optimization problem
+Connection between primal and dual
+Bounds on the leave-one-out error of an SVM
+09/27: Support Vector Machines: Kernels [ slides ] [ slides 6up ]
+Input space and feature space
+Kernels as a method for non-linear learning
+Kernels for learning with non-vectorial data
+10/07: Learning to Rank using SVMs [ slides ] [ slides 6up ]
+Learning for search engines
+Implicit vs. explicit feedback
+Absolute vs. relative feedback
+Ranking SVMs for learning with pairwise preferences
+10/09: Discriminative vs. Generative Learning [ slides ] [ slides 6up ]
+Empirical Risk Minimization
+Regularized training of linear models
+Bayes decision rule and Bayes error rate
+Multivariate naive Bayes classifier
+10/21: Generative Models for Classification [ slides ] [ slides 6up ]
+Linear discriminant analysis
+Multinomial naive Bayes classifier
+Multi-class and multi-label classification
+Precision, recall, and F1 score
+10/23: Modeling Sequence Data: Markov Models [ slides ] [ slides 6up ]
+Less naive Bayes classifier
+Markov models
+Part-of-speech tagging
+Hidden Markov model (HMM)
+10/28: Modeling Sequence Data: HMMs and Viterbi [ slides ] [ slides 6up ]
+Hidden Markov model (HMM)
+Estimation of HMM parameters
+Viterbi algorithm
+Experiments with POS tagging
+10/30: Statistical Learning Theory: PAC Learning [ slides ] [ slides 6up ]
+Psychic game
+Generalization error bound for finite H and zero error
+Sample complexity
+Probably Approximately Correct (PAC) learning
+11/04: Statistical Learning Theory: Error Bounds and VC-Dimension [ slides ] [ slides 6up ]
+Generalization error bound for finite H and non-zero error
+Generalization error bound for infinite H and non-zero error
+Vapnik-Chervonenkis Dimension
+Theoretical characterization of overfitting
+11/06: Statistical Learning Theory: Expert Online Learning [ slides ] [ slides 6up ]
+Vapnik-Chervonenkis Dimension
+Expert Online Learning Model
+Halving Algorithm and Optimal Mistake Bound
+11/11: Statistical Learning Theory: Weighted Experts and Bandits [ slides ] [ slides 6up ]
+Regret and Expected Regret
+Expert Online Learning: Weighted Majority Algorithm, Exponentiated Gradient
+Bandit Online Learning: EXP3 Algorithm
+11/13: Online Learning with Humans in the Loop [ slides ] [ slides 6up ]
+Data from Rational Behavior
+Dueling Bandits Model and Algorithms
+Coactive Learning Model and Algorithms
+11/18: Clustering: Similarity-Based Clustering [ slides ] [ slides 6up ]
+Unsupervised learning problems
+Hierarchical Agglomerative Clustering (HAC)
+Single-link, complete-link, group-average similarity
+11/20: Clustering: k-Means and Mixtures of Gaussians [ slides ] [ slides 6up ]
+Flat clustering
+k-Means algorithms
+Mixture of gaussians model
+EM-algorithm for mixture of gaussians
+12/02: Structured Output Prediction via Structural SVMs [ slides ] [ slides 6up ]
+Empirical risk miminization for structured output prediction
+Structural SVMs
+Cutting-plane training algorithm
+Wrap-up
+Staff
+We greatly prefer that you use the CS4780/5780 Piazza Forum for questions and discussions.  The forum is monitored by all the TA's and the prof -- you will get the best response time. And all the TA's will know the question you asked and the answers you received.
+Prof. Thorsten Joachims ( homepage )
+Shuhan Wang, TA [late submissions, regrades, CMS]
+Daniel Sedra, TA [office hours, piazza]
+Karthik Raman, TA [projects]
+Jisun Jung, TA [quizzes]
+TBA, TA [quizzes]
+Tobias Schnabel, TA [homeworks and solutions]
+Igor Labutov, TA
+Adith Swaminathan, TA
+TBA, Consultant
+Assignments and Exams
+Homework assignments can be downloaded from CMS .
+All assignments are due at the beginning of class on the due date. Assignments turned in late will be charged a 1 percentage point reduction of the cumulated final homework grade for each period of 24 hours for which the assignment is late. However, every student has a budget of 6 late days (i.e. 24 hour periods after the time the assignment was due) throughout the semester for which there is no late penalty. So, if you have perfect scores of 100 on all 5 homeworks and a total of 8 late days, you final homework score will be 97 (which then accounts for 35% of your course grade). No assignment will be accepted after the solution was made public, which is typically 3-5 days after the time it was due. You can submit late assignments in class or following the policy written on the homework handout.
+Graded homework assignments and prelims can be picked up in Gates 216 (opening hours Monday - Friday 12:00pm - 4:00pm).
+Regrade requests can be submitted within 7 days after the grades have been made available on CMS . Regrade requests have to be submitted in writing and in hardcopy using this form (or similar). They can be submitted in class or to Gates 216.
+Grading
+This is a 4-credit course. Grades will be determined based on two written exams, a final project, homework assignments, and class participation.
+50%: 2 Prelim Exams
+15%: Final Project
+25%: Homework (~5 assignments)
+5%: Quizzes (in class)
+2%: Prereq Exam
+3%: Class Participation
+To eliminate outlier grades for homeworks and quizzes, the lowest grade is replaced by the second lowest grade when grades are cumulated at the end of the semester.
+We always appreciate interesting homework solutions that go beyond the minimum. To reward homework solutions that are particularly nice, we will give you "Bonus Points". Bonus points are collected in a special category on CMS. Bonus points are not real points and are not summed up for the final grade, but they can nudge somebody to a higher grade who is right on the boundary.
+All assignment, exam, and final grades (including + and - of that grade) are roughly on the following scale: A=92-100; B=82-88; C=72-78; D=60-68; F= below 60.
+For the final project, we will use peer review similar to how scientific papers are reviewed for conferences and journals. This means that you will get to read and comment on other students work, which provides input for the TA's and the professor to determine the project grades. The quality of your reviewing also becomes a small component of your own project grade.
+Students taking the class S/U do all work, except for the projects, and need to receive at least a grade equivalent to a D to pass the course.
+Reference Material
+The main textbooks for the class are:
+Tom Mitchell, "Machine Learning", McGraw Hill, 1997.
+CS4780 course packet available at the Cornell Bookstore.
+An additional textbook that can serve as an in-depth secondary reference on many topics in this class is:
+Kevin Murphy, "Machine Learning - a Probabilistic Perspective", MIT Press, 2012. ( online via Cornell Library)
+The reading in the course packet are taken from the following books. In addition, these are some books for further reading beyond the scope of the course:
+Cristianini, Shawe-Taylor, "Introduction to Support Vector Machines", Cambridge University Press, 2000. ( online via Cornell Library)
+Schoelkopf, Smola, "Learning with Kernels", MIT Press, 2001. ( online )
+Bishop, "Pattern Recognition and Machine Learning", Springer, 2006.
+Ethem Alpaydin, "Introduction to Machine Learning", MIT Press, 2004.
+Devroye, Gyoerfi, Lugosi, "A Probabilistic Theory of Pattern Recognition", Springer, 1997.
+Duda, Hart, Stork, "Pattern Classification", Wiley, 2000.
+Hastie, Tibshirani, Friedman, "The Elements of Statistical Learning", Springer, 2001.
+Joachims, "Learning to Classify Text using Support Vector Machines", Kluwer, 2002.
+Leeds Tutorial on HMMs ( online )
+Manning, Schuetze, "Foundations of Statistical Natural Language Processing", MIT Press, 1999. ( online via Cornell Library)
+Manning, Raghavan, Schuetze, "Introduction to Information Retrieval", Cambridge, 2008. ( online )
+Vapnik, "Statistical Learning Theory", Wiley, 1998.
+Academic Integrity
+This course follows the Cornell University Code of Academic Integrity . Each student in this course is expected to abide by the Cornell University Code of Academic Integrity. Any work submitted by a student in this course for academic credit will be the student's own work. Violations of the rules (e.g. cheating, copying, non-approved collaborations) will not be tolerated.
+We run automatic cheating detection to detect violations of the collaboration rules.

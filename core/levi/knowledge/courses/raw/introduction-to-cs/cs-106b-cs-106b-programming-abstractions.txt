@@ -1,0 +1,512 @@
+# CS 106B: Programming Abstractions
+# Stanford University
+# source: https://see.stanford.edu/Course/CS106B
+
+Stanford Engineering Everywhere | CS106B - Programming Abstractions
+Stanford University
+CS106B - Programming Abstractions
+Course Details
+Show All
+Course Description
+This course is the natural successor to Programming Methodology and covers such advanced programming topics as recursion, algorithmic analysis, and data abstraction using the C++ programming language, which is similar to both C and Java. If you've taken the Computer Science AP exam and done well (scored 4 or 5) or earned a good grade in a college course, Programming Abstractions may be an appropriate course for you to start with, but often Programming Abstractions (Accelerated) is a better choice. Programming Abstractions assumes that you already have familiarity with good programming style and software engineering issues (at the level of Programming Methodology), and that you can use this understanding as a foundation on which to tackle new topics in programming and data abstraction.
+Topics: Abstraction and its relation to programming. Software engineering principles of data abstraction and modularity. Object-oriented programming, fundamental data structures (such as stacks, queues, sets) and data-directed design. Recursion and recursive data structures (linked lists, trees, graphs). Introduction to time and space complexity analysis. Uses the programming language C++ covering its basic facilities.
+Prerequisites: Solid performance in Programming Methodology and readiness to move on to advanced programming topics. A comparable introductory programming course (including high school AP courses) is often a reasonable substitute for our Programming Methodology.
+Syllabus
+DOWNLOAD All Course Materials
+Instructor
+Zelenski, Julie
+I left my rural hometown of Stevinson, CA (population: 262) to come to Stanford as a wide-eyed freshman in 1985. That tour passed through SLE, the LSJUMB, a half-dozen changes in my major, and I emerged with a Mathematical Sciences degree. A few years out in the "real world" were enough to send me running back for grad school in computer science and I segued into my current position as a lecturer in 1992 without setting foot off campus again. I teach courses in the undergrad systems curriculum, including programming methodology and abstractions, language paradigms, compilers, and object-oriented design and development, but I especially enjoy working with the section leaders in the CS106 courses. I have been the advisor to the Stanford SWE and ACM-W chapters and recently served on the Computer Science Advanced Placement development committee.
+Handouts
+Lecture Slides Handouts
+Lecture 1
+Lecture01.pdf
+H01-Placement.pdf
+H02-GeneralInfo.pdf
+H03-HonorCode.pdf
+H04-IntroToC++.pdf
+Lecture 2
+Lecture02.pdf
+Lecture 3
+Lecture03.pdf
+H05M-XCode.pdf
+H05P-UsingVS.pdf
+H07P-DebugVS.pdf
+H07M-DebugXcode.pdf
+H10-LibRef.pdf
+Lecture 4
+Lecture04.pdf
+Lecture4code.txt
+H11-Grading.pdf
+H12-DevStyle.pdf
+H13-DecompEx.pdf
+H14-106Client.pdf
+Lecture 5
+Lecture05.pdf
+Lecture 6
+Lecture06.pdf
+Lecture6code.txt
+Lecture 7
+Lecture07.pdf
+Lecture7code.txt
+Lecture 8
+Lecture08.pdf
+Lecture 9
+Lecture09.pdf
+Lecture 10
+Lecture10.pdf
+H19-RecBacktrackExamples.pdf
+Lecture 11
+Lecture11.pdf
+H21-LinkedListCode.pdf
+Lecture 12
+Lecture12.pdf
+Lecture 13
+Lecture13.pdf
+Lecture 14
+Lecture14.pdf
+H24-ExamStrategies.pdf
+Lecture 15
+Lecture15.pdf
+Lecture 16
+Lecture16.pdf
+Lecture 17
+Lecture17.pdf
+Lecture 18
+Lecture18.pdf
+Lecture18-vecstring.txt
+Lecture18-vectemplate.txt
+Lecture 19
+Lecture19.pdf
+Lecture19-mystack.txt
+Lecture19-myvector.txt
+Lecture 20
+Lecture20.pdf
+Lecture20-queue.txt
+Lecture20-stack.txt
+Lecture 21
+Lecture21.pdf
+Lecture21code-map.txt
+Lecture 22
+Lecture22.pdf
+Lecture 23
+Lecture23.pdf
+Lecture 24
+Lecture24.pdf
+Lecture24code-hashmap.txt
+Lecture 25
+Lecture25.pdf
+Lecture 26
+Lecture 27
+H38-C++sansCS106.pdf
+Assignments
+Section Assignments
+Assignment Solutions Distributed
+Assignment 1
+Solutions
+Lecture 3
+Assignment 2
+Solutions
+Lecture 5
+Assignment 3
+Solutions
+Lecture 8
+Assignment 4
+Solutions
+Lecture 11
+Assignment 5
+Solutions
+Lecture 16
+Assignment 6
+Solutions
+Lecture 17
+Assignment 7
+Solutions
+Lecture 19
+Assignment 8
+Solutions
+Lecture 22
+Assignment 9
+Solutions
+Lecture 25
+Programming Assignments
+Assignment Instructions Starter Code (PC / Mac) Distributed
+Simple C++
+H09-Assign1SimpleC++.pdf
+Assign1warmup.cpp
+Lecture 3
+Assign 2 ADTs
+H16-Assign2ADTs.pdf
+Assign2PCADTs.zip
+Assign2MacADT.zip
+Lecture 6
+Recursion
+H18-Assign3RecPS.pdf Solutions for Warm-ups
+Assign3PCRecursion.zip
+Assign3MacRecursion.zip
+Lecture 9
+Boggle
+H22-Assign4Boggle.pdf
+Assign4PCBoggle.zip
+Assign4MacBoggle.zip
+Lecture 12
+Sorting
+H29-Assign5Sorting.pdf
+Assign5PCSortLab.zip
+Assign5MacSortLab.zip
+Lecture 16
+PQueue
+H32-Assign6Pqueue.pdf
+Assign6PCPQueue.zip
+Assign6MacPQueue.zip
+Lecture 19
+Pathfinder
+H34-Assign7Pathfinder.pdf
+Assign7PCPathfinder.zip
+Assign7MacPathfinder.zip
+Lecture 23
+Exams
+Practice Midterm
+Questions
+Solutions
+Practice Final
+Questions
+Solutions
+Course Sessions (27):
+Show All
+Lecture 1
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+43 min
+Topics: About the CS106 Series at Stanford, The CS106 Philosophy, Why take CS106B?, Logistics of the Course, Introducing C++
+Transcripts
+HTML
+PDF
+Lecture 2
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+44 min
+Topics: Similarity between C++ & Java: - syntax - variable types - operators - control structures, Looking at an Example C++ code: - comment, #include Statements, Global Declarations (constant), Declaring a Function Prototype, The main() Function, Decomposed Function Definition, Example Live Coding: To Calculate the Average, for loop -> a while : Another Purpose of the Same Code, C++ User Defined Data Types: -enums – records, C++ Parameters Passing: -pass by value - pass by reference
+Transcripts
+HTML
+PDF
+Lecture 3
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+45 min
+Topics: C++ Libraries - Standard Libraries, CS106 Libraries, CS106 random.h Library, C++ String Type, Operations on String Type, String Class' Member Functions, C++ string vs Java String, Live Example Code : Working on Strings, CS106 strutils.h Library, C++ String vs C String, Concatenation Pitfall (C++ vs C string cont.), C++ Console I/O
+Transcripts
+HTML
+PDF
+Lecture 4
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+50 min
+Topics: C++ Console I/O, C++ File I/O, Stream Operations, Live Example Coding : Working with Files, Live Coding Continuation: Function to Operate on the Opened File Stream, Passing the File Stream by Reference, Error Function, Class Libraries OO Features, Why OO is So Successful, CS106 Class Library, CS106: Scanner Library, Scanner Client Interface, Client Use of Scanner, Container Classes, Template Containers, Vector Interface
+Transcripts
+HTML
+PDF
+Lecture 5
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+46 min
+Topics: Client Use of Templates, Vector Class, Vector Client Interface, Client Use of Vector, Type-safety in Templates, Grid Class, Grid Client Interface, Client Use of Grid, Stack Class, Stack Client Interface, Queue Class, Queue Client Interface, Client Use of Queue, Nested Templates, Learning a New API, CS106B Library Documentation
+Transcripts
+HTML
+PDF
+Lecture 6
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+43 min
+Topics: More Containers, Map Class, Uses of Map, Map Client Interface, Live Coding Example: Use of Map, More information on Maps, What’s Missing? Iterator Operation Through the Map, Iterating Over the Map, Set Class, Set Client Interface, Live Coding Example : Use of Set, Set Higher-level Operations, Why Set is Different
+Transcripts
+HTML
+PDF
+Lecture 7
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+48 min
+Topics: Seeing Functions as Data: Specific Plot Functions, Generic Plot Function, Back to the Set, Live Coding Example: Use of Set with User Defined Data Types, Client Callback Function, Review of the Classes Seen,5 Using Nested ADTs (Abstract Data Types), Live Coding Example, Recursion, Recursive Decomposition
+Transcripts
+HTML
+PDF
+Lecture 8
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+43 min
+Topics: Common Mistakes Stumbled Upon: 'I'terator, Common Mistakes Stumbled Upon: Concatenating Strings, Solving Problems Recursively, Functional Recursion, Example of Recursion: Calculating Raise to Power, Demo of "Raise to the Power Example" Through Live Coding, Mechanics of What’s Going to Happen in Recursion, More Efficient Recursion, Being Wary of Too Many Base Cases, Recursion & Efficiency, Example: Palindromes, Example: Binary Search, Binary Search Code Walk Through, Choosing a Subset; Choose Code
+Transcripts
+HTML
+PDF
+Lecture 9
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+48 min
+Topics: Thinking Recursively, Procedural vs Functional – Recursion, Fractal Code, Live Demo: Fractal Example, Another Recursive Graphic: Mondrian Art, Random Pseudo-Mondrian and the Code, Hanois Towers : Classic Recursion Example, Tower Code, Live Demo, Permutations, Permute Code, Tree of Recursive Calls
+Transcripts
+HTML
+PDF
+Lecture 10
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+47 min
+Topics: Refresh: Permute Code, Tree of Recursive Calls, Live Demo: Testing with Different Cases, Eliminating Duplicates, Subsets, Subset Strategy, Subset Code, Tree of RecursiveCalls: Subset, Exhaustive Recursion, Recursive Backtracking, Turning Recursive Permute to Backtracking, Permute -> Anagram Finder Code, Decision Problems: 8 Queens, Extension to N Queens
+Transcripts
+HTML
+PDF
+Lecture 11
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+48 min
+Topics: Backtracking Pseudocode, Sudoku Solver, Sudoku Code, Cryptarithmetic, Dumb Solver, Smarter Solver, Looking for Patterns, Introduction to Pointers, Single Pointer Operations
+Transcripts
+HTML
+PDF
+Lecture 12
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+42 min
+Topics: Pointer Movie, Pointer Operations: Code & Pointer Memory Diagrams, Pointer Basics, Pointer and Dynamic Arrays, Use of Pointers, Recursive Data, A Recursive Structure, Live Demo: Working with Linked List, Building the List
+Transcripts
+HTML
+PDF
+Lecture 13
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+52 min
+Topics: Coding with Linked List, Printing the List, Using Recursion to Print List, De-allocating the Memory Used for the Linked List, Watch the Pointers: Prepend Function, Passing Pointers by Reference, Array vs Linked List, Insert in Sorted (order) Linked List, Insert in Sorted Order: Code, Recursive Insert
+Transcripts
+HTML
+PDF
+Lecture 14
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+50 min
+Topics: Algorithm Analysis, Evaluating the Performance, Analysis of Codes: Statement Counts, Another Example (Statement Count Contd.), Comparing Algorithm, Big-O Notation, Big-O to Predict the Time of Execution, Best/Worst/Average Case, Analysis of Recursive Algorithms, Another Example : Towers of Hanoi, A Tabulation for Different Algorithms, Growth Patterns, Application of Algorithm Analysis to Sorting, Selection Sort, Selection Sort Code
+Transcripts
+HTML
+PDF
+Lecture 15
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+47 min
+Topics: Selection Sort, Live Demo: Working/execution of the Code, Selection Sort Analysis, Insertion Sort Algorithm, Live Demo: Working/execution of Insertion Sort, Insertion Sort Analysis, Insertion vs Selection, Quadratic Growth of the Algorithm, Merge Sort, Merge Sort: Working/execution Demo, Merge Sort Code Explanation, Merge Sort Analysis, Quadratic vs Linear Arithmetic, Sort 'Race', Quick Sort Idea
+Transcripts
+HTML
+PDF
+Lecture 16
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+48 min
+Topics: Partitioning for Quicksort, Quicksort Code Working/execution, Quicksort Code, Live Demo: Running Quicksort vs Merge Sort, Bad Split Example, Worst Case Split, What Input has Worst Case for Quick Sort, Live Demo: Running Quicksort vs Merge Sort, Different Input Scenarios, Strategy to Avoid Worst Case Split, Execution Time Tabulation, Towards Generic Functions: Swap, Function Template, Example Live Code, Template Instantiation and its Errors, Sort Template, Client Use of Sort Template
+Transcripts
+HTML
+PDF
+Lecture 17
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+45 min
+Topics: Sort Template with Callback, Supplying the Callback Function, One Last Convenience: Default Callback Function, Why Object Oriented Programming, Class Division, Class Interface in ".h" File, Storage for Objects, Accessing Members of a Class, Class Implementation, Implementing Member Functions, Maintaining Object Consistency, Constructors of a Class, Destructors of a Class, Basic Thoughts on Object Design, Internal vs External Representation: Idea of Encapsulation, Better Representation, ADTs (Abstract Data Types)
+Transcripts
+HTML
+PDF
+Lecture 18
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+51 min
+Topics: Abstract Data Types, Wall of Abstraction, Why ADTs?, Live Coding Example: Creating the Vector Class, Private Data Members, Growing Dynamically: Making Space at Runtime, Insert and Remove Functions, Templatizing the Class Created, Including the "template.cpp" - Why?
+Transcripts
+HTML
+PDF
+Lecture 19
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+41 min
+Topics: Rules of Template Implementation, Explanation of the Working, Not Allow Member Wise Copy, InsertAt Function, Consequences of Contiguous Memory Being a Disadvantage, Stack Class, The Member Function Definitions, Midterm Post Mortem
+Transcripts
+HTML
+PDF
+Lecture 20
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+51 min
+Topics: Live Coding: Recap of the Vector-based Implementation for Stack, Linked List Implementation for Stack, Live Coding: Linked List Implementation for Stack, Analyzing Push/pop Functions, Queue Implementation, Live Coding: Queue Implementation, Alternative Implementation, Text Editor Case Study, Buffered Class Interface and Buffer Layered on Vector, Live Coding: Text Editor, Evaluate Vector Buffer, Buffer Layered on Stack, Live Demo, Compare Implementations, Buffer as Linked List
+Transcripts
+HTML
+PDF
+Lecture 21
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+46 min
+Topics: Buffer: Vector vs Stack, Buffer as Linked List, Cursor Design, Use of Dummy Cell, Linked List Insert/delete, Linked List Cursor Movement, Compare Implementation, Doubly Linked List, Compare Implementation, Space Time Trade Off, Implementing Map, Simple Map Implementation: Vector, Map as Vector : Performance Implication, A Different Strategy
+Transcripts
+HTML
+PDF
+Lecture 22
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+50 min
+Topics: Map as Vector, A different Strategy: Binary Search Tree, Trees in General, Binary Search Tree for Numbers, Operating on Trees, Tree Traversals at Work, Implementing Map as Tree, Map - getValue(), Important Syntactical Advice, Adding to a BST, Trace treeEnter(), Passing Nodes by Reference, Evaluate Map as a Tree, Impact of the Height of the Tree, Degenerate Trees, What to do About Unbalanced Trees?
+Transcripts
+HTML
+PDF
+Lecture 23
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+46 min*
+Topics: Pathfinder Demo, Graphs: Examples, Graphs: Explanation, Implementation Strategies, Graph Representation in C++, Nodes and Arcs in C++, Graph Traversals, DFS - (Depth First Search), Trace DfS, BFS - (Breadth First Search), Trace BFS, Graph Search Algorithms, Weighted arcs
+* Segments of this lecture have been edited out due to copyright restrictions.
+Transcripts
+HTML
+PDF
+Lecture 24
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+50 min
+Topics: Compare Map Implementations, Hashtable Idea, Hash Functions, Hash Collisions, Live Demo: Hashing, Live Coding: Hashing, Hashing Idea : Example in Real World, Hash Table Performance, Compare Map Implementations, Hashing Generic Types, Implementing Set
+Transcripts
+HTML
+PDF
+Lecture 25
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+51 min
+Topics: Lexicon Case Study, Lexicon as Sorted Vector, Lexicon as BST, Lexicon as Hash Table, Summary so Far, Noticing Patterns/repetitions in the Words, Letter Trie, Lexicon as Trie, Dynamic Array of Children, Flatten Tree into Array, Exploiting Prefixes and Suffixes, DAWG: Directed Acyclic Word Graph, Lexicon as DAWG, The Final Result, Cool Facts about the DAWG
+Transcripts
+HTML
+PDF
+Lecture 26
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+49 min
+Topics: Final Showdown, Thinking About Design, Runtime Performance, Memory Used, Code Complexity, Making Tradeoffs, Array vs Vector, Stack/Queue vs Vector, Set vs Sorted Vector, Pointer-based vs. Contiguous Memory, CS106B MVPs, Pointers, To Remember Years from Now, After CS106B, considering.cs
+Transcripts
+HTML
+PDF
+Lecture 27
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+52 min
+Topics: Guest Lecturer: Keith Schwarz, About the C++ Language, Quick History of C++, C++ Philosophy, C++ Without genlib.h, A Working genlib.h Replacement, Other CS106 Headers, strutils.h, simpio.h, random.h, graphics.h/extrgraph.h, What about ADTs?, Standard Template Library, STL Algorithms, Language Features, Operator Overloading, What Next?
+Transcripts
+HTML
+PDF
+Stanford University
+Stanford Home
+Maps & Directions
+Search Stanford
+Emergency Info
+Terms of Use
+Privacy
+Copyright
+Trademarks
+Non-Discrimination
+Accessibility
+© Stanford University, Stanford, California 94305

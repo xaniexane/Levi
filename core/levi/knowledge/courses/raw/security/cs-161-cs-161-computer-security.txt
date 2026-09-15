@@ -1,0 +1,440 @@
+# CS 161: Computer Security
+# UC Berkeley
+# source: http://www-inst.eecs.berkeley.edu/~cs161/sp15/
+
+This page is archived. It is kept only for reference purposes, so it is no longer being updated and may not meet accessibility standards. If you need this content in a different format, please email inst@eecs.berkeley.edu . Hide this message e
+CS 161: Computer Security
+Administrative
+Lecture
+Homeworks
+Sections
+Projects
+Exams
+Policies
+Piazza
+CS 161 : Computer Security
+Spring 2015
+Instructor:
+Dawn Song (office hours Mon/Wed 8-8:30pm in 245 Li Ka Shing)
+TAs:
+Arjun Baokar (OH Wed 1-2pm, 611 Soda)
+Kevin Chen (OH Fri 1-2pm, 651 Soda)
+Neil Gong (OH Thurs 10:30-11:30am, 411 Soda)
+Alec Guertin (OH Thurs 12-1pm, 651 Soda)
+Andrew Liu (OH Thurs 3:30-4:30pm, 651 Soda)
+Bill Yeh (OH Mon 11:30-12:30pm, 651 Soda)
+Lectures:
+MW 630-8P, 245 LI KA SHING
+Sections:
+Tue     11:00-12:00       185 Barrows           Alec
+Tue     12:00-1:00         3111 Etcheverry     Alec
+Tue     2:00-3:00           102 Latimer           Arjun
+Tue     3:00-4:00           102 Latimer           Kevin
+Tue     4:00-5:00           102 Latimer           Kevin
+Tue     5:00-6:00           121 Wheeler           Andrew
+Wed   10:00-11:00       102 Latimer             Bill
+Wed   12:00-1:00         102 Latimer             Arjun
+Addresses:
+http://www-inst.eecs.berkeley.edu/~cs161/ -->
+Announcements, questions:
+the class Piazza site , which you sign up for here .
+Feel free to mark your question as private if you don't want other students to see it.
+Announcements:
+There will be NO FINAL EXAMS during the final week for this course. In particular, CS161 will not have a conflict with CS162's final exam time.
+The instructors and TAs will periodically post announcements,
+clarifications, etc. to the Piazza site.
+Hence it is important that you check it reguarly
+throughout the semester.
+Lectures:
+The lecture schedule is subject to change
+and will be revised as the course progresses.
+Date
+Topic
+Recommended Readings
+Slides
+Wed 1/21
+Course Introduction
+slides 1
+Mon 1/26
+Introduction to Security
+G&T § 1.1, Craft § 1-1.1, 1.3
+slides 2
+Wed 1/28
+Memory Safety Vulnerabilites: Attacks and Defenses I
+Smashing the Stack for Fun and Profit
+slides 3
+Mon 2/2
+Memory Safety Vulnerabilites: Attacks and Defenses II
+G&T § 3.4, Craft § 6.1-6.3
+Frame Pointer Overwrite
+Basic Integer Overflows
+Format String Vulnerabilities
+Memory Safety Notes
+slides 4
+Tue 2/3
+Project 1 Out
+Wed 2/4
+Memory Safety Vulnerabilities and Fuzzing (Guest Lecture: Kevin Chen)
+Buffer Overflows: Attacks and Defenses for the Vulnerability of the Decade
+Bypassing Browser Memory Protections
+Fuzzing
+slides 5
+Mon 2/9
+Symbolic Execution
+slides 6
+Wed 2/11
+Static Analysis
+slides 7
+Mon 2/16
+HOLIDAY, NO CLASS
+Tue 2/17
+HW 1 Out
+Wed 2/18
+Program Verification
+Reasoning about Code
+slides 8
+Tue 2/24
+Project 1 Due
+Mon 2/23
+Security Architecture Principles
+Patterns
+Security Principles
+G&T § 1.2, Craft § 1.2
+G&T § 1.1.4, Craft § 3.4
+slides 9
+Wed 2/25
+Malware: Botnets, Viruses, and Worms (Guest Lecture: Damon McCoy)
+G&T § 4.3-4.4, Craft § 6.4
+slides 10
+Thu 2/26
+HW 1 Due
+Mon 3/2
+Midterm 1 Review
+slides 11
+Wed 3/4
+MIDTERM 1 (in 245 Li Ka Shing 6:30-8:00pm)
+Mon 3/9
+Web Security Overview and Concepts
+Inkling Textbook Login and instructions on Piazza
+slides 12
+Wed 3/11
+Web Application Security I
+Inkling Textbook Login and instructions on Piazza
+slides 13
+Sun 3/15
+Project 2 Out
+Mon 3/16
+Web Application Security II
+Inkling Textbook Login and instructions on Piazza
+slides 14
+Wed 3/18
+Web Application Security III
+Inkling Textbook Login and instructions on Piazza
+slides 15
+Thu 3/19
+HW 2 Out
+Mon 3/23
+Spring Recess, no class
+Wed 3/25
+Spring Recess, no class
+Mon 3/30
+Crypto I
+Symmetric Key Crypto Notes
+G&T § 8.1.0, 8.1.1, 8.1.3, 8.1.6, 8.1.7
+slides 16
+Wed 4/1
+Crypto II
+Asymmetric Key Crypto Notes
+Signature Notes
+G&T § 8.2.1, 8.2.3, 8.2.4, 8.4.1, 8.4.3
+slides 17
+Fri 4/3
+Project 2 Due
+Mon 4/6
+Crypto III (Guest Lecture: Neil Gong)
+Password Notes
+Public Key Infrastructure Notes
+G&T § 1.3
+slides 18
+Tue 4/7
+Wed 4/8
+Crypto IV
+slides 19
+Thu 4/12
+HW 2 Due
+Mon 4/13
+Network Security I (Guest Lecture: Kevin Chen) HW 3 Out
+slides 20
+Tue 4/14
+Project 3 Out
+Wed 4/15
+Network Security II (Guest Lecture: Kevin Chen)
+slides 21
+Mon 4/20
+Midterm 2 Review
+slides 22
+Tue 4/21
+HW 3 Due
+Wed 4/22
+Crypto currency and Ethereum (Guest Lecture: Kieren Scott James-Lubin, Martin Becze)
+in Wozniack Lounge (4th floor Soda)
+Mon 4/27
+Security in the real world (Guest Lecture: Devdatta Akhawe)
+Wed 4/29
+MIDTERM 2 (in 245 Li Ka Shing 6:30-8:00pm)
+Mon 5/4
+RRR Week, no class
+Wed 5/6
+RRR Week, no class
+Thu 5/7
+Project 3 Due
+Discussion Sections:
+You are expected to attend discussions. Coming prepared to discussions sections will help you get more out of the time spent there.
+Discussion section handouts and worksheets will be posted here.
+Discussion 2 (C Review Slides)
+Discussion 3 (Memory Safety Mitigations)
+Discussion 3 solutions
+Discussion 4 (Software Vulnerabilities)
+Discussion 4 solutions
+Discussion 5 (Fuzzing and Symbolic Execution)
+Discussion 5 solutions
+Discussion 6 (Security Architecture Principles)
+Discussion 6 solutions
+Helpful Guide on Stack Stuff
+Discussion 7 (Midterm 1 Review, no worksheet)
+Discussion 8 (DOM and Same Origin Policy)
+Discussion 8 solutions
+Discussion 9 (SQL Injections and XSS)
+Discussion 9 solutions
+Discussion 10 (CSRF, Session Fixation, Encryption Modes)
+Discussion 10 solutions
+Discussion 11 (Public Key Crypto, Key Exchange)
+Discussion 11 solutions
+Discussion 12 (Intro to Networking)
+Discussion 12 solutions
+Discussion 13 (DNS and DDoS)
+Discussion 13 solutions
+-->
+Homeworks:
+Homeworks will be submitted electronically via GradeScope .
+Homework solutions must be legible; we may mark off for difficult-to-read solutions, or even refrain from grading them entirely.
+There will be a total 3 homework assignments over the course of the semester.
+-->
+Projects
+There will be 3 course projects.
+no longer accepted .
+(There are no "slip days".)
+Note that this late policy applies only to projects, not homeworks
+(which cannot be turned in late).
+Schedule for projects:
+Project 1 (due 3/3):
+Specification (updated 3/2, see @366 and @567 ),
+skeleton code (updated 3/3; see @295 and @366 ).
+Project 2 (due 3/17):
+Specification , Solutions , Your target VM , gdbpipe utility (see spec for how to use it).
+Project 3 (extension: due 5/2):
+Specification (see spec for how to get started), Solutions .
+The slides from the CSUA's C review session are available
+in pdf and
+Powerpoint format.
+-->
+-->
+Exams:
+There will be only be two midterms in this course. In particular, there is no final exam.
+The midterms will be given on
+Wednesday March 4 and Wednesday April 29 during regular
+class hours, 6:30-8:00pm. The location will be revealed closer to the exam date.
+All exams are mandatory.
+If you will be unable to attend any of these dates, you must
+contact the instructor (via a message on Piazza) at some point during
+the first week of classes.
+-->
+Grading:
+We will compute grades from a weighted average, as follows:
+Homeworks: 15% (3 * 5%)
+Projects: 45% (3 * 15%)
+Midterms: 40% (2 * 20%)
+There will be a total 3 homework assignments over the course of the semester.
+Course Policies
+Contact information:
+If you have a question, the best way to contact us is via
+the class Piazza site .
+The staff (instructors and TAs) will check the site regularly,
+and if you use it, other students will be able to help you too.
+Please avoid posting answers or hints on homework/project
+questions before the homework/project is due.
+If your question is personal or not of interest to other students,
+you are encouraged to mark the question as private on Piazza.
+If you wish to talk with one of us individually in person,
+you are welcome to come to any of our office hours.
+We prefer that use these methods instead of sending us email;
+email regrettably does not scale well to a class of this size.
+Announcements:
+The instructors and TAs will periodically post announcements,
+clarifications, etc. to the Piazza site.
+Hence it is important that you check it reguarly
+throughout the semester.
+Prerequisites:
+The prerequisites for CS 161 are CS 61B, CS61C, and CS70.
+We assume basic knowledge of both Java and C.
+You will need to have a basic familiarity using Unix systems.
+Your secret password for HW0 Q3 is:
+l33tskillz
+(Don't share it with anyone.)
+Collaboration:
+Homeworks will specify whether they must be done
+on your own or may be done in groups.
+Either way, you must write up your solutions
+entirely on your own .
+For homeworks, you must never read, see, or copy
+the solutions of other students, and you must not allow other
+students to see your solutions.
+For projects, you must never read, see, or copy the
+code or solutions of other students (except for your project partner,
+for group projects), and you must not allow other students (except
+for your project partner) to see your solutions or code.
+You may use books or online
+resources to help solve homework problems, but you must always
+credit all such sources in your writeup and you must never
+copy material verbatim.
+Not only is this
+good scholarly conduct, it also protects you from accusations of theft
+of your colleagues' ideas.
+You must not receive help on homeworks or projects from students
+who have taken the course in previous years, and you must not
+review homework or project solutions from previous years.
+You must ensure that your solutions will not be visible to other students.
+If you use Github or another source control system to store
+your solutions electronically, you must ensure your account is configured so your
+solutions are not publicly visible.
+If you use Github, Github offers
+free student accounts
+that allow you to keep
+your solutions private; please use one.
+We believe that most students can distinguish between helping other
+students understand course material and cheating.
+Explaining a subtle point from lecture or discussing course topics
+is an interaction that we encourage, but
+you should never read another student's homework/project solution or partial
+solution, nor have it in your possession, either electronically or on
+paper (except for your project partner, for group projects).
+You must never share your solutions, or partial solutions,
+with another student (other than your project partner, for group projects),
+even with the explicit understanding that it will
+not be copied -- not even with students in your homework group.
+You must write your homework solution strictly by yourself.
+Warning: Your attention is drawn to the Department's
+Policy on Academic Dishonesty .
+In particular, you should be aware that
+copying or sharing solutions, in whole or in part, from other
+students in the class or any other source without acknowledgment
+constitutes cheating. Any student found to be cheating risks automatically
+failing the class and referral to the Office of Student Conduct.
+Ethics:
+We will be discussing attacks in this class, some of them quite nasty.
+None of this is in any way an invitation to undertake these attacks
+in any fashion other than with informed consent of all involved
+and affected parties.
+The existence of a security hole is no excuse.
+These issues concern not only professional ethics, but also
+UCB policy and state and federal law .
+If there is any question in your mind about what conduct is allowable,
+contact the instructors first.
+Computer accounts:
+We will use 'class' accounts this semester.
+You will need to obtain an account form with a username and
+password from your discussion section TA.
+When you first log into your account, you will be prompted to
+enter information about yourself; that will register you with our
+grading software.
+If you want to check that you are registered correctly with our
+grading software, you can run check-register at any time.
+Textbook:
+The class does not have a required textbook. That said, we particularly
+recommend
+Introduction to Computer Security
+by Michael Goodrich & Roberto Tamassia
+(ISBN-10: 0321512944, ISBN-13: 9780321512949).
+Lecture notes:
+We will provide lecture notes and/or slides for many of the lectures.
+Lecture notes and slides are not
+a substitute for attending class, as our discussion in class may
+deviate from the written material. You are ultimately resposible for
+material as presented in lecture and section .
+Discussion sections:
+Attendance at discussion sections is expected,
+and sections may cover important material not covered in lecture.
+Outside of your discussion section, you should feel free to attend any
+of the staff office hours (not just your section TA's office hours)
+and ask any of us for help.
+Re-grading policies:
+Any requests for grade changes or re-grading must be made within
+one week of when the work was returned. To ask for a re-grade,
+staple to your work a cover page that specifies:
+The problem(s) you want to be re-graded.
+For each of these problems a clear description of why you think
+the problem was misgraded.
+Give this to your TA.
+Without this page, your work will not be re-graded. Even if you ask
+for only one problem to be re-graded, your entire work may be
+re-graded, so your score could decrease, stay the same, or increase.
+We will not accept verbal re-grade requests or re-grade requests without
+a cover sheet stapled on.
+Don't expect us to re-grade your homework on the spot:
+we normally take the time to read your appeal at some point after it
+is submitted.
+Bear in mind that a primary aim in grading is consistency, so that
+all students are treated the same. For this reason, we are unlikely to adjust
+the score of individual students on an issue of partial credit if the score
+allocated is consistent with the grading policy we adopted for that
+problem.
+More on homeworks:
+If a problem can be interpreted in more than
+one way, clearly state the assumptions under which you solve the
+problem.
+In writing up your homework you are allowed to consult any book,
+paper, or published material, except solutions from previous
+classes or elsewhere, as stated under the Collaboration section.
+If you consult external sources, you must cite your source(s).
+We will make
+model solutions available after the due date, and feedback will be
+available via glookup or PandaGrader.
+Late homework/project policy:
+We will give no credit for homework/projects turned in after the deadline.
+Please don't ask for extensions.
+We don't mean to be harsh, but we prefer to make model
+solutions available shortly after the due date, which makes it
+impossible to accept late homeworks/projects.
+Don't be afraid to ask for help!
+Are you struggling? We'd much rather you approached us for help
+than gradually fall behind over the semester until things become
+untenable. Sometimes this happens when students fear
+a possibly unpleasant conversation with a professor if they admit to
+not understanding something. We would much rather resolve/remedy your
+misunderstanding early than have it expand into further problems later. Even if
+you are convinced that you are the only person in the class that
+doesn't understand the material, and think it must be entirely your fault
+for falling behind, please overcome this concern and
+ask for help as soon as you need it.
+Remember, helping you learn the material is
+in fact what we're paid to do, after all!
+Advice:
+The following tips are offered based on our experience with CS 161:
+1. Don't wait until the last minute to start projects!
+The projects can be time-consuming. Pace yourself.
+Students who procrastinate generally suffer.
+2. Make use of office hours! The instructors and TAs hold
+office hours expressly to help you. It is often surprising how many
+students do not take advantage of this service. You are free to
+attend as many office hours as you wish. You are not constrained just
+to use the office hours of your section TA. You will likely get
+more out of an office hour visit if you have spent some time in advance
+thinking about the questions you have, and formulating them precisely.
+(In fact, this process can often lead you to a solution yourself!)
+3. Participate actively in discussion sections!
+Discussion sections are
+not auxiliary lectures. They are an opportunity for interactive
+learning. The success of a discussion section depends largely on the
+willingness of students to participate actively in it. As with office
+hours, the better prepared you are for the discussion, the more you are
+likely to get out of it.

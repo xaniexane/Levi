@@ -1,0 +1,384 @@
+# CS 6840: Algorithmic Game Theory
+# Cornell University
+# source: http://www.cs.cornell.edu/courses/CS6840/2014sp/
+
+Algorithmic Game Theory
+eva
+Normal
+Eva
+95
+548
+2008-01-24T17:05:00Z
+2014-09-09T14:25:00Z
+3
+1563
+12845
+Computer Science
+107
+28
+14380
+14.00
+90
+Clean
+Clean
+false
+false
+false
+EN-US
+X-NONE
+X-NONE
+MicrosoftInternetExplorer4
+Algorithmic Game Theory
+Computer Science 6840
+Spring 2014
+218 Olin ,
+MWF 1:25-2:15
+Instructor: �va Tardos
+TAs :  Pooya
+Jalaly and Rad Niazadeh
+Office:         316 Gates
+Hall                                                                    ���������� 336 � and 324 Gates Hall
+phone :
+255-0984
+email :
+eva at cs.cornell.edu
+e-mails: jalaly@cs.cornell.edu � and rad@cs.cornell.edu
+Office hours and
+Piazza
+�
+Eva
+Tardos: � Wednesdays 2:30-3:30 in 316
+Gates Hall
+�
+Pooya Jalaly:
+Monday 11-12 in G11 Gates Hall
+�
+Rad Niazadeh:
+Friday 4-5 in G21 Gates Hall ����
+We also have a Piazza page . Piazza is a
+web-based discussion forum for communication with classmates and the course
+staff. Except for confidential matters, Piazza is preferred over email, as
+anyone can answer and everyone can benefit from the answer. The course staff
+will monitor questions and answers and endorse good answers in a timely manner.
+If you know the answer to a question, feel free to post a reply yourself, but
+please avoid giving away any hints on the homework or posting any part of a
+solution. ����������������������� ����������������������������������������
+Class topics
+week-by-week
+Wednesday,
+Jan 23 introduction and Brasss paradox and the
+tragedy of the commons.
+Notes for lecture � from a previous year.
+Friday,
+Jan 25 on discrete congestion games and the existence of equilibria.
+Notes for lecture   from a previous year.
+Monday,
+Jan 27: more on potential function for congestion games, and complexity of
+finding equilibria
+Additional
+reference: � Alex Fabrikant, Christos
+Papadimitriou, and Kunal Talwar
+On the
+complexity of pure Nash equilibria
+Wednesday,
+Jan 29 and Friday, Jan 31; existence of Nash equilibria and PPAD
+Notes
+from a previous year
+Please
+try the online
+Rock-Paper-Scissor game .
+Monday,
+Feb 3: multiplicative weight algorithm for binary prediction.
+See sections 3-4 of the notes
+from 2007.
+Wednesday,
+Feb 5, Hedge algorithm for prediction
+See
+sections 5 of notes
+and some of sections 4 of notes
+from 2007.
+Friday,
+Feb 7: � learning and regret in
+games.
+See
+section 2 of the notes
+from 2007, and the first page of the notes
+from 2012.
+Monday,
+Feb 10, Coarse correlated equilibria of finite games, and learning
+outcomes
+See notes
+from 2012
+Wednesday,
+Feb 12: non-atomic congestion games and the price of anarchy
+See notes
+from 2012. �
+Friday,
+Feb 14: non-atomic congestion games and the price of anarchy (cont.)
+See notes
+from 2012
+Monday,
+Feb 17 break
+Wednesday,
+Feb 19, atomic congestion games and the price of anarchy
+Friday,
+Feb 21, smooth games minimizing cost and the price of anarchy
+See notes
+from 2012
+Monday,
+Feb 24, Utility maximization games (Guest lecture by Vasilis Syrgkanis)
+Notes from Vasilis. See also the paper   Intrinsic
+Robustness of the Price of Anarchy by Tim R oughgarden
+Wednesday,
+Feb 26: Valid utility games are (1,1) smooth
+See notes
+from 2012
+Friday,
+Feb 28: the facility location game
+See notes
+from 2012
+Monday,
+March 3: outcomes of best responses for the facility location game
+See notes
+from 2012
+Wednesday,
+March 5, Price of stability of cost sharing game.
+See notes
+from 2012
+Friday,
+March 7, second price auction, Guest lecture by Rad Niazadeh
+Similar notes
+from 2012
+Monday,
+March 10, Bayesian Nash equilibrium and First price auction
+Notes
+from 2012
+Wednesday,
+March 12, the VCG mechanism
+Notes from
+2012
+Friday,
+March 14, Smooth auctions and the price of anarchy in auction games
+Notes by Chris Liu
+Monday,
+March 17, examples of smooth auctions: first price
+Notes by Jiayang Gao
+Wednesday,
+March 19, more examples of smooth auctions: all pay, and first price unit
+demand bidders
+Notes by Cathy Fan
+�
+Friday, March 21,
+smooth games and the Bayesian Price of Anarchy
+Notes by Xiaodong Wang
+�
+Monday, March 24,
+Generalized second price action (GSP)
+Notes by Daniel Freund
+�
+Wednesday, March 26, price of anarchy for GSP
+Notes by Jonathan
+DiLorenzo improved in April 14.
+�
+Friday, March 28, price of anarchy for
+mechanisms based on greedy algorithms
+Notes by Theodoros Lykouris
+�
+Monday, April 7,
+smoothness, and second price item auction with unit demand bidders
+Notes by Sam Park
+�
+Wednesday, April 9,
+second price item auction with fractionally submodular
+valuations
+Notes by Bryce Evans
+�
+Friday, April 11,
+classes of valuations: submodular , subadditive and fractionally subadditive
+See notes
+�
+Monday, April 14, on
+Bandwidth sharing in a single link, and price equilibrium of the fair sharing game.
+See
+notes from 2012.
+�
+Wednesday, April 16,
+price of anarchy analysis for fair sharing on a single link.
+See notes
+from 2012.
+�
+Friday, April 18, on
+Bandwidth sharing in a network.
+See notes
+from 2012.
+�
+Monday, April 21, more
+on Bandwidth sharing in a network.
+See notes ,
+from 2012, and also the paper R. Johari and J.N. Tsitsiklis
+(2004).   Efficiency
+loss in a network resource allocation game.
+�
+Wednesday, April 23, Walrasian pricing equilibrium.
+�
+Friday, April 25, Walrasian pricing equilibrium, and existence of optimal
+Nash in the GSP game.
+�
+Monday, April 28, Vasilis
+Syrgkanis on sequential auction games
+See the paper Sequential Auctions and Externalities
+�
+Wednesday, April 30,
+Arrow-Debreu market equilibrium
+�
+Friday, May 2,
+Arrow-Debreu market equilibrium cont , and Fischer
+markets
+See notes
+from 2012. See also the course on Computation of
+equilibria by Amin Saberi
+�
+Monday, May 5, revenue
+equivalence
+See notes
+from 2012
+�
+Wednesday, May 7 th ,
+Revenue versus an extra bidder: Bulow Klemperer
+See notes
+from 2012, and the paper by Bulow Klemperer Auctions
+versus negotiations .
+See also the
+courses
+Problem sets
+Problem set 1
+was due Friday, February 14, it is now graded and solutions and comments are
+available on CMS .
+Problem set 2
+was due Wednesday, March 5, it is now graded and solutions and comments are
+available on CMS .
+Problem set 3
+was due Tuesday, March 24, 2014, it is now
+graded and solutions and comments are available on CMS .
+Proposal for the final project was
+due, Friday March 28.
+Problem set 4
+was due Monday, April 21 st , it is
+now graded and solutions and comments are available on CMS .
+Final
+project is due Wednesday, May 7 th . See more details at Course work
+below.
+Take
+home final is available starting May 12 th . Final is cumulative, and is a
+non-cooperative version of the homeworks . You can choose
+any 72 hour period to do the final during May 12-20, but need to be finished by 5pm on Tuesday the 20th. Office hours
+during the final week are posted on Piazza .
+Other Useful resources:
+�
+Sample
+tex file from Chris Liu�s notes
+�
+Video of all previous
+run of this class are available at   www.cs.cornell.edu/videonote/Cornell
+Algorithmic Game Theory .
+eds . Nisan, Roughgarden, Tardos, Vazirani
+(username=agt1user, password=camb2agt), Cambridge, 2007.
+M. Osborne, A. Rubinstein, A
+course in Game Theory, MIT Press, 1994.
+Approximation
+in Economic Design by Jason Hartline
+Multiagent
+Systems , by Shoham and Leyton-Brown, Cambridge, 2008.
+Prediction,
+Learning, and Games , by Cesa -Bianchi and Lugosi
+The
+Theory of Learning in Games , by Fudenberg and Levine
+For a
+nice introduction to Game Theory look at Ken Binmore :
+Game Theory: a Very Short Introduction, Oxford University Press.
+Rough course outline (subject to change):
+Introduction
+to Algorithms and Games:
+Games and examples
+Solution concepts: Nash equilibria, Bayesian Nash, learning
+in games and correlated Nash
+Quantifying
+the Inefficiency of Equilibria:
+Best and worst Nash,
+Quality of learning outcome.
+Strong price of anarchy.
+�
+Games we will discuss
+include
+Routing Games and other congestion games: Nash equilibria
+Potential games: Facility Location, Network Design
+Selfish Routing and   Wardrop   equilibria
+Other Network design games
+Bandwidth sharing Games
+Auction Games: Simultaneous, Sequential and Greedy Auctions,
+Generalized Second Prize
+Market games: market clearing prices, and related
+games.
+Matching games
+Mechanism Design
+Basics:
+second-price auction, Vickrey -Clarke-Groves
+mechanism;
+Bayesian
+Mechanism Design;
+Revenue
+equivalence
+Bayesian
+Approximation
+prior-independent
+mechanisms;
+Course work
+Course work consists of 4 homework sets, a final, a final project, and
+possibly scribe notes. You may discuss homework questions with other
+students, but need to write down the solutions on your own. The final is a
+non-cooperative version of the homework. Extra credit will be available for
+solving more homework problems than required or by improving wikipedia pages about topics discussed in class. Grades and
+solutions to the homeworks will be kept in CMS .
+The project should be a research-like experience (understand what is known
+about about a research problem, and try to advance
+knowledge). You can base projects on recent research papers: understanding what
+they are doing, and attempting to improve the model or result. Or you can base
+projects on your own research interests. You need to write your project result
+in format of a paper, expected to be 6-10 pages long (definitely no longer than
+10).
+Grading
+Course grade is determined roughly as
+Homeworks :
+10% each
+project proposal 5%
+project 25%
+take home final 30%
+Extra credit can be earned by solving all problem
+on the problem set, or by improving pages on wikipedia
+related to the course. Extra credit is very useful for getting an A+, and can
+also be used can to partially make up missing credit on homeworks ,
+and the final.
+Overview and
+Prerequisites
+Algorithmic Game Theory combines algorithmic thinking with game-theoretic,
+or, more generally, economic concepts. The course will study a range of topics
+at this interface. The only prerequisite to the course is mathematical
+maturity. An A- or better in CS 4820 is great, or a course at a similar level
+in a different department.
+Classes on similar topics at other
+universities:
+�
+Earlier version of this course
+�
+Price
+of Anarchy by Jason Hartline
+�
+Algorithmic Mechanism
+Design by Jason Hatrline
+�
+Algorithmic Game Theory
+by Tim Roughgarden
+�
+Games,
+Decision, and Computation by Costis Daskalakis
+and Silvio Micali

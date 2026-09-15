@@ -1,0 +1,152 @@
+# SPAC: Parallelism and Concurrency
+# Univ of Washington
+# source: http://homes.cs.washington.edu/~djg/teachingMaterials/spac/
+
+Sophomoric Parallelism and Concurrency
+Dan Grossman
+Teaching Materials
+Sophomoric Parallelism and Concurrency
+Reading Notes
+A Sophomoric
+Introduction to Shared-Memory Parallelism and Concurrency (pdf)
+This document is for students and instructors. It covers the same
+material as the slides and homeworks in more detail. It is something
+between lecture notes and a draft of textbook chapters.
+Instructors can make variants/extracts using the LaTeX
+source and several image files:
+sophomoricParallelismAndConcurrency.tex
+zip file of images
+Context/Motivation
+Context and Motivation
+The materials on this page offer a 2-3 week unit introducing
+parallelism and concurrency in a lower-level data structures course.
+They have been used since Spring 2010 as part
+of this
+full data-structures course and have also been adapted for CS2
+courses and for introductions in more advanced courses (see
+" Other Users "). All materials are free
+and questions/feedback/suggestions are encouraged.
+For motivation on incorporating this material in lower-level data
+structures and a short overview of the approach, see:
+Introducing Parallelism and
+Concurrency in the Data Structures Course , by Dan Grossman and
+Ruth E. Anderson, published in SIGCSE2012, the 43rd ACM Technical
+Symposium on Computer Science Education. (6 pages)
+presentation slides (pptx)
+Section 1 of the reading notes above
+Ready-For-Use: 3
+Weeks of Parallelism and Concurrency in a Required Second-Year
+Data-Structures Course , by Dan Grossman, presented at the 2010
+Workshop on Curricula for Concurrency and Parallelism at SPLASH
+(formerly OOPSLA). (2 pages)
+presentation slides (pptx)
+All the materials on this page use Java, including Java's ForkJoin
+Framework, when a particular language or code example is needed. Some
+of the materials, including the reading notes, have
+been ported to C++ .
+Slides
+Lecture Slides
+In PowerPoint 2007 and pdf
+Introduction to Multithreading and Fork-Join Parallelism
+pptx
+pdf
+Analysis of Fork-Join Parallel Programs
+pptx
+pdf
+Parallel Prefix, Pack, and Sorting
+pptx
+pdf
+Shared-Memory Concurrency and Mutual Exclusion
+pptx
+pdf
+Programming with Locks and Critical Sections
+pptx
+pdf
+Data Races and Memory Reordering, Deadlock, Reader/Writer Locks, Condition Variables
+pptx
+pdf
+The breakdown into "lectures"
+does not exactly map to 1-hour segments; overall there is
+about 7-8 hours of material divided into 6 lectures.
+Java's ForkJoin
+Introduction to Java's Fork-Join Framework
+Installation instructions and basic usage notes for Java's ForkJoin Framework, written for beginners (html)
+These instructions are essential for writing and running real parallel
+programs using the ForkJoin library, as in the project and some of the
+homework exercises.
+Homework/Project
+Homework Problems and Programming Project
+Please do not post solutions to these exercises
+Homework problems (short paper-and-pencil or simple
+programming exercises):
+pdf
+LaTeX source
+Java parallel-programming project:
+html
+Compute U.S. population densities with real data. Includes a simple, optional, fun GUI.
+Exam
+Sample Exam Problems
+pdf without solutions
+pdf with solutions
+LaTeX source
+Exam problems used in Spring 2010 or Spring 2012. By
+design, some of the questions were fairly difficult. Note
+solutions are posted. The full exams
+( 2010 ,
+2012 )
+also had questions on sorting and graphs, with a 110-minute time limit.
+Instructor Workshop
+I ran a 3-hour workshop at SIGCSE 2011. The
+workshop materials are below. They are self-contained with some
+original content (e.g., new lab exercises) but also substantial
+overlap with other materials.
+Workshop abstract:   Multithreading (Pretty) Early for
+Everyone: Parallelism and Concurrency in Second-Year Data-Structures
+There is wide interest in introducing students to
+threads earlier, but how? This workshop gives an answer: a 3-week unit
+in data structures. It should appeal to data-structure instructors
+and those tasked with curriculum revision. The presenter wrote/used
+the course materials and advised later instructors. A key approach is
+to distinguish parallelism (using more resources to solve problems
+faster) and concurrency (managing shared access to resources). The
+material is taught via core data-structure topics (asymptotic
+complexity, sorting, queues, etc.) and using Java and its ForkJoin
+Framework. Participants will write parallel programs, find concurrency
+errors, and discuss how the material can fit their needs. Those with
+or without knowledge of threads and fork-join programming are welcome.
+Slides:
+pptx
+pdf
+Installation instructions (to be completed in advance)
+Exercises:    pdf
+LaTeX
+Java   maps
+reductions
+test output   maps
+reductions
+The Java files have blank spaces for completing the exercises; testing code is provided. Solutions are available on request.
+Other Users
+Data Abstractions , Univ. Washington, six other instructors
+Data Structures and Advanced Programming , Pomona College, Kim Bruce
+Parallelism and Distribution , Vrije Universiteit Brussel, Elisa Gonzalez Boix
+Parallel & Distributed Computing , Carleton College, Dave Musicant Software Engineering I , George Washington Univ., Rhys Price Jones
+Basic Algorithms and Data Structures , Univ. British Columbia, Alan Hu and Steve Wolfman [in C++]
+Parallel Programming , ETH Zurich, Otmar Hilliges and Kornilios Kourtis
+Programming Languages & Techniques II , Univ. Pennsylvania, David Matuszek
+Concurrent programming module (16 lectures) , Univ. Cape Town, South Africa, Michelle Kuttel
+Advanced Data Structures and Algorithms , Hope College, Charles Cusack
+Programming Languages (see homework 5), UCLA, Todd Millstein
+Software Reliability: Specification, Testing, and Verification , Koç University, Serdar Tasiran
+Object-Oriented Software Development , Rose-Hulman Institute of Technology, Curt Clifton
+Contact/Feedback
+Contact Information / Request for Feedback
+Please let me know how you are using these materials and how they can be improved. Even typos are helpful.
+spac at cs.washington.edu is a low-traffic
+mailing list for announcing updates and occasional discussions among users. You can
+subscribe here
+or just ask me to subscribe you.
+Acknowledgments
+We gratefully acknowledge gifts from Intel Labs University
+Collaborations and grants from the U.S. National Science Foundation
+that provided financial resources to develop these materials.
+Last updated: February 2017

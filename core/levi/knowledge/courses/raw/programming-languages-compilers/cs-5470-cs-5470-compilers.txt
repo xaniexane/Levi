@@ -1,0 +1,538 @@
+# CS 5470: Compilers
+# University of Utah
+# source: http://matt.might.net/teaching/compilers/spring-2015/
+
+Compilers :: Spring 2015
+Compilers :: CS 5470
+Catalog No.
+17541
+Time
+Tue & Thu, 2:00 PM - 3:20 PM
+Location
+WEB L102
+Instructor
+Matt Might
+(MEB 3450)
+Office hours
+After lecture,
+by appointment,
+or whenever my door is open.
+TAs
+Sarah Spall (MEB 3465)
+TA hours
+10:00 AM - 11:00 AM
+Group
+Google Group
+Blog
+blog.might.net (I'll post lecture notes here.)
+Live code
+Code written in lecture
+Navigation
+Description
+Schedule
+Grading
+Material
+Collaboration
+Projects
+Project 1
+Project 2
+Project 3
+Project 4
+Project 5
+Description
+The field of compilers concerns the automated translation of high-level programming
+languages into low-level (virtual or hardware) machine code.
+This course covers the design and implementation of compilers, and
+it explores related topics such as interpreters, virtual machines and runtime
+systems.
+This is not an easy course, but it is a rewarding one for those who finish .
+Few programmers will ever work on a production compiler, but
+knowing how compilers think is an asset.
+It makes you a
+better
+programmer .
+Knowing how a compiler thinks changes how you code.
+When you know
+what compilers can and cannot optimize, you target the intersection of
+human and mechanical comprehension.
+Your code will look better. Your code will run better.
+Many programming tasks can be framed in terms of interpretation or translation.
+Compilers teaches you how to solve tasks like these properly .
+Many companies develop an internal programming or scripting language.
+Most of them get it wrong. If you've taken compilers, you
+can fix it.
+Finally, if you want to develop your own programming language, take compilers
+in order to
+spare the world some accidental indecency .
+Schedule
+Grading
+There are two ways to earn a grade in this class: tests and projects.
+Your grade is your tests grade or your projects grade, whichever is higher.
+You do not have to take the final if you are satisfied with your project grade.
+In fact,
+you are encouraged to achieve your grade through the projects.
+Exams
+Exams will be impossible to finish in the alloted time.
+You should answer those questions which you know best.
+The weight of each question is proportional to the percentage of
+students that failed to answer it or answered it incorrectly.
+The result will be curved.
+Material
+I'm morally opposed to the way textbooks are priced.
+There is no required textbook for the class.
+Instead of a textbook,
+I maintain a technical blog with articles
+on topics covered in the class.
+I'll link to applicable online material from here, as well as
+the slides and any code we use in class.
+Recommended books
+Some students request recommended textbooks.
+There is no "Python compiler project" textbook, but many books cover
+some of the necessary concepts.
+A good resource on compiling a dynamic language like Python is
+Lisp in Small Pieces .
+An older (yet remarkably up-to-date) resource on compiling with continuation passing style is Compiling with Continuations . (This is a very advanced book and not recommended for struggling students.)
+The classic compiler textbook is "The Dragon Book":
+Compilers: Principles, Techniques and Tools .
+Some of the techniques in this book work for dynamic languages like Python.
+Unfortunately, most of the techniques only work well for C-like typed languages.
+Relevant blog posts
+Logical literacy
+Sculpting text with regex
+Standalone lexers with lex
+Grammar: Language of languages (BNF, EBNF, ANF)
+Parsing regular expressions with recursive descent
+Compiling up to the lambda calculus
+Implementing exceptions
+A-Normalization
+Continuation-passing-style conversion
+Closure conversion
+Compiling Scheme to C
+Lambda calculus
+Lambda calculus on wikipedia
+Church encodings
+Racket
+Main Racket site
+Dr. Racket docs
+Racket docs
+Racket programming guide
+Racket language reference
+Racket systems programming guide
+How to Design Programs , textbook that uses Racket
+Documentation for match
+Documentation for quasiquote
+Racket (Slideshow) source code for lecture
+Racket lexers documentation
+Racket parsers documentation
+Python
+Python docs
+Python language reference
+Lexical specification for Python
+Grammar specification for Python
+Lexical analysis
+Regular expressions
+Regular language
+Automata theory
+Deterministic finite automaton (DFA)
+Nondeterministic finite automaton (NFA)
+GNU flex home page
+JLex home page
+JFlex home page
+Ragel state machine compiler
+Regular expressions in Racket
+Rolling a lexer in JavaScript
+Parsing
+Grammar: Language of languages
+Context-free grammar (wikipedia)
+Pushdown automaton (wikipedia)
+Recursive descent parser (wikipedia)
+LL parser (wikipedia)
+Python grammar
+Bison parser generator
+ANTLR parser generator
+Happy parser generator
+derp in Haskell
+Transformation
+Compiling Scheme to Java
+The Essence of Compiling with Continuations (A-Normal Form)
+A-Normalization: Why and How
+Compiling with Continuations, Continued
+Compiling with Continuations [probably too heavyweight for this class]
+Continuation-passing style (wikipedia)
+Programming with continuations by example
+Continuation-passing style by example
+On One-Pass CPS Transformations (the higher-order transform)
+Collaboration policy
+For the projects, you are allowed to pair with a partrner and submit a single, joint assignment.
+You may also work alone.
+I encourage the formation of study groups to discuss the theory and algorithms behind
+the projects.
+You may not share code with anyone other than your partner.
+If you want to learn it, you have to implement it.
+Violators of the collaboration policy will be dealt with under the
+University's academic misconduct policy, and they will fail the course.
+How to cheat in this class
+I've caught so many attempts at cheating in my courses that I feel the need to
+provide a guide to students.
+You may not use code you found on the web, even if modified.
+You may not use code you found on the web, even if it's GPL'd.
+Do not turn in code with a matching md5sum for your friend's assignment.
+You can't simply change comments and spacing.
+I can tokenize your input to eliminate these differences.
+You can't just change variable names.
+I'm going to diff a token stream of your assignment against others.
+You can't just move definitions around.
+Same reason as before.
+You can't copy only part of an assignment.
+Same reason as before.
+If you're going to cheat, you need to rewrite the assignment from scratch.
+Projects
+This semester, we'll be building a Python 3.4 compiler.
+You can use any language you want to do the implementation.
+If you want to receive a passing grade, Racket is recommended.
+If you're bright and motivated, you might be able to get away with
+another functional language such as Scala, OCaml/SML, Clojure or Haskell.
+A major theme in this course is the that functional programming is a
+multiplier: it makes you a significantly more productive programmer.
+Anything else is a knife in a gunfight .
+Projects will likely be along the following lines:
+Lexical analyzer
+Parser
+High-level translator
+Normalizer & CPS converter
+Low-level translator
+Register allocator & Assembly code emitter
+Bonus opportunities
+Use an exploit on vulcan to gain root access: +10% for a local user exploit; +15% for a remote exploit (e.g. breaking in via apache).
+You must exploit a vulnerability (e.g. buffer overflow) for Ubuntu on vulcan
+to gain root; that is, you can't steal my laptop while it has an open ssh
+connection to vulcan to claim the prize.
+You must write up a short summary of the vulnerability and how you exploited it.
+(You may use a prepackaged tool for exploitation.)
+Mail the summary to me for approval and then to the class.
+Each individual exploit may only be claimed once, and the first to exploit wins.
+To signal that you have claimed root, modify the message of the day.
+Project 1: A lexer for Python
+Released: Thursday, Jan 22.
+Due: Friday, Feb 13, 5:00 PM Utah time
+Your task is to construct a lexical analyzer for the Python programming language.
+Python is a relatively simple language to tokenize, with the notable exception of its
+significant whitespace.
+For reference, the lexical specification for Python is available as part of the official documentation.
+Guidelines
+You can use any language you want for this project, but you must be
+able to run your program on vulcan .
+Your program should match the output of the binary pylex ,
+as provided on vulcan .
+Section 2.3 references Unicode characters that have the property Other_ID_Start
+and Other_ID_Continue , and it says these properties are available in
+PropList.txt .
+Please use this version of PropList.txt .
+Section 2.4.1 allows an escape code to refer to a Unicode character
+with \N{ name } .
+Please use UnicodeData.txt as the canonical
+list of names for unicode characters.
+Requirements
+Include a README.txt file that contains:
+your name;
+a list of software dependencies necessary to run your assignment;
+a description of what you got working,
+what's partially working and what's completely broken; and
+a manifest briefly describing each file you've turned in.
+Every source code file you turn in needs to have your name and
+student UID number at the top and the bottom in comments. Failure to meet
+this policy will result in an automatic failing grade.
+The program should use a Makefile:
+make should compile the program (if compilation is necessary).
+It should produce an executable file called pylex in the current directory.
+make run should accept input on STDIN and send
+output to STDOUT .
+make test should run any test cases you used.
+The program should output one s-expression per line for each token in the input.
+There are eight kinds of s-expressions you can emit:
+(NEWLINE) -- for a logical newline.
+(INDENT) -- for a logical increase in indentation.
+(DEDENT) -- for a logical decrease in indentation.
+(ID name ) -- for
+an identifier, where name is a
+Racket-compatible literal string that has been NFKC-normalized.
+Example: foo becomes (ID "foo")
+(LIT value ) -- for a literal value,
+where value is a
+Racket-compatible
+literal value .
+(If it's a string, it must be properly escaped.).
+Example: 10 becomes (LIT 10)
+Example: "foo ÿ bar" may become (LIT "foo ÿ bar")
+or (LIT "foo \xFF bar") .
+(KEYWORD symbol ) -- for
+a keyword, where symbol is a
+Racket-compatible literal symbol .
+Example: def becomes (KEYWORD def)
+(PUNCT text ) -- for operators and
+delimiters, where text is a Racket
+string containing the text of the operator or delimiter.
+Example: + becomes (PUNCT "+")
+(ENDMARKER) -- for the end of the input.
+If you encounter a lexical error, print an error message and quit with
+non-zero exit status.
+Simplifications
+You do not have to handle file-encoding comment
+that may appear in the first two lines.
+Assume UTF-8 input.
+You should not join adjacent strings together in the lexer.
+That will happen in the parser.
+You do not have to report an error for mixed tabs and spaces. (The
+spec itself seems unclear on the meaning of inconsistency here, although
+the Python interpreter itself has clearly fixed a meaning.)
+You do not have to handle unpaired surrogate characters in strings.
+That is, the input "\uD800" is allowed to crash the lexer. For
+clarity, the range of surrogates is D800 to DFFF. (Racket should crash
+automatically on these characters, since Racket disallows unpaired
+surrogates in strings.)
+Hints and tips
+The lexical specification for Python contains two bugs: it forgets to include ...
+as a delimiter and <> as an operator.
+You can use a lexer-generator like flex
+or Racket's lexer for this project.
+Racket is strongly recommended.
+You could also write your own
+lexical analyzer from scratch using
+existing regex support
+on with derivatives of regular expressions .
+It's not unreasonable to write a lexer by hand for a language like Python.
+If you use a language that supports regular expressions, you can get the longest matching prefix of a string for the regular expression
+re with /^( re )/ .
+The special pattern ^ matches the start of the input (or in some cases, the start of a line).
+You may find it easier to write a two-pass lexical analyzer: the first pass could resolve signifcant whitespace, and the second could handle proper tokenization.
+(My reference lexer is not a two-pass lexer, but it may help conceptually.)
+A stubbed out version of my lexer with comments and definition bodies removed
+is available.
+Example
+The input:
+# Comment 1
+# Comment 2
+# Factorial:
+def fact( x\
+):
+if x == -1:
+return 1.j
+elif x ==0:
+return 1
+else:
+return x* fact(x
+- 1)
+s = "foo\
+\\ \n\'\""
+fact(20)
+should produce:
+(KEYWORD def)
+(ID "fact")
+(PUNCT "(")
+(ID "x")
+(PUNCT ")")
+(PUNCT ":")
+(NEWLINE)
+(INDENT)
+(KEYWORD if)
+(ID "x")
+(PUNCT "==")
+(PUNCT "-")
+(LIT 1)
+(PUNCT ":")
+(NEWLINE)
+(INDENT)
+(KEYWORD return)
+(LIT +1.i)
+(NEWLINE)
+(DEDENT)
+(KEYWORD elif)
+(ID "x")
+(PUNCT "==")
+(LIT 0)
+(PUNCT ":")
+(NEWLINE)
+(INDENT)
+(KEYWORD return)
+(LIT 1)
+(NEWLINE)
+(DEDENT)
+(KEYWORD else)
+(PUNCT ":")
+(NEWLINE)
+(INDENT)
+(KEYWORD return)
+(ID "x")
+(PUNCT "*")
+(ID "fact")
+(PUNCT "(")
+(ID "x")
+(PUNCT "-")
+(LIT 1)
+(PUNCT ")")
+(NEWLINE)
+(DEDENT)
+(DEDENT)
+(ID "s")
+(PUNCT "=")
+(LIT "foo\\ \n\'\"")
+(NEWLINE)
+(ID "fact")
+(PUNCT "(")
+(LIT 20)
+(PUNCT ")")
+(NEWLINE)
+(ENDMARKER)
+Code
+Reference implementation
+A reference implementation is available on
+vulcan as pylex .
+Submission instructions
+Copy your project to /home/ unid /pylex/
+on vulcan.ucombinator.org .
+It should be possible to run your code with:
+cd /home/ unid /pylex
+make
+make run < test1 .py > test1 .py.out
+make run < test2 .py > test2 .py.out
+make run < test3 .py > test3 .py.out
+...
+or with:
+cd /home/ unid /pylex
+make
+./pylex < test1 .py > test1 .py.out
+./pylex < test2 .py > test2 .py.out
+./pylex < test3 .py > test3 .py.out
+...
+Project 2: A parser for Python
+Due: Friday, March 6, 5:00 PM Utah time
+Your task is to construct a parser for the Python programming language.
+Compared to other programming languages, Python is straightforward to parse.
+In fact, it is one of the few popular programming languages with an
+LL(1) grammar, making it amenable to hand-written recursive descent parser.
+Of course, it is also possible (and recommended) to use a parsing tool.
+Guidelines
+You can use any language you want for this project, but you must be able to run your program on vulcan.
+Requirements
+You must parse the full Python grammar .
+Assume the start symbol is file_input .
+You should assume that input comes from the format for the lexer.
+If you need to use a working lexer, you can assume that the program
+pylex is in the current PATH.
+The output should contain a syntax tree in the format specified by the reference implementation ,
+pysx .
+Include a README.txt file that contains:
+your name;
+a list of software dependencies necessary to run your assignment;
+a description of what you got working,
+what's partially working and what's completely broken; and
+a manifest briefly describing each file you've turned in.
+Every source code file you turn in needs to have your name and student number at the top and the bottom in comments.
+The program should use a Makefile:
+make should compile the program to produce an executable called pyparse .
+make test should run any test cases you used.
+The program should output one s-expression containing the concrete parse tree on success. If the parse fails, it should return a non-zero exit code.
+Simplifications
+None.
+Hints and tips
+Do not write the parser by hand, unless you have a lot of time.
+I recommend that you use yacc, Racket's parser generator or a
+derivative-based parsing tool.
+If you want write your lexer and parser in a different language,
+you can tie them together with a Unix pipe, like so:
+$ pylex | pyparse
+You can complete the entire assignment by only modifying
+the file my-python-grammar.sx file generated by the
+stub code .
+(You just add derp-style reductions to the rules in this file.)
+The reference pylex accepts a --exp flag
+that does not emit the NEWLINE or ENDMARKER .
+To target subsets, change file_input in
+pyparse.rkt to the name of the production you want to target.
+Code
+The stub code
+produces a parser that constructs a concrete syntax tree.
+Submission instructions
+Upload here .
+-->
+Copy your project to /home/ unid /pyparse/
+on vulcan.ucombinator.org .
+It should be possible to run your code with:
+cd /home/ unid /pyparse
+make
+pylex < test1 .py | ./pyparse > test1 .py.out
+pylex < test2 .py | ./pyparse > test2 .py.out
+pylex < test3 .py | ./pyparse > test3 .py.out
+...
+Project 3: A class-eliminating desugarer for Python
+Due: Tue March 31 11:59 PM Utah time
+You will implement a set of desugarings from Python into Python.
+The two major desugarings will be *-elimination in assignment forms
+and class elimination.
+Requirements
+Clone the github repository with stub code , and follow the instructions there.
+Your assignment should reside in $HOME/project-python-desugar-1 .
+If you need to use a working lexer, you can assume that the program
+pylex is in the current PATH.
+If you need to use a working parser, you can assume that the program
+pyparse is in the current PATH, and that it matches the
+behavior of the reference app by consuming a tokenized input on STDIN and
+printing the AST on stdout.
+Include a README.txt file that contains:
+your name;
+a list of software dependencies necessary to run your assignment;
+a description of what you got working,
+what's partially working and what's completely broken; and
+a manifest briefly describing each file you've turned in.
+Every source code file you turn in needs to have your name and student number at the top and the bottom in comments.
+The program should use a Makefile:
+make should compile the program (if compilation is necessary).
+make run should accept an S-Expressified Python AST on
+STDIN and send output to STDOUT .
+make test should run any test cases you used.
+Your output need not match the reference implementation (pydesugar1) exactly.
+It should be semantically equivalent (unless the reference implementation
+has a bug).
+You can also test your output against a Python 3.x interpreter, but note that these may differ in how they display objects using print .
+Hints and tips
+Use only very small programs for testing (initially).
+Start with print(3) and work up from there.
+Examine the output of the reference implementation on these small programs
+to unravel its logic.
+Project 4: A normalizer for Python
+Due: Fri May 3 11:59 PM Utah time (Extended)
+Normalization fixes the order of execution and simplifies every
+statement down to one "action," bringing it closer to the feel of the
+eventual assembly code.
+Normalization is also required in Python in order to access a larger
+class of desugarings.
+Requirements
+Clone the github repository with stub code , and follow the instructions there.
+Your assignment should reside in $HOME/project-python-pydesugar-2 .
+If you need to use a working lexer, you can assume that the program
+pylex is in the current PATH.
+If you need to use a working parser, you can assume that the program
+pyparse is in the current PATH, and that it matches the
+behavior of the reference app by consuming a tokenized input on STDIN and
+printing the AST on stdout.
+Include a README.txt file that contains:
+your name;
+a list of software dependencies necessary to run your assignment;
+a description of what you got working,
+what's partially working and what's completely broken; and
+a manifest briefly describing each file you've turned in.
+Every source code file you turn in needs to have your name and student number at the top and the bottom in comments.
+The program should use a Makefile:
+make should compile the program (if compilation is necessary).
+make run should accept an S-Expressified Python AST on
+STDIN and send output to STDOUT .
+make test should run any test cases you used.
+Your output need not match the reference implementation (pydesugar --p4)
+exactly.
+It should be semantically equivalent (unless the reference implementation
+has a bug).
+You can also test your output against a Python 3.x interpreter, but
+note that these may differ in how they display objects using
+print .
+Hints and tips
+Use only very small programs for testing

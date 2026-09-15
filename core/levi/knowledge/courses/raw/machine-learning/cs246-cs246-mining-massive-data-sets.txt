@@ -1,0 +1,208 @@
+# CS246: Mining Massive Data Sets
+# Stanford University
+# source: http://web.stanford.edu/class/cs246/
+
+CS246 | Home
+Lectures: T/Th 3:00-4:20pm NVIDIA auditorium.
+Logistics
+Lectures: are on Tuesday/Thursday 3:00-4:20 PM PDT in person in the NVIDIA Auditorium.
+Lecture Videos: are available on Canvas for all the enrolled Stanford students. You can also check our past Coursera MOOC .
+Public resources : The lecture slides and assignments will be posted online as the course progresses. We are happy for anyone to use these resources, but we cannot grade the work of any students who are not officially enrolled in the class.
+Contact : Students should ask all course-related questions on Ed , where you will also find all the announcements. For external enquiries, personal matters, or in emergencies, you can email us at cs246-win2526-staff@lists.stanford.edu .
+Academic accommodations : If you need an academic accommodation based on a disability, you should initiate the request with the Office of Accessible Education (OAE) . The OAE will evaluate the request, recommend accommodations, and prepare a letter for faculty. Students should contact the OAE as soon as possible since timely notice is needed to coordinate accommodations.
+Instructor
+Jure Leskovec
+Guest Co-Instructor
+Charilaos Kanatsoulis
+Course Coordinator
+Lata Nair
+-->
+Course Assistants
+Hongyue Li (Head TA)
+Tim Chen
+Harper Hua
+Ayush Agrawal
+Josh Sanyal
+Sirui (Ariel) Chen
+Rishabh Ranjan
+Zhenyu Zhang
+Fengyu Li
+-->
+serve to make the #content hyperlink display correctly (with the h2 header visible) -->
+Content
+What is this course about? [ Info Handout ]
+The course will discuss data mining and machine learning algorithms for analyzing very large amounts of data. The emphasis will be on MapReduce and Spark as tools for creating parallel algorithms that
+can process very large amounts of data.
+Topics include : Frequent itemsets and Association rules, Near Neighbor Search in High Dimensional Data, Locality Sensitive Hashing (LSH), Dimensionality reduction, Recommendation Systems, Clustering, Link Analysis, Large-scale
+Supervised Machine Learning, Data streams, Mining the Web for Structured Data, Web Advertising.
+Previous offerings
+The previous version of the course is CS345A: Data Mining which also included a course project. CS345A has now been split into two courses, CS246 and CS341.
+You can access class notes and slides of previous versions of the course here:
+CS246 Websites :
+CS246: Winter 2025 /
+CS246: Winter 2024 /
+CS246: Spring 2023 /
+CS246: Winter 2022 /
+CS246: Spring 2021 /
+CS246: Winter 2020 /
+CS246: Winter 2019 /
+CS246: Winter 2018 /
+CS246: Winter 2017 /
+CS246: Winter 2016 /
+CS246: Winter 2015 /
+CS246: Winter 2014 /
+CS246: Winter 2013 /
+CS246: Winter 2012 /
+CS246: Winter 2011
+CS345a Website :
+CS345a: Winter 2010
+Partner course
+In Spring 2020, we will be offering a project based course where students can apply Data Mining and Machine Learning techniques on real world datasets. CS341: Project in Mining Massive Data Sets
+-->
+Prerequisites
+Students are expected to have the following background:
+Knowledge of basic computer science principles and skills, at a level sufficient to write a reasonably non-trivial computer program (e.g., CS107 or CS145 or equivalent are recommended).
+Good knowledge of Java and Python will be extremely helpful since most assignments will require the use of Spark.
+Familiarity with basic probability theory (CS109 or Stat116 or equivalent is sufficient but not necessary).
+Familiarity with writing rigorous proofs (at a minimum, at the level of CS 103).
+Familiarity with basic linear algebra (e.g., any of Math 51, Math 103, Math 113, CS 205, or EE 263 would be much more than necessary).
+Familiarity with algorithmic analysis (e.g., CS 161 would be much more than necessary).
+The recitation sessions in the first weeks of the class will give an overview of the expected background.
+Reference Text
+The following text is useful, but not required. It can be downloaded for free, or purchased from Cambridge University Press.
+Leskovec-Rajaraman-Ullman: Mining of Massive Dataset
+serve to make the #schedule hyperlink display correctly (with the h2 header visible) -->
+Schedule
+Lecture slides will be posted here shortly before each lecture. If you wish to view slides further in advance, refer to 2025 course offering's slides , which are mostly similar.
+This schedule is subject to change. All deadlines are at 11:59pm PST .
+Date
+Description
+Suggested Readings
+Events
+Deadlines
+Tue Jan 6
+Introduction; MapReduce and Spark
+[ slides ]
+Ch1: Data Mining
+Ch2: Large-Scale File Systems and Map-Reduce
+Thu Jan 8
+Frequent Itemsets Mining
+[ slides ]
+Ch6: Frequent itemsets
+Colab 0 ,
+Colab 1 ,
+Homework 1
+out
+Sat Jan 10
+Recitation: Spark tutorial Colab ] -->
+Tue Jan 13
+Locality-Sensitive Hashing I
+[ slides ]
+Ch3: Finding Similar Items (Sect. 3.1-3.4)
+Thu Jan 15
+Locality-Sensitive Hashing II
+[ slides ]
+Ch3: Finding Similar Items (Sect. 3.5-3.8)
+Colab 2
+out
+Colab 0, Colab 1 due
+Thu Jan 15
+Recitation: Linear Algebra handout ] -->
+Fri Jan 16
+Recitation: Probability and Proof Techniques handout ] -->
+Tue Jan 20
+Clustering
+[ slides ]
+Ch7: Clustering (Sect. 7.1-7.4)
+Thu Jan 22
+Dimensionality Reduction
+[ slides ]
+Ch11: Dimensionality Reduction (Sect. 11.4)
+Colab 3 ,
+Homework 2
+out
+Colab 2, Homework 1 due
+Tue Jan 27
+Recommender Systems I
+[ slides ]
+Ch9: Recommendation systems
+Thu Jan 29
+Recommender Systems II
+[ slides ]
+Ch9: Recommendation systems
+Colab 4
+out
+Colab 3 due
+Tue Feb 3
+PageRank
+[ slides ]
+Ch5: Link Analysis (Sect. 5.1-5.3, 5.5)
+Thu Feb 5
+Extensions of PageRank to Recommendations and Spam
+[ slides ]
+Ch5: Link Analysis (Sect. 5.4)
+Ch10: Analysis of Social Networks (Sect. 10.1-10.2, 10.6)
+Colab 5 ,
+Homework 3
+out
+Colab 4, Homework 2 due
+Tue Feb 10
+Community Detection in Graphs
+[ slides ]
+Ch10: Analysis of Social Networks (Sect. 10.3-10.5)
+Thu Feb 12
+Graph Representation Learning
+[ slides ]
+Inductive Representation Learning on Large Graphs
+Do Transformers Really Perform Bad for Graph Representation?
+Sign and Basis Invariant Networks for Spectral Graph Representation Learning
+Colab 6
+out
+Colab 5 due
+Tue Feb 17
+Graph Neural Networks
+[ slides ]
+How Powerful Are Graph Neural Networks?
+Identity-aware Graph Neural Networks
+Graph Neural Networks are More Powerful than We Think
+Position-aware Graph Neural Networks
+Thu Feb 19
+Relational Deep Learning
+[ slides ]
+Relational Deep Learning - Graph Representation Learning on Relational Databases
+RelBench: A Benchmark for Deep Learning on Relational Databases
+Colab 7 ,
+Homework 4
+out
+Colab 6, Homework 3 due
+Tue Feb 24
+Decision Trees
+[ slides ]
+Ch12: Large-Scale Machine Learning
+Thu Feb 26
+Mining Data Streams I & II
+[ slides ]
+Ch4: Mining data streams
+Colab 8
+out
+Colab 7 due
+Tue Mar 3
+Computational Advertising
+[ slides ]
+Ch8: Advertising on the Web
+Thu Mar 5
+Optimizing Submodular Functions
+[ slides ]
+Colab 9
+out
+Colab 8, Homework 4 due
+Tue Mar 10
+Bandits
+[ slides ]
+Turning Down the Noise in the Blogosphere by El-Arini, Veda, Shahaf, Guestrin. KDD 2009.
+Thu Mar 12
+Guest Lecture: Ruiyang Wang, Anthropic
+[ slides ]
+Colab 9 due
+Thu Mar 19, 12:15 PM - 3:15 PM
+Final Exam

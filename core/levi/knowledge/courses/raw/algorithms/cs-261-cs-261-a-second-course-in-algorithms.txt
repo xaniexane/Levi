@@ -1,0 +1,255 @@
+# CS 261: A Second Course in Algorithms
+# Stanford University
+# source: http://theory.stanford.edu/~tim/w16/w16.html
+
+CS261: A Second Course in Algorithms, Winter 2016
+CS 261: A Second Course in Algorithms
+Announcements
+4/3: The first exercise set has been posted.
+Further exercises sets will follow on a weekly basis, posted
+under "Coursework" below
+on Thursday or Friday. (Remember these are not to be turned in.)
+-->
+Jan 15: added a figure to Problem 5 of PSet#1 (corrected on Jan 16 and Jan 24).
+Jan 4: Welcome to CS261!
+Instructor:
+Tim
+Roughgarden (Office hours: Thursdays 3-4 PM, Gates 474. Email: tim@cs.stanford.edu.)
+Course Assistants:
+Okke Schrijvers
+(Office hours: Mondays 9am-noon, Gates 482.
+Email: okkes@stanford.edu.)
+Chuanqi Shen
+(Office hours: Tuesdays 3-6 PM, Huang basement.
+Email: shencq@stanford.edu.)
+Time/location: 1:30-2:50 PM Tue/Thu in 380-380C.
+Piazza site: here
+Email address for PSet submissions:
+cs261submissions@gmail.com
+Staff mailing list:
+cs261-win1516-staff@lists.stanford.edu
+-->
+Prerequisites : CS161 or equivalent.
+Course Description
+Algorithms for network optimization: max-flow, min-cost flow,
+matching, assignment, and min-cut problems. Introduction to linear
+programming. Use of LP duality for design and analysis of
+algorithms. Approximation algorithms for NP-complete problems such as
+Steiner Trees, Traveling Salesman, and scheduling problems. Randomized
+algorithms. Introduction to online algorithms.
+Lecture videos and notes
+Lecture 1 (Goals/Intro to Max Flow):
+Video
+Notes (alpha version)
+Lecture 2 (Edmonds-Karp & Dinic):
+Video
+Notes (alpha version)
+Lecture 3 (Push-Relabel):
+Video
+Notes (alpha version)
+Lecture 4 (Max Flow Apps):
+Video
+Notes (alpha version)
+Lecture 5 (Min-Cost Matching):
+Video
+Notes (alpha version)
+Lecture 6 (Generalizations):
+Video
+Notes (alpha version)
+Lecture 7 (LP: Intro and Apps):
+Video
+Notes (alpha version)
+Lecture 8 (LP Duality I):
+Video
+Notes (alpha version)
+Lecture 9 (LP Duality II):
+Video
+Notes (alpha version)
+Lecture 10 (Minimax/Simplex):
+Video
+Notes (alpha version)
+Lecture 11 (Multiplicative Weights):
+Video
+Notes (alpha version)
+Lecture 12 (MW/Games/LPs):
+Video
+Notes (alpha version)
+Lecture 13 (Online Algorithms I):
+Video
+Notes (alpha version)
+Lecture 14 (Online Algorithms II):
+Video
+Notes (alpha version)
+Lecture 15 (Approximation Algs):
+Video
+Notes (alpha version)
+Lecture 16 (TSP):
+Video
+Notes (alpha version)
+Lecture 17 (LP+Approx Algs):
+Video
+Notes (alpha version)
+Lecture 18 (Randomized Approx Algs):
+Video
+Notes (alpha version)
+Lecture 19 (Beating Brute Force):
+Video
+Notes (alpha version)
+Lecture 20 (Max Cut/SDP):
+Video
+Notes (alpha version)
+Top 10 List
+Coursework
+Exercise Sets (0%) :
+Exercise sets will be handed out weekly and are meant to help
+you keep up with the course material.
+Do not turn in your solutions. Think about them and discuss with
+fellow students or the course staff any that you cannot answer.
+Roughly half of the final exam will consist of
+variations of problems on these exercise sets.
+Week 1 Exercises
+Week 2 Exercises
+Week 3 Exercises
+Week 4 Exercises
+Week 5 Exercises
+Week 6 Exercises
+Week 7 Exercises
+Week 8 Exercises
+Week 9 Exercises
+Week 10 Exercises-->
+Problem Sets (75%) :
+There will be 4 problem sets. Here is the schedule:
+Problem Set #1 (Posted Tue Jan 12; due Tue Jan 26 midnight.)
+Problem Set #2 (Posted Tue Jan 26; due
+Tue Feb 9 midnight.)
+Problem Set #3 (Posted Tue Feb 9; due Tue Feb 23 midnight.)
+Problem Set #4 (Posted Tue Feb 23; due Tue Mar 8 midnight.)
+Problem Set Policies :
+These are challenging are you are strongly encouraged to form
+groups, of up to three students. Each group should turn in a single
+write-up (all students of the group receive the same score).
+You can form different groups for different problem sets.
+You can discuss problems with students from other groups
+verbally and at a high level only.
+Except where otherwise noted, you may refer to your course notes, the
+textbooks and research papers listed on the course Web
+page only . You cannot refer to textbooks, handouts, or
+research papers that are not listed on the course home page. If you
+do use any approved sources, make you sure you cite them
+appropriately, and make sure that all your words are your own.
+You are strongly encouraged to use LaTex to typeset your write-up.
+Here's a LaTeX template that you can use to
+type up solutions. Here
+and here are good
+introductions to LaTeX.
+We expect you to follow
+the honor code .
+Submission instructions:
+We are using Gradescope for the homework submissions. Go to
+www.gradescope.com to either login or create a new
+account. Use the
+course code 9B3BEM to register for CS261. Only one group member
+needs to submit the assignment. When submitting, please remember to
+add all group member names onto Gradescope.
+Late Days :
+One late day equals a 24-hour extension.
+Each student has two free late days.
+At most two late days can be applied to a single assignment;
+after Thursday midnight (following the original due date) no solutions
+will be accepted.
+Each late day used after the first two will result in a 25%
+penalty.
+Example: a student had one free late day remaining but his/her
+group uses two late days on a Problem Set. If the group's write-up
+earns p points, the student receives a final score of .75*p points
+for the assignment.
+In-Class Final Exam (25%) :
+Date: Monday March 14, 3:30-6:30 PM. Location: room 300-300.
+Roughly half of the questions will be variations on exercise set
+questions.
+The exam is closed-book/computer; however, you are allowed
+to bring two
+double-sided sheets (4 pages) of notes, which you must prepare
+by yourself.
+Lecture Schedule
+Last year's course , there will be some changes this year.
+-->
+PART I: COMBINATORIAL OPTIMIZATION
+Lecture 1 (Tue Jan 5): Course goals. Introduction to the maximum flow problem. The Ford-Fulkerson algorithm.
+Lecture 2 (Thu Jan 7): Proof of the max-flow/min-cut theorem. Augmenting on shortest paths (Edmonds-Karp). The blocking flow approach (Dinic).
+The handout from class is taken from this historical survey by Alexander Schrijver.
+Lecture 3 (Tue Jan 12): Maximum flow: the push-relabel approach.
+Lecture 4 (Thu Jan 14): The minimum s-t cut problem.
+Application to image segmentation. Reducing bipartite matching to maximum flow. Hall's theorem.
+More in image segmentation via cuts: Boykov/Kolmogorov,
+An Experimental Comparison of
+Min-Cut/Max-Flow Algorithms for
+Energy Minimization in Vision .
+Lecture 5 (Tue Jan 19): Minimum-cost bipartite matching.
+Optimality conditions. The Hungarian (Kuhn-Munkres/Jacobi) algorithm.
+Lecture 6 (Thu Jan 21):
+Finish the Hungarian algorithm.
+Survey of efficiently solvable generalizations of maximum flow and
+min-cost bipartite matching (min-cost flow, nonbipartite matching, etc.).
+Nonbipartite matching (and P vs. NP): Edmonds, Paths, Trees, and Flowers (1965).
+PART II: LINEAR PROGRAMMING AND DUALITY
+Lecture 7 (Tue Jan 26): Introduction to linear
+programming. Geometric intuition. Applications: maximum and minimum-cost
+flow; linear regression; learning a linear classifier, with extensions
+to minimizing hinge loss and augmented feature sets.
+Lecture 8 (Thu Jan 28): Linear programming duality.
+A recipe for taking duals. The meaning of the dual. Weak duality and
+complementary slackness conditions. The max-flow/min-cut theorem via
+duality.
+Lecture 9 (Tue Feb 2):
+An LP-duality view of the Hungarian algorithm.
+Strong duality. Separating hyperplanes and Farkas's Lemma.
+Lecture 10 (Thu Feb 4):
+The minimax theorem for two-player zero-sum games.
+Survey of algorithms for linear programming: the simplex method, the
+ellipsoid method, and interior point methods.
+How
+to win rock-paper-scissors every time .
+On the ellipsoid method and the popular press: Lawler, The
+Great Mathematical Sputnik of 1979 .
+PART III: ONLINE ALGORITHMS
+Lecture 11 (Tue Feb 9):
+Online decision-making. Regret. The multiplicative weights
+algorithm. Minimax revisited.
+Lecture 12 (Thu Feb 11):
+Applications of multiplicative weights. Linear classifiers revisted.
+Minimax revisited (again). Applications to fast approximate flows.
+Lecture 13 (Tue Feb 16):
+Online algorithms: minimum makespan scheduling and Steiner tree.
+Lecture 14 (Thu Feb 18):
+Online algorithms: an optimal online algorithm for
+maximum bipartite matching.
+PART IV: ALGORITHMS FOR NP-HARD PROBLEMS
+Lecture 15 (Tue Feb 23):
+Introduction to approximation algorithms. Scheduling, knapsack,
+Steiner tree, set coverage, influence maximization.
+CS161-level videos on NP-completeness (Part XVI) and
+approximation algorithms for the knapsack problem
+(Part XVIII).
+Lecture 16 (Thu Feb 25):
+The Traveling Salesman Problem. Inapproximability in the general case.
+The MST heuristic for metric TSP. Christofides's algorithm for metric
+TSP. Asymmetric TSP (ATSP) and minimum-cost cycle covers.
+Lecture 17 (Tue Mar 1):
+Linear programming and approximation algorithms.
+The set cover problem. A dual interpretation of the greedy algorithm. LP rounding and primal-dual approximation algorithms for the vertex cover problem.
+Lecture 18 (Thu Mar 3):
+Five essential tools for the analysis of randomized algorithms
+(approximate and otherwise).
+Linearity of expectation and a 7/8-approximation for MAX 3SAT. Markov
+and Chebyshev inequalities. Chernoff bounds. Running example:
+analysis of hashing. Randomized rounding for low-congestion
+routing.
+Lecture 19 (Tue Mar 8):
+Beating brute-force search for NP-hard problems.
+Fixed-parameter tractability: vertex cover revisited.
+Exact TSP via dynamic
+programming. A random search algorithm for 3SAT.
+Lecture 20 (Thu Mar 10):
+The maximum cut problem. Semidefinite programming (SDP).
+Randomized hyperplane rounding. Top 10 list.

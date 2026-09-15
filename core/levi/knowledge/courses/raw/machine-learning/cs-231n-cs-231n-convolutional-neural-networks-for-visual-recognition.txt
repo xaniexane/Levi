@@ -1,0 +1,150 @@
+# CS 231n: Convolutional Neural Networks for Visual Recognition
+# Stanford University
+# source: http://cs231n.stanford.edu/
+
+Stanford University CS231n: Deep Learning for Computer Vision
+CS231n: Deep Learning for Computer Vision
+Stanford - Spring 2026
+*This network is running live in your browser
+The Convolutional Neural Network in this example is classifying images live in your browser using Javascript, at
+about 10 milliseconds per image. It takes an input image and transforms it through a series of functions into
+class probabilities at the end. The transformed representations in this visualization can be loosely thought of
+as
+the activations of the neurons along the way. The parameters of this function are learned with backpropagation
+on
+a dataset of (image, label) pairs. This particular network is classifying CIFAR-10 images into one of 10 classes and was trained
+with ConvNetJS . Its exact architecture is
+[conv-relu-conv-relu-pool]x3-fc-softmax, for a total of 17 layers and 7000 parameters. It uses 3x3 convolutions
+and 2x2 pooling regions. By the end of the class, you will know exactly what all these numbers mean.
+Course Description
+Computer Vision has become ubiquitous in our society, with applications in search, image understanding, apps,
+mapping, medicine, drones, and self-driving cars. Core to many of these applications are visual recognition
+tasks such as image classification, localization and detection. Recent developments in neural network (aka
+“deep
+learning”) approaches have greatly advanced the performance of these state-of-the-art visual recognition
+systems. This course is a deep dive into the details of deep learning architectures with a focus on learning
+end-to-end models for these tasks, particularly image classification. During the 10-week course, students will
+learn to implement and train their own neural networks and gain a detailed understanding of cutting-edge
+research in computer vision. Additionally, the final assignment will give them the opportunity to train and
+apply multi-million parameter networks on real-world vision problems of their choice. Through multiple
+hands-on
+assignments and the final course project, students will acquire the toolset for setting up deep learning tasks
+and practical engineering tricks for training and fine-tuning deep neural networks.
+Previous Offerings
+[Winter 2015]
+[Winter 2016]
+[Spring 2017]
+[Spring 2018]
+[Spring 2019]
+[Spring 2020]
+[Spring 2021]
+[Spring 2022]
+[Spring 2023]
+[Spring 2024]
+[Spring 2025]
+Instructors
+Fei-Fei Li
+Ehsan Adeli
+Justin Johnson
+Zane Durante
+Tiange Xiang
+Teaching Assistants
+Aditesh Kumar (Head CA)
+Keshigeyan Chandrasegaran
+Mark Endo
+Aniket Gupta
+Wenlong Huang
+Chaitanya Patel
+Yash Shah
+Karan Singh
+Bailey Trang
+Heng Yu
+Koven Yu
+Cristóbal Eyzaguirre
+Fangrui Huang
+Eris Zhang
+Favour Nerrise
+Yalcin Tur
+June Zheng
+Yang Zheng
+Course Logistics
+Lectures: Tuesdays and Thursdays 12:00-1:20PM Pacific Time at NVIDIA Auditorium .
+Lecture Videos: Will be posted on Canvas
+'Panopto Course Videos' tab shortly after each lecture, accessible to enrolled Stanford students. While they
+are not reflective of this offering CS231n, recordings from previous years are available on YouTube .
+Office Hours: We will be holding a mix of in-person and Zoom office hours. You can find a full list
+of times and locations
+on the calendar .
+Contact: Announcements and all course-related questions will happen on the Ed forum
+- post there for the quickest response.
+For external enquiries, emergencies, or personal matters that you don't wish to put in a private post, you
+can email us at cs231n-staff-spr26@stanford.edu .
+Coursework
+Prerequisites
+Proficiency in Python All class assignments will be in Python (and use numpy)
+(we provide a tutorial here for
+those who aren't as familiar with Python). If you have a lot of programming experience but in a different
+language (e.g. C/C++/Matlab/Javascript) you will probably be fine.
+College Calculus, Linear Algebra (e.g. MATH 19, MATH 51) You should be
+comfortable taking derivatives and understanding matrix vector operations and notation.
+Basic Probability and Statistics (e.g. CS 109 or other stats course) You
+should have an intuitive understanding of basic probability, gaussian distributions, mean, standard deviation,
+etc.
+Assignments (45%)
+See the Assignments page for details regarding assignments, late days and
+collaboration policies.
+Midterm (20%)
+Detailed information regarding the midterm will be made available as an announcement on Ed in the coming weeks.
+Final Project (35%)
+See the Project page for more details regarding the final course project.
+Participation (3% extra credit)
+Active participation greatly improves the learning experience for all students! Teaching staff will make note
+of outstanding contributions in Lecture, Section, Office Hours, on EdStem, and elsewhere. The most commended
+student will receive 3% extra credit, and other outstanding contributors will receive a fraction of that
+proportionate to their contribution.
+Regrade Requests
+If you believe that the course staff made an objective error in grading, you may submit a regrade request on
+Gradescope within 3 days of the grade release. Your request should briefly summarize why the original
+grading was incorrect. Note that staff may regrade the entire submission, so it is possible for you to lose more
+points than you gain if a mistake was overlooked in the first time.
+Late Policy
+All students have 4 free late days for the quarter.
+You may use up to 2 late days per assignment.
+Upon use, each late day provides a 24 hour extension with no penalty.
+You may use late days for the assignments, project proposal, and project milestone check-ins.
+You may not use late days for the final project report.
+Once you have exhausted your free late days, we will deduct a late penalty of 25% per additional late day.
+For example: you submit A1 one day late, submit A2 three days late, and submit A3 two days late.
+You receive no penalty for A1, and exhaust one of your free late days.
+For A2 the first two late days exhaust two of your free late days; the third day late incurs a 25%
+penalty.
+For A3 the first late day exhausts your final free late day; the second late day incurs a 25% penalty.
+For the project proposal and milestone, we will deduct late days from each group member independently.
+The students receive support from
+Modal ,
+AWS , and
+GCP
+through cloud credits for final course projects.
+FAQ
+Academic accommodations:
+If you need an academic accommodation based on a disability, you should initiate the request
+with the Office of Accessible Education (OAE) . The OAE will evaluate
+the request, recommend accommodations, and prepare a letter for faculty. Students should contact the OAE as
+soon as possible and at any rate in advance of assignment deadlines, since timely notice is needed to
+coordinate accommodations. It is the student’s responsibility to reach out to the teaching staff regarding
+the
+OAE letter. Please create a private post on Ed in the Accommodations category with your letter attached.
+Can I take this course on credit/no cred basis?
+Yes. Credit will be given to those who would have otherwise earned a C- or above.
+Can I audit or sit in?
+In general we are very open to auditing if you are a member of the Stanford community
+(registered student, staff, and/or faculty). Out of courtesy, we would appreciate that you first email us or
+talk to the instructor after the first class you attend.
+Can I work in groups for the Final Project?
+Yes, in groups of up to three people.
+I have a question about the class. What is the best way to reach the course staff?
+Almost all questions should be asked on Ed. If you have a sensitive issue, you can email the
+below address to reach the instructors and head TA directly: cs231n-staff-spr26@stanford.edu .
+Can I combine the Final Project with another course?
+Yes, you may. Please read the Honor Code section in the Project
+page.

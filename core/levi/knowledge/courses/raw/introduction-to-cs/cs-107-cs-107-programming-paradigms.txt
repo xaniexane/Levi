@@ -1,0 +1,393 @@
+# CS 107: Programming Paradigms
+# Stanford University
+# source: https://see.stanford.edu/Course/CS107
+
+Stanford Engineering Everywhere | CS107 - Programming Paradigms
+Stanford University
+CS107 - Programming Paradigms
+Course Details
+Show All
+Course Description
+Advanced memory management features of C and C++; the differences between imperative and object-oriented paradigms. The functional paradigm (using LISP) and concurrent programming (using C and C++). Brief survey of other modern languages such as Python, Objective C, and C#.
+Prerequisites:
+Programming and problem solving at the
+Programming Abstractions level. Prospective students should know a reasonable amount of C++. You should be comfortable with arrays, pointers, references, classes, methods, dynamic memory allocation, recursion, linked lists, binary search trees, hashing, iterators, and function pointers. You should be able to write well-decomposed, easy-to-understand code, and understand the value that comes with good variable names, short function and method implementations, and thoughtful, articulate comments.
+Syllabus
+DOWNLOAD All Course Materials
+Instructor
+Cain, Jerry
+Jerry Cain is a lecturer at Stanford University in the Computer Science Department.
+Handouts
+Lecture 1
+Course Information
+Course Syllabus
+Lecture 2
+Introducing the STL
+Unix Basics
+Computer Architecture
+Arrays the Full Story
+Lecture 3
+Unix Development
+Lecture 4
+No handouts
+Lecture 5
+Memory
+Lecture 6
+Stack Implementation
+Lecture 7
+No handouts
+Lecture 8
+Computer Architecture
+Simple Code Generation
+Lecture 9
+No handouts
+Lecture 10
+Function Call and Return
+Code Generation Examples
+Factorial Trace
+Lecture 11
+No handouts
+Lecture 12
+No handouts
+Lecture 13
+No handouts
+Lecture 14
+No handouts
+Lecture 15
+Thread Package Docs
+Concurrency Examples
+Lecture 16
+No handouts
+Lecture 17
+More Concurrency
+Lecture 18
+No handouts
+Lecture 19
+Introduction to Scheme
+Scheme Functions
+Lecture 20
+No handouts
+Lecture 21
+Functions as Data
+Scheme Examples
+Lecture 22
+No handouts
+Lecture 23
+No handouts
+Lecture 24
+Python Basics
+Lecture 25
+Networking with Python
+Lecture 26
+No handouts
+Lecture 27
+No handouts
+Resources
+Tutorials:
+Assorted Anecdotes and Advice - Created by course TA Aman Kumar
+Quick and Dirty Purify Tutorial - Created by course TA Aman Kumar
+Purify Errors - Most common Purify error messages
+Other Resources:
+Unix Reference Documentation
+xemacs Command Reference
+vi Command Reference
+gdb Command Reference
+Java and Eclipse
+C and C++ Standard Library Reference
+Dinkumware C++ Library Reference
+The Kawa Language Framework
+The Scheme Programming Language
+Online Python Tutorial
+Java 1.5 Documentation
+Assignments
+Section Assignments
+Assignment Solutions Distributed
+Assignment 1
+Solutions
+Lecture 6
+Assignment 2
+Solutions
+Lecture 8
+Assignment 3
+Solutions
+Lecture 11
+Assignment 4
+Solutions
+Lecture 12
+Assignment 5
+Solutions
+Lecture 16
+Assignment 6
+Solutions
+Lecture 18
+Assignment 7
+Solutions
+Lecture 21
+Assignment 8
+Solutions
+Lecture 26
+Programming Assignments
+Assignment Instructions Starter Code FAQs Distributed
+RSG
+04-Assignment-1-RSG.pdf
+1-rsg.zip 1-rsg-data.zip
+Lecture 2
+Six Degrees
+09-Assignment-2-Six-Degrees.pdf
+2-six-degrees.zip 2-six-degrees-data.zip
+09b-Assignment-2-Six-Degrees-FAQs.pdf
+Lecture4
+Vector and Hashset
+11-Assignment-3-Vector.pdf
+3-vector-hashset.zip 3-vector-hashset-data.zip
+11b-Assignment-3-Vector-FAQs.pdf
+Lecture 7
+RSS
+17-Assignment-4-RSS.pdf
+4-rss-news-search.zip 4-rss-news-search-data.zip 4-rss-news-search-expat.zip 4-rss-news-search-lib.zip
+17b-Assignment-4-RSS-FAQs.pdf
+Lecture 10
+Raw Memory
+19-Assignment-5-Raw-Memory.pdf
+5-raw-memory.zip
+19S-Assignment-5-Solution.pdf
+Lecture 12
+RSS Revisited
+27-Assignment-6-RSS-Revisited.pdf
+6-rss-news-search.zip 6-rss-news-search-lib.zip
+27b-Assignment-6-RSS-Revisited-FAQs.pdf
+Lecture 17
+Where am I?
+34-Assignment-7-Where-Am-I.pdf
+7-where-am-i.zip
+34b-Assignment-7-Where-Am-I-FAQs.pdf
+Lecture 21
+Python
+36-Assignment-8-Python.pdf
+8-align.zip
+Lecture 24
+Exams
+Practice Midterm
+Questions
+Solutions
+Midterm
+Questions
+Solutions
+Practice Final
+Questions
+Solutions
+Course Sessions (27):
+Show All
+Lecture 1
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+18 min
+Topics: Administrative Details, Exams - Time limit, Conflicts, Course Grade Breakdown, Assignment Details - Submission, Grading, Late Days, Course Email, Newsgroup, Facebook/Twitter, Mailing List, Course Prerequisites, Languages and Paradigms Taught - C++ vs. Pure C, Procedural Paradigm vs. Object-Oriented Paradigm, Assembly, Concurrent Programming Overview, Example of Data Sharing Issues with Concurrent Programming, Scheme, Functional Paradigm Overview, Python Overview, Benefits and Common Uses
+Transcripts
+HTML
+PDF
+Lecture 2
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+51 min
+Topics: C/C++ Data Types - Interpretations, Sizes, Bits- How Bytes are Broken Up into Bits, Breaking Up a Character's Decimal Value into its Underlying Bit Structure, Shorts - Interpreting Data that Consists of More Than One Byte, Representations of Negative Numbers, The Sign Bit, Two's Complement Addition, Converting Between Chars and Shorts, How the Bit Representation is Transferred, Converting Between ints and shorts, Sign Extending During Conversion, Floats, Converting Between Integers and Floats
+Transcripts
+HTML
+PDF
+Lecture 3
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+53 min
+Topics: Converting Between Types of Different Sizes and Bit Representations Using Pointers, Little Endian vs. Big Endian, Structs: How the Data of a Struct is Stored, Accessing the Data of a Struct, Arrays, Pointer Arithmetic on Arrays, Result of Casting Arrays to Different Types, Layout in Memory of Structs, Dynamically Allocated Strings in C vs. Arrays of Characters, Modifying Internal Data of Structs Using strcpy, Character Arrays and cout, Generic Functions in C Using Memory and Pointers
+Transcripts
+HTML
+PDF
+Lecture 4
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+51 min
+Topics: Creating a Generic Swap Function for Data Types of Arbitrary Size, Void* Type for Generic Pointers, Implementation of Swap Function Using memcpy, Client Interface to Generic Swap Function, Pros and Cons of C Generics vs. C++ Generics, Errors Resulting from Improper Use of C Generic Swap Function that Compile, Swapping Pointers, Pitfalls when Swapping Pointers Using Generics, Implementing a Generic Linear Search, Implementing a Generic Linear Search, Using Casts and Pointer Arithmetic, Comparing Memory Blocks Using memcmp or a Comparison Function
+Transcripts
+HTML
+PDF
+Lecture 5
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+52 min
+Topics: Generic Lsearch - Prototype, Comparison Function, Implementation, Casting Void*S to Char*S to Compute Byte Offsets, Client Use of Generic Lsearch, Example of a Comparison Function for Integers, More Complicated Data Types and Lsearch- Example Using C-Strings, Comparison Function for Two C-Strings, With Arguments that Represent Char**S, Comparison Functions Where the Key is a Different Type than the Second Argument, Using a Pointer to a Struct as a Key in Order to Access Additional Data in a Comparison Function, Functions Vs. Methods, C Data Structures - Implementing a Non-Generic Stack of Integers, C Stack Interface, Implementation, Preallocating Memory, Client Use of C Stack, State of Internal Memory of the Stack, Growth of Memory when Stack Becomes Too Large, Implementation of Stacknew, Asserts
+Transcripts
+HTML
+PDF
+Lecture 6
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+51 min
+Topics: Integer Stack Implementation - Constructor and Destructor, Stackpush Implementation, Reallocation of Memory when Stack Grows Too Big Using Realloc, How Memory is Copied Using Realloc, Stackpop Implementation, Reimplementing the Stack Interface as a Generic Data Structure, Generic Implementation of StackNew, Generic Implentation of Stackpush Using Memcpy, Stackgrow Implementation, Static (Internal) Functions, Generic Stackpop Implementation Using Memcpy, Where it is the Responsibility of the Caller to Allocate the Memory Where the Popped Element is Stored.
+Transcripts
+HTML
+PDF
+Lecture 7
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+53 min
+Topics: Problems with Ownership of Memory, How Default Implementation of Stackdispose Does Not Free Dynamically Allocated Data, Adding a Free Function to the Stack Implementation, Rewriting Stackdispose to Incorporate It, Writing a Free Function for a Stack of C-Strings, Pitfalls When Writing Such Functions, C Library Functions for Assignment 3 - Memmove (Memcpy That Can Copy Using Two Regions That Overlap), Example of Rotate Function, C Qsort Function, Global Layout of Memory - Stack Segment, Heap Segment, How the Heap Manager Allocates And Frees Memory on the Heap, Underlying Linked List of Free Node Information
+Transcripts
+HTML
+PDF
+Lecture 8
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+51 min
+Topics: Heap Management - How Information about Allocations are Stored in the Heap, Result of Freeing Memory Improperly, Actual Sizes of Heap Allocations - Nearest Power of 2, Management of Free Blocks on the Heap by Storing Addresses in the Blocks of Free Memory, Algorithms for Choosing Which Free Block to Allocate, How the Heap's Free List Can Be Updated When Memory is Freed, How Adjacent Free Blocks Are Combined To Avoid Fragmentation, Compacting the Heap By Using Handles, Stack Segment Layout, Allocation of Local Variables on the Stack by Decrementing the Stack Pointer, Activation Records and State of the Stack Pointer During Nested Function Calls, Assembly Code and the Code Segment, RAM, Registers, and the ALU, Example That Demonstrates How an Arithmetic Expression is Translated Into Register Operations
+Transcripts
+HTML
+PDF
+Lecture 9
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+52 min
+Topics: How a Code Snippet is Translated into Assembly Instructions, Store, Load, and ALU Operations, Assembly Optimizations for 4-Byte Addresses, Context-Insensitive Code Translation, Overriding the 4-Byte Default in Assembly Instructions, Translating a For Loop into Assembly, Using Branch Instructions and the PC Register, Pointer/Array Arithmetic in Assembly, Unconditional Branch Instructions (Jumps), How a 4-Byte Assembly Instruction is Encoded in Memory
+Transcripts
+HTML
+PDF
+Lecture 10
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+49 min
+Topics: More Detail about Activation Records - Layout of Memory During a Function Call, How the Return Address of a Function is Stored on the Stack, Example Showing How an Activation Record is Constructed on the Stack, Setting Up Function Parameters on the Stack, Using the Call Instruction to Jump to the Function, Cleaning Up at the End of a Function and Using the RET Instruction and the Saved Return Address to Return to the Original Function, General Layout of an Activation Record, Who Sets Up Each Part of the Activation Record, Assembly Code Translation of the Factorial Function, How Recursion Translates into Assembly, Why Registers Need to be Reloaded After Other Functions Are Called, Animation Demonstrating the Assembly Execution for the Factorial Function
+Transcripts
+HTML
+PDF
+Lecture 11
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+52 min
+Topics: Moving from C Code Generation to C++ Code Generation: Basic Swap Example, Code Generation for the Pointer Swap Function, Code Generation for the C++ Version Of Swap Using References, Which Are Treated as Automatically Dereferenced Pointers, Local Variables Declared as References, Difference Between References and Pointers, Effect Of Declaring a Class on Memory in the Stack, Class Methods, Which Take a "This" Pointer as An invisible First Parameter, Effect Of the "This" Pointer on the Activation Record for a Class Method, Static Class Methods (Standalone Functions), Which Don't Contain a "This" Pointer, Compilation and Linking - #Define and the Preprocessor
+Transcripts
+HTML
+PDF
+Lecture 12
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+50 min
+Topics: Preprocessing Commands - #Define as a Glorified Find and Replace, Preprocessing Macros - Preprocessor Commands With Arguments, Example of Macro Usage in the Vector assignment to Calculate the Address of the Nth Element, Assert Macro Implementation, How Asserts are Stripped Out for the Final Product Using #Ifdef and #Define, C Macro Drawbacks When Given More Complex Arguments, #Include as a Search and Replace Operation, < > Vs. " ", Output to the Compiler After Preprocessing, How to View the Output of the Preprocessor Using Gcc, How to Avoid Circular #Include Loops Using #Ifndef, #Define, and #Endif, Visual Representation of the Result of Preprocessing (The Translation Unit) that Is Passed to the Compiler to Create a .O File, An Example Illustrating the Preprocessing and Compilation of a Simple Program
+Transcripts
+HTML
+PDF
+Lecture 13
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+52 min
+Topics: Review of Compilation Process of a Simple Program Into a .O File, Effect of Commenting Out a C Standard Library .H File on the Resulting Translation Unit, How Gcc Infers a Prototype When None Is Found and the .O File Remains the Same, How the Gcc Linker Is Able to Link Standard Library Files Without a #Include, The (Similar) Result When the .H File with Malloc's Prototype Is Not Included, How Commenting Out Assert.H Creates Different Results, Failing In the Linker Since Assert Is a Macro, As Opposed to a Function In the Standard Libraries, Effect of Calling Strlen with the Wrong Number of Arguments on the Compilation/Linking Process, Effect of Calling Memcmp with too Few Arguments on the Compilation/Linking Process, How C++ Disambiguates Between Different Function Prototypes to Avoid the Problems Posed By the Previous Two Examples, Debugging Information - Seg Faults (Usually Dereferencing a Bad Pointer) Vs. Bus Errors (Dereferencing Data that Isn't Correctly Aligned), Debugging Example Where Overflowing an Integer Array Leads to an Infinite Loop, Similar Example with a Short Array that Works Differently on Big-Endian Systems Vs. Little-Endian Systems, Example Where an Array Overflow Overwrites the Saved PC and Leads to an Infinite Loop
+Transcripts
+HTML
+PDF
+Lecture 14
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+45 min
+Topics: Example in Which Writing Past the End of Array Causes the Return Address of the Function to be Overwritten, Leading to An Infinite Loop, Example in Which Data Is Incorrectly Shared between Two Different Functions, But Can Still be Printed Out Due to the Structure of the Activation Record (Channelling), How Printf's Prototype Uses "...", Which Allows It to Take A Variable Number of Arguments, Why Parameters Are Pushed Onto the Stack From Right to Left, in the Context of Printf Crawling Up the Stack And Functions With A Variable Number of Arguments, Justification For Structs' Fields being Laid Out Sequentially in Memory, in Terms of Casting between Different Structs With Similar Internal Structures, Sequential Programming Vs. Concurrent Programming, Example of Many Different Processes Running in Separate Virtual Address Spaces, Each Mapped to Physical Addresses by A Central Memory Management Unit, How Concurrent Programming (Multiprocessing) Allows Mutiple Processes to Seemingly Run At the Same Time, How Multithreading Allows Multiple Functions in Run 'Simultaneously' Within One Process (E.G. the office Assistant in Microsoft office Or Downloading Songs in Itunes), Real-World Situation that Can be Modeled Using Threads (10 Ticket Agents Simultaneously Selling 150 Tickets)
+Transcripts
+HTML
+PDF
+Lecture 15
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+53 min
+Topics: Transitioning from Sequential Programming to Concurrent Programming in the Ticket Sale Example, Problems with the Sequential Model, Threading Interface, Rewriting the Ticket Example to Use It, Adding a Randomized Threadsleep Call to the Threads to Make the Time Slices Used by the Different Threads Less Uniform, Sample Output of Our Ticket Threads, How a Thread Can be Interrupted in the Middle of a Nonatomic Operation, How Multithreading Can Drastically Speed Up the RSS News Reader by Allowing Some Feeds to be Loaded While the Other Feeds Are Blocked, Allowing Each of the Ticket Threads to Access A Global Pool of Tickets, Rather than Allocating 15 Tickets to Each Agent, How This Can Lead to Problems When Threads Attempt to Access the Shared Data Simultaneously, How We Can Prevent This from Happening By Enclosing the Critical Region within A Semaphore, the Semaphorewait And Semaphoresignal Functions, Modifying the Selltickets Function to Use the Semaphore to Protect the Shared Data, How Changing the initial Value of the Semaphore Can Create Deadlock or Allow Too Many Threads to Access the Shared Data At Once
+Transcripts
+HTML
+PDF
+Lecture 16
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+52 min
+Topics: Review of Semaphore Syntax, Semaphoresignal and Semaphorewait, Semaphore Usage in the Multithreaded Selltickets Function (Protecting a Critical Region), Example of a Race Conditions Where Two Ticket agents Sell the Same Ticket, How the Stack and Various Registers are Saved When the Currently Running Thread Is Swapped, Another Example Using Semaphores that Models the internet, Implementations of a Reader and Writer Thread, Potential Dangers When the Two Threads Run Without Protection, Using a Fullbuffer Semaphore and an Emptybuffer Semaphore To Ensure that Neither Thread Outpaces the Other, Different Semaphore Patterns - Binary Lock Vs. Rendezvous, Effect of Changing the Starting Values of the Emptybuffers and Fullbuffers Semaphore, How To Detect Deadlock, Changes in the Thread Synchornization When Using Multiple Readers and Writers, Dining Philosopher Problem - Modeling Each Philosopher as a Thread, How Deadlock Can Result, How the Deadlock Can be Eliminated by Limiting the Number of Philosophers that Can Eat at Once
+Transcripts
+HTML
+PDF
+Lecture 17
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+49 min
+Topics: Review of the Dining Philosopher Problem, Modeling Each Philosopher as a Thread, How Deadlock Can Result, How Deadlock Can be Eliminated By Limiting the Number of Philosophers That Can Eat at Once Using a Semaphore, Using a Global Variable and a Binary Lock to Track a Resource Vs. Using a Semaphore, Another Threading Example Involving FTP Downloads of Multiple Files at Once, Where Each File Is Assigned to a Thread and the Total Number of Bytes Is Returned, Implementing a Downloadhelper Function That Downloads a File and then Uses a Binary Lock to Safely Update the Total Number of Bytes Downloaded, Ensuring that the Downloadallfiles Function Does Not Return Before All the Files Have Been Downloaded by the Threads Which It Spawns by Using a Childrendone Semaphore, Ensuring that the Downloadallfiles Function Does Not Return Before All the Files Have Been Downloaded by the Threads Which It Spawns by Using a Childrendone Semaphore, How the Childrendone Semaphore Ensures that the Function Returns at the Correct Time, No Matter How the Various Threads Are Interleaved, Setting Up the Ice Cream Store Concurrency Example for Next Week
+Transcripts
+HTML
+PDF
+Lecture 18
+Watch Online:
+Download:
+Right Click, and Save As
+Duration:
+Watch Now
+Download
+52 min
+Topics: Guest Lecturer, Setup of the Ice Cream Store Problem, with Customer, Cashier, Clerk, and Manager Threads, The Different Constraints on the Various Types of Threads, Writing the Main Function, Spawning the Various Threads, Handling the Manager-Clerk Interaction Using the Inspection Struct, Which Uses a Semaphore to Signal to the Manager That the Clerk Is Ready for Inspection, As Well as a Semaphore tha
