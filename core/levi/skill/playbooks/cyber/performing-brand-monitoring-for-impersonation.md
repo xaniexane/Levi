@@ -63,3 +63,5 @@ Attackers register lookalike domains, clone login pages, and create social media
 - CISA guidance on phishing and brand-impersonation reporting
 - NIST SP 800-177, "Trustworthy Email" (for related sender-authentication context)
 - Platform-specific impersonation reporting flows (document the ones you use in runbooks)
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

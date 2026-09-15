@@ -30,16 +30,26 @@ This playbook explains how to connect STIX/TAXII feeds to your detection and res
 6. **Close the loop.** Track which feed-sourced indicators actually fired in your environment and feed precision metrics back into feed selection and scoring weights.
 7. **Handle sharing markings.** Respect TLP and any distribution controls; automate downgrading or stripping fields when sharing outside the original audience.
 
+8. **Deduplicate across feeds.** Use STIX IDs and indicator values to merge duplicates; a single indicator from five feeds should produce one block, not five alerts.
+9. **Test the pipeline end to end.** Inject a known-test indicator through the full path (feed → TIP → SIEM rule → alert) quarterly to prove the machinery works.
+
 ## Expected outputs
 - Documented feed catalog with scoring weights and TTL policy.
 - Automated pipeline from TAXII poll to control enforcement with provenance tags.
 - Metrics: indicator precision per feed, time from publish to enforcement, analyst enrichment usage.
+- Example: a high-confidence C2 domain from an ISAC feed is polled, scored, pushed to DNS blocking and the SIEM within 15 minutes, and every block is tagged with the feed name for traceability.
 
 ## Pitfalls
 - Ingesting every available feed: volume without scoring creates alert fatigue.
 - Never expiring indicators: stale blocks cause false positives and business disruption.
 - Ignoring TLP markings, which can breach sharing agreements and partner trust.
 
+- Polling too aggressively and getting rate-limited or blocked by the feed provider; respect the published polling guidance.
+- Normalizing away the original STIX IDs, which breaks correlation when the same object is updated upstream.
+
 ## References
 - OASIS STIX 2.1 and TAXII 2.1 specifications (oasis-open.org; docs.oasis-open.org/cti).
 - NIST SP 800-150, Guide to Cyber Threat Information Sharing.
+- FIRST (Forum of Incident Response and Security Teams) information-sharing guidance (first.org).
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

@@ -8,6 +8,7 @@ requires_confirmation: false
 tags: [network, tshark, analysis]
 version: 1.0.0
 ---
+
 ## Purpose
 - Analyze captures too large for interactive tools through fast command-line statistics and filtering.
 - Script repetitive analysis so the same checks run identically across every capture in an incident.
@@ -55,4 +56,5 @@ version: 1.0.0
 - NIST SP 800-86 Guide to Integrating Forensic Techniques into Incident Response
 - Wireshark display filter reference, https://www.wireshark.org/docs/dfref/
 - Wireshark fields documentation for the installed version
-
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

@@ -64,3 +64,5 @@ Adversaries throttle or degrade a target's bandwidth without taking it fully off
 - Apache and Nginx documentation on request timeouts and connection limits
 - NIST SP 800-61, "Computer Security Incident Handling Guide"
 - Cloudflare / AWS Shield documentation on DDoS mitigation architecture patterns
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

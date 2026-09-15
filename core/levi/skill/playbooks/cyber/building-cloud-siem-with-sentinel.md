@@ -50,3 +50,5 @@ This playbook walks a security team through standing up Microsoft Sentinel: work
 - Microsoft Learn: Kusto Query Language (KQL) reference
 - MITRE ATT&CK for detection mapping
 - NIST SP 800-92, Guide to Computer Security Log Management
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

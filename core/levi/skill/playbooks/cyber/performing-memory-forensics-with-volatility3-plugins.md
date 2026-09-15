@@ -8,6 +8,7 @@ requires_confirmation: false
 tags: [memory, forensics, volatility]
 version: 1.0.0
 ---
+
 ## Purpose
 - Go beyond stock Volatility 3 plugins with specialized modules for malware families, rootkit checks, and custom IOC patterns.
 - Standardize plugin usage across the team so results are comparable between analysts and cases.
@@ -55,4 +56,5 @@ version: 1.0.0
 - NIST SP 800-86 Guide to Integrating Forensic Techniques into Incident Response
 - DFIR community plugin repositories and associated documentation
 - The Art of Memory Forensics (Wiley) for plugin internals
-
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

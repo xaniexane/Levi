@@ -30,17 +30,27 @@ This playbook describes how to introduce Sigstore — keyless signing with Fulci
 6. **Document keyless rotation.** Because identities come from OIDC, rotation means rotating the CI identity configuration, not distributing new keys; write this into the key-management runbook.
 7. **Monitor the transparency log.** Watch for certificates or entries issued for your identities that you did not expect — a signal of CI compromise.
 
+8. **Handle key compromise and revocation.** Document the incident path: rotate CI identities, publish revocations, and notify consumers to re-verify artifacts built during the compromise window.
+9. **Extend to SBOMs and attestations.** Sign SBOMs and vulnerability scan attestations alongside binaries so consumers get integrity plus transparency in one verification step.
+
 ## Expected outputs
 - Signed release artifacts with Rekor transparency entries and SLSA provenance.
 - Verification policy enforced at deployment/consumption points.
 - Runbook for identity rotation and incident response for suspected signing abuse.
+- Example: a container image signed by the release workflow's OIDC identity, with `cosign verify` succeeding in the admission controller and the Rekor entry UUID recorded in the release notes.
 
 ## Pitfalls
 - Signing without verification enforcement gives a false sense of security; the value is in the check, not the signature.
 - Assuming public Sigstore is acceptable for all artifacts; regulated data may require a private instance.
 - OIDC identity sprawl: overly broad CI identities let any workflow sign as the release pipeline.
 
+- Signing in CI but storing artifacts in a mutable registry where tags can be repointed after signing; sign digests, and verify digests, not tags.
+- Forgetting that transparency logs are public: never put sensitive internal hostnames or usernames in attestation fields that end up in Rekor.
+
 ## References
 - Sigstore documentation (docs.sigstore.dev).
 - SLSA framework (slsa.dev) — provenance and build integrity levels.
 - NIST SP 800-204D, Strategies for the Integration of Software Supply Chain Security.
+- NIST SP 800-161 Rev. 1, Cybersecurity Supply Chain Risk Management Practices.
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

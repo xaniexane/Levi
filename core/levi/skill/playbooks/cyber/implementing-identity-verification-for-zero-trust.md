@@ -61,3 +61,5 @@ Make identity the primary control plane for zero trust by ensuring the person be
 - NIST SP 800-207, "Zero Trust Architecture" — https://csrc.nist.gov/publications/detail/sp/800-207/final
 - CISA Zero Trust Maturity Model — https://www.cisa.gov/zero-trust-maturity-model
 - MITRE ATT&CK T1556 (Subvert Trust Controls) — https://attack.mitre.org/techniques/T1556/
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

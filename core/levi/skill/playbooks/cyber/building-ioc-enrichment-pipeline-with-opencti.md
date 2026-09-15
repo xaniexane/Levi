@@ -49,3 +49,5 @@ Raw indicators are low-value without context: who uses them, what malware they b
 - OASIS STIX 2.1 and TAXII 2.1 specifications
 - NIST SP 800-150, Guide to Cyber Threat Information Sharing
 - MITRE ATT&CK for threat-actor and technique correlation
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

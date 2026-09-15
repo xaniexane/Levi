@@ -30,16 +30,26 @@ This playbook defines how to configure and operate an incident ticketing system 
 6. **Enforce the timeline.** Require timestamped entries for key milestones; generate the incident timeline from the ticket for reporting.
 7. **Close with lessons learned.** Block closure until root cause, corrective actions, and detection improvements are recorded and assigned owners.
 
+8. **Integrate with the war room.** During major incidents, auto-create a shared chat channel linked from the ticket so coordination happens in one place and is captured.
+9. **Measure ticket quality.** Sample closed incidents quarterly for timeline completeness, root-cause quality, and follow-up execution; bad tickets indicate process failure, not analyst failure.
+
 ## Expected outputs
 - Configured incident workflow with required fields and transition guards.
 - Integration from detection tooling to ticket creation with enrichment.
 - Metrics: time to acknowledge, time to contain, SLA compliance, repeat-incident rate.
+- Example: a SIEM critical alert auto-creates a ticket with asset context and ATT&CK tags, pages the on-call, and blocks closure until root cause and corrective actions are recorded.
 
 ## Pitfalls
 - Reusing the generic IT helpdesk workflow: security incidents need different fields and urgency.
 - Tickets that can be closed with no root cause or follow-up actions.
 - Over-sharing sensitive incident details with broad IT audiences.
 
+- Auto-created tickets with no deduplication flooding the queue during a widespread event; implement alert grouping before auto-creation.
+- Ticket comments becoming the only record of key decisions; require decision entries in dedicated fields, not buried in comment threads.
+
 ## References
 - NIST SP 800-61 Rev. 2, Computer Security Incident Handling Guide.
 - TheHive Project documentation (thehive-project.org) for IR-centric case management.
+- SANS SEC504 (sans.org) — incident handling process and documentation.
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

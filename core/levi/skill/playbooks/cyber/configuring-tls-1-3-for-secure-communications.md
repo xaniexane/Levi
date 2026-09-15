@@ -57,3 +57,5 @@ Standardize on TLS 1.3 across services: forward secrecy by default, no obsolete 
 - Mozilla Server Side TLS configuration guidelines
 - NIST SP 800-52 Rev. 2 (Guidelines for the Selection, Configuration, and Use of TLS)
 - Certificate Transparency (RFC 6962) — crt.sh for monitoring
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

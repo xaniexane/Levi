@@ -30,16 +30,26 @@ This playbook defines a SOAR-driven workflow for reported phishing emails: autom
 6. **Identify victims.** Search mail logs for recipients who received or clicked before containment; open follow-up tasks for credential resets and endpoint checks.
 7. **Close the loop.** Notify the reporter of the outcome, update detection rules (e.g., new blocklist entries, SIEM detections for the IOCs), and record metrics.
 
+8. **Handle repeat reporters and VIPs.** Fast-track cases involving executives or finance staff, and track users who report frequently — they are your best sensors, so acknowledge them.
+9. **Exercise the playbook.** Run a simulated phishing campaign through the full pipeline quarterly to verify SLAs hold under load and every integration still works.
+
 ## Expected outputs
 - End-to-end phishing playbook with verdict branching and approval gates.
 - Metrics: report-to-verdict time, report-to-purge time, victim identification coverage.
 - Feedback loop into email security controls and user awareness training.
+- Example: a credential-harvesting report auto-verdicts malicious in 4 minutes, purges 212 copies tenant-wide, identifies 3 clickers, and opens password-reset tasks — all before an analyst touches the case.
 
 ## Pitfalls
 - Auto-purging without a tested verdict model risks deleting legitimate business email.
 - Ignoring the reporter: if users never hear outcomes, reporting rates collapse.
 - Forgetting mobile and third-party mail paths when purging; verify tenant-wide coverage.
 
+- Verdict models trained only on English-language phish missing localized lures; validate coverage across the languages your users actually receive.
+- Sandbox detonation without URL rewriting awareness: some gateways rewrite links, and the playbook must detonate the original URL, not the rewritten one.
+
 ## References
 - NIST SP 800-61 Rev. 2, Computer Security Incident Handling Guide.
 - CISA Phishing Guidance (cisa.gov) — reporting and mitigation practices.
+- APWG (Anti-Phishing Working Group) reports (apwg.org) — phishing trend data.
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

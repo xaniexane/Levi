@@ -61,3 +61,5 @@ Place a deterministic, line-rate industrial firewall at OT zone boundaries using
 - IEC 62443-3-3, "System security requirements and security levels" (defines zone/conduit and SR requirements; standard available via IEC/ISA)
 - MITRE ATT&CK for ICS — https://attack.mitre.org/techniques/ics/
 - P4 language documentation and p4c compiler — https://p4.org/
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

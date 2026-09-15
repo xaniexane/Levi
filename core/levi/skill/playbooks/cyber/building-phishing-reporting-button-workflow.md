@@ -48,3 +48,5 @@ Users are the fastest phishing sensors an organization has -- if reporting is on
 - CISA phishing guidance and reporting resources
 - NIST SP 800-61 Rev. 3, Computer Security Incident Handling Guide
 - Anti-Phishing Working Group (APWG) reporting best practices
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

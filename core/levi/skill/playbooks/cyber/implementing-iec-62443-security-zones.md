@@ -61,3 +61,5 @@ Partition an industrial automation and control system (IACS) into security zones
 - IEC 62443-3-3, "System security requirements and security levels" (via IEC/ISA)
 - NIST SP 800-82 Rev. 3, "Guide to OT Security" — https://csrc.nist.gov/publications/detail/sp/800-82/rev-3/final
 - MITRE ATT&CK for ICS — https://attack.mitre.org/techniques/ics/
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

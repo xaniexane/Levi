@@ -8,6 +8,7 @@ requires_confirmation: false
 tags: [mobile, tls, hardening]
 version: 1.0.0
 ---
+
 ## Purpose
 - This playbook covers authorized security testing and defensive analysis of certificate pinning; it does not cover evading pinning on systems you do not own or have permission to test.
 - Determine whether a mobile application actually enforces certificate pinning or merely claims to, during authorized security reviews.
@@ -55,4 +56,5 @@ version: 1.0.0
 - OWASP Mobile Application Security Verification Standard (MASVS)
 - NIST SP 800-124 Guidelines for Managing the Security of Mobile Devices
 - NIST SP 800-52 Guidelines for the Selection, Configuration, and Use of TLS
-
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

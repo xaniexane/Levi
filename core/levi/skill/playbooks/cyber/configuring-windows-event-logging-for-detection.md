@@ -57,3 +57,5 @@ Configure Windows auditing so the events that matter — logons, process creatio
 - Sysmon documentation and the SwiftOnSecurity sysmon-config baseline
 - NIST SP 800-92 (Guide to Computer Security Log Management)
 - MITRE ATT&CK T1070 (Indicator Removal) — log-clearing detection context
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

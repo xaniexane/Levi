@@ -61,3 +61,5 @@ Clickjacking (UI redressing) tricks a user into clicking something different fro
 - RFC 7034 (X-Frame-Options header semantics)
 - CWE-1021, "Improper Restriction of Rendered UI Layers or Frames"
 - MDN documentation on X-Frame-Options and CSP frame-ancestors
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

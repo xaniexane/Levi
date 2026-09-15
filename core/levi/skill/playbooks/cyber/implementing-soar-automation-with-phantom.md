@@ -30,16 +30,26 @@ This playbook covers designing and operating automation on Splunk SOAR (the plat
 6. **Test with tabletop + live fire.** Run tabletop exercises against the playbook, then execute in a staging environment with real alerts replayed.
 7. **Measure and tune.** Track time saved, false automation rate, and analyst override rate; retire playbooks that analysts routinely bypass.
 
+8. **Control the blast radius.** Run playbook actions under per-asset service accounts with minimal scopes, and require re-authentication or step-up approval for actions affecting more than N assets at once.
+9. **Plan for platform failure.** Document the manual fallback for each automated containment action so response continues if the SOAR platform itself is down during an incident.
+
 ## Expected outputs
 - Connected, tested asset integrations with least-privilege API credentials.
 - Versioned playbooks with human approval gates on destructive actions.
 - Metrics: mean time to enrich, mean time to contain, automation override rate.
+- Example: a phishing-alert playbook that enriches 40 indicators, purges the malicious message tenant-wide, and opens a ticket — with analyst approval required before disabling any user account.
 
 ## Pitfalls
 - Automating containment before enrichment is trustworthy leads to self-inflicted outages.
 - Over-privileged service accounts on the SOAR platform become a high-value target; scope them tightly.
 - Playbooks that nobody owns rot when APIs change; assign an owner and a review cadence.
 
+- Playbooks that send sensitive case data to third-party enrichment APIs without a data-handling review; check what each integration transmits.
+- No rollback plan for automated firewall blocks: a wrongly blocked partner IP needs a one-click revert, not a change ticket.
+
 ## References
 - Splunk SOAR documentation (docs.splunk.com — Splunk SOAR).
 - NIST SP 800-61 Rev. 2, Computer Security Incident Handling Guide.
+- SANS SEC504 course materials (sans.org) — incident response automation concepts.
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

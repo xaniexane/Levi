@@ -49,3 +49,5 @@ Federating applications to a central identity provider with SAML reduces passwor
 - OASIS SAML 2.0 specifications
 - NIST SP 800-63-3, Digital Identity Guidelines
 - CISA guidance on phishing-resistant authentication
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

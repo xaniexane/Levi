@@ -57,3 +57,5 @@ Treat your own LLM like an attacker would: continuously probe it with promptfoo 
 - NIST AI 600-1 (GenAI Profile) and the OWASP Top 10 for LLM Applications
 - MITRE ATLAS — adversarial threat landscape for AI systems
 - Anthropic / OpenAI published red-teaming methodologies for evaluation design
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

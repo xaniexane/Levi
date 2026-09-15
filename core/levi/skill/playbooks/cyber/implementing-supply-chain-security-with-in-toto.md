@@ -30,17 +30,27 @@ This playbook shows how to apply the in-toto framework to a build pipeline: defi
 6. **Rotate and revoke deliberately.** Update the layout when the pipeline changes, and maintain a revocation path for compromised functionary keys.
 7. **Archive evidence.** Retain layouts and link metadata with the release for audit and incident response.
 
+8. **Handle pipeline exceptions.** Define how hotfixes and emergency builds produce valid link metadata; an undocumented bypass becomes the attacker's favorite path.
+9. **Integrate with artifact signing.** Combine in-toto verification with Sigstore signing so each verified step's output is also tamper-evident in storage.
+
 ## Expected outputs
 - Signed in-toto layout matching the real pipeline, under version control.
 - Per-release link metadata bundle and a verification report.
 - Release gate that blocks unverifiable artifacts.
+- Example: a release where the layout requires signed link metadata from the build, test, and package steps; verification fails the release when the test step's metadata is missing, pointing exactly at the gap.
 
 ## Pitfalls
 - A layout that does not match the actual pipeline fails verification on every legitimate build.
 - Unsigned or loosely-scoped functionary keys let an attacker forge a step.
 - Treating in-toto as a checkbox: the value is the verification gate, not the metadata collection.
 
+- Layouts that pin exact tool versions and break every legitimate build when the toolchain updates; pin the properties that matter for security, not every byte.
+- Verifying signatures but not checking that the signing identity matches the expected functionary for that step.
+
 ## References
 - in-toto documentation (in-toto.io; in-toto.github.io/docs).
 - SLSA framework (slsa.dev).
 - NIST SP 800-204D, Strategies for the Integration of Software Supply Chain Security.
+- CNCF Software Supply Chain Best Practices (github.com/cncf/tag-security — supply chain guidance).
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

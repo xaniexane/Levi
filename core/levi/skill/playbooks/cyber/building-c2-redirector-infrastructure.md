@@ -50,3 +50,5 @@ Adversaries commonly place redirectors -- proxy hosts, CDNs, cloud functions, or
 - MITRE ATT&CK: TA0011 (Command and Control)
 - NIST SP 800-61 Rev. 3, Computer Security Incident Handling Guide
 - FIRST CSIRT services framework guidance on infrastructure takedown coordination
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

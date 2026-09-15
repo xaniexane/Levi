@@ -30,16 +30,26 @@ This playbook deploys ModSecurity (with the OWASP Core Rule Set) primarily as a 
 6. **Protect the logs themselves.** Redact or mask sensitive fields (passwords, tokens, PII) in audit logs before they reach long-term storage.
 7. **Maintain the rule set.** Update CRS on a schedule, re-run tuning after application changes, and review exclusions quarterly.
 
+8. **Correlate with application logs.** Join WAF anomaly scores with application error logs and authentication failures to distinguish attacks from broken clients.
+9. **Document the threat model.** Record which attack classes ModSecurity covers and which it does not (business-logic abuse, authenticated misuse) so nobody over-relies on it.
+
 ## Expected outputs
 - ModSecurity deployed with tuned CRS, structured audit logging to SIEM.
 - Exclusion register with justifications and review dates.
 - SIEM detections for web attack classes with measured false-positive rates.
+- Example: repeated SQLi rule triggers from a single IP with rising anomaly scores auto-escalate to a SOC alert, while the exclusion register documents why the search endpoint's legitimate query patterns are exempted.
 
 ## Pitfalls
 - Enabling blocking on day one: legitimate traffic gets dropped and the WAF gets disabled in anger.
 - Logging full request bodies without redaction, creating a PII honeypot in the SIEM.
 - Tuning exclusions so broad they neuter the rules they were meant to refine.
 
+- Upgrading the CRS without re-running the tuning pass; new rule versions change behavior and old exclusions may no longer match.
+- Running ModSecurity on an under-provisioned proxy where inspection latency becomes the bottleneck; size for peak traffic plus headroom.
+
 ## References
 - ModSecurity and OWASP Core Rule Set documentation (owasp.org/www-project-modsecurity-core-rule-set).
 - NIST SP 800-95, Guide to Secure Web Services.
+- OWASP Secure Headers Project (owasp.org/www-project-secure-headers) — complementary hardening.
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

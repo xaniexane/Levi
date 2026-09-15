@@ -57,3 +57,5 @@ Push Microsoft Defender Antivirus from its out-of-box defaults to a hardened, au
 - CIS Benchmark for Windows 10/11 and Windows Server — Defender settings
 - MITRE ATT&CK T1562.001 (Impair Defenses: Disable or Modify Tools) — tamper-evasion context
 - NIST SP 800-53 SI-7 / SI-8 (software integrity, malicious code protection)
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

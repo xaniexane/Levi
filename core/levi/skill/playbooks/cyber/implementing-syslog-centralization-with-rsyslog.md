@@ -31,16 +31,26 @@ This playbook walks through deploying rsyslog as the backbone of centralized log
 7. **Monitor the pipeline.** Alert on queue depth growth, TLS handshake failures, EPS drops per source, and disk usage on spool directories — a silent logging outage is a detection outage.
 8. **Test failover.** Simulate collector loss and network partitions; verify no messages are lost and ordering is preserved.
 
+9. **Document the retention map.** Record which sources keep logs for how long and where; incident responders should never discover retention gaps mid-investigation.
+10. **Audit log access.** Log who queries the centralized store and alert on anomalous bulk access — the log repository is itself a high-value target.
+
 ## Expected outputs
 - Documented rsyslog topology with TLS and queue configuration under version control.
 - Runbook for adding a new log source, including parsing rules and retention class.
 - Monitoring dashboards and alerts for pipeline health.
+- Example: an authentication-log source onboarded with a parsing template, a 1-year retention class, and a dashboard panel showing its EPS trend with an alert if it drops to zero for 15 minutes.
 
 ## Pitfalls
 - Plain UDP syslog across untrusted networks: trivially spoofable and lossy.
 - Clock skew between senders making correlation impossible; fix NTP first.
 - Unbounded queues filling disks; set queue size limits with documented overflow behavior.
 
+- Relaying logs through a chain of forwarders that each reformat the message; by the time it reaches the SIEM the original structure is unrecognizable.
+- Collecting everything at debug verbosity "just in case" and bankrupting the storage budget within months.
+
 ## References
 - rsyslog documentation (rsyslog.com/doc).
 - NIST SP 800-92, Guide to Computer Security Log Management.
+- CISA logging guidance (cisa.gov) — enterprise logging best practices.
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

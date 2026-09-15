@@ -59,3 +59,5 @@ Turn a default-allow pfSense posture into an explicit least-privilege rule set: 
 - pfSense official documentation — Firewall Rules and NAT (docs.netgate.com)
 - NIST SP 800-41 Rev. 1 (Guidelines on Firewalls and Firewall Policy)
 - MITRE ATT&CK T1562.004 (Impair Defenses: Disable or Modify System Firewall)
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

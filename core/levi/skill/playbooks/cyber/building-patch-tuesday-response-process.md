@@ -49,3 +49,5 @@ Microsoft's monthly security updates regularly include exploited or wormable vul
 - CISA Known Exploited Vulnerabilities (KEV) catalog
 - NIST SP 800-40 Rev. 4, Guide to Enterprise Patch Management Planning
 - CIS Controls: continuous vulnerability management
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

@@ -48,3 +48,5 @@ A playbook turns incident response from improvisation into repeatable process. T
 - NIST SP 800-61 Rev. 3, Computer Security Incident Handling Guide
 - ISO/IEC 27035, Information security incident management
 - CISA incident response playbook resources
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

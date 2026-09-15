@@ -30,16 +30,26 @@ This playbook deploys NextDNS as a zero-trust-aligned DNS control plane: encrypt
 6. **Cover off-network devices.** Ensure the DNS profile applies off-VPN; for unmanaged devices, publish setup guidance and monitor adoption.
 7. **Test the controls.** Attempt resolution of known-malicious test domains and verify blocks, logging, and SIEM alerting end to end.
 
+8. **Integrate with incident response.** On a malware alert, automatically check the host's recent DNS queries in NextDNS logs to scope potential C2 before the analyst even opens the case.
+9. **Review block efficacy.** Monthly, sample blocked domains to confirm they are still malicious; threat infrastructure churns and stale blocks create noise.
+
 ## Expected outputs
 - NextDNS configuration under change control with documented block/allow policy.
 - Encrypted DNS enforced across managed fleet; plaintext DNS blocked at egress.
 - SIEM detections built on DNS query telemetry.
+- Example: a workstation's sudden burst of blocked queries to a newly-registered domain triggers a SOC alert, and the query log shows the exact process and timestamp for scoping.
 
 ## Pitfalls
 - Forgetting IPv6 or secondary resolvers, leaving a bypass path.
 - Over-blocking that breaks SaaS apps, driving users to disable the profile entirely.
 - Retaining full query logs indefinitely without a privacy and retention policy.
 
+- DNS-over-HTTPS in browsers bypassing the OS-level DNS profile; enforce browser policy or block known public DoH endpoints at the perimeter.
+- Treating DNS blocking as sufficient for malware C2; determined malware uses hardcoded IPs, DoH to other resolvers, or non-DNS channels.
+
 ## References
 - NextDNS documentation (help.nextdns.io).
 - NIST SP 800-207, Zero Trust Architecture.
+- NSA "Selecting a Protective DNS Service" guidance (nsa.gov) — evaluation criteria.
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

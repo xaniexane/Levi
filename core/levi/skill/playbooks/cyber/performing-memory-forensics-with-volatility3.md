@@ -8,6 +8,7 @@ requires_confirmation: false
 tags: [memory, forensics, volatility]
 version: 1.0.0
 ---
+
 ## Purpose
 - Recover evidence that exists only in volatile memory, such as injected shellcode, decrypted payloads, and active network connections.
 - Give analysts a standard Volatility 3 workflow that works across Windows, Linux, and macOS memory images.
@@ -55,4 +56,5 @@ version: 1.0.0
 - The Art of Memory Forensics (Wiley) for plugin theory and interpretation
 - MITRE ATT&CK defense evasion techniques involving memory, https://attack.mitre.org/tactics/TA0005/
 - NIST SP 800-86 Guide to Integrating Forensic Techniques into Incident Response
-
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

@@ -8,6 +8,7 @@ requires_confirmation: false
 tags: [network, forensics, wireshark]
 version: 1.0.0
 ---
+
 ## Purpose
 - Turn raw packet captures into a clear narrative of what happened on the wire during an incident.
 - Extract transferred files, credentials in cleartext protocols, and C2 sessions as evidence.
@@ -55,4 +56,5 @@ version: 1.0.0
 - NIST SP 800-86 Guide to Integrating Forensic Techniques into Incident Response
 - SANS FOR572 network forensics course materials
 - Wireshark display filter reference, https://www.wireshark.org/docs/dfref/
-
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

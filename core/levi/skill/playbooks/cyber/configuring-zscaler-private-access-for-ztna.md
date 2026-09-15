@@ -57,3 +57,5 @@ Replace broad VPN network access with Zscaler Private Access (ZPA): users connec
 - NIST SP 800-207 (Zero Trust Architecture)
 - CISA Zero Trust Maturity Model — identity and device pillars
 - MITRE ATT&CK T1133 (External Remote Services) — why VPN replacement matters
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

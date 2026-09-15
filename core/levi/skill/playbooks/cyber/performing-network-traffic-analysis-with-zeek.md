@@ -8,6 +8,7 @@ requires_confirmation: false
 tags: [network, zeek, hunting]
 version: 1.0.0
 ---
+
 ## Purpose
 - Use Zeek's rich protocol logs to hunt threats at scale without storing full packet payloads.
 - Correlate across log types so a DNS anomaly, an odd connection, and a downloaded file tell one story.
@@ -55,4 +56,5 @@ version: 1.0.0
 - MITRE ATT&CK command and control tactics, https://attack.mitre.org/tactics/TA0011/
 - Corelight and Zeek community hunting guides
 - NIST SP 800-94 Guide to Intrusion Detection and Prevention Systems
-
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

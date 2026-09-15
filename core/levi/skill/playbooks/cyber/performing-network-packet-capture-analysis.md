@@ -8,6 +8,7 @@ requires_confirmation: false
 tags: [network, forensics, pcap]
 version: 1.0.0
 ---
+
 ## Purpose
 - Provide a repeatable capture-analysis workflow that works regardless of which tool captured or opens the file.
 - Catch capture-quality problems early so analysts do not draw conclusions from truncated or lossy data.
@@ -55,4 +56,5 @@ version: 1.0.0
 - Wireshark documentation, https://www.wireshark.org/docs/
 - Zeek documentation on log-based traffic analysis, https://docs.zeek.org/
 - RFC 793 and related protocol specifications for ground-truth behavior
-
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

@@ -50,3 +50,5 @@ Orphaned accounts and stale entitlements are a leading cause of privilege misuse
 - ISO/IEC 27001 access control requirements
 - Microsoft Learn: Microsoft Entra ID Governance documentation
 - CIS Controls: account management safeguards
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

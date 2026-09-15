@@ -62,3 +62,5 @@ Establish an identity governance program on SailPoint (Identity Security Cloud o
 - NIST SP 800-63-4, "Digital Identity Guidelines" — https://csrc.nist.gov/publications/detail/sp/800-63/4/final
 - MITRE ATT&CK T1078 (Valid Accounts) — https://attack.mitre.org/techniques/T1078/
 - ISO/IEC 27001:2022 Annex A controls 5.15–5.18 (access control) — standard via ISO
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

@@ -50,3 +50,5 @@ This playbook takes the defensive view of the Sliver open-source adversary-emula
 - MITRE ATT&CK: T1573 (Encrypted Channel)
 - CISA guidance on adversary emulation and threat hunting
 - NIST SP 800-61 Rev. 3, Computer Security Incident Handling Guide
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

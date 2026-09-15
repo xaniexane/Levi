@@ -49,3 +49,5 @@ Sigma is a generic, vendor-neutral format for describing log-based detections. T
 - MITRE ATT&CK for technique tagging
 - NIST SP 800-92, Guide to Computer Security Log Management
 - SANS guidance on detection engineering practices
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

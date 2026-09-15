@@ -76,3 +76,5 @@ Ensure every container image admitted to your clusters was built by your pipelin
 - SLSA framework (supply-chain levels) — https://slsa.dev/
 - NIST SP 800-204D (strategies for securing container supply chains) and EO 14028 software supply chain guidance — https://csrc.nist.gov/
 - MITRE ATT&CK T1190 / T1554-adjacent supply-chain considerations — https://attack.mitre.org/techniques/T1190/
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

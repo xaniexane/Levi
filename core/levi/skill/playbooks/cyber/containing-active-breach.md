@@ -58,3 +58,5 @@ Stop the bleeding first: a repeatable containment sequence for an active intrusi
 - CISA incident response guidance and the CISA IR checklist
 - MITRE ATT&CK — technique-to-containment mapping for prioritization
 - SANS Incident Handler's Handbook — six-step IR process
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

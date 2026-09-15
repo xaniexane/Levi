@@ -8,6 +8,7 @@ requires_confirmation: true
 tags: [mobile, forensics, acquisition]
 version: 1.0.0
 ---
+
 ## Purpose
 - Recover call logs, messages, location history, and application data from mobile devices for investigations.
 - Maintain a defensible chain of custody from seizure through extraction to reporting.
@@ -55,4 +56,5 @@ version: 1.0.0
 - Cellebrite official product documentation and validation materials
 - SWGDE best practices for mobile device forensics
 - NIST SP 800-88 Guidelines for Media Sanitization for disposition planning
-
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

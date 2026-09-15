@@ -48,3 +48,5 @@ During a major incident, scattered chat threads and spreadsheets cost time and l
 - NIST SP 800-61 Rev. 3, Computer Security Incident Handling Guide
 - CISA incident response resources and exercise guidance
 - SANS incident handler's handbook concepts
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

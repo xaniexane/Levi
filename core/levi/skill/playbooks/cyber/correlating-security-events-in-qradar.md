@@ -57,3 +57,5 @@ Make IBM QRadar produce offenses worth investigating: normalized event taxonomy,
 - MITRE ATT&CK — technique mapping for rule coverage tracking
 - NIST SP 800-92 (Guide to Computer Security Log Management)
 - SANS SIEM/detection engineering resources for correlation design patterns
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

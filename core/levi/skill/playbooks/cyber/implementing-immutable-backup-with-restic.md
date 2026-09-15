@@ -67,3 +67,5 @@ Make backups survive the attacker, not just the disk failure. Restic provides en
 - AWS S3 Object Lock documentation — https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html
 - NIST SP 800-209, "Security Guidelines for Storage Infrastructure" — https://csrc.nist.gov/publications/detail/sp/800-209/final
 - MITRE ATT&CK T1490 (Inhibit System Recovery) — https://attack.mitre.org/techniques/T1490/
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

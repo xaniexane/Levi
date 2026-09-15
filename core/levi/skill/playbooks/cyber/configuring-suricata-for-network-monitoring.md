@@ -57,3 +57,5 @@ Use Suricata as more than an IDS — as the network-monitoring layer that feeds 
 - Emerging Threats ruleset documentation
 - NIST SP 800-94 (Guide to Intrusion Detection and Prevention Systems)
 - MITRE ATT&CK — signature-to-technique mapping for coverage reviews
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

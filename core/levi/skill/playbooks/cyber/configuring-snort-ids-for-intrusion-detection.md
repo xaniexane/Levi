@@ -57,3 +57,5 @@ Get Snort from "installed" to "producing actionable alerts": correct sensor plac
 - PulledPork documentation for rule management
 - MITRE ATT&CK — map high-priority SIDs to techniques for coverage tracking
 - NIST SP 800-94 (Guide to Intrusion Detection and Prevention Systems)
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

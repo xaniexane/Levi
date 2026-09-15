@@ -59,3 +59,5 @@ Configure OAuth 2.0 (with OpenID Connect) so that authorization decisions are ma
 - IETF OAuth Security BCP (draft-ietf-oauth-security-topics) — deprecates implicit and ROPC grants
 - OpenID Connect Core 1.0 — ID token validation requirements
 - MITRE ATT&CK T1550 (Use Alternate Authentication Material) for token-abuse detection context
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

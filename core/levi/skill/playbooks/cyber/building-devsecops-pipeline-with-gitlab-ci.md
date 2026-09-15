@@ -49,3 +49,5 @@ This playbook shows how to build a GitLab CI pipeline where security checks run 
 - OWASP DevSecOps Guideline
 - NIST SP 800-218, Secure Software Development Framework (SSDF)
 - CIS Benchmarks for container and pipeline hardening
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

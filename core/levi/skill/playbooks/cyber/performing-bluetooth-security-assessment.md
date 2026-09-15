@@ -63,3 +63,5 @@ Bluetooth Classic and Bluetooth Low Energy ship in headsets, medical devices, in
 - MITRE ATT&CK T1200-adjacent techniques for hardware additions (context)
 - BlueZ and Ubertooth project documentation for tooling usage
 - Vendor security advisories for fleet chipsets under assessment
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

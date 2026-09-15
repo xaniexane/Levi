@@ -48,3 +48,5 @@ Sharing indicators of compromise helps the wider community defend, but live URLs
 - FIRST Traffic Light Protocol (TLP) version 2.0
 - NIST SP 800-150, Guide to Cyber Threat Information Sharing
 - CISA Automated Indicator Sharing (AIS) documentation
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

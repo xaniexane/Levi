@@ -49,3 +49,5 @@ Reconstructing what happened during an incident requires merging filesystem, reg
 - Plaso (log2timeline) documentation for timeline generation
 - NIST SP 800-86, Guide to Integrating Forensic Techniques into Incident Response
 - SANS FOR508 concepts for timeline analysis
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

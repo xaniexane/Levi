@@ -30,16 +30,26 @@ This playbook covers deploying Velociraptor as an incident-response collection p
 6. **Analyze centrally.** Use hunts and notebooks to correlate across hosts; export findings into the case record with hashes and timestamps.
 7. **Review and purge.** After the incident, review what was collected, retain per policy, and purge data that exceeds retention or was out of scope.
 
+8. **Pre-authorize incident scopes.** Maintain standing collection authorizations for declared incidents so responders do not wait on paperwork mid-breach.
+9. **Exercise regularly.** Run quarterly hunts using the artifact library so operators are fluent before a real incident demands speed.
+
 ## Expected outputs
 - Hardened Velociraptor deployment with RBAC and audit logging.
 - Approved artifact catalog mapped to investigation scenarios.
 - Per-incident collection records with scope, approval, and chain of custody.
+- Example: during a suspected intrusion, an approved hunt collects autoruns, recent files, and event logs from 300 endpoints in under an hour, with every collection tied to the incident ID and approver.
 
 ## Pitfalls
 - Over-collection: pulling everything from every host creates privacy, legal, and storage problems.
 - Weak access control on the server turns the IR tool into an attacker-equivalent capability.
 - Collecting without a declared incident or approval erodes trust with system owners.
 
+- Client version drift across the fleet leaving blind spots; track client versions and remediate stragglers like any patch gap.
+- Running hunts that return huge result sets with no analysis plan; define what "done" looks like for each hunt before launching it.
+
 ## References
 - Velociraptor documentation (docs.velociraptor.app).
 - NIST SP 800-61 Rev. 2, Computer Security Incident Handling Guide.
+- SANS FOR508 (sans.org) — enterprise incident response and threat hunting concepts.
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*

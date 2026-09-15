@@ -33,11 +33,15 @@ This playbook guides a security team through building a repeatable pipeline for 
 7. **Measure and review quarterly.** Track precision (true positives / total), coverage against the ATT&CK matrix, and time-to-detect. Retire or rewrite use cases that chronically false-positive.
 8. **Version-control everything.** Store detection logic as code (Sigma rules, saved searches in git) with change history and peer review, the same as application code.
 
+9. **Red-team the detections.** Have a purple-team exercise attempt the covered techniques and confirm each use case fires; a detection that has never fired on real adversary behavior is unproven.
+10. **Document data dependencies.** For each use case, record the exact log sources and fields it needs, and alert when a source stops flowing — silent log loss is the most common detection killer.
+
 ## Expected outputs
 - A catalog of documented, ATT&CK-mapped detection use cases with owners and review dates.
 - Detection-as-code repository with peer-reviewed, tested logic.
 - Metrics: detection coverage per tactic, alert precision, MTTD per use case.
 - Triage runbooks linked one-to-one with production detections.
+- Example: a "Suspicious PowerShell EncodedCommand" use case record showing the Sigma rule, the 30-day baseline volume (e.g., 12 events/day, 0 false positives after tuning), and the linked containment runbook.
 
 ## Pitfalls
 - Writing detections for log sources that are not reliably onboarded; missing logs silently disable logic.
@@ -45,7 +49,13 @@ This playbook guides a security team through building a repeatable pipeline for 
 - Skipping the canary phase and paging analysts with untested logic, which burns out the SOC.
 - Treating detections as write-once: adversary behavior and your environment both change, so schedule reviews.
 
+- Copying detections from another organization without re-baselining: their normal is not your normal, and the thresholds will be wrong on day one.
+- Letting detection ownership default to "the SOC": every use case needs a named engineer who understands both the logic and the data source.
+
 ## References
 - MITRE ATT&CK framework (attack.mitre.org) — technique and tactic reference.
 - Sigma rule specification (github.com/SigmaHQ/sigma) — vendor-neutral detection format.
 - NIST SP 800-92, Guide to Computer Security Log Management.
+- SANS SEC555 / SIEM architecture course materials (sans.org) — detection engineering practices.
+---
+*Original work authored for LEVI. Topic coverage inspired by github.com/mukul975/Anthropic-Cybersecurity-Skills; no content copied.*
