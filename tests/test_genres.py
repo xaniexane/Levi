@@ -30,7 +30,9 @@ CLAIM_FILES = [
     ROOT / "core" / "levi" / "graph" / "genres.py",
     ROOT / "core" / "levi" / "graph" / "story_fabric.py",
     ROOT / "core" / "levi" / "brain" / "seed_hyperdrive.py",
-    ROOT / "web" / "src" / "components" / "levi" / "Onboarding.tsx",
+    # NOTE: web/.../Onboarding.tsx was removed from this list 2026-09-15 — the
+    # UI redesign no longer quotes a genre count in onboarding copy, so there
+    # is no prose number to keep honest. Re-add it if a count returns.
     ROOT / "web" / "src" / "lib" / "levi" / "types.ts",
     ROOT / "web" / "src" / "lib" / "levi" / "local.ts",
     ROOT / "web" / "src" / "lib" / "levi" / "monetize.ts",
