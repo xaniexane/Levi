@@ -41,6 +41,15 @@ MAX_ITEMS_PER_SOURCE = 5
 STATE_NAME = "state.json"
 DIGEST_NAME = "last_digest.md"
 
+# --------------------------------------------------------------------------
+# study-hall cadence — the growth cycle runs on its own slower clock, but
+# ONLY when idle. See levi.growth.study for the honest details.
+# --------------------------------------------------------------------------
+
+STUDY_ENV_ENABLED = "LEVI_STUDY_ENABLED"
+STUDY_ENV_INTERVAL = "LEVI_STUDY_INTERVAL_HOURS"
+STUDY_DEFAULT_INTERVAL_HOURS = 4
+
 
 @dataclass
 class HeartbeatResult:
@@ -236,6 +245,64 @@ _CHECKS: List[tuple] = [
 
 
 # --------------------------------------------------------------------------
+# study-hall cadence
+# --------------------------------------------------------------------------
+
+def _study_interval_hours() -> float:
+    try:
+        return float(os.environ.get(STUDY_ENV_INTERVAL, "") or STUDY_DEFAULT_INTERVAL_HOURS)
+    except (TypeError, ValueError):
+        return float(STUDY_DEFAULT_INTERVAL_HOURS)
+
+
+def _maybe_run_study(
+    home: Path, state: Dict[str, Any], now_utc: datetime
+) -> str:
+    """Run the study cycle on its own clock, only when idle.
+
+    Never raises: any failure is reported as a note string, never as a
+    heartbeat attention item (the study hall is a background habit, not
+    an alarm). Returns a short note describing what happened.
+    """
+    try:
+        from levi.growth import study as _study
+    except Exception as exc:  # noqa: BLE001
+        return "study: skipped (study module unavailable: %s)" % type(exc).__name__
+
+    if not _study.study_enabled():
+        return "study: disabled (%s=0)" % STUDY_ENV_ENABLED
+
+    interval = _study_interval_hours()
+    last_study = _parse_ts(state.get("last_study"))
+    if last_study is not None:
+        elapsed = (now_utc - last_study).total_seconds()
+        if elapsed < interval * 3600:
+            return "study: interval not elapsed"
+
+    # Idle gate — the whole point: never study while Chauncey is around.
+    try:
+        if not _study.is_idle(home, window_hours=interval):
+            return "study: skipped (recent activity — not idle)"
+    except Exception as exc:  # noqa: BLE001 — probe failure = stay silent
+        return "study: skipped (idle check failed: %s)" % type(exc).__name__
+
+    try:
+        report = _study.run_study(use_model=False)  # rules-only: cheap + offline
+    except Exception as exc:  # noqa: BLE001
+        return "study: failed (%s: %s)" % (type(exc).__name__, exc)
+
+    state["last_study"] = now_utc.isoformat()
+    state["study_interval_hours"] = interval
+    state["study_runs"] = int(state.get("study_runs", 0) or 0) + 1
+    q = (report.get("quiz") or {})
+    score = q.get("mean_score")
+    return "study: ran cycle %s (quiz mean=%s)" % (
+        report.get("cycle_id"),
+        ("%.2f" % score) if isinstance(score, (int, float)) else "n/a",
+    )
+
+
+# --------------------------------------------------------------------------
 # digest formatting
 # --------------------------------------------------------------------------
 
@@ -326,7 +393,10 @@ def run_heartbeat(
         checked_at=checked_at, attention=attention, silent=silent, reason=reason
     )
 
-    # 4. Persist state + digest.
+    # 4. Study-hall cadence: own clock, idle-only, never an attention item.
+    study_note = _maybe_run_study(home, state, now_utc)
+
+    # 5. Persist state + digest.
     state["last_run"] = checked_at
     state["interval_min"] = interval
     state["last_attention_count"] = len(
@@ -336,6 +406,7 @@ def run_heartbeat(
         digest_path = hb_dir / DIGEST_NAME
         digest_path.write_text(format_digest(result), encoding="utf-8")
         state["last_digest"] = str(digest_path)
+    state["last_study_note"] = study_note
     _save_state(hb_dir, state)
 
     return result
@@ -373,6 +444,11 @@ def cmd_heartbeat(args) -> None:
         print("  active hours:        %02d:00–%02d:00 local" % (
             ACTIVE_START_HOUR, ACTIVE_END_HOUR))
         print("  attention items:     %s" % (count if count is not None else "n/a"))
+        print("  last study:          %s" % (state.get("last_study") or "never"))
+        print("  study note:          %s" % (state.get("last_study_note") or "n/a"))
+        print("  study every:         %s h (env %s), idle-gated"
+              % (os.environ.get(STUDY_ENV_INTERVAL, STUDY_DEFAULT_INTERVAL_HOURS),
+                 STUDY_ENV_INTERVAL))
         print("  state:               %s" % (hb_dir / STATE_NAME))
         return
     if action == "run":

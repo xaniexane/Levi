@@ -97,3 +97,47 @@ consolidated learnings (engagement copy, not a cognitive claim):
 - `~/.levi/growth/` — `state.json` (watermarks), `journal.jsonl`
 - `~/.levi/memory/` — consolidated learnings (tagged `growth`)
 - `tests/test_growth.py` — 18 hermetic tests
+
+## Study hall — autonomous sharpening cadence
+
+Growth cycles learn from *experience*. Study hall keeps the *teachings*
+sharp: on its own clock, only when idle, LEVI runs a full growth cycle
+and then quizzes itself on the founders' curriculum.
+
+```
+levi growth study run      # one study cycle now (cycle + self-quiz)
+levi growth study trend    # quiz score history (oldest → newest)
+```
+
+**Cadence wiring.** The daemon heartbeat (`levi.daemon.heartbeat`)
+triggers a study run on a slower clock — default **every 4 hours**,
+configurable via `LEVI_STUDY_INTERVAL_HOURS` — but **only when idle**.
+Idle means no session/chat/automation activity inside the window
+(cheap check: newest mtime among `agent/sessions` and `automations`;
+no file contents are read). Disable with `LEVI_STUDY_ENABLED=0`.
+Study runs never become heartbeat attention items: they are journaled
+as `kind: "study"` records in the growth journal, and the last run is
+reported by `levi heartbeat status`.
+
+**The self-quiz** (`levi.growth.study`) is deliberately simple and
+rule-based — no LLM, no network:
+
+1. Sample lessons round-robin from the curriculum (default 5 per run,
+   `LEVI_STUDY_QUIZ_SAMPLE`).
+2. For each lesson, extract key terms (frequent long content words)
+   and build a cloze question: complete the lesson's most term-dense
+   sentence with the blank filled back in.
+3. LEVI "answers" by topic-cued recall — retrieving everything the
+   curriculum holds under that topic — and scores the fraction of key
+   terms present.
+
+Be honest about what the score is: a **crude recall proxy, not
+understanding**. A perfect score means the teachings are intact and
+retrievable by topic — a student reciting back — not that LEVI
+understands them. A removed or renamed topic scores 0; a damaged one
+scores partially. The score and its rolling average trend in the
+journal so Chauncey can watch the line over time.
+
+**Safety rails** (same as the growth cycle): study runs are rules-only
+by default (offline, cheap); they write only growth-tagged memory
+entries and `kind: "study"` journal records; nothing else.
