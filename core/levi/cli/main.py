@@ -298,6 +298,51 @@ def cmd_ask(args):
             print('\n(Say "more detail" for the next layer.)')
 
 
+def cmd_turn(args):
+    """One bloodstream turn: companion + 5D EI → persona lens → L.W.P.
+    governor → factory / organ / model → policy gate → memory → trace.
+
+    Prints the reply and a one-line receipt summary. Consequential acts
+    (risk >= 2) are HITL-gated: without --yes, LEVI asks on stdin and
+    refuses on EOF/denial (fail-closed).
+    """
+    from levi.bloodstream import TurnContext, run_turn
+
+    text = ((args.text or "") + " " + " ".join(args.extra)).strip()
+    if not text:
+        print('Usage: levi turn [--persona NAME] [--provider NAME] [--session ID] '
+              '[--composite NAME] [--yes] [--dry-run] "your text"')
+        return
+
+    if getattr(args, "yes", False):
+        confirm = lambda proposal: True  # noqa: E731
+    else:
+        def confirm(proposal):
+            try:
+                ans = input(
+                    f"Approve '{proposal.description}' "
+                    f"(risk {int(proposal.risk_level)})? [y/N] "
+                ).strip().lower()
+            except EOFError:
+                return False
+            return ans in ("y", "yes")
+
+    ctx = TurnContext(
+        session_id=getattr(args, "session", "default") or "default",
+        persona_id=getattr(args, "persona", None),
+        provider=getattr(args, "provider", None),
+        confirm=confirm,
+        composite_name=getattr(args, "composite", None),
+        dry_run=getattr(args, "dry_run", False),
+    )
+    result = run_turn(text, ctx)
+    print(result.reply)
+    print()
+    print(f"[{result.route.value}] {result.receipt_summary}")
+    if result.awaiting_permission:
+        print("(Awaiting permission — rerun with --yes to approve.)")
+
+
 
 def cmd_nervous(args):
     """Show LEVI affect state + persona activation matrix."""
@@ -2565,6 +2610,15 @@ def main():
     ask_p.add_argument("--ultimate", action="store_true", help="Full organism synthesis path")
     ask_p.add_argument("question", nargs="?", default=None)
     ask_p.add_argument("extra", nargs="*", default=[])
+    turn_p = sub.add_parser("turn", help="One bloodstream turn: EI → persona → governor → factory/organ/model → policy → memory → trace")
+    turn_p.add_argument("text", nargs="?", default=None)
+    turn_p.add_argument("extra", nargs="*", default=[])
+    turn_p.add_argument("--persona", default=None, help="Persona lens id (default: normal)")
+    turn_p.add_argument("--provider", default=None, help="Explicit model provider (default: provider chain)")
+    turn_p.add_argument("--session", default="default", help="Session id for EI/persona continuity")
+    turn_p.add_argument("--composite", default=None, help="Named composite whose strictest risk ceiling applies")
+    turn_p.add_argument("--yes", action="store_true", help="Approve consequential acts without prompting")
+    turn_p.add_argument("--dry-run", action="store_true", help="Walk the gate without executing")
     sub.add_parser("personas")
     wit_p = sub.add_parser("wit", help="ND comedy spectrum + calibrated wit preview")
     rail_p = sub.add_parser("rail", help="Opportunity Rail HITL-gated automation")
@@ -2977,7 +3031,7 @@ def main():
         "init": cmd_init, "home": cmd_home, "continue": cmd_continue,
         "morning": cmd_morning, "import": cmd_import,
         "export": cmd_export, "templates": cmd_templates,
-        "status": cmd_status, "ask": cmd_ask, "personas": cmd_personas, "wit": cmd_wit,
+        "status": cmd_status, "ask": cmd_ask, "turn": cmd_turn, "personas": cmd_personas, "wit": cmd_wit,
         "daemon": cmd_daemon, "mono": cmd_mono, "rail": cmd_rail, "mirror": cmd_mirror, "lwp-model": cmd_lwp_model, "continue": cmd_continue, "characters": cmd_characters, "watch": cmd_watch, "crucible": cmd_crucible, "services": cmd_services, "serve-ui": cmd_serve_ui, "provenance": cmd_provenance, "perfection": cmd_perfection, "free": cmd_free, "production": cmd_production, "go": cmd_go, "integrate": cmd_integrate, "ops": cmd_ops, "ladder": cmd_ladder, "organism": cmd_organism, "charter": cmd_charter, "symbiosis": cmd_symbiosis, "sandbox": cmd_sandbox, "plugins": cmd_plugins, "plugin": cmd_plugin, "finance": cmd_finance, "agent": cmd_agent, "builder": cmd_builder, "unified": cmd_unified,"demand": cmd_demand,"income": cmd_income,"memory-hierarchy": cmd_memory_hierarchy, "growth": cmd_growth, "brain": cmd_brain, "echo": cmd_echo, "mandella": cmd_mandella, "pulse": cmd_pulse, "relay": cmd_relay, "vault": cmd_vault, "courses": cmd_courses, "news": cmd_news, "capabilities": cmd_capabilities, "affect": cmd_affect, "project": cmd_project, "nervous": cmd_nervous, "skills": cmd_skills, "agents": cmd_agents,
         "graph": cmd_graph,
         "image": cmd_image, "story": cmd_story, "genres": cmd_genres, "factory": cmd_factory, "automations": cmd_automations,
