@@ -363,7 +363,7 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
             result = _finish(
                 text=text, ctx=ctx, trace_id=trace_id, stages=stages,
                 reply=special_reply, route=RouteKind.SPECIAL, behavior=behavior,
-                persona_id=persona.id, risk=0, session=session,
+                persona_id=persona.id, risk=0,
                 provider="special-behavior", skills=[], receipt_id=None,
                 awaiting=False, outcome="replied", error=None, composted=None,
                 data_dir=data_dir,
@@ -391,7 +391,7 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
                 reply=("The turn governor refused this request (budget or breaker). "
                        "Nothing was executed."),
                 route=RouteKind.GOVERNED, behavior=behavior, persona_id=persona.id,
-                risk=effective_risk, session=session, provider="none",
+                risk=effective_risk, provider="none",
                 skills=[], receipt_id=None, awaiting=False, outcome="governed",
                 error=None, composted=None, data_dir=data_dir,
             )
@@ -451,7 +451,7 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
             return _finish(
                 text=text, ctx=ctx, trace_id=trace_id, stages=stages,
                 reply=reply, route=route, behavior=behavior, persona_id=persona.id,
-                risk=effective_risk, session=session,
+                risk=effective_risk,
                 provider=holder.get("provider", "none"),
                 skills=holder.get("skills", []), receipt_id=None,
                 awaiting=True, outcome="awaiting_permission", error=None,
@@ -462,7 +462,7 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
                 text=text, ctx=ctx, trace_id=trace_id, stages=stages,
                 reply="Denied at the permission gate. Nothing was executed.",
                 route=route, behavior=behavior, persona_id=persona.id,
-                risk=effective_risk, session=session,
+                risk=effective_risk,
                 provider=holder.get("provider", "none"), skills=[],
                 receipt_id=None, awaiting=False, outcome="denied", error=None,
                 composted=None, data_dir=data_dir,
@@ -479,7 +479,7 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
         return _finish(
             text=text, ctx=ctx, trace_id=trace_id, stages=stages,
             reply=reply, route=route, behavior=behavior, persona_id=persona.id,
-            risk=effective_risk, session=session,
+            risk=effective_risk,
             provider=holder.get("provider", "policy-gate") if route is RouteKind.MODEL
             else "deterministic-local",
             skills=holder.get("skills", []), receipt_id=gate.receipt_id,
@@ -498,7 +498,7 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
             reply=("Something broke mid-turn. The failure was recorded and its "
                    "residue routed to REIM compost — it won't be silently dropped."),
             route=RouteKind.FAILED, behavior=BehaviorKind.NONE, persona_id="unknown",
-            risk=0, session=_session_for(ctx.session_id), provider="none",
+            risk=0, provider="none",
             skills=[], receipt_id=None, awaiting=False, outcome="failed",
             error=summary, composted=composted, data_dir=data_dir,
         )
@@ -507,7 +507,7 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
 def _finish(
     *, text: str, ctx: TurnContext, trace_id: str, stages: List[StageRecord],
     reply: str, route: RouteKind, behavior: BehaviorKind, persona_id: str,
-    risk: int, session: SessionEI, provider: str, skills: List[str],
+    risk: int, provider: str, skills: List[str],
     receipt_id: Optional[str], awaiting: bool, outcome: str,
     error: Optional[str], composted: Optional[Dict[str, Any]],
     data_dir: Optional[Path],

@@ -18,7 +18,12 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
+
+if TYPE_CHECKING:  # registry types only; runtime stays duck-typed
+    from levi.agent.specialists import SpecialistRegistry
+    from levi.daemon.automation import AutomationRegistry
+    from levi.skill.registry import SkillRegistry
 
 
 @dataclass
@@ -30,11 +35,11 @@ class Composite:
     specialist_ids: List[str] = field(default_factory=list)
     automation_ids: List[str] = field(default_factory=list)
 
-    def to_dict(self) -> Dict:
+    def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, data: Dict) -> "Composite":
+    def from_dict(cls, data: Dict[str, Any]) -> "Composite":
         return cls(
             name=data["name"],
             description=data.get("description", ""),
@@ -74,8 +79,14 @@ class CompositeRegistry:
             pass
 
     # -- registry ---------------------------------------------------------
-    def register(self, composite: Composite, *, skills=None, specialists=None,
-                 automations=None) -> Composite:
+    def register(
+        self,
+        composite: Composite,
+        *,
+        skills: Optional["SkillRegistry"] = None,
+        specialists: Optional["SpecialistRegistry"] = None,
+        automations: Optional["AutomationRegistry"] = None,
+    ) -> Composite:
         """Name a composite. Validates every part exists — fail fast, never
         a dangling reference. Returns the composite (reversible via unregister)."""
         missing = self._missing_parts(composite, skills, specialists, automations)
@@ -100,8 +111,14 @@ class CompositeRegistry:
         return list(self._items.values())
 
     # -- risk ceiling ------------------------------------------------------
-    def risk_ceiling(self, composite: Composite, *, skills=None,
-                     specialists=None, automations=None) -> int:
+    def risk_ceiling(
+        self,
+        composite: Composite,
+        *,
+        skills: Optional["SkillRegistry"] = None,
+        specialists: Optional["SpecialistRegistry"] = None,
+        automations: Optional["AutomationRegistry"] = None,
+    ) -> int:
         """Strictest (maximum) risk ceiling across all parts. Personas
         contribute 0 — they are communication lenses, not authority."""
         ceiling = 0
@@ -122,8 +139,13 @@ class CompositeRegistry:
                     ceiling = max(ceiling, int(getattr(a, "risk_ceiling", 0)))
         return ceiling
 
-    def _missing_parts(self, composite: Composite, skills, specialists,
-                       automations) -> List[str]:
+    def _missing_parts(
+        self,
+        composite: Composite,
+        skills: Optional["SkillRegistry"],
+        specialists: Optional["SpecialistRegistry"],
+        automations: Optional["AutomationRegistry"],
+    ) -> List[str]:
         missing: List[str] = []
         if skills is not None:
             missing += [f"skill:{s}" for s in composite.skill_ids if skills.get(s) is None]

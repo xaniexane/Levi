@@ -71,7 +71,7 @@ def chat(
     messages: list[dict],
     timeout: float = 60.0,
 ) -> dict:
-    """POST /v1/chat/completions passthrough. Never raises."""
+    """POST /v1/chat/completions passthrough. Never raises (failures -> dict)."""
     try:
         status, body = _post(
             endpoint + "/v1/chat/completions",
@@ -91,6 +91,7 @@ def chat(
 
 
 def format_probe(result: dict) -> str:
+    """One-line human-readable rendering of :func:`probe`."""
     if not result["ok"]:
         return f"lab chat: probe FAILED — {result.get('error')}"
     models = ", ".join(result["models"][:10]) or "(no models listed)"

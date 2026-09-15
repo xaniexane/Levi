@@ -40,7 +40,7 @@ TYPICAL_ARCH: dict[float, tuple[int, int]] = {
 }
 
 _PARAM_RE = re.compile(r"^\s*(\d+(?:\.\d+)?)\s*([kmbt]?)\s*$", re.IGNORECASE)
-_CTX_RE = re.compile(r"^\s*(\d+(?:\.\d+)?)\s*([kkm]?)\s*$", re.IGNORECASE)
+_CTX_RE = re.compile(r"^\s*(\d+(?:\.\d+)?)\s*([k]?)\s*$", re.IGNORECASE)
 
 
 def parse_params(text: str | int | float) -> int:

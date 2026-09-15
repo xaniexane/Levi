@@ -92,6 +92,7 @@ def format_card(key: str, card: dict) -> str:
     """Human-readable rendering of a model card."""
     lines = [
         f"══ {card['name']} ══",
+        f"  key      : {key}",
         f"  params   : {card['params']:,}",
         f"  provider : {card['provider']}  [{card['status']}]",
         f"  license  : {card['license']}",

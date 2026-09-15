@@ -1801,7 +1801,7 @@ def cmd_lab(args):
             workdir = tempfile.mkdtemp(prefix="levi-lab-")
             print(f"Running scenario {arg!r} live (workdir {workdir}) …")
             try:
-                lab_scen.capture(arg, __import__("pathlib").Path(workdir), live=True)
+                lab_scen.capture(arg, Path(workdir), live=True)
             except ValueError as exc:
                 print(f"lab: {exc}")
                 return
@@ -1845,8 +1845,9 @@ def cmd_lab(args):
             print("(Serve one with: levi agent model pull, then llama-server on :8080.)")
             return
         model = getattr(args, "model", None) or "qwen3-0.6b"
-        print(lab_live.format_probe(lab_live.probe(endpoint)))
-        if not lab_live.probe(endpoint)["ok"]:
+        probe = lab_live.probe(endpoint)
+        print(lab_live.format_probe(probe))
+        if not probe["ok"]:
             return
         print(f"Chatting with {model} — empty line quits.\n")
         messages = [{"role": "system",

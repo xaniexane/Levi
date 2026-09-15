@@ -31,13 +31,15 @@ from __future__ import annotations
 
 import datetime
 import json
+import platform
 import threading
 from dataclasses import dataclass, field
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
+from typing import Any, Dict
 
 import levi
-from levi.agent.loop import run_subtask
+from levi.agent.loop import AgentTranscript, run_subtask
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
 
@@ -136,7 +138,7 @@ def list_scenarios() -> list[Scenario]:
 # ---------------------------------------------------------------------------
 
 
-def transcript_stats(t) -> dict:
+def transcript_stats(t: Any) -> Dict[str, Any]:
     """Small honest stats for one transcript (dict or AgentTranscript)."""
     d = t.to_dict() if hasattr(t, "to_dict") else t
     steps = d.get("steps", [])
@@ -154,9 +156,7 @@ def transcript_stats(t) -> dict:
     }
 
 
-def _provenance(scenario_id: str, live: bool) -> dict:
-    import platform
-
+def _provenance(scenario_id: str, live: bool) -> Dict[str, Any]:
     return {
         "captured_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(
             timespec="seconds"
@@ -173,7 +173,9 @@ def _provenance(scenario_id: str, live: bool) -> dict:
     }
 
 
-def _run(task: str, workdir: Path, system_prompt: str | None = None):
+def _run(
+    task: str, workdir: Path, system_prompt: str | None = None
+) -> AgentTranscript:
     """One real loop run with the local provider."""
     return run_subtask(
         task,
@@ -185,7 +187,7 @@ def _run(task: str, workdir: Path, system_prompt: str | None = None):
     )
 
 
-def _phase(name: str, transcript) -> dict:
+def _phase(name: str, transcript: AgentTranscript) -> Dict[str, Any]:
     d = transcript.to_dict()
     d["stats"] = transcript_stats(transcript)
     return {"name": name, "transcript": d}
@@ -196,7 +198,7 @@ def _phase(name: str, transcript) -> dict:
 # ---------------------------------------------------------------------------
 
 
-def _run_resilient_file(workdir: Path) -> dict:
+def _run_resilient_file(workdir: Path) -> Dict[str, Any]:
     t1 = _run("Read lab-diary.txt and summarize its contents", workdir)
     t2 = _run(
         "Create lab-diary.txt with one line 'Recovered after a missing read' "
@@ -206,7 +208,7 @@ def _run_resilient_file(workdir: Path) -> dict:
     return {"phases": [_phase("fail", t1), _phase("recover", t2)], "events": []}
 
 
-def _run_red_green(workdir: Path) -> dict:
+def _run_red_green(workdir: Path) -> Dict[str, Any]:
     # NOTE: the script is named `labbug` with no extension on purpose — the
     # local provider's command parser stops at the first ".", so
     # `python3 lab-bug.py` would arrive as `python3 lab-bug`. This is a real
@@ -237,7 +239,7 @@ _BRIEF_HTML = (
 
 
 class _BriefHandler(BaseHTTPRequestHandler):
-    def do_GET(self):  # noqa: N802
+    def do_GET(self):  # BaseHTTPRequestHandler names it do_GET
         body = _BRIEF_HTML.encode("utf-8")
         self.send_response(200)
         self.send_header("Content-Type", "text/html")
@@ -249,7 +251,7 @@ class _BriefHandler(BaseHTTPRequestHandler):
         pass
 
 
-def _run_research_brief(workdir: Path) -> dict:
+def _run_research_brief(workdir: Path) -> Dict[str, Any]:
     server = HTTPServer(("127.0.0.1", 0), _BriefHandler)
     port = server.server_address[1]
     thread = threading.Thread(target=server.serve_forever, daemon=True)
@@ -286,7 +288,7 @@ _EFFORT_SYSTEM = (
 )
 
 
-def _run_effort_ab(workdir: Path) -> dict:
+def _run_effort_ab(workdir: Path) -> Dict[str, Any]:
     t_low = _run(_EFFORT_TASK, workdir)
     t_high = _run(_EFFORT_TASK, workdir, system_prompt=_EFFORT_SYSTEM)
     s_low, s_high = transcript_stats(t_low), transcript_stats(t_high)
@@ -326,7 +328,7 @@ def fixture_path(scenario_id: str) -> Path:
     return FIXTURE_DIR / f"{scenario_id}.json"
 
 
-def capture(scenario_id: str, workdir: Path, live: bool = True) -> dict:
+def capture(scenario_id: str, workdir: Path, live: bool = True) -> Dict[str, Any]:
     """Run a scenario for real and write its fixture. Returns the fixture."""
     sc = get_scenario(scenario_id)
     if sc is None:
@@ -351,7 +353,7 @@ def capture(scenario_id: str, workdir: Path, live: bool = True) -> dict:
     return fixture
 
 
-def load_fixture(scenario_id: str) -> dict | None:
+def load_fixture(scenario_id: str) -> Dict[str, Any] | None:
     """Load a captured fixture, or None when not captured yet."""
     fp = fixture_path(scenario_id)
     if not fp.is_file():
