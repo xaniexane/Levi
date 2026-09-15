@@ -14,12 +14,15 @@ plugins {
 
 android {
     namespace = "com.cybrus.vyve"
-    compileSdk = 36
+    // compileSdk/targetSdk 37: Compose BOM 2026.x (1.12.0) and
+    // androidx.core 1.19.0 declare compileSdk 37 in their AAR metadata —
+    // checkDebugAarMetadata fails the build on anything lower.
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.cybrus.vyve"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0.0"
 

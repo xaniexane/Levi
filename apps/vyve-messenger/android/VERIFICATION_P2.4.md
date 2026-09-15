@@ -126,7 +126,7 @@ method, path, request/response field names, status codes:
 7. `RUNBOOK.md` + `gradle/libs.versions.toml` — recorded the verified
    Gradle-9.6.0 requirement and the KSP deviation with sources.
 
-## NEEDS REAL BUILD (`./gradlew assembleDebug` on a machine with Android SDK 36 + JDK 17)
+## NEEDS REAL BUILD (`./gradlew assembleDebug` on a machine with Android SDK 37 + JDK 17)
 
 - Whether KSP 2.3.12 + the `kotlin-metadata-jvm:2.4.20` force actually
   lets Hilt process Kotlin 2.4.20 (the single biggest risk).

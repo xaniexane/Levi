@@ -2,7 +2,8 @@
 
 Build & release notes for `apps/vyve-messenger/android/`. Rebuilt 2026-09-15
 (P2.4): Gradle 9.6.0, AGP 9.4.0, Kotlin 2.4.20, Compose BOM 2026.08.00,
-compileSdk/targetSdk 36.
+compileSdk/targetSdk 37 (bumped from 36: Compose BOM 2026.x / androidx.core
+1.19.0 AAR metadata requires compileSdk 37).
 
 **Why Gradle 9.6.0 (not 9.4.1):** the official AGP 9.4.0 release notes
 (<https://developer.android.com/build/releases/agp-9-4-0-release-notes>)
