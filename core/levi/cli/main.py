@@ -2781,6 +2781,82 @@ def cmd_courses(args):
         )
 
 
+def cmd_security(args):
+    """Offline defensive security knowledge index (topic names only, original prose).
+
+    Subcommands: `list`, `search <query>`, `show <id>`.
+    All data comes from core/levi/knowledge/security/catalog.json — 81 domains
+    derived from the Awesome-Hacking meta-list's category names, each written
+    fresh with defensive blue-team framing (detection + hardening, no
+    attack how-tos). Works with zero network access.
+    """
+    import json
+    from pathlib import Path
+
+    base = Path(__file__).resolve().parent.parent / "knowledge" / "security"
+    catalog_p = base / "catalog.json"
+    if not catalog_p.exists():
+        print("Security index not built yet.")
+        return
+    catalog = json.loads(catalog_p.read_text(encoding="utf-8"))
+    entries = catalog["entries"]
+    action = getattr(args, "security_action", None) or "list"
+
+    if action == "search":
+        q = (getattr(args, "query", None) or "").strip().lower()
+        if not q:
+            print("Usage: levi security search <query>")
+            return
+        hits = [
+            e
+            for e in entries
+            if q in e["name"].lower()
+            or q in e["defensive_summary"].lower()
+            or q in e["detection_notes"].lower()
+            or q in e["hardening_notes"].lower()
+            or any(q in c.lower() for c in e["key_concepts"])
+        ]
+        if not hits:
+            print(f"No security domains match {q!r}.")
+            return
+        print(f"══ {len(hits)} match(es) for {q!r} ══")
+        for e in hits:
+            print(f"  {e['id']:44s} {e['name']}")
+        return
+
+    if action == "show":
+        sid = (getattr(args, "query", None) or "").strip().lower().replace("_", "-")
+        if not sid:
+            print("Usage: levi security show <id>")
+            return
+        entry = next((e for e in entries if e["id"] == sid), None)
+        if entry is None:
+            print(f"Unknown security domain {sid!r}.")
+            print("Use: levi security list")
+            return
+        print(f"══ {entry['name']} [{entry['id']}] ══\n")
+        print(entry["defensive_summary"] + "\n")
+        if entry.get("attack_relevant") and entry.get("attack_profile"):
+            print("-- attack profile (threat knowledge, not instructions) --")
+            print(entry["attack_profile"] + "\n")
+        print("-- detection --")
+        print(entry["detection_notes"] + "\n")
+        print("-- hardening --")
+        print(entry["hardening_notes"] + "\n")
+        print("-- key concepts --")
+        print("  " + ", ".join(entry["key_concepts"]) + "\n")
+        print(f"-- reference --\n  {entry['reference']}")
+        return
+
+    # action == "list"
+    for e in entries:
+        print(f"  {e['id']:44s} {e['name']}")
+    print(
+        f"\n{len(entries)} security domains. "
+        "Use: levi security search <query> | levi security show <id>"
+    )
+
+
 def cmd_project(args):
     """Pre-MVP service capability-discovery phase runner + HITL + capability log."""
     from levi.project.phases import PhaseRunner
@@ -4190,9 +4266,18 @@ def main():
         default=None,
         help="expand one subject in list",
     )
-    news_p = sub.add_parser(
-        "news", help="Current-events ingest (dated recall, not live)"
+    sec_p = sub.add_parser("security", help="offline defensive security knowledge index")
+    sec_p.add_argument(
+        "security_action",
+        nargs="?",
+        default="list",
+        choices=["list", "search", "show"],
     )
+    sec_p.add_argument(
+        "query", nargs="?", default=None, help="search query or entry id (for show)"
+    )
+    news_p = sub.add_parser(
+        "news", help="Current-events ingest (dated recall, not live)"    )
     news_p.add_argument(
         "news_action",
         nargs="?",
@@ -4746,6 +4831,7 @@ def main():
         "relay": cmd_relay,
         "vault": cmd_vault,
         "courses": cmd_courses,
+        "security": cmd_security,
         "news": cmd_news,
         "capabilities": cmd_capabilities,
         "affect": cmd_affect,
