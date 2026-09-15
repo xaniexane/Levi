@@ -776,7 +776,7 @@ def cmd_plugin(args):
     conn = get_connector(getattr(args, "connector", None) or "")
     if conn is None:
         print(f"Unknown connector {getattr(args, 'connector', None)!r}. Try: levi plugin list")
-        raise SystemExit(2) from None
+        raise SystemExit(2)
     params = {}
     for item in getattr(args, "param", None) or []:
         if "=" not in item:
@@ -806,7 +806,7 @@ def cmd_plugin(args):
         if result.data:
             print(_json.dumps(result.data, indent=2))
     if not result.ok:
-        raise SystemExit(2) from None
+        raise SystemExit(2)
 
 def cmd_finance(args):
     """Paper-only finance domain (blueprint §5.4/5.5): quotes, indicator
@@ -1024,7 +1024,7 @@ def cmd_finance(args):
             print("  5. per-order human confirmation")
             print("Until all five hold, AlpacaConnector reports transport_not_wired:")
             print("live trading is structurally impossible in this build.")
-            raise SystemExit(2) from None
+            raise SystemExit(2)
         side = str(getattr(args, "side", "") or "").lower()
         try:
             qty = float(getattr(args, "qty", 0) or 0)
@@ -1124,7 +1124,7 @@ def cmd_agent(args):
         if variant is None:
             valid = ", ".join(v.id for v in all_variants())
             print(f"Unknown KAI-9000 register {variant_id!r}. Valid ids: {valid}")
-            raise SystemExit(2) from None
+            raise SystemExit(2)
         return variant.id, system_for(variant.id)
 
     if action == "serve":
@@ -1252,7 +1252,7 @@ def cmd_agent(args):
             spec = local_model.MODELS.get(model_key)
             if spec is None:
                 print(f"Unknown model {model_key!r} (known: {', '.join(sorted(local_model.MODELS))})")
-                raise SystemExit(2) from None
+                raise SystemExit(2)
             if getattr(args, "model", None) is None:
                 print("Available models (intelligence-per-RAM tradeoff — bigger is smarter, not magic):")
                 for key in sorted(local_model.MODELS):
@@ -1300,7 +1300,7 @@ def cmd_agent(args):
         task = getattr(args, "task", None) or ""
         if not task.strip():
             print("Usage: levi agent run \"<task>\" [--provider local|levi-local|openai|anthropic] [--yes] [--max-steps N]")
-            raise SystemExit(2) from None
+            raise SystemExit(2)
         consent = bool(getattr(args, "yes", False))
 
         def _confirm(preview: str) -> bool:
@@ -1360,7 +1360,7 @@ def cmd_agent(args):
             print(f"\n══ final ({'ok' if transcript.ok else 'FAILED'}) ══")
             print(transcript.final)
         if not transcript.ok:
-            raise SystemExit(1) from None
+            raise SystemExit(1)
         return
 
     print("Usage: levi agent <run|chat|tools|serve|model>")
