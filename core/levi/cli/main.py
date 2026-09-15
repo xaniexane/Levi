@@ -36,6 +36,9 @@ from levi.identity.profile import ProfileStore
 from levi.identity.shelf import collect_shelf, format_shelf, latest_item
 from levi.identity.export_life import export_life_pack, import_life_pack
 from levi.identity.templates import list_templates, apply_template
+# >>> LEVI backup module — minimal hook (backup coordinator); logic in levi/backup/
+from levi.backup.cli import cmd_backup, register_backup_parser
+# <<< LEVI backup module
 
 
 def banner():
@@ -4405,6 +4408,9 @@ def main():
     bty_find = bty_cmd.add_parser("findings", help="list stored findings")
     bty_find.add_argument("--new", action="store_true", help="only new since last run")
     bty_cmd.add_parser("monitor", help="recon all scopes, print only new findings")
+    # >>> LEVI backup module — minimal hook (backup coordinator)
+    register_backup_parser(sub)
+    # <<< LEVI backup module
     news_p = sub.add_parser(
         "news", help="Current-events ingest (dated recall, not live)"    )
     news_p.add_argument(
@@ -4962,10 +4968,14 @@ def main():
         "courses": cmd_courses,
         "security": cmd_security,
         "bounty": cmd_bounty,
+        # >>> LEVI backup module — minimal hook (backup coordinator)
+        "backup": cmd_backup,
+        # <<< LEVI backup module
         "news": cmd_news,
         "capabilities": cmd_capabilities,
         "affect": cmd_affect,
         "lab": cmd_lab,
+        "academy": cmd_academy,  # academy-owned
         "project": cmd_project,
         "nervous": cmd_nervous,
         "skills": cmd_skills,
