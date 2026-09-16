@@ -222,3 +222,48 @@ def test_resolve_builder_missing_attr():
 def test_resolve_builder_not_callable():
     with pytest.raises(ConfigError, match="not callable"):
         resolve_builder("json:__name__")
+
+
+def test_unknown_model_key_rejected(tmp_path):
+    p = tmp_path / "c.yaml"
+    p.write_text(
+        "name: x\nseed: 1\n"
+        "model:\n  builder: json:loads\n  n_kv_heads: 2\n"
+        "data:\n  train_manifest: t\n  val_manifest: v\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ConfigError, match="unknown key"):
+        load_config(p)
+
+
+def test_unknown_eval_key_rejected(tmp_path):
+    p = tmp_path / "c.yaml"
+    p.write_text(
+        "name: x\nseed: 1\n"
+        "model:\n  builder: json:loads\n"
+        "data:\n  train_manifest: t\n  val_manifest: v\n"
+        "eval:\n  probes: probes.jsonl\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ConfigError, match="unknown key"):
+        load_config(p)
+
+
+def test_n_kv_head_defaults_to_zero(tmp_path):
+    p = tmp_path / "c.yaml"
+    p.write_text(
+        "name: x\nseed: 1\n"
+        "model:\n  builder: json:loads\n  n_kv_head: 2\n"
+        "data:\n  train_manifest: t\n  val_manifest: v\n",
+        encoding="utf-8",
+    )
+    cfg = load_config(p)
+    assert cfg.model.n_kv_head == 2
+    q = tmp_path / "d.yaml"
+    q.write_text(
+        "name: x\nseed: 1\n"
+        "model:\n  builder: json:loads\n"
+        "data:\n  train_manifest: t\n  val_manifest: v\n",
+        encoding="utf-8",
+    )
+    assert load_config(q).model.n_kv_head == 0

@@ -11,16 +11,20 @@ Only :meth:`Trainer.run` needs torch. Planning, curriculum staging, and
 report comparison are torch-free and hermetic-testable.
 
 Builder contract (matches ``levi.brain.train.model_v2:build_model``):
-  - ``builder(model_spec_dict)`` -> ``torch.nn.Module`` with
-    ``forward(idx: LongTensor (B, T)) -> Tensor (B, T, V)``.
+  - ``builder(model_hyperparam_dict)`` -> ``torch.nn.Module`` with
+    ``forward(idx: LongTensor (B, T)) -> Tensor (B, T, V)``. The dict is
+    the config's ``model:`` section WITHOUT the ``builder``/``tokenizer``
+    import-path keys (they are harness routing, not model config).
   - tokenizer builder takes no arguments -> object with ``encode`` /
     ``decode`` / ``vocab_size`` (``eod_id`` used as doc separator when
-    present).
+    present). ``vocab_size``/``eod_id`` may be properties or methods;
+    both are accepted.
 
 Resume semantics: the run directory holds the checkpoints; resuming with a
 different config hash raises instead of silently continuing. Optimizer state
-is intentionally NOT checkpointed (documented limitation): on resume the LR
-schedule restarts its warmup from the resumed step.
+is intentionally NOT checkpointed (documented limitation): the LR schedule
+continues from the resumed global step, so resumed training picks up the
+decayed LR rather than restarting warmup.
 """
 
 from __future__ import annotations
@@ -207,17 +211,33 @@ def stage_curriculum(plan: RunPlan) -> CurriculumManifest:
     return manifest
 
 
+def _tokenizer_int(tok: Any, name: str) -> int | None:
+    """Read a tokenizer int that may be a property or a method.
+
+    IMPROVE's ``ByteBPETokenizer`` exposes ``vocab_size``/``eod_id`` as
+    properties; other builders may use methods. Accept both so the trainer
+    does not break on either convention.
+    """
+    val = getattr(tok, name, None)
+    if val is None:
+        return None
+    return int(val() if callable(val) else val)
+
+
 def build_token_stream(
     docs: list[Doc], tok: Any, *, base_vocab_check: bool = True
 ) -> list[int]:
     """Encode docs into one id stream, separated by eod_id when available."""
-    sep = getattr(tok, "eod_id", None)
-    if callable(sep):
-        sep = sep()
+    sep = _tokenizer_int(tok, "eod_id")
+    vocab = _tokenizer_int(tok, "vocab_size")
     ids: list[int] = []
     for doc in docs:
         encoded = tok.encode(doc.text)
-        if base_vocab_check and any(e < 0 or e >= tok.vocab_size for e in encoded):
+        if (
+            base_vocab_check
+            and vocab is not None
+            and any(e < 0 or e >= vocab for e in encoded)
+        ):
             raise TrainerError("tokenizer produced ids outside vocab range")
         ids.extend(encoded)
         if sep is not None:
@@ -243,7 +263,11 @@ class _TorchLogitsAdapter:
     def logits_for_batch(self, prefixes: list[list[int]]) -> np.ndarray:
         torch = require_torch()
         self._model.eval()
-        out = np.zeros((len(prefixes), self._tok.vocab_size), dtype=np.float64)
+        vocab = _tokenizer_int(self._tok, "vocab_size")
+        if not vocab:
+            raise eh.EvalError("tokenizer has no usable vocab_size")
+        out = np.zeros((len(prefixes), vocab), dtype=np.float64)
+        truncated = False
         with torch.no_grad():
             for i in range(0, len(prefixes), 32):
                 chunk = prefixes[i : i + 32]
@@ -252,15 +276,21 @@ class _TorchLogitsAdapter:
                 if max_len == 0:
                     raise eh.EvalError("empty prefix in eval batch")
                 if max_len > self._eval_block:
-                    # Truncate from the left; report it honestly.
+                    # Truncate from the left; report it honestly, once.
                     chunk = [p[-self._eval_block :] for p in chunk]
                     max_len = self._eval_block
+                    truncated = True
                 batch = torch.zeros(len(chunk), max_len, dtype=torch.long)
                 for j, p in enumerate(chunk):
                     batch[j, -len(p) :] = torch.tensor(p, dtype=torch.long)
                 logits = self._model(batch.to(self._device)).cpu().numpy()
                 for j in range(len(chunk)):
                     out[i + j] = logits[j, -1]
+        if truncated:
+            print(
+                f"trainer: eval truncated >{self._eval_block}-token prefixes "
+                f"from the left (eval_block={self._eval_block})"
+            )
         return out
 
 
@@ -281,6 +311,34 @@ class Trainer:
         return stage_curriculum(self.plan)
 
     # -- the run (needs torch) --------------------------------------------
+    @staticmethod
+    def _check_vocab(cfg: TrainConfig, actual_vocab: int | None) -> None:
+        """Refuse a tokenizer/config vocab mismatch before torch sees it.
+
+        Without this, an undersized model dies with a bare ``IndexError``
+        inside the embedding lookup mid-run.
+        """
+        if actual_vocab is not None and actual_vocab > cfg.model.vocab_size:
+            raise TrainerError(
+                f"tokenizer vocab_size {actual_vocab} exceeds config "
+                f"model.vocab_size {cfg.model.vocab_size} — the model cannot "
+                f"embed ids the tokenizer emits; raise model.vocab_size"
+            )
+
+    @staticmethod
+    def _model_cfg_dict(cfg: TrainConfig) -> dict:
+        """Model hyper-parameters for the builder (no harness routing keys).
+
+        ``n_kv_head=0`` means "no grouped-query attention": fall back to
+        ``n_head``, mirroring the builder's default of ``n_kv_head=n_head``.
+        """
+        model_cfg = asdict(cfg.model)
+        model_cfg.pop("builder", None)
+        model_cfg.pop("tokenizer", None)
+        if not model_cfg.get("n_kv_head"):
+            model_cfg["n_kv_head"] = model_cfg["n_head"]
+        return model_cfg
+
     def run(self) -> dict:
         torch = require_torch()
         plan, cfg = self.plan, self.plan.cfg
@@ -292,7 +350,9 @@ class Trainer:
         torch.manual_seed(seed)
 
         model_builder = resolve_builder(cfg.model.builder)
-        model = model_builder(asdict(cfg.model))
+        # The builder contract takes model hyper-parameters only; the
+        # harness-level import paths are not model config.
+        model = model_builder(self._model_cfg_dict(cfg))
         tok_builder = (
             resolve_builder(cfg.model.tokenizer) if cfg.model.tokenizer else None
         )
@@ -305,8 +365,15 @@ class Trainer:
         device = torch.device(self.device)
         model.to(device)
 
+        actual_vocab = _tokenizer_int(tok, "vocab_size")
+        self._check_vocab(cfg, actual_vocab)
+
         self.stage()
         streams = self._build_streams(tok, plan)
+        # Dedicated RNG for stream sampling (the global seeds above cover
+        # torch/numpy); reproducible without perturbing other users of
+        # the module-level `random` instance.
+        self._rng = random.Random(seed)
 
         val_ids = self._load_eval_stream(plan.val_manifest, tok, "val")
 
@@ -445,7 +512,7 @@ class Trainer:
         if t < 2:
             raise TrainerError(f"block_size {block} too small to train on")
 
-        r = random.random()
+        r = self._rng.random()
         cumulative = 0.0
         ids = streams[0][0]
         for stream_ids, weight in streams:
@@ -508,7 +575,11 @@ class Trainer:
         step: int,
         val_ids: list[int],
     ) -> Path:
-        adapter = _TorchLogitsAdapter(model, tok, device)
+        # Never score a prefix longer than the model can consume: clamp the
+        # eval block to both the model's block size and the training length.
+        block = self._model_block_size(model)
+        eval_block = max(2, min(block, cfg.data.max_seq_len, 256))
+        adapter = _TorchLogitsAdapter(model, tok, device, eval_block=eval_block)
         probes = cfg.eval.probes_path or None
         if probes:
             probes = (
@@ -591,12 +662,14 @@ class Trainer:
         from levi.brain.train.v2.checkpoint import load_checkpoint
 
         model_builder = resolve_builder(cfg.model.builder)
-        base_model = model_builder(asdict(cfg.model))
+        base_model = model_builder(self._model_cfg_dict(cfg))
         ckpt = load_checkpoint(base_path)
         state = numpy_to_torch_state_dict(ckpt["arrays"], base_model.state_dict())
         base_model.load_state_dict(state)
         base_model.to(device)
-        adapter = _TorchLogitsAdapter(base_model, tok, device)
+        block = self._model_block_size(base_model)
+        eval_block = max(2, min(block, cfg.data.max_seq_len, 256))
+        adapter = _TorchLogitsAdapter(base_model, tok, device, eval_block=eval_block)
         report = eh.run_eval(
             adapter,
             tok,

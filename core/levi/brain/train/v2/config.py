@@ -73,6 +73,7 @@ class ModelSpec:
     vocab_size: int = 256
     n_layer: int = 4
     n_head: int = 4
+    n_kv_head: int = 0  # 0 = fall back to n_head (no grouped-query attention)
     n_embd: int = 128
     block_size: int = 128
     dropout: float = 0.0
@@ -159,9 +160,38 @@ def _check_str(value: Any, key: str, where: str, allow_empty: bool = False) -> s
     return value
 
 
+def _reject_unknown(raw: dict, known: set[str], where: str) -> None:
+    """Fail loudly on misspelled/unsupported keys instead of ignoring them.
+
+    A silently-ignored key (e.g. ``probes`` instead of ``probes_path``)
+    means the operator's intent never takes effect — that must be an
+    error, not a default.
+    """
+    extra = sorted(set(raw) - known)
+    if extra:
+        raise ConfigError(
+            f"config[{where}]: unknown key(s) {extra}; known keys: {sorted(known)}"
+        )
+
+
 def _model_spec(raw: Any) -> ModelSpec:
     if not isinstance(raw, dict):
         raise ConfigError("config[model]: expected a mapping")
+    _reject_unknown(
+        raw,
+        {
+            "builder",
+            "tokenizer",
+            "vocab_size",
+            "n_layer",
+            "n_head",
+            "n_kv_head",
+            "n_embd",
+            "block_size",
+            "dropout",
+        },
+        "model",
+    )
     builder = _check_str(_req(raw, "builder", "model"), "builder", "model")
     _validate_import_path(builder, "model.builder")
     return ModelSpec(
@@ -172,6 +202,7 @@ def _model_spec(raw: Any) -> ModelSpec:
         vocab_size=_check_int(raw.get("vocab_size", 256), "vocab_size", "model"),
         n_layer=_check_int(raw.get("n_layer", 4), "n_layer", "model"),
         n_head=_check_int(raw.get("n_head", 4), "n_head", "model"),
+        n_kv_head=_check_int(raw.get("n_kv_head", 0), "n_kv_head", "model", minimum=0),
         n_embd=_check_int(raw.get("n_embd", 128), "n_embd", "model"),
         block_size=_check_int(raw.get("block_size", 128), "block_size", "model"),
         dropout=_check_float(raw.get("dropout", 0.0), "dropout", "model"),
@@ -181,6 +212,19 @@ def _model_spec(raw: Any) -> ModelSpec:
 def _data_spec(raw: Any) -> DataSpec:
     if not isinstance(raw, dict):
         raise ConfigError("config[data]: expected a mapping")
+    _reject_unknown(
+        raw,
+        {
+            "train_manifest",
+            "val_manifest",
+            "test_manifest",
+            "batch_size",
+            "max_seq_len",
+            "shuffle_seed",
+            "mix",
+        },
+        "data",
+    )
     mix_raw = raw.get("mix", [])
     if not isinstance(mix_raw, list):
         raise ConfigError("config[data].mix: expected a list of {manifest, weight}")
@@ -190,6 +234,7 @@ def _data_spec(raw: Any) -> DataSpec:
         where = f"data.mix[{i}]"
         if not isinstance(entry, dict):
             raise ConfigError(f"config[{where}]: expected a mapping")
+        _reject_unknown(entry, {"manifest", "weight"}, where)
         manifest = _check_str(_req(entry, "manifest", where), "manifest", where)
         weight = _check_float(
             _req(entry, "weight", where), "weight", where, minimum=0.0
@@ -221,6 +266,19 @@ def _schedule_spec(raw: Any) -> ScheduleSpec:
     raw = raw or {}
     if not isinstance(raw, dict):
         raise ConfigError("config[schedule]: expected a mapping")
+    _reject_unknown(
+        raw,
+        {
+            "steps",
+            "learning_rate",
+            "warmup_steps",
+            "lr_min",
+            "weight_decay",
+            "grad_clip",
+            "log_every",
+        },
+        "schedule",
+    )
     lr = _check_float(
         raw.get("learning_rate", 3.0e-4), "learning_rate", "schedule", minimum=0.0
     )
@@ -245,6 +303,11 @@ def _eval_spec(raw: Any) -> EvalSpec:
     raw = raw or {}
     if not isinstance(raw, dict):
         raise ConfigError("config[eval]: expected a mapping")
+    _reject_unknown(
+        raw,
+        {"every_steps", "probes_path", "baseline_checkpoint", "max_val_batches"},
+        "eval",
+    )
     return EvalSpec(
         every_steps=_check_int(raw.get("every_steps", 250), "every_steps", "eval"),
         probes_path=_check_str(
@@ -266,6 +329,7 @@ def _checkpoint_spec(raw: Any) -> CheckpointSpec:
     raw = raw or {}
     if not isinstance(raw, dict):
         raise ConfigError("config[checkpointing]: expected a mapping")
+    _reject_unknown(raw, {"dir", "save_every", "keep_last"}, "checkpointing")
     return CheckpointSpec(
         dir=_check_str(raw.get("dir", "weights/v2"), "dir", "checkpointing"),
         save_every=_check_int(
@@ -293,6 +357,11 @@ def load_config(path: str | Path) -> TrainConfig:
         raise ConfigError(f"config {path}: invalid YAML: {exc}") from exc
     if not isinstance(raw, dict):
         raise ConfigError(f"config {path}: top level must be a mapping")
+    _reject_unknown(
+        raw,
+        {"name", "seed", "model", "data", "schedule", "eval", "checkpointing"},
+        "top",
+    )
     name = _check_str(_req(raw, "name", "top"), "name", "top")
     seed = _check_int(_req(raw, "seed", "top"), "seed", "top", minimum=0)
     return TrainConfig(

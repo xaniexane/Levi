@@ -327,6 +327,45 @@ def test_attach_baseline_absent(corpus_dir, tmp_path):
 # ---------------------------------------------------------------- CLI
 
 
+# ---------------------------------------------------------------- CLI surface
+
+
+def _brain_args(**kw):
+    import argparse as _ap
+
+    base = dict(
+        brain_action="train",
+        config=None,
+        run_dir=None,
+        device="cpu",
+        stage_only=False,
+    )
+    base.update(kw)
+    return _ap.Namespace(**base)
+
+
+def test_cli_brain_train_stage_only(corpus_dir, tmp_path):
+    from levi.cli.main import cmd_brain
+
+    args = _brain_args(
+        config=str(corpus_dir / "train.yaml"),
+        run_dir=str(tmp_path / "run"),
+        stage_only=True,
+    )
+    with pytest.raises(SystemExit) as exc:
+        cmd_brain(args)
+    assert exc.value.code == 0
+    assert (tmp_path / "run" / "curriculum.json").is_file()
+
+
+def test_cli_brain_train_missing_config():
+    from levi.cli.main import cmd_brain
+
+    with pytest.raises(SystemExit) as exc:
+        cmd_brain(_brain_args())
+    assert exc.value.code == 2
+
+
 def test_main_stage_only(corpus_dir, tmp_path, capsys):
     rc = tr.main(
         [
@@ -452,3 +491,111 @@ def test_run_smoke_tiny(corpus_dir, tmp_path, monkeypatch):
     plan2 = plan_run(corpus_dir / "smoke.yaml", tmp_path / "run")
     with pytest.raises(TrainerError, match="already at step 6"):
         Trainer(plan2).run()
+
+
+def test_model_cfg_dict_strips_harness_keys(corpus_dir):
+    from levi.brain.train.v2.config import load_config
+
+    cfg = load_config(str(corpus_dir / "train.yaml"))
+    d = Trainer._model_cfg_dict(cfg)
+    assert "builder" not in d and "tokenizer" not in d
+    assert {
+        "vocab_size",
+        "n_layer",
+        "n_head",
+        "n_embd",
+        "block_size",
+        "dropout",
+    } <= set(d)
+
+
+class PropertyTokenizer:
+    """Property-style tokenizer (matches levi.brain.train.tok.ByteBPETokenizer)."""
+
+    def __init__(self, words):
+        self._w2i = {w: i for i, w in enumerate(words)}
+
+    @property
+    def vocab_size(self):
+        return len(self._w2i)
+
+    @property
+    def eod_id(self):
+        return len(self._w2i) - 1
+
+    def encode(self, text):
+        return [self._w2i[w] for w in text.split()]
+
+    def decode(self, ids):
+        inv = {i: w for w, i in self._w2i.items()}
+        return " ".join(inv[i] for i in ids)
+
+
+def test_token_stream_property_style_tokenizer():
+    from levi.brain.train.v2.corpus_manager import Doc, doc_sha256
+    from levi.brain.train.v2.trainer import build_token_stream
+
+    tok = PropertyTokenizer(WORDS)
+    docs = [
+        Doc(id=doc_sha256("the cat"), text="the cat"),
+        Doc(id=doc_sha256("dog ran"), text="dog ran"),
+    ]
+    ids = build_token_stream(docs, tok)
+    assert ids == tok.encode("the cat") + [tok.eod_id] + tok.encode("dog ran") + [
+        tok.eod_id
+    ]
+
+
+def test_tokenizer_int_accepts_method_and_property():
+    from levi.brain.train.v2.trainer import _tokenizer_int
+
+    assert _tokenizer_int(FakeTokenizer(WORDS), "vocab_size") == len(WORDS)
+    assert _tokenizer_int(FakeTokenizer(WORDS), "eod_id") == len(WORDS) - 1
+    assert _tokenizer_int(PropertyTokenizer(WORDS), "vocab_size") == len(WORDS)
+    assert _tokenizer_int(PropertyTokenizer(WORDS), "eod_id") == len(WORDS) - 1
+    assert _tokenizer_int(object(), "vocab_size") is None
+
+
+def test_model_cfg_dict_n_kv_head_falls_back_to_n_head(corpus_dir):
+    from dataclasses import replace
+
+    from levi.brain.train.v2.config import load_config
+
+    cfg = load_config(str(corpus_dir / "train.yaml"))
+    d = Trainer._model_cfg_dict(cfg)
+    # fixture config has no n_kv_head -> falls back to n_head
+    assert d["n_kv_head"] == d["n_head"]
+    cfg2 = replace(cfg.model, n_kv_head=2)
+    from levi.brain.train.v2.config import TrainConfig
+
+    cfg3 = TrainConfig(
+        name=cfg.name,
+        seed=cfg.seed,
+        model=cfg2,
+        data=cfg.data,
+        schedule=cfg.schedule,
+        eval=cfg.eval,
+        checkpointing=cfg.checkpointing,
+    )
+    assert Trainer._model_cfg_dict(cfg3)["n_kv_head"] == 2
+
+
+def test_check_vocab_refuses_undersized_model(corpus_dir):
+    from levi.brain.train.v2.config import load_config
+
+    cfg = load_config(str(corpus_dir / "train.yaml"))
+    # fixture model.vocab_size defaults to 256; tokenizer claims more
+    with pytest.raises(TrainerError, match="exceeds config"):
+        Trainer._check_vocab(cfg, 300)
+    # equal or larger config is fine
+    Trainer._check_vocab(cfg, 256)
+    Trainer._check_vocab(cfg, 100)
+    Trainer._check_vocab(cfg, None)
+
+
+def test_model_block_size_reads_dict_config():
+    class M:
+        config = {"block_size": 64}
+
+    assert Trainer._model_block_size(M()) == 64
+    assert Trainer._model_block_size(object()) == 10**9

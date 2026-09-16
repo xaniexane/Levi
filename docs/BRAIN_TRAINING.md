@@ -170,6 +170,22 @@ by the harness or its tests.
   reports. Near-chance scores are labeled **"NOT capable"** plainly; a
   regression verdict says "do not promote". Numbers are measured, never
   claimed.
+- `trainer.py` — the training loop that consumes the harness (the critical
+  path): `plan_run()` resolves a config into a run plan (torch-free);
+  `stage_curriculum()` builds the curriculum manifest; `Trainer.run()`
+  trains with AdamW + warmup/cosine schedule, checkpoints on cadence
+  (atomic, pruned, config-hash-gated resume — a config change refuses to
+  resume instead of silently corrupting the run), and calls the eval harness
+  on cadence with JSON reports + baseline comparison (v2 `.npz` re-eval or
+  report-`.json` compare; anything else is noted and skipped, never fatal).
+  Builder contract matches `levi.brain.train.model_v2:build_model`
+  (dict in, `nn.Module` out); only `run()` needs torch.
+
+**CLI:** `levi brain train --config train.yaml [--run-dir DIR]
+[--device cpu] [--stage-only]` — thin delegation to the trainer, so there
+is exactly one public training surface. `--stage-only` builds just the
+curriculum manifest (no torch needed). Exit codes: 0 ok, 1 trainer error,
+2 bad config/args.
 
 **Example config:** see the docstring at the top of `config.py`.
 
