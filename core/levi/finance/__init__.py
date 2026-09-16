@@ -54,6 +54,34 @@ _LAZY_EXPORTS = {
     "Position": "portfolio",
     "Portfolio": "portfolio",
     "load": "portfolio",
+    # synth.py — seeded synthetic market data
+    "SyntheticProvider": "synth",
+    "SYNTH_SYMBOL_RE": "synth",
+    "SYNTH_UNIVERSE": "synth",
+    "is_synth_symbol": "synth",
+    # crypto.py — keyless crypto market data
+    "BinanceProvider": "crypto",
+    "CRYPTO_SYMBOL_RE": "crypto",
+    "CRYPTO_QUOTE_ASSETS": "crypto",
+    "looks_like_crypto": "crypto",
+    # wsb.py — WSB presentation skin
+    "BANNED_TOKENS": "wsb",
+    "SlurDetected": "wsb",
+    "assert_clean": "wsb",
+    "dd_post": "wsb",
+    "positions_or_ban": "wsb",
+    "gain_loss_porn": "wsb",
+    "ticker_tape": "wsb",
+    "wsb_quote": "wsb",
+    "ADVISORY_FOOTER": "wsb",
+    "PAPER_STAMP": "wsb",
+    # bets.py — paper YOLO bet ledger
+    "Bet": "bets",
+    "BetLedger": "bets",
+    "DEFAULT_BETS_PATH": "bets",
+    "InvalidBet": "bets",
+    "BetNotFound": "bets",
+    "BetAlreadySettled": "bets",
 }
 
 __all__ = sorted(_LAZY_EXPORTS)
