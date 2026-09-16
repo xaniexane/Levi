@@ -146,6 +146,26 @@ def test_learned_merges_compress(tokenizer: ByteBPETokenizer):
     assert len(ids) == 1 and ids[0] >= 260
 
 
+def test_encode_splits_words_before_byte_mapping(tokenizer: ByteBPETokenizer):
+    # Regression: encode() used to map bytes->chars BEFORE splitting words.
+    # The byte map turns whitespace into non-whitespace, so the whole
+    # document became one "word" and _bpe_word ran quadratic (~106s for
+    # 10KB). Words must be split on the raw text first (as in training).
+    import time
+
+    doc = "lorem ipsum dolor sit amet consectetur adipiscing elit " * 200
+    assert len(doc) > 10_000
+    t0 = time.time()
+    ids = tokenizer.encode(doc)
+    dt = time.time() - t0
+    assert tokenizer.decode(ids) == doc
+    assert dt < 5.0, f"encode of 11KB doc took {dt:.1f}s — word splitting regressed"
+    # word-boundary independence: encoding pieces == encoding the whole
+    assert tokenizer.encode("hello world") == (
+        tokenizer.encode("hello") + tokenizer.encode(" ") + tokenizer.encode("world")
+    )
+
+
 # ---------------------------------------------------------------- model
 
 

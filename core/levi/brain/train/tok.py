@@ -148,13 +148,19 @@ class ByteBPETokenizer:
         return tuple(out)
 
     def encode(self, text: str) -> list[int]:
-        """Text -> token ids. Byte-exact invertible via :meth:`decode`."""
+        """Text -> token ids. Byte-exact invertible via :meth:`decode`.
+
+        Words are split on the RAW text first (mirroring training): the
+        byte<->unicode map turns whitespace bytes into non-whitespace
+        chars, so splitting after mapping would treat a whole document
+        as one "word" and make encoding quadratic.
+        """
         if not text:
             return []
-        byte_chars = "".join(_BYTE_TO_UNI[b] for b in text.encode("utf-8"))
         ids: list[int] = []
-        for word in _WORD_RE.findall(byte_chars):
-            ids.extend(self._bpe_word(word))
+        for word in _WORD_RE.findall(text):
+            byte_chars = "".join(_BYTE_TO_UNI[b] for b in word.encode("utf-8"))
+            ids.extend(self._bpe_word(byte_chars))
         return ids
 
     # ------------------------------------------------------------ decode
