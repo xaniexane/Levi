@@ -84,6 +84,8 @@ def test_manifest_registers_all_modules():
         "verify",
         # liberation (perpetual-hunt daily 2026-09-15: roach-motel inversion)
         "liberation",
+        # shelf (perpetual-hunt daily 2026-09-16: fallen platforms)
+        "shelf",
     }
 
 

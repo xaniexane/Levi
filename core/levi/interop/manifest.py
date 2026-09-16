@@ -392,6 +392,19 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- shelf: the share shelf (perpetual-hunt daily 2026-09-16: fallen
+    # platforms) ----------------------------------------------------------------
+    # Google Reader's shared shelf (share-with-note, starred canon) + Digg's
+    # bury as a first-class reversible negative signal, revived as a
+    # local-first portable curation desk. Complements feedreader
+    # (subscriptions); never re-reads feeds.
+    "shelf": {
+        "provides": [
+            "shelf.items",
+            "shelf.bundles",
+        ],
+        "requires": [],
+    },
     # -- feedlab: feed-ranking transparency lab (giant-patterns hunt) --------
     # The giants refuse to disclose how their rankers score you. feedlab
     # inverts the trade: a fully disclosed engagement-bait scoring model

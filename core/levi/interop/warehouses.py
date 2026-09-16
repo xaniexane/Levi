@@ -106,6 +106,9 @@ CLI_COMMANDS.update(
         "verify": ["python -m levi.verify"],
         # -- telegraph (perpetual-hunt wave-001: dead protocols revived) ---
         "telegraph": ["python -m levi.telegraph"],
+        # -- shelf (perpetual-hunt daily 2026-09-16: fallen platforms --------
+        # Reader share-with-note + Digg bury, revived as a local curation desk
+        "shelf": ["python -m levi.shelf"],
         # -- feedlab (perpetual-hunt daily 2026-09-16: giant-patterns inversion)
         "feedlab": ["python -m levi.feedlab rank --demo"],
         # -- additions wave -----------------------------------------------
