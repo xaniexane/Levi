@@ -1,12 +1,18 @@
 """Current-events ingestion for LEVI (stdlib-only).
 
-Fetches a curated source list (RSS via xml.etree, Hacker News JSON API,
-arXiv RSS), stores per-day JSONL at days/YYYY-MM-DD.jsonl with records
-{date, source, title, summary, url}. Dedupes by URL within and across days.
+Fetches a curated source list (RSS/Atom via xml.etree, Hacker News JSON
+API, arXiv RSS), stores per-day JSONL at days/YYYY-MM-DD.jsonl with
+records {date, source, title, summary, url}. Dedupes by normalized URL
+(tracking params stripped) and by normalized-title hash within and
+across days, so the same story syndicated under two URLs is kept once.
 
 Polite: 10s timeout, 0.5s delay between requests, LEVI user-agent.
 A dead source never crashes the pass — its status is recorded in
 sources.json.
+
+Deliberate design: news is DATED RECALL, not training data. It goes stale;
+the tiny brain trains on stable knowledge only (see docs/NEWS.md §
+"News never enters training weights").
 
 Deliberate design: news is DATED RECALL, not training data. It goes stale;
 the tiny brain trains on stable knowledge only (see docs/BRAIN_TRAINING.md).
@@ -16,11 +22,14 @@ Usage: python3 refresh.py [--date YYYY-MM-DD] [--limit N]
 
 from __future__ import annotations
 
+import hashlib
 import html
+import itertools
 import json
 import re
 import sys
 import time
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import date
@@ -87,18 +96,46 @@ def _clean(text: str | None) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+ATOM_NS = "http://www.w3.org/2005/Atom"
+
+
+def _rss_items(root: ET.Element):
+    for item in root.iter("item"):
+        title = _clean(item.findtext("title"))
+        link = (item.findtext("link") or "").strip()
+        desc = _clean(item.findtext("description"))
+        yield title, link, desc
+
+
+def _atom_entries(root: ET.Element):
+    a = ATOM_NS
+    for entry in root.iter("{%s}entry" % a):
+        title = _clean(entry.findtext("{%s}title" % a))
+        link = ""
+        for ln in entry.iter("{%s}link" % a):
+            href = (ln.get("href") or "").strip()
+            rel = (ln.get("rel") or "alternate").strip()
+            if href and rel == "alternate" and not link:
+                link = href
+        summary = _clean(entry.findtext("{%s}summary" % a)) or _clean(
+            entry.findtext("{%s}content" % a)
+        )
+        yield title, link, summary
+
+
 def _parse_rss(body: bytes) -> list[dict]:
+    """Parse an RSS 2.0 or Atom feed into {title, summary, url} items.
+
+    Unparseable or unrecognized feeds degrade to [] — never raise.
+    """
     try:
         root = ET.fromstring(body)
     except ET.ParseError:
         return []
     items = []
-    for item in root.iter("item"):
-        title = _clean(item.findtext("title"))
-        link = (item.findtext("link") or "").strip()
-        desc = _clean(item.findtext("description"))
+    for title, link, summary in itertools.chain(_rss_items(root), _atom_entries(root)):
         if title and link:
-            items.append({"title": title, "summary": desc[:600], "url": link})
+            items.append({"title": title, "summary": summary[:600], "url": link})
     return items
 
 
@@ -132,8 +169,57 @@ def _parse_hn(body: bytes, limit: int) -> list[dict]:
     return items
 
 
-def _known_urls(day: str) -> set[str]:
-    known: set[str] = set()
+# Query params that carry tracking, not identity — stripped for dedup.
+_TRACKING_PARAMS = frozenset(
+    (
+        "utm_source",
+        "utm_medium",
+        "utm_campaign",
+        "utm_term",
+        "utm_content",
+        "at_medium",
+        "at_campaign",
+    )
+)
+
+
+def _norm_url(url: str) -> str:
+    """Canonicalize a URL for dedup: lowercase host, drop tracking params,
+    drop trailing slash. Two links to the same story must collide."""
+    try:
+        p = urllib.parse.urlparse(url)
+        q = sorted(
+            (k, v)
+            for k, v in urllib.parse.parse_qsl(p.query, keep_blank_values=True)
+            if k.lower() not in _TRACKING_PARAMS
+        )
+        path = p.path.rstrip("/") or "/"
+        return urllib.parse.urlunparse(
+            (
+                p.scheme.lower(),
+                p.netloc.lower(),
+                path,
+                "",
+                urllib.parse.urlencode(q),
+                "",
+            )
+        )
+    except Exception:
+        return url
+
+
+def _title_key(title: str) -> str:
+    """Stable hash of a normalized title — the same story syndicated under
+    two different URLs still dedups."""
+    norm = re.sub(r"[^a-z0-9 ]", " ", title.lower())
+    norm = re.sub(r"\s+", " ", norm).strip()
+    return hashlib.sha256(norm.encode("utf-8")).hexdigest()
+
+
+def _load_known() -> tuple[set[str], set[str]]:
+    """(normalized URLs, title hashes) seen in any stored day."""
+    urls: set[str] = set()
+    titles: set[str] = set()
     if DAYS.exists():
         for fp in sorted(DAYS.glob("*.jsonl")):
             try:
@@ -151,9 +237,22 @@ def _known_urls(day: str) -> set[str]:
                     # rather than aborting the whole refresh.
                     print(f"  warn: {fp.name}:{lineno}: corrupt JSON line, skipping")
                     continue
-                if isinstance(rec, dict) and rec.get("url"):
-                    known.add(rec["url"])
-    return known
+                if isinstance(rec, dict):
+                    if rec.get("url"):
+                        urls.add(_norm_url(rec["url"]))
+                    if rec.get("title"):
+                        titles.add(_title_key(rec["title"]))
+    return urls, titles
+
+
+def _known_urls(day: str) -> set[str]:  # noqa: ARG001 - day kept for API compat
+    """URLs (normalized) seen in any stored day."""
+    return _load_known()[0]
+
+
+def _known_title_keys() -> set[str]:
+    """Title hashes seen in any stored day."""
+    return _load_known()[1]
 
 
 def refresh(day: str | None = None, limit: int = DEFAULT_LIMIT) -> dict:
@@ -166,6 +265,7 @@ def refresh(day: str | None = None, limit: int = DEFAULT_LIMIT) -> dict:
         raise ValueError("refresh: limit must be a positive int, got %r" % (limit,))
     DAYS.mkdir(parents=True, exist_ok=True)
     known = _known_urls(day)
+    known_titles = _known_title_keys()
     records: list[dict] = []
     statuses: dict[str, str] = {}
     if SOURCES_JSON.exists():
@@ -203,9 +303,12 @@ def refresh(day: str | None = None, limit: int = DEFAULT_LIMIT) -> dict:
             continue
         added = 0
         for it in items:
-            if it["url"] in known:
+            nurl = _norm_url(it["url"])
+            tkey = _title_key(it["title"])
+            if nurl in known or tkey in known_titles:
                 continue
-            known.add(it["url"])
+            known.add(nurl)
+            known_titles.add(tkey)
             records.append(
                 {
                     "date": day,
