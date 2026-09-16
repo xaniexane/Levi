@@ -28,6 +28,14 @@ from levi.bloodstream.turn import run_turn
 from levi.bloodstream.composites import Composite, CompositeRegistry
 from levi.bloodstream.gate import GateOutcome, run_gated
 from levi.bloodstream.trace import TraceWriter, new_trace_id
+from levi.bloodstream.bus import (
+    publish,
+    reset_bus,
+    subscribe,
+    topics,
+    trace_scope,
+    unsubscribe,
+)
 
 __all__ = [
     "BehaviorKind",
@@ -42,4 +50,10 @@ __all__ = [
     "run_gated",
     "TraceWriter",
     "new_trace_id",
+    "publish",
+    "reset_bus",
+    "subscribe",
+    "topics",
+    "trace_scope",
+    "unsubscribe",
 ]

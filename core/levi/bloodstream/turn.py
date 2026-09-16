@@ -37,6 +37,7 @@ from levi.bloodstream.stages import (
 from levi.bloodstream.trace import TRACE_FIELDS, TraceWriter, new_trace_id
 from levi.bloodstream.gate import GateOutcome, run_gated
 from levi.bloodstream.composites import CompositeRegistry
+from levi.bloodstream.bus import publish as _bus_publish, trace_scope as _trace_scope
 
 
 # ---------------------------------------------------------------------------
@@ -733,6 +734,28 @@ def _finish(
         if receipt_id
         else "no receipt (no consequential act executed)"
     ) + f" · risk {risk} · route {route.value} · provider {provider}"
+
+    # Event bus: every completed turn publishes a summary so the rest of
+    # the organism can hear it. Minimal append — the pipeline above is
+    # untouched. The bus also records the event in this turn's trace.
+    with _trace_scope(trace_id, (data_dir / "traces") if data_dir else None):
+        _bus_publish(
+            "levi.turn.completed",
+            {
+                "trace_id": trace_id,
+                "session_id": ctx.session_id,
+                "text_excerpt": text[:200],
+                "outcome": outcome,
+                "route": route.value,
+                "behavior": behavior.value,
+                "persona_id": persona_id,
+                "provider": provider,
+                "skills_invoked": skills,
+                "risk_level": risk,
+                "policy_receipt_id": receipt_id,
+                "stage_names": [s.stage for s in stages],
+            },
+        )
 
     return TurnResult(
         reply=reply,
