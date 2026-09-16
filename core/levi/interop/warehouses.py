@@ -138,6 +138,9 @@ CLI_COMMANDS.update(
         "discover": ["python -m levi.discover"],
         "presence": ["python -m levi.presence"],
         "honestsearch": ["python -m levi.honestsearch"],
+        # -- quickdial (perpetual-hunt evening-20260916-software: Opera ----
+        # Speed Dial + gestures, LEVI-native workflow slots)
+        "quickdial": ["python -m levi.quickdial"],
         "recommender": ["python -m levi.recommender"],
         # -- liberation (perpetual-hunt daily 2026-09-15: roach-motel inversion)
         "liberation": ["python -m levi.liberation"],

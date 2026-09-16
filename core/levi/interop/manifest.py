@@ -623,6 +623,20 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- quickdial: Speed-Dial slots (perpetual-hunt evening-20260916-software:
+    # dead desktop software wave 3 — Opera Presto, Winamp, Eudora) ------------
+    # Opera's killed power-user layer (Speed Dial + mouse gestures) reborn as
+    # a local-first command launchpad: named slots pin workflow commands as
+    # argv lists (never shell strings), single-key chords recall them, and
+    # --run executes via execvp with no shell, no pipes, no chaining.
+    # Distinct from the "dials" attention-weights module (feed ranking).
+    "quickdial": {
+        "provides": [
+            "quickdial.slots",
+            "quickdial.chords",
+        ],
+        "requires": [],
+    },
 }
 
 
