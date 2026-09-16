@@ -5967,6 +5967,18 @@ def main():
         pass
     # === PWA-REGION-END ===
 
+    # === SANDBOX-REGION-BEGIN: Linux sandbox command registration ===
+    # Parallel tracks: keep ALL sandbox wiring inside this delimited region —
+    # do not scatter sandbox hunks elsewhere in this file.
+    try:
+        from levi.sandbox.cli import register_sandbox as _sandbox_register
+
+        _sandbox_register(sub)
+    except Exception:
+        # Sandbox degrades: the CLI still boots without the sandbox layer.
+        pass
+    # === SANDBOX-REGION-END ===
+
     args = parser.parse_args()
     if not args.command:
         banner()
@@ -6146,6 +6158,16 @@ def main():
     except Exception:
         pass
     # === PWA-REGION-END ===
+    # === SANDBOX-REGION-BEGIN: Linux sandbox command dispatch ===
+    # Parallel tracks: keep ALL sandbox dispatch inside this delimited region —
+    # do not scatter sandbox hunks elsewhere in this file.
+    try:
+        from levi.sandbox.cli import cmd_sandbox as _cmd_sandbox
+
+        cmds["sandbox"] = _cmd_sandbox
+    except Exception:
+        pass
+    # === SANDBOX-REGION-END ===
     # === SOUL-REGION-BEGIN: Soul command dispatch ===
     try:
         from levi.agent.soul import cmd_soul as _cmd_soul
