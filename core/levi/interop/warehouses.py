@@ -124,6 +124,8 @@ CLI_COMMANDS.update(
         "presence": ["python -m levi.presence"],
         "honestsearch": ["python -m levi.honestsearch"],
         "recommender": ["python -m levi.recommender"],
+        # -- sentinel (source-sync `the-pack`: defensive blue-team host tooling)
+        "sentinel": ["sentinel"],
     }
 )
 

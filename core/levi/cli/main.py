@@ -49,6 +49,7 @@ from levi.teach.cli import cmd_teach, register_teach_parser
 # <<< LEVI backup module
 # >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
 from levi.surgeon.cli import cmd_surgeon, register_surgeon_parser
+from levi.sentinel.cli import cmd_sentinel, register_sentinel_parser
 from levi.automation.cli import cmd_automation, register_automation_parser
 # <<< LEVI Stage-1 lineage
 
@@ -5921,6 +5922,7 @@ def main():
     # >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
     register_surgeon_parser(sub)
     register_automation_parser(sub)
+    register_sentinel_parser(sub)
     # <<< LEVI Stage-1 lineage
     news_p = sub.add_parser(
         "news", help="Current-events ingest (dated recall, not live)"
@@ -6721,6 +6723,9 @@ def main():
         "surgeon": cmd_surgeon,
         "automation": cmd_automation,
         # <<< LEVI Stage-1 lineage
+        # >>> LEVI sentinel — defensive host tooling (source-sync entry `the-pack`)
+        "sentinel": cmd_sentinel,
+        # <<< LEVI sentinel
         "news": cmd_news,
         "capabilities": cmd_capabilities,
         "affect": cmd_affect,
