@@ -735,6 +735,13 @@ class SkillRegistry:
 
         for s in CYBER_SKILLS:
             self.register(s)
+        # LEVI operator skill pack (16 productivity playbooks).
+        # Data-driven: operator_skills scans playbooks/operator/*.md.
+        # Lazy import: operator_skills imports Skill/SkillRisk from this module.
+        from levi.skill.operator_skills import OPERATOR_SKILLS
+
+        for s in OPERATOR_SKILLS:
+            self.register(s)
         # LEVI curriculum skill pack (awesome-courses subjects).
         # Data-driven: course_skills scans knowledge/courses/catalog.json.
         from levi.skill.course_skills import COURSE_SKILLS
