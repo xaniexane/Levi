@@ -158,9 +158,7 @@ class _StdlibCipher:
             self._key, _MAC_DOMAIN + salt + nonce + ciphertext, hashlib.sha256
         ).digest()
         if not hmac.compare_digest(mac, expected_mac):
-            raise VaultError(
-                "cannot unlock vault: wrong passphrase or tampered data"
-            )
+            raise VaultError("cannot unlock vault: wrong passphrase or tampered data")
         return self._xor(ciphertext, self._keystream(nonce, len(ciphertext)))
 
 
@@ -173,7 +171,9 @@ class CredentialVault:
                 "passphrase required: pass a non-empty string "
                 "(getpass prompt preferred)"
             )
-        self.dir = Path(directory) if directory is not None else cybrus_dir() / _VAULT_SUBDIR
+        self.dir = (
+            Path(directory) if directory is not None else cybrus_dir() / _VAULT_SUBDIR
+        )
         self.dir.mkdir(parents=True, exist_ok=True)
         os.chmod(self.dir, 0o700)  # fail closed on permissions
 

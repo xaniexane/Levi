@@ -336,8 +336,17 @@ def test_token_plaintext_never_persisted():
     # metadata listing exposes no hashes or plaintext
     meta = eng.list()[0]
     assert "token_hash" not in meta and set(meta) <= {
-        "id", "label", "kind", "memo", "basis", "paper",
-        "scopes", "issued_at", "expires_at", "revoked", "expired",
+        "id",
+        "label",
+        "kind",
+        "memo",
+        "basis",
+        "paper",
+        "scopes",
+        "issued_at",
+        "expires_at",
+        "revoked",
+        "expired",
     }
 
 
@@ -354,9 +363,16 @@ def test_tokens_persist_across_instances():
 def test_package_exports():
     import levi.cybrus as cy
 
-    for name in ("AccountFactory", "CredentialVault", "IdentityStore",
-                 "TierError", "TokenEngine", "TokenError", "VaultError",
-                 "cybrus_dir"):
+    for name in (
+        "AccountFactory",
+        "CredentialVault",
+        "IdentityStore",
+        "TierError",
+        "TokenEngine",
+        "TokenError",
+        "VaultError",
+        "cybrus_dir",
+    ):
         assert name in cy.__all__
         assert hasattr(cy, name)
 

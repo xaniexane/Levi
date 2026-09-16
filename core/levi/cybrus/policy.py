@@ -25,6 +25,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Optional
 
+
 # --- standalone-safe import of the sibling _paths helper -------------------
 # The sibling builder owns _paths.py; it is already landed, but this module
 # must also work if the package __init__ is mid-flight (it imports sibling

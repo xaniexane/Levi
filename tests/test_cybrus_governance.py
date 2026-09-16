@@ -70,6 +70,7 @@ def gateway(home):
 # policy
 # ---------------------------------------------------------------------------
 
+
 class TestRiskCeiling:
     def test_strictest_wins(self, policy):
         assert policy.risk_of("low", "high") == "high"
@@ -153,6 +154,7 @@ class TestPolicyEngine:
 # approval
 # ---------------------------------------------------------------------------
 
+
 class TestApprovalEngine:
     def test_request_then_check_blocked(self, approval):
         engine = approval.ApprovalEngine()
@@ -214,6 +216,7 @@ class TestApprovalEngine:
 # audit
 # ---------------------------------------------------------------------------
 
+
 class TestAuditEngine:
     def test_append_and_verify_ok(self, audit):
         engine = audit.AuditEngine()
@@ -268,6 +271,7 @@ class TestAuditEngine:
 # ---------------------------------------------------------------------------
 # devices
 # ---------------------------------------------------------------------------
+
 
 class TestDeviceTrust:
     def test_enroll_defaults_untrusted(self, devices):
@@ -326,6 +330,7 @@ class TestDeviceTrust:
 # governance integration: policy high-risk + approval pending = blocked
 # ---------------------------------------------------------------------------
 
+
 class TestGovernanceIntegration:
     def test_high_risk_allow_requires_approval(self, policy, approval):
         pe = policy.PolicyEngine()
@@ -345,14 +350,21 @@ class TestGovernanceIntegration:
         assert decision.decision == "deny"
         assert pe.needs_approval(decision) is False
 
+
 # ---------------------------------------------------------------------------
 # QID addressing ("QID = address of thought")
 # ---------------------------------------------------------------------------
 
+
 class TestQID:
     def test_parse_format_roundtrip(self, qid):
         parsed = qid.QID.parse("3.42.7.0")
-        assert (parsed.shell, parsed.form, parsed.logic_state, parsed.recursion) == (3, 42, 7, 0)
+        assert (parsed.shell, parsed.form, parsed.logic_state, parsed.recursion) == (
+            3,
+            42,
+            7,
+            0,
+        )
         assert str(parsed) == "3.42.7.0"
 
     def test_boundaries_accepted(self, qid):
@@ -363,10 +375,14 @@ class TestQID:
 
     def test_out_of_range_rejected(self, qid):
         for bad in (
-            "0.1.1.0", "22.1.1.0",      # shell 1..21
-            "1.0.1.0", "1.316.1.0",      # form 1..315
-            "1.1.0.0", "1.1.14.0",       # logic_state 1..13
-            "1.1.1.-1", f"1.1.1.{10**30 + 1}",  # recursion 0..10^30
+            "0.1.1.0",
+            "22.1.1.0",  # shell 1..21
+            "1.0.1.0",
+            "1.316.1.0",  # form 1..315
+            "1.1.0.0",
+            "1.1.14.0",  # logic_state 1..13
+            "1.1.1.-1",
+            f"1.1.1.{10**30 + 1}",  # recursion 0..10^30
         ):
             with pytest.raises(ValueError):
                 qid.QID.parse(bad)
@@ -393,8 +409,9 @@ class TestQID:
             qid.register_spec_tables(["only-one"], ["x"] * 13)
         with pytest.raises(ValueError):
             qid.register_spec_tables(["p"] * 18, ["s"] * 12)
-        qid.register_spec_tables([f"phase-{i}" for i in range(18)],
-                                 [f"state-{i}" for i in range(13)])
+        qid.register_spec_tables(
+            [f"phase-{i}" for i in range(18)], [f"state-{i}" for i in range(13)]
+        )
         parsed = qid.QID.parse("1.2.3.0")
         assert parsed.phase_name() == "phase-0"
         assert parsed.state_name() == "state-2"
@@ -403,6 +420,7 @@ class TestQID:
 # ---------------------------------------------------------------------------
 # token kinds: session / api / revenue (paper-only)
 # ---------------------------------------------------------------------------
+
 
 class TestTokenKinds:
     def test_default_kind_is_api(self, tokens_mod):
@@ -450,6 +468,7 @@ class TestTokenKinds:
 # gateway helpers
 # ---------------------------------------------------------------------------
 
+
 def _make_account(name="alice", tier="starter"):
     """Create a real identity account via the factory; returns (name, password)."""
     from levi.cybrus.factory import AccountFactory
@@ -468,6 +487,7 @@ def _allow_external(policy_module, subject="alice"):
 # ---------------------------------------------------------------------------
 # gateway auth
 # ---------------------------------------------------------------------------
+
 
 class TestGatewayAuth:
     def test_auth_success_issues_session_token(self, gateway, home):
@@ -497,6 +517,7 @@ class TestGatewayAuth:
 # ---------------------------------------------------------------------------
 # route_external — the sole external gateway (control plane only)
 # ---------------------------------------------------------------------------
+
 
 class TestRouteExternal:
     def test_denied_without_auth(self, gateway, home):
@@ -545,8 +566,7 @@ class TestRouteExternal:
             gw.route_external("api.example.com", name, "p")
         except gateway.ApprovalRequired as exc:
             gw.approve(exc.approval_id)
-        grant = gw.route_external("api.example.com", name, "p",
-                                  grant_ttl_seconds=120)
+        grant = gw.route_external("api.example.com", name, "p", grant_ttl_seconds=120)
         assert grant["expires_at"] - _time.time() <= 120
         # force expiry -> grant no longer validates
         import json as _json
@@ -581,6 +601,7 @@ class TestRouteExternal:
 # authorize_execution — policy -> approval -> audit -> decision
 # ---------------------------------------------------------------------------
 
+
 class TestAuthorizeExecution:
     def test_low_risk_allow_authorizes(self, gateway, home):
         from levi.cybrus.policy import PolicyEngine
@@ -609,8 +630,11 @@ class TestAuthorizeExecution:
             "owner",
             "system.kernel",
             "critical",
-            details={"actor": "owner", "action": "execute",
-                     "resource": "system.kernel"},
+            details={
+                "actor": "owner",
+                "action": "execute",
+                "resource": "system.kernel",
+            },
         )
         eng.approve(entry["id"])  # a human approved it...
         gw = gateway.CybrusGateway()
@@ -622,6 +646,7 @@ class TestAuthorizeExecution:
 # ---------------------------------------------------------------------------
 # named API keys (vault-stored)
 # ---------------------------------------------------------------------------
+
 
 class TestApiKeys:
     def test_create_validate_get_list_revoke(self, gateway, home):
@@ -664,6 +689,7 @@ class TestApiKeys:
 # route_internal — logged, metadata only
 # ---------------------------------------------------------------------------
 
+
 class TestRouteInternal:
     def test_route_by_qid(self, gateway, qid, home):
         gw = gateway.CybrusGateway()
@@ -694,6 +720,7 @@ class TestRouteInternal:
 # verified identity is recorded in the decision's ``by`` field and in the
 # audit log. Programmatic ApprovalEngine.approve() keeps its API.
 # ---------------------------------------------------------------------------
+
 
 def _cli(argv):
     """Run the cybrus CLI, translating SystemExit into a return code."""
@@ -822,6 +849,7 @@ class TestCliApprovalAuth:
 # ---------------------------------------------------------------------------
 # TOCTOU / replay: single-winner semantics under concurrency (round-3)
 # ---------------------------------------------------------------------------
+
 
 class TestSingleWinnerConcurrency:
     def test_consume_approved_single_winner(self, approval, home):

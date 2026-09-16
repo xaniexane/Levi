@@ -102,9 +102,7 @@ def verify_password(password: str, cred: dict) -> bool:
         iterations = int(cred.get("iterations", _PBKDF2_ITERATIONS))
     except (ValueError, KeyError, TypeError):
         return False
-    digest = hashlib.pbkdf2_hmac(
-        "sha256", password.encode("utf-8"), salt, iterations
-    )
+    digest = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, iterations)
     return hmac.compare_digest(digest, expected)
 
 
@@ -129,8 +127,12 @@ class AccountFactory:
             n += 1
         return candidate
 
-    def generate(self, base_name: str, tier: str = "starter",
-                 password_length: int = _PASSWORD_LENGTH) -> tuple[dict, str]:
+    def generate(
+        self,
+        base_name: str,
+        tier: str = "starter",
+        password_length: int = _PASSWORD_LENGTH,
+    ) -> tuple[dict, str]:
         """Create an identity with a unique username and a fresh strong
         password. Returns ``(record, password)`` — the password is returned
         exactly once, in memory only, and never persisted in plaintext."""

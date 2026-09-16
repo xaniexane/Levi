@@ -146,14 +146,13 @@ class CybrusGateway:
         sess = self._sessions.get(actor)
         if not sess or sess["expires_at"] <= time.time():
             self._sessions.pop(actor, None)
-            raise GatewayAuthError(
-                f"no live session for {actor!r}: call auth() first"
-            )
+            raise GatewayAuthError(f"no live session for {actor!r}: call auth() first")
         return sess
 
     @staticmethod
-    def _match_approval(entries: List[Dict], action: str,
-                        details: Dict, status: str) -> Optional[Dict]:
+    def _match_approval(
+        entries: List[Dict], action: str, details: Dict, status: str
+    ) -> Optional[Dict]:
         for entry in entries:
             if entry.get("action") != action or entry.get("status") != status:
                 continue
@@ -266,9 +265,7 @@ class CybrusGateway:
             stored = self.get_api_key(name)
         except (KeyError, GatewayError):
             return None
-        if not isinstance(presented, str) or not hmac.compare_digest(
-            stored, presented
-        ):
+        if not isinstance(presented, str) or not hmac.compare_digest(stored, presented):
             return None
         registry = self._load_store(_APIKEY_STORE)
         meta = next(entry for entry in registry if entry["name"] == name)
@@ -300,7 +297,9 @@ class CybrusGateway:
 
     # -- internal routing -------------------------------------------------
 
-    def route_internal(self, qid_or_target, payload_meta: Optional[Dict] = None) -> Dict:
+    def route_internal(
+        self, qid_or_target, payload_meta: Optional[Dict] = None
+    ) -> Dict:
         """Internal routing decision. Accepts a :class:`QID` (``QID =
         address of thought``) or a named internal target string. The
         decision is audit-logged with metadata only — never full payloads."""

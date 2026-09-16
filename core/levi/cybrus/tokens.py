@@ -107,10 +107,15 @@ class TokenEngine:
 
     # -- issuance ----------------------------------------------------------
 
-    def issue(self, scopes, ttl_seconds: int = DEFAULT_TTL_SECONDS,
-              label: Optional[str] = None, kind: str = "api",
-              memo: Optional[str] = None,
-              basis: Optional[str] = None) -> tuple[str, str]:
+    def issue(
+        self,
+        scopes,
+        ttl_seconds: int = DEFAULT_TTL_SECONDS,
+        label: Optional[str] = None,
+        kind: str = "api",
+        memo: Optional[str] = None,
+        basis: Optional[str] = None,
+    ) -> tuple[str, str]:
         """Issue a token. Returns ``(token_id, plaintext_token)`` — the
         plaintext is returned exactly once; only its SHA-256 is stored.
 
@@ -139,8 +144,9 @@ class TokenEngine:
             self._save()
         return rec["id"], token
 
-    def _mint_unlocked(self, token: str, scopes: list, ttl_seconds: int,
-                       label, kind: str, memo, basis) -> dict:
+    def _mint_unlocked(
+        self, token: str, scopes: list, ttl_seconds: int, label, kind: str, memo, basis
+    ) -> dict:
         """Build and append a token record. Caller must hold the store
         lock and have reloaded; does NOT save (caller saves)."""
         now = _now()
@@ -150,7 +156,9 @@ class TokenEngine:
             "label": label.strip() if label else None,
             "kind": kind,
             "memo": memo.strip() if isinstance(memo, str) and memo.strip() else None,
-            "basis": basis.strip() if isinstance(basis, str) and basis.strip() else None,
+            "basis": basis.strip()
+            if isinstance(basis, str) and basis.strip()
+            else None,
             "paper": kind == "revenue",
             "scopes": scopes,
             "issued_at": now,
@@ -160,8 +168,9 @@ class TokenEngine:
         self._records.append(rec)
         return rec
 
-    def _issue_unlocked(self, scopes, ttl_seconds: int = DEFAULT_TTL_SECONDS,
-                        label=None) -> tuple[str, str]:
+    def _issue_unlocked(
+        self, scopes, ttl_seconds: int = DEFAULT_TTL_SECONDS, label=None
+    ) -> tuple[str, str]:
         """Mint a plain ``api`` token without validation or locking — for
         internal reuse (e.g. ``rotate``) when the caller already holds the
         store lock. Does NOT save (caller saves)."""
@@ -206,7 +215,9 @@ class TokenEngine:
 
     # -- rotation & revocation -----------------------------------------------
 
-    def rotate(self, token_id: str, ttl_seconds: int = DEFAULT_TTL_SECONDS) -> tuple[str, str]:
+    def rotate(
+        self, token_id: str, ttl_seconds: int = DEFAULT_TTL_SECONDS
+    ) -> tuple[str, str]:
         """Revoke the old token and issue a fresh one for the same scopes/
         label. Returns ``(new_token_id, new_plaintext_token)`` — once only.
         The old token stops validating immediately.
@@ -254,19 +265,21 @@ class TokenEngine:
             for rec in self._records:
                 if rec.get("revoked") and not include_revoked:
                     continue
-                out.append({
-                    "id": rec["id"],
-                    "label": rec.get("label"),
-                    "kind": rec.get("kind", "api"),
-                    "memo": rec.get("memo"),
-                    "basis": rec.get("basis"),
-                    "paper": bool(rec.get("paper", False)),
-                    "scopes": list(rec["scopes"]),
-                    "issued_at": rec["issued_at"],
-                    "expires_at": rec["expires_at"],
-                    "revoked": bool(rec.get("revoked")),
-                    "expired": rec["expires_at"] <= _now(),
-                })
+                out.append(
+                    {
+                        "id": rec["id"],
+                        "label": rec.get("label"),
+                        "kind": rec.get("kind", "api"),
+                        "memo": rec.get("memo"),
+                        "basis": rec.get("basis"),
+                        "paper": bool(rec.get("paper", False)),
+                        "scopes": list(rec["scopes"]),
+                        "issued_at": rec["issued_at"],
+                        "expires_at": rec["expires_at"],
+                        "revoked": bool(rec.get("revoked")),
+                        "expired": rec["expires_at"] <= _now(),
+                    }
+                )
         return out
 
     def purge_expired(self) -> int:

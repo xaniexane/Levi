@@ -100,8 +100,9 @@ class IdentityStore:
                 return dict(rec)
         return None
 
-    def list(self, *, tier: Optional[str] = None,
-             status: Optional[str] = None) -> list[dict]:
+    def list(
+        self, *, tier: Optional[str] = None, status: Optional[str] = None
+    ) -> list[dict]:
         """All identities, optionally filtered by tier and/or status.
 
         Credential hash references are redacted from listings: listings name
@@ -133,7 +134,9 @@ class IdentityStore:
         """
         _check_name(name)
         if tier not in VALID_TIERS:
-            raise TierError(f"unknown tier {tier!r}; valid tiers: {sorted(VALID_TIERS)}")
+            raise TierError(
+                f"unknown tier {tier!r}; valid tiers: {sorted(VALID_TIERS)}"
+            )
         with store_lock(self._path):
             self._reload()
             if self.exists(name):

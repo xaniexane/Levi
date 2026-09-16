@@ -135,9 +135,7 @@ class ApprovalEngine:
         if risk not in GATED_RISKS + ("low", "medium"):
             raise ValueError(f"unknown risk level {risk!r}")
         now = _utcnow()
-        expires = datetime.fromtimestamp(
-            now.timestamp() + ttl_seconds, tz=timezone.utc
-        )
+        expires = datetime.fromtimestamp(now.timestamp() + ttl_seconds, tz=timezone.utc)
         entry = {
             "id": uuid.uuid4().hex,
             "action": action,
@@ -283,8 +281,9 @@ class ApprovalEngine:
             self._save()
             return dict(entry)
 
-    def consume_approved(self, action: str,
-                         details: Optional[Dict] = None) -> Optional[Dict]:
+    def consume_approved(
+        self, action: str, details: Optional[Dict] = None
+    ) -> Optional[Dict]:
         """Atomically find an ``approved``, unconsumed entry matching
         ``action`` and ``details`` and mark it consumed.
 

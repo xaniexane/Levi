@@ -46,8 +46,7 @@ def _mod(name: str):
     target = Path(__file__).resolve().parent / f"{name}.py"
     if not target.is_file():
         raise SystemExit(
-            f"error: cybrus module {name!r} has not landed yet "
-            f"(expected {target})"
+            f"error: cybrus module {name!r} has not landed yet (expected {target})"
         )
     import types
 
@@ -66,6 +65,7 @@ def _short(entry_id: str) -> str:
 # ---------------------------------------------------------------------------
 # status
 # ---------------------------------------------------------------------------
+
 
 def _cmd_status() -> int:
     policy = _mod("policy")
@@ -109,6 +109,7 @@ def _cmd_status() -> int:
 # account (identity)
 # ---------------------------------------------------------------------------
 
+
 def _cmd_account(args) -> int:
     identity = _mod("identity")
     store = identity.IdentityStore()
@@ -119,7 +120,9 @@ def _cmd_account(args) -> int:
         except (ValueError, identity.TierError) as exc:
             print(f"account create failed: {exc}")
             return 2
-        print(f"created account {rec['name']} (id {_short(rec['id'])}, tier {rec['tier']})")
+        print(
+            f"created account {rec['name']} (id {_short(rec['id'])}, tier {rec['tier']})"
+        )
         return 0
     if cmd == "list":
         recs = store.list()
@@ -158,9 +161,7 @@ def _cmd_account_set_password(args) -> int:
         return 2
     existing = store.get_credential(rec["id"])
     if existing is not None:
-        current = getpass.getpass(
-            f"Current password for {args.name} (never echoed): "
-        )
+        current = getpass.getpass(f"Current password for {args.name} (never echoed): ")
         if not factory_mod.verify_password(current, existing):
             print("error: current password is incorrect")
             return 2
@@ -185,6 +186,7 @@ def _cmd_account_set_password(args) -> int:
 # ---------------------------------------------------------------------------
 # vault
 # ---------------------------------------------------------------------------
+
 
 def _open_vault():
     """Unlock the credential vault. Master password via getpass prompt —
@@ -231,10 +233,7 @@ def _cmd_vault(args) -> int:
                 print(service)
             return 0
     except AttributeError as exc:
-        print(
-            "error: vault module API mismatch "
-            f"({exc}) — see levi/cybrus/vault.py"
-        )
+        print(f"error: vault module API mismatch ({exc}) — see levi/cybrus/vault.py")
         return 2
     print(f"unknown vault command: {cmd}")
     return 2
@@ -243,6 +242,7 @@ def _cmd_vault(args) -> int:
 # ---------------------------------------------------------------------------
 # token
 # ---------------------------------------------------------------------------
+
 
 def _split_token_result(result):
     """Token issue/rotate returns the plaintext exactly once — either as a
@@ -285,10 +285,7 @@ def _cmd_token(args) -> int:
             print(f"revoked token {args.id}")
             return 0
     except AttributeError as exc:
-        print(
-            "error: token engine API mismatch "
-            f"({exc}) — see levi/cybrus/tokens.py"
-        )
+        print(f"error: token engine API mismatch ({exc}) — see levi/cybrus/tokens.py")
         return 2
     except tokens_mod.TokenError as exc:
         print(f"token {cmd} failed: {exc}")
@@ -300,6 +297,7 @@ def _cmd_token(args) -> int:
 # ---------------------------------------------------------------------------
 # approvals — the human gate (authenticated: no anonymous self-approval)
 # ---------------------------------------------------------------------------
+
 
 def _authenticate_human(identity_name: str) -> str:
     """Authenticate the human behind a HITL decision.
@@ -409,6 +407,7 @@ def _cmd_approvals(args) -> int:
 # audit
 # ---------------------------------------------------------------------------
 
+
 def _cmd_audit(args) -> int:
     audit = _mod("audit")
     engine = audit.AuditEngine()
@@ -438,6 +437,7 @@ def _cmd_audit(args) -> int:
 # ---------------------------------------------------------------------------
 # device
 # ---------------------------------------------------------------------------
+
 
 def _cmd_device(args) -> int:
     devices = _mod("devices")
@@ -474,6 +474,7 @@ def _cmd_device(args) -> int:
 # ---------------------------------------------------------------------------
 # apikey (gateway — vault-stored named API keys)
 # ---------------------------------------------------------------------------
+
 
 def _open_gateway():
     """Construct a CybrusGateway with the vault unlocked (master password
@@ -530,6 +531,7 @@ def _cmd_apikey(args) -> int:
 # route (gateway — the sole external gateway, control plane only)
 # ---------------------------------------------------------------------------
 
+
 def _cmd_route(args) -> int:
     gateway_mod = _mod("gateway")
     try:
@@ -554,12 +556,8 @@ def _cmd_route(args) -> int:
         grant = gw.route_external(args.destination, args.actor, args.purpose)
     except gateway_mod.ApprovalRequired as exc:
         print(f"approval required: {exc}")
-        print(
-            "a verified human must approve it first, e.g.:"
-        )
-        print(
-            f"  levi cybrus approve {exc.approval_id[:8]} --identity <your-name>"
-        )
+        print("a verified human must approve it first, e.g.:")
+        print(f"  levi cybrus approve {exc.approval_id[:8]} --identity <your-name>")
         print("then retry this command")
         return 3
     except (gateway_mod.PolicyDenied, gateway_mod.GatewayError) as exc:
@@ -579,6 +577,7 @@ def _cmd_route(args) -> int:
 # ---------------------------------------------------------------------------
 # qid (QID addressing)
 # ---------------------------------------------------------------------------
+
 
 def _cmd_qid(args) -> int:
     qid_mod = _mod("qid")
@@ -607,20 +606,26 @@ def _cmd_qid(args) -> int:
 # registration (mirrors levi/jobs/cli.py: register_*_parser + cmd_*)
 # ---------------------------------------------------------------------------
 
+
 def _register_commands(cy) -> None:
     """Add the cybrus subcommands (status/account/vault/token/apikey/route/
     qid/approve/deny/approvals/audit/device) to an already-created
     ``cybrus`` parser."""
     cmds = cy.add_subparsers(dest="cybrus_cmd")
 
-    cmds.add_parser("status", help="governance overview: policy, approvals, audit, devices")
+    cmds.add_parser(
+        "status", help="governance overview: policy, approvals, audit, devices"
+    )
 
     ap = cmds.add_parser("account", help="identity accounts")
     asub = ap.add_subparsers(dest="account_cmd")
     ac = asub.add_parser("create", help="create an identity account")
     ac.add_argument("name", help="account name")
-    ac.add_argument("--tier", default="starter",
-                    help="tier: founder | starter | pro (default: starter)")
+    ac.add_argument(
+        "--tier",
+        default="starter",
+        help="tier: founder | starter | pro (default: starter)",
+    )
     asub.add_parser("list", help="list identity accounts")
     asp = asub.add_parser(
         "set-password",
@@ -641,10 +646,18 @@ def _register_commands(cy) -> None:
     tp = cmds.add_parser("token", help="scoped API tokens")
     tsub = tp.add_subparsers(dest="token_cmd")
     ti = tsub.add_parser("issue", help="issue a token (plaintext shown once)")
-    ti.add_argument("--scope", action="append", required=True,
-                    help="scope to grant (repeatable; at least one required)")
-    ti.add_argument("--ttl", type=int, default=30 * 86400,
-                    help="time-to-live in seconds (default: 30 days)")
+    ti.add_argument(
+        "--scope",
+        action="append",
+        required=True,
+        help="scope to grant (repeatable; at least one required)",
+    )
+    ti.add_argument(
+        "--ttl",
+        type=int,
+        default=30 * 86400,
+        help="time-to-live in seconds (default: 30 days)",
+    )
     tr = tsub.add_parser("rotate", help="rotate a token (old value dies)")
     tr.add_argument("id", help="token id")
     tv = tsub.add_parser("revoke", help="revoke a token")
@@ -656,7 +669,8 @@ def _register_commands(cy) -> None:
     )
     apv.add_argument("id", help="approval id (or unique prefix)")
     apv.add_argument(
-        "--identity", required=True,
+        "--identity",
+        required=True,
         help="your identity name — password is prompted, never argv",
     )
     dp = cmds.add_parser(
@@ -665,7 +679,8 @@ def _register_commands(cy) -> None:
     )
     dp.add_argument("id", help="approval id (or unique prefix)")
     dp.add_argument(
-        "--identity", required=True,
+        "--identity",
+        required=True,
         help="your identity name — password is prompted, never argv",
     )
     dp.add_argument("--reason", default="", help="why it was denied")
@@ -694,8 +709,12 @@ def _register_commands(cy) -> None:
     ksub = kp.add_subparsers(dest="apikey_cmd")
     kc = ksub.add_parser("create", help="create a named API key (shown once)")
     kc.add_argument("name", help="key name")
-    kc.add_argument("--scope", action="append", required=True,
-                    help="scope to grant (repeatable; at least one required)")
+    kc.add_argument(
+        "--scope",
+        action="append",
+        required=True,
+        help="scope to grant (repeatable; at least one required)",
+    )
     ksub.add_parser("list", help="list API keys (names and scopes only)")
     kr = ksub.add_parser("revoke", help="revoke a named API key")
     kr.add_argument("name", help="key name")
