@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -41,9 +42,9 @@ object SettingsUi {
     fun pageContent(scroll: ScrollView): LinearLayout {
         val c = LinearLayout(scroll.context).apply {
             orientation = LinearLayout.VERTICAL
-            layoutParams = ScrollView.LayoutParams(
-                ScrollView.LayoutParams.MATCH_PARENT,
-                ScrollView.LayoutParams.WRAP_CONTENT,
+            layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT,
             )
             val d = dp(scroll.context, 0)
             setPadding(d, dp(scroll.context, 8), d, dp(scroll.context, 24))

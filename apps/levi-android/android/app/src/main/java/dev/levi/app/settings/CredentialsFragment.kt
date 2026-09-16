@@ -90,7 +90,7 @@ class CredentialsFragment : Fragment() {
         val secret = SettingsStore.getCredential(ctx, name) ?: return
         val secretView = TextView(ctx).apply {
             text = secret
-            textIsSelectable = true
+            setTextIsSelectable(true)
             setTextColor(resources.getColor(R.color.text, null))
             setPadding(48, 24, 48, 8)
         }
