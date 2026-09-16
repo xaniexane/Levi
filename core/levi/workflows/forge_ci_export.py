@@ -49,13 +49,17 @@ SUMMARY = (
 STEP_NAMES = ["init", "ci_run", "export"]
 
 
-def run(home=None, repo: Optional[str] = None, description: str = "",
-        pipeline: Optional[Dict[str, Any]] = None,
-        dest: Optional[str] = None, **kwargs) -> Dict[str, Any]:
+def run(
+    home=None,
+    repo: Optional[str] = None,
+    description: str = "",
+    pipeline: Optional[Dict[str, Any]] = None,
+    dest: Optional[str] = None,
+    **kwargs,
+) -> Dict[str, Any]:
     levi_home = resolve_home(home)
     fhome = str(levi_home / "forge")  # the forge's own home, explicit
-    emit("workflow.start", {"workflow": NAME, "home": str(levi_home),
-                            "repo": repo})
+    emit("workflow.start", {"workflow": NAME, "home": str(levi_home), "repo": repo})
     steps: List[Dict[str, Any]] = []
     artifacts: Dict[str, Any] = {}
     run_id: Optional[str] = None
@@ -72,9 +76,16 @@ def run(home=None, repo: Optional[str] = None, description: str = "",
                 _repos.create_repo(fhome, repo, description=description)
                 created = True
             pipe = _ci.init_pipeline(fhome, repo, pipeline=pipeline)
-        finish_step(step, True, {"repo": repo, "created": created,
-                                 "pipeline": pipe.get("name", ""),
-                                 "pipeline_steps": len(pipe.get("steps", []))})
+        finish_step(
+            step,
+            True,
+            {
+                "repo": repo,
+                "created": created,
+                "pipeline": pipe.get("name", ""),
+                "pipeline_steps": len(pipe.get("steps", [])),
+            },
+        )
         artifacts["repo"] = repo
         artifacts["repo_created"] = created
     except (ValueError, GitError) as exc:
@@ -96,12 +107,15 @@ def run(home=None, repo: Optional[str] = None, description: str = "",
             record = _ci.run_pipeline(fhome, repo)
         run_id = record.get("id")
         if not record.get("ok"):
-            failed = [s.get("name") for s in record.get("steps", [])
-                      if s.get("rc") != 0]
-            raise RuntimeError("CI run %s failed at: %s"
-                               % (run_id, ", ".join(failed) or "unknown"))
-        finish_step(step, True, {"run_id": run_id,
-                                 "steps": len(record.get("steps", []))})
+            failed = [
+                s.get("name") for s in record.get("steps", []) if s.get("rc") != 0
+            ]
+            raise RuntimeError(
+                "CI run %s failed at: %s" % (run_id, ", ".join(failed) or "unknown")
+            )
+        finish_step(
+            step, True, {"run_id": run_id, "steps": len(record.get("steps", []))}
+        )
         artifacts["ci_run_id"] = run_id
         artifacts["ci_record"] = record
     except Exception as exc:
@@ -118,15 +132,16 @@ def run(home=None, repo: Optional[str] = None, description: str = "",
         # runs never collide on the export destination (export_repo refuses
         # to write into an existing dir).
         uniq = datetime.now(timezone.utc).strftime("%f")
-        out = (dest or str(
-            levi_home / "forge-exports" / ("%s-%s-%s" % (repo, run_id, uniq))))
+        out = dest or str(
+            levi_home / "forge-exports" / ("%s-%s-%s" % (repo, run_id, uniq))
+        )
         with workflow_env(levi_home, growth=False):
             export_path = _export.export_repo(fhome, repo, out)
         if not (export_path / "repo.bundle").is_file():
-            raise RuntimeError("export finished but repo.bundle is missing: %s"
-                               % export_path)
-        finish_step(step, True, {"dest": str(export_path),
-                                 "run_id": run_id})
+            raise RuntimeError(
+                "export finished but repo.bundle is missing: %s" % export_path
+            )
+        finish_step(step, True, {"dest": str(export_path), "run_id": run_id})
         artifacts["export_path"] = str(export_path)
         artifacts["exported_at"] = datetime.now(timezone.utc).isoformat()
     except Exception as exc:
@@ -136,6 +151,7 @@ def run(home=None, repo: Optional[str] = None, description: str = "",
         return workflow_result(NAME, steps, artifacts)
     steps.append(step)
 
-    emit("workflow.done", {"workflow": NAME, "ok": True, "repo": repo,
-                           "run_id": run_id})
+    emit(
+        "workflow.done", {"workflow": NAME, "ok": True, "repo": repo, "run_id": run_id}
+    )
     return workflow_result(NAME, steps, artifacts)

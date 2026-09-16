@@ -45,10 +45,12 @@ def _clean_and_chunk():
     training pipeline's expected format exactly.
     """
     import sys
+
     train_pkg = str(TRAIN_DIR)
     if train_pkg not in sys.path:
         sys.path.insert(0, train_pkg)
     from prepare_corpus import clean_lines, chunk  # noqa: E402
+
     return clean_lines, chunk
 
 
@@ -76,8 +78,14 @@ def _hash(text: str) -> str:
     return hashlib.sha256(norm.encode("utf-8")).hexdigest()
 
 
-def ingest_lesson(day: int, block: int, track: str, title: str,
-                  lesson_markdown: str, mastery: dict | None = None) -> dict:
+def ingest_lesson(
+    day: int,
+    block: int,
+    track: str,
+    title: str,
+    lesson_markdown: str,
+    mastery: dict | None = None,
+) -> dict:
     """Append one session's POST-MASTERY lesson to the academy corpus.
 
     Idempotent. Only distilled, corrected, retained knowledge is ingested:
@@ -90,9 +98,7 @@ def ingest_lesson(day: int, block: int, track: str, title: str,
     """
     clean_lines, chunk = _clean_and_chunk()
     path = corpus_path()
-    header = (
-        f"Academy lesson — Day {day}, Block {block}, Track {track}: {title}\n"
-    )
+    header = f"Academy lesson — Day {day}, Block {block}, Track {track}: {title}\n"
     chunks = chunk(clean_lines(header + "\n" + lesson_markdown))
     existing = _existing_hashes(path)
     added = 0
@@ -133,8 +139,12 @@ def ingest_lesson(day: int, block: int, track: str, title: str,
             rec = json.loads(line)
             total_records += 1
             total_chars += len(rec.get("text", ""))
-    return {"added": added, "skipped_dupes": skipped,
-            "records": total_records, "chars": total_chars}
+    return {
+        "added": added,
+        "skipped_dupes": skipped,
+        "records": total_records,
+        "chars": total_chars,
+    }
 
 
 def corpus_stats() -> dict:
@@ -157,5 +167,9 @@ def corpus_stats() -> dict:
                 total_chars += len(rec.get("text", ""))
                 t = rec.get("track", "?")
                 by_track[t] = by_track.get(t, 0) + 1
-    return {"records": total_records, "chars": total_chars,
-            "by_track": by_track, "path": str(path)}
+    return {
+        "records": total_records,
+        "chars": total_chars,
+        "by_track": by_track,
+        "path": str(path),
+    }

@@ -60,7 +60,9 @@ def test_schema_complete_and_ids_unique_kebab():
         assert e["reference"].startswith("Hack-with-Github/Awesome-Hacking -> "), (
             f"{e['id']}: bad reference pointer"
         )
-        assert isinstance(e["attack_relevant"], bool), f"{e['id']}: attack_relevant not bool"
+        assert isinstance(e["attack_relevant"], bool), (
+            f"{e['id']}: attack_relevant not bool"
+        )
         ids.append(e["id"])
     assert len(set(ids)) == len(ids), "duplicate ids"
 
@@ -85,7 +87,9 @@ def test_attack_profile_breadth_and_presence():
         assert prof and len(prof.strip()) >= 200, (
             f"{e['id']}: attack_profile missing or too thin"
         )
-    stray = [e["id"] for e in entries if not e["attack_relevant"] and "attack_profile" in e]
+    stray = [
+        e["id"] for e in entries if not e["attack_relevant"] and "attack_profile" in e
+    ]
     assert not stray, f"stray attack_profile on non-relevant entries: {stray}"
 
 

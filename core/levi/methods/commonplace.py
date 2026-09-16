@@ -30,7 +30,7 @@ class Excerpt:
     source: str = ""
     page: str = ""
     captured: str = ""  # ISO date of capture
-    note: str = ""      # your own gloss
+    note: str = ""  # your own gloss
 
     def validate(self) -> None:
         if not self.text or not self.text.strip():
@@ -60,9 +60,13 @@ class CommonplaceBook:
         if not data:
             return
         if not isinstance(data, dict) or "heads" not in data:
-            raise _persist.CorruptStoreError(f"commonplace store {self._store} has bad shape")
+            raise _persist.CorruptStoreError(
+                f"commonplace store {self._store} has bad shape"
+            )
         for name, hd in data["heads"].items():
-            head = Head(name=name, excerpts=[Excerpt(**e) for e in hd.get("excerpts", [])])
+            head = Head(
+                name=name, excerpts=[Excerpt(**e) for e in hd.get("excerpts", [])]
+            )
             head.validate()
             self.heads[name] = head
 
@@ -120,7 +124,11 @@ class CommonplaceBook:
         hits = []
         for head in self.heads.values():
             for ex in head.excerpts:
-                if q in ex.text.lower() or q in ex.note.lower() or q in ex.source.lower():
+                if (
+                    q in ex.text.lower()
+                    or q in ex.note.lower()
+                    or q in ex.source.lower()
+                ):
                     hits.append((head.name, ex))
         return hits
 
@@ -131,16 +139,24 @@ class CommonplaceBook:
         heads that may deserve splitting (very long). Nothing is reorganized
         automatically — the assistant proposes, you dispose."""
         names = [h.name for h in self.heads.values()]
-        suggestions: dict[str, list[str]] = {"merge_candidates": [], "stale": [], "split_candidates": []}
+        suggestions: dict[str, list[str]] = {
+            "merge_candidates": [],
+            "stale": [],
+            "split_candidates": [],
+        }
         for i, a in enumerate(names):
-            for b in names[i + 1:]:
+            for b in names[i + 1 :]:
                 wa, wb = set(a.lower().split()), set(b.lower().split())
                 if wa & wb:
-                    suggestions["merge_candidates"].append(f"{a!r} ~ {b!r} (shared words)")
+                    suggestions["merge_candidates"].append(
+                        f"{a!r} ~ {b!r} (shared words)"
+                    )
         for head in self.heads.values():
             n = len(head.excerpts)
             if n <= 1:
-                suggestions["stale"].append(f"{head.name!r} ({n} excerpt{'s' if n != 1 else ''})")
+                suggestions["stale"].append(
+                    f"{head.name!r} ({n} excerpt{'s' if n != 1 else ''})"
+                )
             elif n >= 50:
                 suggestions["split_candidates"].append(f"{head.name!r} ({n} excerpts)")
         return suggestions

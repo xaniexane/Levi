@@ -19,6 +19,7 @@ from levi.workflows import list_workflows, run_workflow
 # fixtures
 # ---------------------------------------------------------------------------
 
+
 def _levi_home(monkeypatch, tmp_path: Path) -> Path:
     """Hermetic LEVI home: isolated HOME plus an explicit home path."""
     home = tmp_path / "levi-home"
@@ -48,11 +49,17 @@ def _finding(n: int, **over) -> dict:
 # registry contract
 # ---------------------------------------------------------------------------
 
+
 def test_list_workflows_contract():
     listed = list_workflows()
     names = [w["name"] for w in listed]
-    assert names == ["hunt-archive-publish", "growth-memory-lifepack",
-                     "archive-showcase", "forge-ci-export", "fleet-five"]
+    assert names == [
+        "hunt-archive-publish",
+        "growth-memory-lifepack",
+        "archive-showcase",
+        "forge-ci-export",
+        "fleet-five",
+    ]
     for w in listed:
         assert isinstance(w["summary"], str) and w["summary"]
         assert isinstance(w["steps"], list) and w["steps"]
@@ -75,6 +82,7 @@ def test_unknown_workflow_raises_valueerror(monkeypatch, tmp_path):
 # hunt-archive-publish (the factory line)
 # ---------------------------------------------------------------------------
 
+
 def test_hunt_archive_publish_ok(monkeypatch, tmp_path):
     home = _levi_home(monkeypatch, tmp_path)
     # two buildable finds + one hard-route find (cost signal -> waymaker)
@@ -86,7 +94,12 @@ def test_hunt_archive_publish_ok(monkeypatch, tmp_path):
 
     assert result["ok"] is True
     assert [s["name"] for s in result["steps"]] == [
-        "intake", "process", "stock", "manufacture", "distribute"]
+        "intake",
+        "process",
+        "stock",
+        "manufacture",
+        "distribute",
+    ]
     assert all(s["ok"] for s in result["steps"])
 
     steps = {s["name"]: s for s in result["steps"]}
@@ -112,14 +125,19 @@ def test_hunt_archive_publish_ok(monkeypatch, tmp_path):
 
     # galaxy registry holds the published collection
     from levi.galaxy.registry import GalaxyRegistry
+
     reg = GalaxyRegistry(home)
     rec = reg.get(result["artifacts"]["package_id"])
     assert rec is not None
     assert rec["kind"] == "archive-collection"
 
     # idempotent re-run: intake re-validates, stock skips dupes, publish replaces
-    rerun = run_workflow("hunt-archive-publish", home=home, findings=findings,
-                         wave_id=result["artifacts"]["wave_id"])
+    rerun = run_workflow(
+        "hunt-archive-publish",
+        home=home,
+        findings=findings,
+        wave_id=result["artifacts"]["wave_id"],
+    )
     assert rerun["ok"] is True
     stock = {s["name"]: s for s in rerun["steps"]}["stock"]
     assert stock["detail"]["added"] == 0
@@ -150,14 +168,19 @@ def test_hunt_archive_publish_bad_record_fails_honestly(monkeypatch, tmp_path):
 # growth-memory-lifepack
 # ---------------------------------------------------------------------------
 
+
 def test_growth_memory_lifepack_ok(monkeypatch, tmp_path):
     home = _levi_home(monkeypatch, tmp_path)
-    result = run_workflow("growth-memory-lifepack", home=home,
-                          use_model=False, dry_run=False)
+    result = run_workflow(
+        "growth-memory-lifepack", home=home, use_model=False, dry_run=False
+    )
 
     assert result["ok"] is True
     assert [s["name"] for s in result["steps"]] == [
-        "growth_cycle", "memory_consolidate", "lifepack_export"]
+        "growth_cycle",
+        "memory_consolidate",
+        "lifepack_export",
+    ]
     steps = {s["name"]: s for s in result["steps"]}
     assert steps["growth_cycle"]["detail"]["cycle_id"]
     assert "accepted" in steps["memory_consolidate"]["detail"]
@@ -174,18 +197,24 @@ def test_growth_memory_lifepack_ok(monkeypatch, tmp_path):
 
 def test_growth_memory_lifepack_dry_run_writes_nothing(monkeypatch, tmp_path):
     home = _levi_home(monkeypatch, tmp_path)
-    result = run_workflow("growth-memory-lifepack", home=home,
-                          use_model=False, dry_run=True)
+    result = run_workflow(
+        "growth-memory-lifepack", home=home, use_model=False, dry_run=True
+    )
     assert result["ok"] is True
     assert result["artifacts"]["pack_path"] is None
-    assert not list((home / "lifepacks").glob("*")) if (home / "lifepacks").exists() else True
+    assert (
+        not list((home / "lifepacks").glob("*"))
+        if (home / "lifepacks").exists()
+        else True
+    )
     assert not (home / "growth" / "journal.jsonl").exists()
 
 
 def test_growth_memory_lifepack_bad_store_fails_honestly(monkeypatch, tmp_path):
     home = _levi_home(monkeypatch, tmp_path)
-    result = run_workflow("growth-memory-lifepack", home=home,
-                          use_model=False, store=object())
+    result = run_workflow(
+        "growth-memory-lifepack", home=home, use_model=False, store=object()
+    )
     assert result["ok"] is False
     assert result["steps"][0]["name"] == "growth_cycle"
     assert result["steps"][0]["ok"] is False
@@ -196,18 +225,26 @@ def test_growth_memory_lifepack_bad_store_fails_honestly(monkeypatch, tmp_path):
 # archive-showcase
 # ---------------------------------------------------------------------------
 
+
 def test_archive_showcase_ok(monkeypatch, tmp_path):
     home = _levi_home(monkeypatch, tmp_path)
     # seed the archive through the real factory line
-    seeded = run_workflow("hunt-archive-publish", home=home,
-                          findings=[_finding(1), _finding(2, title="Another Test Widget")])
+    seeded = run_workflow(
+        "hunt-archive-publish",
+        home=home,
+        findings=[_finding(1), _finding(2, title="Another Test Widget")],
+    )
     assert seeded["ok"] is True
 
-    result = run_workflow("archive-showcase", home=home, query="Test System",
-                          title="Test picks")
+    result = run_workflow(
+        "archive-showcase", home=home, query="Test System", title="Test picks"
+    )
     assert result["ok"] is True
     assert [s["name"] for s in result["steps"]] == [
-        "archive_search", "assemble_collection", "galaxy_publish"]
+        "archive_search",
+        "assemble_collection",
+        "galaxy_publish",
+    ]
     steps = {s["name"]: s for s in result["steps"]}
     assert steps["archive_search"]["detail"]["hits"] >= 1
     collection = result["artifacts"]["collection"]
@@ -215,14 +252,14 @@ def test_archive_showcase_ok(monkeypatch, tmp_path):
     assert collection["record_count"] >= 1
 
     from levi.galaxy.registry import GalaxyRegistry
+
     reg = GalaxyRegistry(home)
     assert reg.get(result["artifacts"]["package_id"]) is not None
 
 
 def test_archive_showcase_no_hits_fails_honestly(monkeypatch, tmp_path):
     home = _levi_home(monkeypatch, tmp_path)
-    result = run_workflow("archive-showcase", home=home,
-                          query="zzz-no-such-thing-zzz")
+    result = run_workflow("archive-showcase", home=home, query="zzz-no-such-thing-zzz")
     assert result["ok"] is False
     assert result["steps"][0]["name"] == "archive_search"
     assert result["steps"][0]["ok"] is False
@@ -238,6 +275,7 @@ def test_archive_showcase_bad_filter_fails_honestly(monkeypatch, tmp_path):
 
 def test_emit_is_defensive():
     from levi.workflows import _common
+
     # never raises, whatever the bus situation is
     assert isinstance(_common.emit("workflow.done", {"ok": True}), bool)
     assert isinstance(_common.emit("workflow.done", None), bool)
@@ -249,6 +287,7 @@ def test_emit_publishes_on_real_bus():
     tok = bus.subscribe("levi.workflows.done", lambda t, p: seen.append(t))
     try:
         from levi.workflows import _common
+
         assert _common.emit("workflow.done", {"ok": True}) is True
         assert seen == ["levi.workflows.done"]
     finally:
@@ -259,21 +298,33 @@ def test_emit_publishes_on_real_bus():
 # forge-ci-export
 # ---------------------------------------------------------------------------
 
+
 def _seed_commit(repo_path: Path, tmp_path: Path) -> None:
     """Put one real commit into a forge bare repo (clone -> commit -> push)."""
     import subprocess
 
     work = tmp_path / "seedwork"
-    subprocess.run(["git", "clone", "-q", str(repo_path), str(work)],
-                   check=True, capture_output=True)
+    subprocess.run(
+        ["git", "clone", "-q", str(repo_path), str(work)],
+        check=True,
+        capture_output=True,
+    )
     (work / "hello.txt").write_text("hello from the forge test\n")
-    subprocess.run(["git", "add", "hello.txt"], cwd=work, check=True,
-                   capture_output=True)
-    subprocess.run(["git", "-c", "user.name=t", "-c", "user.email=t@t",
-                    "commit", "-qm", "seed"], cwd=work, check=True,
-                   capture_output=True)
-    subprocess.run(["git", "push", "-q", "origin", "HEAD:main"], cwd=work,
-                   check=True, capture_output=True)
+    subprocess.run(
+        ["git", "add", "hello.txt"], cwd=work, check=True, capture_output=True
+    )
+    subprocess.run(
+        ["git", "-c", "user.name=t", "-c", "user.email=t@t", "commit", "-qm", "seed"],
+        cwd=work,
+        check=True,
+        capture_output=True,
+    )
+    subprocess.run(
+        ["git", "push", "-q", "origin", "HEAD:main"],
+        cwd=work,
+        check=True,
+        capture_output=True,
+    )
 
 
 def test_forge_ci_export_ok(monkeypatch, tmp_path):
@@ -313,6 +364,7 @@ def test_forge_ci_export_creates_repo(monkeypatch, tmp_path):
     assert result["ok"] is False
     assert result["steps"][0]["detail"]["created"] is True
     from levi.forge import repos as _repos
+
     assert _repos.repo_exists(str(home / "forge"), "auto")
 
 

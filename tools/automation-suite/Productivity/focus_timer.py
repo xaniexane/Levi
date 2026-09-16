@@ -15,8 +15,7 @@ import sys
 import time
 from datetime import datetime
 
-DEFAULT_LOG = os.path.expanduser(
-    "~/Ultimate-Automation-Suite/Productivity/focus.log")
+DEFAULT_LOG = os.path.expanduser("~/Ultimate-Automation-Suite/Productivity/focus.log")
 
 
 def countdown(minutes, label):
@@ -29,8 +28,11 @@ def countdown(minutes, label):
         remaining = int(end - time.time())
         if remaining <= 0:
             break
-        print(f"\r{label}: {remaining // 60:02d}:{remaining % 60:02d} remaining",
-              end="", flush=True)
+        print(
+            f"\r{label}: {remaining // 60:02d}:{remaining % 60:02d} remaining",
+            end="",
+            flush=True,
+        )
         time.sleep(1)
     print(f"\r{label}: done{' ' * 30}")
 
@@ -41,30 +43,38 @@ def log_session(log_path, phase, minutes):
         w = csv.writer(fh)
         if new:
             w.writerow(["timestamp", "phase", "minutes"])
-        w.writerow([datetime.now().isoformat(timespec="seconds"), phase,
-                    round(minutes, 3)])
+        w.writerow(
+            [datetime.now().isoformat(timespec="seconds"), phase, round(minutes, 3)]
+        )
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(
-        description="Pomodoro focus timer with session logging.")
-    ap.add_argument("--work", type=float, default=25,
-                    help="work minutes per cycle (default: 25)")
-    ap.add_argument("--break", dest="break_mins", type=float, default=5,
-                    help="break minutes between cycles (default: 5)")
-    ap.add_argument("--cycles", type=int, default=4,
-                    help="number of work cycles (default: 4)")
-    ap.add_argument("--log", default=DEFAULT_LOG,
-                    help="session log CSV path")
+        description="Pomodoro focus timer with session logging."
+    )
+    ap.add_argument(
+        "--work", type=float, default=25, help="work minutes per cycle (default: 25)"
+    )
+    ap.add_argument(
+        "--break",
+        dest="break_mins",
+        type=float,
+        default=5,
+        help="break minutes between cycles (default: 5)",
+    )
+    ap.add_argument(
+        "--cycles", type=int, default=4, help="number of work cycles (default: 4)"
+    )
+    ap.add_argument("--log", default=DEFAULT_LOG, help="session log CSV path")
     args = ap.parse_args(argv)
 
     if args.work < 0 or args.break_mins < 0 or args.cycles < 1:
-        print("error: --work/--break must be >= 0 and --cycles >= 1",
-              file=sys.stderr)
+        print("error: --work/--break must be >= 0 and --cycles >= 1", file=sys.stderr)
         return 2
 
-    print(f"focus timer: {args.cycles} x {args.work}min work / "
-          f"{args.break_mins}min break")
+    print(
+        f"focus timer: {args.cycles} x {args.work}min work / {args.break_mins}min break"
+    )
     try:
         for cycle in range(1, args.cycles + 1):
             print(f"--- cycle {cycle}/{args.cycles}: WORK ---")

@@ -153,9 +153,7 @@ class _Handler(BaseHTTPRequestHandler):
                 f"invalid Content-Length: {raw_len!r}; expected a byte count"
             ) from None
         if length < 0:
-            raise _BadBody(
-                f"invalid Content-Length: {length}; must be >= 0"
-            )
+            raise _BadBody(f"invalid Content-Length: {length}; must be >= 0")
         if length > _MAX_JSON_BODY:
             raise _BadBody(
                 f"request body too large ({length} bytes; "

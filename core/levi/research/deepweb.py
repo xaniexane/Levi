@@ -58,8 +58,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 USER_AGENT = (
-    "LEVI-deepweb/1.0 (public-source research; honors robots.txt; "
-    "polite crawler)"
+    "LEVI-deepweb/1.0 (public-source research; honors robots.txt; polite crawler)"
 )
 
 BOUNDARIES_TEXT = """\
@@ -102,23 +101,28 @@ def _now_iso() -> str:
 # Result types — every finding carries provenance.
 # --------------------------------------------------------------------------
 
+
 @dataclass(frozen=True)
 class DeepSource:
     """One deep-web finding with full provenance."""
 
-    kind: str            # wayback|commoncrawl|sitemap|feed|arxiv|portal|page
+    kind: str  # wayback|commoncrawl|sitemap|feed|arxiv|portal|page
     url: str
     title: str = ""
     summary: str = ""
     retrieved_at: str = ""
-    method: str = ""     # how this source was found
+    method: str = ""  # how this source was found
     notes: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "kind": self.kind, "url": self.url, "title": self.title,
-            "summary": self.summary, "retrieved_at": self.retrieved_at,
-            "method": self.method, "notes": self.notes,
+            "kind": self.kind,
+            "url": self.url,
+            "title": self.title,
+            "summary": self.summary,
+            "retrieved_at": self.retrieved_at,
+            "method": self.method,
+            "notes": self.notes,
         }
 
     @classmethod
@@ -156,8 +160,7 @@ class DeepSurvey:
         self.sources.append(source)
 
     def refuse(self, url: str, reason: str) -> None:
-        self.refusals.append({"url": url, "reason": reason,
-                              "at": _now_iso()})
+        self.refusals.append({"url": url, "reason": reason, "at": _now_iso()})
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -174,8 +177,7 @@ class DeepSurvey:
         return cls(
             topic=str(data.get("topic", "")),
             created_at=str(data.get("created_at", "")),
-            sources=[DeepSource.from_dict(s)
-                     for s in data.get("sources", [])],
+            sources=[DeepSource.from_dict(s) for s in data.get("sources", [])],
             refusals=[dict(r) for r in data.get("refusals", [])],
         )
 
@@ -184,24 +186,23 @@ class DeepSurvey:
 # HTTP choke point (tests monkeypatch ``_http_get`` — no live network).
 # --------------------------------------------------------------------------
 
+
 def _check_boundary(url: str) -> urllib.parse.ParseResult:
     """Parse *url* and refuse anything outside the hard boundaries."""
     parts = urllib.parse.urlparse(url)
     if parts.scheme not in ("http", "https"):
         raise BoundaryError(
-            "refused: only http(s) URLs are fetchable, got scheme %r"
-            % parts.scheme)
+            "refused: only http(s) URLs are fetchable, got scheme %r" % parts.scheme
+        )
     host = (parts.hostname or "").lower()
     if not host:
         raise BoundaryError("refused: URL has no host: %r" % url)
     if host == "localhost" or host.startswith("127.") or host == "::1":
         raise BoundaryError("refused: loopback addresses are not targets")
     if host.endswith(".onion"):
-        raise BoundaryError(
-            "refused: .onion (darknet) is outside the hard boundaries")
+        raise BoundaryError("refused: .onion (darknet) is outside the hard boundaries")
     if parts.username or parts.password:
-        raise BoundaryError(
-            "refused: URLs carrying credentials are never used")
+        raise BoundaryError("refused: URLs carrying credentials are never used")
     return parts
 
 
@@ -231,8 +232,7 @@ def _http_get(url: str, policy: CrawlPolicy) -> Tuple[bytes, str]:
     _check_boundary(url)
     req = urllib.request.Request(
         url,
-        headers={"User-Agent": policy.user_agent,
-                 "Accept": "*/*"},
+        headers={"User-Agent": policy.user_agent, "Accept": "*/*"},
     )
     try:
         # NOTE: _OPENER (not urlopen) so every redirect hop is re-checked
@@ -243,7 +243,7 @@ def _http_get(url: str, policy: CrawlPolicy) -> Tuple[bytes, str]:
                 raise FetchError("HTTP %s for %s" % (status, url))
             body = resp.read(policy.max_bytes + 1)
             if len(body) > policy.max_bytes:
-                body = body[:policy.max_bytes]
+                body = body[: policy.max_bytes]
             ctype = resp.headers.get("Content-Type", "")
             return body, ctype
     except (BoundaryError, FetchError):
@@ -255,6 +255,7 @@ def _http_get(url: str, policy: CrawlPolicy) -> Tuple[bytes, str]:
 # --------------------------------------------------------------------------
 # robots.txt + polite crawler
 # --------------------------------------------------------------------------
+
 
 def parse_robots(text: str, user_agent: str) -> List[str]:
     """Return Disallow path prefixes applying to *user_agent*.
@@ -296,9 +297,12 @@ class PoliteCrawler:
     honest about what it could not reach.
     """
 
-    def __init__(self, policy: Optional[CrawlPolicy] = None,
-                 clock: Callable[[], float] = time.monotonic,
-                 sleeper: Callable[[float], None] = time.sleep) -> None:
+    def __init__(
+        self,
+        policy: Optional[CrawlPolicy] = None,
+        clock: Callable[[], float] = time.monotonic,
+        sleeper: Callable[[float], None] = time.sleep,
+    ) -> None:
         self.policy = policy or CrawlPolicy()
         self._clock = clock
         self._sleeper = sleeper
@@ -308,8 +312,7 @@ class PoliteCrawler:
         self.refusals: List[Dict[str, str]] = []
 
     def _refuse(self, url: str, reason: str) -> None:
-        self.refusals.append({"url": url, "reason": reason,
-                              "at": _now_iso()})
+        self.refusals.append({"url": url, "reason": reason, "at": _now_iso()})
 
     def _robots_for(self, host: str, scheme: str) -> List[str]:
         if host in self._robots_cache:
@@ -317,15 +320,17 @@ class PoliteCrawler:
         disallows: List[str] = []
         if self.policy.respect_robots:
             try:
-                body, _ = _http_get("%s://%s/robots.txt" % (scheme, host),
-                                   self.policy)
+                body, _ = _http_get("%s://%s/robots.txt" % (scheme, host), self.policy)
                 disallows = parse_robots(
-                    body.decode("utf-8", "replace"), self.policy.user_agent)
+                    body.decode("utf-8", "replace"), self.policy.user_agent
+                )
             except (FetchError, BoundaryError):
                 # Unreachable robots.txt: proceed (standard behavior) but
                 # stay rate-limited and identified. Recorded, not hidden.
-                self._refuse("%s://%s/robots.txt" % (scheme, host),
-                             "robots.txt unreachable; proceeding rate-limited")
+                self._refuse(
+                    "%s://%s/robots.txt" % (scheme, host),
+                    "robots.txt unreachable; proceeding rate-limited",
+                )
         self._robots_cache[host] = disallows
         return disallows
 
@@ -417,8 +422,9 @@ CDX_ENDPOINT = "https://web.archive.org/cdx/search/cdx"
 AVAIL_ENDPOINT = "https://archive.org/wayback/available"
 
 
-def wayback_cdx(url: str, crawler: Optional[PoliteCrawler] = None,
-                limit: int = 20) -> List[DeepSource]:
+def wayback_cdx(
+    url: str, crawler: Optional[PoliteCrawler] = None, limit: int = 20
+) -> List[DeepSource]:
     """Query the Wayback CDX API for successful captures of *url*.
 
     ``url`` may include a wildcard (``example.com/docs/*``). Returns one
@@ -426,8 +432,11 @@ def wayback_cdx(url: str, crawler: Optional[PoliteCrawler] = None,
     """
     crawler = crawler or PoliteCrawler()
     query = {
-        "url": url, "output": "json", "filter": "statuscode:200",
-        "collapse": "urlkey", "limit": str(limit),
+        "url": url,
+        "output": "json",
+        "filter": "statuscode:200",
+        "collapse": "urlkey",
+        "limit": str(limit),
         "fl": "timestamp,original,statuscode,digest",
     }
     target = CDX_ENDPOINT + "?" + urllib.parse.urlencode(query)
@@ -447,19 +456,22 @@ def wayback_cdx(url: str, crawler: Optional[PoliteCrawler] = None,
             continue
         ts, original = row[0], row[1]
         replay = "https://web.archive.org/web/%s/%s" % (ts, original)
-        out.append(DeepSource(
-            kind="wayback", url=replay,
-            title="Snapshot %s — %s" % (ts, original),
-            retrieved_at=_now_iso(),
-            method="Wayback CDX query for %s" % url,
-            notes="archived capture %s (HTTP 200)" % ts,
-        ))
+        out.append(
+            DeepSource(
+                kind="wayback",
+                url=replay,
+                title="Snapshot %s — %s" % (ts, original),
+                retrieved_at=_now_iso(),
+                method="Wayback CDX query for %s" % url,
+                notes="archived capture %s (HTTP 200)" % ts,
+            )
+        )
     return out
 
 
-def wayback_availability(url: str,
-                         crawler: Optional[PoliteCrawler] = None
-                         ) -> Optional[DeepSource]:
+def wayback_availability(
+    url: str, crawler: Optional[PoliteCrawler] = None
+) -> Optional[DeepSource]:
     """Closest Wayback snapshot to now for *url* (availability API)."""
     crawler = crawler or PoliteCrawler()
     target = AVAIL_ENDPOINT + "?" + urllib.parse.urlencode({"url": url})
@@ -474,13 +486,13 @@ def wayback_availability(url: str,
     if not snap.get("available"):
         return None
     return DeepSource(
-        kind="wayback", url=snap.get("url", ""),
+        kind="wayback",
+        url=snap.get("url", ""),
         title="Closest snapshot — %s" % url,
         retrieved_at=_now_iso(),
         method="Wayback availability API",
         notes="snapshot timestamp %s" % snap.get("timestamp", "?"),
     )
-
 
 
 # --------------------------------------------------------------------------
@@ -500,14 +512,15 @@ def commoncrawl_latest_index(crawler: Optional[PoliteCrawler] = None) -> str:
         infos = json.loads(got[0].decode("utf-8", "replace"))
         return str(infos[0]["id"])
     except (ValueError, KeyError, IndexError) as exc:
-        raise FetchError("could not parse Common Crawl collinfo: %s"
-                         % exc) from exc
+        raise FetchError("could not parse Common Crawl collinfo: %s" % exc) from exc
 
 
-def commoncrawl_captures(url_pattern: str,
-                         crawler: Optional[PoliteCrawler] = None,
-                         index: Optional[str] = None,
-                         limit: int = 20) -> List[DeepSource]:
+def commoncrawl_captures(
+    url_pattern: str,
+    crawler: Optional[PoliteCrawler] = None,
+    index: Optional[str] = None,
+    limit: int = 20,
+) -> List[DeepSource]:
     """Query the Common Crawl index for captures matching *url_pattern*.
 
     Returns capture *metadata* (URL, timestamp, WARC location). WARC
@@ -515,10 +528,12 @@ def commoncrawl_captures(url_pattern: str,
     """
     crawler = crawler or PoliteCrawler()
     index = index or commoncrawl_latest_index(crawler)
-    target = ("https://index.commoncrawl.org/%s-index?%s" % (
-        index, urllib.parse.urlencode(
-            {"url": url_pattern, "output": "json",
-             "limit": str(limit)})))
+    target = "https://index.commoncrawl.org/%s-index?%s" % (
+        index,
+        urllib.parse.urlencode(
+            {"url": url_pattern, "output": "json", "limit": str(limit)}
+        ),
+    )
     got = crawler.get(target)
     if got is None:
         return []
@@ -531,15 +546,18 @@ def commoncrawl_captures(url_pattern: str,
             rec = json.loads(line)
         except ValueError:
             continue
-        out.append(DeepSource(
-            kind="commoncrawl", url=str(rec.get("url", "")),
-            title="Capture %s — %s" % (rec.get("timestamp", "?"),
-                                       rec.get("url", "")),
-            retrieved_at=_now_iso(),
-            method="Common Crawl %s index query" % index,
-            notes="warc %s @ offset %s (metadata only — payload not fetched)"
-                  % (rec.get("filename", "?"), rec.get("offset", "?")),
-        ))
+        out.append(
+            DeepSource(
+                kind="commoncrawl",
+                url=str(rec.get("url", "")),
+                title="Capture %s — %s"
+                % (rec.get("timestamp", "?"), rec.get("url", "")),
+                retrieved_at=_now_iso(),
+                method="Common Crawl %s index query" % index,
+                notes="warc %s @ offset %s (metadata only — payload not fetched)"
+                % (rec.get("filename", "?"), rec.get("offset", "?")),
+            )
+        )
     return out
 
 
@@ -550,14 +568,18 @@ def commoncrawl_captures(url_pattern: str,
 _SITEMAP_PROBES = ("sitemap.xml", "sitemap_index.xml", "sitemap-index.xml")
 
 
-def discover_sitemaps(domain: str,
-                      crawler: Optional[PoliteCrawler] = None
-                      ) -> List[str]:
+def discover_sitemaps(
+    domain: str, crawler: Optional[PoliteCrawler] = None
+) -> List[str]:
     """Find sitemap URLs for *domain*: robots.txt ``Sitemap:`` lines first,
     then conventional probes. *domain* may be a bare host or a URL."""
     crawler = crawler or PoliteCrawler()
-    host = urllib.parse.urlparse(
-        domain if "://" in domain else "https://" + domain).hostname or domain
+    host = (
+        urllib.parse.urlparse(
+            domain if "://" in domain else "https://" + domain
+        ).hostname
+        or domain
+    )
     found: List[str] = []
     got = crawler.get("https://%s/robots.txt" % host)
     if got is not None:
@@ -581,10 +603,12 @@ def _local(tag: str) -> str:
     return tag.split("}")[-1].lower()
 
 
-def enumerate_sitemap(sitemap_url: str,
-                      crawler: Optional[PoliteCrawler] = None,
-                      max_urls: int = 2000,
-                      max_depth: int = 3) -> List[str]:
+def enumerate_sitemap(
+    sitemap_url: str,
+    crawler: Optional[PoliteCrawler] = None,
+    max_urls: int = 2000,
+    max_depth: int = 3,
+) -> List[str]:
     """List page URLs from a sitemap (or sitemap index). Capped."""
     crawler = crawler or PoliteCrawler()
     urls: List[str] = []
@@ -634,8 +658,7 @@ _FEED_TYPE_RE = re.compile(r'type=["\']application/(rss|atom)\+xml["\']', re.I)
 _FEED_HREF_RE = re.compile(r'href=["\']([^"\']+)["\']', re.I)
 
 
-def discover_feeds(page_url: str,
-                   crawler: Optional[PoliteCrawler] = None) -> List[str]:
+def discover_feeds(page_url: str, crawler: Optional[PoliteCrawler] = None) -> List[str]:
     """Find RSS/Atom feed URLs for a page: ``<link rel=alternate>`` first,
     then conventional paths."""
     crawler = crawler or PoliteCrawler()
@@ -669,8 +692,7 @@ def discover_feeds(page_url: str,
 def _child_text(el: ET.Element, name: str) -> str:
     for child in el.iter():
         if _local(child.tag) == name and child.text:
-            return html.unescape(
-                re.sub(r"\s+", " ", child.text).strip())[:600]
+            return html.unescape(re.sub(r"\s+", " ", child.text).strip())[:600]
     return ""
 
 
@@ -689,8 +711,7 @@ def feed_entries(feed_bytes: bytes) -> List[Dict[str, str]]:
             link = _child_text(it, "link")
             desc = _child_text(it, "description")
             if title or link:
-                out.append({"title": title[:200], "link": link,
-                            "summary": desc})
+                out.append({"title": title[:200], "link": link, "summary": desc})
     else:  # Atom <feed>/<entry>
         for it in root.iter():
             if _local(it.tag) != "entry":
@@ -703,13 +724,13 @@ def feed_entries(feed_bytes: bytes) -> List[Dict[str, str]]:
                     break
             summ = _child_text(it, "summary") or _child_text(it, "content")
             if title or link:
-                out.append({"title": title[:200], "link": link,
-                            "summary": summ})
+                out.append({"title": title[:200], "link": link, "summary": summ})
     return out
 
 
-def parse_feed(feed_url: str, crawler: Optional[PoliteCrawler] = None,
-               limit: int = 15) -> List[DeepSource]:
+def parse_feed(
+    feed_url: str, crawler: Optional[PoliteCrawler] = None, limit: int = 15
+) -> List[DeepSource]:
     """Fetch a feed URL and return its items as DeepSources."""
     crawler = crawler or PoliteCrawler()
     got = crawler.get(feed_url)
@@ -717,11 +738,16 @@ def parse_feed(feed_url: str, crawler: Optional[PoliteCrawler] = None,
         return []
     out: List[DeepSource] = []
     for entry in feed_entries(got[0])[:limit]:
-        out.append(DeepSource(
-            kind="feed", url=entry["link"], title=entry["title"],
-            summary=entry["summary"], retrieved_at=_now_iso(),
-            method="feed item from %s" % feed_url,
-        ))
+        out.append(
+            DeepSource(
+                kind="feed",
+                url=entry["link"],
+                title=entry["title"],
+                summary=entry["summary"],
+                retrieved_at=_now_iso(),
+                method="feed item from %s" % feed_url,
+            )
+        )
     return out
 
 
@@ -732,26 +758,40 @@ def parse_feed(feed_url: str, crawler: Optional[PoliteCrawler] = None,
 ARXIV_ENDPOINT = "https://export.arxiv.org/api/query"
 
 
-def arxiv_search(query: str, crawler: Optional[PoliteCrawler] = None,
-                 max_results: int = 10) -> List[DeepSource]:
+def arxiv_search(
+    query: str, crawler: Optional[PoliteCrawler] = None, max_results: int = 10
+) -> List[DeepSource]:
     """Search arXiv (all fields). Polite: dedicated 3s-delay crawler."""
     crawler = crawler or PoliteCrawler(policy=CrawlPolicy(delay_seconds=3.0))
-    target = ARXIV_ENDPOINT + "?" + urllib.parse.urlencode({
-        "search_query": "all:" + query, "start": "0",
-        "max_results": str(max_results), "sortBy": "submittedDate",
-        "sortOrder": "descending",
-    })
+    target = (
+        ARXIV_ENDPOINT
+        + "?"
+        + urllib.parse.urlencode(
+            {
+                "search_query": "all:" + query,
+                "start": "0",
+                "max_results": str(max_results),
+                "sortBy": "submittedDate",
+                "sortOrder": "descending",
+            }
+        )
+    )
     got = crawler.get(target)
     if got is None:
         return []
     out: List[DeepSource] = []
     for entry in feed_entries(got[0])[:max_results]:
-        out.append(DeepSource(
-            kind="arxiv", url=entry["link"], title=entry["title"],
-            summary=entry["summary"], retrieved_at=_now_iso(),
-            method="arXiv API search: %s" % query,
-            notes="open-access academic record",
-        ))
+        out.append(
+            DeepSource(
+                kind="arxiv",
+                url=entry["link"],
+                title=entry["title"],
+                summary=entry["summary"],
+                retrieved_at=_now_iso(),
+                method="arXiv API search: %s" % query,
+                notes="open-access academic record",
+            )
+        )
     return out
 
 
@@ -759,12 +799,16 @@ def arxiv_search(query: str, crawler: Optional[PoliteCrawler] = None,
 # Open public-record portals (unauthenticated JSON endpoints only).
 # --------------------------------------------------------------------------
 
-def datagov_search(query: str, crawler: Optional[PoliteCrawler] = None,
-                   rows: int = 10) -> List[DeepSource]:
+
+def datagov_search(
+    query: str, crawler: Optional[PoliteCrawler] = None, rows: int = 10
+) -> List[DeepSource]:
     """Search the data.gov CKAN open-data catalog (public JSON API)."""
     crawler = crawler or PoliteCrawler()
-    target = ("https://catalog.data.gov/api/3/action/package_search?"
-              + urllib.parse.urlencode({"q": query, "rows": str(rows)}))
+    target = (
+        "https://catalog.data.gov/api/3/action/package_search?"
+        + urllib.parse.urlencode({"q": query, "rows": str(rows)})
+    )
     got = crawler.get(target)
     if got is None:
         return []
@@ -775,22 +819,24 @@ def datagov_search(query: str, crawler: Optional[PoliteCrawler] = None,
     out: List[DeepSource] = []
     for ds in (data.get("result") or {}).get("results", []):
         name = str(ds.get("name", ""))
-        out.append(DeepSource(
-            kind="portal",
-            url="https://catalog.data.gov/dataset/" + name,
-            title=str(ds.get("title", ""))[:200],
-            summary=str(ds.get("notes", ""))[:600],
-            retrieved_at=_now_iso(),
-            method="data.gov CKAN package_search",
-            notes="open government dataset; organization: %s"
-                  % (ds.get("organization") or {}).get("title", "?"),
-        ))
+        out.append(
+            DeepSource(
+                kind="portal",
+                url="https://catalog.data.gov/dataset/" + name,
+                title=str(ds.get("title", ""))[:200],
+                summary=str(ds.get("notes", ""))[:600],
+                retrieved_at=_now_iso(),
+                method="data.gov CKAN package_search",
+                notes="open government dataset; organization: %s"
+                % (ds.get("organization") or {}).get("title", "?"),
+            )
+        )
     return out
 
 
-def sec_edgar_search(query: str,
-                     crawler: Optional[PoliteCrawler] = None
-                     ) -> List[DeepSource]:
+def sec_edgar_search(
+    query: str, crawler: Optional[PoliteCrawler] = None
+) -> List[DeepSource]:
     """Match *query* against SEC EDGAR public company tickers, then pull
     each match's public submissions index. Best-effort: EDGAR formats
     change; failures are reported, never fabricated."""
@@ -803,9 +849,11 @@ def sec_edgar_search(query: str,
     except ValueError:
         return []
     q = query.lower()
-    matches = [t for t in tickers.values()
-               if q in str(t.get("title", "")).lower()
-               or q == str(t.get("ticker", "")).lower()][:5]
+    matches = [
+        t
+        for t in tickers.values()
+        if q in str(t.get("title", "")).lower() or q == str(t.get("ticker", "")).lower()
+    ][:5]
     out: List[DeepSource] = []
     for m in matches:
         cik = str(m.get("cik_str", "")).zfill(10)
@@ -814,22 +862,25 @@ def sec_edgar_search(query: str,
         forms: List[str] = []
         if sub is not None:
             try:
-                recent = json.loads(
-                    sub[0].decode("utf-8", "replace")
-                ).get("filings", {}).get("recent", {})
+                recent = (
+                    json.loads(sub[0].decode("utf-8", "replace"))
+                    .get("filings", {})
+                    .get("recent", {})
+                )
                 forms = [str(f) for f in recent.get("form", [])[:3]]
             except ValueError:
                 pass
-        out.append(DeepSource(
-            kind="portal", url=url,
-            title="SEC EDGAR: %s (%s)" % (m.get("title", ""),
-                                          m.get("ticker", "")),
-            summary=("recent filings: %s" % ", ".join(forms)) if forms
-                     else "",
-            retrieved_at=_now_iso(),
-            method="SEC EDGAR public company_tickers + submissions JSON",
-            notes="public filings record; no authentication used",
-        ))
+        out.append(
+            DeepSource(
+                kind="portal",
+                url=url,
+                title="SEC EDGAR: %s (%s)" % (m.get("title", ""), m.get("ticker", "")),
+                summary=("recent filings: %s" % ", ".join(forms)) if forms else "",
+                retrieved_at=_now_iso(),
+                method="SEC EDGAR public company_tickers + submissions JSON",
+                notes="public filings record; no authentication used",
+            )
+        )
     return out
 
 
@@ -849,9 +900,13 @@ OPEN_PORTALS: Dict[str, Dict[str, Any]] = {
 # Survey orchestration
 # --------------------------------------------------------------------------
 
-def survey_topic(topic: str, seed_domains: List[str] | None = None,
-                 policy: Optional[CrawlPolicy] = None,
-                 max_per_source: int = 10) -> DeepSurvey:
+
+def survey_topic(
+    topic: str,
+    seed_domains: List[str] | None = None,
+    policy: Optional[CrawlPolicy] = None,
+    max_per_source: int = 10,
+) -> DeepSurvey:
     """Survey *topic* across deep-web sources. Returns a DeepSurvey with
     provenance on every finding and recorded refusals.
 
@@ -877,13 +932,16 @@ def survey_topic(topic: str, seed_domains: List[str] | None = None,
                 body, ctype = got
                 if "html" not in ctype:
                     continue
-                survey.add(DeepSource(
-                    kind="sitemap", url=page,
-                    title=_title_of(body) or page,
-                    summary=extract_text(body),
-                    retrieved_at=_now_iso(),
-                    method="sitemap enumeration via %s" % sm,
-                ))
+                survey.add(
+                    DeepSource(
+                        kind="sitemap",
+                        url=page,
+                        title=_title_of(body) or page,
+                        summary=extract_text(body),
+                        retrieved_at=_now_iso(),
+                        method="sitemap enumeration via %s" % sm,
+                    )
+                )
         for feed_url in discover_feeds(root, crawler)[:3]:
             survey.sources.extend(parse_feed(feed_url, crawler, 5))
     survey.refusals.extend(crawler.refusals)
@@ -894,13 +952,15 @@ def survey_topic(topic: str, seed_domains: List[str] | None = None,
 # Persistence (home resolved at call time — never import-time).
 # --------------------------------------------------------------------------
 
+
 def research_home(home: "str | os.PathLike[str] | None" = None) -> Path:
     base = Path(home) if home is not None else Path(os.path.expanduser("~"))
     return base / ".levi" / "research" / "deepweb"
 
 
-def save_survey(survey: DeepSurvey,
-                home: "str | os.PathLike[str] | None" = None) -> Path:
+def save_survey(
+    survey: DeepSurvey, home: "str | os.PathLike[str] | None" = None
+) -> Path:
     """Persist a survey as JSON under ~/.levi/research/deepweb/."""
     dest = research_home(home)
     dest.mkdir(parents=True, exist_ok=True)
@@ -912,8 +972,9 @@ def save_survey(survey: DeepSurvey,
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     path = dest / ("%s-%s.json" % (slug[:40] or "survey", stamp))
     tmp = path.with_suffix(".tmp")
-    tmp.write_text(json.dumps(survey.to_dict(), indent=2, ensure_ascii=False),
-                   encoding="utf-8")
+    tmp.write_text(
+        json.dumps(survey.to_dict(), indent=2, ensure_ascii=False), encoding="utf-8"
+    )
     try:
         os.chmod(tmp, 0o600)
     except OSError:
@@ -926,14 +987,13 @@ def save_survey(survey: DeepSurvey,
 # CLI: python -m levi.research.deepweb <command>
 # --------------------------------------------------------------------------
 
+
 def _print_sources(sources: List[DeepSource], as_json: bool) -> None:
     if as_json:
-        print(json.dumps([s.to_dict() for s in sources], indent=2,
-                         ensure_ascii=False))
+        print(json.dumps([s.to_dict() for s in sources], indent=2, ensure_ascii=False))
         return
     if not sources:
-        print("(no sources found — refusals/failures are reported, "
-              "never fabricated)")
+        print("(no sources found — refusals/failures are reported, never fabricated)")
         return
     for s in sources:
         print("[%s] %s" % (s.kind, s.title or s.url))
@@ -947,33 +1007,38 @@ def _print_sources(sources: List[DeepSource], as_json: bool) -> None:
 
 def main(argv: Optional[List[str]] = None) -> int:
     import argparse
+
     ap = argparse.ArgumentParser(
         prog="levi.research.deepweb",
         description="Deep-web research over public but unindexed sources "
-                    "(polite, robots.txt-honoring, public-only).",
+        "(polite, robots.txt-honoring, public-only).",
     )
-    ap.add_argument("--json", action="store_true",
-                    help="Machine-readable JSON output")
-    ap.add_argument("--home", default=None,
-                    help="Override home dir (tests / hermetic runs)")
+    ap.add_argument("--json", action="store_true", help="Machine-readable JSON output")
+    ap.add_argument(
+        "--home", default=None, help="Override home dir (tests / hermetic runs)"
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     p = sub.add_parser("survey", help="Survey a topic across deep sources")
     p.add_argument("topic", help="Topic to research")
-    p.add_argument("--domain", action="append", default=[],
-                   help="Seed domain (repeatable)")
-    p.add_argument("--max", type=int, default=10,
-                   help="Max results per source")
-    p.add_argument("--save", action="store_true",
-                   help="Persist the survey under ~/.levi/research/deepweb/")
+    p.add_argument(
+        "--domain", action="append", default=[], help="Seed domain (repeatable)"
+    )
+    p.add_argument("--max", type=int, default=10, help="Max results per source")
+    p.add_argument(
+        "--save",
+        action="store_true",
+        help="Persist the survey under ~/.levi/research/deepweb/",
+    )
 
     p = sub.add_parser("wayback", help="Wayback CDX captures for a URL")
     p.add_argument("--url", required=True)
     p.add_argument("--limit", type=int, default=20)
 
     p = sub.add_parser("commoncrawl", help="Common Crawl captures (metadata)")
-    p.add_argument("--pattern", required=True,
-                   help="URL pattern, e.g. 'example.com/docs/*'")
+    p.add_argument(
+        "--pattern", required=True, help="URL pattern, e.g. 'example.com/docs/*'"
+    )
     p.add_argument("--limit", type=int, default=20)
 
     p = sub.add_parser("sitemap", help="Discover + enumerate sitemaps")
@@ -981,16 +1046,19 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     p = sub.add_parser("feeds", help="Discover feeds for a page")
     p.add_argument("--url", required=True)
-    p.add_argument("--items", action="store_true",
-                   help="Also fetch feed items")
+    p.add_argument("--items", action="store_true", help="Also fetch feed items")
 
     p = sub.add_parser("arxiv", help="Search arXiv")
     p.add_argument("--query", required=True)
     p.add_argument("--max", type=int, default=10)
 
     p = sub.add_parser("portals", help="Search open public-record portals")
-    p.add_argument("--portal", choices=sorted(OPEN_PORTALS), default=None,
-                   help="Portal id (default: all)")
+    p.add_argument(
+        "--portal",
+        choices=sorted(OPEN_PORTALS),
+        default=None,
+        help="Portal id (default: all)",
+    )
     p.add_argument("--query", required=True)
 
     sub.add_parser("boundaries", help="Print the hard boundaries")
@@ -1002,15 +1070,16 @@ def main(argv: Optional[List[str]] = None) -> int:
         print(BOUNDARIES_TEXT)
         return 0
     if args.cmd == "survey":
-        survey = survey_topic(args.topic, seed_domains=args.domain,
-                              max_per_source=args.max)
+        survey = survey_topic(
+            args.topic, seed_domains=args.domain, max_per_source=args.max
+        )
         if args.json:
-            print(json.dumps(survey.to_dict(), indent=2,
-                             ensure_ascii=False))
+            print(json.dumps(survey.to_dict(), indent=2, ensure_ascii=False))
         else:
-            print("DEEP SURVEY: %s (%d sources, %d refusals)" % (
-                survey.topic, len(survey.sources),
-                len(survey.refusals)))
+            print(
+                "DEEP SURVEY: %s (%d sources, %d refusals)"
+                % (survey.topic, len(survey.sources), len(survey.refusals))
+            )
             _print_sources(survey.sources, False)
             for r in survey.refusals[:10]:
                 print("  refused: %s — %s" % (r["url"], r["reason"]))
@@ -1019,13 +1088,11 @@ def main(argv: Optional[List[str]] = None) -> int:
             print("saved: %s" % path)
         return 0
     if args.cmd == "wayback":
-        _print_sources(wayback_cdx(args.url, crawler, args.limit),
-                       args.json)
+        _print_sources(wayback_cdx(args.url, crawler, args.limit), args.json)
         return 0
     if args.cmd == "commoncrawl":
         try:
-            srcs = commoncrawl_captures(args.pattern, crawler,
-                                        limit=args.limit)
+            srcs = commoncrawl_captures(args.pattern, crawler, limit=args.limit)
         except FetchError as exc:
             print("failed: %s" % exc)
             return 1
@@ -1037,11 +1104,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         for sm in sms[:5]:
             urls.extend(enumerate_sitemap(sm, crawler, max_urls=200))
         if args.json:
-            print(json.dumps({"sitemaps": sms, "urls": urls[:200]},
-                             indent=2))
+            print(json.dumps({"sitemaps": sms, "urls": urls[:200]}, indent=2))
         else:
-            print("sitemaps: %d, urls enumerated: %d" % (len(sms),
-                                                         len(urls)))
+            print("sitemaps: %d, urls enumerated: %d" % (len(sms), len(urls)))
             for sm in sms:
                 print("  sitemap: %s" % sm)
             for u in urls[:20]:
@@ -1063,16 +1128,14 @@ def main(argv: Optional[List[str]] = None) -> int:
                 print("(no feeds discovered)")
         return 0
     if args.cmd == "arxiv":
-        _print_sources(arxiv_search(args.query, crawler, args.max),
-                       args.json)
+        _print_sources(arxiv_search(args.query, crawler, args.max), args.json)
         return 0
     if args.cmd == "portals":
         ids = [args.portal] if args.portal else sorted(OPEN_PORTALS)
         srcs = []
         for pid in ids:
             try:
-                srcs.extend(OPEN_PORTALS[pid]["search"](
-                    args.query, crawler))
+                srcs.extend(OPEN_PORTALS[pid]["search"](args.query, crawler))
             except FetchError as exc:
                 print("portal %s failed: %s" % (pid, exc))
         _print_sources(srcs, args.json)

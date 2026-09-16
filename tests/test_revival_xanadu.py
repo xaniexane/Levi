@@ -58,8 +58,8 @@ def test_transclusion_tracks_who_quotes_whom(docs):
     trans = Transclusion(docs)
     q = trans.transclude("d2", "d1", 0, 3)
     assert q.text == "The"
-    assert trans.quotes("d2") == ["d1"]       # d2 quotes d1
-    assert trans.quoted_by("d1") == ["d2"]    # d1 is quoted by d2
+    assert trans.quotes("d2") == ["d1"]  # d2 quotes d1
+    assert trans.quoted_by("d1") == ["d2"]  # d1 is quoted by d2
     assert trans.quoted_by("d2") == []
 
 
@@ -121,8 +121,11 @@ def test_trail_delete(trails):
 
 def test_trail_from_citations(docs, trails):
     trail = trail_from_citations(
-        trails, "rag-trail", "From RAG",
-        ["d1", "d2"], annotations={"d1": "top hit"},
+        trails,
+        "rag-trail",
+        "From RAG",
+        ["d1", "d2"],
+        annotations={"d1": "top hit"},
     )
     assert isinstance(trail, Trail)
     walked = list(trails.follow_trail("rag-trail"))

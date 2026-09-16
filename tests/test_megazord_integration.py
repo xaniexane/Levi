@@ -114,8 +114,9 @@ def _fixture_archive_record(**over):
     return ArchiveRecord(**base)
 
 
-def _fixture_package(root: Path, name="demo", author="com.example",
-                     version="1.0.0") -> Path:
+def _fixture_package(
+    root: Path, name="demo", author="com.example", version="1.0.0"
+) -> Path:
     pkg = root / f"{name}-{version}"
     pkg.mkdir(parents=True, exist_ok=True)
     (pkg / "run.sh").write_text("#!/bin/sh\necho demo\n", encoding="utf-8")
@@ -138,12 +139,24 @@ def _fixture_session(sessions_dir: Path, name: str = "fixture.jsonl") -> None:
     """One chat session with learnable user statements."""
     sessions_dir.mkdir(parents=True, exist_ok=True)
     lines = [
-        {"kind": "message", "role": "user", "ts": "2026-09-15T10:00:00Z",
-         "content": "note that I always prefer dark mode interfaces, keep that in mind"},
-        {"kind": "message", "role": "assistant", "ts": "2026-09-15T10:00:05Z",
-         "content": "Noted."},
-        {"kind": "message", "role": "user", "ts": "2026-09-15T11:00:00Z",
-         "content": "for future reference: my favorite editor is emacs, remember that"},
+        {
+            "kind": "message",
+            "role": "user",
+            "ts": "2026-09-15T10:00:00Z",
+            "content": "note that I always prefer dark mode interfaces, keep that in mind",
+        },
+        {
+            "kind": "message",
+            "role": "assistant",
+            "ts": "2026-09-15T10:00:05Z",
+            "content": "Noted.",
+        },
+        {
+            "kind": "message",
+            "role": "user",
+            "ts": "2026-09-15T11:00:00Z",
+            "content": "for future reference: my favorite editor is emacs, remember that",
+        },
     ]
     (sessions_dir / name).write_text(
         "\n".join(json.dumps(line) for line in lines) + "\n", encoding="utf-8"
@@ -185,9 +198,7 @@ def test_bloodstream_turn_writes_trace_hermetically(herm):
     stage_names = {s["stage"] for s in trace["stages"]}
     assert {"companion_ei", "persona", "route", "memory", "trace"} <= stage_names
     # the bus.publish event for this turn is bound to the same trace
-    bus_events = [
-        r for r in records if r.get("event") == "bus.publish"
-    ]
+    bus_events = [r for r in records if r.get("event") == "bus.publish"]
     assert any(
         e.get("topic") == "levi.turn.completed"
         and e.get("payload", {}).get("trace_id") == result.trace_id
@@ -210,8 +221,8 @@ def test_turn_completed_bus_event_reaches_subscriber(herm):
     )
     try:
         result = run_turn(
-            "hello levi", ctx=TurnContext(data_dir=herm / "levi-data",
-                                          session_id="mz-int-2")
+            "hello levi",
+            ctx=TurnContext(data_dir=herm / "levi-data", session_id="mz-int-2"),
         )
     finally:
         bloodstream_bus.unsubscribe(token)
@@ -271,8 +282,8 @@ def test_atlas_export_covers_all_modules(herm):
     from levi.interop.atlas import export_atlas
 
     atlas = export_atlas()
-    assert set(DECLARATIONS) <= set(atlas["modules"]), (
-        "atlas missing modules: %s" % (set(DECLARATIONS) - set(atlas["modules"]))
+    assert set(DECLARATIONS) <= set(atlas["modules"]), "atlas missing modules: %s" % (
+        set(DECLARATIONS) - set(atlas["modules"])
     )
     for name, mod in atlas["modules"].items():
         assert "provides" in mod and "requires" in mod, name
@@ -632,7 +643,9 @@ def test_megazord_axes_share_one_home(herm):
     home = herm / ".levi"
 
     # turn
-    result = run_turn("what is 2 + 2", ctx=TurnContext(data_dir=home, session_id="mz-one"))
+    result = run_turn(
+        "what is 2 + 2", ctx=TurnContext(data_dir=home, session_id="mz-one")
+    )
     assert result.ok
 
     # archive (ArchiveStore appends .levi/archive to its home arg)

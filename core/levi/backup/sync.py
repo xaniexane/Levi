@@ -6,6 +6,7 @@ touches the wire or the cloud: even a misconfigured-shared Drive folder only
 holds client-side-encrypted blobs. ``verify_remote()`` enforces this before
 any sync; sync refuses to run against a non-crypt remote.
 """
+
 from __future__ import annotations
 
 import json
@@ -19,7 +20,9 @@ REMOTE_DIR = "levi-backups"
 SYNC_TIMEOUT_S = 300
 
 
-def run_rclone(*args: str, timeout: int = SYNC_TIMEOUT_S) -> subprocess.CompletedProcess:
+def run_rclone(
+    *args: str, timeout: int = SYNC_TIMEOUT_S
+) -> subprocess.CompletedProcess:
     exe = rclone_path()
     if exe is None:
         raise FileNotFoundError("rclone is not installed")

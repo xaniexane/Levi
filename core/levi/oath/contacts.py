@@ -46,7 +46,7 @@ from typing import Any, Optional
 
 from levi.oath import CONTACTS_FILE
 from levi.oath.keys import normalise_fingerprint
-from levi.oath.trust import TRUST_ORDER, TRUSTED, UNTRUSTED, UNVERIFIED, VERIFIED
+from levi.oath.trust import TRUSTED, VERIFIED
 
 __all__ = [
     "TIERS",
@@ -90,7 +90,10 @@ class Contact:
             )
         if self.tier_ceiling not in TIERS:
             raise ValueError(f"unknown tier ceiling: {self.tier_ceiling!r}")
-        if not isinstance(self.max_missions_per_hour, int) or self.max_missions_per_hour < 0:
+        if (
+            not isinstance(self.max_missions_per_hour, int)
+            or self.max_missions_per_hour < 0
+        ):
             raise ValueError("max_missions_per_hour must be a non-negative int")
         self.fingerprints = [normalise_fingerprint(f) for f in self.fingerprints]
         clean: dict[str, list[str]] = {}
@@ -144,8 +147,12 @@ class ContactBook:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         tmp = self.path.with_suffix(".tmp")
         tmp.write_text(
-            json.dumps({"contacts": {n: c.to_dict() for n, c in self.contacts.items()}},
-                       indent=2, sort_keys=True) + "\n",
+            json.dumps(
+                {"contacts": {n: c.to_dict() for n, c in self.contacts.items()}},
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
             encoding="utf-8",
         )
         try:

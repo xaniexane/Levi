@@ -71,7 +71,9 @@ class ArchiveStore:
                 if not line:
                     continue
                 rec = ArchiveRecord.from_dict(json.loads(line))
-                self._records[rec.id] = rec  # last write wins on disk; add() never dupes
+                self._records[rec.id] = (
+                    rec  # last write wins on disk; add() never dupes
+                )
         self._index = {}
         if self.index_path.is_file():
             try:
@@ -82,9 +84,14 @@ class ArchiveStore:
     def _save(self) -> None:
         _atomic_write_jsonl(
             self.records_path,
-            (json.dumps(r.to_dict(), ensure_ascii=False) for r in self._records.values()),
+            (
+                json.dumps(r.to_dict(), ensure_ascii=False)
+                for r in self._records.values()
+            ),
         )
-        _atomic_write_jsonl(self.index_path, [json.dumps(self._index, ensure_ascii=False)])
+        _atomic_write_jsonl(
+            self.index_path, [json.dumps(self._index, ensure_ascii=False)]
+        )
 
     # -- mutation -------------------------------------------------------
 
@@ -93,7 +100,9 @@ class ArchiveStore:
         if not isinstance(record, ArchiveRecord):
             raise ValueError("can only store ArchiveRecord, got %r" % type(record))
         if record.id in self._records:
-            raise ValueError("duplicate record id (refusing to overwrite): %s" % record.id)
+            raise ValueError(
+                "duplicate record id (refusing to overwrite): %s" % record.id
+            )
         self._records[record.id] = record
         self._index_record(record)
         self._save()
@@ -135,8 +144,17 @@ class ArchiveStore:
     # -- indexing -------------------------------------------------------
 
     def _index_record(self, rec: ArchiveRecord) -> None:
-        text = " ".join([rec.title, rec.era, rec.summary, rec.mechanism,
-                         rec.decline, rec.revival_recipe, rec.levi_application])
+        text = " ".join(
+            [
+                rec.title,
+                rec.era,
+                rec.summary,
+                rec.mechanism,
+                rec.decline,
+                rec.revival_recipe,
+                rec.levi_application,
+            ]
+        )
         for token in set(tokenize(text)):
             self._index.setdefault(token, [])
             if rec.id not in self._index[token]:

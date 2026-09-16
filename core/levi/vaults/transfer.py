@@ -45,8 +45,10 @@ def export_vault(vault: Vault, dest: Path) -> Path:
         for arcname, payload in (
             ("manifest.json", json.dumps(manifest, indent=2)),
             ("policy.json", json.dumps(vault.policy, indent=2)),
-            ("entries.jsonl", "\n".join(
-                json.dumps(e, separators=(",", ":")) for e in entries)),
+            (
+                "entries.jsonl",
+                "\n".join(json.dumps(e, separators=(",", ":")) for e in entries),
+            ),
         ):
             data = payload.encode("utf-8")
             info = tarfile.TarInfo(arcname)
@@ -63,9 +65,13 @@ def _read_bundle(path: Path) -> Dict[str, Any]:
         raise VaultError(f"import: cannot read bundle {path} ({exc})") from exc
     with tf:
         try:
-            manifest = json.loads(tf.extractfile("manifest.json").read().decode("utf-8"))
+            manifest = json.loads(
+                tf.extractfile("manifest.json").read().decode("utf-8")
+            )
         except (KeyError, ValueError, AttributeError) as exc:
-            raise VaultError(f"import: bundle {path} has no valid manifest.json") from exc
+            raise VaultError(
+                f"import: bundle {path} has no valid manifest.json"
+            ) from exc
         if manifest.get("format") != FORMAT:
             raise VaultError(
                 f"import: unsupported bundle format {manifest.get('format')!r} "
@@ -112,7 +118,9 @@ def import_vault(
     vault = manager.get(target_name) if exists else manager.create(target_name)
     if policy_from_bundle or not exists:
         vault.policy.update(bundle["policy"])
-        vault._policy_path.write_text(json.dumps(vault.policy, indent=2), encoding="utf-8")
+        vault._policy_path.write_text(
+            json.dumps(vault.policy, indent=2), encoding="utf-8"
+        )
     from levi.memory.types import MemoryEntry
 
     imported = 0

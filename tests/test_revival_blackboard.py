@@ -49,10 +49,8 @@ def test_highest_bidder_runs_not_registration_order():
     bb = Blackboard()
     ran = []
 
-    bb.register_ks("low", ["*"], lambda b: ran.append("low"),
-                   bid=lambda bb, ks: 0.3)
-    bb.register_ks("high", ["*"], lambda b: ran.append("high"),
-                   bid=lambda bb, ks: 0.9)
+    bb.register_ks("low", ["*"], lambda b: ran.append("low"), bid=lambda bb, ks: 0.3)
+    bb.register_ks("high", ["*"], lambda b: ran.append("high"), bid=lambda bb, ks: 0.9)
     bb.post_hypothesis("anything", 1, source="test")
     assert bb.run_cycle() == "high"
     assert ran == ["high"]
@@ -74,8 +72,9 @@ def test_wildcard_and_predicate_interests():
     bb = Blackboard()
     seen = []
     bb.register_ks("wild", ["*"], lambda b: seen.append("wild"))
-    bb.register_ks("pred", [lambda topic: topic.startswith("doc:")],
-                   lambda b: seen.append("pred"))
+    bb.register_ks(
+        "pred", [lambda topic: topic.startswith("doc:")], lambda b: seen.append("pred")
+    )
     bb.post_hypothesis("doc:x", 1, source="t")
     bb.run_cycle()
     # tie on bid 1.0 -> registration order breaks the tie deterministically
@@ -84,8 +83,11 @@ def test_wildcard_and_predicate_interests():
 
 def test_run_until_stops_when_no_bids():
     bb = Blackboard()
-    bb.register_ks("idle", ["never-posted"], lambda b: (_ for _ in ()).throw(
-        AssertionError("should not run")))
+    bb.register_ks(
+        "idle",
+        ["never-posted"],
+        lambda b: (_ for _ in ()).throw(AssertionError("should not run")),
+    )
     assert bb.run_cycle() is None
     out = bb.run_until()
     assert out["cycles"] == 0 and out["exhausted"] is True
@@ -94,9 +96,12 @@ def test_run_until_stops_when_no_bids():
 def test_run_until_respects_max_cycles():
     bb = Blackboard()
     # always bids 1.0 regardless of newness: a genuinely insatiable KS
-    bb.register_ks("eager", ["*"],
-                   lambda b: b.post_hypothesis("spam", 1, source="eager"),
-                   bid=lambda bb, ks: 1.0)
+    bb.register_ks(
+        "eager",
+        ["*"],
+        lambda b: b.post_hypothesis("spam", 1, source="eager"),
+        bid=lambda bb, ks: 1.0,
+    )
     out = bb.run_until(max_cycles=5)
     assert out["cycles"] == 5 and out["exhausted"] is False
 
@@ -128,10 +133,18 @@ def test_three_stage_demo_assembles_opportunistically():
 def test_run_log_records_execution_order():
     bb = Blackboard()
     order = []
-    bb.register_ks("a", ["*"], lambda b: order.append("a"),
-                   bid=lambda bb, ks: 0.5 if not order else 0.0)
-    bb.register_ks("b", ["*"], lambda b: order.append("b"),
-                   bid=lambda bb, ks: 0.9 if not order else 0.0)
+    bb.register_ks(
+        "a",
+        ["*"],
+        lambda b: order.append("a"),
+        bid=lambda bb, ks: 0.5 if not order else 0.0,
+    )
+    bb.register_ks(
+        "b",
+        ["*"],
+        lambda b: order.append("b"),
+        bid=lambda bb, ks: 0.9 if not order else 0.0,
+    )
     bb.post_hypothesis("t", 1, source="test")
     bb.run_until()
     assert order[0] == "b"

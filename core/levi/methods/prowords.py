@@ -92,9 +92,7 @@ class Exchange:
         """Format ``PROWORD — text``. Unknown prowords are rejected."""
         key = proword.strip().upper()
         if key not in PROWORDS:
-            raise ProwordError(
-                f"unknown proword {proword!r}; use the fixed vocabulary"
-            )
+            raise ProwordError(f"unknown proword {proword!r}; use the fixed vocabulary")
         line = key if not text else f"{key} — {text}"
         self.log.append({"proword": key, "text": text, "at": time.time()})
         return line
@@ -112,8 +110,9 @@ class Exchange:
         return Instruction(text=text.strip(), reversible=False)
 
     # -- closing the loop ---------------------------------------------------
-    def acknowledge(self, instruction: Instruction, ack: Ack,
-                    reason: str = "") -> Instruction:
+    def acknowledge(
+        self, instruction: Instruction, ack: Ack, reason: str = ""
+    ) -> Instruction:
         """Record a typed acknowledgment.
 
         Rules (the discipline): UNABLE requires a reason; WILCO on an
@@ -122,24 +121,28 @@ class Exchange:
         """
         if ack is Ack.UNABLE and not reason.strip():
             raise ProwordError("UNABLE must be followed by a reason")
-        if ack is Ack.WILCO and not instruction.reversible \
-                and not instruction.readback_confirmed:
+        if (
+            ack is Ack.WILCO
+            and not instruction.reversible
+            and not instruction.readback_confirmed
+        ):
             raise ProwordError(
-                "irreversible instruction: READ BACK must be confirmed "
-                "before WILCO"
+                "irreversible instruction: READ BACK must be confirmed before WILCO"
             )
         instruction.acknowledged = ack
         instruction.unable_reason = reason.strip()
-        self.log.append({"proword": ack.value, "text": reason.strip(),
-                         "at": time.time()})
+        self.log.append(
+            {"proword": ack.value, "text": reason.strip(), "at": time.time()}
+        )
         return instruction
 
     def read_back(self, instruction: Instruction, repeat: str) -> bool:
         """Verify a verbatim repeat. Exact match closes the loop."""
         if repeat.strip() == instruction.text:
             instruction.readback_confirmed = True
-            self.log.append({"proword": "READ BACK", "text": "confirmed",
-                             "at": time.time()})
+            self.log.append(
+                {"proword": "READ BACK", "text": "confirmed", "at": time.time()}
+            )
             return True
         raise ReadbackMismatch(
             f"read-back {repeat!r} does not match {instruction.text!r}"
@@ -149,11 +152,14 @@ class Exchange:
         """Issue a CORRECTION: the old instruction is void, the new one stands."""
         if not corrected or not corrected.strip():
             raise ValueError("corrected text must be non-empty")
-        self.log.append({"proword": "CORRECTION",
-                         "text": f"{instruction.text!r} -> {corrected.strip()!r}",
-                         "at": time.time()})
-        return Instruction(text=corrected.strip(),
-                           reversible=instruction.reversible)
+        self.log.append(
+            {
+                "proword": "CORRECTION",
+                "text": f"{instruction.text!r} -> {corrected.strip()!r}",
+                "at": time.time(),
+            }
+        )
+        return Instruction(text=corrected.strip(), reversible=instruction.reversible)
 
 
 __all__ = [

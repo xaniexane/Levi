@@ -32,7 +32,9 @@ def test_identity_guard_rejects_levi_names(bad):
         refs.assert_not_levi_identity(bad)
 
 
-@pytest.mark.parametrize("good", ["KAI-9000", "Qwen", "Pollinations", "LLaMA", "Acme Models"])
+@pytest.mark.parametrize(
+    "good", ["KAI-9000", "Qwen", "Pollinations", "LLaMA", "Acme Models"]
+)
 def test_identity_guard_accepts_providers(good):
     assert refs.validate_provider_name(good) == good.strip()
 
@@ -159,12 +161,18 @@ def test_mcp_remove_cleans_up_reference(home):
 
 def test_mcp_replace_updates_reference(home):
     mc.add_server(
-        "srv", transport="http", url="http://127.0.0.1:9/mcp",
-        reference="KAI-9000", home=home,
+        "srv",
+        transport="http",
+        url="http://127.0.0.1:9/mcp",
+        reference="KAI-9000",
+        home=home,
     )
     mc.add_server(
-        "srv", transport="http", url="http://127.0.0.1:9/mcp",
-        reference="Qwen", home=home,
+        "srv",
+        transport="http",
+        url="http://127.0.0.1:9/mcp",
+        reference="Qwen",
+        home=home,
     )
     providers = {r.provider for r in refs.list_references(home=home).values()}
     assert providers == {"Qwen"}

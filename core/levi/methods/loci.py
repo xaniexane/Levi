@@ -66,7 +66,9 @@ class Palace:
         for rd in data.get("rooms", []):
             room = Room(name=rd["name"])
             for ld in rd.get("loci", []):
-                room.loci.append(Locus(ld["name"], ld.get("fact", ""), ld.get("image", "")))
+                room.loci.append(
+                    Locus(ld["name"], ld.get("fact", ""), ld.get("image", ""))
+                )
             room.validate()
             self.rooms.append(room)
 
@@ -81,7 +83,9 @@ class Palace:
         room = Room(room_name.strip())
         room.validate()
         if any(r.name == room.name for r in self.rooms):
-            raise ValueError(f"room {room.name!r} already exists in palace {self.name!r}")
+            raise ValueError(
+                f"room {room.name!r} already exists in palace {self.name!r}"
+            )
         self.rooms.append(room)
         return room
 
@@ -90,11 +94,15 @@ class Palace:
         locus = Locus(locus_name.strip())
         locus.validate()
         if any(l.name == locus.name for l in room.loci):
-            raise ValueError(f"locus {locus.name!r} already exists in room {room.name!r}")
+            raise ValueError(
+                f"locus {locus.name!r} already exists in room {room.name!r}"
+            )
         room.loci.append(locus)
         return locus
 
-    def deposit(self, room_name: str, locus_name: str, fact: str, image: str = "") -> Locus:
+    def deposit(
+        self, room_name: str, locus_name: str, fact: str, image: str = ""
+    ) -> Locus:
         """Deposit a fact at a locus with a vivid image anchor."""
         if not fact or not fact.strip():
             raise ValueError("fact must be non-empty")
@@ -129,7 +137,12 @@ class Palace:
         for room in self.rooms:
             for locus in room.loci:
                 if locus.fact:
-                    rounds.append((f"At {locus.name} ({locus.image or 'no image'}) what did you place?", locus.fact))
+                    rounds.append(
+                        (
+                            f"At {locus.name} ({locus.image or 'no image'}) what did you place?",
+                            locus.fact,
+                        )
+                    )
         return rounds
 
     def coverage(self) -> tuple[int, int]:

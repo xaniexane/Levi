@@ -257,7 +257,12 @@ def premium_beats(
     lead: str, ant: str, genre: str, premise: str
 ) -> List[Dict[str, Any]]:
     """Richer default spine than bare 6-beat list."""
-    for label, value in (("lead", lead), ("ant", ant), ("genre", genre), ("premise", premise)):
+    for label, value in (
+        ("lead", lead),
+        ("ant", ant),
+        ("genre", genre),
+        ("premise", premise),
+    ):
         if not isinstance(value, str):
             raise ValueError(f"premium_beats {label} must be a string")
     g = genre.replace("_", " ")

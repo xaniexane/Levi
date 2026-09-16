@@ -318,9 +318,7 @@ def test_affect_hint_carries_disclaimer():
     from levi.affect.policy import PolicyDecision
     from levi.affect.registers import RegisterSuggestion
 
-    hint = affect_hint(
-        r, PolicyDecision(), RegisterSuggestion("levi", "default"), s
-    )
+    hint = affect_hint(r, PolicyDecision(), RegisterSuggestion("levi", "default"), s)
     assert "not felt" in hint
     assert "never claim to feel" in hint
 

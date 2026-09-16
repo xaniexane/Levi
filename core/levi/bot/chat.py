@@ -230,15 +230,15 @@ _INTENT_SCHEDULE = re.compile(
     re.I,
 )
 _INTENT_RESEARCH = re.compile(r"\bresearch\s+(.+?)(?:\.|$)", re.I)
-_INTENT_RUN_BRIEFING = re.compile(r"\brun\s+(my\s+|the\s+)?(morning briefing|briefing)\b", re.I)
+_INTENT_RUN_BRIEFING = re.compile(
+    r"\brun\s+(my\s+|the\s+)?(morning briefing|briefing)\b", re.I
+)
 _INTENT_RUN_BOUNTY = re.compile(r"\b(bounty watch|bounty-watch|new findings)\b", re.I)
 _INTENT_RUN_BACKUP = re.compile(
     r"\b(backup status|backups? status|check\s+(my\s+)?backup)\b", re.I
 )
 _INTENT_LIST = re.compile(r"\b(list|show)\s+(my\s+|the\s+)?services\b", re.I)
-_INTENT_LOG = re.compile(
-    r"\b(service\s+(run\s+)?log|service history|run log)\b", re.I
-)
+_INTENT_LOG = re.compile(r"\b(service\s+(run\s+)?log|service history|run log)\b", re.I)
 
 
 def _route_intent(text: str) -> Optional[str]:
@@ -255,7 +255,11 @@ def _route_intent(text: str) -> Optional[str]:
 
     match = _INTENT_SCHEDULE.search(text)
     if match:
-        _verb, freq, display = match.group(1), match.group(2).lower(), match.group(3).lower()
+        _verb, freq, display = (
+            match.group(1),
+            match.group(2).lower(),
+            match.group(3).lower(),
+        )
         base = _SERVICE_ALIASES[display]
         reg = ServiceRegistry()
         name = "%s-%s" % (base, freq)
@@ -277,8 +281,7 @@ def _route_intent(text: str) -> Optional[str]:
             "by nature, no built-in scheduler, so here's the cron line that "
             "makes it actually recur:\n\n    %s cd ~/workspace/levi && "
             "python -m levi.bot service run %s\n\nInstall that and I'll show "
-            "up %s like clockwork."
-            % (name, freq, cron, name, freq)
+            "up %s like clockwork." % (name, freq, cron, name, freq)
         )
 
     match = _INTENT_RESEARCH.search(text)
@@ -329,8 +332,12 @@ def _route_intent(text: str) -> Optional[str]:
             mark = "✓" if run.get("ok") else "✗"
             lines.append(
                 "%s %s — %s (%s)"
-                % (mark, run.get("ts", "?")[:16], run.get("service", "?"),
-                   (run.get("summary", "") or "")[:80])
+                % (
+                    mark,
+                    run.get("ts", "?")[:16],
+                    run.get("service", "?"),
+                    (run.get("summary", "") or "")[:80],
+                )
             )
         return "\n".join(lines)
 

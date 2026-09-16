@@ -21,7 +21,6 @@ import smtplib
 import time
 from email.message import EmailMessage
 from email.utils import formatdate, make_msgid
-from pathlib import Path
 from typing import Any, Callable, Optional
 
 from levi.oath import USAGE_FILE
@@ -35,8 +34,8 @@ from levi.oath.inbox import (
     mark_seen,
     poll,
 )
-from levi.oath.pipeline import Pipeline, parse, run as run_pipeline
-from levi.oath.policy import PolicyDecision, check_pipeline, trust_gate, trust_meets_floor
+from levi.oath.pipeline import Pipeline, run as run_pipeline
+from levi.oath.policy import PolicyDecision, check_pipeline, trust_gate
 from levi.oath.trust import TRUSTED, VERIFIED
 
 __all__ = [
@@ -87,6 +86,7 @@ def send_mail(
 # Rate limiting
 # ---------------------------------------------------------------------------
 
+
 def _load_usage() -> dict[str, list[float]]:
     try:
         data = json.loads(USAGE_FILE().read_text(encoding="utf-8"))
@@ -106,7 +106,9 @@ def _save_usage(usage: dict[str, list[float]]) -> None:
     tmp.replace(USAGE_FILE())
 
 
-def check_rate_limit(contact: Contact, *, now: Optional[float] = None) -> PolicyDecision:
+def check_rate_limit(
+    contact: Contact, *, now: Optional[float] = None
+) -> PolicyDecision:
     """Return a denial when the contact exhausted their hourly mission budget."""
     now = time.time() if now is None else now
     usage = _load_usage()
@@ -133,6 +135,7 @@ def record_mission_use(contact: Contact, *, now: Optional[float] = None) -> None
 # ---------------------------------------------------------------------------
 # Daemon
 # ---------------------------------------------------------------------------
+
 
 class Daemon:
     """Poll intake, enforce policy, run missions, audit everything."""
@@ -168,7 +171,9 @@ class Daemon:
         self._stop = True
 
     # -- one cycle --------------------------------------------------------
-    def run_once(self, *, use_imap: bool = False, use_maildir: bool = True) -> dict[str, Any]:
+    def run_once(
+        self, *, use_imap: bool = False, use_maildir: bool = True
+    ) -> dict[str, Any]:
         """Poll intake once and process every mission found.
 
         Returns a summary ``{"missions": n, "ran": n, "denied": n, "errors": n}``.
@@ -181,11 +186,14 @@ class Daemon:
             try:
                 outcome = self.process_mission(mission)
             except Exception as exc:  # a mission must never kill the daemon
-                self._emit("mission.error", {
-                    "message_id": mission.message_id,
-                    "from": mission.from_address,
-                    "error": f"{type(exc).__name__}: {exc}",
-                })
+                self._emit(
+                    "mission.error",
+                    {
+                        "message_id": mission.message_id,
+                        "from": mission.from_address,
+                        "error": f"{type(exc).__name__}: {exc}",
+                    },
+                )
                 summary["errors"] += 1
                 outcome = "error"
             finally:
@@ -214,25 +222,39 @@ class Daemon:
 
         contact = mission.contact
         if contact is None:
-            self._emit("mission.denied", {**base, "gate": "trust",
-                                          "reason": "sender is not a known contact"})
+            self._emit(
+                "mission.denied",
+                {**base, "gate": "trust", "reason": "sender is not a known contact"},
+            )
             return "denied"
 
         # Gate 1 — trust (hard requirement, no override).
         decision = trust_gate(contact, mission.trust)
         if not decision.allowed:
-            self._emit("mission.denied", {**base, "gate": decision.gate, "reason": decision.reason})
+            self._emit(
+                "mission.denied",
+                {**base, "gate": decision.gate, "reason": decision.reason},
+            )
             return "denied"
 
         # Rate limit (before the pipeline runs).
         decision = check_rate_limit(contact)
         if not decision.allowed:
-            self._emit("mission.denied", {**base, "gate": decision.gate, "reason": decision.reason})
+            self._emit(
+                "mission.denied",
+                {**base, "gate": decision.gate, "reason": decision.reason},
+            )
             return "denied"
 
         if mission.parse_error:
-            self._emit("mission.denied", {**base, "gate": "parse",
-                                          "reason": f"pipeline parse error: {mission.parse_error}"})
+            self._emit(
+                "mission.denied",
+                {
+                    **base,
+                    "gate": "parse",
+                    "reason": f"pipeline parse error: {mission.parse_error}",
+                },
+            )
             return "denied"
 
         # Gates 2+3 — per-stage permission and risk ceiling, checked before
@@ -241,9 +263,15 @@ class Daemon:
         precheck = check_pipeline(contact, mission.stages, self.registry)
         for stage_dict, dec in zip(mission.stages, precheck):
             if not dec.allowed:
-                self._emit("mission.denied", {**base, "gate": dec.gate,
-                                              "stage": stage_dict.get("raw", ""),
-                                              "reason": dec.reason})
+                self._emit(
+                    "mission.denied",
+                    {
+                        **base,
+                        "gate": dec.gate,
+                        "stage": stage_dict.get("raw", ""),
+                        "reason": dec.reason,
+                    },
+                )
                 return "denied"
 
         record_mission_use(contact)
@@ -258,38 +286,63 @@ class Daemon:
             reply_to=mission.from_address or contact.email,
             send_reply=self._make_reply_sender(mission),
         )
-        denied_stage = next((r for r in pipeline.results
-                             if r.decision is not None and not r.decision.allowed), None)
+        denied_stage = next(
+            (
+                r
+                for r in pipeline.results
+                if r.decision is not None and not r.decision.allowed
+            ),
+            None,
+        )
         if denied_stage is not None:
-            self._emit("mission.denied", {**base, "gate": denied_stage.decision.gate,
-                                          "stage": denied_stage.stage.raw,
-                                          "reason": denied_stage.decision.reason})
+            self._emit(
+                "mission.denied",
+                {
+                    **base,
+                    "gate": denied_stage.decision.gate,
+                    "stage": denied_stage.stage.raw,
+                    "reason": denied_stage.decision.reason,
+                },
+            )
             return "denied"
         failed = next((r for r in pipeline.results if not r.ok), None)
-        self._emit("mission.completed", {
-            **base,
-            "dry_run": self.dry_run,
-            "ok": failed is None,
-            "failed_stage": None if failed is None else failed.stage.raw,
-            "results": pipeline.to_dict()["results"],
-        })
+        self._emit(
+            "mission.completed",
+            {
+                **base,
+                "dry_run": self.dry_run,
+                "ok": failed is None,
+                "failed_stage": None if failed is None else failed.stage.raw,
+                "results": pipeline.to_dict()["results"],
+            },
+        )
         return "ran"
 
     @staticmethod
     def _stage_from_dict(data: dict[str, Any]):
         from levi.oath.pipeline import Stage
-        return Stage(kind=data.get("kind", "cmd"), name=data.get("name", ""),
-                     args=dict(data.get("args", {})), raw=data.get("raw", ""))
+
+        return Stage(
+            kind=data.get("kind", "cmd"),
+            name=data.get("name", ""),
+            args=dict(data.get("args", {})),
+            raw=data.get("raw", ""),
+        )
 
     def _make_reply_sender(self, mission: Mission):
         config = self.config
 
         def _send(to_address: str, subject: str, body: str) -> None:
             if self.dry_run:
-                self._emit("mission.reply_preview", {
-                    "message_id": mission.message_id, "to": to_address,
-                    "subject": subject, "body_chars": len(body),
-                })
+                self._emit(
+                    "mission.reply_preview",
+                    {
+                        "message_id": mission.message_id,
+                        "to": to_address,
+                        "subject": subject,
+                        "body_chars": len(body),
+                    },
+                )
                 return
             send_mail(config, to_address, subject, body, in_reply_to=mission.message_id)
 
@@ -298,7 +351,10 @@ class Daemon:
     # -- the loop -----------------------------------------------------------
     def serve(self, *, use_imap: bool = False, use_maildir: bool = True) -> None:
         """Poll forever until :meth:`stop` is called or Ctrl-C arrives."""
-        self._emit("daemon.started", {"poll_interval": self.poll_interval, "dry_run": self.dry_run})
+        self._emit(
+            "daemon.started",
+            {"poll_interval": self.poll_interval, "dry_run": self.dry_run},
+        )
         try:
             while not self._stop:
                 summary = self.run_once(use_imap=use_imap, use_maildir=use_maildir)

@@ -26,10 +26,12 @@ def build_parser() -> argparse.ArgumentParser:
     a.add_argument("--tags", default="", help="comma-separated tags")
 
     sub.add_parser("feed", help="show the feed (chronological default)").add_argument(
-        "--limit", type=int, default=20)
+        "--limit", type=int, default=20
+    )
 
-    sub.add_parser("rank", help="show the feed scored with current weights").add_argument(
-        "--limit", type=int, default=20)
+    sub.add_parser(
+        "rank", help="show the feed scored with current weights"
+    ).add_argument("--limit", type=int, default=20)
 
     sub.add_parser("weights", help="show the weight vector and dials")
 
@@ -74,7 +76,9 @@ def main(argv=None) -> int:
         elif args.cmd == "rank":
             d.set_mode("weighted")
             print(d.format_feed(limit=args.limit))
-            d.set_mode("chronological")  # rank is a preview; do not move the sticky dial
+            d.set_mode(
+                "chronological"
+            )  # rank is a preview; do not move the sticky dial
         elif args.cmd == "weights":
             print(d.format_weights())
         elif args.cmd == "set-weight":
@@ -102,10 +106,14 @@ def main(argv=None) -> int:
         elif args.cmd == "explain":
             info = d.explain(args.item_id)
             print(f"item [{info['id']}] by {info['author']}  mode={info['mode']}")
-            print(f"score={info['score']:.4f}  (weights sum to {info['total_weight']:.2f})")
+            print(
+                f"score={info['score']:.4f}  (weights sum to {info['total_weight']:.2f})"
+            )
             for name in FEATURES:
-                print(f"  {name:10s} feature={info['features'][name]:.3f} "
-                      f"weight={info['weights'][name]:.2f} contrib={info['contributions'][name]:.4f}")
+                print(
+                    f"  {name:10s} feature={info['features'][name]:.3f} "
+                    f"weight={info['weights'][name]:.2f} contrib={info['contributions'][name]:.4f}"
+                )
         else:
             build_parser().print_help()
             return 2

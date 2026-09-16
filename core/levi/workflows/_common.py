@@ -37,6 +37,7 @@ def utc_now() -> str:
 # Bloodstream bus (defensive — the bus worker lands in parallel)
 # ---------------------------------------------------------------------------
 
+
 def _bus():
     """Return the bus module, or None when it is not importable yet."""
     try:
@@ -61,7 +62,7 @@ def emit(event: str, payload: Optional[Dict[str, Any]] = None) -> bool:
         topic = "levi." + event
     elif event.startswith("workflow."):
         # call sites say "workflow.<event>"; the subsystem is "workflows"
-        topic = "levi.workflows." + event[len("workflow."):]
+        topic = "levi.workflows." + event[len("workflow.") :]
     else:
         topic = "levi.workflows." + event
     for attr in ("emit", "publish", "record"):
@@ -79,6 +80,7 @@ def emit(event: str, payload: Optional[Dict[str, Any]] = None) -> bool:
 # Step logging (steps logged as data, never as side chatter)
 # ---------------------------------------------------------------------------
 
+
 def new_step(name: str) -> Dict[str, Any]:
     return {
         "name": name,
@@ -89,8 +91,12 @@ def new_step(name: str) -> Dict[str, Any]:
     }
 
 
-def finish_step(step: Dict[str, Any], ok: bool, detail: Optional[Dict] = None,
-                reason: Optional[str] = None) -> Dict[str, Any]:
+def finish_step(
+    step: Dict[str, Any],
+    ok: bool,
+    detail: Optional[Dict] = None,
+    reason: Optional[str] = None,
+) -> Dict[str, Any]:
     step["ok"] = ok
     step["finished_at"] = utc_now()
     if detail:
@@ -100,8 +106,9 @@ def finish_step(step: Dict[str, Any], ok: bool, detail: Optional[Dict] = None,
     return step
 
 
-def workflow_result(name: str, steps: List[Dict[str, Any]],
-                    artifacts: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def workflow_result(
+    name: str, steps: List[Dict[str, Any]], artifacts: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
     ok = all(s.get("ok") for s in steps)
     return {
         "workflow": name,

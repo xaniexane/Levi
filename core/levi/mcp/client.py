@@ -256,8 +256,7 @@ def remove_server(name: str, home: Optional[Path] = None) -> None:
     del servers[name]
     save_servers(servers, home)
     _refs.remove_references_where(
-        lambda r: r.kind == "mcp-server"
-        and r.detail.get("mcp_server") == name,
+        lambda r: r.kind == "mcp-server" and r.detail.get("mcp_server") == name,
         home=home,
     )
 
@@ -619,8 +618,7 @@ def connect_server(
     name = _validate_name(name)
     if not isinstance(cfg, dict):
         raise MCPClientError(
-            f"MCP server {name!r}: config must be a dict, "
-            f"got {type(cfg).__name__}"
+            f"MCP server {name!r}: config must be a dict, got {type(cfg).__name__}"
         )
     transport = (cfg.get("transport") or "").lower()
     raw_tmo = cfg.get("timeout", None)

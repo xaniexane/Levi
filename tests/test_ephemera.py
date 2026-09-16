@@ -11,7 +11,7 @@ import json
 
 import pytest
 
-from levi.ephemera import crypto, store
+from levi.ephemera import crypto
 from levi.ephemera.__main__ import main as cli_main
 from levi.ephemera.store import EphemeraError, EphemeraStore
 
@@ -26,6 +26,7 @@ def _herm(monkeypatch, tmp_path):
 # --------------------------------------------------------------------------
 # crypto unit tests
 # --------------------------------------------------------------------------
+
 
 def test_seal_open_roundtrip():
     key = crypto.derive_key(b"pw", b"salt")
@@ -63,6 +64,7 @@ def test_derive_key_deterministic_and_salted():
 # store tests
 # --------------------------------------------------------------------------
 
+
 def test_create_and_list_channels(monkeypatch, tmp_path):
     st = _herm(monkeypatch, tmp_path)
     st.create_channel("fam", 3600, PW)
@@ -83,8 +85,7 @@ def test_bad_channel_names_rejected(monkeypatch, tmp_path):
 def test_post_read_roundtrip(monkeypatch, tmp_path):
     st = _herm(monkeypatch, tmp_path)
     st.create_channel("fam", 3600, PW)
-    r = st.post("fam", "chauncey", "dinner at 7?", PW,
-                forwarding_discouraged=True)
+    r = st.post("fam", "chauncey", "dinner at 7?", PW, forwarding_discouraged=True)
     msg = st.read_message("fam", r["id"], PW)
     assert msg["body"] == "dinner at 7?"
     assert msg["forwarding_discouraged"] is True
@@ -104,7 +105,8 @@ def test_message_bodies_not_plaintext_on_disk(monkeypatch, tmp_path):
     st.create_channel("fam", 3600, PW)
     st.post("fam", "chauncey", "the eagle has landed", PW)
     disk = "".join(
-        p.read_text() for p in (tmp_path / ".levi" / "ephemera").rglob("msg_*.json"))
+        p.read_text() for p in (tmp_path / ".levi" / "ephemera").rglob("msg_*.json")
+    )
     assert "the eagle has landed" not in disk
 
 
@@ -130,7 +132,7 @@ def test_receipt_chain_tamper_detected(monkeypatch, tmp_path):
     st.create_channel("quick", 0, PW)
     st.post("quick", "a", "bye", PW)
     st.sweep()
-    p = (tmp_path / ".levi" / "ephemera" / "channels" / "quick" / "receipts.jsonl")
+    p = tmp_path / ".levi" / "ephemera" / "channels" / "quick" / "receipts.jsonl"
     lines = p.read_text().splitlines()
     rec = json.loads(lines[0])
     rec["payload"]["event"] = "forged"
@@ -160,10 +162,16 @@ def test_unknown_channel_errors(monkeypatch, tmp_path):
 # CLI tests
 # --------------------------------------------------------------------------
 
+
 def test_cli_create_post_sweep(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)
     assert cli_main(["--passphrase", PW, "create", "q", "--ttl", "0"]) == 0
-    assert cli_main(["--passphrase", PW, "post", "q", "--author", "a", "--body", "gone soon"]) == 0
+    assert (
+        cli_main(
+            ["--passphrase", PW, "post", "q", "--author", "a", "--body", "gone soon"]
+        )
+        == 0
+    )
     assert cli_main(["--passphrase", PW, "sweep", "q"]) == 0
     out = capsys.readouterr().out
     assert "deleted" in out

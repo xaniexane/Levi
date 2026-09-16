@@ -50,7 +50,7 @@ from __future__ import annotations
 
 import math
 import random
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Callable, Optional
 
 
@@ -67,8 +67,8 @@ class DiscoveryError(Exception):
 # Heuristics
 # ---------------------------------------------------------------------------
 
-Proposer = Callable[[Any], Any]          # problem -> candidate solution
-Judge = Callable[[Any, Any], float]      # (problem, candidate) -> score in [0, 1]
+Proposer = Callable[[Any], Any]  # problem -> candidate solution
+Judge = Callable[[Any, Any], float]  # (problem, candidate) -> score in [0, 1]
 
 
 @dataclass
@@ -112,8 +112,11 @@ class CreditAssigner:
     """Runs discovery rounds: every heuristic proposes, the judge scores,
     credit flows back proportional to contribution."""
 
-    def __init__(self, heuristics: Optional[list[Heuristic]] = None,
-                 judge: Optional[Judge] = None):
+    def __init__(
+        self,
+        heuristics: Optional[list[Heuristic]] = None,
+        judge: Optional[Judge] = None,
+    ):
         self.heuristics: list[Heuristic] = list(heuristics or [])
         self.judge = judge
         self.rounds = 0
@@ -151,7 +154,11 @@ class CreditAssigner:
         # Credit: full credit to the best, proportional credit to the rest
         # (relative contribution — Lenat's "who earned the win").
         for h, cand, s in scored:
-            credit = 1.0 if (best > 0 and math.isclose(s, best)) else (s / best if best > 0 else 0.0)
+            credit = (
+                1.0
+                if (best > 0 and math.isclose(s, best))
+                else (s / best if best > 0 else 0.0)
+            )
             h.record(credit)
         self.rounds += 1
         record = {
@@ -164,8 +171,11 @@ class CreditAssigner:
 
     def leaderboard(self) -> list[tuple[str, float, float]]:
         """``(name, score, uses)`` sorted by score — who earned their keep."""
-        return sorted(((h.name, h.score, h.uses) for h in self.heuristics),
-                      key=lambda row: row[1], reverse=True)
+        return sorted(
+            ((h.name, h.score, h.uses) for h in self.heuristics),
+            key=lambda row: row[1],
+            reverse=True,
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -181,7 +191,9 @@ class MetaHeuristic:
 
     name: str
     kind: str = "mutate"  # mutate | combine | custom
-    breed: Optional[Callable[[list[Heuristic], random.Random], Optional[Heuristic]]] = None
+    breed: Optional[Callable[[list[Heuristic], random.Random], Optional[Heuristic]]] = (
+        None
+    )
 
     def __post_init__(self) -> None:
         if self.kind not in ("mutate", "combine", "custom"):
@@ -189,8 +201,9 @@ class MetaHeuristic:
         if self.kind == "custom" and self.breed is None:
             raise ValueError("custom meta-heuristics need a breed callable")
 
-    def propose(self, pool: list[Heuristic],
-                rng: Optional[random.Random] = None) -> Optional[Heuristic]:
+    def propose(
+        self, pool: list[Heuristic], rng: Optional[random.Random] = None
+    ) -> Optional[Heuristic]:
         rng = rng or random.Random()
         if self.kind == "custom":
             assert self.breed is not None
@@ -212,20 +225,24 @@ class MetaHeuristic:
 def _mutate_proposer(propose: Proposer, rng: random.Random) -> Proposer:
     """A mutated proposer: usually behaves like the parent, occasionally
     perturbs numeric candidates (the honest, minimal "mutation")."""
+
     def mutated(problem: Any) -> Any:
         cand = propose(problem)
         if isinstance(cand, (int, float)) and not isinstance(cand, bool):
             if rng.random() < 0.3:
                 return cand + rng.uniform(-0.5, 0.5) * (abs(cand) or 1.0)
         return cand
+
     return mutated
 
 
 def _combine_proposers(pa: Proposer, pb: Proposer, rng: random.Random) -> Proposer:
     """A combined proposer: picks a parent's candidate at random per call
     (recombination of *behavior*, honestly labeled — not a real crossover)."""
+
     def combined(problem: Any) -> Any:
         return pa(problem) if rng.random() < 0.5 else pb(problem)
+
     return combined
 
 
@@ -264,10 +281,14 @@ class DiscoveryPool:
             for _ in range(self.probation_rounds):
                 self.assigner.run_round(problem)
             self.assigner.heuristics = [
-                h for h in self.assigner.heuristics
-                if not (h.uses >= 1.0 and h.score < 0.5)]
-        return {"leaderboard": self.assigner.leaderboard(),
-                "rounds": self.assigner.rounds}
+                h
+                for h in self.assigner.heuristics
+                if not (h.uses >= 1.0 and h.score < 0.5)
+            ]
+        return {
+            "leaderboard": self.assigner.leaderboard(),
+            "rounds": self.assigner.rounds,
+        }
 
 
 __all__ = [

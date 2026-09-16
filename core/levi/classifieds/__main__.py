@@ -15,9 +15,14 @@ def _store() -> ClassifiedsStore:
 
 def cmd_add(args) -> int:
     try:
-        r = _store().add(args.title, description=args.description or "",
-                         price=args.price or "", category=args.category,
-                         lister=args.lister, contact=args.contact or "")
+        r = _store().add(
+            args.title,
+            description=args.description or "",
+            price=args.price or "",
+            category=args.category,
+            lister=args.lister,
+            contact=args.contact or "",
+        )
     except ClassifiedsError as exc:
         print("classifieds: %s" % exc, file=sys.stderr)
         return 1
@@ -33,14 +38,15 @@ def _fmt_trust(t) -> str:
 
 
 def cmd_browse(args) -> int:
-    rows = _store().listings_with_trust(category=args.category,
-                                        query=args.query)
+    rows = _store().listings_with_trust(category=args.category, query=args.query)
     if not rows:
         print("no listings match.")
     for r in rows:
         price = " — %s" % r["price"] if r["price"] else ""
-        print("[%s] %s%s [%s] by %s" % (r["id"], r["title"], price,
-                                        r["category"], r["lister"]))
+        print(
+            "[%s] %s%s [%s] by %s"
+            % (r["id"], r["title"], price, r["category"], r["lister"])
+        )
         print("    %s" % _fmt_trust(r["trust"]))
         if r["description"]:
             print("    %s" % r["description"][:120])
@@ -64,8 +70,10 @@ def cmd_vouch(args) -> int:
     except ClassifiedsError as exc:
         print("classifieds: %s" % exc, file=sys.stderr)
         return 1
-    print("recorded: %s vouches for %s (weight %.2f)" % (
-        r["contact"], r["for"], r["weight"]))
+    print(
+        "recorded: %s vouches for %s (weight %.2f)"
+        % (r["contact"], r["for"], r["weight"])
+    )
     return 0
 
 
@@ -77,7 +85,10 @@ def cmd_contacts_init(args) -> int:
         "contacts": [{"id": c, "name": c, "vouches": {}} for c in args.contact],
     }
     st.save_contacts(data)
-    print("contacts initialized for '%s' with %d contact(s)" % (args.me, len(args.contact)))
+    print(
+        "contacts initialized for '%s' with %d contact(s)"
+        % (args.me, len(args.contact))
+    )
     print("edit ~/.levi/classifieds/contacts.json to set vouch weights, or use:")
     print("  python -m levi.classifieds vouch CONTACT --for ID --weight 0.8")
     return 0
@@ -98,8 +109,10 @@ def cmd_export(args) -> int:
     text = json.dumps(bundle, indent=2)
     if args.out:
         open(args.out, "w", encoding="utf-8").write(text)
-        print("wrote %s (%d listings, %d attestations)" % (
-            args.out, len(bundle["listings"]), len(bundle["attestations"])))
+        print(
+            "wrote %s (%d listings, %d attestations)"
+            % (args.out, len(bundle["listings"]), len(bundle["attestations"]))
+        )
     else:
         print(text)
     return 0
@@ -117,8 +130,10 @@ def cmd_import(args) -> int:
     except ClassifiedsError as exc:
         print("classifieds: %s" % exc, file=sys.stderr)
         return 1
-    print("imported %d listing(s); %d/%d attestations intact (own key)" % (
-        n, v["intact"], v["attestations"]))
+    print(
+        "imported %d listing(s); %d/%d attestations intact (own key)"
+        % (n, v["intact"], v["attestations"])
+    )
     print("note: trust scores recomputed against YOUR contacts on browse")
     return 0
 
@@ -126,7 +141,8 @@ def cmd_import(args) -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(
         prog="levi.classifieds",
-        description="Trust-graph classifieds — local, auditable, portable.")
+        description="Trust-graph classifieds — local, auditable, portable.",
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     p = sub.add_parser("add", help="post a listing")

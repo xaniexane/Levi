@@ -42,7 +42,7 @@ from pathlib import Path
 from typing import Any, Optional
 
 from levi.galaxy import trust as galaxy_trust
-from levi.galaxy.package import PackageError, load_manifest
+from levi.galaxy.package import load_manifest
 from levi.galaxy.registry import GalaxyRegistry
 
 from levi.revival.arexx import (
@@ -157,7 +157,9 @@ class InstalledPackage:
     description: str = ""
     author: str = ""
     kind: str = "service"  # skill | tool | service
-    entry_points: dict[str, str] = field(default_factory=dict)  # verb -> "module:function"
+    entry_points: dict[str, str] = field(
+        default_factory=dict
+    )  # verb -> "module:function"
     pin: str = ""  # sha256 of the canonical install record
     source: str = ""  # where it was installed from (path/URL/note)
     installed_at: float = 0.0
@@ -217,9 +219,13 @@ class GalaxyServices:
         home: "str | os.PathLike[str] | None" = None,
         clock=time.time,
     ) -> None:
-        self._store_dir = Path(store_dir) if store_dir is not None else default_store_dir(home)
+        self._store_dir = (
+            Path(store_dir) if store_dir is not None else default_store_dir(home)
+        )
         self._store_file = self._store_dir / "packages.json"
-        self._home = home  # the "~" home; LEVI home is <home>/.levi (may be None -> Path.home())
+        self._home = (
+            home  # the "~" home; LEVI home is <home>/.levi (may be None -> Path.home())
+        )
         self._clock = clock
         self._registry = PortRegistry()
         self._revocations = RevocationList()
@@ -252,9 +258,8 @@ class GalaxyServices:
         for verb, target in entry_points.items():
             if not isinstance(verb, str) or not verb or not verb.strip():
                 raise ManifestError(f"invalid verb name: {verb!r}")
-            if (
-                not isinstance(target, str)
-                or not _ENTRYPOINT_RE.fullmatch(target.strip())
+            if not isinstance(target, str) or not _ENTRYPOINT_RE.fullmatch(
+                target.strip()
             ):
                 raise ManifestError(
                     f"entry point for verb {verb!r} must be 'module:function', "
@@ -321,9 +326,7 @@ class GalaxyServices:
                     f"verb {verb!r}: module {module_name!r} has no attribute {attr!r}"
                 ) from exc
             if not callable(fn):
-                raise InstallError(
-                    f"verb {verb!r}: {target!r} is not callable"
-                )
+                raise InstallError(f"verb {verb!r}: {target!r} is not callable")
             resolved[verb] = fn
         return resolved
 
@@ -380,7 +383,9 @@ class GalaxyServices:
         imported — a tampered install raises :class:`TamperError` and nothing
         is registered. Entry points come from the installed ``levi-skill.json``.
         """
-        levi_home = Path(home).expanduser() if home is not None else Path.home() / ".levi"
+        levi_home = (
+            Path(home).expanduser() if home is not None else Path.home() / ".levi"
+        )
         pkg_id = record.get("id")
         if not galaxy_trust.verify_install(levi_home, record):
             raise galaxy_trust.TamperError(
@@ -411,7 +416,9 @@ class GalaxyServices:
         is callable*. Sync closes the gap. Per-record deny-closed: one bad
         package is skipped with its reason recorded, never blocking the rest.
         """
-        levi_home = Path(home).expanduser() if home is not None else Path.home() / ".levi"
+        levi_home = (
+            Path(home).expanduser() if home is not None else Path.home() / ".levi"
+        )
         registry = GalaxyRegistry(levi_home)
         registered: list[str] = []
         skipped: list[str] = []
@@ -493,9 +500,7 @@ class GalaxyServices:
         ``["galaxy.acme.*"]`` for one package or ``["galaxy.acme.summarize"]``
         for a single verb. Deny-closed: ``actions=[]`` permits nothing.
         """
-        return issue(
-            CAPABILITY_ISSUER, grantee, actions, ttl_seconds=ttl_seconds
-        )
+        return issue(CAPABILITY_ISSUER, grantee, actions, ttl_seconds=ttl_seconds)
 
     def revoke(self, token_or_nonce: str) -> None:
         """Revoke a capability by full token or raw nonce."""
@@ -587,9 +592,7 @@ class GalaxyServices:
     def _save(self) -> None:
         self._store_dir.mkdir(parents=True, exist_ok=True)
         payload = {
-            "packages": {
-                pid: pkg.to_dict() for pid, pkg in self._packages.items()
-            }
+            "packages": {pid: pkg.to_dict() for pid, pkg in self._packages.items()}
         }
         tmp = self._store_file.with_suffix(".tmp")
         tmp.write_text(_canonical(payload) + "\n", encoding="utf-8")

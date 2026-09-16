@@ -31,8 +31,12 @@ from .record import ArchiveRecord, Provenance, make_id, slugify
 
 _ENTRY_HEADING = re.compile(r"^#{2,4}\s+(\d+)\.\s+(.*\S)\s*$")
 _ANY_HEADING = re.compile(r"^#{1,4}\s+")
-_BADGE_STATUS = {"🔴": "dead", "🟡": "alive-underused",
-                 "🟠": "preserved", "🔵": "technique-alive"}
+_BADGE_STATUS = {
+    "🔴": "dead",
+    "🟡": "alive-underused",
+    "🟠": "preserved",
+    "🔵": "technique-alive",
+}
 _RATING_RE = re.compile(r"\*\*\s*(LOAD-BEARING|USEFUL PATTERN|INSPIRATIONAL)\s*\*\*")
 _URL_LINE = re.compile(r"^-\s+(https?://\S+)\s*$")
 
@@ -80,13 +84,31 @@ def _badge_status(heading: str) -> str:
 
 def _guess_status_sw30(summary: str, decline: str) -> str:
     text = (summary + " " + decline).lower()
-    if any(k in text for k in ("absorbed into", "technical ancestor",
-                              "folded into", "became part of")):
+    if any(
+        k in text
+        for k in (
+            "absorbed into",
+            "technical ancestor",
+            "folded into",
+            "became part of",
+        )
+    ):
         return "absorbed"
-    if any(k in text for k in ("still alive", "alive today", "never died",
-                              "alive in research", "still operating",
-                              "revived 2008", "remains alive", "still sold",
-                              "half-retired", "still active")):
+    if any(
+        k in text
+        for k in (
+            "still alive",
+            "alive today",
+            "never died",
+            "alive in research",
+            "still operating",
+            "revived 2008",
+            "remains alive",
+            "still sold",
+            "half-retired",
+            "still active",
+        )
+    ):
         return "alive-underused"
     return "dead"
 
@@ -140,7 +162,8 @@ def parse_sw30(text: str, provenance: Provenance) -> List[ArchiveRecord]:
             if current and line.strip() and not line.lstrip().startswith("-"):
                 fields[current] += " " + line.strip()
         fields_rec = dict(
-            title=title, era=era,
+            title=title,
+            era=era,
             summary=fields.get("summary", ""),
             mechanism=fields.get("mechanism", ""),
             decline=fields.get("decline", ""),
@@ -148,8 +171,9 @@ def parse_sw30(text: str, provenance: Provenance) -> List[ArchiveRecord]:
             levi_application=fields.get("levi_application", ""),
             sources=[],
             rating="unrated",
-            status=_guess_status_sw30(fields.get("summary", ""),
-                                      fields.get("decline", "")),
+            status=_guess_status_sw30(
+                fields.get("summary", ""), fields.get("decline", "")
+            ),
             skepticism=fields.get("skepticism", ""),
             provenance=provenance,
         )
@@ -162,12 +186,20 @@ def parse_sw30(text: str, provenance: Provenance) -> List[ArchiveRecord]:
 # ---------------------------------------------------------------------------
 
 _SW50_FIELD = re.compile(r"^(\d)\.\s*(.*)$")
-_SW50_LABEL = re.compile(r'^["\']?(mechanism|died|revival|app|application)["\']?\s*:\s*',
-                         re.IGNORECASE)
-_SW50_ORDER = {1: "summary", 2: "mechanism", 3: "decline",
-               4: "revival_recipe", 5: "levi_application"}
+_SW50_LABEL = re.compile(
+    r'^["\']?(mechanism|died|revival|app|application)["\']?\s*:\s*', re.IGNORECASE
+)
+_SW50_ORDER = {
+    1: "summary",
+    2: "mechanism",
+    3: "decline",
+    4: "revival_recipe",
+    5: "levi_application",
+}
 _SW50_DASH = re.compile(r"\s+[—–-]\s*")
-_RATING_RE_LOOSE = re.compile(r"(LOAD-BEARING|USEFUL PATTERN|INSPIRATIONAL)\s*\*{0,2}\s*$")
+_RATING_RE_LOOSE = re.compile(
+    r"(LOAD-BEARING|USEFUL PATTERN|INSPIRATIONAL)\s*\*{0,2}\s*$"
+)
 
 
 def _clean_sw50_heading(heading: str) -> Tuple[str, str, str]:
@@ -176,7 +208,7 @@ def _clean_sw50_heading(heading: str) -> Tuple[str, str, str]:
     rm = _RATING_RE.search(heading)
     if rm:
         rating = _norm_rating(rm.group(1))
-        heading = heading[:rm.start()].strip()
+        heading = heading[: rm.start()].strip()
     status = _badge_status(heading)
     # strip badge + parenthetical notes (e.g. "(absorbed — ...)"), then
     # keep the text before the dash as the title
@@ -213,7 +245,8 @@ def parse_sw50(text: str, provenance: Provenance) -> List[ArchiveRecord]:
                     continue
                 fields[current] += " " + line.strip()
         fields_rec = dict(
-            title=title, era="",
+            title=title,
+            era="",
             summary=fields.get("summary", ""),
             mechanism=fields.get("mechanism", ""),
             decline=fields.get("decline", ""),
@@ -243,7 +276,7 @@ def _clean_m40_heading(heading: str) -> Tuple[str, str]:
         rm = _RATING_RE_LOOSE.search(heading)  # m40 ratings are not bolded
     if rm:
         rating = _norm_rating(rm.group(1))
-        heading = heading[:rm.start()].strip()
+        heading = heading[: rm.start()].strip()
     parts = _SW50_DASH.split(heading, maxsplit=1)
     title = parts[0].strip() if len(parts) > 1 else heading.strip()
     return title, rating
@@ -271,7 +304,8 @@ def parse_m40(text: str, provenance: Provenance) -> List[ArchiveRecord]:
             if current and line.strip():
                 fields[current] += " " + line.strip()
         fields_rec = dict(
-            title=title, era="",
+            title=title,
+            era="",
             summary=fields.get("summary", ""),
             mechanism=fields.get("mechanism", ""),
             decline=fields.get("decline", ""),
@@ -292,8 +326,7 @@ def parse_m40(text: str, provenance: Provenance) -> List[ArchiveRecord]:
 # ---------------------------------------------------------------------------
 
 
-def parse_findings_jsonl(text: str,
-                         provenance: Provenance) -> List[ArchiveRecord]:
+def parse_findings_jsonl(text: str, provenance: Provenance) -> List[ArchiveRecord]:
     """Parse one-ArchiveRecord-per-line JSONL (the hunt-record format)."""
     import json as _json
 
@@ -315,8 +348,10 @@ def parse_findings_jsonl(text: str,
 # id assignment + dedup
 # ---------------------------------------------------------------------------
 
-def _assign_ids(triples: List[Tuple[Dict, str, str]],
-                report_tag: str, kind: str) -> List[ArchiveRecord]:
+
+def _assign_ids(
+    triples: List[Tuple[Dict, str, str]], report_tag: str, kind: str
+) -> List[ArchiveRecord]:
     """Assign deterministic ids; dedup true repeats by identity (title+era)."""
     out: List[ArchiveRecord] = []
     seen_identities = set()
@@ -345,59 +380,72 @@ REPORTS = [
         "files": ["report.md"],
         "parser": parse_sw30,
         "tag": "sw30",
-        "notes": ("Index-sourced 2026-09-16; 2+ sources per entry; no live "
-                  "page reads. No per-entry source URLs in the report."),
+        "notes": (
+            "Index-sourced 2026-09-16; 2+ sources per entry; no live "
+            "page reads. No per-entry source URLs in the report."
+        ),
     },
     {
         "slug": "revival-50-more-20260916-0009",
         "files": ["report-part1.md", "report-part2.md"],
         "parser": parse_sw50,
         "tag": "sw50",
-        "notes": ("Index-sourced 2026-09-16 UTC; no live verification. "
-                  "Status badges: dead / alive-underused / preserved / "
-                  "technique-alive. Part 2 carries the ranked top 10."),
+        "notes": (
+            "Index-sourced 2026-09-16 UTC; no live verification. "
+            "Status badges: dead / alive-underused / preserved / "
+            "technique-alive. Part 2 carries the ranked top 10."
+        ),
     },
     {
         "slug": "forgotten-methods-wave3-20260916-0015",
         "files": ["report.md"],
         "parser": parse_m40,
         "tag": "m40",
-        "notes": ("Index-sourced 2026-09-16; two independent sources per "
-                  "entry. Disputed/romanticized history flagged per entry "
-                  "and in the nostalgia audit."),
+        "notes": (
+            "Index-sourced 2026-09-16; two independent sources per "
+            "entry. Disputed/romanticized history flagged per entry "
+            "and in the nostalgia audit."
+        ),
     },
     {
         "slug": "hw-hunt-20260916",
         "files": ["findings.jsonl"],
         "parser": parse_findings_jsonl,
         "tag": "hw",
-        "notes": ("Web-verified 2026-09-16; abandoned-hardware wave-004 "
-                  "(Atari 2600 kernel, Amiga Copper, Palm Graffiti, "
-                  "ZX Spectrum multicolor)."),
+        "notes": (
+            "Web-verified 2026-09-16; abandoned-hardware wave-004 "
+            "(Atari 2600 kernel, Amiga Copper, Palm Graffiti, "
+            "ZX Spectrum multicolor)."
+        ),
     },
     {
         "slug": "games-hunt-20260916-0022",
         "files": ["findings.jsonl"],
         "parser": parse_findings_jsonl,
         "tag": "games",
-        "notes": ("Web-verified 2026-09-16; guesses marked; findings carry "
-                  "embedded provenance. JSONL is the hunt-record format."),
+        "notes": (
+            "Web-verified 2026-09-16; guesses marked; findings carry "
+            "embedded provenance. JSONL is the hunt-record format."
+        ),
     },
     {
         "slug": "honest-markets-20260916",
         "files": ["findings.jsonl"],
         "parser": parse_findings_jsonl,
         "tag": "honest",
-        "notes": ("Web-verified 2026-09-16; daily perpetual-hunt run, "
-                  "giant-patterns vein: the honest markets "
-                  "(shareware, SourceForge/DevShare, Yahoo Pipes, "
-                  "AltaVista). Skepticism flags embedded per record."),
+        "notes": (
+            "Web-verified 2026-09-16; daily perpetual-hunt run, "
+            "giant-patterns vein: the honest markets "
+            "(shareware, SourceForge/DevShare, Yahoo Pipes, "
+            "AltaVista). Skepticism flags embedded per record."
+        ),
     },
 ]
 
 
-def ingest_reports(research_root: Path,
-                   slugs: Optional[List[str]] = None) -> Tuple[List[ArchiveRecord], List[str]]:
+def ingest_reports(
+    research_root: Path, slugs: Optional[List[str]] = None
+) -> Tuple[List[ArchiveRecord], List[str]]:
     """Parse finished research reports into records.
 
     Returns (records, errors). Reports are read-only inputs; any parse
@@ -409,9 +457,9 @@ def ingest_reports(research_root: Path,
     for spec in REPORTS:
         if slugs is not None and spec["slug"] not in slugs:
             continue
-        prov = Provenance(found_date="2026-09-16",
-                          research_slug=spec["slug"],
-                          notes=spec["notes"])
+        prov = Provenance(
+            found_date="2026-09-16", research_slug=spec["slug"], notes=spec["notes"]
+        )
         for fname in spec["files"]:
             path = research_root / spec["slug"] / fname
             if not path.is_file():

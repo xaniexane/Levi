@@ -23,7 +23,7 @@ behaves — never a claim of identity. See ``docs/ASSISTANT_CORE.md``.
 from __future__ import annotations
 
 import re
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 # ---------------------------------------------------------------------------
 # 1. Assistant-core system prompt (composable section)
@@ -111,9 +111,7 @@ def load_user_context(store=None, limit: int = _CONTEXT_LIMIT) -> str:
                 if eid in seen:
                     continue
                 seen.add(eid)
-                text = (getattr(entry, "content", "") or "").strip().replace(
-                    "\n", " "
-                )
+                text = (getattr(entry, "content", "") or "").strip().replace("\n", " ")
                 if not text:
                     continue
                 mtype_val = getattr(
@@ -162,9 +160,7 @@ _CANDIDATE_PATTERNS = (
         "fact",
     ),
     (
-        re.compile(
-            r"\bactually,?\s+my ([\w\- ]{1,30}) is ([^.?!]{1,80})", re.I
-        ),
+        re.compile(r"\bactually,?\s+my ([\w\- ]{1,30}) is ([^.?!]{1,80})", re.I),
         "fact",
     ),
 )
@@ -212,9 +208,7 @@ def candidate_learnings(transcript_text: str) -> List[Dict[str, str]]:
 # ---------------------------------------------------------------------------
 
 
-def build_agent_prompt(
-    user_text: str = "", store=None, identity: str = "LEVI"
-) -> str:
+def build_agent_prompt(user_text: str = "", store=None, identity: str = "LEVI") -> str:
     """Compose the ready-to-use agent prompt: core + user context.
 
     ``user_text`` is accepted for future use (e.g. context retrieval keyed

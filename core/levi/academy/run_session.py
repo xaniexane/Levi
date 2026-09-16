@@ -53,6 +53,7 @@ def data_dir() -> Path:
     """Academy working dir. ``LEVI_ACADEMY_DIR`` overrides it (tests)."""
     return Path(os.environ.get("LEVI_ACADEMY_DIR", Path.home() / ".levi" / "academy"))
 
+
 SESSION_BUDGET_MINUTES = 45
 BLOCK_SECONDS = 6 * 3600
 
@@ -97,13 +98,20 @@ def load_progress() -> dict:
             return data
         except json.JSONDecodeError:
             pass
-    return {"program_start": None, "completed": [], "sessions": {},
-            "streaks": {}, "graduated": False, "pending_remedial": None}
+    return {
+        "program_start": None,
+        "completed": [],
+        "sessions": {},
+        "streaks": {},
+        "graduated": False,
+        "pending_remedial": None,
+    }
 
 
 def save_progress(progress: dict) -> None:
     (data_dir() / "progress.json").write_text(
-        json.dumps(progress, indent=1, ensure_ascii=False), encoding="utf-8")
+        json.dumps(progress, indent=1, ensure_ascii=False), encoding="utf-8"
+    )
 
 
 def next_uncompleted(progress: dict) -> int:
@@ -152,13 +160,17 @@ def prior_context_points(limit: int = 12) -> list[str]:
     """Recent academy sessions, so teaching compounds instead of repeating."""
     try:
         from levi.growth import journal as gjournal
+
         entries = gjournal.read_entries(limit=60)
     except Exception:
         return []
     points = []
     for e in reversed(entries):
-        if e.get("kind") not in ("academy-session", "academy-graduation",
-                                 "academy-remedial"):
+        if e.get("kind") not in (
+            "academy-session",
+            "academy-graduation",
+            "academy-remedial",
+        ):
             continue
         d = e.get("day")
         t = e.get("track")
@@ -186,8 +198,9 @@ def objective_coverage(objectives: list[str], lesson_md: str) -> list[dict]:
     out = []
     for o in objectives:
         ow = _words(o)
-        best = max((len(ow & _words(s)) / max(len(ow), 1) for s in sentences),
-                   default=0.0)
+        best = max(
+            (len(ow & _words(s)) / max(len(ow), 1) for s in sentences), default=0.0
+        )
         out.append({"objective": o, "coverage": round(best, 3)})
     return out
 
@@ -207,23 +220,33 @@ def mastery_check(entry: dict, lesson_md: str) -> dict:
         answer = " ".join(ranked[:2])[:500]
         matched = len(qw & _words(answer))
         score = matched / max(len(qw), 1)
-        results.append({"question": q, "answer": answer,
-                        "score": round(score, 3)})
+        results.append({"question": q, "answer": answer, "score": round(score, 3)})
     overall = round(sum(r["score"] for r in results) / max(len(results), 1), 3)
     coverage = objective_coverage(entry["objectives"], lesson_md)
-    return {"questions": results, "score": overall,
-            "objective_coverage": coverage,
-            "missed_questions": [r["question"] for r in results
-                                 if r["score"] < MASTERY_THRESHOLD],
-            "missed_objectives": [c["objective"] for c in coverage
-                                  if c["coverage"] < 0.5],
-            "passed": overall >= MASTERY_THRESHOLD}
+    return {
+        "questions": results,
+        "score": overall,
+        "objective_coverage": coverage,
+        "missed_questions": [
+            r["question"] for r in results if r["score"] < MASTERY_THRESHOLD
+        ],
+        "missed_objectives": [c["objective"] for c in coverage if c["coverage"] < 0.5],
+        "passed": overall >= MASTERY_THRESHOLD,
+    }
 
 
 # ------------------------------------------------------------------- growth
-def consolidate_session(day: int, block: int, track: str, entry: dict,
-                        exercise: dict, mastery: dict, review: dict | None,
-                        gate_passed: bool, remedial: dict | None = None) -> dict:
+def consolidate_session(
+    day: int,
+    block: int,
+    track: str,
+    entry: dict,
+    exercise: dict,
+    mastery: dict,
+    review: dict | None,
+    gate_passed: bool,
+    remedial: dict | None = None,
+) -> dict:
     """Debrief: journal honestly and consolidate growth-tagged learnings.
 
     Only mastered content becomes memory. A failed gate journals the
@@ -238,45 +261,70 @@ def consolidate_session(day: int, block: int, track: str, entry: dict,
     review = review or {}
     forgotten = review.get("forgotten", [])
     if gate_passed:
-        summary = (f"{title}: exercise {exercise['score']:.0%}, mastery "
-                   f"{mastery['score']:.0%} (bar 80%) — GATE PASSED. "
-                   f"Review drills: {review.get('reviewed', 0)} due concepts, "
-                   f"mean {review.get('mean_score', 1.0):.0%}.")
+        summary = (
+            f"{title}: exercise {exercise['score']:.0%}, mastery "
+            f"{mastery['score']:.0%} (bar 80%) — GATE PASSED. "
+            f"Review drills: {review.get('reviewed', 0)} due concepts, "
+            f"mean {review.get('mean_score', 1.0):.0%}."
+        )
         learnings = [
             Learning(
                 kind="fact",
-                content=(f"LEVI Boot Camp day {day} block {block} (track {track}): "
-                         f"'{title}'. {entry['objectives'][0]}."),
+                content=(
+                    f"LEVI Boot Camp day {day} block {block} (track {track}): "
+                    f"'{title}'. {entry['objectives'][0]}."
+                ),
                 confidence=0.7,
-                provenance={"program": "levi-academy", "day": day, "block": block,
-                            "track": track, "kind": "academy-session"},
+                provenance={
+                    "program": "levi-academy",
+                    "day": day,
+                    "block": block,
+                    "track": track,
+                    "kind": "academy-session",
+                },
             ),
             Learning(
                 kind="procedural",
-                content=(f"Boot camp method practiced ({entry['exercise_type']}): "
-                         f"{entry['objectives'][-1]}."),
+                content=(
+                    f"Boot camp method practiced ({entry['exercise_type']}): "
+                    f"{entry['objectives'][-1]}."
+                ),
                 confidence=0.6,
-                provenance={"program": "levi-academy", "day": day, "block": block,
-                            "track": track, "kind": "academy-session"},
+                provenance={
+                    "program": "levi-academy",
+                    "day": day,
+                    "block": block,
+                    "track": track,
+                    "kind": "academy-session",
+                },
             ),
         ]
     else:
-        summary = (f"{title}: GATE FAILED — mastery {mastery['score']:.0%} "
-                   f"(bar 80%), exercise {exercise['score']:.0%} (bar 70%). "
-                   f"Missed: {len(mastery['missed_questions'])} question(s). "
-                   f"Remedial queued; the standard does not move. "
-                   f"Review drills: {review.get('reviewed', 0)}, "
-                   f"{len(forgotten)} forgotten and re-queued.")
+        summary = (
+            f"{title}: GATE FAILED — mastery {mastery['score']:.0%} "
+            f"(bar 80%), exercise {exercise['score']:.0%} (bar 70%). "
+            f"Missed: {len(mastery['missed_questions'])} question(s). "
+            f"Remedial queued; the standard does not move. "
+            f"Review drills: {review.get('reviewed', 0)}, "
+            f"{len(forgotten)} forgotten and re-queued."
+        )
         learnings = [
             Learning(
                 kind="fact",
-                content=(f"LEVI Boot Camp day {day} block {block} (track {track}): "
-                         f"gate FAILED on '{title}' — mastery "
-                         f"{mastery['score']:.0%} vs 80% bar. Failure is data; "
-                         f"remediation queued honestly."),
+                content=(
+                    f"LEVI Boot Camp day {day} block {block} (track {track}): "
+                    f"gate FAILED on '{title}' — mastery "
+                    f"{mastery['score']:.0%} vs 80% bar. Failure is data; "
+                    f"remediation queued honestly."
+                ),
                 confidence=0.8,
-                provenance={"program": "levi-academy", "day": day, "block": block,
-                            "track": track, "kind": "academy-session"},
+                provenance={
+                    "program": "levi-academy",
+                    "day": day,
+                    "block": block,
+                    "track": track,
+                    "kind": "academy-session",
+                },
             ),
         ]
     kind = "academy-remedial" if remedial and gate_passed else "academy-session"
@@ -288,26 +336,36 @@ def consolidate_session(day: int, block: int, track: str, entry: dict,
         tags.append("forgetting-logged")
     if review.get("assessment"):
         tags.append("weekly-assessment")
-    report = consolidate(learnings,
-                         cycle_id=f"academy-d{day}b{block}"
-                         f"{'-r' + str(remedial['attempt']) if remedial else ''}")
-    jentry = gjournal.append_entry({
-        "kind": kind,
-        "tags": tags,
-        "day": day, "block": block, "track": track, "title": title,
-        "exercise_type": entry["exercise_type"],
-        "exercise_score": exercise["score"],
-        "mastery_score": mastery["score"],
-        "mastery_passed": mastery["passed"],
-        "gate_passed": gate_passed,
-        "summary": summary,
-        "review": {"reviewed": review.get("reviewed", 0),
-                   "mean_score": review.get("mean_score", 1.0),
-                   "forgotten": forgotten,
-                   "assessment": bool(review.get("assessment"))},
-        "consolidation": {k: report.get(k) for k in
-                          ("accepted", "corroborated", "skipped")},
-    })
+    report = consolidate(
+        learnings,
+        cycle_id=f"academy-d{day}b{block}"
+        f"{'-r' + str(remedial['attempt']) if remedial else ''}",
+    )
+    jentry = gjournal.append_entry(
+        {
+            "kind": kind,
+            "tags": tags,
+            "day": day,
+            "block": block,
+            "track": track,
+            "title": title,
+            "exercise_type": entry["exercise_type"],
+            "exercise_score": exercise["score"],
+            "mastery_score": mastery["score"],
+            "mastery_passed": mastery["passed"],
+            "gate_passed": gate_passed,
+            "summary": summary,
+            "review": {
+                "reviewed": review.get("reviewed", 0),
+                "mean_score": review.get("mean_score", 1.0),
+                "forgotten": forgotten,
+                "assessment": bool(review.get("assessment")),
+            },
+            "consolidation": {
+                k: report.get(k) for k in ("accepted", "corroborated", "skipped")
+            },
+        }
+    )
     return {"consolidation": report, "journal_id": jentry.get("id")}
 
 
@@ -321,74 +379,109 @@ def launch_retrain() -> dict:
     lessons, tagged with mastery level, never first drafts.
     """
     from levi.growth import journal as gjournal
+
     script = ACADEMY_PKG / "retrain.py"
     log_path = data_dir() / "retrain.log"
     try:
         import torch  # noqa: F401
     except Exception:
-        gjournal.append_entry({
-            "kind": "academy-graduation",
-            "tags": ["growth", "levi-learned", "academy", "retrain-skipped"],
-            "note": "Brain retrain skipped: torch not available in this environment.",
-        })
+        gjournal.append_entry(
+            {
+                "kind": "academy-graduation",
+                "tags": ["growth", "levi-learned", "academy", "retrain-skipped"],
+                "note": "Brain retrain skipped: torch not available in this environment.",
+            }
+        )
         return {"launched": False, "reason": "torch-unavailable"}
     log_fh = open(log_path, "a", encoding="utf-8")
     proc = subprocess.Popen(
         [sys.executable, str(script)],
-        stdout=log_fh, stderr=subprocess.STDOUT,
-        start_new_session=True, cwd=str(REPO_ROOT),
+        stdout=log_fh,
+        stderr=subprocess.STDOUT,
+        start_new_session=True,
+        cwd=str(REPO_ROOT),
     )
-    gjournal.append_entry({
-        "kind": "academy-graduation",
-        "tags": ["growth", "levi-learned", "academy", "retrain-launched"],
-        "note": (f"Graduation brain retrain launched in background "
-                 f"(pid {proc.pid}); log at {log_path}. Existing weights "
-                 f"untouched; new checkpoint will be versioned."),
-    })
+    gjournal.append_entry(
+        {
+            "kind": "academy-graduation",
+            "tags": ["growth", "levi-learned", "academy", "retrain-launched"],
+            "note": (
+                f"Graduation brain retrain launched in background "
+                f"(pid {proc.pid}); log at {log_path}. Existing weights "
+                f"untouched; new checkpoint will be versioned."
+            ),
+        }
+    )
     return {"launched": True, "pid": proc.pid, "log": str(log_path)}
 
 
-def graduate(day: int, block: int, track: str, entry: dict, exercise: dict,
-             mastery: dict, syllabus: dict) -> dict:
+def graduate(
+    day: int,
+    block: int,
+    track: str,
+    entry: dict,
+    exercise: dict,
+    mastery: dict,
+    syllabus: dict,
+) -> dict:
     """Session 120: the final crucible report."""
     from levi.growth import journal as gjournal
+
     art = exercise["artifact"]
     per_track = art.get("per_track", {})
     grades = {t: v.get("score") for t, v in per_track.items()}
     weakest = art.get("weakest_track")
     focus = art.get("post_graduation_focus", [])
     verdict = art.get("verdict", "UNKNOWN")
-    gjournal.append_entry({
-        "kind": "academy-graduation",
-        "tags": ["growth", "levi-learned", "academy", "graduation"],
-        "day": day, "block": block, "title": "GRADUATION",
-        "final_score": art.get("overall"),
+    gjournal.append_entry(
+        {
+            "kind": "academy-graduation",
+            "tags": ["growth", "levi-learned", "academy", "graduation"],
+            "day": day,
+            "block": block,
+            "title": "GRADUATION",
+            "final_score": art.get("overall"),
+            "verdict": verdict,
+            "per_track_grades": grades,
+            "weakest_track": weakest,
+            "post_graduation_focus": focus,
+            "summary": (
+                f"Session 120/120 complete. Final crucible overall "
+                f"{art.get('overall', 0):.0%} — {verdict}. Per-track: "
+                + ", ".join(f"{t} {s:.0%}" for t, s in grades.items())
+                + f". Weakest area: track {weakest} — post-graduation "
+                f"drill focus: {'; '.join(focus[:3])}."
+            ),
+        }
+    )
+    retrain = launch_retrain()
+    return {
         "verdict": verdict,
-        "per_track_grades": grades,
+        "per_track": grades,
         "weakest_track": weakest,
         "post_graduation_focus": focus,
-        "summary": (f"Session 120/120 complete. Final crucible overall "
-                    f"{art.get('overall', 0):.0%} — {verdict}. Per-track: "
-                    + ", ".join(f"{t} {s:.0%}" for t, s in grades.items())
-                    + f". Weakest area: track {weakest} — post-graduation "
-                    f"drill focus: {'; '.join(focus[:3])}."),
-    })
-    retrain = launch_retrain()
-    return {"verdict": verdict, "per_track": grades, "weakest_track": weakest,
-            "post_graduation_focus": focus, "retrain": retrain}
+        "retrain": retrain,
+    }
 
 
 # ------------------------------------------------------------------ session
-def _research(entry: dict, track: str, dry_research: dict | None,
-              budget_seconds: float) -> dict:
+def _research(
+    entry: dict, track: str, dry_research: dict | None, budget_seconds: float
+) -> dict:
     if dry_research is not None:
         return dry_research
-    return aresearch.research_topic(entry["title"], track,
-                                    budget_seconds=budget_seconds)
+    return aresearch.research_topic(
+        entry["title"], track, budget_seconds=budget_seconds
+    )
 
 
-def run_one_session(day: int, block: int, *, dry_research: dict | None = None,
-                    budget_minutes: float = SESSION_BUDGET_MINUTES) -> dict:
+def run_one_session(
+    day: int,
+    block: int,
+    *,
+    dry_research: dict | None = None,
+    budget_minutes: float = SESSION_BUDGET_MINUTES,
+) -> dict:
     """Run one curriculum session through the full battle rhythm."""
     t0 = time.time()
     deadline = t0 + budget_minutes * 60
@@ -403,99 +496,151 @@ def run_one_session(day: int, block: int, *, dry_research: dict | None = None,
     sid = session_id(day, block)
 
     # ---- BRIEF
-    print(f"boot camp: BRIEF — day {day} block {block} (session {n}/120) · "
-          f"track {track}: {entry['title']}", flush=True)
+    print(
+        f"boot camp: BRIEF — day {day} block {block} (session {n}/120) · "
+        f"track {track}: {entry['title']}",
+        flush=True,
+    )
     print(f"  objectives: {'; '.join(entry['objectives'])}", flush=True)
-    print(f"  battle rhythm: brief, teach, review, drill, test, debrief · "
-          f"mastery bar 80%", flush=True)
+    print(
+        "  battle rhythm: brief, teach, review, drill, test, debrief · mastery bar 80%",
+        flush=True,
+    )
 
     # ---- TEACH
     print("boot camp: TEACH — researching + synthesizing lesson", flush=True)
     points = prior_context_points()
-    res = _research(entry, track, dry_research,
-                    budget_seconds=min(150.0, max(30.0, _budget_left() / 3)))
+    res = _research(
+        entry,
+        track,
+        dry_research,
+        budget_seconds=min(150.0, max(30.0, _budget_left() / 3)),
+    )
     cross_links = acon.recent_concepts(exclude_track=track, k=3)
-    lesson_md = asynth.synthesize_lesson(day, block, track, entry, res,
-                                         points, week_phase,
-                                         cross_links=cross_links)
+    lesson_md = asynth.synthesize_lesson(
+        day, block, track, entry, res, points, week_phase, cross_links=cross_links
+    )
     dd = data_dir()
     (dd / "lessons").mkdir(parents=True, exist_ok=True)
     (dd / "lessons" / f"{sid}.md").write_text(lesson_md, encoding="utf-8")
 
     # ---- REVIEW (spaced repetition: retrieval drills, never re-reading)
     assessment = day in ASSESSMENT_DAYS
-    print(f"boot camp: REVIEW — due concept drills"
-          f"{' (weekly assessment)' if assessment else ''}", flush=True)
+    print(
+        f"boot camp: REVIEW — due concept drills"
+        f"{' (weekly assessment)' if assessment else ''}",
+        flush=True,
+    )
     review = acon.run_reviews(n, assessment=assessment)
-    print(f"  reviewed {review['reviewed']} concept(s), mean "
-          f"{review['mean_score']:.0%}, forgotten: {len(review['forgotten'])}",
-          flush=True)
+    print(
+        f"  reviewed {review['reviewed']} concept(s), mean "
+        f"{review['mean_score']:.0%}, forgotten: {len(review['forgotten'])}",
+        flush=True,
+    )
 
     # ---- DRILL
     print("boot camp: DRILL — practical exercise", flush=True)
     interleave = acon.interleave_concepts(n, k=2) if track == "S" else None
     if interleave:
-        print(f"  interleaved cross-track concepts: "
-              f"{', '.join(c['id'] for c in interleave)}", flush=True)
-    exercise = aex.run_exercise(entry["exercise_type"], entry, lesson_md, res,
-                                syllabus=syllabus, journal_points=points,
-                                interleave=interleave)
+        print(
+            f"  interleaved cross-track concepts: "
+            f"{', '.join(c['id'] for c in interleave)}",
+            flush=True,
+        )
+    exercise = aex.run_exercise(
+        entry["exercise_type"],
+        entry,
+        lesson_md,
+        res,
+        syllabus=syllabus,
+        journal_points=points,
+        interleave=interleave,
+    )
 
     # ---- TEST (the gate)
-    print("boot camp: TEST — mastery gate (80% lesson / 70% drill)",
-          flush=True)
+    print("boot camp: TEST — mastery gate (80% lesson / 70% drill)", flush=True)
     mastery = mastery_check(entry, lesson_md)
-    gate_passed = (mastery["score"] >= MASTERY_THRESHOLD
-                   and exercise["score"] >= EXERCISE_THRESHOLD)
-    print(f"  mastery {mastery['score']:.0%} "
-          f"({'PASS' if mastery['score'] >= MASTERY_THRESHOLD else 'FAIL'}), "
-          f"exercise {exercise['score']:.0%} "
-          f"({'PASS' if exercise['score'] >= EXERCISE_THRESHOLD else 'FAIL'}) "
-          f"→ gate {'PASSED' if gate_passed else 'FAILED'}", flush=True)
+    gate_passed = (
+        mastery["score"] >= MASTERY_THRESHOLD
+        and exercise["score"] >= EXERCISE_THRESHOLD
+    )
+    print(
+        f"  mastery {mastery['score']:.0%} "
+        f"({'PASS' if mastery['score'] >= MASTERY_THRESHOLD else 'FAIL'}), "
+        f"exercise {exercise['score']:.0%} "
+        f"({'PASS' if exercise['score'] >= EXERCISE_THRESHOLD else 'FAIL'}) "
+        f"→ gate {'PASSED' if gate_passed else 'FAILED'}",
+        flush=True,
+    )
 
     # ---- DEBRIEF
-    print(f"boot camp: DEBRIEF — journaling "
-          f"({'pass' if gate_passed else 'failure, honestly'})", flush=True)
+    print(
+        f"boot camp: DEBRIEF — journaling "
+        f"({'pass' if gate_passed else 'failure, honestly'})",
+        flush=True,
+    )
     progress = load_progress()
     if not progress.get("program_start"):
         progress["program_start"] = _now_iso()
 
-    result = {"session": sid, "day": day, "block": block, "track": track,
-              "title": entry["title"], "week_phase": week_phase,
-              "research_mode": res.get("mode"),
-              "review": {"reviewed": review["reviewed"],
-                         "mean_score": review["mean_score"],
-                         "forgotten": review["forgotten"],
-                         "assessment": review["assessment"]},
-              "interleaved": [c["id"] for c in (interleave or [])],
-              "exercise_type": entry["exercise_type"],
-              "exercise_score": exercise["score"],
-              "mastery_score": mastery["score"],
-              "mastery_passed": mastery["passed"],
-              "gate_passed": gate_passed,
-              "elapsed_seconds": round(time.time() - t0, 1)}
+    result = {
+        "session": sid,
+        "day": day,
+        "block": block,
+        "track": track,
+        "title": entry["title"],
+        "week_phase": week_phase,
+        "research_mode": res.get("mode"),
+        "review": {
+            "reviewed": review["reviewed"],
+            "mean_score": review["mean_score"],
+            "forgotten": review["forgotten"],
+            "assessment": review["assessment"],
+        },
+        "interleaved": [c["id"] for c in (interleave or [])],
+        "exercise_type": entry["exercise_type"],
+        "exercise_score": exercise["score"],
+        "mastery_score": mastery["score"],
+        "mastery_passed": mastery["passed"],
+        "gate_passed": gate_passed,
+        "elapsed_seconds": round(time.time() - t0, 1),
+    }
 
     if gate_passed:
         # Concepts enter the registry only once taught to mastery.
         n_concepts = acon.register_session(
-            day, block, track, entry, res, n, mastery_score=mastery["score"])
-        growth = consolidate_session(day, block, track, entry, exercise,
-                                     mastery, review, gate_passed=True)
+            day, block, track, entry, res, n, mastery_score=mastery["score"]
+        )
+        growth = consolidate_session(
+            day, block, track, entry, exercise, mastery, review, gate_passed=True
+        )
         # Corpus quality: ingest only POST-mastery, tagged with mastery level.
-        corpus = aci.ingest_lesson(day, block, track, entry["title"], lesson_md,
-                                   mastery={"mastery_score": mastery["score"],
-                                            "exercise_score": exercise["score"],
-                                            "attempts": 1,
-                                            "remediated": False})
+        corpus = aci.ingest_lesson(
+            day,
+            block,
+            track,
+            entry["title"],
+            lesson_md,
+            mastery={
+                "mastery_score": mastery["score"],
+                "exercise_score": exercise["score"],
+                "attempts": 1,
+                "remediated": False,
+            },
+        )
         streak = bump_streak(progress, track, True)
         if sid not in progress["completed"]:
             progress["completed"].append(sid)
         progress["sessions"][sid] = {
-            "day": day, "block": block, "track": track, "title": entry["title"],
+            "day": day,
+            "block": block,
+            "track": track,
+            "title": entry["title"],
             "exercise_type": entry["exercise_type"],
             "exercise_score": exercise["score"],
             "mastery_score": mastery["score"],
-            "gate_passed": True, "attempts": 1,
+            "gate_passed": True,
+            "attempts": 1,
             "concepts_registered": n_concepts,
             "reviewed": review["reviewed"],
             "corpus_added": corpus["added"],
@@ -505,18 +650,23 @@ def run_one_session(day: int, block: int, *, dry_research: dict | None = None,
         result["corpus"] = corpus
         result["streak"] = streak
         if n == 120:
-            result["graduation"] = graduate(day, block, track, entry, exercise,
-                                            mastery, syllabus)
+            result["graduation"] = graduate(
+                day, block, track, entry, exercise, mastery, syllabus
+            )
             progress["graduated"] = True
     else:
         # Failed gate: session NOT completed, knowledge NOT ingested, streak
         # reset. Remediation is queued for the next block — the standard
         # does not move.
-        growth = consolidate_session(day, block, track, entry, exercise,
-                                     mastery, review, gate_passed=False)
+        growth = consolidate_session(
+            day, block, track, entry, exercise, mastery, review, gate_passed=False
+        )
         streak = bump_streak(progress, track, False)
         progress["pending_remedial"] = {
-            "day": day, "block": block, "track": track, "n": n,
+            "day": day,
+            "block": block,
+            "track": track,
+            "n": n,
             "attempts": 0,
             "missed_questions": mastery["missed_questions"],
             "missed_objectives": mastery["missed_objectives"],
@@ -525,10 +675,14 @@ def run_one_session(day: int, block: int, *, dry_research: dict | None = None,
             "queued_ts": _now_iso(),
         }
         progress["sessions"][sid] = {
-            "day": day, "block": block, "track": track, "title": entry["title"],
+            "day": day,
+            "block": block,
+            "track": track,
+            "title": entry["title"],
             "exercise_score": exercise["score"],
             "mastery_score": mastery["score"],
-            "gate_passed": False, "attempts": 1,
+            "gate_passed": False,
+            "attempts": 1,
             "ts": _now_iso(),
         }
         result["streak"] = streak
@@ -537,8 +691,12 @@ def run_one_session(day: int, block: int, *, dry_research: dict | None = None,
     return result
 
 
-def run_remedial(pending: dict, *, dry_research: dict | None = None,
-                 budget_minutes: float = SESSION_BUDGET_MINUTES) -> dict:
+def run_remedial(
+    pending: dict,
+    *,
+    dry_research: dict | None = None,
+    budget_minutes: float = SESSION_BUDGET_MINUTES,
+) -> dict:
     """Run the queued remedial session: re-teach, re-drill, re-test.
 
     A remedial pass completes the ORIGINAL curriculum gate. A remedial
@@ -552,84 +710,146 @@ def run_remedial(pending: dict, *, dry_research: dict | None = None,
     _, entry = entry_for(syllabus, day, block)
     sid = session_id(day, block)
 
-    print(f"boot camp: REMEDIAL (attempt {attempt}) — day {day} block {block} "
-          f"· track {track}: {entry['title']}", flush=True)
-    print(f"  re-teaching from a different angle: "
-          f"{len(pending.get('missed_questions', []))} missed question(s), "
-          f"{len(pending.get('missed_objectives', []))} missed objective(s)",
-          flush=True)
+    print(
+        f"boot camp: REMEDIAL (attempt {attempt}) — day {day} block {block} "
+        f"· track {track}: {entry['title']}",
+        flush=True,
+    )
+    print(
+        f"  re-teaching from a different angle: "
+        f"{len(pending.get('missed_questions', []))} missed question(s), "
+        f"{len(pending.get('missed_objectives', []))} missed objective(s)",
+        flush=True,
+    )
 
     points = prior_context_points()
     res = _research(entry, track, dry_research, budget_seconds=60.0)
     lesson_md = asynth.synthesize_remedial_lesson(
-        day, block, track, entry, pending.get("missed_questions", []),
-        pending.get("missed_objectives", []), attempt, res)
+        day,
+        block,
+        track,
+        entry,
+        pending.get("missed_questions", []),
+        pending.get("missed_objectives", []),
+        attempt,
+        res,
+    )
     dd = data_dir()
     (dd / "lessons").mkdir(parents=True, exist_ok=True)
     (dd / "lessons" / f"{sid}-remedial{attempt}.md").write_text(
-        lesson_md, encoding="utf-8")
+        lesson_md, encoding="utf-8"
+    )
 
     interleave = acon.interleave_concepts(n, k=2) if track == "S" else None
-    exercise = aex.run_exercise(entry["exercise_type"], entry, lesson_md, res,
-                                syllabus=syllabus, journal_points=points,
-                                interleave=interleave)
+    exercise = aex.run_exercise(
+        entry["exercise_type"],
+        entry,
+        lesson_md,
+        res,
+        syllabus=syllabus,
+        journal_points=points,
+        interleave=interleave,
+    )
     mastery = mastery_check(entry, lesson_md)
-    gate_passed = (mastery["score"] >= MASTERY_THRESHOLD
-                   and exercise["score"] >= EXERCISE_THRESHOLD)
-    print(f"  remedial mastery {mastery['score']:.0%}, exercise "
-          f"{exercise['score']:.0%} → gate "
-          f"{'PASSED' if gate_passed else 'FAILED — stays queued'}", flush=True)
+    gate_passed = (
+        mastery["score"] >= MASTERY_THRESHOLD
+        and exercise["score"] >= EXERCISE_THRESHOLD
+    )
+    print(
+        f"  remedial mastery {mastery['score']:.0%}, exercise "
+        f"{exercise['score']:.0%} → gate "
+        f"{'PASSED' if gate_passed else 'FAILED — stays queued'}",
+        flush=True,
+    )
 
     progress = load_progress()
-    result = {"remedial": True, "session": sid, "day": day, "block": block,
-              "track": track, "attempt": attempt,
-              "exercise_score": exercise["score"],
-              "mastery_score": mastery["score"],
-              "gate_passed": gate_passed,
-              "elapsed_seconds": round(time.time() - t0, 1)}
+    result = {
+        "remedial": True,
+        "session": sid,
+        "day": day,
+        "block": block,
+        "track": track,
+        "attempt": attempt,
+        "exercise_score": exercise["score"],
+        "mastery_score": mastery["score"],
+        "gate_passed": gate_passed,
+        "elapsed_seconds": round(time.time() - t0, 1),
+    }
     if gate_passed:
         # The corrected, retained version is what enters durable memory.
         n_concepts = acon.register_session(
-            day, block, track, entry, res, n, mastery_score=mastery["score"])
-        growth = consolidate_session(day, block, track, entry, exercise,
-                                     mastery, review=None, gate_passed=True,
-                                     remedial={"attempt": attempt})
+            day, block, track, entry, res, n, mastery_score=mastery["score"]
+        )
+        growth = consolidate_session(
+            day,
+            block,
+            track,
+            entry,
+            exercise,
+            mastery,
+            review=None,
+            gate_passed=True,
+            remedial={"attempt": attempt},
+        )
         (dd / "lessons" / f"{sid}.md").write_text(lesson_md, encoding="utf-8")
-        corpus = aci.ingest_lesson(day, block, track, entry["title"], lesson_md,
-                                   mastery={"mastery_score": mastery["score"],
-                                            "exercise_score": exercise["score"],
-                                            "attempts": attempt + 1,
-                                            "remediated": True})
+        corpus = aci.ingest_lesson(
+            day,
+            block,
+            track,
+            entry["title"],
+            lesson_md,
+            mastery={
+                "mastery_score": mastery["score"],
+                "exercise_score": exercise["score"],
+                "attempts": attempt + 1,
+                "remediated": True,
+            },
+        )
         streak = bump_streak(progress, track, True)
         if sid not in progress["completed"]:
             progress["completed"].append(sid)
-        progress["sessions"][sid].update({
-            "gate_passed": True, "attempts": attempt + 1,
-            "concepts_registered": n_concepts,
-            "corpus_added": corpus["added"], "ts": _now_iso()})
+        progress["sessions"][sid].update(
+            {
+                "gate_passed": True,
+                "attempts": attempt + 1,
+                "concepts_registered": n_concepts,
+                "corpus_added": corpus["added"],
+                "ts": _now_iso(),
+            }
+        )
         progress["pending_remedial"] = None
         result["concepts_registered"] = n_concepts
         result["corpus"] = corpus
         result["streak"] = streak
         if n == 120:
-            result["graduation"] = graduate(day, block, track, entry, exercise,
-                                            mastery, syllabus)
+            result["graduation"] = graduate(
+                day, block, track, entry, exercise, mastery, syllabus
+            )
             progress["graduated"] = True
     else:
-        consolidate_session(day, block, track, entry, exercise, mastery,
-                            review=None, gate_passed=False,
-                            remedial={"attempt": attempt})
+        consolidate_session(
+            day,
+            block,
+            track,
+            entry,
+            exercise,
+            mastery,
+            review=None,
+            gate_passed=False,
+            remedial={"attempt": attempt},
+        )
         progress["pending_remedial"] = {
-            **pending, "attempts": attempt,
+            **pending,
+            "attempts": attempt,
             "missed_questions": mastery["missed_questions"],
             "missed_objectives": mastery["missed_objectives"],
             "mastery_score": mastery["score"],
             "exercise_score": exercise["score"],
             "queued_ts": _now_iso(),
         }
-        progress["sessions"][sid].update({
-            "gate_passed": False, "attempts": attempt + 1,
-            "ts": _now_iso()})
+        progress["sessions"][sid].update(
+            {"gate_passed": False, "attempts": attempt + 1, "ts": _now_iso()}
+        )
         result["pending_remedial"] = progress["pending_remedial"]
     save_progress(progress)
     return result
@@ -654,10 +874,13 @@ def main(argv: list[str] | None = None) -> int:
         # runs before any new syllabus session. Do not advance past it.
         pending = progress.get("pending_remedial")
         if pending:
-            print(f"boot camp: pending remediation for day {pending['day']} "
-                  f"block {pending['block']} (attempt "
-                  f"{pending.get('attempts', 0) + 1}) — running it before any "
-                  f"new session.", flush=True)
+            print(
+                f"boot camp: pending remediation for day {pending['day']} "
+                f"block {pending['block']} (attempt "
+                f"{pending.get('attempts', 0) + 1}) — running it before any "
+                f"new session.",
+                flush=True,
+            )
             result = run_remedial(pending, budget_minutes=args.budget_minutes)
             print(json.dumps(result, indent=1))
             return 0
@@ -670,26 +893,41 @@ def main(argv: list[str] | None = None) -> int:
         if progress.get("program_start"):
             try:
                 start = datetime.fromisoformat(progress["program_start"])
-                expected = int((datetime.now(timezone.utc) - start).total_seconds()
-                               // BLOCK_SECONDS) + 1
+                expected = (
+                    int(
+                        (datetime.now(timezone.utc) - start).total_seconds()
+                        // BLOCK_SECONDS
+                    )
+                    + 1
+                )
                 if expected > n:
                     from levi.growth import journal as gjournal
-                    gjournal.append_entry({
-                        "kind": "academy-note",
-                        "tags": ["growth", "levi-learned", "academy"],
-                        "note": (f"Behind schedule: clock expects session ~{expected}, "
-                                 f"running next uncompleted session {n} (catch-up, no skips)."),
-                    })
+
+                    gjournal.append_entry(
+                        {
+                            "kind": "academy-note",
+                            "tags": ["growth", "levi-learned", "academy"],
+                            "note": (
+                                f"Behind schedule: clock expects session ~{expected}, "
+                                f"running next uncompleted session {n} (catch-up, no skips)."
+                            ),
+                        }
+                    )
             except Exception:
                 pass
 
     result = run_one_session(day, block, budget_minutes=args.budget_minutes)
-    print(json.dumps({k: v for k, v in result.items()
-                      if k not in ("graduation",)}, indent=1))
+    print(
+        json.dumps(
+            {k: v for k, v in result.items() if k not in ("graduation",)}, indent=1
+        )
+    )
     if result.get("graduation"):
         g = result["graduation"]
-        print(f"boot camp: GRADUATION — {g.get('verdict')} "
-              f"(weakest: track {g.get('weakest_track')})")
+        print(
+            f"boot camp: GRADUATION — {g.get('verdict')} "
+            f"(weakest: track {g.get('weakest_track')})"
+        )
     return 0
 
 

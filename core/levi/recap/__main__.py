@@ -31,8 +31,7 @@ def cmd_html(args) -> int:
     except RecapError as exc:
         print("recap: %s" % exc, file=sys.stderr)
         return 1
-    page = render_html(compute_stats(events, year=args.year),
-                       title=args.title)
+    page = render_html(compute_stats(events, year=args.year), title=args.title)
     if args.out:
         open(args.out, "w", encoding="utf-8").write(page)
         print("wrote %s (standalone — no external requests)" % args.out)
@@ -51,7 +50,8 @@ def cmd_sample(args) -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(
         prog="levi.recap",
-        description="Local annual recap — Wrapped-style cards, on-device.")
+        description="Local annual recap — Wrapped-style cards, on-device.",
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     p = sub.add_parser("stats", help="text recap from a JSONL event file")

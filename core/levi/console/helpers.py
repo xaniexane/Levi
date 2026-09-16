@@ -56,6 +56,7 @@ def stage_for_kind(kind: str) -> int:
 
 # -- security browser --------------------------------------------------------
 
+
 #: Fields searched by :func:`search_domains`, mirroring the matching logic
 #: of ``levi security search`` (name, summary, detection, hardening, concepts).
 def search_domains(domains: Sequence[object], query: str) -> List[object]:
@@ -77,9 +78,7 @@ def search_domains(domains: Sequence[object], query: str) -> List[object]:
             str(getattr(d, "hardening_notes", "") or ""),
         ]
         concepts = getattr(d, "key_concepts", None) or []
-        if q in "\n".join(texts).lower() or any(
-            q in str(c).lower() for c in concepts
-        ):
+        if q in "\n".join(texts).lower() or any(q in str(c).lower() for c in concepts):
             hits.append(d)
     return hits
 

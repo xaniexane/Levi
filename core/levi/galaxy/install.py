@@ -31,7 +31,6 @@ stdlib-only.
 from __future__ import annotations
 
 import hashlib
-import hmac
 import os
 import shutil
 import subprocess
@@ -48,7 +47,7 @@ from levi.galaxy.namespace import (
     resolve,
     to_namespaced,
 )
-from levi.galaxy.package import Manifest, PackageError, load_manifest
+from levi.galaxy.package import Manifest, load_manifest
 from levi.galaxy.registry import GalaxyRegistry
 from levi.revival import telescript
 
@@ -125,9 +124,7 @@ def hash_tree(root: PathLike) -> str:
     for path in root.rglob("*"):
         rel = path.relative_to(root).as_posix()
         if path.is_symlink():
-            raise InstallError(
-                f"refusing package containing symlink: {rel!r}"
-            )
+            raise InstallError(f"refusing package containing symlink: {rel!r}")
         if path.is_file():
             rels.append(rel)
     for rel in sorted(rels):
@@ -334,8 +331,7 @@ def _check_policy(manifest: Manifest, policy: dict[str, Any]) -> dict[str, Any]:
 
     if req.get("network") and not policy["network"]:
         raise PermissionDenied(
-            f"{pid}: manifest requests network access but the install "
-            "policy denies it"
+            f"{pid}: manifest requests network access but the install policy denies it"
         )
     if req.get("subprocess") and not policy["subprocess"]:
         raise PermissionDenied(

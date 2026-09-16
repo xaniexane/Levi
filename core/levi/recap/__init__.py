@@ -24,14 +24,23 @@ SHELF = {
         "source, rendered as text + standalone HTML cards."
     ),
     "items": [
-        {"id": "recap-stats", "kind": "command",
-         "summary": "Compute stats from a JSONL event file (optional --year).",
-         "invoke": "python -m levi.recap stats EVENTS.jsonl [--year 2026]"},
-        {"id": "recap-html", "kind": "command",
-         "summary": "Render a standalone shareable HTML card.",
-         "invoke": "python -m levi.recap html EVENTS.jsonl --out recap.html"},
-        {"id": "recap-sample", "kind": "command",
-         "summary": "Generate deterministic synthetic events (labeled synthetic).",
-         "invoke": "python -m levi.recap sample --out sample.jsonl"},
+        {
+            "id": "recap-stats",
+            "kind": "command",
+            "summary": "Compute stats from a JSONL event file (optional --year).",
+            "invoke": "python -m levi.recap stats EVENTS.jsonl [--year 2026]",
+        },
+        {
+            "id": "recap-html",
+            "kind": "command",
+            "summary": "Render a standalone shareable HTML card.",
+            "invoke": "python -m levi.recap html EVENTS.jsonl --out recap.html",
+        },
+        {
+            "id": "recap-sample",
+            "kind": "command",
+            "summary": "Generate deterministic synthetic events (labeled synthetic).",
+            "invoke": "python -m levi.recap sample --out sample.jsonl",
+        },
     ],
 }

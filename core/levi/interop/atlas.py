@@ -22,8 +22,8 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from levi.interop.manifest import DECLARATIONS
-from levi.interop.registry import Registry, RegistryError
-from levi.interop.warehouses import CLI_COMMANDS, WAREHOUSES, list_warehouses
+from levi.interop.registry import Registry
+from levi.interop.warehouses import CLI_COMMANDS, list_warehouses
 
 __all__ = ["export_atlas", "write_atlas", "atlas_modules"]
 
@@ -101,9 +101,7 @@ def export_atlas() -> Dict[str, Any]:
     - ``levi_version``: the kernel version string.
     """
     modules = atlas_modules()
-    capabilities = sorted(
-        {cap for m in modules.values() for cap in m["provides"]}
-    )
+    capabilities = sorted({cap for m in modules.values() for cap in m["provides"]})
     return {
         "modules": modules,
         "capabilities": capabilities,

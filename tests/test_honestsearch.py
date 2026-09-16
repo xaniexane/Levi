@@ -25,26 +25,44 @@ def _herm(monkeypatch, tmp_path):
 
 
 def _doc(url, title, text, outlinks=()):
-    return Document(doc_id=doc_id_for(url), url=url, title=title,
-                    text=text, outlinks=list(outlinks), source="file")
+    return Document(
+        doc_id=doc_id_for(url),
+        url=url,
+        title=title,
+        text=text,
+        outlinks=list(outlinks),
+        source="file",
+    )
 
 
 def _sample_index():
     index = InvertedIndex()
-    index.add(_doc("https://x.test/a", "Alpha guide",
-                   "alpha beta alpha gamma", ["https://x.test/b"]))
-    index.add(_doc("https://x.test/b", "Beta notes",
-                   "beta beta delta", ["https://x.test/c"]))
-    index.add(_doc("https://x.test/c", "Third page",
-                   "gamma gamma gamma", ["https://x.test/a"]))
-    index.add(_doc("https://x.test/d", "Lonely delta",
-                   "delta unrelated words here", []))
+    index.add(
+        _doc(
+            "https://x.test/a",
+            "Alpha guide",
+            "alpha beta alpha gamma",
+            ["https://x.test/b"],
+        )
+    )
+    index.add(
+        _doc("https://x.test/b", "Beta notes", "beta beta delta", ["https://x.test/c"])
+    )
+    index.add(
+        _doc(
+            "https://x.test/c", "Third page", "gamma gamma gamma", ["https://x.test/a"]
+        )
+    )
+    index.add(
+        _doc("https://x.test/d", "Lonely delta", "delta unrelated words here", [])
+    )
     return index
 
 
 # ---------------------------------------------------------------------------
 # PageRank math
 # ---------------------------------------------------------------------------
+
 
 def test_shelf_shape():
     assert SHELF["name"] == "honestsearch"
@@ -86,6 +104,7 @@ def test_pagerank_ignores_external_neighbors():
 # Index + text scoring
 # ---------------------------------------------------------------------------
 
+
 def test_tokenize_lowercases_and_drops_stopwords():
     assert tokenize("The Quick BROWN fox, a!") == ["quick", "brown", "fox"]
 
@@ -118,8 +137,9 @@ def test_text_scores_prefers_term_frequency():
     index = _sample_index()
     scores = text_scores(index, ["gamma"])
     # c mentions gamma 3x, a mentions it 1x
-    assert scores[doc_id_for("https://x.test/c")] > \
-        scores[doc_id_for("https://x.test/a")]
+    assert (
+        scores[doc_id_for("https://x.test/c")] > scores[doc_id_for("https://x.test/a")]
+    )
     assert doc_id_for("https://x.test/b") not in scores
 
 
@@ -127,14 +147,18 @@ def test_text_scores_prefers_term_frequency():
 # Weights
 # ---------------------------------------------------------------------------
 
+
 def test_normalize_weights():
-    assert normalize_weights({"text": 3, "link": 1}) == {"text": 0.75,
-                                                         "link": 0.25}
+    assert normalize_weights({"text": 3, "link": 1}) == {"text": 0.75, "link": 0.25}
 
 
 def test_normalize_weights_rejects_bad():
-    for bad in ({"text": -1, "link": 1}, {"text": 0, "link": 0},
-                {"text": float("nan"), "link": 1}, {"text": 1}):
+    for bad in (
+        {"text": -1, "link": 1},
+        {"text": 0, "link": 0},
+        {"text": float("nan"), "link": 1},
+        {"text": 1},
+    ):
         with pytest.raises(ValueError):
             normalize_weights(bad)
 
@@ -151,6 +175,7 @@ def test_parse_weights():
 # search(): combination, explanations, unpersonalized guarantee
 # ---------------------------------------------------------------------------
 
+
 def test_search_ranks_and_explains():
     index = _sample_index()
     results = search(index, "gamma guide", top_k=10)
@@ -158,9 +183,9 @@ def test_search_ranks_and_explains():
     top = results[0]
     assert top.doc.url == "https://x.test/a"  # matches both terms
     # contributions must sum to the total, exactly as explain() reports
-    assert math.isclose(top.total,
-                        top.contributions["text"] + top.contributions["link"],
-                        rel_tol=1e-12)
+    assert math.isclose(
+        top.total, top.contributions["text"] + top.contributions["link"], rel_tol=1e-12
+    )
     text = explain(top, DEFAULT_WEIGHTS)
     assert "text" in text and "link" in text and "gamma" in text
 
@@ -199,8 +224,8 @@ def test_search_is_deterministic():
 def test_search_takes_no_profile_by_construction():
     params = inspect.signature(search).parameters
     assert not any(
-        key in ("profile", "user", "user_id", "history", "personalize",
-                "personalization")
+        key
+        in ("profile", "user", "user_id", "history", "personalize", "personalization")
         for key in params
     ), "ranking must not accept a profile parameter"
 
@@ -209,28 +234,42 @@ def test_unpersonalized_results_ignore_stored_profile(monkeypatch, tmp_path):
     """Pollute the store with fake profile data; the order must not move."""
     _herm(monkeypatch, tmp_path)
     import levi.honestsearch.__main__ as cli
+
     (tmp_path / "notes.md").write_text("gamma rays and alpha particles")
     assert cli.main(["add", str(tmp_path / "notes.md")]) == 0
-    before = [(r.doc.doc_id, round(r.total, 9))
-              for r in search(__import__("levi.honestsearch.store",
-                                         fromlist=["load_index"]).load_index(),
-                              "gamma")]
+    before = [
+        (r.doc.doc_id, round(r.total, 9))
+        for r in search(
+            __import__("levi.honestsearch.store", fromlist=["load_index"]).load_index(),
+            "gamma",
+        )
+    ]
     # A giant would re-rank on this. We must not.
     store = tmp_path / ".levi" / "honestsearch"
-    (store / "user_profile.json").write_text(json.dumps({
-        "user_id": "chauncey", "interests": ["sports", "celebrity gossip"],
-        "click_history": ["https://ads.test/x"] * 500}))
+    (store / "user_profile.json").write_text(
+        json.dumps(
+            {
+                "user_id": "chauncey",
+                "interests": ["sports", "celebrity gossip"],
+                "click_history": ["https://ads.test/x"] * 500,
+            }
+        )
+    )
     (store / "ad_auction.json").write_text(json.dumps({"bids": {"x": 999}}))
     import importlib
+
     store_mod = importlib.import_module("levi.honestsearch.store")
-    after = [(r.doc.doc_id, round(r.total, 9))
-             for r in search(store_mod.load_index(), "gamma")]
+    after = [
+        (r.doc.doc_id, round(r.total, 9))
+        for r in search(store_mod.load_index(), "gamma")
+    ]
     assert before == after
 
 
 # ---------------------------------------------------------------------------
 # Crawl (fake fetcher — no network)
 # ---------------------------------------------------------------------------
+
 
 class FakeFetcher:
     def __init__(self, pages):
@@ -248,21 +287,25 @@ PAGES = {
     "https://site.test/": (
         "<html><head><title>Home</title></head><body>"
         '<a href="/a">A</a><a href="/b">B</a>'
-        '<a href="https://other.test/x">X</a></body></html>'),
+        '<a href="https://other.test/x">X</a></body></html>'
+    ),
     "https://site.test/a": (
         "<html><head><title>Page A</title></head><body>alpha content "
-        '<a href="/b">B</a></body></html>'),
+        '<a href="/b">B</a></body></html>'
+    ),
     "https://site.test/b": (
-        "<html><head><title>Page B</title></head><body>beta content</body>"
-        "</html>"),
+        "<html><head><title>Page B</title></head><body>beta content</body></html>"
+    ),
 }
 
 
 def test_extract_links_resolves_and_dedups():
-    links = extract_links(PAGES["https://site.test/"].encode(),
-                          "https://site.test/")
-    assert links == ["https://site.test/a", "https://site.test/b",
-                     "https://other.test/x"]
+    links = extract_links(PAGES["https://site.test/"].encode(), "https://site.test/")
+    assert links == [
+        "https://site.test/a",
+        "https://site.test/b",
+        "https://other.test/x",
+    ]
 
 
 def test_title_of():
@@ -274,8 +317,11 @@ def test_crawl_finds_pages_and_links():
     crawl = SiteCrawl(fetcher=FakeFetcher(PAGES), max_pages=10, max_depth=2)
     docs, report = crawl.crawl(["https://site.test/"])
     by_url = {d.url: d for d in docs}
-    assert set(by_url) == {"https://site.test/", "https://site.test/a",
-                           "https://site.test/b"}
+    assert set(by_url) == {
+        "https://site.test/",
+        "https://site.test/a",
+        "https://site.test/b",
+    }
     assert by_url["https://site.test/"].title == "Home"
     assert "https://site.test/a" in by_url["https://site.test/"].outlinks
     assert report["pages"] == 3
@@ -286,12 +332,12 @@ def test_crawl_finds_pages_and_links():
 def test_crawl_records_refusals_honestly():
     pages = dict(PAGES)
     pages["https://site.test/"] = pages["https://site.test/"].replace(
-        "</body>", '<a href="/missing">M</a></body>')
+        "</body>", '<a href="/missing">M</a></body>'
+    )
     crawl = SiteCrawl(fetcher=FakeFetcher(pages), max_pages=10, max_depth=2)
     docs, report = crawl.crawl(["https://site.test/"])
     assert len(docs) == 3  # missing page not fabricated
-    assert any(r["url"] == "https://site.test/missing"
-               for r in report["refusals"])
+    assert any(r["url"] == "https://site.test/missing" for r in report["refusals"])
 
 
 def test_crawl_respects_max_depth_and_pages():
@@ -314,8 +360,10 @@ def test_crawl_rejects_bad_config():
 # CLI
 # ---------------------------------------------------------------------------
 
+
 def test_cli_help_exits_zero():
     from levi.honestsearch.__main__ import main
+
     with pytest.raises(SystemExit) as e:
         main(["--help"])
     assert e.value.code == 0
@@ -324,11 +372,10 @@ def test_cli_help_exits_zero():
 def test_cli_add_query_explain_weights(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)
     from levi.honestsearch.__main__ import main
-    (tmp_path / "alpha.md").write_text(
-        "# Alpha\nrepeat repeat repeat gamma")
+
+    (tmp_path / "alpha.md").write_text("# Alpha\nrepeat repeat repeat gamma")
     (tmp_path / "beta.md").write_text("# Beta\ngamma once")
-    assert main(["add", str(tmp_path / "alpha.md"),
-                 str(tmp_path / "beta.md")]) == 0
+    assert main(["add", str(tmp_path / "alpha.md"), str(tmp_path / "beta.md")]) == 0
     assert main(["query", "repeat", "--explain"]) == 0
     out = capsys.readouterr().out
     assert "unpersonalized" in out
@@ -347,6 +394,7 @@ def test_cli_add_query_explain_weights(monkeypatch, tmp_path, capsys):
 def test_cli_query_empty_index(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)
     from levi.honestsearch.__main__ import main
+
     assert main(["query", "anything"]) == 1
     assert "empty" in capsys.readouterr().out
 
@@ -354,6 +402,7 @@ def test_cli_query_empty_index(monkeypatch, tmp_path, capsys):
 def test_cli_export(monkeypatch, tmp_path):
     _herm(monkeypatch, tmp_path)
     from levi.honestsearch.__main__ import main
+
     (tmp_path / "n.md").write_text("hello world")
     assert main(["add", str(tmp_path / "n.md")]) == 0
     out = tmp_path / "export.json"

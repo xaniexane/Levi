@@ -57,7 +57,7 @@ from typing import Dict, List, Mapping, Optional, Tuple
 # Pure math — no storage, no CLI. Importable by other packages (e.g. threads).
 # ---------------------------------------------------------------------------
 
-LAMBDA = 0.15        # L2 regularization strength
+LAMBDA = 0.15  # L2 regularization strength
 ALS_ITERATIONS = 25  # fixed; convergence is fast on small local matrices
 MIN_RATINGS_FOR_STATUS = 3  # below this a note cannot earn a status label
 HELPFULNESS_THRESHOLD = 0.25  # |β_n| above this, with cross-camp evidence
@@ -72,11 +72,12 @@ def _init_factor(key: str) -> float:
 @dataclass
 class BridgingFit:
     """Result of fitting the bridging model."""
-    note_helpfulness: Dict[str, float]   # β_n per note
-    note_factor: Dict[str, float]        # δ_n per note
-    rater_factor: Dict[str, float]       # γ_u per rater
-    rater_intercept: Dict[str, float]    # α_u per rater
-    global_mean: float                   # μ
+
+    note_helpfulness: Dict[str, float]  # β_n per note
+    note_factor: Dict[str, float]  # δ_n per note
+    rater_factor: Dict[str, float]  # γ_u per rater
+    rater_intercept: Dict[str, float]  # α_u per rater
+    global_mean: float  # μ
     iterations: int = ALS_ITERATIONS
 
     def camps(self, rater_id: str) -> int:
@@ -88,8 +89,9 @@ class BridgingFit:
             return -1
         return 0
 
-    def cross_camp_support(self, note_id: str,
-                           ratings: Mapping[str, Mapping[str, float]]) -> Dict[str, int]:
+    def cross_camp_support(
+        self, note_id: str, ratings: Mapping[str, Mapping[str, float]]
+    ) -> Dict[str, int]:
         """Positive raters of this note, split by latent camp."""
         support = {"camp_pos": 0, "camp_neg": 0, "camp_neutral": 0}
         for rater_id, value in ratings.get(note_id, {}).items():
@@ -104,9 +106,11 @@ class BridgingFit:
         return support
 
 
-def fit_bridging(ratings: Mapping[str, Mapping[str, float]],
-                 lam: float = LAMBDA,
-                 iterations: int = ALS_ITERATIONS) -> BridgingFit:
+def fit_bridging(
+    ratings: Mapping[str, Mapping[str, float]],
+    lam: float = LAMBDA,
+    iterations: int = ALS_ITERATIONS,
+) -> BridgingFit:
     """Fit the bridging model.
 
     ``ratings``: note_id -> {rater_id: value in [-1, 1]}.
@@ -120,9 +124,9 @@ def fit_bridging(ratings: Mapping[str, Mapping[str, float]],
     all_vals = [v for m in ratings.values() for v in m.values()]
     mu = sum(all_vals) / len(all_vals)
 
-    beta = {n: 0.0 for n in notes}                       # note helpfulness
+    beta = {n: 0.0 for n in notes}  # note helpfulness
     delta = {n: _init_factor("note:" + n) for n in notes}  # note factor
-    alpha = {u: 0.0 for u in raters}                     # rater intercept
+    alpha = {u: 0.0 for u in raters}  # rater intercept
     gamma = {u: _init_factor("rater:" + u) for u in raters}  # rater factor
 
     # note -> raters, rater -> notes adjacency
@@ -132,8 +136,9 @@ def fit_bridging(ratings: Mapping[str, Mapping[str, float]],
         for u in m:
             rater_notes[u].append(n)
 
-    def solve_2x2(s11: float, s12: float, s22: float,
-                  t1: float, t2: float) -> Tuple[float, float]:
+    def solve_2x2(
+        s11: float, s12: float, s22: float, t1: float, t2: float
+    ) -> Tuple[float, float]:
         a11, a12, a22 = s11 + lam, s12, s22 + lam
         det = a11 * a22 - a12 * a12
         if abs(det) < 1e-12:
@@ -176,8 +181,9 @@ def fit_bridging(ratings: Mapping[str, Mapping[str, float]],
     )
 
 
-def note_status(note_id: str, fit: BridgingFit,
-                ratings: Mapping[str, Mapping[str, float]]) -> Dict[str, object]:
+def note_status(
+    note_id: str, fit: BridgingFit, ratings: Mapping[str, Mapping[str, float]]
+) -> Dict[str, object]:
     """Honest status label for a note, with the evidence attached."""
     n_ratings = len(ratings.get(note_id, {}))
     helpfulness = fit.note_helpfulness.get(note_id, 0.0)
@@ -207,6 +213,7 @@ def note_status(note_id: str, fit: BridgingFit,
 # Local store — ratings registry with hermetic JSON persistence
 # ---------------------------------------------------------------------------
 
+
 def _home() -> Path:
     override = os.environ.get("LEVI_HOME")
     if override:
@@ -226,7 +233,9 @@ class BridgingError(ValueError):
 class Note:
     id: str
     text: str
-    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
 
 class BridgingStore:
@@ -277,7 +286,11 @@ class BridgingStore:
         rater_id = rater_id.strip()
         if not rater_id:
             raise BridgingError("rater id must be non-empty")
-        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(value)
+        ):
             raise BridgingError(f"rating must be a finite number, got {value!r}")
         if not -1.0 <= value <= 1.0:
             raise BridgingError(f"rating must be in [-1, 1], got {value!r}")
@@ -304,7 +317,9 @@ class BridgingStore:
             lines.append(f"           {note.text[:80]}")
         if not rows:
             lines.append("  (none — add with: bridging note --text ...)")
-        lines += ["",
-                  "BRIDGING-HELPFUL = rated helpful by raters on BOTH sides of the",
-                  "latent disagreement axis. No central moderator involved."]
+        lines += [
+            "",
+            "BRIDGING-HELPFUL = rated helpful by raters on BOTH sides of the",
+            "latent disagreement axis. No central moderator involved.",
+        ]
         return "\n".join(lines)

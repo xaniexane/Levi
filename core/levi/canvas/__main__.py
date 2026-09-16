@@ -20,7 +20,12 @@ import argparse
 import sys
 from pathlib import Path
 
-from levi.canvas.artifacts import ARTIFACT_TYPES, ArtifactStore, CanvasError, default_home
+from levi.canvas.artifacts import (
+    ARTIFACT_TYPES,
+    ArtifactStore,
+    CanvasError,
+    default_home,
+)
 
 
 def _store(a) -> ArtifactStore:
@@ -137,37 +142,50 @@ def main(argv=None) -> int:
         p.add_argument("--text", default=None, help="content as argument")
 
     p = sub.add_parser("new", help="create an artifact")
-    p.add_argument("id"); p.add_argument("--type", required=True, choices=ARTIFACT_TYPES)
-    p.add_argument("--title", required=True); _src(p)
+    p.add_argument("id")
+    p.add_argument("--type", required=True, choices=ARTIFACT_TYPES)
+    p.add_argument("--title", required=True)
+    _src(p)
     p.set_defaults(func=cmd_new)
 
     p = sub.add_parser("edit", help="append a new version")
-    p.add_argument("id"); p.add_argument("--note", default=""); _src(p)
+    p.add_argument("id")
+    p.add_argument("--note", default="")
+    _src(p)
     p.set_defaults(func=cmd_edit)
 
     p = sub.add_parser("show", help="print a version")
-    p.add_argument("id"); p.add_argument("--version", type=int, default=None)
+    p.add_argument("id")
+    p.add_argument("--version", type=int, default=None)
     p.add_argument("--file", default=None, help="write to file instead")
     p.set_defaults(func=cmd_show)
 
     p = sub.add_parser("versions", help="list versions")
-    p.add_argument("id"); p.set_defaults(func=cmd_versions)
+    p.add_argument("id")
+    p.set_defaults(func=cmd_versions)
 
     p = sub.add_parser("diff", help="diff two versions")
-    p.add_argument("id"); p.add_argument("a", type=int); p.add_argument("b", type=int)
+    p.add_argument("id")
+    p.add_argument("a", type=int)
+    p.add_argument("b", type=int)
     p.set_defaults(func=cmd_diff)
 
     p = sub.add_parser("rename", help="rename an artifact")
-    p.add_argument("id"); p.add_argument("--title", required=True)
+    p.add_argument("id")
+    p.add_argument("--title", required=True)
     p.set_defaults(func=cmd_rename)
 
-    p = sub.add_parser("list", help="list artifacts"); p.set_defaults(func=cmd_list)
+    p = sub.add_parser("list", help="list artifacts")
+    p.set_defaults(func=cmd_list)
 
     p = sub.add_parser("delete", help="delete an artifact")
-    p.add_argument("id"); p.set_defaults(func=cmd_delete)
+    p.add_argument("id")
+    p.set_defaults(func=cmd_delete)
 
     p = sub.add_parser("export", help="export all versions + manifest")
-    p.add_argument("id"); p.add_argument("dest"); p.set_defaults(func=cmd_export)
+    p.add_argument("id")
+    p.add_argument("dest")
+    p.set_defaults(func=cmd_export)
 
     args = ap.parse_args(argv)
     return args.func(args)

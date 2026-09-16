@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import urllib.parse
 from html.parser import HTMLParser
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 from levi.research.deepweb import PoliteCrawler, extract_text
 
@@ -85,8 +85,9 @@ class SiteCrawl:
     allows (still polite, still robots-honoring).
     """
 
-    def __init__(self, fetcher=None, max_pages: int = 50,
-                 max_depth: int = 2, scope: str = "host") -> None:
+    def __init__(
+        self, fetcher=None, max_pages: int = 50, max_depth: int = 2, scope: str = "host"
+    ) -> None:
         if scope not in ("host", "any"):
             raise ValueError("scope must be 'host' or 'any'")
         if max_pages < 1 or max_depth < 0:
@@ -120,14 +121,16 @@ class SiteCrawl:
             if "html" not in (content_type or "").lower():
                 continue
             outlinks = extract_links(body, url)
-            documents.append(Document(
-                doc_id=doc_id_for(url),
-                url=url,
-                title=title_of(body) or url,
-                text=extract_text(body, limit=MAX_TEXT_CHARS),
-                outlinks=outlinks,
-                source="crawl",
-            ))
+            documents.append(
+                Document(
+                    doc_id=doc_id_for(url),
+                    url=url,
+                    title=title_of(body) or url,
+                    text=extract_text(body, limit=MAX_TEXT_CHARS),
+                    outlinks=outlinks,
+                    source="crawl",
+                )
+            )
             if depth < self.max_depth:
                 for link in outlinks:
                     host = (urllib.parse.urlparse(link).hostname or "").lower()

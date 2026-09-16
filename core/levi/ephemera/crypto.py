@@ -40,7 +40,9 @@ KDF_ITERATIONS = 210_000
 KEY_LEN = 32  # 256-bit keys throughout
 
 
-def derive_key(passphrase: bytes, salt: bytes, iterations: int = KDF_ITERATIONS) -> bytes:
+def derive_key(
+    passphrase: bytes, salt: bytes, iterations: int = KDF_ITERATIONS
+) -> bytes:
     """PBKDF2-HMAC-SHA256 key derivation (a reviewed primitive)."""
     return hashlib.pbkdf2_hmac("sha256", passphrase, salt, iterations, dklen=KEY_LEN)
 
@@ -52,6 +54,7 @@ def new_salt(n: int = 16) -> bytes:
 # ---------------------------------------------------------------------------
 # Stream cipher: SHA-256 CTR (best-effort composition — see module docstring)
 # ---------------------------------------------------------------------------
+
 
 def _keystream(key: bytes, nonce: bytes, length: int) -> bytes:
     out = bytearray()

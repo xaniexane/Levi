@@ -19,15 +19,67 @@ import sys
 from datetime import datetime
 
 CATEGORIES = {
-    "images": {"jpg", "jpeg", "png", "gif", "bmp", "webp", "svg", "tiff", "tif", "ico", "heic"},
-    "documents": {"pdf", "doc", "docx", "odt", "txt", "md", "markdown", "rtf",
-                  "xls", "xlsx", "csv", "ppt", "pptx", "epub", "tex"},
+    "images": {
+        "jpg",
+        "jpeg",
+        "png",
+        "gif",
+        "bmp",
+        "webp",
+        "svg",
+        "tiff",
+        "tif",
+        "ico",
+        "heic",
+    },
+    "documents": {
+        "pdf",
+        "doc",
+        "docx",
+        "odt",
+        "txt",
+        "md",
+        "markdown",
+        "rtf",
+        "xls",
+        "xlsx",
+        "csv",
+        "ppt",
+        "pptx",
+        "epub",
+        "tex",
+    },
     "audio": {"mp3", "wav", "flac", "ogg", "oga", "m4a", "aac", "opus"},
     "video": {"mp4", "mkv", "avi", "mov", "webm", "m4v", "mpg", "mpeg"},
     "archives": {"zip", "tar", "gz", "bz2", "xz", "7z", "rar", "tgz"},
-    "code": {"py", "js", "ts", "tsx", "jsx", "sh", "bash", "html", "htm", "css",
-             "json", "yml", "yaml", "xml", "java", "c", "h", "cpp", "go", "rs",
-             "php", "rb", "sql", "toml", "ini", "cfg"},
+    "code": {
+        "py",
+        "js",
+        "ts",
+        "tsx",
+        "jsx",
+        "sh",
+        "bash",
+        "html",
+        "htm",
+        "css",
+        "json",
+        "yml",
+        "yaml",
+        "xml",
+        "java",
+        "c",
+        "h",
+        "cpp",
+        "go",
+        "rs",
+        "php",
+        "rb",
+        "sql",
+        "toml",
+        "ini",
+        "cfg",
+    },
 }
 
 RECEIPT_NAME = "moves_receipt.log"
@@ -79,13 +131,24 @@ def plan_moves(target):
 def main(argv=None):
     ap = argparse.ArgumentParser(
         description="Sort files in a directory into category subfolders. "
-                    "Dry-run by default; use --apply to move.")
-    ap.add_argument("target", nargs="?", default=".",
-                    help="directory to organize (default: current dir)")
-    ap.add_argument("--apply", action="store_true",
-                    help="perform the moves (default: dry-run, print plan only)")
-    ap.add_argument("--receipt", default=None,
-                    help="receipt log path (default: <target>/moves_receipt.log)")
+        "Dry-run by default; use --apply to move."
+    )
+    ap.add_argument(
+        "target",
+        nargs="?",
+        default=".",
+        help="directory to organize (default: current dir)",
+    )
+    ap.add_argument(
+        "--apply",
+        action="store_true",
+        help="perform the moves (default: dry-run, print plan only)",
+    )
+    ap.add_argument(
+        "--receipt",
+        default=None,
+        help="receipt log path (default: <target>/moves_receipt.log)",
+    )
     args = ap.parse_args(argv)
 
     target = os.path.abspath(args.target)

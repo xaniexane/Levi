@@ -61,7 +61,12 @@ class Stage:
     raw: str = ""
 
     def to_dict(self) -> dict[str, Any]:
-        return {"kind": self.kind, "name": self.name, "args": dict(self.args), "raw": self.raw}
+        return {
+            "kind": self.kind,
+            "name": self.name,
+            "args": dict(self.args),
+            "raw": self.raw,
+        }
 
 
 @dataclass
@@ -193,6 +198,7 @@ def parse(text: str) -> Pipeline:
 # AI stage
 # ---------------------------------------------------------------------------
 
+
 def _offline_fallback_reason(prompt: str, stdin_text: str) -> str:
     """Deterministic offline rules engine for the ai stage.
 
@@ -212,7 +218,9 @@ def _offline_fallback_reason(prompt: str, stdin_text: str) -> str:
     return summary
 
 
-def ai_reason(prompt: str, stdin_text: str = "", *, max_steps: int = 3) -> tuple[str, str]:
+def ai_reason(
+    prompt: str, stdin_text: str = "", *, max_steps: int = 3
+) -> tuple[str, str]:
     """Run an AI-reasoning stage.  Returns ``(output, note)``.
 
     Tries LEVI's real agent runtime first (lazy import — this module must
@@ -235,7 +243,9 @@ def ai_reason(prompt: str, stdin_text: str = "", *, max_steps: int = 3) -> tuple
     except Exception as exc:  # agent runtime missing/broken -> honest fallback
         note = f"agent runtime unavailable ({type(exc).__name__}); offline fallback"
         return _offline_fallback_reason(prompt, stdin_text), note
-    return _offline_fallback_reason(prompt, stdin_text), "agent returned empty; offline fallback"
+    return _offline_fallback_reason(
+        prompt, stdin_text
+    ), "agent returned empty; offline fallback"
 
 
 def _transcript_text(transcript: Any) -> str:
@@ -251,7 +261,9 @@ def _transcript_text(transcript: Any) -> str:
             content = getattr(msg, "content", None) or (
                 msg.get("content") if isinstance(msg, dict) else None
             )
-            role = getattr(msg, "role", None) or (msg.get("role") if isinstance(msg, dict) else None)
+            role = getattr(msg, "role", None) or (
+                msg.get("role") if isinstance(msg, dict) else None
+            )
             if isinstance(content, str) and content.strip() and role != "user":
                 return content
     text = str(transcript)
@@ -307,7 +319,9 @@ def run(
             definition = registry.get(stage.name)
         except DefinitionError as exc:
             pipeline.results.append(
-                StageResult(stage, False, decision=PolicyDecision(False, "permission", str(exc)))
+                StageResult(
+                    stage, False, decision=PolicyDecision(False, "permission", str(exc))
+                )
             )
             break
 
@@ -346,10 +360,16 @@ def run(
         elif stage.kind == "reply":
             rendered = _render_reply_args(stage, stream)
             try:
-                definition.render({"subject": rendered["subject"], "body": rendered["body"]})
+                definition.render(
+                    {"subject": rendered["subject"], "body": rendered["body"]}
+                )
             except DefinitionError as exc:
                 pipeline.results.append(
-                    StageResult(stage, False, decision=PolicyDecision(False, "permission", str(exc)))
+                    StageResult(
+                        stage,
+                        False,
+                        decision=PolicyDecision(False, "permission", str(exc)),
+                    )
                 )
                 break
             if send_reply is None:
@@ -365,7 +385,9 @@ def run(
                 )
                 break
             pipeline.results.append(
-                StageResult(stage, True, stdout=f"reply sent to {reply_to}", decision=decision)
+                StageResult(
+                    stage, True, stdout=f"reply sent to {reply_to}", decision=decision
+                )
             )
         else:  # cmd
             try:
@@ -374,7 +396,11 @@ def run(
                 )
             except DefinitionError as exc:
                 pipeline.results.append(
-                    StageResult(stage, False, decision=PolicyDecision(False, "permission", str(exc)))
+                    StageResult(
+                        stage,
+                        False,
+                        decision=PolicyDecision(False, "permission", str(exc)),
+                    )
                 )
                 break
             except Exception as exc:

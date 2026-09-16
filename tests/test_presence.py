@@ -2,7 +2,6 @@
 
 import json
 import socket
-import threading
 import time
 
 import pytest
@@ -21,6 +20,7 @@ from levi.presence.server import PresenceHub
 # ---------------------------------------------------------------------------
 # RoomBook: pure state machine
 # ---------------------------------------------------------------------------
+
 
 def _book_with_two():
     book = RoomBook()
@@ -125,6 +125,7 @@ def test_heartbeat_and_touch_keep_member_alive():
 # PresenceHub: real sockets on loopback
 # ---------------------------------------------------------------------------
 
+
 class _Client:
     """Minimal JSON-lines client for hub tests."""
 
@@ -221,6 +222,7 @@ def test_hub_who_lists_members(hub):
 # Discovery: beacons over loopback UDP
 # ---------------------------------------------------------------------------
 
+
 def _free_udp_port():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(("127.0.0.1", 0))
@@ -233,8 +235,13 @@ def test_beacon_roundtrip_and_expiry():
     port = _free_udp_port()
     listener = BeaconListener(bind=("127.0.0.1", port), ttl=0.4).start()
     try:
-        beacon = Beacon(hub_id=new_id("hub"), name="test-hub",
-                        host="127.0.0.1", port=1234, rooms=["lounge"])
+        beacon = Beacon(
+            hub_id=new_id("hub"),
+            name="test-hub",
+            host="127.0.0.1",
+            port=1234,
+            rooms=["lounge"],
+        )
         send_beacon(beacon, targets=[("127.0.0.1", port)])
         deadline = time.time() + 3
         peers = []
@@ -269,9 +276,12 @@ def test_beacon_sender_thread_announces(hub):
     listener = BeaconListener(bind=("127.0.0.1", port), ttl=5.0).start()
     host, hub_port = hub.address
     sender = BeaconSender(
-        Beacon(hub_id=new_id("hub"), name="sender-hub",
-               host="127.0.0.1", port=hub_port),
-        targets=[("127.0.0.1", port)], interval=0.1)
+        Beacon(
+            hub_id=new_id("hub"), name="sender-hub", host="127.0.0.1", port=hub_port
+        ),
+        targets=[("127.0.0.1", port)],
+        interval=0.1,
+    )
     try:
         sender.start()
         deadline = time.time() + 3
@@ -289,8 +299,10 @@ def test_beacon_sender_thread_announces(hub):
 # CLI surface
 # ---------------------------------------------------------------------------
 
+
 def test_cli_help_exits_zero(capsys):
     from levi.presence.__main__ import main
+
     with pytest.raises(SystemExit) as e:
         main(["--help"])
     assert e.value.code == 0
@@ -298,6 +310,7 @@ def test_cli_help_exits_zero(capsys):
 
 def test_cli_default_name_from_tmp_home(monkeypatch, tmp_path):
     import levi.presence.__main__ as cli
+
     monkeypatch.setenv("HOME", str(tmp_path))
     cfg = tmp_path / ".levi" / "presence"
     cfg.mkdir(parents=True)
@@ -307,25 +320,47 @@ def test_cli_default_name_from_tmp_home(monkeypatch, tmp_path):
 
 def test_cli_rooms_and_create_and_say(hub, capsys):
     from levi.presence.__main__ import main
+
     host, port = hub.address
     h, p = str(host), str(port)
-    assert main(["create", "--host", h, "--port", p, "--room", "lounge",
-                 "--topic", "chill"]) == 0
+    assert (
+        main(
+            ["create", "--host", h, "--port", p, "--room", "lounge", "--topic", "chill"]
+        )
+        == 0
+    )
     assert main(["rooms", "--host", h, "--port", p]) == 0
     out = capsys.readouterr().out
     assert "lounge" in out
-    assert main(["say", "--host", h, "--port", p, "--room", "lounge",
-                 "--name", "cli-tester", "hello", "world"]) == 0
+    assert (
+        main(
+            [
+                "say",
+                "--host",
+                h,
+                "--port",
+                p,
+                "--room",
+                "lounge",
+                "--name",
+                "cli-tester",
+                "hello",
+                "world",
+            ]
+        )
+        == 0
+    )
     assert "sent to #lounge" in capsys.readouterr().out
     # say to a missing room fails honestly
-    assert main(["say", "--host", h, "--port", p, "--room", "nowhere",
-                 "x"]) == 1
+    assert main(["say", "--host", h, "--port", p, "--room", "nowhere", "x"]) == 1
 
 
 class _FakeHandler:
     """Minimal handler double: dispatch paths only need _send."""
+
     def __init__(self):
         self.sent = []
+
     def _send(self, obj):
         self.sent.append(obj)
 
@@ -338,8 +373,10 @@ def test_stale_close_does_not_evict_reattached_client(hub):
     teardown deleted it and the next op failed 'unknown client'."""
     old, new = _FakeHandler(), _FakeHandler()
     cid = hub.dispatch(old, None, {"op": "hello", "name": "alice"})
-    assert hub.dispatch(new, None, {"op": "hello", "name": "alice",
-                                    "client_id": cid}) == cid
+    assert (
+        hub.dispatch(new, None, {"op": "hello", "name": "alice", "client_id": cid})
+        == cid
+    )
     hub.client_gone(old, cid)  # stale first connection tears down late
     hub.dispatch(new, cid, {"op": "create", "room": "lounge"})
     hub.dispatch(new, cid, {"op": "join", "room": "lounge"})

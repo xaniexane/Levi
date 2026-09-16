@@ -115,7 +115,9 @@ def gpg_available() -> bool:
     return shutil.which("gpg") is not None
 
 
-def _run_gpg_verify(sig_path: Path, data_path: Optional[Path]) -> tuple[bool, Optional[str], Optional[str], str]:
+def _run_gpg_verify(
+    sig_path: Path, data_path: Optional[Path]
+) -> tuple[bool, Optional[str], Optional[str], str]:
     """Run ``gpg --verify`` and parse ``--status-fd`` output.
 
     Returns ``(valid, fingerprint, uid, detail)``.  ``valid`` is True only
@@ -146,7 +148,7 @@ def _run_gpg_verify(sig_path: Path, data_path: Optional[Path]) -> tuple[bool, Op
     for raw in proc.stdout.decode("utf-8", "replace").splitlines():
         if not raw.startswith("[GNUPG:] "):
             continue
-        tag, _, rest = raw[len("[GNUPG:] "):].partition(" ")
+        tag, _, rest = raw[len("[GNUPG:] ") :].partition(" ")
         if tag == "VALIDSIG":
             valid = True
             fingerprint = rest.split()[0] if rest else None
@@ -157,7 +159,9 @@ def _run_gpg_verify(sig_path: Path, data_path: Optional[Path]) -> tuple[bool, Op
     return valid, fingerprint, uid, detail
 
 
-def verify_detached(signature: bytes, data: bytes) -> tuple[bool, Optional[str], Optional[str], str]:
+def verify_detached(
+    signature: bytes, data: bytes
+) -> tuple[bool, Optional[str], Optional[str], str]:
     """Verify a detached PGP signature over ``data``.
 
     Returns ``(valid, fingerprint, uid, detail)``.  Raises
@@ -268,9 +272,7 @@ def classify_message(
     pinned = {(p or "").upper().replace(" ", "") for p in (pins or [])}
     parts = extract_signed_parts(msg)
     if not parts:
-        return Classification(
-            UNVERIFIED, detail="no PGP signature found in message"
-        )
+        return Classification(UNVERIFIED, detail="no PGP signature found in message")
 
     signed_bytes, sig_bytes = parts[0]
     clearsigned = signed_bytes == sig_bytes

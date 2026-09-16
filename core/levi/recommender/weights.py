@@ -26,8 +26,7 @@ def normalize_weights(weights: Dict[str, float]) -> Dict[str, float]:
             raise ValueError("weight vector missing signal %r" % name)
         value = float(weights[name])
         if not math.isfinite(value) or value < 0:
-            raise ValueError("weight %r must be a finite non-negative number"
-                             % name)
+            raise ValueError("weight %r must be a finite non-negative number" % name)
         cleaned[name] = value
     total = sum(cleaned.values())
     if total <= 0:
@@ -45,8 +44,7 @@ def parse_weights(spec: str) -> Dict[str, float]:
         key, _, value = chunk.partition("=")
         key = key.strip()
         if key not in SIGNALS:
-            raise ValueError("unknown signal %r (want: %s)"
-                             % (key, ", ".join(SIGNALS)))
+            raise ValueError("unknown signal %r (want: %s)" % (key, ", ".join(SIGNALS)))
         try:
             parts[key] = float(value)
         except ValueError:

@@ -238,7 +238,9 @@ def test_collision_refused_different_author(tmp_path):
 def test_upgrade_allowed_for_higher_version(tmp_path):
     home = tmp_path / "home"
     install(make_package(tmp_path / "v1", version="1.0.0"), home=home, policy=None)
-    record = install(make_package(tmp_path / "v2", version="1.1.0"), home=home, policy=None)
+    record = install(
+        make_package(tmp_path / "v2", version="1.1.0"), home=home, policy=None
+    )
     assert record["version"] == "1.1.0"
     reg = GalaxyRegistry(home)
     assert len(reg.list()) == 1  # replaced, not duplicated
@@ -273,9 +275,9 @@ def test_tamper_detected_after_modifying_installed_file(tmp_path):
 def test_tamper_detected_after_adding_file(tmp_path):
     home = tmp_path / "home"
     record = install(make_package(tmp_path / "src"), home=home, policy=None)
-    (home / "galaxy" / "packages" / "com.example.demo" / "1.0.0" / "evil.sh").write_text(
-        "x", encoding="utf-8"
-    )
+    (
+        home / "galaxy" / "packages" / "com.example.demo" / "1.0.0" / "evil.sh"
+    ).write_text("x", encoding="utf-8")
     with pytest.raises(TamperError):
         gtrust.verify_install(home, record)
 
@@ -283,7 +285,15 @@ def test_tamper_detected_after_adding_file(tmp_path):
 def test_tamper_detected_after_removing_file(tmp_path):
     home = tmp_path / "home"
     record = install(make_package(tmp_path / "src"), home=home, policy=None)
-    (home / "galaxy" / "packages" / "com.example.demo" / "1.0.0" / "data" / "seed.txt").unlink()
+    (
+        home
+        / "galaxy"
+        / "packages"
+        / "com.example.demo"
+        / "1.0.0"
+        / "data"
+        / "seed.txt"
+    ).unlink()
     with pytest.raises(TamperError):
         gtrust.verify_install(home, record)
 
@@ -324,7 +334,9 @@ def test_capability_token_least_privilege(tmp_path):
         ginstall.verify_capability(token, "galaxy.subprocess.run", record["id"])
         is False
     )
-    assert ginstall.verify_capability(token, "galaxy.net.fetch", "someone.else") is False
+    assert (
+        ginstall.verify_capability(token, "galaxy.net.fetch", "someone.else") is False
+    )
 
 
 def test_guarded_package_call_refuses_unpermitted(tmp_path):
@@ -348,8 +360,13 @@ def test_guarded_package_call_refuses_unpermitted(tmp_path):
 
 
 def test_empty_grant_permits_nothing(tmp_path):
-    token = ginstall.issue_capability("com.example.demo", {"network": False, "fs": [], "subprocess": False})
-    assert ginstall.verify_capability(token, "galaxy.net.fetch", "com.example.demo") is False
+    token = ginstall.issue_capability(
+        "com.example.demo", {"network": False, "fs": [], "subprocess": False}
+    )
+    assert (
+        ginstall.verify_capability(token, "galaxy.net.fetch", "com.example.demo")
+        is False
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -360,13 +377,20 @@ def test_empty_grant_permits_nothing(tmp_path):
 def test_registry_search(tmp_path):
     home = tmp_path / "home"
     install(
-        make_package(tmp_path / "a", name="weather", description="hyperlocal weather forecasts"),
+        make_package(
+            tmp_path / "a", name="weather", description="hyperlocal weather forecasts"
+        ),
         home=home,
         policy=None,
     )
     install(
-        make_package(tmp_path / "b", name="stocks", author="org.data",
-                     description="market data", capabilities=("finance.quote.*",)),
+        make_package(
+            tmp_path / "b",
+            name="stocks",
+            author="org.data",
+            description="market data",
+            capabilities=("finance.quote.*",),
+        ),
         home=home,
         policy=None,
     )

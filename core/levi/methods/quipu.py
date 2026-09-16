@@ -70,7 +70,7 @@ def decode_knots(clusters: tuple[tuple[int, int], ...]) -> int:
     for level, knots in clusters:
         if level < 0 or knots < 1 or knots > 9:
             raise ValueError(f"invalid knot cluster {(level, knots)}")
-        total += knots * (10 ** level)
+        total += knots * (10**level)
     return total
 
 
@@ -112,18 +112,25 @@ class Khipu:
             )
         for cname, cd in data.get("cords", {}).items():
             cord = Cord(cname)
-            cord.knots = [tuple(tuple(k) for k in cluster)
-                          for cluster in cd.get("knots", [])]
+            cord.knots = [
+                tuple(tuple(k) for k in cluster) for cluster in cd.get("knots", [])
+            ]
             cord.children = list(cd.get("children", []))
             self._cords[cname] = cord
 
     def save(self) -> None:
         _persist.save_json(
             self._store,
-            {"name": self.name,
-             "cords": {cname: {"knots": [list(map(list, cl)) for cl in c.knots],
-                               "children": c.children}
-                       for cname, c in self._cords.items()}},
+            {
+                "name": self.name,
+                "cords": {
+                    cname: {
+                        "knots": [list(map(list, cl)) for cl in c.knots],
+                        "children": c.children,
+                    }
+                    for cname, c in self._cords.items()
+                },
+            },
         )
 
     # -- building the hierarchy ----------------------------------------------
@@ -157,13 +164,15 @@ class Khipu:
     def audit(self, cord: str = "root", _depth: int = 0) -> list[dict]:
         """Unroll a number to its source knots: every level, every cord."""
         node = self._get(cord)
-        rows = [{
-            "cord": cord,
-            "depth": _depth,
-            "own": node.own_total(),
-            "knot_clusters": [list(map(list, cl)) for cl in node.knots],
-            "rollup": self.rollup(cord),
-        }]
+        rows = [
+            {
+                "cord": cord,
+                "depth": _depth,
+                "own": node.own_total(),
+                "knot_clusters": [list(map(list, cl)) for cl in node.knots],
+                "rollup": self.rollup(cord),
+            }
+        ]
         for child in node.children:
             rows.extend(self.audit(child, _depth + 1))
         return rows
@@ -183,22 +192,23 @@ class Khipu:
             if node is None or cord_name in seen:
                 return 0
             seen.add(cord_name)
-            return node.own_total() + sum(subtotal(c, seen)
-                                          for c in node.children)
+            return node.own_total() + sum(subtotal(c, seen) for c in node.children)
 
         for name, node in self._cords.items():
             for c in node.children:
                 if c not in self._cords:
                     problems.append(f"cord {name!r}: pendant {c!r} is missing")
             expected = node.own_total() + sum(
-                subtotal(c, set()) for c in node.children
-                if c in self._cords)
+                subtotal(c, set()) for c in node.children if c in self._cords
+            )
             # Independent recomputation: a mismatch here means structural
             # corruption (e.g. a cycle or double-counted pendant).
             check = node.own_total() + sum(
                 self._cords[c].own_total()
                 + sum(subtotal(g, set()) for g in self._cords[c].children)
-                for c in node.children if c in self._cords)
+                for c in node.children
+                if c in self._cords
+            )
             if expected != check:
                 problems.append(f"cord {name!r}: roll-up inconsistency")
             seen = set()

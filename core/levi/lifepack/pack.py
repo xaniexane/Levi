@@ -231,9 +231,7 @@ def _export_growth(home: Path) -> Dict[str, Any]:
         # them in the home being exported, same rule as growth.status().
         store = MemoryStore(data_dir=home / "memory")
         learnings = sum(
-            1
-            for e in store.list(limit=50_000)
-            if "growth" in (e.tags or [])
+            1 for e in store.list(limit=50_000) if "growth" in (e.tags or [])
         )
         stage, blurb = journal.developmental_stage(learnings, cycles)
         return {
@@ -386,13 +384,19 @@ def validate_pack(pack: Dict[str, Any]) -> None:
         if not isinstance(entry, dict):
             raise LifepackError(f"life pack memory entry #{i} must be an object")
         if not isinstance(entry.get("id"), str) or not entry["id"]:
-            raise LifepackError(f"life pack memory entry #{i} needs a non-empty string 'id'")
+            raise LifepackError(
+                f"life pack memory entry #{i} needs a non-empty string 'id'"
+            )
     skills = sections["skills"]
     if not isinstance(skills, dict) or not isinstance(skills.get("manifest"), list):
-        raise LifepackError("life pack 'skills' section must be an object with a 'manifest' list")
+        raise LifepackError(
+            "life pack 'skills' section must be an object with a 'manifest' list"
+        )
     for i, item in enumerate(skills["manifest"]):
         if not isinstance(item, dict) or not isinstance(item.get("id"), str):
-            raise LifepackError(f"life pack skill manifest entry #{i} must be an object with a string 'id'")
+            raise LifepackError(
+                f"life pack skill manifest entry #{i} must be an object with a string 'id'"
+            )
 
 
 # ── Preview (read-only diff) ───────────────────────────────────────
@@ -494,7 +498,9 @@ def preview_import(pack: Dict[str, Any], home: Optional[Path] = None) -> List[st
         detail = ""
         if status == "ok":
             atlas = caps.get("atlas")
-            detail = f" ({len(atlas)} top-level keys)" if isinstance(atlas, dict) else ""
+            detail = (
+                f" ({len(atlas)} top-level keys)" if isinstance(atlas, dict) else ""
+            )
         lines.append(f"capabilities: {status}{detail} (informational — no writes)")
     if "growth" in sections:
         growth = sections["growth"] or {}
@@ -511,7 +517,9 @@ def preview_import(pack: Dict[str, Any], home: Optional[Path] = None) -> List[st
     if "workflows" in sections:
         wfs = sections["workflows"] or {}
         status = wfs.get("status", "?")
-        names = [w.get("name") for w in (wfs.get("workflows") or []) if isinstance(w, dict)]
+        names = [
+            w.get("name") for w in (wfs.get("workflows") or []) if isinstance(w, dict)
+        ]
         lines.append(
             f"workflows: {status}"
             + (f" — {len(names)} registered: {', '.join(names)}" if names else "")
@@ -692,7 +700,11 @@ def _import_workflows(incoming: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         for w in (incoming.get("workflows") or [])
         if isinstance(w, dict) and w.get("name")
     ]
-    return {"changed": False, "status": incoming.get("status", "unknown"), "names": names}
+    return {
+        "changed": False,
+        "status": incoming.get("status", "unknown"),
+        "names": names,
+    }
 
 
 def _import_manifest(incoming: Optional[Dict[str, Any]]) -> Dict[str, Any]:
@@ -860,7 +872,7 @@ def cmd_lifepack(args: argparse.Namespace, home: Optional[Path] = None) -> int:
                 if gr.get("status") == "ok"
                 else ""
             )
-            + f" (informational — no writes)"
+            + " (informational — no writes)"
         )
         print(
             f"  workflows: {wfs['status']}"

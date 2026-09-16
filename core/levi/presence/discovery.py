@@ -65,8 +65,9 @@ class Beacon:
             return None
 
 
-def send_beacon(beacon: Beacon,
-                targets: Optional[List[Tuple[str, int]]] = None) -> None:
+def send_beacon(
+    beacon: Beacon, targets: Optional[List[Tuple[str, int]]] = None
+) -> None:
     """Send one beacon datagram to each target (default: multicast group).
 
     Uses a connected UDP socket per target: this works for unicast and
@@ -79,8 +80,9 @@ def send_beacon(beacon: Beacon,
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         try:
             # Keep multicast on the local network only.
-            sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL,
-                            struct.pack("b", 2))
+            sock.setsockopt(
+                socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, struct.pack("b", 2)
+            )
             sock.connect((host, port))
             sock.send(raw)
         except OSError:
@@ -92,9 +94,12 @@ def send_beacon(beacon: Beacon,
 class BeaconSender(threading.Thread):
     """Background thread announcing a hub until stopped."""
 
-    def __init__(self, beacon: Beacon,
-                 targets: Optional[List[Tuple[str, int]]] = None,
-                 interval: float = BEACON_INTERVAL) -> None:
+    def __init__(
+        self,
+        beacon: Beacon,
+        targets: Optional[List[Tuple[str, int]]] = None,
+        interval: float = BEACON_INTERVAL,
+    ) -> None:
         super().__init__(daemon=True, name="presence-beacon")
         self._beacon = beacon
         self._targets = targets
@@ -114,9 +119,12 @@ class BeaconSender(threading.Thread):
 class BeaconListener:
     """Collect beacons into a peer table; entries expire after the TTL."""
 
-    def __init__(self, bind: Tuple[str, int] = ("0.0.0.0", DISCOVERY_PORT),
-                 group: str = MULTICAST_GROUP,
-                 ttl: float = BEACON_TTL) -> None:
+    def __init__(
+        self,
+        bind: Tuple[str, int] = ("0.0.0.0", DISCOVERY_PORT),
+        group: str = MULTICAST_GROUP,
+        ttl: float = BEACON_TTL,
+    ) -> None:
         self._bind = bind
         self._group = group
         self._ttl = ttl
@@ -138,15 +146,16 @@ class BeaconListener:
         # the bind address is loopback (tests use unicast targets anyway).
         try:
             mreq = struct.pack(
-                "4s4s", socket.inet_aton(self._group),
-                socket.inet_aton("0.0.0.0"))
+                "4s4s", socket.inet_aton(self._group), socket.inet_aton("0.0.0.0")
+            )
             sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
         except OSError:
             pass
         sock.settimeout(0.5)
         self._sock = sock
-        self._thread = threading.Thread(target=self._loop, daemon=True,
-                                        name="presence-listen")
+        self._thread = threading.Thread(
+            target=self._loop, daemon=True, name="presence-listen"
+        )
         self._thread.start()
         return self
 
@@ -170,11 +179,13 @@ class BeaconListener:
         now = time.monotonic()
         with self._lock:
             live = [
-                beacon for beacon, seen in self._peers.values()
+                beacon
+                for beacon, seen in self._peers.values()
                 if now - seen <= self._ttl
             ]
             self._peers = {
-                hid: (b, s) for hid, (b, s) in self._peers.items()
+                hid: (b, s)
+                for hid, (b, s) in self._peers.items()
                 if now - s <= self._ttl
             }
         return live

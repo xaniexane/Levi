@@ -37,15 +37,17 @@ _NOTATION = re.compile(r"^[0-9]+(\.[0-9]+)*$")
 
 @dataclass
 class Card:
-    notation: str        # UDC-style hierarchical class, e.g. "004.738.5"
+    notation: str  # UDC-style hierarchical class, e.g. "004.738.5"
     subject: str
-    relation: str        # one of RELATIONS
+    relation: str  # one of RELATIONS
     object: str
-    note: str = ""       # the fact, in one line
+    note: str = ""  # the fact, in one line
 
     def validate(self) -> None:
         if not _NOTATION.fullmatch(self.notation or ""):
-            raise ValueError(f"notation {self.notation!r} must be UDC-style digits (e.g. '004.738.5')")
+            raise ValueError(
+                f"notation {self.notation!r} must be UDC-style digits (e.g. '004.738.5')"
+            )
         if not self.subject or not self.subject.strip():
             raise ValueError("subject must be non-empty")
         if self.relation not in RELATIONS:
@@ -68,7 +70,9 @@ class Mundaneum:
         if not data:
             return
         if not isinstance(data, dict) or "cards" not in data:
-            raise _persist.CorruptStoreError(f"mundaneum store {self._store} has bad shape")
+            raise _persist.CorruptStoreError(
+                f"mundaneum store {self._store} has bad shape"
+            )
         for cd in data["cards"]:
             card = Card(**cd)
             card.validate()
@@ -88,15 +92,21 @@ class Mundaneum:
         if not _NOTATION.fullmatch(notation or ""):
             raise ValueError(f"bad notation {notation!r}")
         prefix = notation + "."
-        return [(i, c) for i, c in enumerate(self.cards)
-                if c.notation == notation or c.notation.startswith(prefix)]
+        return [
+            (i, c)
+            for i, c in enumerate(self.cards)
+            if c.notation == notation or c.notation.startswith(prefix)
+        ]
 
     def about(self, topic: str) -> list[tuple[int, Card]]:
         t = topic.strip().lower()
         if not t:
             raise ValueError("topic must be non-empty")
-        return [(i, c) for i, c in enumerate(self.cards)
-                if t in c.subject.lower() or t in c.object.lower() or t in c.note.lower()]
+        return [
+            (i, c)
+            for i, c in enumerate(self.cards)
+            if t in c.subject.lower() or t in c.object.lower() or t in c.note.lower()
+        ]
 
     def brief(self, topic: str) -> dict:
         """The query-service answer: what the cards say about ``topic``,
@@ -105,8 +115,13 @@ class Mundaneum:
         by_relation: dict[str, list[dict]] = {r: [] for r in RELATIONS}
         for i, c in hits:
             by_relation[c.relation].append(
-                {"card": i, "notation": c.notation, "subject": c.subject,
-                 "object": c.object, "note": c.note}
+                {
+                    "card": i,
+                    "notation": c.notation,
+                    "subject": c.subject,
+                    "object": c.object,
+                    "note": c.note,
+                }
             )
         return {
             "topic": topic,
@@ -116,6 +131,8 @@ class Mundaneum:
             "extensions": by_relation["extends"],
             "examples": by_relation["exemplifies"],
             "related": [by_relation["about"], by_relation["relates"]],
-            "disclaimer": ("sketch-level relational index — verify against the "
-                           "full sources before quoting"),
+            "disclaimer": (
+                "sketch-level relational index — verify against the "
+                "full sources before quoting"
+            ),
         }

@@ -82,7 +82,9 @@ def _print_domain(domain) -> None:
     print(banner(domain.name, f"security domain · {domain.id}"))
     print(str(domain.defensive_summary) + "\n")
     if domain.attack_relevant and domain.attack_profile:
-        print(color("-- attack profile (threat knowledge, not instructions) --", dim=True))
+        print(
+            color("-- attack profile (threat knowledge, not instructions) --", dim=True)
+        )
         print(str(domain.attack_profile) + "\n")
     print(color("-- detection --", dim=True))
     print(str(domain.detection_notes) + "\n")
@@ -111,10 +113,7 @@ def screen_security_browser() -> None:
         page_items, total_pages = paginate(filtered, page, PAGE_SIZE)
         page = min(page, max(total_pages, 1))
         offset = (page - 1) * PAGE_SIZE
-        rows = [
-            [str(offset + i + 1), d.id, d.name]
-            for i, d in enumerate(page_items)
-        ]
+        rows = [[str(offset + i + 1), d.id, d.name] for i, d in enumerate(page_items)]
         print(banner("Security index", f"{len(filtered)} of {len(domains)} domains"))
         Table(["#", "id", "name"], rows).print()
         print(
@@ -184,7 +183,9 @@ def _enroll_scope(store: ScopeStore) -> str | None:
         print(f"Cannot enroll: {exc}")
         return None
     store.add(domain)
-    print(f"Enrolled {color(domain, fg='green', bold=True)} — recon is authorized for it and its subdomains.")
+    print(
+        f"Enrolled {color(domain, fg='green', bold=True)} — recon is authorized for it and its subdomains."
+    )
     return domain
 
 
@@ -230,9 +231,7 @@ def _run_recon_with_feed(domain: str) -> None:
         f"findings_total={len(findings)}"
     )
     if findings:
-        rows = [
-            [f.kind, f.target, f.detail[:80]] for f in findings
-        ]
+        rows = [[f.kind, f.target, f.detail[:80]] for f in findings]
         Table(["kind", "target", "detail"], rows).print()
     else:
         print("(no findings)")

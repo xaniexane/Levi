@@ -99,11 +99,13 @@ def main(argv=None) -> int:
 
     pn = sub.add_parser("pin", help="pin a command line to a named slot")
     pn.add_argument("name", help="slot name (lowercase, digits, -, _)")
-    pn.add_argument("cmdline", nargs=argparse.REMAINDER,
-                   help="command line to pin, after --")
+    pn.add_argument(
+        "cmdline", nargs=argparse.REMAINDER, help="command line to pin, after --"
+    )
     pn.add_argument("--description", default="")
-    pn.add_argument("--chord", default="",
-                    help="single-key chord binding (Opera gesture nod)")
+    pn.add_argument(
+        "--chord", default="", help="single-key chord binding (Opera gesture nod)"
+    )
     pn.add_argument("--replace", action="store_true")
 
     up = sub.add_parser("unpin", help="remove a slot")
@@ -112,11 +114,9 @@ def main(argv=None) -> int:
     sub.add_parser("list", help="list pinned dials")
 
     d = sub.add_parser("dial", help="recall a slot (print; --run to execute)")
-    d.add_argument("slot", nargs="?", default="",
-                   help="slot name or 1-based number")
+    d.add_argument("slot", nargs="?", default="", help="slot name or 1-based number")
     d.add_argument("--chord", default="", help="dial by chord key")
-    d.add_argument("--run", action="store_true",
-                   help="execute via execvp (no shell)")
+    d.add_argument("--run", action="store_true", help="execute via execvp (no shell)")
 
     sub.add_parser("seed", help="pin the starter set of LEVI workflows")
 

@@ -138,7 +138,9 @@ class UnitermIndex:
             return f"'{node[1]}'"
         if kind == "NOT":
             return f"NOT {UnitermIndex._render(node[1])}"
-        return f"({UnitermIndex._render(node[1])} {kind} {UnitermIndex._render(node[2])})"
+        return (
+            f"({UnitermIndex._render(node[1])} {kind} {UnitermIndex._render(node[2])})"
+        )
 
     def search(self, query: str, synonyms: dict[str, list[str]] | None = None) -> dict:
         """Coordinate the query. ``synonyms`` is caller-provided and reported
@@ -161,7 +163,9 @@ class UnitermIndex:
         kind = node[0]
         if kind == "TERM":
             term = node[1]
-            syns = [s.strip().lower() for s in synonyms.get(term, []) if s and s.strip()]
+            syns = [
+                s.strip().lower() for s in synonyms.get(term, []) if s and s.strip()
+            ]
             syns = [s for s in syns if s != term]
             if syns:
                 expanded[term] = syns
@@ -172,8 +176,11 @@ class UnitermIndex:
             return node
         if kind == "NOT":
             return ("NOT", self._expand_synonyms(node[1], synonyms, expanded))
-        return (kind, self._expand_synonyms(node[1], synonyms, expanded),
-                self._expand_synonyms(node[2], synonyms, expanded))
+        return (
+            kind,
+            self._expand_synonyms(node[1], synonyms, expanded),
+            self._expand_synonyms(node[2], synonyms, expanded),
+        )
 
     def vocabulary(self) -> list[str]:
         return sorted(self.postings)

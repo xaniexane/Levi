@@ -28,7 +28,9 @@ class Shorthand:
 
     def __init__(self):
         self.tokens: dict[str, str] = {}
-        self.compounds: dict[str, str] = {}  # affix marker -> template, e.g. "-q" -> "{x} with quarterly review"
+        self.compounds: dict[
+            str, str
+        ] = {}  # affix marker -> template, e.g. "-q" -> "{x} with quarterly review"
 
     # ---- lexicon ---------------------------------------------------------
     def define(self, token: str, expansion: str) -> None:
@@ -38,13 +40,19 @@ class Shorthand:
         if not token or not expansion:
             raise ValueError("token and expansion must be non-empty")
         if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", token):
-            raise ValueError(f"token {token!r} must be alphanumeric (may contain ._- inside)")
+            raise ValueError(
+                f"token {token!r} must be alphanumeric (may contain ._- inside)"
+            )
         if token in self.tokens and self.tokens[token] != expansion:
-            raise ValueError(f"token {token!r} already defined as {self.tokens[token]!r}")
+            raise ValueError(
+                f"token {token!r} already defined as {self.tokens[token]!r}"
+            )
         # no token may be a prefix-with-boundary of an existing one in a way
         # that creates ambiguity: reject if one token is a strict prefix of another
         for existing in self.tokens:
-            if existing != token and (existing.startswith(token) or token.startswith(existing)):
+            if existing != token and (
+                existing.startswith(token) or token.startswith(existing)
+            ):
                 raise ValueError(
                     f"token {token!r} collides with existing {existing!r} (prefix ambiguity)"
                 )

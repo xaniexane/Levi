@@ -11,13 +11,15 @@ from levi.organs.riem import promote, format_proposals
 
 
 def _compost(**overrides):
-    base = compost_failure({
-        "source": "deploy-pipeline",
-        "what": "deployment timed out while waiting on the test step",
-        "context": "runner queue was full during release window",
-        "ts": "2026-09-15T19:00:00Z",
-        "severity": "high",
-    })
+    base = compost_failure(
+        {
+            "source": "deploy-pipeline",
+            "what": "deployment timed out while waiting on the test step",
+            "context": "runner queue was full during release window",
+            "ts": "2026-09-15T19:00:00Z",
+            "severity": "high",
+        }
+    )
     base.update(overrides)
     return base
 
@@ -64,7 +66,9 @@ class TestProposalShape:
         assert p["kind"] == "guard-rule"
         assert isinstance(p["content"], str) and p["content"].strip()
         assert p["confidence"] == "high" or p["confidence"] in (
-            "high", "medium", "low",
+            "high",
+            "medium",
+            "low",
         )
         assert p["applied"] is False
         assert p["provenance"]["organ"] == "riem"

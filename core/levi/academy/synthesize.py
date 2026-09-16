@@ -40,23 +40,32 @@ def content_words(text: str) -> list[str]:
         out.append(w)
     return out
 
+
 BOUNDARY_NOTES = {
-    "A": ("**Boundary — defensive only.** This track teaches detection, "
-          "analysis, and hardening. It never provides offensive instruction: "
-          "no attack execution steps, payloads, exploit code, or bypass "
-          "tutorials. Knowledge of attacker behavior is used exclusively to "
-          "detect, defend, and harden."),
-    "B": ("**Method — public sources, original synthesis.** Platform "
-          "intelligence is built from public documentation and observed "
-          "behavior, rewritten in LEVI's own words. Every teardown ends with "
-          "adopt / adapt / deliberately-do-differently."),
-    "C": ("**Method — operate, don't theorize.** This track is proven "
-          "against LEVI's real modules in hermetic, offline-safe drills. "
-          "Advisory-only where money or publishing is involved."),
-    "S": ("**Rules of sparring.** Cross-track practicals inherit the "
-          "strictest boundary of every track involved. Security content stays "
-          "defensive-only. Scenarios are simulations; treat them as real "
-          "until the debrief says otherwise."),
+    "A": (
+        "**Boundary — defensive only.** This track teaches detection, "
+        "analysis, and hardening. It never provides offensive instruction: "
+        "no attack execution steps, payloads, exploit code, or bypass "
+        "tutorials. Knowledge of attacker behavior is used exclusively to "
+        "detect, defend, and harden."
+    ),
+    "B": (
+        "**Method — public sources, original synthesis.** Platform "
+        "intelligence is built from public documentation and observed "
+        "behavior, rewritten in LEVI's own words. Every teardown ends with "
+        "adopt / adapt / deliberately-do-differently."
+    ),
+    "C": (
+        "**Method — operate, don't theorize.** This track is proven "
+        "against LEVI's real modules in hermetic, offline-safe drills. "
+        "Advisory-only where money or publishing is involved."
+    ),
+    "S": (
+        "**Rules of sparring.** Cross-track practicals inherit the "
+        "strictest boundary of every track involved. Security content stays "
+        "defensive-only. Scenarios are simulations; treat them as real "
+        "until the debrief says otherwise."
+    ),
 }
 
 
@@ -79,31 +88,36 @@ _EDGE_ANGLES = [
 
 def _extension(obj: str, i: int) -> str:
     angle = _EXTENSION_ANGLES[i % len(_EXTENSION_ANGLES)]
-    return (f"Push further — {obj.rstrip('.')}, {angle}. The concept does not "
-            f"change; the demands on it do. Practice it under the harder "
-            f"condition until the easy case feels trivial.")
+    return (
+        f"Push further — {obj.rstrip('.')}, {angle}. The concept does not "
+        f"change; the demands on it do. Practice it under the harder "
+        f"condition until the easy case feels trivial."
+    )
 
 
 def _edge(obj: str, i: int) -> str:
     angle = _EDGE_ANGLES[i % len(_EDGE_ANGLES)]
-    return (f"Edge case — {obj.rstrip('.')}: {angle}. If you cannot name where "
-            f"a method fails, you do not understand the method — you only "
-            f"admire it.")
+    return (
+        f"Edge case — {obj.rstrip('.')}: {angle}. If you cannot name where "
+        f"a method fails, you do not understand the method — you only "
+        f"admire it."
+    )
 
 
 def _crosslink(link: dict) -> str:
-    return (f"Revisit this earlier {TRACK_VOICE.get(link['track'], 'track')} "
-            f"concept through today's lens: how does this session change, "
-            f"sharpen, or limit it? Write the connection in one sentence — "
-            f"vague cross-references do not count.")
+    return (
+        f"Revisit this earlier {TRACK_VOICE.get(link['track'], 'track')} "
+        f"concept through today's lens: how does this session change, "
+        f"sharpen, or limit it? Write the connection in one sentence — "
+        f"vague cross-references do not count."
+    )
 
 
 def _slug_sentences(objectives: list[str]) -> list[str]:
     return [o.rstrip(".") for o in objectives]
 
 
-def _answer_question(question: str, objectives: list[str],
-                     key_terms: list[str]) -> str:
+def _answer_question(question: str, objectives: list[str], key_terms: list[str]) -> str:
     """Compose an original answer that addresses the question in its own terms.
 
     The answer echoes the question's content words (so the mastery check can
@@ -118,7 +132,9 @@ def _answer_question(question: str, objectives: list[str],
         if n > best_n:
             best, best_n = o, n
     anchor = (best or objectives[0]).rstrip(".")
-    terms = ", ".join(key_terms[:3]) if key_terms else "the core vocabulary of this topic"
+    terms = (
+        ", ".join(key_terms[:3]) if key_terms else "the core vocabulary of this topic"
+    )
     echoed = ", ".join(qw[:8])
     return (
         f"On the question's own terms — {echoed}: {anchor.lower()}. "
@@ -128,10 +144,16 @@ def _answer_question(question: str, objectives: list[str],
     )
 
 
-def synthesize_lesson(day: int, block: int, track: str, entry: dict,
-                      research: dict, prior_context: list[str],
-                      week_phase: str,
-                      cross_links: list[dict] | None = None) -> str:
+def synthesize_lesson(
+    day: int,
+    block: int,
+    track: str,
+    entry: dict,
+    research: dict,
+    prior_context: list[str],
+    week_phase: str,
+    cross_links: list[dict] | None = None,
+) -> str:
     """Compose the full lesson markdown. Original prose throughout.
 
     Dense layers: core concepts -> extensions -> edge cases -> cross-links
@@ -150,12 +172,15 @@ def synthesize_lesson(day: int, block: int, track: str, entry: dict,
     L: list[str] = []
     L.append(f"# {title}")
     L.append("")
-    L.append(f"*LEVI Boot Camp — Day {day}, Block {block} "
-             f"({'Track ' + track if track != 'S' else 'Synthesis Sparring'}) · "
-             f"Week phase: {week_phase}*")
+    L.append(
+        f"*LEVI Boot Camp — Day {day}, Block {block} "
+        f"({'Track ' + track if track != 'S' else 'Synthesis Sparring'}) · "
+        f"Week phase: {week_phase}*"
+    )
     L.append("")
-    L.append("*Battle rhythm: brief, teach, review, drill, test, debrief. "
-             "Mastery bar: 80%.*")
+    L.append(
+        "*Battle rhythm: brief, teach, review, drill, test, debrief. Mastery bar: 80%.*"
+    )
     L.append("")
     L.append(BOUNDARY_NOTES.get(track, ""))
     L.append("")
@@ -208,8 +233,7 @@ def synthesize_lesson(day: int, block: int, track: str, entry: dict,
         L.append("## What the research confirms")
         L.append("")
         L.append(
-            "Session-time research (public sources) corroborates the framing "
-            "above:"
+            "Session-time research (public sources) corroborates the framing above:"
         )
         for f in facts:
             L.append(f"- {f}")
@@ -230,40 +254,56 @@ def synthesize_lesson(day: int, block: int, track: str, entry: dict,
     L.append("")
     if cross_links:
         for link in cross_links[:3]:
-            L.append(f"- **[{link['track']}] {link['name']}** "
-                     f"(Day {link['day']}): {_crosslink(link)}")
+            L.append(
+                f"- **[{link['track']}] {link['name']}** "
+                f"(Day {link['day']}): {_crosslink(link)}"
+            )
     else:
-        L.append("- _No prior cross-track concepts yet — later sessions will "
-                 "weave this one back in._")
+        L.append(
+            "- _No prior cross-track concepts yet — later sessions will "
+            "weave this one back in._"
+        )
     L.append("")
     L.append("## Putting it to work")
     L.append("")
     if track == "B":
         L.append("### Adopt")
-        L.append("Take directly: the patterns proven by the best platforms — "
-                 "transparent operation, explicit scope, durable provenance.")
+        L.append(
+            "Take directly: the patterns proven by the best platforms — "
+            "transparent operation, explicit scope, durable provenance."
+        )
         L.append("")
         L.append("### Adapt")
-        L.append("Reshape for LEVI: local-first, stdlib-only, free core. The "
-                 "pattern survives; the implementation changes.")
+        L.append(
+            "Reshape for LEVI: local-first, stdlib-only, free core. The "
+            "pattern survives; the implementation changes."
+        )
         L.append("")
         L.append("### Deliberately do differently")
-        L.append("Where platforms manipulate — urgency, gamification, dark "
-                 "patterns — LEVI separates information from pressure. "
-                 "Different on purpose, and able to say why.")
+        L.append(
+            "Where platforms manipulate — urgency, gamification, dark "
+            "patterns — LEVI separates information from pressure. "
+            "Different on purpose, and able to say why."
+        )
     elif track == "A":
-        L.append("The defender's takeaway: every concept in this session "
-                 "converts into one of three outputs — a detection, a hunt, "
-                 "or a hardening change. If a lesson produces none of the "
-                 "three, re-study it until it does.")
+        L.append(
+            "The defender's takeaway: every concept in this session "
+            "converts into one of three outputs — a detection, a hunt, "
+            "or a hardening change. If a lesson produces none of the "
+            "three, re-study it until it does."
+        )
     elif track == "C":
-        L.append("The operator's takeaway: run the drill against the real "
-                 "module, read the real output, and keep the receipt. LEVI "
-                 "is operated, not admired.")
+        L.append(
+            "The operator's takeaway: run the drill against the real "
+            "module, read the real output, and keep the receipt. LEVI "
+            "is operated, not admired."
+        )
     else:
-        L.append("Sparring takeaway: the scenario is the teacher. Commit to "
-                 "your calls during the exercise; the debrief is where you "
-                 "are allowed to be wrong.")
+        L.append(
+            "Sparring takeaway: the scenario is the teacher. Commit to "
+            "your calls during the exercise; the debrief is where you "
+            "are allowed to be wrong."
+        )
     L.append("")
     L.append("## Key questions, answered")
     L.append("")
@@ -274,9 +314,11 @@ def synthesize_lesson(day: int, block: int, track: str, entry: dict,
         L.append("")
     L.append("## Check yourself — retrieval, not re-reading")
     L.append("")
-    L.append("Before the exercise, answer aloud: what are the three "
-             "objectives of this session, in your own words? If you paraphrase "
-             "instead of reciting, you are ready.")
+    L.append(
+        "Before the exercise, answer aloud: what are the three "
+        "objectives of this session, in your own words? If you paraphrase "
+        "instead of reciting, you are ready."
+    )
     if sources:
         L.append("")
         L.append("## Sources consulted this session")
@@ -289,34 +331,45 @@ def synthesize_lesson(day: int, block: int, track: str, entry: dict,
 
 
 REMEDIAL_ANGLES = {
-    1: ("worked example",
+    1: (
+        "worked example",
         "Re-teach through a single concrete worked example, start to finish. "
         "No abstractions first — the concept earns its name only after the "
-        "example is fully worked."),
-    2: ("misconception confrontation",
+        "example is fully worked.",
+    ),
+    2: (
+        "misconception confrontation",
         "Re-teach by confronting the most likely misconception head-on. "
         "State the wrong mental model, show exactly where it breaks, then "
-        "replace it with the correct one."),
+        "replace it with the correct one.",
+    ),
 }
 
 
-def synthesize_remedial_lesson(day: int, block: int, track: str, entry: dict,
-                               missed_questions: list[str],
-                               missed_objectives: list[str],
-                               attempt: int, research: dict) -> str:
+def synthesize_remedial_lesson(
+    day: int,
+    block: int,
+    track: str,
+    entry: dict,
+    missed_questions: list[str],
+    missed_objectives: list[str],
+    attempt: int,
+    research: dict,
+) -> str:
     """Re-teach missed concepts from a different angle. Direct, no fluff."""
     title = entry["title"]
-    angle_name, angle_desc = REMEDIAL_ANGLES.get(
-        attempt, REMEDIAL_ANGLES[2])
+    angle_name, angle_desc = REMEDIAL_ANGLES.get(attempt, REMEDIAL_ANGLES[2])
     key_terms = research.get("key_terms", [])[:8]
     sources = research.get("sources", [])[:4]
 
     L: list[str] = []
     L.append(f"# REMEDIAL — {title} (attempt {attempt})")
     L.append("")
-    L.append(f"*LEVI Boot Camp — Day {day}, Block {block}, Track {track}. "
-             f"The gate was not passed. This session re-teaches what was "
-             f"missed, from a different angle: **{angle_name}**.*")
+    L.append(
+        f"*LEVI Boot Camp — Day {day}, Block {block}, Track {track}. "
+        f"The gate was not passed. This session re-teaches what was "
+        f"missed, from a different angle: **{angle_name}**.*"
+    )
     L.append("")
     L.append(BOUNDARY_NOTES.get(track, ""))
     L.append("")
@@ -353,9 +406,7 @@ def synthesize_remedial_lesson(day: int, block: int, track: str, entry: dict,
             )
             L.append("")
     else:
-        L.append(
-            "Misconception confrontation. The wrong mental model first:"
-        )
+        L.append("Misconception confrontation. The wrong mental model first:")
         L.append("")
         for i, o in enumerate(entry["objectives"], 1):
             L.append(
@@ -368,7 +419,8 @@ def synthesize_remedial_lesson(day: int, block: int, track: str, entry: dict,
     if key_terms:
         L.append(
             "Vocabulary that must be yours by the end of this session: "
-            + ", ".join(key_terms[:6]) + "."
+            + ", ".join(key_terms[:6])
+            + "."
         )
         L.append("")
     L.append("## Re-test terms")

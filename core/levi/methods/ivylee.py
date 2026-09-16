@@ -25,7 +25,7 @@ that isn't current are all rejected with ValueError.
 from __future__ import annotations
 
 import uuid
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import date
 from typing import Optional, Union
 
@@ -98,8 +98,9 @@ class IvyLeeDay:
     # -- the working day ---------------------------------------------------
     def queue(self) -> list[Task]:
         """Pending tasks in rank order (the assistant normally hides these)."""
-        return [self._tasks[i] for i in self._order
-                if self._tasks[i].status == "pending"]
+        return [
+            self._tasks[i] for i in self._order if self._tasks[i].status == "pending"
+        ]
 
     def current(self) -> Optional[Task]:
         """The single visible task: #1. Everything else stays hidden."""

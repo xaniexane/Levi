@@ -25,8 +25,11 @@ def build_parser() -> argparse.ArgumentParser:
     nd = sub.add_parser("new", help="start a discussion")
     nd.add_argument("--title", required=True)
     nd.add_argument("--id", default=None)
-    nd.add_argument("--community", default=None,
-                    help="community id (matches levi.communities by convention)")
+    nd.add_argument(
+        "--community",
+        default=None,
+        help="community id (matches levi.communities by convention)",
+    )
 
     rp = sub.add_parser("reply", help="post a comment or reply")
     rp.add_argument("discussion")
@@ -76,13 +79,17 @@ def main(argv=None) -> int:
 
     try:
         if args.cmd == "new":
-            d = store.new_discussion(args.title, discussion_id=args.id,
-                                     community_id=args.community)
+            d = store.new_discussion(
+                args.title, discussion_id=args.id, community_id=args.community
+            )
             print(f"discussion [{d.id}] {d.title}")
         elif args.cmd == "reply":
-            c = store.add_comment(args.discussion, args.author, args.text,
-                                  parent_id=args.to)
-            print(f"comment [{c.id}]" + (f" reply-to [{args.to[:8]}]" if args.to else ""))
+            c = store.add_comment(
+                args.discussion, args.author, args.text, parent_id=args.to
+            )
+            print(
+                f"comment [{c.id}]" + (f" reply-to [{args.to[:8]}]" if args.to else "")
+            )
         elif args.cmd == "vote":
             store.vote(args.discussion, args.comment, args.voter, args.value)
             print(f"vote {args.value}: {args.voter} -> [{args.comment[:8]}]")
@@ -90,20 +97,35 @@ def main(argv=None) -> int:
             print(store.render_tree(args.discussion, limit=args.limit))
         elif args.cmd == "explain":
             rows = store.rank(args.discussion)
-            row = next((r for r in rows if r["comment"].id == args.comment
-                        or r["comment"].id.startswith(args.comment)), None)
+            row = next(
+                (
+                    r
+                    for r in rows
+                    if r["comment"].id == args.comment
+                    or r["comment"].id.startswith(args.comment)
+                ),
+                None,
+            )
             if row is None:
                 print(f"threads: unknown comment {args.comment!r}", file=sys.stderr)
                 return 1
             c = row["comment"]
-            print(f"comment [{c.id}] by {c.author_id} (depth {row['depth']}, net {c.net:+d})")
-            print(f"  quality={row['quality']:.3f} "
-                  f"(voteness={row['voteness']:.2f} substance={row['substance']:.2f} "
-                  f"depthness={row['depthness']:.2f})")
-            print(f"  bridging={row['bridging']:.3f} (cross-camp consensus, 0.5 = not enough voters)")
-            print(f"  score={row['score']:.3f} = "
-                  f"{store.rank_weights['quality']:.2f}*quality + "
-                  f"{store.rank_weights['bridging']:.2f}*bridging")
+            print(
+                f"comment [{c.id}] by {c.author_id} (depth {row['depth']}, net {c.net:+d})"
+            )
+            print(
+                f"  quality={row['quality']:.3f} "
+                f"(voteness={row['voteness']:.2f} substance={row['substance']:.2f} "
+                f"depthness={row['depthness']:.2f})"
+            )
+            print(
+                f"  bridging={row['bridging']:.3f} (cross-camp consensus, 0.5 = not enough voters)"
+            )
+            print(
+                f"  score={row['score']:.3f} = "
+                f"{store.rank_weights['quality']:.2f}*quality + "
+                f"{store.rank_weights['bridging']:.2f}*bridging"
+            )
         elif args.cmd == "rank-weight":
             store.set_rank_weight(args.name, args.value)
             print(f"rank weight {args.name} = {args.value}")
@@ -116,7 +138,9 @@ def main(argv=None) -> int:
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(json.dumps(doc, indent=2, sort_keys=True))
             print(f"exported signed profile [{args.id}] -> {out}")
-            print("scope: proves authorship continuity by this identity key — not personhood")
+            print(
+                "scope: proves authorship continuity by this identity key — not personhood"
+            )
         elif args.cmd == "profile-verify":
             doc = json.loads(Path(args.in_path).read_text())
             pr = store.verify_profile(doc)

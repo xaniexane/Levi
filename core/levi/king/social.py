@@ -100,7 +100,9 @@ def hashtags_from(text: str, limit: int = 5) -> List[str]:
     if not isinstance(text, str):
         raise ValueError(f"hashtags_from needs a string, got {type(text).__name__}")
     if isinstance(limit, bool) or not isinstance(limit, int) or limit < 0:
-        raise ValueError(f"hashtags_from limit must be a non-negative int, got {limit!r}")
+        raise ValueError(
+            f"hashtags_from limit must be a non-negative int, got {limit!r}"
+        )
     counts: Dict[str, int] = {}
     for m in _WORD.finditer(text.lower()):
         w = m.group(0).strip("'")
@@ -179,7 +181,9 @@ def build_pack(
 def assert_pack_clean(pack: Dict[str, object]) -> None:
     """Enforce the sanitize contract on a built pack. Raises AssertionError."""
     if not isinstance(pack, dict):
-        raise ValueError(f"assert_pack_clean needs a pack dict, got {type(pack).__name__}")
+        raise ValueError(
+            f"assert_pack_clean needs a pack dict, got {type(pack).__name__}"
+        )
     caption = str(pack.get("caption", ""))
     assert "**" not in caption, "markdown bold leaked into caption"
     assert "__" not in caption, "markdown bold leaked into caption"

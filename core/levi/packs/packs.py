@@ -51,9 +51,10 @@ class PackError(Exception):
 
 
 def _safe_name(name: str) -> str:
-    if not name or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,%d}" % MAX_FILENAME, name):
-        raise PackError(
-            "bad pack name %r: use letters, digits, . _ -" % name)
+    if not name or not re.fullmatch(
+        r"[A-Za-z0-9][A-Za-z0-9._-]{0,%d}" % MAX_FILENAME, name
+    ):
+        raise PackError("bad pack name %r: use letters, digits, . _ -" % name)
     if ".." in name or name.startswith((".", "-")):
         raise PackError("bad pack name %r" % name)
     return name
@@ -111,8 +112,9 @@ class Pack:
     def priority(self) -> int:
         return int(self.manifest.get("priority", 100))
 
-    def scope_match(self, project: Optional[str], cwd: Optional[str],
-                    tags: List[str]) -> Optional[str]:
+    def scope_match(
+        self, project: Optional[str], cwd: Optional[str], tags: List[str]
+    ) -> Optional[str]:
         """Return the matching rule name, or None."""
         s = self.scope
         if tags and set(tags) & set(s["tags"]):
@@ -137,8 +139,11 @@ class Pack:
         return out
 
     def instructions(self) -> List[tuple]:
-        files = [p for p in self.path.glob("*.md")
-                 if p.name != MANIFEST and p.suffix.lower() in TEXT_SUFFIXES]
+        files = [
+            p
+            for p in self.path.glob("*.md")
+            if p.name != MANIFEST and p.suffix.lower() in TEXT_SUFFIXES
+        ]
         files += [p for p in self.path.glob("instructions/*.md")]
         return self._read_texts(files)
 
@@ -146,8 +151,11 @@ class Pack:
         cdir = self.path / "content"
         if not cdir.is_dir():
             return []
-        files = [p for p in cdir.rglob("*")
-                 if p.is_file() and p.suffix.lower() in TEXT_SUFFIXES | {".json"}]
+        files = [
+            p
+            for p in cdir.rglob("*")
+            if p.is_file() and p.suffix.lower() in TEXT_SUFFIXES | {".json"}
+        ]
         return self._read_texts(files)
 
 
@@ -156,8 +164,9 @@ class PackStore:
         self.root = packs_home(home)
         self.root.mkdir(parents=True, exist_ok=True)
 
-    def init(self, name: str, description: str = "",
-             scope: Optional[Dict[str, Any]] = None) -> Path:
+    def init(
+        self, name: str, description: str = "", scope: Optional[Dict[str, Any]] = None
+    ) -> Path:
         _safe_name(name)
         d = self.root / name
         if d.exists():
@@ -170,7 +179,8 @@ class PackStore:
         (d / MANIFEST).write_text(json.dumps(m, indent=2), encoding=ENC)
         (d / "instructions.md").write_text(
             "# Instructions for %s\n\nStanding instructions go here.\n" % name,
-            encoding=ENC)
+            encoding=ENC,
+        )
         return d
 
     def list_packs(self) -> List[Pack]:
@@ -193,12 +203,16 @@ class PackStore:
     def delete(self, name: str) -> None:
         pack = self.get(name)
         import shutil
+
         shutil.rmtree(pack.path)
 
-    def assemble(self, project: Optional[str] = None,
-                 cwd: Optional[str] = None,
-                 tags: Optional[List[str]] = None,
-                 budget_chars: int = 60000) -> Dict[str, Any]:
+    def assemble(
+        self,
+        project: Optional[str] = None,
+        cwd: Optional[str] = None,
+        tags: Optional[List[str]] = None,
+        budget_chars: int = 60000,
+    ) -> Dict[str, Any]:
         """Build the scoped context block. Returns {packs, text, truncated}."""
         tags = tags or []
         matched = []
@@ -211,8 +225,13 @@ class PackStore:
         used = []
         truncated: List[str] = []
         for _, rule, pack in matched:
-            used.append({"name": pack.name, "rule": rule,
-                         "version": pack.manifest.get("version")})
+            used.append(
+                {
+                    "name": pack.name,
+                    "rule": rule,
+                    "version": pack.manifest.get("version"),
+                }
+            )
             parts = ["# pack: %s (matched by: %s)" % (pack.name, rule)]
             desc = pack.manifest.get("description")
             if desc:
@@ -230,7 +249,9 @@ class PackStore:
                 parts.append("## content/%s\n%s" % (fname, text))
                 content_budget -= len(text)
             sections.append("\n\n".join(parts))
-        header = ("[scoped context: %d pack(s) attached%s]" % (
-            len(used), "; truncated: %s" % ", ".join(truncated) if truncated else ""))
+        header = "[scoped context: %d pack(s) attached%s]" % (
+            len(used),
+            "; truncated: %s" % ", ".join(truncated) if truncated else "",
+        )
         text = header + "\n\n" + "\n\n---\n\n".join(sections) if sections else header
         return {"packs": used, "text": text, "truncated": truncated}

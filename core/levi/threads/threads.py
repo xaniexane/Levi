@@ -45,7 +45,7 @@ import os
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 from levi.bridging.bridging import fit_bridging  # pure math only; decoupled
 
@@ -78,6 +78,7 @@ class ThreadError(ValueError):
 # Data model
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class Comment:
     id: str
@@ -86,7 +87,7 @@ class Comment:
     author_id: str
     text: str
     created_at: str = field(default_factory=_now)
-    up: List[str] = field(default_factory=list)    # voter ids
+    up: List[str] = field(default_factory=list)  # voter ids
     down: List[str] = field(default_factory=list)
 
     @property
@@ -121,7 +122,9 @@ class ThreadStore:
     def __init__(self, base: Optional[Path] = None) -> None:
         self._base = base or _base()
         self.discussions: Dict[str, Discussion] = {}
-        self.comments: Dict[str, Dict[str, Comment]] = {}  # discussion_id -> {comment_id: Comment}
+        self.comments: Dict[
+            str, Dict[str, Comment]
+        ] = {}  # discussion_id -> {comment_id: Comment}
         self.profiles: Dict[str, Profile] = {}
         self.rank_weights: Dict[str, float] = dict(DEFAULT_RANK_WEIGHTS)
         self._load()
@@ -135,7 +138,9 @@ class ThreadStore:
             raw = json.loads(self._path().read_text())
         except (FileNotFoundError, json.JSONDecodeError):
             return
-        self.discussions = {d["id"]: Discussion(**d) for d in raw.get("discussions", [])}
+        self.discussions = {
+            d["id"]: Discussion(**d) for d in raw.get("discussions", [])
+        }
         self.comments = {}
         for did, cmap in raw.get("comments", {}).items():
             self.comments[did] = {cid: Comment(**c) for cid, c in cmap.items()}
@@ -148,8 +153,10 @@ class ThreadStore:
         self._base.mkdir(parents=True, exist_ok=True)
         payload = {
             "discussions": [asdict(d) for d in self.discussions.values()],
-            "comments": {did: {cid: asdict(c) for cid, c in cmap.items()}
-                        for did, cmap in self.comments.items()},
+            "comments": {
+                did: {cid: asdict(c) for cid, c in cmap.items()}
+                for did, cmap in self.comments.items()
+            },
             "profiles": [asdict(p) for p in self.profiles.values()],
             "rank_weights": self.rank_weights,
         }
@@ -158,12 +165,19 @@ class ThreadStore:
         tmp.replace(self._path())
 
     # -- discussions & comments ------------------------------------------
-    def new_discussion(self, title: str, discussion_id: Optional[str] = None,
-                       community_id: Optional[str] = None) -> Discussion:
+    def new_discussion(
+        self,
+        title: str,
+        discussion_id: Optional[str] = None,
+        community_id: Optional[str] = None,
+    ) -> Discussion:
         title = title.strip()
         if not title:
             raise ThreadError("discussion title must be non-empty")
-        did = (discussion_id or hashlib.sha256(f"{title}|{_now()}".encode()).hexdigest()[:12]).strip()
+        did = (
+            discussion_id
+            or hashlib.sha256(f"{title}|{_now()}".encode()).hexdigest()[:12]
+        ).strip()
         if not did or did in self.discussions:
             raise ThreadError(f"discussion id {did!r} invalid or already exists")
         d = Discussion(id=did, title=title, community_id=community_id)
@@ -178,8 +192,13 @@ class ThreadStore:
         except KeyError:
             raise ThreadError(f"unknown discussion {discussion_id!r}")
 
-    def add_comment(self, discussion_id: str, author_id: str, text: str,
-                    parent_id: Optional[str] = None) -> Comment:
+    def add_comment(
+        self,
+        discussion_id: str,
+        author_id: str,
+        text: str,
+        parent_id: Optional[str] = None,
+    ) -> Comment:
         self._get_discussion(discussion_id)
         author_id, text = author_id.strip(), text.strip()
         if not author_id:
@@ -190,15 +209,22 @@ class ThreadStore:
         if parent_id is not None and parent_id not in cmap:
             raise ThreadError(f"unknown parent comment {parent_id!r}")
         cid = hashlib.sha256(
-            f"{discussion_id}|{parent_id}|{author_id}|{text}|{_now()}".encode()).hexdigest()[:12]
-        c = Comment(id=cid, discussion_id=discussion_id, parent_id=parent_id,
-                    author_id=author_id, text=text)
+            f"{discussion_id}|{parent_id}|{author_id}|{text}|{_now()}".encode()
+        ).hexdigest()[:12]
+        c = Comment(
+            id=cid,
+            discussion_id=discussion_id,
+            parent_id=parent_id,
+            author_id=author_id,
+            text=text,
+        )
         cmap[cid] = c
         self._save()
         return c
 
-    def vote(self, discussion_id: str, comment_id: str, voter_id: str,
-             value: str) -> None:
+    def vote(
+        self, discussion_id: str, comment_id: str, voter_id: str, value: str
+    ) -> None:
         self._get_discussion(discussion_id)
         cmap = self.comments[discussion_id]
         try:
@@ -266,7 +292,7 @@ class ThreadStore:
         voteness = c.net / (abs(c.net) + 5.0) * 0.5 + 0.5  # saturating -> [0,1]
         voteness = max(0.0, min(1.0, voteness))
         substance = min(1.0, len(c.text) / _SUBSTANCE_CHARS)
-        depthness = _DEPTH_DECAY ** depth
+        depthness = _DEPTH_DECAY**depth
         return {
             "voteness": voteness,
             "substance": substance,
@@ -289,14 +315,17 @@ class ThreadStore:
             q = self._quality(c, depths[cid])
             b = bridging[cid]
             score = (wq * q["quality"] + wb * b) / total
-            rows.append({"comment": c, "depth": depths[cid], **q,
-                         "bridging": b, "score": score})
+            rows.append(
+                {"comment": c, "depth": depths[cid], **q, "bridging": b, "score": score}
+            )
         rows.sort(key=lambda r: (-r["score"], r["comment"].created_at))
         return rows
 
     def set_rank_weight(self, name: str, value: float) -> None:
         if name not in self.rank_weights:
-            raise ThreadError(f"unknown rank weight {name!r}; known: {sorted(self.rank_weights)}")
+            raise ThreadError(
+                f"unknown rank weight {name!r}; known: {sorted(self.rank_weights)}"
+            )
         if not math.isfinite(value) or value < 0:
             raise ThreadError("rank weight must be a finite non-negative number")
         self.rank_weights[name] = float(value)
@@ -311,9 +340,11 @@ class ThreadStore:
             children.setdefault(r["comment"].parent_id, []).append(r["comment"].id)
         for sibs in children.values():
             sibs.sort(key=lambda cid: -by_id[cid]["score"])
-        lines = [f"=== {d.title} [{d.id}] ===",
-                 f"rank weights: quality={self.rank_weights['quality']:.2f} "
-                 f"bridging={self.rank_weights['bridging']:.2f}"]
+        lines = [
+            f"=== {d.title} [{d.id}] ===",
+            f"rank weights: quality={self.rank_weights['quality']:.2f} "
+            f"bridging={self.rank_weights['bridging']:.2f}",
+        ]
 
         def walk(cid: str, depth: int) -> None:
             if len(lines) > limit + 2:
@@ -321,8 +352,10 @@ class ThreadStore:
             r = by_id[cid]
             c = r["comment"]
             indent = "  " * depth
-            lines.append(f"{indent}[{c.id[:8]}] {c.author_id} "
-                         f"(score={r['score']:.3f} q={r['quality']:.2f} b={r['bridging']:.2f} net={c.net:+d})")
+            lines.append(
+                f"{indent}[{c.id[:8]}] {c.author_id} "
+                f"(score={r['score']:.3f} q={r['quality']:.2f} b={r['bridging']:.2f} net={c.net:+d})"
+            )
             lines.append(f"{indent}  {c.text[:90]}")
             for child in children.get(cid, []):
                 walk(child, depth + 1)
@@ -349,7 +382,9 @@ class ThreadStore:
         else:
             key = p.read_bytes()
         if len(key) < 16:
-            raise ThreadError("identity key is corrupt (too short); delete it to rotate")
+            raise ThreadError(
+                "identity key is corrupt (too short); delete it to rotate"
+            )
         return key
 
     def new_profile(self, profile_id: str, display_name: str, bio: str = "") -> Profile:
@@ -372,9 +407,11 @@ class ThreadStore:
         except KeyError:
             raise ThreadError(f"unknown profile {profile_id!r}")
         body = {"format": PROFILE_FORMAT, "profile": asdict(p)}
-        sig = hmac.new(self._identity_key(),
-                       json.dumps(body, sort_keys=True, separators=(",", ":")).encode(),
-                       hashlib.sha256).hexdigest()
+        sig = hmac.new(
+            self._identity_key(),
+            json.dumps(body, sort_keys=True, separators=(",", ":")).encode(),
+            hashlib.sha256,
+        ).hexdigest()
         return {**body, "signature": sig, "algorithm": "HMAC-SHA256"}
 
     def verify_profile(self, doc: Dict[str, Any]) -> Profile:
@@ -385,13 +422,19 @@ class ThreadStore:
         personhood and not a global identity.
         """
         if doc.get("format") != PROFILE_FORMAT:
-            raise ThreadError(f"not a LEVI profile artifact (format={doc.get('format')!r})")
+            raise ThreadError(
+                f"not a LEVI profile artifact (format={doc.get('format')!r})"
+            )
         if doc.get("algorithm") != "HMAC-SHA256":
             raise ThreadError("unsupported signature algorithm")
         body = {"format": doc["format"], "profile": doc.get("profile")}
-        expected = hmac.new(self._identity_key(),
-                            json.dumps(body, sort_keys=True, separators=(",", ":")).encode(),
-                            hashlib.sha256).hexdigest()
+        expected = hmac.new(
+            self._identity_key(),
+            json.dumps(body, sort_keys=True, separators=(",", ":")).encode(),
+            hashlib.sha256,
+        ).hexdigest()
         if not hmac.compare_digest(expected, str(doc.get("signature", ""))):
-            raise ThreadError("signature mismatch: artifact was not signed by this identity key")
+            raise ThreadError(
+                "signature mismatch: artifact was not signed by this identity key"
+            )
         return Profile(**body["profile"])

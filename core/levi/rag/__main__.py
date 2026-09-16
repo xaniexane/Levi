@@ -17,19 +17,27 @@ def _default_store_dir() -> str:
 
 def _make_store(data_dir: str):
     from levi.memory.store import MemoryStore
+
     return MemoryStore(data_dir=Path(data_dir))
 
 
 def cmd_ingest(args) -> int:
     from levi.rag import ingest_file, ingest_directory
+
     store = _make_store(args.data_dir)
     target = Path(args.path)
     if target.is_dir():
-        report = ingest_directory(target, store, pattern=args.pattern,
-                                  max_chars=args.max_chars, overlap=args.overlap)
+        report = ingest_directory(
+            target,
+            store,
+            pattern=args.pattern,
+            max_chars=args.max_chars,
+            overlap=args.overlap,
+        )
     else:
-        report = ingest_file(target, store, max_chars=args.max_chars,
-                             overlap=args.overlap)
+        report = ingest_file(
+            target, store, max_chars=args.max_chars, overlap=args.overlap
+        )
     print(report.summary())
     for err in report.errors:
         print("  ! %s" % err, file=sys.stderr)
@@ -38,6 +46,7 @@ def cmd_ingest(args) -> int:
 
 def cmd_ask(args) -> int:
     from levi.rag import ask
+
     store = _make_store(args.data_dir)
     result = ask(args.query, store, limit=args.limit, generate=not args.no_generate)
     if result.answer:
@@ -47,13 +56,13 @@ def cmd_ask(args) -> int:
     if result.notice:
         print("\n[%s]" % result.notice)
     if result.citations:
-        print("citations: %s" % ", ".join("[memory:%s]" % c
-                                          for c in result.citations))
+        print("citations: %s" % ", ".join("[memory:%s]" % c for c in result.citations))
     return 0
 
 
 def cmd_eval(args) -> int:
     from levi.rag import evaluate, print_report
+
     store = _make_store(args.data_dir)
     report = evaluate(store, k=args.k, method=args.method)
     print(print_report(report))
@@ -61,10 +70,10 @@ def cmd_eval(args) -> int:
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(prog="levi.rag",
-                                 description="LEVI RAG pipeline")
-    ap.add_argument("--data-dir", default=_default_store_dir(),
-                    help="memory store directory")
+    ap = argparse.ArgumentParser(prog="levi.rag", description="LEVI RAG pipeline")
+    ap.add_argument(
+        "--data-dir", default=_default_store_dir(), help="memory store directory"
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     p_ing = sub.add_parser("ingest", help="ingest file(s) as RAG chunks")
@@ -82,8 +91,9 @@ def main(argv=None) -> int:
 
     p_eval = sub.add_parser("eval", help="run the retrieval eval harness")
     p_eval.add_argument("--k", type=int, default=5)
-    p_eval.add_argument("--method", default="hybrid",
-                        choices=["bm25", "vector", "hybrid", "recency"])
+    p_eval.add_argument(
+        "--method", default="hybrid", choices=["bm25", "vector", "hybrid", "recency"]
+    )
     p_eval.set_defaults(func=cmd_eval)
 
     args = ap.parse_args(argv)

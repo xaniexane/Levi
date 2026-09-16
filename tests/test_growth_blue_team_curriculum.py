@@ -70,7 +70,9 @@ def test_blue_team_ids_unique():
 
 def test_blue_team_kinds_within_accepted_set():
     kinds = {lesson["kind"] for lesson in BLUE_TEAM_LESSONS}
-    assert kinds <= set(BLUE_TEAM_KINDS), f"unexpected kinds: {kinds - set(BLUE_TEAM_KINDS)}"
+    assert kinds <= set(BLUE_TEAM_KINDS), (
+        f"unexpected kinds: {kinds - set(BLUE_TEAM_KINDS)}"
+    )
     assert kinds == {"concept", "procedure", "checklist", "scenario"}, (
         f"expected all four kinds represented, got {sorted(kinds)}"
     )
@@ -86,9 +88,7 @@ def test_blue_team_topics_coherent():
 
 def test_blue_team_text_sentence_count():
     for lesson in BLUE_TEAM_LESSONS:
-        sentences = [
-            s for s in re.split(r"(?<=[.!?])\s+", lesson["text"].strip()) if s
-        ]
+        sentences = [s for s in re.split(r"(?<=[.!?])\s+", lesson["text"].strip()) if s]
         assert 2 <= len(sentences) <= 6, (
             f"{lesson['id']}: expected 2-6 sentences, got {len(sentences)}"
         )

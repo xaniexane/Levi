@@ -31,42 +31,55 @@ def cmd_create(args) -> int:
     except EphemeraError as exc:
         print("ephemera: %s" % exc, file=sys.stderr)
         return 1
-    print("channel '%s' created — TTL %ds (messages expire %ds after posting)"
-          % (m["name"], m["ttl_seconds"], m["ttl_seconds"]))
+    print(
+        "channel '%s' created — TTL %ds (messages expire %ds after posting)"
+        % (m["name"], m["ttl_seconds"], m["ttl_seconds"])
+    )
     return 0
 
 
 def cmd_post(args) -> int:
     st = _store()
     try:
-        r = st.post(args.channel, args.author, args.body, _passphrase(args),
-                    forwarding_discouraged=args.no_forward)
+        r = st.post(
+            args.channel,
+            args.author,
+            args.body,
+            _passphrase(args),
+            forwarding_discouraged=args.no_forward,
+        )
     except EphemeraError as exc:
         print("ephemera: %s" % exc, file=sys.stderr)
         return 1
     exp = datetime.fromtimestamp(r["expires_at"]).strftime("%Y-%m-%d %H:%M")
-    print("posted %s — expires %s%s" % (
-        r["id"], exp,
-        " [forwarding discouraged]" if args.no_forward else ""))
+    print(
+        "posted %s — expires %s%s"
+        % (r["id"], exp, " [forwarding discouraged]" if args.no_forward else "")
+    )
     return 0
 
 
 def cmd_read(args) -> int:
     st = _store()
     try:
-        msg = st.read_message(args.channel, args.msg_id, _passphrase(args),
-                              reader=args.reader)
+        msg = st.read_message(
+            args.channel, args.msg_id, _passphrase(args), reader=args.reader
+        )
     except EphemeraError as exc:
         print("ephemera: %s" % exc, file=sys.stderr)
         return 1
     except ValueError as exc:
         print("ephemera: cannot decrypt: %s" % exc, file=sys.stderr)
         return 1
-    print("[%s] %s" % (msg["author"],
-                       datetime.fromtimestamp(msg["created_at"]).strftime("%H:%M")))
+    print(
+        "[%s] %s"
+        % (msg["author"], datetime.fromtimestamp(msg["created_at"]).strftime("%H:%M"))
+    )
     if msg["forwarding_discouraged"]:
-        print("(the author asked that this message not be forwarded "
-              "or screenshotted — honor it)")
+        print(
+            "(the author asked that this message not be forwarded "
+            "or screenshotted — honor it)"
+        )
     print(msg["body"])
     return 0
 
@@ -111,34 +124,51 @@ def cmd_access(args) -> int:
     if not rows:
         print("no recorded reads")
     for r in rows:
-        print("%s  %s read %s (%s)" % (
-            datetime.fromtimestamp(r["ts"]).strftime("%Y-%m-%d %H:%M"),
-            r["reader"], r["msg_id"], r["note"]))
+        print(
+            "%s  %s read %s (%s)"
+            % (
+                datetime.fromtimestamp(r["ts"]).strftime("%Y-%m-%d %H:%M"),
+                r["reader"],
+                r["msg_id"],
+                r["note"],
+            )
+        )
     return 0
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(
         prog="levi.ephemera",
-        description="True-delete ephemeral channels (local, encrypted at rest).")
-    ap.add_argument("--passphrase", default=None,
-                    help="channel passphrase (else prompted, never stored)")
+        description="True-delete ephemeral channels (local, encrypted at rest).",
+    )
+    ap.add_argument(
+        "--passphrase",
+        default=None,
+        help="channel passphrase (else prompted, never stored)",
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     p = sub.add_parser("create", help="create a channel")
-    p.add_argument("name"); p.add_argument("--ttl", type=int, default=86400,
-                                          help="seconds until messages expire")
+    p.add_argument("name")
+    p.add_argument(
+        "--ttl", type=int, default=86400, help="seconds until messages expire"
+    )
     p.set_defaults(func=cmd_create)
 
     p = sub.add_parser("post", help="post a message")
-    p.add_argument("channel"); p.add_argument("--author", required=True)
+    p.add_argument("channel")
+    p.add_argument("--author", required=True)
     p.add_argument("--body", required=True)
-    p.add_argument("--no-forward", action="store_true",
-                   help="mark forwarding/screenshotting as discouraged")
+    p.add_argument(
+        "--no-forward",
+        action="store_true",
+        help="mark forwarding/screenshotting as discouraged",
+    )
     p.set_defaults(func=cmd_post)
 
     p = sub.add_parser("read", help="read a message (access-logged)")
-    p.add_argument("channel"); p.add_argument("msg_id")
+    p.add_argument("channel")
+    p.add_argument("msg_id")
     p.add_argument("--reader", default="owner")
     p.set_defaults(func=cmd_read)
 

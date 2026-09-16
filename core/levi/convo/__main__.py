@@ -21,7 +21,10 @@ from levi.convo.render import render_block, render_constellation
 
 _DEMO_TURNS = [
     ("user", "I'm migrating our server this weekend, Nginx needs reconfiguring"),
-    ("levi", "Got it — the Nginx migration is on my radar. I'll check the drive space before the weekend."),
+    (
+        "levi",
+        "Got it — the Nginx migration is on my radar. I'll check the drive space before the weekend.",
+    ),
     ("user", "Also I need a backup plan for the postgres database"),
     ("levi", "For postgres, nightly pg_dump to the backup drive works well."),
     ("user", "back to the server thing — restart it after the config change"),
@@ -105,8 +108,10 @@ def main(argv=None) -> int:
         return _run_demo()
     if argv[0] == "state" and len(argv) == 2:
         return _run_state(argv[1])
-    print("usage: python -m levi.convo demo | python -m levi.convo state <session.jsonl>",
-          file=sys.stderr)
+    print(
+        "usage: python -m levi.convo demo | python -m levi.convo state <session.jsonl>",
+        file=sys.stderr,
+    )
     return 2
 
 

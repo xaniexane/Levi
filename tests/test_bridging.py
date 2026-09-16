@@ -91,8 +91,14 @@ def test_rating_bounds_enforced(monkeypatch, tmp_path):
 def test_store_roundtrip_and_cli(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)
     assert main(["note", "--text", "water is wet", "--id", "n1"]) == 0
-    for rater, val in [("a1", "1"), ("a2", "1"), ("b1", "1"), ("b2", "1"),
-                       ("a3", "-1"), ("b3", "-1")]:
+    for rater, val in [
+        ("a1", "1"),
+        ("a2", "1"),
+        ("b1", "1"),
+        ("b2", "1"),
+        ("a3", "-1"),
+        ("b3", "-1"),
+    ]:
         assert main(["rate", "--note", "n1", "--rater", rater, "--value", val]) == 0
     assert main(["notes"]) == 0
     out = capsys.readouterr().out

@@ -5,7 +5,6 @@ test gets an isolated store_dir and an injected governor Meter pointed at
 a tmp HOME.
 """
 
-import os
 import sys
 import types
 
@@ -65,9 +64,7 @@ def _beta_module():
             grantee="beta-executor",
         )
 
-    return _make_module(
-        "fake_galaxy_beta", shout=shout, via_directory=via_directory
-    )
+    return _make_module("fake_galaxy_beta", shout=shout, via_directory=via_directory)
 
 
 @pytest.fixture()
@@ -145,9 +142,7 @@ def test_install_rejects_malformed_manifest(services):
     with pytest.raises(ManifestError):
         services.install({"id": "ok.id", "entry_points": {}})
     with pytest.raises(ManifestError):
-        services.install(
-            {"id": "ok.id", "entry_points": {"x": "not-a-valid-target"}}
-        )
+        services.install({"id": "ok.id", "entry_points": {"x": "not-a-valid-target"}})
 
 
 def test_install_rejects_unresolvable_entry_point(services):
@@ -233,8 +228,11 @@ def test_call_action_not_permitted_refused(services, installed):
     cap = services.issue_capability("narrow", ["galaxy.acme.alpha.greet"])
     with pytest.raises(ActionRefused):
         services.call(
-            "galaxy.acme.alpha", "add", args=[1, 2],
-            capability=cap, grantee="narrow",
+            "galaxy.acme.alpha",
+            "add",
+            args=[1, 2],
+            capability=cap,
+            grantee="narrow",
         )
 
 
@@ -243,34 +241,30 @@ def test_call_tampered_capability_refused(services, installed, cap_all):
     tampered = payload[:-1] + ("A" if payload[-1] != "A" else "B") + "." + sig
     with pytest.raises(InvalidSignature):
         services.call(
-            "galaxy.acme.alpha", "greet",
-            capability=tampered, grantee="test-executor",
+            "galaxy.acme.alpha",
+            "greet",
+            capability=tampered,
+            grantee="test-executor",
         )
 
 
 def test_call_expired_capability_refused(services, installed):
     cap = services.issue_capability("old", ["galaxy.*"], ttl_seconds=-1)
     with pytest.raises(ExpiredToken):
-        services.call(
-            "galaxy.acme.alpha", "greet", capability=cap, grantee="old"
-        )
+        services.call("galaxy.acme.alpha", "greet", capability=cap, grantee="old")
 
 
 def test_call_wrong_grantee_refused(services, installed):
     cap = services.issue_capability("alice", ["galaxy.*"])
     with pytest.raises(WrongGrantee):
-        services.call(
-            "galaxy.acme.alpha", "greet", capability=cap, grantee="bob"
-        )
+        services.call("galaxy.acme.alpha", "greet", capability=cap, grantee="bob")
 
 
 def test_call_revoked_capability_refused(services, installed):
     cap = services.issue_capability("temp", ["galaxy.*"])
     services.revoke(cap)
     with pytest.raises(telescript.RevokedToken):
-        services.call(
-            "galaxy.acme.alpha", "greet", capability=cap, grantee="temp"
-        )
+        services.call("galaxy.acme.alpha", "greet", capability=cap, grantee="temp")
 
 
 def test_call_requires_a_capability(services, installed):
@@ -281,8 +275,10 @@ def test_call_requires_a_capability(services, installed):
 def test_call_unknown_verb(services, installed, cap_all):
     with pytest.raises(UnknownVerb):
         services.call(
-            "galaxy.acme.alpha", "nope",
-            capability=cap_all, grantee="test-executor",
+            "galaxy.acme.alpha",
+            "nope",
+            capability=cap_all,
+            grantee="test-executor",
         )
 
 
@@ -290,13 +286,17 @@ def test_call_unknown_port(services, cap_all):
     wide = services.issue_capability("test-executor", ["galaxy.*"])
     with pytest.raises(UnknownPort):
         services.call(
-            "galaxy.nonexistent", "greet",
-            capability=wide, grantee="test-executor",
+            "galaxy.nonexistent",
+            "greet",
+            capability=wide,
+            grantee="test-executor",
         )
     with pytest.raises(UnknownPort):
         services.call(
-            "memory", "store",
-            capability=wide, grantee="test-executor",
+            "memory",
+            "store",
+            capability=wide,
+            grantee="test-executor",
         )
 
 
@@ -321,7 +321,9 @@ def test_cross_package_call_through_directory(services, installed, beta_manifest
     assert not hasattr(sys.modules["fake_galaxy_beta"], "fake_galaxy_alpha")
 
 
-def test_cross_package_call_respects_inner_capability(services, installed, beta_manifest):
+def test_cross_package_call_respects_inner_capability(
+    services, installed, beta_manifest
+):
     # Beta's own capability does NOT cover alpha's greet: the inner call
     # through the directory must be refused, not silently permitted.
     services.install(beta_manifest)
@@ -348,14 +350,19 @@ def test_cross_package_call_respects_inner_capability(services, installed, beta_
 def test_calls_are_metered(tmp_path, installed, cap_all, services):
     # one success + one refusal: both land on the governor ledger
     services.call(
-        "galaxy.acme.alpha", "greet",
-        capability=cap_all, grantee="test-executor",
+        "galaxy.acme.alpha",
+        "greet",
+        capability=cap_all,
+        grantee="test-executor",
     )
     bad = services.issue_capability("narrow", ["galaxy.acme.alpha.greet"])
     with pytest.raises(ActionRefused):
         services.call(
-            "galaxy.acme.alpha", "add", args=[1, 2],
-            capability=bad, grantee="narrow",
+            "galaxy.acme.alpha",
+            "add",
+            args=[1, 2],
+            capability=bad,
+            grantee="narrow",
         )
     recs = services._meter.query(provider="galaxy")
     by_tool = {r.tool_name: r for r in recs}
@@ -380,7 +387,10 @@ def test_install_persists_and_reloads(tmp_path, alpha_manifest):
     assert entry["pin"] == pin
     assert entry["verbs"] == ["add", "greet"]
     cap = svc2.issue_capability("e", ["galaxy.acme.alpha.greet"])
-    assert svc2.call("galaxy.acme.alpha", "greet", capability=cap, grantee="e") == "hello, world"
+    assert (
+        svc2.call("galaxy.acme.alpha", "greet", capability=cap, grantee="e")
+        == "hello, world"
+    )
 
 
 def test_tampered_store_marks_package_broken(tmp_path, alpha_manifest):

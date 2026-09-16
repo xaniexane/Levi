@@ -84,7 +84,9 @@ class ArtifactStore:
         try:
             meta = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError) as exc:
-            raise CanvasError(f"artifact {artifact_id!r}: meta.json unreadable ({exc})") from exc
+            raise CanvasError(
+                f"artifact {artifact_id!r}: meta.json unreadable ({exc})"
+            ) from exc
         if not isinstance(meta, dict) or "versions" not in meta:
             raise CanvasError(f"artifact {artifact_id!r}: meta.json malformed")
         return meta
@@ -99,8 +101,14 @@ class ArtifactStore:
         return self._dir(artifact_id) / f"v{n:04d}{_TYPE_EXT.get(atype, '.txt')}"
 
     # -- lifecycle -----------------------------------------------------
-    def create(self, artifact_id: str, atype: str, title: str,
-               content: str = "", note: str = "created") -> Dict[str, Any]:
+    def create(
+        self,
+        artifact_id: str,
+        atype: str,
+        title: str,
+        content: str = "",
+        note: str = "created",
+    ) -> Dict[str, Any]:
         _check_id(artifact_id)
         if atype not in ARTIFACT_TYPES:
             raise CanvasError(
@@ -132,8 +140,7 @@ class ArtifactStore:
             content, encoding="utf-8"
         )
         meta["versions"].append(
-            {"n": n, "created_at": time.time(), "note": note,
-             "chars": len(content)}
+            {"n": n, "created_at": time.time(), "note": note, "chars": len(content)}
         )
         meta["updated_at"] = time.time()
         self._write_meta(artifact_id, meta)
@@ -154,8 +161,13 @@ class ArtifactStore:
         content = self._version_file(artifact_id, n, meta["type"]).read_text(
             encoding="utf-8"
         )
-        return {"id": artifact_id, "type": meta["type"], "title": meta["title"],
-                "version": rec, "content": content}
+        return {
+            "id": artifact_id,
+            "type": meta["type"],
+            "title": meta["title"],
+            "version": rec,
+            "content": content,
+        }
 
     def versions(self, artifact_id: str) -> List[Dict[str, Any]]:
         return list(self._read_meta(artifact_id)["versions"])
@@ -165,11 +177,15 @@ class ArtifactStore:
         ca = self.get(artifact_id, a)["content"].splitlines()
         cb = self.get(artifact_id, b)["content"].splitlines()
         meta = self._read_meta(artifact_id)
-        lines = list(difflib.unified_diff(
-            ca, cb,
-            fromfile=f"{artifact_id}@v{a}", tofile=f"{artifact_id}@v{b}",
-            lineterm="",
-        ))
+        lines = list(
+            difflib.unified_diff(
+                ca,
+                cb,
+                fromfile=f"{artifact_id}@v{a}",
+                tofile=f"{artifact_id}@v{b}",
+                lineterm="",
+            )
+        )
         return "\n".join(lines) if lines else "(no differences)"
 
     def rename(self, artifact_id: str, title: str) -> None:
@@ -198,12 +214,15 @@ class ArtifactStore:
                     meta = self._read_meta(p.name)
                 except CanvasError:
                     continue
-                out.append({
-                    "id": meta["id"], "type": meta["type"],
-                    "title": meta["title"],
-                    "versions": len(meta["versions"]),
-                    "updated_at": meta.get("updated_at", meta.get("created_at")),
-                })
+                out.append(
+                    {
+                        "id": meta["id"],
+                        "type": meta["type"],
+                        "title": meta["title"],
+                        "versions": len(meta["versions"]),
+                        "updated_at": meta.get("updated_at", meta.get("created_at")),
+                    }
+                )
         return out
 
     # -- export ----------------------------------------------------------

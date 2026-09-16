@@ -23,7 +23,7 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable, Iterator, Optional
+from typing import Any, Iterator, Optional
 
 from levi.oath import AUDIT_FILE, CHECKPOINTS_DIR
 
@@ -45,7 +45,9 @@ class AuditError(Exception):
 def canonical_entry_bytes(entry: dict[str, Any]) -> bytes:
     """Canonical bytes hashed for an entry (excludes the ``sha256`` field)."""
     core = {k: entry[k] for k in ("seq", "ts", "prev_hash", "payload")}
-    return (json.dumps(core, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+    return (json.dumps(core, sort_keys=True, separators=(",", ":")) + "\n").encode(
+        "utf-8"
+    )
 
 
 def entry_hash(entry: dict[str, Any]) -> str:
@@ -118,7 +120,9 @@ class AuditLog:
         for entry in self.entries():
             seq = entry.get("seq")
             if seq != expected_seq:
-                raise AuditError(f"seq break at file position {count}: got {seq}, want {expected_seq}")
+                raise AuditError(
+                    f"seq break at file position {count}: got {seq}, want {expected_seq}"
+                )
             if entry.get("prev_hash") != prev_hash:
                 raise AuditError(f"entry {seq}: prev_hash mismatch — chain tampered")
             if entry.get("sha256") != entry_hash(entry):
@@ -135,7 +139,10 @@ class AuditLog:
         ``signer`` is a ``--local-user`` selector; when omitted gpg uses its
         default key.  Returns the checkpoint path.
         """
-        from levi.oath.keys import gpg_sign_args, run_gpg  # local import: keys is optional at runtime
+        from levi.oath.keys import (
+            gpg_sign_args,
+            run_gpg,
+        )  # local import: keys is optional at runtime
 
         assert self.path is not None
         head = self.last()
@@ -162,7 +169,9 @@ class AuditLog:
             tmp.unlink(missing_ok=True)
         return target
 
-    def verify_checkpoints(self, owner_fingerprint: Optional[str] = None) -> dict[str, Any]:
+    def verify_checkpoints(
+        self, owner_fingerprint: Optional[str] = None
+    ) -> dict[str, Any]:
         """Verify every checkpoint: signature valid, seq/hash match the chain.
 
         Rebuilds the head hash per seq from the log, then checks each
@@ -189,21 +198,29 @@ class AuditLog:
                 blob = path.read_bytes()
                 valid, fpr, _uid, detail = verify_clearsigned(blob)
                 if not valid:
-                    raise AuditError(f"{path.name}: bad checkpoint signature ({detail})")
-                if owner_fingerprint and (fpr or "").upper().replace(" ", "") != owner_fingerprint.upper().replace(" ", ""):
+                    raise AuditError(
+                        f"{path.name}: bad checkpoint signature ({detail})"
+                    )
+                if owner_fingerprint and (fpr or "").upper().replace(
+                    " ", ""
+                ) != owner_fingerprint.upper().replace(" ", ""):
                     raise AuditError(f"{path.name}: not signed by the owner")
                 # Extract the JSON body from the clearsigned message.
                 body_text = _clearsign_body(blob)
                 try:
                     body = json.loads(body_text)
                 except json.JSONDecodeError as exc:
-                    raise AuditError(f"{path.name}: checkpoint body not JSON: {exc}") from exc
+                    raise AuditError(
+                        f"{path.name}: checkpoint body not JSON: {exc}"
+                    ) from exc
                 seq = int(body.get("seq", -1))
                 want = heads.get(seq)
                 if want is None:
                     raise AuditError(f"{path.name}: seq {seq} not in audit log")
                 if body.get("head") != want:
-                    raise AuditError(f"{path.name}: head hash mismatch — log tampered after checkpoint")
+                    raise AuditError(
+                        f"{path.name}: head hash mismatch — log tampered after checkpoint"
+                    )
                 checked += 1
         return {"ok": True, "checkpoints": checked}
 

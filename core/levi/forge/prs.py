@@ -68,8 +68,9 @@ def get_pr(home, name, pr_id: int):
     return None
 
 
-def open_pr(home, name, title: str, head: str, base: str, body: str = "",
-            author: str = "local") -> dict:
+def open_pr(
+    home, name, title: str, head: str, base: str, body: str = "", author: str = "local"
+) -> dict:
     name = _require_repo(home, name)
     if not title.strip():
         raise ValueError("PR title is required")
@@ -134,14 +135,31 @@ def merge_pr(home, name, pr_id: int) -> dict:
     try:
         run_git(["clone", "-q", str(bare), str(tmp / "work")])
         work = tmp / "work"
-        run_git(["-c", "user.name=LEVI Forge", "-c", "user.email=forge@localhost",
-                 "checkout", "-q", pr["base"]], cwd=work)
+        run_git(
+            [
+                "-c",
+                "user.name=LEVI Forge",
+                "-c",
+                "user.email=forge@localhost",
+                "checkout",
+                "-q",
+                pr["base"],
+            ],
+            cwd=work,
+        )
         try:
             run_git(
-                ["-c", "user.name=LEVI Forge", "-c", "user.email=forge@localhost",
-                 "merge", "--no-ff", "-m",
-                 "Merge branch '%s' (forge PR #%d)" % (pr["head"], pr["id"]),
-                 "origin/" + pr["head"]],
+                [
+                    "-c",
+                    "user.name=LEVI Forge",
+                    "-c",
+                    "user.email=forge@localhost",
+                    "merge",
+                    "--no-ff",
+                    "-m",
+                    "Merge branch '%s' (forge PR #%d)" % (pr["head"], pr["id"]),
+                    "origin/" + pr["head"],
+                ],
                 cwd=work,
             )
         except GitError as e:

@@ -62,7 +62,9 @@ def socket_dir(home: Optional[Path] = None) -> Path:
 class CapServer:
     """Serve a ServiceSpec on a local socket. Deny-closed per call."""
 
-    def __init__(self, spec: ServiceSpec, home: Optional[Path] = None, name: Optional[str] = None):
+    def __init__(
+        self, spec: ServiceSpec, home: Optional[Path] = None, name: Optional[str] = None
+    ):
         self.spec = spec
         self.name = name or spec.name
         self.sockets_dir = socket_dir(home)
@@ -139,9 +141,7 @@ class CapServer:
                 conn, _ = self._listener.accept()
             except (socket.timeout, OSError):
                 continue
-            threading.Thread(
-                target=self._serve_conn, args=(conn,), daemon=True
-            ).start()
+            threading.Thread(target=self._serve_conn, args=(conn,), daemon=True).start()
 
     def _serve_conn(self, conn: socket.socket) -> None:
         from .protocol import MAX_LINE_BYTES
@@ -157,7 +157,9 @@ class CapServer:
                     while b"\n" in buf:
                         line, buf = buf.split(b"\n", 1)
                         if len(line) > MAX_LINE_BYTES:
-                            self._send(conn, error_response("?", "protocol", "line too long"))
+                            self._send(
+                                conn, error_response("?", "protocol", "line too long")
+                            )
                             return
                         if line.strip():
                             self._handle_line(conn, line)
@@ -166,7 +168,9 @@ class CapServer:
 
     def _send(self, conn: socket.socket, msg: Dict[str, Any]) -> None:
         try:
-            conn.sendall((json.dumps(msg, separators=(",", ":")) + "\n").encode("utf-8"))
+            conn.sendall(
+                (json.dumps(msg, separators=(",", ":")) + "\n").encode("utf-8")
+            )
         except OSError:
             pass
 
@@ -202,11 +206,15 @@ class CapServer:
         if msg["svc"] != self.spec.name:
             self._send(
                 conn,
-                error_response(mid, "protocol", f"this endpoint serves {self.spec.name!r}"),
+                error_response(
+                    mid, "protocol", f"this endpoint serves {self.spec.name!r}"
+                ),
             )
             return
         try:
-            result = self.spec.dispatch(msg["verb"], msg["token"], msg.get("args") or {})
+            result = self.spec.dispatch(
+                msg["verb"], msg["token"], msg.get("args") or {}
+            )
             self._send(conn, ok_response(mid, result))
         except ProtocolError as exc:
             text = str(exc)
@@ -218,7 +226,9 @@ class CapServer:
             etype = "refused" if isinstance(exc, ActionRefused) else "auth"
             self._send(conn, error_response(mid, etype, str(exc)))
         except Exception as exc:  # verb implementation error: named, not leaked
-            self._send(conn, error_response(mid, "server", f"{type(exc).__name__}: {exc}"))
+            self._send(
+                conn, error_response(mid, "server", f"{type(exc).__name__}: {exc}")
+            )
 
 
 class CapClient:
@@ -243,7 +253,9 @@ class CapClient:
             elif port_file.exists():
                 s.close()
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                s.connect(("127.0.0.1", int(port_file.read_text(encoding="utf-8").strip())))
+                s.connect(
+                    ("127.0.0.1", int(port_file.read_text(encoding="utf-8").strip()))
+                )
             else:
                 s.close()
                 raise TransportError(
@@ -289,7 +301,9 @@ class CapClient:
             raise TransportError("server response mismatched request id")
         return resp
 
-    def call(self, svc: str, verb: str, token: str, args: Optional[Dict[str, Any]] = None) -> Any:
+    def call(
+        self, svc: str, verb: str, token: str, args: Optional[Dict[str, Any]] = None
+    ) -> Any:
         from .protocol import msg_call
 
         self._seq += 1

@@ -79,9 +79,12 @@ class MountTable:
     def __init__(self):
         self._services: dict[str, plan9.ServedChannel] = {}
 
-    def bind(self, name: str,
-             handler: Callable[[str, Any], Any],
-             request_types: Optional[set[str]] = None) -> None:
+    def bind(
+        self,
+        name: str,
+        handler: Callable[[str, Any], Any],
+        request_types: Optional[set[str]] = None,
+    ) -> None:
         """Mount a service: ``handler(msg_type, payload)`` served on a
         background plan9 channel. Raises :class:`MountConflict` if the name
         is already bound at this level."""
@@ -130,8 +133,12 @@ class AppNamespace:
         self.table = MountTable()
 
     # -- mounting ---------------------------------------------------------------
-    def mount(self, name: str, handler: Callable[[str, Any], Any],
-              request_types: Optional[set[str]] = None) -> None:
+    def mount(
+        self,
+        name: str,
+        handler: Callable[[str, Any], Any],
+        request_types: Optional[set[str]] = None,
+    ) -> None:
         self.table.bind(name, handler, request_types=request_types)
 
     def unmount(self, name: str) -> None:
@@ -152,7 +159,8 @@ class AppNamespace:
                 scope = scope.parent
         raise UnknownService(
             f"service {name!r} is not mounted in namespace {self.name!r} "
-            "or any enclosing scope")
+            "or any enclosing scope"
+        )
 
     def mounted(self) -> list[str]:
         """All names visible from here (inner shadowing outer)."""
@@ -164,8 +172,9 @@ class AppNamespace:
             scope = scope.parent
         return sorted(seen)
 
-    def call(self, service: str, msg_type: str, payload: Any = None,
-             timeout: float = 5.0) -> Any:
+    def call(
+        self, service: str, msg_type: str, payload: Any = None, timeout: float = 5.0
+    ) -> Any:
         """Resolve ``service`` and issue a 9P-style request."""
         return self.resolve(service).request(msg_type, payload, timeout=timeout)
 

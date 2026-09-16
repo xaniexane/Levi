@@ -103,7 +103,10 @@ def _cmd_service_add(args: argparse.Namespace) -> int:
     except ServiceError as exc:
         print("service add: %s" % exc, file=sys.stderr)
         return 1
-    print("added service '%s' [%s, schedule %s]" % (svc.name, svc.service_type, svc.schedule))
+    print(
+        "added service '%s' [%s, schedule %s]"
+        % (svc.name, svc.service_type, svc.schedule)
+    )
     print("recurrence needs a cron job, e.g.:")
     print(
         "  %s cd %s && python -m levi.bot service run %s"
@@ -148,8 +151,12 @@ def _cmd_service_log(args: argparse.Namespace) -> int:
         mark = "ok" if run.get("ok") else "FAIL"
         print(
             "%s [%s] %s — %s"
-            % (run.get("ts", "?")[:19], mark, run.get("service", "?"),
-               run.get("summary", ""))
+            % (
+                run.get("ts", "?")[:19],
+                mark,
+                run.get("service", "?"),
+                run.get("summary", ""),
+            )
         )
     return 0
 
@@ -174,7 +181,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_persona.set_defaults(func=_cmd_persona)
 
-    p_service = sub.add_parser("service", help="Performed services: list/run/add/remove/log.")
+    p_service = sub.add_parser(
+        "service", help="Performed services: list/run/add/remove/log."
+    )
     svc_sub = p_service.add_subparsers(dest="service_command", required=True)
 
     p_list = svc_sub.add_parser("list", help="List registered services.")
@@ -182,9 +191,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_run = svc_sub.add_parser("run", help="Execute a service now.")
     p_run.add_argument("name", help="Service name.")
-    p_run.add_argument(
-        "--params", default=None, help="JSON object of param overrides."
-    )
+    p_run.add_argument("--params", default=None, help="JSON object of param overrides.")
     p_run.set_defaults(func=_cmd_service_run)
 
     p_add = svc_sub.add_parser("add", help="Register a new service.")

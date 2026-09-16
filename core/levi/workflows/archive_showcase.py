@@ -36,11 +36,18 @@ SUMMARY = (
 STEP_NAMES = ["archive_search", "assemble_collection", "galaxy_publish"]
 
 
-def run(home=None, query: str = "", kind: Optional[str] = None,
-        rating: Optional[str] = None, status: Optional[str] = None,
-        era: Optional[str] = None, title: Optional[str] = None,
-        limit: int = 20, author: str = "levi-workflows",
-        **kwargs) -> Dict[str, Any]:
+def run(
+    home=None,
+    query: str = "",
+    kind: Optional[str] = None,
+    rating: Optional[str] = None,
+    status: Optional[str] = None,
+    era: Optional[str] = None,
+    title: Optional[str] = None,
+    limit: int = 20,
+    author: str = "levi-workflows",
+    **kwargs,
+) -> Dict[str, Any]:
     levi_home = resolve_home(home)
     emit("workflow.start", {"workflow": NAME, "home": str(levi_home), "query": query})
     steps: list = []
@@ -51,18 +58,29 @@ def run(home=None, query: str = "", kind: Optional[str] = None,
     try:
         with workflow_env(levi_home):
             store = ArchiveStore(home=levi_home.parent)
-            hits = archive_search(store, query=query, kind=kind,
-                                  rating=rating, status=status, era=era,
-                                  limit=limit)
+            hits = archive_search(
+                store,
+                query=query,
+                kind=kind,
+                rating=rating,
+                status=status,
+                era=era,
+                limit=limit,
+            )
         if not hits:
             raise ValueError("no archive records match query %r" % query)
         hit_ids = [h.record.id for h in hits]
         hit_titles = [h.record.title for h in hits]
-        finish_step(step, True, {
-            "query": query, "hits": len(hits),
-            "record_ids": hit_ids,
-            "scores": [h.score for h in hits],
-        })
+        finish_step(
+            step,
+            True,
+            {
+                "query": query,
+                "hits": len(hits),
+                "record_ids": hit_ids,
+                "scores": [h.score for h in hits],
+            },
+        )
         artifacts["record_ids"] = hit_ids
         artifacts["record_titles"] = hit_titles
     except Exception as exc:
@@ -90,8 +108,7 @@ def run(home=None, query: str = "", kind: Optional[str] = None,
             "created_at": datetime.now(timezone.utc).isoformat(),
             "records_sha256": digest,
         }
-        finish_step(step, True, {"collection_id": pkg_id,
-                                 "record_count": len(hit_ids)})
+        finish_step(step, True, {"collection_id": pkg_id, "record_count": len(hit_ids)})
         artifacts["collection"] = collection
     except Exception as exc:
         finish_step(step, False, reason="%s: %s" % (type(exc).__name__, exc))

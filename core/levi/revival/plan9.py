@@ -104,7 +104,9 @@ def _scrubbed_env(env_allow: tuple[str, ...] = ()) -> dict[str, str]:
     return env
 
 
-def _preexec_factory(cpu_seconds: Optional[int], mem_bytes: Optional[int]) -> Optional[Callable[[], None]]:
+def _preexec_factory(
+    cpu_seconds: Optional[int], mem_bytes: Optional[int]
+) -> Optional[Callable[[], None]]:
     try:
         import resource  # noqa: F401  (Linux/macOS only)
     except ImportError:
@@ -295,7 +297,9 @@ class Channel:
     # -- low level -----------------------------------------------------------
     def send(self, msg_type: str, payload: Any = None) -> str:
         """Send a one-way typed message; returns its id."""
-        return self._send_frame({"id": _next_id(), "type": msg_type, "payload": payload})
+        return self._send_frame(
+            {"id": _next_id(), "type": msg_type, "payload": payload}
+        )
 
     def _send_frame(self, frame: dict) -> str:
         if self._closed:
@@ -347,10 +351,14 @@ class Channel:
 
         Raises ChannelTimeout on timeout; the peer's error string on ``ok: false``.
         """
-        req_id = self._send_frame({"id": _next_id(), "type": msg_type, "payload": payload})
+        req_id = self._send_frame(
+            {"id": _next_id(), "type": msg_type, "payload": payload}
+        )
         deadline = None if timeout is None else time.monotonic() + timeout
         while True:
-            remaining = None if deadline is None else max(0.0, deadline - time.monotonic())
+            remaining = (
+                None if deadline is None else max(0.0, deadline - time.monotonic())
+            )
             frame = self._recv_frame(remaining if remaining != 0 else 0.0)
             if frame.get("type") == "reply" and frame.get("in_reply_to") == req_id:
                 if frame.get("ok"):
@@ -493,7 +501,12 @@ def serve_in_background(
         return handler(msg_type, payload)
 
     thread = threading.Thread(
-        target=serve, args=(server, _wrapped), kwargs={"request_types": request_types}, daemon=True
+        target=serve,
+        args=(server, _wrapped),
+        kwargs={"request_types": request_types},
+        daemon=True,
     )
     thread.start()
-    return ServedChannel(client=client, _server=server, _thread=thread, _handler=handler)
+    return ServedChannel(
+        client=client, _server=server, _thread=thread, _handler=handler
+    )

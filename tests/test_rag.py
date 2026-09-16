@@ -36,6 +36,7 @@ Backups run daily at 03:00 America/Chicago via cron.
 
 # --- chunking ---------------------------------------------------------------
 
+
 def test_chunker_windows_overlap_and_headers():
     chunks = chunk_text(DOC, "backups.md", max_chars=120, overlap=30)
     assert len(chunks) >= 3
@@ -55,8 +56,10 @@ def test_chunker_windows_overlap_and_headers():
 
 
 def test_chunker_overlap_carries_context():
-    text = ("Sentence one. Sentence two. Sentence three. Sentence four. "
-            "Sentence five. Sentence six.")
+    text = (
+        "Sentence one. Sentence two. Sentence three. Sentence four. "
+        "Sentence five. Sentence six."
+    )
     chunks = chunk_text(text, "d.md", max_chars=60, overlap=25)
     assert len(chunks) >= 2
     # some content shared between consecutive chunks
@@ -72,6 +75,7 @@ def test_chunker_rejects_bad_params():
 
 
 # --- ingest -----------------------------------------------------------------
+
 
 def test_ingest_round_trip(tmp_path, store):
     f = tmp_path / "notes.md"
@@ -106,6 +110,7 @@ def test_ingest_directory(tmp_path, store):
 
 # --- pipeline ---------------------------------------------------------------
 
+
 def _ingested(store, tmp_path):
     f = tmp_path / "backups.md"
     f.write_text(DOC, encoding="utf-8")
@@ -117,6 +122,7 @@ def test_ask_no_generator_returns_context_and_notice(tmp_path, store):
     _ingested(store, tmp_path)
     # Force generator-unavailable by hiding the agent runtime module.
     import levi.rag.pipeline as pipe
+
     orig = pipe._generate
     pipe._generate = lambda *a, **k: None
     try:
@@ -141,11 +147,14 @@ def test_ask_nothing_retrieved_is_honest(tmp_path, store):
 
 def test_relevance_gate_margin(tmp_path, store):
     from levi.rag.pipeline import apply_relevance_gate
+
     _ingested(store, tmp_path)
     from levi.memory.retrieval import retrieve
+
     # nonsense: no lexical evidence, weak vector sim → all dropped
-    junk = retrieve("quantum chromodynamics quark flavors", store,
-                    method="hybrid", limit=10)
+    junk = retrieve(
+        "quantum chromodynamics quark flavors", store, method="hybrid", limit=10
+    )
     assert junk, "sanity: ranker returns *something* before gating"
     assert apply_relevance_gate(junk) == []
     # genuine paraphrase-ish query survives the gate
@@ -161,6 +170,7 @@ def test_ask_blank_query(tmp_path, store):
 def test_rerank_prefers_coverage(tmp_path, store):
     _ingested(store, tmp_path)
     from levi.memory.retrieval import retrieve
+
     retrieved = retrieve("backup encryption passphrase", store, method="hybrid")
     ranked = rerank("backup encryption passphrase", retrieved)
     assert ranked
@@ -172,6 +182,7 @@ def test_coverage_score_bounds():
     class E:
         content = "the quick brown fox"
         tags = []
+
     s, _x = coverage_score("quick fox", E())
     assert 0.0 <= s <= 1.0
     s2, _x2 = coverage_score("zebra zebra", E())
@@ -181,6 +192,7 @@ def test_coverage_score_bounds():
 def test_build_context_cites_and_caps(tmp_path, store):
     _ingested(store, tmp_path)
     from levi.memory.retrieval import retrieve
+
     retrieved = retrieve("backup", store, method="hybrid")
     ctx, cids = build_context(retrieved, max_chars=200)
     assert len(ctx) <= 400  # bounded
@@ -188,6 +200,7 @@ def test_build_context_cites_and_caps(tmp_path, store):
 
 
 # --- eval -------------------------------------------------------------------
+
 
 def _five_doc_store(tmp_path):
     store = MemoryStore(data_dir=tmp_path / "memory")
@@ -224,21 +237,36 @@ def test_build_questions_from_chunks(tmp_path):
 
 # --- CLI smoke ---------------------------------------------------------------
 
+
 def test_cli_ingest_ask_eval(tmp_path):
     env = dict(os.environ, LEVI_RAG_HOME=str(tmp_path / "raghome"))
     doc = tmp_path / "doc.md"
     doc.write_text("# Widget\n\nWidgets calibrate at dawn.", encoding="utf-8")
     root = Path(__file__).resolve().parents[1]
     cmd = [sys.executable, "-m", "levi.rag"]
-    r = subprocess.run(cmd + ["ingest", str(doc)], capture_output=True, text=True,
-                       env={**env, "PYTHONPATH": str(root / "core")}, timeout=60)
+    r = subprocess.run(
+        cmd + ["ingest", str(doc)],
+        capture_output=True,
+        text=True,
+        env={**env, "PYTHONPATH": str(root / "core")},
+        timeout=60,
+    )
     assert r.returncode == 0, r.stderr
-    r = subprocess.run(cmd + ["ask", "widget calibration", "--no-generate"],
-                       capture_output=True, text=True,
-                       env={**env, "PYTHONPATH": str(root / "core")}, timeout=60)
+    r = subprocess.run(
+        cmd + ["ask", "widget calibration", "--no-generate"],
+        capture_output=True,
+        text=True,
+        env={**env, "PYTHONPATH": str(root / "core")},
+        timeout=60,
+    )
     assert r.returncode == 0, r.stderr
     assert "[memory:" in r.stdout
-    r = subprocess.run(cmd + ["eval", "--k", "3"], capture_output=True, text=True,
-                       env={**env, "PYTHONPATH": str(root / "core")}, timeout=60)
+    r = subprocess.run(
+        cmd + ["eval", "--k", "3"],
+        capture_output=True,
+        text=True,
+        env={**env, "PYTHONPATH": str(root / "core")},
+        timeout=60,
+    )
     assert r.returncode == 0, r.stderr
     assert "hit-rate@3" in r.stdout

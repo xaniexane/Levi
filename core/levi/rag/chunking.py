@@ -50,8 +50,9 @@ def _split_sentences(text: str) -> List[str]:
     return out or ([text.strip()] if text.strip() else [])
 
 
-def chunk_text(text: str, source_doc: str, max_chars: int = 500,
-               overlap: int = 100) -> List[Chunk]:
+def chunk_text(
+    text: str, source_doc: str, max_chars: int = 500, overlap: int = 100
+) -> List[Chunk]:
     """Split *text* into overlapping chunks.
 
     - Windows are at most *max_chars*; boundaries prefer sentence ends,
@@ -89,7 +90,7 @@ def chunk_text(text: str, source_doc: str, max_chars: int = 500,
         return []
 
     chunks: List[Chunk] = []
-    buf: List[str] = []          # sentences in the current window
+    buf: List[str] = []  # sentences in the current window
     buf_section = ""
     buf_start_char = 0
     pos = 0  # approx char offset in the original text
@@ -103,13 +104,15 @@ def chunk_text(text: str, source_doc: str, max_chars: int = 500,
         if buf_section and not body.lstrip().startswith(buf_section):
             prefix = "[%s] " % buf_section
         chunk_text_out = prefix + body
-        chunks.append(Chunk(
-            text=chunk_text_out,
-            source_doc=source_doc,
-            chunk_index=len(chunks),
-            char_span=(buf_start_char, end_pos),
-            section=buf_section,
-        ))
+        chunks.append(
+            Chunk(
+                text=chunk_text_out,
+                source_doc=source_doc,
+                chunk_index=len(chunks),
+                char_span=(buf_start_char, end_pos),
+                section=buf_section,
+            )
+        )
         buf = []
 
     for section, sent in units:

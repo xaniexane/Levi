@@ -124,11 +124,13 @@ class PresenceHub:
     ) -> Optional[str]:
         op = req.get("op")
         if op == "hello":
-            cid = self.book.register(req.get("name", "anonymous"),
-                                     req.get("client_id") or new_id())
+            cid = self.book.register(
+                req.get("name", "anonymous"), req.get("client_id") or new_id()
+            )
             self._attach(handler, cid)
-            handler._send({"ok": True, "client_id": cid,
-                           "name": self.book.name_of(cid)})
+            handler._send(
+                {"ok": True, "client_id": cid, "name": self.book.name_of(cid)}
+            )
             return cid
         if client_id is None:
             handler._send({"ok": False, "error": "send hello first"})
@@ -136,10 +138,10 @@ class PresenceHub:
         if op == "rooms":
             handler._send({"ok": True, "rooms": self.book.list_rooms()})
         elif op == "create":
-            ok, msg = self.book.create_room(req.get("room", ""),
-                                            req.get("topic", ""))
-            handler._send({"ok": ok, **({"room": req.get("room")}
-                                        if ok else {"error": msg})})
+            ok, msg = self.book.create_room(req.get("room", ""), req.get("topic", ""))
+            handler._send(
+                {"ok": ok, **({"room": req.get("room")} if ok else {"error": msg})}
+            )
         elif op == "join":
             ok, payload = self.book.join(client_id, req.get("room", ""))
             if ok:
@@ -157,8 +159,9 @@ class PresenceHub:
             else:
                 handler._send({"ok": False, "error": payload})
         elif op == "say":
-            ok, payload = self.book.post(client_id, req.get("room", ""),
-                                         req.get("text", ""))
+            ok, payload = self.book.post(
+                client_id, req.get("room", ""), req.get("text", "")
+            )
             if ok:
                 message, recipients = payload
                 handler._send({"ok": True, "at": message["at"]})
@@ -167,8 +170,12 @@ class PresenceHub:
                 handler._send({"ok": False, "error": payload})
         elif op == "who":
             ok, members = self.book.room_members(req.get("room", ""))
-            handler._send({"ok": ok, **({"members": members}
-                                        if ok else {"error": "no such room"})})
+            handler._send(
+                {
+                    "ok": ok,
+                    **({"members": members} if ok else {"error": "no such room"}),
+                }
+            )
         elif op == "heartbeat":
             self.book.heartbeat(client_id)
             handler._send({"ok": True})
@@ -177,8 +184,7 @@ class PresenceHub:
         return client_id
 
 
-def send_request(host: str, port: int, obj: Dict,
-                 timeout: float = 5.0) -> Dict:
+def send_request(host: str, port: int, obj: Dict, timeout: float = 5.0) -> Dict:
     """One-shot request/response helper used by the CLI."""
     with socket.create_connection((host, port), timeout=timeout) as sock:
         sock.sendall((json.dumps(obj) + "\n").encode("utf-8"))

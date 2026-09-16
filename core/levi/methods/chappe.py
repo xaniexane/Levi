@@ -101,8 +101,10 @@ class Codebook:
     def save(self) -> None:
         _persist.save_json(
             self._store,
-            {"name": self.name,
-             "entries": {f"{p},{q}": ph for (p, q), ph in self._entries.items()}},
+            {
+                "name": self.name,
+                "entries": {f"{p},{q}": ph for (p, q), ph in self._entries.items()},
+            },
         )
 
     # -- the codebook -------------------------------------------------------
@@ -121,9 +123,7 @@ class Codebook:
         try:
             return self._entries[(page, pos)]
         except KeyError:
-            raise UnknownSignal(
-                f"no phrase registered at ({page}, {pos})"
-            ) from None
+            raise UnknownSignal(f"no phrase registered at ({page}, {pos})") from None
 
     def encode(self, phrase: str) -> tuple[int, int]:
         """Find the (page, position) of ``phrase``.
@@ -155,9 +155,7 @@ class Codebook:
         try:
             return CONTROL_SIGNALS[signal]
         except KeyError:
-            raise UnknownSignal(
-                f"{signal} is not a control signal (93–98)"
-            ) from None
+            raise UnknownSignal(f"{signal} is not a control signal (93–98)") from None
 
     def __len__(self) -> int:
         return len(self._entries)

@@ -53,17 +53,16 @@ def research_brief_rag(topic: str, store) -> Dict[str, Any]:
         result["report"] = (
             "RESEARCH BRIEF: RAG pipeline unavailable (%s: %s). "
             "The cited-research path cannot run; the legacy agent-runtime "
-            "brief remains the fallback."
-            % (type(exc).__name__, exc)
+            "brief remains the fallback." % (type(exc).__name__, exc)
         )
         return result
     try:
         asked = ask(topic, store, limit=5, generate=False)
     except Exception as exc:  # ask() is fail-closed, but belt and braces
         result["notice"] = "rag-error"
-        result["report"] = (
-            "RESEARCH BRIEF failed: RAG pipeline raised %s: %s"
-            % (type(exc).__name__, exc)
+        result["report"] = "RESEARCH BRIEF failed: RAG pipeline raised %s: %s" % (
+            type(exc).__name__,
+            exc,
         )
         return result
     citations: List[str] = list(getattr(asked, "citations", []) or [])
@@ -73,8 +72,9 @@ def research_brief_rag(topic: str, store) -> Dict[str, Any]:
     result["notice"] = notice
     if not citations:
         result["ok"] = False
-        result["report"] = (
-            "RESEARCH BRIEF on '%s': %s" % (topic, notice or "no results")
+        result["report"] = "RESEARCH BRIEF on '%s': %s" % (
+            topic,
+            notice or "no results",
         )
         return result
     body = context.strip()

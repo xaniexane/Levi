@@ -94,8 +94,9 @@ def main(argv=None) -> int:
     p_n.add_argument("--limit", type=int, default=10)
     p_n.set_defaults(func=cmd_news)
 
-    p_nr = sub.add_parser("news-refresh", help="fetch today's public feeds "
-                          "(network; honest on failure)")
+    p_nr = sub.add_parser(
+        "news-refresh", help="fetch today's public feeds (network; honest on failure)"
+    )
     p_nr.add_argument("--date", default=None)
     p_nr.add_argument("--limit", type=int, default=200)
     p_nr.set_defaults(func=cmd_news_refresh)

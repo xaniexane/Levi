@@ -43,9 +43,7 @@ def _fallback_block(store, limit: int) -> str:
         return ""
 
 
-def load_user_context_retrieved(
-    store, query: str, limit: int = 8
-) -> Dict[str, Any]:
+def load_user_context_retrieved(store, query: str, limit: int = 8) -> Dict[str, Any]:
     """Build a query-relevant "what I know about you" block.
 
     ``store`` is a :class:`~levi.memory.store.MemoryStore` (or duck-typed

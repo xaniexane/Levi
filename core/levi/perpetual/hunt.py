@@ -35,46 +35,163 @@ HUNT_INTERVAL_DAYS = 7
 # A future hunt must not re-cover these; plan_next_hunt() enforces it.
 # --------------------------------------------------------------------------
 
-WAVE1_DEAD_SOFTWARE = frozenset({
-    "HyperCard", "Plan 9", "Smalltalk", "BeOS", "BFS", "WinFS", "Telescript",
-    "ARexx", "AppleScript", "OpenDoc", "Lotus Agenda", "Memex",
-    "Project Xanadu", "NLS", "Augment", "NoteCards", "Hearsay-II", "Soar",
-    "ACT-R", "Subsumption architecture", "Viable System Model",
-    "Conversation Theory", "Lisp Machines", "Oberon", "PLATO", "Erlang",
-    "OTP", "NewtonScript", "Newton soups", "Canon Cat", "Lotus Improv",
-    "Self", "ZigZag", "Apple Data Detectors",
-})
+WAVE1_DEAD_SOFTWARE = frozenset(
+    {
+        "HyperCard",
+        "Plan 9",
+        "Smalltalk",
+        "BeOS",
+        "BFS",
+        "WinFS",
+        "Telescript",
+        "ARexx",
+        "AppleScript",
+        "OpenDoc",
+        "Lotus Agenda",
+        "Memex",
+        "Project Xanadu",
+        "NLS",
+        "Augment",
+        "NoteCards",
+        "Hearsay-II",
+        "Soar",
+        "ACT-R",
+        "Subsumption architecture",
+        "Viable System Model",
+        "Conversation Theory",
+        "Lisp Machines",
+        "Oberon",
+        "PLATO",
+        "Erlang",
+        "OTP",
+        "NewtonScript",
+        "Newton soups",
+        "Canon Cat",
+        "Lotus Improv",
+        "Self",
+        "ZigZag",
+        "Apple Data Detectors",
+    }
+)
 
-WAVE2_DEAD_SOFTWARE_II = frozenset({
-    "Inferno", "AmigaOS", "OS/2 Workplace Shell", "SOM", "NeXTSTEP",
-    "QNX Neutrino", "AtheOS", "Syllable", "Amoeba", "Interlisp-D", "Eiffel",
-    "Rebol", "Cedar", "Mesa", "Croquet", "Open Croquet", "Ecco Pro", "MORE",
-    "InfoSelect", "Borland Sidekick", "Minitel", "GEnie", "The WELL",
-    "CompuServe CB Simulator", "The Palace", "SHRDLU", "Eurisko", "KEE",
-    "MRS", "ART", "Cyc", "Hyper-G", "HyperWave", "Microcosm", "Intermedia",
-    "Pad++", "Jazz", "BumpTop", "Archy", "NeWS", "GOAP",
-    "The Sims smart terrain", "Facade", "EROS", "Coyotos", "KeyKOS",
-    "CAP computer", "MUMPS", "Pick", "MultiValue", "CODASYL", "GemStone",
-    "MojoNation", "Groove Networks", "NIST RCS", "Lotus Notes replication",
-    "Banyan VINES", "The Coordinator",
-})
+WAVE2_DEAD_SOFTWARE_II = frozenset(
+    {
+        "Inferno",
+        "AmigaOS",
+        "OS/2 Workplace Shell",
+        "SOM",
+        "NeXTSTEP",
+        "QNX Neutrino",
+        "AtheOS",
+        "Syllable",
+        "Amoeba",
+        "Interlisp-D",
+        "Eiffel",
+        "Rebol",
+        "Cedar",
+        "Mesa",
+        "Croquet",
+        "Open Croquet",
+        "Ecco Pro",
+        "MORE",
+        "InfoSelect",
+        "Borland Sidekick",
+        "Minitel",
+        "GEnie",
+        "The WELL",
+        "CompuServe CB Simulator",
+        "The Palace",
+        "SHRDLU",
+        "Eurisko",
+        "KEE",
+        "MRS",
+        "ART",
+        "Cyc",
+        "Hyper-G",
+        "HyperWave",
+        "Microcosm",
+        "Intermedia",
+        "Pad++",
+        "Jazz",
+        "BumpTop",
+        "Archy",
+        "NeWS",
+        "GOAP",
+        "The Sims smart terrain",
+        "Facade",
+        "EROS",
+        "Coyotos",
+        "KeyKOS",
+        "CAP computer",
+        "MUMPS",
+        "Pick",
+        "MultiValue",
+        "CODASYL",
+        "GemStone",
+        "MojoNation",
+        "Groove Networks",
+        "NIST RCS",
+        "Lotus Notes replication",
+        "Banyan VINES",
+        "The Coordinator",
+    }
+)
 
-WAVE3_FORGOTTEN_METHODS = frozenset({
-    "Method of Loci", "Llull", "Ars Magna", "Bruno memory wheels", "Pinakes",
-    "Tironian Notes", "Commonplace Books", "Locke's Index", "Florilegia",
-    "Paciolian triple-book", "Edge-notched cards", "McBee cards",
-    "Optical-coincidence cards", "Peek-a-Boo cards", "Uniterm",
-    "Colon Classification", "Ranganathan", "Mundaneum", "UDC", "Kardex",
-    "Tickler File", "Ivy Lee", "Franklin moral ledger",
-    "Analysis of Competing Hypotheses", "ACH", "Repertory Grid",
-    "Morphological Analysis", "Zwicky Box", "TRIZ", "de Bono", "Water Logic",
-    "Viable System Model", "Cybersyn", "Deming", "Trivium", "Quadrivium",
-    "Ratio Studiorum", "Monitorial instruction", "Pecia system",
-    "Nautical Almanac duplex verification", "Los Alamos T-5", "Therbligs",
-    "Pneumatic dispatch", "Telegraph codebooks", "Q-Codes", "Prosigns",
-    "Prowords", "Chappe semaphore", "Quipu", "Kriegsspiel",
-    "RAND political-military gaming",
-})
+WAVE3_FORGOTTEN_METHODS = frozenset(
+    {
+        "Method of Loci",
+        "Llull",
+        "Ars Magna",
+        "Bruno memory wheels",
+        "Pinakes",
+        "Tironian Notes",
+        "Commonplace Books",
+        "Locke's Index",
+        "Florilegia",
+        "Paciolian triple-book",
+        "Edge-notched cards",
+        "McBee cards",
+        "Optical-coincidence cards",
+        "Peek-a-Boo cards",
+        "Uniterm",
+        "Colon Classification",
+        "Ranganathan",
+        "Mundaneum",
+        "UDC",
+        "Kardex",
+        "Tickler File",
+        "Ivy Lee",
+        "Franklin moral ledger",
+        "Analysis of Competing Hypotheses",
+        "ACH",
+        "Repertory Grid",
+        "Morphological Analysis",
+        "Zwicky Box",
+        "TRIZ",
+        "de Bono",
+        "Water Logic",
+        "Viable System Model",
+        "Cybersyn",
+        "Deming",
+        "Trivium",
+        "Quadrivium",
+        "Ratio Studiorum",
+        "Monitorial instruction",
+        "Pecia system",
+        "Nautical Almanac duplex verification",
+        "Los Alamos T-5",
+        "Therbligs",
+        "Pneumatic dispatch",
+        "Telegraph codebooks",
+        "Q-Codes",
+        "Prosigns",
+        "Prowords",
+        "Chappe semaphore",
+        "Quipu",
+        "Kriegsspiel",
+        "RAND political-military gaming",
+    }
+)
 
 
 @dataclass(frozen=True)
@@ -105,8 +222,8 @@ HUNT_THEMES: List[HuntTheme] = [
         id="forgotten-methods",
         name="Forgotten methods",
         brief="40 forgotten human/organizational methods: memory arts, "
-              "pre-digital retrieval, dead productivity systems, analytical "
-              "techniques, management cybernetics, labor automation.",
+        "pre-digital retrieval, dead productivity systems, analytical "
+        "techniques, management cybernetics, labor automation.",
         exclusions=WAVE3_FORGOTTEN_METHODS,
         covered=True,
     ),
@@ -114,85 +231,109 @@ HUNT_THEMES: List[HuntTheme] = [
         id="dead-protocols",
         name="Dead protocols",
         brief="Forgotten communication and network protocols and signaling "
-              "systems not covered in wave 3 (beyond Q-codes, telegraph "
-              "codebooks, prowords): dead wire protocols, signaling codes, "
-              "pre-internet networking rituals, lost radio procedure.",
-        exclusions=frozenset({"Q-Codes", "Prosigns", "Prowords",
-                              "Telegraph codebooks", "Chappe semaphore"}),
+        "systems not covered in wave 3 (beyond Q-codes, telegraph "
+        "codebooks, prowords): dead wire protocols, signaling codes, "
+        "pre-internet networking rituals, lost radio procedure.",
+        exclusions=frozenset(
+            {
+                "Q-Codes",
+                "Prosigns",
+                "Prowords",
+                "Telegraph codebooks",
+                "Chappe semaphore",
+            }
+        ),
     ),
     HuntTheme(
         id="lost-interfaces",
         name="Lost interfaces",
         brief="Dead human-computer interface paradigms not covered in waves "
-              "1-2 (beyond HyperCard, Canon Cat, BumpTop, Archy, NeWS): "
-              "forgotten input devices, dead interaction models, abandoned "
-              "UI metaphors and their mechanisms.",
-        exclusions=frozenset({"HyperCard", "Canon Cat", "BumpTop", "Archy",
-                              "NeWS", "OS/2 Workplace Shell"}),
+        "1-2 (beyond HyperCard, Canon Cat, BumpTop, Archy, NeWS): "
+        "forgotten input devices, dead interaction models, abandoned "
+        "UI metaphors and their mechanisms.",
+        exclusions=frozenset(
+            {
+                "HyperCard",
+                "Canon Cat",
+                "BumpTop",
+                "Archy",
+                "NeWS",
+                "OS/2 Workplace Shell",
+            }
+        ),
     ),
     HuntTheme(
         id="abandoned-hardware",
         name="Abandoned hardware",
         brief="Dead machines, consoles, handhelds, and peripherals and the "
-              "tricks their constraints forced: forgotten architectures, "
-              "dead storage media workflows, lost embedded cleverness.",
+        "tricks their constraints forced: forgotten architectures, "
+        "dead storage media workflows, lost embedded cleverness.",
     ),
     HuntTheme(
         id="forgotten-languages",
         name="Forgotten languages",
         brief="Dead programming languages, specification languages, "
-              "shorthand systems, and constructed working languages not "
-              "covered before (beyond Tironian notes, Interlisp-D, Rebol, "
-              "Eiffel, SHRDLU): their ideas worth reviving.",
-        exclusions=frozenset({"Tironian Notes", "Interlisp-D", "Rebol",
-                              "Eiffel", "SHRDLU"}),
+        "shorthand systems, and constructed working languages not "
+        "covered before (beyond Tironian notes, Interlisp-D, Rebol, "
+        "Eiffel, SHRDLU): their ideas worth reviving.",
+        exclusions=frozenset(
+            {"Tironian Notes", "Interlisp-D", "Rebol", "Eiffel", "SHRDLU"}
+        ),
     ),
     HuntTheme(
         id="pre-digital-computation",
         name="Pre-digital computation",
         brief="Mechanical computing, human-computer pipelines, and analog "
-              "methods beyond wave 3's T-5 and Nautical Almanac: desk-machine "
-              "workflows, planimeters, nomography, analog programming.",
-        exclusions=frozenset({"Los Alamos T-5",
-                              "Nautical Almanac duplex verification"}),
+        "methods beyond wave 3's T-5 and Nautical Almanac: desk-machine "
+        "workflows, planimeters, nomography, analog programming.",
+        exclusions=frozenset(
+            {"Los Alamos T-5", "Nautical Almanac duplex verification"}
+        ),
     ),
     HuntTheme(
         id="dead-networks",
         name="Dead networks",
         brief="Dead online services, BBS cultures, and pre-web networks not "
-              "covered in wave 2 (beyond Minitel, GEnie, The WELL, CB "
-              "Simulator, The Palace): their social and technical mechanisms.",
-        exclusions=frozenset({"Minitel", "GEnie", "The WELL",
-                              "CompuServe CB Simulator", "The Palace"}),
+        "covered in wave 2 (beyond Minitel, GEnie, The WELL, CB "
+        "Simulator, The Palace): their social and technical mechanisms.",
+        exclusions=frozenset(
+            {"Minitel", "GEnie", "The WELL", "CompuServe CB Simulator", "The Palace"}
+        ),
     ),
     HuntTheme(
         id="lost-crafts",
         name="Lost crafts",
         brief="Pre-industrial knowledge systems and craft techniques beyond "
-              "wave 3's quipu and pecia: guild knowledge transfer, dead "
-              "measurement systems, forgotten making-methods with mechanisms "
-              "worth reviving.",
+        "wave 3's quipu and pecia: guild knowledge transfer, dead "
+        "measurement systems, forgotten making-methods with mechanisms "
+        "worth reviving.",
         exclusions=frozenset({"Quipu", "Pecia system"}),
     ),
     HuntTheme(
         id="dead-genres-games",
         name="Dead genres: games",
         brief="Dead game genres and forgotten mechanics (parser interactive "
-              "fiction, hotseat pass-and-play, dead multiplayer rituals), "
-              "killed gaming platforms (Stadia and friends), and predatory "
-              "monetization trades (loot boxes, pay-to-win, battle passes, "
-              "vanishing subscription libraries) — always as honest playful "
-              "ADDITIONS (local games, fair mechanics, player-owned "
-              "progress, never predatory monetization), never rebuilds.",
+        "fiction, hotseat pass-and-play, dead multiplayer rituals), "
+        "killed gaming platforms (Stadia and friends), and predatory "
+        "monetization trades (loot boxes, pay-to-win, battle passes, "
+        "vanishing subscription libraries) — always as honest playful "
+        "ADDITIONS (local games, fair mechanics, player-owned "
+        "progress, never predatory monetization), never rebuilds.",
     ),
     HuntTheme(
         id="fallen-platforms",
         name="Fallen platforms",
         brief="Dead social and content platforms and the good ideas their "
-              "killers left behind: the sharing, curation, and presence "
-              "mechanisms the winners refused to keep.",
-        exclusions=frozenset({"Google Reader share-with-note", "Vine loop",
-                              "Digg bury", "MySpace handmade page"}),
+        "killers left behind: the sharing, curation, and presence "
+        "mechanisms the winners refused to keep.",
+        exclusions=frozenset(
+            {
+                "Google Reader share-with-note",
+                "Vine loop",
+                "Digg bury",
+                "MySpace handmade page",
+            }
+        ),
         covered=True,
     ),
 ]
@@ -203,6 +344,7 @@ THEMES_BY_ID = {t.id: t for t in HUNT_THEMES}
 # --------------------------------------------------------------------------
 # State
 # --------------------------------------------------------------------------
+
 
 def perpetual_home(home: "str | os.PathLike[str] | None" = None) -> Path:
     base = Path(home) if home is not None else Path(os.path.expanduser("~"))
@@ -230,9 +372,9 @@ def _write_private(path: Path, data: str) -> None:
 
 @dataclass
 class HuntWave:
-    id: str                 # e.g. "wave-004"
+    id: str  # e.g. "wave-004"
     theme_id: str
-    planned_at: str         # ISO
+    planned_at: str  # ISO
     completed_at: Optional[str] = None
     research_slug: str = ""
     findings_count: int = 0
@@ -241,11 +383,14 @@ class HuntWave:
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "id": self.id, "theme_id": self.theme_id,
-            "planned_at": self.planned_at, "completed_at": self.completed_at,
+            "id": self.id,
+            "theme_id": self.theme_id,
+            "planned_at": self.planned_at,
+            "completed_at": self.completed_at,
             "research_slug": self.research_slug,
             "findings_count": self.findings_count,
-            "status": self.status, "notes": self.notes,
+            "status": self.status,
+            "notes": self.notes,
         }
 
     @classmethod
@@ -255,12 +400,14 @@ class HuntWave:
         if data.get("theme_id") not in THEMES_BY_ID:
             raise ValueError("unknown theme: %r" % data.get("theme_id"))
         return cls(
-            id=str(data["id"]), theme_id=str(data["theme_id"]),
+            id=str(data["id"]),
+            theme_id=str(data["theme_id"]),
             planned_at=str(data.get("planned_at", "")),
             completed_at=data.get("completed_at"),
             research_slug=str(data.get("research_slug", "")),
             findings_count=int(data.get("findings_count", 0)),
-            status=str(data["status"]), notes=str(data.get("notes", "")),
+            status=str(data["status"]),
+            notes=str(data.get("notes", "")),
         )
 
 
@@ -270,8 +417,7 @@ class HuntState:
     next_due: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
-        return {"waves": [w.to_dict() for w in self.waves],
-                "next_due": self.next_due}
+        return {"waves": [w.to_dict() for w in self.waves], "next_due": self.next_due}
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "HuntState":
@@ -297,8 +443,7 @@ def load_state(home: "str | os.PathLike[str] | None" = None) -> HuntState:
         raise ValueError("corrupt hunt state at %s: %s" % (path, exc)) from exc
 
 
-def save_state(state: HuntState,
-               home: "str | os.PathLike[str] | None" = None) -> None:
+def save_state(state: HuntState, home: "str | os.PathLike[str] | None" = None) -> None:
     _ensure_dir(perpetual_home(home))
     _write_private(_state_path(home), json.dumps(state.to_dict(), indent=2))
 
@@ -307,11 +452,12 @@ def save_state(state: HuntState,
 # Planning
 # --------------------------------------------------------------------------
 
+
 @dataclass(frozen=True)
 class HuntPlan:
     wave_id: str
     theme: HuntTheme
-    deeper_vein: bool        # True when all themes covered: re-hunt deeper
+    deeper_vein: bool  # True when all themes covered: re-hunt deeper
     exclusions: frozenset
     due: str
     instructions: str
@@ -323,8 +469,10 @@ class HuntPlan:
             "Due: %s" % self.due,
         ]
         if self.deeper_vein:
-            lines.append("NOTE: all themes covered before — hunt a DEEPER vein "
-                         "of this theme; do not repeat covered ground.")
+            lines.append(
+                "NOTE: all themes covered before — hunt a DEEPER vein "
+                "of this theme; do not repeat covered ground."
+            )
         lines.append("")
         lines.append("EXCLUSIONS (never re-cover these):")
         for name in sorted(self.exclusions):
@@ -342,26 +490,27 @@ def _next_wave_id(state: HuntState) -> str:
     return "wave-%03d" % n
 
 
-def plan_next_hunt(state: HuntState,
-                   now: Optional[datetime] = None) -> HuntPlan:
+def plan_next_hunt(state: HuntState, now: Optional[datetime] = None) -> HuntPlan:
     """Plan the next hunt wave. Never repeats covered ground."""
     now = now or datetime.now(timezone.utc)
-    covered_themes = {w.theme_id for w in state.waves
-                      if w.status == "completed"}
+    covered_themes = {w.theme_id for w in state.waves if w.status == "completed"}
     in_flight = [w for w in state.waves if w.status in ("planned", "in-progress")]
     if in_flight:
         # Don't stack plans: finish the open wave first.
         w = in_flight[0]
         theme = THEMES_BY_ID[w.theme_id]
         return HuntPlan(
-            wave_id=w.id, theme=theme, deeper_vein=False,
+            wave_id=w.id,
+            theme=theme,
+            deeper_vein=False,
             exclusions=theme.exclusions,
             due=state.next_due or now.isoformat(),
             instructions=_instructions(theme, w.id, False),
         )
     deeper_vein = False
-    theme = next((t for t in HUNT_THEMES
-                  if not t.covered and t.id not in covered_themes), None)
+    theme = next(
+        (t for t in HUNT_THEMES if not t.covered and t.id not in covered_themes), None
+    )
     if theme is None:
         # Everything covered: re-hunt the oldest theme, deeper.
         deeper_vein = True
@@ -371,8 +520,11 @@ def plan_next_hunt(state: HuntState,
     wave_id = _next_wave_id(state)
     due = (now + timedelta(days=HUNT_INTERVAL_DAYS)).isoformat()
     return HuntPlan(
-        wave_id=wave_id, theme=theme, deeper_vein=deeper_vein,
-        exclusions=theme.exclusions, due=due,
+        wave_id=wave_id,
+        theme=theme,
+        deeper_vein=deeper_vein,
+        exclusions=theme.exclusions,
+        due=due,
         instructions=_instructions(theme, wave_id, deeper_vein),
     )
 
@@ -387,9 +539,12 @@ DEEPWEB_SURVEY_CMD = (
 
 
 def _instructions(theme: HuntTheme, wave_id: str, deeper_vein: bool) -> str:
-    vein = ("This theme was hunted before — go DEEPER: a narrower sub-vein, "
-            "primary sources, mechanisms the first pass missed. "
-            if deeper_vein else "")
+    vein = (
+        "This theme was hunted before — go DEEPER: a narrower sub-vein, "
+        "primary sources, mechanisms the first pass missed. "
+        if deeper_vein
+        else ""
+    )
     return (
         "%sResearch brief for %s:\n"
         "Find 30-50 retired, discontinued, or ahead-of-their-time systems, "
@@ -403,9 +558,7 @@ def _instructions(theme: HuntTheme, wave_id: str, deeper_vein: bool) -> str:
         "wave with: python3 -m levi.perpetual hunt-record %s findings.jsonl\n"
         "where findings.jsonl holds one ArchiveRecord JSON object per line.\n"
         "Deep-web pass (public sources only, robots.txt-honoring): %s\n"
-        "%s"
-        % (vein, wave_id, theme.brief, wave_id, DEEPWEB_SURVEY_CMD,
-           HARD_ROUTE_LAW)
+        "%s" % (vein, wave_id, theme.brief, wave_id, DEEPWEB_SURVEY_CMD, HARD_ROUTE_LAW)
     )
 
 
@@ -448,10 +601,20 @@ HARD_ROUTE_LAW = (
 #: Lowercase substrings suggesting a revival recipe leans on something
 #: paid/proprietary. Heuristic, not proof — flags for human review.
 COST_SIGNALS = (
-    "paid api", "api key", "api-key", "subscription", "saas",
+    "paid api",
+    "api key",
+    "api-key",
+    "subscription",
+    "saas",
     "licens",  # license, licensed, licensing
-    "proprietary", "per-seat", "per seat", "paywall",
-    "monthly fee", "annual fee", "purchase", "commercial",
+    "proprietary",
+    "per-seat",
+    "per seat",
+    "paywall",
+    "monthly fee",
+    "annual fee",
+    "purchase",
+    "commercial",
 )
 
 
@@ -467,8 +630,9 @@ def hard_route_review(records: List[ArchiveRecord]) -> List[Dict[str, Any]]:
         hay = ("%s\n%s" % (rec.revival_recipe, rec.levi_application)).lower()
         signals = sorted({sig for sig in COST_SIGNALS if sig in hay})
         if signals:
-            flagged.append({"record_id": rec.id, "title": rec.title,
-                            "signals": signals})
+            flagged.append(
+                {"record_id": rec.id, "title": rec.title, "signals": signals}
+            )
     return flagged
 
 
@@ -487,8 +651,11 @@ def _build_queue_path(home) -> Path:
     return perpetual_home(home) / "build_queue.jsonl"
 
 
-def queue_for_archive(records: List[ArchiveRecord], wave_id: str,
-                      home: "str | os.PathLike[str] | None" = None) -> Path:
+def queue_for_archive(
+    records: List[ArchiveRecord],
+    wave_id: str,
+    home: "str | os.PathLike[str] | None" = None,
+) -> Path:
     """Write validated records to the Archive ingest queue.
 
     The Archive's own ingest consumes these files; until it does, they are
@@ -501,9 +668,12 @@ def queue_for_archive(records: List[ArchiveRecord], wave_id: str,
     return path
 
 
-def queue_for_build(records: List[ArchiveRecord], wave_id: str,
-                    home: "str | os.PathLike[str] | None" = None,
-                    now: Optional[datetime] = None) -> int:
+def queue_for_build(
+    records: List[ArchiveRecord],
+    wave_id: str,
+    home: "str | os.PathLike[str] | None" = None,
+    now: Optional[datetime] = None,
+) -> int:
     """Queue buildable findings under the standing auto-approval.
 
     Only load-bearing and useful-pattern findings are queued; inspirational
@@ -531,7 +701,8 @@ def queue_for_build(records: List[ArchiveRecord], wave_id: str,
             if rec.id in flagged_ids:
                 item["hard_route_note"] = (
                     "clean-room recreation required: analyze the pattern, "
-                    "rebuild stdlib-only, local-first; never pay.")
+                    "rebuild stdlib-only, local-first; never pay."
+                )
             fh.write(json.dumps(item, ensure_ascii=False) + "\n")
             queued += 1
     try:
@@ -542,7 +713,8 @@ def queue_for_build(records: List[ArchiveRecord], wave_id: str,
 
 
 def read_build_queue(
-        home: "str | os.PathLike[str] | None" = None) -> List[Dict[str, Any]]:
+    home: "str | os.PathLike[str] | None" = None,
+) -> List[Dict[str, Any]]:
     path = _build_queue_path(home)
     try:
         lines = path.read_text(encoding="utf-8").splitlines()
@@ -567,10 +739,14 @@ def pending_waves(home: "str | os.PathLike[str] | None" = None) -> List[str]:
     return sorted(p.stem for p in d.glob("*.jsonl"))
 
 
-def record_hunt(state: HuntState, wave_id: str, records: List[ArchiveRecord],
-                research_slug: str,
-                home: "str | os.PathLike[str] | None" = None,
-                now: Optional[datetime] = None) -> Dict[str, Any]:
+def record_hunt(
+    state: HuntState,
+    wave_id: str,
+    records: List[ArchiveRecord],
+    research_slug: str,
+    home: "str | os.PathLike[str] | None" = None,
+    now: Optional[datetime] = None,
+) -> Dict[str, Any]:
     """Record a completed hunt wave. Deny-closed on every input.
 
     - every record must already be a validated ArchiveRecord
@@ -586,10 +762,10 @@ def record_hunt(state: HuntState, wave_id: str, records: List[ArchiveRecord],
     if wave is None:
         # The plan was produced but state was never saved (e.g. fresh home):
         # create the wave from the plan rather than refusing honest work.
-        theme_id = next(
-            (t.id for t in HUNT_THEMES if not t.covered), HUNT_THEMES[0].id)
-        wave = HuntWave(id=wave_id, theme_id=theme_id,
-                        planned_at=now.isoformat(), status="planned")
+        theme_id = next((t.id for t in HUNT_THEMES if not t.covered), HUNT_THEMES[0].id)
+        wave = HuntWave(
+            id=wave_id, theme_id=theme_id, planned_at=now.isoformat(), status="planned"
+        )
         state.waves.append(wave)
     if wave.status == "completed":
         raise ValueError("wave %s is already completed" % wave_id)

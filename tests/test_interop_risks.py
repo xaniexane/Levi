@@ -7,11 +7,20 @@ from levi.policy.gates import RiskLevel
 
 
 def test_ceiling_max_wins():
-    assert risks.ceiling([RiskLevel.INFO, RiskLevel.CRITICAL, RiskLevel.LOW]) is RiskLevel.CRITICAL
+    assert (
+        risks.ceiling([RiskLevel.INFO, RiskLevel.CRITICAL, RiskLevel.LOW])
+        is RiskLevel.CRITICAL
+    )
 
 
 def test_ceiling_ordering():
-    levels = [RiskLevel.INFO, RiskLevel.LOW, RiskLevel.MODERATE, RiskLevel.HIGH, RiskLevel.CRITICAL]
+    levels = [
+        RiskLevel.INFO,
+        RiskLevel.LOW,
+        RiskLevel.MODERATE,
+        RiskLevel.HIGH,
+        RiskLevel.CRITICAL,
+    ]
     for i in range(len(levels) - 1):
         assert risks.ceiling([levels[i], levels[i + 1]]) is levels[i + 1]
         assert risks.ceiling([levels[i + 1], levels[i]]) is levels[i + 1]

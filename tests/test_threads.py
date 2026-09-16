@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 
 import pytest
 
@@ -21,12 +20,14 @@ def _seed(store: ThreadStore):
     with cross-camp upvotes."""
     d = store.new_discussion("test", discussion_id="d1", community_id="haven")
     factional = store.add_comment("d1", "a1", "our side is right and that's that")
-    bridge = store.add_comment("d1", "b1", "both sides make fair points; here's the evidence")
+    bridge = store.add_comment(
+        "d1", "b1", "both sides make fair points; here's the evidence"
+    )
     for v in ("a1", "a2", "a3", "a4"):
         store.vote("d1", factional.id, v, "up")
-    store.vote("d1", factional.id, "b1", "down")   # net +3, 4 up-votes
+    store.vote("d1", factional.id, "b1", "down")  # net +3, 4 up-votes
     for v in ("a1", "b1", "b2"):
-        store.vote("d1", bridge.id, v, "up")        # net +3, 3 up-votes, cross-camp
+        store.vote("d1", bridge.id, v, "up")  # net +3, 3 up-votes, cross-camp
     return d, factional, bridge
 
 
@@ -97,11 +98,14 @@ def test_profile_tamper_detected(monkeypatch, tmp_path):
 
 def test_profile_key_is_owner_only(monkeypatch, tmp_path):
     import stat
+
     _herm(monkeypatch, tmp_path)
     store = ThreadStore()
     store.new_profile("ada", "Ada")
     store.export_profile("ada")  # generates the key
-    mode = stat.S_IMODE((tmp_path / ".levi" / "threads" / "identity.key").stat().st_mode)
+    mode = stat.S_IMODE(
+        (tmp_path / ".levi" / "threads" / "identity.key").stat().st_mode
+    )
     assert mode == 0o600
 
 

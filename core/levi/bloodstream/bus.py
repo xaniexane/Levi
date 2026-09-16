@@ -60,8 +60,7 @@ def _validate_topic(topic: str) -> str:
 def _validate_payload(payload: Dict[str, Any], topic: str) -> None:
     if not isinstance(payload, dict):
         raise TypeError(
-            f"bus payload for {topic!r} must be a dict, got "
-            f"{type(payload).__name__}"
+            f"bus payload for {topic!r} must be a dict, got {type(payload).__name__}"
         )
     try:
         json.dumps(payload)
@@ -136,9 +135,7 @@ def publish(topic: str, payload: Dict[str, Any]) -> None:
 
 
 @contextmanager
-def trace_scope(
-    trace_id: str, base_dir: Optional[Path] = None
-) -> Iterator[None]:
+def trace_scope(trace_id: str, base_dir: Optional[Path] = None) -> Iterator[None]:
     """Bind ``publish()`` to a trace: while inside the scope, every
     publish appends an event record to *trace_id* (TraceWriter under
     *base_dir*, defaulting to ``~/.levi/traces``)."""

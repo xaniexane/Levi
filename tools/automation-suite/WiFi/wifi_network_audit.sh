@@ -3,6 +3,19 @@
 # Never attempts to connect to anything.
 set -euo pipefail
 
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+    cat <<'EOF'
+wifi_network_audit.sh — report nearby WiFi networks. Report only.
+
+Usage: wifi_network_audit.sh [--help|-h]
+
+Lists visible networks via nmcli (preferred) or iwlist (fallback).
+Never attempts to connect to anything. Fails closed when no wireless
+tooling or no wireless interface is available.
+EOF
+    exit 0
+fi
+
 echo "=== WiFi network audit (report only, no connections made) ==="
 
 if command -v nmcli >/dev/null 2>&1; then

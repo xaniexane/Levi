@@ -78,8 +78,7 @@ def _as_risk_level(value: Any, *, field: str = "risk_level") -> RiskLevel:
         except ValueError:
             pass
     raise ValueError(
-        f"{field} must be a levi.policy.gates.RiskLevel (or int 0-4), "
-        f"got {value!r}"
+        f"{field} must be a levi.policy.gates.RiskLevel (or int 0-4), got {value!r}"
     )
 
 
@@ -212,7 +211,9 @@ class PolicyEngine:
         details: Optional[Dict[str, Any]] = None,
     ) -> Receipt:
         if not isinstance(result_summary, str) or not result_summary.strip():
-            raise ValueError("mark_completed: result_summary must be a non-empty string")
+            raise ValueError(
+                "mark_completed: result_summary must be a non-empty string"
+            )
         if details is not None and not isinstance(details, dict):
             raise ValueError("mark_completed: details must be a dict or None")
         p = self._pending.pop(proposal_id, None)

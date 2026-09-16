@@ -322,7 +322,9 @@ def load_manifest(directory, registered_handles=frozenset()) -> Manifest:
     try:
         data = json.loads(raw)
     except json.JSONDecodeError as exc:
-        raise PackageError(f"manifest {manifest_path} is not valid JSON: {exc}") from exc
+        raise PackageError(
+            f"manifest {manifest_path} is not valid JSON: {exc}"
+        ) from exc
 
     errors = validate_manifest(data, registered_handles)
     # Script-path entry points must exist on disk (deny-closed); this check

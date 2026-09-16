@@ -177,7 +177,8 @@ class Outline:
             if new_parent not in self._nodes:
                 raise UnknownNode(new_parent)
             if new_parent == node_id or any(
-                    n.node_id == new_parent for n in self.subtree(node_id)):
+                n.node_id == new_parent for n in self.subtree(node_id)
+            ):
                 raise EccoError("cannot move a node under itself or its descendant")
         old_parent = node.parent
         if old_parent is None:
@@ -194,7 +195,8 @@ class Outline:
         node = self.get(node_id)
         if node.children and not recursive:
             raise EccoError(
-                f"node {node_id!r} has children; pass recursive=True to delete")
+                f"node {node_id!r} has children; pass recursive=True to delete"
+            )
         for child in list(node.children):
             self.delete_node(child, recursive=True)
         if node.parent is None:
@@ -211,9 +213,10 @@ class Outline:
         return {
             "counter": self._counter,
             "roots": self._roots,
-            "nodes": {nid: {"text": n.text, "parent": n.parent,
-                            "children": n.children}
-                      for nid, n in self._nodes.items()},
+            "nodes": {
+                nid: {"text": n.text, "parent": n.parent, "children": n.children}
+                for nid, n in self._nodes.items()
+            },
         }
 
     @classmethod
@@ -222,9 +225,12 @@ class Outline:
         o._counter = int(data.get("counter", 0))
         o._roots = list(data.get("roots", []))
         for nid, nd in data.get("nodes", {}).items():
-            o._nodes[nid] = Node(node_id=nid, text=nd["text"],
-                                 parent=nd.get("parent"),
-                                 children=list(nd.get("children", [])))
+            o._nodes[nid] = Node(
+                node_id=nid,
+                text=nd["text"],
+                parent=nd.get("parent"),
+                children=list(nd.get("children", [])),
+            )
         return o
 
 
@@ -265,8 +271,7 @@ class Folder:
 
     def set_cell(self, node_id: str, column: str, value: Any) -> None:
         if node_id not in self.members:
-            raise EccoError(
-                f"node {node_id!r} is not a member of folder {self.name!r}")
+            raise EccoError(f"node {node_id!r} is not a member of folder {self.name!r}")
         if column not in self.columns:
             raise UnknownColumn(f"folder {self.name!r} has no column {column!r}")
         self._cells[(node_id, column)] = coerce(self.columns[column], value)
@@ -281,7 +286,9 @@ class Folder:
             "name": self.name,
             "columns": self.columns,
             "members": self.members,
-            "cells": {f"{nid}\x00{col}": val for (nid, col), val in self._cells.items()},
+            "cells": {
+                f"{nid}\x00{col}": val for (nid, col), val in self._cells.items()
+            },
         }
 
     @classmethod
@@ -319,17 +326,25 @@ class Store:
             return
         data = json.loads(f.read_text(encoding="utf-8"))
         self.outline = Outline.from_dict(data.get("outline", {}))
-        self.folders = {fd["name"]: Folder.from_dict(fd)
-                        for fd in data.get("folders", [])}
+        self.folders = {
+            fd["name"]: Folder.from_dict(fd) for fd in data.get("folders", [])
+        }
 
     def save(self) -> Path:
         self.path.mkdir(parents=True, exist_ok=True)
         target = self._file()
         tmp = target.with_suffix(".tmp")
-        tmp.write_text(json.dumps(
-            {"outline": self.outline.to_dict(),
-             "folders": [f.to_dict() for f in self.folders.values()]},
-            ensure_ascii=False, indent=2), encoding="utf-8")
+        tmp.write_text(
+            json.dumps(
+                {
+                    "outline": self.outline.to_dict(),
+                    "folders": [f.to_dict() for f in self.folders.values()],
+                },
+                ensure_ascii=False,
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
         tmp.replace(target)
         return target
 
@@ -353,8 +368,9 @@ class Store:
         self.folder(folder_name).add_member(node_id)
 
     # -- database-grade views -------------------------------------------------------
-    def view(self, folder_name: str, sort_by: Optional[str] = None,
-             reverse: bool = False) -> list[dict]:
+    def view(
+        self, folder_name: str, sort_by: Optional[str] = None, reverse: bool = False
+    ) -> list[dict]:
         """Every member as a row: ``{"id", "text", <columns...>}``."""
         folder = self.folder(folder_name)
         rows = []
@@ -370,12 +386,10 @@ class Store:
         if sort_by is not None:
             if sort_by not in folder.columns and sort_by not in ("id", "text"):
                 raise UnknownColumn(sort_by)
-            rows.sort(key=lambda r: (r[sort_by] is None, r[sort_by]),
-                      reverse=reverse)
+            rows.sort(key=lambda r: (r[sort_by] is None, r[sort_by]), reverse=reverse)
         return rows
 
-    def query(self, folder_name: str,
-              where: Callable[[dict], bool]) -> list[dict]:
+    def query(self, folder_name: str, where: Callable[[dict], bool]) -> list[dict]:
         """Filter a folder's rows with a predicate over the row dict."""
         return [row for row in self.view(folder_name) if where(row)]
 

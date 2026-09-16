@@ -51,8 +51,8 @@ class Strategy(str, Enum):
 
 class ChildState(str, Enum):
     RUNNING = "running"
-    STOPPED = "stopped"      # clean exit (transient) or supervisor shutdown
-    DEFUNCT = "defunct"      # gave up: exceeded restart intensity
+    STOPPED = "stopped"  # clean exit (transient) or supervisor shutdown
+    DEFUNCT = "defunct"  # gave up: exceeded restart intensity
 
 
 class ChildExitedNormally(Exception):
@@ -109,8 +109,15 @@ class CrashReport:
 
 class _ChildRuntime:
     __slots__ = (
-        "spec", "thread", "stop_event", "state", "restarts",
-        "crashes", "pending_exc", "clean_exit", "alive_since",
+        "spec",
+        "thread",
+        "stop_event",
+        "state",
+        "restarts",
+        "crashes",
+        "pending_exc",
+        "clean_exit",
+        "alive_since",
     )
 
     def __init__(self, spec: ChildSpec) -> None:
@@ -165,7 +172,8 @@ class Supervisor:
                 self._start_child(self._runtimes[name])
             if start_monitor and self._monitor is None:
                 self._monitor = threading.Thread(
-                    target=self._monitor_loop, name="otp-supervisor-monitor",
+                    target=self._monitor_loop,
+                    name="otp-supervisor-monitor",
                     daemon=True,
                 )
                 self._monitor.start()
@@ -251,8 +259,10 @@ class Supervisor:
         rt.alive_since = None
         rt.state = ChildState.RUNNING
         rt.thread = threading.Thread(
-            target=self._run_child, args=(rt,),
-            name=f"otp-child-{rt.spec.name}", daemon=True,
+            target=self._run_child,
+            args=(rt,),
+            name=f"otp-child-{rt.spec.name}",
+            daemon=True,
         )
         rt.thread.start()
 
@@ -283,14 +293,18 @@ class Supervisor:
             return
         if exc is None:  # pragma: no cover - defensive
             exc = ChildExitedNormally("child thread died without a recorded cause")
-        rt.crashes.append(CrashReport(
-            child=rt.spec.name,
-            exc_type=type(exc).__name__,
-            message=str(exc),
-            traceback="".join(traceback.format_exception(type(exc), exc, exc.__traceback__)),
-            at=now,
-            restart_count=len(rt.restarts) + 1,
-        ))
+        rt.crashes.append(
+            CrashReport(
+                child=rt.spec.name,
+                exc_type=type(exc).__name__,
+                message=str(exc),
+                traceback="".join(
+                    traceback.format_exception(type(exc), exc, exc.__traceback__)
+                ),
+                at=now,
+                restart_count=len(rt.restarts) + 1,
+            )
+        )
         # restart intensity: sliding window
         rt.restarts = [t for t in rt.restarts if now - t <= rt.spec.restart_window]
         rt.restarts.append(now)
@@ -345,12 +359,14 @@ def lazy_levi_target(dotted: str, *args: Any, **kwargs: Any) -> Callable[..., No
     surfaces as an ordinary child crash (restarted per strategy) — honest
     degradation, reported in crash reports, not a silent fallback.
     """
+
     def _target(stop_event: threading.Event) -> None:
         mod_name, _, attr = dotted.partition(":")
         if not attr:
             raise ValueError(f"dotted target must be 'module:attr', got {dotted!r}")
         try:
             import importlib
+
             mod = importlib.import_module(mod_name)
         except Exception as exc:
             raise RuntimeError(f"lazy import failed for {mod_name!r}: {exc}") from exc
@@ -372,6 +388,7 @@ def _heartbeat_worker(stop_event: threading.Event, beats: List[float]) -> None:
 
 def _queue_consumer(stop_event: threading.Event, queue, consumed: List[Any]) -> None:
     import queue as _q
+
     while not stop_event.is_set():
         try:
             consumed.append(queue.get(timeout=0.05))
@@ -382,6 +399,7 @@ def _queue_consumer(stop_event: threading.Event, queue, consumed: List[Any]) -> 
 def demo() -> Dict[str, Any]:
     """Supervise a heartbeat checker + queue consumer; return final status."""
     import queue as _q
+
     beats: List[float] = []
     consumed: List[Any] = []
     q: _q.Queue = _q.Queue()
@@ -409,4 +427,5 @@ def demo() -> Dict[str, Any]:
 
 if __name__ == "__main__":  # pragma: no cover
     import json
+
     print(json.dumps(demo(), indent=2, default=str))

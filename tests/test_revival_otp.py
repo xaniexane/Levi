@@ -118,12 +118,15 @@ def test_rest_for_one_restarts_crashed_and_later_only():
                 if may_crash and crash.is_set():
                     raise RuntimeError(f"{name} crashed")
                 stop_event.wait(0.02)
+
         return _t
 
     sup = Supervisor(
-        [ChildSpec("a", mk("a", False)),
-         ChildSpec("b", mk("b", True)),
-         ChildSpec("c", mk("c", False))],
+        [
+            ChildSpec("a", mk("a", False)),
+            ChildSpec("b", mk("b", True)),
+            ChildSpec("c", mk("c", False)),
+        ],
         strategy="rest_for_one",
     ).start(start_monitor=False)
     try:
@@ -277,13 +280,20 @@ def test_monitor_thread_drives_restarts():
 
 
 def test_crash_report_summary():
-    r = CrashReport(child="c", exc_type="ValueError", message="bad",
-                    traceback="tb", at=1.0, restart_count=2)
+    r = CrashReport(
+        child="c",
+        exc_type="ValueError",
+        message="bad",
+        traceback="tb",
+        at=1.0,
+        restart_count=2,
+    )
     assert "c" in r.summary() and "ValueError" in r.summary()
 
 
 def test_lazy_levi_target_missing_module_surfaces_as_crash():
     from levi.revival.otp import lazy_levi_target
+
     target = lazy_levi_target("levi.no_such_module_xyz:run")
     sup = Supervisor([ChildSpec("lazy", target)]).start(start_monitor=False)
     try:
@@ -295,6 +305,7 @@ def test_lazy_levi_target_missing_module_surfaces_as_crash():
 
 def test_demo_runs():
     from levi.revival.otp import demo
+
     out = demo()
     assert out["beats"] >= 1
     assert out["consumed"] == ["msg-0", "msg-1", "msg-2"]

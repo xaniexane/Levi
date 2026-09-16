@@ -37,33 +37,73 @@ _CLASS_RULES = (
     (
         "resource-exhaustion",
         (
-            "timeout", "timed out", "out of memory", "oom", "exhausted",
-            "quota", "disk full", "rate limit", "overloaded", "no space",
-            "memoryerror", "recursionerror", "thread pool", "socket",
+            "timeout",
+            "timed out",
+            "out of memory",
+            "oom",
+            "exhausted",
+            "quota",
+            "disk full",
+            "rate limit",
+            "overloaded",
+            "no space",
+            "memoryerror",
+            "recursionerror",
+            "thread pool",
+            "socket",
         ),
     ),
     (
         "missing-guard",
         (
-            "missing guard", "no guard", "unvalidated", "no validation",
-            "precondition", "none check", "null check", "boundary",
-            "off-by-one", "race condition", "unchecked", "no lock",
+            "missing guard",
+            "no guard",
+            "unvalidated",
+            "no validation",
+            "precondition",
+            "none check",
+            "null check",
+            "boundary",
+            "off-by-one",
+            "race condition",
+            "unchecked",
+            "no lock",
         ),
     ),
     (
         "flaky-input",
         (
-            "invalid input", "malformed", "unexpected input", "bad input",
-            "schema", "parse", "decode", "encoding", "empty input",
-            "truncated", "corrupt", "serialization",
+            "invalid input",
+            "malformed",
+            "unexpected input",
+            "bad input",
+            "schema",
+            "parse",
+            "decode",
+            "encoding",
+            "empty input",
+            "truncated",
+            "corrupt",
+            "serialization",
         ),
     ),
     (
         "wrong-assumption",
         (
-            "assumed", "assumption", "expected", "invariant", "contract",
-            "believed", "thought", "meant to", "supposed to", "version",
-            "api changed", "drift", "stale", "out of date",
+            "assumed",
+            "assumption",
+            "expected",
+            "invariant",
+            "contract",
+            "believed",
+            "thought",
+            "meant to",
+            "supposed to",
+            "version",
+            "api changed",
+            "drift",
+            "stale",
+            "out of date",
         ),
     ),
 )
@@ -85,11 +125,11 @@ def _validate_record(record: Dict) -> Dict:
     """Fail-closed validation; returns the record unchanged when valid."""
     if not isinstance(record, dict):
         raise ValueError(
-            "compost_failure: record must be a dict, got %s"
-            % type(record).__name__
+            "compost_failure: record must be a dict, got %s" % type(record).__name__
         )
-    missing = [k for k in ("source", "what", "context", "ts", "severity")
-               if k not in record]
+    missing = [
+        k for k in ("source", "what", "context", "ts", "severity") if k not in record
+    ]
     if missing:
         raise ValueError(
             "compost_failure: record is missing keys: %s" % ", ".join(missing)

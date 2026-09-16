@@ -45,6 +45,7 @@ def _require_budget(budget_units: Any) -> Optional[float]:
         )
     return budget
 
+
 COST_UNIT_NOTE = (
     "Cost units are RELATIVE (levi-tiny = 1). They rank models against "
     "each other for routing decisions. They are not dollars, not prices, "
@@ -384,15 +385,12 @@ def record_actual(
             f"invalid route: must be a levi.control.routing.Route, "
             f"got {type(route).__name__}"
         )
-    for field, value in (("input_tokens", input_tokens), ("output_tokens", output_tokens)):
-        if (
-            not isinstance(value, int)
-            or isinstance(value, bool)
-            or value < 0
-        ):
-            raise RoutingError(
-                f"invalid {field} {value!r}: must be an integer >= 0"
-            )
+    for field, value in (
+        ("input_tokens", input_tokens),
+        ("output_tokens", output_tokens),
+    ):
+        if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+            raise RoutingError(f"invalid {field} {value!r}: must be an integer >= 0")
     try:
         latency_ms = float(latency_ms)  # type: ignore[arg-type]
     except (TypeError, ValueError):
@@ -404,9 +402,7 @@ def record_actual(
             f"invalid latency_ms {latency_ms!r}: must be a finite value >= 0"
         )
     if not isinstance(outcome, str) or not outcome.strip():
-        raise RoutingError(
-            f"invalid outcome {outcome!r}: must be a non-empty string"
-        )
+        raise RoutingError(f"invalid outcome {outcome!r}: must be a non-empty string")
     per_1k = MODEL_COSTS.get(route.model, {}).get("cost_per_1k", 0.0)
     actual_cost = (input_tokens + output_tokens) / 1000.0 * per_1k
     ledger = LedgerWriter(home=home)

@@ -27,7 +27,7 @@ from __future__ import annotations
 import json
 import os
 import uuid
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 from datetime import date
 from pathlib import Path
 from typing import Optional, Union
@@ -52,7 +52,9 @@ def _parse_date(value: DateLike, field_name: str = "date") -> date:
             return date(int(y), int(m), int(d))
         except (ValueError, AttributeError):
             pass
-    raise ValueError(f"{field_name}: expected datetime.date or 'YYYY-MM-DD', got {value!r}")
+    raise ValueError(
+        f"{field_name}: expected datetime.date or 'YYYY-MM-DD', got {value!r}"
+    )
 
 
 def default_store_path() -> Path:
@@ -77,7 +79,9 @@ class TicklerItem:
 class TicklerFile:
     """The 43 folders: 31 day slots + 12 month slots, cycling forever."""
 
-    def __init__(self, path: Optional[Union[str, Path]] = None, today: Optional[DateLike] = None):
+    def __init__(
+        self, path: Optional[Union[str, Path]] = None, today: Optional[DateLike] = None
+    ):
         self._path = Path(path) if path is not None else None
         self._today = _parse_date(today) if today is not None else None
         self._items: dict[str, TicklerItem] = {}
@@ -92,17 +96,25 @@ class TicklerFile:
     def _load(self) -> None:
         raw = json.loads(self._path.read_text(encoding="utf-8"))
         if not isinstance(raw, list):
-            raise ValueError(f"tickler store is corrupt: expected a list in {self._path}")
+            raise ValueError(
+                f"tickler store is corrupt: expected a list in {self._path}"
+            )
         for entry in raw:
-            item = TicklerItem(**{k: entry[k] for k in (
-                "id", "title", "revisit", "filed_on", "folder")})
+            item = TicklerItem(
+                **{
+                    k: entry[k]
+                    for k in ("id", "title", "revisit", "filed_on", "folder")
+                }
+            )
             item.body = entry.get("body", "")
             item.reason = entry.get("reason", "")
             self._items[item.id] = item
 
     def save(self) -> None:
         if self._path is None:
-            raise ValueError("no store path configured; construct with path= to persist")
+            raise ValueError(
+                "no store path configured; construct with path= to persist"
+            )
         self._path.parent.mkdir(parents=True, exist_ok=True)
         payload = []
         for item in self._items.values():
@@ -118,7 +130,9 @@ class TicklerFile:
             return f"day:{revisit.day:02d}"
         return f"month:{revisit.month:02d}"
 
-    def file(self, title: str, revisit: DateLike, body: str = "", reason: str = "") -> TicklerItem:
+    def file(
+        self, title: str, revisit: DateLike, body: str = "", reason: str = ""
+    ) -> TicklerItem:
         """File an item to resurface on ``revisit``. Returns the stored item."""
         if not isinstance(title, str) or not title.strip():
             raise ValueError("title must be a non-empty string")
@@ -173,7 +187,10 @@ class TicklerFile:
         moved = 0
         for item in self._items.values():
             rev = _parse_date(item.revisit, "revisit")
-            if item.folder == f"month:{on.month:02d}" and (rev.year, rev.month) == (on.year, on.month):
+            if item.folder == f"month:{on.month:02d}" and (rev.year, rev.month) == (
+                on.year,
+                on.month,
+            ):
                 item.folder = f"day:{rev.day:02d}"
                 moved += 1
         return moved

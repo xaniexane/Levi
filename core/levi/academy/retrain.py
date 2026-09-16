@@ -56,6 +56,7 @@ def _count(path: Path) -> tuple[int, int]:
 def _journal(kind: str, tags: list[str], **fields) -> None:
     try:
         from levi.growth import journal as gjournal
+
         gjournal.append_entry({"kind": kind, "tags": tags, **fields})
     except Exception as exc:  # journal failure must not kill the retrain
         print(f"journal write failed: {exc}", flush=True)
@@ -71,8 +72,11 @@ def main() -> int:
     base_n, base_c = _count(base)
     acad_n, acad_c = _count(acad)
     if base_n == 0:
-        _journal("academy-retrain", ["growth", "levi-learned", "academy", "retrain-failed"],
-                 note="Retrain aborted: base corpus.jsonl missing or empty.")
+        _journal(
+            "academy-retrain",
+            ["growth", "levi-learned", "academy", "retrain-failed"],
+            note="Retrain aborted: base corpus.jsonl missing or empty.",
+        )
         print("retrain aborted: base corpus missing", flush=True)
         return 1
 
@@ -84,16 +88,22 @@ def main() -> int:
             with open(src, encoding="utf-8") as fh:
                 shutil.copyfileobj(fh, out)
     merged_n, merged_c = _count(merged)
-    print(f"merged corpus: {merged_n} records, {merged_c} chars "
-          f"(base={base_n}, academy={acad_n})", flush=True)
+    print(
+        f"merged corpus: {merged_n} records, {merged_c} chars "
+        f"(base={base_n}, academy={acad_n})",
+        flush=True,
+    )
 
     # 2. train — same hyperparams as the original 600-step run
     try:
         sys.path.insert(0, str(TRAIN_DIR))
         from train import train as train_fn
     except Exception as exc:
-        _journal("academy-retrain", ["growth", "levi-learned", "academy", "retrain-failed"],
-                 note=f"Retrain aborted: could not load training pipeline: {exc}")
+        _journal(
+            "academy-retrain",
+            ["growth", "levi-learned", "academy", "retrain-failed"],
+            note=f"Retrain aborted: could not load training pipeline: {exc}",
+        )
         print(f"retrain aborted: {exc}", flush=True)
         return 1
 
@@ -101,12 +111,18 @@ def main() -> int:
     try:
         log = train_fn(merged, 600, staging, seed=1337)
     except SystemExit as exc:
-        _journal("academy-retrain", ["growth", "levi-learned", "academy", "retrain-failed"],
-                 note=f"Retrain aborted by training pipeline: {exc}")
+        _journal(
+            "academy-retrain",
+            ["growth", "levi-learned", "academy", "retrain-failed"],
+            note=f"Retrain aborted by training pipeline: {exc}",
+        )
         return 1
     except Exception as exc:
-        _journal("academy-retrain", ["growth", "levi-learned", "academy", "retrain-failed"],
-                 note=f"Retrain failed: {type(exc).__name__}: {exc}")
+        _journal(
+            "academy-retrain",
+            ["growth", "levi-learned", "academy", "retrain-failed"],
+            note=f"Retrain failed: {type(exc).__name__}: {exc}",
+        )
         print(f"retrain failed: {exc}", flush=True)
         return 1
 
@@ -126,17 +142,20 @@ def main() -> int:
         "seconds": round(time.time() - t0, 1),
     }
     (WEIGHTS_DIR / f"retrain_log_{ts}.json").write_text(
-        json.dumps(retrain_log, indent=1))
+        json.dumps(retrain_log, indent=1)
+    )
     shutil.rmtree(staging, ignore_errors=True)
 
     # 4. journal the outcome
     _journal(
         "academy-retrain",
         ["growth", "levi-learned", "academy", "retrain-complete"],
-        note=(f"Graduation brain retrain complete in {retrain_log['seconds']}s: "
-              f"{merged_n} records ({acad_n} academy lessons), loss "
-              f"{log.get('loss_first', '?'):.4f} -> {log.get('loss_last', '?'):.4f}. "
-              f"New checkpoint {versioned.name}; previous tiny-gpt.pt kept as fallback."),
+        note=(
+            f"Graduation brain retrain complete in {retrain_log['seconds']}s: "
+            f"{merged_n} records ({acad_n} academy lessons), loss "
+            f"{log.get('loss_first', '?'):.4f} -> {log.get('loss_last', '?'):.4f}. "
+            f"New checkpoint {versioned.name}; previous tiny-gpt.pt kept as fallback."
+        ),
         checkpoint=str(versioned),
         corpus_records=merged_n,
     )

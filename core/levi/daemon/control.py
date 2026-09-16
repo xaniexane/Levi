@@ -59,8 +59,7 @@ DIRECTIVE_KINDS = frozenset(
 def _validate_kind(kind: Any) -> str:
     if kind not in DIRECTIVE_KINDS:
         raise ControlError(
-            f"invalid directive kind {kind!r}: must be one of "
-            f"{sorted(DIRECTIVE_KINDS)}"
+            f"invalid directive kind {kind!r}: must be one of {sorted(DIRECTIVE_KINDS)}"
         )
     return kind
 
@@ -80,21 +79,14 @@ def _validate_strength(value: Any, *, field: str = "strength") -> float:
         ) from None
     if not math.isfinite(num) or not 0.0 <= num <= 1.0:
         raise ControlError(
-            f"invalid {field} {value!r}: must be a finite number between "
-            "0 and 1"
+            f"invalid {field} {value!r}: must be a finite number between 0 and 1"
         )
     return num
 
 
 def _validate_turns(value: Any) -> int:
-    if (
-        not isinstance(value, int)
-        or isinstance(value, bool)
-        or value < 1
-    ):
-        raise ControlError(
-            f"invalid turns {value!r}: must be an integer >= 1"
-        )
+    if not isinstance(value, int) or isinstance(value, bool) or value < 1:
+        raise ControlError(f"invalid turns {value!r}: must be an integer >= 1")
     return value
 
 
@@ -805,9 +797,7 @@ class ControlDaemon:
             alchemy_raw = alchemy_raw if isinstance(alchemy_raw, dict) else {}
             self.alchemy = AlchemyStance(
                 enabled=bool(alchemy_raw.get("enabled", True)),
-                intensity=_finite_intensity(
-                    alchemy_raw.get("intensity", 0.55), 0.55
-                ),
+                intensity=_finite_intensity(alchemy_raw.get("intensity", 0.55), 0.55),
                 respect_pain=bool(alchemy_raw.get("respect_pain", True)),
             )
             self.life_equation = _stance("life_equation", LifeEquationStance, 0.55)
@@ -876,9 +866,7 @@ class ControlDaemon:
         """Shared validation for the set_* stance tuners: reject bad
         input instead of silently clamping it."""
         if not isinstance(enabled, bool):
-            raise ControlError(
-                f"invalid enabled {enabled!r}: must be True or False"
-            )
+            raise ControlError(f"invalid enabled {enabled!r}: must be True or False")
         intensity = _validate_strength(intensity, field="intensity")
         st = getattr(self, name)
         st.enabled = enabled
@@ -898,15 +886,11 @@ class ControlDaemon:
     ) -> ControlDirective:
         kind = _validate_kind(kind)
         if not isinstance(target, str):
-            raise ControlError(
-                f"invalid target {target!r}: must be a string"
-            )
+            raise ControlError(f"invalid target {target!r}: must be a string")
         strength = _validate_strength(strength)
         turns = _validate_turns(turns)
         if not isinstance(reason, str):
-            raise ControlError(
-                f"invalid reason {reason!r}: must be a string"
-            )
+            raise ControlError(f"invalid reason {reason!r}: must be a string")
         d = ControlDirective(
             id=str(uuid.uuid4())[:8],
             kind=kind,

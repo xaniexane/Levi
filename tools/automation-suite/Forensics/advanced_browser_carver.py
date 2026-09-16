@@ -48,12 +48,19 @@ def find_history(profile):
 def main(argv=None):
     ap = argparse.ArgumentParser(
         description="Extract Chrome/Chromium browsing history (read-only) "
-                    "to CSV + JSON. Local only.")
-    ap.add_argument("--profile", default=None,
-                    help="profile dir containing the History file "
-                         "(default: auto-detect Chrome/Chromium Default)")
-    ap.add_argument("--output", default=None,
-                    help="output directory (default: ./browser_carve_<timestamp>)")
+        "to CSV + JSON. Local only."
+    )
+    ap.add_argument(
+        "--profile",
+        default=None,
+        help="profile dir containing the History file "
+        "(default: auto-detect Chrome/Chromium Default)",
+    )
+    ap.add_argument(
+        "--output",
+        default=None,
+        help="output directory (default: ./browser_carve_<timestamp>)",
+    )
     args = ap.parse_args(argv)
 
     profile_dir, history = find_history(args.profile)
@@ -67,8 +74,8 @@ def main(argv=None):
         return 2
 
     outdir = args.output or os.path.join(
-        os.getcwd(),
-        "browser_carve_" + datetime.now().strftime("%Y%m%d-%H%M%S"))
+        os.getcwd(), "browser_carve_" + datetime.now().strftime("%Y%m%d-%H%M%S")
+    )
     os.makedirs(outdir, exist_ok=True)
 
     # Work on a temp copy; the live DB is never touched.
@@ -81,7 +88,8 @@ def main(argv=None):
             cur = con.cursor()
             cur.execute(
                 "SELECT id, url, title, visit_count, last_visit_time FROM urls "
-                "ORDER BY last_visit_time DESC")
+                "ORDER BY last_visit_time DESC"
+            )
             urls = cur.fetchall()
             try:
                 cur.execute("SELECT COUNT(*) FROM visits")
@@ -97,8 +105,7 @@ def main(argv=None):
         os.unlink(tmp.name)
 
     rows = [
-        {"url": u, "title": t or "", "visit_count": vc,
-         "last_visit": chrome_time(lvt)}
+        {"url": u, "title": t or "", "visit_count": vc, "last_visit": chrome_time(lvt)}
         for _, u, t, vc, lvt in urls
     ]
 

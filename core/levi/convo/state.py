@@ -19,12 +19,12 @@ from collections import Counter
 from typing import Dict, List, Optional, Tuple
 
 # Salience dynamics ------------------------------------------------------------
-_THREAD_DECAY = 0.85      # per turn when unmentioned
+_THREAD_DECAY = 0.85  # per turn when unmentioned
 _ENTITY_DECAY = 0.90
-_THREAD_BOOST = 0.45      # added on mention
-_THREAD_JACCARD = 0.30    # keyword overlap to join an existing thread
-_HISTORY_CAP = 40         # salience samples kept per thread (sparkline)
-_ENTITY_RECENCY = 6       # turns within which a pronoun may resolve
+_THREAD_BOOST = 0.45  # added on mention
+_THREAD_JACCARD = 0.30  # keyword overlap to join an existing thread
+_HISTORY_CAP = 40  # salience samples kept per thread (sparkline)
+_ENTITY_RECENCY = 6  # turns within which a pronoun may resolve
 _FACT_CAP = 60
 
 _BOT_SPEAKERS = {"levi", "assistant", "bot"}
@@ -101,11 +101,11 @@ class DialogueState:
     """Living conversational state. Call :meth:`update` once per turn."""
 
     def __init__(self) -> None:
-        self.turns: List[Dict[str, str]] = []          # {speaker, text}
-        self.threads: Dict[str, Dict] = {}            # name -> thread record
-        self.entities: Dict[str, Dict] = {}           # name -> entity record
-        self.loops: List[Dict] = []                   # open loops
-        self.facts: List[Dict] = []                   # session facts
+        self.turns: List[Dict[str, str]] = []  # {speaker, text}
+        self.threads: Dict[str, Dict] = {}  # name -> thread record
+        self.entities: Dict[str, Dict] = {}  # name -> entity record
+        self.loops: List[Dict] = []  # open loops
+        self.facts: List[Dict] = []  # session facts
         self.last_resolution: Optional[Tuple[str, str, int]] = None
         self.turn_count: int = 0
 
@@ -152,7 +152,7 @@ class DialogueState:
         callback = _CALLBACK_RE.search(text)
         if callback and kwset:
             # Try to match the thread named after the callback phrase.
-            rest = _content_words(text[callback.end():])
+            rest = _content_words(text[callback.end() :])
             target = self._match_thread(set(rest)) if rest else None
             if target is None:
                 # Fall back: any thread sharing a word with the remainder.
@@ -201,7 +201,9 @@ class DialogueState:
                 e["mentions"] += 1
             else:
                 self.entities[name] = {
-                    "name": name, "salience": 1.0, "last_turn": turn,
+                    "name": name,
+                    "salience": 1.0,
+                    "last_turn": turn,
                     "mentions": 1,
                 }
             changed.setdefault("entities", []).append(name)
@@ -212,8 +214,10 @@ class DialogueState:
             resolved = self._resolve_pronoun(turn)
             if resolved:
                 self.last_resolution = (pm.group(1).lower(), resolved, turn)
-                changed["resolved"] = {"pronoun": pm.group(1).lower(),
-                                       "entity": resolved}
+                changed["resolved"] = {
+                    "pronoun": pm.group(1).lower(),
+                    "entity": resolved,
+                }
 
         # 4. open loops ---------------------------------------------------------
         if speaker.lower() in _BOT_SPEAKERS:
@@ -223,18 +227,26 @@ class DialogueState:
                 verb = m.group(2).lower()
                 verb_stem = (_content_words(verb) or [verb])[0]
                 kws = [w for w in _content_words(m.group(0)) if w != verb_stem]
-                self.loops.append({
-                    "kind": "promise", "text": m.group(0).strip(),
-                    "keywords": kws,
-                    "opened_turn": turn, "status": "open",
-                })
+                self.loops.append(
+                    {
+                        "kind": "promise",
+                        "text": m.group(0).strip(),
+                        "keywords": kws,
+                        "opened_turn": turn,
+                        "status": "open",
+                    }
+                )
                 changed.setdefault("loops_opened", []).append(m.group(0).strip())
             if text.rstrip().endswith("?") and len(text) > 12:
-                self.loops.append({
-                    "kind": "question", "text": text.strip()[:120],
-                    "keywords": _content_words(text),
-                    "opened_turn": turn, "status": "open",
-                })
+                self.loops.append(
+                    {
+                        "kind": "question",
+                        "text": text.strip()[:120],
+                        "keywords": _content_words(text),
+                        "opened_turn": turn,
+                        "status": "open",
+                    }
+                )
                 changed.setdefault("loops_opened", []).append("question")
         # close loops whose substance reappears
         for loop in self.loops:
@@ -264,14 +276,21 @@ class DialogueState:
             name = f"{base} {i}"
             i += 1
         self.threads[name] = {
-            "name": name, "keywords": Counter(kws), "salience": 1.0,
-            "last_turn": turn, "mentions": 1, "history": [1.0],
+            "name": name,
+            "keywords": Counter(kws),
+            "salience": 1.0,
+            "last_turn": turn,
+            "mentions": 1,
+            "history": [1.0],
         }
         return name
 
     def _resolve_pronoun(self, turn: int) -> Optional[str]:
-        cands = [e for e in self.entities.values()
-                 if turn - e["last_turn"] <= _ENTITY_RECENCY]
+        cands = [
+            e
+            for e in self.entities.values()
+            if turn - e["last_turn"] <= _ENTITY_RECENCY
+        ]
         if not cands:
             return None
         cands.sort(key=lambda e: (e["salience"], e["last_turn"]), reverse=True)
@@ -281,13 +300,15 @@ class DialogueState:
     def live_threads(self, min_salience: float = 0.15) -> List[Dict]:
         return sorted(
             (t for t in self.threads.values() if t["salience"] >= min_salience),
-            key=lambda t: t["salience"], reverse=True,
+            key=lambda t: t["salience"],
+            reverse=True,
         )
 
     def live_entities(self, min_salience: float = 0.15) -> List[Dict]:
         return sorted(
             (e for e in self.entities.values() if e["salience"] >= min_salience),
-            key=lambda e: (e["salience"], e["last_turn"]), reverse=True,
+            key=lambda e: (e["salience"], e["last_turn"]),
+            reverse=True,
         )
 
     def open_loops(self) -> List[Dict]:
@@ -298,8 +319,10 @@ class DialogueState:
         return {
             "turn_count": self.turn_count,
             "turns": self.turns,
-            "threads": {n: {**t, "keywords": dict(t["keywords"])}
-                        for n, t in self.threads.items()},
+            "threads": {
+                n: {**t, "keywords": dict(t["keywords"])}
+                for n, t in self.threads.items()
+            },
             "entities": self.entities,
             "loops": self.loops,
             "facts": self.facts,

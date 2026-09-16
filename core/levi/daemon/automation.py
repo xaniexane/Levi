@@ -104,9 +104,7 @@ def _validate_action(action: Any, *, what: str = "action") -> AutomationAction:
             f"invalid automation {what}: 'skill_id' must be a non-empty string"
         )
     if not isinstance(action.args, dict):
-        raise AutomationError(
-            f"invalid automation {what}: 'args' must be a dict"
-        )
+        raise AutomationError(f"invalid automation {what}: 'args' must be a dict")
     if (
         not isinstance(action.risk_level, int)
         or isinstance(action.risk_level, bool)
@@ -270,8 +268,7 @@ class AutomationRegistry:
             raise AutomationError("invalid automation description: must be a string")
         if not isinstance(actions, list):
             raise AutomationError(
-                "invalid automation actions: must be a list of "
-                "AutomationAction"
+                "invalid automation actions: must be a list of AutomationAction"
             )
         actions = [_validate_action(a, what=f"#{i}") for i, a in enumerate(actions)]
         if not isinstance(trigger, TriggerKind):
@@ -284,8 +281,7 @@ class AutomationRegistry:
             or risk_ceiling < 0
         ):
             raise AutomationError(
-                f"invalid risk_ceiling {risk_ceiling!r}: must be a non-negative "
-                "integer"
+                f"invalid risk_ceiling {risk_ceiling!r}: must be a non-negative integer"
             )
         # Risk ceiling at least max of action risks
         action_risk = max((a.risk_level for a in actions), default=0)

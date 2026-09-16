@@ -154,8 +154,9 @@ class Umpire:
                         f"{order.unit_id!r} cannot reach {order.target_id!r} "
                         "(attacks are adjacent only)"
                     )
-        self.order_log.append({"turn": self.turn + 1, "side": side,
-                               "orders": [vars(o) for o in orders]})
+        self.order_log.append(
+            {"turn": self.turn + 1, "side": side, "orders": [vars(o) for o in orders]}
+        )
         self._pending = getattr(self, "_pending", {})
         self._pending[side] = orders
 
@@ -180,7 +181,8 @@ class Umpire:
                     unit.x += order.dx
                     unit.y += order.dy
                     events.append(
-                        f"turn {self.turn}: {unit.unit_id} moves to {unit.pos()}")
+                        f"turn {self.turn}: {unit.unit_id} moves to {unit.pos()}"
+                    )
 
         # Phase 2: attacks (dice + strength ratio — the combat-table sketch).
         for side in ("red", "blue"):
@@ -194,7 +196,8 @@ class Umpire:
                 if abs(unit.x - target.x) + abs(unit.y - target.y) != 1:
                     events.append(
                         f"turn {self.turn}: {unit.unit_id}'s attack on "
-                        f"{target.unit_id} fails — target moved out of reach")
+                        f"{target.unit_id} fails — target moved out of reach"
+                    )
                     continue
                 atk = self._rng.randint(1, 6) + unit.strength
                 dfn = self._rng.randint(1, 6) + target.strength
@@ -202,13 +205,15 @@ class Umpire:
                     target.strength -= 1
                     events.append(
                         f"turn {self.turn}: {unit.unit_id} hits {target.unit_id} "
-                        f"(now strength {max(target.strength, 0)})")
+                        f"(now strength {max(target.strength, 0)})"
+                    )
                     if not target.alive():
                         events.append(f"turn {self.turn}: {target.unit_id} destroyed")
                 else:
                     events.append(
                         f"turn {self.turn}: {unit.unit_id}'s attack on "
-                        f"{target.unit_id} is repulsed")
+                        f"{target.unit_id} is repulsed"
+                    )
 
         self.event_log.extend(events)
         self._pending = {}
@@ -218,20 +223,27 @@ class Umpire:
     def _observe(self, side: str, events: list[str]) -> Observation:
         own = [u for u in self.units.values() if u.side == side and u.alive()]
         seen = []
-        for enemy in (u for u in self.units.values()
-                      if u.side != side and u.alive()):
+        for enemy in (u for u in self.units.values() if u.side != side and u.alive()):
             if any(abs(o.x - enemy.x) + abs(o.y - enemy.y) <= o.sight for o in own):
-                seen.append({"unit_id": enemy.unit_id, "pos": enemy.pos(),
-                             "strength": enemy.strength})
+                seen.append(
+                    {
+                        "unit_id": enemy.unit_id,
+                        "pos": enemy.pos(),
+                        "strength": enemy.strength,
+                    }
+                )
         visible_events = [
-            e for e in events
-            if any(u.unit_id in e for u in own) or "destroyed" in e
+            e for e in events if any(u.unit_id in e for u in own) or "destroyed" in e
         ]
         return Observation(
-            side=side, turn=self.turn,
-            own_units=[{"unit_id": u.unit_id, "pos": u.pos(),
-                        "strength": u.strength} for u in own],
-            seen_enemy=seen, events=visible_events,
+            side=side,
+            turn=self.turn,
+            own_units=[
+                {"unit_id": u.unit_id, "pos": u.pos(), "strength": u.strength}
+                for u in own
+            ],
+            seen_enemy=seen,
+            events=visible_events,
         )
 
     # -- debrief ------------------------------------------------------------------
@@ -242,8 +254,12 @@ class Umpire:
             "seed": self.seed,
             "turns": self.turn,
             "ground_truth": {
-                uid: {"side": u.side, "pos": u.pos(), "strength": u.strength,
-                      "alive": u.alive()}
+                uid: {
+                    "side": u.side,
+                    "pos": u.pos(),
+                    "strength": u.strength,
+                    "alive": u.alive(),
+                }
                 for uid, u in sorted(self.units.items())
             },
             "order_log": self.order_log,
@@ -252,10 +268,12 @@ class Umpire:
         }
 
     def outcome(self) -> dict:
-        red = sum(u.strength for u in self.units.values()
-                  if u.side == "red" and u.alive())
-        blue = sum(u.strength for u in self.units.values()
-                   if u.side == "blue" and u.alive())
+        red = sum(
+            u.strength for u in self.units.values() if u.side == "red" and u.alive()
+        )
+        blue = sum(
+            u.strength for u in self.units.values() if u.side == "blue" and u.alive()
+        )
         winner = "red" if red > blue else "blue" if blue > red else None
         return {"red_strength": red, "blue_strength": blue, "winner": winner}
 

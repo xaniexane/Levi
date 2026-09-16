@@ -131,6 +131,7 @@ def test_grant_serializes_roundtrip(store):
 def test_cli_issue_redeem_verify(tmp_path, capsys):
     root = tmp_path / "sw"
     import levi.shareware.__main__ as m
+
     orig = m._store
     m._store = lambda: GrantStore(root=root)
     try:

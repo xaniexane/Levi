@@ -8,12 +8,10 @@ real ``git`` binary are skipped gracefully when it is absent.
 
 import json
 import os
-import shutil
 import subprocess
 import threading
 import urllib.error
 import urllib.request
-from pathlib import Path
 
 import pytest
 
@@ -53,8 +51,13 @@ def git_env():
 
 def _git(args, cwd, env, timeout=60):
     return subprocess.run(
-        ["git"] + args, cwd=str(cwd), env=env, timeout=timeout,
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True,
+        ["git"] + args,
+        cwd=str(cwd),
+        env=env,
+        timeout=timeout,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=True,
     )
 
 
@@ -115,8 +118,9 @@ def test_delete_removes_metadata(fh):
 @needs_git
 def test_issues_lifecycle(fh):
     _repos.create_repo(None, "iss")
-    i = _issues.open_issue(None, "iss", "Bug: frobnicate", body="details",
-                           labels=["bug"])
+    i = _issues.open_issue(
+        None, "iss", "Bug: frobnicate", body="details", labels=["bug"]
+    )
     assert i["id"] == 1 and i["state"] == "open"
     j = _issues.open_issue(None, "iss", "Second")
     assert j["id"] == 2
@@ -160,8 +164,7 @@ def test_pr_open_merge(fh, tmp_path, git_env):
     merged = _prs.merge_pr(None, "prj", 1)
     assert merged["state"] == "merged" and merged["merge_commit"]
     # base now contains the feature file
-    out = run_git(["show", "main:b.txt"],
-                  cwd=fh / "repos" / "prj.git").stdout.decode()
+    out = run_git(["show", "main:b.txt"], cwd=fh / "repos" / "prj.git").stdout.decode()
     assert out == "feature\n"
     with pytest.raises(ValueError):
         _prs.merge_pr(None, "prj", 1)  # already merged
@@ -289,7 +292,8 @@ def test_web_ui_pages(fh, tmp_path, git_env):
 
         def get(path):
             with urllib.request.urlopen(
-                    "http://127.0.0.1:%d%s" % (port, path), timeout=10) as r:
+                "http://127.0.0.1:%d%s" % (port, path), timeout=10
+            ) as r:
                 return r.status, r.read().decode("utf-8")
 
         status, body = get("/forge/")
@@ -321,8 +325,11 @@ def test_serve_refuses_non_localhost(fh):
 @needs_git
 def test_ci_init_run(fh, tmp_path, git_env):
     _repos.create_repo(None, "cip")
-    _git(["clone", "-q", str(fh / "repos" / "cip.git"), str(tmp_path / "w")],
-         tmp_path, git_env)
+    _git(
+        ["clone", "-q", str(fh / "repos" / "cip.git"), str(tmp_path / "w")],
+        tmp_path,
+        git_env,
+    )
     w = tmp_path / "w"
     (w / "x.txt").write_text("x\n")
     _git(["add", "x.txt"], w, git_env)
@@ -344,20 +351,28 @@ def test_ci_init_run(fh, tmp_path, git_env):
 @needs_git
 def test_ci_failing_step(fh, tmp_path, git_env):
     _repos.create_repo(None, "cif")
-    _git(["clone", "-q", str(fh / "repos" / "cif.git"), str(tmp_path / "w")],
-         tmp_path, git_env)
+    _git(
+        ["clone", "-q", str(fh / "repos" / "cif.git"), str(tmp_path / "w")],
+        tmp_path,
+        git_env,
+    )
     w = tmp_path / "w"
     (w / "x.txt").write_text("x\n")
     _git(["add", "x.txt"], w, git_env)
     _git(["commit", "-qm", "c1"], w, git_env)
     _git(["push", "-q", "origin", "main"], w, git_env)
-    _ci.init_pipeline(None, "cif", {
-        "version": 1, "name": "t",
-        "steps": [
-            {"name": "ok-step", "run": "git rev-parse HEAD"},
-            {"name": "bad-step", "run": "git rev-parse NOPE"},
-        ],
-    })
+    _ci.init_pipeline(
+        None,
+        "cif",
+        {
+            "version": 1,
+            "name": "t",
+            "steps": [
+                {"name": "ok-step", "run": "git rev-parse HEAD"},
+                {"name": "bad-step", "run": "git rev-parse NOPE"},
+            ],
+        },
+    )
     rec = _ci.run_pipeline(None, "cif")
     assert not rec["ok"]
     assert [s["rc"] for s in rec["steps"]] == [0, 128]
@@ -394,8 +409,11 @@ def test_export_import_roundtrip(fh, tmp_path, git_env):
     assert (out / "FORGE-EXPORT.md").is_file()
     assert (out / "SHA256SUMS").is_file()
     assert (out / "contrib.json").is_file()
-    lines = [json.loads(l) for l in (out / "issues.jsonl").read_text().splitlines()
-             if l.strip()]
+    lines = [
+        json.loads(l)
+        for l in (out / "issues.jsonl").read_text().splitlines()
+        if l.strip()
+    ]
     assert lines[0]["title"] == "Export issue"
     assert json.loads((out / "stars.json").read_text())["starred"] is True
     assert (out / "ci" / "pipeline.json").is_file()
@@ -459,10 +477,10 @@ def test_cli_issue_pr_flow(fh, tmp_path, git_env, capsys):
     assert forge_main(["star", "flow"], home=None) == 0
     assert forge_main(["stars"], home=None) == 0
     assert "flow" in capsys.readouterr().out
-    assert forge_main(["export", "flow", "--out", str(tmp_path / "e")],
-                      home=None) == 0
+    assert forge_main(["export", "flow", "--out", str(tmp_path / "e")], home=None) == 0
     assert (tmp_path / "e" / "FORGE-EXPORT.md").is_file()
-    assert forge_main(["import", str(tmp_path / "e"), "--name", "flow2"],
-                      home=None) == 0
+    assert (
+        forge_main(["import", str(tmp_path / "e"), "--name", "flow2"], home=None) == 0
+    )
     assert forge_main(["repos"], home=None) == 0
     assert "flow2" in capsys.readouterr().out

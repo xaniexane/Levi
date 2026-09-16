@@ -41,8 +41,14 @@ DEFAULT_RULES: List[Dict[str, Any]] = [
         "name": "receipts",
         "match": {
             "keywords": [
-                "receipt", "order confirmation", "your order", "invoice",
-                "payment received", "shipped", "tracking number", "refund",
+                "receipt",
+                "order confirmation",
+                "your order",
+                "invoice",
+                "payment received",
+                "shipped",
+                "tracking number",
+                "refund",
             ]
         },
     },
@@ -71,7 +77,7 @@ def default_home() -> Path:
 
 def _rule_matches(rule: Dict[str, Any], rec: Dict[str, Any]) -> bool:
     match = rule.get("match", {})
-    haystack = f"{rec.get('from','')} {rec.get('subject','')}".lower()
+    haystack = f"{rec.get('from', '')} {rec.get('subject', '')}".lower()
     body = rec.get("body", "").lower()
     if match.get("list_mail") and rec.get("list_unsub"):
         return True
@@ -88,8 +94,15 @@ def _rule_matches(rule: Dict[str, Any], rec: Dict[str, Any]) -> bool:
         # direct human mail: not list mail, not an automated sender
         automated = any(
             t in rec.get("from", "").lower()
-            for t in ("no-reply", "noreply", "notify", "alerts", "donotreply",
-                      "mailer-daemon", "postmaster")
+            for t in (
+                "no-reply",
+                "noreply",
+                "notify",
+                "alerts",
+                "donotreply",
+                "mailer-daemon",
+                "postmaster",
+            )
         )
         return not rec.get("list_unsub") and not automated
     return False
@@ -131,7 +144,9 @@ class TriageEngine:
                 return rule["name"]
         return "other"
 
-    def bundle_all(self, records: List[Dict[str, Any]]) -> Dict[str, List[Dict[str, Any]]]:
+    def bundle_all(
+        self, records: List[Dict[str, Any]]
+    ) -> Dict[str, List[Dict[str, Any]]]:
         out: Dict[str, List[Dict[str, Any]]] = {}
         for rec in records:
             out.setdefault(self.bundle(rec), []).append(rec)
@@ -164,7 +179,9 @@ class TriageEngine:
         }
         self._save_snooze()
 
-    def snooze_until_reply(self, message_id: str, sender: str = "", subject: str = "") -> None:
+    def snooze_until_reply(
+        self, message_id: str, sender: str = "", subject: str = ""
+    ) -> None:
         """Snooze until a reply from the thread's sender appears."""
         self.snooze[message_id] = {
             "mode": "until_reply",
@@ -194,7 +211,8 @@ class TriageEngine:
         """Return and clear time-based snoozes whose time has come."""
         now = time.time() if now is None else now
         due = [
-            mid for mid, e in self.snooze.items()
+            mid
+            for mid, e in self.snooze.items()
             if e["mode"] == "until" and now >= e["until_ts"]
         ]
         for mid in due:
@@ -228,7 +246,9 @@ class TriageEngine:
                     continue
                 subj = rec.get("subject", "").lower()
                 looks_reply = subj.startswith("re:") and base and base in subj
-                if looks_reply and (rec.get("date_ts") or 0) >= entry.get("snoozed_at", 0):
+                if looks_reply and (rec.get("date_ts") or 0) >= entry.get(
+                    "snoozed_at", 0
+                ):
                     woken.append(mid)
                     break
         for mid in woken:

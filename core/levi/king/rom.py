@@ -65,7 +65,9 @@ class SessionRom:
     def rupture_session(self, reason: str, fingerprint: str) -> Dict[str, Any]:
         """Seal one multi-engine session state. Append-only; never edits."""
         if not isinstance(reason, str) or not reason.strip():
-            raise ValueError(f"rupture reason must be a non-empty string, got {reason!r}")
+            raise ValueError(
+                f"rupture reason must be a non-empty string, got {reason!r}"
+            )
         if not isinstance(fingerprint, str) or not fingerprint.strip():
             raise ValueError(
                 f"rupture fingerprint must be a non-empty string, got {fingerprint!r}"

@@ -1,6 +1,5 @@
 """Hermetic tests for levi.memory.retrieval (isolated HOME, no network)."""
 
-import os
 from datetime import datetime, timedelta, timezone
 
 import pytest
@@ -9,8 +8,11 @@ from levi.memory.store import MemoryStore
 from levi.memory.types import MemoryType
 from levi.memory import retrieval
 from levi.memory.retrieval import (
-    BM25Index, expand_query, reciprocal_rank_fusion, retrieve,
-    sparse_vector, tokenize,
+    expand_query,
+    reciprocal_rank_fusion,
+    retrieve,
+    sparse_vector,
+    tokenize,
 )
 
 
@@ -19,12 +21,15 @@ def store(tmp_path):
     return MemoryStore(data_dir=tmp_path / "memory")
 
 
-def _add(store, content, tags=None, importance=0.5, age_hours=0,
-         corroboration=0):
+def _add(store, content, tags=None, importance=0.5, age_hours=0, corroboration=0):
     ts = (datetime.now(timezone.utc) - timedelta(hours=age_hours)).isoformat()
-    entry = store.add(MemoryType.SEMANTIC, content, importance=importance,
-                      tags=tags or [],
-                      metadata={"corroboration": corroboration} if corroboration else {})
+    entry = store.add(
+        MemoryType.SEMANTIC,
+        content,
+        importance=importance,
+        tags=tags or [],
+        metadata={"corroboration": corroboration} if corroboration else {},
+    )
     # backdate deterministically
     entry.created_at = ts
     entry.updated_at = ts
@@ -33,6 +38,7 @@ def _add(store, content, tags=None, importance=0.5, age_hours=0,
 
 
 # --- tokenize / BM25 basics -------------------------------------------------
+
 
 def test_tokenize_strips_stopwords_and_stems():
     toks = tokenize("The quick brown foxes are running quickly")
@@ -60,6 +66,7 @@ def test_bm25_tag_weighting(store):
 
 # --- hybrid / vector --------------------------------------------------------
 
+
 def test_hybrid_beats_single_signals_on_paraphrase(store):
     # "automobile" never appears; BM25 alone struggles, vector catches it.
     target = _add(store, "my automobile needs new brakes before winter")
@@ -69,10 +76,10 @@ def test_hybrid_beats_single_signals_on_paraphrase(store):
     hyb = retrieve("car brakes", store, method="hybrid", limit=5)
     assert hyb and hyb[0][0].id == target.id
     # hybrid must be at least as good as the best single signal
-    bm25_pos = min([i for i, (e, _s, _x) in enumerate(bm25)
-                    if e.id == target.id] or [99])
-    vec_pos = min([i for i, (e, _s, _x) in enumerate(vec)
-                   if e.id == target.id] or [99])
+    bm25_pos = min(
+        [i for i, (e, _s, _x) in enumerate(bm25) if e.id == target.id] or [99]
+    )
+    vec_pos = min([i for i, (e, _s, _x) in enumerate(vec) if e.id == target.id] or [99])
     best_single = min(bm25_pos, vec_pos)
     hyb_pos = [i for i, (e, _s, _x) in enumerate(hyb) if e.id == target.id][0]
     assert hyb_pos <= best_single
@@ -89,19 +96,24 @@ def test_sparse_vector_deterministic():
 
 
 def test_rrf_fusion_order():
-    fused = reciprocal_rank_fusion([[("a", 9.0), ("b", 1.0)],
-                                    [("b", 5.0), ("a", 0.1)]])
+    fused = reciprocal_rank_fusion([[("a", 9.0), ("b", 1.0)], [("b", 5.0), ("a", 0.1)]])
     # b is rank2+rank1, a is rank1+rank2 → tie broken by id: a first
     assert [eid for eid, _s in fused] == ["a", "b"]
 
 
 # --- recency / importance ----------------------------------------------------
 
+
 def test_recency_prefers_newer(store):
-    old = _add(store, "deployment runbook for the web service",
-               importance=0.5, age_hours=24 * 30)
-    new = _add(store, "deployment runbook for the web service",
-               importance=0.5, age_hours=1)
+    old = _add(
+        store,
+        "deployment runbook for the web service",
+        importance=0.5,
+        age_hours=24 * 30,
+    )
+    new = _add(
+        store, "deployment runbook for the web service", importance=0.5, age_hours=1
+    )
     res = retrieve("deployment runbook", store, method="hybrid")
     assert res[0][0].id == new.id
     assert res[1][0].id == old.id
@@ -116,13 +128,15 @@ def test_recency_method_orders_by_age(store):
 
 def test_corrorobation_boosts_rank(store):
     plain = _add(store, "widget calibration procedure", importance=0.5)
-    corrob = _add(store, "widget calibration procedure", importance=0.5,
-                  corroboration=5)
+    corrob = _add(
+        store, "widget calibration procedure", importance=0.5, corroboration=5
+    )
     res = retrieve("widget calibration", store, method="bm25")
     assert res[0][0].id == corrob.id
 
 
 # --- query expansion --------------------------------------------------------
+
 
 def test_expand_query_synonyms_and_multi():
     subs = expand_query("buy a laptop")
@@ -140,6 +154,7 @@ def test_multi_query_fused(store):
 
 
 # --- fail-closed --------------------------------------------------------------
+
 
 @pytest.mark.parametrize("bad", ["", "   ", None, 123, ["x"]])
 def test_retrieve_fail_closed_on_bad_query(store, bad):

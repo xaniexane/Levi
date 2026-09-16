@@ -133,7 +133,9 @@ def test_bad_version_refused(bad):
     assert any("version" in e for e in errors), errors
 
 
-@pytest.mark.parametrize("good", ["1", "1.0", "1.0.0", "2.3.4-alpha.1", "1.0.0+build.7"])
+@pytest.mark.parametrize(
+    "good", ["1", "1.0", "1.0.0", "2.3.4-alpha.1", "1.0.0+build.7"]
+)
 def test_lenient_versions_accepted(good):
     assert validate_manifest(_manifest(version=good)) == []
 
@@ -216,7 +218,9 @@ def test_permissions_shape_refused():
     bad = {"network": False, "fs": ["../x"], "subprocess": False}
     assert any("fs" in e for e in validate_manifest(_manifest(permissions=bad)))
     bad = {"network": False, "fs": [], "subprocess": False, "root": True}
-    assert any("unknown key" in e for e in validate_manifest(_manifest(permissions=bad)))
+    assert any(
+        "unknown key" in e for e in validate_manifest(_manifest(permissions=bad))
+    )
 
 
 def test_bad_min_levi_version_refused():
@@ -246,7 +250,10 @@ def test_to_namespaced_roundtrip():
 
 def test_to_namespaced_last_dot_convention():
     # Reverse-DNS authors are dotted; the name is the trailing segment.
-    assert parse_namespaced("org.example.deep.cleaner") == ("org.example.deep", "cleaner")
+    assert parse_namespaced("org.example.deep.cleaner") == (
+        "org.example.deep",
+        "cleaner",
+    )
 
 
 def test_to_namespaced_registered_handle():

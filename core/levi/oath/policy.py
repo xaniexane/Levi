@@ -83,7 +83,9 @@ def trust_gate(contact: Contact, trust: str) -> PolicyDecision:
             "trust",
             f"contact {contact.name!r} requires {contact.trust_floor}; got {trust} — denied",
         )
-    return PolicyDecision(True, "trust", f"trust {trust} meets floor {contact.trust_floor}")
+    return PolicyDecision(
+        True, "trust", f"trust {trust} meets floor {contact.trust_floor}"
+    )
 
 
 def check_command(
@@ -145,7 +147,9 @@ def check_pipeline(
             definition = registry.get(name)
         except Exception as exc:  # unknown command -> deny
             decisions.append(
-                PolicyDecision(False, "permission", f"unknown command {name!r} — denied ({exc})")
+                PolicyDecision(
+                    False, "permission", f"unknown command {name!r} — denied ({exc})"
+                )
             )
             continue
         # Validate arguments render *before* the stage runs: a stage whose
@@ -154,7 +158,9 @@ def check_pipeline(
             definition.render(dict(stage.get("args", {})))
         except Exception as exc:
             decisions.append(
-                PolicyDecision(False, "permission", f"{name!r}: invalid arguments — denied ({exc})")
+                PolicyDecision(
+                    False, "permission", f"{name!r}: invalid arguments — denied ({exc})"
+                )
             )
             continue
         decisions.append(check_command(contact, definition))

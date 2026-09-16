@@ -57,7 +57,7 @@ def test_env_is_scrubbed_by_default():
     os.environ["LEVI_TEST_SECRET_MARKER"] = "should-not-leak"
     try:
         with plan9.Namespace() as ns:
-            r = ns.run([SH, "-c", "echo \"marker=${LEVI_TEST_SECRET_MARKER:-absent}\""])
+            r = ns.run([SH, "-c", 'echo "marker=${LEVI_TEST_SECRET_MARKER:-absent}"'])
         assert "marker=absent" in r.stdout
     finally:
         del os.environ["LEVI_TEST_SECRET_MARKER"]
@@ -67,7 +67,7 @@ def test_env_allowlist_passes_selected_vars():
     os.environ["LEVI_TEST_PASS_THROUGH"] = "visible"
     try:
         with plan9.Namespace(env_allow=("LEVI_TEST_PASS_THROUGH",)) as ns:
-            r = ns.run([SH, "-c", "echo \"v=${LEVI_TEST_PASS_THROUGH:-absent}\""])
+            r = ns.run([SH, "-c", 'echo "v=${LEVI_TEST_PASS_THROUGH:-absent}"'])
         assert "v=visible" in r.stdout
     finally:
         del os.environ["LEVI_TEST_PASS_THROUGH"]
@@ -75,7 +75,7 @@ def test_env_allowlist_passes_selected_vars():
 
 def test_explicit_env_is_used_verbatim():
     with plan9.Namespace(env={"PATH": "/usr/bin:/bin", "CUSTOM": "yes"}) as ns:
-        r = ns.run([SH, "-c", "echo \"c=${CUSTOM:-no}\""])
+        r = ns.run([SH, "-c", 'echo "c=${CUSTOM:-no}"'])
     assert "c=yes" in r.stdout
 
 
@@ -178,8 +178,10 @@ def test_handler_exception_becomes_error_reply():
 def test_unknown_message_type_refused():
     client, server = plan9.create_channel()
     t = threading.Thread(
-        target=plan9.serve, args=(server, lambda mt, p: None),
-        kwargs={"request_types": {"known"}}, daemon=True,
+        target=plan9.serve,
+        args=(server, lambda mt, p: None),
+        kwargs={"request_types": {"known"}},
+        daemon=True,
     )
     t.start()
     try:
@@ -233,8 +235,14 @@ def test_out_of_order_replies_are_buffered():
         msg_type, payload, msg_id = server.recv(timeout=5)
         assert msg_type == "do"
         server._send_frame(
-            {"id": "r1", "type": "reply", "in_reply_to": msg_id,
-             "ok": True, "payload": "done", "error": None}
+            {
+                "id": "r1",
+                "type": "reply",
+                "in_reply_to": msg_id,
+                "ok": True,
+                "payload": "done",
+                "error": None,
+            }
         )
 
     t = threading.Thread(target=responder, daemon=True)

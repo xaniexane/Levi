@@ -63,7 +63,9 @@ class GovernedProvider(ChatProvider):
 
             detector = SpikeDetector(clock=clock)
         self._detector = detector
-        self._wallet = wallet if wallet is not None else PassWallet(home=home, clock=clock)
+        self._wallet = (
+            wallet if wallet is not None else PassWallet(home=home, clock=clock)
+        )
         self._cooldowns = (
             cooldowns
             if cooldowns is not None
@@ -74,7 +76,9 @@ class GovernedProvider(ChatProvider):
             # for the priority lane to function.
             self._cooldowns._wallet = self._wallet
         self._budgets = (
-            budgets if budgets is not None else BudgetEnforcer(self._meter, home=home, clock=clock)
+            budgets
+            if budgets is not None
+            else BudgetEnforcer(self._meter, home=home, clock=clock)
         )
 
     @property
@@ -120,7 +124,9 @@ class GovernedProvider(ChatProvider):
                 error=f"{type(exc).__name__}: {exc}",
             )
             if grant.probe:
-                self._cooldowns.probe_failure(self.scope, f"probe raised {type(exc).__name__}")
+                self._cooldowns.probe_failure(
+                    self.scope, f"probe raised {type(exc).__name__}"
+                )
             return self._refuse(f"provider raised {type(exc).__name__}: {exc}")
 
         # 3. Meter, detect, cool down.
@@ -146,14 +152,11 @@ class GovernedProvider(ChatProvider):
         # One breach per offending call (not one per attribution key):
         # collapse the alerts into a single breach carrying every reason.
         if alerts:
-            self._cooldowns.breach(
-                self.scope, "; ".join(str(a) for a in alerts)
-            )
+            self._cooldowns.breach(self.scope, "; ".join(str(a) for a in alerts))
         # No silent passes: attach the alerts to the response for the caller.
         if alerts:
             resp.governor_alerts = [str(a) for a in alerts]  # type: ignore[attr-defined]
         return resp
-
 
     def chat_with_pass(
         self, messages: list, tools: list[dict], pass_id: str

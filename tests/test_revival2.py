@@ -142,7 +142,8 @@ def test_ecco_query_and_persistence(tmp_path):
 
 def test_dwim_corrects_and_reports():
     corrected, fixes = interlisp.correct_tokens(
-        "delte teh note", ["delete", "the", "note"])
+        "delte teh note", ["delete", "the", "note"]
+    )
     assert corrected == "delete the note"
     assert ("delte", "delete") in fixes  # corrections always reported
 
@@ -155,7 +156,9 @@ def test_dwim_refuses_wild_guesses():
 def test_masterscope_indexes_and_queries(tmp_path):
     (tmp_path / "m.py").write_text(
         "import os\ndef plan():\n    return guarded_call()\n"
-        "def guarded_call():\n    return 1\n", encoding="utf-8")
+        "def guarded_call():\n    return 1\n",
+        encoding="utf-8",
+    )
     ms = interlisp.Masterscope(tmp_path)
     assert ms.index_tree() == 1
     defs = ms.definitions("m")
@@ -375,12 +378,21 @@ def test_mumps_non_jsonable_rejected(tmp_path):
 def _actions():
     return [
         goap.Action("get_key", effects={"has_key": True}),
-        goap.Action("open_door", preconditions={"has_key": True},
-                    effects={"door_open": True}),
-        goap.Action("walk_thru", preconditions={"door_open": True},
-                    effects={"inside": True}, cost=2.0),
-        goap.Action("teleport", preconditions={"inside": True},
-                    effects={"inside": True}, cost=99.0),
+        goap.Action(
+            "open_door", preconditions={"has_key": True}, effects={"door_open": True}
+        ),
+        goap.Action(
+            "walk_thru",
+            preconditions={"door_open": True},
+            effects={"inside": True},
+            cost=2.0,
+        ),
+        goap.Action(
+            "teleport",
+            preconditions={"inside": True},
+            effects={"inside": True},
+            cost=99.0,
+        ),
     ]
 
 
@@ -410,8 +422,11 @@ def test_goap_replans_when_world_moves():
 
 
 def test_goap_callable_preconditions():
-    acts = [goap.Action("go", preconditions=lambda w: w.get("ready"),
-                        effects={"done": True})]
+    acts = [
+        goap.Action(
+            "go", preconditions=lambda w: w.get("ready"), effects={"done": True}
+        )
+    ]
     with pytest.raises(goap.NoPlan):
         goap.plan({}, {"done": True}, acts)
     assert goap.plan({"ready": True}, {"done": True}, acts) == ["go"]
@@ -424,7 +439,8 @@ def test_goap_callable_preconditions():
 
 def _pool(seed=7):
     pool = eurisko.DiscoveryPool(
-        judge=lambda prob, cand: 1.0 if cand == 42 else 0.0, seed=seed)
+        judge=lambda prob, cand: 1.0 if cand == 42 else 0.0, seed=seed
+    )
     pool.seed_heuristic(eurisko.Heuristic("const42", lambda p: 42))
     pool.seed_heuristic(eurisko.Heuristic("const0", lambda p: 0))
     return pool

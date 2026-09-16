@@ -46,8 +46,7 @@ def build_parser() -> argparse.ArgumentParser:
     rl.add_argument("community")
     rl.add_argument("role")
     rl.add_argument("--name", default="")
-    rl.add_argument("--permissions", default="",
-                    help="comma-separated permissions")
+    rl.add_argument("--permissions", default="", help="comma-separated permissions")
 
     gr = sub.add_parser("grant-role", help="grant a role to a member")
     gr.add_argument("community")
@@ -68,7 +67,9 @@ def build_parser() -> argparse.ArgumentParser:
     ex.add_argument("community")
     ex.add_argument("--out", required=True)
 
-    im = sub.add_parser("import", help="import a verified export (fails closed on tampering)")
+    im = sub.add_parser(
+        "import", help="import a verified export (fails closed on tampering)"
+    )
     im.add_argument("--in", dest="in_path", required=True)
     im.add_argument("--as", dest="as_id", default=None)
 
@@ -92,15 +93,22 @@ def main(argv=None) -> int:
         elif args.cmd == "list":
             comms = store.list()
             for c in comms:
-                print(f"  [{c.id}] {c.name} "
-                      f"({len(c.members)} members, {len(c.messages)} messages)")
+                print(
+                    f"  [{c.id}] {c.name} "
+                    f"({len(c.members)} members, {len(c.messages)} messages)"
+                )
             if not comms:
                 print("  (none)")
         elif args.cmd == "status":
             print(store.format_status(args.id))
         elif args.cmd == "add-channel":
-            ch = store.add_channel(args.community, args.channel, args.name,
-                                   kind=args.kind, topic=args.topic)
+            ch = store.add_channel(
+                args.community,
+                args.channel,
+                args.name,
+                kind=args.kind,
+                topic=args.topic,
+            )
             print(f"channel #{ch.name} [{ch.id}]")
         elif args.cmd == "add-member":
             m = store.add_member(args.community, args.member, args.name)
@@ -128,9 +136,12 @@ def main(argv=None) -> int:
         elif args.cmd == "verify":
             from levi.communities.model import verify_export
             import json
+
             community = verify_export(json.loads(Path(args.in_path).read_text()))
-            print(f"VALID export: [{community.id}] {community.name} — "
-                  f"all section checksums + manifest verified")
+            print(
+                f"VALID export: [{community.id}] {community.name} — "
+                f"all section checksums + manifest verified"
+            )
         else:
             build_parser().print_help()
             return 2

@@ -2,6 +2,7 @@
 configured. Sync failures are logged in state and retried on the next run;
 nothing here ever raises out to the scheduler.
 """
+
 from __future__ import annotations
 
 from datetime import datetime, timezone
@@ -56,7 +57,5 @@ def run_daily() -> dict:
 def _record_daily(report: dict) -> None:
     state = load_state()
     state["last_daily_utc"] = report["ran_at_utc"]
-    state["last_daily_report"] = {
-        k: v for k, v in report.items() if k != "ran_at_utc"
-    }
+    state["last_daily_report"] = {k: v for k, v in report.items() if k != "ran_at_utc"}
     save_state(state)

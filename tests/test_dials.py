@@ -91,7 +91,9 @@ def test_bad_weight_rejected(monkeypatch, tmp_path):
 
 def test_cli_roundtrip(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)
-    assert main(["add", "--author", "ada", "--text", "first post", "--tags", "news"]) == 0
+    assert (
+        main(["add", "--author", "ada", "--text", "first post", "--tags", "news"]) == 0
+    )
     assert main(["weights"]) == 0
     out = capsys.readouterr().out
     assert "mode: chronological" in out

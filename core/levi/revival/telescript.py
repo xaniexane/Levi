@@ -180,7 +180,9 @@ def issue(
         "n": secrets.token_hex(16),
     }
     payload = _b64e(json.dumps(claims, separators=(",", ":")).encode("utf-8"))
-    sig = _b64e(hmac.new(_get_secret(), payload.encode("ascii"), hashlib.sha256).digest())
+    sig = _b64e(
+        hmac.new(_get_secret(), payload.encode("ascii"), hashlib.sha256).digest()
+    )
     return f"{payload}.{sig}"
 
 
@@ -201,7 +203,9 @@ def verify(
     except Exception as exc:
         raise MalformedToken(f"token is not valid base64url: {exc}") from exc
 
-    expected = hmac.new(_get_secret(), payload_b64.encode("ascii"), hashlib.sha256).digest()
+    expected = hmac.new(
+        _get_secret(), payload_b64.encode("ascii"), hashlib.sha256
+    ).digest()
     # Canonical-encoding check: the last base64url char of a 32-byte digest
     # carries only 2 significant bits. Without this, swapping it for another
     # char with the same top 2 bits decodes to identical bytes and a tampered
@@ -333,9 +337,13 @@ def guarded_call(
     action patterns covers ``action``. Errors from ``fn`` itself propagate
     unchanged.
     """
-    cap = verify(cap_token, expected_grantee=expected_grantee, revocations=revocations, now=now)
+    cap = verify(
+        cap_token, expected_grantee=expected_grantee, revocations=revocations, now=now
+    )
     if not permits(cap, action):
-        raise ActionRefused(f"action {action!r} not permitted by capability for {cap.grantee!r}")
+        raise ActionRefused(
+            f"action {action!r} not permitted by capability for {cap.grantee!r}"
+        )
     return fn(*args, **kwargs)
 
 
@@ -352,7 +360,9 @@ class GuardedExecutor:
     tokens: list[str] = field(default_factory=list)
     revocations: Optional[RevocationList] = None
 
-    def call(self, action: str, fn: Callable[..., Any], *args: Any, **kwargs: Any) -> Any:
+    def call(
+        self, action: str, fn: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> Any:
         """Try each held token in order; raise ActionRefused if none permit."""
         last_error: Optional[CapabilityError] = None
         for token in self.tokens:

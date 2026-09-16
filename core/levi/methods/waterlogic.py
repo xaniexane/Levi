@@ -24,7 +24,6 @@ duplicate statements, and self-loops are rejected with ValueError.
 from __future__ import annotations
 
 from collections import Counter, deque
-from typing import Optional
 
 __all__ = ["Flowscape"]
 
@@ -104,10 +103,13 @@ class Flowscape:
             for to, _ in tos:
                 incoming[to] += 1
         return [
-            {"id": sid, "statement": self._statements[sid], "incoming": incoming[sid],
-             "outgoing": len(self._flows[sid])}
-            for sid in sorted(self._statements,
-                              key=lambda s: (-incoming[s], s))
+            {
+                "id": sid,
+                "statement": self._statements[sid],
+                "incoming": incoming[sid],
+                "outgoing": len(self._flows[sid]),
+            }
+            for sid in sorted(self._statements, key=lambda s: (-incoming[s], s))
         ]
 
     def ruts(self, top_n: int = 3) -> list[dict]:
@@ -118,16 +120,20 @@ class Flowscape:
 
     def dead_ends(self) -> list[dict]:
         """Statements where thinking stops: pools with no outgoing flows."""
-        return [{"id": sid, "statement": text}
-                for sid, text in self._statements.items()
-                if not self._flows[sid]]
+        return [
+            {"id": sid, "statement": text}
+            for sid, text in self._statements.items()
+            if not self._flows[sid]
+        ]
 
     def neglected(self) -> list[dict]:
         """Statements nothing flows into: the branches perception never visits."""
         targeted = {to for tos in self._flows.values() for to, _ in tos}
-        return [{"id": sid, "statement": text}
-                for sid, text in self._statements.items()
-                if sid not in targeted]
+        return [
+            {"id": sid, "statement": text}
+            for sid, text in self._statements.items()
+            if sid not in targeted
+        ]
 
     def report(self, start_id: str, max_depth: int = 6) -> dict:
         """The full flowscape reading: paths, ruts, dead ends, neglected."""
@@ -146,6 +152,7 @@ class Flowscape:
                 f"your rut is {self.ruts(1)[0]['statement']!r}; "
                 f"{len(self.dead_ends())} place(s) where thinking stops; "
                 f"{len(self.neglected())} statement(s) perception never visits."
-                if self._statements else "empty flowscape"
+                if self._statements
+                else "empty flowscape"
             ),
         }

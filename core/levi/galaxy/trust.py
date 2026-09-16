@@ -97,9 +97,7 @@ def verify_install(home: PathLike, record: dict[str, Any]) -> bool:
     return True
 
 
-def verify_record_in_registry(
-    home: PathLike, package_id: str
-) -> bool:
+def verify_record_in_registry(home: PathLike, package_id: str) -> bool:
     """Verify the registry's own record for ``package_id``. Convenience."""
     registry = GalaxyRegistry(home)
     record = registry.get(package_id)

@@ -39,6 +39,7 @@ from typing import Any, Dict, Iterator, List, Optional, Tuple
 # Documents
 # --------------------------------------------------------------------------
 
+
 @dataclass
 class Document:
     doc_id: str
@@ -108,8 +109,9 @@ class DocStore:
         target.parent.mkdir(parents=True, exist_ok=True)
         tmp = target.with_suffix(".tmp")
         tmp.write_text(
-            json.dumps([d.to_dict() for d in self._docs.values()],
-                       indent=2, ensure_ascii=False),
+            json.dumps(
+                [d.to_dict() for d in self._docs.values()], indent=2, ensure_ascii=False
+            ),
             encoding="utf-8",
         )
         tmp.replace(target)
@@ -129,6 +131,7 @@ class DocStore:
 # --------------------------------------------------------------------------
 # Transclusion
 # --------------------------------------------------------------------------
+
 
 @dataclass
 class Quote:
@@ -175,11 +178,13 @@ class Transclusion:
     def quote(self, doc_id: str, start: int, end: int) -> Quote:
         """Return the referenced text with provenance (never unattributed)."""
         doc = self.docs.get(doc_id)  # KeyError if unknown — honest
-        return Quote(text=doc.span(start, end), doc_id=doc_id,
-                     span=(start, end), title=doc.title)
+        return Quote(
+            text=doc.span(start, end), doc_id=doc_id, span=(start, end), title=doc.title
+        )
 
-    def transclude(self, quoter_doc_id: str, target_doc_id: str,
-                   start: int, end: int) -> Quote:
+    def transclude(
+        self, quoter_doc_id: str, target_doc_id: str, start: int, end: int
+    ) -> Quote:
         """Record that ``quoter_doc_id`` quotes a span of ``target_doc_id``.
 
         The quote text stays owned by the target document; only the
@@ -216,6 +221,7 @@ class Transclusion:
 # --------------------------------------------------------------------------
 # Trails
 # --------------------------------------------------------------------------
+
 
 def _default_trail_dir() -> Path:
     return Path(os.path.expanduser("~")) / ".levi" / "trails"
@@ -311,8 +317,9 @@ class TrailStore:
         self.trail_dir.mkdir(parents=True, exist_ok=True)
         target = self._path_for(trail_id)
         tmp = target.with_suffix(".tmp")
-        tmp.write_text(json.dumps(trail.to_dict(), indent=2, ensure_ascii=False),
-                       encoding="utf-8")
+        tmp.write_text(
+            json.dumps(trail.to_dict(), indent=2, ensure_ascii=False), encoding="utf-8"
+        )
         tmp.replace(target)
         return target
 
@@ -339,9 +346,14 @@ class TrailStore:
 # Additive RAG integration (lazy import, honest degradation)
 # --------------------------------------------------------------------------
 
-def trail_from_citations(store: TrailStore, trail_id: str, name: str,
-                         citations: List[str],
-                         annotations: Optional[Dict[str, str]] = None) -> Trail:
+
+def trail_from_citations(
+    store: TrailStore,
+    trail_id: str,
+    name: str,
+    citations: List[str],
+    annotations: Optional[Dict[str, str]] = None,
+) -> Trail:
     """Build a trail from a list of cited doc ids (e.g. from rag ask())."""
     trail = store.create(trail_id, name)
     annotations = annotations or {}
@@ -351,9 +363,14 @@ def trail_from_citations(store: TrailStore, trail_id: str, name: str,
     return trail
 
 
-def ask_and_trail(query: str, rag_store: Any, trail_store: TrailStore,
-                  trail_id: str, name: str,
-                  limit: int = 5) -> Tuple[Any, Trail]:
+def ask_and_trail(
+    query: str,
+    rag_store: Any,
+    trail_store: TrailStore,
+    trail_id: str,
+    name: str,
+    limit: int = 5,
+) -> Tuple[Any, Trail]:
     """Run ``levi.rag`` ask() and turn its citations into a trail.
 
     Returns ``(ask_result, trail)``. If the rag module is unavailable,
@@ -380,6 +397,7 @@ def ask_and_trail(query: str, rag_store: Any, trail_store: TrailStore,
 # --------------------------------------------------------------------------
 # Demo
 # --------------------------------------------------------------------------
+
 
 def demo() -> None:
     """Ingest two docs, transclude a quote, build a trail, follow it."""

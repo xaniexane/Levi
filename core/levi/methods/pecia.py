@@ -30,7 +30,7 @@ and deny-closed assembly (nothing unverified is ever collated).
 from __future__ import annotations
 
 import hashlib
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from . import _persist
 
@@ -107,8 +107,9 @@ class Exemplar:
         self.text = text
         self.checksum = _sha256(text)
 
-    def split(self, n: int, kind: str = "transcribe",
-              refs: tuple[str, ...] = ()) -> list[Pecia]:
+    def split(
+        self, n: int, kind: str = "transcribe", refs: tuple[str, ...] = ()
+    ) -> list[Pecia]:
         """Divide the exemplar into ``n`` peciae at line boundaries.
 
         ``kind`` applies to every pecia; ``refs`` optionally names the
@@ -128,7 +129,7 @@ class Exemplar:
         start_line = 0
         for i in range(n):
             count = per + (1 if i < extra else 0)
-            chunk_lines = lines[start_line:start_line + count]
+            chunk_lines = lines[start_line : start_line + count]
             chunk = "".join(chunk_lines)
             end = pos + len(chunk)
             peciae.append(
@@ -176,8 +177,9 @@ class Stationer:
     pecia is unverified.
     """
 
-    def __init__(self, exemplar: Exemplar, peciae: list[Pecia],
-                 store: str | None = None):
+    def __init__(
+        self, exemplar: Exemplar, peciae: list[Pecia], store: str | None = None
+    ):
         if not peciae:
             raise ValueError("stationer needs at least one pecia")
         self.exemplar = exemplar
@@ -243,8 +245,9 @@ class Stationer:
         self._by_scribe[scribe] = target
         return self._peciae[target]
 
-    def submit(self, scribe: str, pecia_id: str, copy: str,
-               exemplar_ref: str = "") -> Submission:
+    def submit(
+        self, scribe: str, pecia_id: str, copy: str, exemplar_ref: str = ""
+    ) -> Submission:
         """Submit a copy; verify it; release the lease on success OR failure.
 
         transcribe: copy must checksum-match the exemplar chunk exactly.
@@ -253,9 +256,7 @@ class Stationer:
         """
         lease = self._leases.get(pecia_id)
         if lease is None or lease.scribe != scribe:
-            raise LeaseError(
-                f"scribe {scribe!r} holds no lease on pecia {pecia_id!r}"
-            )
+            raise LeaseError(f"scribe {scribe!r} holds no lease on pecia {pecia_id!r}")
         pecia = self._peciae[pecia_id]
         self._attempts[pecia_id] = self._attempts.get(pecia_id, 0) + 1
         try:

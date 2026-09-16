@@ -77,8 +77,11 @@ def test_full_pipeline_install_register_call(pkg_src, levi_home, services):
     cap = services.issue_capability("tester", ["galaxy.com.example.alpha.*"])
     assert (
         services.call(
-            "galaxy.com.example.alpha", "shout",
-            args=["hello"], capability=cap, grantee="tester",
+            "galaxy.com.example.alpha",
+            "shout",
+            args=["hello"],
+            capability=cap,
+            grantee="tester",
         )
         == "HELLO"
     )
@@ -94,8 +97,11 @@ def test_install_from_tarball(pkg_src, levi_home, services, tmp_path):
     cap = services.issue_capability("tester", ["galaxy.com.example.alpha.shout"])
     assert (
         services.call(
-            "galaxy.com.example.alpha", "shout",
-            kwargs={"text": "hey"}, capability=cap, grantee="tester",
+            "galaxy.com.example.alpha",
+            "shout",
+            kwargs={"text": "hey"},
+            capability=cap,
+            grantee="tester",
         )
         == "HEY"
     )
@@ -105,7 +111,9 @@ def test_tamper_blocks_registration(pkg_src, levi_home, services):
     record = galaxy_install.install(pkg_src, home=levi_home, policy=None)
     # tamper with the installed copy
     installed_mod = galaxy_trust.install_dir(levi_home, record) / f"{MODULE_NAME}.py"
-    installed_mod.write_text("def shout(text=''):\n    return 'PWNED'\n", encoding="utf-8")
+    installed_mod.write_text(
+        "def shout(text=''):\n    return 'PWNED'\n", encoding="utf-8"
+    )
     with pytest.raises(galaxy_trust.TamperError):
         services.register_installed(record, home=levi_home)
     # and nothing was registered
@@ -124,8 +132,11 @@ def test_sync_from_registry_registers_missing(pkg_src, levi_home, tmp_path):
     cap = fresh.issue_capability("tester", ["galaxy.com.example.alpha.*"])
     assert (
         fresh.call(
-            "galaxy.com.example.alpha", "shout",
-            args=["yo"], capability=cap, grantee="tester",
+            "galaxy.com.example.alpha",
+            "shout",
+            args=["yo"],
+            capability=cap,
+            grantee="tester",
         )
         == "YO"
     )
@@ -162,8 +173,11 @@ def test_verbs_resolve_after_reload(pkg_src, levi_home, tmp_path):
     cap = reloaded.issue_capability("tester", ["galaxy.com.example.alpha.*"])
     assert (
         reloaded.call(
-            "galaxy.com.example.alpha", "shout",
-            args=["again"], capability=cap, grantee="tester",
+            "galaxy.com.example.alpha",
+            "shout",
+            args=["again"],
+            capability=cap,
+            grantee="tester",
         )
         == "AGAIN"
     )

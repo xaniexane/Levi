@@ -87,8 +87,9 @@ def load_events(path: "str | os.PathLike[str]") -> List[Dict[str, Any]]:
     return events
 
 
-def compute_stats(events: List[Dict[str, Any]],
-                  year: Optional[int] = None) -> Dict[str, Any]:
+def compute_stats(
+    events: List[Dict[str, Any]], year: Optional[int] = None
+) -> Dict[str, Any]:
     """Compute recap stats. All local, all honest — counts are real."""
     if year is not None:
         events = [e for e in events if e["_dt"].year == year]
@@ -121,23 +122,30 @@ def compute_stats(events: List[Dict[str, Any]],
         top = max(labels.items(), key=lambda kv: kv[1])
         top_labels[cat] = {"label": top[0], "value": round(top[1], 1)}
     milestones = [
-        {"at": events[0]["_day"], "text": "first event: %s" % (events[0].get("label") or events[0]["kind"])},
+        {
+            "at": events[0]["_day"],
+            "text": "first event: %s" % (events[0].get("label") or events[0]["kind"]),
+        },
     ]
     for n in (100, 500, 1000, 5000):
         if len(events) >= n:
-            milestones.append({"at": events[n - 1]["_day"],
-                               "text": "%dth event recorded" % n})
+            milestones.append(
+                {"at": events[n - 1]["_day"], "text": "%dth event recorded" % n}
+            )
     year_label = year or "%d–%d" % (events[0]["_dt"].year, events[-1]["_dt"].year)
     return {
         "events": len(events),
         "year": year_label,
         "active_days": len(days),
         "longest_streak_days": longest,
-        "first_day": days[0], "last_day": days[-1],
+        "first_day": days[0],
+        "last_day": days[-1],
         "top_categories_by_events": by_cat.most_common(5),
         "top_categories_by_value": sorted(
             ((c, round(v, 1)) for c, v in by_cat_value.items()),
-            key=lambda kv: kv[1], reverse=True)[:5],
+            key=lambda kv: kv[1],
+            reverse=True,
+        )[:5],
         "units": sorted({str(e.get("unit", "")) for e in events if e.get("unit")}),
         "busiest_month": by_month.most_common(1)[0] if by_month else None,
         "busiest_weekday": by_dow.most_common(1)[0] if by_dow else None,
@@ -152,14 +160,16 @@ def compute_stats(events: List[Dict[str, Any]],
 # rendering
 # ---------------------------------------------------------------------------
 
+
 def render_text(stats: Dict[str, Any]) -> str:
     if stats.get("empty"):
         return "No events — nothing to recap. (Feed it a JSONL event file first.)"
     L = []
     L.append("=== LEVI RECAP %s ===" % stats["year"])
-    L.append("%d events across %d active days (%s → %s)" % (
-        stats["events"], stats["active_days"],
-        stats["first_day"], stats["last_day"]))
+    L.append(
+        "%d events across %d active days (%s → %s)"
+        % (stats["events"], stats["active_days"], stats["first_day"], stats["last_day"])
+    )
     L.append("longest daily streak: %d days" % stats["longest_streak_days"])
     L.append("")
     L.append("top categories (by events):")
@@ -210,10 +220,12 @@ def render_html(stats: Dict[str, Any], title: str = "My Year in Review") -> str:
     else:
         cats = "".join(
             "<li>%s — %d events</li>" % (html.escape(c), n)
-            for c, n in stats["top_categories_by_events"])
+            for c, n in stats["top_categories_by_events"]
+        )
         miles = "".join(
             "<li>%s — %s</li>" % (html.escape(m["at"]), html.escape(m["text"]))
-            for m in stats["milestones"])
+            for m in stats["milestones"]
+        )
         body = """
 <div class="row">
   <div class="stat"><div class="n">{events}</div><div class="l">events</div></div>
@@ -222,8 +234,13 @@ def render_html(stats: Dict[str, Any], title: str = "My Year in Review") -> str:
 </div>
 <h3>Top categories</h3><ul>{cats}</ul>
 <h3>Milestones</h3><ul>{miles}</ul>
-""".format(events=stats["events"], days=stats["active_days"],
-           streak=stats["longest_streak_days"], cats=cats, miles=miles)
+""".format(
+            events=stats["events"],
+            days=stats["active_days"],
+            streak=stats["longest_streak_days"],
+            cats=cats,
+            miles=miles,
+        )
     return """<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title><style>{css}</style></head>
@@ -233,36 +250,56 @@ def render_html(stats: Dict[str, Any], title: str = "My Year in Review") -> str:
 {body}
 <div class="foot">Computed locally from your own data. Nothing left the machine.</div>
 </div></body></html>""".format(
-        title=html.escape(title), css=_CARD_CSS,
-        year=html.escape(str(stats.get("year", ""))), body=body)
+        title=html.escape(title),
+        css=_CARD_CSS,
+        year=html.escape(str(stats.get("year", ""))),
+        body=body,
+    )
 
 
 # ---------------------------------------------------------------------------
 # sample generator (deterministic synthetic data for tests/demos)
 # ---------------------------------------------------------------------------
 
-def sample_events(path: "str | os.PathLike[str]", year: int = 2026,
-                  n: int = 400, seed: int = 7) -> Path:
+
+def sample_events(
+    path: "str | os.PathLike[str]", year: int = 2026, n: int = 400, seed: int = 7
+) -> Path:
     """Write a deterministic SYNTHETIC year of events. Labeled synthetic."""
     rng = random.Random(seed)
-    cats = [("reading", "session", "minutes", ["Dune", "Project Hail Mary", "essays"]),
-            ("coding", "session", "minutes", ["levi", "side project"]),
-            ("running", "run", "km", ["morning loop", "trail"]),
-            ("music", "listen", "minutes", ["jazz", "ambient"])]
+    cats = [
+        ("reading", "session", "minutes", ["Dune", "Project Hail Mary", "essays"]),
+        ("coding", "session", "minutes", ["levi", "side project"]),
+        ("running", "run", "km", ["morning loop", "trail"]),
+        ("music", "listen", "minutes", ["jazz", "ambient"]),
+    ]
     p = Path(path)
     with p.open("w", encoding=ENC) as fh:
-        fh.write('{"synthetic": true, "note": "generated sample data — not real activity"}\n')
+        fh.write(
+            '{"synthetic": true, "note": "generated sample data — not real activity"}\n'
+        )
         for _ in range(n):
             cat, kind, unit, labels = rng.choice(cats)
             day = date(year, 1, 1) + timedelta(days=rng.randrange(0, 300))
-            fh.write(json.dumps({
-                "ts": datetime(day.year, day.month, day.day,
-                               rng.randrange(6, 23),
-                               rng.randrange(0, 60)).isoformat(),
-                "category": cat, "kind": kind,
-                "label": rng.choice(labels),
-                "value": round(rng.uniform(10, 120), 1) if unit != "km"
-                else round(rng.uniform(2, 15), 1),
-                "unit": unit,
-            }) + "\n")
+            fh.write(
+                json.dumps(
+                    {
+                        "ts": datetime(
+                            day.year,
+                            day.month,
+                            day.day,
+                            rng.randrange(6, 23),
+                            rng.randrange(0, 60),
+                        ).isoformat(),
+                        "category": cat,
+                        "kind": kind,
+                        "label": rng.choice(labels),
+                        "value": round(rng.uniform(10, 120), 1)
+                        if unit != "km"
+                        else round(rng.uniform(2, 15), 1),
+                        "unit": unit,
+                    }
+                )
+                + "\n"
+            )
     return p

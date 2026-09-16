@@ -97,7 +97,9 @@ class Decision:
 class RoutingTable:
     """Ordered rules; first match wins. Ends with an explicit default rule."""
 
-    DEFAULT_REASON = "default: urgent (>=8) goes courier, everything else rides the tube"
+    DEFAULT_REASON = (
+        "default: urgent (>=8) goes courier, everything else rides the tube"
+    )
 
     def __init__(self, store: str | None = None):
         self.rules: list[Rule] = []
@@ -121,8 +123,12 @@ class RoutingTable:
     def route(self, task: Task) -> Decision:
         for rule in self.rules:
             if rule.matches(task):
-                return Decision(task.task_id, rule.channel,
-                                rule.pattern, rule.reason or "matched rule")
+                return Decision(
+                    task.task_id,
+                    rule.channel,
+                    rule.pattern,
+                    rule.reason or "matched rule",
+                )
         # The explicit default: the trunk/last-mile split.
         channel = COURIER if task.urgency >= 8 else TUBE
         return Decision(task.task_id, channel, "<default>", self.DEFAULT_REASON)
@@ -144,10 +150,14 @@ class Dispatcher:
         if decision.channel == TUBE:
             self._held.append(task)
         else:
-            self.courier_log.append({
-                "task_id": task.task_id, "title": task.title,
-                "urgency": task.urgency, "sent_at": decision.decided_at,
-            })
+            self.courier_log.append(
+                {
+                    "task_id": task.task_id,
+                    "title": task.title,
+                    "urgency": task.urgency,
+                    "sent_at": decision.decided_at,
+                }
+            )
         return decision
 
     def held(self) -> list[Task]:
@@ -160,8 +170,9 @@ class Dispatcher:
         manifest = {
             "dispatched_at": time.time(),
             "count": len(batch),
-            "tasks": [{"task_id": t.task_id, "kind": t.kind, "title": t.title}
-                      for t in batch],
+            "tasks": [
+                {"task_id": t.task_id, "kind": t.kind, "title": t.title} for t in batch
+            ],
         }
         return manifest
 

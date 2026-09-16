@@ -486,7 +486,9 @@ class StoryFabric:
                 f"create_story premise must be a non-empty string, got {premise!r}"
             )
         if not isinstance(genre, str) or not genre.strip():
-            raise ValueError(f"create_story genre must be a non-empty string, got {genre!r}")
+            raise ValueError(
+                f"create_story genre must be a non-empty string, got {genre!r}"
+            )
         if isinstance(character_count, bool) or not isinstance(character_count, int):
             raise ValueError(
                 f"create_story character_count must be an int, got {character_count!r}"
@@ -495,7 +497,9 @@ class StoryFabric:
             not isinstance(archetypes, list)
             or any(not isinstance(a, str) for a in archetypes)
         ):
-            raise ValueError("create_story archetypes must be a list of strings or None")
+            raise ValueError(
+                "create_story archetypes must be a list of strings or None"
+            )
         if title is not None and not isinstance(title, str):
             raise ValueError(
                 f"create_story title must be a string or None, got {type(title).__name__}"
@@ -943,9 +947,7 @@ class StoryFabric:
         story = self._story(story_id)
         for label, value in (("forward", forward), ("backward", backward)):
             if isinstance(value, bool) or not isinstance(value, int):
-                raise ValueError(
-                    f"auto_generate {label} must be an int, got {value!r}"
-                )
+                raise ValueError(f"auto_generate {label} must be an int, got {value!r}")
         story.mode_history.append(f"forward+backwords:fwd={forward}:bak={backward}")
         with self._batch():  # one persist for the whole generate run
             # Forward push

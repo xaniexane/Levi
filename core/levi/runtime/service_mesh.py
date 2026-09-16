@@ -68,9 +68,7 @@ class ServiceMesh:
 
     def find(self, q: str) -> List[LocalService]:
         if not isinstance(q, str):
-            raise ValueError(
-                f"find: 'q' must be a string, got {type(q).__name__}"
-            )
+            raise ValueError(f"find: 'q' must be a string, got {type(q).__name__}")
         q = q.lower()
         return [
             s for s in SERVICES if q in s.id or q in s.title.lower() or q in s.organ

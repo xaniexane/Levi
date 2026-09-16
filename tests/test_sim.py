@@ -70,9 +70,10 @@ def test_bounty_hunt_deterministic(hermetic_env):
 def test_bounty_hunt_different_seeds_differ(hermetic_env):
     _, out1 = _capture(run_bounty_hunt, 4242)
     _, out2 = _capture(run_bounty_hunt, 777)
-    assert hashlib.sha256(out1.encode()).hexdigest() != hashlib.sha256(
-        out2.encode()
-    ).hexdigest()
+    assert (
+        hashlib.sha256(out1.encode()).hexdigest()
+        != hashlib.sha256(out2.encode()).hexdigest()
+    )
 
 
 # -- zero network -----------------------------------------------------------
@@ -123,9 +124,10 @@ def test_soc_shift_deterministic(hermetic_env, monkeypatch):
     monkeypatch.setattr(builtins, "input", lambda *a, **k: "2")  # always escalate
     _, out1 = _capture(run_soc_shift, 555)
     _, out2 = _capture(run_soc_shift, 555)
-    assert hashlib.sha256(out1.encode()).hexdigest() == hashlib.sha256(
-        out2.encode()
-    ).hexdigest()
+    assert (
+        hashlib.sha256(out1.encode()).hexdigest()
+        == hashlib.sha256(out2.encode()).hexdigest()
+    )
 
 
 # -- shim hygiene ---------------------------------------------------------------

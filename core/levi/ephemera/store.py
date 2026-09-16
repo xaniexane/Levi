@@ -64,8 +64,9 @@ class EphemeraStore:
     def _chan_dir(self, channel: str) -> Path:
         return self.root / "channels" / channel
 
-    def create_channel(self, name: str, ttl_seconds: int,
-                       passphrase: str) -> Dict[str, Any]:
+    def create_channel(
+        self, name: str, ttl_seconds: int, passphrase: str
+    ) -> Dict[str, Any]:
         if not name or "/" in name or name.startswith("."):
             raise EphemeraError("bad channel name")
         if ttl_seconds < 0:
@@ -98,13 +99,20 @@ class EphemeraStore:
         chandir = self.root / "channels"
         if not chandir.exists():
             return []
-        return sorted(p.name for p in chandir.iterdir()
-                      if (p / "channel.json").exists())
+        return sorted(
+            p.name for p in chandir.iterdir() if (p / "channel.json").exists()
+        )
 
     # -- messages -----------------------------------------------------------
-    def post(self, channel: str, author: str, body: str, passphrase: str,
-             forwarding_discouraged: bool = False,
-             ttl_override: "int | None" = None) -> Dict[str, Any]:
+    def post(
+        self,
+        channel: str,
+        author: str,
+        body: str,
+        passphrase: str,
+        forwarding_discouraged: bool = False,
+        ttl_override: "int | None" = None,
+    ) -> Dict[str, Any]:
         manifest = self._load_manifest(channel)
         ttl = manifest["ttl_seconds"] if ttl_override is None else ttl_override
         key = self._channel_key(manifest, passphrase)
@@ -129,8 +137,9 @@ class EphemeraStore:
         for p in sorted(d.glob("msg_*.json")):
             yield p, json.loads(p.read_text(encoding=ENC))
 
-    def read_message(self, channel: str, msg_id: str, passphrase: str,
-                     reader: str = "owner") -> Dict[str, Any]:
+    def read_message(
+        self, channel: str, msg_id: str, passphrase: str, reader: str = "owner"
+    ) -> Dict[str, Any]:
         manifest = self._load_manifest(channel)
         key = self._channel_key(manifest, passphrase)
         path = self._chan_dir(channel) / ("msg_%s.json" % msg_id)
@@ -150,11 +159,18 @@ class EphemeraStore:
 
     def _log_access(self, channel: str, msg_id: str, reader: str) -> None:
         d = self._chan_dir(channel)
-        line = json.dumps({
-            "ts": _now(), "msg_id": msg_id, "reader": reader,
-            "note": ("forwarding_discouraged was displayed"
-                     if self._fwd_flag(d, msg_id) else "read"),
-        })
+        line = json.dumps(
+            {
+                "ts": _now(),
+                "msg_id": msg_id,
+                "reader": reader,
+                "note": (
+                    "forwarding_discouraged was displayed"
+                    if self._fwd_flag(d, msg_id)
+                    else "read"
+                ),
+            }
+        )
         with (d / "access.jsonl").open("a", encoding=ENC) as fh:
             fh.write(line + "\n")
 
@@ -169,7 +185,9 @@ class EphemeraStore:
         p = self._chan_dir(channel) / "access.jsonl"
         if not p.exists():
             return []
-        return [json.loads(l) for l in p.read_text(encoding=ENC).splitlines() if l.strip()]
+        return [
+            json.loads(l) for l in p.read_text(encoding=ENC).splitlines() if l.strip()
+        ]
 
     # -- expiry / true delete -----------------------------------------------
     def _secure_overwrite(self, path: Path) -> None:
@@ -192,13 +210,21 @@ class EphemeraStore:
                     prev = bytes.fromhex(json.loads(line)["hash"])
         return prev
 
-    def _append_receipt(self, channel: str, event: str,
-                        msg_id: str, detail: str) -> Dict[str, Any]:
+    def _append_receipt(
+        self, channel: str, event: str, msg_id: str, detail: str
+    ) -> Dict[str, Any]:
         prev = self._last_receipt_hash(channel)
-        payload = json.dumps({
-            "ts": _now(), "channel": channel, "event": event,
-            "msg_id": msg_id, "detail": detail, "prev": prev.hex(),
-        }, sort_keys=True).encode(ENC)
+        payload = json.dumps(
+            {
+                "ts": _now(),
+                "channel": channel,
+                "event": event,
+                "msg_id": msg_id,
+                "detail": detail,
+                "prev": prev.hex(),
+            },
+            sort_keys=True,
+        ).encode(ENC)
         h = chain_hash(prev, payload).hex()
         receipt = {"hash": h, "payload": json.loads(payload.decode(ENC))}
         with (self._chan_dir(channel) / "receipts.jsonl").open("a", encoding=ENC) as fh:
@@ -216,12 +242,19 @@ class EphemeraStore:
                     self._secure_overwrite(path)
                     path.unlink()
                     receipt = self._append_receipt(
-                        ch, "deleted", record["id"],
-                        "expired at %.0f; %d overwrite passes" % (
-                            record["expires_at"], _OVERWRITE_PASSES),
+                        ch,
+                        "deleted",
+                        record["id"],
+                        "expired at %.0f; %d overwrite passes"
+                        % (record["expires_at"], _OVERWRITE_PASSES),
                     )
-                    deleted.append({"channel": ch, "id": record["id"],
-                                    "receipt": receipt["hash"][:16]})
+                    deleted.append(
+                        {
+                            "channel": ch,
+                            "id": record["id"],
+                            "receipt": receipt["hash"][:16],
+                        }
+                    )
         return deleted
 
     def verify_receipts(self, channel: str) -> Dict[str, Any]:
@@ -237,9 +270,16 @@ class EphemeraStore:
                 receipt = json.loads(line)
                 payload = json.dumps(receipt["payload"], sort_keys=True).encode(ENC)
                 expect = chain_hash(prev, payload).hex()
-                if receipt["hash"] != expect or receipt["payload"]["prev"] != prev.hex():
-                    return {"ok": False, "count": count, "channel": channel,
-                            "error": "chain broken at receipt %d" % count}
+                if (
+                    receipt["hash"] != expect
+                    or receipt["payload"]["prev"] != prev.hex()
+                ):
+                    return {
+                        "ok": False,
+                        "count": count,
+                        "channel": channel,
+                        "error": "chain broken at receipt %d" % count,
+                    }
                 prev = bytes.fromhex(receipt["hash"])
                 count += 1
         return {"ok": True, "count": count, "channel": channel}

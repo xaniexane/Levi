@@ -28,40 +28,44 @@ class TestCompostClasses:
 
     def test_flaky_input(self):
         c = compost_failure(
-            _record(what="job failed: malformed CSV in upload payload",
-                    severity="medium")
+            _record(
+                what="job failed: malformed CSV in upload payload", severity="medium"
+            )
         )
         assert c["compost_class"] == "flaky-input"
         assert c["reusable"] is True
 
     def test_wrong_assumption(self):
         c = compost_failure(
-            _record(what="we assumed the staging URL in production config",
-                    severity="medium")
+            _record(
+                what="we assumed the staging URL in production config",
+                severity="medium",
+            )
         )
         assert c["compost_class"] == "wrong-assumption"
         assert c["reusable"] is True
 
     def test_missing_guard(self):
         c = compost_failure(
-            _record(what="crash: unvalidated token passed to parser",
-                    severity="high")
+            _record(what="crash: unvalidated token passed to parser", severity="high")
         )
         assert c["compost_class"] == "missing-guard"
         assert c["reusable"] is True
 
     def test_unknown_not_reusable(self):
         c = compost_failure(
-            _record(what="it just stopped working, no logs captured",
-                    context="nothing in the logs", severity="high")
+            _record(
+                what="it just stopped working, no logs captured",
+                context="nothing in the logs",
+                severity="high",
+            )
         )
         assert c["compost_class"] == "unknown"
         assert c["reusable"] is False
 
     def test_low_severity_not_reusable(self):
         c = compost_failure(
-            _record(what="timed out once on a flaky network",
-                    severity="low")
+            _record(what="timed out once on a flaky network", severity="low")
         )
         assert c["compost_class"] == "resource-exhaustion"
         assert c["reusable"] is False
@@ -71,9 +75,19 @@ class TestRecordShape:
     def test_all_keys_present(self):
         c = compost_failure(_record())
         for key in (
-            "organ", "source", "what", "context", "ts", "severity",
-            "compost_class", "lesson", "inverse_map", "reusable",
-            "corroboration", "fingerprint", "provenance",
+            "organ",
+            "source",
+            "what",
+            "context",
+            "ts",
+            "severity",
+            "compost_class",
+            "lesson",
+            "inverse_map",
+            "reusable",
+            "corroboration",
+            "fingerprint",
+            "provenance",
         ):
             assert key in c, key
         assert c["organ"] == "reim"
@@ -92,9 +106,15 @@ class TestRecordShape:
 
 
 class TestMalformedRecords:
-    @pytest.mark.parametrize("bad", [
-        None, "not-a-dict", [], 42,
-    ])
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            None,
+            "not-a-dict",
+            [],
+            42,
+        ],
+    )
     def test_non_dict_rejected(self, bad):
         with pytest.raises(ValueError):
             compost_failure(bad)

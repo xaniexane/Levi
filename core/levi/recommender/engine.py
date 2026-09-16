@@ -68,8 +68,7 @@ def _age_days(item: Item, now: datetime) -> float:
     return max(0.0, (now - added).total_seconds() / 86400.0)
 
 
-def goal_alignment(item: Item,
-                   goals: Sequence[Goal]) -> Tuple[float, str]:
+def goal_alignment(item: Item, goals: Sequence[Goal]) -> Tuple[float, str]:
     """Max cosine to any active goal (kind_filter applied)."""
     best, which = 0.0, ""
     for goal in goals:
@@ -92,19 +91,24 @@ def quality_score(item: Item, ratings: Dict[str, List[float]]) -> float:
     return (sum(vals) / len(vals)) / 5.0
 
 
-def recency_score(item: Item, now: datetime,
-                  half_life_days: float = DEFAULT_HALF_LIFE_DAYS) -> float:
+def recency_score(
+    item: Item, now: datetime, half_life_days: float = DEFAULT_HALF_LIFE_DAYS
+) -> float:
     if half_life_days <= 0:
         raise ValueError("half-life must be positive")
     return 0.5 ** (_age_days(item, now) / half_life_days)
 
 
-def liked_centroid(items: Sequence[Item],
-                   ratings: Dict[str, List[float]]) -> Dict[str, float]:
+def liked_centroid(
+    items: Sequence[Item], ratings: Dict[str, List[float]]
+) -> Dict[str, float]:
     """Mean topic vector of items rated >= LIKE_THRESHOLD (explicit only)."""
-    liked = [it for it in items
-             if ratings.get(it.id) and
-             sum(ratings[it.id]) / len(ratings[it.id]) >= LIKE_THRESHOLD]
+    liked = [
+        it
+        for it in items
+        if ratings.get(it.id)
+        and sum(ratings[it.id]) / len(ratings[it.id]) >= LIKE_THRESHOLD
+    ]
     if not liked:
         return {}
     centroid: Dict[str, float] = {}
@@ -124,29 +128,40 @@ class Rec:
     best_goal: str = ""
 
 
-def score_item(item: Item, goals: Sequence[Goal],
-               centroid: Dict[str, float],
-               ratings: Dict[str, List[float]],
-               weights: Dict[str, float], now: datetime,
-               half_life_days: float) -> Rec:
+def score_item(
+    item: Item,
+    goals: Sequence[Goal],
+    centroid: Dict[str, float],
+    ratings: Dict[str, List[float]],
+    weights: Dict[str, float],
+    now: datetime,
+    half_life_days: float,
+) -> Rec:
     w = normalize_weights(dict(weights))
     notes: List[str] = []
     g, best_goal = goal_alignment(item, goals)
     if not goals:
-        notes.append("no active goals — goal signal is 0; add a goal "
-                     "to steer recommendations")
+        notes.append(
+            "no active goals — goal signal is 0; add a goal to steer recommendations"
+        )
     c = content_fit(item, centroid)
     if not centroid:
-        notes.append("no liked items yet — content signal is 0; "
-                     "rate items 4+ to enable it")
+        notes.append(
+            "no liked items yet — content signal is 0; rate items 4+ to enable it"
+        )
     q = quality_score(item, ratings)
     if not ratings.get(item.id):
         notes.append("unrated — quality signal is 0; your rating sets it")
     r = recency_score(item, now, half_life_days)
     signals = {"goal": g, "content": c, "quality": q, "recency": r}
     contributions = {s: w[s] * signals[s] for s in SIGNALS}
-    return Rec(item=item, total=sum(contributions.values()),
-               contributions=contributions, notes=notes, best_goal=best_goal)
+    return Rec(
+        item=item,
+        total=sum(contributions.values()),
+        contributions=contributions,
+        notes=notes,
+        best_goal=best_goal,
+    )
 
 
 def mmr_order(scored: List[Rec], lambda_: float) -> List[Rec]:
@@ -156,27 +171,31 @@ def mmr_order(scored: List[Rec], lambda_: float) -> List[Rec]:
     remaining = list(scored)
     picked: List[Rec] = []
     while remaining:
+
         def mmr_score(rec: Rec) -> float:
             if not picked or lambda_ == 1.0:
                 return lambda_ * rec.total
-            redundancy = max(cosine(rec.item.topics, p.item.topics)
-                             for p in picked)
+            redundancy = max(cosine(rec.item.topics, p.item.topics) for p in picked)
             return lambda_ * rec.total - (1 - lambda_) * redundancy
+
         # Deterministic tie-break on item id.
         remaining.sort(key=lambda r: (-mmr_score(r), r.item.id))
         picked.append(remaining.pop(0))
     return picked
 
 
-def recommend(items: Sequence[Item], goals: Sequence[Goal],
-              ratings: Dict[str, List[float]],
-              weights: Dict[str, float] | None = None,
-              active_goal_ids: Optional[Set[str]] = None,
-              exclude_ids: Sequence[str] = (),
-              top_k: int = 10,
-              half_life_days: float = DEFAULT_HALF_LIFE_DAYS,
-              mmr_lambda: float = 1.0,
-              now: Optional[datetime] = None) -> List[Rec]:
+def recommend(
+    items: Sequence[Item],
+    goals: Sequence[Goal],
+    ratings: Dict[str, List[float]],
+    weights: Dict[str, float] | None = None,
+    active_goal_ids: Optional[Set[str]] = None,
+    exclude_ids: Sequence[str] = (),
+    top_k: int = 10,
+    half_life_days: float = DEFAULT_HALF_LIFE_DAYS,
+    mmr_lambda: float = 1.0,
+    now: Optional[datetime] = None,
+) -> List[Rec]:
     """Score, diversify, and return the top_k recommendations."""
     w = normalize_weights(dict(weights) if weights else DEFAULT_WEIGHTS)
     now = now or datetime.now(timezone.utc)
@@ -184,10 +203,13 @@ def recommend(items: Sequence[Item], goals: Sequence[Goal],
         goals = [g for g in goals if g.id in active_goal_ids]
     excluded = set(exclude_ids)
     centroid = liked_centroid(items, ratings)
-    scored = [score_item(it, goals, centroid, ratings, w, now, half_life_days)
-              for it in items if it.id not in excluded]
+    scored = [
+        score_item(it, goals, centroid, ratings, w, now, half_life_days)
+        for it in items
+        if it.id not in excluded
+    ]
     ordered = mmr_order(scored, mmr_lambda)
-    return ordered[:max(1, top_k)]
+    return ordered[: max(1, top_k)]
 
 
 def explain(rec: Rec, weights: Dict[str, float]) -> str:
@@ -195,16 +217,17 @@ def explain(rec: Rec, weights: Dict[str, float]) -> str:
     w = normalize_weights(dict(weights))
     lines = [
         "%s  [%s]  (total %.4f)" % (rec.item.title, rec.item.kind, rec.total),
-        "  id: %s   topics: %s" % (
-            rec.item.id,
-            ", ".join("%s:%.2f" % kv for kv in rec.item.topics.items())),
+        "  id: %s   topics: %s"
+        % (rec.item.id, ", ".join("%s:%.2f" % kv for kv in rec.item.topics.items())),
     ]
     if rec.best_goal:
         lines.append("  best goal match: %s" % rec.best_goal)
     for signal in SIGNALS:
         raw = rec.contributions[signal] / w[signal] if w[signal] else 0.0
-        lines.append("  %-7s weight %.2f  signal %.4f  contribution %.4f"
-                     % (signal, w[signal], raw, rec.contributions[signal]))
+        lines.append(
+            "  %-7s weight %.2f  signal %.4f  contribution %.4f"
+            % (signal, w[signal], raw, rec.contributions[signal])
+        )
     for note in rec.notes:
         lines.append("  note: %s" % note)
     return "\n".join(lines)

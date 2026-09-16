@@ -21,7 +21,7 @@ wiki, not a chat log.
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 
 from . import _persist
 
@@ -31,9 +31,9 @@ CONFIDENCE = ("high", "medium", "low")
 @dataclass
 class Excerpt:
     passage: str
-    source: str          # full source reference (work, author)
-    head: str            # topical head it is filed under
-    context: str = ""    # where in the source / surrounding argument
+    source: str  # full source reference (work, author)
+    head: str  # topical head it is filed under
+    context: str = ""  # where in the source / surrounding argument
     confidence: str = "medium"
     second_hand: bool = False  # True if copied from another florilegium/anthology
     second_hand_from: str = ""  # which anthology, if second_hand
@@ -77,7 +77,8 @@ class Florilegium:
 
     def save(self) -> None:
         _persist.save_json(
-            self._store, {"name": self.name, "excerpts": [asdict(e) for e in self.excerpts]}
+            self._store,
+            {"name": self.name, "excerpts": [asdict(e) for e in self.excerpts]},
         )
 
     def gather(self, excerpt: Excerpt) -> int:
@@ -89,7 +90,9 @@ class Florilegium:
 
     def under_head(self, head: str) -> list[tuple[int, Excerpt]]:
         h = head.strip().lower()
-        return [(i, e) for i, e in enumerate(self.excerpts) if e.head.strip().lower() == h]
+        return [
+            (i, e) for i, e in enumerate(self.excerpts) if e.head.strip().lower() == h
+        ]
 
     def heads(self) -> list[str]:
         seen: dict[str, str] = {}
@@ -104,8 +107,10 @@ class Florilegium:
 
     def render(self, head: str | None = None) -> str:
         items = self.excerpts if head is None else [e for _, e in self.under_head(head)]
-        lines = [f"FLORILEGIUM: {self.name} — {len(items)} excerpts"
-                 + (f" under {head!r}" if head else "")]
+        lines = [
+            f"FLORILEGIUM: {self.name} — {len(items)} excerpts"
+            + (f" under {head!r}" if head else "")
+        ]
         for e in items:
             tag = " [SECOND-HAND — verify against source]" if e.second_hand else ""
             lines.append(f"\n“{e.passage}”{tag}")

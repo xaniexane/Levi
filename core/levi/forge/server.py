@@ -22,7 +22,6 @@ The same server also serves a minimal repo browser UI under ``/forge/``
 from __future__ import annotations
 
 import html
-import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlparse
 
@@ -152,7 +151,9 @@ class ForgeHandler(BaseHTTPRequestHandler):
 
         if parsed.path == "/" or parsed.path == "":
             self._send(
-                302, "text/plain", b"",
+                302,
+                "text/plain",
+                b"",
                 {"Location": "/forge/"},
             )
             return
@@ -235,9 +236,13 @@ class ForgeHandler(BaseHTTPRequestHandler):
             rows.append(
                 "<tr><td><a href=/forge/%s/>%s</a></td>"
                 "<td>%s</td><td>%s</td><td>%s</td></tr>"
-                % (r["name"], html.escape(r["name"]),
-                   html.escape(r["description"] or "—"),
-                   html.escape(r["default_branch"] or "—"), n_commits)
+                % (
+                    r["name"],
+                    html.escape(r["name"]),
+                    html.escape(r["description"] or "—"),
+                    html.escape(r["default_branch"] or "—"),
+                    n_commits,
+                )
             )
         body = (
             "<h1>LEVI Forge</h1>"
@@ -269,12 +274,17 @@ class ForgeHandler(BaseHTTPRequestHandler):
                     if e["type"] == "tree":
                         rows.append(
                             '<li>📁 <a href="/forge/%s/tree?path=%s">%s</a></li>'
-                            % (name, sub, esc(e["name"])))
+                            % (name, sub, esc(e["name"]))
+                        )
                     else:
                         rows.append(
                             '<li>📄 <a href="/forge/%s/blob?path=%s">%s</a></li>'
-                            % (name, sub, esc(e["name"])))
-                main = "<h2>%s</h2><ul>%s</ul>" % (esc("/" + path if path else "/"), "".join(rows))
+                            % (name, sub, esc(e["name"]))
+                        )
+                main = "<h2>%s</h2><ul>%s</ul>" % (
+                    esc("/" + path if path else "/"),
+                    "".join(rows),
+                )
         except GitError as e:
             main = "<p class=meta>error: %s</p>" % esc(str(e))
         readme = browse.find_readme(self._home, name)
@@ -292,7 +302,12 @@ class ForgeHandler(BaseHTTPRequestHandler):
             commits = browse.log(self._home, name, limit=5)
             clog = "".join(
                 "<li><span class=sha>%s</span> %s <span class=meta>%s · %s</span></li>"
-                % (c["sha"][:8], esc(c["subject"]), esc(c["author"]), esc(c["date"][:10]))
+                % (
+                    c["sha"][:8],
+                    esc(c["subject"]),
+                    esc(c["author"]),
+                    esc(c["date"][:10]),
+                )
                 for c in commits
             )
         except GitError:
@@ -317,8 +332,12 @@ class ForgeHandler(BaseHTTPRequestHandler):
             commits = browse.log(self._home, name, limit=limit)
             rows = "".join(
                 "<tr><td class=sha>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>"
-                % (html.escape(c["sha"][:12]), html.escape(c["subject"]),
-                   html.escape(c["author"]), html.escape(c["date"][:16]))
+                % (
+                    html.escape(c["sha"][:12]),
+                    html.escape(c["subject"]),
+                    html.escape(c["author"]),
+                    html.escape(c["date"][:16]),
+                )
                 for c in commits
             )
         except GitError as e:
@@ -335,8 +354,12 @@ class ForgeHandler(BaseHTTPRequestHandler):
 
         rows = "".join(
             "<tr><td>#%d</td><td>%s</td><td>%s</td><td>%s</td></tr>"
-            % (i["id"], html.escape(i["title"]), i["state"],
-               ", ".join(html.escape(l) for l in i.get("labels", [])))
+            % (
+                i["id"],
+                html.escape(i["title"]),
+                i["state"],
+                ", ".join(html.escape(l) for l in i.get("labels", [])),
+            )
             for i in _issues.list_issues(self._home, name)
         )
         self._page(
@@ -351,8 +374,13 @@ class ForgeHandler(BaseHTTPRequestHandler):
 
         rows = "".join(
             "<tr><td>#%d</td><td>%s</td><td class=sha>%s → %s</td><td>%s</td></tr>"
-            % (p["id"], html.escape(p["title"]),
-               html.escape(p["head"]), html.escape(p["base"]), p["state"])
+            % (
+                p["id"],
+                html.escape(p["title"]),
+                html.escape(p["head"]),
+                html.escape(p["base"]),
+                p["state"],
+            )
             for p in _prs.list_prs(self._home, name)
         )
         self._page(
@@ -369,15 +397,16 @@ class ForgeHandler(BaseHTTPRequestHandler):
             pipe = _ci.load_pipeline(self._home, name)
             steps = "".join(
                 "<li>%s — <span class=sha>%s</span></li>"
-                % (html.escape(s.get("name", "?")),
-                   html.escape(s.get("run", "")))
+                % (html.escape(s.get("name", "?")), html.escape(s.get("run", "")))
                 for s in pipe.get("steps", [])
             )
             runs = "".join(
                 "<tr><td class=sha>%s</td><td>%s</td><td>%s</td></tr>"
-                % (html.escape(r.get("id", "")),
-                   "PASS" if r.get("ok") else "FAIL",
-                   html.escape(r.get("started", "")))
+                % (
+                    html.escape(r.get("id", "")),
+                    "PASS" if r.get("ok") else "FAIL",
+                    html.escape(r.get("started", "")),
+                )
                 for r in _ci.list_runs(self._home, name)
             )
         except (GitError, ValueError) as e:
@@ -404,7 +433,8 @@ def serve(home=None, bind: str = "127.0.0.1", port: int = 8741) -> ForgeServer:
     """Create (do NOT start) the server. Call ``serve_forever()`` to run."""
     if bind not in ("127.0.0.1", "localhost", "::1"):
         raise ValueError(
-            "forge serves localhost only (got %r) — code never leaves this machine" % bind
+            "forge serves localhost only (got %r) — code never leaves this machine"
+            % bind
         )
     return ForgeServer(home, bind=bind, port=port)
 
@@ -412,8 +442,10 @@ def serve(home=None, bind: str = "127.0.0.1", port: int = 8741) -> ForgeServer:
 def serve_forever(home=None, bind: str = "127.0.0.1", port: int = 8741) -> None:
     srv = serve(home, bind=bind, port=port)
     addr = srv.server_address
-    print("LEVI Forge serving at http://%s:%d/  (localhost only — nothing leaves this machine)"
-          % (addr[0], addr[1]))
+    print(
+        "LEVI Forge serving at http://%s:%d/  (localhost only — nothing leaves this machine)"
+        % (addr[0], addr[1])
+    )
     print("clone: git clone http://%s:%d/<name>.git" % (addr[0], addr[1]))
     print("browse: http://%s:%d/forge/" % (addr[0], addr[1]))
     try:

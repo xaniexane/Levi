@@ -45,10 +45,7 @@ def run_scenario(name: str, seed: int | None = None) -> int:
     """
     fn = SCENARIOS.get(name)
     if fn is None:
-        print(
-            f"unknown simulation {name!r}; "
-            f"available: {', '.join(sorted(SCENARIOS))}"
-        )
+        print(f"unknown simulation {name!r}; available: {', '.join(sorted(SCENARIOS))}")
         return 2
     try:
         return int(fn(seed))

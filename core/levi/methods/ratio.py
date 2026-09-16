@@ -31,7 +31,7 @@ objections are rejected with ValueError.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import date, timedelta
 from typing import Optional, Union
 
@@ -52,7 +52,9 @@ def _parse_date(value: DateLike, field_name: str = "date") -> date:
             return date(int(y), int(m), int(d))
         except (ValueError, AttributeError):
             pass
-    raise ValueError(f"{field_name}: expected datetime.date or 'YYYY-MM-DD', got {value!r}")
+    raise ValueError(
+        f"{field_name}: expected datetime.date or 'YYYY-MM-DD', got {value!r}"
+    )
 
 
 @dataclass
@@ -68,15 +70,19 @@ class RatioStudy:
         if not isinstance(subject, str) or not subject.strip():
             raise ValueError("subject must be a non-empty string")
         if not isinstance(material, str) or not material.strip():
-            raise ValueError("material must be a non-empty string (what is being studied?)")
+            raise ValueError(
+                "material must be a non-empty string (what is being studied?)"
+            )
         self.subject = subject.strip()
         self.material = material.strip()
         self.start = _parse_date(start) if start is not None else date.today()
-        self._tour: list[str] = []           # praelectio: guided exposition outline
+        self._tour: list[str] = []  # praelectio: guided exposition outline
         self._repetitions: dict[int, dict] = {}  # lag -> {date, quality}
-        self._objections: list[Objection] = []   # disputatio
+        self._objections: list[Objection] = []  # disputatio
         self.protocol_version = 1
-        self.protocol_changelog: list[str] = ["v1: initial Ratio loop (praelectio/repetitio/disputatio)"]
+        self.protocol_changelog: list[str] = [
+            "v1: initial Ratio loop (praelectio/repetitio/disputatio)"
+        ]
 
     @staticmethod
     def _clean(value: str, kind: str) -> str:
@@ -96,13 +102,18 @@ class RatioStudy:
     # -- repetitio: systematic review ---------------------------------------------------------
     def repetitio_schedule(self) -> list[dict]:
         """The fixed review calendar: 1, 3, 7, 14, 30 days after start."""
-        return [{"lag_days": lag,
-                 "date": (self.start + timedelta(days=lag)).isoformat(),
-                 "done": lag in self._repetitions}
-                for lag in REPETITION_LAGS]
+        return [
+            {
+                "lag_days": lag,
+                "date": (self.start + timedelta(days=lag)).isoformat(),
+                "done": lag in self._repetitions,
+            }
+            for lag in REPETITION_LAGS
+        ]
 
-    def mark_repetition(self, lag_days: int, quality: int,
-                        on_date: Optional[DateLike] = None) -> None:
+    def mark_repetition(
+        self, lag_days: int, quality: int, on_date: Optional[DateLike] = None
+    ) -> None:
         """Mark a review done, with recall quality 0 (blank) .. 5 (perfect).
 
         Honest marks only — the schedule adapts to the truth, not the wish.
@@ -120,9 +131,12 @@ class RatioStudy:
         return {
             "scheduled": len(REPETITION_LAGS),
             "completed": done,
-            "mean_quality": round(sum(qualities) / len(qualities), 2) if qualities else None,
-            "weak_lags": sorted(lag for lag, r in self._repetitions.items()
-                                if r["quality"] <= 2),
+            "mean_quality": round(sum(qualities) / len(qualities), 2)
+            if qualities
+            else None,
+            "weak_lags": sorted(
+                lag for lag, r in self._repetitions.items() if r["quality"] <= 2
+            ),
         }
 
     # -- disputatio: defend it -------------------------------------------------------------------
@@ -147,10 +161,12 @@ class RatioStudy:
     def complete(self) -> bool:
         """The loop is complete only when every stage is done and every
         objection defended. Refuses to certify otherwise."""
-        return (bool(self._tour)
-                and len(self._repetitions) == len(REPETITION_LAGS)
-                and bool(self._objections)
-                and not self.undefended())
+        return (
+            bool(self._tour)
+            and len(self._repetitions) == len(REPETITION_LAGS)
+            and bool(self._objections)
+            and not self.undefended()
+        )
 
     # -- the versioned protocol ---------------------------------------------------------------------
     def revise_protocol(self, note: str) -> int:

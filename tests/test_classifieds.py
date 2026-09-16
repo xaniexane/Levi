@@ -6,7 +6,6 @@ time, so monkeypatched HOME isolates everything.
 
 from __future__ import annotations
 
-import json
 
 import pytest
 
@@ -43,6 +42,7 @@ def _with_contacts(st):
 # trust formula
 # --------------------------------------------------------------------------
 
+
 def test_trust_score_transparent():
     t = trust_score("cara", _CONTACTS)
     # via ana: min(1.0, 1.0)=1.0 ; via bob: min(0.8, 0.6)=0.6 ; total 1.6 / 2
@@ -71,10 +71,10 @@ def test_trust_empty_contacts():
 # listings
 # --------------------------------------------------------------------------
 
+
 def test_add_browse_search(monkeypatch, tmp_path):
     st = _with_contacts(_herm(monkeypatch, tmp_path))
-    st.add("Bike", "old road bike", price="$200", category="sports",
-           lister="cara")
+    st.add("Bike", "old road bike", price="$200", category="sports", lister="cara")
     st.add("Lamp", category="home", lister="dan")
     rows = st.listings_with_trust()
     assert len(rows) == 2
@@ -117,6 +117,7 @@ def test_vouch_records_and_reweights(monkeypatch, tmp_path):
 # --------------------------------------------------------------------------
 # export / import
 # --------------------------------------------------------------------------
+
 
 def test_export_verify_roundtrip_own_key(monkeypatch, tmp_path):
     st = _with_contacts(_herm(monkeypatch, tmp_path))
@@ -164,10 +165,24 @@ def test_import_rejects_bad_format(monkeypatch, tmp_path):
 # CLI
 # --------------------------------------------------------------------------
 
+
 def test_cli_add_browse_trust(monkeypatch, tmp_path, capsys):
     _with_contacts(_herm(monkeypatch, tmp_path))
-    assert cli_main(["add", "Bike", "--price", "$200", "--category", "sports",
-                     "--lister", "cara"]) == 0
+    assert (
+        cli_main(
+            [
+                "add",
+                "Bike",
+                "--price",
+                "$200",
+                "--category",
+                "sports",
+                "--lister",
+                "cara",
+            ]
+        )
+        == 0
+    )
     assert cli_main(["browse"]) == 0
     out = capsys.readouterr().out
     assert "Bike" in out and "trust 0.800" in out
@@ -178,8 +193,7 @@ def test_cli_add_browse_trust(monkeypatch, tmp_path, capsys):
 
 def test_cli_contacts_init_and_export_import(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)
-    assert cli_main(["contacts-init", "--me", "chauncey",
-                     "--contact", "ana"]) == 0
+    assert cli_main(["contacts-init", "--me", "chauncey", "--contact", "ana"]) == 0
     assert cli_main(["add", "Lamp", "--lister", "ana"]) == 0
     bundle = tmp_path / "b.json"
     assert cli_main(["export", "--out", str(bundle)]) == 0

@@ -54,7 +54,9 @@ def checkpoint_url(
 ) -> str:
     """Build a media-provider image URL (reference URL scheme). Pure function; no HTTP."""
     if not isinstance(prompt, str):
-        raise ValueError(f"checkpoint_url needs a string prompt, got {type(prompt).__name__}")
+        raise ValueError(
+            f"checkpoint_url needs a string prompt, got {type(prompt).__name__}"
+        )
     clean = prompt.strip()
     if not clean:
         raise ValueError("checkpoint_url needs a non-empty prompt")

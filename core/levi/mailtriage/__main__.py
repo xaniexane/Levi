@@ -21,9 +21,7 @@ local timezone.
 from __future__ import annotations
 
 import argparse
-import json
 import sys
-import time
 from datetime import datetime
 from pathlib import Path
 
@@ -60,7 +58,7 @@ def _fmt(rec) -> str:
     subj = rec.get("subject", "")[:70]
     return (
         f"[{rec['bundle'] if 'bundle' in rec else '?':12}] "
-        f"{rec.get('date','?')[:16]:16} {rec.get('from','?')[:28]:28} {subj}\n"
+        f"{rec.get('date', '?')[:16]:16} {rec.get('from', '?')[:28]:28} {subj}\n"
         f"  id={rec['id']}"
     )
 
@@ -70,8 +68,9 @@ def cmd_inbox(a) -> int:
     due = eng.wake_due()
     for mid in due:
         print(f"(woke: {mid})")
-    view = eng.inbox_view(_records(a), bundle=a.bundle,
-                          include_snoozed=a.include_snoozed)[: a.limit]
+    view = eng.inbox_view(
+        _records(a), bundle=a.bundle, include_snoozed=a.include_snoozed
+    )[: a.limit]
     if not view:
         print("inbox is clear.")
         return 0
@@ -107,8 +106,11 @@ def cmd_snooze(a) -> int:
     eng = TriageEngine(_home(a))
     if a.until_reply:
         rec = next((r for r in _records(a) if r["id"] == a.id), None)
-        eng.snooze_until_reply(a.id, sender=rec["from"] if rec else "",
-                               subject=rec["subject"] if rec else "")
+        eng.snooze_until_reply(
+            a.id,
+            sender=rec["from"] if rec else "",
+            subject=rec["subject"] if rec else "",
+        )
         print(f"snoozed {a.id} until a reply arrives")
     elif a.until:
         ts = _parse_until(a.until)
@@ -165,11 +167,15 @@ def cmd_save_draft(a) -> int:
         return 1
     suggestions = eng.suggest(rec)
     if a.index >= len(suggestions):
-        print(f"only {len(suggestions)} suggestion(s); --index out of range",
-              file=sys.stderr)
+        print(
+            f"only {len(suggestions)} suggestion(s); --index out of range",
+            file=sys.stderr,
+        )
         return 1
     draft_id = eng.save_draft(rec, suggestions[a.index])
-    print(f"saved draft {draft_id} (template: {suggestions[a.index]['template']}) — NOT sent")
+    print(
+        f"saved draft {draft_id} (template: {suggestions[a.index]['template']}) — NOT sent"
+    )
     return 0
 
 
@@ -180,8 +186,10 @@ def cmd_drafts(a) -> int:
         print("no drafts.")
         return 0
     for d in drafts:
-        print(f"[{d['status']:8}] {d['id']} template={d['template']} to={d['to']}\n"
-              f"  subject={d['subject']}")
+        print(
+            f"[{d['status']:8}] {d['id']} template={d['template']} to={d['to']}\n"
+            f"  subject={d['subject']}"
+        )
     return 0
 
 
@@ -192,8 +200,10 @@ def cmd_approve(a) -> int:
     except KeyError as exc:
         print(str(exc), file=sys.stderr)
         return 1
-    print(f"APPROVED (still not sent — copy into your mail client):\n"
-          f"To: {draft['to']}\nSubject: {draft['subject']}\n\n{draft['body']}")
+    print(
+        f"APPROVED (still not sent — copy into your mail client):\n"
+        f"To: {draft['to']}\nSubject: {draft['subject']}\n\n{draft['body']}"
+    )
     return 0
 
 

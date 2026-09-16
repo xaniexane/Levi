@@ -19,8 +19,9 @@ def _store() -> ShelfStore:
 
 
 def _cmd_add(a) -> int:
-    item = _store().add(a.url, a.title, note=a.note or "",
-                        tags=(a.tags.split(",") if a.tags else ()))
+    item = _store().add(
+        a.url, a.title, note=a.note or "", tags=(a.tags.split(",") if a.tags else ())
+    )
     print("shelved %s" % item.id)
     return 0
 

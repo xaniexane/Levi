@@ -8,7 +8,6 @@ import re
 import sys
 from pathlib import Path
 
-import pytest
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "core"))
@@ -39,7 +38,9 @@ _IDENTITY_CLAIM_PATTERNS = (
     re.compile(r"\bi am grok\b", re.I),
     re.compile(r"\byou are muse\b", re.I),
     re.compile(r"\byou are grok\b", re.I),
-    re.compile(r"\ban (anthropic|xai|openai|google|meta) (product|assistant|model)\b", re.I),
+    re.compile(
+        r"\ban (anthropic|xai|openai|google|meta) (product|assistant|model)\b", re.I
+    ),
 )
 
 _PROVIDER_AS_IDENTITY = re.compile(
@@ -58,16 +59,16 @@ def test_prompt_has_no_sycophancy_markers():
     prompt = assistant_system_prompt()
     for marker in _SYCOPHANCY_MARKERS:
         for match in re.finditer(marker, prompt, re.I):
-            before = prompt[max(0, match.start() - 8):match.start()].lower()
-            assert "no" in before, (
-                "unaffirmed sycophancy marker found: %r" % marker
-            )
+            before = prompt[max(0, match.start() - 8) : match.start()].lower()
+            assert "no" in before, "unaffirmed sycophancy marker found: %r" % marker
 
 
 def test_prompt_makes_no_identity_claims():
     prompt = assistant_system_prompt()
     for pat in _IDENTITY_CLAIM_PATTERNS:
-        assert not pat.search(prompt), "identity claim pattern matched: %s" % pat.pattern
+        assert not pat.search(prompt), (
+            "identity claim pattern matched: %s" % pat.pattern
+        )
     assert not _PROVIDER_AS_IDENTITY.search(prompt)
 
 
@@ -137,7 +138,10 @@ def test_load_user_context_fail_soft_on_broken_store():
 
 def test_load_user_context_never_raises_on_garbage():
     assert load_user_context(store=object()) == ""
-    assert load_user_context(store=None, limit=5) in ("", load_user_context(store=None, limit=5))
+    assert load_user_context(store=None, limit=5) in (
+        "",
+        load_user_context(store=None, limit=5),
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -158,14 +162,15 @@ def test_candidate_learnings_remember_that():
 def test_candidate_learnings_i_prefer():
     cands = candidate_learnings("I prefer short answers with no fluff.")
     assert any(
-        c["kind"] == "preference" and "short answers" in c["content"]
-        for c in cands
+        c["kind"] == "preference" and "short answers" in c["content"] for c in cands
     )
     assert all(c["confidence"] == "heuristic" for c in cands)
 
 
 def test_candidate_learnings_call_me_and_correction():
-    cands = candidate_learnings("Call me Chauncey. Actually, my timezone is America/Chicago.")
+    cands = candidate_learnings(
+        "Call me Chauncey. Actually, my timezone is America/Chicago."
+    )
     kinds = {c["kind"] for c in cands}
     assert "preference" in kinds
     assert "fact" in kinds

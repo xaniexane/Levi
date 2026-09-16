@@ -59,9 +59,11 @@ class ContinuityShelf:
             return
         history = raw.get("history") if isinstance(raw, dict) else []
         # One corrupt shelf must not poison resume: keep dict frames only.
-        self.history = [h for h in history if isinstance(h, dict)][
-            -_HISTORY_LIMIT:
-        ] if isinstance(history, list) else []
+        self.history = (
+            [h for h in history if isinstance(h, dict)][-_HISTORY_LIMIT:]
+            if isinstance(history, list)
+            else []
+        )
 
     def _persist(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -82,8 +84,7 @@ class ContinuityShelf:
         for field, value in (("last_ask", last_ask), ("last_reply", last_reply)):
             if not isinstance(value, str):
                 raise ContinuityError(
-                    f"snapshot: {field!r} must be a string, "
-                    f"got {type(value).__name__}"
+                    f"snapshot: {field!r} must be a string, got {type(value).__name__}"
                 )
         frame = ContinuityFrame(at=datetime.now(timezone.utc).isoformat())
         frame.last_ask = last_ask[:_LAST_ASK_LIMIT]

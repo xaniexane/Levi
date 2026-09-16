@@ -92,23 +92,33 @@ class Vault:
 
     # -- policy ----------------------------------------------------------
     def _load_policy(self) -> Dict[str, Any]:
-        default = {"ttl_by_type": {}, "max_entries": 1000,
-                   "note": "TTLs in seconds per memory type; 0/missing = keep forever"}
+        default = {
+            "ttl_by_type": {},
+            "max_entries": 1000,
+            "note": "TTLs in seconds per memory type; 0/missing = keep forever",
+        }
         if not self._policy_path.exists():
-            self._policy_path.write_text(json.dumps(default, indent=2), encoding="utf-8")
+            self._policy_path.write_text(
+                json.dumps(default, indent=2), encoding="utf-8"
+            )
             return dict(default)
         try:
             raw = json.loads(self._policy_path.read_text(encoding="utf-8"))
         except (OSError, ValueError) as exc:
-            raise VaultError(f"vault {self.name!r}: policy.json unreadable ({exc})") from exc
+            raise VaultError(
+                f"vault {self.name!r}: policy.json unreadable ({exc})"
+            ) from exc
         if not isinstance(raw, dict):
             raise VaultError(f"vault {self.name!r}: policy.json must be an object")
         merged = dict(default)
         merged.update(raw)
         return merged
 
-    def set_policy(self, ttl_by_type: Optional[Dict[str, float]] = None,
-                   max_entries: Optional[int] = None) -> Dict[str, Any]:
+    def set_policy(
+        self,
+        ttl_by_type: Optional[Dict[str, float]] = None,
+        max_entries: Optional[int] = None,
+    ) -> Dict[str, Any]:
         if ttl_by_type is not None:
             if not isinstance(ttl_by_type, dict):
                 raise VaultError("set_policy: ttl_by_type must be a dict")
@@ -125,7 +135,9 @@ class Vault:
             if not isinstance(max_entries, int) or max_entries < 1:
                 raise VaultError("set_policy: max_entries must be a positive int")
             self.policy["max_entries"] = max_entries
-        self._policy_path.write_text(json.dumps(self.policy, indent=2), encoding="utf-8")
+        self._policy_path.write_text(
+            json.dumps(self.policy, indent=2), encoding="utf-8"
+        )
         self.purge()  # new policy applies immediately
         return self.policy
 
@@ -141,7 +153,9 @@ class Vault:
                 try:
                     entry = MemoryEntry.from_dict(json.loads(line))
                 except (ValueError, TypeError) as exc:
-                    print(f"vault {self.name}: skipping corrupt entry line {lineno} ({exc})")
+                    print(
+                        f"vault {self.name}: skipping corrupt entry line {lineno} ({exc})"
+                    )
                     continue
                 self._entries[entry.id] = entry
 
@@ -179,14 +193,25 @@ class Vault:
             self._persist()
         return {"expired": len(expired), "over_cap": over_cap}
 
-    def add(self, memory_type: MemoryType, content: str, importance: float = 0.5,
-            source: str = "user", tags: Optional[List[str]] = None,
-            metadata: Optional[Dict[str, Any]] = None) -> MemoryEntry:
+    def add(
+        self,
+        memory_type: MemoryType,
+        content: str,
+        importance: float = 0.5,
+        source: str = "user",
+        tags: Optional[List[str]] = None,
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> MemoryEntry:
         self.purge()  # make room under max_entries before adding
-        entry = new_entry(memory_type=memory_type, content=content,
-                          importance=max(0.0, min(1.0, float(importance))),
-                          source=source, tags=tags or [],
-                          project_id=self.name, metadata=metadata)
+        entry = new_entry(
+            memory_type=memory_type,
+            content=content,
+            importance=max(0.0, min(1.0, float(importance))),
+            source=source,
+            tags=tags or [],
+            project_id=self.name,
+            metadata=metadata,
+        )
         self._entries[entry.id] = entry
         self._persist()
         return entry
@@ -195,8 +220,9 @@ class Vault:
         self.purge()
         return self._entries.get(entry_id)
 
-    def list(self, memory_type: Optional[MemoryType] = None,
-             limit: int = 50) -> List[MemoryEntry]:
+    def list(
+        self, memory_type: Optional[MemoryType] = None, limit: int = 50
+    ) -> List[MemoryEntry]:
         self.purge()
         results = list(self._entries.values())
         if memory_type:
@@ -231,8 +257,12 @@ class Vault:
         counts: Dict[str, int] = {}
         for e in self._entries.values():
             counts[e.memory_type.value] = counts.get(e.memory_type.value, 0) + 1
-        return {"vault": self.name, "total": len(self._entries),
-                "by_type": counts, "policy": self.policy}
+        return {
+            "vault": self.name,
+            "total": len(self._entries),
+            "by_type": counts,
+            "policy": self.policy,
+        }
 
 
 class Vaults:
@@ -272,6 +302,7 @@ class Vaults:
         if not self.home.is_dir():
             return []
         return sorted(
-            p.name for p in self.home.iterdir()
+            p.name
+            for p in self.home.iterdir()
             if p.is_dir() and VALID_NAME_RE.fullmatch(p.name)
         )

@@ -38,7 +38,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 from levi.honestsearch.index import InvertedIndex, tokenize
 from levi.honestsearch.model import Document
@@ -59,8 +59,7 @@ def normalize_weights(weights: Dict[str, float]) -> Dict[str, float]:
             raise ValueError("weight vector missing signal %r" % name)
         value = float(weights[name])
         if not math.isfinite(value) or value < 0:
-            raise ValueError("weight %r must be a finite non-negative number"
-                             % name)
+            raise ValueError("weight %r must be a finite non-negative number" % name)
         cleaned[name] = value
     total = sum(cleaned.values())
     if total <= 0:
@@ -74,8 +73,7 @@ def parse_weights(spec: str) -> Dict[str, float]:
     for chunk in spec.split(","):
         chunk = chunk.strip()
         if not chunk or "=" not in chunk:
-            raise ValueError("bad weight spec %r (want text=0.6,link=0.4)"
-                             % chunk)
+            raise ValueError("bad weight spec %r (want text=0.6,link=0.4)" % chunk)
         key, _, value = chunk.partition("=")
         key = key.strip()
         if key not in SIGNAL_NAMES:
@@ -87,9 +85,12 @@ def parse_weights(spec: str) -> Dict[str, float]:
     return normalize_weights(parts)
 
 
-def pagerank(graph: Dict[str, List[str]], damping: float = DAMPING,
-             tol: float = PR_TOL,
-             max_iter: int = PR_MAX_ITER) -> Dict[str, float]:
+def pagerank(
+    graph: Dict[str, List[str]],
+    damping: float = DAMPING,
+    tol: float = PR_TOL,
+    max_iter: int = PR_MAX_ITER,
+) -> Dict[str, float]:
     """Clean-room PageRank over ``{node: [out-neighbors]}``.
 
     Neighbors not present as keys are ignored (only indexed documents
@@ -104,16 +105,14 @@ def pagerank(graph: Dict[str, List[str]], damping: float = DAMPING,
         raise ValueError("damping must be in (0, 1)")
     node_set = set(nodes)
     # Only neighbors that are indexed documents count as links.
-    out = {v: sorted({u for u in graph[v] if u in node_set})
-           for v in nodes}
+    out = {v: sorted({u for u in graph[v] if u in node_set}) for v in nodes}
     rank = {v: 1.0 / n for v in nodes}
     base = (1.0 - damping) / n
     for _ in range(max_iter):
         dangling = sum(r for v, r in rank.items() if not out[v])
         new = {}
         for v in nodes:
-            incoming = sum(rank[u] / len(out[u]) for u in nodes
-                           if v in out[u])
+            incoming = sum(rank[u] / len(out[u]) for u in nodes if v in out[u])
             new[v] = base + damping * (incoming + dangling / n)
         delta = sum(abs(new[v] - rank[v]) for v in nodes)
         rank = new
@@ -136,8 +135,7 @@ def _link_graph(index: InvertedIndex) -> Dict[str, List[str]]:
     return graph
 
 
-def text_scores(index: InvertedIndex,
-                terms: List[str]) -> Dict[str, float]:
+def text_scores(index: InvertedIndex, terms: List[str]) -> Dict[str, float]:
     """Summed tf-idf per document for *terms* (raw, unnormalized)."""
     n = len(index.docs)
     scores: Dict[str, float] = {}
@@ -166,9 +164,12 @@ class ScoredResult:
     matched_terms: List[str] = field(default_factory=list)
 
 
-def search(index: InvertedIndex, query: str,
-           weights: Dict[str, float] | None = None,
-           top_k: int = 10) -> List[ScoredResult]:
+def search(
+    index: InvertedIndex,
+    query: str,
+    weights: Dict[str, float] | None = None,
+    top_k: int = 10,
+) -> List[ScoredResult]:
     """Rank documents for *query*. No profile enters this function.
 
     Returns ScoredResults sorted by total desc (doc_id tie-break for
@@ -198,29 +199,34 @@ def search(index: InvertedIndex, query: str,
             "text": w["text"] * text.get(doc_id, 0.0),
             "link": w["link"] * link.get(doc_id, 0.0),
         }
-        results.append(ScoredResult(
-            doc=doc,
-            total=contrib["text"] + contrib["link"],
-            contributions=contrib,
-            matched_terms=sorted(matched.get(doc_id, [])),
-        ))
+        results.append(
+            ScoredResult(
+                doc=doc,
+                total=contrib["text"] + contrib["link"],
+                contributions=contrib,
+                matched_terms=sorted(matched.get(doc_id, [])),
+            )
+        )
     results.sort(key=lambda r: (-r.total, r.doc.doc_id))
-    return [r for r in results if r.total > 0][:max(1, top_k)]
+    return [r for r in results if r.total > 0][: max(1, top_k)]
 
 
 def explain(result: ScoredResult, weights: Dict[str, float]) -> str:
     """Human-readable account of which signals produced this result."""
     w = normalize_weights(dict(weights))
     lines = [
-        "%s  (total %.4f)" % (result.doc.title or result.doc.url,
-                              result.total),
+        "%s  (total %.4f)" % (result.doc.title or result.doc.url, result.total),
         "  url: %s" % result.doc.url,
         "  matched terms: %s" % (", ".join(result.matched_terms) or "(none)"),
     ]
     for signal in SIGNAL_NAMES:
-        lines.append("  %-4s  weight %.2f  norm-score %.4f  contribution %.4f"
-                     % (signal, w[signal],
-                        result.contributions[signal] / w[signal]
-                        if w[signal] else 0.0,
-                        result.contributions[signal]))
+        lines.append(
+            "  %-4s  weight %.2f  norm-score %.4f  contribution %.4f"
+            % (
+                signal,
+                w[signal],
+                result.contributions[signal] / w[signal] if w[signal] else 0.0,
+                result.contributions[signal],
+            )
+        )
     return "\n".join(lines)

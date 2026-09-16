@@ -31,9 +31,8 @@ rejected with ValueError.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime
-from typing import Optional
 
 __all__ = ["PUPIL_LEVELS", "TeachBack", "Cascade"]
 
@@ -62,7 +61,9 @@ class TeachBack:
     @staticmethod
     def _check_level(level: str) -> str:
         if level not in PUPIL_LEVELS:
-            raise ValueError(f"unknown pupil level {level!r}; levels: {list(PUPIL_LEVELS)}")
+            raise ValueError(
+                f"unknown pupil level {level!r}; levels: {list(PUPIL_LEVELS)}"
+            )
         return level
 
     def explain(self, level: str, text: str) -> None:
@@ -72,14 +73,18 @@ class TeachBack:
             raise ValueError("explanation must be a non-empty string")
         self._explanations[level] = text.strip()
 
-    def assess(self, level: str, completeness: int, clarity: int,
-               anticipates_objections: int) -> dict:
+    def assess(
+        self, level: str, completeness: int, clarity: int, anticipates_objections: int
+    ) -> dict:
         """Score the explanation on the rubric (each 0..5)."""
         level = self._check_level(level)
         if level not in self._explanations:
             raise ValueError(f"no explanation recorded for the {level} pupil yet")
-        scores = {"completeness": completeness, "clarity": clarity,
-                  "anticipates_objections": anticipates_objections}
+        scores = {
+            "completeness": completeness,
+            "clarity": clarity,
+            "anticipates_objections": anticipates_objections,
+        }
         for name, value in scores.items():
             if not isinstance(value, int) or not (0 <= value <= 5):
                 raise ValueError(f"{name} must be an int 0..5, got {value!r}")
@@ -98,15 +103,16 @@ class TeachBack:
                 "mean": round(sum(s.values()) / 3, 2) if s else None,
             }
         means = [p["mean"] for p in per_level.values() if p["mean"] is not None]
-        mastered = (len(means) == len(PUPIL_LEVELS)
-                    and all(m >= 3 for m in means))
+        mastered = len(means) == len(PUPIL_LEVELS) and all(m >= 3 for m in means)
         return {
             "topic": self.topic,
             "levels": per_level,
             "mastered": mastered,
-            "verdict": ("Mastered: the topic survived the naive, the sharp, and the hostile."
-                        if mastered else
-                        "Not yet: teach every pupil and score >= 3 on each rubric mean."),
+            "verdict": (
+                "Mastered: the topic survived the naive, the sharp, and the hostile."
+                if mastered
+                else "Not yet: teach every pupil and score >= 3 on each rubric mean."
+            ),
         }
 
 
@@ -154,8 +160,12 @@ class Cascade:
             raise ValueError(f"unknown monitor: {monitor!r}")
         if not isinstance(score, int) or not (0 <= score <= 5):
             raise ValueError(f"spot-check score must be an int 0..5, got {score!r}")
-        check = SpotCheck(at=datetime.now().isoformat(timespec="seconds"),
-                          monitor=monitor, score=score, note=note or "")
+        check = SpotCheck(
+            at=datetime.now().isoformat(timespec="seconds"),
+            monitor=monitor,
+            score=score,
+            note=note or "",
+        )
         self._checks.append(check)
         return check
 
@@ -173,7 +183,9 @@ class Cascade:
             "spot_checks": len(self._checks),
             "fidelity_means": means,
             "drifting": drifting,
-            "verdict": ("Cascade healthy."
-                        if not drifting else
-                        f"Drift detected in: {', '.join(drifting)} — retrain those branches."),
+            "verdict": (
+                "Cascade healthy."
+                if not drifting
+                else f"Drift detected in: {', '.join(drifting)} — retrain those branches."
+            ),
         }

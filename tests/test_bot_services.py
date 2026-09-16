@@ -52,7 +52,12 @@ def _stub_handler(report="STUB REPORT"):
 def test_registry_seeds_builtins(hermetic_env):
     reg = ServiceRegistry()
     names = {s.name for s in reg.list()}
-    assert {"morning-briefing", "bounty-watch", "backup-status", "research-brief"} <= names
+    assert {
+        "morning-briefing",
+        "bounty-watch",
+        "backup-status",
+        "research-brief",
+    } <= names
 
 
 def test_registry_add_remove_round_trip(hermetic_env):
@@ -75,23 +80,39 @@ def test_registry_add_remove_round_trip(hermetic_env):
 
 def test_registry_rejects_invalid_definitions(hermetic_env):
     with pytest.raises(ServiceError):
-        ServiceDefinition(name="Bad Name!", description="d", service_type="monitor",
-                          schedule="daily")
+        ServiceDefinition(
+            name="Bad Name!", description="d", service_type="monitor", schedule="daily"
+        )
     with pytest.raises(ServiceError):
-        ServiceDefinition(name="ok-name", description="d", service_type="nope",
-                          schedule="daily")
+        ServiceDefinition(
+            name="ok-name", description="d", service_type="nope", schedule="daily"
+        )
     with pytest.raises(ServiceError):
-        ServiceDefinition(name="ok-name", description="d", service_type="monitor",
-                          schedule="every now and then")
+        ServiceDefinition(
+            name="ok-name",
+            description="d",
+            service_type="monitor",
+            schedule="every now and then",
+        )
     with pytest.raises(ServiceError):
-        ServiceDefinition(name="ok-name", description="d", service_type="monitor",
-                          schedule="99 99 99 99 99")
+        ServiceDefinition(
+            name="ok-name",
+            description="d",
+            service_type="monitor",
+            schedule="99 99 99 99 99",
+        )
     with pytest.raises(ServiceError):
-        ServiceDefinition(name="ok-name", description="d", service_type="monitor",
-                          schedule="daily", params=["not", "a", "dict"])
+        ServiceDefinition(
+            name="ok-name",
+            description="d",
+            service_type="monitor",
+            schedule="daily",
+            params=["not", "a", "dict"],
+        )
     with pytest.raises(ServiceError):
-        ServiceDefinition(name="ok-name", description=" ", service_type="monitor",
-                          schedule="daily")
+        ServiceDefinition(
+            name="ok-name", description=" ", service_type="monitor", schedule="daily"
+        )
 
 
 def test_registry_refuses_builtin_removal(hermetic_env):
@@ -317,7 +338,9 @@ def test_build_system_prompt_has_assistant_core(hermetic_env, monkeypatch):
 
 
 def test_build_system_prompt_includes_context(hermetic_env, monkeypatch):
-    _patch_store(monkeypatch, [_FakeEntry("1", _FakeType("preference"), "likes dark mode")])
+    _patch_store(
+        monkeypatch, [_FakeEntry("1", _FakeType("preference"), "likes dark mode")]
+    )
     assert "likes dark mode" in context.build_system_prompt()
 
 
@@ -342,8 +365,14 @@ def test_extract_candidates():
 
 def test_queue_learnings_writes_documented_format(hermetic_env):
     n = context.queue_learnings(
-        [{"kind": "preference", "text": "likes dark mode",
-          "confidence": "heuristic", "source": "levi-bot"}]
+        [
+            {
+                "kind": "preference",
+                "text": "likes dark mode",
+                "confidence": "heuristic",
+                "source": "levi-bot",
+            }
+        ]
     )
     assert n == 1
     pending = context.read_pending()
@@ -358,8 +387,14 @@ def test_queue_learnings_writes_documented_format(hermetic_env):
 
 def test_queue_learnings_flags_growth_journal(hermetic_env):
     context.queue_learnings(
-        [{"kind": "fact", "text": "x is y", "confidence": "heuristic",
-          "source": "levi-bot"}]
+        [
+            {
+                "kind": "fact",
+                "text": "x is y",
+                "confidence": "heuristic",
+                "source": "levi-bot",
+            }
+        ]
     )
     journal = os.path.join(os.environ["LEVI_GROWTH_DIR"], "journal.jsonl")
     assert os.path.exists(journal)
@@ -374,6 +409,7 @@ def test_say_queues_learnings_best_effort(hermetic_env):
 
 
 def test_maybe_learn_never_raises(hermetic_env, monkeypatch):
-    monkeypatch.setattr(context, "queue_learnings",
-                        lambda cands: (_ for _ in ()).throw(OSError("disk")))
+    monkeypatch.setattr(
+        context, "queue_learnings", lambda cands: (_ for _ in ()).throw(OSError("disk"))
+    )
     assert context.maybe_learn("remember that x is y") == 0

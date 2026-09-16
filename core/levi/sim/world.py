@@ -156,9 +156,7 @@ class SimWorld:
 
         # crt.sh feed: the apex plus a random subset of discoverable subs.
         crtsh_hosts = [self.domain] + [
-            h.fqdn
-            for h in self.hosts
-            if h.discoverable and rng.random() < 0.5
+            h.fqdn for h in self.hosts if h.discoverable and rng.random() < 0.5
         ]
         self._crtsh_json = json.dumps(
             [{"name_value": fqdn} for fqdn in sorted(set(crtsh_hosts))]
@@ -171,8 +169,17 @@ class SimWorld:
             h = rng.choice(pool)
             page = rng.choice(_ARCHIVE_PAGES)
             archived.append(f"http://{h.fqdn}/{page}")
-        rows = [["urlkey", "timestamp", "original", "mimetype",
-                 "statuscode", "digest", "length"]]
+        rows = [
+            [
+                "urlkey",
+                "timestamp",
+                "original",
+                "mimetype",
+                "statuscode",
+                "digest",
+                "length",
+            ]
+        ]
         for url in sorted(set(archived)):
             rows.append([url, "20240101000000", url, "text/html", "200", "-", "-"])
         self._cdx_json = json.dumps(rows)
@@ -237,9 +244,7 @@ class SimWorld:
         )
 
     def _html(self, host: SimHost) -> str:
-        scripts = "\n".join(
-            f'<script src="{p}"></script>' for p in host.js_paths
-        )
+        scripts = "\n".join(f'<script src="{p}"></script>' for p in host.js_paths)
         return (
             "<html><head>"
             f"<title>{host.title}</title>"

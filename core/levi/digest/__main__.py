@@ -19,8 +19,8 @@ def _cmd_create(a) -> int:
         print("error: %s" % exc, file=sys.stderr)
         return 1
     print(
-        "list created: %s owner=%s moderated=%s" % (cfg["name"], cfg["owner"],
-                                                   cfg["moderated"])
+        "list created: %s owner=%s moderated=%s"
+        % (cfg["name"], cfg["owner"], cfg["moderated"])
     )
     return 0
 

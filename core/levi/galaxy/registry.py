@@ -112,8 +112,16 @@ class GalaxyRegistry:
     def _validate_record(record: dict[str, Any]) -> None:
         if not isinstance(record, dict):
             raise RegistryError("install record must be a dict")
-        for field in ("id", "version", "kind", "author", "source",
-                      "root_sha256", "installed_at", "granted"):
+        for field in (
+            "id",
+            "version",
+            "kind",
+            "author",
+            "source",
+            "root_sha256",
+            "installed_at",
+            "granted",
+        ):
             if field not in record:
                 raise RegistryError(f"install record missing field: {field!r}")
         if not isinstance(record["id"], str) or not record["id"]:
@@ -181,6 +189,7 @@ class GalaxyRegistry:
         if not self.quarantine_path.exists():
             return []
         return [
-            line for line in self.quarantine_path.read_text(encoding="utf-8").splitlines()
+            line
+            for line in self.quarantine_path.read_text(encoding="utf-8").splitlines()
             if line.strip()
         ]

@@ -130,7 +130,9 @@ def main(argv=None) -> int:
         prog="levi.capproto",
         description="capproto/1 — capability-gated service protocol (local-first)",
     )
-    ap.add_argument("--home", default=None, help="capproto home (default: ~/.levi/capproto)")
+    ap.add_argument(
+        "--home", default=None, help="capproto home (default: ~/.levi/capproto)"
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     p = sub.add_parser("issue", help="mint a capability token")
@@ -142,7 +144,9 @@ def main(argv=None) -> int:
 
     p = sub.add_parser("attenuate", help="mint a strictly narrower token")
     p.add_argument("--token", required=True)
-    p.add_argument("--action", action="append", default=[], help="subset of parent's; repeatable")
+    p.add_argument(
+        "--action", action="append", default=[], help="subset of parent's; repeatable"
+    )
     p.add_argument("--ttl", type=float, default=None)
     p.set_defaults(func=cmd_attenuate)
 

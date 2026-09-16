@@ -39,7 +39,7 @@ import datetime as _dt
 import json
 import re
 import subprocess
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Optional
 
@@ -71,7 +71,9 @@ def canonical_json(definition: dict[str, Any]) -> bytes:
     The signature file covers exactly these bytes — any edit, however
     small, invalidates the signature.
     """
-    return (json.dumps(definition, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+    return (
+        json.dumps(definition, sort_keys=True, separators=(",", ":")) + "\n"
+    ).encode("utf-8")
 
 
 def parse_expires_at(value: Any) -> Optional[_dt.datetime]:
@@ -111,7 +113,9 @@ class CommandDefinition:
         if self.tier not in TIERS:
             raise DefinitionError(f"unknown tier {self.tier!r} for {self.name!r}")
         if not self.argv or not all(isinstance(a, str) and a for a in self.argv):
-            raise DefinitionError(f"argv must be a non-empty list of strings for {self.name!r}")
+            raise DefinitionError(
+                f"argv must be a non-empty list of strings for {self.name!r}"
+            )
         for arg_name, spec in self.args.items():
             if not isinstance(spec, dict):
                 raise DefinitionError(f"arg {arg_name!r} spec must be an object")
@@ -150,7 +154,9 @@ class CommandDefinition:
             values[arg_name] = self._coerce(arg_name, spec, raw)
         unknown = set(args) - set(self.args)
         if unknown:
-            raise DefinitionError(f"unknown arguments for {self.name!r}: {sorted(unknown)}")
+            raise DefinitionError(
+                f"unknown arguments for {self.name!r}: {sorted(unknown)}"
+            )
         missing = self.placeholders() - set(values)
         if missing:
             raise DefinitionError(
@@ -172,7 +178,9 @@ class CommandDefinition:
             try:
                 value = int(str(raw), 10)
             except (TypeError, ValueError) as exc:
-                raise DefinitionError(f"argument {arg_name!r} must be an integer") from exc
+                raise DefinitionError(
+                    f"argument {arg_name!r} must be an integer"
+                ) from exc
             lo, hi = spec.get("min"), spec.get("max")
             if lo is not None and value < lo:
                 raise DefinitionError(f"argument {arg_name!r} below minimum {lo}")
@@ -329,7 +337,10 @@ class CommandRegistry:
         pinentry; for unattended owner keys use ``--pinentry-mode loopback``
         through ``oath key`` tooling).  Writes ``<name>.json.sig``.
         """
-        from levi.oath.keys import gpg_sign_args, run_gpg  # local import: keys is optional at runtime
+        from levi.oath.keys import (
+            gpg_sign_args,
+            run_gpg,
+        )  # local import: keys is optional at runtime
 
         json_path = self.directory / f"{name}.json"
         if not json_path.exists():
@@ -400,8 +411,12 @@ def _builtin_definitions() -> dict[str, CommandDefinition]:
             name="reply",
             argv=["reply"],
             args={
-                "subject": {"type": "string", "required": False, "max_length": 200,
-                            "default": "Re: LEVI Oath mission"},
+                "subject": {
+                    "type": "string",
+                    "required": False,
+                    "max_length": 200,
+                    "default": "Re: LEVI Oath mission",
+                },
                 "body": {"type": "string", "required": True, "max_length": 20000},
             },
             tier="write",

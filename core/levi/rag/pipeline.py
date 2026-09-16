@@ -24,9 +24,9 @@ from levi.memory.retrieval import retrieve, tokenize
 class AskResult:
     query: str
     answer: Optional[str] = None
-    notice: str = ""            # honest status: generated / no-generator / no-results
-    context: str = ""           # the cited context block handed to the generator
-    citations: List[str] = field(default_factory=list)   # entry ids, rank order
+    notice: str = ""  # honest status: generated / no-generator / no-results
+    context: str = ""  # the cited context block handed to the generator
+    citations: List[str] = field(default_factory=list)  # entry ids, rank order
     retrieved_ids: List[str] = field(default_factory=list)
 
     def to_dict(self) -> Dict:
@@ -74,8 +74,9 @@ def provenance_trust(entry, trusted_sources: Optional[Sequence[str]] = None) -> 
     return base
 
 
-def rerank(query: str, scored: Sequence[Tuple],
-           trusted_sources: Optional[Sequence[str]] = None):
+def rerank(
+    query: str, scored: Sequence[Tuple], trusted_sources: Optional[Sequence[str]] = None
+):
     """Rerank ``(entry, score, explanation)`` tuples.
 
     final = retrieval_score_normalized * (0.6 + 0.4*coverage) * trust.
@@ -89,14 +90,21 @@ def rerank(query: str, scored: Sequence[Tuple],
         cov, cov_expl = coverage_score(query, entry)
         trust = provenance_trust(entry, trusted_sources)
         final = (score / top) * (0.6 + 0.4 * cov) * trust
-        out.append((entry, final,
-                    "rerank final=%.4f | %s | trust=%.2f | base: %s"
-                    % (final, cov_expl, trust, expl)))
+        out.append(
+            (
+                entry,
+                final,
+                "rerank final=%.4f | %s | trust=%.2f | base: %s"
+                % (final, cov_expl, trust, expl),
+            )
+        )
     out.sort(key=lambda p: (-p[1], p[0].id))
     return out
 
 
-def build_context(ranked: Sequence[Tuple], max_chars: int = 6000) -> Tuple[str, List[str]]:
+def build_context(
+    ranked: Sequence[Tuple], max_chars: int = 6000
+) -> Tuple[str, List[str]]:
     """Build the cited context block; returns (block, citation_ids)."""
     lines: List[str] = []
     citations: List[str] = []
@@ -107,7 +115,10 @@ def build_context(ranked: Sequence[Tuple], max_chars: int = 6000) -> Tuple[str, 
         section = prov.get("section") or ""
         src = prov.get("source_doc") or entry.source or "memory"
         header = "[memory:%s] (source: %s%s)" % (
-            entry.id, src, (" § " + section) if section else "")
+            entry.id,
+            src,
+            (" § " + section) if section else "",
+        )
         body = (entry.content or "").strip()
         block = "%s\n%s" % (header, body)
         if total + len(block) > max_chars and lines:
@@ -140,9 +151,12 @@ def _parse_rel_signals(explanation: str) -> Tuple[bool, float]:
     return (m.group(1) != "None"), sim
 
 
-def apply_relevance_gate(ranked, vector_floor: float = VECTOR_FLOOR,
-                         strong_floor: float = VECTOR_STRONG_FLOOR,
-                         margin: float = VECTOR_MARGIN):
+def apply_relevance_gate(
+    ranked,
+    vector_floor: float = VECTOR_FLOOR,
+    strong_floor: float = VECTOR_STRONG_FLOOR,
+    margin: float = VECTOR_MARGIN,
+):
     """Drop fused hits with no real evidence. Deterministic.
 
     Keep a hit when it has lexical evidence, strong vector similarity,
@@ -158,15 +172,15 @@ def apply_relevance_gate(ranked, vector_floor: float = VECTOR_FLOOR,
     for entry, score, expl, lexical, sim in parsed:
         if lexical or sim >= strong_floor:
             out.append((entry, score, expl))
-        elif (sim >= vector_floor and runner_up > 0
-                and sim >= margin * runner_up):
+        elif sim >= vector_floor and runner_up > 0 and sim >= margin * runner_up:
             out.append((entry, score, expl))
         # else: no real evidence — dropped (ask reports "nothing relevant")
     return out
 
 
-def _generate(query: str, context: str,
-              system_prompt: Optional[str] = None) -> Optional[str]:
+def _generate(
+    query: str, context: str, system_prompt: Optional[str] = None
+) -> Optional[str]:
     """Lazy call into the agent runtime. Returns None when unavailable."""
     try:
         from levi.agent.loop import run_subtask
@@ -191,26 +205,30 @@ def _generate(query: str, context: str,
     return final or None
 
 
-def ask(query: str, store, limit: int = 5,
-        trusted_sources: Optional[Sequence[str]] = None,
-        generate: bool = True,
-        system_prompt: Optional[str] = None,
-        vector_floor: float = VECTOR_FLOOR) -> AskResult:
+def ask(
+    query: str,
+    store,
+    limit: int = 5,
+    trusted_sources: Optional[Sequence[str]] = None,
+    generate: bool = True,
+    system_prompt: Optional[str] = None,
+    vector_floor: float = VECTOR_FLOOR,
+) -> AskResult:
     """Run the RAG pipeline. Never invents an answer; never raises."""
     result = AskResult(query=query if isinstance(query, str) else "")
     try:
         if not isinstance(query, str) or not query.strip():
             result.notice = "blank query — nothing to retrieve"
             return result
-        retrieved = retrieve(query, store, limit=max(limit * 2, 10),
-                             method="hybrid")
+        retrieved = retrieve(query, store, limit=max(limit * 2, 10), method="hybrid")
         # Relevance gate: drop fused hits with neither lexical evidence
         # nor sufficient vector similarity (kills tiny-corpus noise).
         retrieved = apply_relevance_gate(retrieved, vector_floor)
         result.retrieved_ids = [e.id for e, _s, _x in retrieved]
         if not retrieved:
-            result.notice = ("nothing relevant retrieved — treat as unsupported; "
-                             "no answer generated")
+            result.notice = (
+                "nothing relevant retrieved — treat as unsupported; no answer generated"
+            )
             return result
         ranked = rerank(query, retrieved, trusted_sources)[: max(limit, 1)]
         context, citations = build_context(ranked)
@@ -221,13 +239,17 @@ def ask(query: str, store, limit: int = 5,
             return result
         answer = _generate(query, context, system_prompt)
         if answer is None:
-            result.notice = ("no generator available (agent runtime unreachable) — "
-                             "returning retrieved context only, no answer invented")
+            result.notice = (
+                "no generator available (agent runtime unreachable) — "
+                "returning retrieved context only, no answer invented"
+            )
             return result
         result.answer = answer
         result.notice = "answer generated from retrieved context"
         return result
     except Exception as exc:
         result.notice = "pipeline error (fail-closed): %s: %s" % (
-            type(exc).__name__, exc)
+            type(exc).__name__,
+            exc,
+        )
         return result

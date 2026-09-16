@@ -31,10 +31,10 @@ STATUSES = ("green", "amber", "red")
 @dataclass
 class VisibleCard:
     entity: str
-    strip: str = ""      # the one-line visible status, e.g. "renews 2026-10-01"
+    strip: str = ""  # the one-line visible status, e.g. "renews 2026-10-01"
     status: str = "green"
-    detail: str = ""     # behind the card; only read when you pull it
-    updated: str = ""    # ISO date of last card-swap
+    detail: str = ""  # behind the card; only read when you pull it
+    updated: str = ""  # ISO date of last card-swap
 
     def validate(self) -> None:
         if not self.entity or not self.entity.strip():
@@ -95,16 +95,19 @@ class VisibleFile:
         lines = [f"VISIBLE FILE: {self.name} — {len(self.cards)} cards"]
         for entity in sorted(self.cards, key=str.lower):
             card = self.cards[entity]
-            lines.append(f"  {glyph[card.status]} {entity}: {card.strip or '(no strip)'}"
-                         + (f"  [updated {card.updated}]" if card.updated else ""))
+            lines.append(
+                f"  {glyph[card.status]} {entity}: {card.strip or '(no strip)'}"
+                + (f"  [updated {card.updated}]" if card.updated else "")
+            )
         return "\n".join(lines)
 
     def flagged(self) -> list[VisibleCard]:
         """Cards whose strips turned red — the algedonic layer of the tray."""
         return [c for c in self.cards.values() if c.status == "red"]
 
-    def set_status(self, entity: str, status: str, strip: str | None = None,
-                   updated: str = "") -> VisibleCard:
+    def set_status(
+        self, entity: str, status: str, strip: str | None = None, updated: str = ""
+    ) -> VisibleCard:
         if entity not in self.cards:
             raise KeyError(f"no card for {entity!r}")
         card = self.cards[entity]

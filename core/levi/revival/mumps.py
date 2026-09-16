@@ -72,8 +72,7 @@ def _sub_key(sub: Any) -> str:
         raise TypeError("subscripts must be str, int, or float (not bool)")
     if isinstance(sub, (str, int, float)):
         return json.dumps(sub, sort_keys=True)
-    raise TypeError(
-        f"subscript must be str/int/float, got {type(sub).__name__}")
+    raise TypeError(f"subscript must be str/int/float, got {type(sub).__name__}")
 
 
 def _collation_key(key: str) -> tuple:
@@ -88,7 +87,8 @@ def _require_jsonable(value: Any) -> None:
         json.dumps(value)
     except (TypeError, ValueError) as exc:
         raise TypeError(
-            f"mumps: global values must be JSON-serializable: {exc}") from exc
+            f"mumps: global values must be JSON-serializable: {exc}"
+        ) from exc
 
 
 # ---------------------------------------------------------------------------
@@ -111,8 +111,7 @@ class Globals:
     # -- recovery: snapshot + journal replay ----------------------------------------
     def _recover(self) -> None:
         if self._snapshot_file.exists():
-            self._data = json.loads(
-                self._snapshot_file.read_text(encoding="utf-8"))
+            self._data = json.loads(self._snapshot_file.read_text(encoding="utf-8"))
         if self._journal_file.exists():
             for line in self._journal_file.read_text(encoding="utf-8").splitlines():
                 if line.strip():
@@ -140,8 +139,9 @@ class Globals:
     def snapshot(self) -> Path:
         """Compact: write the full state atomically, truncate the journal."""
         tmp = self._snapshot_file.with_suffix(".tmp")
-        tmp.write_text(json.dumps(self._data, ensure_ascii=False, indent=1),
-                       encoding="utf-8")
+        tmp.write_text(
+            json.dumps(self._data, ensure_ascii=False, indent=1), encoding="utf-8"
+        )
         tmp.replace(self._snapshot_file)
         self._journal_file.write_text("", encoding="utf-8")
         return self._snapshot_file
@@ -177,8 +177,9 @@ class Globals:
         for s in subs:
             _sub_key(s)  # fail-closed on bad subscripts
         _require_jsonable(list(subs))  # journal must round-trip
-        self._apply_entry({"op": "set", "name": name,
-                           "subs": list(subs), "value": value})
+        self._apply_entry(
+            {"op": "set", "name": name, "subs": list(subs), "value": value}
+        )
 
     def get(self, name: str, *subs: Any, default: Any = None) -> Any:
         """``$GET``: the value, or ``default`` when absent (never raises
@@ -232,9 +233,15 @@ class Globals:
                 # Start before/after the given subscript: find the neighbor.
                 ordered = sorted(parent["c"], key=_collation_key)
                 target = _collation_key(_sub_key(subs[-1]))
-                cands = [k for k in ordered
-                         if (_collation_key(k) > target if direction == 1
-                             else _collation_key(k) < target)]
+                cands = [
+                    k
+                    for k in ordered
+                    if (
+                        _collation_key(k) > target
+                        if direction == 1
+                        else _collation_key(k) < target
+                    )
+                ]
                 return json.loads(cands[0]) if cands else None
             return json.loads(keys[idx + 1]) if idx + 1 < len(keys) else None
         node = self._data.get(name)

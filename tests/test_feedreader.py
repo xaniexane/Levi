@@ -115,7 +115,10 @@ def test_error_counts_fail_streak(monkeypatch, tmp_path):
     assert not r["ok"] and r["fail_streak"] == 1
     h = st.health()[0]
     assert h["status"] == "degraded"
-    st.poll(force=True); st.poll(force=True); st.poll(force=True); st.poll(force=True)
+    st.poll(force=True)
+    st.poll(force=True)
+    st.poll(force=True)
+    st.poll(force=True)
     assert st.health()[0]["status"] == "down"
 
 

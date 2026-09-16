@@ -6,9 +6,7 @@ LEVI_ACADEMY_CORPUS and a patched memory store dir.
 """
 
 import json
-import os
 import socket
-import sys
 import types
 from pathlib import Path
 
@@ -44,6 +42,7 @@ def iso(tmp_path, monkeypatch):
     monkeypatch.setenv("LEVI_GROWTH_DIR", str(growth))
     monkeypatch.setenv("LEVI_ACADEMY_CORPUS", str(corpus))
     import levi.memory.store as mstore
+
     monkeypatch.setattr(mstore, "DEFAULT_DATA_DIR", mem)
     return {"academy": acad, "growth": growth, "memory": mem, "corpus": corpus}
 
@@ -72,8 +71,10 @@ def test_syllabus_structure():
             assert entry["title"], (track, d)
             assert len(entry["objectives"]) >= 2, (track, d)
             assert len(entry["key_questions"]) >= 2, (track, d)
-            assert entry["exercise_type"] in aex.EXERCISE_RUNNERS or \
-                entry["exercise_type"] == "graduation", (track, d)
+            assert (
+                entry["exercise_type"] in aex.EXERCISE_RUNNERS
+                or entry["exercise_type"] == "graduation"
+            ), (track, d)
     # graduation is session 120
     grad = syl["tracks"]["S"]["days"]["30"]
     assert grad["exercise_type"] == "graduation"
@@ -85,8 +86,11 @@ def test_syllabus_structure():
         covered.update(range(lo, hi + 1))
     assert covered == set(range(1, 31))
     assert [w["phase"] for w in syl["weeks"]] == [
-        "Foundations", "Intermediate Methods",
-        "Advanced Application", "Mastery + Synthesis"]
+        "Foundations",
+        "Intermediate Methods",
+        "Advanced Application",
+        "Mastery + Synthesis",
+    ]
 
 
 def test_day_block_arithmetic():
@@ -120,8 +124,10 @@ def test_session_completes_hermetically(iso, no_network):
 
     # journal entry is growth-tagged
     from levi.growth import journal as gjournal
-    entries = [e for e in gjournal.read_entries(limit=50)
-               if e.get("kind") == "academy-session"]
+
+    entries = [
+        e for e in gjournal.read_entries(limit=50) if e.get("kind") == "academy-session"
+    ]
     assert entries, "no academy-session journal entry"
     latest = entries[-1]
     assert "growth" in latest["tags"] and "levi-learned" in latest["tags"]
@@ -148,8 +154,13 @@ def test_track_a_boundary_in_lesson(iso, no_network):
     assert "defensive-only" in text.lower() or "defensive only" in text.lower()
     # No offensive *instruction* content: attack how-tos, bypass guides.
     low = text.lower()
-    for banned in ("how to exploit", "to bypass ", "step-by-step attack",
-                   "brute forc", "crack the password"):
+    for banned in (
+        "how to exploit",
+        "to bypass ",
+        "step-by-step attack",
+        "brute forc",
+        "crack the password",
+    ):
         assert banned not in low, banned
     assert result["track"] == "A"
 
@@ -173,13 +184,21 @@ def test_corpus_format_matches_train_loader(iso, no_network, tmp_path):
     # train.py needs torch for the model, but load_corpus is pure stdlib:
     # extract that exact function from the real source via ast and run it.
     import ast
+
     train_src = Path("core/levi/brain/train/train.py").read_text(encoding="utf-8")
     mod = ast.parse(train_src)
-    fn_node = next(n for n in mod.body
-                   if isinstance(n, ast.FunctionDef) and n.name == "load_corpus")
+    fn_node = next(
+        n
+        for n in mod.body
+        if isinstance(n, ast.FunctionDef) and n.name == "load_corpus"
+    )
     ns: dict = {"Path": Path, "json": json}
-    exec(compile(ast.Module(body=[fn_node], type_ignores=[]),
-                   "train_loader_probe", "exec"), ns)
+    exec(
+        compile(
+            ast.Module(body=[fn_node], type_ignores=[]), "train_loader_probe", "exec"
+        ),
+        ns,
+    )
     text = ns["load_corpus"](iso["corpus"])
     assert "Format probe" in text
     assert "Detection engineering notes." in text
@@ -206,8 +225,12 @@ def test_graduation_path(iso, no_network):
     assert result["graduation"]["retrain"]["launched"] is False
 
     from levi.growth import journal as gjournal
-    grads = [e for e in gjournal.read_entries(limit=100)
-             if e.get("kind") == "academy-graduation"]
+
+    grads = [
+        e
+        for e in gjournal.read_entries(limit=100)
+        if e.get("kind") == "academy-graduation"
+    ]
     assert grads, "no academy-graduation journal entry"
     assert grads[-1].get("weakest_track") in ("A", "B", "C")
 
@@ -237,6 +260,7 @@ def test_next_uncompleted_advances(iso, no_network):
 # ----------------------------------------------------------------- CLI
 def test_academy_status_cli(iso, no_network, capsys):
     from levi.cli.main import cmd_academy
+
     rs.run_one_session(1, 1, dry_research=DRY_RESEARCH)
     args = types.SimpleNamespace(academy_action="status", day=None, block=None)
     assert cmd_academy(args) == 0
@@ -248,6 +272,7 @@ def test_academy_status_cli(iso, no_network, capsys):
 
 def test_academy_skills_register():
     from levi.skill.academy_skills import ACADEMY_SKILLS
+
     ids = [s.id for s in ACADEMY_SKILLS]
     assert "academy_session_brief" in ids
     assert "academy_status_brief" in ids
@@ -278,8 +303,12 @@ def test_failed_gate_queues_remediation_not_completion(iso, no_network, monkeypa
     assert len(pending["missed_questions"]) >= 1
     # honest failure journal entry
     from levi.growth import journal as gjournal
-    fails = [e for e in gjournal.read_entries(limit=50)
-             if e.get("kind") == "academy-session" and "gate-failed" in e.get("tags", [])]
+
+    fails = [
+        e
+        for e in gjournal.read_entries(limit=50)
+        if e.get("kind") == "academy-session" and "gate-failed" in e.get("tags", [])
+    ]
     assert fails, "no honest gate-failed journal entry"
     assert "80%" in fails[-1]["summary"]
 
@@ -309,18 +338,19 @@ def test_remedial_pass_completes_original_gate(iso, no_network, monkeypatch):
     # remedial lesson artifact kept
     assert (iso["academy"] / "lessons" / "d1b1-remedial1.md").exists()
     from levi.growth import journal as gjournal
+
     kinds = [e.get("kind") for e in gjournal.read_entries(limit=50)]
     assert "academy-remedial" in kinds
 
 
 def test_remedial_failure_stays_queued(iso, no_network, monkeypatch):
     monkeypatch.setattr(asynth, "synthesize_lesson", lambda *a, **k: "thin")
-    monkeypatch.setattr(asynth, "synthesize_remedial_lesson",
-                        lambda *a, **k: "thin")
+    monkeypatch.setattr(asynth, "synthesize_remedial_lesson", lambda *a, **k: "thin")
     r1 = rs.run_one_session(1, 1, dry_research=DRY_RESEARCH)
     assert r1["gate_passed"] is False
-    r2 = rs.run_remedial(rs.load_progress()["pending_remedial"],
-                         dry_research=DRY_RESEARCH)
+    r2 = rs.run_remedial(
+        rs.load_progress()["pending_remedial"], dry_research=DRY_RESEARCH
+    )
     assert r2["gate_passed"] is False
     prog = rs.load_progress()
     assert prog["pending_remedial"]["attempts"] == 1
@@ -329,8 +359,13 @@ def test_remedial_failure_stays_queued(iso, no_network, monkeypatch):
 
 def test_main_prefers_pending_remediation(iso, no_network, monkeypatch, capsys):
     prog = rs.load_progress()
-    prog["pending_remedial"] = {"day": 1, "block": 1, "track": "A", "n": 1,
-                                "attempts": 0}
+    prog["pending_remedial"] = {
+        "day": 1,
+        "block": 1,
+        "track": "A",
+        "n": 1,
+        "attempts": 0,
+    }
     rs.save_progress(prog)
     called = {}
 
@@ -369,17 +404,25 @@ def test_corpus_records_carry_mastery_tags(iso, no_network):
 def test_concept_review_schedule(iso, no_network):
     syl = rs.load_syllabus()
     _, entry = rs.entry_for(syl, 1, 1)
-    added = acon.register_session(1, 1, "A", entry, DRY_RESEARCH, 1,
-                                  mastery_score=0.9)
+    added = acon.register_session(1, 1, "A", entry, DRY_RESEARCH, 1, mastery_score=0.9)
     assert added == 6  # 3 objectives + 3 key terms
     assert acon.due_concepts(1) == []  # nothing due before the first review
     due = acon.due_concepts(2)
     assert {c["id"] for c in due} == {
-        "AD01B1O1", "AD01B1O2", "AD01B1O3",
-        "AD01B1T1", "AD01B1T2", "AD01B1T3"}
-    dues = sorted({r["due_session"]
-                   for c in acon.load_registry()["concepts"].values()
-                   for r in c["reviews"]})
+        "AD01B1O1",
+        "AD01B1O2",
+        "AD01B1O3",
+        "AD01B1T1",
+        "AD01B1T2",
+        "AD01B1T3",
+    }
+    dues = sorted(
+        {
+            r["due_session"]
+            for c in acon.load_registry()["concepts"].values()
+            for r in c["reviews"]
+        }
+    )
     assert dues == [2, 5, 29, 57]  # next block, next day, day 7, day 14
 
 
@@ -425,11 +468,17 @@ def test_forgetting_requeues_and_pulls_strength_down(iso, no_network):
 
 def test_assessment_mode_reviews_more(iso, no_network):
     syl = rs.load_syllabus()
-    for day, block, track in ((1, 1, "A"), (1, 2, "B"), (1, 3, "C"),
-                              (2, 1, "A"), (2, 2, "B")):
+    for day, block, track in (
+        (1, 1, "A"),
+        (1, 2, "B"),
+        (1, 3, "C"),
+        (2, 1, "A"),
+        (2, 2, "B"),
+    ):
         _, entry = rs.entry_for(syl, day, block)
-        acon.register_session(day, block, track, entry, DRY_RESEARCH,
-                              rs.day_block_to_n(day, block))
+        acon.register_session(
+            day, block, track, entry, DRY_RESEARCH, rs.day_block_to_n(day, block)
+        )
     rep_a = acon.run_reviews(9, assessment=True)
     assert rep_a["assessment"] is True
     assert rep_a["reviewed"] == acon.ASSESSMENT_REVIEWS
@@ -446,13 +495,15 @@ def test_interleaving_in_sparring(iso, no_network):
     assert len(r4["interleaved"]) == 2
     reg = acon.load_registry()["concepts"]
     tracks = {reg[cid]["track"] for cid in r4["interleaved"]}
-    assert tracks <= {"A", "B", "C"} and tracks, \
+    assert tracks <= {"A", "B", "C"} and tracks, (
         "sparring must interleave cross-track concepts"
+    )
 
 
 def test_status_shows_retention_and_streaks(iso, no_network, capsys):
     from levi.cli.main import cmd_academy
     import types
+
     rs.run_one_session(1, 1, dry_research=DRY_RESEARCH)
     args = types.SimpleNamespace(academy_action="status", day=None, block=None)
     assert cmd_academy(args) == 0

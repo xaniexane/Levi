@@ -95,7 +95,7 @@ def main(argv=None) -> int:
     p_run.add_argument("--domain", help="domain (mandella)")
     p_run.add_argument(
         "--kwargs-json",
-        help='extra keyword args as JSON object, e.g. --kwargs-json \'{"record": {...}}\'',
+        help="extra keyword args as JSON object, e.g. --kwargs-json '{\"record\": {...}}'",
     )
     p_run.add_argument("--json", action="store_true", help="JSON output")
     p_run.set_defaults(func=cmd_run)

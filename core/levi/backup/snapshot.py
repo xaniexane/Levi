@@ -5,6 +5,7 @@ model weights, caches, and the snapshots themselves. The corpus, growth
 journal, memory, findings, scopes, and config are all small text/JSON and
 are always included.
 """
+
 from __future__ import annotations
 
 import hashlib

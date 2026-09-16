@@ -445,9 +445,7 @@ def serve(host: str = "127.0.0.1", port: int = 8765) -> None:
         )
         raise SystemExit(2)
     if not isinstance(host, str) or not host.strip():
-        raise ValueError(
-            f"serve: 'host' must be a non-empty string, got {host!r}"
-        )
+        raise ValueError(f"serve: 'host' must be a non-empty string, got {host!r}")
     try:
         port = int(port)  # type: ignore[arg-type]
     except (TypeError, ValueError):
@@ -455,9 +453,7 @@ def serve(host: str = "127.0.0.1", port: int = 8765) -> None:
             f"serve: 'port' must be an integer in 1..65535, got {port!r}"
         ) from None
     if not 1 <= port <= 65535:
-        raise ValueError(
-            f"serve: 'port' must be an integer in 1..65535, got {port!r}"
-        )
+        raise ValueError(f"serve: 'port' must be an integer in 1..65535, got {port!r}")
 
     from levi.cloud.ratelimit import RateLimiter
 

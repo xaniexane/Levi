@@ -19,8 +19,10 @@ def cmd_status(args) -> int:
     snaps = list_snapshots()
     print(f"local snapshots: {len(snaps)}")
     for s in snaps[:10]:
-        print(f"  {s.get('snapshot_id')}: {s.get('total_bytes', 0)} bytes "
-              f"{'complete' if s.get('complete') else 'INCOMPLETE'}")
+        print(
+            f"  {s.get('snapshot_id')}: {s.get('total_bytes', 0)} bytes "
+            f"{'complete' if s.get('complete') else 'INCOMPLETE'}"
+        )
     return 0
 
 
@@ -28,8 +30,10 @@ def cmd_now(args) -> int:
     from levi.backup.snapshot import create_snapshot
 
     report = create_snapshot(label=args.label)
-    print(f"snapshot {report['snapshot_id']} created "
-          f"({report['total_bytes']} bytes, {report['files']} files)")
+    print(
+        f"snapshot {report['snapshot_id']} created "
+        f"({report['total_bytes']} bytes, {report['files']} files)"
+    )
     print(f"  tarball: {report['tarball']}")
     return 0
 
@@ -62,8 +66,9 @@ def cmd_restore(args) -> int:
     from levi.backup.restore import restore_snapshot
 
     if args.apply and not args.yes:
-        print("restore --apply refused: pass --yes to confirm "
-              "overwriting live state.", )
+        print(
+            "restore --apply refused: pass --yes to confirm overwriting live state.",
+        )
         return 2
     try:
         res = restore_snapshot(
@@ -89,15 +94,13 @@ def main(argv=None) -> int:
     )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    sub.add_parser("status", help="list local snapshots") \
-        .set_defaults(func=cmd_status)
+    sub.add_parser("status", help="list local snapshots").set_defaults(func=cmd_status)
 
     p_now = sub.add_parser("now", help="snapshot now (syncs if configured)")
     p_now.add_argument("--label", default=None)
     p_now.set_defaults(func=cmd_now)
 
-    sub.add_parser("daily", help="the once-a-day job") \
-        .set_defaults(func=cmd_daily)
+    sub.add_parser("daily", help="the once-a-day job").set_defaults(func=cmd_daily)
 
     p_ver = sub.add_parser("verify", help="verify a snapshot's manifest")
     p_ver.add_argument("snapshot")
@@ -106,10 +109,12 @@ def main(argv=None) -> int:
     p_res = sub.add_parser("restore", help="verify + stage (or apply) a snapshot")
     p_res.add_argument("snapshot")
     p_res.add_argument("--from-remote", action="store_true")
-    p_res.add_argument("--apply", action="store_true",
-                       help="apply to live state (needs --yes)")
-    p_res.add_argument("--yes", action="store_true",
-                       help="explicit confirmation for --apply")
+    p_res.add_argument(
+        "--apply", action="store_true", help="apply to live state (needs --yes)"
+    )
+    p_res.add_argument(
+        "--yes", action="store_true", help="explicit confirmation for --apply"
+    )
     p_res.set_defaults(func=cmd_restore)
 
     args = ap.parse_args(argv)

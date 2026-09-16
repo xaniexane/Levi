@@ -17,47 +17,175 @@ import re
 
 # (wing slug, display name, description, keywords)
 _COLLECTIONS: Tuple[Tuple[str, str, str, Tuple[str, ...]], ...] = (
-    ("memory-arts", "Memory Arts",
-     "Techniques for remembering: palaces, commonplaces, card systems.",
-     ("memory palace", "method of loci", "mnemonic", "commonplace",
-      "florilegia", "kardex", "edge-notched", "uniterm", "colon classification",
-      "pinakes", "mundaneum", "tironian")),
-    ("hypertext", "Hypertext & Trails",
-     "Linking and trails before and beyond the web.",
-     ("xanadu", "hypertext", "linkbase", "memex", "trail", "transclusion",
-      "zigzag", "microcosm", "hyper-g", "intermedia", "notecards", "augment")),
-    ("offline-first", "Offline-First",
-     "Sync, replication, and namespaces that assume disconnection.",
-     ("replication", "offline", "replica", "namespace", "9p", "plan 9",
-      "inferno", "groove", "p2p", "peer-to-peer", "sync")),
-    ("ai-lineage", "AI Lineage",
-     "The ancestors: expert systems, cognitive architectures, planners.",
-     ("soar", "act-r", "expert system", "cyc", "eurisko", "goap",
-      "blackboard", "hearsay", "ops5", "art ", "planner", "cognitive")),
-    ("analytical-craft", "Analytical Craft",
-     "Ways of thinking: competing hypotheses, morphological boxes, grids.",
-     ("competing hypotheses", "morphological", "repertory grid", "triz",
-      "de bono", "ach ", "zwicky", "kelly")),
-    ("operating-systems", "Operating Systems",
-     "Dead and sidelined OSes and their load-bearing ideas.",
-     ("operating system", "microkernel", "beos", "amigaos", "qnx",
-      "oberon", "lisp machine", "inferno", "eros", "keykos")),
-    ("dead-languages", "Dead Languages",
-     "Programming languages and environments ahead of their time.",
-     ("smalltalk", "hypertalk", "newtonscript", "interlisp", "limbo",
-      "mumps", "self ", "arexx", "applescript", "language")),
-    ("productivity", "Productivity Systems",
-     "Dead ways of organizing work and attention.",
-     ("tickler", "ivy lee", "franklin", "agenda", "ecco", "improv",
-      "canon cat", "data detectors", "productivity")),
-    ("communication", "Communication Protocols",
-     "Codes, prowords, and compression before the internet.",
-     ("q-code", "proword", "telegraph", "codebook", "chappe", "quipu",
-      "pneumatic", "radiotelephony")),
-    ("verification", "Verification Discipline",
-     "How the careful got things right: duplex checks, pipelines.",
-     ("duplex", "verification", "t-5", "therblig", "pipeline",
-      "double-check", "almanac")),
+    (
+        "memory-arts",
+        "Memory Arts",
+        "Techniques for remembering: palaces, commonplaces, card systems.",
+        (
+            "memory palace",
+            "method of loci",
+            "mnemonic",
+            "commonplace",
+            "florilegia",
+            "kardex",
+            "edge-notched",
+            "uniterm",
+            "colon classification",
+            "pinakes",
+            "mundaneum",
+            "tironian",
+        ),
+    ),
+    (
+        "hypertext",
+        "Hypertext & Trails",
+        "Linking and trails before and beyond the web.",
+        (
+            "xanadu",
+            "hypertext",
+            "linkbase",
+            "memex",
+            "trail",
+            "transclusion",
+            "zigzag",
+            "microcosm",
+            "hyper-g",
+            "intermedia",
+            "notecards",
+            "augment",
+        ),
+    ),
+    (
+        "offline-first",
+        "Offline-First",
+        "Sync, replication, and namespaces that assume disconnection.",
+        (
+            "replication",
+            "offline",
+            "replica",
+            "namespace",
+            "9p",
+            "plan 9",
+            "inferno",
+            "groove",
+            "p2p",
+            "peer-to-peer",
+            "sync",
+        ),
+    ),
+    (
+        "ai-lineage",
+        "AI Lineage",
+        "The ancestors: expert systems, cognitive architectures, planners.",
+        (
+            "soar",
+            "act-r",
+            "expert system",
+            "cyc",
+            "eurisko",
+            "goap",
+            "blackboard",
+            "hearsay",
+            "ops5",
+            "art ",
+            "planner",
+            "cognitive",
+        ),
+    ),
+    (
+        "analytical-craft",
+        "Analytical Craft",
+        "Ways of thinking: competing hypotheses, morphological boxes, grids.",
+        (
+            "competing hypotheses",
+            "morphological",
+            "repertory grid",
+            "triz",
+            "de bono",
+            "ach ",
+            "zwicky",
+            "kelly",
+        ),
+    ),
+    (
+        "operating-systems",
+        "Operating Systems",
+        "Dead and sidelined OSes and their load-bearing ideas.",
+        (
+            "operating system",
+            "microkernel",
+            "beos",
+            "amigaos",
+            "qnx",
+            "oberon",
+            "lisp machine",
+            "inferno",
+            "eros",
+            "keykos",
+        ),
+    ),
+    (
+        "dead-languages",
+        "Dead Languages",
+        "Programming languages and environments ahead of their time.",
+        (
+            "smalltalk",
+            "hypertalk",
+            "newtonscript",
+            "interlisp",
+            "limbo",
+            "mumps",
+            "self ",
+            "arexx",
+            "applescript",
+            "language",
+        ),
+    ),
+    (
+        "productivity",
+        "Productivity Systems",
+        "Dead ways of organizing work and attention.",
+        (
+            "tickler",
+            "ivy lee",
+            "franklin",
+            "agenda",
+            "ecco",
+            "improv",
+            "canon cat",
+            "data detectors",
+            "productivity",
+        ),
+    ),
+    (
+        "communication",
+        "Communication Protocols",
+        "Codes, prowords, and compression before the internet.",
+        (
+            "q-code",
+            "proword",
+            "telegraph",
+            "codebook",
+            "chappe",
+            "quipu",
+            "pneumatic",
+            "radiotelephony",
+        ),
+    ),
+    (
+        "verification",
+        "Verification Discipline",
+        "How the careful got things right: duplex checks, pipelines.",
+        (
+            "duplex",
+            "verification",
+            "t-5",
+            "therblig",
+            "pipeline",
+            "double-check",
+            "almanac",
+        ),
+    ),
 )
 
 
@@ -71,16 +199,23 @@ class Wing:
 
 
 def _record_text(rec: ArchiveRecord) -> str:
-    return " ".join([rec.title, rec.era, rec.summary, rec.mechanism,
-                     rec.decline, rec.revival_recipe,
-                     rec.levi_application]).lower()
+    return " ".join(
+        [
+            rec.title,
+            rec.era,
+            rec.summary,
+            rec.mechanism,
+            rec.decline,
+            rec.revival_recipe,
+            rec.levi_application,
+        ]
+    ).lower()
 
 
 def _wing_patterns(keywords: Tuple[str, ...]) -> List[Tuple[str, "re.Pattern"]]:
     # word-boundary matching: "ach" must not match "each", "art" must not
     # match "part". Keywords are matched case-insensitively on lowercased text.
-    return [(kw, re.compile(r"\b" + re.escape(kw.strip()) + r"\b"))
-            for kw in keywords]
+    return [(kw, re.compile(r"\b" + re.escape(kw.strip()) + r"\b")) for kw in keywords]
 
 
 def build_collections(records: List[ArchiveRecord]) -> Dict[str, Wing]:
@@ -95,8 +230,13 @@ def build_collections(records: List[ArchiveRecord]) -> Dict[str, Wing]:
             if hits:
                 ids.append(rec.id)
                 matched[rec.id] = hits
-        wings[slug] = Wing(slug=slug, name=name, description=desc,
-                           record_ids=ids, matched_keywords=matched)
+        wings[slug] = Wing(
+            slug=slug,
+            name=name,
+            description=desc,
+            record_ids=ids,
+            matched_keywords=matched,
+        )
     return wings
 
 
@@ -111,15 +251,18 @@ class Hit:
     why: str
 
 
-def search(store: ArchiveStore,
-           query: str = "",
-           kind: Optional[str] = None,
-           rating: Optional[str] = None,
-           status: Optional[str] = None,
-           era: Optional[str] = None,
-           limit: int = 20) -> List[Hit]:
+def search(
+    store: ArchiveStore,
+    query: str = "",
+    kind: Optional[str] = None,
+    rating: Optional[str] = None,
+    status: Optional[str] = None,
+    era: Optional[str] = None,
+    limit: int = 20,
+) -> List[Hit]:
     """Ranked search with filters. Deny-closed on bad filter values."""
     from .record import KINDS, RATINGS, STATUSES
+
     if kind is not None and kind not in KINDS:
         raise ValueError("bad kind filter: %r" % kind)
     if rating is not None and rating not in RATINGS:
@@ -143,8 +286,13 @@ def search(store: ArchiveStore,
             continue
         title_t = set(tokenize(rec.title))
         mech_t = set(tokenize(rec.mechanism))
-        rest_t = set(tokenize(" ".join([rec.summary, rec.decline,
-                                        rec.revival_recipe, rec.levi_application])))
+        rest_t = set(
+            tokenize(
+                " ".join(
+                    [rec.summary, rec.decline, rec.revival_recipe, rec.levi_application]
+                )
+            )
+        )
         score = 0.0
         why_bits = []
         for tok in tokens:
@@ -159,9 +307,11 @@ def search(store: ArchiveStore,
                 why_bits.append("text:%s" % tok)
             else:
                 # prefix fallback: "replic" matches "replication"
-                for cand, w, tag in ((title_t, 1.5, "title~"),
-                                     (mech_t, 1.0, "mechanism~"),
-                                     (rest_t, 0.5, "text~")):
+                for cand, w, tag in (
+                    (title_t, 1.5, "title~"),
+                    (mech_t, 1.0, "mechanism~"),
+                    (rest_t, 0.5, "text~"),
+                ):
                     if any(t.startswith(tok) for t in cand):
                         score += w
                         why_bits.append("%s%s" % (tag, tok))

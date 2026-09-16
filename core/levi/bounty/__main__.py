@@ -29,8 +29,9 @@ def cmd_scope(a) -> int:
     store, scmd = ScopeStore(), a.scope_cmd or "list"
     if scmd in ("add", "remove"):
         if not a.domain:
-            print(f"Usage: python -m levi.bounty scope {scmd} <domain>",
-                  file=sys.stderr)
+            print(
+                f"Usage: python -m levi.bounty scope {scmd} <domain>", file=sys.stderr
+            )
             return 2
         try:
             res = store.add(a.domain) if scmd == "add" else store.remove(a.domain)
@@ -40,8 +41,11 @@ def cmd_scope(a) -> int:
         print(f"Scope {'enrolled' if scmd == 'add' else 'removed'}: {res or a.domain}")
         return 0
     doms = store.list()
-    print("No scopes enrolled. Use: python -m levi.bounty scope add <domain>"
-          if not doms else "Enrolled scopes (domain + subdomains):")
+    print(
+        "No scopes enrolled. Use: python -m levi.bounty scope add <domain>"
+        if not doms
+        else "Enrolled scopes (domain + subdomains):"
+    )
     for d in doms:
         print(f"  {d}")
     return 0
@@ -66,8 +70,10 @@ def cmd_recon(a) -> int:
     from levi.bounty.scope import ScopeError
 
     if not a.domain:
-        print("Usage: python -m levi.bounty recon <domain> [--ports 80,443]",
-              file=sys.stderr)
+        print(
+            "Usage: python -m levi.bounty recon <domain> [--ports 80,443]",
+            file=sys.stderr,
+        )
         return 2
     try:
         ports = _parse_ports(a.ports) if a.ports else None
@@ -90,14 +96,17 @@ def cmd_recon(a) -> int:
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(prog="levi.bounty",
-                                 description="LEVI bug-bounty recon — scoped, "
-                                 "polite, recon-only (mirrors `levi bounty`)")
+    ap = argparse.ArgumentParser(
+        prog="levi.bounty",
+        description="LEVI bug-bounty recon — scoped, "
+        "polite, recon-only (mirrors `levi bounty`)",
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     p = sub.add_parser("scope", help="manage enrolled scopes")
-    p.add_argument("scope_cmd", nargs="?", choices=["add", "remove", "list"],
-                   default="list")
+    p.add_argument(
+        "scope_cmd", nargs="?", choices=["add", "remove", "list"], default="list"
+    )
     p.add_argument("domain", nargs="?", default=None)
     p.set_defaults(func=cmd_scope)
 

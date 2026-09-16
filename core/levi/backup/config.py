@@ -4,6 +4,7 @@ Never stores secrets. The crypt passphrase lives only in rclone's own
 obscured config (entered interactively by the user during setup); this
 module only records *which* rclone remote to use.
 """
+
 from __future__ import annotations
 
 import json

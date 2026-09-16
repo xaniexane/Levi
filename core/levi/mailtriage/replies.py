@@ -20,7 +20,7 @@ import json
 import os
 import time
 import uuid
-from email.utils import getaddresses, parseaddr
+from email.utils import parseaddr
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -31,10 +31,7 @@ DEFAULT_TEMPLATES: List[Dict[str, Any]] = [
         "name": "thanks",
         "when": {"body_contains": ["thank you", "thanks so much", "appreciate"]},
         "subject": "Re: {subject}",
-        "body": (
-            "You're very welcome!\n\n"
-            "— sent from a template draft, not yet sent"
-        ),
+        "body": ("You're very welcome!\n\n— sent from a template draft, not yet sent"),
     },
     {
         "name": "ack",
@@ -60,10 +57,7 @@ DEFAULT_TEMPLATES: List[Dict[str, Any]] = [
         "name": "receipt_ack",
         "when": {"subject_contains": ["receipt", "order confirmation", "invoice"]},
         "subject": "Re: {subject}",
-        "body": (
-            "Received — thank you.\n\n"
-            "— sent from a template draft, not yet sent"
-        ),
+        "body": ("Received — thank you.\n\n— sent from a template draft, not yet sent"),
     },
     {
         "name": "followup",
@@ -131,7 +125,9 @@ class ReplyEngine:
             return [dict(t) for t in DEFAULT_TEMPLATES]
         try:
             raw = json.loads(self._tpl_path.read_text(encoding="utf-8"))
-            return raw if isinstance(raw, list) else [dict(t) for t in DEFAULT_TEMPLATES]
+            return (
+                raw if isinstance(raw, list) else [dict(t) for t in DEFAULT_TEMPLATES]
+            )
         except (OSError, ValueError):
             return [dict(t) for t in DEFAULT_TEMPLATES]
 
@@ -164,17 +160,19 @@ class ReplyEngine:
                     subject = tpl.get("subject", "Re: {subject}").format(**ctx)
                 except (KeyError, IndexError):
                     continue
-                out.append({
-                    "template": tpl["name"],
-                    "to": rec.get("from", ""),
-                    "subject": subject,
-                    "body": body,
-                    "label": "template-draft — NOT sent",
-                    "honest_note": (
-                        "Rule-based template match, not a model. "
-                        "Review and edit before using."
-                    ),
-                })
+                out.append(
+                    {
+                        "template": tpl["name"],
+                        "to": rec.get("from", ""),
+                        "subject": subject,
+                        "body": body,
+                        "label": "template-draft — NOT sent",
+                        "honest_note": (
+                            "Rule-based template match, not a model. "
+                            "Review and edit before using."
+                        ),
+                    }
+                )
         return out
 
     def save_draft(self, rec: Dict[str, Any], suggestion: Dict[str, Any]) -> str:

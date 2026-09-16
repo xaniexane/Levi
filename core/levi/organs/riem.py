@@ -36,9 +36,19 @@ KIND_BY_CLASS = {
 }
 
 REQUIRED_KEYS = (
-    "organ", "source", "what", "context", "ts", "severity",
-    "compost_class", "lesson", "inverse_map", "reusable",
-    "corroboration", "fingerprint", "provenance",
+    "organ",
+    "source",
+    "what",
+    "context",
+    "ts",
+    "severity",
+    "compost_class",
+    "lesson",
+    "inverse_map",
+    "reusable",
+    "corroboration",
+    "fingerprint",
+    "provenance",
 )
 
 PROMOTE_SEVERITY = "high"
@@ -51,8 +61,7 @@ def _fingerprint(text: str) -> str:
 def _validate_compost(compost: Dict) -> Dict:
     if not isinstance(compost, dict):
         raise ValueError(
-            "promote: compost record must be a dict, got %s"
-            % type(compost).__name__
+            "promote: compost record must be a dict, got %s" % type(compost).__name__
         )
     missing = [k for k in REQUIRED_KEYS if k not in compost]
     if missing:
@@ -61,8 +70,7 @@ def _validate_compost(compost: Dict) -> Dict:
         )
     if compost["organ"] != "reim":
         raise ValueError(
-            "promote: not a REIM compost record (organ=%r)"
-            % (compost.get("organ"),)
+            "promote: not a REIM compost record (organ=%r)" % (compost.get("organ"),)
         )
     if compost["compost_class"] not in KIND_BY_CLASS:
         raise ValueError(
@@ -93,19 +101,19 @@ def _confidence(compost: Dict) -> str:
 
 def _content(kind: str, compost: Dict) -> str:
     if kind == "guard-rule":
-        return (
-            "Guard: before %s, enforce the precondition from this failure: %s"
-            % (compost["source"], compost["lesson"])
+        return "Guard: before %s, enforce the precondition from this failure: %s" % (
+            compost["source"],
+            compost["lesson"],
         )
     if kind == "checklist-item":
-        return (
-            "Checklist: when doing work like %r, verify: %s"
-            % (compost["what"][:80], compost["lesson"])
+        return "Checklist: when doing work like %r, verify: %s" % (
+            compost["what"][:80],
+            compost["lesson"],
         )
     # procedural-memory
-    return (
-        "Procedural memory: %s. Inverse map: %s"
-        % (compost["lesson"], compost["inverse_map"])
+    return "Procedural memory: %s. Inverse map: %s" % (
+        compost["lesson"],
+        compost["inverse_map"],
     )
 
 
@@ -170,9 +178,7 @@ def format_proposals(proposals: List[Dict]) -> str:
             raise ValueError("format_proposals: each proposal must be a dict")
         for key in ("kind", "content", "confidence"):
             if key not in p:
-                raise ValueError(
-                    "format_proposals: proposal is missing key %r" % key
-                )
+                raise ValueError("format_proposals: proposal is missing key %r" % key)
     lines = ["=== RIEM genome proposals (%d) ===" % len(proposals), ""]
     for i, p in enumerate(proposals, 1):
         lines.append(
@@ -181,7 +187,5 @@ def format_proposals(proposals: List[Dict]) -> str:
         )
         lines.append("   %s" % p["content"])
     lines.append("")
-    lines.append(
-        "Proposals are data, not writes. Nothing was applied."
-    )
+    lines.append("Proposals are data, not writes. Nothing was applied.")
     return "\n".join(lines)

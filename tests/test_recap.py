@@ -38,10 +38,15 @@ def _row(ts, cat, kind="session", label=None, value=1, unit=None):
 
 
 def test_load_validates_rows(tmp_path):
-    p = _write_events(tmp_path / "e.jsonl", [
-        _row("2026-01-01T10:00:00", "reading", label="Dune", value=30, unit="minutes"),
-        {"category": "x", "kind": "y"},  # missing ts
-    ])
+    p = _write_events(
+        tmp_path / "e.jsonl",
+        [
+            _row(
+                "2026-01-01T10:00:00", "reading", label="Dune", value=30, unit="minutes"
+            ),
+            {"category": "x", "kind": "y"},  # missing ts
+        ],
+    )
     with pytest.raises(RecapError) as e:
         load_events(p)
     assert "missing 'ts'" in str(e.value)
@@ -60,12 +65,15 @@ def test_load_missing_file(tmp_path):
 
 
 def test_stats_totals_and_streak(tmp_path):
-    p = _write_events(tmp_path / "e.jsonl", [
-        _row("2026-03-01T09:00:00", "reading", value=20),
-        _row("2026-03-02T09:00:00", "reading", value=30),
-        _row("2026-03-03T09:00:00", "coding", value=60),
-        _row("2026-03-10T09:00:00", "reading", value=10),  # gap breaks streak
-    ])
+    p = _write_events(
+        tmp_path / "e.jsonl",
+        [
+            _row("2026-03-01T09:00:00", "reading", value=20),
+            _row("2026-03-02T09:00:00", "reading", value=30),
+            _row("2026-03-03T09:00:00", "coding", value=60),
+            _row("2026-03-10T09:00:00", "reading", value=10),  # gap breaks streak
+        ],
+    )
     s = compute_stats(load_events(p))
     assert s["events"] == 4
     assert s["active_days"] == 4
@@ -76,26 +84,34 @@ def test_stats_totals_and_streak(tmp_path):
 
 
 def test_stats_top_value_ordering(tmp_path):
-    p = _write_events(tmp_path / "e.jsonl", [
-        _row("2026-03-01T09:00:00", "reading", value=20),
-        _row("2026-03-02T09:00:00", "coding", value=200),
-    ])
+    p = _write_events(
+        tmp_path / "e.jsonl",
+        [
+            _row("2026-03-01T09:00:00", "reading", value=20),
+            _row("2026-03-02T09:00:00", "coding", value=200),
+        ],
+    )
     s = compute_stats(load_events(p))
     assert s["top_categories_by_value"][0] == ("coding", 200.0)
 
 
 def test_stats_year_filter(tmp_path):
-    p = _write_events(tmp_path / "e.jsonl", [
-        _row("2025-12-31T23:00:00", "reading"),
-        _row("2026-01-01T09:00:00", "reading"),
-    ])
+    p = _write_events(
+        tmp_path / "e.jsonl",
+        [
+            _row("2025-12-31T23:00:00", "reading"),
+            _row("2026-01-01T09:00:00", "reading"),
+        ],
+    )
     s = compute_stats(load_events(p), year=2026)
     assert s["events"] == 1
 
 
 def test_stats_milestones_and_biggest_day(tmp_path):
-    rows = [_row("2026-05-%02dT10:00:00" % d, "music", label="jazz", value=5)
-            for d in range(1, 11)]
+    rows = [
+        _row("2026-05-%02dT10:00:00" % d, "music", label="jazz", value=5)
+        for d in range(1, 11)
+    ]
     rows.append(_row("2026-05-11T10:00:00", "music", label="jazz", value=500))
     p = _write_events(tmp_path / "e.jsonl", rows)
     s = compute_stats(load_events(p))
@@ -118,9 +134,12 @@ def test_render_text_honest_footer(tmp_path):
 
 
 def test_render_html_is_standalone(tmp_path):
-    p = _write_events(tmp_path / "e.jsonl", [
-        _row("2026-01-01T10:00:00", "reading", label="Dune <script>", value=30),
-    ])
+    p = _write_events(
+        tmp_path / "e.jsonl",
+        [
+            _row("2026-01-01T10:00:00", "reading", label="Dune <script>", value=30),
+        ],
+    )
     page = render_html(compute_stats(load_events(p)))
     assert "<script>" not in page  # label is escaped
     assert "Dune &lt;script&gt;" in page
@@ -141,6 +160,7 @@ def test_sample_is_deterministic_and_labeled(tmp_path):
 # --------------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------------
+
 
 def test_cli_stats_and_html(tmp_path, capsys):
     p = sample_events(tmp_path / "s.jsonl", n=120)

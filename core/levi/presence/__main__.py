@@ -51,8 +51,9 @@ def default_name() -> str:
 
 
 def _parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="levi.presence",
-                                description="LAN drop-in rooms, no account.")
+    p = argparse.ArgumentParser(
+        prog="levi.presence", description="LAN drop-in rooms, no account."
+    )
     sub = p.add_subparsers(dest="cmd", required=True)
 
     s = sub.add_parser("serve", help="run a hub + discovery beacon")
@@ -94,9 +95,12 @@ def _hello(host: str, port: int, name: str) -> tuple:
     if not resp.get("ok"):
         raise SystemExit("hello failed: %s" % resp.get("error"))
     sock = socket.create_connection((host, port), timeout=5.0)
-    sock.sendall((json.dumps({"op": "hello", "name": name,
-                              "client_id": resp["client_id"]}) + "\n")
-                   .encode("utf-8"))
+    sock.sendall(
+        (
+            json.dumps({"op": "hello", "name": name, "client_id": resp["client_id"]})
+            + "\n"
+        ).encode("utf-8")
+    )
     return sock, resp["client_id"]
 
 
@@ -107,9 +111,13 @@ def cmd_serve(args) -> int:
     print("hub %r on %s:%d  (no account, LAN only)" % (name, host, port))
     sender = None
     if not args.no_beacon:
-        beacon = Beacon(hub_id=new_id("hub"), name=name,
-                        host=host if host != "0.0.0.0" else "127.0.0.1",
-                        port=port, rooms=[])
+        beacon = Beacon(
+            hub_id=new_id("hub"),
+            name=name,
+            host=host if host != "0.0.0.0" else "127.0.0.1",
+            port=port,
+            rooms=[],
+        )
         sender = BeaconSender(beacon)
         sender.start()
         print("announcing on %s:%d" % (MULTICAST_GROUP, DISCOVERY_PORT))
@@ -143,8 +151,7 @@ def cmd_peers(args) -> int:
 
 
 def cmd_rooms(args) -> int:
-    resp = send_request(args.host, args.port, {"op": "hello",
-                                               "name": default_name()})
+    resp = send_request(args.host, args.port, {"op": "hello", "name": default_name()})
     if not resp.get("ok"):
         print("hello failed: %s" % resp.get("error"), file=sys.stderr)
         return 1
@@ -159,16 +166,23 @@ def cmd_rooms(args) -> int:
 
 
 def cmd_create(args) -> int:
-    resp = send_request(args.host, args.port, {"op": "hello",
-                                               "name": default_name()})
+    resp = send_request(args.host, args.port, {"op": "hello", "name": default_name()})
     cid = resp.get("client_id", "")
     # One-shot create: re-attach with the fresh id, then create the room.
     with socket.create_connection((args.host, args.port), timeout=5.0) as sock:
-        sock.sendall((json.dumps({"op": "hello", "name": default_name(),
-                                  "client_id": cid}) + "\n").encode("utf-8"))
+        sock.sendall(
+            (
+                json.dumps({"op": "hello", "name": default_name(), "client_id": cid})
+                + "\n"
+            ).encode("utf-8")
+        )
         sock.recv(65536)
-        sock.sendall((json.dumps({"op": "create", "room": args.room,
-                                  "topic": args.topic}) + "\n").encode("utf-8"))
+        sock.sendall(
+            (
+                json.dumps({"op": "create", "room": args.room, "topic": args.topic})
+                + "\n"
+            ).encode("utf-8")
+        )
         buf = b""
         while b"\n" not in buf:
             buf += sock.recv(65536)
@@ -193,15 +207,19 @@ def _read_line(sock) -> dict:
 def cmd_say(args) -> int:
     sock, _cid = _hello(args.host, args.port, args.name or default_name())
     try:
-        sock.sendall((json.dumps({"op": "join",
-                                  "room": args.room}) + "\n").encode("utf-8"))
+        sock.sendall(
+            (json.dumps({"op": "join", "room": args.room}) + "\n").encode("utf-8")
+        )
         join_ack = _read_line(sock)
         if join_ack.get("ok") is False:
             print("join failed: %s" % join_ack.get("error"), file=sys.stderr)
             return 1
         text = " ".join(args.text)
-        sock.sendall((json.dumps({"op": "say", "room": args.room,
-                                  "text": text}) + "\n").encode("utf-8"))
+        sock.sendall(
+            (json.dumps({"op": "say", "room": args.room, "text": text}) + "\n").encode(
+                "utf-8"
+            )
+        )
         ack = _read_line(sock)
     finally:
         sock.close()
@@ -215,8 +233,7 @@ def cmd_say(args) -> int:
 def cmd_join(args) -> int:
     name = args.name or default_name()
     sock, _cid = _hello(args.host, args.port, name)
-    sock.sendall((json.dumps({"op": "join",
-                              "room": args.room}) + "\n").encode("utf-8"))
+    sock.sendall((json.dumps({"op": "join", "room": args.room}) + "\n").encode("utf-8"))
     stop = threading.Event()
 
     def reader():
@@ -247,16 +264,18 @@ def cmd_join(args) -> int:
 
     t = threading.Thread(target=reader, daemon=True)
     t.start()
-    print("joined #%s as %s — type messages, Ctrl-D to leave"
-          % (args.room, name))
+    print("joined #%s as %s — type messages, Ctrl-D to leave" % (args.room, name))
     try:
         print("> ", end="", flush=True)
         for line in sys.stdin:
             text = line.strip()
             if text:
-                sock.sendall((json.dumps({"op": "say", "room": args.room,
-                                          "text": text}) + "\n")
-                             .encode("utf-8"))
+                sock.sendall(
+                    (
+                        json.dumps({"op": "say", "room": args.room, "text": text})
+                        + "\n"
+                    ).encode("utf-8")
+                )
             print("> ", end="", flush=True)
     except (BrokenPipeError, OSError):
         pass

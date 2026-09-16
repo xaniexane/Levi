@@ -2,11 +2,11 @@
 state unless ``--apply`` is given with explicit confirmation — and even
 then a safety snapshot of the current state is taken first.
 """
+
 from __future__ import annotations
 
 import shutil
 import tarfile
-from datetime import datetime, timezone
 from pathlib import Path
 
 from .config import backup_root, levi_home, staging_root
@@ -64,7 +64,11 @@ def restore_snapshot(
             known = [s["snapshot_id"] for s in list_snapshots()]
             raise FileNotFoundError(
                 f"snapshot '{snapshot_id}' not found locally"
-                + (f" (have: {', '.join(known[:5])})" if known else " (no local snapshots)")
+                + (
+                    f" (have: {', '.join(known[:5])})"
+                    if known
+                    else " (no local snapshots)"
+                )
             )
         ok, problems = verify_snapshot(snapshot_id)
     if not ok:

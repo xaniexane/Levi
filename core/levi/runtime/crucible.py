@@ -74,8 +74,7 @@ class Crucible:
         resolved = (chamber / rel_name).resolve()
         if resolved != chamber.resolve() and chamber.resolve() not in resolved.parents:
             raise ValueError(
-                "file_smoke: 'rel_name' escapes the chamber, "
-                f"got {rel_name!r}"
+                f"file_smoke: 'rel_name' escapes the chamber, got {rel_name!r}"
             )
         return resolved
 
@@ -144,17 +143,13 @@ class Crucible:
         try:
             self._check_rel_name(rel_name)
         except ValueError as exc:
-            return CrucibleResult(
-                id=cid, mode="file_smoke", ok=False, detail=str(exc)
-            )
+            return CrucibleResult(id=cid, mode="file_smoke", ok=False, detail=str(exc))
         chamber = self._chamber()
         try:
             path = self._safe_rel_path(chamber, rel_name)
             path.parent.mkdir(parents=True, exist_ok=True)
         except ValueError as exc:
-            return CrucibleResult(
-                id=cid, mode="file_smoke", ok=False, detail=str(exc)
-            )
+            return CrucibleResult(id=cid, mode="file_smoke", ok=False, detail=str(exc))
         path.write_text(content, encoding="utf-8")
         if path.suffix == ".py":
             try:

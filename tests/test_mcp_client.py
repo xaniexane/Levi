@@ -415,7 +415,9 @@ def test_add_server_validates_timeout_and_headers(tmp_path):
     home = tmp_path / "home"
     for bad in ("soon", -1, 0, float("inf"), float("nan"), 3600):
         with pytest.raises(mc.MCPClientError):
-            mc.add_server("s", transport="http", url="http://h/", timeout=bad, home=home)
+            mc.add_server(
+                "s", transport="http", url="http://h/", timeout=bad, home=home
+            )
     with pytest.raises(mc.MCPClientError):
         mc.add_server(
             "s", transport="http", url="http://h/", headers={"X-A": 1}, home=home
@@ -473,9 +475,7 @@ def test_connect_server_rejects_malformed_configs():
         mc.connect_server("s", None)  # type: ignore[arg-type]
     # Non-string argv elements are rejected, not str()-converted.
     with pytest.raises(mc.MCPClientError, match="argv element"):
-        mc.connect_server(
-            "s", {"transport": "stdio", "command": ["npx", 123]}
-        )
+        mc.connect_server("s", {"transport": "stdio", "command": ["npx", 123]})
     with pytest.raises(mc.MCPClientError, match="non-empty list of strings"):
         mc.connect_server("s", {"transport": "stdio", "command": "npx server"})
     with pytest.raises(mc.MCPClientError, match="every argv element"):

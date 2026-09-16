@@ -236,8 +236,11 @@ def _parse_ts(value) -> Optional[datetime]:
     return dt
 
 
-def recency_factor(entry, half_life_hours: float = _DEFAULT_HALFLIFE_HOURS,
-                   now: Optional[datetime] = None) -> float:
+def recency_factor(
+    entry,
+    half_life_hours: float = _DEFAULT_HALFLIFE_HOURS,
+    now: Optional[datetime] = None,
+) -> float:
     """Exponential decay: 1.0 for brand-new, 0.5 after one half-life."""
     if half_life_hours <= 0:
         return 1.0
@@ -260,8 +263,11 @@ def corroboration_boost(entry) -> float:
     return 1.0 + 0.1 * min(max(count, 0), 5)
 
 
-def quality_factor(entry, half_life_hours: float = _DEFAULT_HALFLIFE_HOURS,
-                   now: Optional[datetime] = None) -> Tuple[float, str]:
+def quality_factor(
+    entry,
+    half_life_hours: float = _DEFAULT_HALFLIFE_HOURS,
+    now: Optional[datetime] = None,
+) -> Tuple[float, str]:
     """Combined recency × importance × corroboration multiplier."""
     try:
         importance = float(getattr(entry, "importance", 0.5) or 0.0)
@@ -272,8 +278,7 @@ def quality_factor(entry, half_life_hours: float = _DEFAULT_HALFLIFE_HOURS,
     cor = corroboration_boost(entry)
     # importance/recency modulate but never zero out a lexical/semantic hit
     factor = (0.5 + 0.5 * importance) * (0.5 + 0.5 * rec) * cor
-    expl = "importance=%.2f recency=%.2f corroboration×%.2f" % (
-        importance, rec, cor)
+    expl = "importance=%.2f recency=%.2f corroboration×%.2f" % (importance, rec, cor)
     return factor, expl
 
 
@@ -309,8 +314,11 @@ def expand_query(query: str) -> List[str]:
         return []
     expanded = []
     for part in parts:
-        raw_terms = [t for t in _TOKEN_RE.findall(part.lower())
-                     if t not in _STOPWORDS and len(t) > 1]
+        raw_terms = [
+            t
+            for t in _TOKEN_RE.findall(part.lower())
+            if t not in _STOPWORDS and len(t) > 1
+        ]
         extra: List[str] = []
         for tok in raw_terms:
             for syn in _SYNONYMS.get(tok, ()):
@@ -337,10 +345,16 @@ LAST_ERROR: str = ""
 _VALID_METHODS = ("bm25", "vector", "hybrid", "recency")
 
 
-def _retrieve_single(query: str, entries: Sequence, index: BM25Index,
-                     vectors: List[List[float]], query_vec: List[float],
-                     method: str, half_life_hours: float,
-                     now: Optional[datetime]) -> List[Tuple[str, float, str]]:
+def _retrieve_single(
+    query: str,
+    entries: Sequence,
+    index: BM25Index,
+    vectors: List[List[float]],
+    query_vec: List[float],
+    method: str,
+    half_life_hours: float,
+    now: Optional[datetime],
+) -> List[Tuple[str, float, str]]:
     """Run one sub-query; return [(entry_id, score, explanation)]."""
     q_terms = tokenize(query)
     if not q_terms and method in ("bm25", "hybrid"):
@@ -353,8 +367,9 @@ def _retrieve_single(query: str, entries: Sequence, index: BM25Index,
         for idx, bm25_score in index.rank(q_terms):
             entry = index.entries[idx]
             qf, qexpl = quality_factor(entry, half_life_hours, now)
-            out.append((entry.id, bm25_score * qf,
-                        "bm25=%.3f %s" % (bm25_score, qexpl)))
+            out.append(
+                (entry.id, bm25_score * qf, "bm25=%.3f %s" % (bm25_score, qexpl))
+            )
     elif method == "vector":
         scored = []
         for i, entry in enumerate(entries):
@@ -377,12 +392,23 @@ def _retrieve_single(query: str, entries: Sequence, index: BM25Index,
         scored.sort(key=lambda p: (-p[1], p[0]))
         for eid, s in scored:
             entry = by_id[eid]
-            out.append((eid, s, "recency=%.3f importance=%.2f"
-                        % (recency_factor(entry, half_life_hours, now),
-                           getattr(entry, "importance", 0.5))))
+            out.append(
+                (
+                    eid,
+                    s,
+                    "recency=%.3f importance=%.2f"
+                    % (
+                        recency_factor(entry, half_life_hours, now),
+                        getattr(entry, "importance", 0.5),
+                    ),
+                )
+            )
     else:  # hybrid
-        bm25_ranked = [(index.entries[i].id, s)
-                       for i, s in index.rank(q_terms)] if q_terms else []
+        bm25_ranked = (
+            [(index.entries[i].id, s) for i, s in index.rank(q_terms)]
+            if q_terms
+            else []
+        )
         vec_ranked = []
         for i, entry in enumerate(entries):
             sim = _cosine(query_vec, vectors[i])
@@ -399,16 +425,26 @@ def _retrieve_single(query: str, entries: Sequence, index: BM25Index,
             qf, qexpl = quality_factor(entry, half_life_hours, now)
             bpos = bm25_pos.get(eid)
             vpos = vec_pos.get(eid)
-            out.append((eid, rrf * qf,
-                        "rrf=%.4f bm25_rank=%s vec_rank=%s vec_sim=%.3f %s"
-                        % (rrf, bpos, vpos, vec_sim.get(eid, 0.0), qexpl)))
+            out.append(
+                (
+                    eid,
+                    rrf * qf,
+                    "rrf=%.4f bm25_rank=%s vec_rank=%s vec_sim=%.3f %s"
+                    % (rrf, bpos, vpos, vec_sim.get(eid, 0.0), qexpl),
+                )
+            )
     out.sort(key=lambda p: (-p[1], p[0]))
     return out
 
 
-def retrieve(query, store, limit: int = 10, method: str = "hybrid",
-             half_life_hours: float = _DEFAULT_HALFLIFE_HOURS,
-             now: Optional[datetime] = None):
+def retrieve(
+    query,
+    store,
+    limit: int = 10,
+    method: str = "hybrid",
+    half_life_hours: float = _DEFAULT_HALFLIFE_HOURS,
+    now: Optional[datetime] = None,
+):
     """Retrieve memory entries for *query*.
 
     Returns a list of ``(entry, score, explanation)`` tuples, best first.
@@ -455,22 +491,41 @@ def retrieve(query, store, limit: int = 10, method: str = "hybrid",
 
         if len(sub_queries) == 1:
             qvec = sparse_vector(sub_queries[0])
-            ranked = _retrieve_single(sub_queries[0], entries, index, vectors,
-                                      qvec, method, half_life_hours, now)
+            ranked = _retrieve_single(
+                sub_queries[0],
+                entries,
+                index,
+                vectors,
+                qvec,
+                method,
+                half_life_hours,
+                now,
+            )
         else:
             # Multi-query: run each sub-query, fuse with RRF.
             per_q = []
             for sub in sub_queries:
                 qvec = sparse_vector(sub)
-                ranked_sq = _retrieve_single(sub, entries, index, vectors,
-                                             qvec, method, half_life_hours, now)
+                ranked_sq = _retrieve_single(
+                    sub, entries, index, vectors, qvec, method, half_life_hours, now
+                )
                 per_q.append([(eid, s) for eid, s, _x in ranked_sq])
             fused = reciprocal_rank_fusion(per_q)
             # Rebuild explanations from the first sub-query's run for
             # determinism, then re-score by fused order.
-            first = {eid: (s, x) for eid, s, x in _retrieve_single(
-                sub_queries[0], entries, index, vectors,
-                sparse_vector(sub_queries[0]), method, half_life_hours, now)}
+            first = {
+                eid: (s, x)
+                for eid, s, x in _retrieve_single(
+                    sub_queries[0],
+                    entries,
+                    index,
+                    vectors,
+                    sparse_vector(sub_queries[0]),
+                    method,
+                    half_life_hours,
+                    now,
+                )
+            }
             ranked = []
             for eid, rrf in fused:
                 s, x = first.get(eid, (0.0, "multi-query fused"))

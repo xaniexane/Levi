@@ -45,8 +45,7 @@ _ATTACKS = [
         "Credential-harvest link clicked; session replayed from new ASN",
         "op.nightowl clicked a lookalike-portal link at 01:14. Twenty "
         "minutes later the session token appeared from a new ASN.",
-        "Mailbox rules were created to hide replies. The account is "
-        "compromised.",
+        "Mailbox rules were created to hide replies. The account is compromised.",
     ),
     (
         "Impossible travel: Chicago and Frankfurt 11 minutes apart",
@@ -66,15 +65,13 @@ _ATTACKS = [
         "New webshell: /static/.cache.php on web-03",
         "File first seen 03:12, contains an eval() dropper, and has been "
         "requested 40 times tonight from two external IPs.",
-        "The dropper already fetched a second stage. The web tier is "
-        "compromised.",
+        "The dropper already fetched a second stage. The web tier is compromised.",
     ),
     (
         "PsExec-style service creation WS-1187 -> WS-1190",
         "A remote service was installed with the same credential on three "
         "hosts in nine minutes. No change ticket exists.",
-        "Same credential, three hosts, no ticket. Confirmed lateral "
-        "movement.",
+        "Same credential, three hosts, no ticket. Confirmed lateral movement.",
     ),
     (
         "9,400 DNS queries for long random labels from WS-1055",
@@ -110,10 +107,8 @@ _FALSE_POSITIVES = [
     ),
     (
         "Vulnerability scanner sweeping 10.0.4.0/24",
-        "Nessus-like probe cadence across the whole subnet. Noisy and "
-        "indiscriminate.",
-        "It's SEC-SCANNER-01 running the quarterly scan. Scheduled, "
-        "authorized, loud.",
+        "Nessus-like probe cadence across the whole subnet. Noisy and indiscriminate.",
+        "It's SEC-SCANNER-01 running the quarterly scan. Scheduled, authorized, loud.",
     ),
     (
         "Traffic burst to CDN edge nodes after a deploy",
@@ -124,24 +119,35 @@ _FALSE_POSITIVES = [
     ),
     (
         "Synthetic login storm from perf-rig-02",
-        "Two thousand logins a minute from a single rig. Brute force? "
-        "Load test?",
+        "Two thousand logins a minute from a single rig. Brute force? Load test?",
         "Perf team ticket PERF-883: authorized load test against staging. "
         "Loud but friendly.",
     ),
 ]
 
 _NOISE = [
-    ("Heartbeat OK from 214 agents", "Fleet check-in nominal; 3 agents stale, within tolerance."),
+    (
+        "Heartbeat OK from 214 agents",
+        "Fleet check-in nominal; 3 agents stale, within tolerance.",
+    ),
     ("WSUS patch cycle finished on 38 hosts", "Two hosts pending reboot; no failures."),
     ("DNS resolver latency p99 41ms", "Within the normal band for this hour."),
-    ("Single failed logon for a locked-out intern account", "Account already disabled; no follow-up needed."),
-    ("Printer spooler restarted on PRINT-01", "Queue flushed; nobody will notice at 3 AM."),
+    (
+        "Single failed logon for a locked-out intern account",
+        "Account already disabled; no follow-up needed.",
+    ),
+    (
+        "Printer spooler restarted on PRINT-01",
+        "Queue flushed; nobody will notice at 3 AM.",
+    ),
     ("Proxy cache hit ratio 94%", "A quiet night for the web cache."),
     ("NTP drift corrected on DC-02", "Clock skew was 1.8s; now nominal."),
     ("Honeypot untouched for 72 hours", "The decoys sit quiet. Suspiciously peaceful."),
     ("SIEM ingestion 12.4k events/sec", "Within quota; hot storage at 61%."),
-    ("Status-page cert expires in 21 days", "Ticket opened automatically; low priority."),
+    (
+        "Status-page cert expires in 21 days",
+        "Ticket opened automatically; low priority.",
+    ),
 ]
 
 _OPTIONS = [

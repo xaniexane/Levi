@@ -40,8 +40,9 @@ class SoupError(Exception):
 class SoupCorruptError(SoupError):
     """Raised when a soup file cannot be parsed. Fail-closed."""
 
-    def __init__(self, name: str, path: Path, reason: str,
-                 quarantined_to: Optional[Path] = None):
+    def __init__(
+        self, name: str, path: Path, reason: str, quarantined_to: Optional[Path] = None
+    ):
         self.soup_name = name
         self.path = Path(path)
         self.reason = reason
@@ -77,8 +78,7 @@ def _validate_schema(schema: str, schema_version: int) -> Tuple[str, int]:
 class Soup:
     """A named, typed, application-independent object store."""
 
-    def __init__(self, name: str, base_dir: Optional[Path] = None,
-                 create: bool = True):
+    def __init__(self, name: str, base_dir: Optional[Path] = None, create: bool = True):
         self.name = _validate_name(name)
         self.base_dir = Path(base_dir) if base_dir else _default_base_dir()
         self._path = self.base_dir / ("%s.json" % self.name)
@@ -102,14 +102,18 @@ class Soup:
         except (OSError, ValueError) as exc:
             self._quarantine("unreadable: %s" % exc)
             raise SoupCorruptError(
-                self.name, self._path, str(exc),
+                self.name,
+                self._path,
+                str(exc),
                 quarantined_to=self._last_quarantine,
             )
         if not isinstance(raw, dict) or not isinstance(raw.get("objects"), dict):
             reason = "top level is not {objects: {...}}"
             self._quarantine(reason)
             raise SoupCorruptError(
-                self.name, self._path, reason,
+                self.name,
+                self._path,
+                reason,
                 quarantined_to=self._last_quarantine,
             )
         self._objects = raw["objects"]
@@ -151,8 +155,7 @@ class Soup:
             pass
 
     # -- object API ----------------------------------------------------------
-    def put(self, obj: Dict[str, Any], schema: str,
-            schema_version: int) -> str:
+    def put(self, obj: Dict[str, Any], schema: str, schema_version: int) -> str:
         """Store an object; returns its id. ``obj`` must be a JSON-able dict."""
         if not isinstance(obj, dict):
             raise TypeError("soups: obj must be a dict, got %s" % type(obj).__name__)
@@ -181,7 +184,9 @@ class Soup:
         except KeyError:
             raise SoupError("soups: soup %r has no object %r" % (self.name, obj_id))
 
-    def query(self, predicate: Callable[[Dict[str, Any]], bool]) -> List[Dict[str, Any]]:
+    def query(
+        self, predicate: Callable[[Dict[str, Any]], bool]
+    ) -> List[Dict[str, Any]]:
         """Return all records for which ``predicate(record)`` is true.
 
         The predicate sees the full record, never coerced — it can filter
@@ -195,14 +200,19 @@ class Soup:
         """Convenience: objects of ``schema`` with ``schema_version >= min_version``."""
         schema, min_version = _validate_schema(schema, min_version)
         return [
-            rec for rec in self._objects.values()
-            if rec.get("schema") == schema and rec.get("schema_version", 0) >= min_version
+            rec
+            for rec in self._objects.values()
+            if rec.get("schema") == schema
+            and rec.get("schema_version", 0) >= min_version
         ]
 
     def compatible(self, obj_id: str, schema: str, min_version: int) -> bool:
         """True if the object carries ``schema`` at ``schema_version >= min_version``."""
         rec = self.get(obj_id)
-        return rec.get("schema") == schema and int(rec.get("schema_version", 0)) >= min_version
+        return (
+            rec.get("schema") == schema
+            and int(rec.get("schema_version", 0)) >= min_version
+        )
 
     def delete(self, obj_id: str) -> Dict[str, Any]:
         """Delete an object; returns the removed record. Raises if missing."""
@@ -220,7 +230,9 @@ class Soup:
         """Schema names present in this soup, each with sorted versions seen."""
         out: Dict[str, set] = {}
         for rec in self._objects.values():
-            out.setdefault(str(rec.get("schema")), set()).add(int(rec.get("schema_version", 0)))
+            out.setdefault(str(rec.get("schema")), set()).add(
+                int(rec.get("schema_version", 0))
+            )
         return {k: sorted(v) for k, v in out.items()}
 
     def path(self) -> Path:
@@ -230,6 +242,7 @@ class Soup:
 # --------------------------------------------------------------------------
 # Registry: all soups in a base dir
 # --------------------------------------------------------------------------
+
 
 def list_soups(base_dir: Optional[Path] = None) -> List[Dict[str, Any]]:
     """List every soup in the base dir with its schemas and object counts.
@@ -247,23 +260,28 @@ def list_soups(base_dir: Optional[Path] = None) -> List[Dict[str, Any]]:
         name = path.stem
         try:
             soup = Soup(name, base_dir=base, create=False)
-            out.append({
-                "name": name,
-                "path": str(path),
-                "corrupt": False,
-                "objects": soup.count(),
-                "schemas": soup.schemas(),
-            })
+            out.append(
+                {
+                    "name": name,
+                    "path": str(path),
+                    "corrupt": False,
+                    "objects": soup.count(),
+                    "schemas": soup.schemas(),
+                }
+            )
         except SoupCorruptError as exc:
-            out.append({
-                "name": name,
-                "path": str(path),
-                "corrupt": True,
-                "error": exc.reason,
-            })
+            out.append(
+                {
+                    "name": name,
+                    "path": str(path),
+                    "corrupt": True,
+                    "error": exc.reason,
+                }
+            )
         except SoupError as exc:
-            out.append({"name": name, "path": str(path), "corrupt": True,
-                        "error": str(exc)})
+            out.append(
+                {"name": name, "path": str(path), "corrupt": True, "error": str(exc)}
+            )
     return out
 
 

@@ -132,9 +132,11 @@ class ApprovalEngine:
             else {}
         )
         history = data.get("history", [])
-        self._history = [r for r in history if isinstance(r, dict)] if isinstance(
-            history, list
-        ) else []
+        self._history = (
+            [r for r in history if isinstance(r, dict)]
+            if isinstance(history, list)
+            else []
+        )
         grants = data.get("grants", {})
         self._grants = (
             {str(k): v for k, v in grants.items() if isinstance(v, dict)}
@@ -189,13 +191,11 @@ class ApprovalEngine:
             )
         if not isinstance(risk_level, RiskLevel):
             raise ApprovalError(
-                f"request: 'risk_level' must be a RiskLevel, "
-                f"got {risk_level!r}"
+                f"request: 'risk_level' must be a RiskLevel, got {risk_level!r}"
             )
         if not isinstance(reason, str):
             raise ApprovalError(
-                f"request: 'reason' must be a string, "
-                f"got {type(reason).__name__}"
+                f"request: 'reason' must be a string, got {type(reason).__name__}"
             )
         self._load()
         grant = self._find_grant(action_key, workflow_key)
@@ -336,8 +336,7 @@ class ApprovalEngine:
     def _require_id(approval_id: Any, what: str) -> str:
         if not isinstance(approval_id, str) or not approval_id.strip():
             raise ApprovalError(
-                f"{what}: 'approval_id' must be a non-empty string, "
-                f"got {approval_id!r}"
+                f"{what}: 'approval_id' must be a non-empty string, got {approval_id!r}"
             )
         return approval_id
 
@@ -364,11 +363,7 @@ class ApprovalEngine:
         return sorted(self._pending.values(), key=lambda r: r.get("created_at", ""))
 
     def history(self, limit: int = 50) -> List[Dict[str, Any]]:
-        if (
-            not isinstance(limit, int)
-            or isinstance(limit, bool)
-            or limit < 0
-        ):
+        if not isinstance(limit, int) or isinstance(limit, bool) or limit < 0:
             raise ApprovalError(
                 f"history: 'limit' must be an integer >= 0, got {limit!r}"
             )

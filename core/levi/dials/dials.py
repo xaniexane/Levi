@@ -52,6 +52,7 @@ def _state_path() -> Path:
 # Items
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class Item:
     id: str
@@ -141,6 +142,7 @@ class RankContext:
 # Engine
 # ---------------------------------------------------------------------------
 
+
 class DialError(ValueError):
     """Raised for invalid dial operations (bad weight names, negatives)."""
 
@@ -164,12 +166,16 @@ class AttentionDials:
             raw = json.loads(self._path.read_text())
         except (FileNotFoundError, json.JSONDecodeError):
             return
-        self.weights = {k: float(v) for k, v in raw.get("weights", {}).items() if k in FEATURES}
+        self.weights = {
+            k: float(v) for k, v in raw.get("weights", {}).items() if k in FEATURES
+        }
         for k in DEFAULT_WEIGHTS:
             self.weights.setdefault(k, DEFAULT_WEIGHTS[k])
         self.affinity = list(raw.get("affinity", []))
         self.pinned_tags = list(raw.get("pinned_tags", []))
-        self.recency_halflife_s = float(raw.get("recency_halflife_s", RECENCY_HALFLIFE_SECONDS))
+        self.recency_halflife_s = float(
+            raw.get("recency_halflife_s", RECENCY_HALFLIFE_SECONDS)
+        )
         if raw.get("mode") in ("chronological", "weighted"):
             self.mode = raw["mode"]
         self.items = [Item(**it) for it in raw.get("items", [])]
@@ -189,16 +195,26 @@ class AttentionDials:
         tmp.replace(self._path)
 
     # -- items ----------------------------------------------------------
-    def add_item(self, author: str, text: str, tags: Optional[List[str]] = None,
-                 timestamp: Optional[str] = None) -> Item:
+    def add_item(
+        self,
+        author: str,
+        text: str,
+        tags: Optional[List[str]] = None,
+        timestamp: Optional[str] = None,
+    ) -> Item:
         author, text = author.strip(), text.strip()
         if not author:
             raise DialError("author must be non-empty")
         if not text:
             raise DialError("text must be non-empty")
         ts = timestamp or datetime.now(timezone.utc).isoformat()
-        item = Item(id=_new_id(author, text, ts), author=author,
-                    timestamp=ts, text=text, tags=list(tags or []))
+        item = Item(
+            id=_new_id(author, text, ts),
+            author=author,
+            timestamp=ts,
+            text=text,
+            tags=list(tags or []),
+        )
         # idempotent: same content+author+timestamp re-add returns existing
         for existing in self.items:
             if existing.id == item.id:
@@ -212,7 +228,9 @@ class AttentionDials:
         if name not in FEATURES:
             raise DialError(f"unknown weight {name!r}; known: {sorted(FEATURES)}")
         if not math.isfinite(value) or value < 0:
-            raise DialError(f"weight must be a finite non-negative number, got {value!r}")
+            raise DialError(
+                f"weight must be a finite non-negative number, got {value!r}"
+            )
         self.weights[name] = float(value)
         self._save()
 
@@ -283,8 +301,9 @@ class AttentionDials:
             "score": score,
         }
 
-    def rank(self, now: Optional[datetime] = None,
-             limit: Optional[int] = None) -> List[Tuple[Item, float, Dict[str, float]]]:
+    def rank(
+        self, now: Optional[datetime] = None, limit: Optional[int] = None
+    ) -> List[Tuple[Item, float, Dict[str, float]]]:
         """Ranked feed. Chronological mode: strictly newest-first, weights
         shown as what-WOULD-apply. Weighted mode: greedy diversity-aware
         scoring (diversity sees previously ranked items)."""
@@ -303,7 +322,9 @@ class AttentionDials:
             best, best_score, best_c = None, -1.0, {}
             for it in remaining:
                 s, c = self._score(it, ctx)
-                if s > best_score or (s == best_score and it.timestamp > (best.timestamp if best else "")):
+                if s > best_score or (
+                    s == best_score and it.timestamp > (best.timestamp if best else "")
+                ):
                     best, best_score, best_c = it, s, c
             assert best is not None
             ranked.append((best, best_score, best_c))
@@ -313,24 +334,31 @@ class AttentionDials:
             ctx.ranked_so_far += 1
         return ranked[:limit] if limit else ranked
 
-    def feed(self, limit: Optional[int] = None,
-             now: Optional[datetime] = None) -> List[Item]:
+    def feed(
+        self, limit: Optional[int] = None, now: Optional[datetime] = None
+    ) -> List[Item]:
         return [it for it, _, _ in self.rank(now=now, limit=limit)]
 
     # -- display --------------------------------------------------------
     def format_weights(self) -> str:
-        lines = ["=== Attention Dials ===", f"mode: {self.mode}  (sticky default: chronological)",
-                 f"recency half-life: {self.recency_halflife_s/3600:.1f}h",
-                 f"affinity (explicit opt-in): {', '.join(self.affinity) or '(none)'}",
-                 f"pinned tags: {', '.join(self.pinned_tags) or '(none)'}", ""]
+        lines = [
+            "=== Attention Dials ===",
+            f"mode: {self.mode}  (sticky default: chronological)",
+            f"recency half-life: {self.recency_halflife_s / 3600:.1f}h",
+            f"affinity (explicit opt-in): {', '.join(self.affinity) or '(none)'}",
+            f"pinned tags: {', '.join(self.pinned_tags) or '(none)'}",
+            "",
+        ]
         total = sum(self.weights.values())
         for name in FEATURES:
             w = self.weights[name]
             pct = (w / total * 100) if total else 0.0
             lines.append(f"  {name:10s} weight={w:6.2f}  ({pct:5.1f}% of score)")
-        lines += ["",
-                  "Giants hide these. Yours are editable: dials set-weight <name> <value>",
-                  "Affinity is explicit only — LEVI never infers who you like."]
+        lines += [
+            "",
+            "Giants hide these. Yours are editable: dials set-weight <name> <value>",
+            "Affinity is explicit only — LEVI never infers who you like.",
+        ]
         return "\n".join(lines)
 
     def format_feed(self, limit: int = 20, now: Optional[datetime] = None) -> str:
@@ -342,5 +370,7 @@ class AttentionDials:
             lines.append(f"  [{it.id[:8]}] {it.author}{tag_s}: {it.text[:70]}")
             lines.append(f"           score={score:.3f}  top-driver={top}")
         if not ranked:
-            lines.append("  (empty — add items with: dials add --author NAME --text TEXT)")
+            lines.append(
+                "  (empty — add items with: dials add --author NAME --text TEXT)"
+            )
         return "\n".join(lines)

@@ -11,7 +11,7 @@ import json
 import pytest
 
 from levi.packs.__main__ import main as cli_main
-from levi.packs.packs import Pack, PackError, PackStore, validate_manifest
+from levi.packs.packs import PackError, PackStore, validate_manifest
 
 
 def _herm(monkeypatch, tmp_path):
@@ -30,6 +30,7 @@ def _write(st, name, instructions="do the thing", content=None, scope=None):
 # --------------------------------------------------------------------------
 # init / validation
 # --------------------------------------------------------------------------
+
 
 def test_init_creates_structure(monkeypatch, tmp_path):
     st = _herm(monkeypatch, tmp_path)
@@ -61,8 +62,9 @@ def test_validate_manifest_rejects_junk():
     with pytest.raises(PackError):
         validate_manifest({"format": "other", "name": "x"})
     with pytest.raises(PackError):
-        validate_manifest({"format": "levi_pack_v1", "name": "x",
-                           "scope": {"tags": "notalist"}})
+        validate_manifest(
+            {"format": "levi_pack_v1", "name": "x", "scope": {"tags": "notalist"}}
+        )
 
 
 def test_broken_pack_skipped_not_fatal(monkeypatch, tmp_path):
@@ -75,6 +77,7 @@ def test_broken_pack_skipped_not_fatal(monkeypatch, tmp_path):
 # --------------------------------------------------------------------------
 # scoping
 # --------------------------------------------------------------------------
+
 
 def test_always_scope(monkeypatch, tmp_path):
     st = _herm(monkeypatch, tmp_path)
@@ -134,8 +137,7 @@ def test_assembly_has_provenance_and_instructions(monkeypatch, tmp_path):
 
 def test_budget_truncation_reported(monkeypatch, tmp_path):
     st = _herm(monkeypatch, tmp_path)
-    _write(st, "big", instructions="i", content="x" * 1000,
-           scope={"always": True})
+    _write(st, "big", instructions="i", content="x" * 1000, scope={"always": True})
     asm = st.assemble(budget_chars=50)
     assert asm["truncated"]
     assert "truncated" in asm["text"]
@@ -144,8 +146,13 @@ def test_budget_truncation_reported(monkeypatch, tmp_path):
 def test_instructions_never_truncated_silently(monkeypatch, tmp_path):
     # instructions are always fully included; only content is budgeted
     st = _herm(monkeypatch, tmp_path)
-    _write(st, "big", instructions="CRITICAL: always obey",
-           content="y" * 5000, scope={"always": True})
+    _write(
+        st,
+        "big",
+        instructions="CRITICAL: always obey",
+        content="y" * 5000,
+        scope={"always": True},
+    )
     asm = st.assemble(budget_chars=60)
     assert "CRITICAL: always obey" in asm["text"]
 
@@ -153,6 +160,7 @@ def test_instructions_never_truncated_silently(monkeypatch, tmp_path):
 # --------------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------------
+
 
 def test_cli_init_list_assemble(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)

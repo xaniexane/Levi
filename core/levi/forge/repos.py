@@ -47,7 +47,9 @@ def repo_exists(home, name) -> bool:
         return False
 
 
-def create_repo(home, name, description: str = "", default_branch: str = "main") -> dict:
+def create_repo(
+    home, name, description: str = "", default_branch: str = "main"
+) -> dict:
     """Create a bare repo. Raises GitError/ValueError on failure/duplicates."""
     name = validate_name(name)
     root = ensure_home(home)
@@ -57,12 +59,15 @@ def create_repo(home, name, description: str = "", default_branch: str = "main")
     run_git(["init", "--bare", "-b", default_branch, str(target)])
     # Stock `git push` over our smart-HTTP server needs this on the server side.
     run_git(["config", "http.receivepack", "true"], cwd=target)
-    _write_meta(target, {
-        "name": name,
-        "description": description,
-        "created": datetime.now(timezone.utc).isoformat(),
-        "default_branch": default_branch,
-    })
+    _write_meta(
+        target,
+        {
+            "name": name,
+            "description": description,
+            "created": datetime.now(timezone.utc).isoformat(),
+            "default_branch": default_branch,
+        },
+    )
     return {"name": name, "path": str(target), "default_branch": default_branch}
 
 

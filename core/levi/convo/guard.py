@@ -29,22 +29,57 @@ def _subjects_match(a: str, b: str) -> bool:
         return False
     return len(sa & sb) / len(sa | sb) >= 0.5
 
+
 _NEG_WORDS = {"not", "never", "no", "cannot", "cant"}
 _AUX = {
-    "do", "does", "did", "be", "is", "are", "was", "were", "been", "being",
-    "have", "has", "had", "having", "will", "would", "can", "could", "shall",
-    "should", "may", "might", "must", "ought",
+    "do",
+    "does",
+    "did",
+    "be",
+    "is",
+    "are",
+    "was",
+    "were",
+    "been",
+    "being",
+    "have",
+    "has",
+    "had",
+    "having",
+    "will",
+    "would",
+    "can",
+    "could",
+    "shall",
+    "should",
+    "may",
+    "might",
+    "must",
+    "ought",
 }
 _INFLECT = {
-    "runs": "run", "uses": "use", "goes": "go", "says": "say", "has": "have",
+    "runs": "run",
+    "uses": "use",
+    "goes": "go",
+    "says": "say",
+    "has": "have",
     "does": "do",
 }
 _CONTRACT = {
-    "can't": "cannot", "won't": "will not", "don't": "do not",
-    "doesn't": "does not", "didn't": "did not", "isn't": "is not",
-    "aren't": "are not", "wasn't": "was not", "weren't": "were not",
-    "haven't": "have not", "hasn't": "has not", "couldn't": "could not",
-    "wouldn't": "would not", "shouldn't": "should not",
+    "can't": "cannot",
+    "won't": "will not",
+    "don't": "do not",
+    "doesn't": "does not",
+    "didn't": "did not",
+    "isn't": "is not",
+    "aren't": "are not",
+    "wasn't": "was not",
+    "weren't": "were not",
+    "haven't": "have not",
+    "hasn't": "has not",
+    "couldn't": "could not",
+    "wouldn't": "would not",
+    "shouldn't": "should not",
 }
 _ATTR_RE = re.compile(
     r"^(.+?)\s+(is|are|was|were|runs|run|uses|use|has|have)\s+(.+)$",
@@ -123,9 +158,7 @@ def extract_claims(text: str) -> List[str]:
     return [s for s in _sentences(text or "") if _CLAIM_HINT_RE.search(s)]
 
 
-def check_contradictions(
-    reply_text: str, facts: List[Dict]
-) -> List[Dict]:
+def check_contradictions(reply_text: str, facts: List[Dict]) -> List[Dict]:
     """Flag contradictions between *reply_text* and established *facts*.
 
     *facts* is a list of ``{"text": str, "turn": int}``. Returns findings:
@@ -151,10 +184,12 @@ def check_contradictions(
                 if key in seen:
                     continue
                 seen.add(key)
-                findings.append({
-                    "type": kind,
-                    "reply": claim,
-                    "fact": ftext,
-                    "fact_turn": fact.get("turn"),
-                })
+                findings.append(
+                    {
+                        "type": kind,
+                        "reply": claim,
+                        "fact": ftext,
+                        "fact_turn": fact.get("turn"),
+                    }
+                )
     return findings

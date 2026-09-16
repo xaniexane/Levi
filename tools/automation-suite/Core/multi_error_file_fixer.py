@@ -33,10 +33,12 @@ def check_source(source, path):
     except SyntaxError as err:
         return err
     except ValueError as err:  # e.g. null bytes
+
         class _E:  # minimal shim with the attributes we report
             lineno = 0
             msg = str(err)
             text = ""
+
         return _E()
 
 
@@ -52,7 +54,7 @@ def safe_fix(lines):
         else:
             body, nl = line, ""
         stripped = body.lstrip(" \t")
-        lead = body[:len(body) - len(stripped)]
+        lead = body[: len(body) - len(stripped)]
         new_lead = lead.replace("\t", "    ")
         new_body = stripped.rstrip(" \t")
         new_line = new_lead + new_body + nl
@@ -102,9 +104,11 @@ def fix_file(path):
         lines, changed = safe_fix(lines)
         if not changed:
             report_error(path, check_source("".join(lines), path))
-            print(f"unfixable after {pass_no - 1} pass(es): "
-                  f"only safe whitespace fixes are applied; original kept in {bak}",
-                  file=sys.stderr)
+            print(
+                f"unfixable after {pass_no - 1} pass(es): "
+                f"only safe whitespace fixes are applied; original kept in {bak}",
+                file=sys.stderr,
+            )
             return 1
         with open(path, "w", encoding="utf-8", newline="") as fh:
             fh.writelines(lines)
@@ -114,15 +118,17 @@ def fix_file(path):
             return 0
 
     report_error(path, check_source("".join(lines), path))
-    print(f"unfixable after {MAX_PASSES} passes; original kept in {bak}",
-          file=sys.stderr)
+    print(
+        f"unfixable after {MAX_PASSES} passes; original kept in {bak}", file=sys.stderr
+    )
     return 1
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(
         description="Apply only safe whitespace fixes to Python files until "
-                    "they compile. Backs up to .bak first; never touches logic.")
+        "they compile. Backs up to .bak first; never touches logic."
+    )
     ap.add_argument("files", nargs="+", help="Python file(s) to repair")
     args = ap.parse_args(argv)
     rc = 0

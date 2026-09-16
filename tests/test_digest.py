@@ -29,9 +29,7 @@ def test_create_subscribe_confirm_post_flow(home):
     assert isinstance(token, str) and token
     email = lists.confirm("club", token)
     assert email == "fan@example.com"
-    msg_id, status = lists.post(
-        "club", "fan@example.com", "hello", "first post body"
-    )
+    msg_id, status = lists.post("club", "fan@example.com", "hello", "first post body")
     assert status == "posted"
     digest = lists.compile_digest("club")
     assert "hello" in digest
@@ -112,11 +110,17 @@ def test_digest_buckets_by_day(home):
 def test_digest_weekly_buckets(home):
     lists.create_list("log", "owner@example.com")
     lists.post(
-        "log", "a@example.com", "weekly-one", "w1",
+        "log",
+        "a@example.com",
+        "weekly-one",
+        "w1",
         posted_at=datetime(2026, 9, 7, 12, 0, tzinfo=timezone.utc),
     )
     lists.post(
-        "log", "b@example.com", "weekly-two", "w2",
+        "log",
+        "b@example.com",
+        "weekly-two",
+        "w2",
         posted_at=datetime(2026, 9, 14, 12, 0, tzinfo=timezone.utc),
     )
     digest = lists.compile_digest("log", period="weekly")
@@ -174,7 +178,9 @@ def test_unknown_and_expired_tokens_raise(home):
     import json
 
     d = home / "digest" / "club" / "pending" / "oldtoken.json"
-    d.write_text(json.dumps({"email": "late@example.com", "created": stale.isoformat()}))
+    d.write_text(
+        json.dumps({"email": "late@example.com", "created": stale.isoformat()})
+    )
     with pytest.raises(ValueError):
         lists.confirm("club", "oldtoken")
     assert not d.exists()

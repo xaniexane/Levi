@@ -104,8 +104,7 @@ class Action:
         if callable(eff):
             new = eff(dict(world))
             if not isinstance(new, dict):
-                raise PlanError(
-                    f"effect callable of {self.name!r} must return a dict")
+                raise PlanError(f"effect callable of {self.name!r} must return a dict")
             return new
         new = dict(world)
         new.update(eff)
@@ -131,11 +130,13 @@ def _state_key(world: State) -> tuple:
         if isinstance(v, (set, frozenset)):
             return tuple(sorted(freeze(x) for x in v))
         return v
+
     return tuple(sorted((k, freeze(v)) for k, v in world.items()))
 
 
-def plan(world: State, goal: State, actions: list[Action],
-         max_expansions: int = 10000) -> list[str]:
+def plan(
+    world: State, goal: State, actions: list[Action], max_expansions: int = 10000
+) -> list[str]:
     """A* from ``world`` to a state satisfying ``goal``.
 
     Returns the action-name sequence (cheapest first on ties, ties broken
@@ -175,7 +176,8 @@ def plan(world: State, goal: State, actions: list[Action],
             counter += 1
     raise NoPlan(
         f"no plan from current world state to goal {sorted(goal)} "
-        f"using {[a.name for a in actions]}")
+        f"using {[a.name for a in actions]}"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -187,8 +189,12 @@ class Planner:
     """Holds a goal and action set; plans, then replans when the world
     moves. ``on_replan`` callbacks receive ``(old_plan, new_plan, reason)``."""
 
-    def __init__(self, actions: list[Action], goal: State,
-                 on_replan: Optional[Callable[[list[str], list[str], str], None]] = None):
+    def __init__(
+        self,
+        actions: list[Action],
+        goal: State,
+        on_replan: Optional[Callable[[list[str], list[str], str], None]] = None,
+    ):
         self.actions: dict[str, Action] = {}
         for a in actions:
             if a.name in self.actions:
@@ -207,8 +213,7 @@ class Planner:
         self.world.update(updates)
 
     def make_plan(self) -> list[str]:
-        self.current_plan = plan(self.world, self.goal,
-                                 list(self.actions.values()))
+        self.current_plan = plan(self.world, self.goal, list(self.actions.values()))
         return list(self.current_plan)
 
     def next_action(self) -> Optional[str]:
@@ -224,11 +229,16 @@ class Planner:
             self.replans += 1
             self.make_plan()
             if self.on_replan:
-                self.on_replan(old, list(self.current_plan),
-                               f"precondition of {head.name!r} no longer holds")
+                self.on_replan(
+                    old,
+                    list(self.current_plan),
+                    f"precondition of {head.name!r} no longer holds",
+                )
         return self.current_plan[0] if self.current_plan else None
 
-    def mark_done(self, action_name: str, observed_world: Optional[State] = None) -> None:
+    def mark_done(
+        self, action_name: str, observed_world: Optional[State] = None
+    ) -> None:
         """Record that ``action_name`` executed; optionally fold in the
         observed post-state (what the world *actually* looks like now —
         effects describe, they don't guarantee)."""

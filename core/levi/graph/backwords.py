@@ -38,7 +38,7 @@ def dual_passage(forward_text: str) -> Tuple[str, str, List[str]]:
 
 def format_dual_block(title: str, forward_text: str) -> str:
     if not isinstance(title, str):
-        raise ValueError(f"format_dual_block title must be a string")
+        raise ValueError("format_dual_block title must be a string")
     fwd, bak, units = dual_passage(forward_text)
     lines = [
         "### " + title,

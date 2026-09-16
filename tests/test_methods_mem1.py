@@ -6,12 +6,19 @@ Isolated HOME via LEVI_HOME=tmp_path; no network; deterministic.
 
 from __future__ import annotations
 
-import json
 
 import pytest
 
 from core.levi.methods import _persist
-from core.levi.methods import bruno, commonplace, florilegia, llull, loci, pinakes, tironian
+from core.levi.methods import (
+    bruno,
+    commonplace,
+    florilegia,
+    llull,
+    loci,
+    pinakes,
+    tironian,
+)
 
 
 @pytest.fixture()
@@ -21,6 +28,7 @@ def home(tmp_path, monkeypatch):
 
 
 # ---- _persist ------------------------------------------------------------
+
 
 def test_persist_roundtrip_and_quarantine(home):
     p = _persist.store_path("t1")
@@ -44,18 +52,23 @@ def test_persist_rejects_unsafe_names():
 
 # ---- loci ---------------------------------------------------------------
 
+
 def test_loci_walk_and_quiz(home):
     pal = loci.Palace("talks")
     pal.add_room("Foyer")
     pal.add_locus("Foyer", "front door")
     pal.add_locus("Foyer", "coat rack")
     pal.deposit("Foyer", "front door", "open with a question", "a giant question mark")
-    pal.deposit("Foyer", "coat rack", "three-act structure", "coats shaped like acts I-III")
+    pal.deposit(
+        "Foyer", "coat rack", "three-act structure", "coats shaped like acts I-III"
+    )
     script = pal.walk_script()
     assert "front door" in script and "giant question mark" in script
     rounds = pal.quiz_round()
-    assert rounds[0] == ("At front door (a giant question mark) what did you place?",
-                         "open with a question")
+    assert rounds[0] == (
+        "At front door (a giant question mark) what did you place?",
+        "open with a question",
+    )
     assert pal.coverage() == (2, 2)
     pal.save()
     pal2 = loci.Palace("talks")
@@ -83,6 +96,7 @@ def test_loci_deny_closed(home):
 
 
 # ---- llull ---------------------------------------------------------------
+
 
 def test_llull_exhaustion_and_judgment():
     ars = llull.Ars(["goodness", "greatness", "eternity"])
@@ -113,13 +127,18 @@ def test_llull_deny_closed():
 
 # ---- bruno ----------------------------------------------------------------
 
+
 def test_bruno_wheel_spin_is_deterministic():
     def make():
         w = bruno.Wheel("essay", seed=42)
-        w.add_ring("argument", ["syllogism", "analogy", "example"],
-                   {"analogy": "a bridge made of mirrors"})
+        w.add_ring(
+            "argument",
+            ["syllogism", "analogy", "example"],
+            {"analogy": "a bridge made of mirrors"},
+        )
         w.add_ring("evidence", ["statistic", "anecdote"])
         return w
+
     w1, w2 = make(), make()
     assert [w1.spin() for _ in range(5)] == [w2.spin() for _ in range(5)]
     assert w1.total_configurations() == 3 * 2
@@ -153,13 +172,23 @@ def test_bruno_deny_closed():
 
 # ---- pinakes --------------------------------------------------------------
 
+
 def test_pinakes_catalog_and_disputed(home):
     cat = pinakes.Pinakes()
-    e1 = pinakes.Entry(title="On Memory", author="Cicero", subject="rhetoric",
-                       summary="founding myth of loci, via Simonides",
-                       authenticity="disputed", provenance="my shelf")
-    e2 = pinakes.Entry(title="Ars Magna", author="Llull, Ramon", subject="logic",
-                       authenticity="authentic")
+    e1 = pinakes.Entry(
+        title="On Memory",
+        author="Cicero",
+        subject="rhetoric",
+        summary="founding myth of loci, via Simonides",
+        authenticity="disputed",
+        provenance="my shelf",
+    )
+    e2 = pinakes.Entry(
+        title="Ars Magna",
+        author="Llull, Ramon",
+        subject="logic",
+        authenticity="authentic",
+    )
     id1 = cat.add(e1)
     id2 = cat.add(e2)
     cat.link(id1, id2)
@@ -186,12 +215,16 @@ def test_pinakes_deny_closed(home):
 
 # ---- tironian --------------------------------------------------------------
 
+
 def test_tironian_define_expand_compound():
     sh = tironian.Shorthand()
     sh.define("mtg", "meeting with quarterly review team")
     sh.define_compound("-q", "{x} with quarterly figures")
     assert sh.expand("prep mtg now") == "prep meeting with quarterly review team now"
-    assert sh.expand("see mtg-q") == "see meeting with quarterly review team with quarterly figures"
+    assert (
+        sh.expand("see mtg-q")
+        == "see meeting with quarterly review team with quarterly figures"
+    )
     assert sh.expand("mtg, ok?") == "meeting with quarterly review team, ok?"
     assert sh.expand("unknown stays") == "unknown stays"  # graceful degradation
     sh2 = tironian.Shorthand.from_dict(sh.to_dict())
@@ -212,15 +245,24 @@ def test_tironian_deny_closed():
     assert tironian.Shorthand.suggest("quarterly business review") == "qbr"
     # collision -> consonant-skeleton fallback, deterministic
     fb = tironian.Shorthand.suggest("quarterly business review", {"qbr"})
-    assert fb != "qbr" and fb == tironian.Shorthand.suggest("quarterly business review", {"qbr"})
+    assert fb != "qbr" and fb == tironian.Shorthand.suggest(
+        "quarterly business review", {"qbr"}
+    )
 
 
 # ---- commonplace ------------------------------------------------------------
 
+
 def test_commonplace_capture_index_audit(home):
     book = commonplace.CommonplaceBook()
-    book.capture("Habit", commonplace.Excerpt(text="We are what we repeatedly do.",
-                                              source="Aristotle (attrib.)", note="on practice"))
+    book.capture(
+        "Habit",
+        commonplace.Excerpt(
+            text="We are what we repeatedly do.",
+            source="Aristotle (attrib.)",
+            note="on practice",
+        ),
+    )
     book.capture("Habit", commonplace.Excerpt(text="Another habit note", source="me"))
     book.capture("Habit formation", commonplace.Excerpt(text="x", source="y"))
     idx = book.index()
@@ -229,7 +271,9 @@ def test_commonplace_capture_index_audit(home):
     hits = book.search("repeatedly")
     assert len(hits) == 1 and hits[0][0] == "Habit"
     audit = book.audit_heads()
-    assert any("Habit" in s for s in audit["merge_candidates"])  # lexical overlap flagged
+    assert any(
+        "Habit" in s for s in audit["merge_candidates"]
+    )  # lexical overlap flagged
     book.save()
     book2 = commonplace.CommonplaceBook()
     assert len(book2.retrieve("Habit")) == 2
@@ -250,14 +294,26 @@ def test_commonplace_deny_closed(home):
 
 # ---- florilegia --------------------------------------------------------------
 
+
 def test_florilegia_provenance_chain(home):
     fl = florilegia.Florilegium("dicta")
-    fl.gather(florilegia.Excerpt(passage="Justice too long delayed is justice denied.",
-                                 source="Gladstone, speech", head="justice",
-                                 confidence="high"))
-    fl.gather(florilegia.Excerpt(passage="borrowed line", source="Aristotle",
-                                 head="justice", second_hand=True,
-                                 second_hand_from="Some Other Florilegium"))
+    fl.gather(
+        florilegia.Excerpt(
+            passage="Justice too long delayed is justice denied.",
+            source="Gladstone, speech",
+            head="justice",
+            confidence="high",
+        )
+    )
+    fl.gather(
+        florilegia.Excerpt(
+            passage="borrowed line",
+            source="Aristotle",
+            head="justice",
+            second_hand=True,
+            second_hand_from="Some Other Florilegium",
+        )
+    )
     assert fl.heads() == ["justice"]
     assert len(fl.needs_verification()) == 1  # florilegia-of-florilegia audit
     assert "SECOND-HAND" in fl.render()
@@ -269,7 +325,8 @@ def test_florilegia_provenance_chain(home):
 def test_florilegia_deny_closed(home):
     fl = florilegia.Florilegium("f2")
     with pytest.raises(ValueError):
-        fl.gather(florilegia.Excerpt(passage="x", source="s", head="h",
-                                     second_hand=True))  # unnamed second-hand source
+        fl.gather(
+            florilegia.Excerpt(passage="x", source="s", head="h", second_hand=True)
+        )  # unnamed second-hand source
     with pytest.raises(ValueError):
         fl.gather(florilegia.Excerpt(passage="", source="s", head="h"))

@@ -24,7 +24,9 @@ from levi.pdi.pdi import (
 
 
 def test_parse_each_opcode():
-    pic = parse("C\nK 3\nP 10 20\nL 0 0 100 100\nR 10 10 20 30\nE 50 50 10 20\nT 5 5 hi\n")
+    pic = parse(
+        "C\nK 3\nP 10 20\nL 0 0 100 100\nR 10 10 20 30\nE 50 50 10 20\nT 5 5 hi\n"
+    )
     names = [op.name for op in pic.ops]
     assert names == ["K", "P", "L", "R", "E", "T"]
     assert pic.ops[0].args == (3,)

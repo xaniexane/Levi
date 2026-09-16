@@ -76,8 +76,7 @@ def dominates(a: dict[str, int], b: dict[str, int]) -> bool:
     if not a:
         return False
     ge = all(a.get(k, 0) >= v for k, v in b.items())
-    gt = any(a.get(k, 0) > v for k, v in b.items()) or any(
-        k not in b for k in a)
+    gt = any(a.get(k, 0) > v for k, v in b.items()) or any(k not in b for k in a)
     return ge and gt
 
 
@@ -99,18 +98,27 @@ class Conflict:
     detected_at: float
 
     def to_dict(self) -> dict:
-        return {"doc_id": self.doc_id, "versions": self.versions,
-                "detected_at": self.detected_at}
+        return {
+            "doc_id": self.doc_id,
+            "versions": self.versions,
+            "detected_at": self.detected_at,
+        }
 
     @classmethod
     def from_dict(cls, data: dict) -> "Conflict":
         return cls(data["doc_id"], data["versions"], data["detected_at"])
 
 
-def _doc_record(doc_id: str, content: Any, rev: dict[str, int],
-                deleted: bool = False) -> dict:
-    return {"doc_id": doc_id, "content": content, "rev": rev,
-            "updated_at": time.time(), "deleted": deleted}
+def _doc_record(
+    doc_id: str, content: Any, rev: dict[str, int], deleted: bool = False
+) -> dict:
+    return {
+        "doc_id": doc_id,
+        "content": content,
+        "rev": rev,
+        "updated_at": time.time(),
+        "deleted": deleted,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -151,8 +159,9 @@ class Replica:
     def _write_record(self, record: dict) -> None:
         p = self._doc_path(record["doc_id"])
         tmp = p.with_suffix(".tmp")
-        tmp.write_text(json.dumps(record, ensure_ascii=False, indent=2),
-                       encoding="utf-8")
+        tmp.write_text(
+            json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
         tmp.replace(p)
 
     def put(self, doc_id: str, content: Any) -> dict[str, int]:
@@ -205,8 +214,10 @@ class Replica:
 
     def _save_conflicts(self, conflicts: list[Conflict]) -> None:
         tmp = self._conflicts_path.with_suffix(".tmp")
-        tmp.write_text(json.dumps([c.to_dict() for c in conflicts],
-                                  ensure_ascii=False, indent=2), encoding="utf-8")
+        tmp.write_text(
+            json.dumps([c.to_dict() for c in conflicts], ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
         tmp.replace(self._conflicts_path)
 
     def resolve_conflict(self, doc_id: str, winner_replica_id: str) -> None:
@@ -218,8 +229,7 @@ class Replica:
         if target is None:
             raise KeyError(f"notes: no conflict on {doc_id!r}")
         if winner_replica_id not in target.versions:
-            raise ValueError(
-                f"winner must be one of {sorted(target.versions)}")
+            raise ValueError(f"winner must be one of {sorted(target.versions)}")
         winner = target.versions[winner_replica_id]
         merged = merge_revs(*(v["rev"] for v in target.versions.values()))
         merged[self.replica_id] = merged.get(self.replica_id, 0) + 1
@@ -239,8 +249,10 @@ class Replica:
         if other.replica_id == self.replica_id:
             raise ValueError("cannot sync a replica with itself")
         sent, received, new_conflicts = [], [], []
-        for doc_id in sorted(set(self.list_docs(include_deleted=True))
-                             | set(other.list_docs(include_deleted=True))):
+        for doc_id in sorted(
+            set(self.list_docs(include_deleted=True))
+            | set(other.list_docs(include_deleted=True))
+        ):
             mine = self._read_record(doc_id)
             theirs = other._read_record(doc_id)
             if mine is None:
@@ -259,32 +271,42 @@ class Replica:
             else:
                 # Concurrent. Same content (incl. both-deleted) converges;
                 # differing content is an explicit conflict on both sides.
-                if mine["content"] == theirs["content"] and \
-                        mine.get("deleted") == theirs.get("deleted"):
-                    merged = _doc_record(doc_id, mine["content"],
-                                         merge_revs(mine["rev"], theirs["rev"]),
-                                         deleted=bool(mine.get("deleted")))
+                if mine["content"] == theirs["content"] and mine.get(
+                    "deleted"
+                ) == theirs.get("deleted"):
+                    merged = _doc_record(
+                        doc_id,
+                        mine["content"],
+                        merge_revs(mine["rev"], theirs["rev"]),
+                        deleted=bool(mine.get("deleted")),
+                    )
                     self._write_record(merged)
                     other._write_record(merged)
                 else:
                     for replica, rec_a, rec_b in (
-                            (self, mine, theirs), (other, theirs, mine)):
+                        (self, mine, theirs),
+                        (other, theirs, mine),
+                    ):
                         conflicts = replica.conflicts()
                         if not any(c.doc_id == doc_id for c in conflicts):
-                            conflicts.append(Conflict(
-                                doc_id=doc_id,
-                                versions={
-                                    self.replica_id: {
-                                        "content": mine["content"],
-                                        "rev": mine["rev"],
-                                        "updated_at": mine["updated_at"]},
-                                    other.replica_id: {
-                                        "content": theirs["content"],
-                                        "rev": theirs["rev"],
-                                        "updated_at": theirs["updated_at"]},
-                                },
-                                detected_at=time.time(),
-                            ))
+                            conflicts.append(
+                                Conflict(
+                                    doc_id=doc_id,
+                                    versions={
+                                        self.replica_id: {
+                                            "content": mine["content"],
+                                            "rev": mine["rev"],
+                                            "updated_at": mine["updated_at"],
+                                        },
+                                        other.replica_id: {
+                                            "content": theirs["content"],
+                                            "rev": theirs["rev"],
+                                            "updated_at": theirs["updated_at"],
+                                        },
+                                    },
+                                    detected_at=time.time(),
+                                )
+                            )
                             replica._save_conflicts(conflicts)
                     new_conflicts.append(doc_id)
         return {"sent": sent, "received": received, "conflicts": new_conflicts}
@@ -294,7 +316,9 @@ def _require_jsonable(value: Any) -> None:
     try:
         json.dumps(value)
     except (TypeError, ValueError) as exc:
-        raise TypeError(f"notes: document content must be JSON-serializable: {exc}") from exc
+        raise TypeError(
+            f"notes: document content must be JSON-serializable: {exc}"
+        ) from exc
 
 
 __all__ = [

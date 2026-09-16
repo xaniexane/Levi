@@ -43,6 +43,7 @@ from levi.methods import (  # noqa: E402
 # 15. tickler
 # ---------------------------------------------------------------------------
 
+
 class TestTickler:
     def test_file_routes_within_month_to_day_folder(self):
         t = tickler.TicklerFile(today=date(2026, 9, 15))
@@ -113,6 +114,7 @@ class TestTickler:
 # 16. ivylee
 # ---------------------------------------------------------------------------
 
+
 class TestIvyLee:
     def _day(self):
         d = ivylee.IvyLeeDay(date(2026, 9, 15))
@@ -169,6 +171,7 @@ class TestIvyLee:
 # 17. franklin
 # ---------------------------------------------------------------------------
 
+
 class TestFranklin:
     def test_thirteen_virtues_default(self):
         ledger = franklin.FranklinLedger(start=date(2026, 9, 15))
@@ -216,18 +219,23 @@ class TestFranklin:
         p = tmp_path / "franklin.json"
         ledger = franklin.FranklinLedger(
             virtues=[("Draft daily", "write"), ("No phone", "mornings")],
-            path=p, start=date(2026, 9, 14))
+            path=p,
+            start=date(2026, 9, 14),
+        )
         ledger.mark("Draft daily", date(2026, 9, 14))
         ledger.save()
         ledger2 = franklin.FranklinLedger(
             virtues=[("Draft daily", "write"), ("No phone", "mornings")],
-            path=p, start=date(2026, 9, 14))
+            path=p,
+            start=date(2026, 9, 14),
+        )
         assert ledger2.report()["spots_per_virtue"]["Draft daily"] == 1
 
 
 # ---------------------------------------------------------------------------
 # 18. ach
 # ---------------------------------------------------------------------------
+
 
 class TestACH:
     def _matrix(self):
@@ -315,14 +323,18 @@ class TestACH:
 # 19. repertory
 # ---------------------------------------------------------------------------
 
+
 class TestRepertory:
     def _grid(self):
         g = repertory.RepertoryGrid(topic="career")
         for el in ("Job A", "Job B", "Job C"):
             g.add_element(el)
-        c1 = g.elicit_construct("autonomous", "directed",
-                                triad=("Job A", "Job B", "Job C"),
-                                alike_pair=("Job A", "Job B"))
+        c1 = g.elicit_construct(
+            "autonomous",
+            "directed",
+            triad=("Job A", "Job B", "Job C"),
+            alike_pair=("Job A", "Job B"),
+        )
         c2 = g.elicit_construct("novel", "routine")
         g.rate("Job A", c1.id, 2)
         g.rate("Job B", c1.id, 3)
@@ -384,6 +396,7 @@ class TestRepertory:
 # 20. morphological
 # ---------------------------------------------------------------------------
 
+
 class TestMorphological:
     def _box(self):
         b = morphological.MorphologicalBox("sabbatical")
@@ -415,7 +428,7 @@ class TestMorphological:
             b.add_parameter(f"p{i}", [f"v{j}" for j in range(10)])  # 10^6
         with pytest.raises(ValueError):
             list(b.enumerate())
-        assert b.count() == 10 ** 6
+        assert b.count() == 10**6
         # explicit opt-in still works lazily (take one without materializing)
         it = b.enumerate(allow_large=True)
         assert len(next(it)) == 6
@@ -438,6 +451,7 @@ class TestMorphological:
 # ---------------------------------------------------------------------------
 # 21. triz
 # ---------------------------------------------------------------------------
+
 
 class TestTRIZ:
     def test_full_parameter_and_principle_encoding(self):
@@ -483,6 +497,7 @@ class TestTRIZ:
 # ---------------------------------------------------------------------------
 # 22. waterlogic
 # ---------------------------------------------------------------------------
+
 
 class TestWaterlogic:
     def _scape(self):
@@ -540,6 +555,7 @@ class TestWaterlogic:
 # 23. vsm
 # ---------------------------------------------------------------------------
 
+
 class TestVSM:
     def _vsm(self):
         v = vsm.VSM("freelance practice")
@@ -576,11 +592,15 @@ class TestVSM:
         sub = v.decompose("client work")
         sub.add_unit("deep work", "1")
         rep = v.viability_report()
-        assert any("recursion via S1 unit 'client work'" in f["message"]
-                   for f in rep["findings"])
+        assert any(
+            "recursion via S1 unit 'client work'" in f["message"]
+            for f in rep["findings"]
+        )
         # the sub-unit 'deep work' is itself not decomposed -> info finding, recursion-tagged
-        assert any("'deep work'" in f["message"] and "not decomposed" in f["message"]
-                   for f in rep["findings"])
+        assert any(
+            "'deep work'" in f["message"] and "not decomposed" in f["message"]
+            for f in rep["findings"]
+        )
 
     def test_colonized_s3_flagged(self):
         v = vsm.VSM("top-heavy")
@@ -607,14 +627,22 @@ class TestVSM:
 # 24. opsroom
 # ---------------------------------------------------------------------------
 
+
 class TestOpsroom:
     def _room(self):
         r = opsroom.OpsRoom("sunday review")
-        r.seat("operator", "deep work hours", 12.0, threshold=15.0,
-               direction="below", unit="h")
+        r.seat(
+            "operator",
+            "deep work hours",
+            12.0,
+            threshold=15.0,
+            direction="below",
+            unit="h",
+        )
         r.seat("scout", "inbound leads", 9.0, threshold=5.0, direction="above")
-        r.seat("auditor", "hours logged vs planned", 0.92, threshold=0.8,
-               direction="below")
+        r.seat(
+            "auditor", "hours logged vs planned", 0.92, threshold=0.8, direction="below"
+        )
         return r
 
     def test_algedonic_alerts(self):
@@ -629,13 +657,19 @@ class TestOpsroom:
         prep = r.prepare()
         assert len(prep["chairs"]) == 7
         assert set(prep["empty_chairs"]) == {
-            "coordinator", "controller", "steward", "chair"}
+            "coordinator",
+            "controller",
+            "steward",
+            "chair",
+        }
 
     def test_decide_requires_rationale(self):
         r = self._room()
         with pytest.raises(ValueError):
             r.decide("chair", "Ship it", "  ")
-        d = r.decide("chair", "Pause new client work", "operator signal below threshold")
+        d = r.decide(
+            "chair", "Pause new client work", "operator signal below threshold"
+        )
         assert r.decisions() == [d]
 
     def test_adjunction(self):
@@ -663,6 +697,7 @@ class TestOpsroom:
 # ---------------------------------------------------------------------------
 # 25. deming
 # ---------------------------------------------------------------------------
+
 
 class TestDeming:
     def _stable(self):
@@ -695,8 +730,9 @@ class TestDeming:
         d = self._stable()
         diag = d.diagnose("output")
         assert diag["knowledge"]["verdict"] == "no_theory"
-        d.record_theory("output", "travel weeks cut deep-work blocks",
-                        "output dips on travel weeks")
+        d.record_theory(
+            "output", "travel weeks cut deep-work blocks", "output dips on travel weeks"
+        )
         diag2 = d.diagnose("output")
         assert diag2["knowledge"]["verdict"] == "theory_recorded"
 
@@ -705,7 +741,9 @@ class TestDeming:
         d.link("output", "travel_days", "travel displaces deep-work blocks")
         d.watch_for("output", "streak_punishment")
         diag = d.diagnose("output")
-        assert diag["system"]["linked_metrics"] == [("travel_days", "travel displaces deep-work blocks")]
+        assert diag["system"]["linked_metrics"] == [
+            ("travel_days", "travel displaces deep-work blocks")
+        ]
         assert "streak_punishment" in diag["psychology"]["watched_risks"]
         assert "Psychology says" in diag["interaction"]
 
@@ -727,6 +765,7 @@ class TestDeming:
 # 26. trivium
 # ---------------------------------------------------------------------------
 
+
 class TestTrivium:
     def test_gates_block_advance(self):
         t = trivium.TriviumStudy("statistics")
@@ -741,7 +780,10 @@ class TestTrivium:
         t.rhetoric("p-values measure surprise under the null...")
         with pytest.raises(ValueError):
             t.advance()  # no cross-examination yet
-        t.cross_examine("What does p=0.04 actually claim?", "That data this extreme would be rare if the null held.")
+        t.cross_examine(
+            "What does p=0.04 actually claim?",
+            "That data this extreme would be rare if the null held.",
+        )
         assert t.advance() == "quadrivium"
         t.quadrivium("arithmetic", "computed power for n=200")
         with pytest.raises(ValueError):
@@ -771,10 +813,12 @@ class TestTrivium:
 # 27. ratio
 # ---------------------------------------------------------------------------
 
+
 class TestRatio:
     def _study(self):
-        s = ratio.RatioStudy("statistics", "the paper on identification",
-                             start=date(2026, 9, 1))
+        s = ratio.RatioStudy(
+            "statistics", "the paper on identification", start=date(2026, 9, 1)
+        )
         s.praelectio(["the argument in one paragraph", "the identification strategy"])
         return s
 
@@ -806,7 +850,9 @@ class TestRatio:
     def test_protocol_versioning(self):
         s = self._study()
         assert s.protocol_version == 1
-        assert s.revise_protocol("add a second disputatio round for methods papers") == 2
+        assert (
+            s.revise_protocol("add a second disputatio round for methods papers") == 2
+        )
         assert len(s.protocol_changelog) == 2
 
     def test_deny_closed(self):
@@ -826,6 +872,7 @@ class TestRatio:
 # ---------------------------------------------------------------------------
 # 28. monitorial
 # ---------------------------------------------------------------------------
+
 
 class TestMonitorial:
     def test_mastery_requires_all_three_pupils(self):
@@ -884,10 +931,25 @@ class TestMonitorial:
 # package-level: every module imports cleanly
 # ---------------------------------------------------------------------------
 
+
 def test_all_modules_import():
     import importlib
-    for name in ("tickler", "ivylee", "franklin", "ach", "repertory",
-                 "morphological", "triz", "waterlogic", "vsm", "opsroom",
-                 "deming", "trivium", "ratio", "monitorial"):
+
+    for name in (
+        "tickler",
+        "ivylee",
+        "franklin",
+        "ach",
+        "repertory",
+        "morphological",
+        "triz",
+        "waterlogic",
+        "vsm",
+        "opsroom",
+        "deming",
+        "trivium",
+        "ratio",
+        "monitorial",
+    ):
         mod = importlib.import_module(f"levi.methods.{name}")
         assert mod.__name__ == f"levi.methods.{name}"

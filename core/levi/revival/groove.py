@@ -47,7 +47,7 @@ import json
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Callable, Optional
+from typing import Callable, Optional
 
 
 # ---------------------------------------------------------------------------
@@ -74,7 +74,8 @@ def dominates(a: VersionVector, b: VersionVector) -> bool:
         return bool(a)
     ge = all(a.get(k, 0) >= v for k, v in b.items())
     gt = any(a.get(k, 0) > v for k, v in b.items()) or any(
-        k not in b and v > 0 for k, v in a.items())
+        k not in b and v > 0 for k, v in a.items()
+    )
     return ge and gt
 
 
@@ -96,16 +97,23 @@ class VersionedDoc:
     deleted: bool = False
 
     def to_dict(self) -> dict:
-        return {"doc_id": self.doc_id, "content": self.content,
-                "version": self.version, "updated_at": self.updated_at,
-                "deleted": self.deleted}
+        return {
+            "doc_id": self.doc_id,
+            "content": self.content,
+            "version": self.version,
+            "updated_at": self.updated_at,
+            "deleted": self.deleted,
+        }
 
     @classmethod
     def from_dict(cls, data: dict) -> "VersionedDoc":
-        return cls(data["doc_id"], data.get("content", ""),
-                   dict(data.get("version", {})),
-                   data.get("updated_at", 0.0),
-                   data.get("deleted", False))
+        return cls(
+            data["doc_id"],
+            data.get("content", ""),
+            dict(data.get("version", {})),
+            data.get("updated_at", 0.0),
+            data.get("deleted", False),
+        )
 
 
 @dataclass
@@ -118,10 +126,12 @@ class Conflict:
     detected_at: float = field(default_factory=time.time)
 
     def to_dict(self) -> dict:
-        return {"doc_id": self.doc_id,
-                "local": self.local.to_dict(),
-                "remote": self.remote.to_dict(),
-                "detected_at": self.detected_at}
+        return {
+            "doc_id": self.doc_id,
+            "local": self.local.to_dict(),
+            "remote": self.remote.to_dict(),
+            "detected_at": self.detected_at,
+        }
 
 
 # ---------------------------------------------------------------------------
@@ -157,7 +167,9 @@ class Workspace:
             doc = VersionedDoc(doc_id, "")
         doc.content = content
         doc.deleted = False
-        doc.version[doc.version.get(self.peer_id, 0) + 1] = doc.version.get(self.peer_id, 0) + 1
+        doc.version[doc.version.get(self.peer_id, 0) + 1] = (
+            doc.version.get(self.peer_id, 0) + 1
+        )
         doc.updated_at = time.time()
         self._store(doc)
         return doc
@@ -178,14 +190,14 @@ class Workspace:
         p = self._doc_path(doc_id)
         if not p.exists():
             raise KeyError(f"unknown document {doc_id!r}")
-        return VersionedDoc.from_dict(
-            json.loads(p.read_text(encoding="utf-8")))
+        return VersionedDoc.from_dict(json.loads(p.read_text(encoding="utf-8")))
 
     def _store(self, doc: VersionedDoc) -> None:
         p = self._doc_path(doc.doc_id)
         tmp = p.with_suffix(".tmp")
-        tmp.write_text(json.dumps(doc.to_dict(), ensure_ascii=False, indent=1),
-                       encoding="utf-8")
+        tmp.write_text(
+            json.dumps(doc.to_dict(), ensure_ascii=False, indent=1), encoding="utf-8"
+        )
         tmp.replace(p)
 
     def doc_ids(self) -> list[str]:
@@ -201,8 +213,10 @@ class Workspace:
     def file_conflict(self, conflict: Conflict) -> Path:
         p = self.path / "conflicts" / f"{conflict.doc_id}.json"
         tmp = p.with_suffix(".tmp")
-        tmp.write_text(json.dumps(conflict.to_dict(), ensure_ascii=False, indent=1),
-                       encoding="utf-8")
+        tmp.write_text(
+            json.dumps(conflict.to_dict(), ensure_ascii=False, indent=1),
+            encoding="utf-8",
+        )
         tmp.replace(p)
         return p
 
@@ -210,15 +224,19 @@ class Workspace:
         out = []
         for p in sorted((self.path / "conflicts").glob("*.json")):
             data = json.loads(p.read_text(encoding="utf-8"))
-            out.append(Conflict(
-                data["doc_id"],
-                VersionedDoc.from_dict(data["local"]),
-                VersionedDoc.from_dict(data["remote"]),
-                data.get("detected_at", 0.0)))
+            out.append(
+                Conflict(
+                    data["doc_id"],
+                    VersionedDoc.from_dict(data["local"]),
+                    VersionedDoc.from_dict(data["remote"]),
+                    data.get("detected_at", 0.0),
+                )
+            )
         return out
 
-    def resolve_conflict(self, doc_id: str, choice: str,
-                         merged_content: Optional[str] = None) -> VersionedDoc:
+    def resolve_conflict(
+        self, doc_id: str, choice: str, merged_content: Optional[str] = None
+    ) -> VersionedDoc:
         """Resolve explicitly: ``choice`` is "local", "remote", or
         "merged" (with ``merged_content``). The winner's version merges
         both vectors and bumps this peer — it supersedes, honestly."""
@@ -235,8 +253,9 @@ class Workspace:
         elif choice == "merged":
             if merged_content is None:
                 raise ValueError("merged_content is required for choice='merged'")
-            winner = VersionedDoc(doc_id, merged_content,
-                                  merge_vectors(local.version, remote.version))
+            winner = VersionedDoc(
+                doc_id, merged_content, merge_vectors(local.version, remote.version)
+            )
         else:
             raise ValueError("choice must be 'local', 'remote', or 'merged'")
         winner.version = merge_vectors(local.version, remote.version)
@@ -277,8 +296,12 @@ class SyncEngine:
 
     @staticmethod
     def _local_exchange(a: Workspace, b: Workspace) -> dict:
-        report: dict[str, list] = {"fast_forwarded": [], "pushed": [],
-                                   "pulled": [], "conflicts": []}
+        report: dict[str, list] = {
+            "fast_forwarded": [],
+            "pushed": [],
+            "pulled": [],
+            "conflicts": [],
+        }
         docs_a = a.all_docs()
         docs_b = b.all_docs()
         for doc_id in sorted(set(docs_a) | set(docs_b)):
@@ -291,8 +314,11 @@ class SyncEngine:
                 b._store(da)
                 report["pushed"].append(doc_id)
             elif da is not None and db is not None:
-                if (da.version == db.version and da.content == db.content
-                        and da.deleted == db.deleted):
+                if (
+                    da.version == db.version
+                    and da.content == db.content
+                    and da.deleted == db.deleted
+                ):
                     continue  # identical
                 if dominates(da.version, db.version):
                     b._store(da)

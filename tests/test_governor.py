@@ -4,14 +4,11 @@ No network, no real providers, no user HOME writes. Token counts are
 simulated through a fake provider; time is an injected clock.
 """
 
-import json
-
 import pytest
 
 from levi.agent.providers import ChatProvider, ChatResponse
 from levi.governor import (
     BudgetEnforcer,
-    BurstPass,
     CooldownManager,
     GovernedProvider,
     Meter,
@@ -75,15 +72,24 @@ def _msgs():
 def test_record_attribution(home, clock):
     m = Meter(clock=clock)
     m.record(
-        provider="openai", model="gpt-x", task_id="t1", agent_id="a1",
-        tool_name="web_search", prompt_fingerprint="abc",
-        prompt_tokens=10, completion_tokens=20,
+        provider="openai",
+        model="gpt-x",
+        task_id="t1",
+        agent_id="a1",
+        tool_name="web_search",
+        prompt_fingerprint="abc",
+        prompt_tokens=10,
+        completion_tokens=20,
     )
     recs = m.query(task_id="t1")
     assert len(recs) == 1
     r = recs[0]
     assert (r.provider, r.model, r.agent_id, r.tool_name) == (
-        "openai", "gpt-x", "a1", "web_search")
+        "openai",
+        "gpt-x",
+        "a1",
+        "web_search",
+    )
     assert r.total == 30
     assert m.query(tool_name="nope") == []
     assert m.query(agent_id="a1", tool_name="web_search") != []
@@ -128,11 +134,15 @@ def test_spike_on_multiplier(home, clock):
     det = SpikeDetector(window_seconds=600, multiplier=4.0, clock=clock)
     m = Meter(clock=clock)
     now = clock()
-    _seed(det, m, now - 900, 10, 100, tool_name="web_search")   # baseline 1k
+    _seed(det, m, now - 900, 10, 100, tool_name="web_search")  # baseline 1k
     alerts = []
     for _ in range(10):
-        m.record(prompt_tokens=1000, completion_tokens=0,
-                 ts=now - 100, tool_name="web_search")
+        m.record(
+            prompt_tokens=1000,
+            completion_tokens=0,
+            ts=now - 100,
+            tool_name="web_search",
+        )
         alerts.extend(det.observe(m.query()[-1]))
     keys = {a.key for a in alerts}
     assert "tool:web_search" in keys
@@ -250,15 +260,20 @@ def test_budget_config_persists(home, clock):
 # ---------------------------------------------------------------- governed wrapper
 def test_governed_meters_call_with_attribution(home, clock):
     inner = FakeProvider()
-    gov = GovernedProvider(inner, task_id="t9", agent_id="a9",
-                           tool_name="search", clock=clock)
+    gov = GovernedProvider(
+        inner, task_id="t9", agent_id="a9", tool_name="search", clock=clock
+    )
     resp = gov.chat(_msgs(), [])
     assert resp.error is None and inner.calls == 1
     recs = Meter(clock=clock).query()
     assert len(recs) == 1
     r = recs[0]
     assert (r.task_id, r.agent_id, r.tool_name, r.provider) == (
-        "t9", "a9", "search", "fake-test")
+        "t9",
+        "a9",
+        "search",
+        "fake-test",
+    )
     assert r.total == 150 and len(r.prompt_fingerprint) == 16
     assert gov.name == "fake-test"  # name delegates to inner provider
 
@@ -329,7 +344,9 @@ def test_top_contributors_shares(home, clock):
 def test_summarize_names_the_cause(home, clock):
     m = Meter(clock=clock)
     now = clock()
-    m.record(prompt_tokens=9000, completion_tokens=0, ts=now - 10, tool_name="rogue_tool")
+    m.record(
+        prompt_tokens=9000, completion_tokens=0, ts=now - 10, tool_name="rogue_tool"
+    )
     text = summarize(m, window_seconds=3600, clock=clock)
     assert "rogue_tool" in text and "9,000" in text
 
@@ -338,8 +355,13 @@ def test_summarize_names_the_cause(home, clock):
 def test_cli_status_top_why(home, clock, capsys, monkeypatch):
     monkeypatch.setenv("HOME", str(home))
     m = Meter()
-    m.record(provider="p", tool_name="t", prompt_tokens=100,
-             completion_tokens=50, ts=__import__("time").time())
+    m.record(
+        provider="p",
+        tool_name="t",
+        prompt_tokens=100,
+        completion_tokens=50,
+        ts=__import__("time").time(),
+    )
     assert gov_cli.main(["--home", str(home), "status"]) == 0
     out = capsys.readouterr().out
     assert "150" in out and "all closed" in out
@@ -391,8 +413,9 @@ def test_pass_cannot_manufacture_contention(home, clock):
     assert cd.status() == {}  # no circuit opened, no reservation
     # ...and again via the full provider wrapper
     inner = FakeProvider()
-    gov = GovernedProvider(inner, clock=clock, wallet=wallet,
-                           cooldowns=cd, pass_id=bp.pass_id)
+    gov = GovernedProvider(
+        inner, clock=clock, wallet=wallet, cooldowns=cd, pass_id=bp.pass_id
+    )
     resp = gov.chat(_msgs(), [])
     assert resp.error is None and inner.calls == 1
     assert wallet.get(bp.pass_id).uses_remaining == 3
@@ -475,8 +498,16 @@ def test_no_fake_scarcity_language():
         "demand surge",
     ]
     src = pathlib.Path(__file__).resolve().parents[1] / "core" / "levi" / "governor"
-    for name in ("priority.py", "cooldown.py", "governed.py", "__main__.py",
-                 "meter.py", "diagnose.py", "budgets.py", "spikes.py"):
+    for name in (
+        "priority.py",
+        "cooldown.py",
+        "governed.py",
+        "__main__.py",
+        "meter.py",
+        "diagnose.py",
+        "budgets.py",
+        "spikes.py",
+    ):
         text = (src / name).read_text(encoding="utf-8").lower()
         for phrase in banned:
             assert phrase not in text, f"{name} contains overload theater: {phrase!r}"
@@ -487,17 +518,23 @@ def test_governed_pass_flow_end_to_end(home, clock):
     cd = CooldownManager(clock=clock, wallet=wallet)
     det = SpikeDetector(window_seconds=600, absolute_cap=1000, clock=clock)
     inner = FakeProvider(prompt_tokens=100, completion_tokens=50)
-    gov = GovernedProvider(inner, clock=clock, wallet=wallet,
-                           cooldowns=cd, detector=det)
+    gov = GovernedProvider(
+        inner, clock=clock, wallet=wallet, cooldowns=cd, detector=det
+    )
     bp = wallet.issue()
     # 1. A genuine spike trips the breaker.
     inner_big = FakeProvider(prompt_tokens=5000, completion_tokens=0)
-    gov_big = GovernedProvider(inner_big, clock=clock, wallet=wallet,
-                               cooldowns=cd, detector=det)
+    gov_big = GovernedProvider(
+        inner_big, clock=clock, wallet=wallet, cooldowns=cd, detector=det
+    )
     assert gov_big.chat(_msgs(), []).error is None
     # 2. Contention: pass holder reserves the probe slot.
     r1 = gov.chat_with_pass(_msgs(), [], bp.pass_id)
-    assert r1.error and "priority pass" in r1.error.lower() and "genuine contention" in r1.error
+    assert (
+        r1.error
+        and "priority pass" in r1.error.lower()
+        and "genuine contention" in r1.error
+    )
     assert inner.calls == 0
     # 3. Backoff elapses: the pass holder's probe runs, metered as priority.
     clock.advance(61)
@@ -506,17 +543,35 @@ def test_governed_pass_flow_end_to_end(home, clock):
     rec = Meter(clock=clock).query()[-1]
     assert rec.priority_pass_id == bp.pass_id
     # 4. Diagnosis labels it honestly.
-    text = summarize(Meter(clock=clock), window_seconds=3600,
-                     cooldowns=cd, wallet=wallet, clock=clock)
+    text = summarize(
+        Meter(clock=clock),
+        window_seconds=3600,
+        cooldowns=cd,
+        wallet=wallet,
+        clock=clock,
+    )
     assert "Priority lane" in text and "genuine contention" in text
 
 
 def test_cli_passes(home, capsys):
     assert gov_cli.main(["--home", str(home), "passes"]) == 0
     assert "No active burst passes" in capsys.readouterr().out
-    assert gov_cli.main(["--home", str(home), "pass-issue",
-                         "--scope", "provider:x", "--uses", "5",
-                         "--note", "test-sale"]) == 0
+    assert (
+        gov_cli.main(
+            [
+                "--home",
+                str(home),
+                "pass-issue",
+                "--scope",
+                "provider:x",
+                "--uses",
+                "5",
+                "--note",
+                "test-sale",
+            ]
+        )
+        == 0
+    )
     out = capsys.readouterr().out
     assert "Issued burst pass bp_" in out and "genuine cool-downs only" in out
     assert gov_cli.main(["--home", str(home), "passes"]) == 0

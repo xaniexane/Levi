@@ -35,13 +35,19 @@ def _components(home):
 def cmd_status(args, c):
     totals = c["meter"].totals(since=None)
     print(f"Metered calls (all time): {totals['calls']}")
-    print(f"Tokens: {totals['total_tokens']:,} "
-          f"({totals['prompt_tokens']:,} in / {totals['completion_tokens']:,} out)")
+    print(
+        f"Tokens: {totals['total_tokens']:,} "
+        f"({totals['prompt_tokens']:,} in / {totals['completion_tokens']:,} out)"
+    )
     rem = c["budgets"].remaining()
-    print(f"Session budget: {rem['session_tokens']['remaining']:,} of "
-          f"{rem['session_tokens']['budget']:,} remaining")
-    print(f"Day budget: {rem['day_tokens']['remaining']:,} of "
-          f"{rem['day_tokens']['budget']:,} remaining")
+    print(
+        f"Session budget: {rem['session_tokens']['remaining']:,} of "
+        f"{rem['session_tokens']['budget']:,} remaining"
+    )
+    print(
+        f"Day budget: {rem['day_tokens']['remaining']:,} of "
+        f"{rem['day_tokens']['budget']:,} remaining"
+    )
     states = c["cooldowns"].status()
     open_now = [s for s, st in states.items() if st.get("state") == "open"]
     half = [s for s, st in states.items() if st.get("state") == "half-open"]
@@ -63,8 +69,10 @@ def cmd_top(args, c):
         return 0
     print(f"Top token contributors (last {args.window}s, by {args.by}):")
     for r in rows:
-        print(f"  {r['key']}: {r['tokens']:,} tokens "
-              f"({r['share']:.1%}, {r['calls']} calls)")
+        print(
+            f"  {r['key']}: {r['tokens']:,} tokens "
+            f"({r['share']:.1%}, {r['calls']} calls)"
+        )
     return 0
 
 
@@ -80,23 +88,33 @@ def cmd_cooldowns(args, c):
         extra = ""
         if st["state"] == "open":
             extra = f", retry in {st['retry_in_s']}s"
-        print(f"  {scope}: {st['state']} "
-              f"(breaches: {st['breaches']}{extra}) — {st['last_reason']}")
+        print(
+            f"  {scope}: {st['state']} "
+            f"(breaches: {st['breaches']}{extra}) — {st['last_reason']}"
+        )
     return 0
 
 
 def cmd_budgets(args, c):
     rem = c["budgets"].remaining()
     for name, r in rem.items():
-        print(f"  {name}: {r['used']:,} used / {r['budget']:,} budget "
-              f"({r['remaining']:,} remaining)")
+        print(
+            f"  {name}: {r['used']:,} used / {r['budget']:,} budget "
+            f"({r['remaining']:,} remaining)"
+        )
     return 0
 
 
 def cmd_why(args, c):
-    print(summarize(c["meter"], window_seconds=args.window,
-                    cooldowns=c["cooldowns"], budgets=c["budgets"],
-                    wallet=c["wallet"]))
+    print(
+        summarize(
+            c["meter"],
+            window_seconds=args.window,
+            cooldowns=c["cooldowns"],
+            budgets=c["budgets"],
+            wallet=c["wallet"],
+        )
+    )
     return 0
 
 
@@ -105,23 +123,32 @@ def cmd_passes(args, c):
     if not active:
         print("No active burst passes.")
         return 0
-    print("Active burst passes (honest priority lane — only valid during "
-          "genuine contention):")
+    print(
+        "Active burst passes (honest priority lane — only valid during "
+        "genuine contention):"
+    )
     for p in active:
-        print(f"  {p.pass_id}: scope={p.scope} "
-              f"uses {p.uses_remaining}/{p.uses_total} "
-              f"expires in {int(p.expires_at - __import__('time').time())}s"
-              + (f" note={p.note}" if p.note else ""))
+        print(
+            f"  {p.pass_id}: scope={p.scope} "
+            f"uses {p.uses_remaining}/{p.uses_total} "
+            f"expires in {int(p.expires_at - __import__('time').time())}s"
+            + (f" note={p.note}" if p.note else "")
+        )
     return 0
 
 
 def cmd_pass_issue(args, c):
-    bp = c["wallet"].issue(scope=args.scope, uses=args.uses,
-                           ttl_seconds=args.ttl, note=args.note or "")
-    print(f"Issued burst pass {bp.pass_id}: scope={bp.scope}, "
-          f"uses={bp.uses_total}, ttl={int(args.ttl)}s")
-    print("This pass buys priority probe slots during genuine cool-downs only; "
-          "it cannot create contention.")
+    bp = c["wallet"].issue(
+        scope=args.scope, uses=args.uses, ttl_seconds=args.ttl, note=args.note or ""
+    )
+    print(
+        f"Issued burst pass {bp.pass_id}: scope={bp.scope}, "
+        f"uses={bp.uses_total}, ttl={int(args.ttl)}s"
+    )
+    print(
+        "This pass buys priority probe slots during genuine cool-downs only; "
+        "it cannot create contention."
+    )
     return 0
 
 
@@ -140,7 +167,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     t = sub.add_parser("top", help="top token contributors")
     t.add_argument("--window", type=int, default=3600)
-    t.add_argument("--by", choices=["tool", "task", "agent", "provider"], default="tool")
+    t.add_argument(
+        "--by", choices=["tool", "task", "agent", "provider"], default="tool"
+    )
     t.add_argument("--limit", type=int, default=10)
 
     sub.add_parser("cooldowns", help="cool-down circuit states")
@@ -155,13 +184,16 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("passes", help="list active burst passes")
 
     pi = sub.add_parser("pass-issue", help="issue a burst pass (operator action)")
-    pi.add_argument("--scope", default="*",
-                    help="scope the pass covers, e.g. provider:openai")
+    pi.add_argument(
+        "--scope", default="*", help="scope the pass covers, e.g. provider:openai"
+    )
     pi.add_argument("--uses", type=int, default=1)
-    pi.add_argument("--ttl", type=float, default=86400.0,
-                    help="time-to-live in seconds")
-    pi.add_argument("--note", default="",
-                    help="operator note, e.g. a payment reference")
+    pi.add_argument(
+        "--ttl", type=float, default=86400.0, help="time-to-live in seconds"
+    )
+    pi.add_argument(
+        "--note", default="", help="operator note, e.g. a payment reference"
+    )
     return p
 
 

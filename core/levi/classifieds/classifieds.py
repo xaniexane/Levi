@@ -70,6 +70,7 @@ def _now() -> float:
 #   divided by (# of my connections), i.e. the fraction of my network
 #   that (weighted) vouches for the lister. Range 0..1. Fully explainable.
 
+
 def trust_score(lister_id: str, contacts: Dict[str, Any]) -> Dict[str, Any]:
     me_vouches: Dict[str, float] = contacts.get("my_vouches", {})
     mutuals = []
@@ -87,8 +88,10 @@ def trust_score(lister_id: str, contacts: Dict[str, Any]) -> Dict[str, Any]:
         "lister": lister_id,
         "score": score,
         "mutuals": sorted(mutuals, key=lambda m: m["via"]),
-        "formula": ("sum(min(my_vouch[m], their_vouch[m] for lister)) "
-                    "/ my_connection_count = %.3f / %d" % (total, denom)),
+        "formula": (
+            "sum(min(my_vouch[m], their_vouch[m] for lister)) "
+            "/ my_connection_count = %.3f / %d" % (total, denom)
+        ),
     }
 
 
@@ -109,26 +112,39 @@ class ClassifiedsStore:
     def _save_listings(self, rows: List[Dict[str, Any]]) -> None:
         self._listings.write_text(json.dumps(rows, indent=2), encoding=ENC)
 
-    def add(self, title: str, description: str = "", price: str = "",
-            category: str = "misc", lister: str = "me",
-            contact: str = "") -> Dict[str, Any]:
+    def add(
+        self,
+        title: str,
+        description: str = "",
+        price: str = "",
+        category: str = "misc",
+        lister: str = "me",
+        contact: str = "",
+    ) -> Dict[str, Any]:
         if not title.strip():
             raise ClassifiedsError("title is required")
         rows = self._load_listings()
         row = {
             "id": uuid.uuid4().hex[:12],
-            "title": title.strip(), "description": description,
-            "price": price, "category": category, "lister": lister,
-            "contact": contact, "status": "active",
+            "title": title.strip(),
+            "description": description,
+            "price": price,
+            "category": category,
+            "lister": lister,
+            "contact": contact,
+            "status": "active",
             "created_at": _now(),
         }
         rows.append(row)
         self._save_listings(rows)
         return row
 
-    def listings(self, category: Optional[str] = None,
-                 query: Optional[str] = None,
-                 include_sold: bool = False) -> List[Dict[str, Any]]:
+    def listings(
+        self,
+        category: Optional[str] = None,
+        query: Optional[str] = None,
+        include_sold: bool = False,
+    ) -> List[Dict[str, Any]]:
         rows = self._load_listings()
         out = []
         for r in rows:
@@ -210,22 +226,31 @@ class ClassifiedsStore:
         attestations = []
         for r in listings:
             t = trust_score(r["lister"], contacts)
-            body = json.dumps({"listing_id": r["id"], "lister": r["lister"],
-                               "trust": t}, sort_keys=True).encode(ENC)
-            attestations.append({
-                "listing_id": r["id"],
-                "attested_by": contacts.get("me", "me"),
-                "attested_at": _now(),
-                "trust": t,
-                "hmac_sha256": self._sign(body),
-                "note": ("integrity signature with the exporter's local key; "
-                         "verifiable only by the exporter — it proves the "
-                         "bundle wasn't altered after export, not identity"),
-            })
-        return {"format": EXPORT_FORMAT, "listings": listings,
-                "attestations": attestations,
-                "exported_at": _now(),
-                "exported_by": contacts.get("me", "me")}
+            body = json.dumps(
+                {"listing_id": r["id"], "lister": r["lister"], "trust": t},
+                sort_keys=True,
+            ).encode(ENC)
+            attestations.append(
+                {
+                    "listing_id": r["id"],
+                    "attested_by": contacts.get("me", "me"),
+                    "attested_at": _now(),
+                    "trust": t,
+                    "hmac_sha256": self._sign(body),
+                    "note": (
+                        "integrity signature with the exporter's local key; "
+                        "verifiable only by the exporter — it proves the "
+                        "bundle wasn't altered after export, not identity"
+                    ),
+                }
+            )
+        return {
+            "format": EXPORT_FORMAT,
+            "listings": listings,
+            "attestations": attestations,
+            "exported_at": _now(),
+            "exported_by": contacts.get("me", "me"),
+        }
 
     def verify_export(self, bundle: Dict[str, Any]) -> Dict[str, Any]:
         """Recompute trust scores and check attestation integrity.
@@ -240,16 +265,26 @@ class ClassifiedsStore:
         checked, ok = 0, 0
         for a in bundle.get("attestations", []):
             checked += 1
-            body = json.dumps({"listing_id": a["listing_id"],
-                               "lister": a["trust"]["lister"],
-                               "trust": a["trust"]}, sort_keys=True).encode(ENC)
+            body = json.dumps(
+                {
+                    "listing_id": a["listing_id"],
+                    "lister": a["trust"]["lister"],
+                    "trust": a["trust"],
+                },
+                sort_keys=True,
+            ).encode(ENC)
             if hmac.compare_digest(self._sign(body), a.get("hmac_sha256", "")):
                 ok += 1
-        mine = {a["listing_id"]: trust_score(a["trust"]["lister"], contacts)
-                for a in bundle.get("attestations", [])}
-        return {"attestations": checked, "intact": ok,
-                "my_trust_scores": mine,
-                "note": "trust scores are recomputed against YOUR contacts"}
+        mine = {
+            a["listing_id"]: trust_score(a["trust"]["lister"], contacts)
+            for a in bundle.get("attestations", [])
+        }
+        return {
+            "attestations": checked,
+            "intact": ok,
+            "my_trust_scores": mine,
+            "note": "trust scores are recomputed against YOUR contacts",
+        }
 
     def import_bundle(self, bundle: Dict[str, Any]) -> int:
         """Import listings from a bundle (ids preserved; no overwrite)."""

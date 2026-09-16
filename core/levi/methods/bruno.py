@@ -39,7 +39,9 @@ class Ring:
             raise ValueError(f"ring {self.name!r} symbols must be distinct")
         for sym, img in self.images.items():
             if sym not in self.symbols:
-                raise ValueError(f"image-seed for unknown symbol {sym!r} on ring {self.name!r}")
+                raise ValueError(
+                    f"image-seed for unknown symbol {sym!r} on ring {self.name!r}"
+                )
 
     def rotate(self, steps: int = 1) -> int:
         self.offset = (self.offset + steps) % len(self.symbols)
@@ -64,7 +66,9 @@ class Wheel:
         self._rng = random.Random(seed)
         self.seed = seed
 
-    def add_ring(self, name: str, symbols: list[str], images: dict[str, str] | None = None) -> Ring:
+    def add_ring(
+        self, name: str, symbols: list[str], images: dict[str, str] | None = None
+    ) -> Ring:
         ring = Ring(name.strip(), [str(s) for s in symbols], dict(images or {}))
         ring.validate()
         if any(r.name == ring.name for r in self.rings):
@@ -112,17 +116,25 @@ class Wheel:
 
     def render(self, config: dict[str, str] | None = None) -> str:
         cfg = config or self.configuration()
-        parts = [f"{ring}={cfg.get(ring, '?')}" for ring in [r.name for r in self.rings]]
+        parts = [
+            f"{ring}={cfg.get(ring, '?')}" for ring in [r.name for r in self.rings]
+        ]
         return f"{self.name}: " + " · ".join(parts)
 
     def to_dict(self) -> dict:
-        return {"name": self.name, "seed": self.seed, "rings": [asdict(r) for r in self.rings]}
+        return {
+            "name": self.name,
+            "seed": self.seed,
+            "rings": [asdict(r) for r in self.rings],
+        }
 
     @classmethod
     def from_dict(cls, data: dict) -> "Wheel":
         wheel = cls(data["name"], data.get("seed", 0))
         for rd in data.get("rings", []):
-            ring = Ring(rd["name"], rd["symbols"], rd.get("images", {}), rd.get("offset", 0))
+            ring = Ring(
+                rd["name"], rd["symbols"], rd.get("images", {}), rd.get("offset", 0)
+            )
             ring.validate()
             wheel.rings.append(ring)
         return wheel

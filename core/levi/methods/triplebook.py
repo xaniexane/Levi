@@ -24,7 +24,7 @@ directly; the merchant-house metaphysics need not.
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 
 from . import _persist
 
@@ -32,6 +32,7 @@ from . import _persist
 @dataclass
 class Capture:
     """memoriale: raw, unprocessed capture."""
+
     text: str
     captured: str = ""  # ISO datetime
     posted: bool = False  # moved into the giornale yet?
@@ -44,6 +45,7 @@ class Capture:
 @dataclass
 class JournalEntry:
     """giornale: one dual-aspect entry — debit one account, credit another."""
+
     narrative: str
     debit_account: str
     credit_account: str
@@ -76,7 +78,9 @@ class TripleBook:
         if not data:
             return
         if not isinstance(data, dict) or "giornale" not in data:
-            raise _persist.CorruptStoreError(f"triplebook store {self._store} has bad shape")
+            raise _persist.CorruptStoreError(
+                f"triplebook store {self._store} has bad shape"
+            )
         for cd in data.get("memoriale", []):
             c = Capture(**cd)
             c.validate()
@@ -89,8 +93,10 @@ class TripleBook:
     def save(self) -> None:
         _persist.save_json(
             self._store,
-            {"memoriale": [asdict(c) for c in self.memoriale],
-             "giornale": [asdict(j) for j in self.giornale]},
+            {
+                "memoriale": [asdict(c) for c in self.memoriale],
+                "giornale": [asdict(j) for j in self.giornale],
+            },
         )
 
     # ---- memoriale -------------------------------------------------------
@@ -118,7 +124,10 @@ class TripleBook:
         """Reorganize the journal by account: {account: {debit, credit}}."""
         accounts: dict[str, dict[str, float]] = {}
         for j in self.giornale:
-            for side, acct in (("debit", j.debit_account), ("credit", j.credit_account)):
+            for side, acct in (
+                ("debit", j.debit_account),
+                ("credit", j.credit_account),
+            ):
                 acc = accounts.setdefault(acct, {"debit": 0.0, "credit": 0.0})
                 acc[side] += float(j.amount)
         return accounts
@@ -135,8 +144,11 @@ class TripleBook:
         accounts = self.ledger()
         total_debit = sum(v["debit"] for v in accounts.values())
         total_credit = sum(v["credit"] for v in accounts.values())
-        unbalanced = {a: v["debit"] - v["credit"] for a, v in accounts.items()
-                      if abs(v["debit"] - v["credit"]) > 1e-9}
+        unbalanced = {
+            a: v["debit"] - v["credit"]
+            for a, v in accounts.items()
+            if abs(v["debit"] - v["credit"]) > 1e-9
+        }
         unposted = [i for i, c in enumerate(self.memoriale) if not c.posted]
         return {
             "balanced": abs(total_debit - total_credit) < 1e-9,

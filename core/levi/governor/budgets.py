@@ -12,7 +12,6 @@ import datetime as _dt
 import json
 import os
 import time
-from pathlib import Path
 
 from levi.governor.meter import Meter, governor_home
 
@@ -63,7 +62,9 @@ class BudgetEnforcer:
         self._budgets[name] = int(tokens)
         self._dir.mkdir(parents=True, exist_ok=True)
         tmp = self._config_file.with_suffix(".tmp")
-        tmp.write_text(json.dumps(self._budgets, indent=2, sort_keys=True), encoding="utf-8")
+        tmp.write_text(
+            json.dumps(self._budgets, indent=2, sort_keys=True), encoding="utf-8"
+        )
         os.chmod(tmp, 0o600)
         os.replace(tmp, self._config_file)
 
@@ -91,7 +92,9 @@ class BudgetEnforcer:
             "session_tokens": {
                 "budget": self._budgets["session_tokens"],
                 "used": self.session_used(),
-                "remaining": max(0, self._budgets["session_tokens"] - self.session_used()),
+                "remaining": max(
+                    0, self._budgets["session_tokens"] - self.session_used()
+                ),
             },
             "day_tokens": {
                 "budget": self._budgets["day_tokens"],

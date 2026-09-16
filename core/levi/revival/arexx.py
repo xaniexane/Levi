@@ -118,7 +118,9 @@ class PortRegistry:
         return {name: sorted(port.verbs) for name, port in self._ports.items()}
 
     # -- dispatch ------------------------------------------------------------
-    def _resolve(self, port: str, verb: str, caller: Optional[str]) -> Callable[..., Any]:
+    def _resolve(
+        self, port: str, verb: str, caller: Optional[str]
+    ) -> Callable[..., Any]:
         try:
             entry = self._ports[port]
         except KeyError:
@@ -162,7 +164,9 @@ class StepResult:
     error: Optional[str] = None
 
 
-def _normalize_step(step: Any, index: int) -> tuple[str, str, list[Any], dict[str, Any]]:
+def _normalize_step(
+    step: Any, index: int
+) -> tuple[str, str, list[Any], dict[str, Any]]:
     if isinstance(step, dict):
         port = step.get("port")
         verb = step.get("verb")
@@ -204,17 +208,23 @@ def run_script(
                 break
             continue
         try:
-            outcome = registry.send_command(port, verb, args=args, kwargs=kwargs, caller=caller)
+            outcome = registry.send_command(
+                port, verb, args=args, kwargs=kwargs, caller=caller
+            )
             results.append(StepResult(index, port, verb, True, outcome, None))
         except PortError as exc:
             results.append(
-                StepResult(index, port, verb, False, None, f"{type(exc).__name__}: {exc}")
+                StepResult(
+                    index, port, verb, False, None, f"{type(exc).__name__}: {exc}"
+                )
             )
             if stop_on_error:
                 break
         except Exception as exc:  # verb implementation errors are captured, not hidden
             results.append(
-                StepResult(index, port, verb, False, None, f"{type(exc).__name__}: {exc}")
+                StepResult(
+                    index, port, verb, False, None, f"{type(exc).__name__}: {exc}"
+                )
             )
             if stop_on_error:
                 break
@@ -232,7 +242,9 @@ def _plan9():
     return _p9
 
 
-def serve_registry(registry: PortRegistry, channel: Any, request_types: Optional[set[str]] = None) -> None:
+def serve_registry(
+    registry: PortRegistry, channel: Any, request_types: Optional[set[str]] = None
+) -> None:
     """Serve ``registry`` over a 9P-style channel (blocking).
 
     Accepted message type: ``"command"`` with payload
@@ -279,7 +291,13 @@ class RemoteRegistry:
     ) -> Any:
         reply = self._channel.request(
             "command",
-            {"port": port, "verb": verb, "args": args or [], "kwargs": kwargs or {}, "caller": caller},
+            {
+                "port": port,
+                "verb": verb,
+                "args": args or [],
+                "kwargs": kwargs or {},
+                "caller": caller,
+            },
             timeout=timeout,
         )
         if not isinstance(reply, dict):

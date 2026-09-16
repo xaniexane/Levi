@@ -80,9 +80,13 @@ def test_tier_boundaries():
 
 
 def test_threshold_alert_and_custom_threshold():
-    hi = _factors(demand=(100, "b"), market_size=(100, "b"),
-                  competition_gap=(100, "b"), trend_velocity=(100, "b"),
-                  entry_feasibility=(100, "b"))
+    hi = _factors(
+        demand=(100, "b"),
+        market_size=(100, "b"),
+        competition_gap=(100, "b"),
+        trend_velocity=(100, "b"),
+        entry_feasibility=(100, "b"),
+    )
     assert score_card("o1", "T", hi).alert is True
     assert score_card("o1", "T", hi, threshold=100.0).alert is True
     mid = score_card("o1", "T", _factors())  # composite 65.0
@@ -133,8 +137,13 @@ def test_weight_validation():
     with pytest.raises(ValueError, match="outside"):
         validate_weights(neg)
     # custom valid weights change the composite deterministically
-    w = {"demand": 1.0, "market_size": 0.0, "competition_gap": 0.0,
-         "trend_velocity": 0.0, "entry_feasibility": 0.0}
+    w = {
+        "demand": 1.0,
+        "market_size": 0.0,
+        "competition_gap": 0.0,
+        "trend_velocity": 0.0,
+        "entry_feasibility": 0.0,
+    }
     card = score_card("o1", "T", _factors(), weights=w)
     assert card.composite == 80.0
 
@@ -228,7 +237,6 @@ def test_default_threshold_constant():
 # -- boundary validation (hardening) -----------------------------------------
 
 
-
 def test_coerce_factor_rejects_malformed_input():
     from levi.demand.scoring import _coerce_factor
 
@@ -273,6 +281,7 @@ def test_rank_cards_rejects_garbage():
 
 
 # -- DemandPulse boundaries ---------------------------------------------------
+
 
 def test_pulse_scan_seed_rejects_empty(tmp_path):
     pulse = DemandPulse(path=tmp_path / "dp.json")
@@ -320,8 +329,12 @@ def test_pulse_corrupt_file_warns_and_starts_empty(tmp_path):
 def test_pulse_skips_corrupt_entries_not_whole_file(tmp_path):
     path = tmp_path / "dp.json"
     good_signal = {
-        "id": "s1", "need": "need x", "segment": "general", "evidence": "",
-        "confidence": 0.4, "kind": "HYPOTHESIS",
+        "id": "s1",
+        "need": "need x",
+        "segment": "general",
+        "evidence": "",
+        "confidence": 0.4,
+        "kind": "HYPOTHESIS",
         "created_at": "2026-01-01T00:00:00",
     }
     bad_signal = {"id": "", "need": "", "confidence": "high"}
@@ -342,6 +355,7 @@ def test_pulse_score_five_factor_rejects_blank_ids(tmp_path):
 
 # -- hardened input contracts ------------------------------------------------
 
+
 def test_validate_factors_requires_mapping():
     for bad in (None, 42, "demand", [("demand", (80, "x"))], {"demand"}):
         with pytest.raises(ValueError, match="must be a mapping"):
@@ -356,9 +370,16 @@ def test_validate_weights_requires_mapping():
 
 
 def test_composite_score_rejects_wrong_factor_set():
-    good = [FactorScore(name, v, "basis note long enough") for name, v in
-            (("demand", 80), ("market_size", 70), ("competition_gap", 60),
-             ("trend_velocity", 50), ("entry_feasibility", 40))]
+    good = [
+        FactorScore(name, v, "basis note long enough")
+        for name, v in (
+            ("demand", 80),
+            ("market_size", 70),
+            ("competition_gap", 60),
+            ("trend_velocity", 50),
+            ("entry_feasibility", 40),
+        )
+    ]
     w = validate_weights(None)
     with pytest.raises(ValueError, match="exactly"):
         composite_score(good[:4], w)  # missing one factor

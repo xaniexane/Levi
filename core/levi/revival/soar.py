@@ -47,7 +47,7 @@ from __future__ import annotations
 import json
 import re
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
@@ -110,9 +110,7 @@ class Procedure:
         """Substitute bindings into the generalized steps."""
         out = []
         for step in self.steps:
-            out.append({
-                k: _substitute(v, bindings) for k, v in step.items()
-            })
+            out.append({k: _substitute(v, bindings) for k, v in step.items()})
         return out
 
 
@@ -292,12 +290,15 @@ def demo() -> Dict[str, Any]:
 
     # --- problem 1: deliberate from scratch ---
     d = Deliberation("deploy service api version 3")
-    d.record("service api version 3 is stopped", "resolve-deps api version 3",
-             "deps for api version 3 resolved")
-    d.record("deps for api version 3 resolved", "build api version 3",
-             "api version 3 built")
-    d.record("api version 3 built", "smoke-test api version 3",
-             "api version 3 healthy")
+    d.record(
+        "service api version 3 is stopped",
+        "resolve-deps api version 3",
+        "deps for api version 3 resolved",
+    )
+    d.record(
+        "deps for api version 3 resolved", "build api version 3", "api version 3 built"
+    )
+    d.record("api version 3 built", "smoke-test api version 3", "api version 3 healthy")
     d.succeed()
     proc = d.chunk(provenance="demo: first deployment deliberation")
     lib.add(proc)

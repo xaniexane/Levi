@@ -18,7 +18,10 @@ from levi.organs.registry import (
 class TestRegistryContents:
     def test_all_four_organs_listed(self):
         assert set(ORGAN_REGISTRY) == {
-            "echoverse", "mandella", "reim", "riem",
+            "echoverse",
+            "mandella",
+            "reim",
+            "riem",
         }
 
     def test_registry_shape(self):
@@ -37,14 +40,25 @@ class TestRegistryContents:
     def test_echoverse_maps_to_run_echo(self):
         assert ORGAN_REGISTRY["echoverse"]["entry"] == "levi.organs.echo:run_echo"
         assert "echoverse.py" not in ORGAN_REGISTRY["echoverse"]["entry"]
-        assert "no separate" in ORGAN_REGISTRY["echoverse"]["describe"].lower() or \
-               "do not" in ORGAN_REGISTRY["echoverse"]["describe"].lower()
+        assert (
+            "no separate" in ORGAN_REGISTRY["echoverse"]["describe"].lower()
+            or "do not" in ORGAN_REGISTRY["echoverse"]["describe"].lower()
+        )
 
 
 class TestDenyClosed:
-    @pytest.mark.parametrize("bad", [
-        "graph", "echoverse2", "", "ECHO", None, 42, "reim ",
-    ])
+    @pytest.mark.parametrize(
+        "bad",
+        [
+            "graph",
+            "echoverse2",
+            "",
+            "ECHO",
+            None,
+            42,
+            "reim ",
+        ],
+    )
     def test_unknown_organ_denied(self, bad):
         with pytest.raises(ValueError):
             run_organ(bad)
@@ -70,7 +84,9 @@ class TestLazyImports:
         )
         proc = subprocess.run(
             [sys.executable, "-c", code],
-            capture_output=True, text=True, cwd="/home/hatch/workspace/levi/core",
+            capture_output=True,
+            text=True,
+            cwd="/home/hatch/workspace/levi/core",
             timeout=60,
         )
         assert proc.returncode == 0, proc.stderr

@@ -13,8 +13,10 @@ def test_help_exits_zero():
 
 def test_table_upsert_and_search(tmp_path, capsys):
     bd = str(tmp_path / "brain")
-    assert main(["--brain-dir", bd, "table-upsert", "facts", "sky",
-                 "the sky is blue"]) == 0
+    assert (
+        main(["--brain-dir", bd, "table-upsert", "facts", "sky", "the sky is blue"])
+        == 0
+    )
     assert main(["--brain-dir", bd, "table-search", "sky"]) == 0
     assert "the sky is blue" in capsys.readouterr().out
 
@@ -26,8 +28,21 @@ def test_table_upsert_empty_value_refused(tmp_path):
 
 def test_corpus_add_and_search(tmp_path, capsys):
     bd = str(tmp_path / "brain")
-    assert main(["--brain-dir", bd, "corpus-add", "observed daylight",
-                 "--kind", "OBSERVED", "--source", "test"]) == 0
+    assert (
+        main(
+            [
+                "--brain-dir",
+                bd,
+                "corpus-add",
+                "observed daylight",
+                "--kind",
+                "OBSERVED",
+                "--source",
+                "test",
+            ]
+        )
+        == 0
+    )
     assert main(["--brain-dir", bd, "corpus-search", "daylight"]) == 0
     assert "daylight" in capsys.readouterr().out
 

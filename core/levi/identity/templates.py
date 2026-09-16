@@ -27,7 +27,9 @@ _templates_cache: Dict[str, tuple] = {}
 
 def _fingerprint(root: Path) -> tuple:
     try:
-        return tuple(sorted((p.name, p.stat().st_mtime_ns) for p in root.glob("*.json")))
+        return tuple(
+            sorted((p.name, p.stat().st_mtime_ns) for p in root.glob("*.json"))
+        )
     except OSError:
         return ()
 

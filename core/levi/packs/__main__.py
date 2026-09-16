@@ -27,8 +27,10 @@ def cmd_init(args) -> int:
         print("packs: %s" % exc, file=sys.stderr)
         return 1
     print("pack created: %s" % d)
-    print("edit instructions.md, drop reference files in content/, then "
-          "tune scope in manifest.json")
+    print(
+        "edit instructions.md, drop reference files in content/, then "
+        "tune scope in manifest.json"
+    )
     return 0
 
 
@@ -44,8 +46,10 @@ def cmd_list(args) -> int:
         for k in ("projects", "paths", "tags"):
             if s[k]:
                 rules.append("%s=%s" % (k, ",".join(s[k])))
-        print("%-20s v%-8s scope: %s" % (
-            p.name, p.manifest.get("version", "?"), "; ".join(rules) or "none"))
+        print(
+            "%-20s v%-8s scope: %s"
+            % (p.name, p.manifest.get("version", "?"), "; ".join(rules) or "none")
+        )
     return 0
 
 
@@ -66,8 +70,7 @@ def cmd_show(args) -> int:
 
 
 def cmd_assemble(args) -> int:
-    asm = _store().assemble(project=args.project, cwd=args.cwd,
-                            tags=args.tag or [])
+    asm = _store().assemble(project=args.project, cwd=args.cwd, tags=args.tag or [])
     names = ", ".join(p["name"] + "(%s)" % p["rule"] for p in asm["packs"])
     print("attached: %s" % (names or "none"))
     if asm["truncated"]:
@@ -83,6 +86,7 @@ def cmd_validate(args) -> int:
         print("ok: %s" % p.name)
     # also surface broken packs
     from levi.packs.packs import packs_home
+
     for d in sorted(packs_home().iterdir()):
         if d.is_dir() and not (d / "manifest.json").exists():
             print("BROKEN (no manifest.json): %s" % d.name, file=sys.stderr)
@@ -103,7 +107,8 @@ def cmd_delete(args) -> int:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(
         prog="levi.packs",
-        description="Scoped knowledge packs — user-owned persistent context.")
+        description="Scoped knowledge packs — user-owned persistent context.",
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     p = sub.add_parser("init", help="create a pack")

@@ -50,9 +50,9 @@ class TriviumStudy:
             raise ValueError("topic must be a non-empty string")
         self.topic = topic.strip()
         self.stage: str = "grammar"
-        self._facts: list[str] = []          # grammar: vocabulary & facts
-        self._claims: list[str] = []         # logic: argument structure
-        self._explanation: str = ""          # rhetoric: the teach-back
+        self._facts: list[str] = []  # grammar: vocabulary & facts
+        self._claims: list[str] = []  # logic: argument structure
+        self._explanation: str = ""  # rhetoric: the teach-back
         self._qa: list[tuple[str, str]] = []  # rhetoric: cross-examination Q&A
         self._quadrivium: dict[str, list[str]] = {a: [] for a in QUADRIVIUM_ARTS}
 
@@ -95,7 +95,9 @@ class TriviumStudy:
     def quadrivium(self, art: str, note: str) -> None:
         """Record a quantitative/modeling insight under its art."""
         if art not in QUADRIVIUM_ARTS:
-            raise ValueError(f"unknown quadrivium art {art!r}; arts: {sorted(QUADRIVIUM_ARTS)}")
+            raise ValueError(
+                f"unknown quadrivium art {art!r}; arts: {sorted(QUADRIVIUM_ARTS)}"
+            )
         self._quadrivium[art].append(self._clean(note, "quadrivium note"))
 
     # -- the gates -------------------------------------------------------------------------
@@ -105,15 +107,25 @@ class TriviumStudy:
             return ok, ("banked facts" if ok else "no facts banked — grammar() first")
         if stage == "logic":
             ok = bool(self._claims)
-            return ok, ("argument structure recorded" if ok else "no claims recorded — logic() first")
+            return ok, (
+                "argument structure recorded"
+                if ok
+                else "no claims recorded — logic() first"
+            )
         if stage == "rhetoric":
             ok = bool(self._explanation) and bool(self._qa)
-            return ok, ("teach-back + cross-examination complete" if ok else
-                        "rhetoric needs rhetoric() AND at least one cross_examine() exchange")
+            return ok, (
+                "teach-back + cross-examination complete"
+                if ok
+                else "rhetoric needs rhetoric() AND at least one cross_examine() exchange"
+            )
         if stage == "quadrivium":
             ok = any(self._quadrivium.values())
-            return ok, ("quantitative notes recorded" if ok else
-                        "quadrivium needs at least one quadrivium() note")
+            return ok, (
+                "quantitative notes recorded"
+                if ok
+                else "quadrivium needs at least one quadrivium() note"
+            )
         raise ValueError(f"unknown stage: {stage!r}")
 
     def advance(self) -> str:
@@ -128,7 +140,9 @@ class TriviumStudy:
         return self.stage
 
     def status(self) -> dict:
-        gates = {s: {"met": self._gate(s)[0], "detail": self._gate(s)[1]} for s in STAGES}
+        gates = {
+            s: {"met": self._gate(s)[0], "detail": self._gate(s)[1]} for s in STAGES
+        }
         return {
             "topic": self.topic,
             "stage": self.stage,

@@ -95,22 +95,34 @@ class Comparer:
                     if not (in_first and in_other):
                         report["agree"] = False
                         report["disagreements"].append(
-                            {"key": key, "paths": {names[0]: first.get(key, "<missing>"),
-                                                   other_name: other.get(key, "<missing>")},
-                             "kind": "missing-key"}
+                            {
+                                "key": key,
+                                "paths": {
+                                    names[0]: first.get(key, "<missing>"),
+                                    other_name: other.get(key, "<missing>"),
+                                },
+                                "kind": "missing-key",
+                            }
                         )
-                    elif not _values_equal(first[key], other[key], rel_tol=self.rel_tol):
+                    elif not _values_equal(
+                        first[key], other[key], rel_tol=self.rel_tol
+                    ):
                         report["agree"] = False
                         report["disagreements"].append(
-                            {"key": key, "paths": {names[0]: first[key],
-                                                   other_name: other[key]},
-                             "kind": "value"}
+                            {
+                                "key": key,
+                                "paths": {names[0]: first[key], other_name: other[key]},
+                                "kind": "value",
+                            }
                         )
             elif not _values_equal(first, other, rel_tol=self.rel_tol):
                 report["agree"] = False
                 report["disagreements"].append(
-                    {"key": None, "paths": {names[0]: first, other_name: other},
-                     "kind": "value"}
+                    {
+                        "key": None,
+                        "paths": {names[0]: first, other_name: other},
+                        "kind": "value",
+                    }
                 )
         return report
 
@@ -137,8 +149,12 @@ class Verified:
 # ---------------------------------------------------------------------------
 
 
-def verify(paths: dict[str, Callable[..., Any]], *args: Any,
-           comparer: Comparer | None = None, **kwargs: Any) -> Verified:
+def verify(
+    paths: dict[str, Callable[..., Any]],
+    *args: Any,
+    comparer: Comparer | None = None,
+    **kwargs: Any,
+) -> Verified:
     """Run each independent path, compare, and return a Verified result.
 
     ``paths`` maps a path name to a callable (two minimum — the duplex).
@@ -180,8 +196,9 @@ def verify(paths: dict[str, Callable[..., Any]], *args: Any,
     return Verified(value=agreed, per_path=results)
 
 
-def verify_n(*callables: Callable[..., Any], names: tuple[str, ...] | None = None,
-             **kwargs: Any) -> Verified:
+def verify_n(
+    *callables: Callable[..., Any], names: tuple[str, ...] | None = None, **kwargs: Any
+) -> Verified:
     """Convenience wrapper: positional paths, auto-named ``path-1..n``."""
     if names is None:
         names = tuple(f"path-{i + 1}" for i in range(len(callables)))

@@ -21,7 +21,7 @@ needles; LEVI does the notching (tagging) and the shaking (intersection).
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass
@@ -43,7 +43,9 @@ class Deck:
     def __init__(self):
         self.features: dict[str, int] = {}  # feature -> hole position
         self.cards: dict[str, Card] = {}
-        self.shared: dict[int, list[str]] = {}  # position -> features sharing it (zatocoding)
+        self.shared: dict[
+            int, list[str]
+        ] = {}  # position -> features sharing it (zatocoding)
 
     # ---- notching --------------------------------------------------------
     def register_feature(self, feature: str, share_with: str | None = None) -> int:
@@ -72,7 +74,9 @@ class Deck:
         self.features[feature] = pos
         return pos
 
-    def add_card(self, item_id: str, title: str = "", features: list[str] | None = None) -> Card:
+    def add_card(
+        self, item_id: str, title: str = "", features: list[str] | None = None
+    ) -> Card:
         card = Card(item_id.strip(), title)
         card.validate()
         if card.item_id in self.cards:

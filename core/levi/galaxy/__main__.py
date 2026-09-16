@@ -155,7 +155,9 @@ def cmd_remove(args: argparse.Namespace) -> int:
     if record is not None:
         found = True
         registry.remove(args.id)
-        shutil.rmtree(galaxy_trust.install_dir(_levi_home(), record), ignore_errors=True)
+        shutil.rmtree(
+            galaxy_trust.install_dir(_levi_home(), record), ignore_errors=True
+        )
         print(f"uninstalled {args.id} (registry record and files removed)")
     if not found:
         return _fail(f"no package installed as {args.id!r}")
@@ -179,7 +181,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("query", help="substring to match against id/name/description/verbs")
     p.set_defaults(func=cmd_search)
 
-    p = sub.add_parser("install", help="install a package from a directory, tarball, or git URL")
+    p = sub.add_parser(
+        "install", help="install a package from a directory, tarball, or git URL"
+    )
     p.add_argument("source", help="package directory, .tar.gz/.zip file, or git URL")
     p.set_defaults(func=cmd_install)
 

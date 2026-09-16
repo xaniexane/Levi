@@ -44,7 +44,9 @@ def _decode_header(value: Any) -> str:
 
 
 def _addrs(value: Any) -> List[str]:
-    return [addr.lower() for _name, addr in getaddresses([_decode_header(value)]) if addr]
+    return [
+        addr.lower() for _name, addr in getaddresses([_decode_header(value)]) if addr
+    ]
 
 
 def _body_text(msg) -> str:

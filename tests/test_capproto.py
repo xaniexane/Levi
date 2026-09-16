@@ -1,9 +1,6 @@
 """Hermetic tests for levi.capproto — no network beyond local sockets,
 tmp HOME, shared per-test telescript secret via env var."""
 
-import json
-import os
-
 import pytest
 
 from levi.capproto import SHELF
@@ -22,7 +19,6 @@ from levi.capproto.tokens import (
     MintLedger,
     attenuate,
     decode,
-    default_home,
 )
 from levi.capproto.transport import CapCallError, CapClient, CapServer
 from levi.revival.telescript import (
@@ -30,7 +26,6 @@ from levi.revival.telescript import (
     ExpiredToken,
     InvalidSignature,
     issue,
-    permits,
     verify,
 )
 
@@ -48,17 +43,23 @@ def herm_home(monkeypatch, tmp_path):
 
 
 def _broad(secret):
-    return issue("issuer", "grantee", ["kvnote.get", "kvnote.put", "kvnote.list"],
-                 ttl_seconds=300)
+    return issue(
+        "issuer",
+        "grantee",
+        ["kvnote.get", "kvnote.put", "kvnote.list"],
+        ttl_seconds=300,
+    )
 
 
 # -- shelf -----------------------------------------------------------------
+
 
 def test_shelf_shape():
     assert SHELF["name"] and SHELF["summary"] and len(SHELF["items"]) >= 4
 
 
 # -- attenuation -----------------------------------------------------------
+
 
 def test_attenuate_narrows(secret):
     child = attenuate(_broad(secret), actions=["kvnote.get"], ttl_seconds=60)
@@ -106,6 +107,7 @@ def test_decode_is_untrusted_view(secret):
 
 # -- ledger ----------------------------------------------------------------
 
+
 def test_ledger_records_and_rebuilds_revocations(secret, herm_home):
     ledger = MintLedger(herm_home)
     tok = _broad(secret)
@@ -126,6 +128,7 @@ def test_ledger_home_is_owner_only(secret, herm_home):
 
 
 # -- protocol messages -----------------------------------------------------
+
 
 def test_message_validation(secret):
     m = validate_message(msg_call("kvnote", "get", "tok"))
@@ -148,6 +151,7 @@ def test_responses_shape():
 
 
 # -- service dispatch ------------------------------------------------------
+
 
 def _spec():
     spec = ServiceSpec("demo")
@@ -190,6 +194,7 @@ def test_service_revoke(secret):
 
 # -- transport roundtrip ---------------------------------------------------
 
+
 def test_socket_roundtrip_refusals(secret, herm_home):
     spec = build_kvnote_service()
     server = CapServer(spec, home=herm_home).start()
@@ -198,7 +203,10 @@ def test_socket_roundtrip_refusals(secret, herm_home):
         hello = client.hello("tester")
         assert "kvnote" in hello["service"]["service"]
         broad = issue("i", "g", ["kvnote.put", "kvnote.get"], ttl_seconds=300)
-        assert client.call("kvnote", "put", broad, {"key": "k", "value": "v"})["stored"] is True
+        assert (
+            client.call("kvnote", "put", broad, {"key": "k", "value": "v"})["stored"]
+            is True
+        )
         narrow = attenuate(broad, actions=["kvnote.get"])
         with pytest.raises(CapCallError) as ei:
             client.call("kvnote", "put", narrow, {"key": "k", "value": "v"})
@@ -228,6 +236,7 @@ def test_client_no_endpoint(secret, herm_home):
 
 # -- CLI -------------------------------------------------------------------
 
+
 def test_cli_issue_verify_attenuate(secret, herm_home, capsys, monkeypatch):
     from levi.capproto.__main__ import main
 
@@ -236,15 +245,31 @@ def test_cli_issue_verify_attenuate(secret, herm_home, capsys, monkeypatch):
         main(["--help"])
     assert e.value.code == 0
     capsys.readouterr()  # drain --help usage text
-    assert main(["issue", "--issuer", "i", "--grantee", "g",
-                 "--action", "kvnote.get", "--ttl", "120"]) == 0
+    assert (
+        main(
+            [
+                "issue",
+                "--issuer",
+                "i",
+                "--grantee",
+                "g",
+                "--action",
+                "kvnote.get",
+                "--ttl",
+                "120",
+            ]
+        )
+        == 0
+    )
     token = capsys.readouterr().out.strip()
     assert token.count(".") == 1
     assert main(["verify", "--token", token]) == 0
     out = capsys.readouterr().out
     assert '"iss": "i"' in out
-    assert main(["attenuate", "--token", token, "--action", "kvnote.get",
-                 "--ttl", "30"]) == 0
+    assert (
+        main(["attenuate", "--token", token, "--action", "kvnote.get", "--ttl", "30"])
+        == 0
+    )
     child = capsys.readouterr().out.strip()
     # widening must fail with exit 1
     assert main(["attenuate", "--token", child, "--action", "kvnote.put"]) == 1

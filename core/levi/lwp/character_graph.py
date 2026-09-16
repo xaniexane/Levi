@@ -242,9 +242,7 @@ class CharacterGraph:
         }
         for axis, (value, options) in axes.items():
             if value is not None and value not in options:
-                raise ValueError(
-                    f"unknown {axis} {value!r}: choose one of {options}"
-                )
+                raise ValueError(f"unknown {axis} {value!r}: choose one of {options}")
         if seed is not None and not isinstance(seed, str):
             raise ValueError(f"seed must be a string or None, got {seed!r}")
         rng = hashlib.sha1((seed or str(len(self.nodes))).encode()).hexdigest()

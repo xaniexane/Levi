@@ -158,17 +158,19 @@ class RoomBook:
                 member = data["members"].pop(client_id, None)
                 if member is None:
                     continue
-                out.append((
-                    {
-                        "event": "presence",
-                        "room": room,
-                        "name": member["name"],
-                        "client_id": client_id,
-                        "state": "left",
-                        "at": now_iso(),
-                    },
-                    list(data["members"]),
-                ))
+                out.append(
+                    (
+                        {
+                            "event": "presence",
+                            "room": room,
+                            "name": member["name"],
+                            "client_id": client_id,
+                            "state": "left",
+                            "at": now_iso(),
+                        },
+                        list(data["members"]),
+                    )
+                )
             return out
 
     def heartbeat(self, client_id: str) -> None:
@@ -214,23 +216,23 @@ class RoomBook:
                         client = self._clients.get(cid)
                         if client is not None:
                             client["rooms"].discard(room)
-                        out.append((
-                            {
-                                "event": "presence",
-                                "room": room,
-                                "name": member["name"],
-                                "client_id": cid,
-                                "state": "timeout",
-                                "at": now_iso(),
-                            },
-                            list(data["members"]),
-                        ))
+                        out.append(
+                            (
+                                {
+                                    "event": "presence",
+                                    "room": room,
+                                    "name": member["name"],
+                                    "client_id": cid,
+                                    "state": "timeout",
+                                    "at": now_iso(),
+                                },
+                                list(data["members"]),
+                            )
+                        )
             return out
 
     # -- messages ---------------------------------------------------------------
-    def post(
-        self, client_id: str, room: str, text: str
-    ) -> Tuple[bool, object]:
+    def post(self, client_id: str, room: str, text: str) -> Tuple[bool, object]:
         """Post a message. Returns (ok, (message, recipients) | error)."""
         text = (text or "").strip()
         if not text:

@@ -19,7 +19,6 @@ stdlib-only.
 
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass
 
 from levi.galaxy.package import SEGMENT_RE, PackageError, parse_version
@@ -89,8 +88,7 @@ def _check_author_shape(author: str, registered_handles=frozenset()) -> None:
             raise NamespaceError(f"author {author!r} is not well-formed reverse-DNS")
     elif author not in registered_handles:
         raise NamespaceError(
-            f"author {author!r} is neither reverse-DNS (no dot) "
-            "nor a registered handle"
+            f"author {author!r} is neither reverse-DNS (no dot) nor a registered handle"
         )
 
 
@@ -150,7 +148,9 @@ def _entries(registry_ids) -> list[RegistryEntry]:
                 )
             else:  # assume a (author, version) tuple
                 author, version = rec
-                out.append(RegistryEntry(namespaced_id=nid, author=author, version=version))
+                out.append(
+                    RegistryEntry(namespaced_id=nid, author=author, version=version)
+                )
         return out
     return list(registry_ids)
 

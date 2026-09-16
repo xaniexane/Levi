@@ -120,23 +120,49 @@ def test_no_repeat_window(home):
 
 def test_unseen_preferred(home):
     items = _items(10)
-    d1, _ = generate_digest(items, "2026-W38", home, seed=7, count=10,
-                            per_kind_cap=10, per_tag_cap=10, no_repeat_weeks=0)
+    d1, _ = generate_digest(
+        items,
+        "2026-W38",
+        home,
+        seed=7,
+        count=10,
+        per_kind_cap=10,
+        per_tag_cap=10,
+        no_repeat_weeks=0,
+    )
     # with no-repeat off and high caps, second digest must still exist;
     # first digest's picks are "seen", so the second prefers the rest
-    d2, _ = generate_digest(items, "2026-W39", home, seed=7, count=10,
-                            per_kind_cap=10, per_tag_cap=10, no_repeat_weeks=0)
+    d2, _ = generate_digest(
+        items,
+        "2026-W39",
+        home,
+        seed=7,
+        count=10,
+        per_kind_cap=10,
+        per_tag_cap=10,
+        no_repeat_weeks=0,
+    )
     first_ids = {p["id"] for p in d1["picks"]}
     # unseen items (none picked in W38... all 10 were picked) -> falls back to seen
     assert len(d2["picks"]) == 10
 
 
 def test_per_tag_cap(home):
-    items = [{"id": f"i{i}", "title": f"T{i}", "kind": f"k{i}",
-              "tags": ["same"], "added_at": "", "source": "t", "blurb": ""}
-             for i in range(10)]
-    digest, _ = generate_digest(items, "2026-W38", home, seed=3, count=7,
-                                per_kind_cap=10, per_tag_cap=2)
+    items = [
+        {
+            "id": f"i{i}",
+            "title": f"T{i}",
+            "kind": f"k{i}",
+            "tags": ["same"],
+            "added_at": "",
+            "source": "t",
+            "blurb": "",
+        }
+        for i in range(10)
+    ]
+    digest, _ = generate_digest(
+        items, "2026-W38", home, seed=3, count=7, per_kind_cap=10, per_tag_cap=2
+    )
     assert len(digest["picks"]) <= 2  # tag cap binds
     assert digest["skipped_by_diversity_caps"] > 0
 
@@ -152,8 +178,12 @@ def test_cli_roundtrip(home, tmp_path, capsys, monkeypatch):
 
     monkeypatch.setenv("LEVI_HOME", str(home.parent))
     corpus = _write_corpus(tmp_path, _items(12), corrupt=False)
-    assert main(["--source", str(corpus), "discover", "--week", "2026-W38",
-                 "--seed", "11"]) == 0
+    assert (
+        main(
+            ["--source", str(corpus), "discover", "--week", "2026-W38", "--seed", "11"]
+        )
+        == 0
+    )
     out = capsys.readouterr().out
     assert "# Discover Weekly — 2026-W38" in out
     assert (home / "digests" / "2026-W38.md").exists()

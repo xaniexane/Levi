@@ -62,10 +62,12 @@ class FakeJournal:
 
 
 def test_assistant_retrieval_hybrid_path():
-    store = FakeStore([
-        FakeEntry("e1", "user plays guitar every evening", tags=["music"]),
-        FakeEntry("e2", "user likes strong coffee", tags=["food"]),
-    ])
+    store = FakeStore(
+        [
+            FakeEntry("e1", "user plays guitar every evening", tags=["music"]),
+            FakeEntry("e2", "user likes strong coffee", tags=["food"]),
+        ]
+    )
     out = assistant_retrieval.load_user_context_retrieved(store, "guitar", limit=8)
     assert out["method"] == "hybrid"
     assert "e1" in out["entry_ids"]
@@ -83,7 +85,9 @@ def test_assistant_retrieval_fallback_when_retrieval_unavailable(monkeypatch):
 
 def test_assistant_retrieval_fallback_no_hits():
     store = FakeStore([FakeEntry("e1", "user prefers dark mode")])
-    out = assistant_retrieval.load_user_context_retrieved(store, "zzz-no-match-qqq", limit=8)
+    out = assistant_retrieval.load_user_context_retrieved(
+        store, "zzz-no-match-qqq", limit=8
+    )
     assert out["method"] == "fallback"
     assert "dark mode" in out["block"]
 
@@ -109,9 +113,13 @@ def test_assistant_retrieval_blank_query_falls_back():
 
 
 def test_bot_rag_shapes_ask_result():
-    store = FakeStore([
-        FakeEntry("k1", "post-quantum TLS migrates to ML-KEM key exchange", tags=["tls"]),
-    ])
+    store = FakeStore(
+        [
+            FakeEntry(
+                "k1", "post-quantum TLS migrates to ML-KEM key exchange", tags=["tls"]
+            ),
+        ]
+    )
     out = bot_rag.research_brief_rag("post-quantum TLS", store)
     assert out["method"] == "rag"
     if out["ok"]:
@@ -154,12 +162,22 @@ def _write_queue(path, lines):
 
 def test_growth_queue_consumer_happy_path(tmp_path):
     q = tmp_path / "pending_learnings.jsonl"
-    _write_queue(q, [
-        json.dumps({"ts": "t", "kind": "fact", "text": "user likes tea",
-                    "confidence": "heuristic", "source": "levi-bot",
-                    "status": "pending"}),
-        json.dumps({"text": "user runs marathons"}),
-    ])
+    _write_queue(
+        q,
+        [
+            json.dumps(
+                {
+                    "ts": "t",
+                    "kind": "fact",
+                    "text": "user likes tea",
+                    "confidence": "heuristic",
+                    "source": "levi-bot",
+                    "status": "pending",
+                }
+            ),
+            json.dumps({"text": "user runs marathons"}),
+        ],
+    )
     journal = FakeJournal()
     summary = growth_learnings.consume_pending_learnings(q, journal)
     assert summary["accepted"] == 2
@@ -176,12 +194,15 @@ def test_growth_queue_consumer_happy_path(tmp_path):
 
 def test_growth_queue_consumer_rejects_bad_lines(tmp_path):
     q = tmp_path / "pending_learnings.jsonl"
-    _write_queue(q, [
-        "not json at all",
-        json.dumps({"kind": "fact"}),          # missing text
-        json.dumps(["a", "list"]),              # not a dict
-        json.dumps({"text": "  valid one  "}),
-    ])
+    _write_queue(
+        q,
+        [
+            "not json at all",
+            json.dumps({"kind": "fact"}),  # missing text
+            json.dumps(["a", "list"]),  # not a dict
+            json.dumps({"text": "  valid one  "}),
+        ],
+    )
     journal = FakeJournal()
     summary = growth_learnings.consume_pending_learnings(q, journal)
     assert summary["accepted"] == 1
@@ -229,18 +250,20 @@ def test_growth_queue_default_path_honors_env(monkeypatch, tmp_path):
 
 
 def test_academy_concepts_to_memory_entries_schema():
-    concepts = [{
-        "id": "pyD01B1O1",
-        "name": "list comprehensions",
-        "kind": "objective",
-        "track": "python",
-        "day": 1,
-        "block": 1,
-        "session": 3,
-        "content_words": ["list", "comprehension"],
-        "strength": 0.9,
-        "status": "active",
-    }]
+    concepts = [
+        {
+            "id": "pyD01B1O1",
+            "name": "list comprehensions",
+            "kind": "objective",
+            "track": "python",
+            "day": 1,
+            "block": 1,
+            "session": 3,
+            "content_words": ["list", "comprehension"],
+            "strength": 0.9,
+            "status": "active",
+        }
+    ]
     entries = concepts_to_memory_entries(concepts)
     assert len(entries) == 1
     e = entries[0]
@@ -278,16 +301,18 @@ def test_academy_concepts_empty_list_ok():
 
 
 def test_bounty_findings_to_corpus_units_schema():
-    findings = [{
-        "id": "f1",
-        "target": "example.com",
-        "scope": "example.com",
-        "kind": "open_port",
-        "detail": "port 443 open with TLS 1.0 enabled",
-        "evidence": "nmap -sV output",
-        "first_seen": "2026-09-01T00:00:00Z",
-        "last_seen": "2026-09-15T00:00:00Z",
-    }]
+    findings = [
+        {
+            "id": "f1",
+            "target": "example.com",
+            "scope": "example.com",
+            "kind": "open_port",
+            "detail": "port 443 open with TLS 1.0 enabled",
+            "evidence": "nmap -sV output",
+            "first_seen": "2026-09-01T00:00:00Z",
+            "last_seen": "2026-09-15T00:00:00Z",
+        }
+    ]
     units = findings_to_corpus_units(findings)
     assert len(units) == 1
     u = units[0]
@@ -302,10 +327,17 @@ def test_bounty_findings_to_corpus_units_schema():
 
 
 def test_bounty_findings_no_evidence_ok():
-    units = findings_to_corpus_units([{
-        "id": "f2", "target": "t", "scope": "s", "kind": "subdomain",
-        "detail": "new subdomain observed",
-    }])
+    units = findings_to_corpus_units(
+        [
+            {
+                "id": "f2",
+                "target": "t",
+                "scope": "s",
+                "kind": "subdomain",
+                "detail": "new subdomain observed",
+            }
+        ]
+    )
     assert units[0]["text"] == "new subdomain observed"
     assert "Evidence:" not in units[0]["text"]
 

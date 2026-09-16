@@ -1,13 +1,10 @@
 """Tests for levi.quickdial — Opera's Speed Dial reborn, LEVI-native."""
 
-import json
-import os
 import stat
 
 import pytest
 
 from levi.quickdial import (
-    Slot,
     check_chord,
     check_name,
     dial,

@@ -26,7 +26,6 @@ call time.
 
 from __future__ import annotations
 
-import calendar
 import json
 import os
 from datetime import date, timedelta
@@ -82,10 +81,16 @@ class CommitmentStore:
         self._path.write_text(json.dumps(data, indent=2), encoding=ENC)
 
     # -- definitions ----------------------------------------------------------
-    def define(self, name: str, unit: str = "times", target: float = 1.0,
-               per: str = "day", rest_days_per_week: int = 0,
-               mulligans_per_month: int = 0,
-               start: Optional[str] = None) -> Dict[str, Any]:
+    def define(
+        self,
+        name: str,
+        unit: str = "times",
+        target: float = 1.0,
+        per: str = "day",
+        rest_days_per_week: int = 0,
+        mulligans_per_month: int = 0,
+        start: Optional[str] = None,
+    ) -> Dict[str, Any]:
         data = self._load()
         if name in data:
             raise CommitmentError("commitment already exists: %s" % name)
@@ -99,12 +104,15 @@ class CommitmentStore:
             raise CommitmentError("mulligans_per_month must be >= 0")
         start_day = _parse_day(start) if start else _today()
         data[name] = {
-            "name": name, "unit": unit, "target": target, "per": per,
+            "name": name,
+            "unit": unit,
+            "target": target,
+            "per": per,
             "rest_days_per_week": rest_days_per_week,
             "mulligans_per_month": mulligans_per_month,
             "start": start_day.isoformat(),
             "paused": False,
-            "checkins": {},   # YYYY-MM-DD -> value
+            "checkins": {},  # YYYY-MM-DD -> value
             "mulligans_used": {},  # YYYY-MM -> count
         }
         self._save(data)
@@ -122,8 +130,14 @@ class CommitmentStore:
     def edit(self, name: str, **fields) -> Dict[str, Any]:
         data = self._load()
         c = self.get(name)
-        for key in ("unit", "target", "per", "rest_days_per_week",
-                    "mulligans_per_month", "paused"):
+        for key in (
+            "unit",
+            "target",
+            "per",
+            "rest_days_per_week",
+            "mulligans_per_month",
+            "paused",
+        ):
             if key in fields and fields[key] is not None:
                 c[key] = fields[key]
         if c["per"] not in ("day", "week"):
@@ -140,8 +154,9 @@ class CommitmentStore:
         self._save(data)
 
     # -- check-ins ------------------------------------------------------------
-    def checkin(self, name: str, value: float = 1.0,
-                day: Optional[str] = None) -> Dict[str, Any]:
+    def checkin(
+        self, name: str, value: float = 1.0, day: Optional[str] = None
+    ) -> Dict[str, Any]:
         data = self._load()
         c = self.get(name)
         d = _parse_day(day) if day else _today()
@@ -150,8 +165,11 @@ class CommitmentStore:
         c["checkins"][d.isoformat()] = c["checkins"].get(d.isoformat(), 0) + value
         data[name] = c
         self._save(data)
-        return {"name": name, "day": d.isoformat(),
-                "total": c["checkins"][d.isoformat()]}
+        return {
+            "name": name,
+            "day": d.isoformat(),
+            "total": c["checkins"][d.isoformat()],
+        }
 
     def mulligan(self, name: str, day: Optional[str] = None) -> Dict[str, Any]:
         """Forgive a missed day using one of the user's monthly mulligans."""
@@ -162,18 +180,22 @@ class CommitmentStore:
         used = c["mulligans_used"].get(month, 0)
         if used >= c["mulligans_per_month"]:
             raise CommitmentError(
-                "no mulligans remaining for %s (configured: %d/month)" % (
-                    month, c["mulligans_per_month"]))
+                "no mulligans remaining for %s (configured: %d/month)"
+                % (month, c["mulligans_per_month"])
+            )
         c["mulligans_used"][month] = used + 1
         c["checkins"][d.isoformat()] = c["checkins"].get(d.isoformat(), 0)
         # mark forgiven: a mulligan day counts as hit regardless of value
         c.setdefault("mulligan_days", []).append(d.isoformat())
         data[name] = c
         self._save(data)
-        return {"name": name, "day": d.isoformat(),
-                "message": _COPY["mulligan_applied"].format(
-                    day=d.isoformat(),
-                    left=c["mulligans_per_month"] - used - 1)}
+        return {
+            "name": name,
+            "day": d.isoformat(),
+            "message": _COPY["mulligan_applied"].format(
+                day=d.isoformat(), left=c["mulligans_per_month"] - used - 1
+            ),
+        }
 
     # -- streaks --------------------------------------------------------------
     def _periods(self, c: Dict[str, Any], until: date) -> List[date]:
@@ -198,17 +220,21 @@ class CommitmentStore:
         if iso in c.get("mulligan_days", []):
             return True
         if c["per"] == "day":
-            if period_start.weekday() >= 7 - c["rest_days_per_week"] and c["rest_days_per_week"]:
+            if (
+                period_start.weekday() >= 7 - c["rest_days_per_week"]
+                and c["rest_days_per_week"]
+            ):
                 # rest days are the last N days of the week (Sat/Sun first)
                 return True
             return c["checkins"].get(iso, 0) >= c["target"]
         # week: sum the 7 days
-        total = sum(c["checkins"].get((period_start + timedelta(days=i)).isoformat(), 0)
-                    for i in range(7))
+        total = sum(
+            c["checkins"].get((period_start + timedelta(days=i)).isoformat(), 0)
+            for i in range(7)
+        )
         return total >= c["target"]
 
-    def status(self, name: str,
-               as_of: Optional[str] = None) -> Dict[str, Any]:
+    def status(self, name: str, as_of: Optional[str] = None) -> Dict[str, Any]:
         c = self.get(name)
         until = _parse_day(as_of) if as_of else _today()
         periods = self._periods(c, until)
@@ -216,8 +242,7 @@ class CommitmentStore:
         # current streak: consecutive hits at the end. An in-progress period
         # (today, for per-day) never breaks the streak — only a completed
         # missed period does.
-        if (c["per"] == "day" and periods and periods[-1] == _today()
-                and not hits[-1]):
+        if c["per"] == "day" and periods and periods[-1] == _today() and not hits[-1]:
             hits = hits[:-1]
             periods = periods[:-1]
         streak = 0
@@ -238,9 +263,13 @@ class CommitmentStore:
         missed = [p.isoformat() for p, h in zip(periods, hits) if not h]
         return {
             "name": name,
-            "per": c["per"], "target": c["target"], "unit": c["unit"],
-            "streak": streak, "longest": longest,
-            "periods": len(periods), "hits": total_hits,
+            "per": c["per"],
+            "target": c["target"],
+            "unit": c["unit"],
+            "streak": streak,
+            "longest": longest,
+            "periods": len(periods),
+            "hits": total_hits,
             "state": state,
             "missed": missed[-10:],
             "message": _COPY["streak"].format(n=streak, state=state),

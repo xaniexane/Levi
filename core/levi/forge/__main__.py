@@ -22,7 +22,6 @@ from levi.forge import repos as _repos
 from levi.forge import server as _server
 from levi.forge import stars as _stars
 from levi.forge.gitx import GitError, git_version
-from levi.forge.home import forge_home
 
 EPILOG = (
     "OWNERSHIP GUARANTEE: LEVI Forge never transmits your code anywhere. "
@@ -73,9 +72,15 @@ def cmd_repos(args, home) -> int:
         else:
             for r in repos:
                 star = " ★" if _stars.is_starred(home, r["name"]) else ""
-                print("%-24s %-8s %s%s" % (
-                    r["name"], r["default_branch"] or "—",
-                    r["description"] or "", star))
+                print(
+                    "%-24s %-8s %s%s"
+                    % (
+                        r["name"],
+                        r["default_branch"] or "—",
+                        r["description"] or "",
+                        star,
+                    )
+                )
         return 0
     except (GitError, ValueError) as e:
         return _err(str(e))
@@ -88,8 +93,10 @@ def cmd_browse(args, home) -> int:
     try:
         if args.path and not args.path.endswith("/"):
             try:
-                print(_browse.read_file(home, args.repo, rev=args.rev, path=args.path),
-                      end="")
+                print(
+                    _browse.read_file(home, args.repo, rev=args.rev, path=args.path),
+                    end="",
+                )
                 return 0
             except GitError:
                 pass  # fall through to tree listing
@@ -111,8 +118,10 @@ def cmd_log(args, home) -> int:
         print(json.dumps(commits, indent=2))
     else:
         for c in commits:
-            print("%s  %s  %s  %s" % (c["sha"][:12], c["date"][:16],
-                                      c["author"], c["subject"]))
+            print(
+                "%s  %s  %s  %s"
+                % (c["sha"][:12], c["date"][:16], c["author"], c["subject"])
+            )
     return 0
 
 
@@ -140,8 +149,10 @@ def cmd_stat(args, home) -> int:
     else:
         print("repo      %s" % stat["repo"])
         print("commits   %d (%d authors)" % (stat["commits"], len(authors)))
-        print("issues    %d open / %d closed"
-              % (stat["issues_open"], stat["issues_closed"]))
+        print(
+            "issues    %d open / %d closed"
+            % (stat["issues_open"], stat["issues_closed"])
+        )
         print("prs       %d open / %d merged" % (stat["prs_open"], stat["prs_merged"]))
         print("starred   %s" % ("yes ★" if stat["starred"] else "no"))
         print("ci runs   %d" % stat["ci_runs"])
@@ -162,9 +173,13 @@ def cmd_issue(args, home) -> int:
                 for i in rows:
                     print("#%-4d %-7s %s" % (i["id"], i["state"], i["title"]))
         elif act == "open":
-            i = _issues.open_issue(home, args.repo, args.title,
-                                   body=args.body or "",
-                                   labels=args.label or [])
+            i = _issues.open_issue(
+                home,
+                args.repo,
+                args.title,
+                body=args.body or "",
+                labels=args.label or [],
+            )
             print("opened issue #%d: %s" % (i["id"], i["title"]))
         elif act == "show":
             i = _issues.get_issue(home, args.repo, args.id)
@@ -179,7 +194,9 @@ def cmd_issue(args, home) -> int:
                 if i["body"]:
                     print("\n%s" % i["body"])
                 for c in i.get("comments", []):
-                    print("\n--- %s (%s) ---\n%s" % (c["author"], c["at"][:16], c["body"]))
+                    print(
+                        "\n--- %s (%s) ---\n%s" % (c["author"], c["at"][:16], c["body"])
+                    )
         elif act == "close":
             i = _issues.close_issue(home, args.repo, args.id)
             print("closed issue #%d" % i["id"])
@@ -206,13 +223,23 @@ def cmd_pr(args, home) -> int:
                 print(json.dumps(rows, indent=2))
             else:
                 for p in rows:
-                    print("#%-4d %-7s %s -> %s : %s"
-                          % (p["id"], p["state"], p["head"], p["base"], p["title"]))
+                    print(
+                        "#%-4d %-7s %s -> %s : %s"
+                        % (p["id"], p["state"], p["head"], p["base"], p["title"])
+                    )
         elif act == "open":
-            p = _prs.open_pr(home, args.repo, args.title, head=args.head,
-                             base=args.base, body=args.body or "")
-            print("opened PR #%d: %s (%s -> %s)"
-                  % (p["id"], p["title"], p["head"], p["base"]))
+            p = _prs.open_pr(
+                home,
+                args.repo,
+                args.title,
+                head=args.head,
+                base=args.base,
+                body=args.body or "",
+            )
+            print(
+                "opened PR #%d: %s (%s -> %s)"
+                % (p["id"], p["title"], p["head"], p["base"])
+            )
         elif act == "show":
             p = _prs.get_pr(home, args.repo, args.id)
             if p is None:
@@ -243,8 +270,11 @@ def cmd_pr(args, home) -> int:
 def cmd_star(args, home) -> int:
     try:
         if args.remove:
-            print("unstarred %r" % args.repo if _stars.unstar(home, args.repo)
-                  else "%r was not starred" % args.repo)
+            print(
+                "unstarred %r" % args.repo
+                if _stars.unstar(home, args.repo)
+                else "%r was not starred" % args.repo
+            )
         else:
             _stars.star(home, args.repo)
             print("starred %r ★ (travels with exports)" % args.repo)
@@ -264,10 +294,10 @@ def cmd_stars(args, home) -> int:
 
 def cmd_export(args, home) -> int:
     try:
-        dest = _export.export_repo(home, args.repo, args.out or
-                                   ("%s-forge-export" % args.repo))
-        return _ok("exported %r -> %s (format %s)"
-                   % (args.repo, dest, _export.FORMAT))
+        dest = _export.export_repo(
+            home, args.repo, args.out or ("%s-forge-export" % args.repo)
+        )
+        return _ok("exported %r -> %s (format %s)" % (args.repo, dest, _export.FORMAT))
     except (GitError, ValueError) as e:
         return _err(str(e))
 
@@ -288,8 +318,10 @@ def cmd_ci(args, home) -> int:
         act = args.ci_action
         if act == "init":
             pipe = _ci.init_pipeline(home, args.repo)
-            print("wrote default pipeline (%d steps) for %r"
-                  % (len(pipe["steps"]), args.repo))
+            print(
+                "wrote default pipeline (%d steps) for %r"
+                % (len(pipe["steps"]), args.repo)
+            )
         elif act == "show":
             pipe = _ci.load_pipeline(home, args.repo)
             if args.json:
@@ -300,9 +332,15 @@ def cmd_ci(args, home) -> int:
         elif act == "run":
             rec = _ci.run_pipeline(home, args.repo)
             for s in rec["steps"]:
-                print("[%s] %s (rc=%d, %.1fs)"
-                      % ("PASS" if s["rc"] == 0 else "FAIL",
-                         s["name"], s["rc"], s["elapsed"]))
+                print(
+                    "[%s] %s (rc=%d, %.1fs)"
+                    % (
+                        "PASS" if s["rc"] == 0 else "FAIL",
+                        s["name"],
+                        s["rc"],
+                        s["elapsed"],
+                    )
+                )
             print("run %s: %s" % (rec["id"], "PASS" if rec["ok"] else "FAIL"))
             return 0 if rec["ok"] else 1
         elif act == "runs":
@@ -311,9 +349,10 @@ def cmd_ci(args, home) -> int:
                 print(json.dumps(runs, indent=2))
             else:
                 for r in runs:
-                    print("%s  %s  %s" % (r["id"],
-                                          "PASS" if r["ok"] else "FAIL",
-                                          r["started"][:16]))
+                    print(
+                        "%s  %s  %s"
+                        % (r["id"], "PASS" if r["ok"] else "FAIL", r["started"][:16])
+                    )
         return 0
     except (GitError, ValueError) as e:
         return _err(str(e))
@@ -333,17 +372,18 @@ def build_parser() -> argparse.ArgumentParser:
 
     p = sub.add_parser("serve", help="serve git smart-HTTP + web UI on localhost")
     p.add_argument("--port", type=int, default=8741)
-    p.add_argument("--bind", default="127.0.0.1",
-                   help="localhost only (anything else is refused)")
+    p.add_argument(
+        "--bind", default="127.0.0.1", help="localhost only (anything else is refused)"
+    )
     p.set_defaults(fn=cmd_serve)
 
     p = sub.add_parser("repos", help="create/list/delete repositories")
-    p.add_argument("repos_action", nargs="?", default="list",
-                   choices=["create", "list", "delete"])
+    p.add_argument(
+        "repos_action", nargs="?", default="list", choices=["create", "list", "delete"]
+    )
     p.add_argument("name", nargs="?", default=None)
     p.add_argument("--desc", default="")
-    p.add_argument("--yes", action="store_true",
-                   help="confirm permanent deletion")
+    p.add_argument("--yes", action="store_true", help="confirm permanent deletion")
     p.add_argument("--json", action="store_true")
     p.set_defaults(fn=cmd_repos)
 
@@ -367,8 +407,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     p = sub.add_parser("issue", help="issues (local JSONL)")
     p.add_argument("repo")
-    p.add_argument("issue_action",
-                   choices=["list", "open", "show", "close", "reopen", "comment"])
+    p.add_argument(
+        "issue_action", choices=["list", "open", "show", "close", "reopen", "comment"]
+    )
     p.add_argument("id", nargs="?", type=int, default=None)
     p.add_argument("--title", default=None)
     p.add_argument("--body", default=None)
@@ -385,19 +426,22 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--body", default=None)
     p.add_argument("--head", default=None)
     p.add_argument("--base", default=None)
-    p.add_argument("--state", default=None,
-                   choices=["open", "merged", "closed"])
+    p.add_argument("--state", default=None, choices=["open", "merged", "closed"])
     p.add_argument("--json", action="store_true")
     p.set_defaults(fn=cmd_pr)
 
-    p = sub.add_parser("star", help="star a repo (portable reputation, exports with the repo)")
+    p = sub.add_parser(
+        "star", help="star a repo (portable reputation, exports with the repo)"
+    )
     p.add_argument("repo")
     p.add_argument("--remove", action="store_true")
     p.set_defaults(fn=cmd_star)
     p = sub.add_parser("stars", help="list starred repos")
     p.set_defaults(fn=cmd_stars)
 
-    p = sub.add_parser("export", help="one-command full export (bundle, issues, PRs, stars, CI, graph)")
+    p = sub.add_parser(
+        "export", help="one-command full export (bundle, issues, PRs, stars, CI, graph)"
+    )
     p.add_argument("repo")
     p.add_argument("--out", default=None, help="destination dir (must not exist)")
     p.set_defaults(fn=cmd_export)
@@ -429,23 +473,40 @@ def main(argv=None, home=None) -> int:
     # Guard: sub-subcommands that need a repo name
     for attr in ("name", "repo"):
         if hasattr(args, attr) and getattr(args, attr) in (None, ""):
-            if args.cmd in ("repos",) and attr == "name" and \
-                    getattr(args, "repos_action", "list") == "list":
+            if (
+                args.cmd in ("repos",)
+                and attr == "name"
+                and getattr(args, "repos_action", "list") == "list"
+            ):
                 continue
             return _err("%s requires a repo name" % args.cmd)
-    if args.cmd == "repos" and args.repos_action in ("create", "delete") and not args.name:
+    if (
+        args.cmd == "repos"
+        and args.repos_action in ("create", "delete")
+        and not args.name
+    ):
         return _err("repos %s requires a name" % args.repos_action)
     if args.cmd == "issue" and args.issue_action == "open" and not args.title:
         return _err("issue open requires --title")
-    if args.cmd == "pr" and args.pr_action == "open" and \
-            not (args.title and args.head and args.base):
+    if (
+        args.cmd == "pr"
+        and args.pr_action == "open"
+        and not (args.title and args.head and args.base)
+    ):
         return _err("pr open requires --title, --head and --base")
-    if args.cmd == "issue" and args.issue_action in ("show", "close", "reopen", "comment") \
-            and args.id is None:
+    if (
+        args.cmd == "issue"
+        and args.issue_action in ("show", "close", "reopen", "comment")
+        and args.id is None
+    ):
         return _err("issue %s requires an id" % args.issue_action)
     if args.cmd == "issue" and args.issue_action == "comment" and not args.body:
         return _err("issue comment requires --body")
-    if args.cmd == "pr" and args.pr_action in ("show", "merge", "close") and args.id is None:
+    if (
+        args.cmd == "pr"
+        and args.pr_action in ("show", "merge", "close")
+        and args.id is None
+    ):
         return _err("pr %s requires an id" % args.pr_action)
     try:
         return args.fn(args, home)

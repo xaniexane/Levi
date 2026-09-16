@@ -20,10 +20,14 @@ def _rev(home, name, rev) -> str:
     """Resolve rev to a sha; raise GitError with a clear message if bad."""
     rev = rev or "HEAD"
     try:
-        return run_git(
-            ["rev-parse", "--verify", rev + "^{commit}"],
-            cwd=repo_dir(home, name),
-        ).stdout.decode("utf-8", "replace").strip()
+        return (
+            run_git(
+                ["rev-parse", "--verify", rev + "^{commit}"],
+                cwd=repo_dir(home, name),
+            )
+            .stdout.decode("utf-8", "replace")
+            .strip()
+        )
     except GitError:
         raise GitError("no such revision %r in repo %r" % (rev, name))
 
@@ -37,9 +41,9 @@ def tree(home, name, rev=None, path=""):
     clean = path.strip("/")
     treeish = sha if not clean else sha + ":" + clean
     try:
-        out = run_git(
-            ["ls-tree", treeish], cwd=repo_dir(home, name)
-        ).stdout.decode("utf-8", "replace")
+        out = run_git(["ls-tree", treeish], cwd=repo_dir(home, name)).stdout.decode(
+            "utf-8", "replace"
+        )
     except GitError:
         raise GitError("no such path %r at %r" % (path, rev or "HEAD"))
     entries = []
@@ -77,8 +81,14 @@ def log(home, name, rev=None, limit: int = 20):
     if not repo_exists(home, name):
         raise GitError("no such repo: %r" % name)
     out = run_git(
-        ["log", "--format=%H%x00%an%x00%ad%x00%s", "--date=iso",
-         "-n", str(max(1, limit)), rev or "HEAD"],
+        [
+            "log",
+            "--format=%H%x00%an%x00%ad%x00%s",
+            "--date=iso",
+            "-n",
+            str(max(1, limit)),
+            rev or "HEAD",
+        ],
         cwd=repo_dir(home, name),
         check=False,
     ).stdout.decode("utf-8", "replace")
@@ -89,8 +99,12 @@ def log(home, name, rev=None, limit: int = 20):
         parts = line.split("\x00")
         if len(parts) == 4:
             commits.append(
-                {"sha": parts[0], "author": parts[1],
-                 "date": parts[2], "subject": parts[3]}
+                {
+                    "sha": parts[0],
+                    "author": parts[1],
+                    "date": parts[2],
+                    "subject": parts[3],
+                }
             )
     return commits
 
@@ -101,8 +115,11 @@ def find_readme(home, name, rev=None):
         entries = tree(home, name, rev, "")
     except GitError:
         return None
-    cands = [e["name"] for e in entries
-             if e["type"] == "blob" and e["name"].upper().startswith("README")]
+    cands = [
+        e["name"]
+        for e in entries
+        if e["type"] == "blob" and e["name"].upper().startswith("README")
+    ]
     cands.sort(key=lambda n: (not n.lower().endswith(".md"), n.lower()))
     return cands[0] if cands else None
 
@@ -122,7 +139,9 @@ def _inline(text: str) -> str:
     text = _BOLD_RE.sub(lambda m: "<strong>%s</strong>" % m.group(1), text)
     text = _ITALIC_RE.sub(lambda m: "<em>%s</em>" % m.group(1), text)
     text = _LINK_RE.sub(
-        lambda m: '<a href="%s">%s</a>' % (html.escape(m.group(2), quote=True), m.group(1)),
+        lambda m: (
+            '<a href="%s">%s</a>' % (html.escape(m.group(2), quote=True), m.group(1))
+        ),
         text,
     )
     return text

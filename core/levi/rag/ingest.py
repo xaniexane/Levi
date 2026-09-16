@@ -25,10 +25,12 @@ class IngestReport:
     errors: List[str] = field(default_factory=list)
 
     def summary(self) -> str:
-        return ("ingested %d file(s) → %d chunk(s), skipped %d file(s)%s"
-                % (self.files_ingested, self.chunks, self.files_skipped,
-                   (" (%s)" % ", ".join(self.skipped_files))
-                   if self.skipped_files else ""))
+        return "ingested %d file(s) → %d chunk(s), skipped %d file(s)%s" % (
+            self.files_ingested,
+            self.chunks,
+            self.files_skipped,
+            (" (%s)" % ", ".join(self.skipped_files)) if self.skipped_files else "",
+        )
 
 
 def _read_text(path: Path) -> Optional[str]:
@@ -44,10 +46,15 @@ def _read_text(path: Path) -> Optional[str]:
     return None
 
 
-def ingest_file(path, store, source_doc: Optional[str] = None,
-                max_chars: int = 500, overlap: int = 100,
-                tags: Optional[List[str]] = None,
-                importance: float = 0.6) -> IngestReport:
+def ingest_file(
+    path,
+    store,
+    source_doc: Optional[str] = None,
+    max_chars: int = 500,
+    overlap: int = 100,
+    tags: Optional[List[str]] = None,
+    importance: float = 0.6,
+) -> IngestReport:
     """Ingest one file. Returns a report; never raises on bad files."""
     report = IngestReport()
     try:
@@ -106,8 +113,9 @@ def ingest_file(path, store, source_doc: Optional[str] = None,
     return report
 
 
-def ingest_directory(directory, store, pattern: str = "*.md",
-                      recursive: bool = True, **kwargs) -> IngestReport:
+def ingest_directory(
+    directory, store, pattern: str = "*.md", recursive: bool = True, **kwargs
+) -> IngestReport:
     """Ingest every matching file under *directory*."""
     total = IngestReport()
     try:

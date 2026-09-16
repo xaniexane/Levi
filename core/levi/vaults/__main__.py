@@ -34,8 +34,10 @@ def _manager(a) -> Vaults:
 
 
 def _fmt(e) -> str:
-    return (f"[{e.id[:8]}] {e.memory_type.value} importance={e.importance:.2f} "
-            f"{e.created_at[:10]} tags={','.join(e.tags)}\n  {e.content[:300]}")
+    return (
+        f"[{e.id[:8]}] {e.memory_type.value} importance={e.importance:.2f} "
+        f"{e.created_at[:10]} tags={','.join(e.tags)}\n  {e.content[:300]}"
+    )
 
 
 def cmd_create(a) -> int:
@@ -84,8 +86,9 @@ def cmd_policy(a) -> int:
             print(f"bad --ttl {item!r}; seconds must be a number", file=sys.stderr)
             return 2
     try:
-        policy = vault.set_policy(ttl_by_type=ttl_by_type or None,
-                                  max_entries=a.max_entries)
+        policy = vault.set_policy(
+            ttl_by_type=ttl_by_type or None, max_entries=a.max_entries
+        )
     except VaultError as exc:
         print(f"policy refused: {exc}", file=sys.stderr)
         return 1
@@ -155,8 +158,10 @@ def cmd_purge(a) -> int:
     except VaultError as exc:
         print(str(exc), file=sys.stderr)
         return 1
-    print(f"purged {report['expired']} expired, {report['over_cap']} over-cap "
-          f"in vault {a.name!r}")
+    print(
+        f"purged {report['expired']} expired, {report['over_cap']} over-cap "
+        f"in vault {a.name!r}"
+    )
     return 0
 
 
@@ -173,8 +178,13 @@ def cmd_export(a) -> int:
 
 def cmd_import(a) -> int:
     try:
-        vault = import_vault(_manager(a), Path(a.src), name=a.name,
-                             merge=a.merge, policy_from_bundle=a.policy_from_bundle)
+        vault = import_vault(
+            _manager(a),
+            Path(a.src),
+            name=a.name,
+            merge=a.merge,
+            policy_from_bundle=a.policy_from_bundle,
+        )
     except VaultError as exc:
         print(f"import refused: {exc}", file=sys.stderr)
         return 1
@@ -191,42 +201,61 @@ def main(argv=None) -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
     types = [t.value for t in MemoryType]
 
-    p = sub.add_parser("create", help="create a vault"); p.add_argument("name"); p.set_defaults(func=cmd_create)
-    p = sub.add_parser("list", help="list vaults"); p.set_defaults(func=cmd_list)
-    p = sub.add_parser("delete", help="delete a vault"); p.add_argument("name"); p.set_defaults(func=cmd_delete)
+    p = sub.add_parser("create", help="create a vault")
+    p.add_argument("name")
+    p.set_defaults(func=cmd_create)
+    p = sub.add_parser("list", help="list vaults")
+    p.set_defaults(func=cmd_list)
+    p = sub.add_parser("delete", help="delete a vault")
+    p.add_argument("name")
+    p.set_defaults(func=cmd_delete)
 
     p = sub.add_parser("policy", help="show/set retention policy")
-    p.add_argument("name"); p.add_argument("--show", action="store_true")
-    p.add_argument("--ttl", action="append", default=[], help="type=seconds, repeatable")
+    p.add_argument("name")
+    p.add_argument("--show", action="store_true")
+    p.add_argument(
+        "--ttl", action="append", default=[], help="type=seconds, repeatable"
+    )
     p.add_argument("--max-entries", type=int, default=None)
     p.set_defaults(func=cmd_policy)
 
     p = sub.add_parser("add", help="add an entry to a vault")
-    p.add_argument("name"); p.add_argument("text")
+    p.add_argument("name")
+    p.add_argument("text")
     p.add_argument("--type", default="working", choices=types)
     p.add_argument("--importance", type=float, default=0.5)
     p.add_argument("--tags", default="")
     p.set_defaults(func=cmd_add)
 
     p = sub.add_parser("get", help="show one entry")
-    p.add_argument("name"); p.add_argument("id"); p.set_defaults(func=cmd_get)
+    p.add_argument("name")
+    p.add_argument("id")
+    p.set_defaults(func=cmd_get)
 
     p = sub.add_parser("search", help="search inside ONE vault")
-    p.add_argument("name"); p.add_argument("query")
-    p.add_argument("--limit", type=int, default=20); p.set_defaults(func=cmd_search)
+    p.add_argument("name")
+    p.add_argument("query")
+    p.add_argument("--limit", type=int, default=20)
+    p.set_defaults(func=cmd_search)
 
     p = sub.add_parser("ls", help="list a vault's entries")
-    p.add_argument("name"); p.add_argument("--type", default=None, choices=types)
-    p.add_argument("--limit", type=int, default=50); p.set_defaults(func=cmd_ls)
+    p.add_argument("name")
+    p.add_argument("--type", default=None, choices=types)
+    p.add_argument("--limit", type=int, default=50)
+    p.set_defaults(func=cmd_ls)
 
     p = sub.add_parser("purge", help="enforce retention now")
-    p.add_argument("name"); p.set_defaults(func=cmd_purge)
+    p.add_argument("name")
+    p.set_defaults(func=cmd_purge)
 
     p = sub.add_parser("export", help="export a vault to a bundle")
-    p.add_argument("name"); p.add_argument("dest"); p.set_defaults(func=cmd_export)
+    p.add_argument("name")
+    p.add_argument("dest")
+    p.set_defaults(func=cmd_export)
 
     p = sub.add_parser("import", help="import a bundle")
-    p.add_argument("src"); p.add_argument("--name", default=None)
+    p.add_argument("src")
+    p.add_argument("--name", default=None)
     p.add_argument("--merge", action="store_true")
     p.add_argument("--policy-from-bundle", action="store_true")
     p.set_defaults(func=cmd_import)

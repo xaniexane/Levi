@@ -2,7 +2,6 @@
 
 import json
 import mailbox
-import os
 import time
 from email.message import EmailMessage
 from pathlib import Path
@@ -11,7 +10,7 @@ import pytest
 
 from levi.mailtriage import SHELF
 from levi.mailtriage.replies import ReplyEngine
-from levi.mailtriage.store import MailStore, normalize_message
+from levi.mailtriage.store import MailStore
 from levi.mailtriage.triage import TriageEngine
 
 
@@ -39,14 +38,26 @@ def _make_maildir(base: Path) -> Path:
         m.set_content(body)
         box.add(m)
 
-    add("friend@people.com", "dinner friday?", "are you free friday night?",
-        msgid="<m1@x>")
-    add("orders@shop.com", "Your order confirmation #123",
-        "your order has shipped, tracking number ABC", msgid="<m2@x>")
-    add("news@newsletter.io", "This week's digest",
-        "top stories this week", list_unsub=True, msgid="<m3@x>")
-    add("no-reply@bank.com", "Security alert",
-        "a new device signed in", msgid="<m4@x>")
+    add(
+        "friend@people.com",
+        "dinner friday?",
+        "are you free friday night?",
+        msgid="<m1@x>",
+    )
+    add(
+        "orders@shop.com",
+        "Your order confirmation #123",
+        "your order has shipped, tracking number ABC",
+        msgid="<m2@x>",
+    )
+    add(
+        "news@newsletter.io",
+        "This week's digest",
+        "top stories this week",
+        list_unsub=True,
+        msgid="<m3@x>",
+    )
+    add("no-reply@bank.com", "Security alert", "a new device signed in", msgid="<m4@x>")
     box.close()
     return md
 
@@ -122,7 +133,9 @@ def test_snooze_until(maildir, herm_home):
 def test_snooze_until_reply_wakes(maildir, herm_home):
     eng = TriageEngine(herm_home / ".levi" / "mailtriage")
     recs = _recs(maildir)
-    eng.snooze_until_reply("<m1@x>", sender="friend@people.com", subject="dinner friday?")
+    eng.snooze_until_reply(
+        "<m1@x>", sender="friend@people.com", subject="dinner friday?"
+    )
     assert eng.is_snoozed("<m1@x>")
     reply = dict(recs["<m1@x>"])
     reply["id"] = "<reply@x>"

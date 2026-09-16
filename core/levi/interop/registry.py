@@ -123,9 +123,7 @@ class Registry:
         return sorted(seen)
 
 
-def _clean_caps(
-    caps: Iterable[str], kind: str, module: str
-) -> List[str]:
+def _clean_caps(caps: Iterable[str], kind: str, module: str) -> List[str]:
     if isinstance(caps, str):
         raise RegistryError(
             "register(%r): %s must be an iterable of strings, not a bare str"
@@ -146,9 +144,7 @@ def _clean_caps(
             )
         cleaned.append(item.strip())
     if len(set(cleaned)) != len(cleaned):
-        raise RegistryError(
-            "register(%r): duplicate entries in %s" % (module, kind)
-        )
+        raise RegistryError("register(%r): duplicate entries in %s" % (module, kind))
     return cleaned
 
 

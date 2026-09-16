@@ -34,10 +34,15 @@ def main(argv=None) -> int:
         description="LEVI bounded simulations — labeled, deterministic, "
         "zero network (mirrors `levi sim`)",
     )
-    ap.add_argument("scenario", nargs="?", default=None,
-                    help="scenario name (omit to list)")
-    ap.add_argument("--seed", type=int, default=None,
-                    help="deterministic seed (same seed -> same run)")
+    ap.add_argument(
+        "scenario", nargs="?", default=None, help="scenario name (omit to list)"
+    )
+    ap.add_argument(
+        "--seed",
+        type=int,
+        default=None,
+        help="deterministic seed (same seed -> same run)",
+    )
     ap.add_argument("--list", action="store_true", help="list scenarios")
     args = ap.parse_args(argv)
     if args.list or not args.scenario:

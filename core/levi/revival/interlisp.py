@@ -68,14 +68,17 @@ def levenshtein(a: str, b: str) -> int:
     for i, ca in enumerate(a, 1):
         cur = [i]
         for j, cb in enumerate(b, 1):
-            cur.append(min(prev[j] + 1, cur[j - 1] + 1,
-                           prev[j - 1] + (ca != cb)))
+            cur.append(min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (ca != cb)))
         prev = cur
     return prev[len(b)]
 
 
-def dwim(name: str, candidates: list[str], max_distance: int = 2,
-         case_insensitive: bool = True) -> Optional[str]:
+def dwim(
+    name: str,
+    candidates: list[str],
+    max_distance: int = 2,
+    case_insensitive: bool = True,
+) -> Optional[str]:
     """Correct ``name`` to the closest candidate within ``max_distance``.
 
     Returns the best candidate, or None if nothing is close enough —
@@ -95,8 +98,9 @@ def dwim(name: str, candidates: list[str], max_distance: int = 2,
     return best if best_dist <= max_distance else None
 
 
-def correct_tokens(text: str, vocabulary: list[str],
-                   max_distance: int = 2) -> tuple[str, list[tuple[str, str]]]:
+def correct_tokens(
+    text: str, vocabulary: list[str], max_distance: int = 2
+) -> tuple[str, list[tuple[str, str]]]:
     """Typo-tolerant token correction over whitespace-separated tokens.
 
     Returns ``(corrected_text, corrections)`` where corrections lists
@@ -212,12 +216,12 @@ class Masterscope:
         visitor = _Visitor()
         visitor.visit(tree)
         info = ModuleInfo(
-            name=dotted, path=str(p),
+            name=dotted,
+            path=str(p),
             functions=sorted(set(visitor.functions)),
             classes=sorted(set(visitor.classes)),
             imports=sorted(set(visitor.imports)),
-            references={f: sorted(names)
-                        for f, names in visitor.references.items()},
+            references={f: sorted(names) for f, names in visitor.references.items()},
         )
         self.modules[dotted] = info
         return info
@@ -248,9 +252,11 @@ class Masterscope:
     def imported_by(self, module: str) -> list[str]:
         """Modules whose import list mentions ``module`` (substring match on
         the dotted name — honest about the approximation)."""
-        return sorted(m for m, info in self.modules.items()
-                      if any(module in imp or imp in module
-                             for imp in info.imports))
+        return sorted(
+            m
+            for m, info in self.modules.items()
+            if any(module in imp or imp in module for imp in info.imports)
+        )
 
     def references(self, name: str) -> list[str]:
         """``module.function`` entries whose body references ``name``."""
@@ -281,6 +287,7 @@ class Masterscope:
 def default_root() -> Path:
     """The LEVI package directory — Masterscope analyzing LEVI itself."""
     import levi
+
     return Path(levi.__file__).resolve().parent
 
 

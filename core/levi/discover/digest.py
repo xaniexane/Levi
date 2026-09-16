@@ -96,8 +96,9 @@ def _save_history(home: Path, history: Dict[str, List[str]]) -> None:
     tmp.replace(path)
 
 
-def _recently_picked(history: Dict[str, List[str]], week_label: str,
-                     window: int = NO_REPEAT_WEEKS) -> set[str]:
+def _recently_picked(
+    history: Dict[str, List[str]], week_label: str, window: int = NO_REPEAT_WEEKS
+) -> set[str]:
     """Ids picked in the recent window of week labels (lexicographic ≈ chronological)."""
     if window <= 0:
         return set()
@@ -170,28 +171,33 @@ def generate_digest(
         if any(tag_counts.get(t, 0) >= per_tag_cap for t in tags):
             skipped += 1
             continue
-        why = ("unseen item — surfacing the neglected"
-               if it["id"] in unseen_ids else "seeded serendipity")
+        why = (
+            "unseen item — surfacing the neglected"
+            if it["id"] in unseen_ids
+            else "seeded serendipity"
+        )
         picks.append({**it, "why": why})
         kind_counts[kind] = kind_counts.get(kind, 0) + 1
         for t in tags:
             tag_counts[t] = tag_counts.get(t, 0) + 1
 
-    digest: Digest = Digest({
-        "week": week_label,
-        "seed": seed,
-        "generated_at": time.time(),
-        "picks": picks,
-        "corpus_size": len(items),
-        "eligible": len(eligible),
-        "skipped_by_diversity_caps": skipped,
-        "rules": {
-            "per_kind_cap": per_kind_cap,
-            "per_tag_cap": per_tag_cap,
-            "no_repeat_weeks": no_repeat_weeks,
-            "mechanism": "seeded shuffle + unseen preference + diversity caps; no engagement signals exist",
-        },
-    })
+    digest: Digest = Digest(
+        {
+            "week": week_label,
+            "seed": seed,
+            "generated_at": time.time(),
+            "picks": picks,
+            "corpus_size": len(items),
+            "eligible": len(eligible),
+            "skipped_by_diversity_caps": skipped,
+            "rules": {
+                "per_kind_cap": per_kind_cap,
+                "per_tag_cap": per_tag_cap,
+                "no_repeat_weeks": no_repeat_weeks,
+                "mechanism": "seeded shuffle + unseen preference + diversity caps; no engagement signals exist",
+            },
+        }
+    )
     markdown = _render_markdown(digest)
 
     digests_dir = home / "digests"

@@ -256,7 +256,7 @@ def test_load_corrupt_file_warns_and_returns_empty(tmp_path):
 def test_load_wrong_shape_warns_and_returns_empty(tmp_path):
     import warnings
 
-    for bad in ('[1,2,3]', '{"cash": "lots"}', '{"cash": 1, "positions": {"A": "x"}}'):
+    for bad in ("[1,2,3]", '{"cash": "lots"}', '{"cash": 1, "positions": {"A": "x"}}'):
         path = tmp_path / "p.json"
         path.write_text(bad, encoding="utf-8")
         with warnings.catch_warnings(record=True) as caught:
@@ -302,7 +302,13 @@ def test_market_value_rejects_bad_price_map():
     p = Portfolio()
     p.deposit(100.0)
     p.apply_fill("AAPL", "buy", 1, 150.0)
-    for bad in (None, [("AAPL", 1.0)], {"AAPL": "high"}, {"AAPL": float("inf")}, {"": 5.0}):
+    for bad in (
+        None,
+        [("AAPL", 1.0)],
+        {"AAPL": "high"},
+        {"AAPL": float("inf")},
+        {"": 5.0},
+    ):
         try:
             p.market_value(bad)
         except ValueError:

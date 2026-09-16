@@ -34,7 +34,7 @@ from __future__ import annotations
 
 import itertools
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 
@@ -161,7 +161,10 @@ class Blackboard:
         if bid is not None and not callable(bid):
             raise ValueError("KS bid must be callable or None")
         self._ks[name] = _KnowledgeSource(
-            name=name, interests=list(interests), action=action, bid_fn=bid,
+            name=name,
+            interests=list(interests),
+            action=action,
+            bid_fn=bid,
             seen_upto=self._latest_id(),
         )
 
@@ -170,7 +173,8 @@ class Blackboard:
 
     def _new_matches(self, ks: _KnowledgeSource) -> List[Hypothesis]:
         return [
-            h for h in self._hyps
+            h
+            for h in self._hyps
             if h.id > ks.seen_upto and any(_matches(p, h.topic) for p in ks.interests)
         ]
 
@@ -241,30 +245,45 @@ def demo_three_stage() -> Dict[str, Any]:
     def classifier(b: Blackboard) -> None:
         doc = b.best("doc:ingested")
         text = str(doc.content).lower()
-        label = "incident" if any(w in text for w in ("outage", "down", "breach")) else "note"
-        b.post_hypothesis("doc:class", {"label": label}, confidence=0.8,
-                           source="classifier")
+        label = (
+            "incident"
+            if any(w in text for w in ("outage", "down", "breach"))
+            else "note"
+        )
+        b.post_hypothesis(
+            "doc:class", {"label": label}, confidence=0.8, source="classifier"
+        )
 
     def enricher(b: Blackboard) -> None:
         cls = b.best("doc:class")
         label = cls.content["label"]
-        b.post_hypothesis("doc:enriched",
-                           {"label": label, "tags": ["urgent"] if label == "incident" else []},
-                           confidence=0.75, source="enricher")
+        b.post_hypothesis(
+            "doc:enriched",
+            {"label": label, "tags": ["urgent"] if label == "incident" else []},
+            confidence=0.75,
+            source="enricher",
+        )
 
     def summarizer(b: Blackboard) -> None:
         enr = b.best("doc:enriched")
-        b.post_hypothesis("doc:summary",
-                           f"summary: {enr.content['label']} {enr.content['tags']}",
-                           confidence=0.9, source="summarizer")
+        b.post_hypothesis(
+            "doc:summary",
+            f"summary: {enr.content['label']} {enr.content['tags']}",
+            confidence=0.9,
+            source="summarizer",
+        )
 
     # deliberately shuffled registration order
     bb.register_ks("summarizer", ["doc:enriched"], summarizer)
     bb.register_ks("enricher", ["doc:class"], enricher)
     bb.register_ks("classifier", ["doc:ingested"], classifier)
 
-    bb.post_hypothesis("doc:ingested", "The payment API is down in eu-west",
-                       confidence=1.0, source="ingest")
+    bb.post_hypothesis(
+        "doc:ingested",
+        "The payment API is down in eu-west",
+        confidence=1.0,
+        source="ingest",
+    )
     result = bb.run_until()
     result["summary"] = bb.best("doc:summary")
     return result
@@ -272,6 +291,7 @@ def demo_three_stage() -> Dict[str, Any]:
 
 if __name__ == "__main__":  # pragma: no cover
     import json
+
     out = demo_three_stage()
     out["summary"] = out["summary"].__dict__
     print(json.dumps(out, indent=2, default=str))

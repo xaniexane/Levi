@@ -8,7 +8,15 @@ from __future__ import annotations
 
 import pytest
 
-from core.levi.methods import colon, edgenotch, kardex, mundaneum, optical, triplebook, uniterm
+from core.levi.methods import (
+    colon,
+    edgenotch,
+    kardex,
+    mundaneum,
+    optical,
+    triplebook,
+    uniterm,
+)
 
 
 @pytest.fixture()
@@ -19,22 +27,34 @@ def home(tmp_path, monkeypatch):
 
 # ---- triplebook ------------------------------------------------------------
 
+
 def test_triplebook_dual_entry_and_trial_balance(home):
     tb = triplebook.TripleBook()
     c0 = tb.jot("call dentist", captured="2026-09-15")
-    tb.post(triplebook.JournalEntry(narrative="dentist call",
-                                    debit_account="calendar:morning",
-                                    credit_account="project:health",
-                                    amount=1.0), from_capture=c0)
+    tb.post(
+        triplebook.JournalEntry(
+            narrative="dentist call",
+            debit_account="calendar:morning",
+            credit_account="project:health",
+            amount=1.0,
+        ),
+        from_capture=c0,
+    )
     # unbalanced: a commitment with time but no project on the other side yet
-    tb.post(triplebook.JournalEntry(narrative="write report",
-                                    debit_account="calendar:afternoon",
-                                    credit_account="project:report"))
+    tb.post(
+        triplebook.JournalEntry(
+            narrative="write report",
+            debit_account="calendar:afternoon",
+            credit_account="project:report",
+        )
+    )
     bal = tb.balances()
     assert bal["calendar:morning"] == 1.0 and bal["project:health"] == -1.0
     trial = tb.trial_balance()
     assert trial["balanced"] is True  # books agree mechanically…
-    assert "calendar:morning" in trial["unbalanced_accounts"]  # …but accounts don't net out
+    assert (
+        "calendar:morning" in trial["unbalanced_accounts"]
+    )  # …but accounts don't net out
     assert trial["unposted_captures"] == []  # c0 was posted
     c1 = tb.jot("unposted stray thought")
     assert tb.trial_balance()["unposted_captures"] == [c1]
@@ -48,17 +68,28 @@ def test_triplebook_deny_closed(home):
     with pytest.raises(ValueError):
         tb.jot("   ")
     with pytest.raises(ValueError):
-        tb.post(triplebook.JournalEntry(narrative="x", debit_account="a",
-                                        credit_account="a"))  # duality: must differ
+        tb.post(
+            triplebook.JournalEntry(
+                narrative="x", debit_account="a", credit_account="a"
+            )
+        )  # duality: must differ
     with pytest.raises(ValueError):
-        tb.post(triplebook.JournalEntry(narrative="x", debit_account="a",
-                                        credit_account="b", amount=0))
+        tb.post(
+            triplebook.JournalEntry(
+                narrative="x", debit_account="a", credit_account="b", amount=0
+            )
+        )
     with pytest.raises(IndexError):
-        tb.post(triplebook.JournalEntry(narrative="x", debit_account="a",
-                                        credit_account="b"), from_capture=99)
+        tb.post(
+            triplebook.JournalEntry(
+                narrative="x", debit_account="a", credit_account="b"
+            ),
+            from_capture=99,
+        )
 
 
 # ---- edgenotch --------------------------------------------------------------
+
 
 def test_edgenotch_needle_sort():
     deck = edgenotch.Deck()
@@ -101,6 +132,7 @@ def test_edgenotch_deny_closed():
 
 # ---- optical -----------------------------------------------------------------
 
+
 def test_optical_coincidence_and_light_table():
     lt = optical.LightTable()
     lt.index_document("d1", ["cognitive load", "worked examples"])
@@ -127,6 +159,7 @@ def test_optical_deny_closed():
 
 
 # ---- uniterm -------------------------------------------------------------------
+
 
 def test_uniterm_postcoordinate_search_with_trace():
     idx = uniterm.UnitermIndex()
@@ -162,15 +195,33 @@ def test_uniterm_deny_closed():
 
 # ---- colon ---------------------------------------------------------------------
 
+
 def test_colon_pmest_synthesis_and_pivot():
     clf = colon.ColonClassifier()
-    n1 = clf.classify("tb-cure", Personality="Medicine", Matter="Disease",
-                      Energy="Treatment", Space="India", Time="1950")
+    n1 = clf.classify(
+        "tb-cure",
+        Personality="Medicine",
+        Matter="Disease",
+        Energy="Treatment",
+        Space="India",
+        Time="1950",
+    )
     assert n1 == "Medicine:Disease:Treatment:India:1950"
-    assert clf.parse(n1) == {"Personality": "Medicine", "Matter": "Disease",
-                             "Energy": "Treatment", "Space": "India", "Time": "1950"}
-    clf.classify("tb-prev", Personality="Medicine", Matter="Disease",
-                 Energy="Prevention", Space="India", Time="1950")
+    assert clf.parse(n1) == {
+        "Personality": "Medicine",
+        "Matter": "Disease",
+        "Energy": "Treatment",
+        "Space": "India",
+        "Time": "1950",
+    }
+    clf.classify(
+        "tb-prev",
+        Personality="Medicine",
+        Matter="Disease",
+        Energy="Prevention",
+        Space="India",
+        Time="1950",
+    )
     assert clf.pivot("Energy", "treatment") == ["tb-cure"]  # case-insensitive slice
     assert clf.pivot("Space", "India") == ["tb-cure", "tb-prev"]
     assert clf.facet_values("Energy") == ["Prevention", "Treatment"]
@@ -178,7 +229,9 @@ def test_colon_pmest_synthesis_and_pivot():
 
 def test_colon_domain_facets():
     clf = colon.ColonClassifier(facets=("client", "topic", "method", "year"))
-    n = clf.classify("x1", client="acme", topic="pricing", method="interview", year="2024")
+    n = clf.classify(
+        "x1", client="acme", topic="pricing", method="interview", year="2024"
+    )
     assert n == "acme:pricing:interview:2024"
     with pytest.raises(ValueError):
         clf.classify("x2", client="acme", bogus="z")  # unknown facet rejected
@@ -190,16 +243,36 @@ def test_colon_domain_facets():
 
 # ---- mundaneum --------------------------------------------------------------------
 
+
 def test_mundaneum_relational_brief(home):
     m = mundaneum.Mundaneum()
-    m.file(mundaneum.Card(notation="004.738.5", subject="remote work",
-                          relation="supports", object="productivity",
-                          note="my notes: deep-work blocks up 20%"))
-    m.file(mundaneum.Card(notation="004.738.5", subject="remote work",
-                          relation="contradicts", object="productivity",
-                          note="study X: junior onboarding slower"))
-    m.file(mundaneum.Card(notation="159.9", subject="sleep",
-                          relation="about", object="cognition", note="unrelated"))
+    m.file(
+        mundaneum.Card(
+            notation="004.738.5",
+            subject="remote work",
+            relation="supports",
+            object="productivity",
+            note="my notes: deep-work blocks up 20%",
+        )
+    )
+    m.file(
+        mundaneum.Card(
+            notation="004.738.5",
+            subject="remote work",
+            relation="contradicts",
+            object="productivity",
+            note="study X: junior onboarding slower",
+        )
+    )
+    m.file(
+        mundaneum.Card(
+            notation="159.9",
+            subject="sleep",
+            relation="about",
+            object="cognition",
+            note="unrelated",
+        )
+    )
     brief = m.brief("remote work")
     assert brief["cards_consulted"] == 2
     assert len(brief["contradictions"]) == 1
@@ -215,9 +288,13 @@ def test_mundaneum_relational_brief(home):
 def test_mundaneum_deny_closed(home):
     m = mundaneum.Mundaneum()
     with pytest.raises(ValueError):
-        m.file(mundaneum.Card(notation="abc", subject="s", relation="about", object="o"))
+        m.file(
+            mundaneum.Card(notation="abc", subject="s", relation="about", object="o")
+        )
     with pytest.raises(ValueError):
-        m.file(mundaneum.Card(notation="1.2", subject="s", relation="proves", object="o"))
+        m.file(
+            mundaneum.Card(notation="1.2", subject="s", relation="proves", object="o")
+        )
     with pytest.raises(ValueError):
         m.under("nope")
     with pytest.raises(ValueError):
@@ -226,12 +303,20 @@ def test_mundaneum_deny_closed(home):
 
 # ---- kardex -----------------------------------------------------------------------
 
+
 def test_kardex_visible_file(home):
     vf = kardex.VisibleFile("subscriptions")
-    vf.file_card(kardex.VisibleCard(entity="domain", strip="renews 2026-10-01",
-                                    status="amber", updated="2026-09-15"))
-    vf.file_card(kardex.VisibleCard(entity="vpn", strip="paid through 2027",
-                                    status="green"))
+    vf.file_card(
+        kardex.VisibleCard(
+            entity="domain",
+            strip="renews 2026-10-01",
+            status="amber",
+            updated="2026-09-15",
+        )
+    )
+    vf.file_card(
+        kardex.VisibleCard(entity="vpn", strip="paid through 2027", status="green")
+    )
     dash = vf.dashboard()
     assert "domain: renews 2026-10-01" in dash and "vpn: paid through 2027" in dash
     assert vf.flagged() == []

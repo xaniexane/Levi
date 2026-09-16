@@ -30,7 +30,9 @@ def test_new_signs_and_verifies(monkeypatch, tmp_path):
     assert doc["version"] == 1
     assert store.verify("haven-c") is True
     # founder key is owner-only
-    mode = stat.S_IMODE((tmp_path / ".levi" / "charters" / "haven-c.key").stat().st_mode)
+    mode = stat.S_IMODE(
+        (tmp_path / ".levi" / "charters" / "haven-c.key").stat().st_mode
+    )
     assert mode == 0o600
 
 
@@ -67,7 +69,9 @@ def test_mod_action_requires_reason(monkeypatch, tmp_path):
     a = store.mod_action("c1", "ada", "warn", "mallory", "spam x3")
     ap = store.appeal("c1", a["id"], "mallory", "it was a test post")
     assert ap["status"] == "open"
-    decided = store.decide_appeal("c1", ap["id"], "grace", "overturned", note="first offense")
+    decided = store.decide_appeal(
+        "c1", ap["id"], "grace", "overturned", note="first offense"
+    )
     assert decided["status"] == "overturned"
     with pytest.raises(CharterError, match="already decided"):
         store.decide_appeal("c1", ap["id"], "grace", "upheld")
@@ -107,6 +111,7 @@ def test_tampered_charter_export_refused(monkeypatch, tmp_path):
 def test_attach_writes_charter_ref_into_community(monkeypatch, tmp_path):
     _herm(monkeypatch, tmp_path)
     from levi.communities.model import CommunityStore
+
     cs = CommunityStore()
     cs.create("haven", "Haven")
     store = CharterStore()
@@ -120,12 +125,41 @@ def test_attach_writes_charter_ref_into_community(monkeypatch, tmp_path):
 
 def test_cli_roundtrip(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)
-    assert main(["new", "c1", "--community", "haven", "--founder", "ada",
-                 "--rules", "be kind", "no spam"]) == 0
+    assert (
+        main(
+            [
+                "new",
+                "c1",
+                "--community",
+                "haven",
+                "--founder",
+                "ada",
+                "--rules",
+                "be kind",
+                "no spam",
+            ]
+        )
+        == 0
+    )
     assert main(["verify", "c1"]) == 0
     assert "VALID" in capsys.readouterr().out
-    assert main(["mod", "c1", "--moderator", "ada", "--action", "warn",
-                 "--target", "mallory", "--reason", "spam"]) == 0
+    assert (
+        main(
+            [
+                "mod",
+                "c1",
+                "--moderator",
+                "ada",
+                "--action",
+                "warn",
+                "--target",
+                "mallory",
+                "--reason",
+                "spam",
+            ]
+        )
+        == 0
+    )
     assert main(["show", "c1"]) == 0
     assert "be kind" in capsys.readouterr().out
     assert main(["modlog", "c1"]) == 0

@@ -659,8 +659,12 @@ def test_routing_rejects_bad_input():
         record_actual("t", route, input_tokens=-1, output_tokens=0, outcome="ok")
     with pytest.raises(RoutingError, match="latency_ms"):
         record_actual(
-            "t", route, input_tokens=1, output_tokens=1,
-            outcome="ok", latency_ms=float("inf"),
+            "t",
+            route,
+            input_tokens=1,
+            output_tokens=1,
+            outcome="ok",
+            latency_ms=float("inf"),
         )
 
 

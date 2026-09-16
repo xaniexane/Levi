@@ -49,7 +49,9 @@ class ColonClassifier:
             raise ValueError("item_id must be non-empty")
         unknown = set(facet_values) - set(self.facets)
         if unknown:
-            raise ValueError(f"unknown facets: {sorted(unknown)} (known: {list(self.facets)})")
+            raise ValueError(
+                f"unknown facets: {sorted(unknown)} (known: {list(self.facets)})"
+            )
         assignment = {}
         for facet in self.facets:
             value = str(facet_values.get(facet, "")).strip()

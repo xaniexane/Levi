@@ -123,9 +123,7 @@ def pick_category(task: str) -> Tuple[str, List[str]]:
     registry default when nothing matches.
     """
     if not isinstance(task, str):
-        raise RoutingError(
-            f"invalid task: must be a string, got {type(task).__name__}"
-        )
+        raise RoutingError(f"invalid task: must be a string, got {type(task).__name__}")
     lowered = task.lower()
     best: Tuple[str, int, List[str]] = ("supervisor", 0, [])
     for category, keywords in _CATEGORY_HINTS:
@@ -201,13 +199,9 @@ def plan(
 ) -> RoutePlan:
     """Route one task → (model, category, tools, strategy) + explanation."""
     if not isinstance(task, str) or not task.strip():
-        raise RoutingError(
-            f"invalid task {task!r}: must be a non-empty string"
-        )
+        raise RoutingError(f"invalid task {task!r}: must be a non-empty string")
     if not isinstance(user_id, str) or not user_id.strip():
-        raise RoutingError(
-            f"invalid user_id {user_id!r}: must be a non-empty string"
-        )
+        raise RoutingError(f"invalid user_id {user_id!r}: must be a non-empty string")
     if privacy not in _PRIVACY_MODES:
         raise RoutingError(
             f"invalid privacy {privacy!r}: must be one of {_PRIVACY_MODES}"

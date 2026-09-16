@@ -103,8 +103,12 @@ def test_cli_roundtrip(home, capsys, monkeypatch):
     from levi.canvas.__main__ import main
 
     monkeypatch.setenv("LEVI_HOME", str(home.parent))
-    assert main(["new", "cli", "--type", "plan", "--title", "CLI plan",
-                 "--text", "step 1"]) == 0
+    assert (
+        main(
+            ["new", "cli", "--type", "plan", "--title", "CLI plan", "--text", "step 1"]
+        )
+        == 0
+    )
     assert main(["edit", "cli", "--text", "step 1\nstep 2", "--note", "more"]) == 0
     assert main(["show", "cli"]) == 0
     assert "step 2" in capsys.readouterr().out

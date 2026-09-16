@@ -10,7 +10,6 @@ from levi.communities import SHELF
 from levi.communities.model import (
     CommunityError,
     CommunityStore,
-    build_export,
     verify_export,
 )
 from levi.communities.__main__ import main
@@ -47,7 +46,13 @@ def test_export_import_roundtrip(monkeypatch, tmp_path):
     store.export("haven", out)
     doc = json.loads(out.read_text())
     assert doc["format"] == "levi-community-export"
-    assert set(doc["checksums"]) == {"channels", "members", "roles", "messages", "governance"}
+    assert set(doc["checksums"]) == {
+        "channels",
+        "members",
+        "roles",
+        "messages",
+        "governance",
+    }
     # import into a fresh home as a different id
     monkeypatch.setenv("HOME", str(tmp_path / "home2"))
     store2 = CommunityStore()
@@ -106,8 +111,10 @@ def test_cli_roundtrip(monkeypatch, tmp_path, capsys):
     assert main(["create", "c1", "--name", "Club"]) == 0
     assert main(["add-channel", "c1", "lobby", "--name", "lobby"]) == 0
     assert main(["add-member", "c1", "u1", "--name", "Uma"]) == 0
-    assert main(["post", "c1", "--channel", "lobby", "--author", "u1",
-                 "--text", "hi"]) == 0
+    assert (
+        main(["post", "c1", "--channel", "lobby", "--author", "u1", "--text", "hi"])
+        == 0
+    )
     out = tmp_path / "c1.json"
     assert main(["export", "c1", "--out", str(out)]) == 0
     assert main(["verify", "--in", str(out)]) == 0
@@ -115,5 +122,6 @@ def test_cli_roundtrip(monkeypatch, tmp_path, capsys):
     assert main(["status", "c1"]) == 0
     assert "Club" in capsys.readouterr().out
     # unknown channel / member rejected
-    assert main(["post", "c1", "--channel", "nope", "--author", "u1",
-                 "--text", "x"]) == 1
+    assert (
+        main(["post", "c1", "--channel", "nope", "--author", "u1", "--text", "x"]) == 1
+    )

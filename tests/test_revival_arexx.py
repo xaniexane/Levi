@@ -93,7 +93,10 @@ def test_acl_denies_anonymous_caller():
 
 def test_no_acl_means_open():
     reg = _registry()
-    assert reg.send_command("memory", "recall", args=["k"], caller="anyone") == "recalled:k"
+    assert (
+        reg.send_command("memory", "recall", args=["k"], caller="anyone")
+        == "recalled:k"
+    )
 
 
 # -- script runner --------------------------------------------------------------

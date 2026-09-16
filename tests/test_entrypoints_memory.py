@@ -17,8 +17,12 @@ def test_help_exits_zero():
 
 def test_add_search_get_delete_roundtrip(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)
-    assert main(["add", "Chauncey likes oolong", "--type", "preference",
-                 "--tags", "drink"]) == 0
+    assert (
+        main(
+            ["add", "Chauncey likes oolong", "--type", "preference", "--tags", "drink"]
+        )
+        == 0
+    )
     out = capsys.readouterr().out
     entry_id = out.split()[1]
 
@@ -38,6 +42,7 @@ def test_stats_json(monkeypatch, tmp_path, capsys):
     capsys.readouterr()  # drain the "added ..." line
     assert main(["stats"]) == 0
     import json
+
     payload = json.loads(capsys.readouterr().out)
     assert payload["total"] == 1
     assert payload["by_type"]["semantic"] == 1

@@ -14,8 +14,14 @@ from levi.convo.render import render_block, render_constellation
 def _long_convo():
     """~12 turns; turn 2 is about postgres, the rest drift elsewhere."""
     turns = [
-        {"speaker": "user", "text": "How do I tune the old postgres database for writes?"},
-        {"speaker": "levi", "text": "Raise shared_buffers and checkpoint_timeout for write-heavy postgres."},
+        {
+            "speaker": "user",
+            "text": "How do I tune the old postgres database for writes?",
+        },
+        {
+            "speaker": "levi",
+            "text": "Raise shared_buffers and checkpoint_timeout for write-heavy postgres.",
+        },
         {"speaker": "user", "text": "Now the nginx config needs a reload"},
         {"speaker": "levi", "text": "Use nginx -s reload after validating the config."},
         {"speaker": "user", "text": "What about backup retention windows?"},
@@ -73,7 +79,9 @@ def test_no_conflict_on_different_predicates():
 
 def test_no_contradiction_on_agreement():
     facts = [{"text": "nginx runs on port 8080.", "turn": 3}]
-    findings = check_contradictions("Right, nginx runs on port 8080 as you said.", facts)
+    findings = check_contradictions(
+        "Right, nginx runs on port 8080 as you said.", facts
+    )
     assert findings == [], findings
 
 

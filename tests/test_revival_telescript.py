@@ -227,12 +227,12 @@ def test_guarded_executor_uses_first_permitting_token():
 
 # -- signature encoding strictness -------------------------------------------
 
+
 def test_verify_rejects_noncanonical_signature_encoding():
     """The last base64url char of a 32-byte HMAC carries only 2 significant
     bits. Swapping it for a different char with the same top 2 bits decodes
     to IDENTICAL bytes — verify() must still refuse the token (regression:
     such tampered tokens used to verify ~1/4 of the time)."""
-    import base64
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
     token = _cap()
     payload_b64, sig_b64 = token.split(".")

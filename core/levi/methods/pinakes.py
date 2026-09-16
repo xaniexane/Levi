@@ -31,10 +31,10 @@ class Entry:
     title: str
     author: str
     subject: str
-    incipit: str = ""        # opening line / identifying hook
-    biography: str = ""      # one-line author note
-    summary: str = ""        # one-line critical judgment
-    provenance: str = ""     # where this copy came from
+    incipit: str = ""  # opening line / identifying hook
+    biography: str = ""  # one-line author note
+    summary: str = ""  # one-line critical judgment
+    provenance: str = ""  # where this copy came from
     authenticity: str = "unknown"
     crossrefs: list[str] = field(default_factory=list)  # entry ids
 
@@ -60,7 +60,9 @@ class Pinakes:
         if not data:
             return
         if not isinstance(data, dict) or "entries" not in data:
-            raise _persist.CorruptStoreError(f"pinakes store {self._store} has bad shape")
+            raise _persist.CorruptStoreError(
+                f"pinakes store {self._store} has bad shape"
+            )
         for eid, ed in data["entries"].items():
             entry = Entry(**ed)
             entry.validate()
@@ -70,8 +72,10 @@ class Pinakes:
     def save(self) -> None:
         _persist.save_json(
             self._store,
-            {"entries": {eid: asdict(e) for eid, e in self.entries.items()},
-             "next_id": self._next_id},
+            {
+                "entries": {eid: asdict(e) for eid, e in self.entries.items()},
+                "next_id": self._next_id,
+            },
         )
 
     def add(self, entry: Entry) -> str:
@@ -92,32 +96,47 @@ class Pinakes:
                 self.entries[a].crossrefs.append(b)
 
     def by_author(self, author: str) -> list[tuple[str, Entry]]:
-        return [(eid, e) for eid, e in self.entries.items()
-                if author.lower() in e.author.lower()]
+        return [
+            (eid, e)
+            for eid, e in self.entries.items()
+            if author.lower() in e.author.lower()
+        ]
 
     def by_subject(self, subject: str) -> list[tuple[str, Entry]]:
-        return [(eid, e) for eid, e in self.entries.items()
-                if subject.lower() in e.subject.lower()]
+        return [
+            (eid, e)
+            for eid, e in self.entries.items()
+            if subject.lower() in e.subject.lower()
+        ]
 
     def disputed(self) -> list[tuple[str, Entry]]:
         """Works flagged disputed or spurious — the authenticity audit."""
-        return [(eid, e) for eid, e in self.entries.items()
-                if e.authenticity in ("disputed", "spurious")]
+        return [
+            (eid, e)
+            for eid, e in self.entries.items()
+            if e.authenticity in ("disputed", "spurious")
+        ]
 
     def annotated_list(self, subject: str | None = None) -> str:
         """Render the classified bibliography as text."""
         items = self.entries.items()
         if subject:
-            items = [(eid, e) for eid, e in items if subject.lower() in e.subject.lower()]
+            items = [
+                (eid, e) for eid, e in items if subject.lower() in e.subject.lower()
+            ]
         lines = [f"PINAKES — {len(list(items))} entries"]
         items = list(items)
-        for eid, e in sorted(items, key=lambda kv: (kv[1].author.lower(), kv[1].title.lower())):
+        for eid, e in sorted(
+            items, key=lambda kv: (kv[1].author.lower(), kv[1].title.lower())
+        ):
             lines.append(f"\n[{eid}] {e.title} — {e.author} ({e.subject})")
             if e.incipit:
                 lines.append(f"  incipit: {e.incipit}")
             if e.summary:
                 lines.append(f"  judgment: {e.summary}")
-            lines.append(f"  authenticity: {e.authenticity}; provenance: {e.provenance or '—'}")
+            lines.append(
+                f"  authenticity: {e.authenticity}; provenance: {e.provenance or '—'}"
+            )
             if e.crossrefs:
                 lines.append(f"  see also: {', '.join(e.crossrefs)}")
         return "\n".join(lines)

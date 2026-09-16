@@ -53,9 +53,7 @@ def concepts_to_memory_entries(concepts: List[Dict[str, Any]]) -> List[Dict[str,
         content_words = concept.get("content_words") or []
         content = "%s — %s (%s academy)" % (name, kind, track)
         if content_words:
-            content += "; key terms: %s" % ", ".join(
-                str(w) for w in content_words[:12]
-            )
+            content += "; key terms: %s" % ", ".join(str(w) for w in content_words[:12])
         entry = {
             "memory_type": "semantic",
             "content": content,

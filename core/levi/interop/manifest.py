@@ -394,10 +394,10 @@ DECLARATIONS = {
             "games.hotseat",
             "games.saves",
             # -- wave-015 (dead game genres): fair-play additions -------------
-            "games.if-engine",     # Z-machine revival: data-driven parser IF VM
-            "games.open-crate",    # anti-loot-box: published odds, free pulls, --prove audit
-            "games.open-season",   # un-expiring battle pass: streaks freeze, never punish
-            "games.turn-relay",    # BBS-door ritual as a hash-chained turn protocol
+            "games.if-engine",  # Z-machine revival: data-driven parser IF VM
+            "games.open-crate",  # anti-loot-box: published odds, free pulls, --prove audit
+            "games.open-season",  # un-expiring battle pass: streaks freeze, never punish
+            "games.turn-relay",  # BBS-door ritual as a hash-chained turn protocol
         ],
         "requires": [],
     },

@@ -70,7 +70,7 @@ def test_mcp_tools_list_has_valid_schemas():
         {"jsonrpc": "2.0", "id": 4, "method": "tools/list", "params": {}}
     )
     tools = resp["result"]["tools"]
-    assert len(tools) == 25  # 24 + growth_context (agent growth-loop reader)
+    assert len(tools) == 27  # 24 + growth_context (agent growth-loop reader) + image_generate + python_exec
     for tool in tools:
         assert tool["name"] and tool["description"]
         schema = tool["inputSchema"]
@@ -231,7 +231,7 @@ def test_mcp_stdio_subprocess_handshake(tmp_path):
         init = rpc(1, "initialize")
         assert init["result"]["protocolVersion"] == PROTOCOL_VERSION
         tools = rpc(2, "tools/list")
-        assert len(tools["result"]["tools"]) == 25  # 24 + growth_context
+        assert len(tools["result"]["tools"]) == 27  # 24 + growth_context + image_generate + python_exec
         call = rpc(
             3,
             "tools/call",
@@ -402,8 +402,7 @@ def test_mcp_batch_within_limit_still_works():
 
     server = build_owner_server()
     batch = [
-        {"jsonrpc": "2.0", "id": i, "method": "ping", "params": {}}
-        for i in range(3)
+        {"jsonrpc": "2.0", "id": i, "method": "ping", "params": {}} for i in range(3)
     ]
     resp = server.handle(batch)
     assert isinstance(resp, list) and len(resp) == 3

@@ -9,7 +9,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "core"))
 
-from levi.shelf import ShelfStore, ShelfError, ShelfItem, url_ok  # noqa: E402
+from levi.shelf import ShelfStore, ShelfError, url_ok  # noqa: E402
 
 
 @pytest.fixture()
@@ -18,8 +18,7 @@ def store(tmp_path):
 
 
 def test_add_and_get(store):
-    it = store.add("https://example.com/a", "Example A", note="good read",
-                   tags=["rss"])
+    it = store.add("https://example.com/a", "Example A", note="good read", tags=["rss"])
     got = store.get(it.id)
     assert got.url == "https://example.com/a"
     assert got.title == "Example A"
@@ -50,8 +49,8 @@ def test_bury_sinks_not_deletes(store):
     b = store.add("https://example.com/b", "B")
     store.bury(a.id)
     order = [i.id for i in store.list()]
-    assert order[-1] == a.id          # buried sinks to bottom
-    assert store.get(a.id).buried     # still there
+    assert order[-1] == a.id  # buried sinks to bottom
+    assert store.get(a.id).buried  # still there
     store.unbury(a.id)
     assert not store.get(a.id).buried
 

@@ -119,7 +119,7 @@ def parse(source: str) -> Picture:
                 after = chunk
                 for tok in (parts[0], rest[0], rest[1]):
                     pos = after.find(tok)
-                    after = after[pos + len(tok):]
+                    after = after[pos + len(tok) :]
                 pic.ops.append(Op(name, (x, y, after.lstrip()), lineno))
                 continue
             if len(rest) != argc:
@@ -136,8 +136,7 @@ def parse(source: str) -> Picture:
                 idx = nums[0]
                 if idx != int(idx) or not 0 <= int(idx) <= 7:
                     raise PDIError(
-                        "line %d: palette index must be 0-7, got %r"
-                        % (lineno, rest[0])
+                        "line %d: palette index must be 0-7, got %r" % (lineno, rest[0])
                     )
                 pic.ops.append(Op(name, (int(idx),), lineno))
                 continue

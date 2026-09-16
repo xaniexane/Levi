@@ -42,6 +42,7 @@ from typing import Any, Callable, Dict, List, Optional
 # Query spec
 # --------------------------------------------------------------------------
 
+
 @dataclass
 class QuerySpec:
     """A live query: entry matches when ALL non-None fields match.
@@ -107,7 +108,15 @@ def entry_as_dict(entry: Any) -> Dict[str, Any]:
         except Exception:
             pass
     out: Dict[str, Any] = {}
-    for key in ("id", "content", "tags", "source", "importance", "memory_type", "metadata"):
+    for key in (
+        "id",
+        "content",
+        "tags",
+        "source",
+        "importance",
+        "memory_type",
+        "metadata",
+    ):
         if hasattr(entry, key):
             out[key] = getattr(entry, key)
     # memory_type may be an Enum; normalize to its value.
@@ -293,7 +302,8 @@ class LiveQuery:
                 spec=spec,
                 callback=fn,
                 handler_name=handler_name,
-                created_at=item.get("created_at") or datetime.now(timezone.utc).isoformat(),
+                created_at=item.get("created_at")
+                or datetime.now(timezone.utc).isoformat(),
             )
             rearmed.append(sub_id)
         return rearmed
@@ -305,6 +315,7 @@ class LiveQuery:
 # --------------------------------------------------------------------------
 # LiveStore: MemoryStore wrapper with notifications
 # --------------------------------------------------------------------------
+
 
 class LiveStore:
     """Wraps a MemoryStore (or any object with ``add``) with live queries.
@@ -321,8 +332,9 @@ class LiveStore:
         self.queries = queries if queries is not None else LiveQuery()
 
     @classmethod
-    def from_default(cls, data_dir: Optional[Path] = None,
-                     queries: Optional[LiveQuery] = None) -> "LiveStore":
+    def from_default(
+        cls, data_dir: Optional[Path] = None, queries: Optional[LiveQuery] = None
+    ) -> "LiveStore":
         """Build a LiveStore around LEVI's real MemoryStore (lazy import)."""
         try:
             from levi.memory.store import MemoryStore  # lazy; honest degradation

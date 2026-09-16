@@ -123,13 +123,11 @@ def parse(token: str) -> Signal:
     is_query = raw.endswith("?")
     code = raw[:-1] if is_query else raw
     if code in Q_CODES:
-        return Signal(code=code, kind="qcode", meaning=Q_CODES[code],
-                      is_query=is_query)
+        return Signal(code=code, kind="qcode", meaning=Q_CODES[code], is_query=is_query)
     if code in PROSIGNS:
         if is_query:
             raise SignalError(f"prosign {code!r} takes no query form")
-        return Signal(code=code, kind="prosign", meaning=PROSIGNS[code],
-                      is_query=False)
+        return Signal(code=code, kind="prosign", meaning=PROSIGNS[code], is_query=False)
     raise UnknownSignal(f"unknown signal {token!r}")
 
 

@@ -101,9 +101,7 @@ def _safe_member_path(root: Path, rel: str) -> Optional[Path]:
     return out
 
 
-def export_life_pack(
-    dest: Optional[Path] = None, home: Optional[Path] = None
-) -> Path:
+def export_life_pack(dest: Optional[Path] = None, home: Optional[Path] = None) -> Path:
     home_dir = _root(home)
     home_dir.mkdir(parents=True, exist_ok=True)
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")

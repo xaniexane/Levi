@@ -1,4 +1,5 @@
 """``levi backup`` CLI: snapshot / sync / status / configure / restore."""
+
 from __future__ import annotations
 
 import argparse
@@ -11,7 +12,7 @@ from .config import (
 )
 from .daily import run_daily
 from .restore import restore_snapshot
-from .snapshot import create_snapshot, list_snapshots, prune_local, verify_snapshot
+from .snapshot import create_snapshot, list_snapshots, prune_local
 from .sync import configured_remote, sync_snapshot, verify_remote
 
 
@@ -81,8 +82,10 @@ def _cmd_now(args: argparse.Namespace) -> int:
 
     remote = getattr(args, "remote", None) or configured_remote()
     if not remote:
-        print("no remote configured — snapshot kept locally only "
-              "(levi backup configure --remote NAME)")
+        print(
+            "no remote configured — snapshot kept locally only "
+            "(levi backup configure --remote NAME)"
+        )
         return 0
     res = sync_snapshot(snap["tarball"], snap["manifest"], remote=remote)
     print(res["message"])
@@ -93,7 +96,9 @@ def _cmd_status() -> int:
     state = load_state()
     cfg = load_config()
     print("LEVI backup status")
-    print(f"  rclone: {'available' if rclone_available() else 'NOT INSTALLED (snapshots stay local)'}")
+    print(
+        f"  rclone: {'available' if rclone_available() else 'NOT INSTALLED (snapshots stay local)'}"
+    )
     print(f"  configured remote: {cfg.get('remote') or '(none)'}")
     if cfg.get("remote"):
         ok, why = verify_remote()

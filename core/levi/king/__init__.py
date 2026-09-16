@@ -219,7 +219,9 @@ class King:
             if new_beat:
                 beat_id = f"{story.id}:beat:{new_beat.order}"
                 self.ledger.register_entity(beat_id, "beat", new_beat.name)
-                self.ledger.add_edge(story.id, beat_id, "advances", new_beat.summary[:120])
+                self.ledger.add_edge(
+                    story.id, beat_id, "advances", new_beat.summary[:120]
+                )
             self._harvest("story_fabric", words, banks, f"pulse {story.id}")
         return (
             f"=== King pulse (story_fabric) ===\n"

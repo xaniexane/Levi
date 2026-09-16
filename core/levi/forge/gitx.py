@@ -66,8 +66,11 @@ def run_git(
     if check and proc.returncode != 0:
         raise GitError(
             "git %s failed (rc=%d): %s"
-            % (" ".join(str(a) for a in args), proc.returncode,
-               proc.stderr.decode("utf-8", "replace").strip()[:2000])
+            % (
+                " ".join(str(a) for a in args),
+                proc.returncode,
+                proc.stderr.decode("utf-8", "replace").strip()[:2000],
+            )
         )
     return proc
 

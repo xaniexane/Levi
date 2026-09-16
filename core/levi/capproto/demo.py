@@ -17,11 +17,10 @@ Run :func:`run_demo` or ``python -m levi.capproto demo``.
 from __future__ import annotations
 
 import threading
-import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from levi.revival.telescript import issue, verify
+from levi.revival.telescript import issue
 
 from .protocol import ServiceSpec
 from .tokens import MintLedger, attenuate, default_home
@@ -61,13 +60,25 @@ class _NoteStore:
 def build_kvnote_service(ledger: Optional[MintLedger] = None) -> ServiceSpec:
     store = _NoteStore()
     spec = ServiceSpec("kvnote")
-    spec.add_verb("put", store.put, required_args=["key", "value"],
-                  summary="store a note (needs kvnote.put)")
-    spec.add_verb("get", store.get, required_args=["key"],
-                  summary="read a note (needs kvnote.get)")
+    spec.add_verb(
+        "put",
+        store.put,
+        required_args=["key", "value"],
+        summary="store a note (needs kvnote.put)",
+    )
+    spec.add_verb(
+        "get",
+        store.get,
+        required_args=["key"],
+        summary="read a note (needs kvnote.get)",
+    )
     spec.add_verb("list", store.list, summary="list note keys (needs kvnote.list)")
-    spec.add_verb("del", store.delete, required_args=["key"],
-                  summary="delete a note (needs kvnote.del)")
+    spec.add_verb(
+        "del",
+        store.delete,
+        required_args=["key"],
+        summary="delete a note (needs kvnote.del)",
+    )
     spec.ledger = ledger
     return spec
 
@@ -86,19 +97,28 @@ def run_demo(home: Optional[Path] = None) -> List[str]:
         log.append(f"hello -> verbs: {sorted(desc['service']['verbs'])}")
 
         # 1. Issuer mints a broad token for the whole service.
-        broad = issue("local-issuer", "demo-client",
-                      ["kvnote.put", "kvnote.get", "kvnote.list", "kvnote.del"],
-                      ttl_seconds=600)
+        broad = issue(
+            "local-issuer",
+            "demo-client",
+            ["kvnote.put", "kvnote.get", "kvnote.list", "kvnote.del"],
+            ttl_seconds=600,
+        )
         ledger.record_issued(broad)
-        client.call("kvnote", "put", broad, {"key": "idea", "value": "capabilities beat APIs"})
+        client.call(
+            "kvnote", "put", broad, {"key": "idea", "value": "capabilities beat APIs"}
+        )
         log.append("broad token: put OK")
 
         # 2. Attenuate to read-only, 60s TTL — this is what the client keeps.
-        read_only = attenuate(broad, actions=["kvnote.get", "kvnote.list"], ttl_seconds=60, ledger=ledger)
+        read_only = attenuate(
+            broad, actions=["kvnote.get", "kvnote.list"], ttl_seconds=60, ledger=ledger
+        )
         log.append("attenuated to read-only (kvnote.get, kvnote.list), ttl=60s")
 
         # 3. Reads succeed, writes are refused by the protocol.
-        log.append(f"read-only get -> {client.call('kvnote', 'get', read_only, {'key': 'idea'})}")
+        log.append(
+            f"read-only get -> {client.call('kvnote', 'get', read_only, {'key': 'idea'})}"
+        )
         try:
             client.call("kvnote", "put", read_only, {"key": "x", "value": "y"})
             log.append("ERROR: write with read-only token was NOT refused")
@@ -120,8 +140,10 @@ def run_demo(home: Optional[Path] = None) -> List[str]:
         except Exception as exc:
             log.append(f"revoked token refused: {exc}")
 
-        log.append(f"ledger holds {len(ledger.entries())} events "
-                   f"({', '.join(e['event'] for e in ledger.entries())})")
+        log.append(
+            f"ledger holds {len(ledger.entries())} events "
+            f"({', '.join(e['event'] for e in ledger.entries())})"
+        )
     finally:
         client.close()
         server.stop()

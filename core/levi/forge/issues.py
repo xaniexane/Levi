@@ -53,7 +53,9 @@ def get_issue(home, name, issue_id: int):
     return None
 
 
-def open_issue(home, name, title: str, body: str = "", labels=(), author: str = "local") -> dict:
+def open_issue(
+    home, name, title: str, body: str = "", labels=(), author: str = "local"
+) -> dict:
     name = _require_repo(home, name)
     title = title.strip()
     if not title:

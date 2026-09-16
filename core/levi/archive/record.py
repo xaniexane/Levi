@@ -45,14 +45,16 @@ def make_id(kind: str, report_tag: str, title: str, era: str, n: int = 0) -> str
 
 @dataclass(frozen=True)
 class Provenance:
-    found_date: str          # ISO date the research hunt completed
-    research_slug: str       # research_notes/<slug> directory name
-    notes: str = ""          # researcher caveats, verification basis, etc.
+    found_date: str  # ISO date the research hunt completed
+    research_slug: str  # research_notes/<slug> directory name
+    notes: str = ""  # researcher caveats, verification basis, etc.
 
     def to_dict(self) -> Dict[str, str]:
-        return {"found_date": self.found_date,
-                "research_slug": self.research_slug,
-                "notes": self.notes}
+        return {
+            "found_date": self.found_date,
+            "research_slug": self.research_slug,
+            "notes": self.notes,
+        }
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Provenance":
@@ -62,9 +64,11 @@ class Provenance:
         research_slug = data.get("research_slug", "")
         if not found_date or not research_slug:
             raise ValueError("provenance requires found_date and research_slug")
-        return cls(found_date=found_date,
-                   research_slug=research_slug,
-                   notes=str(data.get("notes", "")))
+        return cls(
+            found_date=found_date,
+            research_slug=research_slug,
+            notes=str(data.get("notes", "")),
+        )
 
 
 @dataclass(frozen=True)
@@ -73,17 +77,17 @@ class ArchiveRecord:
 
     id: str
     title: str
-    era: str                       # free text, e.g. "Apple, 1987-2004"; may be ""
-    kind: str                      # software | method | technique
-    summary: str                   # what it was / when — the exhibit placard
-    mechanism: str                 # the ahead-of-its-time mechanism
-    decline: str                   # the real cause of death/decline
-    revival_recipe: str            # how to revive it with modern capability
-    levi_application: str          # one concrete local-first AI application
+    era: str  # free text, e.g. "Apple, 1987-2004"; may be ""
+    kind: str  # software | method | technique
+    summary: str  # what it was / when — the exhibit placard
+    mechanism: str  # the ahead-of-its-time mechanism
+    decline: str  # the real cause of death/decline
+    revival_recipe: str  # how to revive it with modern capability
+    levi_application: str  # one concrete local-first AI application
     sources: List[str] = field(default_factory=list)
-    rating: str = "unrated"        # load-bearing | useful-pattern | inspirational
-    status: str = "dead"           # dead | alive-underused | preserved | ...
-    skepticism: str = ""           # disputed/romanticized history flags
+    rating: str = "unrated"  # load-bearing | useful-pattern | inspirational
+    status: str = "dead"  # dead | alive-underused | preserved | ...
+    skepticism: str = ""  # disputed/romanticized history flags
     provenance: Optional[Provenance] = None
 
     def __post_init__(self):
@@ -92,18 +96,26 @@ class ArchiveRecord:
         if not self.title or not self.title.strip():
             raise ValueError("record %s: title is required" % self.id)
         if self.kind not in KINDS:
-            raise ValueError("record %s: kind %r not in %r"
-                             % (self.id, self.kind, KINDS))
-        for name in ("summary", "mechanism", "decline",
-                     "revival_recipe", "levi_application"):
+            raise ValueError(
+                "record %s: kind %r not in %r" % (self.id, self.kind, KINDS)
+            )
+        for name in (
+            "summary",
+            "mechanism",
+            "decline",
+            "revival_recipe",
+            "levi_application",
+        ):
             if not getattr(self, name) or not getattr(self, name).strip():
                 raise ValueError("record %s: %s is required" % (self.id, name))
         if self.rating not in RATINGS:
-            raise ValueError("record %s: rating %r not in %r"
-                             % (self.id, self.rating, RATINGS))
+            raise ValueError(
+                "record %s: rating %r not in %r" % (self.id, self.rating, RATINGS)
+            )
         if self.status not in STATUSES:
-            raise ValueError("record %s: status %r not in %r"
-                             % (self.id, self.status, STATUSES))
+            raise ValueError(
+                "record %s: status %r not in %r" % (self.id, self.status, STATUSES)
+            )
         for url in self.sources:
             if not isinstance(url, str) or not url.startswith(("http://", "https://")):
                 raise ValueError("record %s: bad source URL %r" % (self.id, url))

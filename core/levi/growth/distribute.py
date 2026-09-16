@@ -56,15 +56,38 @@ except Exception:  # pragma: no cover — memory package is stdlib-only too
 
 _SUBSYSTEM_KEYWORDS: dict[str, tuple[str, ...]] = {
     "agent": ("agent", "chat session", "prompt", "tool call", "delegation", "repl"),
-    "archive": ("archive", "research", "corpus", "ingest", "knowledge base", "document"),
+    "archive": (
+        "archive",
+        "research",
+        "corpus",
+        "ingest",
+        "knowledge base",
+        "document",
+    ),
     "backup": ("backup", "restore", "rclone", "snapshot"),
     "brain": ("brain", "model weight", "training", "tokeniz", "llm", "transformer"),
     "builder": ("builder", "scaffold"),
     "daemon": ("daemon", "heartbeat", "cron", "schedule", "automation"),
     "demand": ("demand", "opportunity", "demandpulse"),
     "factory": ("factory", "manufacture", "production line"),
-    "finance": ("finance", "market", "stock", "portfolio", "trading", "broker", "alpaca", "signal"),
-    "forge": ("forge", "git", "repository", "pull request", "commit", "version control"),
+    "finance": (
+        "finance",
+        "market",
+        "stock",
+        "portfolio",
+        "trading",
+        "broker",
+        "alpaca",
+        "signal",
+    ),
+    "forge": (
+        "forge",
+        "git",
+        "repository",
+        "pull request",
+        "commit",
+        "version control",
+    ),
     "galaxy": ("galaxy", "package", "ecosystem", "third-party"),
     "governor": ("governor", "budget", "meter", "rate limit"),
     "growth": ("growth", "journal", "reflect", "baby levi"),
@@ -72,11 +95,27 @@ _SUBSYSTEM_KEYWORDS: dict[str, tuple[str, ...]] = {
     "lifepack": ("lifepack", "life pack"),
     "mcp": ("mcp",),
     "memory": ("memory", "recall"),
-    "methods": ("method", "franklin", "tickler", "gtd", "habit", "productivity", "quoting"),
+    "methods": (
+        "method",
+        "franklin",
+        "tickler",
+        "gtd",
+        "habit",
+        "productivity",
+        "quoting",
+    ),
     "oath": ("oath", "gpg", "signature"),
     "perpetual": ("perpetual", "hunt"),
     "persona": ("persona",),
-    "revival": ("revival", "retro", "plan9", "lisp", "hypertext", "xanadu", "forgotten"),
+    "revival": (
+        "revival",
+        "retro",
+        "plan9",
+        "lisp",
+        "hypertext",
+        "xanadu",
+        "forgotten",
+    ),
     "ux": ("ux", "user interface", "theme", "onboarding"),
     "vault": ("vault", "secret", "encrypt", "api key"),
 }
@@ -108,7 +147,9 @@ def infer_subsystems(content: str) -> list[str]:
     routing home, and the fallback is honest about being a fallback.
     """
     text = content or ""
-    matched = [name for name, pats in _PATTERNS.items() if any(p.search(text) for p in pats)]
+    matched = [
+        name for name, pats in _PATTERNS.items() if any(p.search(text) for p in pats)
+    ]
     return matched or [_FALLBACK_SUBSYSTEM]
 
 
@@ -138,7 +179,9 @@ def _normalize(learning: Any) -> Union[dict, None]:
         "kind": kind,
         "content": content,
         "confidence": max(0.0, min(1.0, confidence)),
-        "provenance": d.get("provenance") if isinstance(d.get("provenance"), dict) else {},
+        "provenance": d.get("provenance")
+        if isinstance(d.get("provenance"), dict)
+        else {},
     }
 
 
@@ -172,9 +215,7 @@ def _journal_path(home: Any) -> Path:
 def _append_journal(path: Path, record: dict[str, Any]) -> dict[str, Any]:
     record = dict(record)
     record.setdefault("id", _journal.new_cycle_id())
-    record.setdefault(
-        "ts", time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-    )
+    record.setdefault("ts", time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()))
     record.setdefault("kind", "distribution")
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "a", encoding="utf-8") as f:

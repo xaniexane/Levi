@@ -117,10 +117,18 @@ def test_checkin_accumulates_and_rejects_pre_start(monkeypatch, tmp_path):
 def test_no_shaming_copy_anywhere():
     import levi.commitments.commitments as mod
     import levi.commitments.__main__ as cli
+
     blob = open(mod.__file__).read() + open(cli.__file__).read()
     lowered = blob.lower()
-    for banned in ["shame", "lazy", "failure", "let yourself down",
-                   "disappoint", "pathetic", "loser"]:
+    for banned in [
+        "shame",
+        "lazy",
+        "failure",
+        "let yourself down",
+        "disappoint",
+        "pathetic",
+        "loser",
+    ]:
         assert banned not in lowered, "guilt copy found: " + banned
 
 
@@ -135,12 +143,25 @@ def test_copy_is_neutral_on_miss(monkeypatch, tmp_path):
 # CLI
 # --------------------------------------------------------------------------
 
+
 def test_cli_define_checkin_status(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)
-    assert cli_main(["define", "read", "--target", "20", "--unit", "pages",
-                     "--start", "2026-09-10"]) == 0
-    assert cli_main(["checkin", "read", "--value", "20",
-                     "--day", "2026-09-10"]) == 0
+    assert (
+        cli_main(
+            [
+                "define",
+                "read",
+                "--target",
+                "20",
+                "--unit",
+                "pages",
+                "--start",
+                "2026-09-10",
+            ]
+        )
+        == 0
+    )
+    assert cli_main(["checkin", "read", "--value", "20", "--day", "2026-09-10"]) == 0
     assert cli_main(["status", "read"]) == 0
     out = capsys.readouterr().out
     assert "streak" in out and "read" in out

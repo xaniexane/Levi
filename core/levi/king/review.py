@@ -177,7 +177,9 @@ class ReviewQueue:
     def log_decision(self, action: str, detail: str = "") -> Dict[str, Any]:
         """Audit-log an engine pass-through decision (deny/approve/rupture…)."""
         if not isinstance(action, str) or not action.strip():
-            raise ValueError(f"log_decision action must be a non-empty string, got {action!r}")
+            raise ValueError(
+                f"log_decision action must be a non-empty string, got {action!r}"
+            )
         if not isinstance(detail, str):
             raise ValueError(f"log_decision detail must be a string, got {detail!r}")
         entry = {"ts": _utcnow(), "action": action, "detail": detail}

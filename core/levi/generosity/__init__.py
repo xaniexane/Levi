@@ -79,9 +79,10 @@ RULES: Tuple[CharterRule, ...] = (
         inversion="Free Basics: if the feature selects or filters for the "
         "user, the criteria must be disclosed AND user-editable — "
         "generosity with a hidden menu is gatekeeping.",
-        check=lambda m: (not m.has_gatekeeper_curation
-                         or (m.curation_criteria_disclosed
-                             and m.curation_criteria_editable)),
+        check=lambda m: (
+            not m.has_gatekeeper_curation
+            or (m.curation_criteria_disclosed and m.curation_criteria_editable)
+        ),
     ),
     CharterRule(
         id="no_privacy_theater",
@@ -89,7 +90,7 @@ RULES: Tuple[CharterRule, ...] = (
         inversion="Privacy Sandbox: a feature that claims privacy must be "
         "locally verifiable — it must function with the network cable "
         "pulled and no trusted third party.",
-        check=lambda m: (not m.claims_privacy or m.privacy_verifiable_locally),
+        check=lambda m: not m.claims_privacy or m.privacy_verifiable_locally,
     ),
     CharterRule(
         id="no_kill_switch",
@@ -97,7 +98,7 @@ RULES: Tuple[CharterRule, ...] = (
         inversion="X API kill: never reserve the right to revoke access "
         "users built on; everything the feature creates must be "
         "user-exportable from day one.",
-        check=lambda m: (not m.reserves_revoke_rights and m.data_exportable),
+        check=lambda m: not m.reserves_revoke_rights and m.data_exportable,
     ),
     CharterRule(
         id="no_rival_harvest",
@@ -145,10 +146,15 @@ class AuditResult:
     passes: List[str]
 
     def report(self) -> str:
-        lines = ["Generosity Charter audit: %s — %s"
-                 % (self.manifest_name,
-                    "PASS (%d/%d)" % (len(self.passes), len(RULES))
-                    if self.passed else "FAIL")]
+        lines = [
+            "Generosity Charter audit: %s — %s"
+            % (
+                self.manifest_name,
+                "PASS (%d/%d)" % (len(self.passes), len(RULES))
+                if self.passed
+                else "FAIL",
+            )
+        ]
         for f in self.failures:
             lines.append("  FAIL  %-22s %s" % (f["id"], f["title"]))
             lines.append("         inverts: %s" % f["inversion"])
@@ -166,10 +172,15 @@ def audit(manifest: GenerosityManifest) -> AuditResult:
         if rule.passes(manifest):
             passes.append(rule.id)
         else:
-            failures.append({"id": rule.id, "title": rule.title,
-                             "inversion": rule.inversion})
-    return AuditResult(manifest_name=manifest.name, passed=not failures,
-                       failures=failures, passes=passes)
+            failures.append(
+                {"id": rule.id, "title": rule.title, "inversion": rule.inversion}
+            )
+    return AuditResult(
+        manifest_name=manifest.name,
+        passed=not failures,
+        failures=failures,
+        passes=passes,
+    )
 
 
 def audit_giants_showcase() -> Dict[str, AuditResult]:

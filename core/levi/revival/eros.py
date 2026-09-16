@@ -92,8 +92,9 @@ def pattern_covers(granted: str, requested: str) -> bool:
     return False
 
 
-def _check_coverage(granted_actions: tuple[str, ...] | list[str],
-                     requested: list[str]) -> None:
+def _check_coverage(
+    granted_actions: tuple[str, ...] | list[str], requested: list[str]
+) -> None:
     for req in requested:
         if not any(pattern_covers(g, req) for g in granted_actions):
             raise AttenuationRefused(
@@ -111,17 +112,21 @@ class Factory:
     capabilities. Constructed from a root capability *token*; the root is
     verified fail-closed at construction and never leaves the factory."""
 
-    def __init__(self, factory_id: str, root_token: str,
-                 expected_grantee: Optional[str] = None,
-                 revocations: Optional[telescript.RevocationList] = None):
+    def __init__(
+        self,
+        factory_id: str,
+        root_token: str,
+        expected_grantee: Optional[str] = None,
+        revocations: Optional[telescript.RevocationList] = None,
+    ):
         if not factory_id or not factory_id.strip():
             raise ValueError("factory_id must be non-empty")
         self.factory_id = factory_id.strip()
         self._revocations = revocations or telescript.RevocationList()
         # Fail-closed: an unverifiable root means no factory at all.
         self._root = telescript.verify(
-            root_token, expected_grantee=expected_grantee,
-            revocations=self._revocations)
+            root_token, expected_grantee=expected_grantee, revocations=self._revocations
+        )
         self._sealed: set[str] = set()  # sealed token nonces
         self._delegation_log: list[dict] = []
 
@@ -129,8 +134,13 @@ class Factory:
     def root_actions(self) -> tuple[str, ...]:
         return self._root.actions
 
-    def mint(self, grantee: str, actions: list[str],
-             ttl_seconds: float = 3600, sealed: bool = False) -> str:
+    def mint(
+        self,
+        grantee: str,
+        actions: list[str],
+        ttl_seconds: float = 3600,
+        sealed: bool = False,
+    ) -> str:
         """Mint a new capability attenuated from the root authority.
 
         Every requested action pattern must be covered by the root's
@@ -138,39 +148,59 @@ class Factory:
         the token invoke-only: this factory will refuse to derive from it.
         """
         _check_coverage(self._root.actions, list(actions))
-        token = telescript.issue(self.factory_id, grantee, list(actions),
-                                 ttl_seconds=ttl_seconds)
+        token = telescript.issue(
+            self.factory_id, grantee, list(actions), ttl_seconds=ttl_seconds
+        )
         cap = telescript.verify(token)  # self-issued; must verify
         if sealed:
             self._sealed.add(cap.nonce)
-        self._delegation_log.append({
-            "op": "mint", "grantee": grantee, "actions": list(actions),
-            "sealed": sealed, "nonce": cap.nonce,
-        })
+        self._delegation_log.append(
+            {
+                "op": "mint",
+                "grantee": grantee,
+                "actions": list(actions),
+                "sealed": sealed,
+                "nonce": cap.nonce,
+            }
+        )
         return token
 
-    def derive(self, token: str, new_grantee: str, actions: list[str],
-               ttl_seconds: float = 3600, sealed: bool = False,
-               expected_grantee: Optional[str] = None) -> str:
+    def derive(
+        self,
+        token: str,
+        new_grantee: str,
+        actions: list[str],
+        ttl_seconds: float = 3600,
+        sealed: bool = False,
+        expected_grantee: Optional[str] = None,
+    ) -> str:
         """Attenuate/delegate: derive a strictly weaker capability from an
         existing one. The derived actions must be covered by the source
         token's actions; sealed source tokens are refused."""
-        cap = telescript.verify(token, expected_grantee=expected_grantee,
-                                revocations=self._revocations)
+        cap = telescript.verify(
+            token, expected_grantee=expected_grantee, revocations=self._revocations
+        )
         if cap.nonce in self._sealed:
             raise SealedCapability(
-                "capability is sealed: it may be invoked but not re-derived")
+                "capability is sealed: it may be invoked but not re-derived"
+            )
         _check_coverage(cap.actions, list(actions))
-        new_token = telescript.issue(self.factory_id, new_grantee, list(actions),
-                                     ttl_seconds=ttl_seconds)
+        new_token = telescript.issue(
+            self.factory_id, new_grantee, list(actions), ttl_seconds=ttl_seconds
+        )
         new_cap = telescript.verify(new_token)
         if sealed:
             self._sealed.add(new_cap.nonce)
-        self._delegation_log.append({
-            "op": "derive", "from_nonce": cap.nonce, "grantee": new_grantee,
-            "actions": list(actions), "sealed": sealed,
-            "nonce": new_cap.nonce,
-        })
+        self._delegation_log.append(
+            {
+                "op": "derive",
+                "from_nonce": cap.nonce,
+                "grantee": new_grantee,
+                "actions": list(actions),
+                "sealed": sealed,
+                "nonce": new_cap.nonce,
+            }
+        )
         return new_token
 
     def seal(self, token: str) -> None:
@@ -203,14 +233,19 @@ class Meter:
     """Wraps a capability token with an invocation budget. Each successful
     guarded call spends one unit; at zero the meter refuses."""
 
-    def __init__(self, token: str, budget: int,
-                 expected_grantee: Optional[str] = None,
-                 revocations: Optional[telescript.RevocationList] = None):
+    def __init__(
+        self,
+        token: str,
+        budget: int,
+        expected_grantee: Optional[str] = None,
+        revocations: Optional[telescript.RevocationList] = None,
+    ):
         if budget < 0:
             raise ValueError("budget must be non-negative")
         # Verify now: a meter over an invalid token is refused at birth.
-        telescript.verify(token, expected_grantee=expected_grantee,
-                          revocations=revocations)
+        telescript.verify(
+            token, expected_grantee=expected_grantee, revocations=revocations
+        )
         self._token = token
         self._budget = budget
         self._grantee = expected_grantee
@@ -220,27 +255,44 @@ class Meter:
     def remaining(self) -> int:
         return self._budget
 
-    def call(self, action: str, fn: Callable[..., Any], *args: Any,
-             **kwargs: Any) -> Any:
+    def call(
+        self, action: str, fn: Callable[..., Any], *args: Any, **kwargs: Any
+    ) -> Any:
         if self._budget <= 0:
             raise MeterExhausted("meter budget is spent")
         result = telescript.guarded_call(
-            self._token, action, fn, *args,
-            expected_grantee=self._grantee, revocations=self._revocations,
-            **kwargs)
+            self._token,
+            action,
+            fn,
+            *args,
+            expected_grantee=self._grantee,
+            revocations=self._revocations,
+            **kwargs,
+        )
         self._budget -= 1
         return result
 
 
-def invoke(token: str, action: str, fn: Callable[..., Any], *args: Any,
-           expected_grantee: Optional[str] = None,
-           revocations: Optional[telescript.RevocationList] = None,
-           **kwargs: Any) -> Any:
+def invoke(
+    token: str,
+    action: str,
+    fn: Callable[..., Any],
+    *args: Any,
+    expected_grantee: Optional[str] = None,
+    revocations: Optional[telescript.RevocationList] = None,
+    **kwargs: Any,
+) -> Any:
     """Invoke through a capability: verify, check the action, execute —
     or refuse. (Delegates to :func:`telescript.guarded_call`.)"""
     return telescript.guarded_call(
-        token, action, fn, *args, expected_grantee=expected_grantee,
-        revocations=revocations, **kwargs)
+        token,
+        action,
+        fn,
+        *args,
+        expected_grantee=expected_grantee,
+        revocations=revocations,
+        **kwargs,
+    )
 
 
 __all__ = [

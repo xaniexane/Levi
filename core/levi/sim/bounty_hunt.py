@@ -136,8 +136,7 @@ def run(seed: int | None = None) -> int:
                 [
                     f
                     for f in ordered
-                    if f.kind
-                    in ("archived_url", "js_endpoint", "possible_exposure")
+                    if f.kind in ("archived_url", "js_endpoint", "possible_exposure")
                 ],
             ),
         ]

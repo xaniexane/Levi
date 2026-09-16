@@ -27,8 +27,11 @@ def build_parser() -> argparse.ArgumentParser:
     r = sub.add_parser("rate", help="record a rating for a note")
     r.add_argument("--note", required=True, help="note id")
     r.add_argument("--rater", required=True, help="rater id")
-    r.add_argument("--value", required=True,
-                   help="+1 helpful, -1 not helpful (any float in [-1,1])")
+    r.add_argument(
+        "--value",
+        required=True,
+        help="+1 helpful, -1 not helpful (any float in [-1,1])",
+    )
 
     sub.add_parser("notes", help="list notes with bridging scores and status")
 
@@ -53,8 +56,10 @@ def main(argv=None) -> int:
             try:
                 value = float(args.value)
             except ValueError:
-                print(f"bridging: --value must be a number in [-1,1], got {args.value!r}",
-                      file=sys.stderr)
+                print(
+                    f"bridging: --value must be a number in [-1,1], got {args.value!r}",
+                    file=sys.stderr,
+                )
                 return 2
             store.add_rating(args.note, args.rater, value)
             print(f"rated: {args.rater} -> [{args.note[:8]}] = {value:+g}")
@@ -66,16 +71,21 @@ def main(argv=None) -> int:
                 print(f"bridging: unknown note {args.note_id!r}", file=sys.stderr)
                 return 1
             from levi.bridging.bridging import note_status
+
             st = note_status(args.note_id, fit, store.ratings)
             note = store.notes[args.note_id]
             print(f"note [{note.id}]: {note.text}")
             print(f"  status={st['status']}  helpfulness(β)={st['helpfulness']:+.4f}")
-            print(f"  note factor δ={fit.note_factor.get(note.id, 0.0):+.4f} "
-                  f"(factional lean; ~0 = cross-camp)")
+            print(
+                f"  note factor δ={fit.note_factor.get(note.id, 0.0):+.4f} "
+                f"(factional lean; ~0 = cross-camp)"
+            )
             print(f"  cross-camp support: {st['cross_camp_support']}")
             print("  raters (latent camp γ):")
             for rater, val in sorted(store.ratings[note.id].items()):
-                print(f"    {rater:16s} rating={val:+.1f}  γ={fit.rater_factor.get(rater, 0.0):+.4f}")
+                print(
+                    f"    {rater:16s} rating={val:+.1f}  γ={fit.rater_factor.get(rater, 0.0):+.4f}"
+                )
         else:
             build_parser().print_help()
             return 2

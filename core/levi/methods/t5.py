@@ -152,8 +152,13 @@ class Pipeline:
                     check_error = "check returned False"
                 if not passed:
                     cards.append(
-                        Card(stage=stage.name, input_repr=_short(value),
-                             output_repr="", ok=False, error=check_error)
+                        Card(
+                            stage=stage.name,
+                            input_repr=_short(value),
+                            output_repr="",
+                            ok=False,
+                            error=check_error,
+                        )
                     )
                     raise StageCheckError(
                         f"pipeline {self.name!r}: stage {stage.name!r} rejected "
@@ -166,9 +171,14 @@ class Pipeline:
             except Exception as exc:  # noqa: BLE001 — stage errors get attribution
                 elapsed = time.monotonic() - started
                 cards.append(
-                    Card(stage=stage.name, input_repr=_short(value),
-                         output_repr="", ok=False,
-                         error=f"{type(exc).__name__}: {exc}", elapsed=elapsed)
+                    Card(
+                        stage=stage.name,
+                        input_repr=_short(value),
+                        output_repr="",
+                        ok=False,
+                        error=f"{type(exc).__name__}: {exc}",
+                        elapsed=elapsed,
+                    )
                 )
                 raise StageRunError(
                     f"pipeline {self.name!r}: stage {stage.name!r} failed: {exc}",
@@ -177,8 +187,13 @@ class Pipeline:
                 ) from exc
             elapsed = time.monotonic() - started
             cards.append(
-                Card(stage=stage.name, input_repr=_short(value),
-                     output_repr=_short(out), ok=True, elapsed=elapsed)
+                Card(
+                    stage=stage.name,
+                    input_repr=_short(value),
+                    output_repr=_short(out),
+                    ok=True,
+                    elapsed=elapsed,
+                )
             )
             value = out
         return RunReport(pipeline=self.name, final=value, cards=cards, ok=True)

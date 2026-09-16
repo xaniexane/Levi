@@ -26,7 +26,7 @@ unmarked cell is *unknown*, never assumed consistent.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Optional
 
 __all__ = [
@@ -149,7 +149,7 @@ class ACH:
         p = sum(1 for m in marks if m == CONSISTENT) / len(marks)
         if p in (0.0, 1.0):
             return 0.0
-        return (-p * log2(p) - (1 - p) * log2(1 - p))
+        return -p * log2(p) - (1 - p) * log2(1 - p)
 
     def flags(self) -> list[dict]:
         """Inconsistency flags: problems the matrix itself reveals."""
@@ -157,21 +157,37 @@ class ACH:
         for e in self.evidence:
             marks = [self._marks.get((e, h)) for h in self.hypotheses]
             known = [m for m in marks if m is not None]
-            if known and all(m == INCONSISTENT for m in known) and len(known) == len(self.hypotheses):
-                out.append({"type": "unexplained",
-                            "evidence": e,
-                            "message": f"{e!r} is inconsistent with EVERY hypothesis — "
-                                       "the hypothesis set may be incomplete"})
+            if (
+                known
+                and all(m == INCONSISTENT for m in known)
+                and len(known) == len(self.hypotheses)
+            ):
+                out.append(
+                    {
+                        "type": "unexplained",
+                        "evidence": e,
+                        "message": f"{e!r} is inconsistent with EVERY hypothesis — "
+                        "the hypothesis set may be incomplete",
+                    }
+                )
             elif known and len(set(known)) == 1 and len(known) == len(self.hypotheses):
-                out.append({"type": "non_diagnostic",
-                            "evidence": e,
-                            "message": f"{e!r} bears the same way on all hypotheses — "
-                                       "it cannot discriminate between them"})
+                out.append(
+                    {
+                        "type": "non_diagnostic",
+                        "evidence": e,
+                        "message": f"{e!r} bears the same way on all hypotheses — "
+                        "it cannot discriminate between them",
+                    }
+                )
         for h in self.hypotheses:
             if not any((e, h) in self._marks for e in self.evidence):
-                out.append({"type": "unevaluated",
-                            "hypothesis": h,
-                            "message": f"{h!r} has no evidence marked against it at all"})
+                out.append(
+                    {
+                        "type": "unevaluated",
+                        "hypothesis": h,
+                        "message": f"{h!r} has no evidence marked against it at all",
+                    }
+                )
         return out
 
     # -- sensitivity: what would change your mind? ---------------------------------
@@ -187,11 +203,13 @@ class ACH:
         out: list[dict] = []
         for e in self.evidence:
             alt = self._score(exclude_evidence=e)[0].hypothesis
-            out.append({
-                "evidence": e,
-                "leader_without_it": alt,
-                "flips_leader": alt != base_leader,
-            })
+            out.append(
+                {
+                    "evidence": e,
+                    "leader_without_it": alt,
+                    "flips_leader": alt != base_leader,
+                }
+            )
         return out
 
     def argue_against(self, hypothesis: Optional[str] = None) -> dict:
@@ -200,10 +218,10 @@ class ACH:
         target = hypothesis or self.leader().hypothesis
         if target not in self.hypotheses:
             raise ValueError(f"unknown hypothesis: {target!r}")
-        inconsistent = [e for e in self.evidence
-                        if self._marks.get((e, target)) == INCONSISTENT]
-        unresolved = [e for e in self.evidence
-                      if (e, target) not in self._marks]
+        inconsistent = [
+            e for e in self.evidence if self._marks.get((e, target)) == INCONSISTENT
+        ]
+        unresolved = [e for e in self.evidence if (e, target) not in self._marks]
         return {
             "hypothesis": target,
             "inconsistent_evidence": inconsistent,

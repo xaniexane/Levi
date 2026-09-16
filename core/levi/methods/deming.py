@@ -26,7 +26,6 @@ theories, and unknown psychology risks are rejected with ValueError.
 from __future__ import annotations
 
 from math import sqrt
-from typing import Optional
 
 __all__ = ["ProfoundKnowledge", "PSYCHOLOGY_RISKS", "MIN_POINTS"]
 
@@ -71,8 +70,10 @@ class ProfoundKnowledge:
         metric = self._metric_name(metric)
         if not theory.strip() or not prediction.strip():
             raise ValueError("theory and prediction must both be non-empty")
-        self._theories[metric] = {"theory": theory.strip(),
-                                  "prediction": prediction.strip()}
+        self._theories[metric] = {
+            "theory": theory.strip(),
+            "prediction": prediction.strip(),
+        }
 
     def link(self, metric_a: str, metric_b: str, relation: str) -> None:
         """System lens: these metrics move in a shared system; say how."""
@@ -88,7 +89,9 @@ class ProfoundKnowledge:
         """Psychology lens: name the motivational failure mode to watch for."""
         metric = self._metric_name(metric)
         if risk not in PSYCHOLOGY_RISKS:
-            raise ValueError(f"unknown risk {risk!r}; known: {sorted(PSYCHOLOGY_RISKS)}")
+            raise ValueError(
+                f"unknown risk {risk!r}; known: {sorted(PSYCHOLOGY_RISKS)}"
+            )
         self._watches.setdefault(metric, [])
         if risk not in self._watches[metric]:
             self._watches[metric].append(risk)
@@ -97,54 +100,77 @@ class ProfoundKnowledge:
     def _variation_lens(self, metric: str) -> dict:
         series = self._series.get(metric, [])
         if len(series) < MIN_POINTS:
-            return {"verdict": "insufficient_data",
-                    "detail": f"Only {len(series)} observation(s); need {MIN_POINTS}+ "
-                              "before distinguishing signal from noise. Do not judge this metric yet."}
+            return {
+                "verdict": "insufficient_data",
+                "detail": f"Only {len(series)} observation(s); need {MIN_POINTS}+ "
+                "before distinguishing signal from noise. Do not judge this metric yet.",
+            }
         baseline, latest = series[:-1], series[-1]
         mean = sum(baseline) / len(baseline)
         var = sum((x - mean) ** 2 for x in baseline) / len(baseline)
         sd = sqrt(var)
         if sd == 0:
-            return {"verdict": "no_variation",
-                    "detail": "Baseline is perfectly flat; any movement is a change worth investigating."}
+            return {
+                "verdict": "no_variation",
+                "detail": "Baseline is perfectly flat; any movement is a change worth investigating.",
+            }
         z = abs(latest - mean) / sd
         if z >= 2:
-            return {"verdict": "possible_special_cause",
-                    "detail": f"Latest ({latest}) is {z:.1f} SD from the baseline mean "
-                              f"({mean:.2f}) — investigate for a special cause before acting."}
-        return {"verdict": "common_cause",
-                "detail": f"Latest ({latest}) sits within normal variation of the baseline "
-                          f"(mean {mean:.2f}, SD {sd:.2f}). Do not tamper — reacting to noise makes it worse."}
+            return {
+                "verdict": "possible_special_cause",
+                "detail": f"Latest ({latest}) is {z:.1f} SD from the baseline mean "
+                f"({mean:.2f}) — investigate for a special cause before acting.",
+            }
+        return {
+            "verdict": "common_cause",
+            "detail": f"Latest ({latest}) sits within normal variation of the baseline "
+            f"(mean {mean:.2f}, SD {sd:.2f}). Do not tamper — reacting to noise makes it worse.",
+        }
 
     def _system_lens(self, metric: str) -> dict:
-        linked = [(b if a == metric else a, rel) for a, b, rel in self._links
-                  if a == metric or b == metric]
-        return {"linked_metrics": linked,
-                "detail": ("No system links recorded — this metric is being read in isolation, "
-                           "which is exactly how systems get suboptimized."
-                           if not linked else
-                           f"Read with: {', '.join(f'{m} ({r})' for m, r in linked)}.")}
+        linked = [
+            (b if a == metric else a, rel)
+            for a, b, rel in self._links
+            if a == metric or b == metric
+        ]
+        return {
+            "linked_metrics": linked,
+            "detail": (
+                "No system links recorded — this metric is being read in isolation, "
+                "which is exactly how systems get suboptimized."
+                if not linked
+                else f"Read with: {', '.join(f'{m} ({r})' for m, r in linked)}."
+            ),
+        }
 
     def _knowledge_lens(self, metric: str) -> dict:
         theory = self._theories.get(metric)
         if theory is None:
-            return {"verdict": "no_theory",
-                    "detail": "No theory recorded. Deming's rule: no knowledge without theory — "
-                              "state what you believe and what you predict before intervening."}
+            return {
+                "verdict": "no_theory",
+                "detail": "No theory recorded. Deming's rule: no knowledge without theory — "
+                "state what you believe and what you predict before intervening.",
+            }
         series = self._series.get(metric, [])
-        return {"verdict": "theory_recorded",
-                "theory": theory["theory"],
-                "prediction": theory["prediction"],
-                "detail": f"Theory: {theory['theory']} Prediction under test: {theory['prediction']} "
-                          f"({len(series)} observations so far)."}
+        return {
+            "verdict": "theory_recorded",
+            "theory": theory["theory"],
+            "prediction": theory["prediction"],
+            "detail": f"Theory: {theory['theory']} Prediction under test: {theory['prediction']} "
+            f"({len(series)} observations so far).",
+        }
 
     def _psychology_lens(self, metric: str) -> dict:
         risks = self._watches.get(metric, [])
-        return {"watched_risks": risks,
-                "detail": ("No psychology risks named — measurement changes the measured; "
-                           "name the failure mode with watch_for()."
-                           if not risks else
-                           " ".join(f"[{r}] {PSYCHOLOGY_RISKS[r]}" for r in risks))}
+        return {
+            "watched_risks": risks,
+            "detail": (
+                "No psychology risks named — measurement changes the measured; "
+                "name the failure mode with watch_for()."
+                if not risks
+                else " ".join(f"[{r}] {PSYCHOLOGY_RISKS[r]}" for r in risks)
+            ),
+        }
 
     def diagnose(self, metric: str) -> dict:
         """Run all four lenses over one metric. The power is the interaction."""
@@ -156,27 +182,45 @@ class ProfoundKnowledge:
         knowledge = self._knowledge_lens(metric)
         psychology = self._psychology_lens(metric)
         interaction = self._interaction_note(variation, system, knowledge, psychology)
-        return {"metric": metric,
-                "observations": len(self._series[metric]),
-                "variation": variation,
-                "system": system,
-                "knowledge": knowledge,
-                "psychology": psychology,
-                "interaction": interaction}
+        return {
+            "metric": metric,
+            "observations": len(self._series[metric]),
+            "variation": variation,
+            "system": system,
+            "knowledge": knowledge,
+            "psychology": psychology,
+            "interaction": interaction,
+        }
 
     @staticmethod
-    def _interaction_note(variation: dict, system: dict,
-                          knowledge: dict, psychology: dict) -> str:
+    def _interaction_note(
+        variation: dict, system: dict, knowledge: dict, psychology: dict
+    ) -> str:
         notes = []
         if variation["verdict"] == "common_cause":
-            notes.append("Variation says: don't tamper. Any intervention now fights noise, not cause.")
+            notes.append(
+                "Variation says: don't tamper. Any intervention now fights noise, not cause."
+            )
         if variation["verdict"] == "possible_special_cause":
-            notes.append("Variation says: possible special cause — but check the system lens first: "
-                         "what moved *with* it?")
+            notes.append(
+                "Variation says: possible special cause — but check the system lens first: "
+                "what moved *with* it?"
+            )
         if knowledge["verdict"] == "no_theory":
-            notes.append("Knowledge says: you have no theory, so you cannot learn from what happens next. "
-                         "Write the prediction down first.")
-        if "gaming" in psychology["watched_risks"] or "streak_punishment" in psychology["watched_risks"]:
-            notes.append("Psychology says: the measurement itself may be producing the behavior — "
-                         "fix the incentive before the process.")
-        return " ".join(notes) if notes else "All four lenses quiet: hold course, keep observing."
+            notes.append(
+                "Knowledge says: you have no theory, so you cannot learn from what happens next. "
+                "Write the prediction down first."
+            )
+        if (
+            "gaming" in psychology["watched_risks"]
+            or "streak_punishment" in psychology["watched_risks"]
+        ):
+            notes.append(
+                "Psychology says: the measurement itself may be producing the behavior — "
+                "fix the incentive before the process."
+            )
+        return (
+            " ".join(notes)
+            if notes
+            else "All four lenses quiet: hold course, keep observing."
+        )

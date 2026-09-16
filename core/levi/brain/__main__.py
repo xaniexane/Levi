@@ -14,8 +14,13 @@ from pathlib import Path
 
 
 def _root(brain_dir: str | None) -> Path:
-    return Path(brain_dir) if brain_dir else Path(
-        os.environ.get("LEVI_BRAIN_DIR") or os.path.expanduser("~/.levi/brain"))
+    return (
+        Path(brain_dir)
+        if brain_dir
+        else Path(
+            os.environ.get("LEVI_BRAIN_DIR") or os.path.expanduser("~/.levi/brain")
+        )
+    )
 
 
 def _corpus(d):
@@ -47,16 +52,19 @@ def cmd(a) -> int:
             for k, v in sorted(by_kind.items()):
                 print(f"  {k}: {v}")
         elif name == "table_upsert":
-            r = _table(a.brain_dir).upsert(a.domain, a.key, a.value,
-                                           source=a.source)
+            r = _table(a.brain_dir).upsert(a.domain, a.key, a.value, source=a.source)
             print(f"upserted [{r.domain}] {r.key}")
         elif name == "table_search":
-            for r in _table(a.brain_dir).search(a.query or "", domain=a.domain)[:a.limit]:
+            for r in _table(a.brain_dir).search(a.query or "", domain=a.domain)[
+                : a.limit
+            ]:
                 print(f"[{r.domain}] {r.key}: {r.value[:160]}")
         elif name == "export":
             from levi.brain.record import export_markdown
 
-            print(f"exported brain to {export_markdown(Path(a.out) if a.out else None)}")
+            print(
+                f"exported brain to {export_markdown(Path(a.out) if a.out else None)}"
+            )
     except ValueError as exc:
         print(f"refused: {exc}", file=sys.stderr)
         return 1
@@ -64,31 +72,42 @@ def cmd(a) -> int:
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(prog="levi.brain",
-                                 description="LEVI indexed second brain")
-    ap.add_argument("--brain-dir", default=None,
-                    help="default ~/.levi/brain or LEVI_BRAIN_DIR")
+    ap = argparse.ArgumentParser(
+        prog="levi.brain", description="LEVI indexed second brain"
+    )
+    ap.add_argument(
+        "--brain-dir", default=None, help="default ~/.levi/brain or LEVI_BRAIN_DIR"
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    p = sub.add_parser("corpus-add"); p.set_defaults(func=cmd)
-    p.add_argument("text"); p.add_argument("--kind", default="OBSERVED")
+    p = sub.add_parser("corpus-add")
+    p.set_defaults(func=cmd)
+    p.add_argument("text")
+    p.add_argument("--kind", default="OBSERVED")
     p.add_argument("--source", default="")
 
-    p = sub.add_parser("corpus-search"); p.set_defaults(func=cmd)
-    p.add_argument("query"); p.add_argument("--limit", type=int, default=20)
+    p = sub.add_parser("corpus-search")
+    p.set_defaults(func=cmd)
+    p.add_argument("query")
+    p.add_argument("--limit", type=int, default=20)
 
     sub.add_parser("corpus-stats").set_defaults(func=cmd)
 
-    p = sub.add_parser("table-upsert"); p.set_defaults(func=cmd)
-    p.add_argument("domain"); p.add_argument("key"); p.add_argument("value")
+    p = sub.add_parser("table-upsert")
+    p.set_defaults(func=cmd)
+    p.add_argument("domain")
+    p.add_argument("key")
+    p.add_argument("value")
     p.add_argument("--source", default="")
 
-    p = sub.add_parser("table-search"); p.set_defaults(func=cmd)
+    p = sub.add_parser("table-search")
+    p.set_defaults(func=cmd)
     p.add_argument("query", nargs="?", default="")
     p.add_argument("--domain", default=None)
     p.add_argument("--limit", type=int, default=20)
 
-    p = sub.add_parser("export"); p.set_defaults(func=cmd)
+    p = sub.add_parser("export")
+    p.set_defaults(func=cmd)
     p.add_argument("--out", default=None)
 
     args = ap.parse_args(argv)

@@ -54,8 +54,9 @@ def load_registry() -> dict:
 
 def save_registry(data: dict) -> None:
     _data_dir().mkdir(parents=True, exist_ok=True)
-    registry_path().write_text(json.dumps(data, ensure_ascii=False, indent=1),
-                               encoding="utf-8")
+    registry_path().write_text(
+        json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8"
+    )
 
 
 def _slug(text: str, limit: int = 6) -> str:
@@ -64,52 +65,80 @@ def _slug(text: str, limit: int = 6) -> str:
     return "".join(w[:4] for w in words if w not in stop)[:limit] or "concept"
 
 
-def extract_concepts(day: int, block: int, track: str, entry: dict,
-                     research: dict, session_n: int) -> list[dict]:
+def extract_concepts(
+    day: int, block: int, track: str, entry: dict, research: dict, session_n: int
+) -> list[dict]:
     """Concepts taught by one session: objectives + researched vocabulary."""
     from levi.academy.synthesize import content_words
+
     concepts: list[dict] = []
     for i, obj in enumerate(entry["objectives"], 1):
         cid = f"{track}D{day:02d}B{block}O{i}"
-        concepts.append({
-            "id": cid,
-            "name": obj,
-            "kind": "objective",
-            "track": track, "day": day, "block": block,
-            "session": session_n,
-            "content_words": content_words(obj),
-            "reviews": [{"due_session": session_n + off, "done": False,
-                         "score": None, "forgotten": False}
-                        for off in REVIEW_OFFSETS
-                        if session_n + off <= 120],
-            "scores": [],
-            "strength": 0.8,
-            "status": "active",
-        })
+        concepts.append(
+            {
+                "id": cid,
+                "name": obj,
+                "kind": "objective",
+                "track": track,
+                "day": day,
+                "block": block,
+                "session": session_n,
+                "content_words": content_words(obj),
+                "reviews": [
+                    {
+                        "due_session": session_n + off,
+                        "done": False,
+                        "score": None,
+                        "forgotten": False,
+                    }
+                    for off in REVIEW_OFFSETS
+                    if session_n + off <= 120
+                ],
+                "scores": [],
+                "strength": 0.8,
+                "status": "active",
+            }
+        )
     for i, term in enumerate(research.get("key_terms", [])[:6], 1):
         cid = f"{track}D{day:02d}B{block}T{i}"
-        concepts.append({
-            "id": cid,
-            "name": term,
-            "kind": "term",
-            "track": track, "day": day, "block": block,
-            "session": session_n,
-            "content_words": content_words(term),
-            "reviews": [{"due_session": session_n + off, "done": False,
-                         "score": None, "forgotten": False}
-                        for off in REVIEW_OFFSETS
-                        if session_n + off <= 120],
-            "scores": [],
-            "strength": 0.8,
-            "status": "active",
-        })
+        concepts.append(
+            {
+                "id": cid,
+                "name": term,
+                "kind": "term",
+                "track": track,
+                "day": day,
+                "block": block,
+                "session": session_n,
+                "content_words": content_words(term),
+                "reviews": [
+                    {
+                        "due_session": session_n + off,
+                        "done": False,
+                        "score": None,
+                        "forgotten": False,
+                    }
+                    for off in REVIEW_OFFSETS
+                    if session_n + off <= 120
+                ],
+                "scores": [],
+                "strength": 0.8,
+                "status": "active",
+            }
+        )
     return concepts
 
 
-def register_session(day: int, block: int, track: str, entry: dict,
-                     research: dict, session_n: int,
-                     mastery_score: float = 1.0,
-                     waived: bool = False) -> int:
+def register_session(
+    day: int,
+    block: int,
+    track: str,
+    entry: dict,
+    research: dict,
+    session_n: int,
+    mastery_score: float = 1.0,
+    waived: bool = False,
+) -> int:
     """Register a session's concepts POST-mastery. Returns count added."""
     data = load_registry()
     added = 0
@@ -125,8 +154,11 @@ def register_session(day: int, block: int, track: str, entry: dict,
     return added
 
 
-def due_concepts(session_n: int, limit: int = MAX_REVIEWS_PER_SESSION,
-                 tracks: tuple[str, ...] | None = None) -> list[dict]:
+def due_concepts(
+    session_n: int,
+    limit: int = MAX_REVIEWS_PER_SESSION,
+    tracks: tuple[str, ...] | None = None,
+) -> list[dict]:
     """Concepts with a pending review due at this session.
 
     Weakest and most overdue first — forgetting gets attention before
@@ -156,8 +188,11 @@ def due_concepts(session_n: int, limit: int = MAX_REVIEWS_PER_SESSION,
 def sample_weakest(track: str, k: int) -> list[dict]:
     """Weakest active concepts of a track — for cumulative assessments."""
     data = load_registry()
-    pool = [c for c in data["concepts"].values()
-            if c.get("status") == "active" and c["track"] == track]
+    pool = [
+        c
+        for c in data["concepts"].values()
+        if c.get("status") == "active" and c["track"] == track
+    ]
     pool.sort(key=lambda c: (c["strength"], c["session"]))
     return pool[:k]
 
@@ -169,8 +204,11 @@ def recent_concepts(exclude_track: str, k: int = 3) -> list[dict]:
     new material explicitly revisits prior cross-track concepts.
     """
     data = load_registry()
-    pool = [c for c in data["concepts"].values()
-            if c.get("status") == "active" and c["track"] != exclude_track]
+    pool = [
+        c
+        for c in data["concepts"].values()
+        if c.get("status") == "active" and c["track"] != exclude_track
+    ]
     pool.sort(key=lambda c: c["session"], reverse=True)
     seen: set[str] = set()
     out = []
@@ -195,11 +233,15 @@ def interleave_concepts(session_n: int, k: int = 2) -> list[dict]:
         return due
     have = {c["id"] for c in due}
     data = load_registry()
-    pool = [c for c in data["concepts"].values()
-            if c.get("status") == "active" and c["track"] in ("A", "B", "C")
-            and c["id"] not in have]
+    pool = [
+        c
+        for c in data["concepts"].values()
+        if c.get("status") == "active"
+        and c["track"] in ("A", "B", "C")
+        and c["id"] not in have
+    ]
     pool.sort(key=lambda c: (c["strength"], c["session"]))
-    return due + pool[:k - len(due)]
+    return due + pool[: k - len(due)]
 
 
 def record_review(concept_id: str, session_n: int, score: float) -> dict:
@@ -223,11 +265,18 @@ def record_review(concept_id: str, session_n: int, score: float) -> dict:
     if forgotten:
         # re-queue: an extra review 4 sessions out (if inside the program)
         due = session_n + 4
-        if due <= 120 and not any(r["due_session"] == due and not r["done"]
-                                  for r in c["reviews"]):
-            c["reviews"].append({"due_session": due, "done": False,
-                                 "score": None, "forgotten": False,
-                                 "requeue": True})
+        if due <= 120 and not any(
+            r["due_session"] == due and not r["done"] for r in c["reviews"]
+        ):
+            c["reviews"].append(
+                {
+                    "due_session": due,
+                    "done": False,
+                    "score": None,
+                    "forgotten": False,
+                    "requeue": True,
+                }
+            )
             c["reviews"].sort(key=lambda r: r["due_session"])
     save_registry(data)
     return {"ok": True, "forgotten": forgotten, "strength": c["strength"]}
@@ -243,13 +292,22 @@ def retention_stats() -> dict:
     data = load_registry()
     stats: dict[str, dict] = {}
     for track in ("A", "B", "C", "S"):
-        pool = [c for c in data["concepts"].values()
-                if c.get("status") == "active" and c["track"] == track]
+        pool = [
+            c
+            for c in data["concepts"].values()
+            if c.get("status") == "active" and c["track"] == track
+        ]
         reviewed = [c for c in pool if c["scores"]]
-        hit = (round(sum(c["scores"][-1] for c in reviewed) / len(reviewed), 3)
-               if reviewed else 0.0)
-        stats[track] = {"concepts": len(pool), "reviewed": len(reviewed),
-                        "hit_rate": hit}
+        hit = (
+            round(sum(c["scores"][-1] for c in reviewed) / len(reviewed), 3)
+            if reviewed
+            else 0.0
+        )
+        stats[track] = {
+            "concepts": len(pool),
+            "reviewed": len(reviewed),
+            "hit_rate": hit,
+        }
     return stats
 
 
@@ -257,6 +315,7 @@ def retention_stats() -> dict:
 def _memory_records() -> list[tuple[str, str]]:
     """Durable memory as (text, session_id) pairs: corpus + journal."""
     from levi.academy import corpus_ingest as aci
+
     records: list[tuple[str, str]] = []
     cpath = aci.corpus_path()
     if cpath.exists():
@@ -273,9 +332,13 @@ def _memory_records() -> list[tuple[str, str]]:
                 records.append((rec.get("text", ""), sid))
     try:
         from levi.growth import journal as gjournal
+
         for e in gjournal.read_entries(limit=400):
-            if e.get("kind") not in ("academy-session", "academy-graduation",
-                                     "academy-remedial"):
+            if e.get("kind") not in (
+                "academy-session",
+                "academy-graduation",
+                "academy-remedial",
+            ):
                 continue
             text = f"{e.get('title', '')} {e.get('summary', '')}"
             sid = f"d{e.get('day', 0)}b{e.get('block', 0)}"
@@ -285,8 +348,7 @@ def _memory_records() -> list[tuple[str, str]]:
     return records
 
 
-def drill_concept(concept: dict, session_n: int,
-                  closed_book: bool = False) -> dict:
+def drill_concept(concept: dict, session_n: int, closed_book: bool = False) -> dict:
     """One retrieval drill: can durable memory reconstruct this concept?
 
     Never re-reading. The drill poses a retrieval question and scores how
@@ -296,8 +358,12 @@ def drill_concept(concept: dict, session_n: int,
     """
     words = set(concept.get("content_words", []))
     if not words:
-        return {"concept_id": concept["id"], "score": 0.0,
-                "question": "", "recalled": ""}
+        return {
+            "concept_id": concept["id"],
+            "score": 0.0,
+            "question": "",
+            "recalled": "",
+        }
     own_sid = f"d{concept['day']}b{concept['block']}"
     best_text, best_overlap = "", 0
     elaboration = 0
@@ -314,10 +380,17 @@ def drill_concept(concept: dict, session_n: int,
     elab = min(1.0, elaboration / 3)
     hit = 1.0 if best_text else 0.0
     score = round(0.5 * recall + 0.3 * elab + 0.2 * hit, 3)
-    question = (f"Retrieve from memory: '{concept['name']}' — state its "
-                f"operational core and the evidence or procedure behind it.")
-    return {"concept_id": concept["id"], "score": score, "question": question,
-            "recalled": best_text[:300], "closed_book": closed_book}
+    question = (
+        f"Retrieve from memory: '{concept['name']}' — state its "
+        f"operational core and the evidence or procedure behind it."
+    )
+    return {
+        "concept_id": concept["id"],
+        "score": score,
+        "question": question,
+        "recalled": best_text[:300],
+        "closed_book": closed_book,
+    }
 
 
 def run_reviews(session_n: int, assessment: bool = False) -> dict:
@@ -333,13 +406,23 @@ def run_reviews(session_n: int, assessment: bool = False) -> dict:
         closed_book = idx > 0
         drill = drill_concept(c, session_n, closed_book=closed_book)
         upd = record_review(c["id"], session_n, drill["score"])
-        results.append({"concept_id": c["id"], "name": c["name"],
-                        "track": c["track"], "score": drill["score"],
-                        "closed_book": closed_book,
-                        "forgotten": upd.get("forgotten", False)})
+        results.append(
+            {
+                "concept_id": c["id"],
+                "name": c["name"],
+                "track": c["track"],
+                "score": drill["score"],
+                "closed_book": closed_book,
+                "forgotten": upd.get("forgotten", False),
+            }
+        )
         if upd.get("forgotten"):
             forgotten.append(c["id"])
     mean = round(sum(r["score"] for r in results) / len(results), 3) if results else 1.0
-    return {"reviewed": len(results), "mean_score": mean,
-            "forgotten": forgotten, "results": results,
-            "assessment": assessment}
+    return {
+        "reviewed": len(results),
+        "mean_score": mean,
+        "forgotten": forgotten,
+        "results": results,
+        "assessment": assessment,
+    }

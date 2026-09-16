@@ -31,8 +31,8 @@ class TrialGrant:
     pack: str
     features: List[str]
     issued_at: float
-    expires_at: Optional[float]          # None = no time bound
-    max_uses: Optional[int]              # None = no use bound
+    expires_at: Optional[float]  # None = no time bound
+    max_uses: Optional[int]  # None = no use bound
     uses: int = 0
     revoked: bool = False
     revoke_reason: str = ""
@@ -69,6 +69,7 @@ class TrialGrant:
 
 def _iso(ts: float) -> str:
     import datetime
+
     return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).isoformat()
 
 
@@ -92,8 +93,9 @@ class GrantStore:
     def _save(self, grants: Dict[str, TrialGrant]) -> None:
         tmp = self._grants_file.with_suffix(".tmp")
         tmp.write_text(
-            json.dumps({gid: asdict(g) for gid, g in grants.items()},
-                       indent=1, sort_keys=True),
+            json.dumps(
+                {gid: asdict(g) for gid, g in grants.items()}, indent=1, sort_keys=True
+            ),
             encoding="utf-8",
         )
         os.chmod(tmp, 0o600)
@@ -105,7 +107,8 @@ class GrantStore:
         payload = dict(entry)
         payload["prev_hash"] = prev
         digest = hashlib.sha256(
-            json.dumps(payload, sort_keys=True).encode("utf-8")).hexdigest()
+            json.dumps(payload, sort_keys=True).encode("utf-8")
+        ).hexdigest()
         payload["hash"] = digest
         with open(self._ledger_file, "a", encoding="utf-8") as fh:
             fh.write(json.dumps(payload, sort_keys=True) + "\n")
@@ -137,11 +140,15 @@ class GrantStore:
         return out
 
     # -- lifecycle --------------------------------------------------------
-    def issue(self, pack: str, features: List[str],
-              days: Optional[float] = None,
-              max_uses: Optional[int] = None,
-              note: str = "",
-              now: Optional[float] = None) -> TrialGrant:
+    def issue(
+        self,
+        pack: str,
+        features: List[str],
+        days: Optional[float] = None,
+        max_uses: Optional[int] = None,
+        note: str = "",
+        now: Optional[float] = None,
+    ) -> TrialGrant:
         if not pack or not pack.strip():
             raise SharewareError("pack name is required")
         features = [f.strip() for f in features if f and f.strip()]
@@ -150,7 +157,8 @@ class GrantStore:
         if days is None and max_uses is None:
             raise SharewareError(
                 "a grant needs a bound: days, max_uses, or both "
-                "(an unbounded trial is not a trial)")
+                "(an unbounded trial is not a trial)"
+            )
         if days is not None and days <= 0:
             raise SharewareError("days must be positive")
         if max_uses is not None and (not isinstance(max_uses, int) or max_uses <= 0):
@@ -168,12 +176,18 @@ class GrantStore:
         grants = self._load()
         grants[grant.id] = grant
         self._save(grants)
-        self._ledger_append({
-            "type": "issue", "grant_id": grant.id, "pack": grant.pack,
-            "features": grant.features,
-            "expires_at": grant.expires_at, "max_uses": grant.max_uses,
-            "at": now, "terms_version": TERMS_VERSION,
-        })
+        self._ledger_append(
+            {
+                "type": "issue",
+                "grant_id": grant.id,
+                "pack": grant.pack,
+                "features": grant.features,
+                "expires_at": grant.expires_at,
+                "max_uses": grant.max_uses,
+                "at": now,
+                "terms_version": TERMS_VERSION,
+            }
+        )
         return grant
 
     def get(self, grant_id: str) -> TrialGrant:
@@ -183,8 +197,9 @@ class GrantStore:
         except KeyError:
             raise SharewareError("no such grant: %s" % grant_id) from None
 
-    def redeem(self, grant_id: str, feature: Optional[str] = None,
-               now: Optional[float] = None) -> Dict[str, Any]:
+    def redeem(
+        self, grant_id: str, feature: Optional[str] = None, now: Optional[float] = None
+    ) -> Dict[str, Any]:
         """Use one unit of the trial. Never touches user data — only the
         grant's own counters. Returns the receipt."""
         now = time.time() if now is None else now
@@ -193,31 +208,44 @@ class GrantStore:
         if grant is None:
             raise SharewareError("no such grant: %s" % grant_id)
         if grant.revoked:
-            raise SharewareError("grant %s was revoked: %s"
-                                 % (grant_id, grant.revoke_reason or "no reason given"))
+            raise SharewareError(
+                "grant %s was revoked: %s"
+                % (grant_id, grant.revoke_reason or "no reason given")
+            )
         if grant.is_expired(now):
             raise SharewareError(
                 "grant %s expired at %s — the premium slice is locked; "
-                "your data is untouched" % (grant_id, _iso(grant.expires_at or 0)))
+                "your data is untouched" % (grant_id, _iso(grant.expires_at or 0))
+            )
         if grant.max_uses is not None and grant.uses >= grant.max_uses:
-            raise SharewareError("grant %s is exhausted (%d/%d uses)"
-                                 % (grant_id, grant.uses, grant.max_uses))
+            raise SharewareError(
+                "grant %s is exhausted (%d/%d uses)"
+                % (grant_id, grant.uses, grant.max_uses)
+            )
         if feature is not None and feature not in grant.features:
-            raise SharewareError("grant %s does not cover feature %r "
-                                 "(covers: %s)"
-                                 % (grant_id, feature, ", ".join(grant.features)))
+            raise SharewareError(
+                "grant %s does not cover feature %r "
+                "(covers: %s)" % (grant_id, feature, ", ".join(grant.features))
+            )
         grant.uses += 1
         grants[grant_id] = grant
         self._save(grants)
-        receipt = self._ledger_append({
-            "type": "redeem", "grant_id": grant_id, "feature": feature,
-            "at": now, "uses": grant.uses,
-            "uses_left": grant.uses_left(), "expires_at": grant.expires_at,
-        })
+        receipt = self._ledger_append(
+            {
+                "type": "redeem",
+                "grant_id": grant_id,
+                "feature": feature,
+                "at": now,
+                "uses": grant.uses,
+                "uses_left": grant.uses_left(),
+                "expires_at": grant.expires_at,
+            }
+        )
         return receipt
 
-    def revoke(self, grant_id: str, reason: str = "",
-               now: Optional[float] = None) -> TrialGrant:
+    def revoke(
+        self, grant_id: str, reason: str = "", now: Optional[float] = None
+    ) -> TrialGrant:
         now = time.time() if now is None else now
         grants = self._load()
         grant = grants.get(grant_id)
@@ -227,9 +255,14 @@ class GrantStore:
         grant.revoke_reason = reason
         grants[grant_id] = grant
         self._save(grants)
-        self._ledger_append({
-            "type": "revoke", "grant_id": grant_id, "reason": reason, "at": now,
-        })
+        self._ledger_append(
+            {
+                "type": "revoke",
+                "grant_id": grant_id,
+                "reason": reason,
+                "at": now,
+            }
+        )
         return grant
 
     def list(self) -> List[TrialGrant]:
@@ -245,7 +278,8 @@ class GrantStore:
                 bad.append(i)
             payload = {k: v for k, v in entry.items() if k != "hash"}
             digest = hashlib.sha256(
-                json.dumps(payload, sort_keys=True).encode("utf-8")).hexdigest()
+                json.dumps(payload, sort_keys=True).encode("utf-8")
+            ).hexdigest()
             if entry.get("hash") != digest:
                 bad.append(i)
             prev = entry.get("hash", "")

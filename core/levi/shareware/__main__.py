@@ -19,8 +19,13 @@ def _store() -> GrantStore:
 def cmd_issue(a) -> int:
     store = _store()
     try:
-        g = store.issue(pack=a.pack, features=a.features, days=a.days,
-                        max_uses=a.uses, note=a.note or "")
+        g = store.issue(
+            pack=a.pack,
+            features=a.features,
+            days=a.days,
+            max_uses=a.uses,
+            note=a.note or "",
+        )
     except SharewareError as exc:
         print("refused: %s" % exc, file=sys.stderr)
         return 1
@@ -36,13 +41,23 @@ def cmd_status(a) -> int:
     except SharewareError as exc:
         print("refused: %s" % exc, file=sys.stderr)
         return 1
-    print(json.dumps({
-        "id": g.id, "pack": g.pack, "features": g.features,
-        "uses": g.uses, "uses_left": g.uses_left(),
-        "expires_at": g.expires_at, "expired": g.is_expired(),
-        "revoked": g.revoked, "revoke_reason": g.revoke_reason,
-        "note": g.note,
-    }, indent=1))
+    print(
+        json.dumps(
+            {
+                "id": g.id,
+                "pack": g.pack,
+                "features": g.features,
+                "uses": g.uses,
+                "uses_left": g.uses_left(),
+                "expires_at": g.expires_at,
+                "expired": g.is_expired(),
+                "revoked": g.revoked,
+                "revoke_reason": g.revoke_reason,
+                "note": g.note,
+            },
+            indent=1,
+        )
+    )
     return 0
 
 
@@ -73,10 +88,18 @@ def cmd_list(a) -> int:
     store = _store()
     for g in store.list():
         state = "revoked" if g.revoked else ("expired" if g.is_expired() else "active")
-        print("%s  %-18s  %-8s  uses=%s  %s" % (
-            g.id, g.pack, state,
-            "unlimited" if g.uses_left() is None else "%d/%d" % (g.uses, g.max_uses),
-            ",".join(g.features)))
+        print(
+            "%s  %-18s  %-8s  uses=%s  %s"
+            % (
+                g.id,
+                g.pack,
+                state,
+                "unlimited"
+                if g.uses_left() is None
+                else "%d/%d" % (g.uses, g.max_uses),
+                ",".join(g.features),
+            )
+        )
     return 0
 
 
@@ -99,8 +122,9 @@ def cmd_terms(a) -> int:
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(prog="levi.shareware",
-                                 description="The honest trial engine.")
+    ap = argparse.ArgumentParser(
+        prog="levi.shareware", description="The honest trial engine."
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     p = sub.add_parser("issue", help="issue a trial grant")

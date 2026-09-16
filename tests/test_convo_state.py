@@ -29,7 +29,9 @@ def test_callback_reignites_old_thread():
     # let the server thread decay over a couple of unrelated turns
     s.update("user", "How often should pg_dump run?")
     s.update("levi", "Nightly is fine for most workloads.")
-    server = [t for t in s.threads.values() if "migrat" in t["name"] or "server" in t["name"]]
+    server = [
+        t for t in s.threads.values() if "migrat" in t["name"] or "server" in t["name"]
+    ]
     assert server, "server thread should exist"
     before = server[0]["salience"]
     changed = s.update("user", "back to the server thing — when is the migration?")

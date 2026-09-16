@@ -123,9 +123,7 @@ class Connector(ABC):
         if cls.references:
             from levi.plugins.references import validate_provider_name
 
-            cls.references = tuple(
-                validate_provider_name(r) for r in cls.references
-            )
+            cls.references = tuple(validate_provider_name(r) for r in cls.references)
 
     # -- credential handling ----------------------------------------------
 

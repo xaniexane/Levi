@@ -25,15 +25,11 @@ verbs and missing args are errors, never guessed.
 
 from __future__ import annotations
 
-import json
-import time
 import uuid
 from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Optional
 
 from levi.revival.telescript import (
-    ActionRefused,
-    CapabilityError,
     RevocationList,
     guarded_call,
 )
@@ -140,13 +136,9 @@ def validate_message(raw: Any) -> Dict[str, Any]:
                 raise ProtocolError(f"call: {key} must be a non-empty string")
         if "args" in raw and not isinstance(raw["args"], dict):
             raise ProtocolError("call: args must be an object")
-    if op == "revoke" and (
-        not isinstance(raw.get("token"), str) or not raw["token"]
-    ):
+    if op == "revoke" and (not isinstance(raw.get("token"), str) or not raw["token"]):
         raise ProtocolError("revoke: token must be a non-empty string")
-    if op == "hello" and (
-        not isinstance(raw.get("agent"), str) or not raw["agent"]
-    ):
+    if op == "hello" and (not isinstance(raw.get("agent"), str) or not raw["agent"]):
         raise ProtocolError("hello: agent must be a non-empty string")
     return raw
 
@@ -238,9 +230,7 @@ class ServiceSpec:
         args = dict(args or {})
         missing = [a for a in spec.required_args if a not in args]
         if missing:
-            raise ProtocolError(
-                f"bad_args: verb {verb!r} requires args {missing}"
-            )
+            raise ProtocolError(f"bad_args: verb {verb!r} requires args {missing}")
         action = self.action_for(verb)
         return guarded_call(
             token,

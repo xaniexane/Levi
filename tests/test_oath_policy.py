@@ -38,8 +38,14 @@ def hermetic_home(tmp_path, monkeypatch):
 
 
 def _contact(**kw) -> Contact:
-    base = dict(name="carol", email="carol@example.com", trust_floor=VERIFIED,
-                tier_ceiling="write", grants={}, max_missions_per_hour=10)
+    base = dict(
+        name="carol",
+        email="carol@example.com",
+        trust_floor=VERIFIED,
+        tier_ceiling="write",
+        grants={},
+        max_missions_per_hour=10,
+    )
     base.update(kw)
     return Contact(**base)
 
@@ -51,6 +57,7 @@ def _cmd(name: str, tier: str) -> CommandDefinition:
 # ---------------------------------------------------------------------------
 # gate 1 — trust (hard requirement, no override)
 # ---------------------------------------------------------------------------
+
 
 def test_trust_gate_hard_floor(hermetic_home, no_network):
     contact = _contact()
@@ -86,6 +93,7 @@ def test_trust_ordering(hermetic_home, no_network):
 # gate 2 — deny-closed permissions
 # ---------------------------------------------------------------------------
 
+
 def test_deny_closed_no_grants(hermetic_home, no_network):
     decision = check_command(_contact(), _cmd("disk-usage", "read"))
     assert decision.allowed is False
@@ -110,6 +118,7 @@ def test_grant_is_per_command(hermetic_home, no_network):
 # ---------------------------------------------------------------------------
 # gate 3 — risk-ceiling inheritance
 # ---------------------------------------------------------------------------
+
 
 def test_ceiling_blocks_above_ceiling(hermetic_home, no_network):
     contact = _contact(grants={"pipe": ["x"]}, tier_ceiling="write")
@@ -140,8 +149,18 @@ def test_builtin_ai_stage_needs_x_grant(hermetic_home, no_network):
     registry = CommandRegistry()
     ai = registry.get("ai")
     assert ai.tier == "execute"
-    assert check_command(_contact(grants={"ai": ["r"]}, tier_ceiling="execute"), ai).allowed is False
-    assert check_command(_contact(grants={"ai": ["x"]}, tier_ceiling="execute"), ai).allowed is True
+    assert (
+        check_command(
+            _contact(grants={"ai": ["r"]}, tier_ceiling="execute"), ai
+        ).allowed
+        is False
+    )
+    assert (
+        check_command(
+            _contact(grants={"ai": ["x"]}, tier_ceiling="execute"), ai
+        ).allowed
+        is True
+    )
 
 
 def test_check_pipeline_reports_first_denial(hermetic_home, no_network):
@@ -161,6 +180,7 @@ def test_check_pipeline_reports_first_denial(hermetic_home, no_network):
 # ---------------------------------------------------------------------------
 # rate limiting
 # ---------------------------------------------------------------------------
+
 
 def test_rate_limit(hermetic_home, no_network):
     from levi.oath.daemon import check_rate_limit, record_mission_use

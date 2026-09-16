@@ -54,13 +54,19 @@ def line_ending_style(data):
         return "none (no line breaks)"
     if len(kinds) == 1:
         return kinds[0]
-    return "mixed (" + ", ".join(f"{k}={v}" for k, v in
-                                 (("CRLF", crlf), ("LF", lf), ("CR", lone_cr)) if v) + ")"
+    return (
+        "mixed ("
+        + ", ".join(
+            f"{k}={v}" for k, v in (("CRLF", crlf), ("LF", lf), ("CR", lone_cr)) if v
+        )
+        + ")"
+    )
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(
-        description="Print a diagnostic report for any file (read-only).")
+        description="Print a diagnostic report for any file (read-only)."
+    )
     ap.add_argument("file", help="file to analyze")
     args = ap.parse_args(argv)
 
@@ -84,8 +90,10 @@ def main(argv=None):
     print(f"file:        {os.path.abspath(path)}")
     print(f"size:        {human_size(size)} ({size} bytes)")
     print(f"sha256:      {sha.hexdigest()}")
-    print(f"type:        {'text' if is_text else 'binary'}"
-          + (" (first 64KB sampled)" if truncated else ""))
+    print(
+        f"type:        {'text' if is_text else 'binary'}"
+        + (" (first 64KB sampled)" if truncated else "")
+    )
 
     if is_text:
         print(f"encoding:    {guess_encoding(data)}")

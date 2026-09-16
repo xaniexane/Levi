@@ -29,7 +29,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
-from levi.revival.otp import ChildSpec, CrashReport, Supervisor
+from levi.revival.otp import ChildSpec, Supervisor
 
 ALIVE_MARKER = "supervisor.alive"
 STARTED_AT = "started_at"
@@ -146,9 +146,7 @@ def build_supervisor(
         ChildSpec(
             name=name,
             target=adapter,
-            kwargs=(
-                {"interval_s": intervals[name]} if name in intervals else {}
-            ),
+            kwargs=({"interval_s": intervals[name]} if name in intervals else {}),
             restart_mode="permanent",
             max_restarts=5,
             restart_window=300.0,
@@ -247,7 +245,12 @@ def read_alive_marker(
     except (OSError, ValueError, TypeError, KeyError):
         return {"running": False, "reason": "no-marker"}
     if age > stale_s:
-        return {"running": False, "reason": "stale", "age_s": age, "pid": data.get("pid")}
+        return {
+            "running": False,
+            "reason": "stale",
+            "age_s": age,
+            "pid": data.get("pid"),
+        }
     return {"running": True, "age_s": age, "pid": data.get("pid")}
 
 

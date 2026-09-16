@@ -211,7 +211,9 @@ _CONFIG_INT_KEYS = frozenset({"words", "events", "ruptures"})
 _CONFIG_STR_KEYS = frozenset(
     {"direction", "phase", "power", "pov", "seed", "ghost", "last_text", "last_id"}
 )
-_CONFIG_STRLIST_KEYS = frozenset({"genres", "bible_facts", "bible_scars", "causal_notes"})
+_CONFIG_STRLIST_KEYS = frozenset(
+    {"genres", "bible_facts", "bible_scars", "causal_notes"}
+)
 _CONFIG_DICTLIST_KEYS = frozenset({"scenes", "vault", "tracks"})
 _CONFIG_ENUMS = {"direction": DIRS, "phase": PHASES, "power": POWERS}
 
@@ -244,12 +246,8 @@ def _validate_config_value(key: str, value: Any) -> None:
             )
         return
     if key in _CONFIG_DICTLIST_KEYS:
-        if not isinstance(value, list) or any(
-            not isinstance(v, dict) for v in value
-        ):
-            raise ValueError(
-                f"configure: {key} must be a list of dicts, got {value!r}"
-            )
+        if not isinstance(value, list) or any(not isinstance(v, dict) for v in value):
+            raise ValueError(f"configure: {key} must be a list of dicts, got {value!r}")
         return
     if key == "rom":
         if value is not None and not isinstance(value, dict):

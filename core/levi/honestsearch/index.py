@@ -21,8 +21,7 @@ TOKEN_RE = re.compile(r"[a-z0-9]{2,}")
 # Fixed, documented, inspectable. Not tuned per user, not learned.
 STOPWORDS = frozenset(
     "a an and are as at be but by for from has have he her his in into is it "
-    "its of on or that the their them they this to was were will with you your"
-    .split()
+    "its of on or that the their them they this to was were will with you your".split()
 )
 
 

@@ -23,7 +23,7 @@ outside the scale, malformed triads, and duplicate names are rejected.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from math import sqrt
 from typing import Optional
 
@@ -56,7 +56,9 @@ class RepertoryGrid:
         self.scale = (lo, hi)
         self.elements: list[str] = []
         self.constructs: dict[str, Construct] = {}
-        self._ratings: dict[tuple[str, str], int] = {}  # (element, construct_id) -> score
+        self._ratings: dict[
+            tuple[str, str], int
+        ] = {}  # (element, construct_id) -> score
         self._next_construct = 1
 
     # -- building the grid -----------------------------------------------------
@@ -102,8 +104,9 @@ class RepertoryGrid:
                 raise ValueError("alike_pair must be two members of the triad")
         cid = f"C{self._next_construct}"
         self._next_construct += 1
-        construct = Construct(id=cid, pole_a=pole_a, pole_b=pole_b,
-                              triad=triad, alike_pair=alike_pair)
+        construct = Construct(
+            id=cid, pole_a=pole_a, pole_b=pole_b, triad=triad, alike_pair=alike_pair
+        )
         self.constructs[cid] = construct
         return construct
 
@@ -149,12 +152,18 @@ class RepertoryGrid:
           fully-rated elements — possibly the same latent dimension twice.
         """
         lo, hi = self.scale
-        full = [el for el in self.elements
-                if all((el, cid) in self._ratings for cid in self.constructs)]
+        full = [
+            el
+            for el in self.elements
+            if all((el, cid) in self._ratings for cid in self.constructs)
+        ]
         spreads: dict[str, dict] = {}
         for cid, c in self.constructs.items():
-            scores = [self._ratings[(el, cid)] for el in self.elements
-                      if (el, cid) in self._ratings]
+            scores = [
+                self._ratings[(el, cid)]
+                for el in self.elements
+                if (el, cid) in self._ratings
+            ]
             spreads[cid] = {
                 "poles": (c.pole_a, c.pole_b),
                 "rated": len(scores),
@@ -169,10 +178,12 @@ class RepertoryGrid:
                 ys = [float(self._ratings[(el, cids[j])]) for el in full]
                 r = self._pearson(xs, ys)
                 if abs(r) >= 0.7:
-                    aligned.append({"constructs": (cids[i], cids[j]),
-                                    "correlation": round(r, 3)})
-        most_discriminating = sorted(spreads, key=lambda c: spreads[c]["spread"],
-                                     reverse=True)
+                    aligned.append(
+                        {"constructs": (cids[i], cids[j]), "correlation": round(r, 3)}
+                    )
+        most_discriminating = sorted(
+            spreads, key=lambda c: spreads[c]["spread"], reverse=True
+        )
         return {
             "topic": self.topic,
             "elements": len(self.elements),

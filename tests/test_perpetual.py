@@ -7,7 +7,6 @@ tmp home. Deterministic: supervisor tests drive tick() manually.
 import json
 import subprocess
 import sys
-import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -33,9 +32,9 @@ def _rec(i, rating="load-bearing"):
         sources=["https://example.com/widget-%d" % i],
         rating=rating,
         status="dead",
-        provenance=Provenance(found_date="2026-09-16",
-                             research_slug="test-slug",
-                             notes="fixture"),
+        provenance=Provenance(
+            found_date="2026-09-16", research_slug="test-slug", notes="fixture"
+        ),
     )
 
 
@@ -56,8 +55,11 @@ def _sleeper(stop_event):
 def test_supervisor_restarts_crashed_child(tmp_path):
     attempts = []
     sup = Supervisor(
-        [ChildSpec("svc", _failer, args=(attempts, 2),
-                   max_restarts=5, restart_window=60.0)],
+        [
+            ChildSpec(
+                "svc", _failer, args=(attempts, 2), max_restarts=5, restart_window=60.0
+            )
+        ],
         strategy="one_for_one",
     ).start(start_monitor=False)
     try:
@@ -78,8 +80,15 @@ def test_supervisor_restarts_crashed_child(tmp_path):
 def test_supervisor_gives_up_on_restart_intensity(tmp_path):
     attempts = []
     sup = Supervisor(
-        [ChildSpec("doomed", _failer, args=(attempts, 999),
-                   max_restarts=1, restart_window=600.0)],
+        [
+            ChildSpec(
+                "doomed",
+                _failer,
+                args=(attempts, 999),
+                max_restarts=1,
+                restart_window=600.0,
+            )
+        ],
         strategy="one_for_one",
     ).start(start_monitor=False)
     try:
@@ -98,8 +107,11 @@ def test_supervisor_gives_up_on_restart_intensity(tmp_path):
 def test_crash_reports_persist_and_load(tmp_path):
     attempts = []
     sup = Supervisor(
-        [ChildSpec("svc", _failer, args=(attempts, 1),
-                   max_restarts=5, restart_window=60.0)],
+        [
+            ChildSpec(
+                "svc", _failer, args=(attempts, 1), max_restarts=5, restart_window=60.0
+            )
+        ],
     ).start(start_monitor=False)
     try:
         for _ in range(30):
@@ -117,8 +129,7 @@ def test_crash_reports_persist_and_load(tmp_path):
         assert "boom" in loaded[0]["message"]
         # Second persist with since=newest writes nothing new.
         newest = max(r.at for r in sup.crash_reports())
-        assert supervise.persist_crash_reports(sup, home=tmp_path,
-                                               since=newest) == 0
+        assert supervise.persist_crash_reports(sup, home=tmp_path, since=newest) == 0
     finally:
         sup.shutdown()
 
@@ -144,8 +155,7 @@ def test_service_overview_lists_configured_services(tmp_path):
 def test_build_supervisor_specs_are_valid():
     sup = supervise.build_supervisor()
     st = sup.status()
-    assert set(st["children"]) == {"levi-heartbeat", "levi-growth",
-                                   "levi-automation"}
+    assert set(st["children"]) == {"levi-heartbeat", "levi-growth", "levi-automation"}
 
 
 # ------------------------------------------------------- hunt
@@ -161,21 +171,33 @@ def test_plan_next_hunt_picks_first_uncovered_theme():
 
 def test_plan_next_hunt_never_repeats_covered_ground():
     now = datetime.now(timezone.utc)
-    state = hunt.HuntState(waves=[
-        hunt.HuntWave(id="wave-001", theme_id="dead-protocols",
-                      planned_at=now.isoformat(), status="completed",
-                      completed_at=now.isoformat(), findings_count=30),
-    ])
+    state = hunt.HuntState(
+        waves=[
+            hunt.HuntWave(
+                id="wave-001",
+                theme_id="dead-protocols",
+                planned_at=now.isoformat(),
+                status="completed",
+                completed_at=now.isoformat(),
+                findings_count=30,
+            ),
+        ]
+    )
     plan = hunt.plan_next_hunt(state)
     assert plan.theme.id == "lost-interfaces"
 
 
 def test_plan_returns_open_wave_instead_of_stacking():
-    state = hunt.HuntState(waves=[
-        hunt.HuntWave(id="wave-007", theme_id="dead-protocols",
-                      planned_at="2026-09-01T00:00:00+00:00",
-                      status="in-progress"),
-    ])
+    state = hunt.HuntState(
+        waves=[
+            hunt.HuntWave(
+                id="wave-007",
+                theme_id="dead-protocols",
+                planned_at="2026-09-01T00:00:00+00:00",
+                status="in-progress",
+            ),
+        ]
+    )
     plan = hunt.plan_next_hunt(state)
     assert plan.wave_id == "wave-007"
 
@@ -184,11 +206,14 @@ def test_record_hunt_happy_path(tmp_path):
     now = datetime(2026, 9, 16, 12, 0, tzinfo=timezone.utc)
     state = hunt.HuntState()
     plan = hunt.plan_next_hunt(state, now=now)
-    result = hunt.record_hunt(state, plan.wave_id,
-                              [_rec(1, "load-bearing"),
-                               _rec(2, "inspirational")],
-                              research_slug="test-slug",
-                              home=tmp_path, now=now)
+    result = hunt.record_hunt(
+        state,
+        plan.wave_id,
+        [_rec(1, "load-bearing"), _rec(2, "inspirational")],
+        research_slug="test-slug",
+        home=tmp_path,
+        now=now,
+    )
     assert result["findings"] == 2
     assert result["build_queued"] == 1  # inspirational is not queued
     pending = Path(result["pending_file"])
@@ -209,16 +234,16 @@ def test_record_hunt_refuses_empty_findings(tmp_path):
     state = hunt.HuntState()
     plan = hunt.plan_next_hunt(state)
     with pytest.raises(ValueError):
-        hunt.record_hunt(state, plan.wave_id, [], research_slug="s",
-                         home=tmp_path)
+        hunt.record_hunt(state, plan.wave_id, [], research_slug="s", home=tmp_path)
 
 
 def test_record_hunt_refuses_duplicate_ids(tmp_path):
     state = hunt.HuntState()
     plan = hunt.plan_next_hunt(state)
     with pytest.raises(ValueError, match="duplicate record id"):
-        hunt.record_hunt(state, plan.wave_id, [_rec(1), _rec(1)],
-                         research_slug="s", home=tmp_path)
+        hunt.record_hunt(
+            state, plan.wave_id, [_rec(1), _rec(1)], research_slug="s", home=tmp_path
+        )
     # nothing half-recorded
     assert hunt.pending_waves(home=tmp_path) == []
 
@@ -226,11 +251,11 @@ def test_record_hunt_refuses_duplicate_ids(tmp_path):
 def test_record_hunt_refuses_double_complete(tmp_path):
     state = hunt.HuntState()
     plan = hunt.plan_next_hunt(state)
-    hunt.record_hunt(state, plan.wave_id, [_rec(1)], research_slug="s",
-                     home=tmp_path)
+    hunt.record_hunt(state, plan.wave_id, [_rec(1)], research_slug="s", home=tmp_path)
     with pytest.raises(ValueError, match="already completed"):
-        hunt.record_hunt(state, plan.wave_id, [_rec(2)], research_slug="s",
-                         home=tmp_path)
+        hunt.record_hunt(
+            state, plan.wave_id, [_rec(2)], research_slug="s", home=tmp_path
+        )
 
 
 def test_record_hunt_refuses_malformed_record_dict(tmp_path):
@@ -243,8 +268,9 @@ def test_record_hunt_refuses_bad_slug(tmp_path):
     state = hunt.HuntState()
     plan = hunt.plan_next_hunt(state)
     with pytest.raises(ValueError, match="research_slug"):
-        hunt.record_hunt(state, plan.wave_id, [_rec(1)],
-                         research_slug="UPPER BAD", home=tmp_path)
+        hunt.record_hunt(
+            state, plan.wave_id, [_rec(1)], research_slug="UPPER BAD", home=tmp_path
+        )
 
 
 # ------------------------------------------------------- pulse
@@ -265,8 +291,9 @@ def test_pulse_reflects_hunt_and_queue(tmp_path):
     now = datetime(2026, 9, 16, 12, 0, tzinfo=timezone.utc)
     state = hunt.HuntState()
     plan = hunt.plan_next_hunt(state, now=now)
-    hunt.record_hunt(state, plan.wave_id, [_rec(1)], research_slug="s",
-                     home=tmp_path, now=now)
+    hunt.record_hunt(
+        state, plan.wave_id, [_rec(1)], research_slug="s", home=tmp_path, now=now
+    )
     supervise.write_alive_marker(home=tmp_path, now=now.timestamp())
     snap = pulse_mod.read_pulse(home=tmp_path, now=now.timestamp())
     assert snap["engine_running"] is True
@@ -292,11 +319,19 @@ def test_pulse_never_raises_on_corrupt_crash_file(tmp_path):
 def _costly_rec():
     r = _rec(9)
     return ArchiveRecord(
-        id=r.id, title=r.title, era=r.era, kind=r.kind, summary=r.summary,
-        mechanism=r.mechanism, decline=r.decline,
+        id=r.id,
+        title=r.title,
+        era=r.era,
+        kind=r.kind,
+        summary=r.summary,
+        mechanism=r.mechanism,
+        decline=r.decline,
         revival_recipe="Rebuild it, or just call the vendor's paid API.",
-        levi_application=r.levi_application, sources=r.sources,
-        rating=r.rating, status=r.status, provenance=r.provenance,
+        levi_application=r.levi_application,
+        sources=r.sources,
+        rating=r.rating,
+        status=r.status,
+        provenance=r.provenance,
     )
 
 
@@ -313,8 +348,9 @@ def test_hard_route_review_clean_record_passes():
 
 def test_build_queue_marks_hard_route_items(tmp_path):
     now = datetime(2026, 9, 16, 12, 0, tzinfo=timezone.utc)
-    n = hunt.queue_for_build([_rec(1), _costly_rec()], "wave-001",
-                             home=tmp_path, now=now)
+    n = hunt.queue_for_build(
+        [_rec(1), _costly_rec()], "wave-001", home=tmp_path, now=now
+    )
     assert n == 2
     queue = hunt.read_build_queue(home=tmp_path)
     by_id = {q["record_id"]: q for q in queue}
@@ -327,11 +363,11 @@ def test_build_queue_marks_hard_route_items(tmp_path):
 def test_record_hunt_reports_hard_route_flags(tmp_path):
     state = hunt.HuntState()
     plan = hunt.plan_next_hunt(state)
-    result = hunt.record_hunt(state, plan.wave_id, [_rec(1), _costly_rec()],
-                              research_slug="s", home=tmp_path)
+    result = hunt.record_hunt(
+        state, plan.wave_id, [_rec(1), _costly_rec()], research_slug="s", home=tmp_path
+    )
     assert len(result["hard_route_flagged"]) == 1
-    assert (result["hard_route_flagged"][0]["record_id"]
-            == "arch-test-software-widget-9")
+    assert result["hard_route_flagged"][0]["record_id"] == "arch-test-software-widget-9"
 
 
 def test_hunt_plan_instructions_carry_hard_route_law():
@@ -350,7 +386,10 @@ def _run_cli(tmp_path, *argv):
     return subprocess.run(
         [sys.executable, "-m", "levi.perpetual", "--home", str(tmp_path), *argv],
         cwd=str(Path(__file__).resolve().parents[1]),
-        env=env, capture_output=True, text=True, timeout=60,
+        env=env,
+        capture_output=True,
+        text=True,
+        timeout=60,
     )
 
 
@@ -368,13 +407,16 @@ def test_cli_hunt_plan_and_record(tmp_path):
     assert r.returncode == 0, r.stderr
     assert "HUNT PLAN wave-001" in r.stdout
     findings = tmp_path / "findings.jsonl"
-    findings.write_text("\n".join([
-        json.dumps(_rec(1).to_dict()), json.dumps(_rec(2).to_dict())]) + "\n")
-    r = _run_cli(tmp_path, "hunt-record", "wave-001", str(findings),
-                 "--slug", "test-slug")
+    findings.write_text(
+        "\n".join([json.dumps(_rec(1).to_dict()), json.dumps(_rec(2).to_dict())]) + "\n"
+    )
+    r = _run_cli(
+        tmp_path, "hunt-record", "wave-001", str(findings), "--slug", "test-slug"
+    )
     assert r.returncode == 0, r.stderr
     assert '"findings": 2' in r.stdout
     # recording the same wave again is refused
-    r = _run_cli(tmp_path, "hunt-record", "wave-001", str(findings),
-                 "--slug", "test-slug")
+    r = _run_cli(
+        tmp_path, "hunt-record", "wave-001", str(findings), "--slug", "test-slug"
+    )
     assert r.returncode == 2

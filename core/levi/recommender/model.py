@@ -6,7 +6,7 @@ import re
 import uuid
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 
 def now_iso() -> str:
@@ -54,8 +54,7 @@ def _check_topics(topics: Dict[str, float], what: str) -> Dict[str, float]:
             raise ValueError("%s has an empty topic name" % what)
         w = float(weight)
         if not (0.0 <= w <= 1.0):
-            raise ValueError("%s topic %r weight must be in [0, 1]"
-                             % (what, name))
+            raise ValueError("%s topic %r weight must be in [0, 1]" % (what, name))
         cleaned[name.strip().lower()] = w
     return cleaned
 
@@ -87,8 +86,10 @@ class Item:
     @classmethod
     def from_dict(cls, raw: Dict) -> "Item":
         return cls(
-            id=str(raw["id"]), title=str(raw["title"]),
-            kind=str(raw["kind"]), topics=dict(raw.get("topics") or {}),
+            id=str(raw["id"]),
+            title=str(raw["title"]),
+            kind=str(raw["kind"]),
+            topics=dict(raw.get("topics") or {}),
             text=str(raw.get("text", "")),
             attrs=dict(raw.get("attrs") or {}),
             added_at=str(raw.get("added_at", "")),
@@ -117,7 +118,8 @@ class Goal:
     @classmethod
     def from_dict(cls, raw: Dict) -> "Goal":
         return cls(
-            id=str(raw["id"]), title=str(raw["title"]),
+            id=str(raw["id"]),
+            title=str(raw["title"]),
             topics=dict(raw.get("topics") or {}),
             kind_filter=list(raw.get("kind_filter") or []),
             notes=str(raw.get("notes", "")),

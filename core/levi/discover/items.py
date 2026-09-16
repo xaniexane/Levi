@@ -21,7 +21,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Dict, Iterator, List, Optional
+from typing import Any, Dict, List
 
 __all__ = ["DiscoverError", "validate_item", "load_items", "ITEM_FIELDS"]
 

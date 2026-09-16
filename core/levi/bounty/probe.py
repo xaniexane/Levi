@@ -13,7 +13,6 @@ everything; a dead host never crashes the run.
 
 from __future__ import annotations
 
-import http.client
 import math
 import re
 import socket

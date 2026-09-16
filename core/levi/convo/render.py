@@ -14,7 +14,7 @@ Two views of the same organism:
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple
+from typing import List, Optional, Tuple
 
 
 def render_block(
@@ -30,8 +30,11 @@ def render_block(
             "THREADS: "
             + " · ".join(
                 "%s(s=%.2f%s)"
-                % (t["name"], t["salience"],
-                   ", REIGNITED" if t.get("reignited") else "")
+                % (
+                    t["name"],
+                    t["salience"],
+                    ", REIGNITED" if t.get("reignited") else "",
+                )
                 for t in threads[:4]
             )
         )
@@ -39,8 +42,7 @@ def render_block(
     if ents:
         lines.append(
             "ENTITIES: "
-            + " · ".join("%s(s=%.2f)" % (e["name"], e["salience"])
-                         for e in ents[:5])
+            + " · ".join("%s(s=%.2f)" % (e["name"], e["salience"]) for e in ents[:5])
         )
     if state.last_resolution:
         pron, ent, turn = state.last_resolution
@@ -92,38 +94,54 @@ def render_constellation(state) -> str:
         if ux:
             rows = []
             for t in threads:
-                star = "✦" if t["salience"] >= 0.7 else ("✧" if t["salience"] >= 0.35 else "·")
-                name = ("%s %s" % (star, t["name"]))
+                star = (
+                    "✦"
+                    if t["salience"] >= 0.7
+                    else ("✧" if t["salience"] >= 0.35 else "·")
+                )
+                name = "%s %s" % (star, t["name"])
                 if t.get("reignited"):
                     name += "  ⟲ reignited"
-                rows.append([
-                    name,
-                    ux.meter(t["salience"], 1.0, width=14),
-                    ux.sparkline(t.get("history", [t["salience"]])),
-                    "t%d" % t["last_turn"],
-                ])
+                rows.append(
+                    [
+                        name,
+                        ux.meter(t["salience"], 1.0, width=14),
+                        ux.sparkline(t.get("history", [t["salience"]])),
+                        "t%d" % t["last_turn"],
+                    ]
+                )
             out.append(ux.Table(["thread", "salience", "life", "last"], rows).render())
         else:
             for t in threads:
-                out.append("  * %s  salience=%.2f  last=t%d%s" % (
-                    t["name"], t["salience"], t["last_turn"],
-                    "  [REIGNITED]" if t.get("reignited") else ""))
+                out.append(
+                    "  * %s  salience=%.2f  last=t%d%s"
+                    % (
+                        t["name"],
+                        t["salience"],
+                        t["last_turn"],
+                        "  [REIGNITED]" if t.get("reignited") else "",
+                    )
+                )
     else:
         out.append("  (no live threads yet — the conversation is still forming)")
 
     ents = state.live_entities()
     if ents:
         out.append("")
-        out.append("satellites: " + " · ".join(
-            "%s(%.2f)" % (e["name"], e["salience"]) for e in ents[:6]))
+        out.append(
+            "satellites: "
+            + " · ".join("%s(%.2f)" % (e["name"], e["salience"]) for e in ents[:6])
+        )
 
     loops = state.open_loops()
     if loops:
         out.append("")
         out.append("pending orbits (open loops LEVI owes):")
         for l in loops:
-            out.append("  ⏳ [%s] %s — opened t%d" % (
-                l["kind"], l["text"][:70], l["opened_turn"]))
+            out.append(
+                "  ⏳ [%s] %s — opened t%d"
+                % (l["kind"], l["text"][:70], l["opened_turn"])
+            )
 
     if state.last_resolution:
         pron, ent, turn = state.last_resolution

@@ -62,7 +62,8 @@ def _check_id(value: str, what: str) -> str:
     value = value.strip()
     if not _ID_RE.match(value):
         raise CommunityError(
-            f"{what} id must match [A-Za-z0-9_-]{{1,64}}, got {value!r}")
+            f"{what} id must match [A-Za-z0-9_-]{{1,64}}, got {value!r}"
+        )
     return value
 
 
@@ -77,6 +78,7 @@ class CommunityError(ValueError):
 # ---------------------------------------------------------------------------
 # Data model
 # ---------------------------------------------------------------------------
+
 
 @dataclass
 class Channel:
@@ -97,7 +99,9 @@ class Member:
 class Role:
     id: str
     name: str
-    permissions: List[str] = field(default_factory=list)  # e.g. post, moderate, manage-roles
+    permissions: List[str] = field(
+        default_factory=list
+    )  # e.g. post, moderate, manage-roles
     member_ids: List[str] = field(default_factory=list)
 
 
@@ -115,7 +119,9 @@ class Message:
 class Governance:
     rules: List[str] = field(default_factory=list)
     moderators: List[str] = field(default_factory=list)  # member ids
-    charter_ref: Optional[Dict[str, str]] = None  # {id, version, checksum} — see levi.charters
+    charter_ref: Optional[Dict[str, str]] = (
+        None  # {id, version, checksum} — see levi.charters
+    )
 
 
 @dataclass
@@ -136,7 +142,9 @@ class Community:
     def from_dict(cls, raw: Dict[str, Any]) -> "Community":
         gov = raw.get("governance") or {}
         return cls(
-            id=raw["id"], name=raw["name"], created_at=raw.get("created_at", _now()),
+            id=raw["id"],
+            name=raw["name"],
+            created_at=raw.get("created_at", _now()),
             channels=[Channel(**c) for c in raw.get("channels", [])],
             members=[Member(**m) for m in raw.get("members", [])],
             roles=[Role(**r) for r in raw.get("roles", [])],
@@ -152,6 +160,7 @@ class Community:
 # ---------------------------------------------------------------------------
 # Checksummed export / verifying import
 # ---------------------------------------------------------------------------
+
 
 def _canonical(obj: Any) -> bytes:
     return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode()
@@ -176,8 +185,11 @@ def build_export(community: Community) -> Dict[str, Any]:
         "format": EXPORT_FORMAT,
         "format_version": EXPORT_VERSION,
         "exported_at": _now(),
-        "community": {"id": community.id, "name": community.name,
-                      "created_at": community.created_at},
+        "community": {
+            "id": community.id,
+            "name": community.name,
+            "created_at": community.created_at,
+        },
         "sections": sections,
         "checksums": checksums,
         "manifest": manifest,
@@ -192,10 +204,12 @@ def verify_export(doc: Dict[str, Any]) -> Community:
     """
     if doc.get("format") != EXPORT_FORMAT:
         raise CommunityError(
-            f"not a LEVI community export (format={doc.get('format')!r})")
+            f"not a LEVI community export (format={doc.get('format')!r})"
+        )
     if doc.get("format_version") != EXPORT_VERSION:
         raise CommunityError(
-            f"unsupported export version {doc.get('format_version')!r}")
+            f"unsupported export version {doc.get('format_version')!r}"
+        )
     sections = doc.get("sections")
     checksums = doc.get("checksums")
     if not isinstance(sections, dict) or not isinstance(checksums, dict):
@@ -207,12 +221,17 @@ def verify_export(doc: Dict[str, Any]) -> Community:
         actual = _sha256(_canonical(sections[name]))
         if expected != actual:
             raise CommunityError(
-                f"checksum mismatch in section {name!r}: export is corrupt or tampered")
+                f"checksum mismatch in section {name!r}: export is corrupt or tampered"
+            )
     if doc.get("manifest") != _sha256(_canonical(checksums)):
         raise CommunityError("manifest mismatch: checksum table was altered")
     meta = doc.get("community", {})
-    raw = {"id": meta.get("id", ""), "name": meta.get("name", ""),
-           "created_at": meta.get("created_at", _now()), **sections}
+    raw = {
+        "id": meta.get("id", ""),
+        "name": meta.get("name", ""),
+        "created_at": meta.get("created_at", _now()),
+        **sections,
+    }
     community = Community.from_dict(raw)
     _check_id(community.id, "community")
     return community
@@ -221,6 +240,7 @@ def verify_export(doc: Dict[str, Any]) -> Community:
 # ---------------------------------------------------------------------------
 # Local store
 # ---------------------------------------------------------------------------
+
 
 class CommunityStore:
     """Own your communities locally. One directory per community."""
@@ -268,13 +288,21 @@ class CommunityStore:
         return [self.get(d.name) for d in sorted(self._base.iterdir()) if d.is_dir()]
 
     # -- mutation helpers -------------------------------------------------
-    def add_channel(self, community_id: str, channel_id: str, name: str,
-                    kind: str = "text", topic: str = "") -> Channel:
+    def add_channel(
+        self,
+        community_id: str,
+        channel_id: str,
+        name: str,
+        kind: str = "text",
+        topic: str = "",
+    ) -> Channel:
         c = self.get(community_id)
         channel_id = _check_id(channel_id, "channel")
         if any(ch.id == channel_id for ch in c.channels):
             raise CommunityError(f"channel {channel_id!r} already exists")
-        ch = Channel(id=channel_id, name=name.strip() or channel_id, kind=kind, topic=topic)
+        ch = Channel(
+            id=channel_id, name=name.strip() or channel_id, kind=kind, topic=topic
+        )
         c.channels.append(ch)
         self._write(c)
         return ch
@@ -289,14 +317,22 @@ class CommunityStore:
         self._write(c)
         return m
 
-    def add_role(self, community_id: str, role_id: str, name: str,
-                 permissions: Optional[List[str]] = None) -> Role:
+    def add_role(
+        self,
+        community_id: str,
+        role_id: str,
+        name: str,
+        permissions: Optional[List[str]] = None,
+    ) -> Role:
         c = self.get(community_id)
         role_id = _check_id(role_id, "role")
         if any(r.id == role_id for r in c.roles):
             raise CommunityError(f"role {role_id!r} already exists")
-        r = Role(id=role_id, name=name.strip() or role_id,
-                 permissions=list(permissions or []))
+        r = Role(
+            id=role_id,
+            name=name.strip() or role_id,
+            permissions=list(permissions or []),
+        )
         c.roles.append(r)
         self._write(c)
         return r
@@ -312,8 +348,9 @@ class CommunityStore:
             role.member_ids.append(member_id)
             self._write(c)
 
-    def post(self, community_id: str, channel_id: str, author_id: str,
-             text: str) -> Message:
+    def post(
+        self, community_id: str, channel_id: str, author_id: str, text: str
+    ) -> Message:
         c = self.get(community_id)
         if not any(ch.id == channel_id for ch in c.channels):
             raise CommunityError(f"unknown channel {channel_id!r}")
@@ -322,7 +359,9 @@ class CommunityStore:
         text = text.strip()
         if not text:
             raise CommunityError("message text must be non-empty")
-        mid = _sha256(f"{community_id}|{channel_id}|{author_id}|{text}|{_now()}".encode())[:12]
+        mid = _sha256(
+            f"{community_id}|{channel_id}|{author_id}|{text}|{_now()}".encode()
+        )[:12]
         msg = Message(id=mid, channel_id=channel_id, author_id=author_id, text=text)
         c.messages.append(msg)
         self._write(c)
@@ -355,20 +394,27 @@ class CommunityStore:
         if self._path(community.id).exists():
             raise CommunityError(
                 f"community {community.id!r} already exists locally; "
-                "import refused rather than overwrite")
+                "import refused rather than overwrite"
+            )
         self._write(community)
         return community
 
     def format_status(self, community_id: str) -> str:
         c = self.get(community_id)
-        lines = [f"=== {c.name} [{c.id}] ===",
-                 f"channels={len(c.channels)} members={len(c.members)} "
-                 f"roles={len(c.roles)} messages={len(c.messages)}",
-                 f"governance rules={len(c.governance.rules)} "
-                 f"moderators={len(c.governance.moderators)}"]
+        lines = [
+            f"=== {c.name} [{c.id}] ===",
+            f"channels={len(c.channels)} members={len(c.members)} "
+            f"roles={len(c.roles)} messages={len(c.messages)}",
+            f"governance rules={len(c.governance.rules)} "
+            f"moderators={len(c.governance.moderators)}",
+        ]
         if c.governance.charter_ref:
             ref = c.governance.charter_ref
-            lines.append(f"charter: {ref.get('id')} v{ref.get('version')} "
-                         f"(checksum {str(ref.get('checksum'))[:12]}…)")
-        lines.append("channels: " + (", ".join(f"#{ch.name}" for ch in c.channels) or "(none)"))
+            lines.append(
+                f"charter: {ref.get('id')} v{ref.get('version')} "
+                f"(checksum {str(ref.get('checksum'))[:12]}…)"
+            )
+        lines.append(
+            "channels: " + (", ".join(f"#{ch.name}" for ch in c.channels) or "(none)")
+        )
         return "\n".join(lines)

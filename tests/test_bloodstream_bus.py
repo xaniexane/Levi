@@ -7,7 +7,6 @@ import json
 
 import pytest
 
-from levi.bloodstream import bus
 from levi.bloodstream.bus import (
     publish,
     reset_bus,
@@ -17,7 +16,6 @@ from levi.bloodstream.bus import (
     unsubscribe,
 )
 from levi.bloodstream.stages import TurnContext
-from levi.bloodstream.trace import TraceWriter
 from levi.bloodstream.turn import reset_session_state, run_turn
 
 
@@ -142,8 +140,7 @@ def test_handler_errors_recorded_in_trace(tmp_path):
     with trace_scope("trace-xyz", base):
         publish("levi.turn.completed", {"ok": True})
     records = [
-        json.loads(l)
-        for l in next(base.glob("*.jsonl")).read_text().splitlines()
+        json.loads(l) for l in next(base.glob("*.jsonl")).read_text().splitlines()
     ]
     assert records[0]["handler_errors"] == ["RuntimeError: subscriber exploded"]
 

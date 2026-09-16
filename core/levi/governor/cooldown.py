@@ -23,7 +23,6 @@ import json
 import os
 import time
 from dataclasses import asdict, dataclass
-from pathlib import Path
 
 from levi.governor.meter import governor_home
 from levi.governor.priority import PassWallet
@@ -95,7 +94,10 @@ class CooldownManager:
         try:
             raw = json.loads(self._state_file.read_text(encoding="utf-8"))
             if isinstance(raw, dict) and "circuits" in raw:
-                circuits, reservations = raw.get("circuits", {}), raw.get("reservations", {})
+                circuits, reservations = (
+                    raw.get("circuits", {}),
+                    raw.get("reservations", {}),
+                )
             else:
                 circuits, reservations = raw, {}
             self._circuits = {
@@ -119,9 +121,7 @@ class CooldownManager:
         tmp.write_text(
             json.dumps(
                 {
-                    "circuits": {
-                        s: c.to_dict() for s, c in self._circuits.items()
-                    },
+                    "circuits": {s: c.to_dict() for s, c in self._circuits.items()},
                     "reservations": self._reservations,
                 },
                 indent=2,
@@ -203,9 +203,7 @@ class CooldownManager:
         # HALF_OPEN with a probe already out: refuse until it resolves.
         return Grant(False, "half-open probe already in flight; awaiting its result")
 
-    def _reserve(
-        self, scope: str, pass_id: str, base: str, wait: int
-    ) -> Grant:
+    def _reserve(self, scope: str, pass_id: str, base: str, wait: int) -> Grant:
         """Redeem one pass use to reserve the next probe slot. Genuine
         contention only — this is only called while the circuit is open."""
         ok, why = self._wallet.redeem(pass_id, scope)

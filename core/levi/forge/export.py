@@ -29,7 +29,7 @@ from . import prs as _prs
 from . import stars as _stars
 from .gitx import GitError, run_git
 from .home import forge_home, validate_name
-from .jsonl import read_jsonl, write_json
+from .jsonl import write_json
 from .repos import create_repo, repo_dir, repo_exists
 
 FORMAT = "forge-export-v1"
@@ -50,10 +50,11 @@ def contrib(home, name):
         if "\x00" not in line:
             continue
         author, date = line.split("\x00", 1)
-        counts[(date.strip(), author.strip())] = counts.get((date.strip(), author.strip()), 0) + 1
+        counts[(date.strip(), author.strip())] = (
+            counts.get((date.strip(), author.strip()), 0) + 1
+        )
     return [
-        {"date": d, "author": a, "commits": n}
-        for (d, a), n in sorted(counts.items())
+        {"date": d, "author": a, "commits": n} for (d, a), n in sorted(counts.items())
     ]
 
 
@@ -75,30 +76,40 @@ def export_repo(home, name, dest) -> Path:
         raise GitError("export destination already exists: %s" % dest)
     dest.mkdir(parents=True)
 
-    meta = {"format": FORMAT, "name": name,
-            "exported_at": datetime.now(timezone.utc).isoformat(),
-            "exported_by": "LEVI Forge"}
+    meta = {
+        "format": FORMAT,
+        "name": name,
+        "exported_at": datetime.now(timezone.utc).isoformat(),
+        "exported_by": "LEVI Forge",
+    }
 
     # 1. git bundle — every ref, stock-git readable. An empty repo (no
     # commits yet) has nothing to bundle; record that honestly instead.
     bundle = dest / "repo.bundle"
-    bundle_proc = run_git(["bundle", "create", str(bundle), "--all"],
-                          cwd=repo_dir(home, name), check=False)
+    bundle_proc = run_git(
+        ["bundle", "create", str(bundle), "--all"],
+        cwd=repo_dir(home, name),
+        check=False,
+    )
     has_history = bundle_proc.returncode == 0
     if not has_history and bundle.is_file():
         bundle.unlink()
     meta["has_history"] = has_history
 
     # 2/3. issues + PRs
-    shutil.copyfile(_issues._path(home, name), dest / "issues.jsonl") \
-        if _issues._path(home, name).is_file() else (dest / "issues.jsonl").write_text("")
-    shutil.copyfile(_prs._path(home, name), dest / "prs.jsonl") \
-        if _prs._path(home, name).is_file() else (dest / "prs.jsonl").write_text("")
+    shutil.copyfile(_issues._path(home, name), dest / "issues.jsonl") if _issues._path(
+        home, name
+    ).is_file() else (dest / "issues.jsonl").write_text("")
+    shutil.copyfile(_prs._path(home, name), dest / "prs.jsonl") if _prs._path(
+        home, name
+    ).is_file() else (dest / "prs.jsonl").write_text("")
 
     # 4. stars (portable reputation)
     star_rec = _stars.starred(home).get(name)
-    write_json(dest / "stars.json", {"name": name, "starred": bool(star_rec),
-                                     "record": star_rec})
+    write_json(
+        dest / "stars.json",
+        {"name": name, "starred": bool(star_rec), "record": star_rec},
+    )
 
     # 5. CI: pipeline + run records + logs
     ci_dest = dest / "ci"
@@ -119,11 +130,7 @@ def export_repo(home, name, dest) -> Path:
     write_json(dest / "meta.json", meta)
 
     # 7. checksums + human-readable manifest
-    files = sorted(
-        str(p.relative_to(dest))
-        for p in dest.rglob("*")
-        if p.is_file()
-    )
+    files = sorted(str(p.relative_to(dest)) for p in dest.rglob("*") if p.is_file())
     sums = {f: _sha256(dest / f) for f in files}
     with open(dest / "SHA256SUMS", "w", encoding="utf-8") as fh:
         for f in files:
@@ -138,7 +145,7 @@ def _manifest_text(meta: dict, sums: dict) -> str:
         "# LEVI Forge export — %s" % meta["name"],
         "",
         "Format: `%s` (spec: LEVI repo `docs/FORGE.md`, section "
-        "\"Export format\")." % FORMAT,
+        '"Export format").' % FORMAT,
         "Exported: %s" % meta["exported_at"],
         "",
         "## What is in this directory",
@@ -208,9 +215,13 @@ def import_repo(home, src, name: "str | None" = None) -> dict:
         # bundle may define HEAD; point the bare repo at the default branch
         run_git(["symbolic-ref", "HEAD", "refs/heads/main"], cwd=bare, check=False)
         # ...but honor whatever branch the bundle actually has:
-        heads = run_git(
-            ["for-each-ref", "--format=%(refname:short)", "refs/heads/"], cwd=bare
-        ).stdout.decode().split()
+        heads = (
+            run_git(
+                ["for-each-ref", "--format=%(refname:short)", "refs/heads/"], cwd=bare
+            )
+            .stdout.decode()
+            .split()
+        )
         if heads:
             preferred = "main" if "main" in heads else heads[0]
             run_git(["symbolic-ref", "HEAD", "refs/heads/" + preferred], cwd=bare)
@@ -219,8 +230,11 @@ def import_repo(home, src, name: "str | None" = None) -> dict:
     for fname in ("issues.jsonl", "prs.jsonl"):
         srcf = src / fname
         if srcf.is_file() and srcf.stat().st_size:
-            dst = (root / ("issues" if fname.startswith("issues") else "prs")
-                   / (name + ".jsonl"))
+            dst = (
+                root
+                / ("issues" if fname.startswith("issues") else "prs")
+                / (name + ".jsonl")
+            )
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(srcf, dst)
             os.chmod(dst, 0o600)

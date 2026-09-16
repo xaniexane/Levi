@@ -127,9 +127,7 @@ def run_service(
     reg = registry or ServiceRegistry()
     definition: Optional[ServiceDefinition] = reg.get(name)
     if definition is None:
-        raise ServiceError(
-            "run: unknown service %r — see `service list`" % (name,)
-        )
+        raise ServiceError("run: unknown service %r — see `service list`" % (name,))
     if not definition.enabled:
         raise ServiceError("run: service %r is disabled" % (name,))
     merged: Dict[str, Any] = dict(definition.params)

@@ -38,12 +38,16 @@ def cmd_hunt_plan(args) -> int:
     existing = next((w for w in state.waves if w.id == plan.wave_id), None)
     if existing is None:
         from datetime import datetime, timezone
-        state.waves.append(hunt.HuntWave(
-            id=plan.wave_id, theme_id=plan.theme.id,
-            planned_at=datetime.now(timezone.utc).isoformat(),
-            status="planned",
-            notes="deeper vein" if plan.deeper_vein else "",
-        ))
+
+        state.waves.append(
+            hunt.HuntWave(
+                id=plan.wave_id,
+                theme_id=plan.theme.id,
+                planned_at=datetime.now(timezone.utc).isoformat(),
+                status="planned",
+                notes="deeper vein" if plan.deeper_vein else "",
+            )
+        )
         if not state.next_due:
             state.next_due = plan.due
         hunt.save_state(state, home=_home(args))
@@ -60,13 +64,16 @@ def cmd_hunt_record(args) -> int:
             try:
                 records.append(ArchiveRecord.from_dict(json.loads(line)))
             except ValueError as exc:
-                print("findings.jsonl line %d refused: %s" % (lineno, exc),
-                      file=sys.stderr)
+                print(
+                    "findings.jsonl line %d refused: %s" % (lineno, exc),
+                    file=sys.stderr,
+                )
                 return 2
     state = hunt.load_state(home=_home(args))
     try:
-        result = hunt.record_hunt(state, args.wave_id, records,
-                                  research_slug=args.slug, home=_home(args))
+        result = hunt.record_hunt(
+            state, args.wave_id, records, research_slug=args.slug, home=_home(args)
+        )
     except ValueError as exc:
         print("refused: %s" % exc, file=sys.stderr)
         return 2
@@ -81,8 +88,9 @@ def cmd_services(args) -> int:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="levi.perpetual")
-    ap.add_argument("--home", default=None,
-                    help="override HOME dir (tests/maintenance)")
+    ap.add_argument(
+        "--home", default=None, help="override HOME dir (tests/maintenance)"
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("pulse")
     sub.add_parser("hunt-plan")

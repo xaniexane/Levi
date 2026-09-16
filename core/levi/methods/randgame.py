@@ -143,16 +143,22 @@ class Game:
             outcomes: dict[str, dict] = {}
             for team in self.teams:
                 new_state, notes = team.model.step(
-                    dict(self._worlds[team.name]), dict(moves))
+                    dict(self._worlds[team.name]), dict(moves)
+                )
                 if not isinstance(new_state, dict):
                     raise GameError(
-                        f"model {team.model.name!r} must return a dict state")
+                        f"model {team.model.name!r} must return a dict state"
+                    )
                 self._worlds[team.name] = new_state
                 outcomes[team.name] = {"state": dict(new_state), "notes": notes}
-            self.rounds_played.append({
-                "round": rnd, "moves": moves, "outcomes": outcomes,
-                "at": time.time(),
-            })
+            self.rounds_played.append(
+                {
+                    "round": rnd,
+                    "moves": moves,
+                    "outcomes": outcomes,
+                    "at": time.time(),
+                }
+            )
         return self
 
     # -- structured debrief -----------------------------------------------------
@@ -172,21 +178,31 @@ class Game:
             base, rest = states[names[0]], names[1:]
             for other in rest:
                 if states[other] != base:
-                    divergences.append({
-                        "round": record["round"],
-                        "models": [team_models[names[0]].name, team_models[other].name],
-                        "differing_keys": sorted(
-                            k for k in set(base) | set(states[other])
-                            if base.get(k) != states[other].get(k)),
-                        "assumptions_a": team_models[names[0]].assumptions,
-                        "assumptions_b": team_models[other].assumptions,
-                    })
+                    divergences.append(
+                        {
+                            "round": record["round"],
+                            "models": [
+                                team_models[names[0]].name,
+                                team_models[other].name,
+                            ],
+                            "differing_keys": sorted(
+                                k
+                                for k in set(base) | set(states[other])
+                                if base.get(k) != states[other].get(k)
+                            ),
+                            "assumptions_a": team_models[names[0]].assumptions,
+                            "assumptions_b": team_models[other].assumptions,
+                        }
+                    )
         return {
             "scenario": self.scenario.name,
             "teams": [
-                {"team": t.name, "model": t.model.name,
-                 "assumptions": t.model.assumptions,
-                 "final_state": self._worlds[t.name]}
+                {
+                    "team": t.name,
+                    "model": t.model.name,
+                    "assumptions": t.model.assumptions,
+                    "final_state": self._worlds[t.name],
+                }
                 for t in self.teams
             ],
             "rounds": len(self.rounds_played),
@@ -204,14 +220,18 @@ class Game:
         for team in d["teams"]:
             lines.append(
                 f"  team {team['team']!r} under {team['model']!r}: "
-                f"{team['final_state']}")
+                f"{team['final_state']}"
+            )
         for div in d["divergences"]:
             lines.append(
                 f"  round {div['round']}: {div['models'][0]!r} vs "
-                f"{div['models'][1]!r} diverged on {div['differing_keys']}")
+                f"{div['models'][1]!r} diverged on {div['differing_keys']}"
+            )
         if not d["divergences"]:
-            lines.append("  the models agreed everywhere — your assumptions "
-                         "don't discriminate this scenario")
+            lines.append(
+                "  the models agreed everywhere — your assumptions "
+                "don't discriminate this scenario"
+            )
         return "\n".join(lines)
 
 

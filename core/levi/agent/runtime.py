@@ -51,8 +51,7 @@ class AgentRuntime:
             ) from None
         if not math.isfinite(budget) or budget < 0:
             raise ValueError(
-                f"AgentRuntime: 'budget' must be a finite value >= 0, "
-                f"got {budget!r}"
+                f"AgentRuntime: 'budget' must be a finite value >= 0, got {budget!r}"
             )
         self.specialists = SpecialistRegistry()
         self.skills = SkillRegistry()
@@ -67,8 +66,7 @@ class AgentRuntime:
     def run(self, intent: str, max_steps: int = 4) -> AgentRun:
         if not isinstance(intent, str) or not intent.strip():
             raise ValueError(
-                f"AgentRuntime.run: 'intent' must be a non-empty string, "
-                f"got {intent!r}"
+                f"AgentRuntime.run: 'intent' must be a non-empty string, got {intent!r}"
             )
         if (
             not isinstance(max_steps, int)

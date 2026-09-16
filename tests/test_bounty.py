@@ -321,12 +321,8 @@ def test_wayback_parses_cdx(scoped, monkeypatch):
 def test_js_harvest_extracts_endpoints_and_exposures(monkeypatch):
     html = '<script src="/static/app.js"></script>'
     js = 'fetch("/api/v1/users"); const api_key = "AKIAIOSFODNN7EXAMPLE";'
-    monkeypatch.setattr(
-        content_mod, "_fetch_text", lambda url, timeout=10: js
-    )
-    out = content_mod.harvest_js(
-        "example.com", {"https://example.com/": html}, delay=0
-    )
+    monkeypatch.setattr(content_mod, "_fetch_text", lambda url, timeout=10: js)
+    out = content_mod.harvest_js("example.com", {"https://example.com/": html}, delay=0)
     assert len(out) == 1
     assert "/api/v1/users" in out[0]["endpoints"]
     assert "aws_access_key" in out[0]["possible_exposures"]
@@ -384,7 +380,9 @@ def test_normalize_domain_idn_to_punycode(raw, expected):
     assert normalize_domain(raw) == expected
 
 
-@pytest.mark.parametrize("raw", [None, 123, 4.5, ["example.com"], {"d": 1}, b"example.com"])
+@pytest.mark.parametrize(
+    "raw", [None, 123, 4.5, ["example.com"], {"d": 1}, b"example.com"]
+)
 def test_normalize_domain_rejects_non_string(raw):
     with pytest.raises(ValueError, match="not a valid domain"):
         normalize_domain(raw)
@@ -419,6 +417,7 @@ def test_invalid_domains_never_touch_network(monkeypatch):
 
 # -- DNS cache --------------------------------------------------------------
 
+
 def test_enum_dns_cache_resolves_each_host_once(scoped, monkeypatch):
     calls = []
 
@@ -429,15 +428,23 @@ def test_enum_dns_cache_resolves_each_host_once(scoped, monkeypatch):
     monkeypatch.setattr(enum_mod, "_resolve", _counting_resolve)
     cache = {}
     first = enum_mod.enumerate_subdomains(
-        "example.com", store=scoped, use_crtsh=False, use_wordlist=True,
-        delay=0, dns_cache=cache,
+        "example.com",
+        store=scoped,
+        use_crtsh=False,
+        use_wordlist=True,
+        delay=0,
+        dns_cache=cache,
     )
     assert len(calls) > 0
     assert len(calls) == len(cache) == len(first)
     # a second enumeration with the same cache must not re-resolve
     second = enum_mod.enumerate_subdomains(
-        "example.com", store=scoped, use_crtsh=False, use_wordlist=True,
-        delay=0, dns_cache=cache,
+        "example.com",
+        store=scoped,
+        use_crtsh=False,
+        use_wordlist=True,
+        delay=0,
+        dns_cache=cache,
     )
     assert len(calls) == len(first)
     assert [s["subdomain"] for s in second] == [s["subdomain"] for s in first]
@@ -459,6 +466,7 @@ def test_enum_dns_cache_defaults_to_fresh_per_call(scoped, monkeypatch):
 
 
 # -- no duplicate homepage fetch --------------------------------------------
+
 
 def test_probe_host_returns_page_bodies(scoped, monkeypatch):
     html = "<html><head><title>T</title></head></html>"
@@ -524,8 +532,10 @@ def test_content_falls_back_to_own_fetch_without_probe_bodies(scoped, monkeypatc
     html = "<html><head><title>Example</title></head></html>"
     fetched = []
     monkeypatch.setattr(
-        content_mod, "_fetch_text", lambda url, timeout=10: fetched.append(url) or (
-            "" if "web.archive.org" in url else html
+        content_mod,
+        "_fetch_text",
+        lambda url, timeout=10: (
+            fetched.append(url) or ("" if "web.archive.org" in url else html)
         ),
     )
     out = content_mod.collect_content("example.com", store=scoped)
@@ -534,6 +544,7 @@ def test_content_falls_back_to_own_fetch_without_probe_bodies(scoped, monkeypatc
 
 
 # -- corrupt persisted JSON --------------------------------------------------
+
 
 def test_corrupt_scope_file_warns_and_fails_closed(tmp_path):
     path = tmp_path / "scope.json"
@@ -582,18 +593,22 @@ def test_finding_add_rejects_blank_fields(fstore):
 
 # -- stage-by-stage degradation ----------------------------------------------
 
+
 def test_run_recon_degrades_stage_by_stage(scoped, fstore, monkeypatch):
     """A network outage in every stage yields error entries, never a traceback."""
     monkeypatch.setattr(
-        enum_mod, "enumerate_subdomains",
+        enum_mod,
+        "enumerate_subdomains",
         lambda *a, **k: (_ for _ in ()).throw(ConnectionError("dns down")),
     )
     monkeypatch.setattr(
-        probe_mod, "probe_host",
+        probe_mod,
+        "probe_host",
         lambda *a, **k: (_ for _ in ()).throw(ConnectionError("tcp down")),
     )
     monkeypatch.setattr(
-        content_mod, "collect_content",
+        content_mod,
+        "collect_content",
         lambda *a, **k: (_ for _ in ()).throw(ConnectionError("http down")),
     )
     report = run_recon("example.com", store=scoped, findings=fstore, delay=0)
@@ -603,7 +618,10 @@ def test_run_recon_degrades_stage_by_stage(scoped, fstore, monkeypatch):
     assert any(e.startswith("enum:") for e in report["errors"])
     assert any("probe example.com" in e for e in report["errors"])
     assert any(e.startswith("content:") for e in report["errors"])
-    assert fstore.record_run(report["domain"], report["started_at"], [])["finding_ids"] == []
+    assert (
+        fstore.record_run(report["domain"], report["started_at"], [])["finding_ids"]
+        == []
+    )
 
 
 @pytest.mark.parametrize("bad_delay", [-1, float("inf"), float("nan"), "0.5", None])

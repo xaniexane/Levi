@@ -134,8 +134,7 @@ class UnifiedDaemon:
         """
         if not isinstance(execute, bool):
             raise ValueError(
-                f"run_cycle: 'execute' must be True or False, "
-                f"got {execute!r}"
+                f"run_cycle: 'execute' must be True or False, got {execute!r}"
             )
         if self.kernel.state.estop:
             return "EMERGENCY STOP active. clear with: levi unified --clear-estop"

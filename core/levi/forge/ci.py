@@ -169,13 +169,21 @@ def _run_step(work: Path, step: dict, idx: int, run_dir: Path) -> dict:
     t0 = time.monotonic()
     try:
         proc = subprocess.run(
-            cmd, shell=shell, cwd=str(work), env=env,
-            stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+            cmd,
+            shell=shell,
+            cwd=str(work),
+            env=env,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
             timeout=timeout,
         )
         rc, out = proc.returncode, proc.stdout
     except subprocess.TimeoutExpired as e:
-        rc, out = 124, (e.stdout or b"") + b"\n[forge] step timed out after %ss\n" % str(timeout).encode()
+        rc, out = (
+            124,
+            (e.stdout or b"")
+            + b"\n[forge] step timed out after %ss\n" % str(timeout).encode(),
+        )
     except FileNotFoundError as e:
         rc, out = 127, ("[forge] command not found: %s\n" % e).encode()
     elapsed = time.monotonic() - t0

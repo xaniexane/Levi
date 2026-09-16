@@ -70,9 +70,7 @@ def test_read_drop_rejects_missing_keys(home):
 
 def test_drop_file_is_owner_only(home):
     path = home / "perm.drop"
-    doors.write_drop(
-        path, node="n", handle="h", time_left_s=60, level=1, door="oracle"
-    )
+    doors.write_drop(path, node="n", handle="h", time_left_s=60, level=1, door="oracle")
     mode = stat.S_IMODE(os.stat(path).st_mode)
     assert mode == 0o600
 

@@ -1,6 +1,5 @@
 """Hermetic tests for levi.vaults: tmp HOME, no network."""
 
-import json
 import time
 
 import pytest
@@ -47,8 +46,9 @@ def test_vault_dir_is_owner_only(manager, home):
 
 def test_add_get_search(manager):
     v = manager.create("alpha")
-    e = v.add(MemoryType.SEMANTIC, "levi runs local-first", importance=0.9,
-              tags=["fact"])
+    e = v.add(
+        MemoryType.SEMANTIC, "levi runs local-first", importance=0.9, tags=["fact"]
+    )
     assert v.get(e.id).content == "levi runs local-first"
     assert v.search("local-first")[0].id == e.id
     assert v.search("nothing-here") == []

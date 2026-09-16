@@ -19,7 +19,9 @@ def cmd_reference(args) -> None:
         refs = _refs.list_references()
         if not refs:
             print("No provider references plugged in.")
-            print("Add one with: levi reference add <provider> --kind plugin|mcp-server|model|media")
+            print(
+                "Add one with: levi reference add <provider> --kind plugin|mcp-server|model|media"
+            )
             print("Or: levi mcp add <name> --url ... --reference <provider>")
             return
         print("══ Provider references ══\n")
@@ -33,7 +35,9 @@ def cmd_reference(args) -> None:
     if action == "add":
         provider = (getattr(args, "provider", None) or "").strip()
         if not provider:
-            print("Usage: levi reference add <provider> --kind <kind> [--detail k=v] [--id <id>]")
+            print(
+                "Usage: levi reference add <provider> --kind <kind> [--detail k=v] [--id <id>]"
+            )
             raise SystemExit(2)
         kind = (getattr(args, "kind", None) or "other").strip()
         detail: dict[str, str] = {}

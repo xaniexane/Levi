@@ -26,8 +26,8 @@ units are rejected with ValueError.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Optional, Union
+from dataclasses import dataclass
+from typing import Optional
 
 __all__ = ["SYSTEMS", "Unit", "Finding", "VSM", "SystemCode"]
 
@@ -74,7 +74,9 @@ class VSM:
             raise ValueError("system name must be a non-empty string")
         self.name = name.strip()
         self.units: list[Unit] = []
-        self.subsystems: dict[str, "VSM"] = {}  # S1 unit name -> its own VSM (recursion)
+        self.subsystems: dict[
+            str, "VSM"
+        ] = {}  # S1 unit name -> its own VSM (recursion)
 
     def add_unit(self, name: str, system: SystemCode, description: str = "") -> Unit:
         if system not in SYSTEMS:
@@ -90,8 +92,14 @@ class VSM:
 
     def decompose(self, s1_unit_name: str, sub_name: Optional[str] = None) -> "VSM":
         """Recursion: an S1 unit is itself a viable system — diagnose it too."""
-        unit = next((u for u in self.units
-                     if u.name.lower() == s1_unit_name.strip().lower() and u.system == "1"), None)
+        unit = next(
+            (
+                u
+                for u in self.units
+                if u.name.lower() == s1_unit_name.strip().lower() and u.system == "1"
+            ),
+            None,
+        )
         if unit is None:
             raise ValueError(f"no S1 unit named {s1_unit_name!r} to decompose")
         sub = VSM(sub_name or unit.name)
@@ -108,44 +116,73 @@ class VSM:
 
         for code in ("1", "2", "3", "4", "5"):
             if code not in present:
-                findings.append(Finding(
-                    system=code,
-                    severity="high" if code in ("1", "4", "5") else "medium",
-                    message=f"S{code} absent: {_SYSTEM_NOTES[code]}."))
+                findings.append(
+                    Finding(
+                        system=code,
+                        severity="high" if code in ("1", "4", "5") else "medium",
+                        message=f"S{code} absent: {_SYSTEM_NOTES[code]}.",
+                    )
+                )
 
         if "3*" not in present:
-            findings.append(Finding(system="3*", severity="medium",
-                                    message=f"S3* absent: {_SYSTEM_NOTES['3*']}."))
+            findings.append(
+                Finding(
+                    system="3*",
+                    severity="medium",
+                    message=f"S3* absent: {_SYSTEM_NOTES['3*']}.",
+                )
+            )
 
         s1, s2, s3 = (len(self._units_in(c)) for c in ("1", "2", "3"))
         if s1 and s2 > s1:
-            findings.append(Finding(
-                system="2", severity="medium",
-                message=f"Coordination overhead: {s2} coordination units for {s1} "
-                        "operational units — S2 may be strangling S1's autonomy."))
+            findings.append(
+                Finding(
+                    system="2",
+                    severity="medium",
+                    message=f"Coordination overhead: {s2} coordination units for {s1} "
+                    "operational units — S2 may be strangling S1's autonomy.",
+                )
+            )
         if s3 > s1 and s1:
-            findings.append(Finding(
-                system="3", severity="medium",
-                message=f"Control heavy: {s3} control units over {s1} operational "
-                        "units — S3 may have colonized S1 (micromanagement)."))
+            findings.append(
+                Finding(
+                    system="3",
+                    severity="medium",
+                    message=f"Control heavy: {s3} control units over {s1} operational "
+                    "units — S3 may have colonized S1 (micromanagement).",
+                )
+            )
         if s1 == 0 and (self._units_in("3") or self._units_in("5")):
-            findings.append(Finding(
-                system="1", severity="high",
-                message="Control/policy exist with no operations — governing nothing."))
+            findings.append(
+                Finding(
+                    system="1",
+                    severity="high",
+                    message="Control/policy exist with no operations — governing nothing.",
+                )
+            )
 
         for unit_name, sub in self.subsystems.items():
             for f in sub.diagnose():
-                findings.append(Finding(
-                    system=f.system, severity=f.severity,
-                    message=f"[recursion via S1 unit {unit_name!r}] {f.message}"))
+                findings.append(
+                    Finding(
+                        system=f.system,
+                        severity=f.severity,
+                        message=f"[recursion via S1 unit {unit_name!r}] {f.message}",
+                    )
+                )
 
-        undecomposed = [u.name for u in self._units_in("1")
-                        if u.name not in self.subsystems]
+        undecomposed = [
+            u.name for u in self._units_in("1") if u.name not in self.subsystems
+        ]
         for name in undecomposed:
-            findings.append(Finding(
-                system="1", severity="info",
-                message=f"S1 unit {name!r} not decomposed — recursion unchecked; "
-                        "call decompose() to verify it is itself viable."))
+            findings.append(
+                Finding(
+                    system="1",
+                    severity="info",
+                    message=f"S1 unit {name!r} not decomposed — recursion unchecked; "
+                    "call decompose() to verify it is itself viable.",
+                )
+            )
         return findings
 
     def viability_report(self) -> dict:
@@ -157,9 +194,14 @@ class VSM:
             "system": self.name,
             "units": len(self.units),
             "systems_present": sorted({u.system for u in self.units}),
-            "findings": [{"system": f.system, "severity": f.severity,
-                          "message": f.message} for f in findings],
+            "findings": [
+                {"system": f.system, "severity": f.severity, "message": f.message}
+                for f in findings
+            ],
             "by_severity": by_severity,
-            "verdict": ("VIABLE" if by_severity["high"] == 0
-                        else "NOT VIABLE — missing load-bearing functions"),
+            "verdict": (
+                "VIABLE"
+                if by_severity["high"] == 0
+                else "NOT VIABLE — missing load-bearing functions"
+            ),
         }

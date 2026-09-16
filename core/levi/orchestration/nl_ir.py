@@ -174,8 +174,7 @@ class NLIRCompiler:
         """Natural-language input must be a non-empty string."""
         if not isinstance(text, str) or not text.strip():
             raise ValueError(
-                f"NLIRCompiler.{what}: 'text' must be a non-empty string, "
-                f"got {text!r}"
+                f"NLIRCompiler.{what}: 'text' must be a non-empty string, got {text!r}"
             )
         return text
 

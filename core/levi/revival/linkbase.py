@@ -92,15 +92,25 @@ class Link:
         raise ValueError(f"document {doc_id!r} is not on link {self.link_id!r}")
 
     def to_dict(self) -> dict:
-        return {"link_id": self.link_id, "src": self.src, "dst": self.dst,
-                "kind": self.kind, "note": self.note,
-                "created_at": self.created_at}
+        return {
+            "link_id": self.link_id,
+            "src": self.src,
+            "dst": self.dst,
+            "kind": self.kind,
+            "note": self.note,
+            "created_at": self.created_at,
+        }
 
     @classmethod
     def from_dict(cls, data: dict) -> "Link":
-        return cls(data["link_id"], data["src"], data["dst"],
-                   data.get("kind", "ref"), data.get("note", ""),
-                   data.get("created_at", 0.0))
+        return cls(
+            data["link_id"],
+            data["src"],
+            data["dst"],
+            data.get("kind", "ref"),
+            data.get("note", ""),
+            data.get("created_at", 0.0),
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -131,23 +141,30 @@ class LinkBase:
         data = json.loads(f.read_text(encoding="utf-8"))
         self.docs = dict(data.get("docs", {}))
         self._counter = int(data.get("counter", 0))
-        self._links = {d["link_id"]: Link.from_dict(d)
-                       for d in data.get("links", [])}
-        self._dangling = {d["link_id"]: Link.from_dict(d)
-                          for d in data.get("dangling", [])}
+        self._links = {d["link_id"]: Link.from_dict(d) for d in data.get("links", [])}
+        self._dangling = {
+            d["link_id"]: Link.from_dict(d) for d in data.get("dangling", [])
+        }
         self._generics = dict(data.get("generics", {}))
 
     def save(self) -> Path:
         self.path.mkdir(parents=True, exist_ok=True)
         target = self._file()
         tmp = target.with_suffix(".tmp")
-        tmp.write_text(json.dumps({
-            "docs": self.docs,
-            "counter": self._counter,
-            "links": [l.to_dict() for l in self._links.values()],
-            "dangling": [l.to_dict() for l in self._dangling.values()],
-            "generics": self._generics,
-        }, ensure_ascii=False, indent=2), encoding="utf-8")
+        tmp.write_text(
+            json.dumps(
+                {
+                    "docs": self.docs,
+                    "counter": self._counter,
+                    "links": [l.to_dict() for l in self._links.values()],
+                    "dangling": [l.to_dict() for l in self._dangling.values()],
+                    "generics": self._generics,
+                },
+                ensure_ascii=False,
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
         tmp.replace(target)
         return target
 
@@ -186,8 +203,9 @@ class LinkBase:
         if doc_id not in self.docs:
             raise UnknownDocument(doc_id)
         del self.docs[doc_id]
-        quarantined = [l for l in self._links.values()
-                       if l.src == doc_id or l.dst == doc_id]
+        quarantined = [
+            l for l in self._links.values() if l.src == doc_id or l.dst == doc_id
+        ]
         for link in quarantined:
             del self._links[link.link_id]
             self._dangling[link.link_id] = link
@@ -217,8 +235,7 @@ class LinkBase:
         return list(self._dangling.values())
 
     # -- links ------------------------------------------------------------------------
-    def add_link(self, src: str, dst: str, kind: str = "ref",
-                 note: str = "") -> Link:
+    def add_link(self, src: str, dst: str, kind: str = "ref", note: str = "") -> Link:
         """Create a link. Both documents must be registered (deny-closed);
         self-links are refused."""
         if src not in self.docs:
@@ -230,8 +247,7 @@ class LinkBase:
         if kind not in ("ref", "generic", "annotation"):
             raise ValueError(f"unknown link kind {kind!r}")
         self._counter += 1
-        link = Link(link_id=f"l{self._counter}", src=src, dst=dst,
-                    kind=kind, note=note)
+        link = Link(link_id=f"l{self._counter}", src=src, dst=dst, kind=kind, note=note)
         self._links[link.link_id] = link
         return link
 
@@ -306,8 +322,14 @@ class LinkBase:
                 positions.append(idx)
                 start = idx + len(term)
             if positions:
-                hits.append({"term": term, "target": gen["target"],
-                             "positions": positions, "note": gen["note"]})
+                hits.append(
+                    {
+                        "term": term,
+                        "target": gen["target"],
+                        "positions": positions,
+                        "note": gen["note"],
+                    }
+                )
         return sorted(hits, key=lambda h: h["positions"][0])
 
     def link_count(self) -> int:

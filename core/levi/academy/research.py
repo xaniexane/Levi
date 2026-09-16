@@ -66,7 +66,9 @@ def extract_key_terms(text: str, limit: int = 12) -> list[str]:
     """
     terms: list[str] = []
     seen: set[str] = set()
-    for m in re.finditer(r"\b([A-Z][a-zA-Z0-9&'\-]*(?:\s+[A-Z][a-zA-Z0-9&'\-]*){0,3})\b", text):
+    for m in re.finditer(
+        r"\b([A-Z][a-zA-Z0-9&'\-]*(?:\s+[A-Z][a-zA-Z0-9&'\-]*){0,3})\b", text
+    ):
         t = m.group(1).strip()
         low = t.lower()
         if len(t) < 3 or low in _STOP or t in seen:
@@ -84,7 +86,9 @@ def extract_key_terms(text: str, limit: int = 12) -> list[str]:
 def _queries_for(topic: str, track: str) -> list[str]:
     base = topic.split(":")[0].strip()
     queries = [base]
-    words = [w for w in re.findall(r"[A-Za-z][A-Za-z\-]{2,}", base) if w.lower() not in _STOP]
+    words = [
+        w for w in re.findall(r"[A-Za-z][A-Za-z\-]{2,}", base) if w.lower() not in _STOP
+    ]
     if len(words) >= 2:
         queries.append(" ".join(words[:3]))
     hints = {
@@ -122,8 +126,10 @@ def _local_fallback(topic: str, track: str) -> dict:
             )
         try:
             import sys
+
             sys.path.insert(0, str(repo_core.parent))
             from levi.knowledge.security.catalog import load_catalog
+
             cat = load_catalog()
             facts.append(
                 f"LEVI's offline security index catalogs {len(cat)} defensive "
@@ -156,12 +162,16 @@ def _local_fallback(topic: str, track: str) -> dict:
             f"Topic '{topic}' studied from the syllabus outline and prior "
             "session journals (compounding context)."
         )
-    return {"facts": facts, "sources": sources, "mode": "local",
-            "key_terms": extract_key_terms(topic), "queries": []}
+    return {
+        "facts": facts,
+        "sources": sources,
+        "mode": "local",
+        "key_terms": extract_key_terms(topic),
+        "queries": [],
+    }
 
 
-def research_topic(topic: str, track: str = "A",
-                   budget_seconds: float = 150.0) -> dict:
+def research_topic(topic: str, track: str = "A", budget_seconds: float = 150.0) -> dict:
     """Research a session topic. Returns facts/sources/key_terms, web or local.
 
     Never raises on network failure: falls back to local materials so the
@@ -192,6 +202,11 @@ def research_topic(topic: str, track: str = "A",
         # de-dup key terms, keep order
         seen: set[str] = set()
         key_terms = [t for t in key_terms if not (t in seen or seen.add(t))][:12]
-        return {"facts": facts, "sources": sources, "mode": "web",
-                "key_terms": key_terms, "queries": queries[:tried]}
+        return {
+            "facts": facts,
+            "sources": sources,
+            "mode": "web",
+            "key_terms": key_terms,
+            "queries": queries[:tried],
+        }
     return _local_fallback(topic, track)

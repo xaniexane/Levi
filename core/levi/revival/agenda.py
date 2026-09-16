@@ -36,7 +36,14 @@ from typing import Any, Dict, List, Optional, Tuple
 # Conditions
 # --------------------------------------------------------------------------
 
-_CONDITION_KINDS = ("keywords", "regex", "tags", "source", "min_importance", "max_importance")
+_CONDITION_KINDS = (
+    "keywords",
+    "regex",
+    "tags",
+    "source",
+    "min_importance",
+    "max_importance",
+)
 
 
 def _norm_text(value: Any) -> str:
@@ -112,6 +119,7 @@ def _check_condition(kind: str, spec: Any, entry: Dict[str, Any]) -> Optional[st
 # Rule
 # --------------------------------------------------------------------------
 
+
 @dataclass
 class Rule:
     """A single filing rule: when its conditions match, file into ``category``.
@@ -132,7 +140,9 @@ class Rule:
         if not isinstance(self.category, str) or not self.category.strip():
             raise ValueError("agenda: rule category must be a non-empty string")
         if not isinstance(self.conditions, dict) or not self.conditions:
-            raise ValueError("agenda: rule %r must have at least one condition" % self.name)
+            raise ValueError(
+                "agenda: rule %r must have at least one condition" % self.name
+            )
         unknown = [k for k in self.conditions if k not in _CONDITION_KINDS]
         if unknown:
             raise ValueError(
@@ -156,7 +166,8 @@ class Rule:
                     float(self.conditions[key])
                 except (TypeError, ValueError):
                     raise ValueError(
-                        "agenda: rule %r condition %r must be a number" % (self.name, key)
+                        "agenda: rule %r condition %r must be a number"
+                        % (self.name, key)
                     )
 
     def matches(self, entry: Dict[str, Any]) -> List[str]:
@@ -200,19 +211,25 @@ class Rule:
 # Explanation
 # --------------------------------------------------------------------------
 
+
 @dataclass
 class Explanation:
     """Why an entry was filed where it was. Always human-readable."""
 
     category: str
-    rule_name: Optional[str]          # None when fail-open fallback fired
+    rule_name: Optional[str]  # None when fail-open fallback fired
     matched: List[str] = field(default_factory=list)
-    candidates: List[str] = field(default_factory=list)  # other matching rules, by priority
+    candidates: List[str] = field(
+        default_factory=list
+    )  # other matching rules, by priority
     detail: str = ""
 
     def summary(self) -> str:
         if self.rule_name is None:
-            return "filed as %r: %s" % (self.category, self.detail or "no rule matched (fail-open)")
+            return "filed as %r: %s" % (
+                self.category,
+                self.detail or "no rule matched (fail-open)",
+            )
         base = "filed as %r by rule %r" % (self.category, self.rule_name)
         if self.matched:
             base += " (%s)" % "; ".join(self.matched)
@@ -246,25 +263,62 @@ def default_rules() -> List[Rule]:
     return [
         Rule(
             name="incidents",
-            conditions={"keywords": ["error", "failure", "crash", "exception", "traceback", "bug", "broken", "panic"]},
+            conditions={
+                "keywords": [
+                    "error",
+                    "failure",
+                    "crash",
+                    "exception",
+                    "traceback",
+                    "bug",
+                    "broken",
+                    "panic",
+                ]
+            },
             category="incidents",
             priority=100,
         ),
         Rule(
             name="decisions",
-            conditions={"keywords": ["decided", "decision", "chose", "will do", "going with", "settled on"]},
+            conditions={
+                "keywords": [
+                    "decided",
+                    "decision",
+                    "chose",
+                    "will do",
+                    "going with",
+                    "settled on",
+                ]
+            },
             category="decisions",
             priority=80,
         ),
         Rule(
             name="learnings",
-            conditions={"keywords": ["learned", "discovered", "realized", "til ", "today i learned", "insight"]},
+            conditions={
+                "keywords": [
+                    "learned",
+                    "discovered",
+                    "realized",
+                    "til ",
+                    "today i learned",
+                    "insight",
+                ]
+            },
             category="learnings",
             priority=70,
         ),
         Rule(
             name="ideas",
-            conditions={"keywords": ["idea", "someday", "maybe we should", "what if", "brainstorm"]},
+            conditions={
+                "keywords": [
+                    "idea",
+                    "someday",
+                    "maybe we should",
+                    "what if",
+                    "brainstorm",
+                ]
+            },
             category="ideas",
             priority=60,
         ),
@@ -302,7 +356,9 @@ class RuleEngine:
     returns ("uncategorized", explanation) and logs the fallback.
     """
 
-    def __init__(self, rules: Optional[List[Rule]] = None, audit_path: Optional[Path] = None):
+    def __init__(
+        self, rules: Optional[List[Rule]] = None, audit_path: Optional[Path] = None
+    ):
         self._rules: Dict[str, Rule] = {}
         self._audit: List[Dict[str, Any]] = []
         self.audit_path = Path(audit_path) if audit_path else None
@@ -312,9 +368,13 @@ class RuleEngine:
     # -- rule CRUD ---------------------------------------------------------
     def add_rule(self, rule: Rule) -> Rule:
         if not isinstance(rule, Rule):
-            raise TypeError("agenda: add_rule expects a Rule, got %r" % type(rule).__name__)
+            raise TypeError(
+                "agenda: add_rule expects a Rule, got %r" % type(rule).__name__
+            )
         if rule.name in self._rules:
-            raise ValueError("agenda: rule %r already exists (remove it first)" % rule.name)
+            raise ValueError(
+                "agenda: rule %r already exists (remove it first)" % rule.name
+            )
         self._rules[rule.name] = rule
         return rule
 
@@ -345,10 +405,14 @@ class RuleEngine:
         """File an entry; returns (category, explanation). Never raises."""
         try:
             if not isinstance(entry, dict):
-                category, expl = _FALLBACK_CATEGORY, Explanation(
-                    category=_FALLBACK_CATEGORY,
-                    rule_name=None,
-                    detail="entry is not a dict (%s); fail-open" % type(entry).__name__,
+                category, expl = (
+                    _FALLBACK_CATEGORY,
+                    Explanation(
+                        category=_FALLBACK_CATEGORY,
+                        rule_name=None,
+                        detail="entry is not a dict (%s); fail-open"
+                        % type(entry).__name__,
+                    ),
                 )
             else:
                 ranked: List[Tuple[Rule, List[str]]] = []
@@ -370,16 +434,22 @@ class RuleEngine:
                         detail="priority %d" % winner.priority,
                     )
                 else:
-                    category, expl = _FALLBACK_CATEGORY, Explanation(
-                        category=_FALLBACK_CATEGORY,
-                        rule_name=None,
-                        detail="no rule matched; fail-open",
+                    category, expl = (
+                        _FALLBACK_CATEGORY,
+                        Explanation(
+                            category=_FALLBACK_CATEGORY,
+                            rule_name=None,
+                            detail="no rule matched; fail-open",
+                        ),
                     )
         except Exception as exc:  # absolute last resort: still fail open
-            category, expl = _FALLBACK_CATEGORY, Explanation(
-                category=_FALLBACK_CATEGORY,
-                rule_name=None,
-                detail="engine error (%s); fail-open" % exc,
+            category, expl = (
+                _FALLBACK_CATEGORY,
+                Explanation(
+                    category=_FALLBACK_CATEGORY,
+                    rule_name=None,
+                    detail="engine error (%s); fail-open" % exc,
+                ),
             )
         self._log_audit(entry, category, expl)
         return category, expl

@@ -24,8 +24,9 @@ class FakeStore:
         self.entries = {}
         self._seq = 0
 
-    def add(self, memory_type, content, importance=0.5, source="test",
-            tags=None, **kwargs):
+    def add(
+        self, memory_type, content, importance=0.5, source="test", tags=None, **kwargs
+    ):
         self._seq += 1
         entry = {
             "id": "fake-%d" % self._seq,
@@ -59,7 +60,9 @@ def test_live_query_fires_on_matching_entry_only(queries):
     hits = []
     queries.subscribe(QuerySpec(keywords=["levi"]), hits.append)
     queries.notify({"content": "LEVI is growing", "tags": [], "importance": 0.5})
-    queries.notify({"content": "unrelated weather report", "tags": [], "importance": 0.5})
+    queries.notify(
+        {"content": "unrelated weather report", "tags": [], "importance": 0.5}
+    )
     assert hits == [{"content": "LEVI is growing", "tags": [], "importance": 0.5}]
 
 
@@ -106,8 +109,8 @@ def test_bad_callback_cannot_break_notify(queries):
     queries.subscribe(QuerySpec(), bad)
     queries.subscribe(QuerySpec(), good.append)
     called = queries.notify({"content": "anything"})
-    assert len(called) == 2          # both were attempted
-    assert len(good) == 1           # the good one still fired
+    assert len(called) == 2  # both were attempted
+    assert len(good) == 1  # the good one still fired
     assert len(queries.errors()) == 1
     assert "boom" in queries.errors()[0]["error"]
 
@@ -123,8 +126,8 @@ def test_live_store_persists_and_notifies(fake, queries):
     hits = []
     queries.subscribe(QuerySpec(tags=["memory"]), hits.append)
     entry = store.store_entry("fact", "the sky is blue", tags=["memory"])
-    assert entry["id"] in fake.entries      # persisted through inner store
-    assert hits == [entry]                  # subscriber notified
+    assert entry["id"] in fake.entries  # persisted through inner store
+    assert hits == [entry]  # subscriber notified
     # non-matching entry: persisted, no notification
     entry2 = store.store_entry("fact", "grass is green", tags=["other"])
     assert entry2["id"] in fake.entries

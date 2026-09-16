@@ -28,7 +28,7 @@ as a measurement discipline, not a science of one best way.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from . import _persist
 
@@ -40,42 +40,114 @@ from . import _persist
 # ---------------------------------------------------------------------------
 
 THERBLIGS: tuple[dict, ...] = (
-    {"name": "Search", "code": "Sh", "effective": False,
-     "blurb": "hunting for the object, file, thread, or control"},
-    {"name": "Find", "code": "F", "effective": False,
-     "blurb": "the moment of locating what was sought"},
-    {"name": "Select", "code": "St", "effective": False,
-     "blurb": "choosing among alternatives"},
-    {"name": "Grasp", "code": "G", "effective": True,
-     "blurb": "taking hold of the object of work"},
-    {"name": "Hold", "code": "H", "effective": False,
-     "blurb": "retaining without progressing"},
-    {"name": "Transport Loaded", "code": "TL", "effective": True,
-     "blurb": "moving the work itself"},
-    {"name": "Transport Empty", "code": "TE", "effective": False,
-     "blurb": "moving to the work (travel without payload)"},
-    {"name": "Position", "code": "P", "effective": True,
-     "blurb": "orienting for the next operation"},
-    {"name": "Pre-Position", "code": "PP", "effective": True,
-     "blurb": "staging so the next operation is trivial"},
-    {"name": "Assemble", "code": "A", "effective": True,
-     "blurb": "putting parts together"},
-    {"name": "Disassemble", "code": "DA", "effective": True,
-     "blurb": "taking apart for inspection or rework"},
-    {"name": "Use", "code": "U", "effective": True,
-     "blurb": "the actual value-adding operation"},
-    {"name": "Inspect", "code": "I", "effective": False,
-     "blurb": "checking quality — necessary but non-advancing"},
-    {"name": "Release Load", "code": "RL", "effective": True,
-     "blurb": "letting go once the operation is done"},
-    {"name": "Unavoidable Delay", "code": "UD", "effective": False,
-     "blurb": "waiting imposed by the process itself"},
-    {"name": "Avoidable Delay", "code": "AD", "effective": False,
-     "blurb": "waiting caused by poor arrangement — pure waste"},
-    {"name": "Plan", "code": "Pn", "effective": False,
-     "blurb": "pausing to decide the next move (rework-signal when large)"},
-    {"name": "Rest", "code": "R", "effective": False,
-     "blurb": "recovery — legitimate in bodies, suspicious in workflows"},
+    {
+        "name": "Search",
+        "code": "Sh",
+        "effective": False,
+        "blurb": "hunting for the object, file, thread, or control",
+    },
+    {
+        "name": "Find",
+        "code": "F",
+        "effective": False,
+        "blurb": "the moment of locating what was sought",
+    },
+    {
+        "name": "Select",
+        "code": "St",
+        "effective": False,
+        "blurb": "choosing among alternatives",
+    },
+    {
+        "name": "Grasp",
+        "code": "G",
+        "effective": True,
+        "blurb": "taking hold of the object of work",
+    },
+    {
+        "name": "Hold",
+        "code": "H",
+        "effective": False,
+        "blurb": "retaining without progressing",
+    },
+    {
+        "name": "Transport Loaded",
+        "code": "TL",
+        "effective": True,
+        "blurb": "moving the work itself",
+    },
+    {
+        "name": "Transport Empty",
+        "code": "TE",
+        "effective": False,
+        "blurb": "moving to the work (travel without payload)",
+    },
+    {
+        "name": "Position",
+        "code": "P",
+        "effective": True,
+        "blurb": "orienting for the next operation",
+    },
+    {
+        "name": "Pre-Position",
+        "code": "PP",
+        "effective": True,
+        "blurb": "staging so the next operation is trivial",
+    },
+    {
+        "name": "Assemble",
+        "code": "A",
+        "effective": True,
+        "blurb": "putting parts together",
+    },
+    {
+        "name": "Disassemble",
+        "code": "DA",
+        "effective": True,
+        "blurb": "taking apart for inspection or rework",
+    },
+    {
+        "name": "Use",
+        "code": "U",
+        "effective": True,
+        "blurb": "the actual value-adding operation",
+    },
+    {
+        "name": "Inspect",
+        "code": "I",
+        "effective": False,
+        "blurb": "checking quality — necessary but non-advancing",
+    },
+    {
+        "name": "Release Load",
+        "code": "RL",
+        "effective": True,
+        "blurb": "letting go once the operation is done",
+    },
+    {
+        "name": "Unavoidable Delay",
+        "code": "UD",
+        "effective": False,
+        "blurb": "waiting imposed by the process itself",
+    },
+    {
+        "name": "Avoidable Delay",
+        "code": "AD",
+        "effective": False,
+        "blurb": "waiting caused by poor arrangement — pure waste",
+    },
+    {
+        "name": "Plan",
+        "code": "Pn",
+        "effective": False,
+        "blurb": "pausing to decide the next move (rework-signal when large)",
+    },
+    {
+        "name": "Rest",
+        "code": "R",
+        "effective": False,
+        "blurb": "recovery — legitimate in bodies, suspicious in workflows",
+    },
 )
 
 _BY_NAME = {t["name"].lower(): t for t in THERBLIGS}
@@ -162,14 +234,16 @@ class TaskPlan:
                 f"therblig store {self._store} does not match plan {self.name!r}"
             )
         for sd in data.get("steps", []):
-            self.steps.append(TaskStep(sd["therblig"], sd.get("note", ""),
-                                       float(sd.get("seconds", 0))))
+            self.steps.append(
+                TaskStep(
+                    sd["therblig"], sd.get("note", ""), float(sd.get("seconds", 0))
+                )
+            )
 
     def save(self) -> None:
         _persist.save_json(
             self._store,
-            {"name": self.name,
-             "steps": [vars(s) for s in self.steps]},
+            {"name": self.name, "steps": [vars(s) for s in self.steps]},
         )
 
     # -- analysis -----------------------------------------------------------
@@ -191,12 +265,14 @@ class TaskPlan:
             secs = by_name.get(t["name"], 0.0)
             if secs <= 0:
                 continue
-            shares.append({
-                "name": t["name"],
-                "seconds": secs,
-                "pct": (100.0 * secs / total) if total else 0.0,
-                "effective": t["effective"],
-            })
+            shares.append(
+                {
+                    "name": t["name"],
+                    "seconds": secs,
+                    "pct": (100.0 * secs / total) if total else 0.0,
+                    "effective": t["effective"],
+                }
+            )
             if not t["effective"]:
                 waste_seconds += secs
         shares.sort(key=lambda s: s["seconds"], reverse=True)

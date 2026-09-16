@@ -31,9 +31,7 @@ class LedgerError(ValueError):
 
 def _require_task_id(task_id: Any) -> str:
     if not isinstance(task_id, str) or not task_id.strip():
-        raise LedgerError(
-            f"invalid task_id {task_id!r}: must be a non-empty string"
-        )
+        raise LedgerError(f"invalid task_id {task_id!r}: must be a non-empty string")
     return task_id
 
 
@@ -49,13 +47,9 @@ def _require_nonneg_finite(value: Any, *, field: str) -> float:
     try:
         num = float(value)  # type: ignore[arg-type]
     except (TypeError, ValueError):
-        raise LedgerError(
-            f"invalid {field} {value!r}: must be a number"
-        ) from None
+        raise LedgerError(f"invalid {field} {value!r}: must be a number") from None
     if not math.isfinite(num) or num < 0:
-        raise LedgerError(
-            f"invalid {field} {value!r}: must be a finite value >= 0"
-        )
+        raise LedgerError(f"invalid {field} {value!r}: must be a finite value >= 0")
     return num
 
 
@@ -260,9 +254,7 @@ class LedgerWriter:
             not isinstance(tools_used, list)
             or any(not isinstance(t, str) for t in tools_used)
         ):
-            raise LedgerError(
-                "invalid tools_used: must be a list of strings or None"
-            )
+            raise LedgerError("invalid tools_used: must be a list of strings or None")
         if verification is not None and not isinstance(verification, dict):
             raise LedgerError(
                 f"invalid verification: must be a dict or None, "
@@ -309,9 +301,7 @@ class LedgerWriter:
             or isinstance(rating, bool)
             or not 0 <= rating <= 5
         ):
-            raise LedgerError(
-                f"invalid rating {rating!r}: must be an integer 0-5"
-            )
+            raise LedgerError(f"invalid rating {rating!r}: must be an integer 0-5")
         comment = _require_str(comment, field="comment")
         with self._connect() as conn:
             cur = conn.execute(
@@ -399,14 +389,8 @@ class LedgerWriter:
             return [dict(r) for r in rows]
 
     def recent_tasks(self, limit: int = 20) -> List[Dict[str, Any]]:
-        if (
-            not isinstance(limit, int)
-            or isinstance(limit, bool)
-            or limit < 0
-        ):
-            raise LedgerError(
-                f"invalid limit {limit!r}: must be an integer >= 0"
-            )
+        if not isinstance(limit, int) or isinstance(limit, bool) or limit < 0:
+            raise LedgerError(f"invalid limit {limit!r}: must be an integer >= 0")
         with self._connect() as conn:
             return [
                 dict(r)

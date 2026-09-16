@@ -179,9 +179,7 @@ class DaemonKernel:
     # --- Event bus ---
     def emit(self, kind: str, payload: Optional[Dict[str, Any]] = None) -> KernelEvent:
         if not isinstance(kind, str) or not kind.strip():
-            raise ValueError(
-                f"emit: 'kind' must be a non-empty string, got {kind!r}"
-            )
+            raise ValueError(f"emit: 'kind' must be a non-empty string, got {kind!r}")
         if payload is not None and not isinstance(payload, dict):
             raise ValueError(
                 f"emit: 'payload' must be a dict or None, got {type(payload).__name__}"
@@ -210,9 +208,7 @@ class DaemonKernel:
 
     def on(self, kind: str, handler: Callable[[KernelEvent], None]) -> None:
         if not isinstance(kind, str) or not kind.strip():
-            raise ValueError(
-                f"on: 'kind' must be a non-empty string, got {kind!r}"
-            )
+            raise ValueError(f"on: 'kind' must be a non-empty string, got {kind!r}")
         if not callable(handler):
             raise ValueError(
                 f"on: 'handler' must be callable, got {type(handler).__name__}"
@@ -257,9 +253,7 @@ class DaemonKernel:
                 f"charge: 'units' must be a number, got {units!r}"
             ) from None
         if not math.isfinite(units):
-            raise ValueError(
-                f"charge: 'units' must be finite, got {units!r}"
-            )
+            raise ValueError(f"charge: 'units' must be finite, got {units!r}")
         if not isinstance(label, str):
             raise ValueError(
                 f"charge: 'label' must be a string, got {type(label).__name__}"
@@ -283,9 +277,7 @@ class DaemonKernel:
                 f"register_tool: 'name' must be a non-empty string, got {name!r}"
             )
         if not isinstance(description, str) or not description.strip():
-            raise ValueError(
-                "register_tool: 'description' must be a non-empty string"
-            )
+            raise ValueError("register_tool: 'description' must be a non-empty string")
         self._tools[name] = description
         self._persist()
 

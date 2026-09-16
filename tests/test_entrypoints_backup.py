@@ -29,6 +29,7 @@ def test_now_then_status_then_verify(monkeypatch, tmp_path, capsys):
     assert "local snapshots: 1" in capsys.readouterr().out
 
     from levi.backup.snapshot import list_snapshots
+
     sid = list_snapshots()[0]["snapshot_id"]
     assert main(["verify", sid]) == 0
     assert "OK" in capsys.readouterr().out
@@ -44,6 +45,7 @@ def test_restore_apply_without_yes_refused(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)
     assert main(["now", "--label", "test"]) == 0
     from levi.backup.snapshot import list_snapshots
+
     sid = list_snapshots()[0]["snapshot_id"]
     # --apply without --yes must fail closed: live state is never touched
     assert main(["restore", sid, "--apply"]) == 2

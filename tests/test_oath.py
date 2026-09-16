@@ -19,7 +19,7 @@ from pathlib import Path
 
 import pytest
 
-from levi.oath import CONTACTS_FILE, COMMANDS_DIR, MAILDIR, OWNER_FILE, oath_home
+from levi.oath import COMMANDS_DIR, MAILDIR, OWNER_FILE, oath_home
 
 GPG = shutil.which("gpg")
 needs_gpg = pytest.mark.skipif(GPG is None, reason="gpg not installed")
@@ -29,9 +29,11 @@ needs_gpg = pytest.mark.skipif(GPG is None, reason="gpg not installed")
 # fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture
 def no_network(monkeypatch):
     """Block all TCP connects; gpg's local agent still works."""
+
     def _blocked(self, addr, *a, **k):
         raise RuntimeError("network disabled in tests")
 
@@ -118,39 +120,54 @@ def _add_alice(book_fixture_grants: dict, **kw):
     from levi.oath.contacts import Contact, load_book
 
     book = load_book()
-    contact = Contact(name="alice", email="alice@example.com",
-                      fingerprints=kw.pop("fingerprints", []),
-                      grants=book_fixture_grants, **kw)
+    contact = Contact(
+        name="alice",
+        email="alice@example.com",
+        fingerprints=kw.pop("fingerprints", []),
+        grants=book_fixture_grants,
+        **kw,
+    )
     book.add(contact)
     return contact
 
 
-def _define_and_sign(name: str, argv: list, args: dict, tier: str,
-                     *, signer: str, expires_at: str = "") -> Path:
+def _define_and_sign(
+    name: str, argv: list, args: dict, tier: str, *, signer: str, expires_at: str = ""
+) -> Path:
     """Write a definition draft and run the owner sign ceremony with an
     explicit signing key (never gpg's default-key choice)."""
     from levi.oath.commands import CommandRegistry
 
     registry = CommandRegistry()
-    registry.write_unsigned({
-        "name": name, "version": 1, "description": f"test command {name}",
-        "tier": tier, "argv": argv, "args": args,
-        "created_by": "owner", "created_at": "2026-09-15T00:00:00Z",
-        "expires_at": expires_at,
-    })
+    registry.write_unsigned(
+        {
+            "name": name,
+            "version": 1,
+            "description": f"test command {name}",
+            "tier": tier,
+            "argv": argv,
+            "args": args,
+            "created_by": "owner",
+            "created_at": "2026-09-15T00:00:00Z",
+            "expires_at": expires_at,
+        }
+    )
     return registry.sign(name, key_fingerprint=signer)
 
 
-MARK_ARGV = [sys.executable, "-c",
-             "import pathlib,sys; pathlib.Path(sys.argv[1]).write_text('ran')",
-             "{flag}"]
-MARK_ARGS = {"flag": {"type": "string", "required": True,
-                      "pattern": r"^[\w\-./]+$"}}
+MARK_ARGV = [
+    sys.executable,
+    "-c",
+    "import pathlib,sys; pathlib.Path(sys.argv[1]).write_text('ran')",
+    "{flag}",
+]
+MARK_ARGS = {"flag": {"type": "string", "required": True, "pattern": r"^[\w\-./]+$"}}
 
 
 # ---------------------------------------------------------------------------
 # trust classification
 # ---------------------------------------------------------------------------
+
 
 @needs_gpg
 def test_trust_unsigned_is_unverified(oath_env, no_network):
@@ -175,8 +192,9 @@ def test_trust_pinned_signature_is_trusted(oath_env, no_network):
     from levi.oath.trust import TRUSTED, classify_message
 
     raw = _clearsigned_email("alice@example.com", "hi", "cmd:noop\n")
-    result = classify_message(email.message_from_bytes(raw),
-                              pins=[oath_env["fingerprint"].lower()])
+    result = classify_message(
+        email.message_from_bytes(raw), pins=[oath_env["fingerprint"].lower()]
+    )
     assert result.level == TRUSTED
     assert result.detail.startswith("valid signature from a pinned")
 
@@ -207,6 +225,7 @@ def test_trust_pgp_mime_multipart_signed(oath_env, no_network):
 # keys
 # ---------------------------------------------------------------------------
 
+
 @needs_gpg
 def test_keys_generate_and_list(oath_env, no_network):
     from levi.oath.keys import fingerprint_of, generate_key, list_keys
@@ -219,7 +238,13 @@ def test_keys_generate_and_list(oath_env, no_network):
 
 @needs_gpg
 def test_keys_import_roundtrip(oath_env, no_network):
-    from levi.oath.keys import delete_key, fingerprint_of, generate_key, import_key, run_gpg
+    from levi.oath.keys import (
+        delete_key,
+        fingerprint_of,
+        generate_key,
+        import_key,
+        run_gpg,
+    )
 
     info = generate_key("Oath Import <import@example.com>")
     proc = run_gpg("--armor", "--export-secret-keys", info.fingerprint)
@@ -234,12 +259,17 @@ def test_keys_import_roundtrip(oath_env, no_network):
 # contacts
 # ---------------------------------------------------------------------------
 
+
 def test_contacts_roundtrip(hermetic_home):
     from levi.oath.contacts import load_book
 
-    contact = _add_alice({"disk-usage": ["r"]}, fingerprints=["A" * 40],
-                         trust_floor="TRUSTED", tier_ceiling="execute",
-                         max_missions_per_hour=5)
+    contact = _add_alice(
+        {"disk-usage": ["r"]},
+        fingerprints=["A" * 40],
+        trust_floor="TRUSTED",
+        tier_ceiling="execute",
+        max_missions_per_hour=5,
+    )
     book = load_book()
     back = book.get("alice")
     assert back is not None and back.email == "alice@example.com"
@@ -263,17 +293,24 @@ def test_contacts_floor_cannot_drop_below_verified(hermetic_home):
 # signed command registry
 # ---------------------------------------------------------------------------
 
+
 @needs_gpg
 def test_unsigned_definition_is_refused(oath_env, no_network):
     from levi.oath.commands import CommandRegistry, DefinitionError
 
     _owner_json(oath_env["fingerprint"])
     registry = CommandRegistry()
-    registry.write_unsigned({
-        "name": "unsigned-cmd", "version": 1, "tier": "read",
-        "argv": ["/bin/echo", "{word}"], "args": {},
-        "created_by": "owner", "created_at": "2026-01-01T00:00:00Z",
-    })
+    registry.write_unsigned(
+        {
+            "name": "unsigned-cmd",
+            "version": 1,
+            "tier": "read",
+            "argv": ["/bin/echo", "{word}"],
+            "args": {},
+            "created_by": "owner",
+            "created_at": "2026-01-01T00:00:00Z",
+        }
+    )
     with pytest.raises(DefinitionError, match="missing detached signature"):
         registry.load_all()
 
@@ -283,9 +320,13 @@ def test_signed_definition_loads(oath_env, no_network):
     from levi.oath.commands import CommandRegistry
 
     _owner_json(oath_env["fingerprint"])
-    _define_and_sign("say", ["/bin/echo", "{word}"],
-                     {"word": {"type": "string", "required": True}}, "read",
-                     signer=oath_env["fingerprint"])
+    _define_and_sign(
+        "say",
+        ["/bin/echo", "{word}"],
+        {"word": {"type": "string", "required": True}},
+        "read",
+        signer=oath_env["fingerprint"],
+    )
     definition = CommandRegistry().get("say")
     assert definition.tier == "read"
     assert definition.render({"word": "hi"}) == ["/bin/echo", "hi"]
@@ -296,8 +337,9 @@ def test_tampered_definition_is_refused(oath_env, no_network):
     from levi.oath.commands import CommandRegistry, DefinitionError
 
     _owner_json(oath_env["fingerprint"])
-    _define_and_sign("fragile", ["/bin/echo", "x"], {}, "read",
-                     signer=oath_env["fingerprint"])
+    _define_and_sign(
+        "fragile", ["/bin/echo", "x"], {}, "read", signer=oath_env["fingerprint"]
+    )
     path = COMMANDS_DIR() / "fragile.json"
     raw = path.read_bytes().replace(b"/bin/echo", b"/bin/EVIL")
     path.write_bytes(raw)
@@ -310,9 +352,14 @@ def test_expired_definition_is_refused(oath_env, no_network):
     from levi.oath.commands import CommandRegistry, DefinitionError
 
     _owner_json(oath_env["fingerprint"])
-    _define_and_sign("old", ["/bin/echo", "x"], {}, "read",
-                     signer=oath_env["fingerprint"],
-                     expires_at="2020-01-01T00:00:00Z")
+    _define_and_sign(
+        "old",
+        ["/bin/echo", "x"],
+        {},
+        "read",
+        signer=oath_env["fingerprint"],
+        expires_at="2020-01-01T00:00:00Z",
+    )
     with pytest.raises(DefinitionError, match="expired"):
         CommandRegistry().load_all()
 
@@ -325,8 +372,9 @@ def test_wrong_signer_is_refused(oath_env, no_network):
     other = generate_key("Oath Attacker <attacker@example.com>")
     _owner_json(other.fingerprint)  # owner pins the ATTACKER key...
     # ...but the definition is signed by the test-owner key -> mismatch
-    _define_and_sign("mismatch", ["/bin/echo", "x"], {}, "read",
-                     signer=oath_env["fingerprint"])
+    _define_and_sign(
+        "mismatch", ["/bin/echo", "x"], {}, "read", signer=oath_env["fingerprint"]
+    )
     with pytest.raises(DefinitionError, match="not by the owner"):
         CommandRegistry().load_all()
 
@@ -335,7 +383,8 @@ def test_arg_validation_rejects_shell_and_bad_patterns(hermetic_home):
     from levi.oath.commands import CommandDefinition, DefinitionError
 
     definition = CommandDefinition(
-        name="say", argv=["/bin/echo", "{word}"],
+        name="say",
+        argv=["/bin/echo", "{word}"],
         args={"word": {"type": "string", "required": True, "pattern": r"^[a-z]+$"}},
         tier="read",
     )
@@ -353,13 +402,18 @@ def test_arg_validation_rejects_shell_and_bad_patterns(hermetic_home):
 def test_pipeline_module_imports_without_agent_stack():
     """pipeline.py must not import levi.agent at module top level."""
     proc = subprocess.run(
-        [sys.executable, "-c",
-         "import sys; sys.path.insert(0, 'core');"
-         "import levi.oath.pipeline;"
-         "mods = [m for m in sys.modules if m == 'levi.agent' or m.startswith('levi.agent.')];"
-         "assert not mods, mods; print('clean')"],
+        [
+            sys.executable,
+            "-c",
+            "import sys; sys.path.insert(0, 'core');"
+            "import levi.oath.pipeline;"
+            "mods = [m for m in sys.modules if m == 'levi.agent' or m.startswith('levi.agent.')];"
+            "assert not mods, mods; print('clean')",
+        ],
         cwd=str(Path(__file__).resolve().parents[1]),
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=60,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        timeout=60,
     )
     assert proc.returncode == 0, proc.stderr.decode()[-500:]
     assert b"clean" in proc.stdout
@@ -368,6 +422,7 @@ def test_pipeline_module_imports_without_agent_stack():
 # ---------------------------------------------------------------------------
 # pipelines
 # ---------------------------------------------------------------------------
+
 
 def test_pipeline_parse(hermetic_home):
     from levi.oath.pipeline import parse
@@ -385,9 +440,13 @@ def test_pipeline_chains_stdout_with_mocked_ai(oath_env, no_network, monkeypatch
     from levi.oath.pipeline import parse, run
 
     _owner_json(oath_env["fingerprint"])
-    _define_and_sign("say", ["/bin/echo", "{word}"],
-                     {"word": {"type": "string", "required": True}}, "read",
-                     signer=oath_env["fingerprint"])
+    _define_and_sign(
+        "say",
+        ["/bin/echo", "{word}"],
+        {"word": {"type": "string", "required": True}},
+        "read",
+        signer=oath_env["fingerprint"],
+    )
     contact = _add_alice({"say": ["r"], "ai": ["x"]}, tier_ceiling="execute")
 
     seen = {}
@@ -407,14 +466,17 @@ def test_pipeline_chains_stdout_with_mocked_ai(oath_env, no_network, monkeypatch
 
 
 @needs_gpg
-def test_pipeline_denies_ungranted_stage_before_execution(oath_env, no_network, tmp_path):
+def test_pipeline_denies_ungranted_stage_before_execution(
+    oath_env, no_network, tmp_path
+):
     from levi.oath.commands import CommandRegistry
     from levi.oath.pipeline import parse, run
 
     _owner_json(oath_env["fingerprint"])
     marker = tmp_path / "should-not-exist"
-    _define_and_sign("mark", MARK_ARGV, MARK_ARGS, "write",
-                     signer=oath_env["fingerprint"])
+    _define_and_sign(
+        "mark", MARK_ARGV, MARK_ARGS, "write", signer=oath_env["fingerprint"]
+    )
     contact = _add_alice({})  # deny-closed: no grants at all
     pipeline = parse(f"cmd:mark flag={marker}")
     run(pipeline, contact, registry=CommandRegistry())
@@ -432,13 +494,15 @@ def test_pipeline_dry_run_executes_nothing(oath_env, no_network, tmp_path):
 
     _owner_json(oath_env["fingerprint"])
     marker = tmp_path / "dry-run-marker"
-    _define_and_sign("mark", MARK_ARGV, MARK_ARGS, "write",
-                     signer=oath_env["fingerprint"])
+    _define_and_sign(
+        "mark", MARK_ARGV, MARK_ARGS, "write", signer=oath_env["fingerprint"]
+    )
     contact = _add_alice({"mark": ["w"]}, tier_ceiling="write")
-    pipeline = parse(f"cmd:mark flag={marker} | reply:body=\"done {{stdin}}\"")
+    pipeline = parse(f'cmd:mark flag={marker} | reply:body="done {{stdin}}"')
     # reply needs a grant too
     contact.grants["reply"] = ["w"]
     from levi.oath.contacts import load_book
+
     load_book().update(contact)
     run(pipeline, contact, registry=CommandRegistry(), dry_run=True)
     assert all(r.ok for r in pipeline.results)
@@ -450,6 +514,7 @@ def test_pipeline_dry_run_executes_nothing(oath_env, no_network, tmp_path):
 # ---------------------------------------------------------------------------
 # audit
 # ---------------------------------------------------------------------------
+
 
 def test_audit_chain_verifies(hermetic_home):
     from levi.oath.audit import AuditLog
@@ -503,6 +568,7 @@ def test_audit_checkpoint_roundtrip(oath_env, no_network):
 # inbox
 # ---------------------------------------------------------------------------
 
+
 @needs_gpg
 def test_inbox_builds_trusted_mission(oath_env, no_network):
     from levi.oath.contacts import load_book
@@ -510,8 +576,9 @@ def test_inbox_builds_trusted_mission(oath_env, no_network):
     from levi.oath.trust import TRUSTED
 
     _add_alice({}, fingerprints=[oath_env["fingerprint"]])
-    raw = _clearsigned_email("alice@example.com", "mission",
-                             "cmd:say word=hi | ai:\"shout {stdin}\"\n")
+    raw = _clearsigned_email(
+        "alice@example.com", "mission", 'cmd:say word=hi | ai:"shout {stdin}"\n'
+    )
     mission = build_mission(raw, load_book())
     assert mission.trust == TRUSTED
     assert mission.contact_name == "alice"
@@ -551,6 +618,7 @@ def test_inbox_maildir_poll(oath_env, no_network):
 # daemon
 # ---------------------------------------------------------------------------
 
+
 @needs_gpg
 def test_daemon_denies_untrusted_mail(oath_env, no_network):
     from levi.oath.audit import AuditLog
@@ -574,11 +642,15 @@ def test_daemon_runs_signed_mission(oath_env, no_network, tmp_path):
 
     _owner_json(oath_env["fingerprint"])
     marker = tmp_path / "mission-ran"
-    _define_and_sign("mark", MARK_ARGV, MARK_ARGS, "write",
-                     signer=oath_env["fingerprint"])
-    _add_alice({"mark": ["w"]}, fingerprints=[oath_env["fingerprint"]],
-               tier_ceiling="write")
-    _drop_mail(_clearsigned_email("alice@example.com", "go", f"cmd:mark flag={marker}\n"))
+    _define_and_sign(
+        "mark", MARK_ARGV, MARK_ARGS, "write", signer=oath_env["fingerprint"]
+    )
+    _add_alice(
+        {"mark": ["w"]}, fingerprints=[oath_env["fingerprint"]], tier_ceiling="write"
+    )
+    _drop_mail(
+        _clearsigned_email("alice@example.com", "go", f"cmd:mark flag={marker}\n")
+    )
     daemon = Daemon()
     summary = daemon.run_once(use_imap=False, use_maildir=True)
     assert summary["ran"] == 1 and summary["denied"] == 0
@@ -596,11 +668,15 @@ def test_daemon_dry_run_sends_no_mail(oath_env, no_network, tmp_path):
 
     _owner_json(oath_env["fingerprint"])
     marker = tmp_path / "dry-marker"
-    _define_and_sign("mark", MARK_ARGV, MARK_ARGS, "write",
-                     signer=oath_env["fingerprint"])
-    contact = _add_alice({"mark": ["w"], "reply": ["w"]},
-                         fingerprints=[oath_env["fingerprint"]], tier_ceiling="write")
-    body = f"cmd:mark flag={marker} | reply:body=\"done {{stdin}}\"\n"
+    _define_and_sign(
+        "mark", MARK_ARGV, MARK_ARGS, "write", signer=oath_env["fingerprint"]
+    )
+    contact = _add_alice(
+        {"mark": ["w"], "reply": ["w"]},
+        fingerprints=[oath_env["fingerprint"]],
+        tier_ceiling="write",
+    )
+    body = f'cmd:mark flag={marker} | reply:body="done {{stdin}}"\n'
     _drop_mail(_clearsigned_email("alice@example.com", "go", body))
     daemon = Daemon(dry_run=True)
     summary = daemon.run_once(use_imap=False, use_maildir=True)
@@ -616,6 +692,7 @@ def test_daemon_rate_limit_denies(oath_env, no_network):
 
     _add_alice({}, max_missions_per_hour=1)
     from levi.oath.contacts import load_book
+
     contact = load_book().get("alice")
     assert contact is not None
     record_mission_use(contact)

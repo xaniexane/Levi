@@ -27,7 +27,7 @@ from __future__ import annotations
 
 from itertools import product
 from math import prod
-from typing import Iterator, Optional
+from typing import Iterator
 
 __all__ = ["MorphologicalBox", "MAX_COMBINATIONS"]
 
@@ -127,8 +127,9 @@ class MorphologicalBox:
 
     def survivors(self, allow_large: bool = False) -> list[dict[str, str]]:
         """Every combination that passes cross-consistency assessment."""
-        return [c for c in self.enumerate(allow_large=allow_large)
-                if self._consistent(c)]
+        return [
+            c for c in self.enumerate(allow_large=allow_large) if self._consistent(c)
+        ]
 
     def prune_report(self, allow_large: bool = False) -> dict:
         """The method's honesty made visible: what was considered, struck, kept."""

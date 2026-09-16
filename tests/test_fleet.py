@@ -390,6 +390,7 @@ def test_swarm_status_missing_run():
 
 # -- hardening: validation ---------------------------------------------------
 
+
 def test_plan_rejects_blank_objective():
     with pytest.raises(ValueError, match="objective"):
         Plan(objective="   ", nodes=[], method="heuristic")

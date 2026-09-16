@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import os
 import re
-import shutil
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
@@ -80,7 +79,9 @@ def gpg_sign_args() -> list[str]:
     return []
 
 
-def run_gpg(*args: str, input_bytes: Optional[bytes] = None, timeout: int = 120) -> subprocess.CompletedProcess:
+def run_gpg(
+    *args: str, input_bytes: Optional[bytes] = None, timeout: int = 120
+) -> subprocess.CompletedProcess:
     """Run ``gpg`` against the Oath keyring.
 
     Always passes ``--batch --no-tty --homedir <oath gnupg>``.  Raises

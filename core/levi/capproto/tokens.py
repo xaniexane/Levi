@@ -53,7 +53,9 @@ def default_home() -> Path:
     return base / "capproto"
 
 
-def _require_patterns(actions: Optional[List[str]], parent: Capability) -> tuple[str, ...]:
+def _require_patterns(
+    actions: Optional[List[str]], parent: Capability
+) -> tuple[str, ...]:
     if actions is None:
         return parent.actions
     if not isinstance(actions, (list, tuple)):
@@ -98,9 +100,7 @@ def attenuate(
         try:
             ttl = float(ttl_seconds)
         except (TypeError, ValueError):
-            raise AttenuationError(
-                "attenuate: ttl_seconds must be a number"
-            ) from None
+            raise AttenuationError("attenuate: ttl_seconds must be a number") from None
         if ttl <= 0:
             raise AttenuationError("attenuate: ttl_seconds must be positive")
         if current + ttl > parent.expires_at:
@@ -137,9 +137,7 @@ def decode(token: str) -> Dict[str, Any]:
     payload_b64 = token.split(".", 1)[0]
     pad = "=" * (-len(payload_b64) % 4)
     try:
-        claims = json.loads(
-            base64.urlsafe_b64decode(payload_b64 + pad).decode("utf-8")
-        )
+        claims = json.loads(base64.urlsafe_b64decode(payload_b64 + pad).decode("utf-8"))
     except Exception as exc:
         raise AttenuationError(f"decode: token payload is not JSON ({exc})") from exc
     if not isinstance(claims, dict):
@@ -187,7 +185,9 @@ class MintLedger:
     def record_issued(self, token: str) -> None:
         self._record("issued", token)
 
-    def record_attenuated(self, parent: Capability, child_token: str, current: Optional[float] = None) -> None:
+    def record_attenuated(
+        self, parent: Capability, child_token: str, current: Optional[float] = None
+    ) -> None:
         self._record(
             "attenuated",
             child_token,

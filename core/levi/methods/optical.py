@@ -74,7 +74,9 @@ class LightTable:
             if mask == 0:
                 return []
         assert mask is not None
-        return [self.documents[pos] for pos in range(len(self.documents)) if mask >> pos & 1]
+        return [
+            self.documents[pos] for pos in range(len(self.documents)) if mask >> pos & 1
+        ]
 
     def view(self, terms: list[str]) -> str:
         """Render the optical-coincidence grid: rows = terms, columns =
@@ -83,22 +85,32 @@ class LightTable:
         if not terms:
             raise ValueError("view needs at least one term")
         keys = [t.strip().lower() for t in terms]
-        header = "term \\ doc | " + " ".join(f"{i:>3}" for i in range(len(self.documents)))
+        header = "term \\ doc | " + " ".join(
+            f"{i:>3}" for i in range(len(self.documents))
+        )
         lines = [header, "-" * len(header)]
         masks = []
         for term, key in zip(terms, keys):
             mask = self.cards.get(key, 0)
             masks.append(mask)
-            row = " ".join("  ●" if mask >> pos & 1 else "  ○" for pos in range(len(self.documents)))
+            row = " ".join(
+                "  ●" if mask >> pos & 1 else "  ○"
+                for pos in range(len(self.documents))
+            )
             lines.append(f"{term[:9]:<9} | {row}")
         lines.append("-" * len(header))
         combined = masks[0]
         for m in masks[1:]:
             combined &= m
-        row = " ".join("  ●" if combined >> pos & 1 else "  ○" for pos in range(len(self.documents)))
+        row = " ".join(
+            "  ●" if combined >> pos & 1 else "  ○"
+            for pos in range(len(self.documents))
+        )
         lines.append(f"{'AND':<9} | {row}")
         hits = self.coincide(terms)
-        lines.append(f"light through: {hits if hits else '— (no document matches all terms)'}")
+        lines.append(
+            f"light through: {hits if hits else '— (no document matches all terms)'}"
+        )
         return "\n".join(lines)
 
     def terms(self) -> list[str]:

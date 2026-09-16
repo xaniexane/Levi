@@ -68,9 +68,7 @@ def _root(home: Optional[Path] = None) -> Path:
 
 def _list_dir(list_name: str, home: Optional[Path] = None) -> Path:
     if not _NAME_RE.match(list_name or ""):
-        raise ValueError(
-            "bad list name %r (a-z A-Z 0-9 _ -, max 40)" % (list_name,)
-        )
+        raise ValueError("bad list name %r (a-z A-Z 0-9 _ -, max 40)" % (list_name,))
     p = _root(home) / list_name
     if not p.is_dir():
         raise KeyError("unknown list %r" % (list_name,))
@@ -131,9 +129,7 @@ def _email_ok(email: str) -> bool:
     return bool(local) and bool(domain) and "." in domain and " " not in email
 
 
-def subscribe(
-    list_name: str, email: str, home: Optional[Path] = None
-) -> str:
+def subscribe(list_name: str, email: str, home: Optional[Path] = None) -> str:
     """Start a double-opt-in subscription; returns the confirmation token."""
     d = _list_dir(list_name, home)
     if not _email_ok(email):
@@ -150,16 +146,16 @@ def subscribe(
     return token
 
 
-def confirm(
-    list_name: str, token: str, home: Optional[Path] = None
-) -> str:
+def confirm(list_name: str, token: str, home: Optional[Path] = None) -> str:
     """Confirm a subscription token. Raises ValueError on unknown/expired."""
     d = _list_dir(list_name, home)
     f = d / "pending" / ("%s.json" % token)
     if not f.is_file():
         raise ValueError("unknown or expired confirmation token")
     pending = _read_json(f, {})
-    created = datetime.fromisoformat(pending.get("created", "1970-01-01T00:00:00+00:00"))
+    created = datetime.fromisoformat(
+        pending.get("created", "1970-01-01T00:00:00+00:00")
+    )
     if _utcnow() - created > _TOKEN_TTL:
         f.unlink()
         raise ValueError("confirmation token expired")
@@ -172,9 +168,7 @@ def confirm(
     return email
 
 
-def unsubscribe(
-    list_name: str, email: str, home: Optional[Path] = None
-) -> bool:
+def unsubscribe(list_name: str, email: str, home: Optional[Path] = None) -> bool:
     """Remove a subscriber (and any pending token). True if they were a member."""
     d = _list_dir(list_name, home)
     members = _members(d)
@@ -190,8 +184,9 @@ def unsubscribe(
 # ---------------------------------------------------------------- posting + moderation
 
 
-def _new_message(sender: str, subject: str, body: str,
-                 posted_at: Optional[datetime] = None) -> Dict[str, Any]:
+def _new_message(
+    sender: str, subject: str, body: str, posted_at: Optional[datetime] = None
+) -> Dict[str, Any]:
     ts = posted_at or _utcnow()
     return {
         "id": secrets.token_hex(8),

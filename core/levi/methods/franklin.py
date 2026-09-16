@@ -27,7 +27,6 @@ from __future__ import annotations
 import json
 import os
 from collections import Counter
-from dataclasses import dataclass, field
 from datetime import date, timedelta
 from pathlib import Path
 from typing import Optional, Union
@@ -43,17 +42,47 @@ DateLike = Union[date, str]
 # Franklin's 13 virtues with his precepts (Autobiography, public domain).
 FRANKLIN_VIRTUES: tuple[tuple[str, str], ...] = (
     ("Temperance", "Eat not to dullness; drink not to elevation."),
-    ("Silence", "Speak not but what may benefit others or yourself; avoid trifling conversation."),
-    ("Order", "Let all your things have their places; let each part of your business have its time."),
-    ("Resolution", "Resolve to perform what you ought; perform without fail what you resolve."),
-    ("Frugality", "Make no expense but to do good to others or yourself; i.e., waste nothing."),
-    ("Industry", "Lose no time; be always employ'd in something useful; cut off all unnecessary actions."),
-    ("Sincerity", "Use no hurtful deceit; think innocently and justly, and, if you speak, speak accordingly."),
-    ("Justice", "Wrong none by doing injuries, or omitting the benefits that are your duty."),
-    ("Moderation", "Avoid extremes; forbear resenting injuries so much as you think they deserve."),
+    (
+        "Silence",
+        "Speak not but what may benefit others or yourself; avoid trifling conversation.",
+    ),
+    (
+        "Order",
+        "Let all your things have their places; let each part of your business have its time.",
+    ),
+    (
+        "Resolution",
+        "Resolve to perform what you ought; perform without fail what you resolve.",
+    ),
+    (
+        "Frugality",
+        "Make no expense but to do good to others or yourself; i.e., waste nothing.",
+    ),
+    (
+        "Industry",
+        "Lose no time; be always employ'd in something useful; cut off all unnecessary actions.",
+    ),
+    (
+        "Sincerity",
+        "Use no hurtful deceit; think innocently and justly, and, if you speak, speak accordingly.",
+    ),
+    (
+        "Justice",
+        "Wrong none by doing injuries, or omitting the benefits that are your duty.",
+    ),
+    (
+        "Moderation",
+        "Avoid extremes; forbear resenting injuries so much as you think they deserve.",
+    ),
     ("Cleanliness", "Tolerate no uncleanliness in body, cloaths, or habitation."),
-    ("Tranquillity", "Be not disturbed at trifles, or at accidents common or unavoidable."),
-    ("Chastity", "Rarely use venery but for health or offspring, never to dullness or weakness."),
+    (
+        "Tranquillity",
+        "Be not disturbed at trifles, or at accidents common or unavoidable.",
+    ),
+    (
+        "Chastity",
+        "Rarely use venery but for health or offspring, never to dullness or weakness.",
+    ),
     ("Humility", "Imitate Jesus and Socrates."),
 )
 
@@ -69,7 +98,9 @@ def _parse_date(value: DateLike, field_name: str = "date") -> date:
             return date(int(y), int(m), int(d))
         except (ValueError, AttributeError):
             pass
-    raise ValueError(f"{field_name}: expected datetime.date or 'YYYY-MM-DD', got {value!r}")
+    raise ValueError(
+        f"{field_name}: expected datetime.date or 'YYYY-MM-DD', got {value!r}"
+    )
 
 
 def default_store_path() -> Path:
@@ -96,7 +127,9 @@ class FranklinLedger:
         self.virtues: list[tuple[str, str]] = [(n.strip(), p) for n, p in vlist]
         self._names = [n for n, _ in self.virtues]
         self.start = _parse_date(start) if start is not None else date.today()
-        self._spots: dict[str, set[str]] = {n: set() for n in self._names}  # virtue -> ISO dates
+        self._spots: dict[str, set[str]] = {
+            n: set() for n in self._names
+        }  # virtue -> ISO dates
         self._path = Path(path) if path is not None else None
         if self._path is not None and self._path.exists():
             self._load()
@@ -112,7 +145,9 @@ class FranklinLedger:
 
     def save(self) -> None:
         if self._path is None:
-            raise ValueError("no store path configured; construct with path= to persist")
+            raise ValueError(
+                "no store path configured; construct with path= to persist"
+            )
         self._path.parent.mkdir(parents=True, exist_ok=True)
         payload = {
             "virtues": self.virtues,
@@ -123,9 +158,13 @@ class FranklinLedger:
 
     # -- the nightly ritual --------------------------------------------------
     def _check_virtue(self, virtue: str) -> str:
-        match = next((n for n in self._names if n.lower() == virtue.strip().lower()), None)
+        match = next(
+            (n for n in self._names if n.lower() == virtue.strip().lower()), None
+        )
         if match is None:
-            raise ValueError(f"unknown virtue: {virtue!r} (known: {', '.join(self._names)})")
+            raise ValueError(
+                f"unknown virtue: {virtue!r} (known: {', '.join(self._names)})"
+            )
         return match
 
     def mark(self, virtue: str, on_date: Optional[DateLike] = None) -> None:
@@ -156,7 +195,9 @@ class FranklinLedger:
         return self._names[self.week_index(on_date) % len(self._names)]
 
     # -- reading the grid --------------------------------------------------------
-    def grid(self, start: Optional[DateLike] = None, days: int = 7) -> dict[str, list[bool]]:
+    def grid(
+        self, start: Optional[DateLike] = None, days: int = 7
+    ) -> dict[str, list[bool]]:
         """Black-spot matrix: virtue -> [spotted?] for ``days`` from ``start``."""
         if days < 1:
             raise ValueError("days must be >= 1")

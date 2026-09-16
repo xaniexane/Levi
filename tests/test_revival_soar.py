@@ -14,15 +14,21 @@ from levi.revival.soar import (
 
 def _deploy_deliberation(service: str = "api", version: str = "3") -> Deliberation:
     d = Deliberation(f"deploy service {service} version {version}")
-    d.record(f"service {service} version {version} is stopped",
-             f"resolve-deps {service} version {version}",
-             f"deps for {service} version {version} resolved")
-    d.record(f"deps for {service} version {version} resolved",
-             f"build {service} version {version}",
-             f"{service} version {version} built")
-    d.record(f"{service} version {version} built",
-             f"smoke-test {service} version {version}",
-             f"{service} version {version} healthy")
+    d.record(
+        f"service {service} version {version} is stopped",
+        f"resolve-deps {service} version {version}",
+        f"deps for {service} version {version} resolved",
+    )
+    d.record(
+        f"deps for {service} version {version} resolved",
+        f"build {service} version {version}",
+        f"{service} version {version} built",
+    )
+    d.record(
+        f"{service} version {version} built",
+        f"smoke-test {service} version {version}",
+        f"{service} version {version} healthy",
+    )
     d.succeed()
     return d
 

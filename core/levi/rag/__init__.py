@@ -11,8 +11,14 @@ from .pipeline import ask, AskResult
 from .eval import evaluate, build_questions, print_report
 
 __all__ = [
-    "chunk_text", "Chunk",
-    "ingest_file", "ingest_directory", "IngestReport",
-    "ask", "AskResult",
-    "evaluate", "build_questions", "print_report",
+    "chunk_text",
+    "Chunk",
+    "ingest_file",
+    "ingest_directory",
+    "IngestReport",
+    "ask",
+    "AskResult",
+    "evaluate",
+    "build_questions",
+    "print_report",
 ]

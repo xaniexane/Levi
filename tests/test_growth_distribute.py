@@ -38,9 +38,7 @@ def env(tmp_path, monkeypatch):
     (tmp_path / "sessions").mkdir()
     # MemoryStore.DEFAULT_DATA_DIR is bound at import time from Path.home();
     # patching HOME alone does not move it.
-    monkeypatch.setattr(
-        _mem_store, "DEFAULT_DATA_DIR", levi_home / "memory"
-    )
+    monkeypatch.setattr(_mem_store, "DEFAULT_DATA_DIR", levi_home / "memory")
     return {"home": levi_home, "tmp": tmp_path}
 
 
@@ -74,7 +72,9 @@ def test_infer_subsystems_keyword_map():
         "backup",
         "vault",
     ]
-    multi = infer_subsystems("Galaxy package install failed during agent tool delegation")
+    multi = infer_subsystems(
+        "Galaxy package install failed during agent tool delegation"
+    )
     assert "galaxy" in multi and "agent" in multi
 
 
@@ -124,7 +124,9 @@ def test_distribute_accepts_dict_learnings(env):
 
 
 def test_distribute_journal_records(env):
-    learning = _learning("Archive ingested 12 research reports about forgotten software.")
+    learning = _learning(
+        "Archive ingested 12 research reports about forgotten software."
+    )
     report = distribute_learnings([learning], env["home"], cycle_id="cyc-test")
     lines = _journal_lines(env)
     dist = [r for r in lines if r.get("kind") == "distribution"]
@@ -142,7 +144,9 @@ def test_distribute_bus_end_to_end(env):
     from levi.bloodstream import bus as blood_bus
 
     received = []
-    token = blood_bus.subscribe("levi.growth.learning", lambda t, p: received.append((t, p)))
+    token = blood_bus.subscribe(
+        "levi.growth.learning", lambda t, p: received.append((t, p))
+    )
     try:
         report = distribute_learnings(
             [_learning("The daemon heartbeat interval should be 15 minutes.")],
@@ -202,7 +206,10 @@ def test_distribute_skips_bad_items(env):
     report = distribute_learnings(
         [
             _learning("short"),  # too short
-            {"kind": "nonsense", "content": "long enough but bad kind here"},  # bad kind
+            {
+                "kind": "nonsense",
+                "content": "long enough but bad kind here",
+            },  # bad kind
             42,  # not a learning
             _learning("The user asked to remember the backup schedule nightly."),
         ],
@@ -226,7 +233,8 @@ def test_distribute_dry_run_no_writes(env):
 
 def test_distribute_respects_rails_no_sentience(env):
     report = distribute_learnings(
-        [_learning("When X happens, do Y — a functional workflow pattern.")], env["home"]
+        [_learning("When X happens, do Y — a functional workflow pattern.")],
+        env["home"],
     )
     assert report["distributed"] == 1
     store = MemoryStore(data_dir=env["home"] / "memory")

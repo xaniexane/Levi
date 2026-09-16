@@ -17,7 +17,6 @@ Every source degrades honestly: a missing subsystem is reported as
 
 from __future__ import annotations
 
-import json
 import os
 import time
 from datetime import datetime, timezone
@@ -33,15 +32,22 @@ def _archive_stats(home) -> Dict[str, Any]:
     The archive builder is still landing its store module; count whatever
     durable record files exist and say exactly what was counted.
     """
-    arch = Path(home if home is not None else os.path.expanduser("~")) / ".levi" / "archive"
+    arch = (
+        Path(home if home is not None else os.path.expanduser("~"))
+        / ".levi"
+        / "archive"
+    )
     if not arch.is_dir():
         return {"status": "not-initialized", "records": 0}
     total = 0
     sources: Dict[str, int] = {}
     for path in sorted(arch.rglob("*.jsonl")):
         try:
-            n = sum(1 for line in path.read_text(encoding="utf-8").splitlines()
-                    if line.strip())
+            n = sum(
+                1
+                for line in path.read_text(encoding="utf-8").splitlines()
+                if line.strip()
+            )
         except OSError:
             continue
         # Only count files that look like record stores, not logs.
@@ -97,8 +103,9 @@ def _hunt_summary(home, now: float) -> Dict[str, Any]:
     }
 
 
-def read_pulse(home: "str | os.PathLike[str] | None" = None,
-               now: Optional[float] = None) -> Dict[str, Any]:
+def read_pulse(
+    home: "str | os.PathLike[str] | None" = None, now: Optional[float] = None
+) -> Dict[str, Any]:
     """Read the full proof-of-life snapshot. Never raises for missing data."""
     now = now if now is not None else time.time()
     alive = supervise.read_alive_marker(home, now=now)
@@ -151,38 +158,51 @@ def format_pulse(p: Dict[str, Any]) -> str:
     """Render the snapshot as a one-glance text block."""
     lines = []
     eng = "ALIVE" if p["engine_running"] else "NOT RUNNING"
-    lines.append("LEVI perpetual engine: %s  (uptime %s)"
-                 % (eng, _fmt_uptime(p["uptime_s"])))
+    lines.append(
+        "LEVI perpetual engine: %s  (uptime %s)" % (eng, _fmt_uptime(p["uptime_s"]))
+    )
     lines.append("services: %s" % ", ".join(p["services"]))
     if p["crash_counts"]:
-        lines.append("crashes: %d total %s"
-                     % (p["crashes_total"],
-                        "{" + ", ".join("%s:%d" % kv
-                                        for kv in sorted(p["crash_counts"].items())) + "}"))
+        lines.append(
+            "crashes: %d total %s"
+            % (
+                p["crashes_total"],
+                "{"
+                + ", ".join("%s:%d" % kv for kv in sorted(p["crash_counts"].items()))
+                + "}",
+            )
+        )
     else:
         lines.append("crashes: none recorded")
     arch = p["archive"]
     if arch["status"] == "not-initialized":
         lines.append("archive: not initialized yet")
     else:
-        lines.append("archive: %d records%s"
-                     % (arch["records"],
-                        " | pending waves: %s" % ", ".join(arch["pending_waves"])
-                        if arch.get("pending_waves") else ""))
+        lines.append(
+            "archive: %d records%s"
+            % (
+                arch["records"],
+                " | pending waves: %s" % ", ".join(arch["pending_waves"])
+                if arch.get("pending_waves")
+                else "",
+            )
+        )
     h = p["hunts"]
     if h["status"] == "ok":
         due = h["next_due"] or "unscheduled"
         flag = "  OVERDUE" if h["overdue"] else ""
-        lines.append("hunts: %d waves completed | last %s (%d findings) | next due %s%s"
-                     % (h["waves_completed"], h["last_wave"],
-                        h["last_findings"], due, flag))
+        lines.append(
+            "hunts: %d waves completed | last %s (%d findings) | next due %s%s"
+            % (h["waves_completed"], h["last_wave"], h["last_findings"], due, flag)
+        )
     else:
         lines.append("hunts: %s" % h["status"])
     b = p["budgets"]
     if b["status"] == "ok":
         rem = b["remaining"]
-        lines.append("token budgets: %s"
-                     % ", ".join("%s:%s" % kv for kv in sorted(rem.items())))
+        lines.append(
+            "token budgets: %s" % ", ".join("%s:%s" % kv for kv in sorted(rem.items()))
+        )
     else:
         lines.append("token budgets: unavailable (%s)" % b.get("reason", "?"))
     lines.append("build queue: %d findings waiting" % p["build_queue_depth"])

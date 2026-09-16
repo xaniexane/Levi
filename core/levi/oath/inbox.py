@@ -33,14 +33,13 @@ import email.utils
 import imaplib
 import json
 import ssl
-import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable, Optional
 
 from levi.oath import MAIL_FILE, MAILDIR
 from levi.oath.contacts import Contact, ContactBook
-from levi.oath.pipeline import Pipeline, parse
+from levi.oath.pipeline import parse
 from levi.oath.trust import UNTRUSTED, UNVERIFIED, Classification, classify_message
 
 __all__ = [
@@ -136,6 +135,7 @@ def load_mail_config(path: Optional[Path] = None) -> MailConfig:
 # Maildir
 # ---------------------------------------------------------------------------
 
+
 def iter_maildir(maildir: Optional[Path] = None) -> Iterable[tuple[str, bytes]]:
     """Yield ``(key, raw_bytes)`` for messages in ``new/`` then ``cur/``.
 
@@ -175,6 +175,7 @@ def mark_seen_maildir(key: str, maildir: Optional[Path] = None) -> None:
 # IMAP
 # ---------------------------------------------------------------------------
 
+
 def fetch_imap_unseen(config: MailConfig) -> list[tuple[str, bytes]]:
     """Fetch UNSEEN messages over IMAP SSL (stdlib ``imaplib``).
 
@@ -201,7 +202,11 @@ def fetch_imap_unseen(config: MailConfig) -> list[tuple[str, bytes]]:
             if typ != "OK" or not fetched:
                 continue
             for part in fetched:
-                if isinstance(part, tuple) and len(part) == 2 and isinstance(part[1], bytes):
+                if (
+                    isinstance(part, tuple)
+                    and len(part) == 2
+                    and isinstance(part[1], bytes)
+                ):
                     out.append((uid.decode("ascii", "replace"), part[1]))
                     break
         return out
@@ -230,6 +235,7 @@ def mark_seen_imap(uid: str, config: MailConfig) -> None:
 # ---------------------------------------------------------------------------
 # Mission building
 # ---------------------------------------------------------------------------
+
 
 def _first_text_body(msg: email.message.Message) -> str:
     """Best-effort plain-text body for *unsigned* mail (diagnostics only)."""
@@ -295,7 +301,10 @@ def build_mission(raw: bytes, book: ContactBook) -> Mission:
     pipeline_text = ""
     stages: list[dict[str, Any]] = []
     parse_error = ""
-    if classification.level not in (UNVERIFIED, UNTRUSTED) and classification.signed_bytes:
+    if (
+        classification.level not in (UNVERIFIED, UNTRUSTED)
+        and classification.signed_bytes
+    ):
         pipeline_text = _strip_clearsign_armor(
             classification.signed_bytes.decode("utf-8", "replace")
         )
@@ -342,22 +351,48 @@ def poll(
             try:
                 out.append((key, build_mission(raw, book)))
             except Exception as exc:  # never let one bad mail kill the poll
-                out.append((key, Mission(None, None, UNVERIFIED, None, None, "",
-                                        detail=f"parse failure: {exc}")))
+                out.append(
+                    (
+                        key,
+                        Mission(
+                            None,
+                            None,
+                            UNVERIFIED,
+                            None,
+                            None,
+                            "",
+                            detail=f"parse failure: {exc}",
+                        ),
+                    )
+                )
     if use_imap:
         config = config or load_mail_config()
         for uid, raw in fetch_imap_unseen(config):
             try:
                 out.append((f"imap:{uid}", build_mission(raw, book)))
             except Exception as exc:
-                out.append((f"imap:{uid}", Mission(None, None, UNVERIFIED, None, None, "",
-                                                  detail=f"parse failure: {exc}")))
+                out.append(
+                    (
+                        f"imap:{uid}",
+                        Mission(
+                            None,
+                            None,
+                            UNVERIFIED,
+                            None,
+                            None,
+                            "",
+                            detail=f"parse failure: {exc}",
+                        ),
+                    )
+                )
     return out
 
 
-def mark_seen(key: str, *, config: Optional[MailConfig] = None, maildir: Optional[Path] = None) -> None:
+def mark_seen(
+    key: str, *, config: Optional[MailConfig] = None, maildir: Optional[Path] = None
+) -> None:
     """Mark an intake message seen after its mission is recorded."""
     if key.startswith("imap:"):
-        mark_seen_imap(key[len("imap:"):], config or load_mail_config())
+        mark_seen_imap(key[len("imap:") :], config or load_mail_config())
     else:
         mark_seen_maildir(key, maildir)

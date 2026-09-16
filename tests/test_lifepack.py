@@ -427,7 +427,12 @@ def test_v2_export_tolerates_missing_modules(tmp_path, monkeypatch):
 
     seed_home(tmp_path)
     # Simulate a tree where the atlas / workflows / growth modules never landed.
-    for mod in ("levi.interop.atlas", "levi.workflows", "levi.growth", "levi.growth.journal"):
+    for mod in (
+        "levi.interop.atlas",
+        "levi.workflows",
+        "levi.growth",
+        "levi.growth.journal",
+    ):
         monkeypatch.setitem(sys.modules, mod, None)
     pack = export_pack(tmp_path)
     assert pack["sections"]["capabilities"] == {"status": "atlas-not-landed"}
@@ -447,8 +452,7 @@ def test_v1_pack_still_validates_and_imports(tmp_path, monkeypatch):
         "exported_at": v2["exported_at"],
         "levi_version": v2["levi_version"],
         "sections": {
-            k: v2["sections"][k]
-            for k in ("identity", "settings", "memory", "skills")
+            k: v2["sections"][k] for k in ("identity", "settings", "memory", "skills")
         },
     }
     validate_pack(v1)  # v1 must still be accepted
@@ -502,13 +506,13 @@ def test_preview_v2_sections(tmp_path, monkeypatch):
     pack = export_pack(src)
     lines = preview_import(pack, tmp_path / "dst")
     assert any(line.startswith("capabilities:") for line in lines)
-    assert any(
-        line.startswith("growth:") and "newborn" in line for line in lines
-    ), "\n".join(lines)
+    assert any(line.startswith("growth:") and "newborn" in line for line in lines), (
+        "\n".join(lines)
+    )
     assert any(line.startswith("workflows:") for line in lines)
-    assert any(
-        line.startswith("manifest:") and "pack v2" in line for line in lines
-    ), "\n".join(lines)
+    assert any(line.startswith("manifest:") and "pack v2" in line for line in lines), (
+        "\n".join(lines)
+    )
 
 
 if __name__ == "__main__":

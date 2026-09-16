@@ -167,9 +167,7 @@ def pin(
     if existing is not None and not replace:
         raise ValueError("slot %r already pinned; use replace=True to overwrite" % name)
     if chord:
-        clash = next(
-            (s for s in slots if s.chord == chord and s.name != name), None
-        )
+        clash = next((s for s in slots if s.chord == chord and s.name != name), None)
         if clash:
             raise ValueError(
                 "chord %r is already bound to slot %r" % (chord, clash.name)
@@ -232,7 +230,12 @@ def render(slot: Slot) -> str:
 def seed() -> List[Slot]:
     """Pin a starter set of honest local-first LEVI workflows. Idempotent."""
     starters = [
-        ("pulse", "python3 -m levi.perpetual pulse", "perpetual engine proof-of-life", "p"),
+        (
+            "pulse",
+            "python3 -m levi.perpetual pulse",
+            "perpetual engine proof-of-life",
+            "p",
+        ),
         ("growth", "python3 -m levi.growth status", "growth loop status", "g"),
         ("news", "python3 -m levi.news refresh", "daily news corpus refresh", "n"),
     ]

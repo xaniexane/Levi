@@ -2228,6 +2228,15 @@ def cmd_builder(args):
     print(b.format_status())
 
 
+def cmd_council(args):
+    """Multi-model code council: seats | add-candidate | build."""
+    from levi.council.cli import main as council_main
+
+    code = council_main(getattr(args, "council_args", None) or [])
+    if code:
+        raise SystemExit(code)
+
+
 def cmd_unified(args):
     """Unified LEVI Daemon Core — operating layer cycle."""
     from levi.daemon.unified import UnifiedDaemon
@@ -5640,6 +5649,20 @@ def main():
     bld_p.add_argument("--target", default="independent", help="independent|levi")
     bld_p.add_argument("--apply", default=None, help="Job id to apply")
     bld_p.add_argument("--force", action="store_true")
+    # === COUNCIL-REGION-BEGIN: council command wiring ===
+    # Keep ALL council wiring inside this delimited region — do not scatter
+    # council hunks elsewhere in this file.
+    council_p = sub.add_parser(
+        "council",
+        help="Multi-model code council: seats | add-candidate | build",
+    )
+    council_p.add_argument(
+        "council_args",
+        nargs=argparse.REMAINDER,
+        help="council subcommand, e.g. seats | add-candidate --seat emergent "
+        "--file PATH | build --task TEXT --tests PATH",
+    )
+    # === COUNCIL-REGION-END ===
     uni_p = sub.add_parser("unified", help="LEVI Daemon Core unified cycle")
     uni_p.add_argument("--cycle", default=None, help="Run one cycle for task text")
     uni_p.add_argument(
@@ -6927,6 +6950,9 @@ def main():
     except Exception:
         pass
     # === MEGAZORD-AXIS1-REGION-END ===
+    # === COUNCIL-REGION-BEGIN: council command dispatch ===
+    cmds["council"] = cmd_council
+    # === COUNCIL-REGION-END ===
     fn = cmds.get(args.command)
     if fn:
         try:

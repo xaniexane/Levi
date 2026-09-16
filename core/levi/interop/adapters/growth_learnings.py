@@ -33,7 +33,7 @@ import os
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 
 def _utc_stamp() -> str:
@@ -62,9 +62,7 @@ def _validate_candidate(raw: Any, lineno: int) -> Dict[str, Any]:
     return entry
 
 
-def consume_pending_learnings(
-    queue_path, journal
-) -> Dict[str, Any]:
+def consume_pending_learnings(queue_path, journal) -> Dict[str, Any]:
     """Consume the pending-learnings queue into the growth journal.
 
     ``queue_path`` may be a str or :class:`pathlib.Path`. ``journal`` must
@@ -103,9 +101,7 @@ def consume_pending_learnings(
             raw = json.loads(line)
         except ValueError as exc:
             summary["rejected"] += 1
-            summary["rejections"].append(
-                "line %d: invalid JSON (%s)" % (lineno, exc)
-            )
+            summary["rejections"].append("line %d: invalid JSON (%s)" % (lineno, exc))
             continue
         try:
             entry = _validate_candidate(raw, lineno)

@@ -16,8 +16,9 @@ from typing import Any, Callable, Dict, List, Optional
 _WORKFLOWS: Dict[str, Dict[str, Any]] = {}
 
 
-def register(name: str, summary: str, steps: List[str],
-             runner: Callable[..., Dict[str, Any]]) -> None:
+def register(
+    name: str, summary: str, steps: List[str], runner: Callable[..., Dict[str, Any]]
+) -> None:
     if not name or not isinstance(name, str):
         raise ValueError("register: name must be a non-empty string")
     if not callable(runner):
@@ -37,8 +38,7 @@ def list_workflows() -> List[Dict[str, Any]]:
     ]
 
 
-def run_workflow(name: str, home: Optional[Any] = None,
-                 **kwargs) -> Dict[str, Any]:
+def run_workflow(name: str, home: Optional[Any] = None, **kwargs) -> Dict[str, Any]:
     entry = _WORKFLOWS.get(name)
     if entry is None:
         raise ValueError(

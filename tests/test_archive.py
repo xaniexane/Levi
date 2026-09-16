@@ -5,13 +5,10 @@ no real research reports — parsers are tested on small synthetic fixtures
 in the three heading styles.
 """
 
-import json
-from pathlib import Path
-
 import pytest
 
 from levi.archive import ingest as ing
-from levi.archive.record import (ArchiveRecord, Provenance, make_id, slugify)
+from levi.archive.record import ArchiveRecord, Provenance, make_id, slugify
 from levi.archive.search import build_collections, search
 from levi.archive.store import ArchiveStore
 
@@ -104,24 +101,38 @@ M40_FIXTURE = """# Fake Methods
 
 
 def _prov(slug="fake-research-1"):
-    return Provenance(found_date="2026-09-16", research_slug=slug,
-                      notes="synthetic fixture")
+    return Provenance(
+        found_date="2026-09-16", research_slug=slug, notes="synthetic fixture"
+    )
 
 
 def _rec(**kw):
-    base = dict(id="arch-t-fake-one", title="Fake One", era="1990",
-                kind="software", summary="s", mechanism="m", decline="d",
-                revival_recipe="r", levi_application="a",
-                provenance=_prov())
+    base = dict(
+        id="arch-t-fake-one",
+        title="Fake One",
+        era="1990",
+        kind="software",
+        summary="s",
+        mechanism="m",
+        decline="d",
+        revival_recipe="r",
+        levi_application="a",
+        provenance=_prov(),
+    )
     base.update(kw)
     return ArchiveRecord(**base)
 
 
 # -- record validation ----------------------------------------------------
 
+
 def test_record_roundtrip():
-    rec = _rec(sources=["https://example.com/x"], rating="load-bearing",
-               status="preserved", skepticism="maybe myth")
+    rec = _rec(
+        sources=["https://example.com/x"],
+        rating="load-bearing",
+        status="preserved",
+        skepticism="maybe myth",
+    )
     d = rec.to_dict()
     back = ArchiveRecord.from_dict(d)
     assert back == rec
@@ -157,8 +168,7 @@ def test_provenance_requires_fields():
     with pytest.raises(ValueError):
         Provenance.from_dict({"found_date": "2026-09-16"})
     with pytest.raises(ValueError):
-        ArchiveRecord.from_dict({**_rec().to_dict(),
-                                 "provenance": {"found_date": "x"}})
+        ArchiveRecord.from_dict({**_rec().to_dict(), "provenance": {"found_date": "x"}})
 
 
 def test_slugify_and_make_id():
@@ -169,6 +179,7 @@ def test_slugify_and_make_id():
 
 
 # -- sw30 parser ----------------------------------------------------------
+
 
 def test_parse_sw30_two_entries():
     recs = ing.parse_sw30(SW30_FIXTURE, _prov())
@@ -194,6 +205,7 @@ def test_parse_sw30_stops_before_ranked_list():
 
 # -- sw50 parser ----------------------------------------------------------
 
+
 def test_parse_sw50_badges_and_ratings():
     recs = ing.parse_sw50(SW50_FIXTURE, _prov())
     assert len(recs) == 2
@@ -201,8 +213,10 @@ def test_parse_sw50_badges_and_ratings():
     assert r1.title == "Fakernel"
     assert r1.rating == "load-bearing"
     assert r1.status == "alive-underused"  # 🟡
-    assert r1.sources == ["https://example.com/fakernel",
-                          "https://example.org/fakernel-docs"]
+    assert r1.sources == [
+        "https://example.com/fakernel",
+        "https://example.org/fakernel-docs",
+    ]
     assert "message-passing microkernel" in r1.mechanism
     assert r2.title == "Oldstep"
     assert r2.rating == "useful-pattern"
@@ -211,6 +225,7 @@ def test_parse_sw50_badges_and_ratings():
 
 
 # -- m40 parser -----------------------------------------------------------
+
 
 def test_parse_m40_skepticism_and_sources():
     recs = ing.parse_m40(M40_FIXTURE, _prov())
@@ -227,10 +242,11 @@ def test_parse_m40_skepticism_and_sources():
 
 # -- dedup ----------------------------------------------------------------
 
+
 def test_dedup_within_report_skips_true_repeats():
     dup = SW30_FIXTURE.replace(
-        "### 2. GhostOS (Ghost Inc, 1990–1995)",
-        "### 2. Fakecard (Fakeco, 1987–2004)")
+        "### 2. GhostOS (Ghost Inc, 1990–1995)", "### 2. Fakecard (Fakeco, 1987–2004)"
+    )
     recs = ing.parse_sw30(dup, _prov())
     assert len(recs) == 1  # second identical identity skipped
 
@@ -244,6 +260,7 @@ def test_same_title_different_reports_coexist():
 
 
 # -- store ----------------------------------------------------------------
+
 
 def test_store_add_get_and_duplicate_refusal(tmp_path):
     store = ArchiveStore(home=tmp_path)
@@ -278,16 +295,29 @@ def test_store_rejects_non_records(tmp_path):
 
 # -- search ---------------------------------------------------------------
 
+
 def _search_store(tmp_path):
     store = ArchiveStore(home=tmp_path)
-    store.add_many([
-        _rec(id="arch-t-alpha", title="Alpha Replication",
-             summary="offline replica sync", mechanism="bidirectional sync",
-             rating="load-bearing", status="alive-underused"),
-        _rec(id="arch-t-beta", title="Beta Cards",
-             summary="card stacks", mechanism="hypertext cards",
-             rating="useful-pattern", status="dead"),
-    ])
+    store.add_many(
+        [
+            _rec(
+                id="arch-t-alpha",
+                title="Alpha Replication",
+                summary="offline replica sync",
+                mechanism="bidirectional sync",
+                rating="load-bearing",
+                status="alive-underused",
+            ),
+            _rec(
+                id="arch-t-beta",
+                title="Beta Cards",
+                summary="card stacks",
+                mechanism="hypertext cards",
+                rating="useful-pattern",
+                status="dead",
+            ),
+        ]
+    )
     return store
 
 
@@ -302,7 +332,9 @@ def test_search_filters(tmp_path):
     store = _search_store(tmp_path)
     assert [h.record.id for h in search(store, "", kind="software")] != []
     assert search(store, "", kind="method") == []
-    assert [h.record.id for h in search(store, "", rating="load-bearing")] == ["arch-t-alpha"]
+    assert [h.record.id for h in search(store, "", rating="load-bearing")] == [
+        "arch-t-alpha"
+    ]
     assert [h.record.id for h in search(store, "", status="dead")] == ["arch-t-beta"]
     with pytest.raises(ValueError):
         search(store, "", kind="spell")
@@ -316,6 +348,7 @@ def test_search_prefix_fallback(tmp_path):
 
 # -- collections ----------------------------------------------------------
 
+
 def test_collections_are_explainable(tmp_path):
     store = _search_store(tmp_path)
     wings = build_collections(store.all())
@@ -325,6 +358,7 @@ def test_collections_are_explainable(tmp_path):
 
 
 # -- ingest_reports with synthetic research root --------------------------
+
 
 def test_ingest_reports_from_fake_root(tmp_path):
     root = tmp_path / "research_notes"
@@ -347,6 +381,7 @@ def test_ingest_reports_missing_file_is_error(tmp_path):
     root = tmp_path / "research_notes"
     root.mkdir()
     recs, errors = ing.ingest_reports(
-        root, slugs=["retired-software-revival-research-20260916-0004"])
+        root, slugs=["retired-software-revival-research-20260916-0004"]
+    )
     assert recs == []
     assert errors and "missing report file" in errors[0]

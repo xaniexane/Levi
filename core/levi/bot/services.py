@@ -357,8 +357,7 @@ class ServiceRegistry:
         if svc.builtin:
             raise ServiceError(
                 "remove: '%s' is a built-in service; disable it instead "
-                "(not supported yet — leave it enabled and ignore its schedule)"
-                % name
+                "(not supported yet — leave it enabled and ignore its schedule)" % name
             )
         del self._services[name]
         self._save()
@@ -539,9 +538,7 @@ def _handle_bounty_watch(params: Dict[str, Any]) -> ServiceResult:
         )
     lines = ["BOUNTY WATCH: %d new finding(s)" % len(new)]
     for f in new[:15]:
-        lines.append(
-            "- [%s] %s: %s" % (f.severity, f.target, (f.detail or "")[:120])
-        )
+        lines.append("- [%s] %s: %s" % (f.severity, f.target, (f.detail or "")[:120]))
     if len(new) > 15:
         lines.append("…and %d more (see `levi bounty findings`)" % (len(new) - 15))
     return ServiceResult(ok=True, report="\n".join(lines), notes=notes)
@@ -602,7 +599,7 @@ def _handle_research_brief(params: Dict[str, Any]) -> ServiceResult:
     if not isinstance(topic, str) or not topic.strip():
         raise ServiceError(
             "research-brief: params.topic is required "
-            "(e.g. --params '{\"topic\": \"post-quantum TLS\"}')"
+            '(e.g. --params \'{"topic": "post-quantum TLS"}\')'
         )
     topic = topic.strip()
     if os.environ.get("LEVI_BOT_OFFLINE", "").strip().lower() in {"1", "true", "yes"}:
@@ -631,9 +628,7 @@ def _handle_research_brief(params: Dict[str, Any]) -> ServiceResult:
         "mark anything uncertain as uncertain." % topic
     )
     try:
-        transcript = run_subtask(
-            prompt, provider=provider or "local", max_steps=8
-        )
+        transcript = run_subtask(prompt, provider=provider or "local", max_steps=8)
     except Exception as exc:
         return ServiceResult(
             ok=False,
@@ -651,8 +646,10 @@ def _handle_research_brief(params: Dict[str, Any]) -> ServiceResult:
     path = os.path.join(out_dir, "research-brief-%s-%s.md" % (stamp, slug))
     with open(path, "w", encoding="utf-8") as fh:
         fh.write("# Research brief: %s\n\n" % topic)
-        fh.write("_Generated %s (LEVI bot, provider=%s)_\n\n"
-                 % (datetime.now(timezone.utc).isoformat(), provider or "local"))
+        fh.write(
+            "_Generated %s (LEVI bot, provider=%s)_\n\n"
+            % (datetime.now(timezone.utc).isoformat(), provider or "local")
+        )
         fh.write(body + "\n")
     summary = body.split("\n\n")[0][:280]
     return ServiceResult(
@@ -744,9 +741,7 @@ def register_handler(
             "register_handler: name must be a non-empty str, got %r" % (name,)
         )
     if not callable(fn):
-        raise ValueError(
-            "register_handler: fn must be callable, got %r" % (fn,)
-        )
+        raise ValueError("register_handler: fn must be callable, got %r" % (fn,))
     if name in _BUILTIN_HANDLER_NAMES:
         raise ValueError(
             "register_handler: %r is a built-in handler and cannot be "
@@ -756,7 +751,9 @@ def register_handler(
     return fn
 
 
-def get_handler_for(definition: "ServiceDefinition") -> Callable[[Dict[str, Any]], ServiceResult]:
+def get_handler_for(
+    definition: "ServiceDefinition",
+) -> Callable[[Dict[str, Any]], ServiceResult]:
     """Return the handler for a service *definition*.
 
     Built-in names keep their dedicated handler; user-added services fall

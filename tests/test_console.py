@@ -14,7 +14,7 @@ import pytest
 
 from levi.bounty.scope import ScopeStore
 from levi.bounty.store import FindingStore
-from levi.console import app, helpers, screens
+from levi.console import screens
 from levi.console.app import run
 from levi.console.helpers import (
     browser_command,
@@ -98,7 +98,10 @@ def test_search_domains_matches_name_summary_concepts():
         _fake_domain(2, name="Web Stuff", key_concepts=["xss", "csrf", "sqli"]),
         _fake_domain(3, name="Other", hardening_notes="rotate android keys"),
     ]
-    assert [d.id for d in search_domains(domains, "android")] == ["domain-1", "domain-3"]
+    assert [d.id for d in search_domains(domains, "android")] == [
+        "domain-1",
+        "domain-3",
+    ]
     assert [d.id for d in search_domains(domains, "XSS")] == ["domain-2"]
     assert [d.id for d in search_domains(domains, "nope")] == []
 
@@ -186,9 +189,7 @@ def test_session_open_browser_search_back_quit(monkeypatch, capsys):
 
 def test_session_browser_view_entry(monkeypatch, capsys):
     _tty(monkeypatch)
-    monkeypatch.setattr(
-        "builtins.input", ScriptedInput(["1", "v 1", "", "b", "4"])
-    )
+    monkeypatch.setattr("builtins.input", ScriptedInput(["1", "v 1", "", "b", "4"]))
     assert run() == 0
     out = capsys.readouterr().out
     assert "-- detection --" in out
@@ -264,9 +265,7 @@ class _PatchedLiveStore(FindingStore):
 def test_session_bounty_recon_results(monkeypatch, capsys, hermetic_bounty):
     _tty(monkeypatch)
     # 2=bounty, 1=first scope, y=confirm, ""=pause after results, q=back, 4=quit
-    monkeypatch.setattr(
-        "builtins.input", ScriptedInput(["2", "1", "y", "", "q", "4"])
-    )
+    monkeypatch.setattr("builtins.input", ScriptedInput(["2", "1", "y", "", "q", "4"]))
     assert run() == 0
     out = capsys.readouterr().out
     assert "Recon results" in out
@@ -328,7 +327,9 @@ def test_session_demand_digest_with_cards(monkeypatch, capsys, tmp_path):
     _tty(monkeypatch)
     pulse = DemandPulse(tmp_path / "dp.json")
     _seed_card(pulse)
-    monkeypatch.setattr(screens, "DemandPulse", lambda: DemandPulse(tmp_path / "dp.json"))
+    monkeypatch.setattr(
+        screens, "DemandPulse", lambda: DemandPulse(tmp_path / "dp.json")
+    )
     monkeypatch.setattr("builtins.input", ScriptedInput(["3", "", "4"]))
     assert run() == 0
     out = capsys.readouterr().out
@@ -339,7 +340,9 @@ def test_session_demand_digest_with_cards(monkeypatch, capsys, tmp_path):
 
 def test_session_demand_digest_empty_state(monkeypatch, capsys, tmp_path):
     _tty(monkeypatch)
-    monkeypatch.setattr(screens, "DemandPulse", lambda: DemandPulse(tmp_path / "dp.json"))
+    monkeypatch.setattr(
+        screens, "DemandPulse", lambda: DemandPulse(tmp_path / "dp.json")
+    )
     monkeypatch.setattr("builtins.input", ScriptedInput(["3", "", "4"]))
     assert run() == 0
     assert "No score cards yet" in capsys.readouterr().out

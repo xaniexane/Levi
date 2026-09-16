@@ -4,12 +4,11 @@ No network, no real HOME writes (LEVI_HOME is pointed at tmp_path), and
 rclone is always mocked or declared missing — the real binary is never
 executed by these tests.
 """
+
 from __future__ import annotations
 
 import argparse
 import json
-import os
-import subprocess
 import tarfile
 from pathlib import Path
 
@@ -21,7 +20,7 @@ from levi.backup import daily as daily_mod
 from levi.backup import restore as restore_mod
 from levi.backup import snapshot as snapshot_mod
 from levi.backup import sync as sync_mod
-from levi.backup.config import load_config, save_config
+from levi.backup.config import save_config
 
 
 @pytest.fixture
@@ -73,6 +72,7 @@ def _fake_rclone(monkeypatch, dump: dict, copy_rc: int = 0, copy_err: str = ""):
 
 # -- snapshot ---------------------------------------------------------------
 
+
 def test_snapshot_roundtrip_and_verify(home):
     snap = snapshot_mod.create_snapshot()
     assert Path(snap["tarball"]).exists()
@@ -121,6 +121,7 @@ def test_prune_local_keeps_newest(home):
 
 # -- sync -------------------------------------------------------------------
 
+
 def test_sync_rclone_missing(home, monkeypatch):
     _no_rclone(monkeypatch)
     snap = snapshot_mod.create_snapshot()
@@ -139,7 +140,9 @@ def test_sync_remote_unconfigured(home, monkeypatch):
 
 
 def test_verify_remote_accepts_crypt(home, monkeypatch):
-    _fake_rclone(monkeypatch, {"levi-crypt": {"type": "crypt", "remote": "drive:LEVI-Backups"}})
+    _fake_rclone(
+        monkeypatch, {"levi-crypt": {"type": "crypt", "remote": "drive:LEVI-Backups"}}
+    )
     ok, why = sync_mod.verify_remote("levi-crypt")
     assert ok, why
     assert "crypt overlay" in why
@@ -155,7 +158,9 @@ def test_verify_remote_rejects_plaintext_backend(home, monkeypatch):
 def test_sync_success_and_failure_recorded(home, monkeypatch):
     save_config({"remote": "levi-crypt"})
     snap = snapshot_mod.create_snapshot()
-    _fake_rclone(monkeypatch, {"levi-crypt": {"type": "crypt", "remote": "drive:LEVI-Backups"}})
+    _fake_rclone(
+        monkeypatch, {"levi-crypt": {"type": "crypt", "remote": "drive:LEVI-Backups"}}
+    )
     res = sync_mod.sync_snapshot(snap["tarball"], snap["manifest"])
     assert res["ok"] and res["synced"]
     state = json.loads((home / "backup_state.json").read_text())
@@ -176,6 +181,7 @@ def test_sync_success_and_failure_recorded(home, monkeypatch):
 
 
 # -- restore ----------------------------------------------------------------
+
 
 def test_restore_stages_and_matches(home):
     snap = snapshot_mod.create_snapshot()
@@ -220,6 +226,7 @@ def test_restore_apply_with_yes_updates_state(home):
 
 
 # -- daily + CLI ------------------------------------------------------------
+
 
 def test_daily_snapshots_without_remote(home, monkeypatch):
     _no_rclone(monkeypatch)

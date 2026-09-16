@@ -474,7 +474,11 @@ def _hbars(n=20):
     return [
         Bar(
             date=f"2026-09-{d:02d}",
-            open=100, high=110, low=95, close=105, volume=1000,
+            open=100,
+            high=110,
+            low=95,
+            close=105,
+            volume=1000,
         )
         for d in range(1, n + 1)
     ]

@@ -7,8 +7,6 @@ Hermetic: no network, deterministic, persistence isolated via LEVI_HOME
 pointed at tmp_path. Stdlib only.
 """
 
-import os
-
 import pytest
 
 from core.levi.methods import (
@@ -97,8 +95,7 @@ def test_duplex_divergence_quarantined():
 
 
 def test_duplex_verify_n():
-    v = duplex.verify_n(lambda: "x", lambda: "x", lambda: "x",
-                        names=("p1", "p2", "p3"))
+    v = duplex.verify_n(lambda: "x", lambda: "x", lambda: "x", names=("p1", "p2", "p3"))
     assert v.value == "x"
 
 
@@ -108,8 +105,9 @@ def test_duplex_verify_n():
 
 
 def test_t5_pipeline_run():
-    pipe = t5.Pipeline("p", [t5.Stage("double", lambda x: x * 2),
-                             t5.Stage("inc", lambda x: x + 1)])
+    pipe = t5.Pipeline(
+        "p", [t5.Stage("double", lambda x: x * 2), t5.Stage("inc", lambda x: x + 1)]
+    )
     rep = pipe.run(21)
     assert rep.ok and rep.final == 43
     assert [c.stage for c in rep.cards] == ["double", "inc"]
@@ -281,8 +279,7 @@ def test_prowords_correct_marks_superseded():
     ins = e.order("turn left")
     fixed = e.correct(ins, "turn right")
     assert fixed.text == "turn right"
-    assert any("correct" in entry.get("proword", "").lower()
-               for entry in e.log)
+    assert any("correct" in entry.get("proword", "").lower() for entry in e.log)
 
 
 # ===========================================================================
@@ -402,10 +399,13 @@ def test_kriegsspiel_debrief_and_outcome():
 
 def _game(rounds=3):
     wm = randgame.WorldModel(
-        "m", step=lambda s, mv: (dict(s, n=s.get("n", 0) + 1), [f"ev{mv}"]))
+        "m", step=lambda s, mv: (dict(s, n=s.get("n", 0) + 1), [f"ev{mv}"])
+    )
     sc = randgame.Scenario("s", "d", rounds=rounds)
-    teams = [randgame.Team("A", wm, lambda s, r: {"choice": "a"}),
-             randgame.Team("B", wm, lambda s, r: {"choice": "b"})]
+    teams = [
+        randgame.Team("A", wm, lambda s, r: {"choice": "a"}),
+        randgame.Team("B", wm, lambda s, r: {"choice": "b"}),
+    ]
     return randgame.Game(sc, teams)
 
 
@@ -418,17 +418,19 @@ def test_randgame_runs_all_rounds():
 
 
 def test_randgame_divergence_flagged():
-    w1 = randgame.WorldModel("m1",
-                             step=lambda s, mv: (dict(s, n=1), []))
-    w2 = randgame.WorldModel("m2",
-                             step=lambda s, mv: (dict(s, n=2), []))
+    w1 = randgame.WorldModel("m1", step=lambda s, mv: (dict(s, n=1), []))
+    w2 = randgame.WorldModel("m2", step=lambda s, mv: (dict(s, n=2), []))
     sc = randgame.Scenario("s", "d", rounds=2)
-    g = randgame.Game(sc, [randgame.Team("A", w1, lambda s, r: 1),
-                           randgame.Team("B", w2, lambda s, r: 1)])
+    g = randgame.Game(
+        sc,
+        [
+            randgame.Team("A", w1, lambda s, r: 1),
+            randgame.Team("B", w2, lambda s, r: 1),
+        ],
+    )
     g.run()
     assert g.debrief()["divergent_rounds"] == 2  # count of divergent rounds
-    assert all(d["differing_keys"] == ["n"]
-               for d in g.debrief()["divergences"])
+    assert all(d["differing_keys"] == ["n"] for d in g.debrief()["divergences"])
 
 
 def test_randgame_summary_mentions_agreement():

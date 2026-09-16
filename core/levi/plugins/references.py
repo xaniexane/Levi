@@ -253,9 +253,7 @@ def remove_reference(ref_id: str, home: Optional[Path] = None) -> None:
     save_references(refs, home)
 
 
-def remove_references_where(
-    predicate: Any, home: Optional[Path] = None
-) -> list[str]:
+def remove_references_where(predicate: Any, home: Optional[Path] = None) -> list[str]:
     """Remove every reference matching ``predicate``; return removed ids."""
     refs = load_references(home)
     doomed = [rid for rid, r in refs.items() if predicate(r)]
@@ -271,7 +269,9 @@ def list_references(home: Optional[Path] = None) -> dict[str, ProviderReference]
     return load_references(home)
 
 
-def get_reference(ref_id: str, home: Optional[Path] = None) -> Optional[ProviderReference]:
+def get_reference(
+    ref_id: str, home: Optional[Path] = None
+) -> Optional[ProviderReference]:
     """Return one reference by id, or None."""
     return load_references(home).get(_validate_id(ref_id))
 

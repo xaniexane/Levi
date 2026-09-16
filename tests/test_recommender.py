@@ -8,7 +8,6 @@ import pytest
 
 from levi.recommender import SHELF
 from levi.recommender.engine import (
-    Rec,
     content_fit,
     cosine,
     explain,
@@ -18,12 +17,10 @@ from levi.recommender.engine import (
     quality_score,
     recency_score,
     recommend,
-    score_item,
 )
 from levi.recommender.model import Goal, Item, check_rating, parse_topics
 from levi.recommender.weights import (
     DEFAULT_WEIGHTS,
-    SIGNALS,
     normalize_weights,
     parse_weights,
 )
@@ -36,34 +33,45 @@ def _herm(monkeypatch, tmp_path):
 
 
 def _item(id, title, kind, topics, days_old=0):
-    return Item(id=id, title=title, kind=kind, topics=topics,
-                added_at=(NOW - timedelta(days=days_old)).isoformat())
+    return Item(
+        id=id,
+        title=title,
+        kind=kind,
+        topics=topics,
+        added_at=(NOW - timedelta(days=days_old)).isoformat(),
+    )
 
 
 def _goal(id, title, topics, kind_filter=()):
-    return Goal(id=id, title=title, topics=topics,
-                kind_filter=list(kind_filter))
+    return Goal(id=id, title=title, topics=topics, kind_filter=list(kind_filter))
 
 
 def _corpus():
     items = [
-        _item("py-async", "Asyncio deep dive", "course",
-              {"python": 1.0, "asyncio": 0.9}),
-        _item("py-web", "Flask web apps", "course",
-              {"python": 0.8, "web": 0.9}),
-        _item("rust-book", "Rust systems", "book",
-              {"rust": 1.0, "systems": 0.8}),
-        _item("py-async-2", "Asyncio patterns", "course",
-              {"python": 1.0, "asyncio": 1.0}),
+        _item(
+            "py-async", "Asyncio deep dive", "course", {"python": 1.0, "asyncio": 0.9}
+        ),
+        _item("py-web", "Flask web apps", "course", {"python": 0.8, "web": 0.9}),
+        _item("rust-book", "Rust systems", "book", {"rust": 1.0, "systems": 0.8}),
+        _item(
+            "py-async-2", "Asyncio patterns", "course", {"python": 1.0, "asyncio": 1.0}
+        ),
     ]
-    goals = [_goal("g1", "Learn async Python", {"python": 1.0, "asyncio": 1.0},
-                   kind_filter=["course"])]
+    goals = [
+        _goal(
+            "g1",
+            "Learn async Python",
+            {"python": 1.0, "asyncio": 1.0},
+            kind_filter=["course"],
+        )
+    ]
     return items, goals
 
 
 # ---------------------------------------------------------------------------
 # Model / weights
 # ---------------------------------------------------------------------------
+
 
 def test_shelf_shape():
     assert SHELF["name"] == "recommender"
@@ -72,7 +80,10 @@ def test_shelf_shape():
 
 def test_parse_topics():
     assert parse_topics("python:1.0,asyncio:0.6,web") == {
-        "python": 1.0, "asyncio": 0.6, "web": 1.0}
+        "python": 1.0,
+        "asyncio": 0.6,
+        "web": 1.0,
+    }
     with pytest.raises(ValueError):
         parse_topics("")
     with pytest.raises(ValueError):
@@ -99,14 +110,24 @@ def test_check_rating_bounds():
 
 
 def test_normalize_and_parse_weights():
-    assert normalize_weights({"goal": 1, "content": 1, "quality": 0,
-                              "recency": 0}) == {"goal": 0.5, "content": 0.5,
-                                                 "quality": 0.0,
-                                                 "recency": 0.0}
-    assert parse_weights("goal=0.5,content=0.5,quality=0,recency=0") == \
-        {"goal": 0.5, "content": 0.5, "quality": 0.0, "recency": 0.0}
-    for bad in ("goal=1,vibes=1", "goal=-1,content=1,quality=0,recency=0",
-                "goal=0,content=0,quality=0,recency=0", "garbage"):
+    assert normalize_weights({"goal": 1, "content": 1, "quality": 0, "recency": 0}) == {
+        "goal": 0.5,
+        "content": 0.5,
+        "quality": 0.0,
+        "recency": 0.0,
+    }
+    assert parse_weights("goal=0.5,content=0.5,quality=0,recency=0") == {
+        "goal": 0.5,
+        "content": 0.5,
+        "quality": 0.0,
+        "recency": 0.0,
+    }
+    for bad in (
+        "goal=1,vibes=1",
+        "goal=-1,content=1,quality=0,recency=0",
+        "goal=0,content=0,quality=0,recency=0",
+        "garbage",
+    ):
         with pytest.raises(ValueError):
             parse_weights(bad)
 
@@ -115,13 +136,13 @@ def test_normalize_and_parse_weights():
 # Signal math
 # ---------------------------------------------------------------------------
 
+
 def test_cosine_known_values():
     assert cosine({"a": 1.0}, {"a": 1.0}) == pytest.approx(1.0)
     assert cosine({"a": 1.0}, {"b": 1.0}) == pytest.approx(0.0)
     assert cosine({}, {"a": 1.0}) == 0.0
     # orthogonal-ish: (1,0) vs (1,1) -> 1/sqrt(2)
-    assert cosine({"x": 1.0}, {"x": 1.0, "y": 1.0}) == \
-        pytest.approx(1 / math.sqrt(2))
+    assert cosine({"x": 1.0}, {"x": 1.0, "y": 1.0}) == pytest.approx(1 / math.sqrt(2))
 
 
 def test_goal_alignment_picks_best_and_respects_kind_filter():
@@ -150,8 +171,7 @@ def test_content_fit_zero_until_rated():
 def test_quality_from_explicit_ratings_only():
     items, _ = _corpus()
     assert quality_score(items[0], {}) == 0.0
-    assert quality_score(items[0], {"py-async": [4.0, 5.0]}) == \
-        pytest.approx(0.9)
+    assert quality_score(items[0], {"py-async": [4.0, 5.0]}) == pytest.approx(0.9)
 
 
 def test_recency_decay():
@@ -167,6 +187,7 @@ def test_recency_decay():
 # ---------------------------------------------------------------------------
 # recommend(): ranking, explanations, honesty notes
 # ---------------------------------------------------------------------------
+
 
 def test_recommend_goal_drives_ranking():
     items, goals = _corpus()
@@ -196,11 +217,12 @@ def test_ratings_enable_content_and_quality():
     recs = recommend(items, goals, ratings, now=NOW)
     by_id = {r.item.id: r for r in recs}
     # liked centroid is asyncio-heavy: the other asyncio course rises
-    assert by_id["py-async-2"].contributions["content"] > \
-        by_id["py-web"].contributions["content"]
+    assert (
+        by_id["py-async-2"].contributions["content"]
+        > by_id["py-web"].contributions["content"]
+    )
     # quality reflects the explicit 2.0 rating on py-web
-    assert by_id["py-web"].contributions["quality"] == pytest.approx(
-        0.20 * 0.4)
+    assert by_id["py-web"].contributions["quality"] == pytest.approx(0.20 * 0.4)
     assert "unrated" not in " ".join(by_id["py-async"].notes)
 
 
@@ -208,22 +230,29 @@ def test_weight_change_flips_order():
     items, goals = _corpus()
     # rust-book: zero goal alignment, but make it high quality + fresh
     ratings = {"rust-book": [5.0]}
-    goal_heavy = recommend(items, goals, ratings,
-                           weights={"goal": 1.0, "content": 0.0,
-                                    "quality": 0.0, "recency": 0.0},
-                           now=NOW)
-    quality_heavy = recommend(items, goals, ratings,
-                              weights={"goal": 0.0, "content": 0.0,
-                                       "quality": 1.0, "recency": 0.0},
-                              now=NOW)
+    goal_heavy = recommend(
+        items,
+        goals,
+        ratings,
+        weights={"goal": 1.0, "content": 0.0, "quality": 0.0, "recency": 0.0},
+        now=NOW,
+    )
+    quality_heavy = recommend(
+        items,
+        goals,
+        ratings,
+        weights={"goal": 0.0, "content": 0.0, "quality": 1.0, "recency": 0.0},
+        now=NOW,
+    )
     assert goal_heavy[0].item.id.startswith("py-async")
     assert quality_heavy[0].item.id == "rust-book"
 
 
 def test_exclude_ids_and_top_k():
     items, goals = _corpus()
-    recs = recommend(items, goals, {}, exclude_ids=["py-async", "py-async-2"],
-                     top_k=1, now=NOW)
+    recs = recommend(
+        items, goals, {}, exclude_ids=["py-async", "py-async-2"], top_k=1, now=NOW
+    )
     assert len(recs) == 1 and recs[0].item.id == "py-web"
 
 
@@ -239,6 +268,7 @@ def test_active_goal_subset():
 # ---------------------------------------------------------------------------
 # MMR diversity
 # ---------------------------------------------------------------------------
+
 
 def test_mmr_lambda_one_is_pure_relevance():
     items, goals = _corpus()
@@ -268,8 +298,10 @@ def test_mmr_diversity_spreads_topics():
 # CLI
 # ---------------------------------------------------------------------------
 
+
 def test_cli_help_exits_zero():
     from levi.recommender.__main__ import main
+
     with pytest.raises(SystemExit) as e:
         main(["--help"])
     assert e.value.code == 0
@@ -278,12 +310,49 @@ def test_cli_help_exits_zero():
 def test_cli_end_to_end(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)
     from levi.recommender.__main__ import main
-    assert main(["add-item", "--title", "Asyncio deep dive", "--kind",
-                 "course", "--topics", "python:1.0,asyncio:0.9"]) == 0
-    assert main(["add-item", "--title", "Rust systems", "--kind", "book",
-                 "--topics", "rust:1.0"]) == 0
-    assert main(["add-goal", "--title", "Learn async Python", "--topics",
-                 "python:1.0,asyncio:1.0", "--kind-filter", "course"]) == 0
+
+    assert (
+        main(
+            [
+                "add-item",
+                "--title",
+                "Asyncio deep dive",
+                "--kind",
+                "course",
+                "--topics",
+                "python:1.0,asyncio:0.9",
+            ]
+        )
+        == 0
+    )
+    assert (
+        main(
+            [
+                "add-item",
+                "--title",
+                "Rust systems",
+                "--kind",
+                "book",
+                "--topics",
+                "rust:1.0",
+            ]
+        )
+        == 0
+    )
+    assert (
+        main(
+            [
+                "add-goal",
+                "--title",
+                "Learn async Python",
+                "--topics",
+                "python:1.0,asyncio:1.0",
+                "--kind-filter",
+                "course",
+            ]
+        )
+        == 0
+    )
     assert main(["rate", "asyncio-deep-dive", "5"]) == 0
     assert main(["recommend", "--explain"]) == 0
     out = capsys.readouterr().out
@@ -291,8 +360,7 @@ def test_cli_end_to_end(monkeypatch, tmp_path, capsys):
     assert "contribution" in out
     # diverse flag + weights round-trip
     assert main(["recommend", "--diverse", "0.5", "--top", "1"]) == 0
-    assert main(["weights", "set", "goal=0.6,content=0.4,quality=0,recency=0"]) \
-        == 0
+    assert main(["weights", "set", "goal=0.6,content=0.4,quality=0,recency=0"]) == 0
     assert main(["weights", "show"]) == 0
     assert "goal=0.60" in capsys.readouterr().out
     assert main(["list", "items"]) == 0
@@ -300,13 +368,16 @@ def test_cli_end_to_end(monkeypatch, tmp_path, capsys):
     # bad inputs rejected, not silently accepted
     assert main(["rate", "asyncio-deep-dive", "9"]) == 2
     assert main(["rate", "nope", "3"]) == 1
-    assert main(["add-item", "--title", "Bad", "--kind", "course",
-                 "--topics", "python:9"]) == 2
+    assert (
+        main(["add-item", "--title", "Bad", "--kind", "course", "--topics", "python:9"])
+        == 2
+    )
 
 
 def test_cli_recommend_empty_corpus(monkeypatch, tmp_path, capsys):
     _herm(monkeypatch, tmp_path)
     from levi.recommender.__main__ import main
+
     assert main(["recommend"]) == 1
     assert "empty" in capsys.readouterr().out
 
@@ -314,8 +385,8 @@ def test_cli_recommend_empty_corpus(monkeypatch, tmp_path, capsys):
 def test_cli_export(monkeypatch, tmp_path):
     _herm(monkeypatch, tmp_path)
     from levi.recommender.__main__ import main
-    assert main(["add-item", "--title", "T", "--kind", "k",
-                 "--topics", "a:1.0"]) == 0
+
+    assert main(["add-item", "--title", "T", "--kind", "k", "--topics", "a:1.0"]) == 0
     out = tmp_path / "taste.json"
     assert main(["export", str(out)]) == 0
     payload = json.loads(out.read_text())

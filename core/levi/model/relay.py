@@ -121,14 +121,8 @@ class ModelRelay:
                 "http://127.0.0.1:11434/api/tags", timeout=2
             ) as r:
                 data = json.loads(r.read().decode())
-                entries = (
-                    data.get("models") if isinstance(data, dict) else None
-                ) or []
-                models = [
-                    m.get("name", "")
-                    for m in entries
-                    if isinstance(m, dict)
-                ]
+                entries = (data.get("models") if isinstance(data, dict) else None) or []
+                models = [m.get("name", "") for m in entries if isinstance(m, dict)]
                 return {"up": True, "models": [m for m in models if m][:12]}
         except Exception as e:
             return {"up": False, "error": str(e)[:120], "models": []}

@@ -20,6 +20,7 @@ from typing import Dict, Iterable, List, Optional, Tuple
 
 # -- errors ---------------------------------------------------------------
 
+
 class ShelfError(Exception):
     """Deny-closed: anything malformed is refused, never half-written."""
 
@@ -27,6 +28,7 @@ class ShelfError(Exception):
 # -- validation -----------------------------------------------------------
 
 _URL_RE = re.compile(r"^https?://[^\s/$.?#].[^\s]*$", re.IGNORECASE)
+
 
 def url_ok(url: str) -> bool:
     return isinstance(url, str) and bool(_URL_RE.match(url.strip()))
@@ -39,6 +41,7 @@ def _slug(text: str, max_len: int = 40) -> str:
 
 # -- item -----------------------------------------------------------------
 
+
 @dataclass(frozen=True)
 class ShelfItem:
     id: str
@@ -49,14 +52,19 @@ class ShelfItem:
     starred: bool = False
     buried: bool = False
     added_at: float = field(default_factory=time.time)
-    source: str = ""          # e.g. "hand-shelved", "bundle:friend.zip"
+    source: str = ""  # e.g. "hand-shelved", "bundle:friend.zip"
 
     def to_dict(self) -> Dict:
         return {
-            "id": self.id, "url": self.url, "title": self.title,
-            "note": self.note, "tags": list(self.tags),
-            "starred": self.starred, "buried": self.buried,
-            "added_at": self.added_at, "source": self.source,
+            "id": self.id,
+            "url": self.url,
+            "title": self.title,
+            "note": self.note,
+            "tags": list(self.tags),
+            "starred": self.starred,
+            "buried": self.buried,
+            "added_at": self.added_at,
+            "source": self.source,
         }
 
     @classmethod
@@ -96,6 +104,7 @@ def _new_id(url: str, title: str, added_at: float) -> str:
 
 # -- store ----------------------------------------------------------------
 
+
 def default_dir(home: Optional[Path] = None) -> Path:
     base = Path(home) if home else Path.home()
     return base / ".levi" / "shelf"
@@ -115,25 +124,37 @@ class ShelfStore:
         self._items = {}
         if not self.path.is_file():
             return
-        for lineno, line in enumerate(self.path.read_text(encoding="utf-8").splitlines(), 1):
+        for lineno, line in enumerate(
+            self.path.read_text(encoding="utf-8").splitlines(), 1
+        ):
             line = line.strip()
             if not line:
                 continue
             try:
                 item = ShelfItem.from_dict(json.loads(line))
-            except (ShelfError, json.JSONDecodeError, KeyError, TypeError, ValueError) as exc:
-                raise ShelfError(
-                    "shelf line %d refused: %s" % (lineno, exc))
+            except (
+                ShelfError,
+                json.JSONDecodeError,
+                KeyError,
+                TypeError,
+                ValueError,
+            ) as exc:
+                raise ShelfError("shelf line %d refused: %s" % (lineno, exc))
             if item.id in self._items:
-                raise ShelfError("shelf line %d refused: duplicate id %r" % (lineno, item.id))
+                raise ShelfError(
+                    "shelf line %d refused: duplicate id %r" % (lineno, item.id)
+                )
             self._items[item.id] = item
 
     def _save(self) -> None:
         self.dir.mkdir(parents=True, exist_ok=True)
         tmp = self.path.with_suffix(".jsonl.tmp")
         tmp.write_text(
-            "\n".join(json.dumps(i.to_dict(), ensure_ascii=False)
-                      for i in self._items.values()) + ("\n" if self._items else ""),
+            "\n".join(
+                json.dumps(i.to_dict(), ensure_ascii=False)
+                for i in self._items.values()
+            )
+            + ("\n" if self._items else ""),
             encoding="utf-8",
         )
         os.chmod(tmp, 0o600)
@@ -141,18 +162,30 @@ class ShelfStore:
 
     # -- mutation ---------------------------------------------------------
 
-    def add(self, url: str, title: str, note: str = "",
-            tags: Iterable[str] = (), source: str = "hand-shelved",
-            added_at: Optional[float] = None) -> ShelfItem:
+    def add(
+        self,
+        url: str,
+        title: str,
+        note: str = "",
+        tags: Iterable[str] = (),
+        source: str = "hand-shelved",
+        added_at: Optional[float] = None,
+    ) -> ShelfItem:
         if not url_ok(url):
             raise ShelfError("bad url: %r" % url)
         if not title or not title.strip():
             raise ShelfError("title is required")
         tag_list = [str(t).strip().lower() for t in (tags or []) if str(t).strip()]
         ts = added_at if added_at is not None else time.time()
-        item = ShelfItem(id=_new_id(url, title.strip(), ts), url=url.strip(),
-                         title=title.strip(), note=note or "",
-                         tags=tuple(tag_list), added_at=ts, source=source)
+        item = ShelfItem(
+            id=_new_id(url, title.strip(), ts),
+            url=url.strip(),
+            title=title.strip(),
+            note=note or "",
+            tags=tuple(tag_list),
+            added_at=ts,
+            source=source,
+        )
         self._items[item.id] = item
         self._save()
         return item
@@ -205,17 +238,24 @@ class ShelfStore:
         items = list(self._items.values())
         if not include_buried:
             items = [i for i in items if not i.buried]
+
         def key(i: ShelfItem):
             return (i.buried, not i.starred, -i.added_at)
+
         return sorted(items, key=key)
 
     def search(self, query: str) -> List[ShelfItem]:
         q = (query or "").lower().strip()
         if not q:
             return []
-        return [i for i in self._items.values()
-                if q in i.title.lower() or q in i.note.lower()
-                or q in i.url.lower() or any(q in t for t in i.tags)]
+        return [
+            i
+            for i in self._items.values()
+            if q in i.title.lower()
+            or q in i.note.lower()
+            or q in i.url.lower()
+            or any(q in t for t in i.tags)
+        ]
 
     def stats(self) -> Dict[str, int]:
         n = len(self._items)
@@ -234,8 +274,10 @@ class ShelfStore:
         dest = Path(dest)
         items = self.list(include_buried=True)
         lines = ["# Share Shelf — exported by LEVI", ""]
-        lines.append("%d item(s). Open this file, or import shelf.json "
-                     "into another shelf." % len(items))
+        lines.append(
+            "%d item(s). Open this file, or import shelf.json "
+            "into another shelf." % len(items)
+        )
         lines.append("")
         for it in items:
             flags = []
@@ -243,7 +285,9 @@ class ShelfStore:
                 flags.append("STARRED")
             if it.buried:
                 flags.append("BURIED")
-            lines.append("## %s%s" % (it.title, " [%s]" % ", ".join(flags) if flags else ""))
+            lines.append(
+                "## %s%s" % (it.title, " [%s]" % ", ".join(flags) if flags else "")
+            )
             lines.append("- url: %s" % it.url)
             if it.note:
                 lines.append("- note: %s" % it.note)
@@ -257,9 +301,10 @@ class ShelfStore:
         }
         with zipfile.ZipFile(dest, "w", zipfile.ZIP_DEFLATED) as zf:
             zf.writestr("shelf.md", "\n".join(lines).encode("utf-8"))
-            zf.writestr("shelf.json",
-                        json.dumps(manifest, indent=2,
-                                   ensure_ascii=False).encode("utf-8"))
+            zf.writestr(
+                "shelf.json",
+                json.dumps(manifest, indent=2, ensure_ascii=False).encode("utf-8"),
+            )
         return dest
 
     def import_bundle(self, src: Path) -> Dict[str, int]:
@@ -277,7 +322,10 @@ class ShelfStore:
             manifest = json.loads(raw.decode("utf-8"))
         except (json.JSONDecodeError, UnicodeDecodeError) as exc:
             raise ShelfError("bundle manifest refused: %s" % exc)
-        if not isinstance(manifest, dict) or manifest.get("format") != "levi-share-shelf/1":
+        if (
+            not isinstance(manifest, dict)
+            or manifest.get("format") != "levi-share-shelf/1"
+        ):
             raise ShelfError("bundle manifest refused: unknown format")
         items = manifest.get("items", [])
         if not isinstance(items, list):
