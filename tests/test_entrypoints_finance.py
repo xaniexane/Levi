@@ -6,11 +6,20 @@ not exercised here — only the offline paper ledger paths.
 
 import pytest
 
+from levi.finance import portfolio as _portfolio
 from levi.finance.__main__ import main
 
 
 def _herm(monkeypatch, tmp_path):
     monkeypatch.setenv("HOME", str(tmp_path))
+    # NOTE: _portfolio.DEFAULT_PATH is bound at import time from Path.home(),
+    # so patching HOME alone does not move it. Point it at the tmp dir so
+    # these tests never touch the real ~/.levi ledger.
+    monkeypatch.setattr(
+        _portfolio,
+        "DEFAULT_PATH",
+        tmp_path / ".levi" / "finance" / "portfolio.json",
+    )
 
 
 def test_help_exits_zero():
