@@ -108,6 +108,14 @@ CLI_COMMANDS.update(
         "analog": ["python -m levi.analog"],
         # -- telegraph (perpetual-hunt wave-001: dead protocols revived) ---
         "telegraph": ["python -m levi.telegraph"],
+        # -- digest (perpetual-hunt wave-008: dead networks — LISTSERV) --
+        "digest": ["python -m levi.digest"],
+        # -- pdi (perpetual-hunt wave-008: dead networks — NAPLPS remix) --
+        "pdi": ["python -m levi.pdi"],
+        # -- boards (perpetual-hunt wave-008: dead networks — BBS areas) --
+        "boards": ["python -m levi.boards"],
+        # -- doors (perpetual-hunt wave-008: dead networks — door games) --
+        "doors": ["python -m levi.doors"],
         # -- shelf (perpetual-hunt daily 2026-09-16: fallen platforms --------
         # Reader share-with-note + Digg bury, revived as a local curation desk
         "shelf": ["python -m levi.shelf"],

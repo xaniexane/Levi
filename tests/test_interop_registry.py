@@ -92,6 +92,14 @@ def test_manifest_registers_all_modules():
         "analog",
         # reveal (perpetual-hunt daily 2026-09-16b: retired software wave)
         "reveal",
+        # quickdial (perpetual-hunt evening-20260916-software: dead desktop
+        # software wave 3 — committed in b094858, hardcoded set lagged behind)
+        "quickdial",
+        # dead-networks (perpetual-hunt wave-008)
+        "digest",
+        "pdi",
+        "boards",
+        "doors",
     }
 
 

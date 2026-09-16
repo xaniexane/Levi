@@ -409,6 +409,49 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- digest: the list server (perpetual-hunt wave-008: dead networks) -----
+    # BITNET LISTSERV's list ownership, double-opt-in, moderation holds, and
+    # human-readable digests reborn as original LEVI works: local-first
+    # mailing-list plumbing with owner-only storage. No mail delivery (the
+    # caller carries the confirmation token); subscriptions are opt-in only.
+    "digest": {
+        "provides": [
+            "digest.lists",
+        ],
+        "requires": [],
+    },
+    # -- pdi: the picture-description stream (perpetual-hunt wave-008) --------
+    # NAPLPS/Telidon Picture Description Instructions remixed as LEVI's own
+    # ASCII diagram language: compact opcode streams render to SVG and
+    # ASCII-art previews. Explicitly NOT NAPLPS-compatible; stateless.
+    "pdi": {
+        "provides": [
+            "pdi.pdi",
+        ],
+        "requires": [],
+    },
+    # -- boards: the message areas (perpetual-hunt wave-008: dead networks) ---
+    # BBS message areas + FidoNet echomail charters + Free-Net boards reborn
+    # as original LEVI works: charter-required areas, moderation queues with
+    # recorded reasons, per-reader seen-tracking, portable offline packets
+    # (clean-room format, not QWK-compatible). Owner-only storage.
+    "boards": {
+        "provides": [
+            "boards.areas",
+        ],
+        "requires": [],
+    },
+    # -- doors: the door-plugin contract (perpetual-hunt wave-008) -----------
+    # BBS door games (LoRD/TradeWars) remixed as LEVI-native additions:
+    # clean-room JSON drop-file contract (not DOOR.SYS-compatible),
+    # UTC-day turn-scarcity engine, and a sample "number oracle" door.
+    # Standalone: separate from levi.games (sibling territory).
+    "doors": {
+        "provides": [
+            "doors.doors",
+        ],
+        "requires": [],
+    },
     # -- shelf: the share shelf (perpetual-hunt daily 2026-09-16: fallen
     # platforms) ----------------------------------------------------------------
     # Google Reader's shared shelf (share-with-note, starred canon) + Digg's
