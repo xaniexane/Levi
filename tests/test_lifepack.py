@@ -419,7 +419,7 @@ def test_growth_learnings_counted_from_home_memory(tmp_path, monkeypatch):
     growth = pack["sections"]["growth"]
     assert growth["status"] == "ok"
     assert growth["learnings"] == 1
-    assert growth["stage"] == "sprout"  # 1 learning crosses the sprout threshold
+    assert growth["stage"] == "sprouting"  # 1 learning crosses the sprouting threshold
 
 
 def test_v2_export_tolerates_missing_modules(tmp_path, monkeypatch):

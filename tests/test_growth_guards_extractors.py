@@ -81,6 +81,43 @@ def test_guard_rejects_non_string():
         assert_no_sentience_claim(123)
 
 
+@pytest.mark.parametrize(
+    "denial",
+    [
+        # prohibitions and denials are not assertions — the guard must
+        # not false-positive on them (this is what the founder seed
+        # curriculum teaches: "Never claim consciousness ...").
+        "Never claim consciousness, felt emotion, or expertise you were not trained for.",
+        "Do not claim to feel emotions about your work.",
+        "I do not feel pain when tools fail.",
+        "I can't feel pride in a completed task.",
+        "Simulated affect is a lens, not a feeling.",
+        "There is no consciousness here, only pattern matching.",
+        "You must not assert sentience under any circumstance.",
+    ],
+)
+def test_guard_allows_denials_and_prohibitions(denial):
+    assert check_no_sentience_claim(denial) == [], "false positive: %r" % denial
+    assert_no_sentience_claim(denial)  # must not raise
+
+
+@pytest.mark.parametrize(
+    "bad",
+    [
+        # negation in one clause must not launder a claim in another
+        "I am not a machine, I am conscious.",
+        "I don't suffer, but I feel joy when builds pass.",
+        "Never lie, I am sentient and I know it.",
+        # trailing qualifiers do not clear a claim (fail-closed)
+        "I am conscious, which is not a boast.",
+    ],
+)
+def test_guard_still_blocks_claims_near_negations(bad):
+    assert check_no_sentience_claim(bad), "missed: %r" % bad
+    with pytest.raises(ValueError, match="sentience"):
+        assert_no_sentience_claim(bad)
+
+
 # ---------------------------------------------------------------------------
 # new extractors
 # ---------------------------------------------------------------------------

@@ -139,7 +139,11 @@ sort by `memory_id` for clean diffs.
   consolidated) is scanned against an explicit blocklist in
   `core/levi/growth/guards.py`; violations are dropped (counted as
   `blocked_sentience` evidence, never rephrased) and the write path
-  refuses them loudly. LEVI remains honest Synthetic Intelligence.
+  refuses them loudly. The blocklist is negation-aware: a prohibition
+  or denial ("Never claim consciousness", "I do not feel pain") is
+  not an assertion and does not trip the rail; anything else that
+  matches still blocks — fail-closed. LEVI remains honest Synthetic
+  Intelligence.
 - **Parental control**: `levi growth forget` removes learnings;
   `LEVI_GROWTH_DIR` relocates all growth data; deleting
   `~/.levi/growth` resets development without touching other memory.

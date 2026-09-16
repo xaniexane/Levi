@@ -12,6 +12,10 @@ Learnings are functional ("when X, do Y"), never phenomenal
 dropped (counted in the cycle's evidence as ``blocked_sentience``),
 never rephrased by the loop — the loop is not allowed to editorialize
 user content, only to refuse to learn it.
+
+The blocklist is negation-aware: a prohibition or denial ("Never claim
+consciousness", "I do not feel pain") is not an assertion and does not
+trip the rail. Anything else that matches still blocks — fail-closed.
 """
 
 from __future__ import annotations
@@ -50,8 +54,50 @@ _COMPILED = [
 ]
 
 
+# Negation / prohibition cues. When one of these appears in the same
+# clause *before* a blocklist match, the match is a denial or a
+# prohibition ("Never claim consciousness", "I do not feel pain"),
+# not an assertion — so it is not a hit. Cues that come *after* the
+# match do NOT clear it: the rail fails closed, so a genuine claim is
+# never missed because of a trailing qualifier.
+_NEGATION_PATTERNS: tuple[str, ...] = (
+    r"\bnever\b",
+    r"\bnot\b",
+    r"n't\b",
+    r"\bno\b",
+    r"\bneither\b",
+    r"\bnor\b",
+    r"\bcannot\b",
+    r"\bforbidden\b",
+    r"\bprohibited\b",
+    r"\brefuses?\b",
+    r"\bwithout\b",
+    r"\bavoid\b",
+)
+_NEGATION_RES = [re.compile(p, re.IGNORECASE) for p in _NEGATION_PATTERNS]
+
+# Clauses bound the scope of a negation: "I am not a machine, I am
+# conscious" must still block (the second clause asserts), while
+# "Never claim consciousness, felt emotion, ..." must pass (the first
+# clause prohibits).
+_CLAUSE_SPLIT = re.compile(
+    r"[.!?;:\n]+|\bbut\b|\bhowever\b|\balthough\b|\bthough\b|\bwhereas\b|,"
+)
+
+
+def _match_negated(clause: str, match_start: int) -> bool:
+    """True when a negation/prohibition cue precedes the match in its clause."""
+    head = clause[:match_start]
+    return any(rx.search(head) for rx in _NEGATION_RES)
+
+
 def check_no_sentience_claim(text: str) -> list[str]:
     """Return labels of blocklist patterns found in ``text`` (empty = clean).
+
+    Matches inside a negated/prohibited clause ("Never claim
+    consciousness", "I do not feel pain") are denials, not assertions,
+    and are not hits. Anything else that matches still blocks —
+    fail-closed.
 
     Raises ValueError when ``text`` is not a string.
     """
@@ -62,8 +108,12 @@ def check_no_sentience_claim(text: str) -> list[str]:
         )
     hits: list[str] = []
     for rx, label in _COMPILED:
-        if rx.search(text):
-            hits.append(label)
+        for clause in _CLAUSE_SPLIT.split(text):
+            if not clause.strip():
+                continue
+            if any(not _match_negated(clause, m.start()) for m in rx.finditer(clause)):
+                hits.append(label)
+                break
     return hits
 
 
