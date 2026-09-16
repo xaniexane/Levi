@@ -431,6 +431,10 @@ def cmd_nervous(args):
 
 def cmd_daemon(args):
     """Control daemon: steer personas, wit styles, alchemy (no-pure-negative)."""
+    action = getattr(args, "action", None) or "status"
+    if action == "services":
+        # Unified supervisor (axis 4) — branch before ControlDaemon import.
+        return cmd_daemon_services(args)
     from levi.daemon.control import ControlDaemon
 
     d = ControlDaemon()
@@ -3439,6 +3443,8 @@ def cmd_genres(args):
 
 
 def cmd_factory(args):
+    if getattr(args, "factory_action", None) == "status":
+        return cmd_factory_status(args)
     fac = SoftwareFactory()
     if args.create:
         p = fac.create(args.create, args.idea or args.create)
@@ -3952,6 +3958,556 @@ def _provider_choices() -> list[str]:
         return provider_names()
     except Exception:
         return ["local", "levi-brain", "levi-local", "openai", "anthropic"]
+
+
+# === MEGAZORD-AXIS1-REGION-BEGIN: one CLI surface (axis 1) ===
+# Thin adapters: every landed subsystem reachable from `levi`. Each adapter
+# delegates to the subsystem's own entry point — NO reimplementation here.
+# Subsystems whose owning axis has not landed yet print an honest
+# "not yet landed" and exit 2 (never a traceback, never a fake success).
+
+
+def _axis1_not_landed(what: str):
+    """Honest gap: the owning axis has not merged this yet. Exit 2."""
+    print(
+        "not yet landed: %s — the owning axis has not merged it yet."
+        % what,
+        file=sys.stderr,
+    )
+    raise SystemExit(2)
+
+
+def _axis1_delegate(module: str, args, attr: str = "main"):
+    """Delegate to ``levi.<module>.__main__.main`` with REMAINDER argv."""
+    import importlib
+
+    entry = getattr(importlib.import_module("levi.%s.__main__" % module), attr)
+    rc = entry(list(getattr(args, "argv", None) or []))
+    if rc:
+        raise SystemExit(rc)
+
+
+def _axis1_importable(dotted: str) -> bool:
+    try:
+        import importlib
+
+        importlib.import_module(dotted)
+        return True
+    except Exception:
+        return False
+
+
+def _axis1_field(obj, *names, default=""):
+    """Duck-typed field read: dict key first, then attribute."""
+    for name in names:
+        if isinstance(obj, dict) and name in obj:
+            return obj[name]
+        value = getattr(obj, name, None)
+        if value is not None:
+            return value
+    return default
+
+
+def cmd_archive(args):
+    """The LEVI Archive — Smithsonian of forgotten software (passthrough)."""
+    _axis1_delegate("archive", args)
+
+
+def cmd_galaxy(args):
+    """Galaxy ecosystem: list/search/install packages (passthrough)."""
+    _axis1_delegate("galaxy", args)
+
+
+def cmd_perpetual(args):
+    """Perpetual engine: pulse, hunt waves, services (passthrough)."""
+    _axis1_delegate("perpetual", args)
+
+
+def cmd_oath(args):
+    """Oath trust mesh: init/doctor/key/contact/command/run/inbox/daemon/audit."""
+    _axis1_delegate("oath", args)
+
+
+def _axis1_shelf_modules(package: str):
+    """[(name, first-doc-line)] for every public submodule of a warehouse pkg."""
+    import importlib
+    import pkgutil
+
+    pkg = importlib.import_module("levi.%s" % package)
+    out = []
+    for info in sorted(pkgutil.iter_modules(pkg.__path__), key=lambda m: m.name):
+        if info.name.startswith("_"):
+            continue
+        mod = importlib.import_module("levi.%s.%s" % (package, info.name))
+        doc = (mod.__doc__ or "").strip().splitlines()
+        out.append((info.name, doc[0] if doc else ""))
+    return out
+
+
+def _axis1_shelf_cmd(args, package: str, action_attr: str, name_attr: str,
+                     title: str):
+    action = getattr(args, action_attr, None) or "list"
+    if action == "list":
+        print("=== %s ===" % title)
+        for name, blurb in _axis1_shelf_modules(package):
+            print("  %-14s %s" % (name, blurb[:100]))
+        print("\nPull one off the shelf: `levi %s show <name>`" % package)
+        return
+    name = getattr(args, name_attr, None) or ""
+    for mod_name, _blurb in _axis1_shelf_modules(package):
+        if mod_name == name:
+            import importlib
+
+            doc = getattr(
+                importlib.import_module("levi.%s.%s" % (package, name)),
+                "__doc__",
+                "",
+            )
+            print((doc or "(no docs for %s)" % name).strip())
+            return
+    print(
+        "unknown %s %r — browse with `levi %s list`" % (package, name, package),
+        file=sys.stderr,
+    )
+    raise SystemExit(2)
+
+
+def cmd_methods(args):
+    """Methods warehouse: forgotten human techniques, LEVI-native."""
+    _axis1_shelf_cmd(args, "methods", "methods_action", "methods_name",
+                     "Methods warehouse — shelves")
+
+
+def cmd_revival(args):
+    """Revivals warehouse: retired-software ideas reborn as LEVI originals."""
+    _axis1_shelf_cmd(args, "revival", "revival_action", "revival_name",
+                     "Revivals warehouse — shelves")
+
+
+_MEGAZORD_AXES = (
+    ("one CLI surface", "levi.cli.main"),
+    ("bloodstream turn pipeline", "levi.bloodstream.turn"),
+    ("capability registry / atlas", "levi.interop.atlas"),
+    ("unified daemon", "levi.daemon.supervisor"),
+    ("cross-module workflows", "levi.workflows"),
+    ("home / config root", None),  # ~/.levi exists
+    ("unified docs atlas", None),  # docs/CAPABILITIES.md in checkout
+    ("cross-module proof harness", None),  # tests/test_cli_megazord_surface.py
+    ("growth loop", "levi.growth"),
+    ("life-pack export", "levi.lifepack.pack"),
+)
+
+
+def cmd_megazord(args):
+    """MEGAZORD¹⁰ organism self-report: which of the 10 axes have landed."""
+    action = getattr(args, "megazord_action", None) or "status"
+    if action != "status":
+        print("unknown megazord action %r" % action, file=sys.stderr)
+        raise SystemExit(2)
+    print("=== MEGAZORD¹⁰ — organism self-report ===")
+    home = Path.home() / ".levi"
+    repo = Path(__file__).resolve().parents[3]
+    landed = 0
+    for i, (label, dotted) in enumerate(_MEGAZORD_AXES, 1):
+        if dotted:
+            ok = _axis1_importable(dotted)
+        elif label == "home / config root":
+            ok = home.is_dir()
+        elif label == "unified docs atlas":
+            ok = (repo / "docs" / "CAPABILITIES.md").is_file()
+        else:  # cross-module proof harness
+            ok = (repo / "tests" / "test_cli_megazord_surface.py").is_file()
+        landed += 1 if ok else 0
+        print(
+            "  [%s] axis %2d: %-32s %s"
+            % ("x" if ok else " ", i, label, "landed" if ok else "not yet landed")
+        )
+    try:
+        from levi.interop import atlas as _atlas
+
+        ap = getattr(_atlas, "atlas_path", None)
+        atlas_path = str(ap() if callable(ap) else ap) if ap else "~/.levi/atlas.json"
+    except Exception:
+        atlas_path = "not yet landed (levi.interop.atlas)"
+    print("atlas path: %s" % atlas_path)
+    try:
+        from levi.lifepack.pack import PACK_VERSION as _lpv
+
+        lpv = str(_lpv)
+    except Exception:
+        lpv = "unknown"
+    print("lifepack format version: %s" % lpv)
+    try:
+        from levi.interop import warehouses as _wh
+
+        rows = _wh.list_warehouses()
+        print("warehouses: %d" % len(rows))
+    except Exception:
+        print("warehouses: not yet landed (levi.interop.warehouses)")
+    print("axes landed: %d/10" % landed)
+
+
+def cmd_atlas(args):
+    """Capability atlas export (warehouse-grouped when the axis lands)."""
+    action = getattr(args, "atlas_action", None) or "export"
+    if action != "export":
+        print("unknown atlas action %r" % action, file=sys.stderr)
+        raise SystemExit(2)
+    try:
+        from levi.interop.atlas import export_atlas, write_atlas
+    except Exception:
+        _axis1_not_landed("levi.interop.atlas (capability atlas)")
+    data = export_atlas()
+    out = getattr(args, "out", None)
+    if out:
+        try:
+            written = write_atlas(out)
+        except TypeError:
+            # Alternate contract variant: write_atlas(data, path).
+            written = write_atlas(data, out)
+        print("atlas written → %s" % written)
+        return
+    # Read whatever structure export_atlas() returns: grouped or flat.
+    if isinstance(data, dict) and "warehouses" in data:
+        whs = data["warehouses"]
+        pairs = (
+            whs.items()
+            if isinstance(whs, dict)
+            else [(getattr(w, "name", "?"), w) for w in whs]
+        )
+        print("=== capability atlas (by warehouse) ===")
+        for name, w in pairs:
+            count = _axis1_field(w, "inventory_count", "count", "items",
+                                 default="?")
+            print("  %-22s %s item(s)" % (name, count))
+    elif isinstance(data, (list, tuple)):
+        print("atlas: %d entries (flat)" % len(data))
+    elif isinstance(data, dict):
+        keys = list(data)[:12]
+        print(
+            "atlas: %d top-level groups: %s"
+            % (len(data), ", ".join(str(k) for k in keys))
+        )
+    else:
+        print(str(data)[:2000])
+
+
+def cmd_workflow(args):
+    """Cross-module flagship workflows (axis 5)."""
+    action = getattr(args, "workflow_action", None) or "list"
+    try:
+        from levi.workflows import list_workflows, run_workflow
+    except Exception:
+        _axis1_not_landed("levi.workflows (cross-module workflows)")
+    if action == "list":
+        for w in list_workflows() or []:
+            print(
+                "  %-24s %s"
+                % (_axis1_field(w, "name", "id"),
+                   _axis1_field(w, "summary", "description", default="")[:90])
+            )
+        return
+    name = getattr(args, "name", None)
+    if not name:
+        print("usage: levi workflow run <name>", file=sys.stderr)
+        raise SystemExit(2)
+    rc = run_workflow(name)
+    if rc:
+        raise SystemExit(rc)
+
+
+def cmd_warehouse(args):
+    """Browse LEVI's warehouses: list, browse shelves, inventory, pull."""
+    try:
+        from levi.interop import warehouses as _wh
+    except Exception:
+        _axis1_not_landed("levi.interop.warehouses (warehouse registry)")
+    action = getattr(args, "warehouse_action", None) or "list"
+    if action == "list":
+        print("=== LEVI warehouses ===")
+        for w in _wh.list_warehouses() or []:
+            name = _axis1_field(w, "name", "id")
+            summary = _axis1_field(w, "summary", "description", default="")
+            count = _axis1_field(w, "inventory_count", "count", "items",
+                                 default="?")
+            print("  %s\n    %s [%s item(s)]" % (name, summary, count))
+        print(
+            "\n`levi warehouse browse <name>` — shelves · "
+            "`levi warehouse inventory <name>` — stock · "
+            "`levi warehouse pull <warehouse> <item>` — inspect"
+        )
+        return
+    if action == "browse":
+        name = getattr(args, "name", None)
+        if not name:
+            print("usage: levi warehouse browse <name>", file=sys.stderr)
+            raise SystemExit(2)
+        info = _wh.browse_warehouse(name)
+        print("=== warehouse: %s ===" % _axis1_field(info, "title", "name",
+                                                     default=name))
+        summary = _axis1_field(info, "summary", "description", default="")
+        if summary:
+            print(summary)
+        shelves = _axis1_field(info, "shelves", "modules", "sections",
+                               default=[]) or []
+        for s in shelves:
+            sname = _axis1_field(s, "module", "name", "id")
+            ssum = _axis1_field(s, "summary", "description", default="")
+            provides = _axis1_field(s, "provides", "items", default=[]) or []
+            extra = (" · %d item(s)" % len(provides)) if provides else ""
+            print("  %-24s %s%s" % (sname, ssum[:80], extra))
+        hint = _axis1_field(info, "pull_hint", "hint", default="")
+        if hint:
+            print("\n%s" % hint)
+        return
+    if action == "inventory":
+        name = getattr(args, "name", None)
+        if not name:
+            print("usage: levi warehouse inventory <name>", file=sys.stderr)
+            raise SystemExit(2)
+        limit = getattr(args, "limit", 20) or 20
+        raw = _wh.warehouse_inventory(name) or []
+        if isinstance(raw, dict):
+            items = raw.get("items") or []
+            total = raw.get("total", len(items))
+        else:
+            items = list(raw)
+            total = len(items)
+        shown = list(items)[:limit]
+        print("=== inventory: %s (%d of %d shown) ==="
+              % (name, len(shown), total))
+        for it in shown:
+            print(
+                "  %-28s %s"
+                % (_axis1_field(it, "id", "name"),
+                   _axis1_field(it, "summary", "description", "blurb",
+                                default="")[:80])
+            )
+        return
+    if action == "pull":
+        warehouse = getattr(args, "name", None)
+        item = getattr(args, "item", None)
+        if not warehouse or not item:
+            print("usage: levi warehouse pull <warehouse> <item>",
+                  file=sys.stderr)
+            raise SystemExit(2)
+        try:
+            detail = _wh.pull_from_shelf(warehouse, item)
+        except (ValueError, KeyError, LookupError) as exc:
+            print("pull failed: %s" % exc, file=sys.stderr)
+            raise SystemExit(1)
+        if isinstance(detail, str):
+            print(detail)
+        elif isinstance(detail, dict):
+            print("%s — %s"
+                  % (_axis1_field(detail, "id", "name", default=item),
+                     _axis1_field(detail, "summary", "description",
+                                  default="")))
+            invoke = _axis1_field(detail, "invoke", "how_to_invoke",
+                                  "usage", default="")
+            if invoke:
+                print("invoke: %s" % invoke)
+            rest = {k: v for k, v in detail.items()
+                    if k not in ("id", "name", "summary", "description",
+                                 "invoke", "how_to_invoke", "usage")}
+            if rest:
+                print(json.dumps(rest, indent=2, default=str)[:3000])
+        else:
+            print(json.dumps(detail, indent=2, default=str))
+        return
+    print("unknown warehouse action %r" % action, file=sys.stderr)
+    raise SystemExit(2)
+
+
+def cmd_bloodstream(args):
+    """Single-bloodstream turn pipeline (axis 2)."""
+    action = getattr(args, "bloodstream_action", None) or "turn"
+    from levi.bloodstream.turn import run_turn
+
+    if action == "turn":
+        text = " ".join(getattr(args, "text", None) or [])
+        if not text:
+            print("usage: levi bloodstream turn <text>", file=sys.stderr)
+            raise SystemExit(2)
+        res = run_turn(text)
+        print(res.reply)
+        print(
+            "— route=%s behavior=%s persona=%s risk=%s"
+            % (res.route, res.behavior, res.persona_id, res.risk_level)
+        )
+        print(
+            "  stages: %s · trace=%s"
+            % (", ".join(res.stage_names()), res.trace_id)
+        )
+        if not res.ok:
+            raise SystemExit(1)
+        return
+    if action == "bus-test":
+        res = run_turn("megazord bus self-test probe")
+        ok = bool(res.ok and res.stage_names())
+        print(
+            "bus-test: %s — %d stage(s): %s"
+            % ("PASS" if ok else "FAIL", len(res.stage_names()),
+               ", ".join(res.stage_names()))
+        )
+        if not ok:
+            raise SystemExit(1)
+        return
+    print("unknown bloodstream action %r" % action, file=sys.stderr)
+    raise SystemExit(2)
+
+
+_WAYMAKER_LINE = "Waymaker law: where there isn't a way, LEVI creates one."
+
+
+def _axis1_waymaker_jobs():
+    """Read-only peek at the workflows worker's waymaker queue (defensive)."""
+    try:
+        from levi import workflows as _wf
+    except Exception:
+        return None
+    fn = getattr(_wf, "waymaker_jobs", None)
+    if not callable(fn):
+        return None
+    try:
+        res = fn()
+    except Exception:
+        return None
+    if isinstance(res, int):
+        return res
+    if isinstance(res, (list, tuple)):
+        return len(res)
+    if isinstance(res, dict):
+        for key in ("count", "pending", "depth"):
+            if isinstance(res.get(key), int):
+                return res[key]
+        jobs = res.get("jobs")
+        if isinstance(jobs, (list, tuple)):
+            return len(jobs)
+    return None
+
+
+def cmd_factory_status(args):
+    """Factory production line: hunt → archive → manufacture → stock → galaxy."""
+    print("=== LEVI factory — production line ===")
+    print(_WAYMAKER_LINE)
+    home = Path.home()
+    print("\n[intake] perpetual hunt")
+    try:
+        from levi.perpetual import hunt as _hunt
+
+        state = _hunt.load_state()
+        done = [w for w in state.waves if w.status == "completed"]
+        last = max(done, key=lambda w: w.completed_at or "") if done else None
+        print("  waves completed: %d" % len(done))
+        if last:
+            print(
+                "  last wave: %s (%s) — %d findings @ %s"
+                % (last.id, last.theme_id, last.findings_count,
+                   last.completed_at)
+            )
+        if state.next_due:
+            print("  next due: %s" % state.next_due)
+    except Exception:
+        print("  not landed: levi.perpetual")
+    print("\n[processing] archive")
+    try:
+        from levi.archive.store import ArchiveStore
+
+        print("  records: %d" % ArchiveStore().count())
+    except Exception:
+        print("  not landed: levi.archive.store")
+    print("\n[manufacture] build queue")
+    try:
+        from levi.perpetual import hunt as _hunt
+
+        queue = _hunt.read_build_queue()
+        print("  queued builds: %d" % len(queue))
+        waymaker = _axis1_waymaker_jobs()
+        if waymaker is None:
+            print("  waymaker queue: not yet exposed (workflows axis pending)")
+        else:
+            print("  waymaker queue: %d job(s)" % waymaker)
+    except Exception:
+        print("  not landed: levi.perpetual build queue")
+    print("\n[stocking] warehouses")
+    try:
+        from levi.interop import warehouses as _wh
+
+        rows = _wh.list_warehouses() or []
+        total = 0
+        for w in rows:
+            count = _axis1_field(w, "inventory_count", "count", "items",
+                                 default=0)
+            total += count if isinstance(count, int) else 0
+        print("  warehouses: %d · inventoried items: %d" % (len(rows), total))
+    except Exception:
+        print("  not yet landed: levi.interop.warehouses")
+    print("\n[distribution] galaxy")
+    try:
+        from levi.galaxy.registry import GalaxyRegistry
+
+        pkgs = GalaxyRegistry(home / ".levi").list()
+        print("  installed packages: %d" % len(pkgs))
+    except Exception:
+        print("  not landed: levi.galaxy.registry")
+
+
+def _cmd_lifepack_preview(args, home=None):
+    """`levi lifepack preview <file>`: diff without writing (axis 10)."""
+    from levi.lifepack.pack import (
+        LifepackError,
+        _resolve_home,
+        preview_import,
+        validate_pack,
+    )
+
+    home = _resolve_home(home)
+    path = Path(getattr(args, "file", "") or "")
+    try:
+        pack = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        print("cannot read pack %s: %s" % (path, exc), file=sys.stderr)
+        raise SystemExit(1)
+    try:
+        validate_pack(pack)
+    except LifepackError as exc:
+        print("invalid life pack: %s" % exc, file=sys.stderr)
+        raise SystemExit(1)
+    for line in preview_import(pack, home):
+        print(line)
+    print("(preview only — nothing was written)")
+
+
+def cmd_daemon_services(args):
+    """`levi daemon services`: unified supervisor catalog + health (axis 4)."""
+    try:
+        from levi.daemon import supervisor as _sup
+    except Exception:
+        _axis1_not_landed("levi.daemon.supervisor (unified daemon supervisor)")
+    name = getattr(args, "target", None)
+    if name:
+        st = _sup.service_status(name)
+        print("%s: %s — %s" % (st["name"], st["status"], st["detail"]))
+        print("hint: %s" % _axis1_field(st, "start_hint", default=""))
+        if not st["ok"]:
+            raise SystemExit(1)
+        return
+    statuses = _sup.all_status()
+    up = sum(1 for s in statuses.values() if s["ok"])
+    print("=== daemon services (%d/%d up) ===" % (up, len(statuses)))
+    for sname, st in statuses.items():
+        mark = "up  " if st["ok"] else "DOWN"
+        print("  [%s] %-16s %s" % (mark, sname, st["detail"][:110]))
+    downs = [s for s in statuses.values() if not s["ok"]]
+    if downs:
+        print("\nstart hints for down services:")
+        for st in downs:
+            print("  %-16s %s"
+                  % (st["name"], _axis1_field(st, "start_hint", default="")))
+
+
+# === MEGAZORD-AXIS1-REGION-END ===
 
 
 def main():
@@ -4797,7 +5353,9 @@ def main():
         "lifepack", help="Life pack: portable LEVI state (export/import)"
     )
     lp_p.add_argument(
-        "lifepack_action", choices=["export", "import"], help="lifepack action"
+        "lifepack_action",
+        choices=["export", "import", "preview"],
+        help="lifepack action (preview: diff without writing)",
     )
     lp_p.add_argument("file", help="pack file to write (export) or read (import)")
     lp_p.add_argument(
@@ -4838,7 +5396,7 @@ def main():
         "action",
         nargs="?",
         default="status",
-        help="status|clear|alchemy|lock-persona|boost-persona|lock-wit|force-alchemy",
+        help="status|services|clear|alchemy|lock-persona|boost-persona|lock-wit|force-alchemy",
     )
     dae.add_argument("--target", default=None)
     dae.add_argument("--turns", type=int, default=10)
@@ -4916,6 +5474,13 @@ def main():
     ge.add_argument("--all", action="store_true")
     ge.add_argument("--category", default=None)
     fac_p = sub.add_parser("factory")
+    fac_p.add_argument(
+        "factory_action",
+        nargs="?",
+        default=None,
+        choices=["status"],
+        help="status: production-line view (hunt → archive → manufacture → stock → galaxy)",
+    )
     fac_p.add_argument("--create", default=None)
     fac_p.add_argument("--idea", default=None)
     fac_p.add_argument("--advance", default=None)
@@ -5065,6 +5630,138 @@ def main():
         default=20,
         help="usage: most recent N records (default 20)",
     )
+
+    # === MEGAZORD-AXIS1-REGION-BEGIN: one-CLI-surface parser registration ===
+    # Parallel tracks: keep ALL axis-1 adapter wiring inside this delimited
+    # region — do not scatter axis-1 hunks elsewhere in this file.
+    arch_p = sub.add_parser(
+        "archive",
+        help="The LEVI Archive — Smithsonian of forgotten software",
+    )
+    arch_p.add_argument(
+        "argv",
+        nargs=argparse.REMAINDER,
+        help="passed through to `python -m levi.archive`",
+    )
+    gal_p = sub.add_parser("galaxy", help="Galaxy ecosystem: packages, services")
+    gal_p.add_argument(
+        "argv",
+        nargs=argparse.REMAINDER,
+        help="passed through to `python -m levi.galaxy`",
+    )
+    meth_p = sub.add_parser(
+        "methods", help="Methods warehouse: forgotten techniques, LEVI-native"
+    )
+    meth_p.add_argument(
+        "methods_action",
+        nargs="?",
+        default="list",
+        choices=["list", "show"],
+        help="list shelves, or show one method",
+    )
+    meth_p.add_argument(
+        "methods_name", nargs="?", default=None, help="method name for `show`"
+    )
+    rev_p = sub.add_parser(
+        "revival", help="Revivals warehouse: retired-software ideas reborn"
+    )
+    rev_p.add_argument(
+        "revival_action",
+        nargs="?",
+        default="list",
+        choices=["list", "show"],
+        help="list shelves, or show one revival",
+    )
+    rev_p.add_argument(
+        "revival_name", nargs="?", default=None, help="revival name for `show`"
+    )
+    perp_p = sub.add_parser(
+        "perpetual", help="Perpetual engine: pulse, hunts, services"
+    )
+    perp_p.add_argument(
+        "argv",
+        nargs=argparse.REMAINDER,
+        help="passed through to `python -m levi.perpetual`",
+    )
+    oath_p = sub.add_parser(
+        "oath", help="Oath trust mesh: keys, contacts, commands, audit"
+    )
+    oath_p.add_argument(
+        "argv",
+        nargs=argparse.REMAINDER,
+        help="passed through to `python -m levi.oath`",
+    )
+    meg_p = sub.add_parser("megazord", help="MEGAZORD¹⁰ organism self-report")
+    meg_p.add_argument(
+        "megazord_action",
+        nargs="?",
+        default="status",
+        choices=["status"],
+        help="megazord action",
+    )
+    atlas_p = sub.add_parser(
+        "atlas", help="Capability atlas (warehouse-grouped when landed)"
+    )
+    atlas_p.add_argument(
+        "atlas_action",
+        nargs="?",
+        default="export",
+        choices=["export"],
+        help="atlas action",
+    )
+    atlas_p.add_argument(
+        "--out",
+        default=None,
+        help="write atlas JSON to PATH (default: print summary)",
+    )
+    wf_p = sub.add_parser(
+        "workflow", help="Cross-module flagship workflows"
+    )
+    wf_p.add_argument(
+        "workflow_action",
+        nargs="?",
+        default="list",
+        choices=["list", "run"],
+        help="workflow action",
+    )
+    wf_p.add_argument("name", nargs="?", default=None,
+                      help="workflow name for `run`")
+    wh_p = sub.add_parser(
+        "warehouse", help="Browse LEVI's warehouses (not a tool belt)"
+    )
+    wh_p.add_argument(
+        "warehouse_action",
+        nargs="?",
+        default="list",
+        choices=["list", "browse", "inventory", "pull"],
+        help="warehouse action",
+    )
+    wh_p.add_argument(
+        "name",
+        nargs="?",
+        default=None,
+        help="warehouse name (browse/inventory), or warehouse for `pull`",
+    )
+    wh_p.add_argument(
+        "item", nargs="?", default=None, help="item id for `pull`"
+    )
+    wh_p.add_argument(
+        "--limit", type=int, default=20, help="inventory: max items (default 20)"
+    )
+    bs_p = sub.add_parser(
+        "bloodstream", help="Single-bloodstream turn pipeline"
+    )
+    bs_p.add_argument(
+        "bloodstream_action",
+        nargs="?",
+        default="turn",
+        choices=["turn", "bus-test"],
+        help="bloodstream action",
+    )
+    bs_p.add_argument(
+        "text", nargs=argparse.REMAINDER, help="turn text (for `turn`)"
+    )
+    # === MEGAZORD-AXIS1-REGION-END ===
 
     # === KING-REGION-BEGIN: King control plane (core/levi/king) ===
     # Parallel tracks: keep ALL King wiring inside this delimited region —
@@ -5309,6 +6006,32 @@ def main():
     except Exception:
         pass
     # === TORCH-REGION-END ===
+    # === MEGAZORD-AXIS1-REGION-BEGIN: axis-1 dispatch registration ===
+    # Parallel tracks: keep ALL axis-1 dispatch hunks inside this region.
+    cmds["archive"] = cmd_archive
+    cmds["galaxy"] = cmd_galaxy
+    cmds["methods"] = cmd_methods
+    cmds["revival"] = cmd_revival
+    cmds["perpetual"] = cmd_perpetual
+    cmds["oath"] = cmd_oath
+    cmds["megazord"] = cmd_megazord
+    cmds["atlas"] = cmd_atlas
+    cmds["workflow"] = cmd_workflow
+    cmds["warehouse"] = cmd_warehouse
+    cmds["bloodstream"] = cmd_bloodstream
+    # lifepack preview: fill the gap without touching levi/lifepack/pack.py.
+    try:
+        from levi.lifepack.pack import cmd_lifepack as _cmd_lifepack_base
+
+        def _cmd_lifepack(args, _base=_cmd_lifepack_base):
+            if getattr(args, "lifepack_action", None) == "preview":
+                return _cmd_lifepack_preview(args)
+            return _base(args)
+
+        cmds["lifepack"] = _cmd_lifepack
+    except Exception:
+        pass
+    # === MEGAZORD-AXIS1-REGION-END ===
     fn = cmds.get(args.command)
     if fn:
         try:
