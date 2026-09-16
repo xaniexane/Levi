@@ -375,6 +375,8 @@ def prepare(
     out = Path(out_dir).expanduser()
     if not str(out).strip():
         raise TeachError("out_dir must be a non-empty path")
+    if out.exists() and not out.is_dir():
+        raise TeachError(f"out_dir exists and is not a directory: {out}")
     chosen = tuple(sources)
     if n_stages < 1:
         raise TeachError(f"n_stages must be >= 1, got {n_stages}")

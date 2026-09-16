@@ -644,6 +644,67 @@ def test_cli_check_command(repo, home_env, monkeypatch, capsys):
     assert "FAILED" in capsys.readouterr().out
 
 
+# ---------------------------------------------------------------------------
+# round 4: malformed-input hardening
+
+
+def test_courses_binary_file_does_not_crash(tmp_path):
+    raw = tmp_path / "core" / "levi" / "knowledge" / "courses" / "raw" / "misc"
+    raw.mkdir(parents=True)
+    (raw / "binary.txt").write_bytes(b"\x00\xff\xfe binary \x80 junk " * 200)
+    docs = courses_docs(tmp_path)
+    assert isinstance(docs, list)  # no crash; garbage may or may not chunk
+
+
+def test_academy_huge_line_streams(repo):
+    acad = repo / "core" / "levi" / "brain" / "train" / "corpus_academy.jsonl"
+    with open(acad, "a", encoding="utf-8") as fh:
+        fh.write(json.dumps({"text": "word " * 100000}) + "\n")
+    docs = academy_docs(repo)  # must not blow RAM or crash
+    assert len(docs) >= 1
+
+
+def test_growth_store_unavailable_returns_empty(monkeypatch):
+    import levi.growth.corpus_export as ce
+
+    monkeypatch.setattr(ce, "MemoryStore", None)
+    assert growth_docs() == []
+
+
+def test_prepare_out_is_file_raises_teach_error(repo, tmp_path):
+    f = tmp_path / "afile"
+    f.write_text("x", encoding="utf-8")
+    with pytest.raises(TeachError, match="not a directory"):
+        prepare(f, sources=["courses"], root=repo)
+
+
+def test_plan_is_deterministic(repo):
+    a = plan_teaching(["courses", "seed"], root=repo, seed=99, run_teachback=False)
+    b = plan_teaching(["courses", "seed"], root=repo, seed=99, run_teachback=False)
+    assert a.sequence_counts == b.sequence_counts
+    assert a.stages == b.stages
+    assert a.n_dedup_removed == b.n_dedup_removed
+
+
+def test_courses_subject_filter(repo):
+    docs = courses_docs(repo, subjects=["misc"])
+    assert docs == [] or all(d.meta["subject"] == "misc" for d in docs)
+    all_docs = courses_docs(repo)
+    assert len(all_docs) >= len(docs)
+
+
+def test_playbooks_empty_body_produces_no_docs(tmp_path):
+    pb = tmp_path / "core" / "levi" / "skill" / "playbooks" / "cyber"
+    pb.mkdir(parents=True)
+    (pb / "empty.md").write_text("---\nname: Empty\n---\n", encoding="utf-8")
+    assert playbooks_docs(tmp_path) == []
+
+
+def test_sanitize_surrogates_do_not_crash():
+    out = sanitize_text("\ud800 lone surrogate \udfff here")
+    assert isinstance(out, str)
+
+
 def test_teach_home_uses_levi_home(home_env):
     # LEVI_HOME is the .levi dir itself (repo convention)
     assert teach_home() == home_env / "teach"
