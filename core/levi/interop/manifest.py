@@ -405,6 +405,21 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- circles: Dunbar-bounded trust circles (perpetual-hunt daily -------
+    # 2026-09-16 evening: fallen platforms) ----------------------------------
+    # Path's load-bearing idea (the hard friend cap, Dunbar-inspired),
+    # revived without Path's growth pressure: inner(5)/close(15)/
+    # friends(50)/tribe(150) caps enforced at add-time, deny-closed;
+    # circle-scoped share receipts; owner-only local store; no public
+    # counts, ever.
+    "circles": {
+        "provides": [
+            "circles.layers",
+            "circles.share",
+            "circles.audit",
+        ],
+        "requires": [],
+    },
     # -- feedlab: feed-ranking transparency lab (giant-patterns hunt) --------
     # The giants refuse to disclose how their rankers score you. feedlab
     # inverts the trade: a fully disclosed engagement-bait scoring model

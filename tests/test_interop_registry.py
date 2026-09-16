@@ -86,6 +86,8 @@ def test_manifest_registers_all_modules():
         "liberation",
         # shelf (perpetual-hunt daily 2026-09-16: fallen platforms)
         "shelf",
+        # circles (perpetual-hunt daily 2026-09-16 evening: Path's cap)
+        "circles",
     }
 
 

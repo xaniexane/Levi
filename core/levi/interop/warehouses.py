@@ -109,6 +109,8 @@ CLI_COMMANDS.update(
         # -- shelf (perpetual-hunt daily 2026-09-16: fallen platforms --------
         # Reader share-with-note + Digg bury, revived as a local curation desk
         "shelf": ["python -m levi.shelf"],
+        # -- circles (perpetual-hunt daily 2026-09-16 evening: Path's cap) --
+        "circles": ["python -m levi.circles"],
         # -- feedlab (perpetual-hunt daily 2026-09-16: giant-patterns inversion)
         "feedlab": ["python -m levi.feedlab rank --demo"],
         # -- additions wave -----------------------------------------------
