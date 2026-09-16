@@ -32,6 +32,10 @@ class GameManifest:
     progress_portable: bool = True  # saves exportable by the player
     odds_declared: bool = True  # any chance is stated honestly
     hints_free: bool = True  # help is never a purchase
+    # --- wave-006: the ownership and transparency trades, defaulted honest ---
+    has_time_limited_content: bool = False  # battle-pass FOMO seasons
+    has_randomness: bool = False  # the game involves chance at all
+    has_audit_hook: bool = False  # an empirical odds audit (prove-the-odds)
 
 
 # ---------------------------------------------------------------------------
@@ -99,6 +103,29 @@ RULES: Tuple[CharterRule, ...] = (
         inversion="Hidden RNG economics: wherever chance exists, the odds "
         "are stated plainly.",
         check=lambda m: m.odds_declared,
+    ),
+    CharterRule(
+        id="no_kill_switch",
+        title="No kill switch",
+        inversion="The Stadia/OnLive trade: a dead server must never take "
+        "the game with it. The game is fully playable offline from local "
+        "files, and saves stay player-owned plain text.",
+        check=lambda m: not m.requires_network,
+    ),
+    CharterRule(
+        id="no_synthetic_scarcity",
+        title="No synthetic scarcity",
+        inversion="Battle-pass / FOMO-season trade: time-limited content "
+        "that manufactures urgency. Nothing in the game may expire.",
+        check=lambda m: not m.has_time_limited_content,
+    ),
+    CharterRule(
+        id="odds_are_public",
+        title="Odds are public",
+        inversion="The loot-box trade: randomness is only fair when its "
+        "odds are declared AND empirically auditable (a prove-the-odds "
+        "hook the player can run).",
+        check=lambda m: not m.has_randomness or (m.odds_declared and m.has_audit_hook),
     ),
 )
 

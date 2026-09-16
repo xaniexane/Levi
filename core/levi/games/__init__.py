@@ -13,11 +13,31 @@ Contents:
   FOMO-free daily substitution-cipher puzzle with free unlimited hints.
 - :mod:`levi.games.hotseat` — pass-and-play local multiplayer (TicTacToe,
   Nim): the forgotten couch mechanic, revived without accounts or servers.
+- :mod:`levi.games.bagatelle` — Bagatelle: mechanical-pinball remix with
+  shareable board layouts and a prove-the-odds audit mode.
+- :mod:`levi.games.mancala` — Mancala: the parametric game grammar; rules
+  are data, variants are generated and self-play-validated.
 
 Play: ``python -m levi.games charter`` / ``play codebreak|tictactoe|nim`` /
-``cipher [--date YYYY-MM-DD]`` / ``saves ...``
+``cipher [--date YYYY-MM-DD]`` / ``bagatelle`` / ``mancala`` / ``saves ...``
 """
 
-from levi.games import charter, daily_puzzle, deduction, hotseat, saves
+from levi.games import (
+    bagatelle,
+    charter,
+    daily_puzzle,
+    deduction,
+    hotseat,
+    mancala,
+    saves,
+)
 
-__all__ = ["charter", "deduction", "daily_puzzle", "hotseat", "saves"]
+__all__ = [
+    "bagatelle",
+    "charter",
+    "deduction",
+    "daily_puzzle",
+    "hotseat",
+    "mancala",
+    "saves",
+]
