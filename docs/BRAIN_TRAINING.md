@@ -133,3 +133,89 @@ Dated recall lives in per-day JSONL and is read at runtime by
 `news_latest` / `news_search`, always with dates attached. Baking
 headlines into weights would produce a brain that confidently recalls
 last month's news as current — exactly the failure this design avoids.
+
+## 7. v2 train/teach harness (`core/levi/brain/train/v2/`)
+
+The v1 scripts (`train.py` / `eval.py`) are frozen as the proof-of-learning
+reference. v2 is the config-driven harness for real training runs, built as
+composable modules the TEACH worker consumes. Everything is hermetic-tested
+(`tests/test_brain_v2_*.py`); torch is only needed by actual training, never
+by the harness or its tests.
+
+**Modules:**
+
+- `config.py` — ONE YAML file drives the run: model size (`builder` /
+  `tokenizer` as dotted import-path callables, so the IMPROVE worker's
+  `model_v2`/tokenizer plug in untouched), data manifests + optional
+  weighted mix, LR schedule, eval cadence, checkpoint policy. Strict
+  validation: bad values raise `ConfigError` naming the field.
+- `corpus_manager.py` — SHA256 dedupe, versioned corpus manifests (name,
+  version, per-file hashes, doc/char counts), seeded train/val/test splits,
+  manifest re-verification. **Hard policy gate:** any corpus tagged `news`
+  (or living under a news-like path) raises `PolicyError` — §6 is enforced
+  in code, not just documented.
+- `curriculum.py` — orders approved teaching material simple→complex via
+  length + vocabulary-rarity heuristics; emits a `CurriculumManifest`
+  (ordered doc ids, per-doc difficulty, contiguous stages) for the TEACH
+  worker. The heuristic is documented as a heuristic.
+- `checkpoint.py` — atomic saves (temp + fsync + rename), `checkpoints.json`
+  manifest with step/loss/config-hash, resume-from-latest with config-mismatch
+  reporting, pruning to `keep_last`, sha256 verification on load (tampered
+  files are refused). Checkpoints are numpy `.npz`; torch conversion helpers
+  live at the edges.
+- `eval_harness.py` — honest eval: held-out perplexity, next-token accuracy
+  on synthetic probes, topic-classification probes (choices shuffled, seeded,
+  so positional bias can't inflate scores), before/after comparison against a
+  baseline checkpoint with improved/regressed/within-noise verdicts, JSON
+  reports. Near-chance scores are labeled **"NOT capable"** plainly; a
+  regression verdict says "do not promote". Numbers are measured, never
+  claimed.
+
+**Example config:** see the docstring at the top of `config.py`.
+
+## 8. Capability gates — the default slot is earned by measurement
+
+The native brain is **explicit-only** (`--provider levi-brain` /
+`LEVI_PROVIDER=levi-brain`) until a checkpoint *measures* its way into
+heavier duties. `levi.agent.brain_checkpoints` implements the gates;
+`levi agent model status` reports each checkpoint's tier and exactly
+why it sits there. Thresholds (also as constants in the module):
+
+| Tier | Requirements |
+|---|---|
+| `prose-only` (default) | weights file present. Answers prose; the provider never emits tool calls. |
+| `tool-loop-candidate` | eval report present **and** held-out loss ≤ **1.20** **and** a tool-use eval with pass rate ≥ **0.80** on n ≥ 50 |
+| `default-candidate` | tool-loop tier **and** held-out loss ≤ **1.00** **and** tool-use pass rate ≥ **0.90** **and** eval dated within the last **180 days** |
+
+Only a `default-candidate` checkpoint earns the default slot of the
+provider chain (`model_family.resolve_family()`); everything else stays
+explicit-only, honestly. Current reality (2026-09-15): `tiny-gpt.pt`
+reports held-out loss **1.857** with no tool-use eval — prose-only, and
+`model status` says exactly that. These are capability measurements,
+not minds; nothing here claims consciousness or sentience.
+
+**Eval manifests (the v2 contract):** each `<stem>.pt` checkpoint in
+`core/levi/brain/weights/` is described by a `<stem>.eval.json`
+manifest beside it — e.g. `tiny-gpt.eval.json`, and when the v2
+harness lands `model_v2.pt` it drops `model_v2.eval.json` with it.
+Status and gating pick them up automatically, no code change. Fields
+(all optional; missing fields just mean less evidence):
+
+```json
+{
+  "checkpoint": "model_v2.pt",
+  "held_out_loss": 0.9,
+  "perplexity": 2.46,
+  "eval_date": "2026-09-20",
+  "corpus_version": "academy+main v2",
+  "params": 50000000,
+  "steps": 5000,
+  "generated_by": "core/levi/brain/train/v2/eval_harness.py",
+  "tool_use": {"pass_rate": 0.95, "n": 100}
+}
+```
+
+`perplexity` is derived as exp(held_out_loss) when omitted. The legacy
+bare `eval.json` in the weights-dir root still applies to `tiny-gpt.pt`
+as a fallback. Malformed manifests are treated as missing evidence —
+never a crash, never a promotion.
