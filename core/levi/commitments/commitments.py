@@ -63,7 +63,7 @@ def _parse_day(s: str) -> date:
     try:
         return date.fromisoformat(s)
     except ValueError:
-        raise CommitmentError("bad date %r — use YYYY-MM-DD" % s)
+        raise CommitmentError("bad date %r — use YYYY-MM-DD" % s) from None
 
 
 class CommitmentStore:

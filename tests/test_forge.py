@@ -410,9 +410,9 @@ def test_export_import_roundtrip(fh, tmp_path, git_env):
     assert (out / "SHA256SUMS").is_file()
     assert (out / "contrib.json").is_file()
     lines = [
-        json.loads(l)
-        for l in (out / "issues.jsonl").read_text().splitlines()
-        if l.strip()
+        json.loads(line)
+        for line in (out / "issues.jsonl").read_text().splitlines()
+        if line.strip()
     ]
     assert lines[0]["title"] == "Export issue"
     assert json.loads((out / "stars.json").read_text())["starred"] is True

@@ -29,7 +29,7 @@ def _rev(home, name, rev) -> str:
             .strip()
         )
     except GitError:
-        raise GitError("no such revision %r in repo %r" % (rev, name))
+        raise GitError("no such revision %r in repo %r" % (rev, name)) from None
 
 
 def tree(home, name, rev=None, path=""):
@@ -45,7 +45,7 @@ def tree(home, name, rev=None, path=""):
             "utf-8", "replace"
         )
     except GitError:
-        raise GitError("no such path %r at %r" % (path, rev or "HEAD"))
+        raise GitError("no such path %r at %r" % (path, rev or "HEAD")) from None
     entries = []
     for line in out.splitlines():
         # "<mode> <type> <sha>\t<name>"

@@ -73,7 +73,7 @@ class QuerySpec:
             try:
                 self.min_importance = float(self.min_importance)
             except (TypeError, ValueError):
-                raise ValueError("bfs: min_importance must be a number")
+                raise ValueError("bfs: min_importance must be a number") from None
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -214,7 +214,7 @@ class LiveQuery:
         try:
             return self._subs.pop(sub_id)
         except KeyError:
-            raise ValueError("bfs: no subscription %r" % sub_id)
+            raise ValueError("bfs: no subscription %r" % sub_id) from None
 
     def subscriptions(self) -> List[Subscription]:
         return list(self._subs.values())
@@ -342,7 +342,7 @@ class LiveStore:
             raise RuntimeError(
                 "bfs: levi.memory.store is unavailable (%s); "
                 "pass an explicit store instead" % exc
-            )
+            ) from exc
         store = MemoryStore(data_dir=data_dir) if data_dir else MemoryStore()
         return cls(store, queries=queries)
 

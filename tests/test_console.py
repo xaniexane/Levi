@@ -163,7 +163,7 @@ def test_tier_color_and_stage_for_kind():
 
 def test_screens_registry_contents():
     assert set(SCREENS) == {"security", "bounty", "demand"}
-    for key, (title, handler) in SCREENS.items():
+    for _, (title, handler) in SCREENS.items():
         assert isinstance(title, str) and title
         assert callable(handler)
     titles = [t for t, _ in SCREENS.values()]

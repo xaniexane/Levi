@@ -142,7 +142,7 @@ def test_unseen_preferred(home):
         per_tag_cap=10,
         no_repeat_weeks=0,
     )
-    first_ids = {p["id"] for p in d1["picks"]}
+    _first_ids = {p["id"] for p in d1["picks"]}
     # unseen items (none picked in W38... all 10 were picked) -> falls back to seen
     assert len(d2["picks"]) == 10
 

@@ -1204,19 +1204,24 @@ def _register_builtins(
                     kw[num_key] = int(args[num_key])
                 except (TypeError, ValueError):
                     return ToolResult(
-                        ok=False, error=f"image_generate: '{num_key}' must be an integer"
+                        ok=False,
+                        error=f"image_generate: '{num_key}' must be an integer",
                     )
         if args.get("seed") is not None:
             try:
                 kw["seed"] = int(args["seed"])
             except (TypeError, ValueError):
-                return ToolResult(ok=False, error="image_generate: 'seed' must be an integer")
+                return ToolResult(
+                    ok=False, error="image_generate: 'seed' must be an integer"
+                )
         if args.get("model"):
             kw["model"] = str(args["model"])
         try:
             from levi.media import generate_image
         except Exception as exc:
-            return ToolResult(ok=False, error=f"image_generate: cannot import levi.media: {exc}")
+            return ToolResult(
+                ok=False, error=f"image_generate: cannot import levi.media: {exc}"
+            )
         try:
             img = generate_image(str(prompt), **kw)
         except RuntimeError as exc:
@@ -1246,11 +1251,14 @@ def _register_builtins(
         except (TypeError, ValueError):
             return ToolResult(ok=False, error="python_exec: 'timeout' must be numeric")
         if timeout <= 0 or timeout > 120:
-            return ToolResult(ok=False, error="python_exec: 'timeout' must be in (0, 120]")
+            return ToolResult(
+                ok=False, error="python_exec: 'timeout' must be in (0, 120]"
+            )
         cwd = args.get("cwd")
         try:
             run_cwd = (
-                _resolve_sandboxed(workspace_root, str(cwd)) if cwd is not None
+                _resolve_sandboxed(workspace_root, str(cwd))
+                if cwd is not None
                 else _ensure_dir(workspace_root / "agent_scratch")
             )
         except ValueError as exc:
@@ -1260,7 +1268,9 @@ def _register_builtins(
         try:
             script.write_text(code, encoding="utf-8")
         except OSError as exc:
-            return ToolResult(ok=False, error=f"python_exec: cannot stage script: {exc}")
+            return ToolResult(
+                ok=False, error=f"python_exec: cannot stage script: {exc}"
+            )
         env = {k: v for k, v in os.environ.items() if "_proxy" not in k.lower()}
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         env["PYTHONSAFEPATH"] = "1"
@@ -1276,7 +1286,9 @@ def _register_builtins(
                 errors="replace",
             )
         except subprocess.TimeoutExpired:
-            return ToolResult(ok=False, error=f"python_exec: timed out after {timeout}s")
+            return ToolResult(
+                ok=False, error=f"python_exec: timed out after {timeout}s"
+            )
         except OSError as exc:
             return ToolResult(ok=False, error=f"python_exec: failed to run: {exc}")
         finally:

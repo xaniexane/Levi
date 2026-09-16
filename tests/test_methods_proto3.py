@@ -239,7 +239,7 @@ def test_codebook_edition_divergence_visible():
 
 
 def test_qcodes_parse_query():
-    sig = qcodes.parse("QTH?")
+    _sig = qcodes.parse("QTH?")
     assert qcodes.is_qcode("QTH")
     assert "QTH" in qcodes.query("QTH")
 

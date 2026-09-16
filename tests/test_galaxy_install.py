@@ -446,7 +446,7 @@ def test_registry_atomic_write_survives_crash_midway(tmp_path):
     }
     reg.add(rec)
     before = reg.path.read_bytes()
-    with pytest.raises(RegistryError := gregistry.RegistryError):
+    with pytest.raises(_RegistryError := gregistry.RegistryError):
         reg.add({"id": "bad"})  # missing fields -> validated before any write
     assert reg.path.read_bytes() == before
     assert reg.get("com.example.demo")["version"] == "1.0.0"

@@ -120,7 +120,7 @@ def test_hunt_archive_publish_ok(monkeypatch, tmp_path):
     # ingest queue file exists and carries both records
     queue = Path(result["artifacts"]["queue_path"])
     assert queue.is_file()
-    queued = [json.loads(l) for l in queue.read_text().splitlines() if l.strip()]
+    queued = [json.loads(line) for line in queue.read_text().splitlines() if line.strip()]
     assert len(queued) == 4
 
     # galaxy registry holds the published collection

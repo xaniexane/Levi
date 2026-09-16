@@ -82,8 +82,7 @@ def register_neighboros_parser(sub) -> None:
     wadd_p.add_argument(
         "--categories",
         required=True,
-        help="comma-separated categories "
-        f"(e.g. {', '.join(KNOWN_CATEGORIES[:4])})",
+        help=f"comma-separated categories (e.g. {', '.join(KNOWN_CATEGORIES[:4])})",
     )
 
     wlist_p = wcmds.add_parser("list", help="list workers")
@@ -293,9 +292,7 @@ def cmd_neighboros(args: argparse.Namespace) -> int:
         for status, count in s["jobs_by_status"].items():
             if count:
                 print(f"  {status}: {count}")
-        print(
-            f"workers: {s['workers_active']} active of {s['workers_total']}"
-        )
+        print(f"workers: {s['workers_active']} active of {s['workers_total']}")
         return 0
 
     print(f"unknown neighboros command: {cmd}")

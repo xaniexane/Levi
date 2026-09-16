@@ -312,7 +312,7 @@ class DialogueState:
         )
 
     def open_loops(self) -> List[Dict]:
-        return [l for l in self.loops if l["status"] == "open"]
+        return [loop for loop in self.loops if loop["status"] == "open"]
 
     # -- persistence -------------------------------------------------------------
     def to_dict(self) -> Dict:

@@ -28,7 +28,7 @@ import os
 import re
 import shlex
 import tempfile
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -157,7 +157,7 @@ def pin(
         try:
             argv = shlex.split(command, posix=True)
         except ValueError as exc:
-            raise ValueError("could not parse command %r: %s" % (command, exc))
+            raise ValueError("could not parse command %r: %s" % (command, exc)) from exc
     else:
         argv = [str(a) for a in command]
     if not argv:

@@ -46,7 +46,7 @@ def test_star_and_unstar(store):
 
 def test_bury_sinks_not_deletes(store):
     a = store.add("https://example.com/a", "A")
-    b = store.add("https://example.com/b", "B")
+    _b = store.add("https://example.com/b", "B")
     store.bury(a.id)
     order = [i.id for i in store.list()]
     assert order[-1] == a.id  # buried sinks to bottom
@@ -156,7 +156,7 @@ def test_import_collision_rekeys(store, tmp_path):
     res = store.import_bundle(bundle_path)
     assert res["added"] == 0
 
-    it = store.add("https://example.com/a", "A")
+    _it = store.add("https://example.com/a", "A")
     bundle_path2 = tmp_path / "mine2.shelfbundle"
     store.bundle(bundle_path2)
     # import back into same shelf: ids collide -> re-keyed, never overwritten

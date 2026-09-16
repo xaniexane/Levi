@@ -103,7 +103,7 @@ def test_bundles(maildir, herm_home):
 
 def test_bundle_rules_are_user_editable(maildir, herm_home):
     home = herm_home / ".levi" / "mailtriage"
-    eng = TriageEngine(home)
+    _eng = TriageEngine(home)
     rules_path = home / "rules.json"
     rules = json.loads(rules_path.read_text())
     rules.insert(0, {"name": "vip", "match": {"from_contains": ["friend@people.com"]}})
@@ -211,7 +211,7 @@ def test_cli_draft_flow(maildir, herm_home, capsys, monkeypatch):
 
     monkeypatch.setenv("LEVI_HOME", str(herm_home / ".levi"))
     args = ["--maildir", str(maildir)]
-    recs = _recs(maildir)
+    _recs_unused = _recs(maildir)
     # make the receipt message match the ack template
     assert main(args + ["draft", "<m2@x>"]) == 0
     assert main(args + ["save-draft", "<m2@x>", "--index", "0"]) == 0

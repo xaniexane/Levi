@@ -514,7 +514,7 @@ class CharterStore:
         try:
             envelope = json.loads(Path(in_path).read_text())
         except (json.JSONDecodeError, OSError) as exc:
-            raise CharterError(f"cannot read export: {exc}")
+            raise CharterError(f"cannot read export: {exc}") from exc
         if envelope.get("format") != EXPORT_FORMAT:
             raise CharterError(
                 f"not a LEVI charter export (format={envelope.get('format')!r})"

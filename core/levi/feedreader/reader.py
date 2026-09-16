@@ -316,7 +316,7 @@ class FeedStore:
         try:
             root = ET.fromstring(opml_text)
         except ET.ParseError as exc:
-            raise FeedError("bad OPML: %s" % exc)
+            raise FeedError("bad OPML: %s" % exc) from exc
         added = 0
         for el in root.iter("outline"):
             url = el.get("xmlUrl")

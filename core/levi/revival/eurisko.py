@@ -153,7 +153,7 @@ class CreditAssigner:
         best = max(s for _, _, s in scored)
         # Credit: full credit to the best, proportional credit to the rest
         # (relative contribution — Lenat's "who earned the win").
-        for h, cand, s in scored:
+        for h, _, s in scored:
             credit = (
                 1.0
                 if (best > 0 and math.isclose(s, best))

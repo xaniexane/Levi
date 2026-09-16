@@ -229,7 +229,7 @@ def test_out_of_order_replies_are_buffered():
     # Manually interleave: send a one-way, then a request; server answers the
     # request while the one-way stays queued, then we still receive it.
     server.send("note", "first")
-    req_id_holder = {}
+    _req_id_holder = {}
 
     def responder():
         msg_type, payload, msg_id = server.recv(timeout=5)

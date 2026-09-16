@@ -156,7 +156,7 @@ class TicklerFile:
         try:
             return self._items[item_id]
         except KeyError:
-            raise ValueError(f"unknown tickler item: {item_id!r}")
+            raise ValueError(f"unknown tickler item: {item_id!r}") from None
 
     def dismiss(self, item_id: str) -> TicklerItem:
         """Remove a filed item (it was handled). Returns the removed item."""

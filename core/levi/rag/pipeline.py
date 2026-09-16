@@ -109,7 +109,7 @@ def build_context(
     lines: List[str] = []
     citations: List[str] = []
     total = 0
-    for i, (entry, _score, _expl) in enumerate(ranked, 1):
+    for _, (entry, _score, _expl) in enumerate(ranked, 1):
         meta = entry.metadata or {}
         prov = meta.get("provenance") or {}
         section = prov.get("section") or ""

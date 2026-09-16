@@ -168,9 +168,7 @@ def test_corrupt_store_starts_empty(tmp_path):
     d = tmp_path / "neighboros"
     d.mkdir()
     (d / "jobs.json").write_text("{not json", encoding="utf-8")
-    t = NeighborTracker(
-        jobs_path=d / "jobs.json", workers_path=d / "workers.json"
-    )
+    t = NeighborTracker(jobs_path=d / "jobs.json", workers_path=d / "workers.json")
     assert t.list_jobs() == []
 
 
@@ -439,9 +437,7 @@ def test_cli_brief_writes_file(tmp_path, monkeypatch, capsys):
         )
     )
     assert rc == 0
-    rc = ncli.cmd_neighboros(
-        _ns(neighboros_cmd="brief", date="2026-09-16")
-    )
+    rc = ncli.cmd_neighboros(_ns(neighboros_cmd="brief", date="2026-09-16"))
     assert rc == 0
     out = capsys.readouterr().out
     assert "CLI sink" in out

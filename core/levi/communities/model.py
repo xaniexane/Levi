@@ -387,7 +387,7 @@ class CommunityStore:
         try:
             doc = json.loads(Path(in_path).read_text())
         except (json.JSONDecodeError, OSError) as exc:
-            raise CommunityError(f"cannot read export: {exc}")
+            raise CommunityError(f"cannot read export: {exc}") from exc
         community = verify_export(doc)  # raises on any tampering
         if as_id:
             community.id = _check_id(as_id, "community")

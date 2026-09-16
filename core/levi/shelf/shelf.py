@@ -139,7 +139,7 @@ class ShelfStore:
                 TypeError,
                 ValueError,
             ) as exc:
-                raise ShelfError("shelf line %d refused: %s" % (lineno, exc))
+                raise ShelfError("shelf line %d refused: %s" % (lineno, exc)) from exc
             if item.id in self._items:
                 raise ShelfError(
                     "shelf line %d refused: duplicate id %r" % (lineno, item.id)
@@ -317,11 +317,11 @@ class ShelfStore:
             with zipfile.ZipFile(src) as zf:
                 raw = zf.read("shelf.json")
         except (zipfile.BadZipFile, KeyError) as exc:
-            raise ShelfError("not a share-shelf bundle: %s" % exc)
+            raise ShelfError("not a share-shelf bundle: %s" % exc) from exc
         try:
             manifest = json.loads(raw.decode("utf-8"))
         except (json.JSONDecodeError, UnicodeDecodeError) as exc:
-            raise ShelfError("bundle manifest refused: %s" % exc)
+            raise ShelfError("bundle manifest refused: %s" % exc) from exc
         if (
             not isinstance(manifest, dict)
             or manifest.get("format") != "levi-share-shelf/1"
@@ -337,7 +337,7 @@ class ShelfStore:
             try:
                 item = ShelfItem.from_dict(entry)
             except ShelfError as exc:
-                raise ShelfError("bundle item refused: %s" % exc)
+                raise ShelfError("bundle item refused: %s" % exc) from exc
             if item.id in self._items:
                 # collision: re-key, never overwrite — loop until unique
                 # (same-second re-keys could regenerate the same id)
@@ -349,7 +349,7 @@ class ShelfStore:
                     try:
                         item = ShelfItem.from_dict({**entry, "id": cand})
                     except ShelfError as exc:
-                        raise ShelfError("bundle item refused: %s" % exc)
+                        raise ShelfError("bundle item refused: %s" % exc) from exc
                     if cand not in self._items:
                         break
                     attempt += 1

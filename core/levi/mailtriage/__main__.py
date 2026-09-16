@@ -43,7 +43,7 @@ def _store(a) -> MailStore:
         return MailStore()
     except FileNotFoundError as exc:
         print(str(exc), file=sys.stderr)
-        raise SystemExit(2)
+        raise SystemExit(2) from exc
 
 
 def _records(a):

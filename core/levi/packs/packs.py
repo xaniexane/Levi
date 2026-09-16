@@ -99,7 +99,7 @@ class Pack:
         try:
             data = json.loads(mp.read_text(encoding=ENC))
         except (json.JSONDecodeError, OSError) as exc:
-            raise PackError("pack %r manifest unreadable: %s" % (self.name, exc))
+            raise PackError("pack %r manifest unreadable: %s" % (self.name, exc)) from exc
         self.manifest = validate_manifest(data)
 
     @property

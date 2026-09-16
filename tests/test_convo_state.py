@@ -62,7 +62,7 @@ def test_open_loop_opens_and_closes():
 def test_question_loop_opens():
     s = _s()
     s.update("levi", "What time is the migration window on Saturday?")
-    assert any(l["kind"] == "question" for l in s.open_loops())
+    assert any(loop["kind"] == "question" for loop in s.open_loops())
 
 
 def test_facts_recorded_from_levi_claims():

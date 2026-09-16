@@ -114,7 +114,7 @@ def test_publish_appends_to_trace_when_scope_active(tmp_path):
         publish("levi.hunt.finding", {"title": "dead software"})
     files = list(base.glob("*.jsonl"))
     assert len(files) == 1
-    records = [json.loads(l) for l in files[0].read_text().splitlines()]
+    records = [json.loads(line) for line in files[0].read_text().splitlines()]
     assert len(records) == 1
     rec = records[0]
     assert rec["trace_id"] == "trace-abc"
@@ -140,7 +140,7 @@ def test_handler_errors_recorded_in_trace(tmp_path):
     with trace_scope("trace-xyz", base):
         publish("levi.turn.completed", {"ok": True})
     records = [
-        json.loads(l) for l in next(base.glob("*.jsonl")).read_text().splitlines()
+        json.loads(line) for line in next(base.glob("*.jsonl")).read_text().splitlines()
     ]
     assert records[0]["handler_errors"] == ["RuntimeError: subscriber exploded"]
 
@@ -172,7 +172,7 @@ def test_turn_completed_event_lands_in_turn_trace(tmp_path):
     assert result.ok
     traces = list((data_dir / "traces").glob("*.jsonl"))
     assert len(traces) == 1
-    records = [json.loads(l) for l in traces[0].read_text().splitlines()]
+    records = [json.loads(line) for line in traces[0].read_text().splitlines()]
     bus_events = [r for r in records if r.get("event") == "bus.publish"]
     assert len(bus_events) == 1
     assert bus_events[0]["topic"] == "levi.turn.completed"

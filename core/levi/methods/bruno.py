@@ -37,7 +37,7 @@ class Ring:
             raise ValueError(f"ring {self.name!r} needs at least 2 symbols")
         if len(set(self.symbols)) != len(self.symbols):
             raise ValueError(f"ring {self.name!r} symbols must be distinct")
-        for sym, img in self.images.items():
+        for sym, _ in self.images.items():
             if sym not in self.symbols:
                 raise ValueError(
                     f"image-seed for unknown symbol {sym!r} on ring {self.name!r}"

@@ -263,7 +263,7 @@ def test_keys_import_roundtrip(oath_env, no_network):
 def test_contacts_roundtrip(hermetic_home):
     from levi.oath.contacts import load_book
 
-    contact = _add_alice(
+    _contact = _add_alice(
         {"disk-usage": ["r"]},
         fingerprints=["A" * 40],
         trust_floor="TRUSTED",
@@ -671,7 +671,7 @@ def test_daemon_dry_run_sends_no_mail(oath_env, no_network, tmp_path):
     _define_and_sign(
         "mark", MARK_ARGV, MARK_ARGS, "write", signer=oath_env["fingerprint"]
     )
-    contact = _add_alice(
+    _contact = _add_alice(
         {"mark": ["w"], "reply": ["w"]},
         fingerprints=[oath_env["fingerprint"]],
         tier_ceiling="write",

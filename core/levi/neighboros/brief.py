@@ -106,10 +106,13 @@ def urgent_work(
                     reasons.append(f"due {job.due}")
         if reasons:
             found.append({"job": job, "reason": "; ".join(reasons)})
+
     # Emergencies and overdue first, then oldest.
     def _rank(item: Dict[str, Any]) -> Tuple[int, str, int]:
         job = item["job"]
-        urgent_flag = 0 if ("emergency" in item["reason"] or "overdue" in item["reason"]) else 1
+        urgent_flag = (
+            0 if ("emergency" in item["reason"] or "overdue" in item["reason"]) else 1
+        )
         return (urgent_flag, job.created_at, job.id)
 
     return sorted(found, key=_rank)

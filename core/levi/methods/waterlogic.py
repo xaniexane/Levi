@@ -99,7 +99,7 @@ class Flowscape:
         drains into.
         """
         incoming: Counter[str] = Counter()
-        for frm, tos in self._flows.items():
+        for _, tos in self._flows.items():
             for to, _ in tos:
                 incoming[to] += 1
         return [

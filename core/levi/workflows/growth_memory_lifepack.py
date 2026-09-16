@@ -91,7 +91,7 @@ def run(
     step = new_step("memory_consolidate")
     try:
         consolidation = dict(report.get("consolidation") or {})
-        accepted = consolidation.get("accepted", 0)
+        _accepted = consolidation.get("accepted", 0)
         finish_step(step, True, consolidation)
         artifacts["consolidation"] = consolidation
     except Exception as exc:

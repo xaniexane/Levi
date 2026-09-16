@@ -62,7 +62,7 @@ def run_git(
             stderr=subprocess.PIPE,
         )
     except FileNotFoundError:
-        raise GitError("git binary disappeared at exec time")
+        raise GitError("git binary disappeared at exec time") from None
     if check and proc.returncode != 0:
         raise GitError(
             "git %s failed (rc=%d): %s"

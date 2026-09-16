@@ -319,5 +319,5 @@ def parse_weights(spec: str) -> Dict[str, float]:
     try:
         values = [float(p) for p in parts]
     except ValueError:
-        raise ValueError(f"weight spec has non-numeric values: {spec!r}")
+        raise ValueError(f"weight spec has non-numeric values: {spec!r}") from None
     return validate_weights(dict(zip(FACTORS, values)))

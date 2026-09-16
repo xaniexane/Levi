@@ -48,5 +48,5 @@ def parse_weights(spec: str) -> Dict[str, float]:
         try:
             parts[key] = float(value)
         except ValueError:
-            raise ValueError("bad weight value %r" % value)
+            raise ValueError("bad weight value %r" % value) from None
     return normalize_weights(parts)

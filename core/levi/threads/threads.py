@@ -190,7 +190,7 @@ class ThreadStore:
         try:
             return self.discussions[discussion_id]
         except KeyError:
-            raise ThreadError(f"unknown discussion {discussion_id!r}")
+            raise ThreadError(f"unknown discussion {discussion_id!r}") from None
 
     def add_comment(
         self,
@@ -230,7 +230,7 @@ class ThreadStore:
         try:
             c = cmap[comment_id]
         except KeyError:
-            raise ThreadError(f"unknown comment {comment_id!r}")
+            raise ThreadError(f"unknown comment {comment_id!r}") from None
         voter_id = voter_id.strip()
         if not voter_id:
             raise ThreadError("voter id must be non-empty")
@@ -405,7 +405,7 @@ class ThreadStore:
         try:
             p = self.profiles[profile_id]
         except KeyError:
-            raise ThreadError(f"unknown profile {profile_id!r}")
+            raise ThreadError(f"unknown profile {profile_id!r}") from None
         body = {"format": PROFILE_FORMAT, "profile": asdict(p)}
         sig = hmac.new(
             self._identity_key(),

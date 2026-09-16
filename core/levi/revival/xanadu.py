@@ -97,7 +97,7 @@ class DocStore:
         try:
             return self._docs[doc_id]
         except KeyError:
-            raise KeyError("xanadu: unknown document %r" % doc_id)
+            raise KeyError("xanadu: unknown document %r" % doc_id) from None
 
     def list_docs(self) -> List[Document]:
         return list(self._docs.values())
@@ -307,7 +307,7 @@ class TrailStore:
         try:
             return self._trails[trail_id]
         except KeyError:
-            raise KeyError("xanadu: unknown trail %r" % trail_id)
+            raise KeyError("xanadu: unknown trail %r" % trail_id) from None
 
     def list_trails(self) -> List[Trail]:
         return list(self._trails.values())
@@ -324,7 +324,7 @@ class TrailStore:
         return target
 
     def delete(self, trail_id: str) -> None:
-        trail = self.get(trail_id)
+        _trail = self.get(trail_id)
         del self._trails[trail_id]
         try:
             self._path_for(trail_id).unlink()
@@ -383,7 +383,7 @@ def ask_and_trail(
         raise RuntimeError(
             "xanadu: levi.rag is unavailable (%s); cannot build a trail "
             "from RAG citations" % exc
-        )
+        ) from exc
     result = ask(query, rag_store, limit=limit, generate=False)
     if not result.citations:
         raise RuntimeError(

@@ -147,7 +147,7 @@ class Supervisor:
             raise ValueError(
                 f"unknown strategy {strategy!r}; "
                 "choose one_for_one, one_for_all, rest_for_one"
-            )
+            ) from None
         names = [s.name for s in specs]
         if len(set(names)) != len(names):
             raise ValueError(f"duplicate child names: {names}")

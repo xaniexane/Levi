@@ -232,7 +232,7 @@ def verify_snapshot(snapshot_id: str) -> tuple[bool, list[str]]:
                     problems.append(f"unreadable member: {rel}")
                     continue
                 h = hashlib.sha256()
-                for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+                for chunk in iter(lambda fh=fh: fh.read(1024 * 1024), b""):
                     h.update(chunk)
                 if h.hexdigest() != want:
                     problems.append(f"hash mismatch: {rel}")

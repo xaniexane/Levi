@@ -111,7 +111,7 @@ def test_tag_scope_precedence(monkeypatch, tmp_path):
 def test_priority_ordering(monkeypatch, tmp_path):
     st = _herm(monkeypatch, tmp_path)
     d1 = st.init("zz", scope={"always": True})
-    d2 = st.init("aa", scope={"always": True})
+    _d2 = st.init("aa", scope={"always": True})
     m = json.loads((d1 / "manifest.json").read_text())
     m["priority"] = 1
     (d1 / "manifest.json").write_text(json.dumps(m))

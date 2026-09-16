@@ -283,7 +283,7 @@ class Replica:
                     self._write_record(merged)
                     other._write_record(merged)
                 else:
-                    for replica, rec_a, rec_b in (
+                    for replica, _, _ in (
                         (self, mine, theirs),
                         (other, theirs, mine),
                     ):

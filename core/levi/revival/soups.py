@@ -106,7 +106,7 @@ class Soup:
                 self._path,
                 str(exc),
                 quarantined_to=self._last_quarantine,
-            )
+            ) from exc
         if not isinstance(raw, dict) or not isinstance(raw.get("objects"), dict):
             reason = "top level is not {objects: {...}}"
             self._quarantine(reason)
@@ -163,7 +163,7 @@ class Soup:
         try:
             json.dumps(obj)
         except (TypeError, ValueError) as exc:
-            raise ValueError("soups: obj is not JSON-serializable: %s" % exc)
+            raise ValueError("soups: obj is not JSON-serializable: %s" % exc) from exc
         self._seq += 1
         obj_id = "%s-%d" % (self.name, self._seq)
         record = {
@@ -182,7 +182,7 @@ class Soup:
         try:
             return self._objects[obj_id]
         except KeyError:
-            raise SoupError("soups: soup %r has no object %r" % (self.name, obj_id))
+            raise SoupError("soups: soup %r has no object %r" % (self.name, obj_id)) from None
 
     def query(
         self, predicate: Callable[[Dict[str, Any]], bool]
@@ -219,7 +219,7 @@ class Soup:
         try:
             rec = self._objects.pop(obj_id)
         except KeyError:
-            raise SoupError("soups: soup %r has no object %r" % (self.name, obj_id))
+            raise SoupError("soups: soup %r has no object %r" % (self.name, obj_id)) from None
         self._persist()
         return rec
 

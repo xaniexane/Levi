@@ -93,7 +93,7 @@ class Palace:
         room = self._room(room_name)
         locus = Locus(locus_name.strip())
         locus.validate()
-        if any(l.name == locus.name for l in room.loci):
+        if any(loc.name == locus.name for loc in room.loci):
             raise ValueError(
                 f"locus {locus.name!r} already exists in room {room.name!r}"
             )
@@ -148,7 +148,7 @@ class Palace:
     def coverage(self) -> tuple[int, int]:
         """(filled_loci, total_loci)."""
         total = sum(len(r.loci) for r in self.rooms)
-        filled = sum(1 for r in self.rooms for l in r.loci if l.fact)
+        filled = sum(1 for r in self.rooms for loc in r.loci if loc.fact)
         return filled, total
 
     # ---- internals -------------------------------------------------------

@@ -26,7 +26,9 @@ def _pump(sup: Supervisor, cond, timeout: float = 5.0, interval: float = 0.01) -
     return bool(cond())
 
 
-def _raiser(stop_event, fail_after: float = 0.0, exc=RuntimeError("boom")):
+def _raiser(stop_event, fail_after: float = 0.0, exc=None):
+    if exc is None:
+        exc = RuntimeError("boom")
     if fail_after:
         stop_event.wait(fail_after)
     raise exc

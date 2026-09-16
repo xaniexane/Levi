@@ -358,7 +358,7 @@ class ForgeHandler(BaseHTTPRequestHandler):
                 i["id"],
                 html.escape(i["title"]),
                 i["state"],
-                ", ".join(html.escape(l) for l in i.get("labels", [])),
+                ", ".join(html.escape(label) for label in i.get("labels", [])),
             )
             for i in _issues.list_issues(self._home, name)
         )

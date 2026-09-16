@@ -232,7 +232,7 @@ def cmd_contact(args: argparse.Namespace) -> int:
     if args.contact_cmd == "list":
         for name, contact in sorted(book.contacts.items()):
             grants = ", ".join(
-                f"{c}:{''.join(l)}" for c, l in sorted(contact.grants.items())
+                f"{c}:{''.join(letters)}" for c, letters in sorted(contact.grants.items())
             )
             print(
                 f"{name} <{contact.email}> floor={contact.trust_floor} "

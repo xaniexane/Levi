@@ -16,7 +16,7 @@ def _parse_ports(raw: str) -> list[int]:
     try:
         ports = [int(p) for p in raw.split(",") if p.strip()]
     except ValueError:
-        raise ValueError("expected comma-separated ints, e.g. --ports 80,443")
+        raise ValueError("expected comma-separated ints, e.g. --ports 80,443") from None
     bad = [p for p in ports if not 1 <= p <= 65535]
     if bad or not ports:
         raise ValueError(f"ports must be 1-65535, got {bad or 'empty'}")

@@ -233,7 +233,7 @@ def reveal(text: str) -> RevealReport:
             tok("quote", ln, 0, "QUOTE", "depth %d" % len(m.group(1)))
         m = _LIST_RE.match(line)
         if m:
-            indent, bullet, numbered = m.group(1), m.group(2), m.group(3)
+            indent, bullet, _numbered = m.group(1), m.group(2), m.group(3)
             depth = len(indent.expandtabs(4)) // 2
             tok("list", ln, 0, "LIST:d%d" % depth, "bullet" if bullet else "numbered")
         if _HR_RE.match(line) and "|" not in line:

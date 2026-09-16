@@ -127,7 +127,7 @@ def test_recency_method_orders_by_age(store):
 
 
 def test_corrorobation_boosts_rank(store):
-    plain = _add(store, "widget calibration procedure", importance=0.5)
+    _plain = _add(store, "widget calibration procedure", importance=0.5)
     corrob = _add(
         store, "widget calibration procedure", importance=0.5, corroboration=5
     )

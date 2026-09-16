@@ -57,7 +57,7 @@ class SessionRom:
             return
         if isinstance(raw, dict):
             locks = raw.get("locks", []) or []
-            self.locks = [l for l in locks if isinstance(l, dict)]
+            self.locks = [lock for lock in locks if isinstance(lock, dict)]
 
     def _persist(self) -> None:
         _write_json_600(self.path, {"locks": self.locks})

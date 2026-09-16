@@ -63,7 +63,7 @@ def cmd_pwa(args: argparse.Namespace) -> None:
         host, port = _check_pwa_bind(host, port)
     except ValueError as exc:
         print(f"invalid bind address: {exc}")
-        raise SystemExit(2)
+        raise SystemExit(2) from exc
     run(host, port, provider_factory=_factory, default_register=register)
 
 

@@ -110,9 +110,7 @@ def _check_status(status: Any) -> str:
 
 def _check_priority(priority: Any) -> str:
     if not isinstance(priority, str) or priority not in PRIORITIES:
-        raise ValueError(
-            f"unknown priority {priority!r}; expected one of {PRIORITIES}"
-        )
+        raise ValueError(f"unknown priority {priority!r}; expected one of {PRIORITIES}")
     return priority
 
 
@@ -125,9 +123,7 @@ def _check_due(due: Any) -> str:
     try:
         date.fromisoformat(due)
     except ValueError:
-        raise ValueError(
-            f"due must be YYYY-MM-DD, got {due!r}"
-        ) from None
+        raise ValueError(f"due must be YYYY-MM-DD, got {due!r}") from None
     return due
 
 
@@ -145,9 +141,7 @@ def _atomic_write(path: Path, payload: Dict[str, Any]) -> None:
         os.chmod(path.parent, 0o700)
     except OSError:
         pass
-    fd, tmp = tempfile.mkstemp(
-        dir=str(path.parent), prefix=".nos.", suffix=".tmp"
-    )
+    fd, tmp = tempfile.mkstemp(dir=str(path.parent), prefix=".nos.", suffix=".tmp")
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as fh:
             json.dump(payload, fh, indent=2)
@@ -205,9 +199,7 @@ class ServiceJob:
         self.customer = _check_str(
             "customer", self.customer, MAX_NAME_LEN, allow_empty=True
         )
-        self.worker = _check_str(
-            "worker", self.worker, MAX_NAME_LEN, allow_empty=True
-        )
+        self.worker = _check_str("worker", self.worker, MAX_NAME_LEN, allow_empty=True)
         self.due = _check_due(self.due)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -284,7 +276,9 @@ class NeighborTracker:
         jobs_path: Optional[Path] = None,
         workers_path: Optional[Path] = None,
     ) -> None:
-        self.jobs_path = Path(jobs_path) if jobs_path is not None else default_jobs_path()
+        self.jobs_path = (
+            Path(jobs_path) if jobs_path is not None else default_jobs_path()
+        )
         self.workers_path = (
             Path(workers_path) if workers_path is not None else default_workers_path()
         )
@@ -551,8 +545,7 @@ class NeighborTracker:
         return [
             w
             for w in self._workers.values()
-            if w.status == "active"
-            and any(c.casefold() == want for c in w.categories)
+            if w.status == "active" and any(c.casefold() == want for c in w.categories)
         ]
 
     # -- reporting --------------------------------------------------------

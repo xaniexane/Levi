@@ -511,7 +511,7 @@ def test_groove_resolve_supersedes_honestly(tmp_path):
     eng.sync(a, b)
     w = a.resolve_conflict("d1", "merged", merged_content="both")
     assert w.content == "both"
-    rep = eng.sync(a, b)
+    _rep = eng.sync(a, b)
     assert b.read("d1").content == "both"  # resolution propagates
     assert not a.conflicts()
 

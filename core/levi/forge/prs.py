@@ -50,7 +50,7 @@ def _branches(home, name):
         ["for-each-ref", "--format=%(refname:short)", "refs/heads/"],
         cwd=repo_dir(home, name),
     ).stdout.decode("utf-8", "replace")
-    return {l.strip() for l in out.splitlines() if l.strip()}
+    return {line.strip() for line in out.splitlines() if line.strip()}
 
 
 def list_prs(home, name, state: "str | None" = None):
@@ -168,7 +168,7 @@ def merge_pr(home, name, pr_id: int) -> dict:
                 "merge of %r into %r conflicts; PR #%d left open — "
                 "resolve locally and push, then merge again. %s"
                 % (pr["head"], pr["base"], pr["id"], e)
-            )
+            ) from e
         run_git(["push", "-q", "origin", pr["base"]], cwd=work)
         sha = run_git(["rev-parse", "HEAD"], cwd=work).stdout.decode().strip()
     finally:

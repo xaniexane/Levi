@@ -2329,14 +2329,14 @@ def _cmd_demand_five_factor(dp, demand_id, args):
             except (TypeError, ValueError):
                 raise ValueError(
                     f"--ff-{f.replace('_', '-')} must be a number 0-100, got {raw!r}"
-                )
+                ) from None
             factor_vals[f] = (val, basis)
         try:
             threshold = float(getattr(args, "ff_threshold", 75.0) or 75.0)
         except (TypeError, ValueError):
             raise ValueError(
                 f"--ff-threshold must be numeric, got {args.ff_threshold!r}"
-            )
+            ) from None
         card = dp.score_five_factor(
             demand_id,
             args.title,
@@ -4811,7 +4811,7 @@ def cmd_warehouse(args):
             detail = _wh.pull_from_shelf(warehouse, item)
         except (ValueError, KeyError, LookupError) as exc:
             print("pull failed: %s" % exc, file=sys.stderr)
-            raise SystemExit(1)
+            raise SystemExit(1) from exc
         if isinstance(detail, str):
             print(detail)
         elif isinstance(detail, dict):
@@ -4997,12 +4997,12 @@ def _cmd_lifepack_preview(args, home=None):
         pack = json.loads(path.read_text(encoding="utf-8"))
     except Exception as exc:
         print("cannot read pack %s: %s" % (path, exc), file=sys.stderr)
-        raise SystemExit(1)
+        raise SystemExit(1) from exc
     try:
         validate_pack(pack)
     except LifepackError as exc:
         print("invalid life pack: %s" % exc, file=sys.stderr)
-        raise SystemExit(1)
+        raise SystemExit(1) from exc
     for line in preview_import(pack, home):
         print(line)
     print("(preview only — nothing was written)")
@@ -5952,7 +5952,7 @@ def main():
     bty_find = bty_cmd.add_parser("findings", help="list stored findings")
     bty_find.add_argument("--new", action="store_true", help="only new since last run")
     bty_cmd.add_parser("monitor", help="recon all scopes, print only new findings")
-    con_p = sub.add_parser(
+    _con_p = sub.add_parser(
         "console", help="interactive text dashboard (security, bounty, demand)"
     )
     sim_p = sub.add_parser(
@@ -6291,25 +6291,63 @@ def main():
     sub.add_parser("agents")
     g = sub.add_parser("graph")
     g.add_argument("--seed", default=None)
-    img_p = sub.add_parser("image", help="Generate images: local procedural (default) or Pollinations/SD")
+    img_p = sub.add_parser(
+        "image", help="Generate images: local procedural (default) or Pollinations/SD"
+    )
     img_p.add_argument("--prompt", default=None)
     img_p.add_argument("--story", default=None, help="Story id for still")
     img_p.add_argument("--beat", default="midpoint")
-    img_p.add_argument("--width", type=int, default=None, help="default 512 local, 1024 pollinations")
-    img_p.add_argument("--height", type=int, default=None, help="default 512 local, 1024 pollinations")
-    img_p.add_argument("--model", default="flux", help="Pollinations model (flux|gptimage|turbo|kontext|seedream)")
-    img_p.add_argument("--backend", default="auto", choices=["auto", "local", "pollinations", "sd"],
-                       help="auto/local = offline procedural (default); pollinations = free keyless reference; sd = local Stable Diffusion (needs GPU+deps)")
-    img_p.add_argument("--style", default="none",
-                       choices=["none", "abstract", "photo", "anime", "painting", "product", "cinematic"],
-                       help="quality preset: appends proven boosters (pollinations) / palette direction (local)")
+    img_p.add_argument(
+        "--width", type=int, default=None, help="default 512 local, 1024 pollinations"
+    )
+    img_p.add_argument(
+        "--height", type=int, default=None, help="default 512 local, 1024 pollinations"
+    )
+    img_p.add_argument(
+        "--model",
+        default="flux",
+        help="Pollinations model (flux|gptimage|turbo|kontext|seedream)",
+    )
+    img_p.add_argument(
+        "--backend",
+        default="auto",
+        choices=["auto", "local", "pollinations", "sd"],
+        help="auto/local = offline procedural (default); pollinations = free keyless reference; sd = local Stable Diffusion (needs GPU+deps)",
+    )
+    img_p.add_argument(
+        "--style",
+        default="none",
+        choices=[
+            "none",
+            "abstract",
+            "photo",
+            "anime",
+            "painting",
+            "product",
+            "cinematic",
+        ],
+        help="quality preset: appends proven boosters (pollinations) / palette direction (local)",
+    )
     img_p.add_argument("--seed", type=int, default=None, help="deterministic seed")
-    img_p.add_argument("--enhance", dest="enhance", action="store_true", default=True,
-                       help="Pollinations AI prompt enhancement (default on)")
+    img_p.add_argument(
+        "--enhance",
+        dest="enhance",
+        action="store_true",
+        default=True,
+        help="Pollinations AI prompt enhancement (default on)",
+    )
     img_p.add_argument("--no-enhance", dest="enhance", action="store_false")
-    img_p.add_argument("--quality", default="high", choices=["low", "medium", "high", "hd"],
-                       help="Pollinations quality tier (default high)")
-    img_p.add_argument("--sd-model", default=None, help="SD model id (default stabilityai/stable-diffusion-2-1)")
+    img_p.add_argument(
+        "--quality",
+        default="high",
+        choices=["low", "medium", "high", "hd"],
+        help="Pollinations quality tier (default high)",
+    )
+    img_p.add_argument(
+        "--sd-model",
+        default=None,
+        help="SD model id (default stabilityai/stable-diffusion-2-1)",
+    )
     img_p.add_argument("--url-only", action="store_true")
     img_p.add_argument("--no-save", action="store_true")
     st = sub.add_parser("story", help="Create/list/expand L.W.P. stories")

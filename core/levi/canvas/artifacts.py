@@ -176,7 +176,7 @@ class ArtifactStore:
         """Unified diff between two versions (stdlib difflib)."""
         ca = self.get(artifact_id, a)["content"].splitlines()
         cb = self.get(artifact_id, b)["content"].splitlines()
-        meta = self._read_meta(artifact_id)
+        _meta = self._read_meta(artifact_id)
         lines = list(
             difflib.unified_diff(
                 ca,

@@ -156,8 +156,8 @@ class LinkBase:
                 {
                     "docs": self.docs,
                     "counter": self._counter,
-                    "links": [l.to_dict() for l in self._links.values()],
-                    "dangling": [l.to_dict() for l in self._dangling.values()],
+                    "links": [link.to_dict() for link in self._links.values()],
+                    "dangling": [link.to_dict() for link in self._dangling.values()],
                     "generics": self._generics,
                 },
                 ensure_ascii=False,
@@ -192,7 +192,7 @@ class LinkBase:
             if link.dst == old_id:
                 link.dst = new_id
                 updated += 1
-        for term, gen in self._generics.items():
+        for _, gen in self._generics.items():
             if gen["target"] == old_id:
                 gen["target"] = new_id
         return updated
@@ -204,7 +204,7 @@ class LinkBase:
             raise UnknownDocument(doc_id)
         del self.docs[doc_id]
         quarantined = [
-            l for l in self._links.values() if l.src == doc_id or l.dst == doc_id
+            link for link in self._links.values() if link.src == doc_id or link.dst == doc_id
         ]
         for link in quarantined:
             del self._links[link.link_id]
@@ -266,11 +266,11 @@ class LinkBase:
     # -- bidirectional traversal ------------------------------------------------------------
     def links_from(self, doc_id: str) -> list[Link]:
         self._require_doc(doc_id)
-        return [l for l in self._links.values() if l.src == doc_id]
+        return [link for link in self._links.values() if link.src == doc_id]
 
     def links_to(self, doc_id: str) -> list[Link]:
         self._require_doc(doc_id)
-        return [l for l in self._links.values() if l.dst == doc_id]
+        return [link for link in self._links.values() if link.dst == doc_id]
 
     def neighbors(self, doc_id: str) -> list[str]:
         """Every document linked to ``doc_id`` in either direction —

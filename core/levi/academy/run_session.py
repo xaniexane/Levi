@@ -611,7 +611,7 @@ def run_one_session(
         n_concepts = acon.register_session(
             day, block, track, entry, res, n, mastery_score=mastery["score"]
         )
-        growth = consolidate_session(
+        _growth = consolidate_session(
             day, block, track, entry, exercise, mastery, review, gate_passed=True
         )
         # Corpus quality: ingest only POST-mastery, tagged with mastery level.
@@ -658,7 +658,7 @@ def run_one_session(
         # Failed gate: session NOT completed, knowledge NOT ingested, streak
         # reset. Remediation is queued for the next block — the standard
         # does not move.
-        growth = consolidate_session(
+        _growth = consolidate_session(
             day, block, track, entry, exercise, mastery, review, gate_passed=False
         )
         streak = bump_streak(progress, track, False)
@@ -780,7 +780,7 @@ def run_remedial(
         n_concepts = acon.register_session(
             day, block, track, entry, res, n, mastery_score=mastery["score"]
         )
-        growth = consolidate_session(
+        _growth = consolidate_session(
             day,
             block,
             track,

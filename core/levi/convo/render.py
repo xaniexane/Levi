@@ -52,8 +52,8 @@ def render_block(
         lines.append(
             "OPEN LOOPS: "
             + " · ".join(
-                "⏳[%s] %s (t%d)" % (l["kind"], l["text"][:60], l["opened_turn"])
-                for l in loops[:3]
+                "⏳[%s] %s (t%d)" % (loop["kind"], loop["text"][:60], loop["opened_turn"])
+                for loop in loops[:3]
             )
         )
     if recalled:
@@ -137,10 +137,10 @@ def render_constellation(state) -> str:
     if loops:
         out.append("")
         out.append("pending orbits (open loops LEVI owes):")
-        for l in loops:
+        for loop in loops:
             out.append(
                 "  ⏳ [%s] %s — opened t%d"
-                % (l["kind"], l["text"][:70], l["opened_turn"])
+                % (loop["kind"], loop["text"][:70], loop["opened_turn"])
             )
 
     if state.last_resolution:

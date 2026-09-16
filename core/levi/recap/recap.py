@@ -56,7 +56,7 @@ def _parse_ts(raw: str) -> datetime:
     try:
         return datetime.fromisoformat(raw)
     except ValueError:
-        raise RecapError("bad ts %r — use ISO-8601" % raw)
+        raise RecapError("bad ts %r — use ISO-8601" % raw) from None
 
 
 def load_events(path: "str | os.PathLike[str]") -> List[Dict[str, Any]]:
@@ -71,7 +71,7 @@ def load_events(path: "str | os.PathLike[str]") -> List[Dict[str, Any]]:
         try:
             row = json.loads(line)
         except json.JSONDecodeError as exc:
-            raise RecapError("line %d: bad JSON (%s)" % (i, exc))
+            raise RecapError("line %d: bad JSON (%s)" % (i, exc)) from exc
         if not isinstance(row, dict):
             raise RecapError("line %d: must be an object" % i)
         if row.get("synthetic"):

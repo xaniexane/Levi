@@ -159,7 +159,7 @@ class Rule:
                 except re.error as exc:
                     raise ValueError(
                         "agenda: rule %r has invalid regex %r: %s" % (self.name, p, exc)
-                    )
+                    ) from exc
         for key in ("min_importance", "max_importance"):
             if key in self.conditions:
                 try:
@@ -168,7 +168,7 @@ class Rule:
                     raise ValueError(
                         "agenda: rule %r condition %r must be a number"
                         % (self.name, key)
-                    )
+                    ) from None
 
     def matches(self, entry: Dict[str, Any]) -> List[str]:
         """Evaluate against an entry; return matched condition descriptions.
@@ -382,7 +382,7 @@ class RuleEngine:
         try:
             return self._rules.pop(name)
         except KeyError:
-            raise ValueError("agenda: no rule named %r" % name)
+            raise ValueError("agenda: no rule named %r" % name) from None
 
     def get_rule(self, name: str) -> Optional[Rule]:
         return self._rules.get(name)

@@ -36,7 +36,7 @@ def parse_topics(spec: str) -> Dict[str, float]:
         try:
             w = float(weight) if weight else 1.0
         except ValueError:
-            raise ValueError("bad topic weight in %r" % chunk)
+            raise ValueError("bad topic weight in %r" % chunk) from None
         if not (0.0 <= w <= 1.0):
             raise ValueError("topic weight must be in [0, 1]: %r" % chunk)
         topics[name] = w
