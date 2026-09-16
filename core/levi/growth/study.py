@@ -145,8 +145,9 @@ def is_idle(
 
 #: Real contract: ``from levi.growth.curriculum import LESSONS`` — a list
 #: of dicts with keys ``id``, ``topic``, ``kind``, ``text``,
-#: ``taught_by``. Fallbacks kept for the placeholder contract and for a
-#: torch-planted seed, in that order.
+#: ``taught_by``. The curriculum package ships founder-seed lessons plus
+#: the blue-team track (``curriculum/blue_team.py``); the remaining
+#: fallbacks are defensive only, in order.
 SEED_FILE_NAME = "curriculum_seed.json"  # fallback when the module is absent
 
 
@@ -175,9 +176,9 @@ def get_lessons() -> list[dict[str, Any]]:
         cleaned = _clean(LESSONS)
         if cleaned:
             return cleaned
-    except Exception:  # noqa: BLE001 — module not built yet
+    except Exception:  # noqa: BLE001 — curriculum package absent/unreadable
         pass
-    # placeholder contract from the original spec (defensive)
+    # legacy lowercase-`lessons` contract from the original spec (defensive)
     try:
         from levi.growth.curriculum import lessons as _lessons  # type: ignore
 
