@@ -18,6 +18,8 @@ from . import (
     nines,
     to_sigfigs,
 )
+from .bulla import append_record, verify_chain
+from .trialbalance import trial_balance
 
 
 def _report(receipts) -> int:
@@ -55,6 +57,19 @@ def main(argv=None) -> int:
     p.add_argument("value", type=float)
     p.add_argument("--sig", type=int, required=True)
 
+    p = sub.add_parser("seal", help="seal one JSON record onto a chained log")
+    p.add_argument("payload", help="JSON object to seal")
+    p.add_argument(
+        "--prev", default="", help="previous sealed line (empty for genesis)"
+    )
+
+    p = sub.add_parser("unseal", help="verify a chained log file")
+    p.add_argument("path", help="JSONL file of sealed lines")
+
+    p = sub.add_parser("trial-balance", help="reconcile journal.json vs index.json")
+    p.add_argument("journal", help="JSON object: id -> entry")
+    p.add_argument("index", help="JSON object: topic -> [ids]")
+
     args = parser.parse_args(argv)
     try:
         if args.cmd == "digit-root":
@@ -71,6 +86,29 @@ def main(argv=None) -> int:
         if args.cmd == "sigfigs":
             print(format_sigfigs(to_sigfigs(args.value, args.sig), args.sig))
             return 0
+        if args.cmd == "seal":
+            payload = json.loads(args.payload)
+            if not isinstance(payload, dict):
+                raise ValueError("payload must be a JSON object")
+            print(append_record(args.prev, payload))
+            return 0
+        if args.cmd == "unseal":
+            with open(args.path, encoding="utf-8") as fh:
+                ok, problems = verify_chain(fh)
+            if ok:
+                print("bulla: chain intact")
+                return 0
+            for prob in problems:
+                print("bulla: " + prob)
+            return 1
+        if args.cmd == "trial-balance":
+            with open(args.journal, encoding="utf-8") as fh:
+                journal = json.load(fh)
+            with open(args.index, encoding="utf-8") as fh:
+                index = json.load(fh)
+            tb = trial_balance(journal, index)
+            print(tb)
+            return 0 if tb.ok else 1
     except (TypeError, ValueError) as exc:
         print("malformed input: %s" % exc, file=sys.stderr)
         return 2

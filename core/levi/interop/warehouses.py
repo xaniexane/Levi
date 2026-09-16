@@ -104,6 +104,8 @@ CLI_COMMANDS.update(
         "copper": ["python -m levi.copper"],
         # -- verify (perpetual-hunt wave-006: pre-digital proof rituals) ------
         "verify": ["python -m levi.verify"],
+        # -- analog (perpetual-hunt wave-006: analog computing revived) ------
+        "analog": ["python -m levi.analog"],
         # -- telegraph (perpetual-hunt wave-001: dead protocols revived) ---
         "telegraph": ["python -m levi.telegraph"],
         # -- shelf (perpetual-hunt daily 2026-09-16: fallen platforms --------
@@ -235,12 +237,13 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "scratch as LEVI's own code — telescript's capability tokens, "
             "plan9's namespaces, Arexx ports, blackboards, plus the telegraph "
             "office (FidoNet store-and-forward, Telex answerback, AppleTalk "
-            "chooser) — never copied, always remixed into something "
-            "unreplicable."
+            "chooser) and the analog workbench (patch-panel ODE solving, "
+            "printable nomographs, terminal Fourier playground) — never "
+            "copied, always remixed into something unreplicable."
         ),
-        "shelves": ["revival", "telegraph"],
+        "shelves": ["revival", "telegraph", "analog"],
         "strategy": "revivals",
-        "pull_hint": "from levi.revival import <system>  (e.g. telescript, plan9, arexx); python -m levi.telegraph <send|poll|inbox|...>",
+        "pull_hint": "from levi.revival import <system>  (e.g. telescript, plan9, arexx); python -m levi.telegraph <send|poll|inbox|...>; python -m levi.analog <run|parts|nomo|fourier>",
     },
     "skills": {
         "title": "Skills & Playbooks Warehouse",
@@ -293,7 +296,12 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "Stocked by the perpetual hunt games wave (2026-09-16). Every "
             "game passes the Fair Play Charter (charter.py): no paid "
             "randomness, no streak punishment, no FOMO timers, free hints, "
-            "offline-first, portable player-owned saves."
+            "offline-first, portable player-owned saves — plus wave-006 "
+            "rules: no kill switch (Stadia lesson), no synthetic scarcity "
+            "(battle-pass lesson), odds are public with an empirical audit "
+            "hook (loot-box lesson). New: bagatelle (pins-in-a-board, "
+            "prove-the-odds mode) and mancala (parametric game grammar with "
+            "variant generator)."
         ),
     },
     "memory": {

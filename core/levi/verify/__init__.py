@@ -20,8 +20,10 @@ from .checks import (
     elevens,
     nines,
 )
+from .bulla import append_record, verify_chain
 from .crossfoot import crossfoot
 from .dual import dual_path
+from .trialbalance import TrialBalance, trial_balance
 from .precision import (
     format_sigfigs,
     honest_report,
@@ -32,6 +34,7 @@ from .receipts import VerificationReceipt
 
 __all__ = [
     "VerificationReceipt",
+    "TrialBalance",
     "nines",
     "elevens",
     "check_sum",
@@ -40,6 +43,9 @@ __all__ = [
     "check_product_elevens",
     "crossfoot",
     "dual_path",
+    "append_record",
+    "verify_chain",
+    "trial_balance",
     "to_sigfigs",
     "format_sigfigs",
     "sigfigs_in",

@@ -362,6 +362,23 @@ DECLARATIONS = {
     "verify": {
         "provides": [
             "verify.checks",
+            "verify.bulla",
+            "verify.trialbalance",
+        ],
+        "requires": [],
+    },
+    # -- analog: pre-digital computation revived (perpetual-hunt wave-006) -----
+    # Thomson's ball-and-disc integrators, Bush's chainable differential
+    # analyzer, REAC/EAI patch panels, d'Ocagne nomographs, Michelson's
+    # harmonic analyzer — clean-room native: a bounded virtual patch-panel
+    # workbench (RK4, receipts, Meccano parts view), printable nomograph
+    # charts (ASCII + SVG, computed accuracy note), and a terminal Fourier
+    # playground. stdlib-only, offline, deny-closed.
+    "analog": {
+        "provides": [
+            "analog.bench",
+            "analog.nomo",
+            "analog.fourier",
         ],
         "requires": [],
     },

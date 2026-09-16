@@ -88,6 +88,10 @@ def test_manifest_registers_all_modules():
         "shelf",
         # circles (perpetual-hunt daily 2026-09-16 evening: Path's cap)
         "circles",
+        # analog (perpetual-hunt wave-006: pre-digital computation revived)
+        "analog",
+        # reveal (perpetual-hunt daily 2026-09-16b: retired software wave)
+        "reveal",
     }
 
 
