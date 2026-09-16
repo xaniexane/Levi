@@ -161,9 +161,7 @@ class ToolRegistry:
 
     def register(self, tool: Tool) -> None:
         if not isinstance(tool, Tool):
-            raise ValueError(
-                f"register: expected a Tool, got {type(tool).__name__}"
-            )
+            raise ValueError(f"register: expected a Tool, got {type(tool).__name__}")
         # Tool.__post_init__ already validated the fields.
         self._tools[tool.name] = tool
 
@@ -560,11 +558,18 @@ def _register_builtins(
 
     def _skill_load(args: dict) -> ToolResult:
         name = args.get("name")
+        raw = str(name) if name else ""
         try:
-            fname = _sanitize_name(str(name) if name else "")
+            fname = _sanitize_name(raw)
         except ValueError as exc:
             return ToolResult(ok=False, error=f"skill_load: {exc}")
         target = skills_dir / fname
+        if not target.is_file() and _NAME_RE.match(raw):
+            # User-created skills live in <skills_dir>/<id>/SKILL.md
+            # (scaffolded by `levi skill create`).
+            alt = skills_dir / raw / "SKILL.md"
+            if alt.is_file():
+                target = alt
         if not target.is_file():
             return ToolResult(
                 ok=False,

@@ -3263,7 +3263,8 @@ def cmd_personas(args):
 def cmd_skills(args):
     reg = SkillRegistry()
     for s in reg.list():
-        print(f"  {s.id:22} | {s.description[:60]}")
+        mark = " ·user" if "user-created" in s.tags else ""
+        print(f"  {s.id:22} | {s.description[:60]}{mark}")
 
 
 def cmd_agents(args):
@@ -5865,6 +5866,18 @@ def main():
         pass
     # === KING-REGION-END ===
 
+    # === SKILL-CREATE-REGION-BEGIN: skill scaffolder (core/levi/skill/creator.py) ===
+    # Parallel tracks: keep ALL skill-scaffold wiring inside this delimited
+    # region — do not scatter hunks elsewhere in this file.
+    try:
+        from levi.skill.creator import register_skill as _skill_register
+
+        _skill_register(sub)
+    except Exception:
+        # Skill scaffolder degrades: the CLI still boots without it.
+        pass
+    # === SKILL-CREATE-REGION-END ===
+
     # === FLEET-REGION-BEGIN: Fleet command registration ===
     # Parallel tracks: keep ALL fleet wiring inside this delimited region —
     # do not scatter fleet hunks elsewhere in this file.
@@ -6034,6 +6047,14 @@ def main():
     except Exception:
         pass
     # === KING-REGION-END ===
+    # === SKILL-CREATE-REGION-BEGIN: skill command dispatch ===
+    try:
+        from levi.skill.creator import cmd_skill as _cmd_skill
+
+        cmds["skill"] = _cmd_skill
+    except Exception:
+        pass
+    # === SKILL-CREATE-REGION-END ===
     # === MCP-REGION-BEGIN: MCP server command dispatch ===
     try:
         from levi.mcp.cli import cmd_mcp as _cmd_mcp
