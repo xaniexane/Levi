@@ -11,7 +11,7 @@ import {
   type PersonaId,
 } from "@/lib/levi/personas";
 import type { ChatMessage } from "@/lib/levi/ai";
-import { streamChat } from "@/lib/levi/stream";
+import { streamAgentChat, streamChat } from "@/lib/levi/stream";
 import { companionSystem } from "@/lib/levi/prompt";
 import {
   detectGenre,
@@ -51,6 +51,8 @@ export function TalkView() {
   const [more, setMore] = useState(false);
   const [streamingId, setStreamingId] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  /** Honest connection notice: which upstream reply paths failed this turn. */
+  const [connNote, setConnNote] = useState<string | null>(null);
   const busyRef = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -132,11 +134,17 @@ export function TalkView() {
     return false;
   }
 
-  /** The cloud reply path — streams tokens live, falls back locally and honestly. */
+  /**
+   * The reply chain: LEVI's own agent server → cloud relay → on-device engine.
+   * Each step streams tokens live when it can; on failure the UI falls to the
+   * next path and says so. The final fallback is the real local engine —
+   * never an invented message.
+   */
   async function respond(input: string) {
     if (busyRef.current) return;
     busyRef.current = true;
     setBusy(true);
+    setConnNote(null);
 
     const fallback = () => localReply({ input, name, goal, persona, shelf: shelfSummary() });
 
@@ -149,49 +157,84 @@ export function TalkView() {
 
     const p = getPersona(persona);
     const history = useLevi.getState().messages.slice(-12);
+    const chatMessages: ChatMessage[] = [
+      {
+        role: "system",
+        content: companionSystem({
+          name,
+          goal,
+          persona,
+          shelf: shelfSummary(),
+          mode: "talk",
+          lessons: lessonsForPrompt(compost),
+          designMode,
+        }),
+      },
+      ...history.map((m): ChatMessage => ({
+        role: m.role === "levi" ? "assistant" : "user",
+        content: m.text,
+      })),
+    ];
     const draft = addMessage("levi", "");
     setStreamingId(draft.id);
     const aborter = new AbortController();
     abortRef.current = aborter;
 
     let acc = "";
-    try {
-      const { error } = await streamChat({
-        messages: [
-          {
-            role: "system",
-            content: companionSystem({
-              name,
-              goal,
-              persona,
-              shelf: shelfSummary(),
-              mode: "talk",
-              lessons: lessonsForPrompt(compost),
-              designMode,
-            }),
-          },
-          ...history.map((m): ChatMessage => ({
-            role: m.role === "levi" ? "assistant" : "user",
-            content: m.text,
-          })),
-        ],
-        maxTokens: p.noHero ? 180 : p.interrogation ? 220 : 700,
-        signal: aborter.signal,
-        onToken: (t) => {
-          acc += t;
-          updateMessage(draft.id, acc);
-        },
-      });
-      if (error || !acc.trim()) {
-        updateMessage(draft.id, fallback());
-      }
-    } catch {
-      updateMessage(draft.id, fallback());
-    } finally {
+    const onToken = (t: string) => {
+      acc += t;
+      updateMessage(draft.id, acc);
+    };
+    const finish = () => {
       abortRef.current = null;
       setStreamingId(null);
       busyRef.current = false;
       setBusy(false);
+    };
+
+    try {
+      // 1) LEVI's own agent server — the product's own backend, when configured
+      //    (LEVI_AGENT_TOKEN server-side). "unavailable" just means it isn't
+      //    configured; anything else is a real failure worth reporting.
+      const agent = await streamAgentChat({
+        message: input,
+        signal: aborter.signal,
+        onToken,
+      });
+      if (!agent.error && acc.trim()) {
+        finish();
+        return;
+      }
+      const agentFailed = Boolean(agent.error && agent.error !== "unavailable");
+
+      // 2) Cloud relay — the existing catalyst path.
+      const cloud = await streamChat({
+        messages: chatMessages,
+        maxTokens: p.noHero ? 180 : p.interrogation ? 220 : 700,
+        signal: aborter.signal,
+        onToken,
+      });
+      if (!cloud.error && acc.trim()) {
+        if (agentFailed) {
+          setConnNote("Agent server unreachable — answered via the cloud relay.");
+        }
+        finish();
+        return;
+      }
+
+      // 3) On-device engine. Real, local, and always available.
+      updateMessage(draft.id, fallback());
+      if (agentFailed || cloud.error) {
+        setConnNote(
+          agentFailed
+            ? "Agent server and cloud relay unreachable — on-device reply."
+            : "Cloud relay unreachable — on-device reply.",
+        );
+      }
+    } catch {
+      updateMessage(draft.id, fallback());
+    } finally {
+      finish();
     }
   }
 
@@ -323,9 +366,7 @@ export function TalkView() {
         </div>
         {more && (
           <div className="flex flex-col gap-2 pb-1">
-            <div className="text-micro uppercase tracking-[0.18em] text-subtle">
-              LEVI registers
-            </div>
+            <div className="text-micro uppercase tracking-[0.18em] text-subtle">LEVI registers</div>
             <div className="flex flex-wrap gap-1.5">{REGISTERS.map(personaChip)}</div>
             <div className="text-micro uppercase tracking-[0.18em] text-subtle">
               Classic personas
@@ -449,6 +490,20 @@ export function TalkView() {
         </div>
       </div>
 
+      {connNote && (
+        <div role="status" className="border-t border-border px-4 py-2">
+          <div className="mx-auto flex max-w-2xl items-center gap-3">
+            <p className="flex-1 text-xs text-muted">{connNote}</p>
+            <button
+              type="button"
+              onClick={() => setConnNote(null)}
+              className="shrink-0 text-micro text-subtle underline-offset-2 hover:text-muted hover:underline"
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+      )}
       <form
         className="border-t border-border p-3"
         onSubmit={(e) => {
