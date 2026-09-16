@@ -1,0 +1,117 @@
+"""Hermetic tests for the capability registry (levi.interop.registry)."""
+
+import pytest
+
+from levi.interop.manifest import DECLARATIONS
+from levi.interop.registry import Registry, RegistryError
+
+
+def _fresh():
+    return Registry()
+
+
+def test_manifest_registers_all_eleven_modules():
+    reg = _fresh()
+    for name, decl in DECLARATIONS.items():
+        reg.register(name, provides=decl["provides"], requires=decl["requires"])
+    assert set(reg.modules()) == {
+        "organs", "memory-store", "memory-retrieval", "rag",
+        "bot-services", "growth", "academy", "bounty",
+        "knowledge", "oath", "agent-assistant",
+    }
+
+
+def test_manifest_passes_check_all():
+    reg = _fresh()
+    for name, decl in DECLARATIONS.items():
+        reg.register(name, provides=decl["provides"], requires=decl["requires"])
+    reg.check_all()  # must not raise
+
+
+def test_check_unknown_module_denied():
+    reg = _fresh()
+    with pytest.raises(RegistryError):
+        reg.check("nope-not-a-module")
+
+
+def test_check_unknown_requires_target_denied():
+    reg = _fresh()
+    reg.register("a", provides=["a.x"], requires=["ghost-module"])
+    with pytest.raises(RegistryError, match="unknown requires"):
+        reg.check("a")
+
+
+def test_check_all_aggregates_failures():
+    reg = _fresh()
+    reg.register("ok-module", provides=["ok.x"])
+    reg.register("bad-one", requires=["missing-a"])
+    reg.register("bad-two", requires=["missing-b"])
+    with pytest.raises(RegistryError) as excinfo:
+        reg.check_all()
+    msg = str(excinfo.value)
+    assert "bad-one" in msg and "bad-two" in msg
+
+
+def test_register_duplicate_denied():
+    reg = _fresh()
+    reg.register("a")
+    with pytest.raises(RegistryError, match="already declared"):
+        reg.register("a")
+
+
+def test_register_malformed_caps_denied():
+    reg = _fresh()
+    with pytest.raises(RegistryError):
+        reg.register("a", provides="not-a-list")
+    with pytest.raises(RegistryError):
+        reg.register("b", requires=[""])
+    with pytest.raises(RegistryError):
+        reg.register("c", provides=["x", "x"])  # duplicates
+    with pytest.raises(RegistryError):
+        reg.register("", provides=[])
+
+
+def test_dependents_of_direct():
+    reg = _fresh()
+    reg.register("memory-store", provides=["memory.write"])
+    reg.register("rag", requires=["memory-store"])
+    reg.register("bot-services", requires=["rag"])
+    assert reg.dependents_of("memory-store") == ["rag"]
+    assert reg.dependents_of("rag") == ["bot-services"]
+    assert reg.dependents_of("bot-services") == []
+
+
+def test_dependents_of_transitive():
+    reg = _fresh()
+    reg.register("memory-store")
+    reg.register("memory-retrieval", requires=["memory-store"])
+    reg.register("rag", requires=["memory-retrieval"])
+    reg.register("bot-services", requires=["rag"])
+    assert reg.dependents_of("memory-store", transitive=True) == [
+        "bot-services", "memory-retrieval", "rag",
+    ]
+
+
+def test_dependents_of_unknown_module_denied():
+    reg = _fresh()
+    with pytest.raises(RegistryError):
+        reg.dependents_of("ghost")
+
+
+def test_default_registry_preloaded_and_valid():
+    import levi.interop.registry as regmod
+
+    assert len(regmod.modules()) == 11
+    regmod.check_all()  # must not raise
+    deps = regmod.dependents_of("memory-store", transitive=True)
+    assert "rag" in deps and "bot-services" in deps
+
+
+def test_manifest_memory_store_is_foundation():
+    # the substrate must be required-by many and require nothing
+    assert DECLARATIONS["memory-store"]["requires"] == []
+    dependents = [
+        name for name, decl in DECLARATIONS.items()
+        if "memory-store" in decl["requires"]
+    ]
+    assert len(dependents) >= 4
