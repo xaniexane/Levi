@@ -356,6 +356,15 @@ def plan_next_hunt(state: HuntState,
     )
 
 
+#: Deep-web pass for hunts: public-but-unindexed sources (Wayback, Common
+#: Crawl, sitemaps, feeds, arXiv, open portals). Polite, robots.txt-honoring,
+#: public-only — see core/levi/research/deepweb.py for the hard boundaries.
+DEEPWEB_SURVEY_CMD = (
+    'python3 -m levi.research.deepweb survey "<topic>" '
+    "[--domain <seed-domain>] [--save]"
+)
+
+
 def _instructions(theme: HuntTheme, wave_id: str, deeper_vein: bool) -> str:
     vein = ("This theme was hunted before — go DEEPER: a narrower sub-vein, "
             "primary sources, mechanisms the first pass missed. "
@@ -372,8 +381,10 @@ def _instructions(theme: HuntTheme, wave_id: str, deeper_vein: bool) -> str:
         "Write the report to research_notes/<slug>/report.md, then record the "
         "wave with: python3 -m levi.perpetual hunt-record %s findings.jsonl\n"
         "where findings.jsonl holds one ArchiveRecord JSON object per line.\n"
+        "Deep-web pass (public sources only, robots.txt-honoring): %s\n"
         "%s"
-        % (vein, wave_id, theme.brief, wave_id, HARD_ROUTE_LAW)
+        % (vein, wave_id, theme.brief, wave_id, DEEPWEB_SURVEY_CMD,
+           HARD_ROUTE_LAW)
     )
 
 
