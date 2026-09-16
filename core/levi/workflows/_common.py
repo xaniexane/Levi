@@ -47,15 +47,28 @@ def _bus():
 
 
 def emit(event: str, payload: Optional[Dict[str, Any]] = None) -> bool:
-    """Emit a bus event if the bloodstream bus exists. Never raises."""
+    """Emit a bus event if the bloodstream bus exists. Never raises.
+
+    The bus requires ``levi.<subsystem>.<event>`` topics; workflow events
+    are published as ``levi.workflows.<event>``.
+    """
     mod = _bus()
     if mod is None:
         return False
+    if event.startswith("levi."):
+        topic = event
+    elif event.startswith("workflows."):
+        topic = "levi." + event
+    elif event.startswith("workflow."):
+        # call sites say "workflow.<event>"; the subsystem is "workflows"
+        topic = "levi.workflows." + event[len("workflow."):]
+    else:
+        topic = "levi.workflows." + event
     for attr in ("emit", "publish", "record"):
         fn = getattr(mod, attr, None)
         if callable(fn):
             try:
-                fn(event, dict(payload or {}))
+                fn(topic, dict(payload or {}))
             except Exception:
                 return False
             return True

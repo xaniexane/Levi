@@ -236,6 +236,25 @@ def test_archive_showcase_bad_filter_fails_honestly(monkeypatch, tmp_path):
     assert "reason" in result["steps"][0]
 
 
+def test_emit_is_defensive():
+    from levi.workflows import _common
+    # never raises, whatever the bus situation is
+    assert isinstance(_common.emit("workflow.done", {"ok": True}), bool)
+    assert isinstance(_common.emit("workflow.done", None), bool)
+
+
+def test_emit_publishes_on_real_bus():
+    bus = pytest.importorskip("levi.bloodstream.bus")
+    seen = []
+    tok = bus.subscribe("levi.workflows.done", lambda t, p: seen.append(t))
+    try:
+        from levi.workflows import _common
+        assert _common.emit("workflow.done", {"ok": True}) is True
+        assert seen == ["levi.workflows.done"]
+    finally:
+        bus.unsubscribe(tok)
+
+
 # ---------------------------------------------------------------------------
 # forge-ci-export
 # ---------------------------------------------------------------------------

@@ -114,8 +114,12 @@ def run(home=None, repo: Optional[str] = None, description: str = "",
     # -- export ------------------------------------------------------------
     step = new_step("export")
     try:
+        # run_id has only second resolution; add microseconds so back-to-back
+        # runs never collide on the export destination (export_repo refuses
+        # to write into an existing dir).
+        uniq = datetime.now(timezone.utc).strftime("%f")
         out = (dest or str(
-            levi_home / "forge-exports" / ("%s-%s" % (repo, run_id))))
+            levi_home / "forge-exports" / ("%s-%s-%s" % (repo, run_id, uniq))))
         with workflow_env(levi_home, growth=False):
             export_path = _export.export_repo(fhome, repo, out)
         if not (export_path / "repo.bundle").is_file():
