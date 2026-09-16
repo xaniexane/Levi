@@ -25,6 +25,12 @@ def _default_genome() -> Dict[str, Any]:
         "signatures": {},
         "lineage": [],
         "candidates": {},
+        # champions: name -> {"variant": {...}, "score": float, "generation": int}
+        # The reigning best version of each identity. Evolution is elitist:
+        # a challenger only dethrones the champion by scoring strictly
+        # higher under the active fitness function. The champion never
+        # gets worse — that is the "positive improved/upgraded" guarantee.
+        "champions": {},
         "cycles": 0,
     }
 
@@ -60,7 +66,7 @@ class GenomeStore:
         for key in ("guards", "lineage"):
             if not isinstance(genome.get(key), list):
                 genome[key] = []
-        for key in ("signatures", "candidates"):
+        for key in ("signatures", "candidates", "champions"):
             if not isinstance(genome.get(key), dict):
                 genome[key] = {}
         return genome
@@ -103,3 +109,21 @@ class GenomeStore:
     def inherit_traits(self) -> Dict[str, float]:
         """Trait mix a new identity inherits from the genome."""
         return {k: float(v) for k, v in self.load()["traits"].items()}
+
+    def get_champion(self, name: str) -> Optional[Dict[str, Any]]:
+        """The reigning best variant of ``name``, or None if never crowned."""
+        champ = self.load().get("champions", {}).get(name)
+        return champ if isinstance(champ, dict) else None
+
+    def set_champion(
+        self, name: str, variant: Dict[str, Any], score: float, generation: int
+    ) -> Dict[str, Any]:
+        """Crown a new champion. Callers enforce elitism (strictly better)."""
+        genome = self.load()
+        genome["champions"][name] = {
+            "variant": variant,
+            "score": round(score, 4),
+            "generation": generation,
+        }
+        self.save(genome)
+        return genome

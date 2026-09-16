@@ -99,3 +99,64 @@ def test_scope_all_stores_candidates_without_touching_modules(tmp_path):
     assert len(genome["candidates"]) > 10
     for _module, variants in genome["candidates"].items():
         assert isinstance(variants, list) and variants
+
+
+# ── elitist evolution: champions never regress ─────────────────────
+
+
+def _fresh_cycle(tmp_path):
+    from levi.identity.cycle import IdentityCycle
+    from levi.identity.genome import GenomeStore
+
+    store = GenomeStore(tmp_path)
+    return IdentityCycle(store=store), store
+
+
+def test_fitness_is_deterministic():
+    from levi.identity.cycle import fitness
+
+    ident = {"name": "x", "traits": {"a": 0.8}, "params": {}, "fragments": []}
+    assert fitness(ident) == fitness(ident)
+
+
+def test_fitness_penalizes_fractures():
+    from levi.identity.cycle import fitness
+
+    healthy = {"name": "x", "traits": {"a": 1.0}, "params": {}, "fragments": []}
+    broken = {"name": "x", "traits": {"a": 1.5}, "params": {}, "fragments": []}
+    assert fitness(healthy) > fitness(broken)
+
+
+def test_evolve_never_regresses(tmp_path):
+    cycle, store = _fresh_cycle(tmp_path)
+    first = cycle.evolve(generations=2, n_variants=3, seed="a")
+    before = {s["name"]: s["champion_score"] for s in first["results"]}
+    second = cycle.evolve(generations=2, n_variants=3, seed="b")
+    for s in second["results"]:
+        assert s["champion_score"] >= before[s["name"]] - 1e-9, s["name"]
+
+
+def test_evolve_crowns_champions_for_all_identities(tmp_path):
+    from levi.identity.cycle import ORGANISM_FORMS
+    from levi.identity.scope import iter_module_identities
+
+    cycle, store = _fresh_cycle(tmp_path)
+    out = cycle.evolve(generations=1, n_variants=2, seed="c")
+    modules = list(iter_module_identities())
+    # one organism: the list holds modules + forms (cybrus appears in both,
+    # sharing one champion entry — module and form are one identity)
+    assert out["identities"] == len(modules) + len(ORGANISM_FORMS)
+    expected = {i["name"] for i in modules} | set(ORGANISM_FORMS)
+    for name in expected:
+        champ = store.get_champion(name)
+        assert champ is not None, name
+        assert champ["score"] >= 0
+
+
+def test_evolve_only_dethrones_on_strict_improvement(tmp_path):
+    cycle, store = _fresh_cycle(tmp_path)
+    out = cycle.evolve(generations=1, n_variants=2, seed="d")
+    for s in out["results"]:
+        champ = store.get_champion(s["name"])
+        assert champ["score"] == s["champion_score"]
+        assert champ["generation"] <= 1

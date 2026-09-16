@@ -28,7 +28,33 @@ Scorer = Callable[[Dict[str, Any]], float]
 
 
 def _default_scorer(variant: Dict[str, Any]) -> float:
-    return EchoEngine().reflect(variant).coherence
+    return fitness(variant)
+
+
+def fitness(variant: Dict[str, Any]) -> float:
+    """How good is this variant? Higher is better.
+
+    Deterministic composite under the variant's own content:
+      - Echo coherence (the mirror's structural verdict), weight 1.0
+      - fracture penalty: -0.2 per fracture, capped at -1.0
+      - trait strength: mean of numeric traits, weight 0.1 (rewards
+        strong, well-formed traits; bounded so it can't dominate)
+
+    Honest note: "better" is defined by this function. It measures
+    structural health of the identity, not real-world performance.
+    Plug a custom Scorer into IdentityCycle for domain-specific fitness
+    (test pass rates, benchmark scores, user approval). The elitist
+    guarantee — the champion never gets worse — holds for whatever
+    fitness function is active.
+    """
+    reflection = EchoEngine().reflect(variant)
+    traits = variant.get("traits", {})
+    nums = [v for v in traits.values() if isinstance(v, (int, float))]
+    strength = sum(nums) / len(nums) if nums else 0.0
+    return round(
+        reflection.coherence - 0.2 * min(len(reflection.fractures), 5) + 0.1 * strength,
+        4,
+    )
 
 
 # The named SER forms — the organism's archetypal layer, from the founder's
@@ -293,6 +319,111 @@ class IdentityCycle:
             "scope": "forms",
             "forms": len(ORGANISM_FORMS),
             "results": results,
+        }
+
+    def evolve(
+        self,
+        generations: int = 3,
+        n_variants: int = 4,
+        seed: str = "",
+        cross_pollenate: bool = True,
+    ) -> Dict[str, Any]:
+        """Elitist evolution across the whole organism (modules + forms).
+
+        Each identity keeps a champion — its reigning best version. Every
+        generation produces challengers from the champion; a challenger
+        dethrones the champion ONLY by scoring strictly higher under the
+        active fitness function. The champion never gets worse, so every
+        recorded step is a positive improvement, never a regression.
+
+        This is how the founder's version stays the best: his canonical
+        organism IS the champion lineage. Mutations are tried in the
+        arena; only upgrades survive.
+        """
+        identities = list(iter_module_identities())
+        for name, spec in ORGANISM_FORMS.items():
+            identities.append(
+                {
+                    "name": name,
+                    "role": spec["role"],
+                    "traits": dict(spec["traits"]),
+                    "params": {"layer": "organism"},
+                    "fragments": [name],
+                    "lineage": ["forms-architecture"],
+                    "module_meta": {},
+                }
+            )
+        donor_pool = {ident["name"]: ident for ident in identities}
+        summary: List[Dict[str, Any]] = []
+        for ident in identities:
+            name = ident["name"]
+            champ = self.store.get_champion(name)
+            if champ is not None:
+                champion = champ["variant"]
+                champ_score = float(champ["score"])
+                start_gen = int(champ["generation"]) + 1
+            else:
+                champion = ident
+                champ_score = self.scorer(ident)
+                start_gen = 0
+                self.store.set_champion(name, ident, champ_score, 0)
+            dethroned = 0
+            for gen in range(start_gen, start_gen + generations):
+                gseed = "evolve:%s:g%d:%s" % (seed, gen, name)
+                reflection = self.echo.reflect(champion)
+                variants = MandellaEngine(seed).reconstruct(
+                    reflection, n_variants, gseed
+                )
+                if cross_pollenate:
+                    self._cross_pollenate(
+                        name, variants, donor_pool, random.Random(gseed)
+                    )
+                contenders = [(self.scorer(v), v) for v in variants]
+                contenders.append((champ_score, champion))  # champion defends
+                best_score, best = max(contenders, key=lambda t: t[0])
+                if best_score > champ_score and best is not champion:
+                    champion, champ_score = best, best_score
+                    self.store.set_champion(name, best, best_score, gen + 1)
+                    dethroned += 1
+                # every generation's outcome is composted; only real
+                # improvements compress into the genome
+                lessons = self.reim.compost(
+                    {
+                        "identity": name,
+                        "success": best_score >= champ_score,
+                        "score": round(best_score, 4),
+                        "notes": "evolve generation %d" % (gen + 1),
+                        "failures": [],
+                    }
+                )
+                deltas = self.riem.compress(lessons, self.store.load())
+                self.store.apply_deltas(deltas)
+            self.store.record_candidates(name, [champion])
+            summary.append(
+                {
+                    "name": name,
+                    "champion_score": round(champ_score, 4),
+                    "generation": start_gen + generations,
+                    "dethroned": dethroned,
+                }
+            )
+        genome = self.store.load()
+        genome["lineage"].append(
+            {
+                "event": "evolution",
+                "seed": seed,
+                "generations": generations,
+                "identities": len(identities),
+            }
+        )
+        self.store.save(genome)
+        improved = sum(1 for s in summary if s["dethroned"] > 0)
+        return {
+            "scope": "evolve",
+            "identities": len(identities),
+            "generations": generations,
+            "improved": improved,
+            "results": summary,
         }
 
     def _cross_pollenate(

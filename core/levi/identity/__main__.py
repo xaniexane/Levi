@@ -94,6 +94,23 @@ def _cmd_cycle(args) -> int:
     )
 
 
+def _cmd_evolve(args) -> int:
+    from levi.identity import GenomeStore, IdentityCycle
+
+    cycle = IdentityCycle(store=GenomeStore())
+    out = cycle.evolve(
+        generations=args.generations,
+        n_variants=args.n,
+        seed=args.seed,
+        cross_pollenate=not args.no_cross,
+    )
+    print(
+        "Evolved %(identities)d identities over %(generations)d generations: "
+        "%(improved)d improved, champions never regressed." % out
+    )
+    return _emit(out)
+
+
 def _cmd_genome(args) -> int:
     from levi.identity import GenomeStore
 
@@ -153,6 +170,16 @@ def build_parser() -> argparse.ArgumentParser:
     g.add_argument("--reset", action="store_true")
     g.add_argument("--module", default=None, help="show candidates for one module")
     g.set_defaults(func=_cmd_genome)
+
+    e = sub.add_parser(
+        "evolve",
+        help="elitist evolution: champions only fall to strictly better variants",
+    )
+    e.add_argument("--generations", type=int, default=3)
+    e.add_argument("--n", type=int, default=4, help="challengers per generation")
+    e.add_argument("--seed", default="")
+    e.add_argument("--no-cross", action="store_true", help="disable cross-pollination")
+    e.set_defaults(func=_cmd_evolve)
     return p
 
 
