@@ -60,6 +60,7 @@ The identity, the binding laws, and the architecture the organism runs on.
 - [BLUEPRINT_GROUNDED.md](BLUEPRINT_GROUNDED.md) — **(planned)** the clean-slate build spec for LEVI × L.W.P., grounded in the full prior build history (a spec, not shipped code).
 - [GALAXY.md](GALAXY.md) — the ecosystem substrate: third parties publish skills, tools, and services on LEVI; LEVI is the platform, not just the product.
 - [INTEROP.md](INTEROP.md) — the interpenetration doctrine, a binding law: modules compose through a shared substrate with strictest-risk-ceiling inheritance.
+- [INTERPENETRATION.md](INTERPENETRATION.md) — the law as an engine: `composites.effective_ceiling` computes the strictest ceiling, `gate.run_composite_gated` enforces it on the execution path, deny-closed.
 - [INTEROP_FOLLOWUPS.md](INTEROP_FOLLOWUPS.md) — **(planned)** deferred minimal patches that adopt the additive interop adapters inside existing modules.
 - [MISSION.md](MISSION.md) — the prime directive: LEVI is next-generation offline-first, privacy-oriented synthetic intelligence.
 - [OATH.md](OATH.md) — the trust-bound mission plane: a clean-room LEVI-native recreation of Beadle's trust model (inspiration reference only — no code read or copied).

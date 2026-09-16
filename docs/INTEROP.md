@@ -4,6 +4,11 @@ Interpenetration is a **binding law** of the LEVI organism: modules compose
 through a shared substrate with **strictest-risk-ceiling inheritance** —
 the organism wired together, not a bag of parts.
 
+> **The law as an engine:** the machinery that computes and enforces this
+> law — `composites.effective_ceiling`, `gate.run_composite_gated`, and the
+> deny-closed defaults — is described in
+> [INTERPENETRATION.md](INTERPENETRATION.md).
+
 Two sub-laws, no exceptions:
 
 1. **Shared substrate.** Every module that remembers, learns, or knows
