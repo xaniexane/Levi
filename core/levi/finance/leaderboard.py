@@ -89,6 +89,15 @@ def _money(value: float) -> str:
     return f"{sign}${abs(value):,.2f}"
 
 
+def _cell(text: str, width: int) -> str:
+    """Fit a table cell to ``width``: truncate with a marker rather than
+    breaking the column layout. Trader names can be up to 32 chars."""
+    text = str(text)
+    if len(text) > width:
+        text = text[: width - 1] + "…"
+    return f"{text:<{width}}"
+
+
 def render_leaderboard(rows: list[dict]) -> str:
     """Render ranked leaderboard rows, WSB-flavored, paper-stamped."""
     rows = ranked_leaderboard(rows)
@@ -107,7 +116,7 @@ def render_leaderboard(rows: list[dict]) -> str:
         medal = {1: "🥇", 2: "🥈", 3: "🥉"}.get(row["rank"], "  ")
         lines.append(
             assert_clean(
-                f"  {medal}{rank:<3} {row['trader']:<14} {row['bets']:>4} "
+                f"  {medal}{rank:<3} {_cell(row['trader'], 14)} {row['bets']:>4} "
                 f"{_pct(row['win_rate']):>6} {_money(row['total_pnl']):>12} "
                 f"{_pct(row['diamond_rate']):>6} {row['open']:>4}"
             )

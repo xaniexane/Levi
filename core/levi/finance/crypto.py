@@ -13,6 +13,7 @@ Stdlib-only: ``json``, ``re``, ``urllib``, ``datetime``.
 
 from __future__ import annotations
 
+import http.client
 import json
 import re
 import urllib.error
@@ -75,7 +76,12 @@ class BinanceProvider(MarketDataProvider):
         try:
             with urllib.request.urlopen(request, timeout=self.timeout) as resp:
                 return resp.read().decode("utf-8")
-        except (urllib.error.URLError, OSError, ValueError) as exc:
+        except (
+            urllib.error.URLError,
+            http.client.HTTPException,
+            OSError,
+            ValueError,
+        ) as exc:
             raise MarketDataError(
                 f"market data download failed ({type(exc).__name__})"
             ) from None
@@ -139,3 +145,15 @@ class BinanceProvider(MarketDataProvider):
             )
         url = _KLINES_URL.format(symbol=clean, limit=days)
         return self._parse_klines(self._download(url))
+
+    def latest_close(self, symbol: str) -> tuple[str, float]:
+        """Latest daily close for a crypto pair: ``(date, close)``.
+
+        One kline is fetched — the cheapest honest quote this provider
+        can give. Raises :class:`MarketDataError` on any failure; the
+        caller decides what the price is *for* (a paper bet entry, a
+        settlement, a draft reference) and labels it accordingly.
+        """
+        bars = self.daily_bars(symbol, days=1)
+        last = bars[-1]
+        return last.date, last.close

@@ -123,6 +123,27 @@ def test_render_screens_hostile_trader():
         raise AssertionError("hostile trader name was rendered")
 
 
+@finance_test
+def test_long_trader_name_does_not_break_table():
+    ledger = BetLedger()
+    for entry, exit_ in ((100.0, 120.0), (100.0, 110.0), (100.0, 105.0)):
+        b = ledger.place(
+            trader="a" * 32,  # max-length name
+            symbol="SYNTH",
+            side="buy",
+            qty=10,
+            entry_price=entry,
+        )
+        ledger.settle(b.id, exit_)
+    rows = build_leaderboard(ledger.bets)
+    out = render_leaderboard(rows)
+    header = next(line for line in out.splitlines() if line.strip().startswith("#"))
+    for line in out.splitlines():
+        if line.strip().startswith(("🥇", "🥈", "🥉", "–")) or "  –  " in line:
+            assert len(line) <= len(header) + 4, f"table broken: {line!r}"
+    assert "…" in out  # the long name was visibly truncated
+
+
 def main() -> int:
     failures = 0
     print(f"finance leaderboard tests ({len(_TESTS)} tests)")

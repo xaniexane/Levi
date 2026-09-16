@@ -110,6 +110,11 @@ class Bet:
     exit_at: str | None = None
     early_exit: bool = False
     pnl: float | None = None
+    #: Where the exit price came from: "manual" (caller-supplied), or a
+    #: market-data source name ("stooq", "binance", "synth") when the bet
+    #: was settled at the provider's latest close. Provenance for the
+    #: settlement — the price is never invented, and the ticket says so.
+    exit_price_source: str | None = None
 
     def __post_init__(self) -> None:
         self.trader = _clean_trader(self.trader)
@@ -139,6 +144,14 @@ class Bet:
             self.exit_price = _require_positive("exit_price", self.exit_price)
         if self.pnl is not None:
             self.pnl = _require_number("pnl", self.pnl)
+        if self.exit_price_source is not None:
+            source = str(self.exit_price_source).strip().lower()
+            if source not in _SOURCES and source != "manual":
+                raise InvalidBet(
+                    f"exit_price_source must be one of {(*_SOURCES, 'manual')}, "
+                    f"got {self.exit_price_source!r}"
+                )
+            self.exit_price_source = source
 
     def signed_pnl(self, exit_price: float) -> float:
         """Simulated P&L at ``exit_price``: long wins when price rises."""
@@ -174,6 +187,7 @@ class Bet:
             exit_at=data.get("exit_at"),
             early_exit=bool(data.get("early_exit", False)),
             pnl=float(data["pnl"]) if data.get("pnl") is not None else None,
+            exit_price_source=data.get("exit_price_source"),
         )
 
 
@@ -222,12 +236,22 @@ class BetLedger:
                 return bet
         raise BetNotFound(f"unknown bet id {bet_id!r} — nothing was settled.")
 
-    def settle(self, bet_id: str, exit_price: float, *, early: bool = False) -> Bet:
+    def settle(
+        self,
+        bet_id: str,
+        exit_price: float,
+        *,
+        early: bool = False,
+        exit_price_source: str = "manual",
+    ) -> Bet:
         """Settle an open bet at ``exit_price``.
 
         ``exit_price`` must be supplied (from market data, never
         invented). ``early=True`` marks a paper-hands exit — the bet was
-        closed before its horizon played out.
+        closed before its horizon played out. ``exit_price_source`` records
+        where the price came from (``"manual"`` or a provider name like
+        ``"stooq"``/``"binance"``/``"synth"``) so the ticket can show
+        provenance.
         """
         bet = self.get(bet_id)
         if bet.status != "open":
@@ -240,7 +264,35 @@ class BetLedger:
         bet.early_exit = bool(early)
         bet.pnl = pnl
         bet.status = "settled"
+        source = str(exit_price_source or "manual").strip().lower()
+        if source not in _SOURCES and source != "manual":
+            raise InvalidBet(
+                f"exit_price_source must be one of {(*_SOURCES, 'manual')}, "
+                f"got {exit_price_source!r}"
+            )
+        bet.exit_price_source = source
         return bet
+
+    def settle_preview(self, bet_id: str, exit_price: float) -> dict:
+        """What-if preview: simulated P&L at ``exit_price`` without
+        settling anything. The bet is untouched — this is a read-only
+        look at where the bet stands."""
+        bet = self.get(bet_id)
+        if bet.status != "open":
+            raise BetAlreadySettled(
+                f"bet {bet_id} is already settled — preview is for open bets."
+            )
+        pnl = bet.signed_pnl(exit_price)
+        return {
+            "bet_id": bet.id,
+            "trader": bet.trader,
+            "symbol": bet.symbol,
+            "side": bet.side,
+            "entry_price": bet.entry_price,
+            "exit_price": _require_positive("exit_price", exit_price),
+            "pnl": pnl,
+            "status": "preview — nothing was settled (paper only)",
+        }
 
     # -- queries --------------------------------------------------------
 
@@ -295,31 +347,46 @@ class BetLedger:
 
     # -- rendering ------------------------------------------------------
 
+    _TICKET_WIDTH = 43  # box border width; content lines are fitted to it
+
+    @staticmethod
+    def _ticket_line(text: str) -> str:
+        """Fit ``text`` inside the ticket box: truncate with an ellipsis
+        marker when a long trader name or symbol would break the border."""
+        inner = BetLedger._TICKET_WIDTH - 4  # "│  " … " │"
+        text = str(text)
+        if len(text) > inner:
+            text = text[: inner - 1] + "…"
+        return f"│  {text:<{inner}}│"
+
     @staticmethod
     def ticket(bet: Bet) -> str:
         """ASCII ticket for a paper bet — always stamped SIMULATED."""
         side_word = "LONG 📈" if bet.side == "buy" else "SHORT 📉"
+        line = BetLedger._ticket_line
+        border = "┌" + "─" * (BetLedger._TICKET_WIDTH - 2) + "┐"
+        mid = "├" + "─" * (BetLedger._TICKET_WIDTH - 2) + "┤"
+        bottom = "└" + "─" * (BetLedger._TICKET_WIDTH - 2) + "┘"
         lines = [
-            "┌─────────────────────────────────────────┐",
-            "│  🎰 PAPER YOLO TICKET (SIMULATED)        │",
-            "├─────────────────────────────────────────┤",
-            f"│  {bet.id}  trader: {bet.trader}",
-            f"│  {side_word}  {bet.qty:g} {bet.symbol} @ ${bet.entry_price:,.2f}",
-            f"│  horizon: {bet.horizon_days}d   source: {bet.source}",
-            f"│  placed: {bet.placed_at[:10]}",
+            border,
+            line("🎰 PAPER YOLO TICKET (SIMULATED)"),
+            mid,
+            line(f"{bet.id}  trader: {bet.trader}"),
+            line(f"{side_word}  {bet.qty:g} {bet.symbol} @ ${bet.entry_price:,.2f}"),
+            line(f"horizon: {bet.horizon_days}d   source: {bet.source}"),
+            line(f"placed: {bet.placed_at[:10]}"),
         ]
         if bet.status == "settled":
             hands = "💎 DIAMOND" if not bet.early_exit else "🧻 PAPER"
-            lines.append(
-                f"│  SETTLED @ ${bet.exit_price:,.2f}  "
-                f"P&L {_signed_money(bet.pnl or 0)}  {hands}"
-            )
+            source = f" (via {bet.exit_price_source})" if bet.exit_price_source else ""
+            lines.append(line(f"SETTLED @ ${bet.exit_price:,.2f}{source}"))
+            lines.append(line(f"P&L {_signed_money(bet.pnl or 0)}  {hands}"))
         else:
-            lines.append("│  status: OPEN — fortune favors the bold (paper)")
+            lines.append(line("status: OPEN — fortune favors the bold (paper)"))
         lines += [
-            "├─────────────────────────────────────────┤",
-            "│  not financial advice · paper only      │",
-            "└─────────────────────────────────────────┘",
+            mid,
+            line("not financial advice · paper only"),
+            bottom,
         ]
         return assert_clean("\n".join(lines))
 

@@ -54,9 +54,9 @@ still need its own separate approvals and does not exist in this build.
 | `synth.py` | Seeded deterministic synthetic bars for `SYNTH*` symbols (seeded PRNG, `as_of` date anchor). Rejects real symbols with `MarketDataError` — never fabricates market data | stdlib only |
 | `crypto.py` | Keyless Binance public daily-klines provider (`BinanceProvider`, stdlib `urllib`, no SDK/credentials). Honest `MarketDataError` on any failure | stdlib only |
 | `wsb.py` | WSB presentation skin: DD posts, positions-or-ban, gain/loss porn, meme ticker tape. Clean slang only (SHA-256 denylist, no literals in source); every rendering paper-stamped | stdlib only |
-| `bets.py` | Paper-YOLO bet ledger: place/settle/list, win rate, diamond-vs-paper-hands stats. Trader names screened at placement | stdlib only |
-| `leaderboard.py` | Per-trader settled-bet aggregation (3+ settled bets for an official rank) | `bets`, `wsb` |
-| `copytrade.py` | Simulates mirroring a paper trader's settled bets; exact-fill assumption disclosed, no fees/slippage, no order routing | `bets`, `wsb` |
+| `bets.py` | Paper-YOLO bet ledger: place/settle/list, win rate, diamond-vs-paper-hands stats, exit-price provenance, read-only settle preview. Trader names screened at placement | stdlib only |
+| `leaderboard.py` | Per-trader settled-bet aggregation (3+ settled bets for an official rank); rendered table width-fits long trader names | `bets`, `wsb` |
+| `copytrade.py` | Simulates mirroring a paper trader's settled bets; exact-fill assumption disclosed, no fees/slippage, no order routing; `min_bets` validated | `bets`, `wsb` |
 | `brokerlink.py` | Draft-only broker-link option: configure a platform label (no keys), prepare `DRAFT — NOT SENT` review artifacts, `execute_draft()` raises `LiveExecutionRefused` unconditionally — no transport exists | stdlib only |
 | CLI | `levi finance` in `core/levi/cli/main.py` (`cmd_finance`) | finance modules only — never a live broker |
 | Web | `/finance` route: `FinanceWsb` dashboard over synthetic fixtures (paper-stamped panels) | React + `finance-wsb.ts` |
@@ -582,8 +582,11 @@ between LEVI's signal rules, never a probability**.*
 - **stooq** (default): keyless Stooq daily bars for US equities.
 - **binance**: keyless Binance *public* daily klines for crypto pairs
   (`BTCUSDT`). Stdlib `urllib`, no SDK, no credentials. Any fetch/parse
-  failure is an honest `MarketDataError` — the CLI prints what happened
-  and exits 1. Nothing is ever fabricated.
+  failure — network, HTTP error, or even a low-level
+  `http.client.HTTPException` leaking from `urlopen` — is an honest
+  `MarketDataError`; the CLI prints what happened and exits 1. Nothing
+  is ever fabricated. `BinanceProvider.latest_close(symbol)` fetches a
+  single kline for the cheapest honest quote (date, close).
 - **synth**: seeded deterministic bars for `SYNTH*` symbols (profiles
   include `SYNTH`, `SYNTHBTC`, `SYNTHETH`). Same symbol + seed ⇒ same
   prices, always; calendar dates anchor to `as_of` (default: today — pass
@@ -598,10 +601,20 @@ wrong source hints at `--source synth`.
 Local paper-YOLO bet ledger (`~/.levi/finance/bets.json`, mode `0o700`).
 Placing a bet is still a HITL action: without `--yes` the command refuses
 (exit 2) and saves nothing. Entry prices come from the chosen source's
-latest bar — never invented. Settlement takes an explicit exit price.
-Tickets, win-rate, and diamond-hands vs paper-hands statistics are all
-rendered paper-stamped. A corrupt ledger file yields an empty ledger
-**with a loud warning** — never a traceback, never half-parsed bets.
+latest bar — never invented. Settlement takes an explicit exit price and
+records its **provenance** (`exit_price_source`: `manual`, `stooq`,
+`binance`, or `synth`), shown on the ticket as `via <source>` so a
+settled bet always says where its exit price came from. A read-only
+`settle_preview(bet_id, exit_price)` answers "what is this bet worth
+right now?" without touching the ledger. Tickets, win-rate, and
+diamond-hands vs paper-hands statistics are all rendered paper-stamped;
+the diamond-vs-paper scoreboard also has a dedicated WSB renderer
+(`wsb.hands_report`) that names a cohort winner on settled paper P&L
+only — holding longer is not automatically better, and the report says
+so. A corrupt ledger file yields an empty ledger **with a loud warning**
+— never a traceback, never half-parsed bets. Ticket box art is
+width-fitted: max-length trader names truncate with a marker instead of
+breaking the border.
 
 ### 7.4 Simulated copy trading (`copytrade`)
 

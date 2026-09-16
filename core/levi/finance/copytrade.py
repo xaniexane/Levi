@@ -117,6 +117,10 @@ def compare_traders(
     Traders with fewer than ``min_bets`` settled bets are skipped — a
     tiny sample is noise, not a track record.
     """
+    if isinstance(min_bets, bool) or not isinstance(min_bets, int):
+        raise ValueError(f"min_bets must be an int >= 1, got {min_bets!r}")
+    if min_bets < 1:
+        raise ValueError(f"min_bets must be >= 1, got {min_bets!r}")
     reports: list[dict] = []
     for trader in sorted({b.trader for b in bets}):
         settled = [b for b in bets if b.trader == trader and b.status == "settled"]

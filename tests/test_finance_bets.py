@@ -252,6 +252,154 @@ def test_bet_serialization_roundtrip():
     assert clone.entry_price == bet.entry_price
 
 
+@finance_test
+def test_settle_preview_is_read_only():
+    ledger = _ledger()
+    bet = ledger.place(
+        trader="ape1",
+        symbol="SYNTH",
+        side="buy",
+        qty=10,
+        entry_price=100.0,
+        source="synth",
+    )
+    preview = ledger.settle_preview(bet.id, 120.0)
+    assert preview["pnl"] == 200.0
+    assert preview["exit_price"] == 120.0
+    assert "nothing was settled" in preview["status"]
+    # The bet itself is untouched.
+    assert ledger.get(bet.id).status == "open"
+    assert ledger.get(bet.id).pnl is None
+
+
+@finance_test
+def test_settle_preview_short_side():
+    ledger = _ledger()
+    bet = ledger.place(
+        trader="ape1",
+        symbol="SYNTH",
+        side="sell",
+        qty=10,
+        entry_price=100.0,
+        source="synth",
+    )
+    preview = ledger.settle_preview(bet.id, 80.0)
+    assert preview["pnl"] == 200.0
+
+
+@finance_test
+def test_settle_preview_rejects_settled():
+    ledger = _ledger()
+    bet = ledger.place(
+        trader="ape1",
+        symbol="SYNTH",
+        side="buy",
+        qty=10,
+        entry_price=100.0,
+        source="synth",
+    )
+    ledger.settle(bet.id, 110.0)
+    try:
+        ledger.settle_preview(bet.id, 120.0)
+    except BetAlreadySettled:
+        pass
+    else:
+        raise AssertionError("preview of a settled bet must raise")
+
+
+@finance_test
+def test_settle_records_exit_price_source():
+    ledger = _ledger()
+    bet = ledger.place(
+        trader="ape1",
+        symbol="BTCUSDT",
+        side="buy",
+        qty=1,
+        entry_price=60000.0,
+        source="binance",
+    )
+    settled = ledger.settle(bet.id, 61000.0, exit_price_source="binance")
+    assert settled.exit_price_source == "binance"
+    ticket = BetLedger.ticket(settled)
+    assert "via binance" in ticket
+    # Manual (default) provenance is recorded too.
+    bet2 = ledger.place(
+        trader="ape1",
+        symbol="SYNTH",
+        side="buy",
+        qty=1,
+        entry_price=100.0,
+        source="synth",
+    )
+    settled2 = ledger.settle(bet2.id, 90.0)
+    assert settled2.exit_price_source == "manual"
+
+
+@finance_test
+def test_settle_rejects_unknown_price_source():
+    ledger = _ledger()
+    bet = ledger.place(
+        trader="ape1",
+        symbol="SYNTH",
+        side="buy",
+        qty=1,
+        entry_price=100.0,
+        source="synth",
+    )
+    try:
+        ledger.settle(bet.id, 110.0, exit_price_source="darkpool")
+    except InvalidBet:
+        pass
+    else:
+        raise AssertionError("unknown exit price source must raise")
+
+
+@finance_test
+def test_exit_price_source_roundtrips():
+    bet = Bet(
+        id="bet-src1",
+        trader="t",
+        symbol="SYNTH",
+        side="buy",
+        qty=5,
+        entry_price=10.0,
+        source="synth",
+    )
+    bet.status = "settled"
+    bet.exit_price = 12.0
+    bet.pnl = 10.0
+    bet.exit_price_source = "synth"
+    clone = Bet.from_dict(json.loads(json.dumps(bet.to_dict())))
+    assert clone.exit_price_source == "synth"
+    # Old ledgers without the field still load.
+    data = bet.to_dict()
+    del data["exit_price_source"]
+    legacy = Bet.from_dict(data)
+    assert legacy.exit_price_source is None
+
+
+@finance_test
+def test_ticket_box_never_breaks_on_long_name():
+    bet = Bet(
+        id="bet-0123456789abcdef",
+        trader="x" * 32,  # max-length trader name
+        symbol="SYNTHVERYLONGSYMBOL",
+        side="buy",
+        qty=123456.789,
+        entry_price=1234567.89,
+        horizon_days=365,
+        source="synth",
+    )
+    for line in BetLedger.ticket(bet).splitlines():
+        assert len(line) <= BetLedger._TICKET_WIDTH, f"box broken: {line!r}"
+    bet.status = "settled"
+    bet.exit_price = 9999999.99
+    bet.pnl = 123456.78
+    bet.exit_price_source = "binance"
+    for line in BetLedger.ticket(bet).splitlines():
+        assert len(line) <= BetLedger._TICKET_WIDTH, f"box broken: {line!r}"
+
+
 def main() -> int:
     failures = 0
     print(f"finance bets tests ({len(_TESTS)} tests)")

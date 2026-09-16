@@ -134,6 +134,47 @@ def test_crypto_download_failure_honest():
 
 
 @finance_test
+def test_crypto_http_exception_becomes_market_data_error():
+    # http.client.HTTPException can leak out of urlopen; it must be
+    # converted to MarketDataError, never escape raw.
+    import http.client
+    import urllib.request
+    from unittest import mock
+
+    provider = BinanceProvider()
+    with mock.patch.object(
+        urllib.request,
+        "urlopen",
+        side_effect=http.client.RemoteDisconnected("closed"),
+    ):
+        try:
+            BinanceProvider._download(provider, "https://example.invalid/x")
+        except MarketDataError as exc:
+            assert "failed" in str(exc)
+        else:
+            raise AssertionError("HTTPException did not become MarketDataError")
+
+
+@finance_test
+def test_crypto_latest_close():
+    provider = _patched(_klines_payload(n=3, start=60000.0))
+    date, close = provider.latest_close("BTCUSDT")
+    assert date == "2026-09-10"
+    assert close == 60200.0
+
+
+@finance_test
+def test_crypto_latest_close_validates_symbol():
+    provider = _patched(_klines_payload(n=1))
+    try:
+        provider.latest_close("AAPL!!")
+    except MarketDataError:
+        pass
+    else:
+        raise AssertionError("invalid symbol did not raise")
+
+
+@finance_test
 def test_looks_like_crypto_hint():
     assert looks_like_crypto("BTCUSDT")
     assert looks_like_crypto("ethusdc")

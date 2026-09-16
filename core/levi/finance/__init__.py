@@ -71,6 +71,7 @@ _LAZY_EXPORTS = {
     "dd_post": "wsb",
     "positions_or_ban": "wsb",
     "gain_loss_porn": "wsb",
+    "hands_report": "wsb",
     "ticker_tape": "wsb",
     "wsb_quote": "wsb",
     "ADVISORY_FOOTER": "wsb",

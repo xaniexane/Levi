@@ -133,6 +133,29 @@ def test_render_honest():
     assert "slippage" in out
 
 
+@finance_test
+def test_compare_traders_validates_min_bets():
+    ledger = _seeded_ledger()
+    for bad in (0, -1, True, "3", 2.5):
+        try:
+            compare_traders(ledger.bets, min_bets=bad)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"min_bets={bad!r} did not raise")
+
+
+@finance_test
+def test_compare_traders_min_bets_threshold():
+    ledger = _seeded_ledger()
+    # rookie has exactly 2 settled: visible only with min_bets=2.
+    assert {r["follow"] for r in compare_traders(ledger.bets)} == {"guru"}
+    assert {r["follow"] for r in compare_traders(ledger.bets, min_bets=2)} == {
+        "guru",
+        "rookie",
+    }
+
+
 def main() -> int:
     failures = 0
     print(f"finance copytrade tests ({len(_TESTS)} tests)")

@@ -25,6 +25,7 @@ from levi.finance.wsb import (  # noqa: E402
     assert_clean,
     dd_post,
     gain_loss_porn,
+    hands_report,
     positions_or_ban,
     ticker_tape,
     wsb_quote,
@@ -147,6 +148,49 @@ def test_gain_loss_porn_branches():
     assert "CRAB" in flat
     for out in (gain, loss, flat):
         assert "not financial advice" in out
+
+
+@finance_test
+def test_hands_report():
+    hands = {
+        "diamond_hands": {
+            "bets": 4,
+            "wins": 3,
+            "losses": 1,
+            "win_rate": 0.75,
+            "total_pnl": 250.0,
+        },
+        "paper_hands": {
+            "bets": 2,
+            "wins": 0,
+            "losses": 2,
+            "win_rate": 0.0,
+            "total_pnl": -80.0,
+        },
+        "note": "x",
+    }
+    out = hands_report(hands)
+    assert "DIAMOND HANDS vs PAPER HANDS" in out
+    assert "+$250.00" in out and "-$80.00" in out
+    assert "75%" in out
+    assert "DIAMOND HANDS WIN" in out
+    assert "not financial advice" in out
+    assert "PAPER ONLY" in out
+
+
+@finance_test
+def test_hands_report_paper_wins_and_empty():
+    hands = {
+        "diamond_hands": {"bets": 1, "win_rate": 0.0, "total_pnl": -10.0},
+        "paper_hands": {"bets": 1, "win_rate": 1.0, "total_pnl": 50.0},
+    }
+    assert "PAPER HANDS WIN" in hands_report(hands)
+    empty = hands_report({"diamond_hands": {"bets": 0}, "paper_hands": {}})
+    assert "no settled bets yet" in empty
+    one_sided = hands_report(
+        {"diamond_hands": {"bets": 2, "total_pnl": 5.0}, "paper_hands": {}}
+    )
+    assert "only diamond-hands exits" in one_sided
 
 
 @finance_test

@@ -33,6 +33,7 @@ __all__ = [
     "dd_post",
     "positions_or_ban",
     "gain_loss_porn",
+    "hands_report",
     "ticker_tape",
     "wsb_quote",
     "ADVISORY_FOOTER",
@@ -247,6 +248,65 @@ def gain_loss_porn(summary: dict) -> str:
                 banner,
                 f"  total P&L: {_money(total)} ({PAPER_STAMP})",
                 f"  {flavor}",
+                "",
+                ADVISORY_FOOTER,
+            ]
+        )
+    )
+
+
+def hands_report(hands: dict) -> str:
+    """Render diamond-hands vs paper-hands stats, WSB-flavored.
+
+    ``hands`` is the dict from ``BetLedger.hands_stats()``: per-cohort
+    ``bets``/``wins``/``win_rate``/``total_pnl``. The skin reports the
+    cohorts verbatim and names a winner only on settled paper P&L —
+    holding longer is not automatically better, and the report says so.
+    """
+    diamond = dict(hands.get("diamond_hands", {}) or {})
+    paper = dict(hands.get("paper_hands", {}) or {})
+
+    def _row(label: str, emoji: str, cohort: dict) -> str:
+        n = int(cohort.get("bets", 0) or 0)
+        wr = cohort.get("win_rate")
+        wr_text = f"{wr:.0%}" if wr is not None else "n/a"
+        return (
+            f"  {emoji} {label:<13} {n:>3} bets   win {wr_text:>4}   "
+            f"P&L {_money(float(cohort.get('total_pnl', 0) or 0))}"
+        )
+
+    d_pnl = float(diamond.get("total_pnl", 0) or 0)
+    p_pnl = float(paper.get("total_pnl", 0) or 0)
+    d_n = int(diamond.get("bets", 0) or 0)
+    p_n = int(paper.get("bets", 0) or 0)
+    if d_n and p_n:
+        if d_pnl > p_pnl:
+            verdict = (
+                "💎 DIAMOND HANDS WIN THIS ROUND — holding paid (this time, on paper)"
+            )
+        elif p_pnl > d_pnl:
+            verdict = "🧻 PAPER HANDS WIN THIS ROUND — exiting early paid (this time, on paper)"
+        else:
+            verdict = "🦧 DEAD HEAT — hands made no difference (this time, on paper)"
+    elif d_n:
+        verdict = "💎 only diamond-hands exits so far — no paper cohort to compare"
+    elif p_n:
+        verdict = "🧻 only paper-hands exits so far — no diamond cohort to compare"
+    else:
+        verdict = "🦧 no settled bets yet — settle some paper to grow hands"
+
+    return assert_clean(
+        "\n".join(
+            [
+                "💎🙌 DIAMOND HANDS vs PAPER HANDS 🧻🙌",
+                f"   ({PAPER_STAMP} — settled paper bets only)",
+                "",
+                _row("diamond", "💎", diamond),
+                _row("paper", "🧻", paper),
+                "",
+                f"  verdict: {verdict}",
+                "  note: diamond = held to the bet's horizon; paper = exited",
+                "  early. Neither is a strategy — this is a scoreboard.",
                 "",
                 ADVISORY_FOOTER,
             ]
