@@ -22,6 +22,14 @@ def test_manifest_registers_all_modules():
         "methods", "revival", "galaxy", "lifepack", "bloodstream",
         "daemon", "perpetual", "archive", "cyber-skills", "factory",
         "finance", "forge",
+        # operator + additions + research waves, 2026-09-16 sweep
+        "signals", "creed", "promises", "decisions", "interruptions",
+        "snapshots", "drift", "teachback", "energy", "friction",
+        "sweeps", "premortem", "research",
+        "ephemera", "feedreader", "packs", "commitments", "recap",
+        "classifieds", "dials", "bridging", "communities", "threads",
+        "charters", "capproto", "mailtriage", "vaults", "canvas",
+        "discover", "presence", "honestsearch", "recommender",
     }
 
 

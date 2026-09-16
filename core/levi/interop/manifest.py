@@ -241,6 +241,256 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- operator wave: LEVI's operating layer (signals, creed, ledgers) ------
+    # Twelve LEVI-native packages: the graded signal plane, the frozen creed
+    # of laws and tone masks, and the ledgers/rituals that make LEVI a
+    # reliable operator. All stdlib-only, local-first.
+    "signals": {
+        "provides": [
+            "signals.grades",
+            "signals.instincts",
+            "signals.focus-mute",
+            "signals.active-hours",
+        ],
+        # wires the nine documented accountability instincts as defaults
+        "requires": [
+            "commitments",
+            "decisions",
+            "drift",
+            "energy",
+            "friction",
+            "interruptions",
+            "promises",
+            "sweeps",
+            "teachback",
+        ],
+    },
+    "creed": {
+        "provides": [
+            "creed.laws",
+            "creed.masks",
+            "creed.promotion",
+        ],
+        "requires": [],
+    },
+    "promises": {
+        "provides": [
+            "promises.tracker",
+            "promises.fulfillment",
+        ],
+        "requires": [],
+    },
+    "decisions": {
+        "provides": [
+            "decisions.journal",
+            "decisions.revisit",
+        ],
+        "requires": [],
+    },
+    "interruptions": {
+        "provides": [
+            "interruptions.ledger",
+            "interruptions.noise-roi",
+        ],
+        "requires": [],
+    },
+    "snapshots": {
+        "provides": [
+            "snapshots.capture",
+            "snapshots.resume",
+        ],
+        "requires": [],
+    },
+    "drift": {
+        "provides": [
+            "drift.tracker",
+            "drift.evidence",
+        ],
+        "requires": [],
+    },
+    "teachback": {
+        "provides": [
+            "teachback.model",
+            "teachback.corrections",
+        ],
+        "requires": [],
+    },
+    "energy": {
+        "provides": [
+            "energy.tracker",
+            "energy.peak-hours",
+        ],
+        "requires": [],
+    },
+    "friction": {
+        "provides": [
+            "friction.log",
+            "friction.themes",
+        ],
+        "requires": [],
+    },
+    "sweeps": {
+        "provides": [
+            "sweeps.sweep",
+            "sweeps.safe-fix",
+        ],
+        "requires": [],
+    },
+    "premortem": {
+        "provides": [
+            "premortem.ritual",
+            "premortem.mitigations",
+        ],
+        "requires": [],
+    },
+    # -- research: public-source deep-web research (polite, no darknet) -------
+    "research": {
+        "provides": [
+            "research.deepweb",
+            "research.sitemaps",
+            "research.feeds",
+        ],
+        "requires": [],
+    },
+    # -- additions wave: 19 LEVI-native social/craft packages -----------------
+    # Built as additions (never rebuilds): portable social fabric and
+    # sovereign instruments, stdlib-only, local-first.
+    "ephemera": {
+        "provides": [
+            "ephemera.channels",
+            "ephemera.true-delete",
+        ],
+        "requires": [],
+    },
+    "feedreader": {
+        "provides": [
+            "feedreader.reader",
+            "feedreader.feeds",
+        ],
+        "requires": ["research"],
+    },
+    "packs": {
+        "provides": [
+            "packs.packs",
+            "packs.scopes",
+        ],
+        "requires": [],
+    },
+    "commitments": {
+        "provides": [
+            "commitments.devices",
+            "commitments.checkin",
+        ],
+        "requires": [],
+    },
+    "recap": {
+        "provides": [
+            "recap.year",
+            "recap.digest",
+        ],
+        "requires": [],
+    },
+    "classifieds": {
+        "provides": [
+            "classifieds.listings",
+            "classifieds.trust-graph",
+        ],
+        "requires": [],
+    },
+    "dials": {
+        "provides": [
+            "dials.dials",
+            "dials.ranking",
+        ],
+        "requires": [],
+    },
+    "bridging": {
+        "provides": [
+            "bridging.legitimacy",
+            "bridging.consensus",
+        ],
+        "requires": [],
+    },
+    "communities": {
+        "provides": [
+            "communities.model",
+            "communities.portable",
+        ],
+        "requires": [],
+    },
+    "threads": {
+        "provides": [
+            "threads.trees",
+            "threads.bridging-rank",
+        ],
+        "requires": ["bridging"],
+    },
+    "charters": {
+        "provides": [
+            "charters.charters",
+            "charters.governance",
+        ],
+        "requires": ["communities"],
+    },
+    "capproto": {
+        "provides": [
+            "capproto.protocol",
+            "capproto.tokens",
+            "capproto.transport",
+        ],
+        # capability tokens descend from the telescript revival
+        "requires": ["revival"],
+    },
+    "mailtriage": {
+        "provides": [
+            "mailtriage.triage",
+            "mailtriage.replies",
+        ],
+        "requires": [],
+    },
+    "vaults": {
+        "provides": [
+            "vaults.vaults",
+            "vaults.retention",
+            "vaults.transfer",
+        ],
+        "requires": [],
+    },
+    "canvas": {
+        "provides": [
+            "canvas.artifacts",
+            "canvas.workbench",
+        ],
+        "requires": [],
+    },
+    "discover": {
+        "provides": [
+            "discover.digest",
+            "discover.rituals",
+        ],
+        "requires": [],
+    },
+    "presence": {
+        "provides": [
+            "presence.rooms",
+            "presence.discovery",
+        ],
+        "requires": [],
+    },
+    "honestsearch": {
+        "provides": [
+            "honestsearch.index",
+            "honestsearch.rank",
+        ],
+        "requires": ["research"],
+    },
+    "recommender": {
+        "provides": [
+            "recommender.engine",
+            "recommender.interest-graph",
+        ],
+        "requires": [],
+    },
 }
 
 

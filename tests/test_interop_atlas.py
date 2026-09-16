@@ -38,6 +38,60 @@ EXPECTED_NEW_MODULES = {
     "finance",
 }
 
+#: Operator + additions + research waves (2026-09-16 sweep): every new
+#: package must be declared in the manifest and shelved in a warehouse.
+EXPECTED_WAVE_MODULES = {
+    "signals",
+    "creed",
+    "promises",
+    "decisions",
+    "interruptions",
+    "snapshots",
+    "drift",
+    "teachback",
+    "energy",
+    "friction",
+    "sweeps",
+    "premortem",
+    "research",
+    "ephemera",
+    "feedreader",
+    "packs",
+    "commitments",
+    "recap",
+    "classifieds",
+    "dials",
+    "bridging",
+    "communities",
+    "threads",
+    "charters",
+    "capproto",
+    "mailtriage",
+    "vaults",
+    "canvas",
+    "discover",
+    "presence",
+    "honestsearch",
+    "recommender",
+}
+
+EXPECTED_WAVE_WAREHOUSES = {"operations", "commons", "craft"}
+
+
+def test_wave_modules_declared():
+    assert EXPECTED_WAVE_MODULES <= set(DECLARATIONS)
+
+
+def test_wave_warehouses_exist_and_shelve_everything():
+    assert EXPECTED_WAVE_WAREHOUSES <= set(WAREHOUSES)
+    shelved = {
+        shelf
+        for wh in EXPECTED_WAVE_WAREHOUSES
+        for shelf in WAREHOUSES[wh]["shelves"]
+    }
+    assert EXPECTED_WAVE_MODULES - {"research"} <= shelved
+    assert "research" in WAREHOUSES["archive"]["shelves"]
+
 
 @pytest.fixture(autouse=True)
 def _hermetic_home(tmp_path, monkeypatch):
@@ -174,7 +228,7 @@ def test_inventory_counts_match_reality():
     assert by_name["methods"] == real_methods
     assert real_revivals == 20
     assert by_name["revivals"] == real_revivals
-    assert real_playbooks == 823
+    assert real_playbooks == 839
     assert by_name["skills"] == real_playbooks
     assert by_name["games"] == 0  # standing theme, no landed stock yet
 
@@ -206,17 +260,17 @@ def test_inventory_unknown_warehouse_rejected():
 
 def test_inventory_pagination_is_honest():
     full = warehouse_inventory("skills", limit=None)
-    assert full["total"] == 823
-    assert len(full["items"]) == 823
+    assert full["total"] == 839
+    assert len(full["items"]) == 839
     assert full["truncated"] is False
 
     page = warehouse_inventory("skills", limit=50, offset=0)
-    assert page["total"] == 823
+    assert page["total"] == 839
     assert len(page["items"]) == 50
     assert page["truncated"] is True
 
     last = warehouse_inventory("skills", limit=50, offset=800)
-    assert len(last["items"]) == 23
+    assert len(last["items"]) == 39
     assert last["truncated"] is False
 
     for item in page["items"]:
