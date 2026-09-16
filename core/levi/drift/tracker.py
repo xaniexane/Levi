@@ -152,7 +152,8 @@ class DriftTracker:
             except (KeyError, ValueError):
                 continue
             if ts.tzinfo is None:
-                ts = ts.replace(tzinfo=timezone.utc)
+                # Naive stored timestamps are local time, not UTC.
+                ts = ts.astimezone()
             if ts >= cutoff:
                 out.append(entry)
         return out
@@ -161,7 +162,8 @@ class DriftTracker:
         """Return a CARD-grade dict on real divergence, else None (SILENT)."""
         moment = now or _now()
         if moment.tzinfo is None:
-            moment = moment.replace(tzinfo=timezone.utc)
+            # Naive datetimes are local time, not UTC.
+            moment = moment.astimezone()
         goals = self._load_goals()
         window = self._window(moment)
 

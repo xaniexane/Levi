@@ -94,7 +94,8 @@ def _user_base(home: Path) -> Path:
 def _utc(now: Optional[datetime]) -> datetime:
     moment = now or datetime.now(timezone.utc)
     if moment.tzinfo is None:
-        moment = moment.replace(tzinfo=timezone.utc)
+        # Naive datetimes are local time, not UTC.
+        moment = moment.astimezone()
     return moment.astimezone(timezone.utc)
 
 
@@ -106,7 +107,8 @@ def _parse_iso(raw: Any) -> Optional[datetime]:
     except ValueError:
         return None
     if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=timezone.utc)
+        # Naive stored timestamps are local time, not UTC.
+        dt = dt.astimezone()
     return dt.astimezone(timezone.utc)
 
 

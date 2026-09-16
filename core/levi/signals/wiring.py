@@ -94,7 +94,11 @@ def _parse_ts(raw: Any) -> Optional[datetime]:
     except ValueError:
         return None
     if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=timezone.utc)
+        # Naive timestamps are LOCAL time (producers write naive local ISO;
+        # see focus blocks and session logs). Attaching UTC here silently
+        # shifts every naive timestamp by the UTC offset and breaks
+        # trailing-window evidence in non-UTC timezones.
+        dt = dt.astimezone()
     return dt.astimezone(timezone.utc)
 
 

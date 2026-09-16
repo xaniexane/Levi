@@ -52,7 +52,8 @@ def _levi_home() -> Path:
 def _stamp(at: Optional[datetime] = None) -> str:
     dt = at if at is not None else datetime.now(timezone.utc)
     if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=timezone.utc)
+        # Naive datetimes are local time, not UTC.
+        dt = dt.astimezone()
     return dt.isoformat()
 
 
@@ -62,7 +63,8 @@ def _parse_at(at: Optional[datetime]) -> datetime:
     if not isinstance(at, datetime):
         raise InterruptionError("at must be a datetime, got %r" % (at,))
     if at.tzinfo is None:
-        return at.replace(tzinfo=timezone.utc)
+        # Naive datetimes are local time, not UTC.
+        return at.astimezone()
     return at
 
 

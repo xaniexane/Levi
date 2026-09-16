@@ -84,7 +84,8 @@ def _stamp(now: DateLike = None) -> str:
     if now is None:
         return datetime.now(timezone.utc).isoformat()
     if isinstance(now, datetime):
-        dt = now if now.tzinfo else now.replace(tzinfo=timezone.utc)
+        # Naive datetimes are local time, not UTC.
+        dt = now if now.tzinfo else now.astimezone()
         return dt.isoformat()
     if isinstance(now, date):
         return datetime(now.year, now.month, now.day, tzinfo=timezone.utc).isoformat()

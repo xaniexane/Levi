@@ -199,7 +199,8 @@ class InstinctRegistry:
         if now is None:
             return datetime.now(timezone.utc)
         if now.tzinfo is None:
-            return now.replace(tzinfo=timezone.utc)
+            # Naive datetimes are local time, not UTC.
+            return now.astimezone()
         return now.astimezone(timezone.utc)
 
     def _on_cooldown(
@@ -213,7 +214,8 @@ class InstinctRegistry:
         except ValueError:
             return False
         if last.tzinfo is None:
-            last = last.replace(tzinfo=timezone.utc)
+            # Naive stored timestamps are local time, not UTC.
+            last = last.astimezone()
         return (now - last).total_seconds() < instinct.cooldown
 
     def _clamp_grade(self, signal: Signal, instinct: Instinct) -> Signal:
