@@ -405,6 +405,21 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- reveal: the Reveal-Codes inspector (perpetual-hunt daily ---------
+    # 2026-09-16b: retired software) ------------------------------------------
+    # WordPerfect's load-bearing idea, clean-room revived: the honest second
+    # screen on a document. Shows structural codes (headings, emphasis,
+    # links, lists, tables, frontmatter) and invisible characters
+    # (zero-width, trailing whitespace, BOM) that editors hide. exorcise()
+    # strips invisibles and reports every removal. Stdlib-only, local-first,
+    # never modifies input silently.
+    "reveal": {
+        "provides": [
+            "reveal.inspect",
+            "reveal.exorcise",
+        ],
+        "requires": [],
+    },
     # -- circles: Dunbar-bounded trust circles (perpetual-hunt daily -------
     # 2026-09-16 evening: fallen platforms) ----------------------------------
     # Path's load-bearing idea (the hard friend cap, Dunbar-inspired),

@@ -185,6 +185,16 @@ HUNT_THEMES: List[HuntTheme] = [
               "ADDITIONS (local games, fair mechanics, player-owned "
               "progress, never predatory monetization), never rebuilds.",
     ),
+    HuntTheme(
+        id="fallen-platforms",
+        name="Fallen platforms",
+        brief="Dead social and content platforms and the good ideas their "
+              "killers left behind: the sharing, curation, and presence "
+              "mechanisms the winners refused to keep.",
+        exclusions=frozenset({"Google Reader share-with-note", "Vine loop",
+                              "Digg bury", "MySpace handmade page"}),
+        covered=True,
+    ),
 ]
 
 THEMES_BY_ID = {t.id: t for t in HUNT_THEMES}
