@@ -51,7 +51,15 @@ still need its own separate approvals and does not exist in this build.
 | `signals.py` | Deterministic signal scoring: `score_bars`, `generate_signal`, `narrate` | `indicators`, `market`, `model.abstraction` (narration only) |
 | `portfolio.py` | Paper ledger: `Portfolio`, `Position`, JSON persistence, realized/unrealized P&L | stdlib only |
 | `broker.py` | `PaperBroker` (default, simulated fills) and `AlpacaConnector` (declared, **transport not wired**) | stdlib + `plugins.registry` |
+| `synth.py` | Seeded deterministic synthetic bars for `SYNTH*` symbols (seeded PRNG, `as_of` date anchor). Rejects real symbols with `MarketDataError` — never fabricates market data | stdlib only |
+| `crypto.py` | Keyless Binance public daily-klines provider (`BinanceProvider`, stdlib `urllib`, no SDK/credentials). Honest `MarketDataError` on any failure | stdlib only |
+| `wsb.py` | WSB presentation skin: DD posts, positions-or-ban, gain/loss porn, meme ticker tape. Clean slang only (SHA-256 denylist, no literals in source); every rendering paper-stamped | stdlib only |
+| `bets.py` | Paper-YOLO bet ledger: place/settle/list, win rate, diamond-vs-paper-hands stats. Trader names screened at placement | stdlib only |
+| `leaderboard.py` | Per-trader settled-bet aggregation (3+ settled bets for an official rank) | `bets`, `wsb` |
+| `copytrade.py` | Simulates mirroring a paper trader's settled bets; exact-fill assumption disclosed, no fees/slippage, no order routing | `bets`, `wsb` |
+| `brokerlink.py` | Draft-only broker-link option: configure a platform label (no keys), prepare `DRAFT — NOT SENT` review artifacts, `execute_draft()` raises `LiveExecutionRefused` unconditionally — no transport exists | stdlib only |
 | CLI | `levi finance` in `core/levi/cli/main.py` (`cmd_finance`) | finance modules only — never a live broker |
+| Web | `/finance` route: `FinanceWsb` dashboard over synthetic fixtures (paper-stamped panels) | React + `finance-wsb.ts` |
 
 ### 2.2 Stdlib-only kernel (blueprint §1.1)
 
@@ -184,15 +192,23 @@ and exit 1; HITL/live refusals and invalid input exit 2.
 
 | Command | What it does |
 |---|---|
-| `finance quote <SYM> [--json]` | Latest close + day range via Stooq. |
-| `finance indicators <SYM>` | SMA20, EMA12/26, RSI14, MACD line/signal/histogram, Bollinger 20, ATR14, Stochastic %K/%D, OBV, ADX14 +DI/−DI, VWAP, and the regime label (trending / ranging / volatile) for the latest bar (`n/a` with warmup note when data is short). |
-| `finance signal <SYM> [--json]` | Advisory signal: direction, confidence, rationale bullets, indicator snapshot, narrated text — with the "ADVISORY ONLY — paper only, not financial advice" banner. |
-| `finance portfolio [--json]` | Paper ledger: cash, positions, realized / unrealized / total P&L, market value. Symbols whose prices can't be fetched are listed as **warnings** and valued at average cost — never zeroed. |
+| `finance quote <SYM> [--json] [--source stooq\|binance\|synth] [--wsb]` | Latest close + day range. `--source binance` for crypto pairs (`BTCUSDT`), `--source synth` for seeded synthetic symbols (`SYNTH*`). `--wsb` renders the meme-tape quote card. Wrong-universe symbols fail honestly with a routing hint, never a fabricated number. |
+| `finance indicators <SYM> [--source ...]` | SMA20, EMA12/26, RSI14, MACD line/signal/histogram, Bollinger 20, ATR14, Stochastic %K/%D, OBV, ADX14 +DI/−DI, VWAP, and the regime label (trending / ranging / volatile) for the latest bar (`n/a` with warmup note when data is short). |
+| `finance signal <SYM> [--json] [--source ...] [--wsb]` | Advisory signal: direction, confidence, rationale bullets, indicator snapshot, narrated text — with the "ADVISORY ONLY — paper only, not financial advice" banner. `--wsb` renders the same signal as a DD post (paper-stamped, "confidence = heuristic agreement, not probability"). |
+| `finance portfolio [--json] [--source ...] [--wsb]` | Paper ledger: cash, positions, realized / unrealized / total P&L, market value. Symbols whose prices can't be fetched are listed as **warnings** and valued at average cost — never zeroed. `--wsb` renders positions-or-ban + gain/loss porn. |
 | `finance order <SYM> <QTY> --side buy\|sell [--yes] [--live]` | Paper order. Without `--yes`: refusal + exit 2 (HITL gate, nothing placed). With `--yes`: `PaperBroker` fills at the latest close, applies to the ledger, prints the **SIMULATED** fill, saves. `--live` (or `LEVI_BROKER_LIVE`): refused with the five live requirements, exit 2. Never reaches `AlpacaConnector`. |
 | `finance deposit <AMOUNT>` | Funds the paper portfolio. Positive amounts only; cash starts at 0. |
+| `finance bet <SYM> <QTY> --side buy\|sell [--trader NAME] [--horizon D] [--source ...] [--yes]` | Paper YOLO bet (HITL: needs `--yes`). Entry price comes from the chosen source's latest bar — never invented. Trader names are screened (clean slang only). Prints a paper ticket. |
+| `finance bets [--trader NAME] [--json]` | Paper-bet ledger: open/settled bets, win rate, 💎 diamond-hands vs 🧻 paper-hands stats. |
+| `finance settle <BETID> --price <PX> [--paper-hands]` | Settle an open paper bet at an explicit exit price (from market data, never invented). `--paper-hands` marks an early exit. |
+| `finance leaderboard [--json]` | Paper-trader leaderboard (SIMULATED): bets, wins, win rate, simulated P&L, diamond-hands rate. 3+ settled bets required for an official rank. |
+| `finance copytrade --follow <TRADER> [--capital X] [--all] [--json]` | **Simulated** copy-trade forecast: mirrors a paper trader's settled bets with equal capital split, reports copied P&L vs the sit-out $0 baseline, and discloses the exact-fill assumption, no fees/slippage/partial fills, and that past simulations don't predict future results. No order routing exists. |
+| `finance broker-link <status\|configure\|draft>` | Draft-only broker-link option: `configure --platform alpaca\|binance\|coinbase` sets a label (no keys requested, nothing connected); `draft` prepares a `DRAFT — NOT SENT` review artifact; `status` reports state. Live execution is **structurally refused** — there is no transport, and `execute_draft()` raises unconditionally. |
 
 The paper ledger lives at `~/.levi/finance/portfolio.json` (directory mode
-`0o700`).
+`0o700`). Paper bets live at `~/.levi/finance/bets.json`; broker-link
+config at `~/.levi/finance/broker_link.json` and drafts at
+`~/.levi/finance/drafts.json`.
 
 ---
 
@@ -530,3 +546,110 @@ Answer each in writing before signing off on the signal logic:
 ("Approved"). This checklist remains the standing review record: signals
 are reviewed heuristics — useful for research and paper trading, not for
 real-money decisions, and the build remains structurally paper-only.
+
+---
+
+## 7. WSB mode, crypto, paper bets, simulated copy trading, draft-only broker link
+
+*WSB expansion (rounds 1–4, 2026-09-16): the finance experience reads like
+a WallStreetBets forum with LEVI's analysis underneath — DD posts,
+positions-or-ban, gain/loss porn, paper YOLO bets with tickets, a paper
+leaderboard, diamond-hands vs paper-hands stats, and simulated copy
+trading. The fun is what makes the paper safe: every number is labeled
+**PAPER ONLY — SIMULATED**, advisory output carries **not financial
+advice**, and "confidence" is always presented as **heuristic agreement
+between LEVI's signal rules, never a probability**.*
+
+### 7.1 Voice rules (binding)
+
+- **Clean slang only.** Apes, tendies, diamond hands, paper hands, to the
+  moon. Slurs never appear in output — ever.
+- The denylist is enforced as **SHA-256 digests of the normalized tokens**
+  (`wsb._BANNED_DIGESTS`): no denylisted literal appears in source or
+  tests (tests use base64-encoded fixtures decoded in memory). Every
+  public renderer runs `assert_clean` over its final output, and trader
+  names are screened at bet placement, so hostile input can never smuggle
+  a term into rendered output. `assert_clean` never echoes the offending
+  token back.
+- The skin changes the voice, never the numbers: renderers print
+  `Signal`/ledger data verbatim.
+
+### 7.2 Data sources: stocks, crypto, synthetic
+
+`--source stooq|binance|synth` on `quote`, `indicators`, `signal`,
+`portfolio`:
+
+- **stooq** (default): keyless Stooq daily bars for US equities.
+- **binance**: keyless Binance *public* daily klines for crypto pairs
+  (`BTCUSDT`). Stdlib `urllib`, no SDK, no credentials. Any fetch/parse
+  failure is an honest `MarketDataError` — the CLI prints what happened
+  and exits 1. Nothing is ever fabricated.
+- **synth**: seeded deterministic bars for `SYNTH*` symbols (profiles
+  include `SYNTH`, `SYNTHBTC`, `SYNTHETH`). Same symbol + seed ⇒ same
+  prices, always; calendar dates anchor to `as_of` (default: today — pass
+  an explicit date for reproducibility). Rejects real symbols outright.
+
+Universes never mix silently: a crypto symbol on `--source stooq` fails
+with a hint pointing at `--source binance`; a `SYNTH*` symbol on the
+wrong source hints at `--source synth`.
+
+### 7.3 Paper bets (`bet`, `bets`, `settle`)
+
+Local paper-YOLO bet ledger (`~/.levi/finance/bets.json`, mode `0o700`).
+Placing a bet is still a HITL action: without `--yes` the command refuses
+(exit 2) and saves nothing. Entry prices come from the chosen source's
+latest bar — never invented. Settlement takes an explicit exit price.
+Tickets, win-rate, and diamond-hands vs paper-hands statistics are all
+rendered paper-stamped. A corrupt ledger file yields an empty ledger
+**with a loud warning** — never a traceback, never half-parsed bets.
+
+### 7.4 Simulated copy trading (`copytrade`)
+
+`copytrade --follow <TRADER>` replays a paper trader's *settled* bets
+with equal capital split and reports copied P&L against the sit-out $0
+baseline; `--all` ranks every qualifying trader the same way. The report
+discloses its assumptions in plain language: exact fills at recorded
+prices, no fees, no slippage, no partial fills, and past simulations do
+not predict future results. **There is no order routing** — this is a
+forecast of a simulation, not a strategy being run.
+
+### 7.5 Draft-only broker link (`broker-link`)
+
+An *option* to link a trading platform (alpaca, binance, coinbase) that
+can only ever prepare **draft orders for review**:
+
+- `configure --platform <name>` stores a platform *label*. No keys are
+  requested, stored, or needed; nothing connects anywhere.
+- `draft` turns a prediction into a locally persisted `DRAFT — NOT SENT`
+  review artifact (reference price from market data or explicit).
+- `status` reports state; a corrupt config surfaces as a loud warning,
+  never a silent "unconfigured".
+- `execute_draft()` raises `LiveExecutionRefused` **unconditionally** —
+  there is no transport in the codebase, and a draft's status can never
+  transition away from `DRAFT — NOT SENT` (a tampered drafts file is
+  dropped with a warning).
+- A secrets sweep confirms the WSB expansion requests/stores no
+  credentials; the only credential *names* in the finance domain are the
+  pre-existing `LEVI_ALPACA_*` env-var identifiers in the unwired legacy
+  `AlpacaConnector` path.
+
+### 7.6 Web dashboard (`/finance`)
+
+`web/src/components/levi/FinanceWsb.tsx` + `web/src/lib/levi/finance-wsb.ts`
+render the ticker tape, DD cards, positions-or-ban, gain/loss porn,
+paper-bet tickets, leaderboard, and copy-trading forecast. Every panel
+carries the honesty badges (*Paper only — simulated*, *Not financial
+advice*, *Confidence = heuristic agreement, not probability*). The
+dashboard currently runs on **synthetic fixtures by design**; the fixture
+shapes mirror the Python domain so it can be wired to the real engine
+without a re-shape. Unit tests assert fixture determinism, advisory
+flags, and arithmetic consistency — never real-world correctness.
+
+### 7.7 What stays structurally true
+
+- Finance is **paper/simulated/forecast-only**. Live trading remains
+  structurally disabled (no transport, `--live` refused, keys neither
+  needed nor wanted).
+- Broker links prepare **draft orders for review only**.
+- Confidence = heuristic rule agreement, never probability.
+- Advisory output says **paper/simulated** and **not financial advice**.
