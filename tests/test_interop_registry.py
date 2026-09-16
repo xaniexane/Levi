@@ -76,6 +76,8 @@ def test_manifest_registers_all_modules():
         "games",
         # telegraph (perpetual-hunt wave-001: dead protocols revived)
         "telegraph",
+        # feedlab (perpetual-hunt daily 2026-09-16: giant-patterns inversion)
+        "feedlab",
     }
 
 

@@ -102,6 +102,8 @@ CLI_COMMANDS.update(
         "games": ["python -m levi.games"],
         # -- telegraph (perpetual-hunt wave-001: dead protocols revived) ---
         "telegraph": ["python -m levi.telegraph"],
+        # -- feedlab (perpetual-hunt daily 2026-09-16: giant-patterns inversion)
+        "feedlab": ["python -m levi.feedlab rank --demo"],
         # -- additions wave -----------------------------------------------
         "ephemera": ["python -m levi.ephemera"],
         "feedreader": ["python -m levi.feedreader"],
@@ -378,7 +380,9 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "discussion trees, disagreement-bridging without a central "
             "moderator, trust-graph classifieds with no ad layer, portable "
             "governance charters, guilt-free commitment devices, yearly "
-            "recaps computed on-device, and a sovereign feed reader."
+            "recaps computed on-device, a sovereign feed reader, and a "
+            "feed-ranking transparency lab that discloses exactly how "
+            "engagement-bait scoring would rank your own posts."
         ),
         "shelves": [
             "communities",
@@ -389,6 +393,7 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "commitments",
             "recap",
             "feedreader",
+            "feedlab",
         ],
         "strategy": "capabilities",
         "pull_hint": "python -m levi.communities  ·  python -m levi.threads  ·  python -m levi.feedreader",

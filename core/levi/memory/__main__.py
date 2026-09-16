@@ -9,6 +9,7 @@ import argparse
 import json
 import os
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 from levi.memory.types import MemoryType
@@ -68,6 +69,57 @@ def cmd_list(a) -> int:
     return 0
 
 
+def cmd_receipts(a) -> int:
+    """Provenance ledger: every memory LEVI holds, receipted.
+
+    The honest inversion of opaque always-on memory products: each entry
+    shows its id, type, source, creation time, importance, and project, so
+    the user can see exactly what is remembered, where it came from, and
+    delete any of it with `levi.memory delete <id>`.
+    """
+    es = _store(a.data_dir).list(limit=100000)
+    receipts = [{
+        "id": e.id,
+        "type": e.memory_type.value,
+        "source": e.source,
+        "created_at": e.created_at,
+        "updated_at": e.updated_at,
+        "importance": round(e.importance, 3),
+        "project_id": e.project_id,
+        "tags": list(e.tags),
+        "content_preview": e.content[:120],
+    } for e in es]
+    if a.export:
+        Path(a.export).write_text(json.dumps({
+            "exported_at": datetime.now(timezone.utc).isoformat(),
+            "count": len(receipts),
+            "receipts": receipts,
+        }, indent=2), encoding="utf-8")
+        print("exported %d receipt(s) to %s" % (len(receipts), a.export))
+        return 0
+    if not receipts:
+        print("no memories stored — nothing to receipt.")
+        return 0
+    by_source: dict = {}
+    by_type: dict = {}
+    for r in receipts:
+        by_source[r["source"]] = by_source.get(r["source"], 0) + 1
+        by_type[r["type"]] = by_type.get(r["type"], 0) + 1
+    print("memory receipts: %d entr(ies), all local, all deletable" % len(receipts))
+    print("by source: %s" % ", ".join("%s=%d" % kv for kv in sorted(by_source.items())))
+    print("by type:   %s" % ", ".join("%s=%d" % kv for kv in sorted(by_type.items())))
+    print()
+    for r in receipts:
+        print("[%s] %s src=%s created=%s importance=%.2f%s" % (
+            r["id"], r["type"], r["source"], r["created_at"],
+            r["importance"],
+            (" project=%s" % r["project_id"]) if r["project_id"] else ""))
+        print("  %s" % r["content_preview"])
+    print()
+    print("delete any entry: levi.memory delete <id>   (--export FILE for JSON)")
+    return 0
+
+
 def cmd_delete(a) -> int:
     if not _store(a.data_dir).delete(a.id):
         print(f"no entry {a.id!r}", file=sys.stderr)
@@ -101,6 +153,10 @@ def main(argv=None) -> int:
 
     p = sub.add_parser("delete", help="delete an entry"); p.set_defaults(func=cmd_delete); p.add_argument("id")
 
+    p = sub.add_parser("receipts", help="provenance ledger: what LEVI remembers, with source and timestamp")
+    p.add_argument("--export", default=None, help="write the ledger as JSON to FILE")
+    p.set_defaults(func=cmd_receipts)
+
     def _info(a) -> int:
         if a.info == "stats":
             print(json.dumps(_store(a.data_dir).stats(), indent=2))
@@ -120,3 +176,7 @@ def main(argv=None) -> int:
 
     args = ap.parse_args(argv)
     return args.func(args)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -370,6 +370,21 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- feedlab: feed-ranking transparency lab (giant-patterns hunt) --------
+    # The giants refuse to disclose how their rankers score you. feedlab
+    # inverts the trade: a fully disclosed engagement-bait scoring model
+    # applied to the user's OWN posts — every signal, weight, and point
+    # contribution visible. Educational simulation; never claims to match
+    # any real platform's ranker.
+    "feedlab": {
+        "provides": [
+            "feedlab.rank",
+            "feedlab.audit",
+            "feedlab.flags",
+            "feedlab.compare",
+        ],
+        "requires": [],
+    },
     # -- research: public-source deep-web research (polite, no darknet) -------
     "research": {
         "provides": [
