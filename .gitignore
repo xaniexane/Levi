@@ -22,8 +22,16 @@ Thumbs.db
 # Credentials / secrets
 .env
 .env.local
+.env.*
+!.env.example
 *.pem
 *.key
+id_rsa*
+credentials.json
+client_secret*.json
+.envrc
+.terraform/
+.grok/
 creds/
 secrets/
 *.log

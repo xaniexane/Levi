@@ -25,9 +25,12 @@ class SettingsActivity : AppCompatActivity() {
         binding.urlInput.setText(ServerConfig.getUrl(this))
 
         binding.saveButton.setOnClickListener {
-            val normalized = ServerConfig.normalize(
-                binding.urlInput.text.toString()
-            )
+            val raw = binding.urlInput.text.toString()
+            if (ServerConfig.isInsecureHttp(raw)) {
+                binding.urlLayout.error = getString(R.string.error_url_insecure)
+                return@setOnClickListener
+            }
+            val normalized = ServerConfig.normalize(raw)
             if (normalized == null) {
                 binding.urlLayout.error = getString(R.string.error_url_invalid)
                 return@setOnClickListener

@@ -41,8 +41,30 @@ class MainActivity : AppCompatActivity() {
         webSettings.mediaPlaybackRequiresUserGesture = false
         webSettings.loadWithOverviewMode = true
         webSettings.useWideViewPort = true
+        // Hardening: the WebView only ever shows the user's configured
+        // server, so it needs no local file/content access at all.
+        webSettings.allowFileAccess = false
+        webSettings.allowContentAccess = false
 
         binding.webView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(
+                view: WebView?,
+                request: WebResourceRequest?,
+            ): Boolean {
+                val uri = request?.url ?: return false
+                val target = uri.toString()
+                // Stay in-app only for the configured server. External
+                // https links (docs, etc.) open in the user's browser;
+                // anything else (custom schemes, file://) is blocked.
+                return if (isConfiguredHost(target)) {
+                    false // let the WebView load it
+                } else if (target.startsWith("https://")) {
+                    startActivity(Intent(Intent.ACTION_VIEW, uri))
+                    true
+                } else {
+                    true // swallow: no file://, intent://, or other schemes
+                }
+            }
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 binding.progress.visibility = View.VISIBLE
                 binding.errorView.visibility = View.GONE
@@ -113,6 +135,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun openSettings() {
         startActivity(Intent(this, SettingsActivity::class.java))
+    }
+
+    /**
+     * True when [url] targets the configured LEVI server (same scheme +
+     * host). Navigation anywhere else is not the app's content.
+     */
+    private fun isConfiguredHost(url: String): Boolean {
+        val configured = currentUrl ?: ServerConfig.getUrl(this)
+        if (configured.isBlank()) return false
+        fun hostOf(u: String): String =
+            u.substringAfter("://").substringBefore('/').lowercase()
+        fun schemeOf(u: String): String =
+            u.substringBefore("://").lowercase()
+        return schemeOf(url) == schemeOf(configured) &&
+            hostOf(url) == hostOf(configured)
     }
 
     private fun loadConfigured() {

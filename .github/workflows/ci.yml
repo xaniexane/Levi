@@ -7,7 +7,8 @@
 #   gitleaks — secret scanning
 #
 # Action majors verified 2026-09-15: the Node-20 runtime deprecation forces
-# checkout@v5, setup-python@v6, setup-node@v5, gitleaks-action@v3 (all node24).
+# checkout@v5, setup-python@v6, setup-node@v5 (all node24).
+# gitleaks-action is SHA-pinned (see the gitleaks job), not tag-pinned.
 name: CI
 
 on:
@@ -15,6 +16,11 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+
+# Least privilege: every job gets read-only by default; jobs that need
+# more declare it explicitly below.
+permissions:
+  contents: read
 
 jobs:
   python:
@@ -99,6 +105,10 @@ jobs:
   android:
     name: Android assembleDebug (${{ matrix.app }})
     runs-on: ubuntu-latest
+    # upload-artifact needs actions:write; everything else is read-only.
+    permissions:
+      contents: read
+      actions: write
     strategy:
       fail-fast: false
       matrix:
@@ -186,4 +196,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: gitleaks/gitleaks-action@v3
+      # SHA-pinned (not tag-pinned): a repointed tag on a third-party action
+      # would otherwise execute attacker code with repo access.
+      # e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e = v3.0.0
+      - uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e

@@ -40,9 +40,9 @@ android {
     //      VYVE_KEY_PASSWORD env vars (CI)
     //   2. vyve.keystore.path / vyve.keystore.password / vyve.key.alias /
     //      vyve.key.password Gradle properties (local dev, see gradle.properties)
-    // If no keystore is configured the release build falls back to the debug
-    // key so `./gradlew assembleRelease` still assembles locally — NEVER
-    // upload a debug-signed artifact to Play. See RUNBOOK.md.
+    // If no keystore is configured the release build FAILS at configuration
+    // time (see buildTypes below) — a release must never be signed with the
+    // debug key. See RUNBOOK.md.
     val keystorePath: String? =
         System.getenv("VYVE_KEYSTORE_PATH")
             ?: (project.findProperty("vyve.keystore.path") as String?)?.ifBlank { null }
@@ -62,7 +62,7 @@ android {
     } else {
         logger.warn(
             "No upload keystore configured (VYVE_KEYSTORE_PATH / vyve.keystore.path). " +
-                "Release builds will be signed with the debug key — do NOT ship to Play.",
+                "Release builds will FAIL until one is configured — this is intentional.",
         )
     }
 
@@ -73,8 +73,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
-            signingConfig =
-                signingConfigs.findByName("vyveRelease") ?: signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.findByName("vyveRelease")
+                ?: error(
+                    "Release build requires an upload keystore: set VYVE_KEYSTORE_PATH " +
+                        "(env) or vyve.keystore.path (Gradle property). Refusing to " +
+                        "sign a release with the debug key.",
+                )
         }
         debug {
             applicationIdSuffix = ".debug"

@@ -22,7 +22,7 @@ from levi.plugins.github import GitHubConnector
 from levi.plugins.registry import ConnectorAPIError, list_connectors
 
 ROOT = Path(__file__).resolve().parents[1]
-TOKEN = "ghp_faketoken_for_tests_only"
+TOKEN = "not-a-real-token-for-tests-only"
 
 
 class _FakeTransport:

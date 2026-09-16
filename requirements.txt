@@ -16,7 +16,7 @@ uvicorn[standard]>=0.27.0,<1
 pydantic>=2.6.0,<3
 
 # Security (vault/seal.py + apps/vyve-messenger JWT keys)
-cryptography>=44,<51
+cryptography>=50,<51
 
 # Media (delivery/runtimes/apotheosis/levi.py imports PIL.Image)
 pillow>=10.2.0,<12

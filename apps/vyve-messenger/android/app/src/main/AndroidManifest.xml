@@ -39,10 +39,15 @@
             </intent-filter>
         </activity>
 
-        <!-- OAuth redirect — handles callback from Cybrus -->
+        <!-- OAuth redirect — NOT exported while OAuth is unwired. When OAuth
+             is wired, replace the custom scheme below with a VERIFIED App
+             Link (https:// + android:autoVerify="true" on the intent-filter)
+             plus per-request `state` and PKCE; a custom scheme left exported
+             lets any installed app intercept the callback and steal the
+             authorization code. -->
         <activity
             android:name=".auth.OAuthCallbackActivity"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

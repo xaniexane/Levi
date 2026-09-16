@@ -35,13 +35,23 @@ it can reach.
 
 **At home (same Wi-Fi):**
 
+The app refuses plain `http://` for anything off-device (a LAN
+eavesdropper could read or rewrite your session), so the server needs
+TLS. The easy path is a reverse proxy with automatic HTTPS:
+
 1. On your computer, in the repo: `cd web && npm install` (first time
    only), then `npm run dev`.
-2. It prints `http://0.0.0.0:8080`. Find your computer's LAN address
-   (on the home network it's usually `192.168.x.x` — check your Wi-Fi
-   settings or run `ip addr` / `ipconfig`).
+2. It prints `http://0.0.0.0:8080`. Put Caddy in front of it:
+   `caddy reverse-proxy --from :8443 --to localhost:8080` (Caddy mints
+   a local certificate automatically).
 3. Open the LEVI app → **Settings** (⋮ menu) → enter
-   `http://192.168.x.x:8080` → **Save**. The Talk UI loads.
+   `https://<your-computer's-LAN-address>:8443` → **Save**. The Talk UI
+   loads. (Find the LAN address — usually `192.168.x.x` — in your Wi-Fi
+   settings or via `ip addr` / `ipconfig`.)
+
+On-device only: `http://127.0.0.1:8080` still works (e.g. a server
+running in Termux on the same phone) — loopback cleartext is
+allow-listed in the app's network security config.
 
 **Away from home:** expose the same server with a tunnel, e.g.
 `cloudflared tunnel --url http://localhost:8080`, and put the
