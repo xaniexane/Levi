@@ -16,8 +16,8 @@ reason, never fabricated results.
 
 from __future__ import annotations
 
-from . import (archive_showcase, forge_ci_export, growth_memory_lifepack,
-                hunt_archive_publish)
+from . import (archive_showcase, fleet_five, forge_ci_export,
+                growth_memory_lifepack, hunt_archive_publish)
 from .registry import list_workflows, register, run_workflow
 
 register(hunt_archive_publish.NAME, hunt_archive_publish.SUMMARY,
@@ -28,5 +28,7 @@ register(archive_showcase.NAME, archive_showcase.SUMMARY,
          archive_showcase.STEP_NAMES, archive_showcase.run)
 register(forge_ci_export.NAME, forge_ci_export.SUMMARY,
          forge_ci_export.STEP_NAMES, forge_ci_export.run)
+register(fleet_five.NAME, fleet_five.SUMMARY,
+         fleet_five.STEP_NAMES, fleet_five.run)
 
 __all__ = ["list_workflows", "run_workflow", "register"]

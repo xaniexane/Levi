@@ -52,7 +52,7 @@ def test_list_workflows_contract():
     listed = list_workflows()
     names = [w["name"] for w in listed]
     assert names == ["hunt-archive-publish", "growth-memory-lifepack",
-                     "archive-showcase", "forge-ci-export"]
+                     "archive-showcase", "forge-ci-export", "fleet-five"]
     for w in listed:
         assert isinstance(w["summary"], str) and w["summary"]
         assert isinstance(w["steps"], list) and w["steps"]
