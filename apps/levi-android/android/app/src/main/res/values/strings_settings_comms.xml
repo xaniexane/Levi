@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ChannelsFragment -->
+    <string name="channels_title">Messaging channels</string>
+    <string name="channels_system_row">System channel settings</string>
+    <string name="channels_system_row_desc">Fine-tune sound, vibration, and lock-screen behavior per channel</string>
+    <string name="channels_note">These are the Android notification channels LEVI posts through. Toggling recreates the channel — Android remembers your per-channel choice afterwards.</string>
+
+    <!-- NotificationsFragment -->
+    <string name="notifications_title">Notifications</string>
+    <string name="notifications_master">Notifications</string>
+    <string name="notifications_master_desc">Master switch for all LEVI notifications</string>
+    <string name="notifications_open_system">Open system settings</string>
+    <string name="notifications_open_system_desc">Sounds, badges, and lock-screen behavior</string>
+
+    <!-- AppearanceFragment -->
+    <string name="appearance_title">Appearance</string>
+    <string name="appearance_void_desc">LEVI\'s dark-first theme</string>
+    <string name="appearance_light_desc">A bright, readable theme</string>
+    <string name="appearance_system_desc">Matches your device setting</string>
+    <string name="appearance_selected_suffix">· %1$s</string>
+    <string name="appearance_note">Void is LEVI\'s native dark-first theme. The choice applies instantly and is remembered.</string>
+
+    <!-- ConnectorsFragment -->
+    <string name="connectors_title">Connectors</string>
+    <string name="connectors_server">LEVI server</string>
+    <string name="connectors_server_unset">Not configured</string>
+    <string name="connectors_messenger">Messenger</string>
+    <string name="connectors_whatsapp">WhatsApp</string>
+    <string name="connectors_pending_toast">Needs LEVI sync — not wired yet.</string>
+    <string name="connectors_note">Connectors beyond your LEVI server arrive with LEVI cloud sync. Nothing here sends data anywhere today.</string>
+
+    <!-- UpdatesFragment -->
+    <string name="updates_title">App updates</string>
+    <string name="updates_installed">Installed version</string>
+    <string name="updates_check">Check for updates</string>
+    <string name="updates_check_desc">Open the release page on GitHub</string>
+    <string name="updates_releases_url">https://github.com/xaniexane/Levi/releases</string>
+    <string name="updates_note">No in-app update feed yet — releases are published on GitHub. This build never auto-updates itself.</string>
+</resources>

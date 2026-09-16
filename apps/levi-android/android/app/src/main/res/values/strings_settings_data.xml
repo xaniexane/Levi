@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DataControlsFragment -->
+    <string name="data_storage_used">Storage used</string>
+    <string name="data_export">Export my data</string>
+    <string name="data_export_sub">ZIP of this app\'s files, shared from here</string>
+    <string name="data_wipe">Wipe all data</string>
+    <string name="data_wipe_sub">Deletes everything LEVI stored on this device</string>
+    <string name="data_note">Local-first: your data lives on this device only. Nothing is uploaded anywhere by these controls.</string>
+    <string name="data_export_failed">Could not create the export.</string>
+    <string name="data_export_ready">Export ready</string>
+    <string name="data_share_failed">No app available to share the file.</string>
+    <string name="data_wipe_title">Wipe all data?</string>
+    <string name="data_wipe_message">This deletes your server URL, settings, credentials and profile from this device. This cannot be undone.</string>
+    <string name="data_export_first">Export first</string>
+    <string name="data_wipe_confirm">Wipe</string>
+    <string name="data_cancel">Cancel</string>
+    <string name="data_really_wipe_title">Really wipe?</string>
+    <string name="data_really_wipe_message">Last chance: every file and setting LEVI stored on this device will be permanently deleted.</string>
+
+    <!-- IssueFragment -->
+    <string name="issue_group">Report</string>
+    <string name="issue_title_hint">Title</string>
+    <string name="issue_desc_hint">Description — what happened, what you expected</string>
+    <string name="issue_include_device">Include device info</string>
+    <string name="issue_generate">Generate report</string>
+    <string name="issue_title_empty">Give the issue a short title.</string>
+    <string name="issue_note">Local-first: the report is generated on your device and only goes where you send it.</string>
+    <string name="issue_share_failed">No app available to share the report.</string>
+    <string name="issue_write_failed">Could not write the report file.</string>
+
+    <!-- HelpFragment -->
+    <string name="help_faq_server_q">How do I connect to my LEVI server?</string>
+    <string name="help_faq_server_a">Open Server settings and enter your LEVI server URL. If the server is on this same device or your local network with a loopback address, http:// is accepted; everywhere else LEVI requires https://.</string>
+    <string name="help_faq_http_q">Why does http:// only work for 127.0.0.1?</string>
+    <string name="help_faq_http_a">Plain HTTP sends your data unencrypted. LEVI only trusts it on loopback addresses (127.0.0.1, ::1) where traffic never leaves the device. Any other host must use HTTPS, enforced by the app\'s network security config.</string>
+    <string name="help_faq_applock_q">What does App lock protect?</string>
+    <string name="help_faq_applock_a">App lock asks for your PIN (or device biometrics) before LEVI opens. It protects the app on this device — it does not encrypt your files, and it cannot recover a forgotten PIN.</string>
+    <string name="help_faq_data_q">Where is my data stored?</string>
+    <string name="help_faq_data_a">On this device only: app files, settings and the encrypted profile store. Data controls can export or wipe everything, and nothing is uploaded by these screens.</string>
+    <string name="help_github">LEVI on GitHub</string>
+    <string name="help_github_sub">xaniexane/Levi</string>
+    <string name="help_docs">Android app docs</string>
+    <string name="help_docs_sub">docs/ANDROID_APP.md</string>
+    <string name="help_note">No support chat in this build — the docs and issue reporter are the honest channels.</string>
+    <string name="help_open_failed">Could not open the link.</string>
+
+    <!-- LegalFragment -->
+    <string name="legal_copyright">LEVI — © 2026 Chauncey (CJ) Logan. All rights reserved.</string>
+    <string name="legal_licenses">This app embeds AndroidX libraries under the Apache License 2.0: core, appcompat, material, activity, biometric, security-crypto.</string>
+    <string name="legal_privacy">No analytics, no ads, no tracking in this build. Your data stays on your device.</string>
+
+    <!-- AccountFragment -->
+    <string name="account_group">Profile</string>
+    <string name="account_name_hint">Display name</string>
+    <string name="account_handle_hint">Handle, e.g. @chauncey</string>
+    <string name="account_save">Save profile</string>
+    <string name="account_saved">Profile saved</string>
+    <string name="account_cloud_sync">Cloud sync</string>
+    <string name="account_cloud_sync_sub">Your profile lives on this device for now.</string>
+    <string name="account_cloud_sync_toast">Cloud sync isn\'t wired yet.</string>
+    <string name="account_note">LEVI Account is local-first in this build: your profile is encrypted on this device. Cloud sync is honestly pending.</string>
+
+    <!-- InviteFragment -->
+    <string name="invite_group">Redeem</string>
+    <string name="invite_code_hint">Invite code, e.g. LEVI-AB12-CD34</string>
+    <string name="invite_redeem">Redeem</string>
+    <string name="invite_error">Codes look like LEVI-AB12-CD34.</string>
+    <string name="invite_saved_code">Saved code</string>
+    <string name="invite_saved_local">Saved on this device — server-side redemption activates with LEVI sync.</string>
+    <string name="invite_note">Invite codes are stored encrypted on this device. There is no redemption server yet, so nothing is validated remotely.</string>
+
+    <!-- WalletFragment -->
+    <string name="wallet_empty_title">LEVI Wallet isn\'t here yet</string>
+    <string name="wallet_empty_body">No money moves in this build. LEVI core finance stays simulated and paper-only — the wallet will only ever hold play money until Chauncey says otherwise.</string>
+    <string name="wallet_balances">Balances</string>
+    <string name="wallet_balances_toast">Not wired yet.</string>
+    <string name="wallet_note">Free core forever: whatever the wallet becomes, holding your own LEVI data costs nothing.</string>
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- CredentialsFragment -->
+    <string name="creds_add">Add credential</string>
+    <string name="creds_empty_title">No credentials yet</string>
+    <string name="creds_empty_body">Names and secrets are encrypted on this device.</string>
+    <string name="creds_note">Stored in EncryptedSharedPreferences — encrypted at rest, never leaves this device.</string>
+    <string name="creds_name_hint">Name</string>
+    <string name="creds_secret_hint">Secret</string>
+    <string name="creds_blank">Name and secret can\'t be blank.</string>
+    <string name="creds_saved">Saved.</string>
+    <string name="creds_deleted">Deleted.</string>
+    <string name="creds_delete">Delete</string>
+    <string name="creds_close">Close</string>
+    <string name="creds_delete_confirm_title">Delete credential?</string>
+    <string name="creds_delete_confirm_body">\"%1$s\" will be removed from this device.</string>
+
+    <!-- PermissionsFragment -->
+    <string name="perm_internet_title">Internet</string>
+    <string name="perm_network_title">Network state</string>
+    <string name="perm_biometric_title">Biometrics</string>
+    <string name="perm_notifications_title">Notifications</string>
+    <string name="perm_granted_install">Granted at install</string>
+    <string name="perm_granted">Granted</string>
+    <string name="perm_not_granted">Not granted</string>
+    <string name="perm_open_system">Open system settings</string>
+    <string name="perm_note">LEVI needs network access for your server; notifications and biometrics are optional and requested only when you use them.</string>
+
+    <!-- DevicesFragment -->
+    <string name="dev_this_device">This device</string>
+    <string name="dev_model">Model</string>
+    <string name="dev_android">Android</string>
+    <string name="dev_app_version">App version</string>
+    <string name="dev_device_id">Device ID</string>
+    <string name="dev_linked">Linked devices</string>
+    <string name="dev_link_new">Link a new device</string>
+    <string name="dev_link_pending_toast">Needs LEVI sync — not wired yet.</string>
+    <string name="dev_note">The device ID above never leaves this phone; it is shown only for your own reference.</string>
+
+    <!-- AppLockFragment -->
+    <string name="applock_switch_title">Lock LEVI</string>
+    <string name="applock_switch_sub">Require biometrics or PIN to open the app</string>
+    <string name="applock_prompt_title">Turn on app lock</string>
+    <string name="applock_prompt_sub">Confirm it\'s you</string>
+    <string name="applock_off_title">Turn off app lock?</string>
+    <string name="applock_off_body">This disables the lock and clears the saved PIN.</string>
+    <string name="applock_off_confirm">Turn off</string>
+    <string name="applock_note">The lock re-arms every time the app process ends. Disabling clears the saved PIN.</string>
+
+</resources>
