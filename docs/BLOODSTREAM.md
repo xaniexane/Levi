@@ -214,3 +214,48 @@ compost).
   `mark_completed` after verification.
 - Promotion currently means eligibility (`promotion_eligible` on verified
   receipt); the graph/story-fabric promotion writer is a later package.
+
+## The event bus — one organism, one event stream (axis 2)
+
+The turn pipeline is the bloodstream's *circulation*; the event bus
+(`core/levi/bloodstream/bus.py`) is its *nervous system*. Subsystems hear
+each other without coupling: growth publishes learnings, the archive
+publishes ingestions, the hunt publishes findings, and every completed
+turn publishes `levi.turn.completed` with its trace summary.
+
+- **API** (stdlib-only, in-process pub/sub):
+  `publish(topic, payload)`, `subscribe(topic, handler) -> token`,
+  `unsubscribe(token)`, `topics()`.
+- **Topic convention** (enforced): `levi.<subsystem>.<event>` —
+  e.g. `levi.growth.learning`, `levi.archive.ingested`,
+  `levi.hunt.finding`, `levi.turn.completed`. Bad names raise
+  `ValueError`.
+- **Payloads must be JSON-serializable** — validated, rejected otherwise
+  (`TypeError`), because every publish appends to the trace.
+- **Trace binding**: `publish()` writes an event record via `TraceWriter`
+  only while a trace is active (`trace_scope(trace_id, base_dir)`). The
+  turn pipeline opens the scope in `_finish()`, so each turn's trace file
+  carries its `levi.turn.completed` event alongside the turn trace.
+- **Handler isolation**: one failing subscriber never breaks the bus or
+  the turn — failures are recorded in the trace event's
+  `handler_errors`.
+
+## Warehouses, not a tool belt
+
+The organism's capabilities are organized as **warehouses**, not a flat
+tool belt (`core/levi/interop/warehouses.py` — presentation over the
+existing modules, no rewrites): Methods (40 forgotten techniques),
+Revivals (20 reborn systems), Skills & Playbooks (823 defensive
+blue-team playbooks), Archive Knowledge (the Smithsonian records),
+Services (galaxy + daemon + perpetual), Games (standing theme, no stock
+yet), Memory & Growth, Finance, Factory (the production line), and
+Organism Core.
+
+Each warehouse has a real, counted inventory manifest — `list_warehouses()`,
+`browse_warehouse(name)`, `warehouse_inventory(name, limit, offset)`
+(honest pagination: `total` is always the true count), and
+`pull_from_shelf(warehouse, item_id)` (read-only lookup of one item's
+full detail + how to invoke it; never executes). The capability atlas
+(`levi.interop.atlas.export_atlas()`) groups modules under their
+warehouses while keeping the flat module list for existing consumers.
+See `docs/WAREHOUSES.md`.
