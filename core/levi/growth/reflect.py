@@ -23,6 +23,7 @@ import re
 from dataclasses import asdict, dataclass, field
 
 from levi.growth.experience import Experience
+from levi.growth.guards import check_no_sentience_claim
 
 
 # ---------------------------------------------------------------------------
@@ -81,6 +82,50 @@ def _snip(text: str, limit: int = 220) -> str:
 def reflect_rules(experiences: list[Experience]) -> list[Learning]:
     """Deterministic heuristic reflection. No model, no network.
 
+    Thin wrapper over :func:`reflect_rules_detailed`; see that function
+    for the extractor inventory.
+
+    Raises ValueError when ``experiences`` is not a list of Experience
+    objects.
+    """
+    learnings, _evidence = reflect_rules_detailed(experiences)
+    return learnings
+
+
+def reflect_rules_detailed(
+    experiences: list[Experience],
+) -> tuple[list[Learning], dict[str, int]]:
+    """Deterministic heuristic reflection, with per-extractor evidence.
+
+    Returns ``(learnings, evidence)`` where ``evidence`` maps extractor
+    name → number of learnings it produced this run. The cycle journals
+    this breakdown so growth is observable: Chauncey can see *why* the
+    loop thinks it learned something.
+
+    Extractor inventory (all offline, all deterministic):
+
+    * ``direct_signals`` — corrections, preferences, "remember this"
+      facts in user speech (passes 1);
+    * ``tool_trouble`` — a tool erroring ≥2 times (pass 2);
+    * ``approved_workflows`` — approved multi-turn work (pass 3);
+    * ``distilled_facts`` — session summaries → low-confidence facts
+      (pass 4);
+    * ``recurring_topics`` — a content word recurring across ≥3 user
+      turns in ≥2 sources → an active area of the user's interest;
+    * ``failed_then_fixed`` — a tool failed, then later succeeded:
+      prefer recovery over blind retry;
+    * ``capability_gaps`` — Levi explicitly declined ("I can't …"):
+      an observed boundary of what it can do;
+    * ``automation_outcomes`` — automation run records: stable
+      cadences and recent failures worth a look;
+    * ``repeated_requests`` — the user asking near-identical things
+      ≥3 times: a recurring need to watch for proactively;
+    * ``blocked_sentience`` — candidate learnings dropped by the
+      sentience-claim rail (never written, always counted).
+
+    Every candidate learning passes the sentience blocklist
+    (:mod:`levi.growth.guards`) before it is emitted.
+
     Raises ValueError when ``experiences`` is not a list of Experience
     objects.
     """
@@ -97,14 +142,27 @@ def reflect_rules(experiences: list[Experience]) -> list[Learning]:
             )
     learnings: list[Learning] = []
     seen: set[str] = set()
+    evidence: dict[str, int] = {}
 
-    def add(kind: str, content: str, confidence: float, exp: Experience) -> None:
+    def add(
+        extractor: str,
+        kind: str,
+        content: str,
+        confidence: float,
+        exp: Experience,
+    ) -> bool:
         content = _snip(content, 280)
         if not content or len(content) < 12:
-            return
+            return False
         key = (kind, content.lower())
         if key in seen:
-            return
+            return False
+        # Binding rail: no sentience/subjective-experience claims, ever.
+        # A user quote that trips the blocklist costs the learning, not
+        # the rule — counted, never rephrased.
+        if check_no_sentience_claim(content):
+            evidence["blocked_sentience"] = evidence.get("blocked_sentience", 0) + 1
+            return False
         seen.add(key)
         learnings.append(
             Learning(
@@ -113,20 +171,42 @@ def reflect_rules(experiences: list[Experience]) -> list[Learning]:
                 confidence=confidence,
                 provenance={
                     "mode": "rules",
+                    "extractor": extractor,
                     "source": exp.source,
                     "experience_id": exp.id,
                     "ts": exp.ts,
                 },
             )
         )
+        evidence[extractor] = evidence.get(extractor, 0) + 1
+        return True
 
-    # pass 1: direct signals in user speech
+    _extract_direct_signals(experiences, add)
+    _extract_tool_trouble(experiences, add)
+    _extract_approved_workflows(experiences, add)
+    _extract_distilled_facts(experiences, add)
+    _extract_recurring_topics(experiences, add)
+    _extract_failed_then_fixed(experiences, add)
+    _extract_capability_gaps(experiences, add)
+    _extract_automation_outcomes(experiences, add)
+    _extract_repeated_requests(experiences, add)
+    return learnings, evidence
+
+
+# ---------------------------------------------------------------------------
+# Rule extractors
+# ---------------------------------------------------------------------------
+
+
+def _extract_direct_signals(experiences, add) -> None:
+    """Pass 1: direct signals in user speech."""
     for exp in experiences:
         if exp.kind != "user-said":
             continue
         text = exp.content
         if _CORRECTION.search(text):
             add(
+                "direct_signals",
                 "correction",
                 f"User corrected Levi with: '{_snip(text)}'. "
                 "When corrected this way, acknowledge the correction and "
@@ -135,14 +215,28 @@ def reflect_rules(experiences: list[Experience]) -> list[Learning]:
                 exp,
             )
         if _PREFERENCE.search(text):
-            add("preference", f"User preference expressed: '{_snip(text)}'.", 0.7, exp)
+            add(
+                "direct_signals",
+                "preference",
+                f"User preference expressed: '{_snip(text)}'.",
+                0.7,
+                exp,
+            )
         m = _REMEMBER.search(text)
         if m:
             fact = _snip(text[m.end() :], 240)
             if fact:
-                add("fact", f"User asked Levi to remember: '{fact}'.", 0.75, exp)
+                add(
+                    "direct_signals",
+                    "fact",
+                    f"User asked Levi to remember: '{fact}'.",
+                    0.75,
+                    exp,
+                )
 
-    # pass 2: tool trouble → procedural learnings
+
+def _extract_tool_trouble(experiences, add) -> None:
+    """Pass 2: tool trouble → procedural learnings."""
     err_counts: dict[str, int] = {}
     err_example: dict[str, Experience] = {}
     for exp in experiences:
@@ -157,6 +251,7 @@ def reflect_rules(experiences: list[Experience]) -> list[Learning]:
     for tool, count in err_counts.items():
         if count >= 2:
             add(
+                "tool_trouble",
                 "procedural",
                 f"Tool '{tool}' failed {count} times recently "
                 f"(e.g. '{_snip(err_example[tool].content, 120)}'). "
@@ -166,13 +261,16 @@ def reflect_rules(experiences: list[Experience]) -> list[Learning]:
                 err_example[tool],
             )
 
-    # pass 3: approved multi-turn work → procedural learnings
+
+def _extract_approved_workflows(experiences, add) -> None:
+    """Pass 3: approved multi-turn work → procedural learnings."""
     approved = [
         e for e in experiences if e.kind == "user-said" and _APPROVAL.search(e.content)
     ]
     levi_turns = [e for e in experiences if e.kind == "levi-did"]
     if approved and len(levi_turns) >= 3:
         add(
+            "approved_workflows",
             "procedural",
             "A multi-step task completed to the user's satisfaction "
             f"({len(levi_turns)} Levi turns, user said "
@@ -182,26 +280,200 @@ def reflect_rules(experiences: list[Experience]) -> list[Learning]:
             approved[-1],
         )
 
-    # pass 4: distilled summaries → facts (low confidence, marked as such)
+
+def _extract_distilled_facts(experiences, add) -> None:
+    """Pass 4: distilled summaries → facts (low confidence, marked as such)."""
     for exp in experiences:
         if exp.kind == "distilled":
+            per_exp = 0
             for sentence in re.split(r"(?<=[.!?])\s+", exp.content):
                 s = _snip(sentence, 200)
                 if len(s) > 40 and not _ERROR_HINT.search(s):
-                    add("fact", f"From past conversation: {s}", 0.4, exp)
-                    if (
-                        len(
-                            [
-                                learning
-                                for learning in learnings
-                                if learning.provenance.get("experience_id") == exp.id
-                            ]
-                        )
-                        >= 3
+                    if add(
+                        "distilled_facts",
+                        "fact",
+                        f"From past conversation: {s}",
+                        0.4,
+                        exp,
                     ):
-                        break
+                        per_exp += 1
+                    if per_exp >= 3:
+                        break  # cap: at most 3 facts per summary
 
-    return learnings
+
+# ---------------------------------------------------------------------------
+# New offline extractors (deterministic; enrich the rules engine)
+# ---------------------------------------------------------------------------
+
+_TOPIC_WORD = re.compile(r"[a-z0-9][a-z0-9\-]{2,}")
+_TOPIC_STOP = frozenset(
+    "the and for with that this from have has had were was are but not you your "
+    "levi when what which while where their there then than them they our out can "
+    "will would should could about into over after before between through during "
+    "please thank thanks just like dont don't get got one two also very much more "
+    "how why all any its it's into".split()
+)
+_INABILITY = re.compile(
+    r"\b(i (can't|cannot|don't have|won't be able to|am not able to)|"
+    r"i'm not able to|i don't have access to|not something i can|"
+    r"beyond what i can|i have no way to)\b",
+    re.IGNORECASE,
+)
+
+
+def _topic_words(text: str) -> set[str]:
+    return {
+        w
+        for w in _TOPIC_WORD.findall((text or "").lower())
+        if w not in _TOPIC_STOP and not w.isdigit()
+    }
+
+
+def _extract_recurring_topics(experiences, add) -> None:
+    """A content word recurring across ≥3 user turns in ≥2 sources.
+
+    Becomes a fact about the user's *active interest area* — the kind
+    of thing a growing assistant should proactively watch for.
+    """
+    hits: dict[str, dict[str, set[str]]] = {}
+    user_exps = [e for e in experiences if e.kind == "user-said"]
+    for exp in user_exps:
+        for word in _topic_words(exp.content):
+            cell = hits.setdefault(word, {"turns": set(), "sources": set()})
+            cell["turns"].add(exp.id)
+            cell["sources"].add(exp.source)
+    ranked = sorted(
+        (
+            (word, cell)
+            for word, cell in hits.items()
+            if len(cell["turns"]) >= 3 and len(cell["sources"]) >= 2
+        ),
+        key=lambda wc: (-len(wc[1]["turns"]), wc[0]),
+    )
+    for word, cell in ranked[:3]:
+        example = next(e for e in user_exps if e.id in cell["turns"])
+        add(
+            "recurring_topics",
+            "fact",
+            f"The user's recent sessions keep returning to '{word}' "
+            f"({len(cell['turns'])} mentions across {len(cell['sources'])} sessions, "
+            f"e.g. '{_snip(example.content, 100)}'). Treat this as an active "
+            "area of interest; offer proactive help on it.",
+            0.55,
+            example,
+        )
+
+
+def _extract_failed_then_fixed(experiences, add) -> None:
+    """A tool failed, then later succeeded: learn the recovery pattern."""
+    first_err: dict[str, Experience] = {}
+    later_ok: dict[str, Experience] = {}
+    for exp in experiences:
+        if exp.kind != "levi-did" or not exp.content.startswith("[tool"):
+            continue
+        tool = exp.content.split("]")[0].replace("[tool ", "")
+        if _ERROR_HINT.search(exp.content):
+            first_err.setdefault(tool, exp)
+        else:
+            later_ok[tool] = exp  # keep the latest success
+    for tool, err_exp in first_err.items():
+        ok_exp = later_ok.get(tool)
+        if ok_exp is None:
+            continue
+        if ok_exp.ts and err_exp.ts and ok_exp.ts <= err_exp.ts:
+            continue  # success wasn't after the failure
+        add(
+            "failed_then_fixed",
+            "procedural",
+            f"Tool '{tool}' failed ('{_snip(err_exp.content, 90)}') and later "
+            "succeeded. When this tool fails, change something (arguments, "
+            "preconditions, or approach) before retrying — the plain repeat "
+            "is what failed.",
+            0.55,
+            err_exp,
+        )
+
+
+def _extract_capability_gaps(experiences, add) -> None:
+    """Levi explicitly declined ("I can't …") — an observed boundary."""
+    for exp in experiences:
+        if exp.kind != "levi-did":
+            continue
+        if _INABILITY.search(exp.content):
+            add(
+                "capability_gaps",
+                "fact",
+                f"Observed capability boundary: Levi declined a request — "
+                f"'{_snip(exp.content, 140)}'. When asked for this kind of "
+                "thing again, say plainly it is out of reach and offer the "
+                "nearest in-reach alternative instead of hedging.",
+                0.6,
+                exp,
+            )
+
+
+def _extract_automation_outcomes(experiences, add) -> None:
+    """Automation run records: stable cadences and recent failures."""
+    for exp in experiences:
+        if exp.kind != "automation":
+            continue
+        runs = int(exp.meta.get("run_count", 0) or 0)
+        status = str(exp.meta.get("status", "?") or "?")
+        failed = _ERROR_HINT.search(exp.content) or status.lower() in (
+            "failed",
+            "error",
+            "crashed",
+        )
+        if failed:
+            add(
+                "automation_outcomes",
+                "procedural",
+                f"Automation '{exp.source}' last reported trouble: "
+                f"'{_snip(exp.content, 140)}'. Worth a look before its next "
+                "scheduled run.",
+                0.6,
+                exp,
+            )
+        elif runs >= 5:
+            add(
+                "automation_outcomes",
+                "procedural",
+                f"Automation '{exp.source}' has run {runs} times "
+                f"(status={status}). It is stable — leave its cadence alone "
+                "and don't 'fix' what isn't broken.",
+                0.5,
+                exp,
+            )
+
+
+def _extract_repeated_requests(experiences, add) -> None:
+    """Near-identical user requests ≥3 times: a recurring need."""
+    user_exps = [e for e in experiences if e.kind == "user-said"]
+    word_sets = [(e, _topic_words(e.content)) for e in user_exps]
+    used: set[str] = set()
+    for i, (exp_a, wa) in enumerate(word_sets):
+        if exp_a.id in used or not wa:
+            continue
+        group = [exp_a]
+        for exp_b, wb in word_sets[i + 1 :]:
+            if exp_b.id in used or not wb:
+                continue
+            union = wa | wb
+            if union and len(wa & wb) / len(union) >= 0.6:
+                group.append(exp_b)
+        if len(group) >= 3:
+            for g in group:
+                used.add(g.id)
+            add(
+                "repeated_requests",
+                "fact",
+                f"The user asked {len(group)} times for nearly the same thing "
+                f"('{_snip(exp_a.content, 110)}'). This is a recurring need — "
+                "watch for it proactively and offer a shortcut or a standing "
+                "arrangement.",
+                0.6,
+                exp_a,
+            )
 
 
 # ---------------------------------------------------------------------------
@@ -297,15 +569,36 @@ def reflect(
 ) -> tuple[list[Learning], str]:
     """Reflect on experiences. Returns (learnings, mode).
 
+    Thin wrapper over :func:`reflect_detailed`; see that function for
+    the full contract.
+    """
+    learnings, mode, _evidence = reflect_detailed(experiences, use_model=use_model)
+    return learnings, mode
+
+
+def reflect_detailed(
+    experiences: list[Experience],
+    *,
+    use_model: bool = True,
+) -> tuple[list[Learning], str, dict[str, int]]:
+    """Reflect on experiences. Returns (learnings, mode, evidence).
+
     ``mode`` is ``"model:<name>"`` when the provider succeeded, else
     ``"rules"``. Model failures fall back to rules silently-but-honestly:
-    the mode always says which engine actually ran.
+    the mode always says which engine actually ran. ``evidence`` maps
+    extractor name → learnings produced (see
+    :func:`reflect_rules_detailed`).
 
     Privacy rule: experiences with ``meta["origin"] == "cloud"`` (other
     users' sessions) are NEVER sent to the model reflector — a
     third-party provider must not receive another user's content.
     Cloud experiences are distilled separately by
     :func:`reflect_cloud`.
+
+    Binding rail: model-produced learnings are scanned by the
+    sentience-claim blocklist (:mod:`levi.growth.guards`) before they
+    are accepted — the provider is untrusted output, the prompt is not
+    enough.
 
     Raises ValueError when ``experiences`` is not a list of Experience
     objects.
@@ -321,17 +614,39 @@ def reflect(
                 % type(e).__name__
             )
     if not experiences:
-        return [], "rules"
+        return [], "rules", {}
     local = [e for e in experiences if e.meta.get("origin") != "cloud"]
     if use_model and local:
         try:
-            return _reflect_model(local)
+            learnings, provider_name = _reflect_model(local)
+            # Structural guard: the model is untrusted output. Drop any
+            # learning that asserts sentience/subjective experience.
+            clean: list[Learning] = []
+            blocked = 0
+            for learning in learnings:
+                if check_no_sentience_claim(learning.content):
+                    blocked += 1
+                    continue
+                prov = dict(learning.provenance or {})
+                prov.setdefault("extractor", "model")
+                learning.provenance = prov
+                clean.append(learning)
+            if blocked:
+                print(
+                    "growth: dropped %d model learning(s) asserting "
+                    "sentience/subjective experience" % blocked
+                )
+            evidence = {"model": len(clean)}
+            if blocked:
+                evidence["blocked_sentience"] = blocked
+            return clean, f"model:{provider_name}", evidence
         except Exception:
             pass
     # Cloud experiences are never reflected here at all — even by the
     # offline rules, which could otherwise lift another user's
     # preferences/facts. They are distilled only by reflect_cloud().
-    return reflect_rules(local), "rules"
+    learnings, evidence = reflect_rules_detailed(local)
+    return learnings, "rules", evidence
 
 
 # ---------------------------------------------------------------------------

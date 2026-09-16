@@ -25,6 +25,7 @@ import os
 import re
 from typing import Any
 
+from levi.growth.guards import check_no_sentience_claim
 from levi.growth.reflect import Learning
 
 try:
@@ -154,6 +155,18 @@ def consolidate(
             continue
         content = (learning.content or "").strip()
         if len(content) < 12:
+            report["skipped"] += 1
+            continue
+
+        # Binding rail, last line of defense: nothing that asserts
+        # sentience/subjective experience is ever written to memory.
+        # A violation here is a bug upstream — log it loudly, skip the
+        # learning, keep the cycle running.
+        if check_no_sentience_claim(content):
+            print(
+                "growth: REFUSED to consolidate a learning asserting "
+                "sentience/subjective experience (skipped, not written)"
+            )
             report["skipped"] += 1
             continue
 
