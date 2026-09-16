@@ -4,10 +4,11 @@
 this build (see [Paper vs. live](#paper-vs-live-what-live-would-require)).
 
 **Safety gate:** the dependency/build sign-off for this domain was granted
-in writing; the **signal-logic safety sign-off is still pending** — do not
-treat signals as safe to trust with real money until the review brief at
-the end of this document has been read and explicitly signed off by the
-human reviewer.
+in writing, and the **signal-logic safety sign-off was granted in writing
+on 2026-09-15** ("Approved", against §6 as built: 8 rules, regime
+detection, volatility-adjusted confidence, 15-question checklist). Signals
+remain advisory-only and the build remains paper-only — live trading would
+still need its own separate approvals and does not exist in this build.
 
 ---
 
@@ -198,7 +199,9 @@ The paper ledger lives at `~/.levi/finance/portfolio.json` (directory mode
 ## 6. SIGNAL-LOGIC REVIEW BRIEF
 
 *Written for the human safety sign-off (blueprint §5.5): the dependency
-sign-off for this domain is done; the **signal-logic sign-off is not**.
+sign-off for this domain is done; the **signal-logic sign-off was granted
+in writing on 2026-09-15** ("Approved"). The brief below remains the
+standing reference for what was reviewed.
 Read this section before deciding whether the signal engine is safe to
 trust — even with paper money, and especially if a live path is ever
 proposed. Every claim below is grounded in `core/levi/finance/signals.py`;
@@ -523,6 +526,7 @@ Answer each in writing before signing off on the signal logic:
     acting on it? If not, what would need to change — the numbers, the
     words, or the fact that a confidence number is shown at all?
 
-**Until this checklist is answered in writing, the signal-logic safety
-sign-off is pending and signals must be treated as unreviewed
-heuristics — useful for research, not for decisions.**
+**The signal-logic safety sign-off was granted in writing on 2026-09-15**
+("Approved"). This checklist remains the standing review record: signals
+are reviewed heuristics — useful for research and paper trading, not for
+real-money decisions, and the build remains structurally paper-only.
