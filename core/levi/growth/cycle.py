@@ -17,13 +17,30 @@ Safety rails (binding):
 
 from __future__ import annotations
 
+import os
+from pathlib import Path
 from typing import Any
 
 from levi.growth import journal as _journal
 from levi.growth.consolidate import consolidate
+from levi.growth.distribute import distribute_learnings
 from levi.growth.experience import harvest_new
 from levi.growth.redact import redact_cloud_experiences
 from levi.growth.reflect import reflect, reflect_cloud
+
+
+def _distribute_enabled() -> bool:
+    """Distribution kill switch: ``LEVI_GROWTH_DISTRIBUTE=0`` disables."""
+    return os.environ.get("LEVI_GROWTH_DISTRIBUTE", "1").strip().lower() not in (
+        "0",
+        "false",
+        "no",
+    )
+
+
+def _levi_home() -> Path:
+    raw = os.environ.get("LEVI_HOME")
+    return Path(raw).expanduser() if raw else Path.home() / ".levi"
 
 
 def _source_breakdown(experiences: list) -> dict:
@@ -79,6 +96,15 @@ def run_cycle(
         "learnings_proposed": 0,
         "learnings": [],
         "consolidation": {"accepted": 0, "corroborated": 0, "skipped": 0, "writes": []},
+        "distribution": {
+            "distributed": 0,
+            "skipped": 0,
+            "duplicates": 0,
+            "entries": [],
+            "subsystems": {},
+            "bus_published": 0,
+            "journal_records": [],
+        },
         "quiet": not experiences,
     }
 
@@ -93,6 +119,23 @@ def run_cycle(
         report["consolidation"] = consolidate(
             learnings, cycle_id=cycle_id, store=store, dry_run=dry_run
         )
+        # AXIS 9: route consolidated learnings to every subsystem they
+        # concern (memory routing slips + bloodstream bus + journal).
+        # Distribution is best-effort: it must never break the cycle.
+        if not dry_run and _distribute_enabled():
+            try:
+                report["distribution"] = distribute_learnings(
+                    learnings,
+                    _levi_home(),
+                    store=store,
+                    cycle_id=cycle_id,
+                )
+            except Exception as exc:  # log and continue — never break the cycle
+                report["distribution"] = {
+                    "distributed": 0,
+                    "error": "distribution failed (continuing): %s" % exc,
+                }
+                print("growth: %s" % report["distribution"]["error"])
 
     if not dry_run:
         # advance watermarks past everything we saw (even unharvestable)
@@ -113,6 +156,8 @@ def run_cycle(
                 "accepted": report["consolidation"]["accepted"],
                 "corroborated": report["consolidation"]["corroborated"],
                 "memory_writes": report["consolidation"]["writes"],
+                "distributed": report["distribution"].get("distributed", 0),
+                "distribution_subsystems": report["distribution"].get("subsystems", {}),
                 "quiet": report["quiet"],
             }
         )
@@ -130,8 +175,11 @@ def status(store: Any = None) -> dict[str, Any]:
 
         s = store or MemoryStore()
         entries = [e for e in s.list(limit=5000) if "growth" in e.tags]
-        learnings = len(entries)
-        for e in entries:
+        # distribution routing slips are growth bookkeeping, not learnings
+        learnings_entries = [e for e in entries if "distribution" not in e.tags]
+        learnings = len(learnings_entries)
+        distributed = len(entries) - learnings
+        for e in learnings_entries:
             for t in e.tags:
                 if t in ("fact", "preference", "procedural", "correction"):
                     by_kind[t] = by_kind.get(t, 0) + 1
@@ -149,6 +197,7 @@ def status(store: Any = None) -> dict[str, Any]:
         "stage_blurb": stage_blurb,
         "cycles_completed": cycles,
         "learnings_consolidated": learnings,
+        "learnings_distributed": distributed,
         "learnings_by_kind": by_kind,
         "experiences_pending": len(pending),
         "pending_by_source": pending_sources,
