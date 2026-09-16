@@ -23,8 +23,9 @@ android {
     //      LEVI_KEY_PASSWORD env vars (CI)
     //   2. levi.keystore.path / levi.keystore.password / levi.key.alias /
     //      levi.key.password Gradle properties (local dev)
-    // With no keystore configured the release build falls back to the debug
-    // key LOUDLY — never upload a debug-signed artifact anywhere public.
+    // With no keystore configured the release build FAILS at task-graph time
+    // (see the enforcement block after buildTypes below) — a release must
+    // never be signed with the debug key.
     // NOTE: this must run before buildTypes so the release build type can
     // find the "leviRelease" signing config at configuration time.
     val keystorePath: String? =
@@ -46,7 +47,7 @@ android {
     } else {
         logger.warn(
             "No upload keystore configured (LEVI_KEYSTORE_PATH / levi.keystore.path). " +
-                "Release builds will be signed with the debug key — do NOT distribute them.",
+                "Release builds will FAIL until one is configured — this is intentional.",
         )
     }
 
@@ -61,8 +62,27 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig =
-                signingConfigs.findByName("leviRelease") ?: signingConfigs.getByName("debug")
+            // Wired only when an upload keystore is configured; the
+            // missing-keystore failure is enforced lazily at task-graph time
+            // (below) so debug builds never break.
+            signingConfig = signingConfigs.findByName("leviRelease")
+        }
+    }
+
+    // ---- Release signing enforcement (lazy) ----
+    // A release must never be signed with the debug key. Failing at
+    // configuration time would break every invocation (Gradle configures all
+    // build types even for `assembleDebug`), so the check runs when the task
+    // graph is ready: if any release-variant task was requested and no
+    // upload keystore is configured, fail loudly before anything executes.
+    gradle.taskGraph.whenReady {
+        val releaseRequested = allTasks.any { it.name.contains("Release", ignoreCase = true) }
+        if (releaseRequested && signingConfigs.findByName("leviRelease") == null) {
+            throw GradleException(
+                "Release build requires an upload keystore: set LEVI_KEYSTORE_PATH " +
+                    "(env) or levi.keystore.path (Gradle property). Refusing to " +
+                    "sign a release with the debug key.",
+            )
         }
     }
 

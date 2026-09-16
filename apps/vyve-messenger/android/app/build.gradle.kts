@@ -40,9 +40,10 @@ android {
     //      VYVE_KEY_PASSWORD env vars (CI)
     //   2. vyve.keystore.path / vyve.keystore.password / vyve.key.alias /
     //      vyve.key.password Gradle properties (local dev, see gradle.properties)
-    // If no keystore is configured the release build FAILS at configuration
-    // time (see buildTypes below) — a release must never be signed with the
-    // debug key. See RUNBOOK.md.
+    // If no keystore is configured the release build FAILS at task-graph time
+    // when release tasks are requested (see the enforcement block after
+    // buildTypes below) — a release must never be signed with the debug key.
+    // See RUNBOOK.md.
     val keystorePath: String? =
         System.getenv("VYVE_KEYSTORE_PATH")
             ?: (project.findProperty("vyve.keystore.path") as String?)?.ifBlank { null }
@@ -73,16 +74,31 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+            // Wired only when an upload keystore is configured. The
+            // missing-keystore failure is enforced lazily at task-graph time
+            // (below) so debug builds never break.
             signingConfig = signingConfigs.findByName("vyveRelease")
-                ?: error(
-                    "Release build requires an upload keystore: set VYVE_KEYSTORE_PATH " +
-                        "(env) or vyve.keystore.path (Gradle property). Refusing to " +
-                        "sign a release with the debug key.",
-                )
         }
         debug {
             applicationIdSuffix = ".debug"
             isDebuggable = true
+        }
+    }
+
+    // ---- Release signing enforcement (lazy) ----
+    // A release must never be signed with the debug key. Failing at
+    // configuration time would break every invocation (Gradle configures all
+    // build types even for `assembleDebug`), so the check runs when the task
+    // graph is ready: if any release-variant task was requested and no
+    // upload keystore is configured, fail loudly before anything executes.
+    gradle.taskGraph.whenReady {
+        val releaseRequested = allTasks.any { it.name.contains("Release", ignoreCase = true) }
+        if (releaseRequested && signingConfigs.findByName("vyveRelease") == null) {
+            throw GradleException(
+                "Release build requires an upload keystore: set VYVE_KEYSTORE_PATH " +
+                    "(env) or vyve.keystore.path (Gradle property). Refusing to " +
+                    "sign a release with the debug key.",
+            )
         }
     }
 
