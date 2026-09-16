@@ -262,8 +262,10 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
         ),
         "shelves": ["games"],
         "strategy": "capabilities",
-        "pull_hint": ("python -m levi.games charter  ·  python -m levi.games play "
-                      "codebreak|tictactoe|nim  ·  python -m levi.games cipher"),
+        "pull_hint": (
+            "python -m levi.games charter  ·  python -m levi.games play "
+            "codebreak|tictactoe|nim  ·  python -m levi.games cipher"
+        ),
         "note": (
             "Stocked by the perpetual hunt games wave (2026-09-16). Every "
             "game passes the Fair Play Charter (charter.py): no paid "
@@ -556,8 +558,7 @@ def _inventory_for(name: str) -> Tuple[int, List[Dict[str, str]]]:
 def _check_warehouse(name: str) -> str:
     if not isinstance(name, str) or name not in WAREHOUSES:
         raise ValueError(
-            f"unknown warehouse {name!r}; available: "
-            + ", ".join(sorted(WAREHOUSES))
+            f"unknown warehouse {name!r}; available: " + ", ".join(sorted(WAREHOUSES))
         )
     return name
 
@@ -801,8 +802,7 @@ def _pull_record(item_id: str) -> Dict[str, Any]:
         rec = None
     if rec is None:
         raise ValueError(
-            f"unknown archive record {item_id!r}; "
-            "see warehouse_inventory('archive')"
+            f"unknown archive record {item_id!r}; see warehouse_inventory('archive')"
         )
     return {
         "warehouse": "archive",
@@ -829,7 +829,7 @@ def _pull_service(item_id: str) -> Dict[str, Any]:
     for item in items:
         if item["id"] == item_id:
             invoke = (
-                f"python -m levi.galaxy info {item_id[len('galaxy.'):]}"
+                f"python -m levi.galaxy info {item_id[len('galaxy.') :]}"
                 if item["kind"] == "galaxy-package"
                 else "levi daemon"
             )

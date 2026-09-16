@@ -237,6 +237,7 @@ class ConversationManager:
         system_prompt: str | None = None,
         affect: bool = False,
         affect_session: Any = None,
+        growth: bool = True,
     ):
         self.session = ChatSession(session_name)
         if isinstance(provider, ChatProvider):
@@ -250,6 +251,7 @@ class ConversationManager:
         self.confirm = confirm
         self.workspace_root = workspace_root
         self.system_prompt = system_prompt
+        self.growth = bool(growth)
         self.affect = bool(affect)
         if affect_session is not None:
             self.affect_session = affect_session
@@ -316,6 +318,7 @@ class ConversationManager:
             system_prompt=self.system_prompt,
             affect=self.affect,
             affect_session=self.affect_session,
+            growth=self.growth,
         )
 
         # Persist the turn's dialogue (assistant texts, tool exchanges,
@@ -570,6 +573,7 @@ def run_chat_repl(
     system_prompt: str | None = None,
     affect: bool = False,
     affect_session: Any = None,
+    growth: bool = True,
 ) -> None:
     """Interactive long-conversation REPL. Returns on /quit / EOF."""
     mgr = ConversationManager(
@@ -583,6 +587,7 @@ def run_chat_repl(
         system_prompt=system_prompt,
         affect=affect,
         affect_session=affect_session,
+        growth=growth,
     )
     resumed = len(mgr.session.message_records())
     print(

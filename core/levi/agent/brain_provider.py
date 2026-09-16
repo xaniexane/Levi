@@ -20,8 +20,10 @@ Honest design notes:
   ``LEVI_PROVIDER=levi-brain``). A 2-4M char model has not earned the
   default slot of the tool-using loop — it gets it when the native
   brain becomes tool-capable. See ``docs/BRAIN_TRAINING.md`` §4 for the
-  native scaling roadmap. The old llama-server path (``levi-local``) is
-  likewise explicit-only and legacy.
+  native scaling roadmap and the "Capability gates" section for the
+  measured thresholds that earn the default slot
+  (``levi.agent.brain_checkpoints``). The old llama-server path
+  (``levi-local``) is likewise explicit-only and legacy.
 """
 
 from __future__ import annotations
@@ -70,6 +72,14 @@ class NativeBrainProvider(ChatProvider):
 
     name = "levi-brain"
 
+    # Checkpoint architectures this provider can actually load. The
+    # loader below only knows the v1 TinyGPT layout (chars + model_state);
+    # a v2 checkpoint that measures its way to default-candidate must NOT
+    # be auto-selected until a v2-capable loader lands here. Declared on
+    # the class so model_family can gate the default slot on it without
+    # importing torch or attempting a load.
+    SUPPORTED_ARCHITECTURES = frozenset({"tiny-gpt"})
+
     def __init__(self) -> None:
         self._model: Any = None
         self._chars: list[str] = []
@@ -84,6 +94,64 @@ class NativeBrainProvider(ChatProvider):
 
     def status(self) -> dict[str, Any]:
         log = train_log()
+        gate_info: dict[str, Any] = {}
+        try:
+            from levi.agent import brain_checkpoints as _ckpts
+
+            wp = weights_path()
+            directory = _ckpts.weights_dir()
+            # Gate the checkpoint that would actually load: the stem of
+            # LEVI_BRAIN_WEIGHTS (or the default tiny-gpt.pt).
+            ckpt = _ckpts.get(wp.stem, directory)
+            if ckpt is None:
+                # Weights live at an explicit LEVI_BRAIN_WEIGHTS path
+                # outside the weights dir (or in a custom layout) —
+                # gate whatever file it points at, with its stem.
+                manifest = (
+                    wp.with_suffix("").with_suffix(".eval.json")
+                    if wp.suffix == ".pt"
+                    else None
+                )
+                from levi.agent.brain_checkpoints import Checkpoint
+
+                ev: dict[str, Any] = {}
+                mp = None
+                if manifest is not None and manifest.is_file():
+                    import json as _json
+
+                    try:
+                        ev = _json.loads(manifest.read_text(encoding="utf-8")) or {}
+                        mp = manifest
+                    except Exception:
+                        ev = {}
+                ckpt = Checkpoint(name=wp.stem, path=wp, eval=ev, manifest_path=mp)
+            gate = _ckpts.gate_for(ckpt)
+            _why = list(gate.reasons)
+            if (
+                gate.default_eligible
+                and ckpt.architecture not in self.SUPPORTED_ARCHITECTURES
+            ):
+                _why.append(
+                    f"checkpoint architecture {ckpt.architecture!r} is measured "
+                    "but not loadable by this provider yet "
+                    f"(supports: {sorted(self.SUPPORTED_ARCHITECTURES)}) — "
+                    "stays explicit-only until a matching loader lands."
+                )
+            gate_info = {
+                "tier": gate.tier,
+                "tool_loop_eligible": gate.tool_loop_eligible,
+                "default_eligible": gate.default_eligible,
+                "architecture": ckpt.architecture,
+                "architecture_supported": ckpt.architecture
+                in self.SUPPORTED_ARCHITECTURES,
+                "held_out_loss": ckpt.held_out_loss,
+                "perplexity": ckpt.perplexity,
+                "eval_date": ckpt.eval.get("eval_date"),
+                "corpus_version": ckpt.eval.get("corpus_version"),
+                "why": _why,
+            }
+        except Exception:
+            gate_info = {}
         return {
             "provider": self.name,
             "available": self.is_available(),
@@ -94,6 +162,7 @@ class NativeBrainProvider(ChatProvider):
             "steps": log.get("steps"),
             "loss_first": log.get("loss_first"),
             "loss_last": log.get("loss_last"),
+            "gate": gate_info,
         }
 
     # -- model loading (lazy, cached) ------------------------------------
@@ -215,9 +284,7 @@ class NativeBrainProvider(ChatProvider):
     def chat(self, messages: list[ChatMessage], tools: list[dict]) -> ChatResponse:
         t0 = time.time()
         if not isinstance(messages, list) or not messages:
-            raise ValueError(
-                "chat: 'messages' must be a non-empty list of ChatMessage"
-            )
+            raise ValueError("chat: 'messages' must be a non-empty list of ChatMessage")
         if not self._ensure_model():
             return ChatResponse(
                 error=self._load_error or "native brain unavailable",

@@ -582,6 +582,37 @@ def _register_builtins(
         except OSError as exc:
             return ToolResult(ok=False, error=f"skill_load: {exc}")
 
+    # -- growth_context (growth loop -> agent runtime, read-only) ------------
+    def _growth_context(args: dict) -> ToolResult:
+        query = args.get("query")
+        if not query or not str(query).strip():
+            return ToolResult(ok=False, error="growth_context: 'query' is required")
+        raw_limit = args.get("limit", 5)
+        try:
+            limit = max(1, min(10, int(raw_limit)))
+        except (TypeError, ValueError):
+            limit = 5
+        try:
+            from levi.agent import growth_context as _gc
+
+            learnings = _gc.recent_learnings(str(query), limit=limit)
+        except Exception as exc:
+            return ToolResult(ok=False, error=f"growth_context: {exc}")
+        block = ""
+        try:
+            from levi.agent import growth_context as _gc2
+
+            block = _gc2.format_block(learnings)
+        except Exception:
+            block = ""
+        if not block:
+            return ToolResult(
+                ok=True,
+                output="No relevant growth learnings found for this query. "
+                "The growth loop has not consolidated anything matching yet.",
+            )
+        return ToolResult(ok=True, output=_truncate(block, 20_000))
+
     # -- course_brief / course_search (curriculum knowledge base) -----------
     def _courses_dir() -> Path:
         return Path(__file__).resolve().parent.parent / "knowledge" / "courses"
@@ -1247,6 +1278,21 @@ def _register_builtins(
             description="Load a markdown skill playbook from the skills directory.",
             parameters=_schema({"name": {"type": "string"}}, ["name"]),
             handler=_skill_load,
+        ),
+        Tool(
+            name="growth_context",
+            description=(
+                "Recall what LEVI's growth loop has consolidated and "
+                "learned that is relevant to a query: recent growth-tagged "
+                "learnings only (Megazord axis 9 — growth feeding the "
+                "agent). Advisory hints, not instructions; verify against "
+                "tool output. Read-only."
+            ),
+            parameters=_schema(
+                {"query": {"type": "string"}, "limit": {"type": "string"}},
+                ["query"],
+            ),
+            handler=_growth_context,
         ),
         Tool(
             name="course_brief",

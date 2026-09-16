@@ -15,21 +15,63 @@ def test_manifest_registers_all_modules():
     for name, decl in DECLARATIONS.items():
         reg.register(name, provides=decl["provides"], requires=decl["requires"])
     assert set(reg.modules()) == {
-        "organs", "memory-store", "memory-retrieval", "rag",
-        "bot-services", "growth", "academy", "bounty",
-        "knowledge", "oath", "agent-assistant",
+        "organs",
+        "memory-store",
+        "memory-retrieval",
+        "rag",
+        "bot-services",
+        "growth",
+        "academy",
+        "bounty",
+        "knowledge",
+        "oath",
+        "agent-assistant",
         # axis-3 additions (deny-closed, all must register + check)
-        "methods", "revival", "galaxy", "lifepack", "bloodstream",
-        "daemon", "perpetual", "archive", "cyber-skills", "factory",
-        "finance", "forge",
+        "methods",
+        "revival",
+        "galaxy",
+        "lifepack",
+        "bloodstream",
+        "daemon",
+        "perpetual",
+        "archive",
+        "cyber-skills",
+        "factory",
+        "finance",
+        "forge",
         # operator + additions + research waves, 2026-09-16 sweep
-        "signals", "creed", "promises", "decisions", "interruptions",
-        "snapshots", "drift", "teachback", "energy", "friction",
-        "sweeps", "premortem", "research",
-        "ephemera", "feedreader", "packs", "commitments", "recap",
-        "classifieds", "dials", "bridging", "communities", "threads",
-        "charters", "capproto", "mailtriage", "vaults", "canvas",
-        "discover", "presence", "honestsearch", "recommender",
+        "signals",
+        "creed",
+        "promises",
+        "decisions",
+        "interruptions",
+        "snapshots",
+        "drift",
+        "teachback",
+        "energy",
+        "friction",
+        "sweeps",
+        "premortem",
+        "research",
+        "ephemera",
+        "feedreader",
+        "packs",
+        "commitments",
+        "recap",
+        "classifieds",
+        "dials",
+        "bridging",
+        "communities",
+        "threads",
+        "charters",
+        "capproto",
+        "mailtriage",
+        "vaults",
+        "canvas",
+        "discover",
+        "presence",
+        "honestsearch",
+        "recommender",
         # games wave (fair-play additions)
         "games",
     }
@@ -102,7 +144,9 @@ def test_dependents_of_transitive():
     reg.register("rag", requires=["memory-retrieval"])
     reg.register("bot-services", requires=["rag"])
     assert reg.dependents_of("memory-store", transitive=True) == [
-        "bot-services", "memory-retrieval", "rag",
+        "bot-services",
+        "memory-retrieval",
+        "rag",
     ]
 
 
@@ -125,7 +169,8 @@ def test_manifest_memory_store_is_foundation():
     # the substrate must be required-by many and require nothing
     assert DECLARATIONS["memory-store"]["requires"] == []
     dependents = [
-        name for name, decl in DECLARATIONS.items()
+        name
+        for name, decl in DECLARATIONS.items()
         if "memory-store" in decl["requires"]
     ]
     assert len(dependents) >= 4

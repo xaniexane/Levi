@@ -174,6 +174,7 @@ def run_subtask(
     history: list[ChatMessage] | None = None,
     affect: bool = False,
     affect_session: Any = None,
+    growth: bool = True,
 ) -> AgentTranscript:
     """Run one task through the step-level tool loop.
 
@@ -194,6 +195,15 @@ def run_subtask(
     be a :class:`levi.affect.SessionEI` to carry per-session state;
     otherwise a throwaway session is used.
 
+    ``growth`` (default True) appends recent growth-loop learnings
+    relevant to the task to the system prompt, via
+    :mod:`levi.agent.growth_context`. It is advisory and read-only:
+    when there are no relevant learnings (or the memory store is
+    unreadable) the addendum is empty and the run proceeds unchanged.
+    ``LEVI_GROWTH_CONTEXT=0`` disables it globally. The bloodstream
+    turn (``levi.bloodstream.turn``) routes MODEL turns through this
+    function, so it inherits growth context without a new turn stage.
+
     ``ctx`` is the glue parameter the ``delegate`` tool in
     :mod:`levi.agent.tools` passes when it recurses into this function:
     the sub-run inherits the parent's consent state. When ``ctx`` is
@@ -207,10 +217,7 @@ def run_subtask(
         raise ValueError(
             f"run_subtask: 'task' must be a non-empty string, got {task!r}"
         )
-    if (
-        not isinstance(max_steps, int)
-        or isinstance(max_steps, bool)
-    ):
+    if not isinstance(max_steps, int) or isinstance(max_steps, bool):
         raise ValueError(
             f"run_subtask: 'max_steps' must be an integer, got {max_steps!r}"
         )
@@ -219,9 +226,7 @@ def run_subtask(
             f"run_subtask: 'max_steps' must be an integer >= 1, got {max_steps!r}"
         )
     if max_steps > 100:
-        raise ValueError(
-            f"run_subtask: 'max_steps' must be <= 100, got {max_steps!r}"
-        )
+        raise ValueError(f"run_subtask: 'max_steps' must be <= 100, got {max_steps!r}")
     if history is not None and not isinstance(history, list):
         raise ValueError(
             f"run_subtask: 'history' must be a list of ChatMessage, got "
@@ -266,6 +271,19 @@ def run_subtask(
             system = system + "\n\n" + _mod["hint"]
         except Exception:
             pass  # affect is advisory; never break a run
+
+    # Growth context: recent growth-loop learnings relevant to the
+    # task, appended to the system prompt as advisory context.
+    # Read-only and best-effort — never breaks a run.
+    if growth:
+        try:
+            from levi.agent import growth_context as _growth_context
+
+            _add = _growth_context.context_addendum(task, limit=3)
+            if _add:
+                system = system + "\n\n" + _add
+        except Exception:
+            pass
 
     messages = [
         ChatMessage(role="system", content=system),

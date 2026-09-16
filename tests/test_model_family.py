@@ -178,16 +178,52 @@ def test_default_prefers_largest_downloaded_remix(monkeypatch, tmp_path):
     assert os.environ.get("LEVI_LOCAL_MODEL") == "Qwen3-4B-Q4_K_M.gguf"
 
 
-def test_tiny_preferred_when_native_brain_present(monkeypatch, tmp_path):
+def test_tiny_not_default_until_earned_by_measurement(monkeypatch, tmp_path):
+    # Standing policy: the native brain is explicit-only until a
+    # checkpoint EARNS the default slot via the capability gates
+    # (levi.agent.brain_checkpoints). Weights with no eval evidence
+    # stay prose-only and do NOT win the default slot.
     _scrub_env(monkeypatch, tmp_path)
     weights = tmp_path / "tiny-gpt.pt"
     weights.write_bytes(b"fake-ckpt")
+    monkeypatch.setenv("LEVI_BRAIN_WEIGHTS", str(weights))
+    monkeypatch.setattr("levi.agent.brain_provider.torch_available", lambda: True)
+    assert model_family.resolve_family() is None
+    p = select_provider()
+    assert isinstance(p, LocalProvider)
+    # ...but explicit selection still works — the gate governs the
+    # default, not the user's explicit call.
+    p = select_provider("levi-tiny")
+    assert isinstance(p, NativeBrainProvider)
+
+
+def test_earned_native_brain_wins_default(monkeypatch, tmp_path):
+    # A checkpoint whose eval meets the documented default thresholds
+    # earns the default slot by measurement, not branding.
+    import datetime as _dt
+    import json as _json
+
+    _scrub_env(monkeypatch, tmp_path)
+    weights = tmp_path / "tiny-gpt.pt"
+    weights.write_bytes(b"fake-ckpt")
+    (tmp_path / "tiny-gpt.eval.json").write_text(
+        _json.dumps(
+            {
+                "held_out_loss": 0.9,
+                "eval_date": _dt.date.today().isoformat(),
+                "tool_use": {"pass_rate": 0.95, "n": 100},
+                "architecture": "tiny-gpt",
+            }
+        ),
+        encoding="utf-8",
+    )
     monkeypatch.setenv("LEVI_BRAIN_WEIGHTS", str(weights))
     monkeypatch.setattr("levi.agent.brain_provider.torch_available", lambda: True)
     resolved = model_family.resolve_family()
     assert resolved is not None
     assert resolved["entry"] == "levi-tiny"
     assert resolved["provider"] == "levi-brain"
+    assert "earned" in resolved["reason"]
     p = select_provider()
     assert isinstance(p, NativeBrainProvider)
 
@@ -315,3 +351,45 @@ def test_cli_model_status_reports_no_weight(tmp_path):
     assert "Active model" in proc.stdout
     assert "no LEVI weight available" in proc.stdout
     assert "fluent-ish gibberish" in proc.stdout  # honest limits shown
+
+
+def _stellar_eval(tmp_path: Path, stem: str, architecture) -> None:
+    import datetime as _dt
+
+    manifest = {
+        "held_out_loss": 0.9,
+        "eval_date": _dt.date.today().isoformat(),
+        "tool_use": {"pass_rate": 0.95, "n": 100},
+    }
+    if architecture is not None:
+        manifest["architecture"] = architecture
+    (tmp_path / f"{stem}.eval.json").write_text(json.dumps(manifest), encoding="utf-8")
+
+
+def test_default_candidate_with_unknown_arch_stays_explicit_only(monkeypatch, tmp_path):
+    # A checkpoint can MEASURE as default-candidate while being unloadable
+    # by the current provider (e.g. a future v2 architecture). The default
+    # slot must not be granted — the chain falls through to local rules.
+    _scrub_env(monkeypatch, tmp_path)
+    weights = tmp_path / "model_v2.pt"
+    weights.write_bytes(b"fake-ckpt")
+    _stellar_eval(tmp_path, "model_v2", architecture=None)
+    monkeypatch.setenv("LEVI_BRAIN_WEIGHTS", str(weights))
+    monkeypatch.setattr("levi.agent.brain_provider.torch_available", lambda: True)
+    assert model_family.resolve_family() is None
+    p = select_provider()
+    assert isinstance(p, LocalProvider)
+
+
+def test_default_candidate_with_supported_arch_earns_default(monkeypatch, tmp_path):
+    # Same stellar measurements, but the manifest declares an architecture
+    # the provider can actually load → the default slot is earned.
+    _scrub_env(monkeypatch, tmp_path)
+    weights = tmp_path / "model_v2.pt"
+    weights.write_bytes(b"fake-ckpt")
+    _stellar_eval(tmp_path, "model_v2", architecture="tiny-gpt")
+    monkeypatch.setenv("LEVI_BRAIN_WEIGHTS", str(weights))
+    monkeypatch.setattr("levi.agent.brain_provider.torch_available", lambda: True)
+    resolved = model_family.resolve_family()
+    assert resolved is not None
+    assert resolved["provider"] == "levi-brain"

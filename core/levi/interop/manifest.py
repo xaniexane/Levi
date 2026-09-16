@@ -358,7 +358,8 @@ DECLARATIONS = {
         "requires": [],
     },
     # -- research: public-source deep-web research (polite, no darknet) -------
-    "research": {        "provides": [
+    "research": {
+        "provides": [
             "research.deepweb",
             "research.sitemaps",
             "research.feeds",

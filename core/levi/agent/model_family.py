@@ -129,7 +129,11 @@ def register_remix(
     """
     from levi.agent import local_model
 
-    if not isinstance(name, str) or not name.startswith("levi-") or name in family_names():
+    if (
+        not isinstance(name, str)
+        or not name.startswith("levi-")
+        or name in family_names()
+    ):
         raise ValueError("remix name must be a new 'levi-*' name, got %r" % name)
     if not isinstance(base, str) or not base.strip():
         raise ValueError(
@@ -270,9 +274,12 @@ def resolve_family() -> dict | None:
     """Pick the best available LEVI family weight.
 
     Order: persisted ``model use`` choice (when actually downloaded) →
-    ``levi-tiny`` native brain (weights present and torch importable) →
-    the largest downloaded remix whose runner is present → None (the
-    caller falls back to the deterministic rules planner).
+    the native brain (``levi-tiny``) only when a checkpoint has EARNED
+    the default slot by measurement
+    (:func:`levi.agent.brain_checkpoints.best_default_candidate`) —
+    otherwise it stays explicit-only per standing policy → the largest
+    downloaded remix whose runner is present → None (the caller falls
+    back to the deterministic rules planner).
 
     Returns ``{"entry": name, "provider": provider_name, "reason": str}``
     or None. Never raises, never spawns anything.
@@ -299,11 +306,27 @@ def resolve_family() -> dict | None:
     except KeyError:
         tiny = None
     if tiny and tiny["downloaded"]:
-        return {
-            "entry": "levi-tiny",
-            "provider": "levi-brain",
-            "reason": "native brain weights present",
-        }
+        # The native brain wins the default slot only when a checkpoint
+        # measures as a default candidate. Explicit selection
+        # (`--provider levi-tiny` / `levi-brain`) always still works —
+        # the gate governs the default, not the user's explicit call.
+        from levi.agent import brain_checkpoints as _ckpts
+        from levi.agent.brain_provider import NativeBrainProvider as _Native
+
+        earned = _ckpts.best_default_candidate()
+        if earned is not None:
+            # Measured AND loadable: the provider only knows the v1
+            # TinyGPT layout, so a default-candidate of an unsupported
+            # architecture (e.g. a future v2 checkpoint) must not claim
+            # the default slot until a matching loader lands. It stays
+            # explicit-only; the chain falls through below.
+            if earned.architecture in _Native.SUPPORTED_ARCHITECTURES:
+                return {
+                    "entry": "levi-tiny",
+                    "provider": "levi-brain",
+                    "reason": "native brain earned the default slot: checkpoint "
+                    "%s gated 'default-candidate'" % earned.file,
+                }
 
     if _runner_available():
         downloaded = [

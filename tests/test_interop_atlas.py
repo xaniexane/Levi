@@ -12,7 +12,7 @@ import pytest
 
 from levi.interop.atlas import atlas_modules, export_atlas, write_atlas
 from levi.interop.manifest import DECLARATIONS
-from levi.interop.registry import Registry, RegistryError
+from levi.interop.registry import Registry
 from levi.interop.warehouses import (
     WAREHOUSES,
     browse_warehouse,
@@ -85,9 +85,7 @@ def test_wave_modules_declared():
 def test_wave_warehouses_exist_and_shelve_everything():
     assert EXPECTED_WAVE_WAREHOUSES <= set(WAREHOUSES)
     shelved = {
-        shelf
-        for wh in EXPECTED_WAVE_WAREHOUSES
-        for shelf in WAREHOUSES[wh]["shelves"]
+        shelf for wh in EXPECTED_WAVE_WAREHOUSES for shelf in WAREHOUSES[wh]["shelves"]
     }
     assert EXPECTED_WAVE_MODULES - {"research"} <= shelved
     assert "research" in WAREHOUSES["archive"]["shelves"]
@@ -164,9 +162,7 @@ def test_export_atlas_keeps_flat_module_list():
 
 def test_export_atlas_capabilities_cover_all_provides():
     atlas = export_atlas()
-    expected = sorted(
-        {cap for d in DECLARATIONS.values() for cap in d["provides"]}
-    )
+    expected = sorted({cap for d in DECLARATIONS.values() for cap in d["provides"]})
     assert atlas["capabilities"] == expected
 
 
@@ -230,7 +226,9 @@ def test_inventory_counts_match_reality():
     assert by_name["revivals"] == real_revivals
     assert real_playbooks == 839
     assert by_name["skills"] == real_playbooks
-    assert by_name["games"] == 5  # games wave landed: charter/codebreak/cipher/hotseat/saves
+    assert (
+        by_name["games"] == 5
+    )  # games wave landed: charter/codebreak/cipher/hotseat/saves
 
 
 def test_browse_warehouse_shelves():
@@ -333,8 +331,16 @@ def test_pull_unknown_item_names_available():
 
 def test_pull_never_executes():
     # pull_from_shelf only inspects; importing it must not create state.
-    before = set((Path.home() / ".levi").rglob("*")) if (Path.home() / ".levi").exists() else set()
+    before = (
+        set((Path.home() / ".levi").rglob("*"))
+        if (Path.home() / ".levi").exists()
+        else set()
+    )
     pull_from_shelf("methods", "methods.ach")
     pull_from_shelf("revivals", "revival.plan9")
-    after = set((Path.home() / ".levi").rglob("*")) if (Path.home() / ".levi").exists() else set()
+    after = (
+        set((Path.home() / ".levi").rglob("*"))
+        if (Path.home() / ".levi").exists()
+        else set()
+    )
     assert before == after

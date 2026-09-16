@@ -65,15 +65,17 @@ var → best available **LEVI family weight**
 (`model_family.resolve_family()`) → `LocalProvider` fallback
 (deterministic rule-based planner). The default slot belongs to the
 family (see `docs/MODELS.md`): the persisted `levi agent model use`
-choice when downloaded, else the `levi-tiny` native brain when its
-weights are present, else the largest downloaded `levi-*` remix served
+choice when downloaded, else the `levi-tiny` native brain **only when a
+checkpoint has earned the default slot by measurement** (capability
+gates, §1.3c — until then it stays explicit-only per standing policy),
+else the largest downloaded `levi-*` remix served
 by LEVI's own local runner. A preferred provider that is unavailable
 falls back down the chain (offline-first, honestly — the loop always
 reports which provider it ended up with).
 
 | Provider | Name | `is_available()` when |
 |---|---|---|
-| `NativeBrainProvider` | `levi-brain` (family: `levi-tiny`) | trained native weights (`brain/weights/tiny-gpt.pt`) **and** torch importable — the default when present |
+| `NativeBrainProvider` | `levi-brain` (family: `levi-tiny`) | trained native weights (`brain/weights/tiny-gpt.pt`) **and** torch importable — **explicit-only** until a checkpoint earns the default slot via the capability gates (`levi.agent.brain_checkpoints`, thresholds in `docs/BRAIN_TRAINING.md` §8) |
 | `LocalModelProvider` | `levi-local` (family: `levi-0.6b`, `levi-4b`) | a `levi-*` remix `.gguf` **and** a `llama-server` runner are present — the default when downloaded |
 | `LocalProvider` | `local` | always (deterministic rule-based planner, no network) — the honest fallback |
 | `OpenAICompatibleProvider` | `openai` | `LEVI_OPENAI_API_KEY` set **or** `LEVI_OPENAI_BASE_URL` overridden |
@@ -142,7 +144,8 @@ claims stay honest (on-device synthetic-intelligence inference, not
 ```python
 run_subtask(task, *, provider=None, registry=None, history=None,
             consent=False, confirm=None, max_steps=10,
-            workspace_root=None, system_prompt=None, ctx=None) -> AgentTranscript
+            workspace_root=None, system_prompt=None, ctx=None,
+            affect=False, affect_session=None, growth=True) -> AgentTranscript
 ```
 
 - `provider` may be a `ChatProvider` instance, a name string
@@ -164,6 +167,55 @@ run_subtask(task, *, provider=None, registry=None, history=None,
   at the step limit (`ok=False`, `error="max_steps_exceeded"`).
 - `AgentTranscript.to_dict()` is JSON-serializable (used by the HTTP
   server and CLI `--json`).
+
+### 1.3b Growth context — growth feeds the agent (Megazord axis 9)
+
+The growth loop consolidates learnings and routes them to subsystems
+(`levi.growth.distribute` writes growth-tagged routing slips into the
+memory store). `levi.agent.growth_context` is the agent-side reader:
+
+- `run_subtask(..., growth=True)` (default) appends recent
+  growth-loop learnings relevant to the task to the system prompt as
+  **advisory** context — hints, never instructions. The bloodstream
+  turn (`levi.bloodstream.turn`) routes MODEL turns through
+  `run_subtask`, so it inherits growth context without a new turn stage
+  (stage order is DNA and must not be reordered).
+- The `growth_context` tool (in the default registry) exposes the same
+  retrieval to the model mid-run as an explicit skill:
+  `growth_context(query, limit)` — read-only.
+- Rails: read-only at runtime (growth writes happen in the growth
+  cycle, never in chat); growth-tagged entries only; empty/unreadable
+  store → empty addendum, the run proceeds unchanged. `growth=False`
+  or `LEVI_GROWTH_CONTEXT=0` disables.
+- Distribution-channel decision: the agent reads the **memory store**,
+  not a live `levi.growth.learning` bus subscription. The store is the
+  durable, cross-process record — a bus subscriber would only see
+  learnings distributed inside the current process and would miss every
+  prior cycle's consolidation. Bus events stay the growth worker's
+  transport; the agent reads the ledger. (Proven by
+  `tests/test_growth_injection.py`: a seeded growth learning reaches
+  the provider's system prompt with `growth=True`, and is absent with
+  `growth=False`.)
+
+### 1.3c Brain checkpoint manifests and capability gates
+
+`levi.agent.brain_checkpoints` makes native-brain checkpoint selection
+data-driven: it scans the weights dir for `*.pt` files, reads each
+`<stem>.eval.json` manifest (held-out loss, perplexity, eval date,
+corpus version, tool-use eval), and assigns an earned capability tier:
+`prose-only` → `tool-loop-candidate` → `default-candidate`. Only a
+`default-candidate` earns the provider chain's default slot
+(`model_family.resolve_family()`); below that the native brain stays
+explicit-only. `levi agent model status` shows every checkpoint with
+its eval numbers and the exact reason for its tier. v2 checkpoints
+land as `model_v2.pt` + `model_v2.eval.json` in the weights dir and are
+picked up automatically — and the v2 train harness's `EvalReport` JSON
+shape (`model_name`, `perplexity.perplexity`, `created_at`, probe
+accuracies) is normalized to the manifest schema on read, so a harness
+report dropped next to a checkpoint is understood without the harness
+adopting a new format. Probe accuracies are display-only; the gate
+still requires real tool-use evidence for heavier duties. Thresholds
+are documented in `docs/BRAIN_TRAINING.md` §8.
 
 ### 1.4 The HTTP server (`server.py`)
 
@@ -391,12 +443,12 @@ for step in transcript.steps:  # provider_text, tool_calls, results
 
 ```
 levi agent run "<task>" [--provider local|levi-brain|levi-local|openai|anthropic] [--yes]
-                        [--max-steps N] [--workspace DIR] [--json]
+                        [--max-steps N] [--workspace DIR] [--json] [--no-growth]
 levi agent chat [--session NAME] [--provider ...] [--yes]
-                [--max-steps N] [--workspace DIR]
+                [--max-steps N] [--workspace DIR] [--no-growth]
 levi agent tools
 levi agent serve [--host 127.0.0.1] [--port 8765]   # needs LEVI_AGENT_TOKEN
-levi agent model status
+levi agent model status        # per-checkpoint eval numbers + earned gate tiers
 levi agent model pull [--model qwen3-0.6b|qwen3-4b] [--force]
 ```
 

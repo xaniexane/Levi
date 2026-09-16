@@ -70,7 +70,7 @@ def test_mcp_tools_list_has_valid_schemas():
         {"jsonrpc": "2.0", "id": 4, "method": "tools/list", "params": {}}
     )
     tools = resp["result"]["tools"]
-    assert len(tools) == 24
+    assert len(tools) == 25  # 24 + growth_context (agent growth-loop reader)
     for tool in tools:
         assert tool["name"] and tool["description"]
         schema = tool["inputSchema"]
@@ -231,7 +231,7 @@ def test_mcp_stdio_subprocess_handshake(tmp_path):
         init = rpc(1, "initialize")
         assert init["result"]["protocolVersion"] == PROTOCOL_VERSION
         tools = rpc(2, "tools/list")
-        assert len(tools["result"]["tools"]) == 24
+        assert len(tools["result"]["tools"]) == 25  # 24 + growth_context
         call = rpc(
             3,
             "tools/call",

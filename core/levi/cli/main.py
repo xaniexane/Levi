@@ -1841,6 +1841,7 @@ def cmd_agent(args):
             system_prompt=register_system,
             affect=use_affect,
             affect_session=affect_session,
+            growth=not bool(getattr(args, "no_growth", False)),
         )
         return
 
@@ -1908,6 +1909,7 @@ def cmd_agent(args):
             return
         if maction == "status":
             from levi.agent import brain_provider
+            from levi.agent import brain_checkpoints as _ckpts
 
             resolved = model_family.resolve_family()
             active_name = resolved["entry"] if resolved else None
@@ -1920,6 +1922,40 @@ def cmd_agent(args):
                 )
             print()
             _print_family(active_name)
+            print()
+            print("-- native brain checkpoints (measured, not vibes) --\n")
+            crep = _ckpts.status_report()
+            print(f"  Weights dir : {crep['weights_dir']}")
+            if not crep["checkpoints"]:
+                print("  (no *.pt checkpoints in the weights dir)")
+                print(
+                    "              Fix: train one — see docs/BRAIN_TRAINING.md; "
+                    "v2 manifests drop here as <stem>.eval.json"
+                )
+            for _ce in crep["checkpoints"]:
+                _loss = _ce["held_out_loss"]
+                _ppl = _ce["perplexity"]
+                print(
+                    f"  {_ce['file']:<18} tier={_ce['tier']}"
+                    f"  arch={_ce.get('architecture', 'unknown')}"
+                    + (
+                        f"  loss={_loss:.3f} ppl={_ppl:.1f}"
+                        if _loss is not None
+                        else "  (no eval evidence)"
+                    )
+                    + (
+                        f"  eval={_ce['eval_date'] or '?'}"
+                        f" corpus={_ce['corpus_version'] or '?'}"
+                        if _loss is not None
+                        else ""
+                    )
+                )
+                for _why in _ce["why"]:
+                    print(f"      · {_why}")
+                _probes = _ce.get("probes") or {}
+                if _probes:
+                    _ps = ", ".join(f"{k}={v:.2f}" for k, v in sorted(_probes.items()))
+                    print(f"      probes: {_ps} (display only — not tool-use evidence)")
             print()
             brain = brain_provider.NativeBrainProvider().status()
             print("-- levi-tiny: native brain detail --\n")
@@ -1946,6 +1982,11 @@ def cmd_agent(args):
             print(
                 "              It earns the loop's default slot by growing, not by branding."
             )
+            _gate = brain.get("gate") or {}
+            if _gate:
+                print(f"  Gate      : {_gate.get('tier', 'prose-only')}")
+                for _why in _gate.get("why", [])[:3]:
+                    print(f"              · {_why}")
             print()
             print("-- levi-* remixes: runner detail --\n")
             report = local_model.status_report()
@@ -2124,6 +2165,7 @@ def cmd_agent(args):
             system_prompt=register_system,
             affect=use_affect,
             affect_session=affect_session,
+            growth=not bool(getattr(args, "no_growth", False)),
         )
         _record_agent_ledger(task, transcript, provider)
         if getattr(args, "json", False):
@@ -5471,6 +5513,13 @@ def main():
         help="curriculum: load|list; study: run|trend "
         "(shared second positional; the action picks its own)",
     )
+    ag_run.add_argument(
+        "--no-growth",
+        action="store_true",
+        help="Disable growth-loop context for this run (default: the agent "
+        "sees recent growth-loop learnings relevant to the task as advisory "
+        "context; LEVI_GROWTH_CONTEXT=0 disables globally).",
+    )
     gr_p.add_argument(
         "--study-model",
         action="store_true",
@@ -5514,6 +5563,11 @@ def main():
     gr_p.add_argument(
         "--ingest",
         default="",
+    ag_chat.add_argument(
+        "--no-growth",
+        action="store_true",
+        help="Disable growth-loop context for the session (see `levi agent run --help`).",
+    )
         help="pack: ingest a learning pack file (offline fallback)",
     )
     gr_p.add_argument(
