@@ -449,7 +449,7 @@ def _select_probes(entry) -> list[str]:
             ("news", "news"),
             ("memory", "memory"),
             ("skill", "skill"),
-            ("schedul", "schedule"),
+            ("schedul", "schedul"),
             ("agent", "agent"),
             ("secur", "security"),
         ]
