@@ -34,6 +34,8 @@ secrets/
 *.tar
 archives/
 archive/
+# ...but the LEVI Archive (Smithsonian module) is a real Python package:
+!core/levi/archive/
 
 # Temp
 *.tmp
