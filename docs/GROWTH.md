@@ -48,23 +48,81 @@ levi growth learnings        # list self-taught learnings
 levi growth learnings --kind preference
 levi growth forget --id <id> # remove a learning
 levi growth forget --tag correction
+levi growth export-corpus --out FILE [--min-confidence X]
+                             # export redacted, deduped learning texts
+                             # as JSONL for the curriculum builder
 ```
 
 Run `levi growth cycle` on a schedule (cron, systemd timer) for
-continuous development — e.g. nightly.
+continuous development — e.g. nightly. Set `LEVI_GROWTH_TRIGGER=cron`
+in the scheduled environment so the journal records what started
+each cycle (`manual` is the default).
 
 ## Developmental stages
 
-A light, honest label for how far Levi has grown — a pure function of
-consolidated learnings (engagement copy, not a cognitive claim):
+A light, honest label for how far Levi has grown — a **pure function
+of observable counters**, never vibes. `stage_for(stats)` in
+`core/levi/growth/stages.py` returns the highest stage whose criteria
+are all met, plus the next stage's unmet requirements as explicit
+current/threshold numbers (shown by `levi growth status` as
+`progress to <next>: learnings 12/25, corroborations 4/10, …`).
 
-| learnings | stage |
-|-----------|-------|
-| 0 | newborn |
-| 1+ | sprout |
-| 10+ | curious |
-| 30+ | growing |
-| 100+ | maturing |
+| stage | criteria (all required) |
+|-------|-------------------------|
+| newborn | — (no learnings consolidated yet) |
+| sprouting | learnings ≥ 1 |
+| curious | learnings ≥ 5, days_active ≥ 1 |
+| growing | learnings ≥ 25, corroborations ≥ 10, days_active ≥ 7 |
+| maturing | learnings ≥ 100, corroborations ≥ 50, days_active ≥ 30, curriculum_units ≥ 20 |
+
+Counters: `learnings` = self-taught growth learnings (curriculum seed
+and distribution slips excluded); `corroborations` = sum of
+`corroborated_count` on those learnings (founder-seeded counts don't
+count — they weren't earned); `days_active` = days since the first
+journaled cycle; `curriculum_units` = founder-taught seed lessons;
+`cycles` = completed cycles (informational).
+
+Engagement copy, not a cognitive claim: the stage labels how much
+Levi has been taught, not how it feels about being taught.
+
+## Reflection extractors (rules engine)
+
+The offline engine runs a battery of deterministic extractors over
+harvested experiences; every cycle journals a per-extractor
+**evidence** breakdown (`evidence: {"direct_signals": 2,
+"tool_trouble": 1, …}`) so growth is observable:
+
+- `direct_signals` — corrections, preferences, "remember this" facts
+- `tool_trouble` — a tool erroring ≥2 times → check args first
+- `approved_workflows` — approved multi-turn work → reusable approach
+- `distilled_facts` — session summaries → low-confidence facts
+- `recurring_topics` — a content word recurring across ≥3 user turns
+  in ≥2 sources → an active interest area
+- `failed_then_fixed` — a tool failed then succeeded → prefer
+  recovery over blind retry
+- `capability_gaps` — Levi explicitly declined ("I can't …") →
+  an observed boundary of what it can do
+- `automation_outcomes` — stable cadences (≥5 runs) and recent
+  automation failures
+- `repeated_requests` — near-identical user asks ≥3 times →
+  a recurring need to watch for proactively
+- `blocked_sentience` — candidates dropped by the sentience rail
+  (counted, never written)
+
+Each journaled cycle also carries structured fields: `trigger`
+(what started it), `confidence` (mean/min/max over proposed
+learnings), plus the usual accepted/corroborated counts.
+
+## Corpus export (training signal)
+
+`levi growth export-corpus --out FILE` exports self-taught learnings
+as redacted, deduped JSONL — the adapter between what the growth
+loop learns and what the curriculum builder trains on. One record
+per line: `text` (secrets/PII-shaped strings scrubbed),
+`kind`, `confidence`, `corroborated_count`, `source`, `status`,
+`cycle_id`, `memory_id`. Duplicate texts collapse (earliest-learned
+identity kept, strongest corroboration/confidence merged); records
+sort by `memory_id` for clean diffs.
 
 ## Safety rails (binding)
 
@@ -75,9 +133,13 @@ consolidated learnings (engagement copy, not a cognitive claim):
   tags `["growth", "levi-learned", kind]`, provenance metadata, and
   `status: provisional`. Self-taught beliefs are always marked as such.
 - **No inner life, ever**: reflection is forbidden from producing
-  claims of subjective experience, sentience, or consciousness — the
-  model prompt enforces it; the rule engine cannot produce such claims
-  by construction. LEVI remains honest Synthetic Intelligence.
+  claims of subjective experience, sentience, or consciousness — and
+  the rail is now *structural*, not just prompted. Every candidate
+  learning (rule-generated, model-generated, or about to be
+  consolidated) is scanned against an explicit blocklist in
+  `core/levi/growth/guards.py`; violations are dropped (counted as
+  `blocked_sentience` evidence, never rephrased) and the write path
+  refuses them loudly. LEVI remains honest Synthetic Intelligence.
 - **Parental control**: `levi growth forget` removes learnings;
   `LEVI_GROWTH_DIR` relocates all growth data; deleting
   `~/.levi/growth` resets development without touching other memory.
@@ -93,10 +155,14 @@ consolidated learnings (engagement copy, not a cognitive claim):
 
 ## Files
 
-- `core/levi/growth/` — experience, reflect, consolidate, journal, cycle
+- `core/levi/growth/` — experience, reflect (rule extractors),
+  guards (sentience blocklist), stages (explicit stage criteria),
+  corpus_export, consolidate, journal, cycle
 - `~/.levi/growth/` — `state.json` (watermarks), `journal.jsonl`
 - `~/.levi/memory/` — consolidated learnings (tagged `growth`)
-- `tests/test_growth.py` — 18 hermetic tests
+- `tests/test_growth.py`, `tests/test_growth_stages.py`,
+  `tests/test_growth_guards_extractors.py`,
+  `tests/test_growth_corpus_export.py` — hermetic tests
 
 ## Study hall — autonomous sharpening cadence
 

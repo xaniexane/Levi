@@ -20,6 +20,21 @@
             app:titleTextColor="@color/amber" />
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Voice-assistant handoff: shows the transcribed query. Dismissible;
+         the web chat may also consume it via window.leviVoiceQuery. -->
+    <TextView
+        android:id="@+id/voiceBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/void_panel"
+        android:drawableStart="@drawable/ic_mic"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:padding="12dp"
+        android:textColor="@color/text"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -282,11 +282,14 @@ def test_journal_append_and_read(env):
 
 
 def test_developmental_stages():
+    # compatibility shim: cycles stand in for days_active under the
+    # nightly cadence; corroborations/curriculum_units are unavailable
+    # here and count as 0, which can only under-advance the stage
     assert growth_journal.developmental_stage(0, 0)[0] == "newborn"
-    assert growth_journal.developmental_stage(1, 1)[0] == "sprout"
+    assert growth_journal.developmental_stage(1, 1)[0] == "sprouting"
     assert growth_journal.developmental_stage(10, 3)[0] == "curious"
-    assert growth_journal.developmental_stage(30, 8)[0] == "growing"
-    assert growth_journal.developmental_stage(120, 20)[0] == "maturing"
+    assert growth_journal.developmental_stage(30, 8)[0] == "curious"
+    assert growth_journal.developmental_stage(120, 40)[0] == "curious"
 
 
 def test_full_cycle_dry_run(env):
@@ -327,7 +330,7 @@ def test_status_dashboard(env):
     store = MemoryStore(data_dir=env["mem"])
     growth_cycle.run_cycle(use_model=False, store=store)
     s = growth_cycle.status(store=store)
-    assert s["stage"] in ("sprout", "curious", "growing")
+    assert s["stage"] in ("sprouting", "curious", "growing")
     assert s["cycles_completed"] == 1
     assert s["learnings_consolidated"] > 0
     assert s["experiences_pending"] == 0

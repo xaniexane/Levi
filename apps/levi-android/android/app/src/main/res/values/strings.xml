@@ -40,6 +40,32 @@
 
     <!-- Default assistant / home-screen shortcut -->
     <string name="assistant_unavailable">System assistant settings aren\'t available on this device.</string>
+    <string name="assistant_status_title">Default assistant status</string>
+    <string name="assistant_is_default">LEVI is your default assistant</string>
+    <string name="assistant_not_default">LEVI is not the default assistant</string>
+    <string name="assistant_choose_title">Choose default assistant</string>
+    <string name="assistant_choose_sub">Opens system settings where you pick LEVI</string>
+    <string name="assistant_note">Long-press home (or your device\'s assistant gesture) opens LEVI once it is selected as the default assistant. Only the system picker can change this — LEVI can only show its own status. Hotword ("Hey LEVI") detection is not supported: always-on listening needs system-level support. Gesture behavior varies by manufacturer. The app lock still gates the chat, so a locked phone stays locked.</string>
+    <string name="perm_mic_title">Microphone</string>
+    <string name="perm_mic_sub">Needed for the assistant voice plate. Tap to grant.</string>
+    <string name="voice_prompt">Ask LEVI</string>
+    <string name="voice_listening">Listening…</string>
+    <string name="voice_hint">Speak now, or tap to close</string>
+    <string name="voice_hearing">"%1$s"</string>
+    <string name="voice_heard_banner">I heard: %1$s</string>
+    <string name="voice_mic_needed">Microphone permission needed</string>
+    <string name="voice_mic_why">The voice plate can\'t listen without microphone access. Grant it to talk to LEVI hands-free.</string>
+    <string name="voice_grant_mic">Grant microphone access</string>
+    <string name="voice_mic_granted">Microphone granted — invoke the assistant again to talk.</string>
+    <string name="voice_mic_denied">Microphone denied — the voice plate stays off. You can still type.</string>
+    <string name="voice_no_recognizer">No speech recognizer on this device</string>
+    <string name="voice_no_recognizer_hint">This device has no speech-to-text service. You can still open the chat and type.</string>
+    <string name="voice_open_chat">Open LEVI chat</string>
+    <string name="voice_try_again">Try again</string>
+    <string name="voice_not_caught">Didn\'t catch that</string>
+    <string name="voice_error_network">Speech service unreachable — check the connection and try again.</string>
+    <string name="voice_error_no_match">No speech heard — try again.</string>
+    <string name="voice_error_generic">Speech recognition failed — try again.</string>
     <string name="shortcut_label">Open LEVI</string>
     <string name="shortcut_unsupported">Pinned shortcuts aren\'t supported on this device.</string>
     <string name="shortcut_failed">Couldn\'t create the shortcut.</string>

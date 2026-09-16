@@ -26,16 +26,30 @@ def cmd_status(args) -> int:
     blurb = dash.get("stage_blurb")
     if blurb:
         print(f"  {blurb}")
+    nxt = dash.get("next_stage")
+    if nxt:
+        parts = ", ".join(
+            f"{counter} {int(req['current'])}/{req['threshold']}"
+            for counter, req in nxt["requirements"].items()
+        )
+        print(f"  progress to {nxt['name']}: {parts}")
+    else:
+        print("  top stage reached — fully mature")
     print(f"cycles completed: {dash.get('cycles_completed')}")
     print(f"learnings consolidated: {dash.get('learnings_consolidated')}")
     kinds = dash.get("learnings_by_kind") or {}
     if kinds:
         print("  by kind: " + ", ".join(f"{k}={v}" for k, v in kinds.items()))
+    print(f"recent learnings (7d): {dash.get('recent_learnings_7d', 0)}")
+    jbytes = int(dash.get("journal_bytes", 0) or 0)
+    print(f"journal: {dash.get('journal_records', 0)} records, {jbytes / 1024:.1f} KB")
     print(f"experiences pending: {dash.get('experiences_pending')}")
     last = dash.get("last_cycle")
     if last:
-        print(f"last cycle: {last.get('id')} ({last.get('mode')}) "
-              f"accepted={last.get('accepted')}")
+        print(
+            f"last cycle: {last.get('id')} ({last.get('mode')}) "
+            f"accepted={last.get('accepted')}"
+        )
     return 0
 
 
@@ -46,14 +60,40 @@ def cmd_cycle(args) -> int:
     if args.json:
         print(json.dumps(report, indent=2))
         return 0
-    print(f"cycle {report.get('cycle_id')}: mode={report.get('mode')} "
-          f"dry_run={report.get('dry_run')}")
+    print(
+        f"cycle {report.get('cycle_id')}: mode={report.get('mode')} "
+        f"dry_run={report.get('dry_run')}"
+    )
     cons = report.get("consolidation") or {}
-    print(f"  experiences: {report.get('experiences', 0)}  "
-          f"learnings proposed: {report.get('learnings_proposed', 0)}  "
-          f"accepted: {cons.get('accepted', 0)}")
+    print(
+        f"  experiences: {report.get('experiences', 0)}  "
+        f"learnings proposed: {report.get('learnings_proposed', 0)}  "
+        f"accepted: {cons.get('accepted', 0)}"
+    )
     if report.get("quiet"):
         print("  quiet cycle: no new experiences to reflect on.")
+    return 0
+
+
+def cmd_export_corpus(args) -> int:
+    from levi.growth import corpus_export as _export
+
+    out = (getattr(args, "out", "") or "").strip()
+    if not out:
+        print("export-corpus needs --out FILE", file=sys.stderr)
+        return 2
+    try:
+        summary = _export.export_corpus(out, min_confidence=args.min_confidence)
+    except ValueError as exc:
+        print(f"export-corpus refused: {exc}", file=sys.stderr)
+        return 2
+    if args.json:
+        print(json.dumps(summary, indent=2))
+        return 0
+    print(
+        f"exported {summary['records']} learning(s) "
+        f"(min_confidence={summary['min_confidence']}) → {summary['path']}"
+    )
     return 0
 
 
@@ -65,16 +105,21 @@ def cmd_journal(args) -> int:
         print("journal is empty.")
         return 0
     for e in entries:
-        print(f"[{e.get('ts')}] {e.get('id')} mode={e.get('mode')} "
-              f"accepted={e.get('accepted')} sources={e.get('sources')}")
+        print(
+            f"[{e.get('ts')}] {e.get('id')} mode={e.get('mode')} "
+            f"accepted={e.get('accepted')} sources={e.get('sources')}"
+        )
     return 0
 
 
 def cmd_forget(args) -> int:
     # Parental control surface: growth supports forgetting a cycle's
     # journal entry; memory-side forget is handled by the forget flow.
-    print("growth forget: use `levi forget` for memory-side removal; "
-          "journal entries are append-only.", file=sys.stderr)
+    print(
+        "growth forget: use `levi forget` for memory-side removal; "
+        "journal entries are append-only.",
+        file=sys.stderr,
+    )
     return 2
 
 
@@ -86,22 +131,41 @@ def main(argv=None) -> int:
     ap.add_argument("--json", action="store_true", help="JSON output")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    sub.add_parser("status", help="growth dashboard: stage, counts, last cycle") \
-        .set_defaults(func=cmd_status)
+    sub.add_parser(
+        "status", help="growth dashboard: stage, counts, last cycle"
+    ).set_defaults(func=cmd_status)
 
     p_cyc = sub.add_parser("cycle", help="run one growth cycle")
-    p_cyc.add_argument("--dry-run", action="store_true",
-                       help="reflect only; write nothing")
-    p_cyc.add_argument("--no-model", action="store_true",
-                       help="offline rules engine only (never a provider)")
+    p_cyc.add_argument(
+        "--dry-run", action="store_true", help="reflect only; write nothing"
+    )
+    p_cyc.add_argument(
+        "--no-model",
+        action="store_true",
+        help="offline rules engine only (never a provider)",
+    )
     p_cyc.set_defaults(func=cmd_cycle)
 
     p_j = sub.add_parser("journal", help="show journal entries (newest first)")
     p_j.add_argument("--limit", type=int, default=10)
     p_j.set_defaults(func=cmd_journal)
 
-    sub.add_parser("forget", help="note on growth forgetting policy") \
-        .set_defaults(func=cmd_forget)
+    p_ec = sub.add_parser(
+        "export-corpus",
+        help="export redacted, deduped learning texts as JSONL for the curriculum builder",
+    )
+    p_ec.add_argument("--out", default="", help="destination JSONL file")
+    p_ec.add_argument(
+        "--min-confidence",
+        type=float,
+        default=0.0,
+        help="only learnings at or above this confidence",
+    )
+    p_ec.set_defaults(func=cmd_export_corpus)
+
+    sub.add_parser("forget", help="note on growth forgetting policy").set_defaults(
+        func=cmd_forget
+    )
 
     args = ap.parse_args(argv)
     return args.func(args)

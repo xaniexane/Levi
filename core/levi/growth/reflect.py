@@ -142,7 +142,20 @@ def reflect_rules_detailed(
             )
     learnings: list[Learning] = []
     seen: set[str] = set()
-    evidence: dict[str, int] = {}
+    # Seed every extractor at zero: a quiet cycle journals that the
+    # extractors *ran and found nothing*, not that they were skipped.
+    evidence: dict[str, int] = {
+        "direct_signals": 0,
+        "tool_trouble": 0,
+        "approved_workflows": 0,
+        "distilled_facts": 0,
+        "recurring_topics": 0,
+        "failed_then_fixed": 0,
+        "capability_gaps": 0,
+        "automation_outcomes": 0,
+        "repeated_requests": 0,
+        "blocked_sentience": 0,
+    }
 
     def add(
         extractor: str,

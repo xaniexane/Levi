@@ -2082,6 +2082,8 @@ def cmd_growth(args):
     study [run|trend] — study hall: full cycle + self-quiz, or quiz trend
     pack [--build] [--ingest FILE] [--sync] [--pack-list] — learning-pack
         distribution: build versioned packs, ingest files, or sync from cloud
+    export-corpus --out FILE [--min-confidence X] — export redacted,
+        deduped learning texts as JSONL for the curriculum builder
     """
     from levi.growth import cycle as _cycle
     from levi.growth import journal as _journal
@@ -2093,6 +2095,15 @@ def cmd_growth(args):
         s = _cycle.status()
         print("=== LEVI growth ===")
         print(f"stage: {s['stage']} — {s['stage_blurb']}")
+        nxt = s.get("next_stage")
+        if nxt:
+            parts = ", ".join(
+                f"{counter} {int(req['current'])}/{req['threshold']}"
+                for counter, req in nxt["requirements"].items()
+            )
+            print(f"progress to {nxt['name']}: {parts}")
+        else:
+            print("progress: top stage reached — fully mature")
         print(f"cycles completed: {s['cycles_completed']}")
         print(f"learnings consolidated: {s['learnings_consolidated']}")
         if s["learnings_by_kind"]:
@@ -2100,6 +2111,9 @@ def cmd_growth(args):
                 f"{k}={v}" for k, v in sorted(s["learnings_by_kind"].items())
             )
             print(f"by kind: {kinds}")
+        print(f"recent learnings (7d): {s.get('recent_learnings_7d', 0)}")
+        jbytes = int(s.get("journal_bytes", 0) or 0)
+        print(f"journal: {s.get('journal_records', 0)} records, {jbytes / 1024:.1f} KB")
         print(f"experiences pending: {s['experiences_pending']}")
         pending = s.get("pending_by_source") or {}
         by_origin = pending.get("by_origin") or {}
@@ -2346,6 +2360,29 @@ def cmd_growth(args):
                 f"v{rec['version']}: {rec['entry_count']} technique(s), "
                 f"ingested {rec['ingested_at']}, sha {rec['sha256'][:16]}…"
             )
+        return
+
+    if action == "export-corpus":
+        from levi.growth import corpus_export as _export
+
+        out = (getattr(args, "out", "") or "").strip()
+        if not out:
+            print("export-corpus needs --out FILE")
+            return
+        try:
+            min_conf = float(getattr(args, "min_confidence", 0.0) or 0.0)
+        except (TypeError, ValueError):
+            print("--min-confidence must be a number between 0 and 1")
+            return
+        try:
+            summary = _export.export_corpus(out, min_confidence=min_conf)
+        except ValueError as exc:
+            print(f"export-corpus refused: {exc}")
+            return
+        print(
+            f"exported {summary['records']} learning(s) "
+            f"(min_confidence={summary['min_confidence']}) → {summary['path']}"
+        )
         return
 
     print(f"Unknown growth action: {action}")
@@ -5056,6 +5093,7 @@ def main():
             "curriculum",
             "study",
             "pack",
+            "export-corpus",
         ],
     )
     gr_p.add_argument(
@@ -5089,6 +5127,17 @@ def main():
     )
     gr_p.add_argument(
         "--tag", default="", help="forget: remove learnings with this tag"
+    )
+    gr_p.add_argument(
+        "--out",
+        default="",
+        help="export-corpus: destination JSONL file",
+    )
+    gr_p.add_argument(
+        "--min-confidence",
+        type=float,
+        default=0.0,
+        help="export-corpus: only learnings at or above this confidence",
     )
     gr_p.add_argument(
         "--build",

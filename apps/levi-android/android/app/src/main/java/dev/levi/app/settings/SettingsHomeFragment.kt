@@ -6,7 +6,6 @@ import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import dev.levi.app.R
 import dev.levi.app.SettingsActivity
 import dev.levi.app.ServerConfig
 import dev.levi.app.tools.ToolsFragment
+import dev.levi.app.voice.AssistantStatus
 
 /**
  * Root settings page: grouped cards mirroring the reference layout,
@@ -140,8 +140,12 @@ class SettingsHomeFragment : Fragment() {
         )
         r2.addView(SettingsUi.divider(ctx))
         r2.addView(
-            SettingsUi.row(ctx, R.drawable.ic_mic, getString(R.string.row_assistant)) {
-                openAssistantSettings()
+            SettingsUi.row(
+                ctx, R.drawable.ic_mic, getString(R.string.row_assistant),
+                if (AssistantStatus.isDefaultAssistant(ctx)) getString(R.string.assistant_is_default)
+                else getString(R.string.assistant_not_default),
+            ) {
+                open(AssistantFragment(), getString(R.string.row_assistant))
             },
         )
         r2.addView(SettingsUi.divider(ctx))
@@ -219,19 +223,6 @@ class SettingsHomeFragment : Fragment() {
             SettingsStore.THEME_SYSTEM -> getString(R.string.theme_system)
             else -> getString(R.string.theme_void)
         }
-
-    /** System voice-input settings — where the default assistant is chosen. */
-    private fun openAssistantSettings() {
-        try {
-            startActivity(Intent(Settings.ACTION_VOICE_INPUT_SETTINGS))
-        } catch (e: Exception) {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.assistant_unavailable),
-                Toast.LENGTH_SHORT,
-            ).show()
-        }
-    }
 
     /** Pinned home-screen shortcut (Android 8+). */
     private fun pinShortcut() {

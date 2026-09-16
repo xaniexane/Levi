@@ -6,6 +6,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- BiometricPrompt app lock (normal permission, granted at install). -->
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <!-- Microphone for the default-assistant voice plate. Runtime permission:
+         requested in the assistant flow with a rationale; the voice plate
+         and voice session fail closed without it. The toolbar mic uses the
+         *system* speech recognizer instead and needs no permission. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- Notification channels ("Messaging channels", "Notifications" rows). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- Coarse location for the "location_coarse" device tool (network/IP-based
@@ -75,6 +80,53 @@
         <activity
             android:name=".LockActivity"
             android:exported="false" />
+
+        <!-- Default-assistant entry: the system fires ASSIST / VOICE_COMMAND
+             here when LEVI is the default digital assistant on paths that
+             resolve to an activity. Validates the action, ignores extras on
+             external intents, and routes into MainActivity with a
+             voice-input affordance. No UI of its own. -->
+        <activity
+            android:name=".AssistActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@style/Theme.LEVI">
+            <intent-filter>
+                <action android:name="android.intent.action.ASSIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VOICE_COMMAND" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Default-assistant voice interaction: declaring this service is
+             what puts LEVI in Settings → Apps → Default apps →
+             Digital assistant app. Bound only by the system. -->
+        <service
+            android:name=".voice.LeviVoiceInteractionService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+            <intent-filter>
+                <action android:name="android.service.voice.VoiceInteractionService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.voice_interaction"
+                android:resource="@xml/voice_interaction_service" />
+        </service>
+
+        <!-- Vends the assistant overlay session. Bound only by the system. -->
+        <service
+            android:name=".voice.LeviVoiceInteractionSessionService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+            <intent-filter>
+                <action android:name="android.service.voice.VoiceInteractionSessionService" />
+            </intent-filter>
+        </service>
 
         <!-- Shares data-export / issue-report files from cache only. -->
         <provider

@@ -38,6 +38,11 @@ def _now() -> str:
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
 
+def now_iso() -> str:
+    """Current UTC time as ISO-8601 (public alias for cycle bookkeeping)."""
+    return _now()
+
+
 def new_cycle_id() -> str:
     return f"cyc-{uuid.uuid4().hex[:8]}"
 
@@ -112,27 +117,34 @@ def save_state(state: dict[str, Any]) -> None:
 # ---------------------------------------------------------------------------
 # Developmental stages — a light, honest label for how far Levi has grown.
 # This is engagement copy, not a cognitive claim: the stage is a pure
-# function of consolidated learnings + completed cycles.
+# function of observable counters (see levi.growth.stages.stage_for for
+# the explicit criteria table).
 # ---------------------------------------------------------------------------
-
-_STAGES = [
-    (0, "newborn", "just opened its eyes — no learnings consolidated yet"),
-    (1, "sprout", "first learnings taking root"),
-    (10, "curious", "asking questions of its own experience now"),
-    (30, "growing", "a real memory of how things work around here"),
-    (100, "maturing", "seasoned — a long personal history to draw on"),
-]
 
 
 def developmental_stage(learnings: int, cycles: int) -> tuple[str, str]:
+    """Compatibility shim over :func:`levi.growth.stages.stage_for`.
+
+    Under the nightly cadence one cycle runs per day, so ``cycles``
+    stands in for ``days_active``; ``corroborations`` and
+    ``curriculum_units`` are unavailable here and count as 0, which can
+    only *under*-advance the stage. Prefer ``stage_for(gather_stats(…))``
+    when the full counters are available.
+    """
+    from levi.growth.stages import stage_for
+
     for name, val in (("learnings", learnings), ("cycles", cycles)):
         if not isinstance(val, int) or val < 0:
             raise ValueError(
                 "developmental_stage: %s must be a non-negative int, got %r"
                 % (name, val)
             )
-    name, blurb = "newborn", _STAGES[0][2]
-    for threshold, sname, sblurb in _STAGES:
-        if learnings >= threshold:
-            name, blurb = sname, sblurb
-    return name, f"{blurb} ({learnings} learnings over {cycles} cycles)"
+    res = stage_for(
+        {
+            "learnings": learnings,
+            "days_active": cycles,
+            "corroborations": 0,
+            "curriculum_units": 0,
+        }
+    )
+    return res["name"], f"{res['blurb']} ({learnings} learnings over {cycles} cycles)"

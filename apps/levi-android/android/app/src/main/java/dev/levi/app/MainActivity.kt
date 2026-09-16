@@ -3,6 +3,7 @@ package dev.levi.app
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,9 +13,11 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import dev.levi.app.databinding.ActivityMainBinding
 import dev.levi.app.settings.AppLock
+import org.json.JSONObject
 
 /**
  * WebView shell hosting the LEVI web client (the Talk UI from web/).
@@ -24,8 +27,34 @@ import dev.levi.app.settings.AppLock
  */
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        /**
+         * Spoken/transcribed query handed off by the assistant flow
+         * ([AssistActivity], voice session). Shown in a banner and offered
+         * to the web UI via the documented `window.leviVoiceQuery` hook.
+         */
+        const val EXTRA_VOICE_QUERY = "dev.levi.app.extra.VOICE_QUERY"
+
+        /** When true, show the voice-input affordance on launch. */
+        const val EXTRA_START_VOICE = "dev.levi.app.extra.START_VOICE"
+    }
+
     private lateinit var binding: ActivityMainBinding
     private var currentUrl: String? = null
+    private var pendingVoiceQuery: String? = null
+
+    private val voiceInputLauncher =
+        registerForActivityResult(
+            androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult(),
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val heard = result.data
+                    ?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                    ?.firstOrNull { it.isNotBlank() }
+                if (!heard.isNullOrBlank()) deliverVoiceQuery(heard)
+            }
+            // Cancelled or empty: stay in the chat, nothing to report.
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +108,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 binding.progress.visibility = View.GONE
+                // Deliver any voice query that arrived before the chat loaded.
+                pendingVoiceQuery?.let { q ->
+                    pendingVoiceQuery = null
+                    offerQueryToPage(q)
+                }
             }
 
             override fun onReceivedError(
@@ -98,6 +132,96 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.webView.webChromeClient = WebChromeClient()
+
+        handleVoiceIntent(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleVoiceIntent(intent)
+    }
+
+    /**
+     * Assistant entry points. Extras are only honored on explicit intents
+     * addressed to this app (the assistant flow uses explicit intents);
+     * anything arriving implicitly is treated as a plain launch.
+     */
+    private fun handleVoiceIntent(intent: Intent?) {
+        if (intent?.component?.packageName != packageName) return
+        val query = intent.getStringExtra(EXTRA_VOICE_QUERY)
+        if (!query.isNullOrBlank()) {
+            deliverVoiceQuery(query)
+        } else if (intent.getBooleanExtra(EXTRA_START_VOICE, false)) {
+            launchVoiceInput()
+        }
+        // Clear so a rotation or revisit doesn't replay the voice flow.
+        intent.removeExtra(EXTRA_VOICE_QUERY)
+        intent.removeExtra(EXTRA_START_VOICE)
+    }
+
+    /**
+     * Shows the transcribed query in a dismissible banner and offers it to
+     * the web chat through the documented `window.leviVoiceQuery(text)`
+     * hook when the page implements it. The banner is the honest fallback:
+     * the user's words are always visible even if the web UI hasn't adopted
+     * the hook yet.
+     */
+    private fun deliverVoiceQuery(query: String) {
+        val banner = binding.voiceBanner
+        banner.text = getString(R.string.voice_heard_banner, query)
+        banner.visibility = View.VISIBLE
+        banner.setOnClickListener { banner.visibility = View.GONE }
+        if (binding.webView.visibility != View.VISIBLE) {
+            // Chat isn't loaded yet (no server configured, or still
+            // loading): hold the query and deliver after load.
+            pendingVoiceQuery = query
+            return
+        }
+        offerQueryToPage(query)
+    }
+
+    private fun offerQueryToPage(query: String) {
+        val quoted = JSONObject.quote(query)
+        binding.webView.evaluateJavascript(
+            "(typeof window.leviVoiceQuery === 'function')",
+        ) { isFn ->
+            if (isFn == "true") {
+                binding.webView.evaluateJavascript(
+                    "window.leviVoiceQuery($quoted)",
+                    null,
+                )
+            }
+            // Absent hook: the banner already shows the query. Nothing
+            // else to do — never pretend the chat received it.
+        }
+    }
+
+    /**
+     * Voice-input affordance: delegates to the *system* speech recognizer
+     * (RecognizerIntent), so LEVI needs no microphone permission and no
+     * cloud STT of its own. Fails honestly where no recognizer exists.
+     */
+    private fun launchVoiceInput() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM,
+            )
+            putExtra(
+                RecognizerIntent.EXTRA_PROMPT,
+                getString(R.string.voice_prompt),
+            )
+        }
+        try {
+            voiceInputLauncher.launch(intent)
+        } catch (e: Exception) {
+            Toast.makeText(
+                this,
+                getString(R.string.voice_no_recognizer),
+                Toast.LENGTH_SHORT,
+            ).show()
+        }
     }
 
     override fun onResume() {
@@ -113,6 +237,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_voice -> {
+                launchVoiceInput()
+                true
+            }
             R.id.action_settings -> {
                 openSettings()
                 true

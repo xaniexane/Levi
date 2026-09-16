@@ -27,6 +27,8 @@ from levi.growth.reflect import (
     reflect_rules_detailed,
 )
 
+from levi.growth.stages import gather_stats, stage_for
+
 __all__ = [
     "run_cycle",
     "status",
@@ -40,6 +42,8 @@ __all__ = [
     "assert_no_sentience_claim",
     "check_no_sentience_claim",
     "developmental_stage",
+    "stage_for",
+    "gather_stats",
     "growth_dir",
     "read_entries",
 ]

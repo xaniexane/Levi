@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Describes LEVI's voice interaction to the system. Referenced from the
+     VoiceInteractionService's android.voice_interaction meta-data. -->
+<voice-interaction-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:sessionService="dev.levi.app.voice.LeviVoiceInteractionSessionService"
+    android:supportsAssist="true"
+    android:supportsLaunchVoiceAssistFromKeyguard="false" />
