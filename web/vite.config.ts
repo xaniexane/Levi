@@ -164,7 +164,9 @@ export default defineConfig(({ command, isPreview }) => ({
     // Dev-only /__app-env, read by scripts/check-auth-invariant.mjs.
     appEnvPlugin(),
     // PWA head + ?install=1 tutorial page; runs before Start/Nitro.
-    grokPwaPlugin(),
+    // Skipped on LEVI-controlled builds (LEVI_SELFHOST=1): the platform
+    // branding injector never runs there, so no "Created with Grok" pill.
+    ...(process.env.LEVI_SELFHOST === "1" ? [] : [grokPwaPlugin()]),
     tailwindcss(),
     tanstackStart(),
     ...(command === "build" || isPreview

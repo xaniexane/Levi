@@ -5670,6 +5670,14 @@ def main():
 
     _register_builder_parser(sub)
     # === BUILDER-REGION-END ===
+    # === SERVE-REGION-BEGIN: serve command wiring ===
+    # Keep ALL serve wiring inside this delimited region — do not scatter
+    # serve hunks elsewhere in this file.
+    from levi.serve.server import cmd_serve as _cmd_serve
+    from levi.serve.server import register_serve_parser as _register_serve_parser
+
+    _register_serve_parser(sub)
+    # === SERVE-REGION-END ===
     uni_p = sub.add_parser("unified", help="LEVI Daemon Core unified cycle")
     uni_p.add_argument("--cycle", default=None, help="Run one cycle for task text")
     uni_p.add_argument(
@@ -6965,6 +6973,9 @@ def main():
 
     cmds["build"] = _cmd_build
     # === BUILDER-REGION-END ===
+    # === SERVE-REGION-BEGIN: serve command dispatch ===
+    cmds["serve"] = _cmd_serve
+    # === SERVE-REGION-END ===
     fn = cmds.get(args.command)
     if fn:
         try:

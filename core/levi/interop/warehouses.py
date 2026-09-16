@@ -75,6 +75,7 @@ CLI_COMMANDS: Dict[str, List[str]] = {
     "memory-retrieval": [],
     "rag": [],
     "oath": [],
+    "serve": ["serve", "python -m levi.serve"],
 }
 
 
@@ -292,7 +293,7 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "service directory, daemon automations and supervision, the "
             "perpetual hunt/pulse engine, and the bot service registry."
         ),
-        "shelves": ["galaxy", "daemon", "perpetual", "bot-services"],
+        "shelves": ["galaxy", "daemon", "perpetual", "bot-services", "serve"],
         "strategy": "services",
         "pull_hint": "python -m levi.galaxy services  ·  levi daemon  ·  python -m levi.perpetual pulse",
     },

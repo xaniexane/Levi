@@ -104,6 +104,8 @@ def test_manifest_registers_all_modules():
         "doors",
         # craft (perpetual-hunt wave-014: lost crafts revived)
         "craft",
+        # serve (hosting wave: LEVI-native static file server)
+        "serve",
     }
 
 

@@ -712,6 +712,13 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- serve: LEVI-native static file server (pill-free self-hosting) ------
+    # stdlib-only HTTP server with SPA fallback; the pure self-reliant half
+    # of the hosting story (docs/HOSTING.md). Requires nothing.
+    "serve": {
+        "provides": ["serve.static"],
+        "requires": [],
+    },
 }
 
 
