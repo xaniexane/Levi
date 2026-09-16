@@ -26,7 +26,8 @@ new, sectioned, diff-previewable format.
 }
 ```
 
-- `format` must be `"levi-lifepack"`, `version` must be `1`. Import refuses
+- `format` must be `"levi-lifepack"`, `version` must be `1` or `2` (see
+  [Format version 2](#format-version-2--duplicate-yourself)). Import refuses
   anything else with a plain-language `LifepackError`.
 - Every file write during import is atomic (temp file + rename).
 
@@ -124,7 +125,71 @@ Note: this intentionally does **not** reuse the existing `export`/`import`
 - **No secrets, by filter not by promise.** The filter is heuristic. Anything
   genuinely secret belongs in the vault (`levi vault`), not in settings or
   memory content.
-- **Version 1 only.** Future versions must bump `version` and refuse
-  gracefully (already the behavior for anything ≠ 1).
+- **Versions 1 and 2.** v1 packs (four core sections) are still accepted on
+  import; exports always write the newest version. Anything else is refused
+  with a plain-language `LifepackError`.
 - Re-importing the same pack is a **no-op**: import is idempotent, and
   repeated imports write nothing.
+
+---
+
+## Format version 2 — duplicate yourself
+
+v2 is the life pack that lets LEVI **duplicate itself**: everything needed
+to stand up a twin of this instance on another machine, in one offline JSON
+bundle. Exports write v2; v1 packs still validate and import unchanged.
+
+### What's new
+
+Four informational snapshot sections, added to the four core ones:
+
+| Section        | What it carries | On import |
+|----------------|-----------------|-----------|
+| `capabilities` | the capability-atlas snapshot from `levi.interop.atlas.export_atlas` (when the atlas has landed; otherwise `{"status": "atlas-not-landed"}`) | verified, reported, never written — capabilities ship with the code |
+| `growth`       | developmental stage + learnings count (memory entries tagged `growth`) + recent journal entries (last 10), read-only via the public `levi.growth.journal` API | verified, reported, never written — growth state belongs to the growth loop |
+| `workflows`    | available workflow names + summaries from `levi.workflows.list_workflows` (step bodies travel with the code) | verified, reported, never written |
+| `manifest`     | pack provenance: format, pack version, LEVI version, `exported_at`, and `source_machine_id` | reported, never written |
+
+`source_machine_id` is `sha256(hostname)` truncated to 16 hex chars —
+**stable per machine, non-personal, and not reversible** to a hostname,
+username, or anything else about the machine. It exists so an operator can
+tell which machine a pack came from when juggling several. It is documented
+in the pack itself (`source_machine_id_note`).
+
+### What travels / what never travels
+
+**Travels (v2):** identity, known settings files, durable memory
+(semantic / preference / procedural / relationship), the skill manifest,
+the capability-atlas snapshot, the growth developmental snapshot, the
+workflow registry snapshot, and the pack manifest.
+
+**Never travels:** secrets and credentials of any kind (filtered on
+import — secret-looking settings keys and memory content are skipped and
+reported); ephemeral memory (`working`, `episodic`) and scoped/device state;
+playbook and workflow bodies (they travel with the code); anything outside
+the known settings files and the memory store; and growth *state itself* —
+the pack carries a read-only snapshot of where this LEVI is
+developmentally, not the journal or watermarks. The twin starts its own
+growth loop from its own experiences.
+
+### The duplicate-yourself procedure
+
+```bash
+# Machine A — export (offline, user-controlled)
+levi lifepack export ~/backup/lifepack-A.json
+
+# carry the file to machine B (USB, scp, anything — it's just JSON)
+
+# Machine B — preview first, then import
+levi lifepack import ~/backup/lifepack-A.json --preview   # diff, no writes
+levi lifepack import ~/backup/lifepack-A.json --yes       # confirmed import
+
+# verify the twin
+levi megazord status
+```
+
+`levi megazord status` reports the unified organism state on machine B —
+identity landed, durable memory count, registered skills/workflows, growth
+stage — so you can confirm the twin matches the source before you trust it.
+Growth journal entries from machine A appear in the pack as a snapshot
+only; machine B's growth loop starts fresh from its own experiences.
