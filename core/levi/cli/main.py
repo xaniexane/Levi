@@ -4531,6 +4531,11 @@ def cmd_archive(args):
     _axis1_delegate("archive", args)
 
 
+def cmd_identity(args):
+    """Identity variant engine: Echo/Mandella/REIM/RIEM (passthrough)."""
+    _axis1_delegate("identity", args)
+
+
 def cmd_galaxy(args):
     """Galaxy ecosystem: list/search/install packages (passthrough)."""
     _axis1_delegate("galaxy", args)
@@ -6576,6 +6581,15 @@ def main():
         nargs=argparse.REMAINDER,
         help="passed through to `python -m levi.archive`",
     )
+    id_p = sub.add_parser(
+        "identity",
+        help="Identity variant engine: Echo/Mandella/REIM/RIEM",
+    )
+    id_p.add_argument(
+        "argv",
+        nargs=argparse.REMAINDER,
+        help="passed through to `python -m levi.identity`",
+    )
     gal_p = sub.add_parser("galaxy", help="Galaxy ecosystem: packages, services")
     gal_p.add_argument(
         "argv",
@@ -6999,6 +7013,7 @@ def main():
     # === MEGAZORD-AXIS1-REGION-BEGIN: axis-1 dispatch registration ===
     # Parallel tracks: keep ALL axis-1 dispatch hunks inside this region.
     cmds["archive"] = cmd_archive
+    cmds["identity"] = cmd_identity
     cmds["galaxy"] = cmd_galaxy
     cmds["methods"] = cmd_methods
     cmds["revival"] = cmd_revival

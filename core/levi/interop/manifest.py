@@ -740,6 +740,25 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- identity: Echo/Mandella variant engine with REIM/RIEM ----------------
+    # Echo reflects an identity (coherence + fractures); Mandella reconstructs
+    # it into controlled variants (evolution engine, not just repair); REIM
+    # composts outcomes into lessons; RIEM compresses lessons into heritable
+    # genome via controlled compression (signal kept, noise dropped).
+    # --scope all interpenetrates every manifest-declared module. Local-only,
+    # stdlib-only, deterministic under seed. Requires nothing.
+    "identity": {
+        "provides": [
+            "identity.echo",
+            "identity.mandella",
+            "identity.reim",
+            "identity.riem",
+            "identity.genome",
+            "identity.cycle",
+            "identity.scope-all",
+        ],
+        "requires": [],
+    },
 }
 
 

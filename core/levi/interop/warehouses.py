@@ -161,6 +161,8 @@ CLI_COMMANDS.update(
         "liberation": ["python -m levi.liberation"],
         # -- sentinel (source-sync `the-pack`: defensive blue-team host tooling)
         "sentinel": ["sentinel"],
+        # -- identity: Echo/Mandella variant engine with REIM/RIEM ----------
+        "identity": ["identity"],
     }
 )
 

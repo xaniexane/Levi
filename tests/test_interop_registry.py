@@ -109,6 +109,9 @@ def test_manifest_registers_all_modules():
         # cybrus (Chauncey's own Security & Identity Layer — intentionally
         # declared in the manifest; snapshot updated in round-2 review)
         "cybrus",
+        # identity (Echo/Mandella variant engine with REIM/RIEM controlled
+        # compression; --scope all interpenetrates every declared module)
+        "identity",
     }
 
 
