@@ -172,24 +172,39 @@ class Khipu:
         """The Puruchuco check: every cord's stored roll-up must equal the
         sum of its own knots plus its children's roll-ups. Returns a list
         of discrepancies — empty means the books balance. Deny-closed: it
-        reports, never silently re-ties."""
+        reports, never silently re-ties. Missing pendants are *reported*,
+        never raised."""
         problems = []
+
+        def subtotal(cord_name: str, seen: set[str]) -> int:
+            # Roll-up over the present subgraph only; missing nodes
+            # contribute 0 here because they are reported separately below.
+            node = self._cords.get(cord_name)
+            if node is None or cord_name in seen:
+                return 0
+            seen.add(cord_name)
+            return node.own_total() + sum(subtotal(c, seen)
+                                          for c in node.children)
+
         for name, node in self._cords.items():
-            expected = node.own_total() + sum(self.rollup(c) for c in node.children)
-            # rollup() is defined identically, so a mismatch here would mean
-            # structural corruption (e.g. a child listed twice / missing).
-            children_sum = sum(self._cords[c].own_total()
-                               + sum(self.rollup(g) for g in self._cords[c].children)
-                               for c in node.children)
-            if expected != node.own_total() + children_sum:
+            for c in node.children:
+                if c not in self._cords:
+                    problems.append(f"cord {name!r}: pendant {c!r} is missing")
+            expected = node.own_total() + sum(
+                subtotal(c, set()) for c in node.children
+                if c in self._cords)
+            # Independent recomputation: a mismatch here means structural
+            # corruption (e.g. a cycle or double-counted pendant).
+            check = node.own_total() + sum(
+                self._cords[c].own_total()
+                + sum(subtotal(g, set()) for g in self._cords[c].children)
+                for c in node.children if c in self._cords)
+            if expected != check:
                 problems.append(f"cord {name!r}: roll-up inconsistency")
             seen = set()
             dupes = [c for c in node.children if c in seen or seen.add(c)]
             if dupes:
                 problems.append(f"cord {name!r}: child listed twice: {dupes}")
-            for c in node.children:
-                if c not in self._cords:
-                    problems.append(f"cord {name!r}: pendant {c!r} is missing")
         return problems
 
     def summary(self) -> str:
