@@ -9,6 +9,7 @@ import argparse
 import json
 import os
 import sys
+import types
 from pathlib import Path
 
 # Only touch sys.path when the package isn't already importable (e.g. a fresh
@@ -788,10 +789,7 @@ def cmd_go(args):
         else:
             from levi.cli.main import cmd_ladder
 
-            class A:
-                pass
-
-            cmd_ladder(A())
+            cmd_ladder(types.SimpleNamespace())
     print("")
     from levi.ops.layer import OperationalLayer
 

@@ -106,6 +106,29 @@ overrides, dispatches to the handler, catches handler crashes into the run
 log (never raises), and `automation.narrate` renders the result in the
 spark voice — report first, flavor second, failures stated plainly.
 
+### Custom services
+
+A service of type `custom` has no built-in behavior — give it one with
+`register_handler`:
+
+```python
+from levi.bot.services import ServiceResult, register_handler
+
+def my_handler(params):
+    return ServiceResult(ok=True, report="hello from my service")
+
+register_handler("my-service", my_handler)
+```
+
+`register_handler(name, fn)` is fail-closed: it raises `ValueError` for a
+bad name or a non-callable `fn`, and it refuses names that collide with the
+four built-ins (`morning-briefing`, `bounty-watch`, `backup-status`,
+`research-brief`) — built-in handlers are not overridable by design.
+Registration is process-local (not persisted); call it from your
+entrypoint or plugin module before running the service. Registered names
+win over the honest `_handle_custom` refusal in `get_handler` /
+`get_handler_for`.
+
 ## Intent routing (chat → services)
 
 `chat.say(text)` checks a simple keyword/intent map *before* chatting — no

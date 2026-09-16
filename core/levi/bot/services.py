@@ -668,17 +668,34 @@ def _handle_custom(params: Dict[str, Any]) -> ServiceResult:
     return ServiceResult(
         ok=False,
         report=(
-            "Custom service '%s' has no built-in handler. Attach one via "
-            "the services API (see docs/BOT.md) or convert it to a "
-            "briefing/monitor/research type."
+            "Custom service '%s' has no handler registered. Attach one with "
+            "register_handler(name, fn) — e.g. "
+            "`from levi.bot.services import register_handler` — or convert "
+            "it to a briefing/monitor/research type."
         )
         % params.get("name", "?"),
-        notes=["custom services need a handler registered in code"],
+        notes=[
+            "custom services need a handler: "
+            "register_handler('%s', my_handler)" % params.get("name", "?")
+        ],
     )
 
 
 # Handler dispatch table. Tests may monkeypatch entries with stubs.
+# Built-in handlers are seeded lazily; user-registered custom handlers land
+# in this same dict via register_handler() and can never shadow a built-in
+# (overrides raise ValueError). The module dict is the registry on purpose:
+# get_handler()/get_handler_for() and the monkeypatched tests all read one
+# source of truth.
 _HANDLERS: Dict[str, Callable[[Dict[str, Any]], ServiceResult]] = {}
+
+# Names the bot itself owns. Built-in handlers are not overridable: a custom
+# handler must pick its own name. This is a deliberate product decision —
+# the daily digest / watchers have stable, auditable behavior, and a custom
+# name collision would silently reroute them.
+_BUILTIN_HANDLER_NAMES = frozenset(
+    {"morning-briefing", "bounty-watch", "backup-status", "research-brief"}
+)
 
 
 def _handlers() -> Dict[str, Callable[[Dict[str, Any]], ServiceResult]]:
@@ -697,6 +714,46 @@ def _handlers() -> Dict[str, Callable[[Dict[str, Any]], ServiceResult]]:
 def get_handler(name: str) -> Callable[[Dict[str, Any]], ServiceResult]:
     """Return the handler for a service name (custom → default stub)."""
     return _handlers().get(name, _handle_custom)
+
+
+def register_handler(
+    name: str, fn: Callable[[Dict[str, Any]], ServiceResult]
+) -> Callable[[Dict[str, Any]], ServiceResult]:
+    """Register a custom service handler under ``name``.
+
+    ``fn`` is called as ``fn(params)`` and should return a
+    :class:`ServiceResult`. Registration is process-local (it is not
+    persisted to ``services.json``); call it from your own entrypoint or
+    plugin module before running the service.
+
+    Validation is fail-closed:
+
+    * ``name`` must be a non-empty ``str`` — else :class:`ValueError`.
+    * ``fn`` must be callable — else :class:`ValueError`.
+    * ``name`` must not collide with a built-in handler
+      (``morning-briefing``, ``bounty-watch``, ``backup-status``,
+      ``research-brief``) — else :class:`ValueError`. Built-ins are not
+      overridable by design: they are the bot's auditable core services,
+      and a collision would silently reroute them.
+
+    A registered name wins over the :func:`_handle_custom` honest-refusal
+    fallback in :func:`get_handler` and :func:`get_handler_for`.
+    """
+    if not isinstance(name, str) or not name:
+        raise ValueError(
+            "register_handler: name must be a non-empty str, got %r" % (name,)
+        )
+    if not callable(fn):
+        raise ValueError(
+            "register_handler: fn must be callable, got %r" % (fn,)
+        )
+    if name in _BUILTIN_HANDLER_NAMES:
+        raise ValueError(
+            "register_handler: %r is a built-in handler and cannot be "
+            "overridden; choose a custom name" % name
+        )
+    _handlers()[name] = fn
+    return fn
 
 
 def get_handler_for(definition: "ServiceDefinition") -> Callable[[Dict[str, Any]], ServiceResult]:
