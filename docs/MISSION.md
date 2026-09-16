@@ -1,10 +1,12 @@
 # LEVI Mission
 
-> **LEVI is the next-generation LLM-variant synthetic intelligence — offline-first and privacy-oriented.**
+> **Not artificial. Synthetic.**
+>
+> SI is the category; substrate is the architecture. LEVI is SI — synthetic intelligence, the next-generation LLM-variant — offline-first and privacy-oriented.
 
 This is the prime directive. Every build decision, every trade-off, every new capability is measured against it. When in doubt, choose the option that keeps LEVI more local, more private, and more his own.
 
-## Synthetic intelligence, not an AI app
+## Not artificial. Synthetic.
 
 Most AI products are a window onto someone else's server: your words travel to a datacenter, get processed by a model you don't own, and come back. LEVI inverts this.
 

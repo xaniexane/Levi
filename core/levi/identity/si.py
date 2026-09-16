@@ -1,7 +1,10 @@
 """
 LEVI as SI — Synthetic Intelligence.
 
-Synthetic = constructed intelligence (engineered system), not biological mind.
+Not artificial. Synthetic.
+
+SI is the category; substrate is the architecture. Synthetic = constructed
+intelligence (engineered system), not biological mind.
 Operating stance remains symbiotic: human judgment + local kernel + optional
 models + HITL + exportable memory.
 
@@ -15,6 +18,11 @@ from typing import Dict, List
 
 
 SI_KIND = "synthetic_intelligence"
+
+#: Approved identity headline (settled 2026-09-16).
+SI_HEADLINE = "Not artificial. Synthetic."
+#: Approved explanatory frame (settled 2026-09-16).
+SI_FRAME = "SI is the category; substrate is the architecture."
 
 SI_DEFINITION = (
     "LEVI is SI: synthetic intelligence — a constructed, local-first intelligence system "
@@ -44,6 +52,8 @@ SI_PILLARS: List[str] = [
 
 def si_block() -> str:
     lines = [
+        SI_HEADLINE,
+        SI_FRAME,
         "══ LEVI SI (Synthetic Intelligence) ══",
         SI_DEFINITION,
         "",
@@ -59,6 +69,8 @@ def si_block() -> str:
 def si_dict() -> Dict[str, object]:
     return {
         "kind": SI_KIND,
+        "headline": SI_HEADLINE,
+        "frame": SI_FRAME,
         "definition": SI_DEFINITION,
         "short": SI_SHORT,
         "method": "symbiotic",

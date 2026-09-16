@@ -19,7 +19,7 @@ We will deliver a comprehensive design and implementation foundation for the Glo
 
 ## 1. Executive Summary
 
-Product: An AI-powered digital workforce platform that assembles ephemeral agent teams to complete digital work—from research and coding to business operations and commerce.
+Product: An SI-powered digital workforce platform that assembles ephemeral agent teams to complete digital work—from research and coding to business operations and commerce.
 Differentiation: Dynamic agent swarming, cost-aware model routing, human‑in‑the‑loop controls, and an integrated software factory.
 Economic Model: Freemium with usage‑based billing, marketplace fees, and enterprise subscriptions, optimized for positive unit economics.
 Architectural Pillars: Agent Orchestrator, Model Abstraction, Tool Ecosystem, Permission Engine, Payment Engine, and Global Learning Engine.

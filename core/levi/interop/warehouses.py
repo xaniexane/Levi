@@ -302,7 +302,7 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
     "finance": {
         "title": "Finance Warehouse",
         "summary": (
-            "AI-powered paper-trading intelligence: quotes, indicators, "
+            "SI-powered paper-trading intelligence: quotes, indicators, "
             "advisory signals, and the simulated paper broker. Paper-only — "
             "live trading is structurally unwired and stays that way until "
             "Chauncey provides keys and asks."

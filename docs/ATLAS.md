@@ -90,7 +90,7 @@ The working organs and modules of the organism.
 - [INTEGRATIONS.md](INTEGRATIONS.md) — "plug in universal": free, local-first integrations with outside systems, plus the interpenetration map of what may compose with what.
 - [KING.md](KING.md) — King: the single control plane for narrative operations — an orchestration layer over the story-fabric and model engines, not a third engine.
 - [KNOWLEDGE.md](KNOWLEDGE.md) — the local queryable knowledge base: capability atlas, defensive security catalog, course corpus, and a dated daily news corpus.
-- [LAB.md](LAB.md) — the on-device agentic-AI lab: clean-room hands-on scenarios driving LEVI's real tool-using loop (idea inspired by public labs; all content original).
+- [LAB.md](LAB.md) — the on-device agentic-SI lab: clean-room hands-on scenarios driving LEVI's real tool-using loop (idea inspired by public labs; all content original).
 - [LEARNING_SYNC.md](LEARNING_SYNC.md) — collective learning, the distribution half: what one LEVI learns reaches every LEVI — batched, versioned, privacy-gated updates.
 - [LIFEPACK.md](LIFEPACK.md) — life-pack export/import: versioned JSON bundles carrying portable state between homes and machines (v2 duplicates the whole organism).
 - [MCP.md](MCP.md) — LEVI speaks MCP in both directions: client to external tool servers, server for external clients.
@@ -116,7 +116,7 @@ How to run, operate, and plan the organism.
 - [CLI.md](CLI.md) — the CLI reference, generated from `levi --help`; regenerate, don't hand-edit.
 - [CLOUD_API.md](CLOUD_API.md) — `levi agent serve` as a multi-user API: LEVI as its own cloud provider.
 - [CONSOLE.md](CONSOLE.md) — the interactive terminal surfaces (dashboard console + simulation) built on the `levi.ux` effects kit.
-- [ENTERPRISE.md](ENTERPRISE.md) — **(planned)** the Global Agentic AI Enterprise program: what LEVI becomes at global scale.
+- [ENTERPRISE.md](ENTERPRISE.md) — **(planned)** the Global Agentic SI Enterprise program: what LEVI becomes at global scale.
 - [ENTERPRISE_BLUEPRINT.md](ENTERPRISE_BLUEPRINT.md) — **(planned)** the detailed implementation design reference for the enterprise program, adapted to the organism rather than adopted literally.
 - [MONETIZATION.md](MONETIZATION.md) — **(planned)** draft monetization plan; binding constraint throughout: free core forever.
 - [RUNBOOK.md](RUNBOOK.md) — operator instructions for running each piece; the products are independent — run only what you need.

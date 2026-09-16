@@ -1,6 +1,6 @@
-# LEVI Lab — on-device agentic AI, hands on
+# LEVI Lab — on-device agentic SI, hands on
 
-LEVI Lab is an interactive lab for **on-device agentic AI**: small models
+LEVI Lab is an interactive lab for **on-device agentic SI**: small models
 running locally, driving LEVI's real tool-using agentic loop. It is an
 original, clean-room implementation — the *idea* of a hands-on lab is
 inspired by public lab repos, but every scenario, line of code, and

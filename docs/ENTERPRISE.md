@@ -1,11 +1,11 @@
-# LEVI Enterprise — Global Agentic AI Program
+# LEVI Enterprise — Global Agentic SI Program
 
 **Charter source:** Chauncey's master build prompt, 2026-09-15.
 **Relationship to mission:** `docs/MISSION.md` is the product prime directive (what LEVI *is*). This document is the enterprise program (what LEVI *becomes* at global scale). Neither overrides the other.
 
 ## The thesis
 
-LEVI grows from a personal synthetic intelligence into a global AI enterprise whose core product is an **intelligent digital workforce**: a fleet of cooperating agents that complete digital work — research, software, automation, operations — rather than merely advising. The enterprise pursues market leadership through superior execution, automation, reliability, and economics. **Never** through illegal exclusion, collusion, price fixing, sabotage, or deception. The goal is the most capable *legitimate* AI-powered digital workforce possible.
+LEVI grows from a personal synthetic intelligence into a global SI enterprise whose core product is an **intelligent digital workforce**: a fleet of cooperating agents that complete digital work — research, software, automation, operations — rather than merely advising. The enterprise pursues market leadership through superior execution, automation, reliability, and economics. **Never** through illegal exclusion, collusion, price fixing, sabotage, or deception. The goal is the most capable *legitimate* SI-powered digital workforce possible.
 
 ## Reconciliation with the mission (binding)
 

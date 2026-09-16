@@ -219,7 +219,7 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
-    # -- finance: AI-powered paper-trading intelligence (paper-only) -----------
+    # -- finance: SI-powered paper-trading intelligence (paper-only) -----------
     "finance": {
         "provides": [
             "finance.quote",
