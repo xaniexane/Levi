@@ -94,11 +94,19 @@ def consolidate(
     store: Any = None,
     dry_run: bool = False,
     dedup_threshold: float = 0.5,
+    on_corroborate: Any = None,
 ) -> dict[str, Any]:
     """Write learnings to the memory store with dedup.
 
     Returns a report: ``{accepted, corroborated, skipped, writes}`` where
     ``writes`` lists the new entry ids (empty on dry-run).
+
+    ``on_corroborate``, when given, is a callable ``(entry_id, store)``
+    invoked (best-effort) each time a learning corroborates an existing
+    entry. The creed package registers
+    :func:`levi.creed.promotion.consolidation_corroboration_hook` here so
+    repeated corroboration feeds the creed promotion rule — without this
+    module ever importing the creed package.
 
     Raises ValueError when ``learnings`` is not a list or
     ``dedup_threshold`` is not within 0..1.
@@ -169,6 +177,14 @@ def consolidate(
                     importance=min(1.0, round(best.importance + 0.15, 3)),
                     metadata=md,
                 )
+                # Adapter hook: notify whoever counts corroborations
+                # (the creed promotion tracker). Best-effort — a failing
+                # hook must never break consolidation.
+                if on_corroborate is not None:
+                    try:
+                        on_corroborate(best.id, store)
+                    except Exception as exc:
+                        print("growth: on_corroborate hook failed (%s)" % exc)
             continue
 
         if dry_run:
