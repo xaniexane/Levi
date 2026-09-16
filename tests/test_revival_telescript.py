@@ -223,3 +223,26 @@ def test_guarded_executor_uses_first_permitting_token():
     assert ex.call("b.two", lambda: "ran-b") == "ran-b"
     with pytest.raises(ts.ActionRefused):
         ex.call("c.three", lambda: "nope")
+
+
+# -- signature encoding strictness -------------------------------------------
+
+def test_verify_rejects_noncanonical_signature_encoding():
+    """The last base64url char of a 32-byte HMAC carries only 2 significant
+    bits. Swapping it for a different char with the same top 2 bits decodes
+    to IDENTICAL bytes — verify() must still refuse the token (regression:
+    such tampered tokens used to verify ~1/4 of the time)."""
+    import base64
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
+    token = _cap()
+    payload_b64, sig_b64 = token.split(".")
+    last = sig_b64[-1]
+    alt = alphabet[(alphabet.index(last) ^ 0x01) % 64]  # flip low bit only
+    assert alt != last
+    tampered = payload_b64 + "." + sig_b64[:-1] + alt
+    # Prove the mechanism: same decoded bytes, different encoding.
+    assert ts._b64d(tampered.split(".")[1]) == ts._b64d(sig_b64)
+    with pytest.raises(ts.InvalidSignature):
+        ts.verify(tampered)
+    # The canonical original still verifies.
+    ts.verify(token)

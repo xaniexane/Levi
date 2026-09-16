@@ -202,6 +202,12 @@ def verify(
         raise MalformedToken(f"token is not valid base64url: {exc}") from exc
 
     expected = hmac.new(_get_secret(), payload_b64.encode("ascii"), hashlib.sha256).digest()
+    # Canonical-encoding check: the last base64url char of a 32-byte digest
+    # carries only 2 significant bits. Without this, swapping it for another
+    # char with the same top 2 bits decodes to identical bytes and a tampered
+    # token would verify. Reject non-canonical encodings outright.
+    if _b64e(sig_bytes) != sig_b64:
+        raise InvalidSignature("signature is not canonical base64url")
     if not hmac.compare_digest(sig_bytes, expected):
         raise InvalidSignature("HMAC verification failed")
 
