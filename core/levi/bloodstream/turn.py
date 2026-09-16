@@ -16,6 +16,8 @@ with their own reply — at most ONE may fire per turn, enforced here.
 
 from __future__ import annotations
 
+import functools
+import time
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
@@ -62,6 +64,36 @@ def reset_session_state() -> None:
     _sessions.clear()
     _clarifications.clear()
     _detail_levels.clear()
+
+
+# ---------------------------------------------------------------------------
+# Observability instrumentation (additive — measures, never steers)
+# ---------------------------------------------------------------------------
+
+_obs_stage_ms: Dict[str, float] = {}
+_obs_turn_t0: float = 0.0
+
+
+def _timed_stage(name: str) -> Callable:
+    """Decorator: record wall-clock ms for a stage function.
+
+    Additive observability instrumentation only — the wrapped function's
+    behavior is unchanged. Timings are consumed by the emission hook in
+    ``_finish``; a stage that never ran simply has no entry.
+    """
+
+    def deco(fn: Callable) -> Callable:
+        @functools.wraps(fn)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            t0 = time.perf_counter()
+            try:
+                return fn(*args, **kwargs)
+            finally:
+                _obs_stage_ms[name] = (time.perf_counter() - t0) * 1000.0
+
+        return wrapper
+
+    return deco
 
 
 # ---------------------------------------------------------------------------
@@ -139,6 +171,7 @@ def _assess_risk(text: str, route: RouteKind) -> Tuple[RiskLevel, str]:
 # ---------------------------------------------------------------------------
 
 
+@_timed_stage("companion_ei")
 def _stage_companion_ei(
     text: str, ctx: TurnContext
 ) -> Tuple[StageRecord, SessionEI, Dict[str, Any]]:
@@ -171,6 +204,7 @@ def _stage_companion_ei(
     )
 
 
+@_timed_stage("persona")
 def _stage_persona(
     text: str, ctx: TurnContext
 ) -> Tuple[StageRecord, Persona, BehaviorKind, Optional[str]]:
@@ -230,6 +264,7 @@ def _stage_persona(
     return record, persona, behavior, reply
 
 
+@_timed_stage("governor")
 def _stage_governor(
     text: str, ctx: TurnContext, route: RouteKind, base_risk: RiskLevel
 ) -> Tuple[StageRecord, bool, int, str]:
@@ -354,6 +389,13 @@ def _execute_model(
         holder["skills"] = [
             c.get("name") for s in transcript.steps for c in s.tool_calls
         ]
+        # Observability: keep name + args (redacted + hashed at emission;
+        # raw secret values never reach the corpus).
+        holder["tool_calls"] = [
+            {"name": c.get("name"), "args": c.get("args") or {}}
+            for s in transcript.steps
+            for c in s.tool_calls
+        ]
         reply = transcript.final.strip() or str(transcript)
         holder["reply"] = reply
         prefix = ei_hint.strip()
@@ -400,6 +442,10 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
     trace_id = new_trace_id()
     stages: List[StageRecord] = []
     data_dir = Path(ctx.data_dir) if ctx.data_dir else None
+    # Observability clock: reset per turn; consumed additively in _finish.
+    _obs_stage_ms.clear()
+    global _obs_turn_t0
+    _obs_turn_t0 = time.perf_counter()
 
     def data_sub(name: str) -> Optional[Path]:
         return (data_dir / name) if data_dir else None
@@ -499,6 +545,7 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
 
         # 6. Policy gate — Plan → Preview → Permission → Execute → Verify → Receipt
         engine = PolicyEngine(auto_approve_up_to=ctx.auto_approve_up_to)
+        _gate_t0 = time.perf_counter()
         gate: GateOutcome = run_gated(
             engine=engine,
             description=action_desc,
@@ -512,6 +559,7 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
             affected_systems=["local"],
             reversible=True,
         )
+        _obs_stage_ms["policy"] = (time.perf_counter() - _gate_t0) * 1000.0
         stages.append(
             StageRecord(
                 stage="policy",
@@ -562,6 +610,7 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
                 error=None,
                 composted=None,
                 data_dir=data_dir,
+                tool_calls=holder.get("tool_calls"),
             )
         if not gate.approved:
             return _finish(
@@ -582,6 +631,7 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
                 error=None,
                 composted=None,
                 data_dir=data_dir,
+                tool_calls=holder.get("tool_calls"),
             )
 
         reply = holder.get("reply") or "done."
@@ -612,6 +662,7 @@ def run_turn(text: str, ctx: Optional[TurnContext] = None) -> TurnResult:
             error=None,
             composted=None,
             data_dir=data_dir,
+            tool_calls=holder.get("tool_calls"),
         )
 
     except Exception as exc:  # noqa: BLE001 — the turn must never crash the caller
@@ -667,10 +718,12 @@ def _finish(
     error: Optional[str],
     composted: Optional[Dict[str, Any]],
     data_dir: Optional[Path],
+    tool_calls: Optional[List[Dict[str, Any]]] = None,
 ) -> TurnResult:
     """Memory + trace + promotion eligibility. Shared by every exit path —
     no turn leaves without a trace."""
     # Memory: one episodic entry per turn
+    _mem_t0 = time.perf_counter()
     memory_ok = False
     try:
         from levi.memory.store import MemoryStore
@@ -689,6 +742,7 @@ def _finish(
         memory_ok = True
     except Exception:
         pass  # memory is durable-nice-to-have; never break the turn
+    _obs_stage_ms["memory"] = (time.perf_counter() - _mem_t0) * 1000.0
     stages.append(
         StageRecord(
             stage="memory",
@@ -719,12 +773,14 @@ def _finish(
         trace.setdefault(f, None)
     trace_path = None
     trace_ok = False
+    _trace_t0 = time.perf_counter()
     try:
         writer = TraceWriter(base_dir=(data_dir / "traces") if data_dir else None)
         trace_path = writer.write(trace)
         trace_ok = trace_path is not None
     except Exception:
         pass
+    _obs_stage_ms["trace"] = (time.perf_counter() - _trace_t0) * 1000.0
     trace_stage.decision = "written" if trace_ok else "failed"
     trace_stage.detail = {"path": str(trace_path) if trace_path else None}
 
@@ -757,7 +813,7 @@ def _finish(
             },
         )
 
-    return TurnResult(
+    result = TurnResult(
         reply=reply,
         route=route,
         behavior=behavior,
@@ -771,4 +827,26 @@ def _finish(
         ok=outcome != "failed",
         error=error,
         stages=stages,
+        outcome=outcome,
+        session_id=ctx.session_id,
+        tool_calls=tool_calls or [],
     )
+
+    # Observability: ONE additive call — the finished turn round-trips
+    # into the decision-trace corpus (~/.levi/observability). The hook
+    # never raises and never changes the turn; it only observes.
+    try:
+        from levi.observability.hook import emit_turn_trace
+
+        emit_turn_trace(
+            result,
+            text,
+            stage_timings=dict(_obs_stage_ms),
+            duration_ms=(time.perf_counter() - _obs_turn_t0) * 1000.0,
+            composted=composted,
+            base_dir=(data_dir / "observability") if data_dir else None,
+        )
+    except Exception:
+        pass
+
+    return result

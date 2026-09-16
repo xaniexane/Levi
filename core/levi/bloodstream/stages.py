@@ -78,6 +78,13 @@ class TurnResult:
     ok: bool = True
     error: Optional[str] = None
     stages: List[StageRecord] = field(default_factory=list)
+    # Observability surface (additive): the pipeline's own outcome string
+    # ("replied" | "denied" | "governed" | "awaiting_permission" | "failed"),
+    # the session id, and the tool calls observed (name + args; redacted and
+    # hashed at emission so raw values never reach the corpus).
+    outcome: str = "replied"
+    session_id: str = "default"
+    tool_calls: List[Dict[str, Any]] = field(default_factory=list)
 
     def stage_names(self) -> List[str]:
         return [s.stage for s in self.stages]
