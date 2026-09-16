@@ -26,7 +26,7 @@ atlas contract itself (`export_atlas()` / `write_atlas()`), see
 | `forge` — Forge | forge | LEVI's own code home: local git hosting, issues, PRs, unmetered local CI, one-command full export |
 | `operations` — Operations | signals, creed, promises, decisions, interruptions, snapshots, drift, teachback, energy, friction, sweeps, premortem | LEVI's operating layer: graded signal plane, frozen creed of laws, ledgers and rituals of a reliable operator |
 | `commons` — Commons | communities, threads, bridging, classifieds, charters, commitments, recap, feedreader, feedlab | Portable social fabric: leave any platform, keep the community; consensus without a central moderator; a feed-ranking transparency lab |
-| `craft` — Craft | ephemera, packs, dials, capproto, mailtriage, vaults, canvas, discover, presence, honestsearch, recommender | Sovereign instruments: true-delete channels, attention dials, local mail triage, LAN presence rooms, clean-room search |
+| `craft` — Craft | ephemera, packs, shareware, dials, capproto, mailtriage, vaults, canvas, discover, presence, honestsearch, recommender | Sovereign instruments: true-delete channels, attention dials, local mail triage, LAN presence rooms, clean-room search, honest trial grants |
 
 Inventory counts are **real** — counted from the actual modules,
 playbooks, records, and live runtime state, never estimated.

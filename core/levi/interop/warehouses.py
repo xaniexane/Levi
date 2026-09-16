@@ -133,6 +133,9 @@ CLI_COMMANDS.update(
         "ephemera": ["python -m levi.ephemera"],
         "feedreader": ["python -m levi.feedreader"],
         "packs": ["python -m levi.packs"],
+        # -- shareware (perpetual-hunt daily 2026-09-16: the honest
+        # markets — Apogee's episode model remixed as local trial grants)
+        "shareware": ["python -m levi.shareware"],
         "commitments": ["python -m levi.commitments"],
         "recap": ["python -m levi.recap"],
         "classifieds": ["python -m levi.classifieds"],
@@ -453,11 +456,14 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "retention, a versioned workbench canvas, ritualized discovery "
             "over your own corpus, LAN presence rooms with no account and no "
             "server, clean-room link-graph search, and goal-directed "
-            "recommendations with no engagement mining."
+            "recommendations with no engagement mining, and an honest trial "
+            "engine that sells premium packs the shareware way: a real free "
+            "slice, local receipts, no data harvest."
         ),
         "shelves": [
             "ephemera",
             "packs",
+            "shareware",
             "dials",
             "capproto",
             "mailtriage",

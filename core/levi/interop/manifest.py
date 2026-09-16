@@ -573,6 +573,16 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- shareware: the honest trial engine (perpetual-hunt 2026-09-16:
+    # the honest markets — Apogee's episode model remixed as local,
+    # receipted trial grants; trials that harvest nothing) ---------------
+    "shareware": {
+        "provides": [
+            "shareware.grants",
+            "shareware.trials",
+        ],
+        "requires": ["packs"],
+    },
     "commitments": {
         "provides": [
             "commitments.devices",

@@ -383,6 +383,16 @@ REPORTS = [
         "notes": ("Web-verified 2026-09-16; guesses marked; findings carry "
                   "embedded provenance. JSONL is the hunt-record format."),
     },
+    {
+        "slug": "honest-markets-20260916",
+        "files": ["findings.jsonl"],
+        "parser": parse_findings_jsonl,
+        "tag": "honest",
+        "notes": ("Web-verified 2026-09-16; daily perpetual-hunt run, "
+                  "giant-patterns vein: the honest markets "
+                  "(shareware, SourceForge/DevShare, Yahoo Pipes, "
+                  "AltaVista). Skepticism flags embedded per record."),
+    },
 ]
 
 

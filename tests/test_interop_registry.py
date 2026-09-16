@@ -56,6 +56,8 @@ def test_manifest_registers_all_modules():
         "ephemera",
         "feedreader",
         "packs",
+        # shareware (perpetual-hunt daily 2026-09-16: the honest markets)
+        "shareware",
         "commitments",
         "recap",
         "classifieds",
