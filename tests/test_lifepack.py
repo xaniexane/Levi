@@ -614,9 +614,7 @@ def test_variant_genome_carries_champions(tmp_path):
     pack = export_pack(src)
     vg = pack["sections"]["variant_genome"]
     assert vg["status"] == "ok"
-    assert len(vg["genome"]["champions"]) == len(
-        GenomeStore(src).load()["champions"]
-    )
+    assert len(vg["genome"]["champions"]) == len(GenomeStore(src).load()["champions"])
     assert len(vg["genome"]["champions"]) > 0
     import_pack(pack, dst, confirm=True)
     imported = GenomeStore(dst).load()["champions"]
@@ -631,15 +629,11 @@ def test_import_never_dethrones_local_champion_unfairly(tmp_path):
     seed_home(dst)
     from levi.identity.cycle import IdentityCycle
 
-    IdentityCycle(store=GenomeStore(src)).evolve(
-        generations=1, n_variants=2, seed="t"
-    )
+    IdentityCycle(store=GenomeStore(src)).evolve(generations=1, n_variants=2, seed="t")
     pack = export_pack(src)
     # dst crowns its own superior champion for one identity first
     dst_store = GenomeStore(dst)
-    dst_store.set_champion(
-        "cybrus", {"name": "cybrus-local", "traits": {}}, 999.0, 1
-    )
+    dst_store.set_champion("cybrus", {"name": "cybrus-local", "traits": {}}, 999.0, 1)
     import_pack(pack, dst, confirm=True)
     # elitism holds across the import boundary: local 999.0 keeps the crown
     assert GenomeStore(dst).load()["champions"]["cybrus"]["score"] == 999.0
