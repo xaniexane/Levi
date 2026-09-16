@@ -1300,6 +1300,13 @@ def cmd_finance(args):
     raise SystemExit(2)
 
 
+def cmd_forge(args):
+    """LEVI Forge — local-first code home. Pass-through to levi.forge CLI."""
+    from levi.forge.__main__ import main as forge_main
+
+    return forge_main(getattr(args, "forge_args", None) or [])
+
+
 def _record_agent_ledger(task, transcript, provider) -> None:
     """Write one ``levi agent run`` into the decision ledger (phase 2).
 
@@ -4197,6 +4204,15 @@ def main():
     )
     fin_d = fin_sub.add_parser("deposit", help="Fund the paper portfolio")
     fin_d.add_argument("amount", type=float, help="Amount (> 0)")
+    forge_p = sub.add_parser(
+        "forge",
+        help="LEVI Forge: local-first code home (git hosting, issues, PRs, CI, export)",
+    )
+    forge_p.add_argument(
+        "forge_args",
+        nargs=argparse.REMAINDER,
+        help="passed through to the forge CLI (see: levi forge --help)",
+    )
     ag_p = sub.add_parser(
         "agent",
         help="Agent runtime: step-level tool loop, tools, HTTP service (blueprint §7)",
@@ -5150,6 +5166,7 @@ def main():
         "plugin": cmd_plugin,
         "reference": cmd_reference,
         "finance": cmd_finance,
+        "forge": cmd_forge,
         "agent": cmd_agent,
         "builder": cmd_builder,
         "unified": cmd_unified,
