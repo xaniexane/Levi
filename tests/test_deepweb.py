@@ -382,3 +382,38 @@ def test_cli_wayback_mocked(monkeypatch, capsys):
 def test_deepsource_requires_url():
     with pytest.raises(ValueError):
         dw.DeepSource.from_dict({"kind": "page", "url": "  "})
+
+
+# --------------------------------------------------------------------------
+# SSRF redirect hardening: every redirect hop is re-checked against the
+# hard boundaries (_BoundaryRedirectHandler).
+# --------------------------------------------------------------------------
+
+def test_redirect_to_loopback_refused():
+    handler = dw._BoundaryRedirectHandler()
+    with pytest.raises(dw.BoundaryError):
+        handler.redirect_request(
+            None, None, 302, "Found", {}, "http://127.0.0.1/secret")
+
+
+def test_redirect_to_onion_refused():
+    handler = dw._BoundaryRedirectHandler()
+    with pytest.raises(dw.BoundaryError):
+        handler.redirect_request(
+            None, None, 302, "Found", {}, "http://example.onion/")
+
+
+def test_redirect_to_credential_url_refused():
+    handler = dw._BoundaryRedirectHandler()
+    with pytest.raises(dw.BoundaryError):
+        handler.redirect_request(
+            None, None, 302, "Found", {}, "https://user:pass@example.com/")
+
+
+def test_redirect_to_public_url_allowed():
+    import urllib.request
+    handler = dw._BoundaryRedirectHandler()
+    req = urllib.request.Request("http://example.com/")
+    out = handler.redirect_request(
+        req, None, 302, "Found", {}, "https://example.org/next")
+    assert out.get_full_url() == "https://example.org/next"

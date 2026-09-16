@@ -205,6 +205,23 @@ def _check_boundary(url: str) -> urllib.parse.ParseResult:
     return parts
 
 
+class _BoundaryRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """Redirect handler that re-applies the hard boundaries on every hop.
+
+    Without this, ``urlopen`` would follow a redirect from a vetted URL to
+    a loopback/internal address, silently bypassing ``_check_boundary``
+    (SSRF). Any out-of-bounds hop raises ``BoundaryError`` and aborts the
+    whole chain.
+    """
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        _check_boundary(newurl)  # raises BoundaryError: aborts the chain
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+_OPENER = urllib.request.build_opener(_BoundaryRedirectHandler)
+
+
 def _http_get(url: str, policy: CrawlPolicy) -> Tuple[bytes, str]:
     """Single HTTP GET choke point. Returns (body, content_type).
 
@@ -218,7 +235,9 @@ def _http_get(url: str, policy: CrawlPolicy) -> Tuple[bytes, str]:
                  "Accept": "*/*"},
     )
     try:
-        with urllib.request.urlopen(req, timeout=policy.timeout) as resp:
+        # NOTE: _OPENER (not urlopen) so every redirect hop is re-checked
+        # against the hard boundaries by _BoundaryRedirectHandler.
+        with _OPENER.open(req, timeout=policy.timeout) as resp:
             status = getattr(resp, "status", 200)
             if status != 200:
                 raise FetchError("HTTP %s for %s" % (status, url))
