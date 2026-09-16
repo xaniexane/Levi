@@ -229,6 +229,18 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- forge: LEVI's own code home — local git hosting + collaboration -------
+    "forge": {
+        "provides": [
+            "forge.repos",
+            "forge.issues",
+            "forge.prs",
+            "forge.ci",
+            "forge.export",
+            "forge.serve",
+        ],
+        "requires": [],
+    },
 }
 
 

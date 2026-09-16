@@ -21,7 +21,7 @@ def test_manifest_registers_all_modules():
         # axis-3 additions (deny-closed, all must register + check)
         "methods", "revival", "galaxy", "lifepack", "bloodstream",
         "daemon", "perpetual", "archive", "cyber-skills", "factory",
-        "finance",
+        "finance", "forge",
     }
 
 

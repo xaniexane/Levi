@@ -276,6 +276,18 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
         "strategy": "capabilities",
         "pull_hint": "levi turn <text>  ·  levi lifepack  ·  from levi.bloodstream import run_turn",
     },
+    "forge": {
+        "title": "Forge Warehouse",
+        "summary": (
+            "LEVI's own code home: local git hosting that works with stock "
+            "git clients, repo browser, issues, pull requests, local-first CI "
+            "with no minute metering, and one-command full export of "
+            "everything — the additions GitHub refuses."
+        ),
+        "shelves": ["forge"],
+        "strategy": "capabilities",
+        "pull_hint": "levi forge  ·  python -m levi.forge",
+    },
 }
 
 
