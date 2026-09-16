@@ -30,6 +30,8 @@ from levi.policy.gates import (
     RiskLevel,
 )
 
+from levi.bloodstream.composites import effective_ceiling
+
 
 @dataclass
 class GateOutcome:
@@ -43,6 +45,7 @@ class GateOutcome:
     receipt: Optional[Receipt] = None
     dry_run: bool = False
     error: Optional[str] = None
+    ceiling: Optional[RiskLevel] = None  # inherited ceiling (composite path)
 
     @property
     def receipt_id(self) -> Optional[str]:
@@ -148,4 +151,133 @@ def run_gated(
         # PolicyEngine raises ValueError for unknown proposals (used to be a
         # raw KeyError); either way the receipt degrades, never crashes.
         outcome.error = (outcome.error or "") + " [receipt failed: proposal lost]"
+    return outcome
+
+
+def run_composite_gated(
+    *,
+    engine: PolicyEngine,
+    name: str,
+    components: List[Any],
+    description: str,
+    reason: str,
+    execute: Callable[[], str],
+    verify: Optional[Callable[[], bool]] = None,
+    confirm: Optional[Callable[[ActionProposal], bool]] = None,
+    authorization_level: Optional[Any] = None,
+    auto_approve_up_to: Optional[RiskLevel] = None,
+    dry_run: bool = False,
+    affected_systems: Optional[List[str]] = None,
+    reversible: bool = True,
+) -> GateOutcome:
+    """Run a composite (interpenetrated) action through the gate.
+
+    The interpenetration composition law, as an engine:
+
+    1. **Ceiling.** The effective risk ceiling of *components* is computed
+       with :func:`levi.bloodstream.composites.effective_ceiling` —
+       deny-closed, so unknown/unrated components raise the ceiling to the
+       highest caution. The ceiling ordering comes solely from
+       :mod:`levi.interop.risks`.
+    2. **Authorization check.** When ``authorization_level`` is presented —
+       the level the act claims to be authorized at — it must *meet* the
+       inherited ceiling. Anything lower is DENIED outright: the outcome
+       carries an explicit reason naming the ceiling and the component(s)
+       that raised it, and nothing executes.
+    3. **Six steps.** Otherwise the act runs through :func:`run_gated`
+       with ``risk_level`` set to the inherited ceiling, so the full
+       Plan → Preview → Permission → Execute → Verify → Receipt path still
+       applies: the standing ceiling (``auto_approve_up_to`` or the
+       engine's own) auto-approves only up to the inherited ceiling, and
+       the human ``confirm`` channel decides above it — with the inherited
+       ceiling named in the proposal the human sees.
+    """
+    from levi.interop import risks
+
+    evidence = effective_ceiling(components)
+    ceiling = risks.parse_level(evidence["ceiling"])
+    raisers = sorted(
+        cname
+        for cname, clevel in evidence["contributions"].items()
+        if risks.parse_level(clevel) == ceiling
+    )
+    audit_reason = "%s [composite %r: inherited risk ceiling %s, raised by %s]" % (
+        reason,
+        name,
+        ceiling.name,
+        ", ".join(raisers) if raisers else "<unknown>",
+    )
+
+    if authorization_level is not None:
+        auth_level = risks.parse_level(authorization_level)
+        if auth_level < ceiling:
+            # Insufficient authorization: deny outright, with the ceiling
+            # and its raisers named so the denial is auditable. Nothing
+            # executes.
+            proposal = engine.propose(
+                description=description,
+                risk_level=ceiling,
+                reason=audit_reason,
+                affected_systems=affected_systems or [],
+                reversible=reversible,
+            )
+            preview = engine.preview(proposal.id) or {}
+            denial = (
+                "denied: composite %r inherits risk ceiling %s (raised by %s); "
+                "presented authorization %s is below the ceiling — explicit "
+                "approval at %s or above is required"
+                % (
+                    name,
+                    ceiling.name,
+                    ", ".join(raisers) if raisers else "<unknown>",
+                    auth_level.name,
+                    ceiling.name,
+                )
+            )
+            engine.deny(proposal.id, note=denial)
+            return GateOutcome(
+                proposal=proposal,
+                preview=preview,
+                approved=False,
+                awaiting_permission=False,
+                executed=False,
+                error=denial,
+                ceiling=ceiling,
+            )
+        # The presented authorization meets the ceiling: it becomes the
+        # standing ceiling for the six-step run, so Permission is automatic
+        # (already proven sufficient) and confirm is only a backstop.
+        outcome = run_gated(
+            engine=engine,
+            description=description,
+            risk_level=ceiling,
+            reason="%s; authorization presented at %s"
+            % (audit_reason, auth_level.name),
+            execute=execute,
+            verify=verify,
+            confirm=confirm,
+            auto_approve_up_to=auth_level,
+            dry_run=dry_run,
+            affected_systems=affected_systems,
+            reversible=reversible,
+        )
+        outcome.ceiling = ceiling
+        return outcome
+
+    # No explicit authorization: the standing ceiling (or the human channel)
+    # decides, with the act priced at the inherited ceiling's risk level.
+    outcome = run_gated(
+        engine=engine,
+        description=description,
+        risk_level=ceiling,
+        reason=audit_reason,
+        execute=execute,
+        verify=verify,
+        confirm=confirm,
+        auto_approve_up_to=auto_approve_up_to,
+        dry_run=dry_run,
+        affected_systems=affected_systems,
+        reversible=reversible,
+    )
+    outcome.ceiling = ceiling
     return outcome

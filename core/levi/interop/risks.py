@@ -71,9 +71,28 @@ def _parse_level(value: Any):
                 % (value, sorted(m.name for m in RiskLevel))
             ) from None
     raise ValueError(
-        "unparseable risk level %r (expected RiskLevel, int, or name str)"
-        % (value,)
+        "unparseable risk level %r (expected RiskLevel, int, or name str)" % (value,)
     )
+
+
+def parse_level(value: Any):
+    """Coerce *value* to the canonical ``RiskLevel``.
+
+    This is the public face of :func:`_parse_level` — the single source of
+    the ceiling ordering. Accepts ``RiskLevel`` instances, ints (via the
+    enum), and case-insensitive names (``"high"`` / ``"HIGH"``).
+    Anything else → :class:`ValueError` (deny-closed).
+    """
+    return _parse_level(value)
+
+
+def highest_caution():
+    """Return the highest caution level (``RiskLevel.CRITICAL``).
+
+    This is the deny-closed default: an unknown or unrated component does
+    not dilute a composition's ceiling — it raises it to the maximum.
+    """
+    return max(_risk_level())
 
 
 def ceiling(levels: Iterable[Any]):
@@ -96,9 +115,7 @@ def _participant_risk(participant: Any) -> Tuple[str, Any]:
     mapping with ``"risk"`` (and optional ``"name"``/``"module"``) keys.
     """
     if isinstance(participant, Mapping):
-        name = str(
-            participant.get("name", participant.get("module", "<anonymous>"))
-        )
+        name = str(participant.get("name", participant.get("module", "<anonymous>")))
         if "risk" not in participant:
             raise ValueError(
                 "compose_risk: participant %r carries no 'risk' key" % (name,)

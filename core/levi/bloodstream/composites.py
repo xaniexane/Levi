@@ -20,12 +20,80 @@ import json
 import os
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, Iterable, List, Mapping, Optional
 
 if TYPE_CHECKING:  # registry types only; runtime stays duck-typed
     from levi.agent.specialists import SpecialistRegistry
     from levi.daemon.automation import AutomationRegistry
     from levi.skill.registry import SkillRegistry
+
+
+def _component_risk(component: Any) -> Any:
+    """Extract the raw risk value of one component.
+
+    Accepts bare levels (``RiskLevel`` / int / name string), mappings with
+    a ``"risk"`` key, and attribute objects exposing ``risk_level`` or
+    ``risk_ceiling`` (skills, specialists, automations). Returns the raw
+    value — or ``None`` when the component is unrated.
+    """
+    if isinstance(component, Mapping):
+        return component.get("risk")
+    for attr in ("risk_level", "risk_ceiling"):
+        if hasattr(component, attr):
+            return getattr(component, attr)
+    if isinstance(component, str):
+        # A bare name string is ambiguous: it might be a level name
+        # ("high") or just an identifier ("shell_exec"). Only level names
+        # resolve; anything else is unrated → deny-closed below.
+        return component
+    if isinstance(component, (int, float)) and not isinstance(component, bool):
+        return component
+    return None
+
+
+def _component_name(component: Any) -> str:
+    if isinstance(component, Mapping):
+        return str(component.get("name", component.get("module", "<anonymous>")))
+    name = getattr(component, "name", None) or getattr(component, "id", None)
+    return str(name) if name is not None else "<anonymous>"
+
+
+def effective_ceiling(components: Iterable[Any]) -> Dict[str, Any]:
+    """Pure function: the strictest-risk ceiling of *components*.
+
+    Each component is a bare level (``RiskLevel`` / int / name string), a
+    mapping like ``{"name": "rag", "risk": ...}``, or an object exposing
+    ``risk_level`` / ``risk_ceiling``. Returns ``{"ceiling", "contributions"}``
+    — the ceiling plus per-component evidence, so callers (and receipts)
+    can audit *why* a composition is risky.
+
+    Deny-closed: an unknown or unrated component does not dilute the
+    ceiling — it raises it to the highest caution. The ceiling ordering
+    comes solely from :mod:`levi.interop.risks`; nothing is duplicated
+    here. An empty component list has ceiling ``INFO`` (no parts, no risk).
+    """
+    from levi.interop import risks
+
+    parts = []
+    for component in components:
+        name = _component_name(component)
+        raw = _component_risk(component)
+        if raw is None:
+            # Unrated → highest caution. A component nobody can rate is the
+            # riskiest component in the room.
+            level = risks.highest_caution()
+        else:
+            try:
+                level = risks.parse_level(raw)
+            except (ValueError, RuntimeError):
+                level = risks.highest_caution()
+        parts.append({"name": name, "risk": level})
+    if not parts:
+        return {
+            "ceiling": risks.parse_level(0),
+            "contributions": {},
+        }
+    return risks.compose_risk(*parts)
 
 
 @dataclass
@@ -75,9 +143,7 @@ class Composite:
         id_lists = {}
         for key in ("skill_ids", "specialist_ids", "automation_ids"):
             ids = data.get(key, [])
-            if not isinstance(ids, list) or any(
-                not isinstance(i, str) for i in ids
-            ):
+            if not isinstance(ids, list) or any(not isinstance(i, str) for i in ids):
                 return None
             id_lists[key] = list(ids)
         return cls(
@@ -189,24 +255,43 @@ class CompositeRegistry:
         automations: Optional["AutomationRegistry"] = None,
     ) -> int:
         """Strictest (maximum) risk ceiling across all parts. Personas
-        contribute 0 — they are communication lenses, not authority."""
-        ceiling = 0
+        contribute 0 — they are communication lenses, not authority.
+
+        Computed through :func:`effective_ceiling`, whose ordering comes
+        solely from :mod:`levi.interop.risks`. Parts absent from every
+        registry contribute nothing here (``register()`` already failed
+        fast on dangling references); each found part is named so the
+        evidence trail survives.
+        """
+        parts: List[Dict[str, Any]] = []
         if skills is not None:
             for sid in composite.skill_ids:
                 s = skills.get(sid)
                 if s is not None:
-                    ceiling = max(ceiling, int(getattr(s, "risk_level", 0)))
+                    parts.append(
+                        {"name": f"skill:{sid}", "risk": getattr(s, "risk_level", 0)}
+                    )
         if specialists is not None:
             for sid in composite.specialist_ids:
                 s = specialists.get(sid)
                 if s is not None:
-                    ceiling = max(ceiling, int(getattr(s, "risk_ceiling", 0)))
+                    parts.append(
+                        {
+                            "name": f"specialist:{sid}",
+                            "risk": getattr(s, "risk_ceiling", 0),
+                        }
+                    )
         if automations is not None:
             for aid in composite.automation_ids:
                 a = automations.get(aid)
                 if a is not None:
-                    ceiling = max(ceiling, int(getattr(a, "risk_ceiling", 0)))
-        return ceiling
+                    parts.append(
+                        {
+                            "name": f"automation:{aid}",
+                            "risk": getattr(a, "risk_ceiling", 0),
+                        }
+                    )
+        return int(effective_ceiling(parts)["ceiling"])
 
     def _missing_parts(
         self,
