@@ -367,6 +367,15 @@ REPORTS = [
                   "and in the nostalgia audit."),
     },
     {
+        "slug": "hw-hunt-20260916",
+        "files": ["findings.jsonl"],
+        "parser": parse_findings_jsonl,
+        "tag": "hw",
+        "notes": ("Web-verified 2026-09-16; abandoned-hardware wave-004 "
+                  "(Atari 2600 kernel, Amiga Copper, Palm Graffiti, "
+                  "ZX Spectrum multicolor)."),
+    },
+    {
         "slug": "games-hunt-20260916-0022",
         "files": ["findings.jsonl"],
         "parser": parse_findings_jsonl,

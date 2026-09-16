@@ -100,6 +100,8 @@ CLI_COMMANDS.update(
         "research": [],
         # -- games (perpetual-hunt games wave) ------------------------------
         "games": ["python -m levi.games"],
+        # -- copper (perpetual-hunt wave-004: scored choreography) ---------------
+        "copper": ["python -m levi.copper"],
         # -- telegraph (perpetual-hunt wave-001: dead protocols revived) ---
         "telegraph": ["python -m levi.telegraph"],
         # -- feedlab (perpetual-hunt daily 2026-09-16: giant-patterns inversion)
@@ -370,6 +372,7 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "friction",
             "sweeps",
             "premortem",
+            "copper",
         ],
         "strategy": "capabilities",
         "pull_hint": "python -m levi.signals  ·  python -m levi.promises  ·  from levi.creed import laws",

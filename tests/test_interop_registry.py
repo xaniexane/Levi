@@ -78,6 +78,8 @@ def test_manifest_registers_all_modules():
         "telegraph",
         # feedlab (perpetual-hunt daily 2026-09-16: giant-patterns inversion)
         "feedlab",
+        # copper (perpetual-hunt wave-004: scored timed choreography)
+        "copper",
     }
 
 

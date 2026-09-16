@@ -343,6 +343,17 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- copper: scored timed choreography (perpetual-hunt wave-004) ------------
+    # The Amiga Copper's pattern, clean-room native: declarative
+    # WAIT/EXEC/SKIP instruction scores against a real or simulated clock,
+    # zero timers and zero callbacks, with an honest Receipt of every event.
+    # For supervision recovery sequences and bounded-simulation replay.
+    "copper": {
+        "provides": [
+            "copper.score",
+        ],
+        "requires": [],
+    },
     # -- games: fair-play local games (perpetual-hunt games wave) ---------------
     # Every game passes the Fair Play Charter (charter.py): no paid
     # randomness, no streak punishment, no FOMO timers, free hints,
