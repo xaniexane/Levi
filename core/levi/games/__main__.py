@@ -10,6 +10,13 @@ Commands:
                             launch a bagatelle ball; --prove prints empirical odds
   mancala [--variant NAME] [--move N] [--generate] [--validate] [--seed N]
                             play a mancala variant move, or generate+validate one
+  story [--adventure NAME]   play a parser interactive fiction (Z-machine revival)
+  odds [--crate NAME] [--prove]
+                            the anti-loot-box: free pulls, published odds, --prove audits
+  season <new|add|log|status|close|reopen> ...
+                            the un-expiring battle pass — progress never rots
+  relay <new|move|show|verify|export|import> ...
+                            async turn relay: the BBS-door ritual as a protocol
   saves list <game>           list save slots
   saves export <game> <slot> <file>   export a portable save
   saves import <file> [--slot S]      import a portable save
@@ -161,6 +168,45 @@ def _cmd_mancala(args) -> int:
     return 0
 
 
+def _cmd_story(args) -> int:
+    from levi.games import if_engine
+
+    adv = if_engine.ADVENTURES.get(args.adventure)
+    if adv is None:
+        print(
+            "unknown adventure %r (try: %s)"
+            % (args.adventure, ", ".join(if_engine.ADVENTURES))
+        )
+        return 2
+    if_engine.play(adv, slot=args.slot or "story")
+    return 0
+
+
+def _cmd_odds(args) -> int:
+    from levi.games import odds
+
+    if args.crate not in odds.CRATES:
+        print("unknown crate %r (try: %s)" % (args.crate, ", ".join(odds.CRATES)))
+        return 2
+    if args.prove:
+        print(odds.prove(args.crate, n=args.trials, seed=args.seed or 7))
+        return 0
+    odds.play(args.crate, slot=args.slot or "crate")
+    return 0
+
+
+def _cmd_season(args) -> int:
+    from levi.games import season
+
+    return season.cmd(args)
+
+
+def _cmd_relay(args) -> int:
+    from levi.games import relay
+
+    return relay.cmd(args)
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
         prog="levi.games", description="Fair-play local games"
@@ -222,6 +268,51 @@ def main(argv=None) -> int:
     saves_p.add_argument("slot", nargs="?", default=None)
     saves_p.add_argument("file", nargs="?", default=None)
 
+    story_p = sub.add_parser(
+        "story", help="parser interactive fiction (Z-machine revival)"
+    )
+    story_p.add_argument("--adventure", default="sunken-archive")
+    story_p.add_argument("--slot", default=None, help="save slot")
+
+    odds_p = sub.add_parser(
+        "odds", help="the anti-loot-box: free pulls, published odds"
+    )
+    odds_p.add_argument("--crate", default="starfall")
+    odds_p.add_argument("--slot", default=None, help="save slot")
+    odds_p.add_argument("--prove", action="store_true", help="empirical odds audit")
+    odds_p.add_argument("--trials", type=int, default=20000, help="trials for --prove")
+    odds_p.add_argument("--seed", type=int, default=None, help="seed for --prove")
+
+    season_p = sub.add_parser("season", help="the un-expiring battle pass")
+    season_p.add_argument(
+        "action", choices=["new", "add", "log", "status", "close", "reopen"]
+    )
+    season_p.add_argument("name", nargs="?", default=None, help="season name (new)")
+    season_p.add_argument("--cid", default=None, help="challenge id (add/log)")
+    season_p.add_argument("--desc", default="", help="challenge description (add)")
+    season_p.add_argument(
+        "--target", type=int, default=1, help="challenge target (add)"
+    )
+    season_p.add_argument(
+        "--xp", type=int, default=50, help="challenge xp reward (add)"
+    )
+    season_p.add_argument("--amount", type=int, default=1, help="progress to log (log)")
+    season_p.add_argument("--slot", default="season", help="save slot")
+
+    relay_p = sub.add_parser(
+        "relay", help="async turn relay (BBS-door ritual as protocol)"
+    )
+    relay_p.add_argument(
+        "action", choices=["new", "move", "show", "verify", "export", "import"]
+    )
+    relay_p.add_argument("players", nargs="*", default=[], help="player names (new)")
+    relay_p.add_argument("--player", default=None, help="moving player (move)")
+    relay_p.add_argument(
+        "--move", default="{}", help="move payload, JSON or text (move)"
+    )
+    relay_p.add_argument("--file", default=None, help="relay file (export/import)")
+    relay_p.add_argument("--slot", default="relay", help="save slot")
+
     args = parser.parse_args(argv)
     if args.command == "charter":
         return _cmd_charter(args)
@@ -237,6 +328,14 @@ def main(argv=None) -> int:
         return _cmd_mancala(args)
     if args.command == "saves":
         return _cmd_saves(args)
+    if args.command == "story":
+        return _cmd_story(args)
+    if args.command == "odds":
+        return _cmd_odds(args)
+    if args.command == "season":
+        return _cmd_season(args)
+    if args.command == "relay":
+        return _cmd_relay(args)
     parser.print_help()
     return 2
 

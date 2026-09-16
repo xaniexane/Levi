@@ -229,8 +229,8 @@ def test_inventory_counts_match_reality():
     assert real_playbooks == 839
     assert by_name["skills"] == real_playbooks
     assert (
-        by_name["games"] == 5
-    )  # games wave landed: charter/codebreak/cipher/hotseat/saves
+        by_name["games"] == 9
+    )  # games wave landed: charter/codebreak/cipher/hotseat/saves + wave-015: if-engine/open-crate/open-season/turn-relay
 
 
 def test_browse_warehouse_shelves():
