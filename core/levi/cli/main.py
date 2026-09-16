@@ -2229,7 +2229,7 @@ def cmd_builder(args):
 
 
 def cmd_council(args):
-    """Multi-model code council: seats | add-candidate | build."""
+    """LEVI-native code council: seats | build."""
     from levi.council.cli import main as council_main
 
     code = council_main(getattr(args, "council_args", None) or [])
@@ -5654,7 +5654,7 @@ def main():
     # council hunks elsewhere in this file.
     council_p = sub.add_parser(
         "council",
-        help="Multi-model code council: seats | add-candidate | build",
+        help="LEVI-native code council: seats | build",
     )
     council_p.add_argument(
         "council_args",
