@@ -34,7 +34,8 @@ def tree(home, name, rev=None, path=""):
     if not repo_exists(home, name):
         raise GitError("no such repo: %r" % name)
     sha = _rev(home, name, rev)
-    treeish = sha + ":" + (path.strip("/") or ".")
+    clean = path.strip("/")
+    treeish = sha if not clean else sha + ":" + clean
     try:
         out = run_git(
             ["ls-tree", treeish], cwd=repo_dir(home, name)

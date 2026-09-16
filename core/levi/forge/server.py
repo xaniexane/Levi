@@ -121,6 +121,14 @@ class ForgeHandler(BaseHTTPRequestHandler):
     # -- routing -------------------------------------------------------
 
     def do_GET(self):
+        try:
+            self._do_GET()
+        except (GitError, ValueError) as e:
+            self._text(500, "forge: %s" % e)
+        except BrokenPipeError:
+            pass
+
+    def _do_GET(self):
         parsed = urlparse(self.path)
         parts = parsed.path.strip("/").split("/")
 
@@ -151,6 +159,14 @@ class ForgeHandler(BaseHTTPRequestHandler):
         self._text(404, "forge: not found")
 
     def do_POST(self):
+        try:
+            self._do_POST()
+        except (GitError, ValueError) as e:
+            self._text(500, "forge: %s" % e)
+        except BrokenPipeError:
+            pass
+
+    def _do_POST(self):
         parts = urlparse(self.path).path.strip("/").split("/")
         if len(parts) == 2 and parts[1] in _SERVICES:
             name = self._repo_name(parts[0])
@@ -240,7 +256,7 @@ class ForgeHandler(BaseHTTPRequestHandler):
                 content = browse.read_file(self._home, name, path=path)
                 main = "<h2>%s</h2><pre>%s</pre>" % (esc(path), esc(content))
             else:
-                entries = browse.tree(self._home, path=path)
+                entries = browse.tree(self._home, name, path=path)
                 rows = []
                 if path:
                     parent = "/".join(path.split("/")[:-1])

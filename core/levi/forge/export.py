@@ -79,9 +79,15 @@ def export_repo(home, name, dest) -> Path:
             "exported_at": datetime.now(timezone.utc).isoformat(),
             "exported_by": "LEVI Forge"}
 
-    # 1. git bundle — every ref, stock-git readable
+    # 1. git bundle — every ref, stock-git readable. An empty repo (no
+    # commits yet) has nothing to bundle; record that honestly instead.
     bundle = dest / "repo.bundle"
-    run_git(["bundle", "create", str(bundle), "--all"], cwd=repo_dir(home, name))
+    bundle_proc = run_git(["bundle", "create", str(bundle), "--all"],
+                          cwd=repo_dir(home, name), check=False)
+    has_history = bundle_proc.returncode == 0
+    if not has_history and bundle.is_file():
+        bundle.unlink()
+    meta["has_history"] = has_history
 
     # 2/3. issues + PRs
     shutil.copyfile(_issues._path(home, name), dest / "issues.jsonl") \
@@ -137,7 +143,8 @@ def _manifest_text(meta: dict, sums: dict) -> str:
         "",
         "## What is in this directory",
         "",
-        "- `repo.bundle` — complete git history, all refs (`git clone repo.bundle`)",
+        "- `repo.bundle` — complete git history, all refs (`git clone repo.bundle`)"
+        + (" (absent: repo has no commits yet)" if not meta.get("has_history") else ""),
         "- `issues.jsonl` — every issue, one JSON object per line",
         "- `prs.jsonl` — every pull request, one JSON object per line",
         "- `stars.json` — star/favorite record (portable reputation)",
