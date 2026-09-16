@@ -80,6 +80,10 @@ def test_manifest_registers_all_modules():
         "feedlab",
         # copper (perpetual-hunt wave-004: scored timed choreography)
         "copper",
+        # verify (perpetual-hunt wave-006: pre-digital proof rituals)
+        "verify",
+        # liberation (perpetual-hunt daily 2026-09-15: roach-motel inversion)
+        "liberation",
     }
 
 

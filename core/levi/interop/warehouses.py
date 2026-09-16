@@ -102,6 +102,8 @@ CLI_COMMANDS.update(
         "games": ["python -m levi.games"],
         # -- copper (perpetual-hunt wave-004: scored choreography) ---------------
         "copper": ["python -m levi.copper"],
+        # -- verify (perpetual-hunt wave-006: pre-digital proof rituals) ------
+        "verify": ["python -m levi.verify"],
         # -- telegraph (perpetual-hunt wave-001: dead protocols revived) ---
         "telegraph": ["python -m levi.telegraph"],
         # -- feedlab (perpetual-hunt daily 2026-09-16: giant-patterns inversion)
@@ -126,6 +128,8 @@ CLI_COMMANDS.update(
         "presence": ["python -m levi.presence"],
         "honestsearch": ["python -m levi.honestsearch"],
         "recommender": ["python -m levi.recommender"],
+        # -- liberation (perpetual-hunt daily 2026-09-15: roach-motel inversion)
+        "liberation": ["python -m levi.liberation"],
         # -- sentinel (source-sync `the-pack`: defensive blue-team host tooling)
         "sentinel": ["sentinel"],
     }
@@ -373,6 +377,7 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "sweeps",
             "premortem",
             "copper",
+            "verify",
         ],
         "strategy": "capabilities",
         "pull_hint": "python -m levi.signals  ·  python -m levi.promises  ·  from levi.creed import laws",
@@ -387,7 +392,9 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "governance charters, guilt-free commitment devices, yearly "
             "recaps computed on-device, a sovereign feed reader, and a "
             "feed-ranking transparency lab that discloses exactly how "
-            "engagement-bait scoring would rank your own posts."
+            "engagement-bait scoring would rank your own posts, and a "
+            "liberation ledger that prices your exit from data-hostage "
+            "services."
         ),
         "shelves": [
             "communities",
@@ -399,6 +406,7 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "recap",
             "feedreader",
             "feedlab",
+            "liberation",
         ],
         "strategy": "capabilities",
         "pull_hint": "python -m levi.communities  ·  python -m levi.threads  ·  python -m levi.feedreader",

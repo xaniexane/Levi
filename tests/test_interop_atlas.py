@@ -220,7 +220,7 @@ def test_inventory_counts_match_reality():
     real_revivals = len(list((PKG / "revival").glob("[a-z]*.py")))
     real_playbooks = len(list((PKG / "skill" / "playbooks").rglob("*.md")))
     by_name = {w["name"]: w["inventory_count"] for w in list_warehouses()}
-    assert real_methods == 40
+    assert real_methods == 41
     assert by_name["methods"] == real_methods
     assert real_revivals == 20
     assert (

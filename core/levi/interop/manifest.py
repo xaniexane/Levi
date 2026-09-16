@@ -354,6 +354,17 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- verify: pre-digital verification rituals (perpetual-hunt wave-006) -----
+    # The desk-machine proof discipline, clean-room native: cast-out-nines /
+    # cast-out-elevens digit checks, ledger crossfooting, dual-path agreement,
+    # and honest significant figures. Every check returns a deny-closed
+    # VerificationReceipt — a failed proof never silently passes.
+    "verify": {
+        "provides": [
+            "verify.checks",
+        ],
+        "requires": [],
+    },
     # -- games: fair-play local games (perpetual-hunt games wave) ---------------
     # Every game passes the Fair Play Charter (charter.py): no paid
     # randomness, no streak punishment, no FOMO timers, free hints,
@@ -421,6 +432,14 @@ DECLARATIONS = {
             "feedreader.feeds",
         ],
         "requires": ["research"],
+    },
+    "liberation": {
+        "provides": [
+            "liberation.ledger",
+            "liberation.hostage-score",
+            "liberation.tasks",
+        ],
+        "requires": [],
     },
     "packs": {
         "provides": [
