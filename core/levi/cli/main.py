@@ -5480,6 +5480,47 @@ def main():
         action="store_true",
         help="import: confirm non-interactively (otherwise prompts)",
     )
+    # `levi pack`: life-pack *bundles* — the tamper-evident, optionally
+    # encrypted .tar.gz shipping format (Megazord axis 10). The passphrase
+    # is NEVER a CLI arg (it would land in shell history): it comes from
+    # --passphrase-env VAR or an interactive prompt.
+    pk_p = sub.add_parser(
+        "pack", help="Life-pack bundles: encrypted portable state (.tar.gz)"
+    )
+    pk_sub = pk_p.add_subparsers(dest="pack_action")
+    pk_exp = pk_sub.add_parser("export", help="Export this home to a bundle")
+    pk_exp.add_argument(
+        "--output",
+        default=None,
+        help="Destination path (default: ./levi-lifepack-<utc>.tar.gz[.enc])",
+    )
+    pk_exp.add_argument(
+        "--passphrase-env",
+        default=None,
+        help="Env var holding the bundle passphrase (encrypts the bundle)",
+    )
+    pk_exp.add_argument(
+        "--no-encrypt",
+        action="store_true",
+        help="Write the bundle UNENCRYPTED (loud warning: personal state inside)",
+    )
+    pk_imp = pk_sub.add_parser("import", help="Import a bundle into this home")
+    pk_imp.add_argument("bundle", help="Path to the .tar.gz[.enc] bundle")
+    pk_imp.add_argument(
+        "--preview",
+        action="store_true",
+        help="Verify the bundle and show the diff without writing anything",
+    )
+    pk_imp.add_argument(
+        "--passphrase-env",
+        default=None,
+        help="Env var holding the bundle passphrase (for encrypted bundles)",
+    )
+    pk_imp.add_argument(
+        "--yes",
+        action="store_true",
+        help="Confirm a real import without an interactive prompt",
+    )
     proj_p.add_argument(
         "project_action",
         nargs="?",
@@ -6126,6 +6167,13 @@ def main():
         from levi.lifepack.pack import cmd_lifepack as _cmd_lifepack
 
         cmds["lifepack"] = _cmd_lifepack
+    except Exception:
+        pass
+    # `levi pack`: bundle (tar.gz + manifest + optional Fernet) dispatch.
+    try:
+        from levi.lifepack.bundle import cmd_pack as _cmd_pack
+
+        cmds["pack"] = _cmd_pack
     except Exception:
         pass
     # === LIFEPACK-REGION-END ===

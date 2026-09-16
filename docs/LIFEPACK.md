@@ -193,3 +193,92 @@ identity landed, durable memory count, registered skills/workflows, growth
 stage — so you can confirm the twin matches the source before you trust it.
 Growth journal entries from machine A appear in the pack as a snapshot
 only; machine B's growth loop starts fresh from its own experiences.
+
+---
+
+## Life-pack bundles (.tar.gz) — the shipping format
+
+The raw JSON pack is the *format*; the **bundle** (`core/levi/lifepack/bundle.py`)
+is the *shipping container*: a tamper-evident, optionally encrypted `.tar.gz`
+that carries the pack between machines. It is an adapter over `pack.py` —
+`export_pack` builds, `validate_pack` / `preview_import` / `import_pack` verify
+and write. Nothing in `pack.py` was rewritten for this.
+
+### What's inside
+
+```
+levi-lifepack-<utc>.tar.gz            # or .tar.gz.enc when encrypted
+├── pack.json                         # the v2 life pack (canonical JSON)
+└── MANIFEST.json                     # SHA-256 of every file in the bundle
+```
+
+`MANIFEST.json` carries, per file, its SHA-256 and byte size — plus a
+`manifest_integrity` self-hash (computed with the field blanked) so the
+manifest itself can't be edited either. **Import verifies the manifest
+before parsing anything, and fails closed on any mismatch**: a flipped byte
+anywhere aborts the whole import with a plain-language `LifepackError`.
+
+### Encryption
+
+Bundles are encrypted unless you explicitly opt out:
+
+- **Key derivation:** PBKDF2-HMAC-SHA256, 600,000 iterations, random 16-byte
+  salt stored in the bundle (current OWASP guidance for PBKDF2-SHA256).
+- **Cipher:** Fernet from the `cryptography` package (AES-128-CBC +
+  HMAC-SHA256, authenticated — a wrong passphrase fails loudly, never
+  silently). No home-rolled crypto anywhere.
+- An encrypted bundle is a JSON envelope (`format: "levi-lifepack-bundle"`,
+  `kdf`, `cipher`, base64 `payload`) whose decrypted payload is the same
+  `.tar.gz`. Format is detected by magic bytes, so the file extension is
+  cosmetic.
+- Bundle files are written `0600` (owner-only).
+
+**Passphrase hygiene:** the passphrase is *never* a CLI argument — argv lands
+in shell history and process tables. It comes from `--passphrase-env VAR`
+(an environment variable) or an interactive `getpass` prompt. Without a
+passphrase and without `--no-encrypt`, export refuses (non-interactive) or
+prompts (TTY).
+
+### Unencrypted bundles
+
+`levi pack export --no-encrypt` writes a plain `.tar.gz` — and prints a LOUD
+warning to stderr (also embedded in `MANIFEST.json`):
+
+> This bundle contains personal state — identity, settings, durable memory.
+> Anyone who can read this file can read your LEVI's mind.
+
+Use unencrypted bundles only for short-lived local transfers you fully
+control. Prefer encryption whenever a bundle leaves the machine.
+
+### What's excluded, and why
+
+| Excluded | Why |
+|----------|-----|
+| **Model weights** (`.pt` / `.gguf` / …) | A bundle ships *state*, not brains. The pack carries a model manifest/reference at most; the builder fails closed if any weight filename reference appears. Weights travel with the code/release, never the pack. |
+| **Secrets / credentials** | The import-time `looks_secret` filter is applied at export time too — secret-looking settings keys and memory content are scrubbed from the bundle and reported. This is a last line of defense, not a guarantee: keep real secrets in the vault. |
+| **Ephemeral / device state** (`working`, `episodic`, device-scoped memory, other data dirs) | Device state belongs to the device it was born on; moving it would corrupt both twins. |
+| **Playbook / workflow bodies** | Manifests only — code ships with the code. |
+
+### CLI usage
+
+```bash
+# export (encrypted): passphrase via env var, or an interactive prompt.
+# Set the var WITHOUT echoing it (so it never lands in shell history):
+read -rsp "bundle passphrase: " PACK_PW; export PACK_PW; echo
+levi pack export --output ~/backup/levi.tar.gz.enc --passphrase-env PACK_PW
+
+# export unencrypted (loud warning)
+levi pack export --output ~/backup/levi.tar.gz --no-encrypt
+
+# import: verify + preview first (writes nothing)
+levi pack import ~/backup/levi.tar.gz.enc --preview --passphrase-env PACK_PW
+
+# import for real: preview shown, then explicit confirmation
+levi pack import ~/backup/levi.tar.gz.enc --passphrase-env PACK_PW   # TTY: type IMPORT
+levi pack import ~/backup/levi.tar.gz.enc --passphrase-env PACK_PW --yes
+```
+
+The import path is Plan → Preview → Permission all the way down:
+decrypt → verify MANIFEST (fail closed) → `validate_pack` (version gate) →
+`preview_import` diff → explicit confirmation → `import_pack(confirm=True)`
+writes, per-section and idempotent.
