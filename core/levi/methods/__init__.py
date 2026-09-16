@@ -69,6 +69,9 @@ silently absorbed; nothing here phones home.
 - ``quipu``: the quipu — tamper-evident tally cords (INSPIRATIONAL).
 - ``kriegsspiel``: Kriegsspiel — umpired adversarial red-team harness.
 - ``randgame``: RAND political-military gaming — scenario comparator.
+- ``concatenative``: Stackscript — LEVI's own bounded stack machine
+  (Forth's concatenative core remixed: deny-closed bounds, receipts,
+  pure compute, no I/O words).
 
 Remix law: faithful preservation belongs in the Archive; these modules are
 LEVI-native realizations — the load-bearing mechanism taken, improved, and
