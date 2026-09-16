@@ -5337,10 +5337,22 @@ def main():
         "mcp_action",
         nargs="?",
         default="serve",
-        choices=["serve", "add", "remove", "list-servers"],
+        choices=["serve", "add", "remove", "list-servers", "catalog"],
         help="mcp action",
     )
-    mcp_p.add_argument("name", nargs="?", default=None, help="add/remove: server name")
+    mcp_p.add_argument(
+        "name",
+        nargs="?",
+        default=None,
+        help="add/remove: server name (with --catalog, defaults to the entry name)",
+    )
+    mcp_p.add_argument(
+        "--catalog",
+        default=None,
+        metavar="ENTRY",
+        help="add: install a server from the curated catalog "
+        "(`levi mcp catalog` to browse; one-command install)",
+    )
     mcp_p.add_argument(
         "--url",
         default=None,
