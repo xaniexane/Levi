@@ -146,6 +146,42 @@ def render_system_prompt() -> str:
 
 
 # ---------------------------------------------------------------------------
+# No-mask enforcement — "LEVI wears no mask: 100% pure LEVI."
+#
+# The forbidden_claims list and _PROVIDER_BRANDS tuple above declare the rule;
+# check_no_mask() enforces it. Anything LEVI renders or says about itself
+# must pass this check: no borrowed identities, no provider branding worn
+# as LEVI's own.
+# ---------------------------------------------------------------------------
+
+_MASK_PATTERNS: List[tuple] = [
+    (re.compile(re.escape(claim), re.I), f"forbidden claim: {claim!r}")
+    for claim in PERSONA["forbidden_claims"]  # type: ignore[union-attr]
+] + [
+    (re.compile(rf"\b{re.escape(brand)}\b", re.I), f"provider brand: {brand!r}")
+    for brand in _PROVIDER_BRANDS
+]
+
+
+def check_no_mask(text: str) -> List[str]:
+    """Scan *text* for mask violations.
+
+    Returns a list of human-readable violations; an empty list means the
+    text is pure LEVI — no borrowed identity, no provider brand worn as
+    its own. References *about* providers in honest framing (e.g. "other
+    providers are references, not sources") are the caller's responsibility
+    to word carefully; this check catches the unambiguous violations.
+    """
+    violations: List[str] = []
+    if not isinstance(text, str) or not text:
+        return violations
+    for pattern, label in _MASK_PATTERNS:
+        if pattern.search(text):
+            violations.append(label)
+    return violations
+
+
+# ---------------------------------------------------------------------------
 # Identity answers
 # ---------------------------------------------------------------------------
 
