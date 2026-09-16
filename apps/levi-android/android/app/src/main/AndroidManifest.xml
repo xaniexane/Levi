@@ -8,6 +8,37 @@
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <!-- Notification channels ("Messaging channels", "Notifications" rows). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Coarse location for the "location_coarse" device tool (network/IP-based
+         estimate only). Runtime permission: the tool fails closed until granted,
+         and the location is read only when the tool is invoked — never tracked. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Package visibility (API 30+) for the device tools' intent checks:
+         resolveActivity() must see the handlers, otherwise the tools would
+         wrongly report "no_handler". -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="http" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.WEB_SEARCH" />
+        </intent>
+        <intent>
+            <action android:name="android.provider.AlarmClock.ACTION_SET_ALARM" />
+        </intent>
+        <intent>
+            <action android:name="android.provider.AlarmClock.ACTION_SET_TIMER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.INSERT" />
+            <data android:mimeType="vnd.android.cursor.dir/event" />
+        </intent>
+    </queries>
 
     <application
         android:name=".LeviApp"

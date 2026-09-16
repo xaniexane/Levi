@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- FileProvider paths: only the cache dir is ever shared (data exports,
-     issue reports). Nothing else leaves the app sandbox this way. -->
+<!-- FileProvider paths: the cache dir is shared (data exports, issue
+     reports). The app files dir is shared read-only for the "open_file"
+     device tool — still strictly inside the app sandbox; the tool itself
+     refuses any path outside the app's own storage. -->
 <paths>
     <cache-path name="shared" path="." />
+    <files-path name="app_files" path="." />
 </paths>

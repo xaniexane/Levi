@@ -18,6 +18,7 @@ import dev.levi.app.MainActivity
 import dev.levi.app.R
 import dev.levi.app.SettingsActivity
 import dev.levi.app.ServerConfig
+import dev.levi.app.tools.ToolsFragment
 
 /**
  * Root settings page: grouped cards mirroring the reference layout,
@@ -99,6 +100,17 @@ class SettingsHomeFragment : Fragment() {
         r1.addView(
             SettingsUi.row(ctx, R.drawable.ic_devices, getString(R.string.row_devices)) {
                 open(DevicesFragment(), getString(R.string.row_devices))
+            },
+        )
+        r1.addView(SettingsUi.divider(ctx))
+        // Workstream 6 (device tools): entry point for the per-tool toggles.
+        r1.addView(
+            SettingsUi.row(
+                ctx, R.drawable.ic_tools,
+                getString(R.string.row_tools),
+                getString(R.string.row_tools_sub),
+            ) {
+                open(ToolsFragment(), getString(R.string.row_tools))
             },
         )
         content.addView(g1)
