@@ -8,6 +8,7 @@ export type View =
   | "write"
   | "build"
   | "studio"
+  | "finance"
   | "hydra"
   | "echo"
   | "mandella"

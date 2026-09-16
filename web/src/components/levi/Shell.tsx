@@ -5,6 +5,7 @@ import {
   PenLine,
   Hammer,
   Sparkles,
+  TrendingUp,
   Hexagon,
   GitBranch,
   Scale,
@@ -21,6 +22,7 @@ import { TalkView } from "./Talk";
 import { WriteView } from "./Write";
 import { BuildView } from "./Build";
 import { StudioView } from "./Studio";
+import { FinanceView } from "./Finance";
 import { HydraView } from "./Hydra";
 import { EchoView } from "./Echo";
 import { MandellaView } from "./Mandella";
@@ -34,6 +36,7 @@ const PRIMARY: { id: View; label: string; icon: typeof Home }[] = [
   { id: "write", label: "Write", icon: PenLine },
   { id: "build", label: "Build", icon: Hammer },
   { id: "studio", label: "Studio", icon: Sparkles },
+  { id: "finance", label: "Finance", icon: TrendingUp },
 ];
 
 const LATTICE: { id: View; label: string; icon: typeof Home }[] = [
@@ -209,6 +212,7 @@ export function Shell() {
           {view === "write" && <WriteView />}
           {view === "build" && <BuildView />}
           {view === "studio" && <StudioView />}
+          {view === "finance" && <FinanceView />}
           {view === "hydra" && <HydraView />}
           {view === "echo" && <EchoView />}
           {view === "mandella" && <MandellaView />}
