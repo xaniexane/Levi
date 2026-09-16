@@ -347,5 +347,169 @@ def test_secret_setting_keys_skipped_on_import(tmp_path):
     assert "secret-note" in summary["memory"]["secrets_skipped"]
 
 
+# ── format v2 ────────────────────────────────────────────────────
+
+
+def _seed_growth(monkeypatch, home: Path):
+    """Seed a growth journal + state via the public journal API.
+
+    Uses the journal's own LEVI_GROWTH_DIR override so the test never
+    touches the real ~/.levi/growth.
+    """
+    from levi.growth import journal
+
+    monkeypatch.setenv("LEVI_GROWTH_DIR", str(home / "growth"))
+    journal.save_state({"cycles": 3})
+    journal.append_entry({"kind": "cycle", "accepted": 2, "mode": "rules"})
+    journal.append_entry({"kind": "cycle", "accepted": 1, "mode": "rules"})
+    return journal
+
+
+def test_export_v2_sections(tmp_path, monkeypatch):
+    seed_home(tmp_path)
+    _seed_growth(monkeypatch, tmp_path)
+    pack = export_pack(tmp_path)
+    assert pack["version"] == 2 == PACK_VERSION
+    secs = pack["sections"]
+    for name in ("capabilities", "growth", "workflows", "manifest"):
+        assert name in secs, f"missing v2 section {name!r}"
+
+    # capabilities: atlas landed in this tree — accept any honest status
+    caps = secs["capabilities"]
+    assert caps["status"] in ("ok", "atlas-not-landed", "atlas-unreadable")
+    if caps["status"] == "ok":
+        assert isinstance(caps["atlas"], dict)
+
+    # growth: developmental snapshot via the public journal API
+    growth = secs["growth"]
+    assert growth["status"] == "ok"
+    assert growth["cycles"] == 3
+    assert growth["learnings"] == 0  # no growth-tagged memory yet
+    assert growth["stage"] == "newborn"
+    assert len(growth["recent_entries"]) == 2
+
+    # workflows: names + summaries only — step bodies travel with the code
+    wfs = secs["workflows"]
+    assert wfs["status"] in ("ok", "workflows-not-landed", "workflows-unreadable")
+    if wfs["status"] == "ok":
+        assert wfs["workflows"]
+        assert all(set(w) == {"name", "summary"} for w in wfs["workflows"])
+
+    # manifest: provenance with a non-personal machine id
+    mf = secs["manifest"]
+    assert mf["pack_version"] == 2
+    assert mf["levi_version"]
+    assert mf["exported_at"]
+    assert len(mf["source_machine_id"]) == 16
+    assert all(c in "0123456789abcdef" for c in mf["source_machine_id"])
+    assert "not reversible" in mf["source_machine_id_note"]
+
+
+def test_growth_learnings_counted_from_home_memory(tmp_path, monkeypatch):
+    seed_home(tmp_path)
+    _seed_growth(monkeypatch, tmp_path)
+    store = MemoryStore(data_dir=tmp_path / "memory")
+    store.add(
+        MemoryType.SEMANTIC,
+        "Chauncey likes concise answers",
+        source="user",
+        tags=["growth", "preference"],
+    )
+    pack = export_pack(tmp_path)
+    growth = pack["sections"]["growth"]
+    assert growth["status"] == "ok"
+    assert growth["learnings"] == 1
+    assert growth["stage"] == "sprout"  # 1 learning crosses the sprout threshold
+
+
+def test_v2_export_tolerates_missing_modules(tmp_path, monkeypatch):
+    import sys
+
+    seed_home(tmp_path)
+    # Simulate a tree where the atlas / workflows / growth modules never landed.
+    for mod in ("levi.interop.atlas", "levi.workflows", "levi.growth", "levi.growth.journal"):
+        monkeypatch.setitem(sys.modules, mod, None)
+    pack = export_pack(tmp_path)
+    assert pack["sections"]["capabilities"] == {"status": "atlas-not-landed"}
+    assert pack["sections"]["workflows"] == {"status": "workflows-not-landed"}
+    assert pack["sections"]["growth"] == {"status": "growth-not-landed"}
+    validate_pack(pack)  # still a valid v2 pack
+
+
+def test_v1_pack_still_validates_and_imports(tmp_path, monkeypatch):
+    src = tmp_path / "src"
+    seed_home(src)
+    v2 = export_pack(src)
+    # hand-shape a v1 pack: the four core sections only
+    v1 = {
+        "format": FORMAT,
+        "version": 1,
+        "exported_at": v2["exported_at"],
+        "levi_version": v2["levi_version"],
+        "sections": {
+            k: v2["sections"][k]
+            for k in ("identity", "settings", "memory", "skills")
+        },
+    }
+    validate_pack(v1)  # v1 must still be accepted
+
+    dst = tmp_path / "dst"
+    summary = import_pack(v1, dst, confirm=True)
+    assert summary["identity"]["changed"] is True
+    assert summary["memory"]["added"] == 3  # only the durable entries
+    # v2-only sections report not-in-pack; nothing is written for them
+    for name in ("capabilities", "growth", "workflows", "manifest"):
+        assert summary[name]["changed"] is False
+        assert summary[name]["status"] == "not-in-pack"
+    store = MemoryStore(data_dir=dst / "memory")
+    assert len(store.list(limit=10_000)) == 3
+
+
+def test_v2_roundtrip_preserves_durable_memory(tmp_path, monkeypatch):
+    src = tmp_path / "src"
+    dst = tmp_path / "dst"
+    seed_home(src)
+    _seed_growth(monkeypatch, src)
+    pack = export_pack(src)
+
+    summary = import_pack(pack, dst, confirm=True)
+    assert summary["memory"]["added"] == 3
+    store = MemoryStore(data_dir=dst / "memory")
+    contents = [e.content for e in store.list(limit=10_000)]
+    assert "Chauncey prefers dark mode" in contents
+    assert "coffee: black" in contents
+    assert "deploy with ./deploy.sh" in contents
+
+    # v2 sections are informational: verified and reported, never written
+    assert summary["capabilities"]["changed"] is False
+    assert summary["workflows"]["changed"] is False
+    growth = summary["growth"]
+    assert growth["changed"] is False
+    assert growth["status"] == "ok"
+    assert growth["stage"] == "newborn"
+    assert growth["cycles"] == 3
+    mf = summary["manifest"]
+    assert mf["pack_version"] == 2
+    assert mf["source_machine_id"] == pack["sections"]["manifest"]["source_machine_id"]
+    # growth state itself was NOT imported into the target home
+    assert not (dst / "growth").exists()
+
+
+def test_preview_v2_sections(tmp_path, monkeypatch):
+    src = tmp_path / "src"
+    seed_home(src)
+    _seed_growth(monkeypatch, src)
+    pack = export_pack(src)
+    lines = preview_import(pack, tmp_path / "dst")
+    assert any(line.startswith("capabilities:") for line in lines)
+    assert any(
+        line.startswith("growth:") and "newborn" in line for line in lines
+    ), "\n".join(lines)
+    assert any(line.startswith("workflows:") for line in lines)
+    assert any(
+        line.startswith("manifest:") and "pack v2" in line for line in lines
+    ), "\n".join(lines)
+
+
 if __name__ == "__main__":
     sys.exit(pytest.main([__file__, "-q"]))
