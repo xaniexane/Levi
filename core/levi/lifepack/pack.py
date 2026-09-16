@@ -292,6 +292,7 @@ def _export_variant_genome(home: Path) -> Dict[str, Any]:
                 "version": genome.get("version"),
                 "traits": genome.get("traits"),
                 "candidates": genome.get("candidates"),
+                "champions": genome.get("champions"),
                 "lineage": genome.get("lineage"),
                 "signatures": genome.get("signatures"),
                 "guards": genome.get("guards"),
@@ -773,6 +774,16 @@ def _import_variant_genome(
     for name, cands in (pack_genome.get("candidates") or {}).items():
         if name not in current["candidates"]:
             current["candidates"][name] = cands
+            changed = True
+    # champions: the pack's bloodline. A local champion is only replaced
+    # by the pack's when the pack's scores strictly higher — elitism
+    # holds across the import boundary too.
+    for name, champ in (pack_genome.get("champions") or {}).items():
+        if not isinstance(champ, dict):
+            continue
+        local = current["champions"].get(name)
+        if local is None or float(champ.get("score", 0)) > float(local.get("score", 0)):
+            current["champions"][name] = champ
             changed = True
     for trait, value in (pack_genome.get("traits") or {}).items():
         if trait not in current["traits"]:

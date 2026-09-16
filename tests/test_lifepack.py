@@ -600,3 +600,46 @@ def test_run_forms_covers_organism_forms():
     out = IdentityCycle().run_forms(n_variants=1, seed="test")
     assert out["forms"] == len(ORGANISM_FORMS) >= 18
     assert {r["form"] for r in out["results"]} == set(ORGANISM_FORMS)
+
+
+def test_variant_genome_carries_champions(tmp_path):
+    from levi.identity.genome import GenomeStore
+
+    src, dst = tmp_path / "src", tmp_path / "dst"
+    seed_home(src)
+    cycle_store = GenomeStore(src)
+    from levi.identity.cycle import IdentityCycle
+
+    IdentityCycle(store=cycle_store).evolve(generations=1, n_variants=2, seed="t")
+    pack = export_pack(src)
+    vg = pack["sections"]["variant_genome"]
+    assert vg["status"] == "ok"
+    assert len(vg["genome"]["champions"]) == len(
+        GenomeStore(src).load()["champions"]
+    )
+    assert len(vg["genome"]["champions"]) > 0
+    import_pack(pack, dst, confirm=True)
+    imported = GenomeStore(dst).load()["champions"]
+    assert set(imported) == set(GenomeStore(src).load()["champions"])
+
+
+def test_import_never_dethrones_local_champion_unfairly(tmp_path):
+    from levi.identity.genome import GenomeStore
+
+    src, dst = tmp_path / "src", tmp_path / "dst"
+    seed_home(src)
+    seed_home(dst)
+    from levi.identity.cycle import IdentityCycle
+
+    IdentityCycle(store=GenomeStore(src)).evolve(
+        generations=1, n_variants=2, seed="t"
+    )
+    pack = export_pack(src)
+    # dst crowns its own superior champion for one identity first
+    dst_store = GenomeStore(dst)
+    dst_store.set_champion(
+        "cybrus", {"name": "cybrus-local", "traits": {}}, 999.0, 1
+    )
+    import_pack(pack, dst, confirm=True)
+    # elitism holds across the import boundary: local 999.0 keeps the crown
+    assert GenomeStore(dst).load()["champions"]["cybrus"]["score"] == 999.0
