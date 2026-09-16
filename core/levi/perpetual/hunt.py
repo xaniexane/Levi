@@ -174,6 +174,17 @@ HUNT_THEMES: List[HuntTheme] = [
               "worth reviving.",
         exclusions=frozenset({"Quipu", "Pecia system"}),
     ),
+    HuntTheme(
+        id="dead-genres-games",
+        name="Dead genres: games",
+        brief="Dead game genres and forgotten mechanics (parser interactive "
+              "fiction, hotseat pass-and-play, dead multiplayer rituals), "
+              "killed gaming platforms (Stadia and friends), and predatory "
+              "monetization trades (loot boxes, pay-to-win, battle passes, "
+              "vanishing subscription libraries) — always as honest playful "
+              "ADDITIONS (local games, fair mechanics, player-owned "
+              "progress, never predatory monetization), never rebuilds.",
+    ),
 ]
 
 THEMES_BY_ID = {t.id: t for t in HUNT_THEMES}

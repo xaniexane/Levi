@@ -288,6 +288,30 @@ def parse_m40(text: str, provenance: Provenance) -> List[ArchiveRecord]:
 
 
 # ---------------------------------------------------------------------------
+# JSONL findings parser — for waves that ship findings.jsonl directly
+# ---------------------------------------------------------------------------
+
+
+def parse_findings_jsonl(text: str,
+                         provenance: Provenance) -> List[ArchiveRecord]:
+    """Parse one-ArchiveRecord-per-line JSONL (the hunt-record format)."""
+    import json as _json
+
+    records: List[ArchiveRecord] = []
+    for lineno, line in enumerate(text.splitlines(), 1):
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            data = _json.loads(line)
+        except ValueError as exc:
+            raise ValueError("bad JSON on line %d: %s" % (lineno, exc)) from exc
+        rec = ArchiveRecord.from_dict(data)
+        records.append(rec)
+    return records
+
+
+# ---------------------------------------------------------------------------
 # id assignment + dedup
 # ---------------------------------------------------------------------------
 
@@ -341,6 +365,14 @@ REPORTS = [
         "notes": ("Index-sourced 2026-09-16; two independent sources per "
                   "entry. Disputed/romanticized history flagged per entry "
                   "and in the nostalgia audit."),
+    },
+    {
+        "slug": "games-hunt-20260916-0022",
+        "files": ["findings.jsonl"],
+        "parser": parse_findings_jsonl,
+        "tag": "games",
+        "notes": ("Web-verified 2026-09-16; guesses marked; findings carry "
+                  "embedded provenance. JSONL is the hunt-record format."),
     },
 ]
 

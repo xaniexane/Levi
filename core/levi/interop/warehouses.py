@@ -78,6 +78,50 @@ CLI_COMMANDS: Dict[str, List[str]] = {
 }
 
 
+#: Reachability for the operator + additions waves. Every package with a
+#: ``__main__`` is honestly reachable as ``python -m levi.<pkg>``; packages
+#: without one are import-only until the unified CLI wires them.
+CLI_COMMANDS.update(
+    {
+        # -- operator wave ------------------------------------------------
+        "signals": ["python -m levi.signals"],
+        "creed": [],
+        "promises": ["python -m levi.promises"],
+        "decisions": ["python -m levi.decisions"],
+        "interruptions": ["python -m levi.interruptions"],
+        "snapshots": ["python -m levi.snapshots"],
+        "drift": ["python -m levi.drift"],
+        "teachback": ["python -m levi.teachback"],
+        "energy": ["python -m levi.energy"],
+        "friction": ["python -m levi.friction"],
+        "sweeps": ["python -m levi.sweeps"],
+        "premortem": ["python -m levi.premortem"],
+        # -- deep-web research --------------------------------------------
+        "research": [],
+        # -- additions wave -----------------------------------------------
+        "ephemera": ["python -m levi.ephemera"],
+        "feedreader": ["python -m levi.feedreader"],
+        "packs": ["python -m levi.packs"],
+        "commitments": ["python -m levi.commitments"],
+        "recap": ["python -m levi.recap"],
+        "classifieds": ["python -m levi.classifieds"],
+        "dials": ["python -m levi.dials"],
+        "bridging": ["python -m levi.bridging"],
+        "communities": ["python -m levi.communities"],
+        "threads": ["python -m levi.threads"],
+        "charters": ["python -m levi.charters"],
+        "capproto": ["python -m levi.capproto"],
+        "mailtriage": ["python -m levi.mailtriage"],
+        "vaults": ["python -m levi.vaults"],
+        "canvas": ["python -m levi.canvas"],
+        "discover": ["python -m levi.discover"],
+        "presence": ["python -m levi.presence"],
+        "honestsearch": ["python -m levi.honestsearch"],
+        "recommender": ["python -m levi.recommender"],
+    }
+)
+
+
 def _pkg_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
@@ -191,7 +235,7 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "dead software, forgotten methods, tech-giant patterns — plus the "
             "dated courses/news/security corpora. Dated, queryable, citable."
         ),
-        "shelves": ["archive", "knowledge", "academy", "bounty"],
+        "shelves": ["archive", "knowledge", "academy", "bounty", "research"],
         "strategy": "records",
         "pull_hint": "ArchiveStore().get('<record-id>') or: python -m levi.archive search <q>",
     },
@@ -210,16 +254,20 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
         "title": "Games Warehouse",
         "summary": (
             "Fair-play additions: honest local games with fair mechanics and "
-            "player-owned progress — the standing hunt theme is dead genres, "
-            "forgotten mechanics, and killed gaming platforms, remixed as "
-            "additions (never predatory rebuilds)."
+            "player-owned progress — dead genres, forgotten mechanics, and "
+            "killed gaming platforms, remixed as additions (never predatory "
+            "rebuilds)."
         ),
-        "shelves": [],
-        "strategy": "empty",
-        "pull_hint": "stock arrives via the perpetual hunt (games theme) — nothing on the shelves yet",
+        "shelves": ["fair-play-charter", "codebreak", "daily-cipher",
+                    "hotseat-tictactoe", "hotseat-nim", "player-saves"],
+        "strategy": "capabilities",
+        "pull_hint": ("python -m levi.games charter  ·  python -m levi.games play "
+                      "codebreak|tictactoe|nim  ·  python -m levi.games cipher"),
         "note": (
-            "Standing hunt theme with no landed stock yet. First fair-play "
-            "additions arrive through the perpetual hunt program."
+            "Stocked by the perpetual hunt games wave (2026-09-16). Every "
+            "game passes the Fair Play Charter (charter.py): no paid "
+            "randomness, no streak punishment, no FOMO timers, free hints, "
+            "offline-first, portable player-owned saves."
         ),
     },
     "memory": {
@@ -287,6 +335,84 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
         "shelves": ["forge"],
         "strategy": "capabilities",
         "pull_hint": "levi forge  ·  python -m levi.forge",
+    },
+    "operations": {
+        "title": "Operations Warehouse",
+        "summary": (
+            "LEVI's operating layer: the graded signal plane (SILENT / NUDGE "
+            "/ CARD / ESCALATE with cooldown instincts, focus mute, "
+            "active-hours gate), the frozen creed of laws and tone masks, and "
+            "the ledgers and rituals of a reliable operator — promises, "
+            "decisions, interruptions, snapshots, drift, teach-back, energy, "
+            "friction, sweeps, pre-mortems."
+        ),
+        "shelves": [
+            "signals",
+            "creed",
+            "promises",
+            "decisions",
+            "interruptions",
+            "snapshots",
+            "drift",
+            "teachback",
+            "energy",
+            "friction",
+            "sweeps",
+            "premortem",
+        ],
+        "strategy": "capabilities",
+        "pull_hint": "python -m levi.signals  ·  python -m levi.promises  ·  from levi.creed import laws",
+    },
+    "commons": {
+        "title": "Commons Warehouse",
+        "summary": (
+            "Portable social fabric — additions the giants refuse: "
+            "communities you can leave any platform with, bridging-ranked "
+            "discussion trees, disagreement-bridging without a central "
+            "moderator, trust-graph classifieds with no ad layer, portable "
+            "governance charters, guilt-free commitment devices, yearly "
+            "recaps computed on-device, and a sovereign feed reader."
+        ),
+        "shelves": [
+            "communities",
+            "threads",
+            "bridging",
+            "classifieds",
+            "charters",
+            "commitments",
+            "recap",
+            "feedreader",
+        ],
+        "strategy": "capabilities",
+        "pull_hint": "python -m levi.communities  ·  python -m levi.threads  ·  python -m levi.feedreader",
+    },
+    "craft": {
+        "title": "Craft Warehouse",
+        "summary": (
+            "Sovereign instruments, local-first: true-delete ephemeral "
+            "channels, scoped knowledge packs you own, attention dials for "
+            "user-owned feed ranking, the capability-gated service protocol, "
+            "mail triage over a local store, per-project vaults with explicit "
+            "retention, a versioned workbench canvas, ritualized discovery "
+            "over your own corpus, LAN presence rooms with no account and no "
+            "server, clean-room link-graph search, and goal-directed "
+            "recommendations with no engagement mining."
+        ),
+        "shelves": [
+            "ephemera",
+            "packs",
+            "dials",
+            "capproto",
+            "mailtriage",
+            "vaults",
+            "canvas",
+            "discover",
+            "presence",
+            "honestsearch",
+            "recommender",
+        ],
+        "strategy": "capabilities",
+        "pull_hint": "python -m levi.ephemera  ·  python -m levi.vaults  ·  python -m levi.honestsearch",
     },
 }
 
