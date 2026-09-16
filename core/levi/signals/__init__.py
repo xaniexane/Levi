@@ -5,6 +5,11 @@ ESCALATE); instincts fire on evidence with cooldowns and grade caps;
 focus mode and active hours decide what may actually reach the user.
 """
 
+from levi.signals.defaults import (
+    EVIDENCE_KEYS,
+    accountability_evidence,
+    register_default_instincts,
+)
 from levi.signals.focus import (
     Mode,
     get_mode,
@@ -33,11 +38,13 @@ __all__ = [
     "ActiveHours",
     "DEFAULT_ACTIVE_HOURS",
     "Delivery",
+    "EVIDENCE_KEYS",
     "Instinct",
     "InstinctRegistry",
     "Mode",
     "Signal",
     "SignalGrade",
+    "accountability_evidence",
     "default_registry",
     "deliver",
     "focus_delivers",
@@ -48,6 +55,7 @@ __all__ = [
     "levi_home",
     "matches_evidence",
     "pulse_with_signals",
+    "register_default_instincts",
     "render",
     "route",
     "set_mode",

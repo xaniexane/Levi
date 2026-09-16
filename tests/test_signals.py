@@ -368,7 +368,10 @@ class TestWiredInstincts:
 
     def test_two_miss_silent_without_evidence(self, home):
         reg = default_registry(home=home)
-        assert reg.evaluate(gather_evidence(home, _at(10, 10))) == []
+        signals = reg.evaluate(gather_evidence(home, _at(10, 10)))
+        # The default accountability plane may still fire (e.g. the sweep
+        # cadence reminder); two_miss itself must stay silent.
+        assert [s for s in signals if s.source == "instinct.two_miss"] == []
 
     def test_error_spike_fires(self, home):
         now = _at(15, 12)
@@ -387,7 +390,8 @@ class TestWiredInstincts:
         now = _at(15, 12)
         _write_sessions_with_errors(home, 2, now)
         reg = default_registry(home=home)
-        assert reg.evaluate(gather_evidence(home, now), now) == []
+        signals = reg.evaluate(gather_evidence(home, now), now)
+        assert [s for s in signals if s.source == "instinct.error_spike"] == []
 
     def test_empty_block_fires(self, home):
         now = _at(15, 12)
@@ -439,15 +443,22 @@ class TestSupervisorAdapter:
             }
         )
         signals = signals_for_supervisor(report, home=home, now=_at(15, 10))
-        assert len(signals) == 1
-        (signal,) = signals
+        # The default accountability plane (e.g. the sweep cadence reminder)
+        # may add its own signals; the supervisor layer contributes exactly
+        # one card for the down service.
+        supervisor = [s for s in signals if s.tag == "[supervisor]"]
+        assert len(supervisor) == 1
+        (signal,) = supervisor
         assert signal.grade is SignalGrade.CARD
         assert signal.tag == "[supervisor]"
         assert "agent-server" in signal.title
 
     def test_all_up_no_evidence_no_signals(self, home):
         report = self._report({"heartbeat": {"ok": True, "detail": "fine"}})
-        assert signals_for_supervisor(report, home=home, now=_at(15, 10)) == []
+        signals = signals_for_supervisor(report, home=home, now=_at(15, 10))
+        # The supervisor layer is silent; the default instinct plane may
+        # still contribute (e.g. the sweep cadence reminder).
+        assert [s for s in signals if s.tag == "[supervisor]"] == []
 
     def test_signals_sorted_highest_grade_first(self, home):
         from levi.commitments.commitments import CommitmentStore
@@ -456,8 +467,11 @@ class TestSupervisorAdapter:
         store.define("write", start="2026-09-01")
         report = self._report({"x": {"ok": False, "detail": "down"}})
         signals = signals_for_supervisor(report, home=home, now=_at(10, 10))
-        assert signals[0].grade is SignalGrade.ESCALATE  # two_miss first
-        assert signals[-1].grade is SignalGrade.CARD  # down service last
+        grades = [s.grade.value for s in signals]
+        assert grades == sorted(grades, reverse=True)  # highest grade first
+        assert signals[0].source == "instinct.two_miss"  # ESCALATE first
+        down = [s for s in signals if s.tag == "[supervisor]"]
+        assert len(down) == 1 and "x" in down[0].title
 
 
 # ---------------------------------------------------------------------------

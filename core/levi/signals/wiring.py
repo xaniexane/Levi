@@ -12,6 +12,12 @@ Wired instincts (evidence-triggered, never vibes):
 * ``instinct.empty_block`` — ``focus.empty_block`` → CARD, 50m cooldown
 * ``instinct.error_spike`` — ``logs.error_spike`` → CARD, 1h cooldown
 
+Plus the nine default accountability instincts registered by
+:mod:`levi.signals.defaults` (promises, decisions, interruptions, drift,
+friction, teach-back, energy, sweeps) — see that module for the full
+spec table. ``default_registry()`` carries all of them; evidence for the
+defaults is gathered by ``accountability_evidence()``.
+
 Evidence contract (all under the LEVI state home, resolved at call time):
 
 * commitments: ``<home>/commitments/commitments.json`` (via the real
@@ -31,6 +37,10 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from levi.signals.defaults import (
+    accountability_evidence,
+    register_default_instincts,
+)
 from levi.signals.focus import Mode, get_mode, should_deliver as _focus_delivers
 from levi.signals.grades import Signal, SignalGrade, render, route
 from levi.signals.hours import ActiveHours, DEFAULT_ACTIVE_HOURS
@@ -39,6 +49,8 @@ from levi.signals.instincts import Instinct, InstinctRegistry, levi_home
 __all__ = [
     "levi_home",
     "gather_evidence",
+    "accountability_evidence",
+    "register_default_instincts",
     "commitments_missed",
     "error_counts",
     "focus_evidence",
@@ -243,6 +255,7 @@ def gather_evidence(
     evidence["logs.errors_24h"] = n24h
     evidence["logs.error_spike"] = n1h >= ERROR_SPIKE_1H or n24h >= ERROR_SPIKE_24H
     evidence.update(focus_evidence(base, moment))
+    evidence.update(accountability_evidence(base, moment))
     return evidence
 
 
@@ -299,7 +312,9 @@ def _error_spike_handler(evidence: Dict[str, Any]) -> Signal:
 
 
 def default_registry(home: "str | os.PathLike[str] | None" = None) -> InstinctRegistry:
-    """Registry with the three supervisor-wired instincts."""
+    """Registry with the wired supervisor instincts plus the nine default
+    accountability instincts (promises, decisions, interruptions, drift,
+    friction, teach-back, energy, sweeps)."""
     reg = InstinctRegistry(home=home)
     reg.register(
         Instinct(
@@ -334,7 +349,7 @@ def default_registry(home: "str | os.PathLike[str] | None" = None) -> InstinctRe
             tag="[sentinel]",
         )
     )
-    return reg
+    return register_default_instincts(reg)
 
 
 # ---------------------------------------------------------------------------

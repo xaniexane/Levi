@@ -60,6 +60,38 @@ Focus blocks are declared in `<levi-home>/focus/blocks.json`:
 `[{"name": "deep work", "start": "<ISO>", "end": "<ISO>"}]` (naive = local).
 No blocks file → no focus evidence → the instinct stays silent.
 
+## The nine default accountability instincts
+
+Registered by `signals/defaults.py` via `register_default_instincts()` and
+carried by `wiring.default_registry()` — the documented instinct specs from
+the accountability, state & alignment, and energy/friction/sweeps modules,
+finally adopted. Each handler calls the owning module's `check()`-equivalent
+and translates its plain-string-grade dicts into real `Signal`s (capped at
+`max_grade` by the registry). Evidence is gathered by
+`accountability_evidence()` — read-only, best-effort, never raises. The
+promises/decisions/interruptions modules resolve storage under
+`<user-base>/.levi/…` (their own convention), so they receive the user base
+(`home.parent` when the state home is named `.levi`) — the same translation
+`wiring.commitments_missed` already uses.
+
+| ID | Fires on | Grade | Cooldown | Does |
+|----|----------|-------|----------|------|
+| `instinct.promise_overdue` | `promises.overdue>=1` | CARD | 12h | summarizes overdue promises; offers fulfill / record-broken |
+| `instinct.promise_overdue_severe` | `promises.overdue_severe` | ESCALATE (requires ack) | 24h | escalates promises past the escalation threshold |
+| `instinct.decision_revisit` | `decisions.revisit_due>=1` | CARD | 24h | shows the decision + reasoning; offers reaffirm / retire |
+| `instinct.interruption_noise` | `interruptions.logged_7d` | NUDGE | 7d | presents the weekly noise ROI card; proposes muting top sources |
+| `instinct.drift_card` | `drift.card` | CARD | 7d | surfaces the weekly drift card once; never nags |
+| `instinct.friction_review` | `friction.captured>=3` | NUDGE | 7d | runs the weekly friction review; asks which themes to promote |
+| `instinct.teachback_review` | `teachback.due` (model untouched ≥30d) | NUDGE | 30d | invites a goal-model review: correct, affirm, or drop |
+| `instinct.energy_recompute` | `energy.deep_shipped>=1` | SILENT (internal) | 7d | recomputes peak windows; never reaches the user |
+| `instinct.sweep_cadence` | `sweeps.have_specs>=1` | NUDGE | 7d | reminds about the hygiene sweep; safe auto-fix, unsafe report-only |
+
+Documented but **not registered**: `instinct.premortem_before_lock` would
+fire on `commitments.big_locked` when a big commitment locks — but no module
+emits that evidence (verified: neither the commitments nor the premortem
+package has a "big lock" concept). Registering it would be a dead spec, so
+it stays documented here until a real evidence source exists.
+
 ## Focus contract
 
 Modes: `focus` | `plan` | `review` | `play` (persisted at
