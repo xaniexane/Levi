@@ -2369,6 +2369,20 @@ def cmd_brain(args):
     from levi.brain.record import export_markdown
 
     action = getattr(args, "brain_action", "table") or "table"
+    if action == "train":
+        # v2 brain training (SCAFFOLD worker): delegates to the trainer so
+        # `levi brain train --config train.yaml` is the one public surface.
+        from levi.brain.train.v2 import trainer as _trainer
+
+        targv = []
+        if getattr(args, "config", None):
+            targv += ["--config", args.config]
+        if getattr(args, "run_dir", None):
+            targv += ["--run-dir", args.run_dir]
+        targv += ["--device", getattr(args, "device", None) or "cpu"]
+        if getattr(args, "stage_only", False):
+            targv.append("--stage-only")
+        raise SystemExit(_trainer.main(targv))
     if getattr(args, "seed_expand", False):
         from levi.brain.seed_expand import expand_corpus, format_expand_info
 
@@ -5599,7 +5613,7 @@ def main():
         "brain_action",
         nargs="?",
         default="table",
-        choices=["table", "corpus", "set", "export", "atlas"],
+        choices=["table", "corpus", "set", "export", "atlas", "train"],
     )
     brain_p.add_argument(
         "--seed-atlas", action="store_true", help="Pre-load offline brain A-Z atlas"
@@ -5650,6 +5664,25 @@ def main():
     brain_p.add_argument("--key", default="note")
     brain_p.add_argument("--value", default="")
     brain_p.add_argument("--query", default="")
+    # v2 brain training (SCAFFOLD worker): `levi brain train --config`
+    brain_p.add_argument(
+        "--config",
+        default=None,
+        help="brain train: path to v2 train.yaml config",
+    )
+    brain_p.add_argument(
+        "--run-dir",
+        default=None,
+        help="brain train: run directory (default: runs/<name>-<timestamp>)",
+    )
+    brain_p.add_argument(
+        "--device", default="cpu", help="brain train: torch device (default: cpu)"
+    )
+    brain_p.add_argument(
+        "--stage-only",
+        action="store_true",
+        help="brain train: only build the curriculum manifest, then exit",
+    )
     echo_p = sub.add_parser("echo", help="Echo organ — taken/not-taken/wild")
     echo_p.add_argument("--seed", default="silence")
     man_p = sub.add_parser("mandella", help="Mandella organ — domain stakes")
