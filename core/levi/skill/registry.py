@@ -786,6 +786,22 @@ class SkillRegistry:
 
         for s in INTEGRITY_SKILLS + SOLVER_SKILLS:
             self.register(s)
+        # LEVI document skill pack (office document read/create).
+        # Stdlib-only OOXML (docx/xlsx/pptx) + best-effort PDF text
+        # extraction. All LOW risk, no confirmation (reads/writes only
+        # user-named files).
+        from levi.docs.skills import DOC_SKILLS
+
+        for s in DOC_SKILLS:
+            self.register(s)
+        # LEVI user-created skills (~/.levi/skills/<id>/SKILL.md).
+        # Data-driven: creator.list_user_skills scans the dir and registers
+        # frontmatter-defined skills tagged "user-created". Lazy import:
+        # creator imports Skill/SkillRisk from this module.
+        from levi.skill.creator import list_user_skills
+
+        for s in list_user_skills():
+            self.register(s)
 
     def register(self, skill: Skill) -> None:
         if not isinstance(skill, Skill):

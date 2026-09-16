@@ -902,6 +902,12 @@ def cmd_reference(args):
     _cmd(args)
 
 
+def cmd_doc(args):
+    from levi.docs.cli import cmd_doc as _cmd
+
+    _cmd(args)
+
+
 def cmd_plugin(args):
     """Plugin connectors (blueprint §3): list registered connectors or
     execute one operation. Writes require --yes (HITL gate); without a
@@ -4758,6 +4764,50 @@ def main():
         default=None,
         help="add: local id (default ref-<slug>); remove: id to unplug",
     )
+    doc_p = sub.add_parser(
+        "doc",
+        help="Document skills: read/create docx, xlsx, pptx; read pdf",
+    )
+    doc_sub = doc_p.add_subparsers(dest="doc_action")
+    doc_r = doc_sub.add_parser("read", help="Read text from a document file")
+    doc_r.add_argument("file", help="Path to .docx/.xlsx/.pptx/.pdf")
+    doc_r.add_argument("--json", action="store_true", help="Print as JSON")
+    doc_w = doc_sub.add_parser("write", help="Create a document file")
+    doc_w.add_argument(
+        "format", choices=["docx", "xlsx", "pptx"], help="format to create"
+    )
+    doc_w.add_argument("file", help="Output path")
+    doc_w.add_argument("--title", default=None, help="Document/slide title")
+    doc_w.add_argument(
+        "--paragraph",
+        action="append",
+        default=[],
+        help="docx: paragraph text (repeatable)",
+    )
+    doc_w.add_argument(
+        "--table",
+        action="append",
+        default=[],
+        help='docx: one table as "r1c1,r1c2;r2c1,r2c2" (repeatable)',
+    )
+    doc_w.add_argument(
+        "--header",
+        action="append",
+        default=[],
+        help="xlsx: column header (repeatable)",
+    )
+    doc_w.add_argument(
+        "--row",
+        action="append",
+        default=[],
+        help='xlsx: one data row as "a,b,c" (repeatable)',
+    )
+    doc_w.add_argument(
+        "--slide",
+        action="append",
+        default=[],
+        help='pptx: one slide as "Title|bullet1;bullet2" (repeatable)',
+    )
     fin_p = sub.add_parser(
         "finance",
         help="Paper-only finance: quotes, indicators, signals, paper orders (blueprint §5)",
@@ -5902,6 +5952,7 @@ def main():
         "plugins": cmd_plugins,
         "plugin": cmd_plugin,
         "reference": cmd_reference,
+        "doc": cmd_doc,
         "finance": cmd_finance,
         "forge": cmd_forge,
         "agent": cmd_agent,
