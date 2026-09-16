@@ -41,7 +41,12 @@ from levi.identity.templates import list_templates, apply_template
 # >>> LEVI backup module — minimal hook (backup coordinator); logic in levi/backup/
 from levi.backup.cli import cmd_backup, register_backup_parser
 from levi.jobs.cli import cmd_jobs, register_jobs_parser
+
 # <<< LEVI backup module
+# >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
+from levi.surgeon.cli import cmd_surgeon, register_surgeon_parser
+from levi.automation.cli import cmd_automation, register_automation_parser
+# <<< LEVI Stage-1 lineage
 
 
 def banner():
@@ -1904,7 +1909,7 @@ def _cmd_demand_five_factor(dp, demand_id, args):
             threshold = float(getattr(args, "ff_threshold", 75.0) or 75.0)
         except (TypeError, ValueError):
             raise ValueError(
-                f"--ff-threshold must be numeric, got {getattr(args, 'ff_threshold')!r}"
+                f"--ff-threshold must be numeric, got {args.ff_threshold!r}"
             )
         card = dp.score_five_factor(
             demand_id,
@@ -1969,6 +1974,16 @@ def cmd_brain(args):
         n = seed_k()
         print(f"Knowledge corpus seed: {n} units (A–Z, events, inventors, stars, X).")
         return
+    # >>> LEVI Stage-1 lineage — seed path (source-sync entry `levi-ai`)
+    if getattr(args, "seed_stage1", False):
+        from levi.brain.seed_stage1 import format_index as fmt_s1
+        from levi.brain.seed_stage1 import seed as seed_s1
+
+        print(fmt_s1())
+        n = seed_s1()
+        print(f"Stage-1 corpus seed: {n} nano literacy units.")
+        return
+    # <<< LEVI Stage-1 lineage
     if getattr(args, "seed_knowledge_heavy", False):
         from levi.brain.seed_knowledge_heavy import (
             seed as seed_h,
@@ -5081,6 +5096,13 @@ def main():
         action="store_true",
         help="Seed A–Z subjects, events, inventors, stars, X-domain",
     )
+    # >>> LEVI Stage-1 lineage — seed path (source-sync entry `levi-ai`)
+    brain_p.add_argument(
+        "--seed-stage1",
+        action="store_true",
+        help="Seed 25 Stage-1 nano literacy units (rewritten textbook facts)",
+    )
+    # <<< LEVI Stage-1 lineage
     brain_p.add_argument(
         "--seed-knowledge-heavy",
         action="store_true",
@@ -5188,6 +5210,10 @@ def main():
     # >>> LEVI jobs module — minimal hook (Hybrid Search & Apply tracker)
     register_jobs_parser(sub)
     # <<< LEVI jobs module
+    # >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
+    register_surgeon_parser(sub)
+    register_automation_parser(sub)
+    # <<< LEVI Stage-1 lineage
     news_p = sub.add_parser(
         "news", help="Current-events ingest (dated recall, not live)"
     )
@@ -5902,6 +5928,10 @@ def main():
         # >>> LEVI jobs module — minimal hook (Hybrid Search & Apply tracker)
         "jobs": cmd_jobs,
         # <<< LEVI jobs module
+        # >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
+        "surgeon": cmd_surgeon,
+        "automation": cmd_automation,
+        # <<< LEVI Stage-1 lineage
         "news": cmd_news,
         "capabilities": cmd_capabilities,
         "affect": cmd_affect,

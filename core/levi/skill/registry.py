@@ -760,6 +760,32 @@ class SkillRegistry:
 
         for s in JOB_SKILLS:
             self.register(s)
+        # LEVI Stage-1 lineage skill packs (source-sync entry `levi-ai`).
+        # Surgeon: snapshots/cleanup/proposals (apply is MODERATE + HITL).
+        from levi.surgeon.surgeon import SURGEON_SKILLS
+        from levi.surgeon.sandbox import SANDBOX_SKILLS
+
+        for s in SURGEON_SKILLS + SANDBOX_SKILLS:
+            self.register(s)
+        # WriteBuild fusion pipeline (MODERATE + HITL on apply).
+        from levi.factory.writebuild import WRITEBUILD_SKILLS
+
+        for s in WRITEBUILD_SKILLS:
+            self.register(s)
+        # Automation: browser plans (INFO, plans only), primitives (INFO),
+        # CDP session (HIGH + HITL — drives a real browser once confirmed).
+        from levi.automation.browser import BROWSER_SKILLS
+        from levi.automation.primitives import PRIMITIVE_SKILLS
+        from levi.automation.cdp import CDP_SKILLS
+
+        for s in BROWSER_SKILLS + PRIMITIVE_SKILLS + CDP_SKILLS:
+            self.register(s)
+        # Integrity (INFO, defensive verification) + solver (INFO, UX lenses).
+        from levi.security.integrity import INTEGRITY_SKILLS
+        from levi.agent.solver import SOLVER_SKILLS
+
+        for s in INTEGRITY_SKILLS + SOLVER_SKILLS:
+            self.register(s)
 
     def register(self, skill: Skill) -> None:
         if not isinstance(skill, Skill):

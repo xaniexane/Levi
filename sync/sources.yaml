@@ -74,11 +74,115 @@ sources:
     repo: xaniexane/Levi-ai
     visibility: private
     branch: main
-    synced_at: null
-    commit: null
-    status: pending
+    synced_at: "2026-09-16T02:00:00Z"
+    commit: 700aa9256f23e08a7d2a5139291d0798b6452a7c
+    status: active
     notes: >
-      Second private source. Fetch requires Chauncey's fresh transient
-      PAT (previous token shredded per policy). Format map defined on
-      inventory after fetch, per docs/SOURCE_SYNC_PROTOCOL.md.
-    format_map: []
+      Chauncey's own July 2026 "LEVI Apex Intelligence Private" Stage-1
+      lineage (Acode plugin JS engine + automation/knowledge packs).
+      Security sweep clean (no secrets/exfiltration; only loopback CDP +
+      defensive blocklists). Privacy: hardcoded Gmail addresses + name
+      variants + plugin author email scrubbed on port — replaced with
+      configurable owner identity (LEVI_OWNER_NAME / ~/.levi/owner.json).
+      All ports are rewrites; zero source text in the tree.
+    format_map:
+      - source: levi_private_v15.4/levi_surgeon.js (v15.9.0)
+        target: core/levi/surgeon/
+        format: rewrite
+        reason: >
+          Snapshots/revert, cleanup, advancement proposals, export-header
+          stamping rewritten as original LEVI-native Python. Version modes
+          that withhold code (encrypted_stub/pay_tier_limited) dropped per
+          free-core-forever law; header stamping kept. + `levi surgeon` CLI.
+      - source: levi_private_v15.4/levi_sandbox.js (v15.9.0)
+        target: core/levi/surgeon/sandbox.py
+        format: rewrite
+        reason: >
+          Propose→analyze→HITL→apply gate rewritten stdlib-only. No code
+          execution ever; apply requires clean report AND explicit human
+          confirmation. Dangerous-pattern blocklist kept defensive.
+      - source: levi_private_v15.4/levi_writebuild.js (v15.9.0)
+        target: core/levi/factory/writebuild.py
+        format: rewrite
+        reason: >
+          Analyze→format→fix→scaffold→sandbox fusion pipeline rewritten;
+          Acode editor APIs replaced with plain file ops; writes gated by
+          surgeon sandbox + human confirmation.
+      - source: levi_private_v15.4/levi_browser.js (v15.9.0)
+        target: core/levi/automation/browser.py
+        format: rewrite
+        reason: >
+          Automation plan schema + HITL-gated step model + Termux helper
+          emission rewritten. PLANS ONLY — no execution; boundary explicit
+          in module docstring and docs/AUTOMATION_SAFETY.md.
+      - source: automation-pack-v1/browser/cdp_session.py
+        target: core/levi/automation/cdp.py
+        format: rewrite
+        reason: >
+          CDP recovery state machine + error taxonomy + HITL flag-file
+          pattern rewritten; third-party `websockets` dependency replaced
+          with an original stdlib-only RFC 6455 client (kernel law).
+          Loopback-only enforced; no credential/cookie persistence.
+      - source: levi_private_v15.4/levi_integrity.js (v15.8.3)
+        target: core/levi/security/integrity.py
+        format: rewrite
+        reason: >
+          FNV-1a + triple-fingerprint tamper-refuse rewritten defensive-only.
+          Unlock-blob license machinery dropped (free core forever).
+      - source: levi_private_v15.4/levi_solver.js (v15.9.0)
+        target: core/levi/agent/solver.py
+        format: rewrite
+        reason: >
+          7-step sequential solver + cognitive modes rewritten. Modes are
+          UX/routing lenses ONLY by construction — never facts, safety,
+          permissions, or integrity (binding law).
+      - source: automation-pack-v1/safety/{matrix.md,must_stay_manual.md}
+        target: docs/AUTOMATION_SAFETY.md
+        format: rewrite
+        reason: >
+          Safety matrix, must-stay-manual list, Termux hardening, HITL
+          protocol, no-bypass constraint documented LEVI-native; plus the
+          network-setup rules from browser/termux_network_setup.md.
+      - source: levi-full-delivery/knowledge/{L0,MASTER_EXPANSION_PROMPT.md}
+        target: docs/KNOWLEDGE_PIPELINE.md + core/levi/brain/seed_stage1.py
+        format: rewrite
+        reason: >
+          Nano/Medium/Rare tiers, organize-daemon rules, serial scheme and
+          expansion pipeline documented; 23 nano + 2 quantum entries
+          (standard textbook facts) ingested as literacy units with
+          EDUCATION ONLY notes on safety topics.
+      - source: LEVI_Automation_Capabilities_Prompt.md (v15.9.0)
+        target: core/levi/automation/primitives.py
+        format: design-reference
+        reason: >
+          Population prompt kept as labeled design reference; the primitive
+          registry (16 primitives, bands, HITL flags, NL map) adapted as
+          original LEVI-native design — not cloned verbatim.
+      - source: levi_private_v15.4/{levi_brain,levi_cortex,levi_knowledge,levi_router,levi_echo,levi_echoverse,levi_builder,levi_hydra,levi_demandpulse,levi_nlir,levi_packs,levi_profile}.js
+        target: null
+        format: skip
+        reason: Older duplicates of grown-up ~/workspace/levi modules (brain, cortex, knowledge, router, echo/REIM, echoverse, builder/factory, hydra, demand, NLIR, packs, profile).
+      - source: levi_private_v15.4/{main.js,levi_sidebar.js}
+        target: null
+        format: skip
+        reason: Acode-plugin-specific entry/sidebar code; not portable to the LEVI kernel.
+      - source: levi_private_v15.4/{levi_cybrus.js,plugin.json}
+        target: null
+        format: skip
+        reason: Carries hardcoded PII (Gmail addresses, name variants, author email); concepts covered natively elsewhere.
+      - source: levi_private_v15.4/{levi_canon_seed.js,levi_master_index.js,levi_daydream.js,levi_mathverse.js,levi_content_machine.js}
+        target: null
+        format: skip
+        reason: Duplicates of grown-up LEVI modules (canon seed, master index/atlas, daydream, mathverse, content_machine already ported from Omega).
+      - source: content_machine (1).py
+        target: null
+        format: skip
+        reason: Duplicate of the Omega content_machine.py already ported as core/levi/king/content_machine.py.
+      - source: automation-pack-v1/{MANIFEST.json,nl/command_map.md,workflows/templates.md,primitives/registry.md}
+        target: null
+        format: skip
+        reason: Manifest metadata and stub docs ("see previous conversation"); substance covered by primitives.py + AUTOMATION_SAFETY.md.
+      - source: "{free-minimal,private-omniscient,pro-capable,levi-full-delivery}/**/MANIFEST.json + free/pro/private tier splits"
+        target: null
+        format: skip
+        reason: Free/Pro/Private tier-split manifests kept as capability-boundary reference only; free core forever — no tier machinery ported.

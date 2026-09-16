@@ -156,5 +156,10 @@ commit SHA back into `sync/sources.yaml`.
   design → `core/levi/plugins/http.py`; generated API client → labeled
   design reference `docs/CREATORLAB_REFERENCE.md`; broken/irrelevant
   files skipped.
-- **Levi-ai** (entry `levi-ai`): pending — second private source,
-  format map to be defined on inventory after fetch.
+- **Levi-ai** (entry `levi-ai`): synced 2026-09-15. Chauncey's July 2026
+  "LEVI Apex" Stage-1 lineage: surgeon → `core/levi/surgeon/`, writebuild →
+  `core/levi/factory/writebuild.py`, browser/CDP → `core/levi/automation/`,
+  integrity → `core/levi/security/integrity.py`, solver →
+  `core/levi/agent/solver.py`, safety → `docs/AUTOMATION_SAFETY.md`,
+  knowledge → `docs/KNOWLEDGE_PIPELINE.md` + `core/levi/brain/seed_stage1.py`.
+  All rewrites; PII scrubbed to configurable owner identity.
