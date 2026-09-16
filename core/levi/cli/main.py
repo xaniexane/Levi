@@ -991,15 +991,52 @@ def cmd_finance(args):
     from levi.finance import portfolio as _portfolio
     from levi.finance import broker as _broker
 
+    # --- WSB finance expansion modules (all paper-only) ---
+    from levi.finance import crypto as _crypto
+    from levi.finance import synth as _synth
+    from levi.finance import wsb as _wsb
+    from levi.finance import bets as _bets
+    from levi.finance import leaderboard as _leaderboard
+    from levi.finance import copytrade as _copytrade
+    from levi.finance import brokerlink as _brokerlink
+
     ADVISORY_BANNER = "══ ADVISORY ONLY — paper only, not financial advice ══"
 
-    def _bars_for(symbol: str, days: int = 120) -> list:
-        provider = _market.StooqProvider()
+    def _signed_money(value: float) -> str:
+        sign = "+" if value >= 0 else "-"
+        return f"{sign}${abs(value):,.2f}"
+
+    def _provider_for(source: str):
+        """Return (provider, source_label) for a --source name.
+
+        Unknown names are a usage error (exit 2), not a silent default.
+        """
+        name = str(source or "stooq").strip().lower()
+        if name == "stooq":
+            return _market.StooqProvider(), "Stooq daily bars (keyless)"
+        if name == "binance":
+            return _crypto.BinanceProvider(), "Binance public klines (keyless)"
+        if name == "synth":
+            return _synth.SyntheticProvider(), "seeded synthetic bars (SIMULATED)"
+        print(f"Unknown data source {source!r}: expected stooq|binance|synth.")
+        raise SystemExit(2)
+
+    def _source_name(source: str) -> str:
+        return str(source or "stooq").strip().lower()
+
+    def _bars_for(symbol: str, days: int = 120, source: str = "stooq") -> list:
+        provider, _label = _provider_for(source)
         try:
             return provider.daily_bars(symbol, days=days)
         except _market.MarketDataError as exc:
             # Honest failure: name what happened, print no numbers, exit 1.
-            print(f"Market data unavailable for {symbol}: {exc}")
+            # Add a routing hint when the symbol smells like another source.
+            hint = ""
+            if _crypto.looks_like_crypto(symbol) and _source_name(source) != "binance":
+                hint = " (hint: crypto pairs like BTCUSDT need --source binance)"
+            elif _synth.is_synth_symbol(symbol) and _source_name(source) != "synth":
+                hint = " (hint: SYNTH* symbols need --source synth)"
+            print(f"Market data unavailable for {symbol}{hint}: {exc}")
             raise SystemExit(1) from None
 
     def _fmt(value, need: int, have: int, decimals: int = 4) -> str:
@@ -1012,8 +1049,13 @@ def cmd_finance(args):
     # -- quote -----------------------------------------------------------
     if action == "quote":
         symbol = str(getattr(args, "sym", "") or "").upper()
-        bars = _bars_for(symbol, days=10)
+        source = getattr(args, "source", "stooq")
+        bars = _bars_for(symbol, days=10, source=source)
         last = bars[-1]
+        _provider, source_label = _provider_for(source)
+        if getattr(args, "wsb", False):
+            print(_wsb.wsb_quote(symbol, last.close, last.date, source_label))
+            return
         payload = {
             "symbol": symbol,
             "date": last.date,
@@ -1030,13 +1072,14 @@ def cmd_finance(args):
                 f"  day range ${last.low:,.2f} – ${last.high:,.2f}  "
                 f"volume {last.volume:,.0f}"
             )
-            print("  source: Stooq daily bars (keyless)")
+            print(f"  source: {source_label}")
         return
 
     # -- indicators -------------------------------------------------------
     if action == "indicators":
         symbol = str(getattr(args, "sym", "") or "").upper()
-        bars = _bars_for(symbol)
+        source = getattr(args, "source", "stooq")
+        bars = _bars_for(symbol, source=source)
         closes = [b.close for b in bars]
         last = bars[-1]
         n = len(closes)
@@ -1102,12 +1145,18 @@ def cmd_finance(args):
     # -- signal ------------------------------------------------------------
     if action == "signal":
         symbol = str(getattr(args, "sym", "") or "").upper()
+        source = getattr(args, "source", "stooq")
+        provider, _label = _provider_for(source)
         try:
-            signal = _signals.generate_signal(symbol, provider=_market.StooqProvider())
+            signal = _signals.generate_signal(symbol, provider=provider)
         except _market.MarketDataError as exc:
             # Never fabricate a signal from a failed fetch.
             print(f"Market data unavailable for {symbol}: {exc}")
             raise SystemExit(1) from None
+        if getattr(args, "wsb", False):
+            # WSB skin: the same Signal, rendered as a DD post.
+            print(_wsb.dd_post(signal))
+            return
         narrative = _signals.narrate(signal)
         if getattr(args, "json", False):
             print(
@@ -1146,7 +1195,12 @@ def cmd_finance(args):
     # -- portfolio ----------------------------------------------------------
     if action == "portfolio":
         portfolio = _portfolio.load(_portfolio.DEFAULT_PATH)
-        provider = _market.StooqProvider()
+        source = getattr(args, "source", "stooq")
+        # Portfolio is deliberately resilient: a per-symbol fetch failure
+        # values the position at average cost with a warning, never zeroed
+        # and never a hard crash.  So this action uses the provider
+        # directly instead of the hard-exiting _bars_for() helper.
+        provider, _source_label = _provider_for(source)
         prices: dict[str, float] = {}
         fetch_failures: list[str] = []
         for symbol, pos in portfolio.positions.items():
@@ -1171,6 +1225,18 @@ def cmd_finance(args):
             if fetch_failures:
                 summary["fetch_failures"] = fetch_failures
             print(_json.dumps(summary, indent=2))
+            return
+        if getattr(args, "wsb", False):
+            # WSB skin: positions-or-ban ledger + gain/loss porn.
+            print(_wsb.positions_or_ban(summary))
+            print()
+            print(_wsb.gain_loss_porn(summary))
+            if missing:
+                print(
+                    "  warnings: could not fetch latest prices for "
+                    + ", ".join(missing)
+                    + " — valued at average cost, not zeroed"
+                )
             return
         print("══ Paper portfolio (SIMULATED — no real money) ══")
         print(f"  cash: ${summary['cash']:,.2f}")
@@ -1290,25 +1356,304 @@ def cmd_finance(args):
         print(f"Paper cash is now ${portfolio.cash:,.2f}  (saved: {saved_path})")
         return
 
+    # --- WSB finance expansion actions (all paper-only) ---------------------
+
+    # -- bet -----------------------------------------------------------------
+    if action == "bet":
+        symbol = str(getattr(args, "sym", "") or "").upper()
+        source = getattr(args, "source", "stooq")
+        side = str(getattr(args, "side", "") or "").lower()
+        trader = str(getattr(args, "trader", "anon") or "anon")
+        try:
+            qty = float(getattr(args, "qty", 0) or 0)
+        except (TypeError, ValueError):
+            qty = 0.0
+        try:
+            horizon = int(getattr(args, "horizon", 30) or 0)
+        except (TypeError, ValueError):
+            horizon = 0
+        # HITL gate (blueprint §1.5): a paper bet is still a consequential
+        # action — without explicit --yes this command refuses to place it.
+        if not getattr(args, "yes", False):
+            print(
+                "Bet NOT placed: paper bets require an explicit --yes "
+                "(HITL gate, blueprint §1.5)."
+            )
+            print(
+                f"  Would have placed: {side or '?'} {qty:g} {symbol} "
+                f"for {trader} (paper)."
+            )
+            print("  Nothing was placed and nothing was saved.")
+            print("  Re-run with --yes to confirm this paper bet.")
+            raise SystemExit(2) from None
+        # Entry price comes from real market data (or seeded synthetic
+        # bars) — never invented.
+        bars = _bars_for(symbol, days=10, source=source)
+        entry_price = bars[-1].close
+        ledger = _bets.BetLedger.load(_bets.DEFAULT_BETS_PATH)
+        try:
+            bet = ledger.place(
+                trader=trader,
+                symbol=symbol,
+                side=side,
+                qty=qty,
+                entry_price=entry_price,
+                horizon_days=horizon,
+                source=_source_name(source),
+            )
+        except _bets.InvalidBet as exc:
+            print(f"Bet NOT placed: {exc}")
+            raise SystemExit(2) from None
+        saved_path = ledger.save(_bets.DEFAULT_BETS_PATH)
+        print(_bets.BetLedger.ticket(bet))
+        print(f"Recorded in the paper bet ledger (saved: {saved_path})")
+        return
+
+    # -- bets ----------------------------------------------------------------
+    if action == "bets":
+        trader = getattr(args, "trader", None)
+        ledger = _bets.BetLedger.load(_bets.DEFAULT_BETS_PATH)
+        open_bets = ledger.open_bets(trader)
+        settled = ledger.settled_bets(trader)
+        score = ledger.win_rate(trader)
+        hands = ledger.hands_stats()
+        if getattr(args, "json", False):
+            print(
+                _json.dumps(
+                    {
+                        "trader": trader,
+                        "open": [b.to_dict() for b in open_bets],
+                        "settled": [b.to_dict() for b in settled],
+                        "win_rate": score,
+                        "hands": hands,
+                        "paper_only": True,
+                    },
+                    indent=2,
+                )
+            )
+            return
+        who = f" for {trader}" if trader else ""
+        print(f"🎰 PAPER BETS{who} (SIMULATED — no real money)")
+        for bet in open_bets:
+            print(
+                f"  OPEN   {bet.id}  {bet.trader}  {bet.side} {bet.qty:g} "
+                f"{bet.symbol} @ ${bet.entry_price:,.2f}  ({bet.horizon_days}d)"
+            )
+        for bet in settled:
+            hands_tag = "💎" if not bet.early_exit else "🧻"
+            print(
+                f"  SETTLD {bet.id}  {bet.trader}  {bet.side} {bet.qty:g} "
+                f"{bet.symbol}  P&L {_signed_money(bet.pnl or 0)} {hands_tag}"
+            )
+        if not open_bets and not settled:
+            print("  (no paper bets yet — place one with `levi finance bet`)")
+        wr = score["win_rate"]
+        print(
+            f"  win rate: {wr:.1%} ({score['wins']}/{score['bets']})"
+            if wr is not None
+            else "  win rate: n/a (no settled bets)"
+        )
+        dh, ph = hands["diamond_hands"], hands["paper_hands"]
+        dh_wr = "n/a" if dh["win_rate"] is None else f"{dh['win_rate']:.0%}"
+        ph_wr = "n/a" if ph["win_rate"] is None else f"{ph['win_rate']:.0%}"
+        print(f"  💎 diamond hands: {dh['bets']} bets, {dh_wr} win")
+        print(f"  🧻 paper hands:   {ph['bets']} bets, {ph_wr} win")
+        return
+
+    # -- settle ---------------------------------------------------------------
+    if action == "settle":
+        bet_id = str(getattr(args, "bet_id", "") or "")
+        try:
+            exit_price = float(getattr(args, "price", 0) or 0)
+        except (TypeError, ValueError):
+            exit_price = 0.0
+        early = bool(getattr(args, "paper_hands", False))
+        ledger = _bets.BetLedger.load(_bets.DEFAULT_BETS_PATH)
+        try:
+            bet = ledger.settle(bet_id, exit_price, early=early)
+        except (_bets.BetNotFound, _bets.BetAlreadySettled, _bets.InvalidBet) as exc:
+            print(f"Bet NOT settled: {exc}")
+            raise SystemExit(2) from None
+        saved_path = ledger.save(_bets.DEFAULT_BETS_PATH)
+        print(_bets.BetLedger.ticket(bet))
+        print(f"Settled in the paper bet ledger (saved: {saved_path})")
+        return
+
+    # -- leaderboard -----------------------------------------------------------
+    if action == "leaderboard":
+        ledger = _bets.BetLedger.load(_bets.DEFAULT_BETS_PATH)
+        rows = _leaderboard.build_leaderboard(ledger.bets)
+        if getattr(args, "json", False):
+            print(
+                _json.dumps(
+                    {
+                        "rows": _leaderboard.ranked_leaderboard(rows),
+                        "paper_only": True,
+                    },
+                    indent=2,
+                )
+            )
+            return
+        print(_leaderboard.render_leaderboard(rows))
+        return
+
+    # -- copytrade ---------------------------------------------------------------
+    if action == "copytrade":
+        follow = str(getattr(args, "follow", "") or "")
+        try:
+            capital = float(getattr(args, "capital", 10000.0) or 0)
+        except (TypeError, ValueError):
+            capital = 0.0
+        ledger = _bets.BetLedger.load(_bets.DEFAULT_BETS_PATH)
+        if getattr(args, "all", False):
+            reports = _copytrade.compare_traders(ledger.bets, capital=capital)
+            if getattr(args, "json", False):
+                print(_json.dumps({"reports": reports, "paper_only": True}, indent=2))
+                return
+            if not reports:
+                print(
+                    "No paper trader has enough settled bets to rank "
+                    "(need 3+). Paper only."
+                )
+                return
+            for report in reports:
+                print(_copytrade.render_copy_report(report))
+                print()
+            return
+        try:
+            report = _copytrade.mirror_report(ledger.bets, follow, capital=capital)
+        except (_copytrade.NoSettledBets, ValueError) as exc:
+            print(f"Copy simulation NOT run: {exc}")
+            raise SystemExit(2) from None
+        if getattr(args, "json", False):
+            print(_json.dumps({**report, "paper_only": True}, indent=2))
+            return
+        print(_copytrade.render_copy_report(report))
+        return
+
+    # -- broker-link --------------------------------------------------------------
+    if action == "broker-link":
+        bl_action = getattr(args, "broker_link_action", None)
+        if bl_action == "status":
+            st = _brokerlink.broker_link_status(
+                link_path=_brokerlink.DEFAULT_LINK_PATH,
+                drafts_path=_brokerlink.DEFAULT_DRAFTS_PATH,
+            )
+            print("🔌 BROKER LINK — DRAFT ONLY (live structurally refused)")
+            print(f"  platform: {st['platform'] or '(not configured)'}")
+            if st["platform_label"]:
+                print(f"  label:    {st['platform_label']}")
+            print(f"  mode:     {st['mode']}")
+            print(f"  live:     {st['live_execution']}")
+            print(f"  keys:     {st['credentials_requested']}")
+            print(
+                f"  drafts:   {st['drafts_pending']} pending / "
+                f"{st['drafts_total']} total"
+            )
+            return
+        if bl_action == "configure":
+            platform = str(getattr(args, "platform", "") or "")
+            try:
+                cfg = _brokerlink.configure_broker_link(
+                    platform, path=_brokerlink.DEFAULT_LINK_PATH
+                )
+            except _brokerlink.InvalidDraft as exc:
+                print(f"Broker link NOT configured: {exc}")
+                raise SystemExit(2) from None
+            print(
+                f"Broker link configured for {cfg.platform} "
+                f"({_brokerlink.SUPPORTED_PLATFORMS[cfg.platform]}) — "
+                "draft-only. No keys requested, nothing connected."
+            )
+            return
+        if bl_action == "draft":
+            symbol = str(getattr(args, "sym", "") or "").upper()
+            side = str(getattr(args, "side", "") or "").lower()
+            try:
+                qty = float(getattr(args, "qty", 0) or 0)
+            except (TypeError, ValueError):
+                qty = 0.0
+            source = getattr(args, "source", "stooq")
+            price = getattr(args, "price", None)
+            if price is None:
+                # Reference price from market data — never invented.
+                bars = _bars_for(symbol, days=10, source=source)
+                price = bars[-1].close
+                print(f"  reference price ${price:,.2f} (latest {source} bar)")
+            try:
+                cfg = _brokerlink.BrokerLinkConfig.from_dict(
+                    _json.loads(
+                        _brokerlink.DEFAULT_LINK_PATH.read_text(encoding="utf-8")
+                    )
+                    if _brokerlink.DEFAULT_LINK_PATH.exists()
+                    else {}
+                )
+            except Exception:
+                cfg = _brokerlink.BrokerLinkConfig(platform=None)
+            try:
+                drafts = _brokerlink.prepare_drafts(
+                    [
+                        {
+                            "symbol": symbol,
+                            "side": side,
+                            "qty": qty,
+                            "reference_price": float(price),
+                        }
+                    ],
+                    cfg,
+                    path=_brokerlink.DEFAULT_DRAFTS_PATH,
+                )
+            except (_brokerlink.InvalidDraft, ValueError) as exc:
+                print(f"Draft NOT prepared: {exc}")
+                raise SystemExit(2) from None
+            for draft in drafts:
+                print(draft.render())
+            return
+        print("Usage: levi finance broker-link <status|configure|draft>")
+        print("  live execution is structurally refused — drafts are review-only.")
+        raise SystemExit(2)
+
     if action is None:
-        print("Usage: levi finance <quote|indicators|signal|portfolio|order|deposit>")
         print(
-            "  levi finance quote <SYM>                    — latest close + day range (Stooq)"
+            "Usage: levi finance "
+            "<quote|indicators|signal|portfolio|order|deposit|bet|bets|settle|"
+            "leaderboard|copytrade|broker-link>"
         )
         print(
-            "  levi finance indicators <SYM>               — SMA/EMA/RSI/MACD/Bollinger/ATR/Stoch/OBV/ADX/VWAP + regime snapshot"
+            "  levi finance quote <SYM> [--source stooq|binance|synth] [--wsb]  — latest close + day range"
         )
         print(
-            "  levi finance signal <SYM>                   — advisory signal (paper-only, not financial advice)"
+            "  levi finance indicators <SYM> [--source ...]  — SMA/EMA/RSI/MACD/Bollinger/ATR/Stoch/OBV/ADX/VWAP + regime snapshot"
         )
         print(
-            "  levi finance portfolio [--json]             — paper ledger: cash, positions, P&L"
+            "  levi finance signal <SYM> [--source ...] [--wsb]  — advisory signal, or --wsb for a DD post (paper-only, not financial advice)"
+        )
+        print(
+            "  levi finance portfolio [--json] [--source ...] [--wsb]  — paper ledger: cash, positions, P&L"
         )
         print(
             "  levi finance order <SYM> <QTY> --side buy|sell [--yes]  — paper order (needs --yes)"
         )
         print(
             "  levi finance deposit <AMOUNT>               — fund the paper portfolio"
+        )
+        print(
+            "  levi finance bet <SYM> <QTY> --side buy|sell [--trader NAME] [--horizon D] [--source ...] [--yes]  — paper YOLO bet (needs --yes)"
+        )
+        print(
+            "  levi finance bets [--trader NAME] [--json]  — paper bets, win rate, diamond vs paper hands"
+        )
+        print(
+            "  levi finance settle <BETID> --price <PX> [--paper-hands]  — settle an open paper bet"
+        )
+        print(
+            "  levi finance leaderboard [--json]           — paper-trader leaderboard (SIMULATED)"
+        )
+        print(
+            "  levi finance copytrade --follow <TRADER> [--capital X] [--all]  — simulated copy-trade forecast (paper-only)"
+        )
+        print(
+            "  levi finance broker-link <status|configure|draft>  — draft-only broker link (live structurally refused)"
         )
         return
 
