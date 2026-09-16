@@ -5663,6 +5663,13 @@ def main():
         "--file PATH | build --task TEXT --tests PATH",
     )
     # === COUNCIL-REGION-END ===
+    # === BUILDER-REGION-BEGIN: builder command wiring ===
+    # Keep ALL builder wiring inside this delimited region — do not scatter
+    # builder hunks elsewhere in this file.
+    from levi.builder.cli import register_builder_parser as _register_builder_parser
+
+    _register_builder_parser(sub)
+    # === BUILDER-REGION-END ===
     uni_p = sub.add_parser("unified", help="LEVI Daemon Core unified cycle")
     uni_p.add_argument("--cycle", default=None, help="Run one cycle for task text")
     uni_p.add_argument(
@@ -6953,6 +6960,11 @@ def main():
     # === COUNCIL-REGION-BEGIN: council command dispatch ===
     cmds["council"] = cmd_council
     # === COUNCIL-REGION-END ===
+    # === BUILDER-REGION-BEGIN: builder command dispatch ===
+    from levi.builder.cli import cmd_build as _cmd_build
+
+    cmds["build"] = _cmd_build
+    # === BUILDER-REGION-END ===
     fn = cmds.get(args.command)
     if fn:
         try:
