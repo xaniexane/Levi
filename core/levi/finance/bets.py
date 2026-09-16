@@ -258,18 +258,20 @@ class BetLedger:
             raise BetAlreadySettled(
                 f"bet {bet_id} is already settled — nothing was changed."
             )
-        pnl = bet.signed_pnl(exit_price)
-        bet.exit_price = _require_positive("exit_price", exit_price)
-        bet.exit_at = _now_iso()
-        bet.early_exit = bool(early)
-        bet.pnl = pnl
-        bet.status = "settled"
+        # Validate everything before mutating: a failed settle must leave
+        # the bet open and untouched.
         source = str(exit_price_source or "manual").strip().lower()
         if source not in _SOURCES and source != "manual":
             raise InvalidBet(
                 f"exit_price_source must be one of {(*_SOURCES, 'manual')}, "
                 f"got {exit_price_source!r}"
             )
+        pnl = bet.signed_pnl(exit_price)
+        bet.exit_price = _require_positive("exit_price", exit_price)
+        bet.exit_at = _now_iso()
+        bet.early_exit = bool(early)
+        bet.pnl = pnl
+        bet.status = "settled"
         bet.exit_price_source = source
         return bet
 

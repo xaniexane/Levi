@@ -194,6 +194,20 @@ def test_hands_report_paper_wins_and_empty():
 
 
 @finance_test
+def test_positions_or_ban_tolerates_missing_avg_cost():
+    out = positions_or_ban(
+        {
+            "positions": {"SYNTH": {"qty": 5, "avg_cost": None}},
+            "realized_pnl": 0,
+            "unrealized_pnl": 0,
+            "market_value": 0,
+            "total_pnl": 0,
+        }
+    )
+    assert "SYNTH" in out and "POSITIONS OR BAN" in out
+
+
+@finance_test
 def test_ticker_tape():
     out = ticker_tape([("BTCUSDT", 67432.1, 2.4), ("SYNTH", 101.5, -1.2)])
     assert "BTCUSDT $67,432.10" in out

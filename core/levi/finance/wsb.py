@@ -210,7 +210,8 @@ def positions_or_ban(summary: dict) -> str:
         if qty <= 0:
             continue
         shown = True
-        line = f"  {symbol}: {qty:g} @ avg ${pos.get('avg_cost', 0):,.2f}"
+        avg = pos.get("avg_cost", 0) or 0
+        line = f"  {symbol}: {qty:g} @ avg ${float(avg):,.2f}"
         if "unrealized_pnl" in pos:
             upl = float(pos["unrealized_pnl"] or 0)
             tag = "💎" if upl >= 0 else "💀"

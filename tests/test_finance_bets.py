@@ -352,6 +352,11 @@ def test_settle_rejects_unknown_price_source():
         pass
     else:
         raise AssertionError("unknown exit price source must raise")
+    # Failed settle leaves the bet open and untouched (atomic).
+    fresh = ledger.get(bet.id)
+    assert fresh.status == "open"
+    assert fresh.pnl is None
+    assert fresh.exit_price is None
 
 
 @finance_test
