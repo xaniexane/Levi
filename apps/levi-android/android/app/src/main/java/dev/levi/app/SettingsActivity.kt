@@ -2,13 +2,15 @@ package dev.levi.app
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import dev.levi.app.databinding.ActivitySettingsBinding
+import dev.levi.app.settings.AppLock
+import dev.levi.app.settings.SettingsHomeFragment
 
 /**
- * Server URL configuration. The URL is the address of the machine
- * serving the LEVI web client (see docs/ANDROID_APP.md).
+ * Host for the LEVI settings pages. [SettingsHomeFragment] is the root;
+ * every row pushes a page with [open]. Back walks the page stack.
  */
 class SettingsActivity : AppCompatActivity() {
 
@@ -16,40 +18,47 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // App lock gates the whole settings surface.
+        if (AppLock.requireUnlock(this)) {
+            finish()
+            return
+        }
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.settings_title)
 
-        binding.urlInput.setText(ServerConfig.getUrl(this))
-
-        binding.saveButton.setOnClickListener {
-            val raw = binding.urlInput.text.toString()
-            if (ServerConfig.isInsecureHttp(raw)) {
-                binding.urlLayout.error = getString(R.string.error_url_insecure)
-                return@setOnClickListener
-            }
-            val normalized = ServerConfig.normalize(raw)
-            if (normalized == null) {
-                binding.urlLayout.error = getString(R.string.error_url_invalid)
-                return@setOnClickListener
-            }
-            binding.urlLayout.error = null
-            ServerConfig.setUrl(this, normalized)
-            Toast.makeText(
-                this,
-                if (normalized.isEmpty()) getString(R.string.url_cleared)
-                else getString(R.string.url_saved, normalized),
-                Toast.LENGTH_SHORT,
-            ).show()
-            finish()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.settings_container, SettingsHomeFragment())
+                .commit()
         }
+        supportFragmentManager.addOnBackStackChangedListener { updateTitle() }
+        updateTitle()
+    }
+
+    /** Push a settings page onto the stack. */
+    fun open(fragment: Fragment, title: String) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.settings_container, fragment)
+            .addToBackStack(title)
+            .commit()
+    }
+
+    private fun updateTitle() {
+        val count = supportFragmentManager.backStackEntryCount
+        supportActionBar?.title =
+            if (count == 0) getString(R.string.settings_title)
+            else supportFragmentManager.getBackStackEntryAt(count - 1).name
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            finish()
+            if (supportFragmentManager.backStackEntryCount > 0) {
+                supportFragmentManager.popBackStack()
+            } else {
+                finish()
+            }
             return true
         }
         return super.onOptionsItemSelected(item)

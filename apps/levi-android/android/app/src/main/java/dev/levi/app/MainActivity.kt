@@ -14,6 +14,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import dev.levi.app.databinding.ActivityMainBinding
+import dev.levi.app.settings.AppLock
 
 /**
  * WebView shell hosting the LEVI web client (the Talk UI from web/).
@@ -28,6 +29,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // App lock gates the whole app. If the lock screen shows, this
+        // activity finishes; reopening the app lands past the lock.
+        if (AppLock.requireUnlock(this)) {
+            finish()
+            return
+        }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)

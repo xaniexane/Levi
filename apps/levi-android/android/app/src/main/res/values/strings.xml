@@ -1,7 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LEVI</string>
-    <string name="settings_title">Server settings</string>
+    <string name="settings_title">Settings</string>
+
+    <!-- Shared settings chrome -->
+    <string name="badge_pending">PENDING</string>
+    <string name="state_on">On</string>
+    <string name="state_off">Off</string>
+
+    <!-- Settings home rows -->
+    <string name="row_server">LEVI server</string>
+    <string name="row_server_not_set">Not configured</string>
+    <string name="row_connectors">Connectors</string>
+    <string name="row_wallet">Wallet</string>
+    <string name="row_credentials">Secure credentials store</string>
+    <string name="row_permissions">Permissions</string>
+    <string name="row_channels">Messaging channels</string>
+    <string name="row_devices">Devices</string>
+    <string name="row_notifications">Notifications</string>
+    <string name="row_appearance">Appearance</string>
+    <string name="row_applock">App lock</string>
+    <string name="row_assistant">Set as default assistant</string>
+    <string name="row_homescreen">Add to home screen</string>
+    <string name="row_invite">Redeem invite code</string>
+    <string name="row_data">Data controls</string>
+    <string name="row_issue">Report an issue</string>
+    <string name="row_help">Help &amp; support</string>
+    <string name="row_updates">App updates</string>
+    <string name="row_legal">Legal info</string>
+    <string name="row_account">LEVI Account</string>
+    <string name="row_account_setup">Set up your profile</string>
+    <string name="row_logout">Log out</string>
+    <string name="section_account">LEVI Account</string>
+
+    <!-- Appearance -->
+    <string name="theme_void">Void (dark)</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_system">Follow system</string>
+
+    <!-- Default assistant / home-screen shortcut -->
+    <string name="assistant_unavailable">System assistant settings aren\'t available on this device.</string>
+    <string name="shortcut_label">Open LEVI</string>
+    <string name="shortcut_unsupported">Pinned shortcuts aren\'t supported on this device.</string>
+    <string name="shortcut_failed">Couldn\'t create the shortcut.</string>
+
+    <!-- Log out -->
+    <string name="logout_confirm">This clears your LEVI profile from this device. Your LEVI server data is untouched.</string>
+    <string name="logged_out">Logged out.</string>
+
+    <!-- App lock -->
+    <string name="applock_locked_title">LEVI is locked</string>
+    <string name="applock_locked_body">Unlock to continue.</string>
+    <string name="applock_use_biometric">Use biometrics</string>
+    <string name="applock_unlock">Unlock</string>
+    <string name="applock_pin_hint">PIN</string>
+    <string name="applock_pin_wrong">Wrong PIN. Try again.</string>
+    <string name="applock_pin_title">Set a PIN</string>
+    <string name="applock_pin_new">New PIN (4+ digits)</string>
+    <string name="applock_pin_confirm">Confirm PIN</string>
+    <string name="applock_pin_too_short">PIN must be at least 4 digits.</string>
+    <string name="applock_pin_mismatch">PINs don\'t match.</string>
+    <string name="applock_biometric_title">Unlock LEVI</string>
+    <string name="applock_biometric_subtitle">Confirm it\'s you</string>
+
+    <!-- Notification channels -->
+    <string name="channel_messages">LEVI messages</string>
+    <string name="channel_messages_desc">Replies and alerts from LEVI.</string>
+    <string name="channel_updates">Updates</string>
+    <string name="channel_updates_desc">App news and release notes.</string>
 
     <string name="empty_title">No server configured</string>
     <string name="empty_body">Point LEVI at the machine serving your LEVI web client, then come back here.</string>

@@ -13,6 +13,9 @@ coreKtx = "1.18.0"
 appcompat = "1.8.0"
 material = "1.13.0"
 activity = "1.13.0"
+# Mirrors apps/vyve-messenger/android (verified 2026-assistant-09-15).
+securityCrypto = "1.1.0"
+biometric = "1.1.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -24,3 +27,5 @@ core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx"
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "securityCrypto" }
+biometric = { group = "androidx.biometric", name = "biometric", version.ref = "biometric" }

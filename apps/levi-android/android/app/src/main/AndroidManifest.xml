@@ -4,8 +4,13 @@
     <!-- WebView needs network access. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- BiometricPrompt app lock (normal permission, granted at install). -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <!-- Notification channels ("Messaging channels", "Notifications" rows). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
+        android:name=".LeviApp"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -34,5 +39,21 @@
             android:name=".SettingsActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
+
+        <!-- App-lock gate. Never exported: only this app can show it. -->
+        <activity
+            android:name=".LockActivity"
+            android:exported="false" />
+
+        <!-- Shares data-export / issue-report files from cache only. -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
     </application>
 </manifest>

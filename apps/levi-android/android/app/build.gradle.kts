@@ -108,4 +108,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
+    // App lock (BiometricPrompt) + encrypted on-device stores.
+    implementation(libs.security.crypto)
+    implementation(libs.biometric)
 }
