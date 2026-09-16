@@ -36,6 +36,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 import threading
 import urllib.parse
 import urllib.request
@@ -1180,6 +1181,116 @@ def _register_builtins(
             ok=True, output=f"HTTP {status}\n{_truncate(payload, 100_000)}"
         )
 
+    # -- image_generate ------------------------------------------------------
+    # Agent-facing image generation. Default backend is "auto" -> the offline
+    # procedural generator (local-first, always available). "pollinations"
+    # uses the free keyless reference (labeled, never LEVI's identity);
+    # "sd" needs local diffusers+torch+GPU and fails closed otherwise.
+    def _image_generate(args: dict) -> ToolResult:
+        prompt = args.get("prompt")
+        if not prompt or not str(prompt).strip():
+            return ToolResult(ok=False, error="image_generate: 'prompt' is required")
+        backend = str(args.get("backend") or "auto").strip().lower()
+        if backend not in ("auto", "local", "pollinations", "sd"):
+            return ToolResult(
+                ok=False,
+                error="image_generate: 'backend' must be auto|local|pollinations|sd",
+            )
+        style = str(args.get("style") or "none").strip().lower()
+        kw: dict[str, Any] = {"backend": backend, "style": style, "save": True}
+        for num_key in ("width", "height"):
+            if args.get(num_key) is not None:
+                try:
+                    kw[num_key] = int(args[num_key])
+                except (TypeError, ValueError):
+                    return ToolResult(
+                        ok=False, error=f"image_generate: '{num_key}' must be an integer"
+                    )
+        if args.get("seed") is not None:
+            try:
+                kw["seed"] = int(args["seed"])
+            except (TypeError, ValueError):
+                return ToolResult(ok=False, error="image_generate: 'seed' must be an integer")
+        if args.get("model"):
+            kw["model"] = str(args["model"])
+        try:
+            from levi.media import generate_image
+        except Exception as exc:
+            return ToolResult(ok=False, error=f"image_generate: cannot import levi.media: {exc}")
+        try:
+            img = generate_image(str(prompt), **kw)
+        except RuntimeError as exc:
+            # fail-closed backends (sd without deps) report plainly
+            return ToolResult(ok=False, error=f"image_generate: {exc}")
+        except ValueError as exc:
+            return ToolResult(ok=False, error=f"image_generate: {exc}")
+        except Exception as exc:
+            return ToolResult(ok=False, error=f"image_generate: failed: {exc}")
+        return ToolResult(ok=True, output=img.format())
+
+    # -- python_exec ----------------------------------------------------------
+    # Sandboxed Python execution for the agent loop: code runs in a
+    # subprocess with cwd jailed to the workspace scratch dir, a scrubbed
+    # environment (no proxy vars, no PYTHONPATH smuggling), stdin closed,
+    # and a hard timeout. Honest scope: process-isolated, not a seccomp
+    # sandbox — no network blocking at the kernel level, so treat it as
+    # untrusted-code containment, not a security boundary.
+    def _python_exec(args: dict) -> ToolResult:
+        code = args.get("code")
+        if not code or not str(code).strip():
+            return ToolResult(ok=False, error="python_exec: 'code' is required")
+        code = str(code)
+        timeout = args.get("timeout", 15)
+        try:
+            timeout = float(timeout)
+        except (TypeError, ValueError):
+            return ToolResult(ok=False, error="python_exec: 'timeout' must be numeric")
+        if timeout <= 0 or timeout > 120:
+            return ToolResult(ok=False, error="python_exec: 'timeout' must be in (0, 120]")
+        cwd = args.get("cwd")
+        try:
+            run_cwd = (
+                _resolve_sandboxed(workspace_root, str(cwd)) if cwd is not None
+                else _ensure_dir(workspace_root / "agent_scratch")
+            )
+        except ValueError as exc:
+            return ToolResult(ok=False, error=f"python_exec: {exc}")
+        _ensure_dir(run_cwd)
+        script = run_cwd / "_agent_exec.py"
+        try:
+            script.write_text(code, encoding="utf-8")
+        except OSError as exc:
+            return ToolResult(ok=False, error=f"python_exec: cannot stage script: {exc}")
+        env = {k: v for k, v in os.environ.items() if "_proxy" not in k.lower()}
+        env["PYTHONDONTWRITEBYTECODE"] = "1"
+        env["PYTHONSAFEPATH"] = "1"
+        try:
+            proc = subprocess.run(
+                [sys.executable, str(script)],
+                cwd=str(run_cwd),
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+                stdin=subprocess.DEVNULL,
+                env=env,
+                errors="replace",
+            )
+        except subprocess.TimeoutExpired:
+            return ToolResult(ok=False, error=f"python_exec: timed out after {timeout}s")
+        except OSError as exc:
+            return ToolResult(ok=False, error=f"python_exec: failed to run: {exc}")
+        finally:
+            try:
+                script.unlink()
+            except OSError:
+                pass
+        out = (proc.stdout or "") + (proc.stderr or "")
+        return ToolResult(
+            ok=proc.returncode == 0,
+            output=_truncate(out) or f"(exit {proc.returncode}, no output)",
+            error="" if proc.returncode == 0 else f"exit code {proc.returncode}",
+        )
+
     # -- register everything -------------------------------------------------
     def _schema(properties: dict, required: list[str]) -> dict:
         return {"type": "object", "properties": properties, "required": required}
@@ -1470,6 +1581,46 @@ def _register_builtins(
             ),
             handler=_http_request,
             requires_confirmation=True,
+        ),
+        Tool(
+            name="image_generate",
+            description=(
+                "Generate an image from a prompt. Default backend 'auto' "
+                "uses the offline procedural generator (deterministic, no "
+                "network). 'pollinations' is the free keyless photoreal "
+                "reference; 'sd' needs local diffusers+torch+GPU."
+            ),
+            parameters=_schema(
+                {
+                    "prompt": {"type": "string"},
+                    "backend": {"type": "string"},
+                    "style": {"type": "string"},
+                    "width": {"type": "integer"},
+                    "height": {"type": "integer"},
+                    "seed": {"type": "integer"},
+                    "model": {"type": "string"},
+                },
+                ["prompt"],
+            ),
+            handler=_image_generate,
+        ),
+        Tool(
+            name="python_exec",
+            description=(
+                "Run Python code in a jailed subprocess: cwd confined to "
+                "the workspace scratch dir, scrubbed environment, stdin "
+                "closed, hard timeout. Process-isolated, not a kernel "
+                "sandbox — treat as untrusted-code containment."
+            ),
+            parameters=_schema(
+                {
+                    "code": {"type": "string"},
+                    "timeout": {"type": "number"},
+                    "cwd": {"type": "string"},
+                },
+                ["code"],
+            ),
+            handler=_python_exec,
         ),
     ]
     for tool in tools:

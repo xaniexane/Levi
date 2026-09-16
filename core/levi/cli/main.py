@@ -3744,8 +3744,10 @@ def cmd_graph(args):
 
 
 def cmd_image(args):
-    from levi.media.pollinations import generate, story_still, image_url
+    from levi.media import generate_image
+    from levi.media.pollinations import image_url, story_still
 
+    backend = getattr(args, "backend", None) or "auto"
     if getattr(args, "url_only", False):
         print(image_url(getattr(args, "prompt", None) or "abstract"))
         return
@@ -3761,13 +3763,28 @@ def cmd_image(args):
         )
         print(img.format())
         return
-    img = generate(
-        getattr(args, "prompt", None) or "cinematic still",
-        width=int(getattr(args, "width", 1024) or 1024),
-        height=int(getattr(args, "height", 1024) or 1024),
-        model=getattr(args, "model", None) or "flux",
-        save=not getattr(args, "no_save", False),
-    )
+    kw: dict = {
+        "backend": backend,
+        "style": getattr(args, "style", None) or "none",
+        "seed": getattr(args, "seed", None),
+        "save": not getattr(args, "no_save", False),
+    }
+    if getattr(args, "width", None):
+        kw["width"] = int(args.width)
+    if getattr(args, "height", None):
+        kw["height"] = int(args.height)
+    if backend in ("auto", "pollinations"):
+        kw["model"] = getattr(args, "model", None) or "flux"
+        kw["enhance"] = bool(getattr(args, "enhance", True))
+        kw["quality"] = getattr(args, "quality", None) or "high"
+    if backend == "sd" and getattr(args, "sd_model", None):
+        kw["model_id"] = args.sd_model
+    try:
+        img = generate_image(getattr(args, "prompt", None) or "cinematic still", **kw)
+    except RuntimeError as exc:
+        # fail-closed backends (sd without deps) report plainly, no traceback
+        print(f"image: {exc}")
+        return
     print(img.format())
 
 
@@ -6232,13 +6249,25 @@ def main():
     sub.add_parser("agents")
     g = sub.add_parser("graph")
     g.add_argument("--seed", default=None)
-    img_p = sub.add_parser("image", help="Pollinations image gen for LEVI x LWP")
+    img_p = sub.add_parser("image", help="Generate images: local procedural (default) or Pollinations/SD")
     img_p.add_argument("--prompt", default=None)
     img_p.add_argument("--story", default=None, help="Story id for still")
     img_p.add_argument("--beat", default="midpoint")
-    img_p.add_argument("--width", type=int, default=1024)
-    img_p.add_argument("--height", type=int, default=1024)
-    img_p.add_argument("--model", default="flux")
+    img_p.add_argument("--width", type=int, default=None, help="default 512 local, 1024 pollinations")
+    img_p.add_argument("--height", type=int, default=None, help="default 512 local, 1024 pollinations")
+    img_p.add_argument("--model", default="flux", help="Pollinations model (flux|gptimage|turbo|kontext|seedream)")
+    img_p.add_argument("--backend", default="auto", choices=["auto", "local", "pollinations", "sd"],
+                       help="auto/local = offline procedural (default); pollinations = free keyless reference; sd = local Stable Diffusion (needs GPU+deps)")
+    img_p.add_argument("--style", default="none",
+                       choices=["none", "abstract", "photo", "anime", "painting", "product", "cinematic"],
+                       help="quality preset: appends proven boosters (pollinations) / palette direction (local)")
+    img_p.add_argument("--seed", type=int, default=None, help="deterministic seed")
+    img_p.add_argument("--enhance", dest="enhance", action="store_true", default=True,
+                       help="Pollinations AI prompt enhancement (default on)")
+    img_p.add_argument("--no-enhance", dest="enhance", action="store_false")
+    img_p.add_argument("--quality", default="high", choices=["low", "medium", "high", "hd"],
+                       help="Pollinations quality tier (default high)")
+    img_p.add_argument("--sd-model", default=None, help="SD model id (default stabilityai/stable-diffusion-2-1)")
     img_p.add_argument("--url-only", action="store_true")
     img_p.add_argument("--no-save", action="store_true")
     st = sub.add_parser("story", help="Create/list/expand L.W.P. stories")
