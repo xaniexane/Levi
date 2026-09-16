@@ -103,6 +103,13 @@ class PresenceHub:
 
     def client_gone(self, handler: _Handler, client_id: str) -> None:
         with self._conn_lock:
+            # Stale-close guard: a client may re-attach on a newer connection
+            # (the CLI's hello handshake opens a second connection). If this
+            # closing connection is no longer the attached one, its teardown
+            # must not evict the live client — otherwise a late FIN from the
+            # first connection deletes a client that just re-registered.
+            if self._conns.get(client_id) is not handler:
+                return
             self._conns.pop(client_id, None)
         for event, recipients in self.book.disconnect(client_id):
             self._fanout(event, recipients)

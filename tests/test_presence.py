@@ -320,3 +320,37 @@ def test_cli_rooms_and_create_and_say(hub, capsys):
     # say to a missing room fails honestly
     assert main(["say", "--host", h, "--port", p, "--room", "nowhere",
                  "x"]) == 1
+
+
+class _FakeHandler:
+    """Minimal handler double: dispatch paths only need _send."""
+    def __init__(self):
+        self.sent = []
+    def _send(self, obj):
+        self.sent.append(obj)
+
+
+def test_stale_close_does_not_evict_reattached_client(hub):
+    """Regression: the CLI hello handshake uses two connections (one-shot
+    hello, then a persistent socket re-sending hello with the client_id).
+    If the first connection's teardown runs AFTER the second hello
+    re-registered the client, the client must survive — previously the late
+    teardown deleted it and the next op failed 'unknown client'."""
+    old, new = _FakeHandler(), _FakeHandler()
+    cid = hub.dispatch(old, None, {"op": "hello", "name": "alice"})
+    assert hub.dispatch(new, None, {"op": "hello", "name": "alice",
+                                    "client_id": cid}) == cid
+    hub.client_gone(old, cid)  # stale first connection tears down late
+    hub.dispatch(new, cid, {"op": "create", "room": "lounge"})
+    hub.dispatch(new, cid, {"op": "join", "room": "lounge"})
+    hub.dispatch(new, cid, {"op": "say", "room": "lounge", "text": "hi"})
+    assert new.sent[-1]["ok"] is True
+
+
+def test_genuine_close_still_disconnects(hub):
+    old = _FakeHandler()
+    cid = hub.dispatch(old, None, {"op": "hello", "name": "bob"})
+    hub.dispatch(old, cid, {"op": "create", "room": "lounge"})
+    hub.client_gone(old, cid)  # the attached connection really went away
+    ok, err = hub.book.post(cid, "lounge", "hi")
+    assert ok is False and "unknown client" in err
