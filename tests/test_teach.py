@@ -381,10 +381,11 @@ def test_prepare_writes_trainer_consumable_bundle(repo, home_env):
         assert jsonl.is_file()
         m = load_manifest(corpora / f"{split}.manifest.json")
         assert m.n_docs == len(load_jsonl_docs(jsonl))
-    # per-source manifests verify against the written files
+    # per-source manifests verify against the written files (resolved the
+    # way the v2 trainer resolves: relative to the manifest's own dir)
     for src in ("courses", "academy"):
         mp = corpora / f"source_{src}.manifest.json"
-        assert verify_manifest(load_manifest(mp), base_dir=out) == []
+        assert verify_manifest(load_manifest(mp), base_dir=mp.parent) == []
 
     # curriculum + sequences
     curr = load_curriculum(out / "curriculum.json")
@@ -709,6 +710,20 @@ def test_teach_home_uses_levi_home(home_env):
     # LEVI_HOME is the .levi dir itself (repo convention)
     assert teach_home() == home_env / "teach"
     assert registry_dir() == home_env / "teach" / "manifests"
+
+
+def test_trainer_load_manifest_docs_resolves(repo, home_env):
+    # The v2 trainer resolves manifest entry paths via manifest_path.parent.
+    # This is the integration contract prepare() must honor (regression test
+    # for the corpora/corpora double-prefix bug).
+    from levi.brain.train.v2.trainer import load_manifest_docs
+
+    out = repo / "bundle12"
+    prepare(out, name="t12", sources=["courses"], root=repo)
+    docs = load_manifest_docs(out / "corpora" / "train.manifest.json")
+    assert docs
+    mix_docs = load_manifest_docs(out / "corpora" / "source_courses.manifest.json")
+    assert mix_docs
 
 
 # ---------------------------------------------------------------------------

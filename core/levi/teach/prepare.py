@@ -431,12 +431,15 @@ def prepare(
     manifest_names: dict[str, str] = {}
     for split_name, docs in splits.items():
         jsonl = write_split_jsonl(docs, corpora / f"{split_name}.jsonl")
+        # NOTE: entry paths are relative to the manifest's own directory
+        # (corpora/), matching how the v2 trainer resolves them via
+        # manifest_path.parent — NOT relative to the bundle root.
         m = build_manifest(
             f"{name}-{split_name}",
             version,
             [jsonl],
             tags=("teach", split_name, "news-excluded"),
-            base_dir=tmp,
+            base_dir=corpora,
         )
         manifest_names[split_name] = f"corpora/{split_name}.manifest.json"
         save_manifest(m, corpora / f"{split_name}.manifest.json")
@@ -449,15 +452,17 @@ def prepare(
         check_policy(src_tags)
         entries = []
         for s in splits:
-            f = tmp / f"corpora/{s}.jsonl"
+            f = corpora / f"{s}.jsonl"
             h = hashlib.sha256()
             with open(f, "rb") as fh:
                 for chunk in iter(lambda: fh.read(1 << 20), b""):
                     h.update(chunk)
             in_split = [d for d in splits[s] if d.source.split(":")[0] == src_name]
+            # Path relative to the manifest's own directory (corpora/):
+            # the v2 trainer resolves entry paths via manifest_path.parent.
             entries.append(
                 FileEntry(
-                    path=f"corpora/{s}.jsonl",
+                    path=f"{s}.jsonl",
                     sha256=h.hexdigest(),
                     n_docs=len(in_split),
                     n_chars=sum(len(d.text) for d in in_split),

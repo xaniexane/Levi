@@ -87,7 +87,9 @@ def check_bundle(bundle_dir: str | Path) -> dict:
         except (CorpusError, KeyError, ValueError) as exc:
             problems.append(f"corpora/{split}.manifest.json: {exc}")
             continue
-        for p in verify_manifest(manifest, base_dir=root):
+        # Resolved the way the v2 trainer resolves: entry paths are
+        # relative to the manifest's own directory.
+        for p in verify_manifest(manifest, base_dir=manifest_p.parent):
             problems.append(f"corpora/{split}.manifest.json: {p}")
         ids: set[str] = set()
         try:
@@ -118,7 +120,7 @@ def check_bundle(bundle_dir: str | Path) -> dict:
             except (CorpusError, KeyError, ValueError) as exc:
                 problems.append(f"{mp.name}: {exc}")
                 continue
-            for p in verify_manifest(m, base_dir=root):
+            for p in verify_manifest(m, base_dir=mp.parent):
                 problems.append(f"{mp.name}: {p}")
 
     # Curriculum.

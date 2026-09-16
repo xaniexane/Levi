@@ -64,6 +64,13 @@ points the model builder at `levi.brain.train.model_v2:build_model`
 teach manifest is copied to `~/.levi/teach/manifests/<name>@<date>.json`
 for `teach stats`.
 
+Manifest path convention (integration contract): corpus entry paths are
+relative to the *manifest's own directory* (`corpora/*.jsonl` entries read
+as `train.jsonl` from inside `corpora/`), because the v2 trainer resolves
+them via `manifest_path.parent`. The trainer's `plan_run` +
+`stage_curriculum` consume a prepared bundle directly — verified
+end-to-end (894 docs → 4 curriculum stages).
+
 ## Teachback verification
 
 Teachback is a **data-side** check, never a capability claim: synthetic
