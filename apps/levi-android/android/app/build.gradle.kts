@@ -111,4 +111,7 @@ dependencies {
     // App lock (BiometricPrompt) + encrypted on-device stores.
     implementation(libs.security.crypto)
     implementation(libs.biometric)
+
+    // Local unit tests (plain JUnit4; pure string/policy functions only).
+    testImplementation(libs.junit)
 }

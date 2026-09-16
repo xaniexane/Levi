@@ -58,4 +58,23 @@ object ServerConfig {
         val aN = v4.groupValues[1].toIntOrNull() ?: return false
         return aN == 127 // 127.0.0.0/8 loopback
     }
+
+    /**
+     * True when [url] targets the configured server (same scheme + host).
+     * Navigation anywhere else is not the app's content. Extracted from
+     * MainActivity.isConfiguredHost so the policy is unit-testable;
+     * behavior is identical.
+     *
+     * Host comparison keeps the raw authority (host[:port]) — a different
+     * port is a different host. Case-insensitive.
+     */
+    fun isSameServerHost(url: String, configured: String): Boolean {
+        if (configured.isBlank()) return false
+        fun hostOf(u: String): String =
+            u.substringAfter("://").substringBefore('/').lowercase()
+        fun schemeOf(u: String): String =
+            u.substringBefore("://").lowercase()
+        return schemeOf(url) == schemeOf(configured) &&
+            hostOf(url) == hostOf(configured)
+    }
 }

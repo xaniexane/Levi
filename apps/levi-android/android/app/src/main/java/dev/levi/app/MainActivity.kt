@@ -278,13 +278,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun isConfiguredHost(url: String): Boolean {
         val configured = currentUrl ?: ServerConfig.getUrl(this)
-        if (configured.isBlank()) return false
-        fun hostOf(u: String): String =
-            u.substringAfter("://").substringBefore('/').lowercase()
-        fun schemeOf(u: String): String =
-            u.substringBefore("://").lowercase()
-        return schemeOf(url) == schemeOf(configured) &&
-            hostOf(url) == hostOf(configured)
+        return ServerConfig.isSameServerHost(url, configured)
     }
 
     private fun loadConfigured() {
