@@ -41,6 +41,7 @@ from levi.identity.templates import list_templates, apply_template
 # >>> LEVI backup module — minimal hook (backup coordinator); logic in levi/backup/
 from levi.backup.cli import cmd_backup, register_backup_parser
 from levi.jobs.cli import cmd_jobs, register_jobs_parser
+from levi.neighboros.cli import cmd_neighboros, register_neighboros_parser
 
 # >>> LEVI teach module — minimal hook (teach worker); logic in levi/teach/
 from levi.teach.cli import cmd_teach, register_teach_parser
@@ -5971,6 +5972,9 @@ def main():
     # >>> LEVI jobs module — minimal hook (Hybrid Search & Apply tracker)
     register_jobs_parser(sub)
     # <<< LEVI jobs module
+    # >>> LEVI neighboros module — minimal hook (NeighborOS dispatch OS, PL-01)
+    register_neighboros_parser(sub)
+    # <<< LEVI neighboros module
     # >>> LEVI teach module — minimal hook (teach worker)
     register_teach_parser(sub)
     # <<< LEVI teach module
@@ -6783,6 +6787,9 @@ def main():
         # >>> LEVI jobs module — minimal hook (Hybrid Search & Apply tracker)
         "jobs": cmd_jobs,
         # <<< LEVI jobs module
+        # >>> LEVI neighboros module — minimal hook (NeighborOS dispatch OS, PL-01)
+        "neighboros": cmd_neighboros,
+        # <<< LEVI neighboros module
         # >>> LEVI teach module — minimal hook (teach worker)
         "teach": cmd_teach,
         # <<< LEVI teach module
