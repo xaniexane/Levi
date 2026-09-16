@@ -15,8 +15,8 @@ Two tracks, different purity:
 `core/levi/serve/` is stdlib-only (`http.server.ThreadingHTTPServer`):
 
 ```
-levi serve --dir web/dist --port 8742
-python -m levi.serve --dir web/dist --port 8742
+levi serve --dir web/.vercel/output/static --port 8742
+python -m levi.serve --dir web/.vercel/output/static --port 8742
 ```
 
 - SPA fallback: unknown routes serve `index.html`; missing *assets*
@@ -27,11 +27,13 @@ python -m levi.serve --dir web/dist --port 8742
   accepts anything else but prints an honest warning — exposing files to
   a network is your explicit choice.
 
-Build the pill-free bundle first:
+Build the pill-free bundle first. The SSR build emits no `index.html`
+(the shell is rendered per request), so `scripts/static-shim.mjs`
+generates one from the build's own manifest for pure-static hosts:
 
 ```
-cd web && LEVI_SELFHOST=1 npm run build
-levi serve --dir web/dist --port 8742
+cd web && LEVI_SELFHOST=1 npm run build && node scripts/static-shim.mjs
+levi serve --dir web/.vercel/output/static --port 8742
 ```
 
 Why the pill is gone: the "Created with Grok / Remix" pill is injected by
@@ -45,8 +47,10 @@ strip, the injector simply never exists.
 deploys to Pages with the official `actions/upload-pages-artifact` +
 `actions/deploy-pages` actions:
 
-- `npm ci`, then `LEVI_SELFHOST=1 npm run build -- --base=/Levi/`
-- `dist/index.html` → `dist/404.html` (the Pages SPA-fallback trick)
+- `npm ci`, then `LEVI_SELFHOST=1 node scripts/with-app-env.mjs vite build --base=/Levi/`
+  (invoked via the wrapper so `--base` reaches vite — npm arg-forwarding would
+  misdeliver it to `db:migrate`), then `node scripts/static-shim.mjs`
+- `.vercel/output/static/index.html` → `404.html` (the Pages SPA-fallback trick)
 - Permissions: `pages: write`, `id-token: write`; concurrency group `pages`
 
 Free because this repo is public. Custom domain optional later

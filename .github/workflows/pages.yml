@@ -46,17 +46,26 @@ jobs:
         run: npm ci
 
       - name: Build (LEVI self-hosted, no platform branding)
-        run: LEVI_SELFHOST=1 npm run build -- --base=/Levi/
+        # NOTE: --base must reach `vite build` directly — `npm run build -- --base=…`
+        # would append it to `db:migrate` instead, so the wrapper is invoked explicitly
+        # with the local vite binary (npm's .bin PATH shim is absent outside npm run).
+        run: |
+          LEVI_SELFHOST=1 node scripts/with-app-env.mjs ./node_modules/.bin/vite build --base=/Levi/
+          npm run db:migrate
         env:
           CI: "true"
 
-      - name: SPA fallback for GitHub Pages
-        run: cp dist/index.html dist/404.html
+      - name: Static shell + SPA fallback for GitHub Pages
+        # The SSR build emits no index.html; static-shim.mjs generates one from
+        # the build's own manifest, then 404.html gives Pages its SPA fallback.
+        run: |
+          node scripts/static-shim.mjs
+          cp .vercel/output/static/index.html .vercel/output/static/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: web/dist
+          path: web/.vercel/output/static
 
   deploy:
     needs: build

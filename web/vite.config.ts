@@ -145,6 +145,14 @@ function authPopupPlugin(): Plugin {
 // `0.0.0.0:8080` is the live-preview contract — don't change host/port.
 // The dev server starts once `src/router.tsx` and `src/routes/` exist — see
 // AGENTS.md § "First scaffold".
+//
+// LEVI_SELFHOST=1 marks a LEVI-controlled build: the platform branding
+// injector (grokPwaPlugin) never runs AND the platform nitro middleware
+// (server/middleware/grok-pwa.ts — which would inject the pill's
+// extensions.js script tag into every HTML response at request time, and
+// imports a virtual module only the plugin provides) is excluded from the
+// server build. Default platform builds are unchanged.
+const LEVI_SELFHOST = process.env.LEVI_SELFHOST === "1";
 export default defineConfig(({ command, isPreview }) => ({
   server: {
     host: "0.0.0.0",
@@ -166,7 +174,7 @@ export default defineConfig(({ command, isPreview }) => ({
     // PWA head + ?install=1 tutorial page; runs before Start/Nitro.
     // Skipped on LEVI-controlled builds (LEVI_SELFHOST=1): the platform
     // branding injector never runs there, so no "Created with Grok" pill.
-    ...(process.env.LEVI_SELFHOST === "1" ? [] : [grokPwaPlugin()]),
+    ...(LEVI_SELFHOST ? [] : [grokPwaPlugin()]),
     tailwindcss(),
     tanstackStart(),
     ...(command === "build" || isPreview
@@ -176,7 +184,9 @@ export default defineConfig(({ command, isPreview }) => ({
             // Auto-registers server/middleware/* (the PWA install page +
             // manifest + head-tag middleware). Nitro v3 defaults serverDir to
             // false, so removing this silently unwires /?install=1 on deploys.
-            serverDir: "./server",
+            // On LEVI-controlled builds the platform middleware is excluded:
+            // it would inject the pill's extensions.js tag at request time.
+            serverDir: LEVI_SELFHOST ? false : "./server",
           }),
         ]
       : []),
