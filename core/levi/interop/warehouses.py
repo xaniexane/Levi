@@ -98,6 +98,8 @@ CLI_COMMANDS.update(
         "premortem": ["python -m levi.premortem"],
         # -- deep-web research --------------------------------------------
         "research": [],
+        # -- games (perpetual-hunt games wave) ------------------------------
+        "games": ["python -m levi.games"],
         # -- additions wave -----------------------------------------------
         "ephemera": ["python -m levi.ephemera"],
         "feedreader": ["python -m levi.feedreader"],
@@ -258,8 +260,7 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "killed gaming platforms, remixed as additions (never predatory "
             "rebuilds)."
         ),
-        "shelves": ["fair-play-charter", "codebreak", "daily-cipher",
-                    "hotseat-tictactoe", "hotseat-nim", "player-saves"],
+        "shelves": ["games"],
         "strategy": "capabilities",
         "pull_hint": ("python -m levi.games charter  ·  python -m levi.games play "
                       "codebreak|tictactoe|nim  ·  python -m levi.games cipher"),

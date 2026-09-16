@@ -343,9 +343,22 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
-    # -- research: public-source deep-web research (polite, no darknet) -------
-    "research": {
+    # -- games: fair-play local games (perpetual-hunt games wave) ---------------
+    # Every game passes the Fair Play Charter (charter.py): no paid
+    # randomness, no streak punishment, no FOMO timers, free hints,
+    # offline-first, portable player-owned saves.
+    "games": {
         "provides": [
+            "games.charter",
+            "games.codebreak",
+            "games.daily-cipher",
+            "games.hotseat",
+            "games.saves",
+        ],
+        "requires": [],
+    },
+    # -- research: public-source deep-web research (polite, no darknet) -------
+    "research": {        "provides": [
             "research.deepweb",
             "research.sitemaps",
             "research.feeds",

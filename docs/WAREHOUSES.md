@@ -9,24 +9,27 @@ This is the **organization layer** over the capability atlas. For the
 atlas contract itself (`export_atlas()` / `write_atlas()`), see
 `docs/ATLAS.md`; this document is the warehouse framing and its API.
 
-## The ten warehouses
+## The fourteen warehouses
 
 | Warehouse | Shelves (modules) | What's stocked |
 |---|---|---|
 | `methods` — Methods | methods | 40 forgotten human techniques (loci, ACH, colon, …) |
 | `revivals` — Revivals | revival | 20 retired systems reborn as original LEVI works |
-| `skills` — Skills & Playbooks | cyber-skills | 823 defensive blue-team playbooks |
-| `archive` — Archive Knowledge | archive, knowledge, academy, bounty | The Smithsonian records (perpetual-hunt finds) |
+| `skills` — Skills & Playbooks | cyber-skills | 839 defensive blue-team + operator playbooks |
+| `archive` — Archive Knowledge | archive, knowledge, academy, bounty, research | The Smithsonian records (perpetual-hunt finds) + public-source deep-web research |
 | `services` — Services | galaxy, daemon, perpetual, bot-services | Live installs, automations, supervision |
-| `games` — Games | — | Fair-play additions (standing theme, no stock yet) |
+| `games` — Games | games | Fair-play local games: every game passes the Fair Play Charter (no paid randomness, no streak punishment, no FOMO timers, free hints, offline-first, portable player-owned saves) |
 | `memory` — Memory & Growth | memory-store, memory-retrieval, rag, agent-assistant, growth | The substrate + baby Levi's learning loop |
 | `finance` — Finance | finance | Paper-trading intelligence (paper-only) |
 | `factory` — Factory | factory | The production line: hunt → archive → manufacture → stocking → galaxy |
 | `organism` — Organism Core | bloodstream, organs, lifepack, oath | The turn pipeline, event bus, organs, life packs |
+| `forge` — Forge | forge | LEVI's own code home: local git hosting, issues, PRs, unmetered local CI, one-command full export |
+| `operations` — Operations | signals, creed, promises, decisions, interruptions, snapshots, drift, teachback, energy, friction, sweeps, premortem | LEVI's operating layer: graded signal plane, frozen creed of laws, ledgers and rituals of a reliable operator |
+| `commons` — Commons | communities, threads, bridging, classifieds, charters, commitments, recap, feedreader | Portable social fabric: leave any platform, keep the community; consensus without a central moderator |
+| `craft` — Craft | ephemera, packs, dials, capproto, mailtriage, vaults, canvas, discover, presence, honestsearch, recommender | Sovereign instruments: true-delete channels, attention dials, local mail triage, LAN presence rooms, clean-room search |
 
 Inventory counts are **real** — counted from the actual modules,
-playbooks, records, and live runtime state, never estimated. `games`
-honestly reports 0: the stock arrives via the perpetual hunt.
+playbooks, records, and live runtime state, never estimated.
 
 ## API (stable — the CLI wires to exactly this)
 
@@ -47,8 +50,8 @@ available. Example:
 ```python
 from levi.interop.warehouses import browse_warehouse, warehouse_inventory, pull_from_shelf
 
-browse_warehouse("skills")                       # 823 playbooks
-warehouse_inventory("skills", limit=10)          # first 10, total=823
+browse_warehouse("skills")                       # 839 playbooks
+warehouse_inventory("skills", limit=10)          # first 10, total=839
 pull_from_shelf("methods", "methods.loci")       # full detail + invoke line
 ```
 

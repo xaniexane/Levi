@@ -230,7 +230,7 @@ def test_inventory_counts_match_reality():
     assert by_name["revivals"] == real_revivals
     assert real_playbooks == 839
     assert by_name["skills"] == real_playbooks
-    assert by_name["games"] == 0  # standing theme, no landed stock yet
+    assert by_name["games"] == 5  # games wave landed: charter/codebreak/cipher/hotseat/saves
 
 
 def test_browse_warehouse_shelves():

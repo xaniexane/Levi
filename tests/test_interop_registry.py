@@ -30,6 +30,8 @@ def test_manifest_registers_all_modules():
         "classifieds", "dials", "bridging", "communities", "threads",
         "charters", "capproto", "mailtriage", "vaults", "canvas",
         "discover", "presence", "honestsearch", "recommender",
+        # games wave (fair-play additions)
+        "games",
     }
 
 
