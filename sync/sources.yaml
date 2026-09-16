@@ -186,3 +186,69 @@ sources:
         target: null
         format: skip
         reason: Free/Pro/Private tier-split manifests kept as capability-boundary reference only; free core forever — no tier machinery ported.
+  - id: the-pack
+    archive: ~/workspace/user/files/the_pack.zip
+    visibility: private
+    synced_at: "2026-09-16T04:30:00Z"
+    status: active
+    notes: >
+      ~5MB / 345 files, legacy LEVI August lineage: LEVI_*.py legacy
+      versions, Android all-in-one zips, Termux standalone, Acode plugin,
+      omega_* defensive shell scripts, Kotlin daemon stubs. Security
+      sweep clean: no live secrets (founder.key empty, no key material),
+      no obfuscation, no exfiltration hosts; only PII was the owner's own
+      email addresses (scrubbed, never ported).
+    format_map:
+      - source: omega_auto_defense.sh / omega_elite_guard.sh / omega_network_guard.sh
+        target: core/levi/sentinel/watch.py + contain.py
+        format: rewrite
+        reason: >
+          Host defense sensors (failed logins, suspicious processes,
+          listening ports) and HITL containment rewritten as original
+          LEVI-native Python; containment is dry-run preview by default.
+      - source: integrity_check.sh (omega)
+        target: core/levi/sentinel/integrity.py
+        format: rewrite
+        reason: >
+          SHA-256 host file-integrity baselines rewritten natively;
+          distinct from core/levi/security/integrity.py (pack-manifest
+          tamper-refuse).
+      - source: universal_dna_scanner.sh / malware_scan_hitl.sh
+        target: core/levi/sentinel/triage.py
+        format: rewrite
+        reason: >
+          Read-only file triage (hash + signature leads) rewritten
+          natively; findings are triage leads, never verdicts.
+      - source: omega_forensic_orchestrator.sh
+        target: core/levi/sentinel/forensics.py
+        format: rewrite
+        reason: >
+          Forensic case tree + append-only chain-of-custody + hashing +
+          summary rewritten natively; the menu-driven shell workflow was
+          not ported.
+      - source: authorized_nmap_wrapper.sh
+        target: null
+        format: skip
+        reason: >
+          Offensive-capable (nmap scanning of arbitrary targets) despite
+          HITL gates — defensive blue-team ONLY rule. Not integrated.
+      - source: LEVI_22.1.0 / LEVI_23.2.0 / LEVI_23.4.0 / LEVI_32_XENO_MAX.py and legacy zips
+        target: null
+        format: skip
+        reason: Legacy monolith versions; every subsystem has grown-up LEVI-native forms.
+      - source: Kotlin daemon stubs (AetherDaemon, DispatchDaemon, DreamDaemon, EliteGuardDaemon, NetworkGuardDaemon, PulseDaemon, ...)
+        target: null
+        format: skip
+        reason: Skeleton stubs; repo daemon infrastructure already grown-up.
+      - source: LEVI_TERMUX_STANDALONE_v20.5.1-1.zip / termux-bootstrap.sh
+        target: null
+        format: skip
+        reason: Legacy installer concept; Termux toolchain + device tools already native.
+      - source: LEVI_ACODE_PLUGIN_v20.5.1-1.zip / LEVI_ACODE_FIXED_v20.5.1.zip
+        target: null
+        format: skip
+        reason: Acode-plugin packaging already covered by the reference-app parity program.
+      - source: surgeon.py (pack copy)
+        target: null
+        format: skip
+        reason: Already ported as core/levi/surgeon/ from the Levi-ai source-sync.
