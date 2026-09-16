@@ -336,6 +336,21 @@ HUNT_THEMES: List[HuntTheme] = [
         ),
         covered=True,
     ),
+    HuntTheme(
+        id="giant-patterns",
+        name="Giant patterns",
+        brief="What the tech giants built, refused, and killed — and the "
+        "honest additions LEVI can own that they never would.",
+        exclusions=frozenset(
+            {
+                "shareware/Apogee model",
+                "SourceForge/DevShare",
+                "Yahoo Pipes",
+                "AltaVista",
+            }
+        ),
+        covered=True,
+    ),
 ]
 
 THEMES_BY_ID = {t.id: t for t in HUNT_THEMES}
