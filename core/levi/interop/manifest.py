@@ -398,6 +398,7 @@ DECLARATIONS = {
             "games.open-crate",  # anti-loot-box: published odds, free pulls, --prove audit
             "games.open-season",  # un-expiring battle pass: streaks freeze, never punish
             "games.turn-relay",  # BBS-door ritual as a hash-chained turn protocol
+            "games.story-table",  # dice-first tabletop RPG: swappable role agents, sealed roll receipts, portable world packs
         ],
         "requires": [],
     },

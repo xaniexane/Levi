@@ -17,6 +17,11 @@ Commands:
                             the un-expiring battle pass — progress never rots
   relay <new|move|show|verify|export|import> ...
                             async turn relay: the BBS-door ritual as a protocol
+  table <new|check|roll|scene|lore|npc|create|receipts|roles|swap|packs|
+         pack-export|pack-import|prove|charter> ...
+                            the story table: dice-first tabletop RPG,
+                            swappable role agents, sealed roll receipts,
+                            portable world packs
   saves list <game>           list save slots
   saves export <game> <slot> <file>   export a portable save
   saves import <file> [--slot S]      import a portable save
@@ -207,6 +212,12 @@ def _cmd_relay(args) -> int:
     return relay.cmd(args)
 
 
+def _cmd_table(args) -> int:
+    from levi.games import table
+
+    return table.cmd(args.table_args)
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
         prog="levi.games", description="Fair-play local games"
@@ -313,6 +324,15 @@ def main(argv=None) -> int:
     relay_p.add_argument("--file", default=None, help="relay file (export/import)")
     relay_p.add_argument("--slot", default="relay", help="save slot")
 
+    table_p = sub.add_parser(
+        "table", help="the story table: dice-first tabletop RPG"
+    )
+    table_p.add_argument(
+        "table_args",
+        nargs=argparse.REMAINDER,
+        help="passed to the story-table CLI (see: levi.games table --help)",
+    )
+
     args = parser.parse_args(argv)
     if args.command == "charter":
         return _cmd_charter(args)
@@ -336,6 +356,8 @@ def main(argv=None) -> int:
         return _cmd_season(args)
     if args.command == "relay":
         return _cmd_relay(args)
+    if args.command == "table":
+        return _cmd_table(args)
     parser.print_help()
     return 2
 
