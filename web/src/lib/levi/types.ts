@@ -170,7 +170,7 @@ export const ORGAN_MAP: {
     old: "Chat",
     now: "talk",
     status: "merged",
-    note: "Talk is the companion. Personas, HITL, Grok catalyst.",
+    note: "Talk is the companion. Personas, HITL, LEVI-forged.",
   },
   { old: "Morning", now: "home", status: "merged", note: "Daily ritual and streak live on Home." },
   {
