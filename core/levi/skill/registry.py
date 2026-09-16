@@ -748,6 +748,18 @@ class SkillRegistry:
 
         for s in ACADEMY_SKILLS:
             self.register(s)
+        # LEVI content-machine skill pack (social content helpers).
+        # Content generation only — never the network. INFO risk.
+        from levi.king.content_machine import CONTENT_SKILLS
+
+        for s in CONTENT_SKILLS:
+            self.register(s)
+        # LEVI job-tracker skill pack (Hybrid Search & Apply).
+        # Local pipeline tracking only — never applies anywhere.
+        from levi.jobs.tracker import JOB_SKILLS
+
+        for s in JOB_SKILLS:
+            self.register(s)
 
     def register(self, skill: Skill) -> None:
         if not isinstance(skill, Skill):

@@ -1,0 +1,84 @@
+# LEVI source-sync registry
+# Each entry is an external source repo ported into LEVI per
+# docs/SOURCE_SYNC_PROTOCOL.md. Format map values: rewrite | build |
+# design-port | design-reference | skip.
+
+sources:
+  - id: omega-powered-by-alpha
+    repo: xaniexane/Omega-Powered-by-Alpha
+    visibility: private
+    branch: main
+    synced_at: "2026-09-16T01:28:00Z"
+    commit: d88c13b85d39a1f98f58265a26aadcec325079c5
+    status: active
+    notes: >
+      8-file grab-bag: social content helper, TS fetch wrapper,
+      orval-generated CreatorLab API client (no backend), empty
+      job-tracker spreadsheet template. Security sweep clean.
+    format_map:
+      - source: content_machine.py
+        target: core/levi/king/content_machine.py
+        format: rewrite
+        reason: >
+          Concept (platform specs + hook formulas + validators) rewritten
+          as original LEVI-native code; no source text copied (source
+          carries AGPL-3.0).
+      - source: custom-fetch.ts
+        target: core/levi/plugins/http.py
+        format: design-port
+        reason: >
+          TS cannot enter the stdlib-only Python kernel; the design
+          (base URL, bearer getter, typed errors, smart parsing) ported
+          as original Python over urllib.
+      - source: api.ts
+        target: null
+        format: design-reference
+        reason: >
+          2,563-line generated client for a CreatorLab backend that does
+          not exist; dead without it. Endpoint surface documented as a
+          labeled reference in docs/CREATORLAB_REFERENCE.md.
+      - source: api.schemas.ts
+        target: null
+        format: design-reference
+        reason: Same as api.ts — reference doc only, no generated code copied.
+      - source: index.ts
+        target: null
+        format: skip
+        reason: Broken barrel export (re-exports nonexistent paths).
+      - source: scaffoldInput.ts
+        target: null
+        format: skip
+        reason: Models duplicated in api.schemas.ts; covered by the reference doc.
+      - source: scaffoldInputType.ts
+        target: null
+        format: skip
+        reason: Models duplicated in api.schemas.ts; covered by the reference doc.
+      - source: The Hybrid Search and Apply System.xlsx
+        target: core/levi/jobs/
+        format: build
+        reason: >
+          Empty 6-sheet template (zero cells); no code or data to port.
+          Built the implied system: local job-pipeline tracker
+          (review_buffer → applied → interview → prep, restrictions),
+          JSON state, `levi jobs` CLI, docs/JOBS.md.
+      - source: .gitignore
+        target: null
+        format: skip
+        reason: Irrelevant Unreal Engine template.
+      - source: LICENSE
+        target: null
+        format: skip
+        reason: AGPL-3.0 text; copyleft conflicts with LEVI's proprietary license.
+
+  - id: levi-ai
+    repo: xaniexane/Levi-ai
+    visibility: private
+    branch: main
+    synced_at: null
+    commit: null
+    status: pending
+    notes: >
+      Second private source. Fetch requires Chauncey's fresh transient
+      PAT (previous token shredded per policy). Format map defined on
+      inventory after fetch, per docs/SOURCE_SYNC_PROTOCOL.md.
+    format_map: []

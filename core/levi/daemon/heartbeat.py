@@ -373,8 +373,8 @@ def run_heartbeat(
     now_utc = local.astimezone(timezone.utc)
     checked_at = now_utc.isoformat()
 
-    # 1. Active-hours gate: 8am–10pm local only.
-    if not (ACTIVE_START_HOUR <= local.hour < ACTIVE_END_HOUR):
+    # 1. Active-hours gate: 8am–10pm local only (force bypasses).
+    if not force and not (ACTIVE_START_HOUR <= local.hour < ACTIVE_END_HOUR):
         return HeartbeatResult(
             checked_at=checked_at,
             attention=[],

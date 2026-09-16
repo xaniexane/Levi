@@ -110,10 +110,17 @@ def test_clean_home_is_silent(home, capsys):
 
 
 def test_outside_active_hours_is_silent(home):
-    result = run_heartbeat(home=home, now=_at(15, 3), force=True)
+    result = run_heartbeat(home=home, now=_at(15, 3))
     assert result.silent is True
     assert result.reason == "outside active hours"
     assert result.attention == []
+
+
+def test_force_bypasses_active_hours_gate(home):
+    # Documented contract (run_heartbeat docstring): force=True bypasses
+    # both the active-hours gate and the interval gate.
+    result = run_heartbeat(home=home, now=_at(15, 3), force=True)
+    assert result.reason != "outside active hours"
 
 
 def test_inside_active_hours_proceeds(home):

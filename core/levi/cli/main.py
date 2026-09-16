@@ -40,6 +40,7 @@ from levi.identity.templates import list_templates, apply_template
 
 # >>> LEVI backup module — minimal hook (backup coordinator); logic in levi/backup/
 from levi.backup.cli import cmd_backup, register_backup_parser
+from levi.jobs.cli import cmd_jobs, register_jobs_parser
 # <<< LEVI backup module
 
 
@@ -3970,8 +3971,7 @@ def _provider_choices() -> list[str]:
 def _axis1_not_landed(what: str):
     """Honest gap: the owning axis has not merged this yet. Exit 2."""
     print(
-        "not yet landed: %s — the owning axis has not merged it yet."
-        % what,
+        "not yet landed: %s — the owning axis has not merged it yet." % what,
         file=sys.stderr,
     )
     raise SystemExit(2)
@@ -4044,8 +4044,7 @@ def _axis1_shelf_modules(package: str):
     return out
 
 
-def _axis1_shelf_cmd(args, package: str, action_attr: str, name_attr: str,
-                     title: str):
+def _axis1_shelf_cmd(args, package: str, action_attr: str, name_attr: str, title: str):
     action = getattr(args, action_attr, None) or "list"
     if action == "list":
         print("=== %s ===" % title)
@@ -4074,14 +4073,20 @@ def _axis1_shelf_cmd(args, package: str, action_attr: str, name_attr: str,
 
 def cmd_methods(args):
     """Methods warehouse: forgotten human techniques, LEVI-native."""
-    _axis1_shelf_cmd(args, "methods", "methods_action", "methods_name",
-                     "Methods warehouse — shelves")
+    _axis1_shelf_cmd(
+        args, "methods", "methods_action", "methods_name", "Methods warehouse — shelves"
+    )
 
 
 def cmd_revival(args):
     """Revivals warehouse: retired-software ideas reborn as LEVI originals."""
-    _axis1_shelf_cmd(args, "revival", "revival_action", "revival_name",
-                     "Revivals warehouse — shelves")
+    _axis1_shelf_cmd(
+        args,
+        "revival",
+        "revival_action",
+        "revival_name",
+        "Revivals warehouse — shelves",
+    )
 
 
 _MEGAZORD_AXES = (
@@ -4177,8 +4182,7 @@ def cmd_atlas(args):
         )
         print("=== capability atlas (by warehouse) ===")
         for name, w in pairs:
-            count = _axis1_field(w, "inventory_count", "count", "items",
-                                 default="?")
+            count = _axis1_field(w, "inventory_count", "count", "items", default="?")
             print("  %-22s %s item(s)" % (name, count))
     elif isinstance(data, (list, tuple)):
         print("atlas: %d entries (flat)" % len(data))
@@ -4203,8 +4207,10 @@ def cmd_workflow(args):
         for w in list_workflows() or []:
             print(
                 "  %-24s %s"
-                % (_axis1_field(w, "name", "id"),
-                   _axis1_field(w, "summary", "description", default="")[:90])
+                % (
+                    _axis1_field(w, "name", "id"),
+                    _axis1_field(w, "summary", "description", default="")[:90],
+                )
             )
         return
     name = getattr(args, "name", None)
@@ -4228,8 +4234,7 @@ def cmd_warehouse(args):
         for w in _wh.list_warehouses() or []:
             name = _axis1_field(w, "name", "id")
             summary = _axis1_field(w, "summary", "description", default="")
-            count = _axis1_field(w, "inventory_count", "count", "items",
-                                 default="?")
+            count = _axis1_field(w, "inventory_count", "count", "items", default="?")
             print("  %s\n    %s [%s item(s)]" % (name, summary, count))
         print(
             "\n`levi warehouse browse <name>` — shelves · "
@@ -4243,13 +4248,13 @@ def cmd_warehouse(args):
             print("usage: levi warehouse browse <name>", file=sys.stderr)
             raise SystemExit(2)
         info = _wh.browse_warehouse(name)
-        print("=== warehouse: %s ===" % _axis1_field(info, "title", "name",
-                                                     default=name))
+        print(
+            "=== warehouse: %s ===" % _axis1_field(info, "title", "name", default=name)
+        )
         summary = _axis1_field(info, "summary", "description", default="")
         if summary:
             print(summary)
-        shelves = _axis1_field(info, "shelves", "modules", "sections",
-                               default=[]) or []
+        shelves = _axis1_field(info, "shelves", "modules", "sections", default=[]) or []
         for s in shelves:
             sname = _axis1_field(s, "module", "name", "id")
             ssum = _axis1_field(s, "summary", "description", default="")
@@ -4274,22 +4279,23 @@ def cmd_warehouse(args):
             items = list(raw)
             total = len(items)
         shown = list(items)[:limit]
-        print("=== inventory: %s (%d of %d shown) ==="
-              % (name, len(shown), total))
+        print("=== inventory: %s (%d of %d shown) ===" % (name, len(shown), total))
         for it in shown:
             print(
                 "  %-28s %s"
-                % (_axis1_field(it, "id", "name"),
-                   _axis1_field(it, "summary", "description", "blurb",
-                                default="")[:80])
+                % (
+                    _axis1_field(it, "id", "name"),
+                    _axis1_field(it, "summary", "description", "blurb", default="")[
+                        :80
+                    ],
+                )
             )
         return
     if action == "pull":
         warehouse = getattr(args, "name", None)
         item = getattr(args, "item", None)
         if not warehouse or not item:
-            print("usage: levi warehouse pull <warehouse> <item>",
-                  file=sys.stderr)
+            print("usage: levi warehouse pull <warehouse> <item>", file=sys.stderr)
             raise SystemExit(2)
         try:
             detail = _wh.pull_from_shelf(warehouse, item)
@@ -4299,17 +4305,32 @@ def cmd_warehouse(args):
         if isinstance(detail, str):
             print(detail)
         elif isinstance(detail, dict):
-            print("%s — %s"
-                  % (_axis1_field(detail, "id", "name", default=item),
-                     _axis1_field(detail, "summary", "description",
-                                  default="")))
-            invoke = _axis1_field(detail, "invoke", "how_to_invoke",
-                                  "usage", default="")
+            print(
+                "%s — %s"
+                % (
+                    _axis1_field(detail, "id", "name", default=item),
+                    _axis1_field(detail, "summary", "description", default=""),
+                )
+            )
+            invoke = _axis1_field(
+                detail, "invoke", "how_to_invoke", "usage", default=""
+            )
             if invoke:
                 print("invoke: %s" % invoke)
-            rest = {k: v for k, v in detail.items()
-                    if k not in ("id", "name", "summary", "description",
-                                 "invoke", "how_to_invoke", "usage")}
+            rest = {
+                k: v
+                for k, v in detail.items()
+                if k
+                not in (
+                    "id",
+                    "name",
+                    "summary",
+                    "description",
+                    "invoke",
+                    "how_to_invoke",
+                    "usage",
+                )
+            }
             if rest:
                 print(json.dumps(rest, indent=2, default=str)[:3000])
         else:
@@ -4335,10 +4356,7 @@ def cmd_bloodstream(args):
             "— route=%s behavior=%s persona=%s risk=%s"
             % (res.route, res.behavior, res.persona_id, res.risk_level)
         )
-        print(
-            "  stages: %s · trace=%s"
-            % (", ".join(res.stage_names()), res.trace_id)
-        )
+        print("  stages: %s · trace=%s" % (", ".join(res.stage_names()), res.trace_id))
         if not res.ok:
             raise SystemExit(1)
         return
@@ -4347,8 +4365,11 @@ def cmd_bloodstream(args):
         ok = bool(res.ok and res.stage_names())
         print(
             "bus-test: %s — %d stage(s): %s"
-            % ("PASS" if ok else "FAIL", len(res.stage_names()),
-               ", ".join(res.stage_names()))
+            % (
+                "PASS" if ok else "FAIL",
+                len(res.stage_names()),
+                ", ".join(res.stage_names()),
+            )
         )
         if not ok:
             raise SystemExit(1)
@@ -4403,8 +4424,7 @@ def cmd_factory_status(args):
         if last:
             print(
                 "  last wave: %s (%s) — %d findings @ %s"
-                % (last.id, last.theme_id, last.findings_count,
-                   last.completed_at)
+                % (last.id, last.theme_id, last.findings_count, last.completed_at)
             )
         if state.next_due:
             print("  next due: %s" % state.next_due)
@@ -4437,8 +4457,7 @@ def cmd_factory_status(args):
         rows = _wh.list_warehouses() or []
         total = 0
         for w in rows:
-            count = _axis1_field(w, "inventory_count", "count", "items",
-                                 default=0)
+            count = _axis1_field(w, "inventory_count", "count", "items", default=0)
             total += count if isinstance(count, int) else 0
         print("  warehouses: %d · inventoried items: %d" % (len(rows), total))
     except Exception:
@@ -4503,8 +4522,9 @@ def cmd_daemon_services(args):
     if downs:
         print("\nstart hints for down services:")
         for st in downs:
-            print("  %-16s %s"
-                  % (st["name"], _axis1_field(st, "start_hint", default="")))
+            print(
+                "  %-16s %s" % (st["name"], _axis1_field(st, "start_hint", default=""))
+            )
 
 
 # === MEGAZORD-AXIS1-REGION-END ===
@@ -5165,6 +5185,9 @@ def main():
     # >>> LEVI backup module — minimal hook (backup coordinator)
     register_backup_parser(sub)
     # <<< LEVI backup module
+    # >>> LEVI jobs module — minimal hook (Hybrid Search & Apply tracker)
+    register_jobs_parser(sub)
+    # <<< LEVI jobs module
     news_p = sub.add_parser(
         "news", help="Current-events ingest (dated recall, not live)"
     )
@@ -5714,9 +5737,7 @@ def main():
         default=None,
         help="write atlas JSON to PATH (default: print summary)",
     )
-    wf_p = sub.add_parser(
-        "workflow", help="Cross-module flagship workflows"
-    )
+    wf_p = sub.add_parser("workflow", help="Cross-module flagship workflows")
     wf_p.add_argument(
         "workflow_action",
         nargs="?",
@@ -5724,8 +5745,7 @@ def main():
         choices=["list", "run"],
         help="workflow action",
     )
-    wf_p.add_argument("name", nargs="?", default=None,
-                      help="workflow name for `run`")
+    wf_p.add_argument("name", nargs="?", default=None, help="workflow name for `run`")
     wh_p = sub.add_parser(
         "warehouse", help="Browse LEVI's warehouses (not a tool belt)"
     )
@@ -5742,15 +5762,11 @@ def main():
         default=None,
         help="warehouse name (browse/inventory), or warehouse for `pull`",
     )
-    wh_p.add_argument(
-        "item", nargs="?", default=None, help="item id for `pull`"
-    )
+    wh_p.add_argument("item", nargs="?", default=None, help="item id for `pull`")
     wh_p.add_argument(
         "--limit", type=int, default=20, help="inventory: max items (default 20)"
     )
-    bs_p = sub.add_parser(
-        "bloodstream", help="Single-bloodstream turn pipeline"
-    )
+    bs_p = sub.add_parser("bloodstream", help="Single-bloodstream turn pipeline")
     bs_p.add_argument(
         "bloodstream_action",
         nargs="?",
@@ -5758,9 +5774,7 @@ def main():
         choices=["turn", "bus-test"],
         help="bloodstream action",
     )
-    bs_p.add_argument(
-        "text", nargs=argparse.REMAINDER, help="turn text (for `turn`)"
-    )
+    bs_p.add_argument("text", nargs=argparse.REMAINDER, help="turn text (for `turn`)")
     # === MEGAZORD-AXIS1-REGION-END ===
 
     # === KING-REGION-BEGIN: King control plane (core/levi/king) ===
@@ -5885,6 +5899,9 @@ def main():
         # >>> LEVI backup module — minimal hook (backup coordinator)
         "backup": cmd_backup,
         # <<< LEVI backup module
+        # >>> LEVI jobs module — minimal hook (Hybrid Search & Apply tracker)
+        "jobs": cmd_jobs,
+        # <<< LEVI jobs module
         "news": cmd_news,
         "capabilities": cmd_capabilities,
         "affect": cmd_affect,

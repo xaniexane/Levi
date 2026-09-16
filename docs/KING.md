@@ -165,3 +165,32 @@ python -m levi.cli.main king approve <review-id>
 python -m levi.cli.main king social-post --id <review-id> --yes   # loopback
 python -m levi.cli.main king d5               # demo the D2→D5 progression
 ```
+
+## Content machine (`content_machine.py`)
+
+Platform-aware social content helpers, ported as a **rewrite** from an
+external source concept (see `docs/SOURCE_SYNC_PROTOCOL.md` — no source
+text was copied). Content generation only; never the network.
+
+- **Platform specs** — documented limits, fold/truncation points, and
+  hashtag budgets for LinkedIn, X, Instagram feed/stories, TikTok, and
+  newsletter (`PLATFORM_SPECS`, `platform_spec()`).
+- **Hook formulas** — rhetorical patterns (contrarian, curiosity gap,
+  specificity, negative, callout, slippery slope, permission) rendered
+  from slot values with an honest rationale (`render_hook()`).
+  Patterns, not promises: the docstring says what each pattern *is*,
+  never that it will perform.
+- **Builders** — `build_linkedin_post()`, `build_x_thread()`,
+  `build_instagram_post()`, `build_newsletter()`; one entry point
+  `format_for_platform()` that builds *and* validates.
+- **Validators** — `validate_length()`, `validate_hook()`
+  (banned-opener hygiene), `validate_content()`.
+
+Relationship to `social.py`: `social.py` owns the sanitize contract
+(markdown → clean caption + generated hashtags). The content machine
+owns platform mechanics (limits, structure, hooks). King can call both;
+posting still routes through the review queue and the confirmation-
+gated plugin connector — the content machine never posts.
+
+Registered skills (category `social`, risk INFO):
+`social_content_format`, `social_hook_render`, `social_content_validate`.
