@@ -82,6 +82,29 @@ _LAZY_EXPORTS = {
     "InvalidBet": "bets",
     "BetNotFound": "bets",
     "BetAlreadySettled": "bets",
+    # leaderboard.py — paper-trader rankings
+    "MIN_BETS_RANKED": "leaderboard",
+    "build_leaderboard": "leaderboard",
+    "ranked_leaderboard": "leaderboard",
+    "render_leaderboard": "leaderboard",
+    # copytrade.py — simulated copy trading
+    "NoSettledBets": "copytrade",
+    "mirror_report": "copytrade",
+    "compare_traders": "copytrade",
+    "render_copy_report": "copytrade",
+    # brokerlink.py — draft-only broker-link option
+    "BrokerLinkConfig": "brokerlink",
+    "DraftOrder": "brokerlink",
+    "LiveExecutionRefused": "brokerlink",
+    "InvalidDraft": "brokerlink",
+    "SUPPORTED_PLATFORMS": "brokerlink",
+    "DEFAULT_LINK_PATH": "brokerlink",
+    "DEFAULT_DRAFTS_PATH": "brokerlink",
+    "configure_broker_link": "brokerlink",
+    "broker_link_status": "brokerlink",
+    "prepare_drafts": "brokerlink",
+    "execute_draft": "brokerlink",
+    "load_drafts": "brokerlink",
 }
 
 __all__ = sorted(_LAZY_EXPORTS)
