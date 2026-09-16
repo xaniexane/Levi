@@ -711,6 +711,108 @@ def cmd_provenance(args):
     print(scan_tree_for_foreign_branding(str(Path(root).resolve().parents[1])))
 
 
+def cmd_seal(args):
+    """Origin Seal: init | manifest | sign | verify | anchor."""
+    import json as _json
+    from pathlib import Path
+
+    from levi.provenance import seal as _seal
+
+    action = getattr(args, "seal_action", None) or "verify"
+    root = Path(getattr(args, "root", None) or _seal.default_root()).resolve()
+
+    if action == "init":
+        try:
+            info = _seal.init_keypair()
+        except FileExistsError as exc:
+            print(f"seal init refused: {exc}")
+            raise SystemExit(1) from None
+        print(f"origin key: {info['private_key']} (0600, never leaves this machine)")
+        print(f"trust anchor: {_seal.repo_pubkey_path()} (commit this)")
+        print(f"fingerprint: {info['fingerprint']}")
+        return
+
+    if action == "manifest":
+        manifest = _seal.build_manifest(root)
+        out = getattr(args, "out", None)
+        if out:
+            Path(out).write_text(
+                _json.dumps(manifest, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+            print(f"manifest: {out}")
+        print(f"files: {len(manifest['files'])}")
+        print(f"manifest_sha256: {manifest['manifest_sha256']}")
+        return
+
+    if action == "sign":
+        try:
+            result = _seal.sign_release(
+                root,
+                notes=getattr(args, "notes", "") or "",
+                out=getattr(args, "seal", None),
+            )
+        except FileNotFoundError as exc:
+            print(f"seal sign failed: {exc}")
+            raise SystemExit(1) from None
+        env = result["envelope"]
+        print(f"signed: {result['seal']}")
+        print(f"manifest_sha256: {env['descriptor']['manifest_sha256']}")
+        print(f"signer fingerprint: {env['signer_pubkey_fingerprint']}")
+        print(f"released_at: {env['descriptor']['released_at']}")
+        return
+
+    if action == "verify":
+        seal_path = getattr(args, "seal", None) or (root / _seal.SEAL_FILENAME)
+        res = _seal.verify_release(root, seal_path)
+        print(f"seal: {seal_path}")
+        print(f"files checked: {res.files_checked}")
+        if res.ok:
+            print("VERIFY OK — release is authentic and untampered.")
+            return
+        print("VERIFY FAILED:")
+        for err in res.errors:
+            print(f"  ! {err}")
+        for path in res.tampered:
+            print(f"  tampered: {path}")
+        for path in res.missing:
+            print(f"  missing: {path}")
+        for path in res.added[:20]:
+            print(f"  added: {path}")
+        if len(res.added) > 20:
+            print(f"  ... and {len(res.added) - 20} more added files")
+        raise SystemExit(1)
+
+    if action == "anchor":
+        seal_path = getattr(args, "seal", None) or (root / _seal.SEAL_FILENAME)
+        try:
+            envelope = _json.loads(Path(seal_path).read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            print(f"seal anchor failed: cannot read seal: {exc}")
+            raise SystemExit(1) from None
+        digest = envelope["descriptor"]["manifest_sha256"]
+        cals = (
+            [getattr(args, "calendar", None)]
+            if getattr(args, "calendar", None)
+            else None
+        )
+        res = _seal.anchor_digest(digest, calendars=cals, out_dir=root)
+        if res["status"] == "anchored":
+            print(f"anchor submitted via {res['calendar']}")
+            print(f"receipt: {res['ots']}")
+            print(res["note"])
+        else:
+            print(
+                "anchor PENDING (offline or calendar unreachable) — no success faked."
+            )
+            print(f"request file: {res['pending_request']}")
+            print(f"last error: {res['last_error']}")
+        return
+
+    print(f"unknown seal action: {action}")
+    raise SystemExit(2)
+
+
 def cmd_perfection(args):
     from levi.ops.perfection import perfection_report
 
@@ -5160,6 +5262,23 @@ def main():
     sui.add_argument("--port", type=int, default=8765)
     sui.add_argument("--no-browser", action="store_true")
     sub.add_parser("provenance", help="Closed-source LEVI DNA vs foreign branding")
+    seal_p = sub.add_parser("seal", help="Origin Seal: signed, anchored LEVI releases")
+    seal_p.add_argument(
+        "seal_action",
+        nargs="?",
+        default="verify",
+        choices=["init", "manifest", "sign", "verify", "anchor"],
+        help="seal action",
+    )
+    seal_p.add_argument("--root", default=None, help="tree root (default: repo root)")
+    seal_p.add_argument(
+        "--out", default=None, help="manifest: write manifest JSON here"
+    )
+    seal_p.add_argument(
+        "--seal", default=None, help="sign/verify/anchor: seal file path"
+    )
+    seal_p.add_argument("--notes", default="", help="sign: release notes")
+    seal_p.add_argument("--calendar", default=None, help="anchor: OTS calendar URL")
     sub.add_parser("perfection", help="Perfection layer score")
     free_p = sub.add_parser(
         "free", help="Free integration lattice + interpenetration matrix"
@@ -6817,6 +6936,7 @@ def main():
         "services": cmd_services,
         "serve-ui": cmd_serve_ui,
         "provenance": cmd_provenance,
+        "seal": cmd_seal,
         "perfection": cmd_perfection,
         "free": cmd_free,
         "production": cmd_production,
