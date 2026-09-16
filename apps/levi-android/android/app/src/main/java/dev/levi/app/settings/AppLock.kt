@@ -30,9 +30,18 @@ object AppLock {
      * Launches [LockActivity] when app lock is enabled and this process has
      * not unlocked yet. Returns true when the lock screen was shown (the
      * caller should not continue setting up protected UI).
+     *
+     * Fail-closed: if the secure store cannot be read, the lock state is
+     * unknown, so the lock screen is shown rather than letting anyone in.
      */
     fun requireUnlock(activity: AppCompatActivity): Boolean {
-        if (!SettingsStore.isAppLockEnabled(activity) || unlocked) return false
+        val locked =
+            try {
+                SettingsStore.isAppLockEnabled(activity)
+            } catch (e: SettingsStore.SecureStorageException) {
+                true
+            }
+        if (!locked || unlocked) return false
         activity.startActivity(Intent(activity, LockActivity::class.java))
         return true
     }
@@ -66,6 +75,9 @@ object AppLock {
         val info = BiometricPrompt.PromptInfo.Builder()
             .setTitle(title)
             .apply { subtitle?.let { setSubtitle(it) } }
+            // Biometric-only authenticators require an explicit negative
+            // button, otherwise authenticate() throws.
+            .setNegativeButtonText(activity.getString(android.R.string.cancel))
             .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
             .build()
         prompt.authenticate(info)

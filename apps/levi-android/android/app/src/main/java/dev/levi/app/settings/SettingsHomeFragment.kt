@@ -168,10 +168,9 @@ class SettingsHomeFragment : Fragment() {
         )
         r3.addView(SettingsUi.divider(ctx))
         r3.addView(
-            SettingsUi.row(
-                ctx, R.drawable.ic_download, getString(R.string.row_updates),
-                badge = getString(R.string.badge_pending),
-            ) { open(UpdatesFragment(), getString(R.string.row_updates)) },
+            SettingsUi.row(ctx, R.drawable.ic_download, getString(R.string.row_updates)) {
+                open(UpdatesFragment(), getString(R.string.row_updates))
+            },
         )
         r3.addView(SettingsUi.divider(ctx))
         r3.addView(

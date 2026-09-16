@@ -14,10 +14,14 @@ import java.security.MessageDigest
  * Non-sensitive UI preferences live in plain SharedPreferences.
  * Anything sensitive (app-lock state, PIN hash, profile, invite code,
  * credential secrets) lives in EncryptedSharedPreferences. If the encrypted
- * store cannot be created (very old / broken keystore), we fall back to
- * plain prefs rather than crashing — the data stays on-device either way.
+ * store cannot be created (broken keystore), [secure] throws
+ * [SecureStorageException] — secrets are never silently written in
+ * plaintext. UI write paths must catch it and tell the user.
  */
 object SettingsStore {
+    /** The encrypted store could not be opened. Never fall back to plaintext. */
+    class SecureStorageException(message: String, cause: Throwable?) :
+        IllegalStateException(message, cause)
     private const val TAG = "SettingsStore"
     private const val PREFS = "levi_settings"
     private const val SECURE_PREFS = "levi_secure"
@@ -58,12 +62,27 @@ object SettingsStore {
                 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
             )
         } catch (e: Exception) {
-            Log.w(TAG, "Encrypted prefs unavailable, falling back to plain prefs", e)
-            context.getSharedPreferences(SECURE_PREFS, Context.MODE_PRIVATE)
+            Log.e(TAG, "Encrypted prefs unavailable; refusing plaintext fallback", e)
+            throw SecureStorageException(
+                "LEVI secure storage unavailable — secrets are not written in plaintext",
+                e,
+            )
         }
         secureCache = created
         return created
     }
+
+    /**
+     * True when the encrypted store opens. UI flows use this to show an
+     * honest "secure storage unavailable" message instead of crashing.
+     */
+    fun secureAvailable(context: Context): Boolean =
+        try {
+            secure(context)
+            true
+        } catch (e: SecureStorageException) {
+            false
+        }
 
     // ---- Appearance ----
 
