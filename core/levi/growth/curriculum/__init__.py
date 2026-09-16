@@ -6,8 +6,22 @@ Public API:
     load_curriculum()  ingest lessons as seed entries (idempotent)
     curriculum_topics()  per-topic seed counts
     curriculum_entries()  the loaded seed entries
+
+Blue-team track (blue_team.py) — defensive analyst / LEVI-domain lessons
+for the study hall, kept separate from the founder seeds so each track
+keeps its own validation and topic set:
+    BLUE_TEAM_LESSONS  defensive lesson dicts for study-hall quizzes
+    BLUE_TEAM_TOPICS   the six blue-team topics
+    BLUE_TEAM_KINDS    accepted lesson kinds for the blue-team track
+    validate_blue_team_lessons()  structural validation
 """
 
+from levi.growth.curriculum.blue_team import (
+    BLUE_TEAM_KINDS,
+    BLUE_TEAM_LESSONS,
+    BLUE_TEAM_TOPICS,
+    validate_blue_team_lessons,
+)
 from levi.growth.curriculum.lessons import (
     LESSONS,
     TOPICS,
@@ -32,4 +46,8 @@ __all__ = [
     "SEED_CONFIDENCE",
     "SEED_CORROBORATED_COUNT",
     "CURRICULUM_CYCLE_ID",
+    "BLUE_TEAM_LESSONS",
+    "BLUE_TEAM_TOPICS",
+    "BLUE_TEAM_KINDS",
+    "validate_blue_team_lessons",
 ]
