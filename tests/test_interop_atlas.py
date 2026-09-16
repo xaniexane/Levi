@@ -193,6 +193,8 @@ def test_atlas_cli_reachability_spot_checks():
     assert modules["galaxy"]["cli"] == ["python -m levi.galaxy"]
     assert modules["methods"]["cli"] == []
     assert modules["organs"]["cli"] == ["echo", "mandella"]
+    # cybrus CLI wired via CLI_COMMANDS + cli/main.py (round-2 review)
+    assert modules["cybrus"]["cli"] == ["cybrus", "python -m levi.cybrus"]
 
 
 def test_write_atlas_to_tmp_path(tmp_path):
@@ -237,7 +239,8 @@ def test_browse_warehouse_shelves():
     info = browse_warehouse("organism")
     assert info["title"] == "Organism Core Warehouse"
     shelf_modules = [s["module"] for s in info["shelves"]]
-    assert shelf_modules == ["bloodstream", "organs", "lifepack", "oath"]
+    # cybrus shelf added intentionally by the cybrus build (round-2 review)
+    assert shelf_modules == ["bloodstream", "organs", "lifepack", "oath", "cybrus"]
     for shelf in info["shelves"]:
         assert shelf["summary"]
         assert shelf["provides"] == DECLARATIONS[shelf["module"]]["provides"]

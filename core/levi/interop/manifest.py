@@ -719,6 +719,27 @@ DECLARATIONS = {
         "provides": ["serve.static"],
         "requires": [],
     },
+    # -- cybrus: Chauncey's own Security & Identity Layer --------------------
+    # Governance = Plan→Preview→Permission→Execute→Verify→Receipt.
+    # Default-deny, deny-wins policy with strictest-risk-ceiling inheritance;
+    # human-in-the-loop approval gate (high-risk blocked until approved);
+    # hash-chained tamper-evident audit log; device trust. Defensive
+    # blue-team only — no bypass paths exist in this build by design.
+    # Requires nothing: the governance engine is standalone.
+    "cybrus": {
+        "provides": [
+            "cybrus.policy",
+            "cybrus.approval",
+            "cybrus.audit",
+            "cybrus.devices",
+            "cybrus.identity",
+            "cybrus.vault",
+            "cybrus.tokens",
+            "cybrus.gateway",
+            "cybrus.qid",
+        ],
+        "requires": [],
+    },
 }
 
 

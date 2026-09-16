@@ -47,6 +47,14 @@ from levi.neighboros.cli import cmd_neighboros, register_neighboros_parser
 from levi.teach.cli import cmd_teach, register_teach_parser
 # <<< LEVI teach module
 
+# >>> LEVI cybrus module — minimal hook (security/identity governance); logic in levi/cybrus/
+try:
+    from levi.cybrus.__main__ import cmd_cybrus, register_cybrus_parser
+except Exception:  # sibling engine modules may still be landing; degrade gracefully
+    cmd_cybrus = None
+    register_cybrus_parser = None
+# <<< LEVI cybrus module
+
 # <<< LEVI backup module
 # >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
 from levi.surgeon.cli import cmd_surgeon, register_surgeon_parser
@@ -5978,6 +5986,10 @@ def main():
     # >>> LEVI teach module — minimal hook (teach worker)
     register_teach_parser(sub)
     # <<< LEVI teach module
+    # >>> LEVI cybrus module — minimal hook (security/identity governance)
+    if register_cybrus_parser is not None:
+        register_cybrus_parser(sub)
+    # <<< LEVI cybrus module
     # >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
     register_surgeon_parser(sub)
     register_automation_parser(sub)
@@ -7021,6 +7033,10 @@ def main():
     # === SERVE-REGION-BEGIN: serve command dispatch ===
     cmds["serve"] = _cmd_serve
     # === SERVE-REGION-END ===
+    # === CYBRUS-REGION-BEGIN: cybrus command dispatch ===
+    if cmd_cybrus is not None:
+        cmds["cybrus"] = cmd_cybrus
+    # === CYBRUS-REGION-END ===
     fn = cmds.get(args.command)
     if fn:
         try:

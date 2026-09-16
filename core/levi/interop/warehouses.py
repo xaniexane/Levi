@@ -76,6 +76,7 @@ CLI_COMMANDS: Dict[str, List[str]] = {
     "rag": [],
     "oath": [],
     "serve": ["serve", "python -m levi.serve"],
+    "cybrus": ["cybrus", "python -m levi.cybrus"],
 }
 
 
@@ -373,7 +374,7 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "life-pack export/import (LEVI duplicating itself), and the oath "
             "identity/trust substrate."
         ),
-        "shelves": ["bloodstream", "organs", "lifepack", "oath"],
+        "shelves": ["bloodstream", "organs", "lifepack", "oath", "cybrus"],
         "strategy": "capabilities",
         "pull_hint": "levi turn <text>  ·  levi lifepack  ·  from levi.bloodstream import run_turn",
     },

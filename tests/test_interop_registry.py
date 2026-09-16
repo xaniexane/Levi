@@ -106,6 +106,9 @@ def test_manifest_registers_all_modules():
         "craft",
         # serve (hosting wave: LEVI-native static file server)
         "serve",
+        # cybrus (Chauncey's own Security & Identity Layer — intentionally
+        # declared in the manifest; snapshot updated in round-2 review)
+        "cybrus",
     }
 
 
