@@ -60,6 +60,13 @@ def _add_common(p: argparse.ArgumentParser) -> None:
         action="store_true",
         help="skip the teachback coverage check",
     )
+    p.add_argument(
+        "--teachback-fail-under",
+        type=float,
+        default=None,
+        metavar="0-1",
+        help="fail if teachback coverage is below this fraction (quality gate)",
+    )
 
 
 def register_teach_parser(sub) -> None:
@@ -123,9 +130,13 @@ def _print_plan(summary) -> None:
     print()
     print("  data mix:")
     for src, w in sorted(summary.mix.items(), key=lambda kv: -kv[1]):
-        print(f"    {src:<8}: {w:.1%}")
+        bar = "█" * max(1, round(w * 20)) if w > 0 else ""
+        print(f"    {src:<8}: {w:.1%} {bar}")
     tb = summary.teachback
-    if tb:
+    if tb.get("skipped"):
+        print()
+        print(f"  teachback skipped: {tb['skipped']}")
+    elif tb:
         print()
         print(
             f"  teachback (data-side only): {tb['n_covered']}/{tb['n_probes']} "
@@ -153,6 +164,7 @@ def cmd_teach(args: argparse.Namespace) -> int:
             max_seq_len=args.max_seq_len,
             min_confidence=args.min_confidence,
             run_teachback=not args.no_teachback,
+            teachback_fail_under=args.teachback_fail_under,
         )
         if cmd == "plan":
             summary = plan_teaching(**kwargs)
@@ -162,10 +174,20 @@ def cmd_teach(args: argparse.Namespace) -> int:
             manifest_path = prepare(args.out, register=not args.no_register, **kwargs)
             print(f"teach: bundle prepared at {Path(args.out).expanduser()}")
             print(f"teach: manifest {manifest_path}")
-            # Teachback detail after prepare: per-probe table.
+            # Teachback detail after prepare: per-probe table, probes
+            # filtered to the chosen sources (see prepare._teachback_for_sources).
             if not args.no_teachback:
+                from levi.teach.probes import PROBES
+
+                src_probes = [p for p in PROBES if p.source in sources]
+                if not src_probes:
+                    print(
+                        "teach: teachback skipped: no probes for sources: "
+                        + ", ".join(sources)
+                    )
+                    return 0
                 try:
-                    report = teachback_report(args.out)
+                    report = teachback_report(args.out, probes=src_probes)
                 except TeachbackError as exc:
                     print(f"teach: teachback skipped: {exc}")
                     return 0

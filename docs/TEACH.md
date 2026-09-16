@@ -21,6 +21,9 @@ news-path corpus raises `PolicyError` and never reaches a manifest.
 | `growth`  | Redacted learnings via `levi.growth.corpus_export`      | `growth`       |
 | `seed`    | Growth seed curriculum (`growth/curriculum/lessons`)    | `seed-curriculum` |
 
+| `briefs`    | Subject field guides (`knowledge/courses/briefs/*.md`) | `courses`+`field-guides` |
+| `playbooks` | LEVI-original defensive cyber playbooks (`skill/playbooks/cyber/*.md`) | `cyber-playbooks`+`defensive` |
+
 Converters never touch the network. Course texts are chunked
 (400 words, 40 overlap) with `[subject · file]` headers; email addresses
 are masked by `sanitize_text` (syllabi ship TA addresses — noise for

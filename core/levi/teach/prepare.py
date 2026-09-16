@@ -60,6 +60,7 @@ from levi.brain.train.v2.curriculum import (
 )
 from levi.teach import TEACH_VERSION, registry_dir
 from levi.teach.converters import SOURCES, collect
+from levi.teach.probes import PROBES
 from levi.teach.teachback import coverage as teachback_coverage
 
 __all__ = [
@@ -104,8 +105,32 @@ class TeachSummary:
     teachback: dict = field(default_factory=dict)
 
 
-def _word_count(text: str) -> int:
-    return len(text.split())
+def _teachback_for_sources(texts: list[str], sources: tuple[str, ...]) -> dict:
+    """Teachback over probes matching the chosen sources.
+
+    When no probe covers a chosen source, the check is skipped (recorded,
+    not faked): scoring e.g. cyber probes against a courses-only bundle
+    would be noise.
+    """
+    probes = [p for p in PROBES if p.source in sources]
+    if not probes:
+        return {"skipped": f"no probes for sources: {', '.join(sources)}"}
+    return teachback_coverage(texts, probes)
+
+
+def _check_teachback_gate(teachback: dict, fail_under: float | None) -> None:
+    if fail_under is None or teachback.get("skipped"):
+        return
+    if not 0.0 <= fail_under <= 1.0:
+        raise TeachError(f"teachback_fail_under must be within 0..1, got {fail_under}")
+    coverage = teachback.get("coverage", 0.0)
+    if coverage < fail_under:
+        raise TeachError(
+            f"teachback gate: coverage {coverage:.0%} below --teachback-fail-under "
+            f"{fail_under:.0%} ({teachback.get('n_covered')}/"
+            f"{teachback.get('n_probes')} probes). Data-side only: the prepared "
+            "texts are missing expected probe vocabulary."
+        )
 
 
 def _collect_unique(
@@ -141,6 +166,7 @@ def plan_teaching(
     test_frac: float = 0.05,
     min_confidence: float = 0.0,
     run_teachback: bool = True,
+    teachback_fail_under: float | None = None,
 ) -> TeachSummary:
     """Dry run: compute everything ``prepare`` would do, write nothing."""
     if n_stages < 1:
@@ -180,8 +206,9 @@ def plan_teaching(
 
     teachback: dict = {}
     if run_teachback:
-        teachback = teachback_coverage([d.text for d in unique])
+        teachback = _teachback_for_sources([d.text for d in unique], chosen)
         teachback.pop("probes", None)  # plan stays readable; detail in prepare
+    _check_teachback_gate(teachback, teachback_fail_under)
 
     per_src_stats = {
         s: {
@@ -336,6 +363,7 @@ def prepare(
     test_frac: float = 0.05,
     min_confidence: float = 0.0,
     run_teachback: bool = True,
+    teachback_fail_under: float | None = None,
     register: bool = True,
 ) -> Path:
     """Prepare a trainer-consumable bundle in ``out_dir``.
@@ -386,7 +414,8 @@ def prepare(
 
     teachback: dict = {}
     if run_teachback:
-        teachback = teachback_coverage([d.text for d in unique])
+        teachback = _teachback_for_sources([d.text for d in unique], chosen)
+    _check_teachback_gate(teachback, teachback_fail_under)
 
     # Stage into out/.tmp, then promote atomically-ish.
     tmp = out / ".tmp"

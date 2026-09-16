@@ -25,15 +25,19 @@ from levi.teach import registry_dir, teach_home
 from levi.teach.cli import cmd_teach
 from levi.teach.converters import (
     SOURCES,
+    _split_frontmatter,
     academy_docs,
+    briefs_docs,
     collect,
     courses_docs,
     growth_docs,
+    playbooks_docs,
     sanitize_text,
     seed_docs,
 )
 from levi.teach.prepare import (
     TeachError,
+    _teachback_for_sources,
     make_sequences,
     plan_teaching,
     prepare,
@@ -74,6 +78,42 @@ def _fake_repo(tmp_path: Path) -> Path:
         "not json at all\n"
         '{"text": "   "}\n'
         '{"no_text": true}\n',
+        encoding="utf-8",
+    )
+    briefs = tmp_path / "core" / "levi" / "knowledge" / "courses" / "briefs"
+    briefs.mkdir(parents=True)
+    (briefs / "algorithms.md").write_text(
+        "# Algorithms — field guide\n\n"
+        "Extractive summary — keyword frequencies from fetched course pages.\n\n"
+        "## Start here (live links verified at ingest time)\n\n"
+        "- **CS 61B: Data Structures** — sorting, searching, and graphs.\n\n"
+        "## Topic keywords\n\n"
+        "algorithms, sorting, graphs, recursion, complexity, data structures.\n\n"
+        "## All courses\n\n"
+        "- **CS 61B** — Data Structures, UC Berkeley.\n",
+        encoding="utf-8",
+    )
+    cyber = tmp_path / "core" / "levi" / "skill" / "playbooks" / "cyber"
+    cyber.mkdir(parents=True)
+    (cyber / "test-playbook.md").write_text(
+        "---\n"
+        "skill_id: cyber_test_playbook\n"
+        "name: Test Detection Playbook\n"
+        "risk: low\n"
+        "tags: [detection, windows]\n"
+        "---\n"
+        "# Test Detection Playbook\n\n"
+        + (
+            "This playbook guides detection and triage. Harden the host, "
+            "collect telemetry, hunt for anomalies, map findings to MITRE "
+            "techniques, and apply hardening checklists. A good playbook "
+            "shortens triage time.\n"
+        )
+        * 4,
+        encoding="utf-8",
+    )
+    (cyber / "no-frontmatter.md").write_text(
+        "# Bare Playbook\n\n" + "Detection prose without frontmatter. " * 10,
         encoding="utf-8",
     )
     return tmp_path
@@ -278,7 +318,8 @@ def test_plan_teaching_bad_args(repo):
 def test_plan_teachback_is_data_side_only(repo):
     summary = plan_teaching(["courses"], root=repo, run_teachback=True)
     tb = summary.teachback
-    assert tb["n_probes"] == len(PROBES)
+    # probes filtered to the chosen sources (courses probes only)
+    assert tb["n_probes"] == len(probes_for_source("courses"))
     assert 0.0 <= tb["coverage"] <= 1.0
     assert "probes" not in tb  # plan stays readable
 
@@ -479,6 +520,7 @@ def _ns(**kw):
         repo="",
         min_confidence=0.0,
         no_teachback=False,
+        teachback_fail_under=None,
         out="",
         no_register=False,
     )
@@ -534,3 +576,121 @@ def test_teach_home_uses_levi_home(home_env):
     # LEVI_HOME is the .levi dir itself (repo convention)
     assert teach_home() == home_env / "teach"
     assert registry_dir() == home_env / "teach" / "manifests"
+
+
+# ---------------------------------------------------------------------------
+# round 2: new sources, frontmatter, teachback gate
+
+
+def test_briefs_docs(repo):
+    docs = briefs_docs(repo)
+    assert len(docs) == 1
+    assert "field-guides" in docs[0].tags
+    assert docs[0].text.startswith("[field guide · algorithms]")
+    assert docs[0].meta["guide"] == "algorithms"
+
+
+def test_briefs_docs_missing_dir_returns_empty(tmp_path):
+    assert briefs_docs(tmp_path) == []
+
+
+def test_playbooks_docs(repo):
+    docs = playbooks_docs(repo)
+    assert len(docs) == 2
+    by_src = {d.source: d for d in docs}
+    pb = by_src["playbooks:test-playbook.md#c0"]
+    assert "defensive" in pb.tags
+    assert pb.text.startswith("[defensive playbook · Test Detection Playbook]")
+    assert pb.meta["playbook"] == "cyber_test_playbook"
+    assert pb.meta["risk"] == "low"
+    assert pb.meta["pb_tags"] == "detection,windows"
+    # no-frontmatter file still converts, named by stem
+    bare = by_src["playbooks:no-frontmatter.md#c0"]
+    assert "Bare Playbook" in bare.text
+
+
+def test_playbooks_docs_missing_dir_returns_empty(tmp_path):
+    assert playbooks_docs(tmp_path) == []
+
+
+def test_playbooks_news_path_still_gated(tmp_path):
+    # the converter policy-checks the playbooks path: a news-looking path
+    # is rejected even with clean tags
+    from levi.brain.train.v2.corpus_manager import check_policy
+    from levi.teach.converters import SOURCE_TAGS
+
+    with pytest.raises(PolicyError):
+        check_policy(SOURCE_TAGS["playbooks"], str(tmp_path / "news" / "x.md"))
+
+
+def test_split_frontmatter_edge_cases():
+    # no frontmatter
+    meta, body = _split_frontmatter("# Title\n\nbody text here")
+    assert meta == {}
+    assert "body text here" in body
+    # unterminated frontmatter -> treated as plain text, never raises
+    meta, body = _split_frontmatter("---\nname: nope\nbody")
+    assert meta == {}
+    # malformed lines are skipped, good ones kept
+    meta, body = _split_frontmatter(
+        "---\nname: Good Name\nnot a kv line\nrisk: low\n---\nbody"
+    )
+    assert meta == {"name": "Good Name", "risk": "low"}
+    assert body.strip() == "body"
+
+
+def test_collect_all_sources_includes_new(repo):
+    out = collect(SOURCES, root=repo, min_confidence=0.0)
+    assert set(out) == set(SOURCES)
+    assert out["briefs"]
+    assert out["playbooks"]
+
+
+def test_plan_with_new_sources(repo):
+    summary = plan_teaching(["briefs", "playbooks"], root=repo, run_teachback=True)
+    assert summary.n_docs_unique >= 3
+    tb = summary.teachback
+    assert tb["n_probes"] == 2  # filtered to the chosen sources
+    assert {p.id for p in probes_for_source("briefs")} == {"field-guides"}
+    assert {p.id for p in probes_for_source("playbooks")} == {"playbooks"}
+
+
+def test_teachback_gate_raises_below_threshold(repo):
+    with pytest.raises(TeachError, match="teachback gate"):
+        plan_teaching(["courses"], root=repo, teachback_fail_under=0.5)
+
+
+def test_teachback_gate_passes_at_zero(repo):
+    summary = plan_teaching(["courses"], root=repo, teachback_fail_under=0.0)
+    assert summary.teachback["coverage"] >= 0.0
+
+
+def test_teachback_gate_bad_value_raises(repo):
+    with pytest.raises(TeachError, match="within 0..1"):
+        plan_teaching(["courses"], root=repo, teachback_fail_under=1.5)
+
+
+def test_teachback_skipped_when_no_probes_match():
+    result = _teachback_for_sources(["some text here"], ("zzz",))
+    assert "skipped" in result
+
+
+def test_plan_mix_bar_printed(repo, capsys):
+    summary = plan_teaching(["courses", "seed"], root=repo, run_teachback=False)
+    from levi.teach.cli import _print_plan
+
+    _print_plan(summary)
+    assert "█" in capsys.readouterr().out
+
+
+def test_cli_prepare_fail_under_exits_2(repo, home_env, monkeypatch, capsys):
+    monkeypatch.setenv("LEVI_HOME", str(home_env))
+    monkeypatch.setenv("LEVI_REPO", str(repo))
+    ns = _ns(
+        teach_cmd="prepare",
+        out=str(home_env / "bundle5"),
+        sources=["courses"],
+        teachback_fail_under=0.9,
+    )
+    assert cmd_teach(ns) == 2
+    assert "teachback gate" in capsys.readouterr().out

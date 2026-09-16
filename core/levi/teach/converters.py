@@ -19,6 +19,12 @@ Approved sources:
 * ``seed`` — the growth seed curriculum
   (``levi.growth.curriculum.lessons.LESSONS``): founder-level direction
   and distilled operational technique.
+* ``briefs`` — subject field guides from
+  ``core/levi/knowledge/courses/briefs/*.md`` (extractive summaries from
+  the same ingestion as ``courses``).
+* ``playbooks`` — LEVI-original defensive cyber playbooks from
+  ``core/levi/skill/playbooks/cyber/*.md`` (detection/analysis/hardening;
+  frontmatter name/tags become headers and meta).
 
 Hygiene: :func:`sanitize_text` masks email addresses (course syllabi ship
 with instructor/TA addresses; they are noise for training and privacy
@@ -48,10 +54,12 @@ __all__ = [
     "academy_docs",
     "growth_docs",
     "seed_docs",
+    "briefs_docs",
+    "playbooks_docs",
     "collect",
 ]
 
-SOURCES = ("courses", "academy", "growth", "seed")
+SOURCES = ("courses", "academy", "growth", "seed", "briefs", "playbooks")
 
 # Tags per source; all pass the news policy gate.
 SOURCE_TAGS: dict[str, tuple[str, ...]] = {
@@ -59,6 +67,8 @@ SOURCE_TAGS: dict[str, tuple[str, ...]] = {
     "academy": ("academy",),
     "growth": ("growth",),
     "seed": ("seed-curriculum",),
+    "briefs": ("courses", "field-guides"),
+    "playbooks": ("cyber-playbooks", "defensive"),
 }
 
 _EMAIL_RE = re.compile(r"[\w.+-]+@[\w-][\w.-]*\.[a-zA-Z]{2,}")
@@ -99,6 +109,36 @@ def _chunk_words(words: list[str], size: int, overlap: int) -> Iterable[list[str
             break
 
 
+def _chunked_docs(
+    text: str,
+    *,
+    header: str,
+    source: str,
+    tags: tuple[str, ...],
+    meta: dict,
+    chunk_words: int = COURSE_CHUNK_WORDS,
+    overlap: int = COURSE_CHUNK_OVERLAP,
+) -> list[Doc]:
+    """Split sanitized text into header-prefixed chunk Docs."""
+    clean = sanitize_text(text)
+    words = clean.split()
+    docs: list[Doc] = []
+    for i, chunk in enumerate(_chunk_words(words, chunk_words, overlap)):
+        chunk_text = f"{header} " + " ".join(chunk)
+        chunk_meta = dict(meta)
+        chunk_meta["chunk"] = i
+        docs.append(
+            Doc(
+                id=doc_sha256(chunk_text),
+                text=chunk_text,
+                source=f"{source}#c{i}",
+                tags=tags,
+                meta=chunk_meta,
+            )
+        )
+    return docs
+
+
 def _courses_repo_dir(root: Path) -> Path:
     return root / "core" / "levi" / "knowledge" / "courses" / "raw"
 
@@ -128,21 +168,17 @@ def courses_docs(
                 text = path.read_text(encoding="utf-8", errors="replace")
             except OSError:
                 continue
-            clean = sanitize_text(text)
-            words = clean.split()
-            for i, chunk in enumerate(_chunk_words(words, chunk_words, overlap)):
-                chunk_text = (
-                    f"[courses · {subject_dir.name} · {path.stem}] " + " ".join(chunk)
+            docs.extend(
+                _chunked_docs(
+                    text,
+                    header=f"[courses · {subject_dir.name} · {path.stem}]",
+                    source=f"courses:{subject_dir.name}/{path.name}",
+                    tags=SOURCE_TAGS["courses"],
+                    meta={"subject": subject_dir.name, "file": path.name},
+                    chunk_words=chunk_words,
+                    overlap=overlap,
                 )
-                docs.append(
-                    Doc(
-                        id=doc_sha256(chunk_text),
-                        text=chunk_text,
-                        source=f"courses:{subject_dir.name}/{path.name}#c{i}",
-                        tags=SOURCE_TAGS["courses"],
-                        meta={"subject": subject_dir.name, "file": path.name},
-                    )
-                )
+            )
     return docs
 
 
@@ -151,41 +187,44 @@ def _academy_corpus_path(root: Path) -> Path:
 
 
 def academy_docs(root: Path | None = None) -> list[Doc]:
-    """Academy lesson records -> Docs."""
+    """Academy lesson records -> Docs (streamed, never whole-file in RAM)."""
     root = root or repo_root()
     path = _academy_corpus_path(root)
     check_policy(SOURCE_TAGS["academy"], str(path))
     if not path.is_file():
         return []
     docs: list[Doc] = []
-    for lineno, line in enumerate(
-        path.read_text(encoding="utf-8", errors="replace").splitlines(), 1
-    ):
-        line = line.strip()
-        if not line:
-            continue
-        try:
-            obj = json.loads(line)
-        except json.JSONDecodeError:
-            continue
-        if not isinstance(obj, dict):
-            continue
-        text = sanitize_text(obj.get("text", ""))
-        if len(text.split()) < MIN_CHUNK_WORDS:
-            continue
-        docs.append(
-            Doc(
-                id=doc_sha256(text),
-                text=text,
-                source=f"academy:corpus_academy.jsonl:{lineno}",
-                tags=SOURCE_TAGS["academy"],
-                meta={
-                    k: v
-                    for k, v in obj.items()
-                    if k != "text" and isinstance(v, (str, int, float, bool))
-                },
+    try:
+        fh = open(path, encoding="utf-8", errors="replace")
+    except OSError:
+        return []
+    with fh:
+        for lineno, line in enumerate(fh, 1):
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                obj = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(obj, dict):
+                continue
+            text = sanitize_text(obj.get("text", ""))
+            if len(text.split()) < MIN_CHUNK_WORDS:
+                continue
+            docs.append(
+                Doc(
+                    id=doc_sha256(text),
+                    text=text,
+                    source=f"academy:corpus_academy.jsonl:{lineno}",
+                    tags=SOURCE_TAGS["academy"],
+                    meta={
+                        k: v
+                        for k, v in obj.items()
+                        if k != "text" and isinstance(v, (str, int, float, bool))
+                    },
+                )
             )
-        )
     return docs
 
 
@@ -253,11 +292,119 @@ def seed_docs() -> list[Doc]:
     return docs
 
 
+def _briefs_repo_dir(root: Path) -> Path:
+    return root / "core" / "levi" / "knowledge" / "courses" / "briefs"
+
+
+def briefs_docs(root: Path | None = None) -> list[Doc]:
+    """Subject field guides (courses/briefs/*.md) -> Docs.
+
+    Extractive summaries written by the courses ingestion — approved
+    teaching material from the same corpus family as ``courses``.
+    """
+    root = root or repo_root()
+    briefs_dir = _briefs_repo_dir(root)
+    check_policy(SOURCE_TAGS["briefs"], str(briefs_dir))
+    if not briefs_dir.is_dir():
+        return []
+    docs: list[Doc] = []
+    for path in sorted(briefs_dir.glob("*.md")):
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        docs.extend(
+            _chunked_docs(
+                text,
+                header=f"[field guide · {path.stem}]",
+                source=f"briefs:{path.name}",
+                tags=SOURCE_TAGS["briefs"],
+                meta={"guide": path.stem, "file": path.name},
+            )
+        )
+    return docs
+
+
+def _playbooks_repo_dir(root: Path) -> Path:
+    return root / "core" / "levi" / "skill" / "playbooks" / "cyber"
+
+
+_FRONTMATTER_DELIM = "---"
+
+
+def _split_frontmatter(text: str) -> tuple[dict[str, str], str]:
+    """Split ``---`` YAML-ish frontmatter from a markdown body.
+
+    Returns ({key: value}, body). Malformed or missing frontmatter yields
+    ({}, full_text) — never raises.
+    """
+    lines = text.splitlines()
+    if len(lines) < 3 or lines[0].strip() != _FRONTMATTER_DELIM:
+        return {}, text
+    meta: dict[str, str] = {}
+    end = None
+    for i, line in enumerate(lines[1:], 1):
+        if line.strip() == _FRONTMATTER_DELIM:
+            end = i
+            break
+        if ":" in line:
+            key, _, value = line.partition(":")
+            key = key.strip()
+            value = value.strip().strip("\"'")
+            if key and value and key.replace("_", "").isalnum():
+                meta[key] = value
+    if end is None:
+        return {}, text
+    return meta, "\n".join(lines[end + 1 :])
+
+
+def playbooks_docs(root: Path | None = None) -> list[Doc]:
+    """Defensive cyber playbooks -> Docs.
+
+    LEVI-original blue-team playbooks (detection / analysis / hardening).
+    Frontmatter ``name``/``tags`` become chunk headers and meta; the body
+    is chunked like any other prose.
+    """
+    root = root or repo_root()
+    pb_dir = _playbooks_repo_dir(root)
+    check_policy(SOURCE_TAGS["playbooks"], str(pb_dir))
+    if not pb_dir.is_dir():
+        return []
+    docs: list[Doc] = []
+    for path in sorted(pb_dir.glob("*.md")):
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        meta, body = _split_frontmatter(text)
+        name = meta.get("name", path.stem)
+        tags_raw = meta.get("tags", "")
+        pb_tags = [t.strip(" []") for t in tags_raw.split(",") if t.strip(" [],")]
+        chunk_meta = {
+            "file": path.name,
+            "playbook": meta.get("skill_id", path.stem),
+            "risk": meta.get("risk", ""),
+            "pb_tags": ",".join(pb_tags[:8]),
+        }
+        docs.extend(
+            _chunked_docs(
+                f"{name}. {body}",
+                header=f"[defensive playbook · {name}]",
+                source=f"playbooks:{path.name}",
+                tags=SOURCE_TAGS["playbooks"],
+                meta=chunk_meta,
+            )
+        )
+    return docs
+
+
 _CONVERTERS = {
     "courses": courses_docs,
     "academy": academy_docs,
     "growth": growth_docs,
     "seed": seed_docs,
+    "briefs": briefs_docs,
+    "playbooks": playbooks_docs,
 }
 
 
@@ -276,7 +423,7 @@ def collect(
     for name in chosen:
         if name == "growth":
             out[name] = growth_docs(min_confidence=min_confidence)
-        elif name in ("courses", "academy"):
+        elif name in ("courses", "academy", "briefs", "playbooks"):
             out[name] = _CONVERTERS[name](root)
         else:
             out[name] = _CONVERTERS[name]()

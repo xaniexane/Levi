@@ -179,6 +179,33 @@ PROBES: tuple[Probe, ...] = (
             "decidable",
         ),
     ),
+    Probe(
+        id="field-guides",
+        topic="course field guides",
+        source="briefs",
+        keywords=(
+            "start here",
+            "topic keywords",
+            "all courses",
+            "extractive summary",
+            "live links",
+            "prerequisites",
+        ),
+    ),
+    Probe(
+        id="playbooks",
+        topic="defensive security playbooks",
+        source="playbooks",
+        keywords=(
+            "playbook",
+            "detection",
+            "hardening",
+            "triage",
+            "telemetry",
+            "mitre",
+            "hunt",
+        ),
+    ),
 )
 
 
