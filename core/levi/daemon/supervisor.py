@@ -192,7 +192,7 @@ class Supervisor:
                 "Scheduled automations registry: triggers, actions, "
                 "persistence, due-run evaluation."
             ),
-            "start_hint": "levi automations list  (foreground: python -m levi.daemon pulse)",
+            "start_hint": "levi automations  (foreground: python -m levi.daemon pulse)",
             "health": _guarded(functools.partial(_check_automation_engine)),
             "_check_fn": _check_automation_engine,
         },
@@ -225,7 +225,7 @@ class Supervisor:
                 "Perpetual supervision loops: heartbeat, growth and automation "
                 "child threads, crash reports, alive markers, hunt waves."
             ),
-            "start_hint": "python -m levi.perpetual supervise  (foreground only)",
+            "start_hint": "levi perpetual services  (foreground only)",
             "health": _guarded(functools.partial(_check_perpetual)),
             "_check_fn": _check_perpetual,
         },
