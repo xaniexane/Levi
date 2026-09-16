@@ -271,6 +271,36 @@ def _export_workflows() -> Dict[str, Any]:
         return {"status": "workflows-unreadable", "error": str(exc)}
 
 
+def _export_variant_genome(home: Path) -> Dict[str, Any]:
+    """Variant-engine heredity: the genome store (candidates, traits, lineage).
+
+    This is what makes a life pack more than a duplicate: the pack carries
+    the organism's heritable genome — reflected variants, cross-pollination
+    provenance, compressed lessons — so the imported copy starts with the
+    same heredity and can mutate from there instead of from zero.
+    Read-only; never touches the live store.
+    """
+    try:
+        from levi.identity.genome import GenomeStore
+    except Exception:
+        return {"status": "variant-genome-not-landed"}
+    try:
+        genome = GenomeStore(home).load()
+        return {
+            "status": "ok",
+            "genome": {
+                "version": genome.get("version"),
+                "traits": genome.get("traits"),
+                "candidates": genome.get("candidates"),
+                "lineage": genome.get("lineage"),
+                "signatures": genome.get("signatures"),
+                "guards": genome.get("guards"),
+            },
+        }
+    except Exception as exc:  # never let a broken genome break export
+        return {"status": "variant-genome-unreadable", "error": str(exc)}
+
+
 def _machine_id() -> str:
     """Stable, non-personal source-machine id: sha256(hostname), 16 hex chars.
 
@@ -311,6 +341,7 @@ def export_pack(home: Optional[Path] = None) -> Dict[str, Any]:
             "capabilities": _export_capabilities(),
             "growth": _export_growth(home),
             "workflows": _export_workflows(),
+            "variant_genome": _export_variant_genome(home),
             "manifest": _export_manifest(),
         },
     }
@@ -361,6 +392,16 @@ def validate_pack(pack: Dict[str, Any]) -> None:
     for name in V2_SECTIONS:
         if name in sections and not isinstance(sections[name], dict):
             raise LifepackError(f"life pack {name!r} section must be an object")
+    # variant_genome is an optional v2 section (older packs lack it): when
+    # present it must be well-shaped, but it is never required.
+    vg = sections.get("variant_genome")
+    if vg is not None:
+        if not isinstance(vg, dict):
+            raise LifepackError("life pack 'variant_genome' section must be an object")
+        if vg.get("status") == "ok" and not isinstance(vg.get("genome"), dict):
+            raise LifepackError(
+                "life pack 'variant_genome' with status 'ok' needs a 'genome' object"
+            )
     identity = sections["identity"]
     if not isinstance(identity, dict):
         raise LifepackError("life pack 'identity' section must be an object")
@@ -707,6 +748,53 @@ def _import_workflows(incoming: Optional[Dict[str, Any]]) -> Dict[str, Any]:
     }
 
 
+def _import_variant_genome(
+    incoming: Optional[Dict[str, Any]], home: Path
+) -> Dict[str, Any]:
+    """Restore the pack's heritable genome into this home's identity store.
+
+    The duplicate inherits the source's heredity — variants, traits,
+    lineage, compressed lessons — so it can mutate *from* the source
+    instead of from zero. Idempotent: re-importing the same pack genome
+    merges candidates by name without duplicating lineage entries.
+    """
+    if incoming is None:
+        return {"changed": False, "status": "not-in-pack"}
+    if incoming.get("status") != "ok" or not isinstance(incoming.get("genome"), dict):
+        return {"changed": False, "status": incoming.get("status", "unknown")}
+    try:
+        from levi.identity.genome import GenomeStore
+    except Exception:
+        return {"changed": False, "status": "variant-genome-not-landed"}
+    store = GenomeStore(home)
+    current = store.load()
+    pack_genome = incoming["genome"]
+    changed = False
+    for name, cands in (pack_genome.get("candidates") or {}).items():
+        if name not in current["candidates"]:
+            current["candidates"][name] = cands
+            changed = True
+    for trait, value in (pack_genome.get("traits") or {}).items():
+        if trait not in current["traits"]:
+            current["traits"][trait] = value
+            changed = True
+    seen = {(e.get("event"), e.get("at")) for e in current["lineage"]}
+    for entry in pack_genome.get("lineage") or []:
+        key = (entry.get("event"), entry.get("at"))
+        if key not in seen:
+            current["lineage"].append(entry)
+            seen.add(key)
+            changed = True
+    if changed:
+        store.save(current)
+    return {
+        "changed": changed,
+        "status": "ok",
+        "candidates": len(current["candidates"]),
+        "traits": len(current["traits"]),
+    }
+
+
 def _import_manifest(incoming: Optional[Dict[str, Any]]) -> Dict[str, Any]:
     if incoming is None:
         return {"changed": False, "status": "not-in-pack"}
@@ -752,6 +840,7 @@ def import_pack(
         "capabilities": _import_capabilities(sections.get("capabilities")),
         "growth": _import_growth(sections.get("growth")),
         "workflows": _import_workflows(sections.get("workflows")),
+        "variant_genome": _import_variant_genome(sections.get("variant_genome"), home),
         "manifest": _import_manifest(sections.get("manifest")),
     }
     return summary
@@ -886,8 +975,56 @@ def cmd_lifepack(args: argparse.Namespace, home: Optional[Path] = None) -> int:
             )
         return 0
 
+    if action == "mutate":
+        seed = getattr(args, "seed", "") or ""
+        if not seed:
+            print(
+                "mutate needs a seed: levi lifepack mutate --seed <name> "
+                "(the seed is the divergence point — choose deliberately)",
+                file=sys.stderr,
+            )
+            return 2
+        try:
+            from levi.identity.cycle import IdentityCycle
+            from levi.identity.genome import GenomeStore
+        except Exception as exc:
+            print(f"variant engine not landed: {exc}", file=sys.stderr)
+            return 1
+        store = GenomeStore(home)
+        cycle = IdentityCycle(store=store)
+        modules_out = cycle.run_scope_all(n_variants=3, seed=seed)
+        forms_out = cycle.run_forms(n_variants=3, seed=seed)
+        genome = store.load()
+        genome["lineage"].append(
+            {
+                "event": "mutation",
+                "seed": seed,
+                "at": _utc_now(),
+                "modules": modules_out["modules"],
+                "forms": forms_out["forms"],
+            }
+        )
+        store.save(genome)
+        n_mod_variants = sum(len(r["variants"]) for r in modules_out["results"])
+        n_form_variants = sum(len(r["variants"]) for r in forms_out["results"])
+        print(f"Organism mutated with seed {seed!r}:")
+        print(
+            f"  modules: {modules_out['modules']} reflected, "
+            f"{n_mod_variants} variants, cross-pollinated"
+        )
+        print(
+            f"  forms: {forms_out['forms']} reflected, "
+            f"{n_form_variants} variants, cross-pollinated"
+        )
+        print(
+            f"  genome: {len(genome['candidates'])} candidates, "
+            f"{len(genome['traits'])} traits — divergence recorded in lineage"
+        )
+        print("  (candidates are review-only; no module code was touched)")
+        return 0
+
     print(
-        "usage: levi lifepack {export|import} <file> [--preview] [--yes]",
+        "usage: levi lifepack {export|import|mutate} <file> [--preview] [--yes]",
         file=sys.stderr,
     )
     return 2

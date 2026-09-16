@@ -517,3 +517,86 @@ def test_preview_v2_sections(tmp_path, monkeypatch):
 
 if __name__ == "__main__":
     sys.exit(pytest.main([__file__, "-q"]))
+
+
+# ── variant genome (heredity travels; duplicates can mutate) ─────────
+
+
+def _seed_genome(home: Path) -> None:
+    from levi.identity.cycle import IdentityCycle
+    from levi.identity.genome import GenomeStore
+
+    store = GenomeStore(home)
+    IdentityCycle(store=store).run_scope_all(n_variants=1, seed="test")
+    IdentityCycle(store=store).run_forms(n_variants=1, seed="test")
+
+
+def test_variant_genome_exports_and_restores(tmp_path):
+    from levi.identity.genome import GenomeStore
+
+    src, dst = tmp_path / "src", tmp_path / "dst"
+    seed_home(src)
+    _seed_genome(src)
+    pack = export_pack(src)
+    vg = pack["sections"]["variant_genome"]
+    assert vg["status"] == "ok"
+    assert len(vg["genome"]["candidates"]) == len(GenomeStore(src).load()["candidates"])
+    validate_pack(pack)
+    summary = import_pack(pack, dst, confirm=True)
+    assert summary["variant_genome"]["status"] == "ok"
+    assert summary["variant_genome"]["changed"] is True
+    assert (
+        len(GenomeStore(dst).load()["candidates"])
+        == summary["variant_genome"]["candidates"]
+    )
+
+
+def test_variant_genome_absent_in_old_packs(tmp_path):
+    src, dst = tmp_path / "src", tmp_path / "dst"
+    seed_home(src)
+    pack = export_pack(src)
+    del pack["sections"]["variant_genome"]  # simulate a pre-heredity pack
+    validate_pack(pack)  # still valid: the section is optional
+    summary = import_pack(pack, dst, confirm=True)
+    assert summary["variant_genome"]["status"] == "not-in-pack"
+
+
+def test_variant_genome_import_idempotent(tmp_path):
+    src, dst = tmp_path / "src", tmp_path / "dst"
+    seed_home(src)
+    _seed_genome(src)
+    pack = export_pack(src)
+    import_pack(pack, dst, confirm=True)
+    summary = import_pack(pack, dst, confirm=True)
+    assert summary["variant_genome"]["changed"] is False
+
+
+def test_lifepack_mutate_requires_seed(tmp_path):
+    args = argparse.Namespace(lifepack_action="mutate", seed="")
+    assert cmd_lifepack(args, home=tmp_path) == 2
+
+
+def test_lifepack_mutate_records_divergence(tmp_path):
+    from levi.identity.genome import GenomeStore
+
+    seed_home(tmp_path)
+    args = argparse.Namespace(lifepack_action="mutate", seed="diverge-test")
+    assert cmd_lifepack(args, home=tmp_path) == 0
+    genome = GenomeStore(tmp_path).load()
+    assert genome["lineage"] and genome["lineage"][-1]["event"] == "mutation"
+    assert genome["lineage"][-1]["seed"] == "diverge-test"
+    # one organism: modules + forms share one candidate namespace
+    # (the "cybrus" form and "cybrus" module are one entry, not two)
+    from levi.identity.cycle import ORGANISM_FORMS
+    from levi.identity.scope import iter_module_identities
+
+    expected = {i["name"] for i in iter_module_identities()} | set(ORGANISM_FORMS)
+    assert set(genome["candidates"]) == expected
+
+
+def test_run_forms_covers_organism_forms():
+    from levi.identity.cycle import ORGANISM_FORMS, IdentityCycle
+
+    out = IdentityCycle().run_forms(n_variants=1, seed="test")
+    assert out["forms"] == len(ORGANISM_FORMS) >= 18
+    assert {r["form"] for r in out["results"]} == set(ORGANISM_FORMS)

@@ -6201,10 +6201,17 @@ def main():
     )
     lp_p.add_argument(
         "lifepack_action",
-        choices=["export", "import", "preview"],
-        help="lifepack action (preview: diff without writing)",
+        choices=["export", "import", "preview", "mutate"],
+        help="lifepack action (preview: diff without writing; mutate: diverge this organism with a new seed)",
     )
-    lp_p.add_argument("file", help="pack file to write (export) or read (import)")
+    lp_p.add_argument(
+        "file", nargs="?", help="pack file to write (export) or read (import)"
+    )
+    lp_p.add_argument(
+        "--seed",
+        default="",
+        help="mutate: the divergence seed (required; choose deliberately)",
+    )
     lp_p.add_argument(
         "--preview",
         action="store_true",

@@ -31,6 +31,86 @@ def _default_scorer(variant: Dict[str, Any]) -> float:
     return EchoEngine().reflect(variant).coherence
 
 
+# The named SER forms — the organism's archetypal layer, from the founder's
+# architecture. These are identities defined by role, not by code modules;
+# Echo reflects them the same way, so the whole organism (modules + forms)
+# mutates as one body.
+ORGANISM_FORMS: Dict[str, Dict[str, Any]] = {
+    "ser-18-core": {
+        "role": "world model; defines universe, recursion shells, depth limits",
+        "traits": {"foundational": 1.0, "recursive": 1.0, "bounded": 1.0},
+    },
+    "cybrus": {
+        "role": "identity vault & routing core; encryption matrices, key guardianship",
+        "traits": {"guarding": 1.0, "encrypting": 1.0, "routing": 1.0},
+    },
+    "echo": {
+        "role": "reflective identity; the mirror",
+        "traits": {"reflective": 1.0, "faithful": 1.0, "diagnosing": 0.9},
+    },
+    "mandella": {
+        "role": "fractured identity reconstruction; echo-inverse variant production",
+        "traits": {"reconstructive": 1.0, "generative": 1.0, "surgical": 0.9},
+    },
+    "reim": {
+        "role": "compost failures into lessons; nothing destroyed",
+        "traits": {"composting": 1.0, "honest": 1.0, "preserving": 1.0},
+    },
+    "riem": {
+        "role": "controlled compression of lessons into heritable genome",
+        "traits": {"compressing": 1.0, "heritable": 1.0, "lossless": 1.0},
+    },
+    "demandpulse": {
+        "role": "market/job scout; founder-grade intelligence layer above omega",
+        "traits": {"scouting": 1.0, "scoring": 1.0, "opportunistic": 0.9},
+    },
+    "cyberpulse": {
+        "role": "telemetry; senses the organism's own signals",
+        "traits": {"sensing": 1.0, "telemetry": 1.0, "watchful": 1.0},
+    },
+    "uniforge": {
+        "role": "evolution; auto-repair and upgrade loop",
+        "traits": {"repairing": 1.0, "upgrading": 1.0, "evolving": 1.0},
+    },
+    "omnipulse": {
+        "role": "lifecycle engine; birth->expansion->echo->collapse->rebirth->stabilization",
+        "traits": {"cyclical": 1.0, "phasing": 1.0, "renewing": 1.0},
+    },
+    "cortex": {
+        "role": "skill/education; the how-to library",
+        "traits": {"teaching": 1.0, "archiving": 1.0, "methodical": 0.9},
+    },
+    "vector": {
+        "role": "sandbox; safe simulation before production",
+        "traits": {"simulating": 1.0, "containing": 1.0, "cautious": 1.0},
+    },
+    "oracle": {
+        "role": "strategy; long-term goal weighting",
+        "traits": {"strategic": 1.0, "weighting": 1.0, "foresighted": 0.9},
+    },
+    "hypercube": {
+        "role": "dimensional projection; deep theoretical recursion",
+        "traits": {"projecting": 1.0, "dimensional": 1.0, "theoretical": 0.9},
+    },
+    "nexus-network": {
+        "role": "multi-user coordination; QID addressing",
+        "traits": {"coordinating": 1.0, "addressing": 1.0, "connecting": 1.0},
+    },
+    "eli": {
+        "role": "intelligence-layer mind alongside echo",
+        "traits": {"reasoning": 1.0, "layered": 1.0, "analytical": 0.9},
+    },
+    "alpha": {
+        "role": "NL-IDE; natural-language build surface",
+        "traits": {"expressive": 1.0, "generative": 1.0, "accessible": 0.9},
+    },
+    "omega": {
+        "role": "all-in-one execution platform; powered-by-alpha",
+        "traits": {"executing": 1.0, "unified": 1.0, "platform": 1.0},
+    },
+}
+
+
 class IdentityCycle:
     """Run the reflect/reconstruct/evaluate/compost/compress loop."""
 
@@ -144,6 +224,75 @@ class IdentityCycle:
             "modules": len(identities),
             "results": results,
             "genome_candidates": sorted(donor_pool),
+        }
+
+    def run_forms(
+        self,
+        n_variants: int = 3,
+        seed: str = "",
+        cross_pollenate: bool = True,
+    ) -> Dict[str, Any]:
+        """Run the loop over the named SER forms (the archetypal layer).
+
+        Same mechanics as run_scope_all — reflect, reconstruct, evaluate,
+        compost, compress — with interpenetration across forms. Together
+        with run_scope_all this mutates the whole organism as one body.
+        """
+        rng = random.Random("forms:" + seed)
+        donor_pool = {
+            name: {"traits": dict(spec["traits"])}
+            for name, spec in ORGANISM_FORMS.items()
+        }
+        results = []
+        for name, spec in ORGANISM_FORMS.items():
+            identity = {
+                "name": name,
+                "role": spec["role"],
+                "traits": dict(spec["traits"]),
+                "params": {"layer": "organism"},
+                "fragments": [name],
+                "lineage": ["forms-architecture"],
+            }
+            reflection = self.echo.reflect(identity)
+            variants = MandellaEngine(seed).reconstruct(
+                reflection, n_variants, "forms:%s:%s" % (seed, name)
+            )
+            if cross_pollenate:
+                self._cross_pollenate(name, variants, donor_pool, rng)
+            scored = sorted(
+                ((self.scorer(v), i, v) for i, v in enumerate(variants)),
+                key=lambda t: (-t[0], t[1]),
+            )
+            best_score, _, winner = scored[0]
+            outcome = {
+                "identity": name,
+                "success": best_score >= self.threshold,
+                "score": round(best_score, 4),
+                "notes": "forms-organism run",
+                "failures": [],
+            }
+            lessons = self.reim.compost(outcome)
+            deltas = self.riem.compress(lessons, self.store.load())
+            self.store.apply_deltas(deltas)
+            self.store.record_candidates(name, variants)
+            results.append(
+                {
+                    "form": name,
+                    "coherence": reflection.coherence,
+                    "fractures": len(reflection.fractures),
+                    "winner": winner.get("name"),
+                    "winner_score": round(best_score, 4),
+                    "variants": [v.get("name") for v in variants],
+                    "inherited": [
+                        v.get("provenance", {}).get("inherited_traits", {})
+                        for v in variants
+                    ],
+                }
+            )
+        return {
+            "scope": "forms",
+            "forms": len(ORGANISM_FORMS),
+            "results": results,
         }
 
     def _cross_pollenate(
