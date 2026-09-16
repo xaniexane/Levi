@@ -108,6 +108,8 @@ CLI_COMMANDS.update(
         "analog": ["python -m levi.analog"],
         # -- telegraph (perpetual-hunt wave-001: dead protocols revived) ---
         "telegraph": ["python -m levi.telegraph"],
+        # -- craft (perpetual-hunt wave-014: lost crafts revived) ---------
+        "craft": ["python -m levi.craft"],
         # -- digest (perpetual-hunt wave-008: dead networks — LISTSERV) --
         "digest": ["python -m levi.digest"],
         # -- pdi (perpetual-hunt wave-008: dead networks — NAPLPS remix) --
@@ -249,12 +251,14 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "plan9's namespaces, Arexx ports, blackboards, plus the telegraph "
             "office (FidoNet store-and-forward, Telex answerback, AppleTalk "
             "chooser) and the analog workbench (patch-panel ODE solving, "
-            "printable nomographs, terminal Fourier playground) — never "
-            "copied, always remixed into something unreplicable."
+            "printable nomographs, terminal Fourier playground) and the guild "
+            "quarter (hallmark struck provenance, indenture ladder, museum of "
+            "dead measures) — never copied, always remixed into something "
+            "unreplicable."
         ),
-        "shelves": ["revival", "telegraph", "analog"],
+        "shelves": ["revival", "telegraph", "analog", "craft"],
         "strategy": "revivals",
-        "pull_hint": "from levi.revival import <system>  (e.g. telescript, plan9, arexx); python -m levi.telegraph <send|poll|inbox|...>; python -m levi.analog <run|parts|nomo|fourier>",
+        "pull_hint": "from levi.revival import <system>  (e.g. telescript, plan9, arexx); python -m levi.telegraph <send|poll|inbox|...>; python -m levi.analog <run|parts|nomo|fourier>; python -m levi.craft <hallmark|guild|measures>",
     },
     "skills": {
         "title": "Skills & Playbooks Warehouse",

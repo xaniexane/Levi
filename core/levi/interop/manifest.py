@@ -495,6 +495,23 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- craft: the guild quarter (perpetual-hunt wave-014: lost crafts) -------
+    # Dead craft knowledge remixed as LEVI-native additions, clean-room and
+    # stdlib-only: hallmark struck provenance (maker + independent verifier
+    # + SHA-256 + date letter; consequential flows refuse unhallmarked
+    # records, deny-closed), the indenture ladder (apprentice -> journeyman
+    # -> master via logged practice, mentor sign-off, peer-judged
+    # masterpiece retained in the guildhall corpus), and the museum of dead
+    # measures (historical units with master-standard provenance, Gunter's
+    # decimal chain trick, the Egyptian seked).
+    "craft": {
+        "provides": [
+            "craft.hallmark",
+            "craft.guild",
+            "craft.measures",
+        ],
+        "requires": [],
+    },
     # -- feedlab: feed-ranking transparency lab (giant-patterns hunt) --------
     # The giants refuse to disclose how their rankers score you. feedlab
     # inverts the trade: a fully disclosed engagement-bait scoring model

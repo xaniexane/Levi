@@ -224,8 +224,8 @@ def test_inventory_counts_match_reality():
     assert by_name["methods"] == real_methods
     assert real_revivals == 20
     assert (
-        by_name["revivals"] == real_revivals + 3 + 3
-    )  # + telegraph shelf (envelopes/identity/directory) + analog shelf (bench/nomo/fourier)
+        by_name["revivals"] == real_revivals + 3 + 3 + 3
+    )  # + telegraph shelf (envelopes/identity/directory) + analog shelf (bench/nomo/fourier) + craft shelf (hallmark/guild/measures)
     assert real_playbooks == 839
     assert by_name["skills"] == real_playbooks
     assert (

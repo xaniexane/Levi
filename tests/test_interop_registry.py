@@ -100,6 +100,8 @@ def test_manifest_registers_all_modules():
         "pdi",
         "boards",
         "doors",
+        # craft (perpetual-hunt wave-014: lost crafts revived)
+        "craft",
     }
 
 
