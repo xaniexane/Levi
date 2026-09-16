@@ -10,7 +10,7 @@ def _fresh():
     return Registry()
 
 
-def test_manifest_registers_all_eleven_modules():
+def test_manifest_registers_all_modules():
     reg = _fresh()
     for name, decl in DECLARATIONS.items():
         reg.register(name, provides=decl["provides"], requires=decl["requires"])
@@ -18,6 +18,10 @@ def test_manifest_registers_all_eleven_modules():
         "organs", "memory-store", "memory-retrieval", "rag",
         "bot-services", "growth", "academy", "bounty",
         "knowledge", "oath", "agent-assistant",
+        # axis-3 additions (deny-closed, all must register + check)
+        "methods", "revival", "galaxy", "lifepack", "bloodstream",
+        "daemon", "perpetual", "archive", "cyber-skills", "factory",
+        "finance",
     }
 
 
@@ -101,7 +105,7 @@ def test_dependents_of_unknown_module_denied():
 def test_default_registry_preloaded_and_valid():
     import levi.interop.registry as regmod
 
-    assert len(regmod.modules()) == 11
+    assert len(regmod.modules()) == len(DECLARATIONS)
     regmod.check_all()  # must not raise
     deps = regmod.dependents_of("memory-store", transitive=True)
     assert "rag" in deps and "bot-services" in deps

@@ -76,6 +76,159 @@ DECLARATIONS = {
         ],
         "requires": ["memory-store", "growth"],
     },
+    # -- methods: 40 forgotten techniques (stdlib-only, local-first) ---------
+    "methods": {
+        "provides": [
+            "methods.ach",
+            "methods.bruno",
+            "methods.chappe",
+            "methods.codebook",
+            "methods.colon",
+            "methods.commonplace",
+            "methods.deming",
+            "methods.duplex",
+            "methods.edgenotch",
+            "methods.florilegia",
+            "methods.franklin",
+            "methods.ivylee",
+            "methods.kardex",
+            "methods.kriegsspiel",
+            "methods.llull",
+            "methods.loci",
+            "methods.monitorial",
+            "methods.morphological",
+            "methods.mundaneum",
+            "methods.opsroom",
+            "methods.optical",
+            "methods.pecia",
+            "methods.pinakes",
+            "methods.pneumatic",
+            "methods.prowords",
+            "methods.qcodes",
+            "methods.quipu",
+            "methods.randgame",
+            "methods.ratio",
+            "methods.repertory",
+            "methods.t5",
+            "methods.therbligs",
+            "methods.tickler",
+            "methods.tironian",
+            "methods.triplebook",
+            "methods.trivium",
+            "methods.triz",
+            "methods.uniterm",
+            "methods.vsm",
+            "methods.waterlogic",
+        ],
+        "requires": [],
+    },
+    # -- revival: retired software reborn as original LEVI works (wave 1+2) --
+    "revival": {
+        "provides": [
+            "revival.agenda",
+            "revival.arexx",
+            "revival.bfs",
+            "revival.blackboard",
+            "revival.ecco",
+            "revival.eros",
+            "revival.eurisko",
+            "revival.goap",
+            "revival.groove",
+            "revival.inferno",
+            "revival.interlisp",
+            "revival.linkbase",
+            "revival.mumps",
+            "revival.notes",
+            "revival.otp",
+            "revival.plan9",
+            "revival.soar",
+            "revival.soups",
+            "revival.telescript",
+            "revival.xanadu",
+        ],
+        "requires": [],
+    },
+    # -- galaxy: ecosystem packaging / registry / install / services ---------
+    "galaxy": {
+        "provides": [
+            "galaxy.packages",
+            "galaxy.services",
+            "galaxy.install",
+            "galaxy.capabilities",
+        ],
+        "requires": [],
+    },
+    # -- lifepack: portable LEVI state (export/import/validate) ---------------
+    "lifepack": {
+        "provides": [
+            "lifepack.export",
+            "lifepack.import",
+            "lifepack.validate",
+        ],
+        "requires": ["memory-store"],
+    },
+    # -- bloodstream: the one-turn pipeline + event bus -----------------------
+    "bloodstream": {
+        "provides": [
+            "bloodstream.turn",
+            "bloodstream.trace",
+            "bloodstream.bus",
+            "bloodstream.composites",
+            "bloodstream.gate",
+        ],
+        "requires": ["memory-store", "organs"],
+    },
+    # -- daemon: control plane — automations, heartbeat, kernel ---------------
+    "daemon": {
+        "provides": [
+            "daemon.automations",
+            "daemon.heartbeat",
+            "daemon.kernel",
+            "daemon.unified",
+        ],
+        "requires": [],
+    },
+    # -- perpetual: the never-stops engine — hunt, pulse, supervision ---------
+    "perpetual": {
+        "provides": [
+            "perpetual.hunt",
+            "perpetual.pulse",
+            "perpetual.supervise",
+        ],
+        "requires": ["archive"],
+    },
+    # -- archive: the Smithsonian records (dated queryable corpus) ------------
+    "archive": {
+        "provides": [
+            "archive.records",
+            "archive.search",
+            "archive.ingest",
+        ],
+        "requires": [],
+    },
+    # -- cyber-skills: 823 original defensive blue-team playbooks -------------
+    "cyber-skills": {
+        "provides": ["skills.cyber-playbooks"],
+        "requires": [],
+    },
+    # -- factory: the production line (constructive software cascade) ---------
+    "factory": {
+        "provides": [
+            "factory.create",
+            "factory.projects",
+        ],
+        "requires": [],
+    },
+    # -- finance: AI-powered paper-trading intelligence (paper-only) -----------
+    "finance": {
+        "provides": [
+            "finance.quote",
+            "finance.signals",
+            "finance.portfolio",
+            "finance.paper-broker",
+        ],
+        "requires": [],
+    },
 }
 
 
