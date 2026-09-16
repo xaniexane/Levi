@@ -14,7 +14,7 @@ atlas contract itself (`export_atlas()` / `write_atlas()`), see
 | Warehouse | Shelves (modules) | What's stocked |
 |---|---|---|
 | `methods` — Methods | methods | 40 forgotten human techniques (loci, ACH, colon, …) |
-| `revivals` — Revivals | revival | 20 retired systems reborn as original LEVI works |
+| `revivals` — Revivals | revival, telegraph | 20 retired systems + the telegraph office (dead protocols: FidoNet store-and-forward, Telex answerback, AppleTalk chooser), all reborn as original LEVI works |
 | `skills` — Skills & Playbooks | cyber-skills | 839 defensive blue-team + operator playbooks |
 | `archive` — Archive Knowledge | archive, knowledge, academy, bounty, research | The Smithsonian records (perpetual-hunt finds) + public-source deep-web research |
 | `services` — Services | galaxy, daemon, perpetual, bot-services | Live installs, automations, supervision |

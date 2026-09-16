@@ -74,6 +74,8 @@ def test_manifest_registers_all_modules():
         "recommender",
         # games wave (fair-play additions)
         "games",
+        # telegraph (perpetual-hunt wave-001: dead protocols revived)
+        "telegraph",
     }
 
 

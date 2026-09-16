@@ -100,6 +100,8 @@ CLI_COMMANDS.update(
         "research": [],
         # -- games (perpetual-hunt games wave) ------------------------------
         "games": ["python -m levi.games"],
+        # -- telegraph (perpetual-hunt wave-001: dead protocols revived) ---
+        "telegraph": ["python -m levi.telegraph"],
         # -- additions wave -----------------------------------------------
         "ephemera": ["python -m levi.ephemera"],
         "feedreader": ["python -m levi.feedreader"],
@@ -210,14 +212,16 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
     "revivals": {
         "title": "Revivals Warehouse",
         "summary": (
-            "20 retired software systems re-implemented from scratch as "
-            "LEVI's own code — telescript's capability tokens, plan9's "
-            "namespaces, Arexx ports, blackboards — never copied, always "
-            "remixed into something unreplicable."
+            "Retired software systems and dead protocols re-implemented from "
+            "scratch as LEVI's own code — telescript's capability tokens, "
+            "plan9's namespaces, Arexx ports, blackboards, plus the telegraph "
+            "office (FidoNet store-and-forward, Telex answerback, AppleTalk "
+            "chooser) — never copied, always remixed into something "
+            "unreplicable."
         ),
-        "shelves": ["revival"],
+        "shelves": ["revival", "telegraph"],
         "strategy": "revivals",
-        "pull_hint": "from levi.revival import <system>  (e.g. telescript, plan9, arexx)",
+        "pull_hint": "from levi.revival import <system>  (e.g. telescript, plan9, arexx); python -m levi.telegraph <send|poll|inbox|...>",
     },
     "skills": {
         "title": "Skills & Playbooks Warehouse",
@@ -437,15 +441,29 @@ def _count_techniques() -> Tuple[int, List[Dict[str, str]]]:
     return len(items), items
 
 
-def _count_revivals() -> Tuple[int, List[Dict[str, str]]]:
-    items = [
-        {
-            "id": f"revival.{name}",
-            "kind": "revival",
-            "summary": _first_doc_line(path),
-        }
-        for name, path in _module_files("revival")
-    ]
+def _count_revivals(shelves: List[str]) -> Tuple[int, List[Dict[str, str]]]:
+    items: List[Dict[str, str]] = []
+    for shelf in shelves:
+        if shelf == "revival":
+            items.extend(
+                {
+                    "id": f"revival.{name}",
+                    "kind": "revival",
+                    "summary": _first_doc_line(path),
+                }
+                for name, path in _module_files("revival")
+            )
+        else:
+            # companion shelves (e.g. telegraph): manifest capabilities
+            decl = DECLARATIONS.get(shelf, {})
+            items.extend(
+                {
+                    "id": cap,
+                    "kind": "capability",
+                    "summary": cap.replace(".", " ").replace("-", " "),
+                }
+                for cap in decl.get("provides", [])
+            )
     return len(items), items
 
 
@@ -541,7 +559,7 @@ def _inventory_for(name: str) -> Tuple[int, List[Dict[str, str]]]:
     if strategy == "techniques":
         return _count_techniques()
     if strategy == "revivals":
-        return _count_revivals()
+        return _count_revivals(shelves)
     if strategy == "playbooks":
         return _count_playbooks()
     if strategy == "records":
@@ -652,7 +670,9 @@ def pull_from_shelf(warehouse: str, item_id: str) -> Dict[str, Any]:
     if strategy == "techniques":
         return _pull_technique(item_id)
     if strategy == "revivals":
-        return _pull_revival(item_id)
+        if item_id.startswith("revival."):
+            return _pull_revival(item_id)
+        return _pull_capability(warehouse, item_id)
     if strategy == "playbooks":
         return _pull_playbook(item_id)
     if strategy == "records":

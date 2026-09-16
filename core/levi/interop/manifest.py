@@ -357,6 +357,19 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- telegraph: the telegraph office (perpetual-hunt wave-001) -------------
+    # Dead comms protocols reborn as original LEVI works: FidoNet-style
+    # store-and-forward envelopes, Telex WRU answerback identity,
+    # AppleTalk NBP-style accountless chooser. Envelopes are data, never
+    # executed; owner-only dirs; no network daemon or cloud.
+    "telegraph": {
+        "provides": [
+            "telegraph.envelopes",
+            "telegraph.identity",
+            "telegraph.directory",
+        ],
+        "requires": [],
+    },
     # -- research: public-source deep-web research (polite, no darknet) -------
     "research": {
         "provides": [
