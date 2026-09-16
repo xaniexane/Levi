@@ -18,8 +18,14 @@ already healthy" — deterministic replay under a FakeClock for tests and
 bounded simulation.
 """
 
-from .lists import (FakeClock, Instruction, RealClock, Receipt, Score,
-                    ScoreError, run)
+from .lists import FakeClock, Instruction, RealClock, Receipt, Score, ScoreError, run
 
-__all__ = ["Score", "Instruction", "Receipt", "ScoreError", "run",
-           "RealClock", "FakeClock"]
+__all__ = [
+    "Score",
+    "Instruction",
+    "Receipt",
+    "ScoreError",
+    "run",
+    "RealClock",
+    "FakeClock",
+]

@@ -39,6 +39,7 @@ class ScoreError(ValueError):
 # clocks
 # --------------------------------------------------------------------------
 
+
 class RealClock:
     """Wall clock: sleeps really sleep. Use for production runs."""
 
@@ -101,19 +102,24 @@ class Score:
         if not isinstance(ms, int) or ms < 0:
             raise ScoreError(f"wait_ms requires a non-negative int, got {ms!r}")
         self.instructions.append(
-            Instruction("wait_ms", name or f"wait-{ms}ms", {"ms": ms}))
+            Instruction("wait_ms", name or f"wait-{ms}ms", {"ms": ms})
+        )
         return self
 
-    def wait_until(self, name: str, pred: Callable[[], bool],
-                   timeout_ms: int, poll_ms: int = 200) -> "Score":
+    def wait_until(
+        self, name: str, pred: Callable[[], bool], timeout_ms: int, poll_ms: int = 200
+    ) -> "Score":
         if timeout_ms <= 0:
             raise ScoreError("wait_until timeout_ms must be positive")
         if poll_ms <= 0:
             raise ScoreError("wait_until poll_ms must be positive")
         self.instructions.append(
-            Instruction("wait_until", name,
-                        {"pred": pred, "timeout_ms": timeout_ms,
-                         "poll_ms": poll_ms}))
+            Instruction(
+                "wait_until",
+                name,
+                {"pred": pred, "timeout_ms": timeout_ms, "poll_ms": poll_ms},
+            )
+        )
         return self
 
     def exec(self, name: str, fn: Callable[[], Any]) -> "Score":
@@ -141,19 +147,24 @@ class Score:
 # receipts + runner
 # --------------------------------------------------------------------------
 
+
 @dataclass
 class Receipt:
     """Honest record of a run: what happened, in clock order."""
+
     score_name: str
     completed: bool
-    stopped_at: Optional[int] = None          # instruction index or None
-    stop_reason: str = ""                      # "" when completed
+    stopped_at: Optional[int] = None  # instruction index or None
+    stop_reason: str = ""  # "" when completed
     events: List[Dict[str, Any]] = field(default_factory=list)
 
     def executed(self) -> List[str]:
         """Names of exec instructions that ran."""
-        return [e["name"] for e in self.events
-                if e["op"] == "exec" and e.get("status") == "ran"]
+        return [
+            e["name"]
+            for e in self.events
+            if e["op"] == "exec" and e.get("status") == "ran"
+        ]
 
 
 def run(score: Score, clock: Optional[Any] = None) -> Receipt:
@@ -190,8 +201,8 @@ def run(score: Score, clock: Optional[Any] = None) -> Receipt:
                     event("wait_until", ins.name, status="timeout")
                     receipt.stopped_at = i
                     receipt.stop_reason = (
-                        f"wait_until {ins.name!r} timed out after "
-                        f"{timeout}ms")
+                        f"wait_until {ins.name!r} timed out after {timeout}ms"
+                    )
                     return receipt
                 clock.sleep_ms(poll)
         elif ins.op == "exec":
@@ -200,22 +211,30 @@ def run(score: Score, clock: Optional[Any] = None) -> Receipt:
             try:
                 result = fn()
             except Exception as exc:  # noqa: BLE001 - recorded, not swallowed
-                event("exec", ins.name, status="error",
-                      elapsed_ms=clock.now_ms() - start,
-                      error=f"{type(exc).__name__}: {exc}")
+                event(
+                    "exec",
+                    ins.name,
+                    status="error",
+                    elapsed_ms=clock.now_ms() - start,
+                    error=f"{type(exc).__name__}: {exc}",
+                )
                 receipt.stopped_at = i
                 receipt.stop_reason = f"exec {ins.name!r} raised"
                 return receipt
             elapsed = clock.now_ms() - start
-            event("exec", ins.name, status="ran", elapsed_ms=elapsed,
-                  returned=repr(result)[:200])
+            event(
+                "exec",
+                ins.name,
+                status="ran",
+                elapsed_ms=elapsed,
+                returned=repr(result)[:200],
+            )
         elif ins.op == "skip_if":
             if ins.args["pred"]():
                 # Copper SKIP: skip the immediately following exec only.
                 if i + 1 < n and instrs[i + 1].op == "exec":
                     skipped = instrs[i + 1]
-                    event("skip_if", ins.name, status="skipped",
-                          skipped=skipped.name)
+                    event("skip_if", ins.name, status="skipped", skipped=skipped.name)
                     i += 2
                     continue
                 event("skip_if", ins.name, status="no-exec-after")

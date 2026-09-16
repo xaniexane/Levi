@@ -10,12 +10,13 @@ def main() -> None:
         healthy["ok"] = True
         return "restarted"
 
-    score = (Score("service-recovery-demo")
-             .skip_if("already-healthy", lambda: healthy["ok"])
-             .wait_ms(2_000)
-             .exec("restart-service", restart)
-             .wait_until("healthy", lambda: healthy["ok"],
-                         timeout_ms=30_000, poll_ms=500))
+    score = (
+        Score("service-recovery-demo")
+        .skip_if("already-healthy", lambda: healthy["ok"])
+        .wait_ms(2_000)
+        .exec("restart-service", restart)
+        .wait_until("healthy", lambda: healthy["ok"], timeout_ms=30_000, poll_ms=500)
+    )
     clock = FakeClock()
     receipt = run(score, clock=clock)
     print(f"score: {receipt.score_name}")
