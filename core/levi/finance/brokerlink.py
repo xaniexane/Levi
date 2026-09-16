@@ -239,12 +239,23 @@ def broker_link_status(
     link_path: Path = DEFAULT_LINK_PATH,
     drafts_path: Path = DEFAULT_DRAFTS_PATH,
 ) -> dict:
-    """Report broker-link state. Never touches the network."""
+    """Report broker-link state. Never touches the network.
+
+    ``config_state`` is ``"ok"``, ``"missing"`` (never configured), or
+    ``"corrupt"`` (file exists but is unreadable or malformed) — a corrupt
+    config is surfaced loudly here, never silently treated as unconfigured.
+    """
     try:
         data = json.loads(Path(link_path).read_text(encoding="utf-8"))
         config = BrokerLinkConfig.from_dict(data)
-    except Exception:
+        config_state = "ok"
+    except FileNotFoundError:
         config = BrokerLinkConfig(platform=None)
+        config_state = "missing"
+    except Exception:
+        # Corrupt config: do NOT silently pretend it was never configured.
+        config = BrokerLinkConfig(platform=None)
+        config_state = "corrupt"
     drafts = load_drafts(drafts_path)
     pending = [d for d in drafts if d.status == "DRAFT — NOT SENT"]
     return {
@@ -252,6 +263,7 @@ def broker_link_status(
         "platform_label": (
             SUPPORTED_PLATFORMS[config.platform] if config.platform else None
         ),
+        "config_state": config_state,
         "mode": config.mode,
         "live_execution": "STRUCTURALLY REFUSED — no transport exists",
         "credentials_requested": "none — drafts need no keys",

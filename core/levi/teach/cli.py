@@ -21,6 +21,7 @@ from levi.teach import registry_dir
 from levi.teach.converters import SOURCES, repo_root
 from levi.teach.prepare import TeachError, plan_teaching, prepare
 from levi.teach.teachback import TeachbackError, teachback_report
+from levi.teach.verify import check_bundle
 
 __all__ = ["register_teach_parser", "cmd_teach"]
 
@@ -89,6 +90,11 @@ def register_teach_parser(sub) -> None:
 
     cmds.add_parser("stats", help="what has been taught across runs (registry)")
 
+    check_p = cmds.add_parser(
+        "check", help="verify a prepared bundle is intact and consumable"
+    )
+    check_p.add_argument("dir", help="bundle directory from `teach prepare`")
+
 
 def _resolve_sources(args) -> list[str]:
     raw = list(getattr(args, "sources", None) or ["all"])
@@ -154,6 +160,9 @@ def cmd_teach(args: argparse.Namespace) -> int:
     if cmd == "stats":
         return _cmd_stats()
 
+    if cmd == "check":
+        return _cmd_check(args.dir)
+
     try:
         kwargs = dict(
             name=args.name,
@@ -214,6 +223,32 @@ def cmd_teach(args: argparse.Namespace) -> int:
         print(f"teach {cmd} failed: {type(exc).__name__}: {exc}")
         return 2
     print(f"teach: unknown command {cmd!r}")
+    return 2
+
+
+def _cmd_check(bundle_dir: str) -> int:
+    report = check_bundle(bundle_dir)
+    stats = report["stats"]
+    if report["ok"]:
+        print(f"teach check: OK — {bundle_dir}")
+        bits = []
+        for split in ("train", "val", "test"):
+            d = stats.get(f"{split}_docs")
+            s = stats.get(f"{split}_sequences")
+            if d is not None:
+                bits.append(f"{split} {d:,} docs / {s:,} seqs")
+        if bits:
+            print("  " + " · ".join(bits))
+        if stats.get("manifest"):
+            print(f"  manifest: {stats['manifest']}")
+        if stats.get("config"):
+            print(f"  config: {stats['config']} (validates)")
+        return 0
+    print(f"teach check: FAILED — {bundle_dir}")
+    for p in report["problems"][:20]:
+        print(f"  ! {p}")
+    if len(report["problems"]) > 20:
+        print(f"  … and {len(report['problems']) - 20} more")
     return 2
 
 

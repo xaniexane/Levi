@@ -65,7 +65,7 @@ _LAZY_EXPORTS = {
     "CRYPTO_QUOTE_ASSETS": "crypto",
     "looks_like_crypto": "crypto",
     # wsb.py — WSB presentation skin
-    "BANNED_TOKENS": "wsb",
+    "BANNED_DIGEST_COUNT": "wsb",
     "SlurDetected": "wsb",
     "assert_clean": "wsb",
     "dd_post": "wsb",

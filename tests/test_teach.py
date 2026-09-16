@@ -44,6 +44,7 @@ from levi.teach.prepare import (
 )
 from levi.teach.probes import PROBES, probes_for_source
 from levi.teach.teachback import TeachbackError, coverage, teachback_report
+from levi.teach.verify import check_bundle
 
 
 # ---------------------------------------------------------------------------
@@ -570,6 +571,77 @@ def test_cli_prepare_and_stats(repo, home_env, monkeypatch, capsys):
 def test_cli_stats_empty_registry(home_env, capsys):
     assert cmd_teach(_ns(teach_cmd="stats")) == 0
     assert "no runs registered" in capsys.readouterr().out
+
+
+# ---------------------------------------------------------------------------
+# round 3: bundle verification
+
+
+def test_check_bundle_ok(repo, home_env):
+    out = repo / "bundle6"
+    prepare(out, name="chk", sources=["courses", "academy"], root=repo)
+    report = check_bundle(out)
+    assert report["ok"], report["problems"]
+    assert report["stats"]["train_docs"] > 0
+    assert report["stats"]["train_sequences"] > 0
+    assert report["stats"]["curriculum_stages"] == 4
+
+
+def test_check_bundle_missing_dir(tmp_path):
+    report = check_bundle(tmp_path / "nope")
+    assert not report["ok"]
+    assert any("missing" in p for p in report["problems"])
+
+
+def test_check_bundle_detects_tampered_corpus(repo, home_env):
+    out = repo / "bundle7"
+    prepare(out, name="chk2", sources=["courses"], root=repo)
+    # tamper with a corpus file -> manifest hash check must fire
+    p = out / "corpora" / "train.jsonl"
+    p.write_text(
+        p.read_text(encoding="utf-8") + '{"text": "injected"}\n', encoding="utf-8"
+    )
+    report = check_bundle(out)
+    assert not report["ok"]
+    assert any("hash mismatch" in prob for prob in report["problems"])
+
+
+def test_check_bundle_missing_sequences(repo, home_env):
+    out = repo / "bundle8"
+    prepare(out, name="chk3", sources=["courses"], root=repo)
+    (out / "sequences_test.jsonl").unlink()
+    report = check_bundle(out)
+    assert not report["ok"]
+    assert any("sequences_test.jsonl" in prob for prob in report["problems"])
+
+
+def test_check_bundle_broken_curriculum(repo, home_env):
+    out = repo / "bundle9"
+    prepare(out, name="chk4", sources=["courses"], root=repo)
+    (out / "curriculum.json").write_text("{broken", encoding="utf-8")
+    report = check_bundle(out)
+    assert not report["ok"]
+    assert any("curriculum.json" in prob for prob in report["problems"])
+
+
+def test_check_bundle_broken_train_yaml(repo, home_env):
+    out = repo / "bundle10"
+    prepare(out, name="chk5", sources=["courses"], root=repo)
+    (out / "train.yaml").write_text("name: [unclosed\n", encoding="utf-8")
+    report = check_bundle(out)
+    assert not report["ok"]
+    assert any("train.yaml" in prob for prob in report["problems"])
+
+
+def test_cli_check_command(repo, home_env, monkeypatch, capsys):
+    monkeypatch.setenv("LEVI_REPO", str(repo))
+    out = home_env / "bundle11"
+    prepare(out, name="chk6", sources=["courses"], root=repo)
+    assert cmd_teach(_ns(teach_cmd="check", dir=str(out))) == 0
+    assert "teach check: OK" in capsys.readouterr().out
+    # and a failing check exits 2
+    assert cmd_teach(_ns(teach_cmd="check", dir=str(home_env / "nope"))) == 2
+    assert "FAILED" in capsys.readouterr().out
 
 
 def test_teach_home_uses_levi_home(home_env):

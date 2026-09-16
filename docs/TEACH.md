@@ -35,8 +35,14 @@ training, privacy debt for us).
 levi teach plan                                  # dry run: stats, stages, mix
 levi teach plan --sources courses academy       # subset
 levi teach prepare --out runs/t1                # write the bundle
+levi teach prepare --out runs/t1 --teachback-fail-under 0.8   # quality gate
+levi teach check runs/t1                        # verify bundle integrity
 levi teach stats                                 # runs registered in ~/.levi/teach/manifests/
 ```
+
+`teach check` re-validates a prepared bundle: manifest hashes, curriculum
+shape, `train.yaml` validity, and sequence ↔ corpus ↔ curriculum
+cross-references. A broken bundle is reported, never an exception.
 
 `teach prepare` writes:
 

@@ -1,11 +1,15 @@
 """Paper-bet ledger tests — hermetic, no network, temp HOME files.
 
+The hostile trader fixture is base64-encoded: no denylisted literal
+appears in this file. It decodes in memory only, to exercise the guard.
+
 Run:  python3 tests/test_finance_bets.py     (has a real __main__ runner)
       python3 -m pytest tests/test_finance_bets.py -q
 """
 
 from __future__ import annotations
 
+import base64
 import json
 import sys
 import traceback
@@ -34,6 +38,11 @@ def finance_test(fn):
 
 def _ledger() -> BetLedger:
     return BetLedger()
+
+
+def _hostile(b64: str) -> str:
+    """Decode a base64 hostile fixture (keeps literals out of source)."""
+    return base64.b64decode(b64).decode("utf-8")
 
 
 @finance_test
@@ -104,7 +113,7 @@ def test_trader_name_slur_rejected():
     ledger = _ledger()
     try:
         ledger.place(
-            trader="retard_ape",
+            trader=_hostile("cmV0YXJkX2FwZQ=="),  # hostile name, encoded
             symbol="SYNTH",
             side="buy",
             qty=1,

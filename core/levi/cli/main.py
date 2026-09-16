@@ -1010,6 +1010,31 @@ def cmd_finance(args):
         sign = "+" if value >= 0 else "-"
         return f"{sign}${abs(value):,.2f}"
 
+    def _load_link_config():
+        """Load the broker-link config, warning loudly on corruption.
+
+        Returns (config, config_state). A corrupt config is never
+        silently treated as unconfigured — the caller sees the warning.
+        """
+        try:
+            data = _json.loads(
+                _brokerlink.DEFAULT_LINK_PATH.read_text(encoding="utf-8")
+            )
+            cfg = _brokerlink.BrokerLinkConfig.from_dict(data)
+            return cfg, "ok"
+        except FileNotFoundError:
+            return _brokerlink.BrokerLinkConfig(platform=None), "missing"
+        except Exception:
+            return _brokerlink.BrokerLinkConfig(platform=None), "corrupt"
+
+    def _warn_link_corrupt(config_state: str) -> None:
+        if config_state == "corrupt":
+            print(
+                "  ⚠️  WARNING: the broker-link config file is corrupt — "
+                "treating as unconfigured. Back it up or delete it to "
+                "silence this warning."
+            )
+
     def _provider_for(source: str):
         """Return (provider, source_label) for a --source name.
 
@@ -1545,6 +1570,7 @@ def cmd_finance(args):
             )
             print("🔌 BROKER LINK — DRAFT ONLY (live structurally refused)")
             print(f"  platform: {st['platform'] or '(not configured)'}")
+            _warn_link_corrupt(st["config_state"])
             if st["platform_label"]:
                 print(f"  label:    {st['platform_label']}")
             print(f"  mode:     {st['mode']}")
@@ -1584,16 +1610,8 @@ def cmd_finance(args):
                 bars = _bars_for(symbol, days=10, source=source)
                 price = bars[-1].close
                 print(f"  reference price ${price:,.2f} (latest {source} bar)")
-            try:
-                cfg = _brokerlink.BrokerLinkConfig.from_dict(
-                    _json.loads(
-                        _brokerlink.DEFAULT_LINK_PATH.read_text(encoding="utf-8")
-                    )
-                    if _brokerlink.DEFAULT_LINK_PATH.exists()
-                    else {}
-                )
-            except Exception:
-                cfg = _brokerlink.BrokerLinkConfig(platform=None)
+            cfg, link_state = _load_link_config()
+            _warn_link_corrupt(link_state)
             try:
                 drafts = _brokerlink.prepare_drafts(
                     [

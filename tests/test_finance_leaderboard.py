@@ -6,6 +6,7 @@ Run:  python3 tests/test_finance_leaderboard.py     (has a real __main__ runner)
 
 from __future__ import annotations
 
+import base64
 import sys
 import traceback
 from pathlib import Path
@@ -112,7 +113,8 @@ def test_render_screens_hostile_trader():
         trader="clean_ape", symbol="SYNTH", side="buy", qty=1, entry_price=1.0
     )
     # mutate past validation to simulate a hostile stored name
-    b.trader = "evil retard"
+    # (base64-encoded hostile fixture — the literal stays out of source)
+    b.trader = base64.b64decode("ZXZpbCByZXRhcmQ=").decode("utf-8")
     try:
         render_leaderboard(build_leaderboard(ledger.bets))
     except Exception as exc:

@@ -69,7 +69,9 @@ class SyntheticProvider(MarketDataProvider):
 
     A 2000-bar master series is generated per (symbol, seed); requests
     return the trailing ``days`` bars, so results are stable across
-    different ``days`` values. Same symbol + seed ⇒ same bars, always.
+    different ``days`` values. Same symbol + seed ⇒ same prices, always;
+    calendar dates anchor to ``as_of`` (default: today), so pass an
+    explicit ``as_of`` when dates must be reproducible across sessions.
 
     Raises :class:`MarketDataError` for non-SYNTH symbols — this provider
     never serves (or fabricates) real market data.
@@ -78,17 +80,22 @@ class SyntheticProvider(MarketDataProvider):
     #: Default seed. Override per-instance for alternate histories.
     seed: int = 20260915
 
-    def __init__(self, seed: int = 20260915) -> None:
+    def __init__(self, seed: int = 20260915, as_of: date | None = None) -> None:
         if isinstance(seed, bool) or not isinstance(seed, int):
             raise MarketDataError(f"seed must be an int, got {seed!r}")
+        if as_of is not None and not isinstance(as_of, date):
+            raise MarketDataError(f"as_of must be a date, got {as_of!r}")
         self.seed = seed
+        # Date anchor for the generated calendar: defaults to today so a
+        # fresh provider always ends "now"; pin it for reproducibility.
+        self.as_of: date = as_of or date.today()
 
     def _master_series(self, symbol: str) -> list[Bar]:
         profile = SYNTH_UNIVERSE.get(symbol, {"base": 50.0, "kind": "equity-like"})
         base = float(profile["base"])
         crypto_like = profile["kind"] == "crypto-like"
         rng = random.Random(_seed_for(symbol, self.seed))
-        end = date.today()
+        end = self.as_of
         start = end - timedelta(days=_MASTER_BARS - 1)
         price = base
         bars: list[Bar] = []

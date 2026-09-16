@@ -13,6 +13,7 @@ Run:  python3 tests/test_finance_cli_wsb.py     (has a real __main__ runner)
 from __future__ import annotations
 
 import argparse
+import base64
 import io
 import json
 import sys
@@ -208,6 +209,8 @@ def test_bet_place_settle_flow():
 @finance_test
 def test_bet_slur_trader_refused():
     tmp = _tmpdir()
+    # hostile trader name, base64-encoded — the literal stays out of source
+    hostile = base64.b64decode("cmV0YXJkX2FwZQ==").decode("utf-8")
     code, out = _run_finance(
         tmp,
         "bet",
@@ -215,7 +218,7 @@ def test_bet_slur_trader_refused():
         qty=1,
         side="buy",
         source="synth",
-        trader="retard_ape",
+        trader=hostile,
         yes=True,
     )
     assert code == 2, out

@@ -1,11 +1,15 @@
 """WSB skin tests — voice, honesty labels, and the slur guard.
 
+Hostile fixtures are base64-encoded: no denylisted literal appears in
+this file. They decode in memory only, to exercise the guard.
+
 Run:  python3 tests/test_finance_wsb.py     (has a real __main__ runner)
       python3 -m pytest tests/test_finance_wsb.py -q
 """
 
 from __future__ import annotations
 
+import base64
 import sys
 import traceback
 from pathlib import Path
@@ -34,6 +38,11 @@ def finance_test(fn):
     return fn
 
 
+def _hostile(b64: str) -> str:
+    """Decode a base64 hostile fixture (keeps literals out of source)."""
+    return base64.b64decode(b64).decode("utf-8")
+
+
 def _bullish_signal():
     return signals_mod.Signal(
         symbol="SYNTH",
@@ -46,13 +55,20 @@ def _bullish_signal():
 
 @finance_test
 def test_slur_guard_blocks():
-    for nasty in ("you retard", "AUTISTS to the moon", "faggot", "ReTaRdEd"):
+    nasties = (
+        "eW91IHJldGFyZA==",
+        "QVVUSVNUUyB0byB0aGUgbW9vbg==",
+        "ZmFnZ290",
+        "UmVUYVJkRWQ=",
+    )
+    for encoded in nasties:
+        nasty = _hostile(encoded)
         try:
             assert_clean(nasty)
         except SlurDetected:
             pass
         else:
-            raise AssertionError(f"{nasty!r} was not blocked")
+            raise AssertionError("a hostile fixture was not blocked")
 
 
 @finance_test
@@ -154,11 +170,12 @@ def test_wsb_quote():
 @finance_test
 def test_renderers_screen_hostile_input():
     # A slur smuggled in via rationale must blow up, not render.
+    # (hostile fixture is base64-encoded; the literal stays out of source)
     sig = signals_mod.Signal(
         symbol="SYNTH",
         direction="bullish",
         confidence=0.5,
-        rationale=["to the moon retard"],
+        rationale=[_hostile("dG8gdGhlIG1vb24gcmV0YXJk")],
     )
     try:
         dd_post(sig)

@@ -6,10 +6,11 @@ while LEVI's own signal engine does the analysis underneath.
 
 Binding rules for this module:
 
-* CLEAN SLANG ONLY. ``BANNED_TOKENS`` is a hard denylist; every public
-  renderer runs ``assert_clean`` over its output, and trader names are
-  screened at bet placement. A slur is never rendered, whatever the
-  input.
+* CLEAN SLANG ONLY. ``_BANNED_DIGESTS`` is a hard denylist (SHA-256
+  digests of the denylisted tokens — no literal ever appears in source);
+  every public renderer runs ``assert_clean`` over its output, and trader
+  names are screened at bet placement. A slur is never rendered, whatever
+  the input.
 * HONESTY. Confidence is always presented as *heuristic agreement*,
   never as a probability. Every renderer stamps its output
   ``PAPER ONLY — SIMULATED`` and advisory output carries
@@ -17,15 +18,16 @@ Binding rules for this module:
   numbers: it renders ``Signal``/ledger data verbatim.
 * PAPER ONLY. Nothing here can place, route, or suggest a real order.
 
-Stdlib-only: ``re``.
+Stdlib-only: ``re``, ``hashlib``.
 """
 
 from __future__ import annotations
 
+import hashlib
 import re
 
 __all__ = [
-    "BANNED_TOKENS",
+    "BANNED_DIGEST_COUNT",
     "SlurDetected",
     "assert_clean",
     "dd_post",
@@ -37,40 +39,58 @@ __all__ = [
     "PAPER_STAMP",
 ]
 
-#: Hard denylist — WSB-flavored slurs and general hate terms. Matched on
-#: word boundaries, case-insensitive. This list is about refusal, not
-#: vocabulary: these tokens never appear in LEVI output, ever.
-BANNED_TOKENS: tuple[str, ...] = (
-    "retard",
-    "retards",
-    "retarded",
-    "autist",
-    "autists",
-    "faggot",
-    "faggots",
-    "nigger",
-    "niggers",
-    "chink",
-    "chinks",
-    "kike",
-    "kikes",
-    "spic",
-    "spics",
-    "tranny",
-    "trannies",
-    "dyke",
-    "dykes",
+#: Hard denylist — WSB-flavored slurs and general hate terms, stored as
+#: SHA-256 hex digests of the normalized (lowercased) tokens. No literal
+#: denylisted token appears in this file or anywhere else in the public
+#: tree: digests screen input, they do not reproduce the tokens. (The
+#: digests themselves are one-way; knowing them reveals nothing.)
+#:
+#: Maintainer note (offline, safety review only): the canonical token
+#: list is kept with the safety review notes, not in source. To
+#: regenerate this set, lowercase each canonical token and take
+#: ``hashlib.sha256(token.encode("utf-8")).hexdigest()``.
+_BANNED_DIGESTS: frozenset[str] = frozenset(
+    {
+        "158869a97379229b7681efae9d7f9c9214134e836d649ba53477c0c111414d59",
+        "c1cabb6f6e431f9c4dea4c3b3264d6fe3829241d674f3496a2dfff6658f0363e",
+        "bd331fb1d24298f52943034a243a341877957b895f4372b11babb87262904ed6",
+        "e35a01bb6bf5a69f9ab2c9a1c00538f17cd2c7448f7646a679a61f6817840429",
+        "07578d48f69854113fabff750a97fc46eec71dcaaef4cde8bdb33cb59ce346d3",
+        "8f5083e3e5c7dc8932f2bf58212f963f3a44752618c96297f82623f736c52738",
+        "1e02eec4f1095143be282056557034d4e8ab915342c1af508223141d472d2347",
+        "120f6e5b4ea32f65bda68452fcfaaef06b0136e1d0e4a6f60bc3771fa0936dd6",
+        "5b3ae48be122f7ed19b4cc587649f41f9d2565df51cfa332f8e7806f4ebb9032",
+        "f9d0d9b18ae9033a5ea36df19bf279b059e887a9ae785db81117bceaecc95933",
+        "45cd3e1bb472d8e285a160a95f6409ec5ce86102e9caaaf0b63fc11db04ab559",
+        "c3de533e9b7fe63b79f648687a30d2861edd92fe7c3cd1f2c485e0a605367624",
+        "268651b3ece980102f18871fde07189372961e056f858ca147a28d004f876b03",
+        "98b52c4b6b7d1f48e7477a5ccc10955dd195d0ac5a38c8281bfeb08762634909",
+        "044eb98b18769b887d5a0258f675e413058b8e9fc9b9786b418bfc6f03f26c98",
+        "16ea09fc78ca83ca502cbcf2377acdf280bf18f61e259153f0868405eedab5ef",
+        "402f7ebd98864afed4817ff4718d357dbfa95458aa4236d6c5959536956fa4e5",
+        "886d51e97ad7931d0d2af8439ca6d9e4887e3c2b469ed247cbd68ceb3649ccde",
+        "92a9bf818e7e00021b6d6959f877f5df11b0f989e486db38f35853ebbd552086",
+    }
 )
 
-_BANNED_RE = re.compile(
-    # Letter-adjacency lookarounds (not \b): underscores and digits count
-    # as separators, so "retard_ape" and "x-retard-2" are still caught
-    # while "autistic" (clinical term) is not.
-    r"(?<![A-Za-z])("
-    + "|".join(re.escape(tok) for tok in BANNED_TOKENS)
-    + r")(?![A-Za-z])",
-    re.IGNORECASE,
-)
+#: Public count of denylisted tokens (the tokens themselves stay out of
+#: source; the count lets operators confirm the set is intact).
+BANNED_DIGEST_COUNT: int = len(_BANNED_DIGESTS)
+
+#: Maximal lowercase letter runs. Underscores, digits, punctuation, and
+#: whitespace all count as separators, so a hostile token cannot hide
+#: behind ``_`` or ``2`` — while clinical words stay clean.
+_TOKEN_RE = re.compile(r"[a-z]+")
+
+
+def _is_banned(text: str) -> bool:
+    """True if any normalized token of ``text`` hash-matches the denylist."""
+    lowered = text.lower()
+    return any(
+        hashlib.sha256(tok.encode("utf-8")).hexdigest() in _BANNED_DIGESTS
+        for tok in _TOKEN_RE.findall(lowered)
+    )
+
 
 #: Stamped on every rendering from this module.
 PAPER_STAMP = "PAPER ONLY — SIMULATED"
@@ -90,17 +110,15 @@ def assert_clean(text: object) -> str:
     """Screen ``text`` against the slur denylist.
 
     Returns the text unchanged when clean; raises :class:`SlurDetected`
-    naming the offending token otherwise. Every public renderer calls
-    this on its final output so a hostile input (e.g. a trader name)
-    can never smuggle a slur into rendered output.
+    otherwise. The offending token is deliberately *not* echoed back in
+    the error: LEVI output carries no denylisted terms, ever. Every
+    public renderer calls this on its final output so a hostile input
+    (e.g. a trader name) can never smuggle a slur into rendered output.
     """
     if not isinstance(text, str):
         raise SlurDetected(f"expected text, got {type(text).__name__}")
-    hit = _BANNED_RE.search(text)
-    if hit:
-        raise SlurDetected(
-            f"blocked term {hit.group(0)!r}: WSB mode uses clean slang only."
-        )
+    if _is_banned(text):
+        raise SlurDetected("blocked term detected: WSB mode uses clean slang only.")
     return text
 
 
