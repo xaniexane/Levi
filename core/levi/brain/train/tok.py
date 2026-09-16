@@ -32,6 +32,7 @@ Example:
 from __future__ import annotations
 
 import json
+import os
 import re
 from pathlib import Path
 
@@ -338,6 +339,100 @@ class ByteBPETokenizer:
             raise ValueError(f"not a {FORMAT} tokenizer file: {path}")
         merges = [tuple(p) for p in payload["merges"]]
         return cls(merges, specials=payload.get("specials"))
+
+
+# ---------------------------------------------------------------------------
+# Harness-facing factory: load, or train + save, from a JSON spec.
+# The v2 harness calls the tokenizer builder with no arguments; the spec is
+# then read from ``$LEVI_TOKENIZER_SPEC`` or ``tokenizer_spec.json`` next to
+# this module. A spec dict (or path to a JSON spec file) may be passed
+# directly, e.g. from scripts and tests.
+# ---------------------------------------------------------------------------
+
+TRAIN_DIR = Path(__file__).resolve().parent
+DEFAULT_SPEC_PATH = TRAIN_DIR / "tokenizer_spec.json"
+DEFAULT_TOKENIZER_FILENAME = "tokenizer.json"
+
+_SPEC_KEYS = frozenset(
+    {"path", "vocab_size", "corpus", "text_field", "max_train_chars", "force_retrain"}
+)
+
+
+def _resolve_spec(spec: dict | str | Path | None) -> dict:
+    """Return the effective spec dict (may be empty)."""
+    if spec is None:
+        env = os.environ.get("LEVI_TOKENIZER_SPEC")
+        if env:
+            spec = env
+        elif DEFAULT_SPEC_PATH.is_file():
+            spec = DEFAULT_SPEC_PATH
+        else:
+            return {}
+    if isinstance(spec, (str, Path)):
+        spec = json.loads(Path(spec).read_text(encoding="utf-8"))
+    if not isinstance(spec, dict):
+        raise ValueError(
+            f"tokenizer spec must be a JSON object (dict), got {type(spec).__name__}"
+        )
+    unknown = set(spec) - _SPEC_KEYS
+    if unknown:
+        raise ValueError(f"unknown tokenizer spec keys: {sorted(unknown)}")
+    return dict(spec)
+
+
+def build_tokenizer(spec: dict | str | Path | None = None) -> ByteBPETokenizer:
+    """Load a tokenizer, or train + save one, from a JSON spec.
+
+    Spec keys (all optional):
+      ``path``: tokenizer JSON location; relative paths resolve against
+        ``core/levi/brain/train/``. Defaults to ``tokenizer.json`` there.
+      ``vocab_size``: target vocab when training (default 8192).
+      ``corpus``: JSONL corpus to train from when ``path`` is missing;
+        relative paths resolve against ``core/levi/brain/train/``.
+      ``text_field``: record field holding the text (default ``"text"``).
+      ``max_train_chars``: cap on training chars (default 2_000_000).
+      ``force_retrain``: re-train even if ``path`` exists (default False).
+
+    Resolution: existing ``path`` -> load; missing ``path`` + ``corpus`` ->
+    train, save to ``path``, return; missing ``path`` and no ``corpus`` ->
+    loud error naming the training command (never a silently wrong vocab).
+    """
+    cfg = _resolve_spec(spec)
+    tdir = TRAIN_DIR
+
+    def _abs(p: str | Path) -> Path:
+        p = Path(p)
+        return p if p.is_absolute() else tdir / p
+
+    tok_path = _abs(cfg.get("path", DEFAULT_TOKENIZER_FILENAME))
+    force = bool(cfg.get("force_retrain", False))
+    if tok_path.is_file() and not force:
+        return ByteBPETokenizer.load(tok_path)
+
+    corpus = cfg.get("corpus")
+    if not corpus:
+        raise FileNotFoundError(
+            f"v2 tokenizer not found at {tok_path} and no 'corpus' in the "
+            "tokenizer spec; train one first:\n"
+            f"  python3 tok.py --corpus {tdir / 'corpus.jsonl'} "
+            f"--vocab {cfg.get('vocab_size', 8192)} --out {tok_path}"
+        )
+    corpus_path = _abs(corpus)
+    if not corpus_path.is_file():
+        raise FileNotFoundError(
+            f"tokenizer spec 'corpus' not found: {corpus_path} "
+            f"(from spec value {corpus!r})"
+        )
+    tok = ByteBPETokenizer.train_from_jsonl(
+        corpus_path,
+        text_field=cfg.get("text_field", "text"),
+        vocab_size=int(cfg.get("vocab_size", 8192)),
+        max_train_chars=int(cfg.get("max_train_chars", 2_000_000)),
+        verbose=False,
+    )
+    tok_path.parent.mkdir(parents=True, exist_ok=True)
+    tok.save(tok_path)
+    return tok
 
 
 def main(argv=None) -> int:

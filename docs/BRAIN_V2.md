@@ -49,6 +49,19 @@ any UTF-8 text, verified byte-exact.
 existing course corpus). Regenerate with:
 `python3 tok.py --corpus corpus.jsonl --vocab 8192 --out tokenizer.json`.
 
+**Harness factory:** `tok.build_tokenizer(spec)` — load, or train + save,
+from a JSON spec. The v2 harness calls the tokenizer builder with no
+arguments; the spec is then read from `$LEVI_TOKENIZER_SPEC` or
+`train/tokenizer_spec.json` (shipped; documents the canonical recipe:
+vocab 8192 on `corpus.jsonl`). Spec keys: `path`, `vocab_size`,
+`corpus`, `text_field`, `max_train_chars`, `force_retrain` (unknown keys
+rejected). Resolution: existing `path` → load; missing `path` + `corpus`
+→ train, save, return; missing `path` and no `corpus` → loud
+`FileNotFoundError` with the training command (never a silently wrong
+vocabulary). `model_v2.build_tokenizer` (the name the harness docstring
+references) delegates to the same spec resolution, so both entry points
+behave identically.
+
 Measured on this machine (2-CPU sandbox):
 
 | metric | value |
@@ -90,6 +103,25 @@ second pass and is stable across runs.
 Batch dict: `input_ids` (B,T), `labels` (B,T, shifted by one),
 `segment_ids` (B,T), `attn_mask` (B,1,T,T) or None.
 
+**Round-5 hardening:**
+- Malformed JSONL lines fail fast with `path:line N` in the message —
+  a corrupt corpus can never train quietly on a subset of itself. Both
+  the public `iter_jsonl_docs` and the pipeline's internal plan builder
+  share one strict parser (`_parse_record`); previously the plan
+  builder silently skipped bad lines while the public iterator raised.
+- Non-object JSON records (e.g. a bare array) raise a clear error
+  instead of dying on a bare `AttributeError`.
+- Duplicate doc ids are deduped (first occurrence wins) and hash to
+  one split, so a duplicated doc can never leak from train into val.
+- Manifest robustness: unknown doc ids in a manifest are ignored
+  without crashing; a stage missing `doc_ids` is an empty stage.
+- New introspection API for split debugging:
+  `iter_train_docs()` / `iter_val_docs()` yield `(doc_id, text)` in
+  stream order — the TRAIN worker can verify split assignment and
+  curriculum order without decoding batches.
+- `build_model` rejects unknown config keys loudly (a typo'd YAML key
+  no longer silently falls back to the default).
+
 ## 4. Ablations — do the modern pieces matter at small scale?
 
 v2 (RMSNorm + RoPE + SwiGLU) vs v1-style (LayerNorm + learned absolute
@@ -100,37 +132,48 @@ local statistics, nothing more.)
 
 | step | v2 loss | v1-classic loss |
 |---|---|---|
-| 1 | TBD | TBD |
-| 50 | TBD | TBD |
-| 100 | TBD | TBD |
-| 150 | TBD | TBD |
-| 200 | TBD | TBD |
+| 1 | 7.0408 | 7.0065 |
+| 50 | 3.1694 | 2.8955 |
+| 100 | 2.0406 | 1.8673 |
+| 150 | 1.7023 | 1.6372 |
+| 200 | 1.6298 | 1.5998 |
 
-TBD — honest reading goes here when the run finishes. Expectation set
-up front: at 1.3M params on synthetic data, any gap is about
-optimization dynamics, not capability.
+Honest reading: the classic baseline is slightly ahead at every
+checkpoint, and v2 cost ~25% more CPU (215 vs 172 CPU-s for 200 steps).
+At ~1M params on 200 steps of synthetic data, the modern components
+show **no advantage** — the gap is optimization dynamics at small
+scale, not capability. v2 stays the documented architecture (roadmap
+target; the gap is small), but no superiority is claimed on this
+evidence. (`~/workspace/brain_bench/ablate.py`, result JSON alongside.)
 
 ## 5. Longer context (1024) — memory and throughput
 
-TBD — smoke run at block_size 1024, batch 4, measuring peak RSS and
-steps/sec, with and without gradient checkpointing.
-
-## 6. Measured CPU throughput (this machine)
-
-Default config (13.8M params), random-token micro-benchmark
-(`/tmp/microbench.py`), contention-independent CPU seconds:
+Measured on the default 13,767,552-param config
+(`~/workspace/brain_bench/microbench.py`, contention-independent
+CPU seconds, peak RSS via `resource`):
 
 | block | batch | tokens/step | CPU-s/step | tokens/CPU-s | peak RSS |
 |---|---|---|---|---|---|
-| 512 | 4 | 2048 | TBD | TBD | TBD |
-| 512 | 8 | 4096 | TBD | TBD | TBD |
-| 1024 | 4 | 4096 | TBD | TBD | TBD |
-| 1024 | 4 + grad-ckpt | 4096 | TBD | TBD | TBD |
+| 512 | 4 | 2048 | 8.048 | 254.5 | 1678 MB |
+| 512 | 8 | 4096 | 13.748 | 297.9 | 2616 MB |
+| 1024 | 4 | 4096 | 16.659 | 245.9 | 2836 MB |
+| 1024 | 4 + grad-ckpt | 4096 | 16.485 | 248.5 | 2836 MB |
 
-Early smoke (10.9M-param config, batch 4, block 512, 30 steps):
-loss 6.44 → 3.74, 55 tokens/s wall under heavy multi-worker load —
-wall numbers are contention-inflated; budget from the CPU-s column
-above, not from guesses.
+Readings: block 1024 runs fine and fits comfortably (2.8 GB peak on a
+7.9 GB box), but costs ~21% more CPU per token than block 512 at the
+same tokens/step (attention is quadratic in block size). Batch 8 is the
+most token-efficient (297.9 tok/CPU-s — better amortization of fixed
+per-step overhead). Gradient checkpointing is ~neutral at these sizes
+here; its memory win matters at larger batches than fit this box
+anyway. Prefer wider batches over longer contexts on 2 CPUs.
+
+## 6. Measured CPU throughput (this machine)
+
+Use the §5 table (CPU-s/step is contention-independent). Rule of thumb
+for the default config at block 512: **~250–300 tokens per CPU-second**,
+i.e. ~8 CPU-s per 2048-token step. A 5400-step run at 2048 tok/step ≈
+12 CPU-hours on this box; the live TRAIN run (§9) uses block 256 and
+measures ~4.6 s/step wall including trainer overhead.
 
 Machine: 2-CPU Linux sandbox, torch 2.14.0+cpu, 2 threads.
 
@@ -143,8 +186,27 @@ Machine: 2-CPU Linux sandbox, torch 2.14.0+cpu, 2 threads.
    `model.tokenizer` at `levi.brain.train.model_v2:build_tokenizer`.
 3. Harness run stages the curriculum, trains with the v2 checkpoint
    format, and evaluates on cadence via `v2/eval_harness.py`.
-4. Budget from §6: at X steps/sec, 2000 steps ≈ Y hours on this box.
-   Prefer gradient accumulation over large batches on 2 CPUs.
+4. Budget from §6: at ~8 CPU-s per 2048-token step (block 512,
+   batch 4), 2000 steps ≈ 4.4 CPU-hours on this box. Prefer gradient
+   accumulation over large batches on 2 CPUs.
+
+## 9. Live training run (TRAIN worker, in flight)
+
+Reference numbers from the TRAIN worker's background run, which uses
+this stack (default config, v2 harness, `model_v2:build_tokenizer`):
+
+- Params: **13,767,552** (matches the §5 micro-benchmark config exactly)
+- Tokenizer: vocab 8192 BPE, 388 s to train on the train split
+- Smoke: 60 steps, loss 6.09 → 4.94
+- Full run: 5400 steps ≈ **6.9 CPU-hours** (~4.6 s/step wall including
+  trainer overhead), ~690k tokens ≈ 2.8 epochs
+
+Known harness limits found during launch (noted for future harness
+rounds; SCAFFOLD's rounds are complete — not edited here): `batch_size`
+is config-validated but `_train_step` trains one B=1 sequence per step;
+eval `sequence_nll` scores every prefix independently (~63 min per 20k
+val tokens — TRAIN caps via `max_val_tokens`); pass `python -u` so
+trainer prints aren't buffered to files.
 
 ## 8. What this is NOT
 

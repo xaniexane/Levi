@@ -273,39 +273,32 @@ def default_param_count(cfg: dict | None = None) -> int:
     return build_model(cfg).n_params()
 
 
-DEFAULT_TOKENIZER_PATH = Path(__file__).resolve().parent / "tokenizer.json"
-
-
 def build_tokenizer(path: str | Path | None = None):
     """v2 harness entry point: no-argument tokenizer builder.
 
     Resolution order: explicit ``path`` > ``$LEVI_TOKENIZER_PATH`` >
-    ``tokenizer.json`` next to this module. Returns a
+    :func:`tok.build_tokenizer` spec resolution (``$LEVI_TOKENIZER_SPEC`` /
+    ``tokenizer_spec.json`` / ``tokenizer.json`` next to the train
+    modules, training from the spec corpus when configured). Returns a
     :class:`tok.ByteBPETokenizer` (has ``encode``/``decode``/``vocab_size``/
     ``eod_id``).
 
     Raises FileNotFoundError with the exact training command when no
-    tokenizer file exists yet — the harness surfaces this instead of
-    training on a silently wrong vocabulary.
+    tokenizer file exists and no spec corpus is configured — the harness
+    surfaces this instead of training on a silently wrong vocabulary.
     """
     if __package__:
-        from .tok import ByteBPETokenizer
+        from . import tok as _tok_mod
     else:  # imported as a top-level module (tests, standalone scripts)
-        from tok import ByteBPETokenizer
+        import tok as _tok_mod
 
-    candidate = (
-        Path(path)
-        if path
-        else Path(os.environ["LEVI_TOKENIZER_PATH"])
-        if os.environ.get("LEVI_TOKENIZER_PATH")
-        else DEFAULT_TOKENIZER_PATH
-    )
-    if not candidate.is_file():
-        raise FileNotFoundError(
-            f"v2 tokenizer not found at {candidate}; train one first:\n"
-            f"  python3 tok.py --corpus corpus.jsonl --vocab 8192 --out {candidate}"
+    if path or os.environ.get("LEVI_TOKENIZER_PATH"):
+        # explicit location: load it, or fail loudly (never train silently
+        # over an explicit path the operator chose)
+        return _tok_mod.build_tokenizer(
+            {"path": str(path or os.environ["LEVI_TOKENIZER_PATH"])}
         )
-    return ByteBPETokenizer.load(candidate)
+    return _tok_mod.build_tokenizer()
 
 
 # ------------------------------------------------------------------ checkpoint

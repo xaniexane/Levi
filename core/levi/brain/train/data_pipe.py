@@ -64,14 +64,36 @@ def doc_boundary_mask(segment_ids: torch.Tensor) -> torch.Tensor:
     return (causal[None, None, :, :] + doc_block[:, None, :, :]).to(torch.float32)
 
 
+def _parse_record(path: str | Path, line: str, lineno: int) -> dict | None:
+    """Parse one JSONL line. Returns None for blank lines.
+
+    Malformed lines raise loudly (never silently dropped — a corrupt
+    corpus must not train quietly on a subset of itself).
+    """
+    s = line.strip()
+    if not s:
+        return None
+    try:
+        rec = json.loads(s)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"{path}: line {lineno}: invalid JSON: {e}") from e
+    if not isinstance(rec, dict):
+        raise ValueError(
+            f"{path}: line {lineno}: expected a JSON object, got {type(rec).__name__}"
+        )
+    return rec
+
+
 def iter_jsonl_docs(path: str | Path, text_field: str = "text"):
-    """Yield (doc_id, text) streaming, one JSON record per line."""
+    """Yield (doc_id, text) streaming, one JSON record per line.
+
+    Malformed lines raise loudly; see :func:`_parse_record`.
+    """
     with open(path, encoding="utf-8") as fh:
-        for i, line in enumerate(fh):
-            line = line.strip()
-            if not line:
+        for i, line in enumerate(fh, start=1):
+            rec = _parse_record(path, line, i)
+            if rec is None:
                 continue
-            rec = json.loads(line)
             text = rec.get(text_field, "")
             if not text:
                 continue
@@ -152,17 +174,15 @@ class DataPipeline:
         seen: set[str] = set()
         with open(self.corpus, encoding="utf-8") as fh:
             seq = 0
+            lineno = 0
             while True:
                 offset = fh.tell()
                 line = fh.readline()
                 if not line:
                     break
-                s = line.strip()
-                if not s:
-                    continue
-                try:
-                    rec = json.loads(s)
-                except json.JSONDecodeError:
+                lineno += 1
+                rec = _parse_record(self.corpus, line, lineno)
+                if rec is None:
                     continue
                 text = rec.get(self.text_field, "")
                 if not text:
@@ -271,6 +291,22 @@ class DataPipeline:
             n += 1
             if max_batches is not None and n >= max_batches:
                 break
+
+    def iter_train_docs(self):
+        """Yield (doc_id, text) for the train split, in stream order.
+
+        Introspection helper: lets the TRAIN worker verify split
+        assignment and curriculum order without decoding batches.
+        """
+        for _, doc_id, offset in self._build_plan():
+            if not self._is_val(doc_id):
+                yield doc_id, self._read_doc_at(offset)
+
+    def iter_val_docs(self):
+        """Yield (doc_id, text) for the validation split, in stream order."""
+        for _, doc_id, offset in self._build_plan():
+            if self._is_val(doc_id):
+                yield doc_id, self._read_doc_at(offset)
 
     # ------------------------------------------------------------ introspection
 

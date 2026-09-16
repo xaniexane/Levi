@@ -77,7 +77,6 @@ def jsonl_corpus(tmp_path: Path) -> Path:
         for did, text in docs:
             fh.write(json.dumps({"id": did, "text": text}) + "\n")
         fh.write(json.dumps({"id": "doc-empty", "text": ""}) + "\n")  # skipped
-        fh.write("not json at all\n")  # skipped by the planner
     return path
 
 
@@ -422,10 +421,84 @@ def test_data_pipe_module_contract():
         "doc_boundary_mask",
         "iter_jsonl_docs",
         "stable_hash01",
+        "_parse_record",
     ):
         assert hasattr(data_pipe, name), name
     assert tok_mod.FORMAT == "levi-bpe-v1"
     assert model_v2.CKPT_FORMAT == "levi-brain-v2"
+
+
+# ---------------------------------------------------------------- pipeline hardening
+
+
+def _write_jsonl(tmp_path: Path, name: str, records: list) -> Path:
+    path = tmp_path / name
+    with open(path, "w", encoding="utf-8") as fh:
+        for rec in records:
+            fh.write(rec if isinstance(rec, str) else json.dumps(rec) + "\n")
+    return path
+
+
+def test_malformed_jsonl_raises_loudly(tmp_path: Path):
+    # a corrupt corpus must fail fast, never train quietly on a subset
+    path = _write_jsonl(
+        tmp_path, "bad.jsonl", [{"id": "a", "text": "hello world"}, "not json at all\n"]
+    )
+    with pytest.raises(ValueError, match="line 2"):
+        list(data_pipe.iter_jsonl_docs(path))
+
+
+def test_non_dict_jsonl_record_raises_clear_error(tmp_path: Path):
+    path = _write_jsonl(
+        tmp_path, "weird.jsonl", ['["a", "list", "not", "an", "object"]\n']
+    )
+    with pytest.raises(ValueError, match="expected a JSON object"):
+        list(data_pipe.iter_jsonl_docs(path))
+
+
+def test_duplicate_doc_ids_share_split_no_leakage(
+    tmp_path: Path, tokenizer: ByteBPETokenizer
+):
+    # duplicate ids are deduped (first wins) and hash identically, so a
+    # duplicated doc can never leak from train into val
+    recs = [
+        {"id": "dup", "text": "alpha beta gamma delta epsilon zeta eta theta"},
+        {"id": "dup", "text": "alpha beta gamma delta epsilon zeta eta theta"},
+        {"id": "solo", "text": "iota kappa lambda mu nu xi omicron pi rho sigma"},
+    ]
+    path = _write_jsonl(tmp_path, "dups.jsonl", recs)
+    kw = dict(block_size=16, batch_size=8, val_fraction=0.5, seed=1)
+    train_ids = [d for d, _ in DataPipeline(path, tokenizer, **kw).iter_train_docs()]
+    val_ids = [d for d, _ in DataPipeline(path, tokenizer, **kw).iter_val_docs()]
+    assert train_ids.count("dup") + val_ids.count("dup") == 1  # deduped
+    assert not (set(train_ids) & set(val_ids)), "train/val id leakage"
+
+
+def test_manifest_unknown_doc_ids_ignored(tmp_path: Path, tokenizer: ByteBPETokenizer):
+    path = _write_jsonl(
+        tmp_path, "c.jsonl", [{"id": "real", "text": "alpha beta gamma delta"}]
+    )
+    manifest = {"stages": [{"name": "s", "doc_ids": ["ghost-1", "ghost-2", "real"]}]}
+    cur = Curriculum(manifest)
+    assert cur.stage_of("real") == 0
+    assert cur.stage_of("ghost-1") == 0  # harmless: never streamed, never crashes
+    pipe = DataPipeline(
+        path, tokenizer, block_size=16, batch_size=8, val_fraction=0.0, curriculum=cur
+    )
+    assert [d for d, _ in pipe.iter_train_docs()] == ["real"]
+
+
+def test_manifest_stage_without_doc_ids_is_empty_stage(tmp_path: Path):
+    cur = Curriculum({"stages": [{"name": "typo-stage"}]})
+    assert cur.stage_of("anything") == -1  # no crash, no phantom stage
+
+
+def test_empty_corpus_yields_nothing(tmp_path: Path, tokenizer: ByteBPETokenizer):
+    path = _write_jsonl(tmp_path, "empty.jsonl", [])
+    pipe = DataPipeline(path, tokenizer, block_size=16, batch_size=2)
+    assert list(pipe.iter_train()) == []
+    assert list(pipe.iter_val()) == []
+    assert pipe.stats()["documents"] == 0
 
 
 # ---------------------------------------------------------------- harness plug-in
@@ -433,9 +506,15 @@ def test_data_pipe_module_contract():
 
 def test_build_tokenizer_missing_file_errors_loudly(tmp_path: Path, monkeypatch):
     monkeypatch.delenv("LEVI_TOKENIZER_PATH", raising=False)
-    monkeypatch.setattr(model_v2, "DEFAULT_TOKENIZER_PATH", tmp_path / "nope.json")
+    monkeypatch.delenv("LEVI_TOKENIZER_SPEC", raising=False)
+    # point the factory at an empty dir: no spec file, no tokenizer.json
+    monkeypatch.setattr(tok_mod, "TRAIN_DIR", tmp_path)
+    monkeypatch.setattr(tok_mod, "DEFAULT_SPEC_PATH", tmp_path / "no-spec.json")
     with pytest.raises(FileNotFoundError, match="train one first"):
         model_v2.build_tokenizer()
+    # same contract on the spec-driven factory itself
+    with pytest.raises(FileNotFoundError, match="train one first"):
+        tok_mod.build_tokenizer({"path": str(tmp_path / "nope.json")})
 
 
 def test_build_tokenizer_loads_from_env(
@@ -519,3 +598,81 @@ def test_v2_checkpoint_bridge_rejects_arch_mismatch(tmp_path: Path):
     other = build_model({**TINY_CFG, "n_layer": 3})
     with pytest.raises(ValueError, match="architecture mismatch"):
         model_v2.load_v2_checkpoint(path, other)
+
+
+# ---------------------------------------------------------------- tok.build_tokenizer spec factory
+
+
+def _write_tok_corpus(tmp_path: Path) -> Path:
+    p = tmp_path / "tiny_corpus.jsonl"
+    with open(p, "w", encoding="utf-8") as fh:
+        for i, t in enumerate(_synthetic_texts(40, seed=99)):
+            fh.write(json.dumps({"id": f"d{i}", "text": t}) + "\n")
+    return p
+
+
+def test_tok_build_tokenizer_trains_saves_and_reloads(tmp_path: Path):
+    corpus = _write_tok_corpus(tmp_path)
+    out = tmp_path / "sub" / "tok.json"
+    spec = {"path": str(out), "vocab_size": 300, "corpus": str(corpus)}
+    t1 = tok_mod.build_tokenizer(spec)
+    assert out.is_file()
+    assert t1.vocab_size <= 300
+    # second call loads from disk: delete the corpus to prove no retrain
+    corpus.unlink()
+    t2 = tok_mod.build_tokenizer(spec)
+    assert t2.vocab_size == t1.vocab_size
+    assert t2.decode(t2.encode("hello world")) == "hello world"
+
+
+def test_tok_build_tokenizer_loads_without_retraining(tmp_path: Path, monkeypatch):
+    corpus = _write_tok_corpus(tmp_path)
+    out = tmp_path / "tok.json"
+    spec = {"path": str(out), "vocab_size": 300, "corpus": str(corpus)}
+    calls = []
+    orig = tok_mod.ByteBPETokenizer.train_from_jsonl
+
+    @classmethod
+    def spy(cls, *a, **k):
+        calls.append(1)
+        return orig(*a, **k)
+
+    monkeypatch.setattr(tok_mod.ByteBPETokenizer, "train_from_jsonl", spy)
+    tok_mod.build_tokenizer(spec)
+    assert len(calls) == 1
+    tok_mod.build_tokenizer(spec)  # cache hit: loads from disk
+    assert len(calls) == 1
+    tok_mod.build_tokenizer({**spec, "force_retrain": True})
+    assert len(calls) == 2
+
+
+def test_tok_build_tokenizer_missing_everything_raises(tmp_path: Path):
+    with pytest.raises(FileNotFoundError, match="train one first"):
+        tok_mod.build_tokenizer({"path": str(tmp_path / "nope.json")})
+    with pytest.raises(FileNotFoundError, match="not found"):
+        tok_mod.build_tokenizer(
+            {
+                "path": str(tmp_path / "nope.json"),
+                "corpus": str(tmp_path / "gone.jsonl"),
+            }
+        )
+
+
+def test_tok_build_tokenizer_rejects_unknown_keys(tmp_path: Path):
+    with pytest.raises(ValueError, match="unknown tokenizer spec keys"):
+        tok_mod.build_tokenizer({"path": "x.json", "vocab": 123})
+
+
+def test_tok_build_tokenizer_spec_file_via_env(tmp_path: Path, monkeypatch):
+    corpus = _write_tok_corpus(tmp_path)
+    out = tmp_path / "tok.json"
+    spec_file = tmp_path / "spec.json"
+    spec_file.write_text(
+        json.dumps({"path": str(out), "vocab_size": 300, "corpus": str(corpus)}),
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("LEVI_TOKENIZER_SPEC", str(spec_file))
+    monkeypatch.delenv("LEVI_TOKENIZER_PATH", raising=False)
+    t = tok_mod.build_tokenizer()
+    assert out.is_file() and t.vocab_size <= 300
+    assert t.decode(t.encode("round trip")) == "round trip"
