@@ -1,0 +1,94 @@
+# LEVI native-brain v2 training config.
+#
+# RECONSTRUCTION of the 2026-09-16 morning run, which died without artifacts
+# (no checkpoint, no log, no launch script survived). The morning plan was:
+# ~5,400 CPU steps, 13,767,552 parameters. Every choice below is documented
+# against core/levi/brain/train/model_v2.py and the v2 harness; nothing here
+# is newly tuned — it reproduces the lost run's plan as faithfully as the
+# surviving evidence allows.
+#
+# Data prep (run once, committed helper):
+#   PYTHONPATH=core python3 core/levi/brain/train/v2/prepare_data.py \
+#       --run-dir runs/tiny-gpt-v2-20260916
+# Staging (torch-free curriculum build):
+#   PYTHONPATH=core python3 -m levi.brain.train.v2.trainer \
+#       --config core/levi/brain/train/v2/train.yaml \
+#       --run-dir runs/tiny-gpt-v2-20260916 --stage-only
+# Full run: see runs/tiny-gpt-v2-20260916/LAUNCH.md
+
+name: tiny-gpt-v2
+seed: 1337
+
+model:
+  builder: "levi.brain.train.model_v2:build_model"
+  tokenizer: "levi.brain.train.model_v2:build_tokenizer"
+  # vocab_size 8192: matches the byte-BPE tokenizer resolved by
+  # build_tokenizer() (core/levi/brain/train/tokenizer.json, verified
+  # vocab_size == 8192). The harness refuses a mismatch loudly before
+  # torch ever sees it.
+  vocab_size: 8192
+  # n_layer=6, n_head=6, n_embd=384: default_param_count() == 13,767,552,
+  # EXACTLY the morning plan's parameter count (verified 2026-09-16).
+  # Architecture per model_v2.py: tied token/output embeddings, RoPE,
+  # RMSNorm, SwiGLU FFN (hidden = 8/3 * n_embd), plain MHA (n_kv_head
+  # defaults to n_head). Constraints honored: 384 % 6 == 0, head_dim 64
+  # is even (RoPE requirement).
+  n_layer: 6
+  n_head: 6
+  n_embd: 384
+  # block_size 512: model default context length; max_seq_len (128) must
+  # stay <= this.
+  block_size: 512
+  dropout: 0.0
+
+data:
+  # Manifests built by prepare_data.py into the run dir. Paths resolve
+  # relative to THIS file's directory (config_dir). The manifests pin
+  # sha256 of the staged splits, so the run trains on exactly what was
+  # staged even if the live corpus files keep changing.
+  # Staged 2026-09-16: train 341 docs / 817,928 chars; val 18 / 47,742;
+  # test 20 / 43,909 (90/5/5 seeded split, seed 1337, after cross-file
+  # dedupe: 739 raw docs -> 379 unique).
+  train_manifest: ../../../../../runs/tiny-gpt-v2-20260916/corpora/train.manifest.json
+  val_manifest: ../../../../../runs/tiny-gpt-v2-20260916/corpora/val.manifest.json
+  test_manifest: ../../../../../runs/tiny-gpt-v2-20260916/corpora/test.manifest.json
+  # batch_size 32: CPU-sane; matches the morning run's data_pipe usage.
+  batch_size: 32
+  # max_seq_len 128: <= block_size; keeps CPU step time reasonable.
+  max_seq_len: 128
+  shuffle_seed: 1337
+
+schedule:
+  # steps 5400: the morning plan's step count.
+  # Token budget: 5400 * 32 * 128 = 22,118,400 tokens.
+  steps: 5400
+  learning_rate: 3.0e-4
+  warmup_steps: 100
+  lr_min: 3.0e-5
+  weight_decay: 0.01
+  grad_clip: 1.0
+  # log_every 50: the morning log showed every-50-step lines
+  # ("step 50 loss=... ema=...").
+  log_every: 50
+
+eval:
+  # every_steps 500: periodic honest eval aligned with checkpoint cadence.
+  # probes_path / baseline_checkpoint intentionally empty: no
+  # eval/probes.jsonl and no weights/v1 baseline exist in the repo; the
+  # harness degrades gracefully ("no probes" note, "comparison skipped")
+  # instead of failing.
+  every_steps: 500
+  probes_path: ""
+  baseline_checkpoint: ""
+  max_val_batches: 50
+
+checkpointing:
+  # NOTE: the trainer derives the real checkpoint dir from --run-dir
+  # (<run-dir>/checkpoints); this value is validated but informational.
+  # keep_last 5 bounds disk; save_every 500 mirrors the eval cadence.
+  # The morning run saved every 100 steps; 500 is chosen to halve
+  # checkpoint I/O on this slower CPU box while keeping 10+ recovery
+  # points across the run.
+  dir: ../../../../../runs/tiny-gpt-v2-20260916/checkpoints
+  save_every: 500
+  keep_last: 5
