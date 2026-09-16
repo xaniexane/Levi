@@ -1,1 +1,1 @@
-"""Hybrid Search & Apply job tracker — local-first pipeline state."""
+"""LEVI jobs tracker — local-first opportunity / deal pipeline state."""
