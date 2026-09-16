@@ -42,6 +42,10 @@ from levi.identity.templates import list_templates, apply_template
 from levi.backup.cli import cmd_backup, register_backup_parser
 from levi.jobs.cli import cmd_jobs, register_jobs_parser
 
+# >>> LEVI teach module — minimal hook (teach worker); logic in levi/teach/
+from levi.teach.cli import cmd_teach, register_teach_parser
+# <<< LEVI teach module
+
 # <<< LEVI backup module
 # >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
 from levi.surgeon.cli import cmd_surgeon, register_surgeon_parser
@@ -5655,6 +5659,9 @@ def main():
     # >>> LEVI jobs module — minimal hook (Hybrid Search & Apply tracker)
     register_jobs_parser(sub)
     # <<< LEVI jobs module
+    # >>> LEVI teach module — minimal hook (teach worker)
+    register_teach_parser(sub)
+    # <<< LEVI teach module
     # >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
     register_surgeon_parser(sub)
     register_automation_parser(sub)
@@ -6451,6 +6458,9 @@ def main():
         # >>> LEVI jobs module — minimal hook (Hybrid Search & Apply tracker)
         "jobs": cmd_jobs,
         # <<< LEVI jobs module
+        # >>> LEVI teach module — minimal hook (teach worker)
+        "teach": cmd_teach,
+        # <<< LEVI teach module
         # >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
         "surgeon": cmd_surgeon,
         "automation": cmd_automation,
