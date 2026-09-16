@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import pytest
 
 from levi.videotex import CHOICES_PER_SCREEN, PAGE_WIDTH
 from levi.videotex.keys import guide_lines, parse

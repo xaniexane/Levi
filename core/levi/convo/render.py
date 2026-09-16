@@ -52,7 +52,8 @@ def render_block(
         lines.append(
             "OPEN LOOPS: "
             + " · ".join(
-                "⏳[%s] %s (t%d)" % (loop["kind"], loop["text"][:60], loop["opened_turn"])
+                "⏳[%s] %s (t%d)"
+                % (loop["kind"], loop["text"][:60], loop["opened_turn"])
                 for loop in loops[:3]
             )
         )

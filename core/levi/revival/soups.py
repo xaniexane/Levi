@@ -182,7 +182,9 @@ class Soup:
         try:
             return self._objects[obj_id]
         except KeyError:
-            raise SoupError("soups: soup %r has no object %r" % (self.name, obj_id)) from None
+            raise SoupError(
+                "soups: soup %r has no object %r" % (self.name, obj_id)
+            ) from None
 
     def query(
         self, predicate: Callable[[Dict[str, Any]], bool]
@@ -219,7 +221,9 @@ class Soup:
         try:
             rec = self._objects.pop(obj_id)
         except KeyError:
-            raise SoupError("soups: soup %r has no object %r" % (self.name, obj_id)) from None
+            raise SoupError(
+                "soups: soup %r has no object %r" % (self.name, obj_id)
+            ) from None
         self._persist()
         return rec
 

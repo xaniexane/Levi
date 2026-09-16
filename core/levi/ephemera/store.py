@@ -186,7 +186,9 @@ class EphemeraStore:
         if not p.exists():
             return []
         return [
-            json.loads(line) for line in p.read_text(encoding=ENC).splitlines() if line.strip()
+            json.loads(line)
+            for line in p.read_text(encoding=ENC).splitlines()
+            if line.strip()
         ]
 
     # -- expiry / true delete -----------------------------------------------

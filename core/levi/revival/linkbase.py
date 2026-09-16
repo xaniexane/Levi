@@ -204,7 +204,9 @@ class LinkBase:
             raise UnknownDocument(doc_id)
         del self.docs[doc_id]
         quarantined = [
-            link for link in self._links.values() if link.src == doc_id or link.dst == doc_id
+            link
+            for link in self._links.values()
+            if link.src == doc_id or link.dst == doc_id
         ]
         for link in quarantined:
             del self._links[link.link_id]
