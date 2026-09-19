@@ -88,8 +88,7 @@ result = run_workflow(
     "fleet-five",
     task="Design the nightly archive sweep",
     specialists=[
-        {"role": "architect", "focus": "warehouse indexing",
-         "contribution": "..."},
+        {"role": "architect", "focus": "warehouse indexing", "contribution": "..."},
         {"role": "implementer", "contribution": "..."},
         {"role": "critic", "contribution": "..."},
         {"role": "scope_warden", "contribution": "..."},
@@ -105,7 +104,7 @@ Direct (raises `FleetError` on violations):
 ```python
 from levi.workflows.fleet_five import run_fleet
 
-report = run_fleet(task, specialists)   # one folded report dict
+report = run_fleet(task, specialists)  # one folded report dict
 ```
 
 The report dict:
@@ -134,5 +133,6 @@ answer is the work.
 
 ## Laws observed
 
-stdlib-only, local-first, free core forever. Additions lens: fleet-five
+stdlib-only, local-first, no free core (dollar-scale entry; "free core forever"
+killed 2026-09-17). Additions lens: fleet-five
 adds a new bounded-delegation primitive LEVI owns; it rewrites nothing.

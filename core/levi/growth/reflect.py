@@ -203,6 +203,7 @@ def reflect_rules_detailed(
     _extract_capability_gaps(experiences, add)
     _extract_automation_outcomes(experiences, add)
     _extract_repeated_requests(experiences, add)
+    _extract_ops_outcomes(experiences, add)
     return learnings, evidence
 
 
@@ -800,3 +801,36 @@ def reflect_cloud(experiences: list[Experience]) -> list[Learning]:
             )
         )
     return learnings
+
+
+def _extract_ops_outcomes(experiences, add) -> None:
+    """Widened ops-log intake: hunt waves and agent/browser task outcomes.
+
+    Conservative by design — only completed hunt waves (facts about what
+    was found) and failed agent/browser tasks (corrections worth
+    remembering) distill in rules mode. Build-queue entries and raw
+    daily-log chunks are intake for the model-assisted path, not rules:
+    they're too noisy to assert as durable learnings.
+    """
+    for exp in experiences:
+        if exp.meta.get("ops_source") == "hunt-wave":
+            # content: "Hunt wave <id> completed (<ts>): theme=<t>,
+            #          findings=<n>, research=<slug>."
+            add(
+                "ops_outcomes",
+                "fact",
+                f"Completed {_snip(exp.content, 200)}",
+                0.55,
+                exp,
+            )
+        elif exp.meta.get("ops_source") == "agent-output":
+            if _ERROR_HINT.search(exp.content):
+                add(
+                    "ops_outcomes",
+                    "correction",
+                    f"Agent/browser task run reported trouble "
+                    f"({exp.source}): '{_snip(exp.content, 160)}'. Check the "
+                    "task report before retrying the same route.",
+                    0.6,
+                    exp,
+                )

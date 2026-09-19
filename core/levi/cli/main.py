@@ -41,7 +41,20 @@ from levi.identity.templates import list_templates, apply_template
 # >>> LEVI backup module — minimal hook (backup coordinator); logic in levi/backup/
 from levi.backup.cli import cmd_backup, register_backup_parser
 from levi.jobs.cli import cmd_jobs, register_jobs_parser
+from levi.strategy.cli import cmd_strategy, register_strategy_parser
 from levi.neighboros.cli import cmd_neighboros, register_neighboros_parser
+from levi.neighbor.cli import cmd_neighbor, register_neighbor_parser
+# >>> LEVI legion module — minimal hook (Legion bot product); logic in levi/legion/
+from levi.legion.cli import cmd_legion, register_legion_parser
+# <<< LEVI legion module
+# >>> LEVI workshop module — minimal hook (Agent Workshop); logic in levi/workshop/
+from levi.workshop.cli import cmd_workshop, register_workshop_parser
+# <<< LEVI workshop module
+from levi.inbox.cli import cmd_inbox, register_inbox_parser
+from levi.advisor.cli import cmd_advise, register_advisor_parser
+from levi.engagement.cli import cmd_engage, register_engage_parser
+from levi.creator.cli import cmd_creator, register_creator_parser
+from levi.snapshots.stage_cli import cmd_snapshot, register_snapshot_parser
 
 # >>> LEVI teach module — minimal hook (teach worker); logic in levi/teach/
 from levi.teach.cli import cmd_teach, register_teach_parser
@@ -59,7 +72,18 @@ except Exception:  # sibling engine modules may still be landing; degrade gracef
 # >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
 from levi.surgeon.cli import cmd_surgeon, register_surgeon_parser
 from levi.sentinel.cli import cmd_sentinel, register_sentinel_parser
-from levi.automation.cli import cmd_automation, register_automation_parser
+from levi.automation.cli import (
+    cmd_automate,
+    cmd_automation,
+    register_automate_parser,
+    register_automation_parser,
+)
+from levi.nexus.cli import cmd_nexus, register_nexus_parser
+from levi.si_team.cli import cmd_si_team, register_si_team_parser
+from levi.revival.omega.cli import cmd_omega, register_omega_parser
+from levi.alpha.cli import cmd_alpha, register_alpha_parser
+from levi.uniforge.cli import cmd_uniforge, register_uniforge_parser
+from levi.dweller.cli import cmd_dweller, register_dweller_parser
 # <<< LEVI Stage-1 lineage
 
 
@@ -1954,6 +1978,7 @@ def cmd_agent(args):
             affect=use_affect,
             affect_session=affect_session,
             growth=not bool(getattr(args, "no_growth", False)),
+            language=getattr(args, "lang", None),
         )
         return
 
@@ -2278,6 +2303,7 @@ def cmd_agent(args):
             affect=use_affect,
             affect_session=affect_session,
             growth=not bool(getattr(args, "no_growth", False)),
+            language=getattr(args, "lang", None),
         )
         _record_agent_ledger(task, transcript, provider)
         if getattr(args, "json", False):
@@ -2370,6 +2396,29 @@ def cmd_unified(args):
 def cmd_demand(args):
     from levi.demand.pulse import DemandPulse
 
+    # Autonomous upgrade authority surface.
+    if getattr(args, "authority", None):
+        from levi.demand.authority import cli_main as authority_main
+
+        return authority_main(list(args.authority))
+
+    # Feed-product surface: delegate to the module CLI (tested path).
+    if (
+        getattr(args, "feed", False)
+        or getattr(args, "digest", False)
+        or getattr(args, "watch", None)
+    ):
+        from levi.demand.__main__ import main as demand_main
+
+        argv: list = []
+        if getattr(args, "feed", False):
+            argv.append("feed")
+        elif getattr(args, "digest", False):
+            argv.append("digest")
+        elif getattr(args, "watch", None):
+            argv.extend(["watch", "--item", str(getattr(args, "watch"))])
+        return demand_main(argv)
+
     dp = DemandPulse()
     if getattr(args, "scan", None):
         s = dp.scan_seed(args.scan, segment=getattr(args, "segment", None) or "general")
@@ -2461,6 +2510,11 @@ def _cmd_demand_five_factor(dp, demand_id, args):
 
 
 def cmd_income(args):
+    # Portfolio engine subcommands take precedence when given.
+    if getattr(args, "income_cmd", None):
+        from levi.income.cli import cmd_income as _portfolio_cmd
+
+        return _portfolio_cmd(args)
     from levi.income.factory import IncomeFactory
 
     fac = IncomeFactory()
@@ -2523,6 +2577,15 @@ def cmd_brain(args):
         print(format_index())
         n = seed_k()
         print(f"Knowledge corpus seed: {n} units (A–Z, events, inventors, stars, X).")
+        return
+    if getattr(args, "seed_synthetic_minds", False):
+        from levi.brain.seed_synthetic_minds import seed as seed_sm, format_index
+
+        print(format_index())
+        n = seed_sm()
+        print(
+            f"Synthetic-minds corpus seed: {n} units (synthetic vs artificial, landscape, uncommon minds, dead minds)."
+        )
         return
     # >>> LEVI Stage-1 lineage — seed path (source-sync entry `levi-ai`)
     if getattr(args, "seed_stage1", False):
@@ -3184,6 +3247,74 @@ def cmd_academy(args):
             print("Usage: levi academy session --day N --block M")
             return 2
         return rs.main(["--day", str(day), "--block", str(block)])
+    if action == "help":
+        from levi.academy import remediation as arem
+
+        learner = getattr(args, "learner", None)
+        stats = arem.help_stats(learner)
+        scope = f" for learner {learner}" if learner else ""
+        print(
+            f"academy help desk{scope}: {stats['open']} open, "
+            f"{stats['escalated']} escalated, {stats['resolved']} resolved"
+        )
+        for t in arem.open_tickets(learner):
+            print(
+                f"  [{t['status']}] {t['ticket_id']} "
+                f"learner={t['learner_id']} session={t['session_id']}"
+            )
+            print(f"    {t['reason'][:140]}")
+        return 0
+    if action == "staff":
+        from levi.academy import staff as astaff
+
+        session = getattr(args, "session", None)
+        roles = getattr(args, "roles", None)
+        if session and roles:
+            need = [r.strip() for r in roles.split(",") if r.strip()]
+            crew = astaff.assign_staff(session, need)
+            print(f"crew for session {session}:")
+            for role, who in crew.items():
+                print(f"  {role:16s} {who['callsign']}")
+            return 0
+        print("academy workforce — roles, not identities:")
+        for s in astaff.roster():
+            print(f"  {s['callsign']:10s} {s['role']:16s} {s['job'][:72]}")
+        return 0
+    if action == "remediate":
+        from levi.academy import remediation as arem
+
+        sid = getattr(args, "session", None)
+        progress = rs.load_progress()
+        pending = progress.get("pending_remedial")
+        if sid is None:
+            if pending:
+                sid = f"d{pending['day']}b{pending['block']}"
+            else:
+                done = progress.get("completed", [])
+                if not done:
+                    print("no sessions on record — nothing to remediate")
+                    return 0
+                sid = done[-1]
+        if pending and sid == f"d{pending['day']}b{pending['block']}":
+            record = dict(pending, session=sid)
+        else:
+            rec = progress.get("sessions", {}).get(sid)
+            if not rec:
+                print(f"no record for session {sid}")
+                return 2
+            record = {
+                "session": sid,
+                "gate_passed": rec.get("gate_passed", True),
+                "mastery_score": rec.get("mastery_score", 1.0),
+                "missed_objectives": [],
+                "missed_questions": [],
+            }
+        plan = arem.auto_remediate("levi", record)
+        if plan is None:
+            print(f"session {sid} is healthy — no remediation needed")
+            return 0
+        print(json.dumps(plan, indent=1))
+        return 0
     print(f"Unknown academy action: {action}")
     return 2
 
@@ -3588,14 +3719,32 @@ def cmd_security(args):
     )
 
 
+def cmd_service(args):
+    """Service offerings — the legion service-offering standard.
+
+    Any organ, or Levi in general, offers cyber and software-development
+    services through one pipeline: analyze -> quote -> deliver -> paid
+    -> showcase. Thin hook; the real work lives in levi.services.
+    """
+    from levi.services.cli import cmd_service as _service_cmd
+
+    return _service_cmd(args)
+
+
 def cmd_bounty(args):
     """Bug-bounty recon pipeline — scoped, polite, recon-only.
 
-    Subcommands:
+    Recon subcommands:
       scope add|remove|list     manage enrolled program scopes
       recon <domain>            run enum -> probe -> content -> store
       findings [--new]          list stored findings (optionally only new)
       monitor --once            recon every enrolled scope, print only new
+
+    Service-bounty hunter subcommands (Chauncey's bounty hunter):
+      register|list|quote|agree|start|deliver|pay|sense
+      showcase [--admit <id>] [--verify-client <id>]
+    Payment moves through the Cybrus money gateway only; the gateway is
+    fail-closed (no rails registered), so settlement refuses honestly.
     """
     from levi.bounty.pipeline import run_monitor, run_recon
     from levi.bounty.scope import ScopeError, ScopeStore
@@ -3691,6 +3840,194 @@ def cmd_bounty(args):
         for f in new:
             print(f"  [{f['kind']}] {f['target']}: {f['detail'][:100]}")
         return
+
+    # -- service bounties: the bounty hunter --------------------------------
+    if cmd in (
+        "register",
+        "list",
+        "quote",
+        "agree",
+        "start",
+        "deliver",
+        "pay",
+        "sense",
+        "showcase",
+    ):
+        from levi.bounty import hunts as _hunts
+        from levi.bounty import payment as _pay
+        from levi.bounty import showcase as _show
+
+        _hstore = _hunts.BountyStore()
+
+        def _get(bid):
+            try:
+                return _hstore.get(bid)
+            except _hunts.BountyError as exc:
+                print(f"refused: {exc}")
+                return None
+
+        if cmd == "register":
+            b = _hunts.new_bounty(
+                args.title,
+                args.problem,
+                scope=args.scope,
+                deadline=args.deadline,
+                client=args.client,
+            )
+            _hstore.add(b)
+            print(f"registered {b.id} (draft): {b.title}")
+            return
+
+        if cmd == "list":
+            items = _hstore.list(state=args.state)
+            if not items:
+                print("No bounties." + (" Register one: levi bounty register ..." if not args.state else ""))
+                return
+            print(f"══ {len(items)} bounties ══")
+            for b in items:
+                q = f" · ${b.quote_usd:.2f}" if b.quote_usd else ""
+                print(f"  [{b.state:9s}] {b.id} — {b.title}{q}")
+            return
+
+        if cmd == "quote":
+            b = _get(args.bounty_id)
+            if not b:
+                return
+            try:
+                _hunts.quote_bounty(
+                    b, giant_price=args.giant_price, strategy=args.strategy
+                )
+            except Exception as exc:
+                print(f"quote refused: {exc}")
+                return
+            _hstore.save(b)
+            print(f"quoted {b.id}: ${b.quote_usd:.2f} (quote, not a charge)")
+            print(f"  rationale: {b.price_rationale[:160]}")
+            return
+
+        if cmd == "agree":
+            b = _get(args.bounty_id)
+            if not b:
+                return
+            try:
+                _hunts.transition(b, _hunts.BountyState.AGREED, note=args.note)
+            except _hunts.BountyError as exc:
+                print(f"agree refused: {exc}")
+                return
+            _hstore.save(b)
+            print(f"{b.id}: terms agreed — {args.note[:120]}")
+            return
+
+        if cmd == "start":
+            b = _get(args.bounty_id)
+            if not b:
+                return
+            try:
+                _hunts.transition(b, _hunts.BountyState.HUNTING)
+            except _hunts.BountyError as exc:
+                print(f"start refused: {exc}")
+                return
+            _hstore.save(b)
+            print(f"{b.id}: the hunt is on.")
+            return
+
+        if cmd == "deliver":
+            b = _get(args.bounty_id)
+            if not b:
+                return
+            b.solution = args.solution
+            b.evidence = [e.strip() for e in args.evidence.split(";;") if e.strip()]
+            b.confidence = args.confidence
+            b.verification = args.verification
+            try:
+                _hunts.transition(b, _hunts.BountyState.DELIVERED)
+                _pay.mark_delivered_for_payment(b)
+            except (_hunts.BountyError, ValueError) as exc:
+                print(f"deliver refused: {exc}")
+                return
+            _hstore.save(b)
+            print(f"{b.id}: delivered (evidence: {len(b.evidence)}, confidence {b.confidence})")
+            return
+
+        if cmd == "pay":
+            b = _get(args.bounty_id)
+            if not b:
+                return
+            if args.status or not (args.plan or args.execute):
+                st = _pay.payment_status(b)
+                print(f"payment {b.id}: {st['payment_state']}")
+                if st["plan_id"]:
+                    print(f"  plan: {st['plan_id']}")
+                    print(f"  gateway events: {st['gateway']['events']}")
+                    print(f"  moved: {st['moved']}")
+                return
+            if args.plan:
+                try:
+                    res = _pay.request_payment(b)
+                except _hunts.BountyError as exc:
+                    print(f"payment plan refused: {exc}")
+                    return
+                _hstore.save(b)
+                print(res["preview"])
+                print("Plan recorded. Preview is not permission; nothing moved.")
+                return
+            if args.execute:
+                if not args.authorized_by:
+                    print("execute requires --authorized-by (Chauncey's keeper identity)")
+                    return
+                try:
+                    res = _pay.settle_bounty(
+                        b, authorized_by=args.authorized_by
+                    )
+                except Exception as exc:
+                    _hstore.save(b)  # persist the recorded refusal
+                    print(f"settlement refused (fail-closed): {exc}")
+                    return
+                _hstore.save(b)
+                print(f"{b.id}: PAID — receipt recorded via Cybrus.")
+                return
+
+        if cmd == "sense":
+            drafts = _hunts.sense_bounties(min_worth=args.min_worth)
+            if not drafts:
+                print("No DemandPulse opportunities worth sensing right now.")
+                return
+            if args.register:
+                for d in drafts:
+                    _hstore.add(d)
+                print(f"sensed + registered {len(drafts)} draft(s)")
+            else:
+                print(f"══ {len(drafts)} sensed draft(s) (not registered) ══")
+            for d in drafts:
+                print(f"  {d.id} — {d.title} [from {d.sensed_from}]")
+            return
+
+        if cmd == "showcase":
+            _sstore = _show.ShowcaseStore()
+            if args.admit:
+                b = _get(args.admit)
+                if not b:
+                    return
+                try:
+                    from levi.cybrus.money import MoneyGateway
+
+                    entry = _show.admit(b, gateway=MoneyGateway())
+                    _sstore.add(entry)
+                except _show.ShowcaseRefused as exc:
+                    print(f"admission refused: {exc}")
+                    return
+                print(f"showcased {entry.entry_id}: {entry.title}")
+                return
+            if args.verify_client:
+                try:
+                    entry = _sstore.verify_client(args.verify_client, note=args.note)
+                except _show.ShowcaseRefused as exc:
+                    print(f"refused: {exc}")
+                    return
+                print(f"{entry.entry_id}: client-verified.")
+                return
+            print(_show.render(_sstore))
+            return
 
     # cmd == "findings" (default)
     fstore = FindingStore()
@@ -3839,6 +4176,47 @@ def cmd_personas(args):
         print(f"  {k:28} {p.display_name if p else ''}")
     print("… levi chat --personas  |  levi chat /personas <filter>")
     print('Lock: levi chat --persona normal  or  levi ask -p strategist "..."')
+
+
+def cmd_persona(args):
+    """Companion lenses — higher-order than the PersonaLattice roster.
+
+    Lenses, not identities: the lens modulates expression only, never
+    safety, permissions, factual integrity, or identity. LEVI stays LEVI.
+    """
+    from levi.personas import active_lens, get_lens, list_lenses, set_active_lens
+
+    action = getattr(args, "action", None) or "list"
+    if action == "list":
+        current = active_lens()
+        print("Companion lenses — lenses, not identities. LEVI stays LEVI.")
+        for lens in list_lenses():
+            mark = "*" if lens.id == current.id else " "
+            print(f"{mark} {lens.id:12} {lens.name:12} {lens.tagline}")
+        print("Use: levi persona select <id> | levi persona preview <id>")
+    elif action == "select":
+        lid = (getattr(args, "id", "") or "").strip()
+        if set_active_lens(lid):
+            lens = get_lens(lid)
+            print(f"Active lens: {lens.name} — {lens.tagline}")
+        else:
+            print(f"Unknown lens id: {lid!r}. Nothing changed.")
+            print("Available:", ", ".join(lens.id for lens in list_lenses()))
+    elif action == "preview":
+        lid = (getattr(args, "id", "") or "").strip()
+        lens = get_lens(lid)
+        if lens is None:
+            print(f"Unknown lens id: {lid!r}.")
+            print("Available:", ", ".join(lens.id for lens in list_lenses()))
+            return
+        print(f"{lens.name} — {lens.tagline}")
+        print(f"Role: {lens.role}")
+        print(f"Stance: {lens.stance}")
+        print("Tone:")
+        print(f"  word choice: {lens.tone.word_choice}")
+        print(f"  cadence: {lens.tone.cadence}")
+        print(f"  do: {'; '.join(lens.tone.do)}")
+        print(f"  don't: {'; '.join(lens.tone.dont)}")
 
 
 def cmd_skills(args):
@@ -4117,6 +4495,49 @@ def cmd_automations(args):
     print(json.dumps(reg.status(), indent=2))
     for a in reg.list():
         print(f"  {a.id} | {a.status.value:8} | {a.name}")
+
+
+def cmd_engines(args):
+    from levi.engines import registry as eng_registry
+
+    action = (getattr(args, "action", None) or "list").lower()
+    if action == "list":
+        for e in eng_registry.list():
+            print(f"  {e.id:10} | {e.name:8} | {e.description[:60]}")
+        return
+    engine_id = getattr(args, "engine", None)
+    if not engine_id:
+        print("Usage: levi engines <list|describe|run> [engine-id] [--input '<json>']")
+        return
+    if action == "describe":
+        try:
+            e = eng_registry.get(engine_id)
+        except KeyError as exc:
+            print(exc)
+            return
+        print(f"{e.id} — {e.name} (v{e.version}, risk {e.risk})")
+        print(f"  {e.description}")
+        print(f"  required: {', '.join(e.required) or '(none)'}")
+        for k, v in e.schema.items():
+            print(f"  input '{k}': {v}")
+        return
+    if action == "run":
+        import json as _json
+
+        raw = getattr(args, "input", None) or "{}"
+        try:
+            inputs = _json.loads(raw)
+        except _json.JSONDecodeError as exc:
+            print(f"bad --input JSON: {exc}")
+            return
+        try:
+            result = eng_registry.run(engine_id, inputs)
+        except (KeyError, ValueError) as exc:
+            print(f"refused: {exc}")
+            return
+        print(_json.dumps(result.to_dict(), indent=2))
+        return
+    print(f"unknown engines action '{action}' (list|describe|run)")
 
 
 def cmd_remember(args):
@@ -5223,6 +5644,21 @@ def main():
         "--dry-run", action="store_true", help="Walk the gate without executing"
     )
     sub.add_parser("personas")
+    persona_p = sub.add_parser(
+        "persona", help="Companion lenses (lenses, not identities)"
+    )
+    persona_sub = persona_p.add_subparsers(dest="action")
+    persona_sub.add_parser("list", help="List companion lenses")
+    persona_sel_p = persona_sub.add_parser("select", help="Set the active lens")
+    persona_sel_p.add_argument(
+        "id",
+        help="Lens id: friend, mentor, challenger, protector, trickster, archivist",
+    )
+    persona_prev_p = persona_sub.add_parser("preview", help="Show a lens card")
+    persona_prev_p.add_argument(
+        "id",
+        help="Lens id: friend, mentor, challenger, protector, trickster, archivist",
+    )
     wit_p = sub.add_parser("wit", help="ND comedy spectrum + calibrated wit preview")
     rail_p = sub.add_parser("rail", help="Opportunity Rail HITL-gated automation")
     rail_p.add_argument("--start", default=None)
@@ -5658,6 +6094,12 @@ def main():
         "--json", action="store_true", help="Print the transcript as JSON"
     )
     ag_run.add_argument(
+        "--lang",
+        default=None,
+        help="Reply language code (e.g. es, fr, de, pt, ja). "
+        "Default: English. Unknown codes fall back to English.",
+    )
+    ag_run.add_argument(
         "--register",
         default=None,
         metavar="VARIANT",
@@ -5727,6 +6169,12 @@ def main():
         "--no-growth",
         action="store_true",
         help="Disable growth-loop context for the session (see `levi agent run --help`).",
+    )
+    ag_chat.add_argument(
+        "--lang",
+        default=None,
+        help="Reply language code (e.g. es, fr, de, pt, ja). "
+        "Default: English. Unknown codes fall back to English.",
     )
     ag_model = ag_sub.add_parser(
         "model", help="The LEVI model family: list, status, pull, use"
@@ -5847,11 +6295,59 @@ def main():
         help='Override weights, e.g. "0.3,0.25,0.2,0.15,0.1"',
     )
     dem_p.add_argument("--ff-threshold", type=float, default=75.0)
+    dem_p.add_argument(
+        "--feed",
+        action="store_true",
+        help="Curate scored opportunities into a dated digest",
+    )
+    dem_p.add_argument(
+        "--digest",
+        action="store_true",
+        help="Show the latest DemandPulse digest",
+    )
+    dem_p.add_argument(
+        "--watch",
+        default=None,
+        metavar="ITEM_ID",
+        help="Mark a digest item as watched",
+    )
+    dem_p.add_argument(
+        "--authority",
+        nargs=argparse.REMAINDER,
+        default=None,
+        metavar="AUTHORITY_CMD",
+        help="Autonomous upgrade authority: status | audit | escalations | resolve | sense | propose ...",
+    )
     inc_p = sub.add_parser(
         "income", help="Income Factory (capability, not whole purpose)"
     )
     inc_p.add_argument("--compose", default=None)
     inc_p.add_argument("--service", default="service modernization")
+    # >>> income portfolio engine subcommands (coordinator)
+    inc_cmd = inc_p.add_subparsers(dest="income_cmd")
+    inc_cmd.add_parser("summary", help="portfolio standing")
+    inc_cmd.add_parser("list", help="list registered generators")
+    _ir = inc_cmd.add_parser("run", help="run one generator's cycle")
+    _ir.add_argument("generator_id", help="generator id")
+    _ir.add_argument("--apply", action="store_true", help="run for real (default: dry-run)")
+    _ira = inc_cmd.add_parser("run-all", help="run every generator's cycle")
+    _ira.add_argument("--apply", action="store_true", help="run for real (default: dry-run)")
+    _irc = inc_cmd.add_parser("record", help="record confirmed income (70/30 split)")
+    _irc.add_argument("generator_id", help="generator id")
+    _irc.add_argument("amount", type=float, help="confirmed amount USD")
+    _irc.add_argument("kind", help="sale|recurring|payout")
+    _irc.add_argument("--basis", required=True, help="must be 'confirmed'")
+    _irc.add_argument("--counterparty", default="", help="who paid")
+    _irc.add_argument("--note", default="", help="note")
+    inc_cmd.add_parser("events", help="income event ledger")
+    inc_cmd.add_parser("pool", help="reinvestment-pool balance")
+    _isp = inc_cmd.add_parser("spend", help="approve a pool spend (Chauncey only)")
+    _isp.add_argument("amount", type=float, help="amount USD")
+    _isp.add_argument("purpose", help="what the spend is for")
+    _isp.add_argument("--by", default="", help="approver; must be 'chauncey'")
+    _ipr = inc_cmd.add_parser("price", help="price an entry tier per doctrine")
+    _ipr.add_argument("--giant", type=float, default=None, help="giant's comparable price")
+    # <<< income portfolio engine subcommands
     mh_p = sub.add_parser("memory-hierarchy", help="Memory hierarchy + why-belief")
     mh_p.add_argument("--why", default=None, help="Trace belief to evidence")
     gr_p = sub.add_parser("growth", help="Raise baby Levi: developmental learning loop")
@@ -5971,6 +6467,11 @@ def main():
         action="store_true",
         help="Seed A–Z subjects, events, inventors, stars, X-domain",
     )
+    brain_p.add_argument(
+        "--seed-synthetic-minds",
+        action="store_true",
+        help="Seed synthetic-vs-artificial, mind landscape, uncommon minds, dead minds",
+    )
     # >>> LEVI Stage-1 lineage — seed path (source-sync entry `levi-ai`)
     brain_p.add_argument(
         "--seed-stage1",
@@ -6065,7 +6566,8 @@ def main():
         "query", nargs="?", default=None, help="search query or entry id (for show)"
     )
     bty_p = sub.add_parser(
-        "bounty", help="bug-bounty recon: scoped, polite, recon-only"
+        "bounty",
+        help="bug-bounty recon (scoped, polite) + the service-bounty hunter",
     )
     bty_cmd = bty_p.add_subparsers(dest="bounty_cmd")
     bty_scope = bty_cmd.add_parser("scope", help="manage enrolled program scopes")
@@ -6084,6 +6586,183 @@ def main():
     bty_find = bty_cmd.add_parser("findings", help="list stored findings")
     bty_find.add_argument("--new", action="store_true", help="only new since last run")
     bty_cmd.add_parser("monitor", help="recon all scopes, print only new findings")
+    # -- service bounties: the bounty hunter --------------------------------
+    bty_reg = bty_cmd.add_parser("register", help="register a service bounty")
+    bty_reg.add_argument("title", help="short hunt title")
+    bty_reg.add_argument("--problem", required=True, help="the problem statement")
+    bty_reg.add_argument("--scope", default="", help="hunt scope / boundaries")
+    bty_reg.add_argument("--client", default="", help="client identity")
+    bty_reg.add_argument("--deadline", default="", help="deadline, free text")
+    bty_list = bty_cmd.add_parser("list", help="list service bounties")
+    bty_list.add_argument("--state", default=None, help="filter by state")
+    bty_quote = bty_cmd.add_parser("quote", help="price a bounty (quote, not charge)")
+    bty_quote.add_argument("bounty_id", help="bounty id")
+    bty_quote.add_argument("--giant-price", type=float, default=None)
+    bty_quote.add_argument(
+        "--strategy", default="volume", choices=["volume", "margin"]
+    )
+    bty_agree = bty_cmd.add_parser("agree", help="record client agreement to terms")
+    bty_agree.add_argument("bounty_id", help="bounty id")
+    bty_agree.add_argument("--note", default="", help="who agreed, to what")
+    bty_start = bty_cmd.add_parser("start", help="begin the hunt")
+    bty_start.add_argument("bounty_id", help="bounty id")
+    bty_deliver = bty_cmd.add_parser("deliver", help="deliver the solution + evidence")
+    bty_deliver.add_argument("bounty_id", help="bounty id")
+    bty_deliver.add_argument("--solution", required=True)
+    bty_deliver.add_argument(
+        "--evidence", required=True, help="evidence items, separated by ';;'"
+    )
+    bty_deliver.add_argument("--confidence", type=float, required=True)
+    bty_deliver.add_argument("--verification", required=True)
+    bty_pay = bty_cmd.add_parser(
+        "pay", help="payment via the Cybrus gateway (fail-closed)"
+    )
+    bty_pay.add_argument("bounty_id", help="bounty id")
+    bty_pay.add_argument(
+        "--plan", action="store_true", help="build the payment plan (moves nothing)"
+    )
+    bty_pay.add_argument(
+        "--execute",
+        action="store_true",
+        help="attempt settlement (refuses without a rail + Chauncey authorization)",
+    )
+    bty_pay.add_argument("--authorized-by", default="")
+    bty_pay.add_argument("--status", action="store_true", help="honest payment status")
+    bty_sense = bty_cmd.add_parser(
+        "sense", help="sense bounty drafts from DemandPulse opportunities"
+    )
+    bty_sense.add_argument("--min-worth", type=float, default=0.5)
+    bty_sense.add_argument(
+        "--register", action="store_true", help="register the sensed drafts"
+    )
+    bty_show = bty_cmd.add_parser("showcase", help="the hunt showcase")
+    bty_show.add_argument("--admit", default=None, help="admit a paid bounty")
+    bty_show.add_argument(
+        "--verify-client", default=None, help="mark an entry client-verified"
+    )
+    bty_show.add_argument("--note", default="", help="client note for --verify-client")
+    # -- services: the legion service-offering standard ---------------------
+    svc_p = sub.add_parser(
+        "service",
+        help="service offerings: analyze -> quote -> deliver -> paid -> showcase",
+    )
+    svc_cmd = svc_p.add_subparsers(dest="service_cmd")
+    svc_offer = svc_cmd.add_parser("offer", help="offer a service through the standard")
+    svc_offer.add_argument("provider", help="offering organ, or 'levi' for Levi in general")
+    svc_offer.add_argument(
+        "service_type",
+        help="cyber-audit|cyber-hardening|cyber-forensics|dev-build|dev-lift|dev-automation",
+    )
+    svc_offer.add_argument("title", help="short offering title")
+    svc_offer.add_argument("--problem", required=True, help="the problem statement")
+    svc_offer.add_argument("--scope", default="", help="service scope / boundaries")
+    svc_offer.add_argument("--client", default="", help="client identity")
+    svc_offer.add_argument("--deadline", default="", help="deadline, free text")
+    svc_anl = svc_cmd.add_parser("analyze", help="record the AI analysis (no fabrication)")
+    svc_anl.add_argument("offering_id", help="offering id")
+    svc_anl.add_argument("--subject", default="", help="what was analyzed")
+    svc_anl.add_argument("--summary", default="", help="the honest read")
+    svc_anl.add_argument(
+        "--finding", action="append", default=[], help="a finding (repeatable)"
+    )
+    svc_anl.add_argument(
+        "--evidence_a", action="append", default=[],
+        help="evidence for the matching --finding (repeatable, order-paired)",
+    )
+    svc_anl.add_argument(
+        "--severity", action="append", default=[],
+        help="severity for the matching --finding (repeatable, order-paired)",
+    )
+    svc_anl.add_argument("--confidence", type=float, default=None)
+    svc_quote = svc_cmd.add_parser("quote", help="price via the advisor (quote, not charge)")
+    svc_quote.add_argument("offering_id", help="offering id")
+    svc_quote.add_argument("--giant-price", type=float, default=None)
+    svc_quote.add_argument("--strategy", default="volume", choices=["volume", "margin"])
+    svc_quote.add_argument("--commission", type=float, default=0.0)
+    svc_del = svc_cmd.add_parser("deliver", help="deliver the solution + evidence")
+    svc_del.add_argument("offering_id", help="offering id")
+    svc_del.add_argument("--solution", required=True)
+    svc_del.add_argument("--evidence", action="append", default=[], help="evidence items")
+    svc_del.add_argument("--confidence", type=float, default=None)
+    svc_del.add_argument("--verification", default="", help="how the solution was verified")
+    svc_show = svc_cmd.add_parser("showcase", help="admit completed, paid work")
+    svc_show.add_argument("offering_id", help="offering id")
+    svc_cmd.add_parser("list", help="list service offerings")
+    svc_lift = svc_cmd.add_parser(
+        "lift", help="run the five-pass Site Lift program on a site directory"
+    )
+    svc_lift.add_argument("site_dir", help="directory of the site's HTML files")
+    svc_lift.add_argument("--provider", default="levi")
+    svc_lift.add_argument(
+        "--graft", action="append", default=[], help="pattern grafted in (repeatable)"
+    )
+    svc_lift.add_argument(
+        "--gsource",
+        action="append",
+        default=[],
+        help="source of the matching --graft (repeatable, order-paired)",
+    )
+    svc_lift.add_argument(
+        "--gnote",
+        action="append",
+        default=[],
+        help="note for the matching --graft (repeatable, order-paired)",
+    )
+    svc_lift.add_argument(
+        "--compost",
+        action="append",
+        default=[],
+        help="failure composted out (repeatable)",
+    )
+    svc_lift.add_argument(
+        "--clesson",
+        action="append",
+        default=[],
+        help="lesson of the matching --compost (repeatable, order-paired)",
+    )
+    svc_lift.add_argument("--absorbed", default="", help="Sig B: pattern absorbed from")
+    svc_lift.add_argument("--reversed", default="", help="Sig B: how it was reversed")
+    svc_lift.add_argument("--improved", default="", help="Sig B: the improvement")
+    svc_lift.add_argument(
+        "--returned", default="", help="Sig B: the original returned form"
+    )
+    svc_lift.add_argument("--unreplicable", default="", help="Sig B: unreplicable note")
+    svc_lift.add_argument("--showcase", default="", help="showcase summary (attested)")
+    # tailored team pack — report + crew as one offer
+    _TEAM_PACKS = ["restaurant", "salon", "shop", "trades", "generic"]  # PACK_ORDER in levi.services.site_teams
+    svc_lift.add_argument(
+        "--with-team",
+        action="store_true",
+        help="match the report to a tailored team pack and assemble the report+crew offer",
+    )
+    svc_lift.add_argument(
+        "--pack", default=None, choices=_TEAM_PACKS, help="team pack override (default: auto-match)"
+    )
+    svc_lift.add_argument(
+        "--no-quote",
+        action="store_true",
+        help="assemble the offer without the paper price-advisor quote",
+    )
+    svc_lift.add_argument("--giant-price", type=float, default=None, help="quote anchor: giant's comparable price")
+    svc_lift.add_argument(
+        "--strategy", default="volume", choices=["volume", "margin"], help="quote strategy"
+    )
+    svc_teams = svc_cmd.add_parser(
+        "teams", help="match a saved lift report to a tailored team pack (report+crew offer)"
+    )
+    svc_teams.add_argument("report_id", help="lift report id (from: levi service lift)")
+    svc_teams.add_argument(
+        "--pack", default=None, choices=_TEAM_PACKS, help="team pack override (default: auto-match)"
+    )
+    svc_teams.add_argument(
+        "--no-quote",
+        action="store_true",
+        help="assemble the offer without the paper price-advisor quote",
+    )
+    svc_teams.add_argument("--giant-price", type=float, default=None, help="quote anchor: giant's comparable price")
+    svc_teams.add_argument(
+        "--strategy", default="volume", choices=["volume", "margin"], help="quote strategy"
+    )
     _con_p = sub.add_parser(
         "console", help="interactive text dashboard (security, bounty, demand)"
     )
@@ -6101,12 +6780,39 @@ def main():
     # >>> LEVI backup module — minimal hook (backup coordinator)
     register_backup_parser(sub)
     # <<< LEVI backup module
+    # >>> LEVI legion module — minimal hook (Legion bot product)
+    register_legion_parser(sub)
+    # <<< LEVI legion module
+    # >>> LEVI workshop module — minimal hook (Agent Workshop)
+    register_workshop_parser(sub)
+    # <<< LEVI workshop module
     # >>> LEVI jobs module — minimal hook (Hybrid Search & Apply tracker)
     register_jobs_parser(sub)
     # <<< LEVI jobs module
+    # >>> LEVI strategy module — minimal hook (the 48 forward/reverse laws)
+    register_strategy_parser(sub)
+    # <<< LEVI strategy module
     # >>> LEVI neighboros module — minimal hook (NeighborOS dispatch OS, PL-01)
     register_neighboros_parser(sub)
     # <<< LEVI neighboros module
+    # >>> LEVI neighbor module — minimal hook (NeighborOS gig dispatch + Site Lift, worker 7)
+    register_neighbor_parser(sub)
+    # <<< LEVI neighbor module
+    # >>> LEVI inbox module — minimal hook (companion inbox: analytics + request box)
+    register_inbox_parser(sub)
+    # <<< LEVI inbox module
+    # >>> LEVI engagement module — minimal hook (surveys/campaigns/voting)
+    register_engage_parser(sub)
+    # <<< LEVI engagement module
+    # >>> LEVI creator module — minimal hook (dating + creator platform, AI/SI tracks)
+    register_creator_parser(sub)
+    # <<< LEVI creator module
+    # >>> LEVI stage-snapshot module — minimal hook (stage snapshots + ops-snapshot service)
+    register_snapshot_parser(sub)
+    # <<< LEVI stage-snapshot module
+    # >>> LEVI advisor module — minimal hook (founder-level feature/price advisor)
+    register_advisor_parser(sub)
+    # <<< LEVI advisor module
     # >>> LEVI teach module — minimal hook (teach worker)
     register_teach_parser(sub)
     # <<< LEVI teach module
@@ -6117,6 +6823,13 @@ def main():
     # >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
     register_surgeon_parser(sub)
     register_automation_parser(sub)
+    register_automate_parser(sub)
+    register_nexus_parser(sub)
+    register_si_team_parser(sub)
+    register_omega_parser(sub)
+    register_alpha_parser(sub)
+    register_uniforge_parser(sub)
+    register_dweller_parser(sub)
     register_sentinel_parser(sub)
     # <<< LEVI Stage-1 lineage
     news_p = sub.add_parser(
@@ -6174,10 +6887,17 @@ def main():
         "academy_action",
         nargs="?",
         default="status",
-        choices=["status", "session"],
+        choices=["status", "session", "help", "staff", "remediate"],
     )
     acad_p.add_argument("--day", type=int, default=None, help="session: day 1-30")
     acad_p.add_argument("--block", type=int, default=None, help="session: block 1-4")
+    acad_p.add_argument("--learner", default=None, help="help: filter tickets by learner")
+    acad_p.add_argument(
+        "--session", default=None, help="staff/remediate: session id like d1b1"
+    )
+    acad_p.add_argument(
+        "--roles", default=None, help="staff: comma-separated roles to assign"
+    )
     # --- end academy-owned block ---
     proj_p = sub.add_parser(
         "project",
@@ -6341,6 +7061,20 @@ def main():
         action="store_true",
         help="import: confirm non-interactively (otherwise prompts)",
     )
+    # === GENESIS-REGION-BEGIN: genesis pack forge parsers ===
+    # Parallel tracks: keep ALL genesis parser hunks inside this delimited
+    # region — do not scatter genesis hunks elsewhere in this file.
+    gen_p = sub.add_parser("genesis", help="Genesis pack forge: lifetime 1-copy buy")
+    gen_sub = gen_p.add_subparsers(dest="genesis_action")
+    gen_asm = gen_sub.add_parser("assemble", help="Assemble a genesis pack from a spec")
+    gen_asm.add_argument("--spec", default=None, help="Spec JSON file")
+    gen_asm.add_argument("--spec-json", default=None, help="Spec JSON inline")
+    gen_asm.add_argument("--out", default=None, help="Packs root override")
+    gen_sub.add_parser("list", help="List assembled genesis packs")
+    gen_insp = gen_sub.add_parser("inspect", help="Inspect + verify a genesis pack")
+    gen_insp.add_argument("pack", nargs="?", default=None, help="Pack id or directory")
+    gen_sub.add_parser("parts", help="Show the genesis parts bin (capability families)")
+    # === GENESIS-REGION-END ===
     # `levi pack`: life-pack *bundles* — the tamper-evident, optionally
     # encrypted .tar.gz shipping format (Megazord axis 10). The passphrase
     # is NEVER a CLI arg (it would land in shell history): it comes from
@@ -6554,6 +7288,19 @@ def main():
         "--test", default=None, help="Smoke-test sandbox main.py (closed loop)"
     )
     sub.add_parser("automations")
+    eng_p = sub.add_parser(
+        "engines",
+        help="Deterministic decision engines: triage, cadence, weigh",
+    )
+    eng_p.add_argument(
+        "action",
+        nargs="?",
+        default="list",
+        choices=["list", "describe", "run"],
+        help="list engines, describe one, or run one with --input JSON",
+    )
+    eng_p.add_argument("engine", nargs="?", default=None, help="engine id")
+    eng_p.add_argument("--input", default=None, help="JSON input dict for run")
     rem = sub.add_parser("remember")
     rem.add_argument("content", nargs="?", default=None)
     rem.add_argument("extra", nargs="*", default=[])
@@ -6839,6 +7586,20 @@ def main():
         pass
     # === KING-REGION-END ===
 
+    # === SIDEWINDER-REGION-BEGIN: Sidewinder course (core/levi/sidewinder) ===
+    # Parallel tracks: keep ALL Sidewinder wiring inside this delimited
+    # region — do not scatter Sidewinder hunks elsewhere in this file.
+    try:
+        from levi.sidewinder.platform.cli import register_course as _course_register
+        from levi.sidewinder.platform.cli import register_sidewinder as _sidewinder_register
+
+        _sidewinder_register(sub)
+        _course_register(sub)
+    except Exception:
+        # Sidewinder degrades: the CLI still boots without the course.
+        pass
+    # === SIDEWINDER-REGION-END ===
+
     # === SKILL-CREATE-REGION-BEGIN: skill scaffolder (core/levi/skill/creator.py) ===
     # Parallel tracks: keep ALL skill-scaffold wiring inside this delimited
     # region — do not scatter hunks elsewhere in this file.
@@ -6924,6 +7685,7 @@ def main():
         "ask": cmd_ask,
         "turn": cmd_turn,
         "personas": cmd_personas,
+        "persona": cmd_persona,
         "wit": cmd_wit,
         "daemon": cmd_daemon,
         "mono": cmd_mono,
@@ -6970,23 +7732,58 @@ def main():
         "courses": cmd_courses,
         "security": cmd_security,
         "bounty": cmd_bounty,
+        "service": cmd_service,
         "console": cmd_console,
         "sim": cmd_sim,
         # >>> LEVI backup module — minimal hook (backup coordinator)
         "backup": cmd_backup,
         # <<< LEVI backup module
+        # >>> LEVI legion module — minimal hook (Legion bot product)
+        "legion": cmd_legion,
+        # <<< LEVI legion module
+        # >>> LEVI workshop module — minimal hook (Agent Workshop)
+        "workshop": cmd_workshop,
+        # <<< LEVI workshop module
         # >>> LEVI jobs module — minimal hook (Hybrid Search & Apply tracker)
         "jobs": cmd_jobs,
         # <<< LEVI jobs module
         # >>> LEVI neighboros module — minimal hook (NeighborOS dispatch OS, PL-01)
         "neighboros": cmd_neighboros,
         # <<< LEVI neighboros module
+        # >>> LEVI strategy module — minimal hook (the 48 forward/reverse laws)
+        "strategy": cmd_strategy,
+        # <<< LEVI strategy module
+        # >>> LEVI neighbor module — minimal hook (NeighborOS gig dispatch + Site Lift, worker 7)
+        "neighbor": cmd_neighbor,
+        # <<< LEVI neighbor module
         # >>> LEVI teach module — minimal hook (teach worker)
         "teach": cmd_teach,
         # <<< LEVI teach module
+        # >>> LEVI inbox module — minimal hook (companion inbox)
+        "inbox": cmd_inbox,
+        # <<< LEVI inbox module
+        # >>> LEVI engagement module — minimal hook (surveys/campaigns/voting)
+        "engage": cmd_engage,
+        # <<< LEVI engagement module
+        # >>> LEVI creator module — minimal hook (dating + creator platform)
+        "creator": cmd_creator,
+        # <<< LEVI creator module
+        # >>> LEVI stage-snapshot module — minimal hook (stage snapshots)
+        "snapshot": cmd_snapshot,
+        # <<< LEVI stage-snapshot module
+        # >>> LEVI advisor module — minimal hook (founder-level advisor)
+        "advise": cmd_advise,
+        # <<< LEVI advisor module
         # >>> LEVI Stage-1 lineage — minimal hooks (source-sync entry `levi-ai`)
         "surgeon": cmd_surgeon,
         "automation": cmd_automation,
+        "automate": cmd_automate,
+        "nexus": cmd_nexus,
+        "si-team": cmd_si_team,
+        "omega": cmd_omega,
+        "alpha": cmd_alpha,
+        "uniforge": cmd_uniforge,
+        "dweller": cmd_dweller,
         # <<< LEVI Stage-1 lineage
         # >>> LEVI sentinel — defensive host tooling (source-sync entry `the-pack`)
         "sentinel": cmd_sentinel,
@@ -7006,6 +7803,7 @@ def main():
         "genres": cmd_genres,
         "factory": cmd_factory,
         "automations": cmd_automations,
+        "engines": cmd_engines,
         "remember": cmd_remember,
         "recall": cmd_recall,
         "cloud": cmd_cloud,
@@ -7042,6 +7840,27 @@ def main():
     except Exception:
         pass
     # === KING-REGION-END ===
+    # === SIDEWINDER-REGION-BEGIN: Sidewinder/course command dispatch ===
+    # Parallel tracks: keep ALL Sidewinder wiring inside this delimited region.
+    # Exit codes propagate via SystemExit (main() re-raises it): 0 ok,
+    # 1 no match, 2 usage/data problems — honest codes for scripting.
+    try:
+        import sys as _sys
+
+        from levi.sidewinder.platform.cli import cmd_course as _cmd_course
+        from levi.sidewinder.platform.cli import cmd_sidewinder as _cmd_sidewinder
+
+        def _sidewinder_main(args, _fn=_cmd_sidewinder):
+            _sys.exit(_fn(args) or 0)
+
+        def _course_main(args, _fn=_cmd_course):
+            _sys.exit(_fn(args) or 0)
+
+        cmds["sidewinder"] = _sidewinder_main
+        cmds["course"] = _course_main
+    except Exception:
+        pass
+    # === SIDEWINDER-REGION-END ===
     # === SKILL-CREATE-REGION-BEGIN: skill command dispatch ===
     try:
         from levi.skill.creator import cmd_skill as _cmd_skill
@@ -7129,6 +7948,15 @@ def main():
     except Exception:
         pass
     # === LIFEPACK-REGION-END ===
+    # === GENESIS-REGION-BEGIN: genesis pack forge dispatch ===
+    # Parallel tracks: keep ALL genesis dispatch inside this delimited region.
+    try:
+        from levi.genesis.cli import cmd_genesis as _cmd_genesis
+
+        cmds["genesis"] = _cmd_genesis
+    except Exception:
+        pass
+    # === GENESIS-REGION-END ===
     # === TORCH-REGION-BEGIN: Pass-the-torch command dispatch ===
     try:
         from levi.torch import cmd_torch as _cmd_torch

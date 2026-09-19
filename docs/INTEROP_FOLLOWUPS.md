@@ -8,55 +8,38 @@ sketch, and why it is deferred.
 
 ---
 
-## F1. bot `research-brief` adopts `research_brief_rag`
+## F1. bot `research-brief` adopts `research_brief_rag` — LANDED 2026-09-18
 
 - **File:** `core/levi/bot/services.py`
-- **Location:** `_handle_research_brief` (around line 596), after the
-  `LEVI_BOT_OFFLINE` check and before the `from levi.agent.loop import
-  run_subtask` fallback.
-- **Patch sketch:**
-  ```python
-  from levi.interop.adapters.bot_rag import research_brief_rag
-  rag_brief = research_brief_rag(topic, store=None)  # store opened lazily inside
-  if rag_brief["ok"]:
-      return ServiceResult(ok=True, report=rag_brief["report"], notes=rag_brief["citations"])
-  # else: fall through to the existing agent-runtime path
-  ```
-- **Why deferred:** requires editing `bot/services.py` (additive-only
-  rule). Note: the current adapter takes an explicit `store`; the patch
-  should open the default `MemoryStore` lazily (or thread the bot's
-  existing store through) before this lands.
+- **Location:** `_handle_research_brief`, after the `LEVI_BOT_OFFLINE`
+  check, before the agent-runtime fallback import.
+- The patch opens a default `MemoryStore` lazily and calls
+  `research_brief_rag(topic, store)`; on `ok` it returns the cited
+  report directly (citations as `notes`), otherwise falls through to
+  the existing agent-runtime path. RAG failures never raise into the
+  fallback; the `ServiceResult` contract is unchanged.
+- Tests: `tests/test_interop_f1_research_brief.py` (4).
 
-## F2. `agent/chat.py` adopts `load_user_context_retrieved`
+## F2. `agent/chat.py` adopts `load_user_context_retrieved` — LANDED 2026-09-18
 
-- **File:** `core/levi/agent/chat.py` (the REPL / session-context builder;
-  check where it calls `assistant.load_user_context`)
-- **Location:** wherever the per-turn user-context block is assembled.
-- **Patch sketch:**
-  ```python
-  from levi.interop.adapters.assistant_retrieval import load_user_context_retrieved
-  ctx = load_user_context_retrieved(store, user_message, limit=8)
-  block = ctx["block"]  # method is "hybrid" or "fallback"; both are honest
-  ```
-- **Why deferred:** requires editing `agent/chat.py`. Semantics are safe:
-  the adapter never raises and degrades to today's exact behavior
-  (`method="fallback"`) when retrieval is unavailable.
+- **File:** `core/levi/agent/chat.py` (`ConversationManager.turn()`).
+- `chat.py` had no per-turn user-context loading path, so the landing
+  created one: each turn now calls
+  `load_user_context_retrieved(store=None, query=user_message, limit=8)`
+  and injects a non-empty block into the turn's system prompt
+  ("What LEVI remembers about the user…"). Kill switch:
+  `LEVI_CHAT_USER_CONTEXT=0`. The adapter is lazy-imported and
+  guarded — a retrieval failure can never break a turn.
+- Tests: `tests/test_interop_f2_chat_context.py` (5).
 
-## F3. growth `cycle.py` calls `consume_pending_learnings`
+## F3. growth `cycle.py` calls `consume_pending_learnings` — LANDED 2026-09-18
 
-- **File:** `core/levi/growth/cycle.py` (the harvest → reflect → consolidate
-  → journal loop)
-- **Location:** at the start of the harvest phase.
-- **Patch sketch:**
-  ```python
-  from levi.interop.adapters.growth_learnings import consume_pending_learnings, default_queue_path
-  from levi.growth import journal
-  consumed = consume_pending_learnings(default_queue_path(), journal)
-  # consumed["accepted"] learnings are now journaled; harvest continues as before
-  ```
-- **Why deferred:** requires editing `growth/cycle.py`. The adapter is
-  idempotent (queue renamed to `.consumed-<ts>` before journaling), so
-  double-harvests are safe even if the patch is applied twice.
+- **File:** `core/levi/growth/cycle.py` (`run_cycle()`, start of harvest).
+- Calls `consume_pending_learnings(default_queue_path(), journal)` (the
+  cycle's already-imported `journal` module exposes `append_entry`);
+  the summary lands in `report["pending_learnings"]`. Skipped under
+  `dry_run` (dry runs never write); the call can never break the cycle.
+- Tests: `tests/test_interop_f3_growth_queue.py` (4).
 
 ## F4. academy session flow writes concepts to memory
 
@@ -67,6 +50,7 @@ sketch, and why it is deferred.
 - **Patch sketch:**
   ```python
   from levi.interop.adapters.academy_memory import concepts_to_memory_entries
+
   for entry in concepts_to_memory_entries(concepts):
       memory_store.new_entry(**entry)  # or the store's public write API
   ```
@@ -83,6 +67,7 @@ sketch, and why it is deferred.
 - **Patch sketch:**
   ```python
   from levi.interop.adapters.bounty_knowledge import findings_to_corpus_units
+
   units = findings_to_corpus_units(FindingStore().list())  # dicts via .to_dict()
   ingest_units(units)  # the knowledge layer's existing ingest API
   ```
@@ -108,17 +93,18 @@ sketch, and why it is deferred.
   product decision about which compositions are risk-bearing. The ceiling
   machinery (`ceiling`, `compose_risk`) is built, tested, and ready.
 
-## F7. registry `check_all()` in CI / boot self-check
+## F7. registry `check_all()` in CI / boot self-check — LANDED 2026-09-18
 
-- **File:** the CI workflow (`.github/workflows/ci.yml`) and/or the daemon
-  boot sequence (`core/levi/daemon/...`)
-- **Location:** test stage of CI; early boot of the daemon.
-- **Patch sketch:**
-  ```python
-  from levi.interop.registry import check_all
-  check_all()  # raises RegistryError on any broken provides/requires wiring
-  ```
-- **Why deferred:** requires editing CI config / daemon boot code. This
-  turns the manifest into a living contract: any module that drops a
-  capability its dependents require fails fast instead of failing
-  silently at runtime.
+- **CI:** `.github/workflows/ci.yml`, python job, new step after the root
+  pytest suite: `python3 -c "from levi.interop.registry import
+  check_all; check_all(); print('registry check_all OK')"`. Cheap
+  (<1s), fail-fast.
+- **Daemon boot self-check:** no sibling owned the daemon boot path, so
+  it landed: `core/levi/daemon/supervisor.py` gained an
+  `interop-registry` health-check entry running `check_all()`. Broken
+  wiring reports the service DOWN in `python -m levi.daemon pulse`
+  instead of failing silently at runtime; the check is guarded like
+  every other health check, so it can never raise into the supervisor.
+  (Deliberately a DOWN report rather than a boot aborter — a bricked
+  daemon fails open worse.)
+- Tests: `tests/test_interop_f7_registry_ci.py` (5).

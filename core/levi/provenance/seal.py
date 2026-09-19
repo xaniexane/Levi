@@ -30,10 +30,14 @@ from typing import Any, Optional
 
 # ---------------------------------------------------------------------------
 # Identity constants — the origin chain, oldest first.
+# (Chauncey, 2026-09-19: Alpha + Omega first; Nexus renamed Wax by his
+# pick the same day -- revamped as the Hive's personal-and-community
+# coordination layer. DemandPulse is pre-chain root material: "eh".
+# The eleven originals follow per canon.)
 # ---------------------------------------------------------------------------
 
 PRODUCT_NAME = "LEVI"
-ORIGIN_CHAIN = ["DemandPulse", "Nexus", "Alpha", "Omega", "LEVI"]
+ORIGIN_CHAIN = ["Alpha", "Omega", "Wax", "LEVI", "Nanobit"]
 DATE_OF_INVENTION = "2026-04-24"
 OWNER = "Chauncey Logan"
 

@@ -297,7 +297,7 @@ Adapted to the LEVI program (`docs/ENTERPRISE.md`):
 | Phase | Focus |
 |---|---|
 | 1 | The Fleet — agent registry, supervisor, budgeted swarming (NOW BUILDING) |
-| 2 | Control & Telemetry — universal approval engine, decision ledger, cost-aware routing, AI router |
+| 2 | Control & Telemetry — universal approval engine, decision ledger, cost-aware routing, AI router — **COMPLETE 2026-09-15** (see `docs/CONTROL_PLANE.md`; `core/levi/control/approvals.py`, `ledger.py`, `routing.py`, `router.py`) |
 | 3 | Software Factory — sandboxed builds, self-debug loop, visual testing |
 | 4 | Marketplaces — automation + agent listings |
 | 5 | Economic Engine — payment orchestration, billing, freemium |

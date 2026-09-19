@@ -23,6 +23,8 @@ from levi.cybrus import (
     TokenError,
     VaultError,
     cybrus_dir,
+    is_founder,
+    require_founder,
 )
 
 
@@ -199,7 +201,12 @@ def test_identity_duplicate_name_rejected():
         store.create("bad name!")
 
 
-def test_tier_limits_enforced():
+def test_tier_limits_enforced(monkeypatch):
+    # founder is the keeper's bound tier — the test names ride the list.
+    import levi.cybrus.identity as ident
+    monkeypatch.setattr(
+        ident, "FOUNDER_IDENTITIES", tuple(f"founder-{i}" for i in range(8))
+    )
     store = IdentityStore()
     for i in range(5):
         store.create(f"starter-{i}", tier="starter")
@@ -239,6 +246,13 @@ def test_factory_uniqueness_200(monkeypatch):
     # the full work factor — the real iteration count is covered by the
     # round-trip test below.
     monkeypatch.setattr(factory_mod, "_PBKDF2_ITERATIONS", 1_000)
+    # founder tier is keeper-bound — the generated names ride the list.
+    import levi.cybrus.identity as ident
+    monkeypatch.setattr(
+        ident,
+        "FOUNDER_IDENTITIES",
+        ("svc-account",) + tuple(f"svc-account-{n}" for n in range(2, 201)),
+    )
     fac = AccountFactory(IdentityStore())
     seen_users, seen_pw = set(), set()
     for _ in range(200):
@@ -253,7 +267,9 @@ def test_factory_uniqueness_200(monkeypatch):
     assert any("-" in u for u in seen_users)
 
 
-def test_factory_password_never_persisted_plaintext():
+def test_factory_password_never_persisted_plaintext(monkeypatch):
+    import levi.cybrus.identity as ident
+    monkeypatch.setattr(ident, "FOUNDER_IDENTITIES", ("db-admin",))
     fac = AccountFactory(IdentityStore())
     rec, password = fac.generate("db-admin", tier="founder")
     raw = (cybrus_dir() / "identities.json").read_text()
@@ -383,3 +399,39 @@ def test_levi_home_override_respected(tmp_path, monkeypatch):
     IdentityStore().create("zed")
     assert (other / ".levi" / "cybrus" / "identities.json").exists()
     assert not (tmp_path / ".levi" / "cybrus" / "identities.json").exists()
+
+
+# -- founder tier: the keeper's own ------------------------------------------
+
+def test_founder_tier_refused_for_unnamed():
+    with pytest.raises(TierError):
+        IdentityStore().create("mallory", tier="founder")
+
+
+def test_update_to_founder_refused_for_unnamed():
+    store = IdentityStore()
+    store.create("bob")
+    with pytest.raises(TierError):
+        store.update("bob", tier="founder")
+
+
+def test_founder_rename_off_list_refused(monkeypatch):
+    import levi.cybrus.identity as ident
+    monkeypatch.setattr(ident, "FOUNDER_IDENTITIES", ("keeper-test",))
+    store = IdentityStore()
+    store.create("keeper-test", tier="founder")
+    with pytest.raises(TierError):
+        store.update("keeper-test", name="mallory")
+
+
+def test_founder_identity_unlimited_and_bypass(monkeypatch):
+    import levi.cybrus.identity as ident
+    monkeypatch.setattr(ident, "FOUNDER_IDENTITIES", ("keeper-test",))
+    store = IdentityStore()
+    rec = store.create("keeper-test", tier="founder")
+    assert is_founder(rec)
+    assert require_founder(store, "keeper-test")["name"] == "keeper-test"
+    assert not is_founder({"tier": "pro"})
+    assert not is_founder(None)
+    with pytest.raises(TierError):
+        require_founder(store, "zed")

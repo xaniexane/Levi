@@ -9,7 +9,7 @@ This is the **organization layer** over the capability atlas. For the
 atlas contract itself (`export_atlas()` / `write_atlas()`), see
 `docs/ATLAS.md`; this document is the warehouse framing and its API.
 
-## The fourteen warehouses
+## The fifteen warehouses
 
 | Warehouse | Shelves (modules) | What's stocked |
 |---|---|---|
@@ -27,6 +27,7 @@ atlas contract itself (`export_atlas()` / `write_atlas()`), see
 | `operations` — Operations | signals, creed, promises, decisions, interruptions, snapshots, drift, teachback, energy, friction, sweeps, premortem | LEVI's operating layer: graded signal plane, frozen creed of laws, ledgers and rituals of a reliable operator |
 | `commons` — Commons | communities, threads, bridging, classifieds, charters, commitments, recap, feedreader, feedlab | Portable social fabric: leave any platform, keep the community; consensus without a central moderator; a feed-ranking transparency lab |
 | `craft` — Craft | ephemera, packs, shareware, dials, capproto, mailtriage, vaults, canvas, discover, presence, honestsearch, recommender | Sovereign instruments: true-delete channels, attention dials, local mail triage, LAN presence rooms, clean-room search, honest trial grants |
+| `automation` — Automation | automation | The HITL-gated bot catalog + dry-run rail (Plan→Preview→Permission→Execute→Verify→Receipt) + the "watch me once" routine recorder: local, user-owned routines, permission-gated playback, live execution unwired |
 
 Inventory counts are **real** — counted from the actual modules,
 playbooks, records, and live runtime state, never estimated.
@@ -48,11 +49,15 @@ Unknown warehouse/item names raise `ValueError` naming what *is*
 available. Example:
 
 ```python
-from levi.interop.warehouses import browse_warehouse, warehouse_inventory, pull_from_shelf
+from levi.interop.warehouses import (
+    browse_warehouse,
+    warehouse_inventory,
+    pull_from_shelf,
+)
 
-browse_warehouse("skills")                       # 839 playbooks
-warehouse_inventory("skills", limit=10)          # first 10, total=839
-pull_from_shelf("methods", "methods.loci")       # full detail + invoke line
+browse_warehouse("skills")  # 839 playbooks
+warehouse_inventory("skills", limit=10)  # first 10, total=839
+pull_from_shelf("methods", "methods.loci")  # full detail + invoke line
 ```
 
 ## The factory synthesis

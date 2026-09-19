@@ -47,10 +47,9 @@ review = log.weekly_review(since_days=7)  # or weekly_review(min_group=2)
 #  "ungrouped": [ ... ],   # honestly ungrouped, never forced
 #  "note": "2 candidate fix(es); 1 item(s) honestly ungrouped"}
 
-fix = log.promote_to_fix("fx-1a2b3c4d",
-                         fix_note="cache the deploy token in the vault")
+fix = log.promote_to_fix("fx-1a2b3c4d", fix_note="cache the deploy token in the vault")
 log.drop_candidate("fx-9z8y7x6w")  # decline, recorded
-log.fixes()                        # converted fixes log
+log.fixes()  # converted fixes log
 ```
 
 `capture("")` raises `ValueError`. `promote_to_fix` raises

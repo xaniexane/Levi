@@ -75,15 +75,17 @@ from levi.bloodstream.composites import effective_ceiling
 from levi.bloodstream.gate import run_composite_gated
 from levi.policy.gates import PolicyEngine, RiskLevel
 
-evidence = effective_ceiling([
-    {"name": "skill:file_read", "risk": RiskLevel.LOW},
-    {"name": "skill:shell_exec", "risk": RiskLevel.HIGH},
-    {"name": "specialist:researcher", "risk": RiskLevel.MODERATE},
-])
-evidence["ceiling"]          # → RiskLevel.HIGH  (max wins; LOW does not dilute)
-evidence["contributions"]    # → {"skill:file_read": LOW,
-                             #    "skill:shell_exec": HIGH,
-                             #    "specialist:researcher": MODERATE}
+evidence = effective_ceiling(
+    [
+        {"name": "skill:file_read", "risk": RiskLevel.LOW},
+        {"name": "skill:shell_exec", "risk": RiskLevel.HIGH},
+        {"name": "specialist:researcher", "risk": RiskLevel.MODERATE},
+    ]
+)
+evidence["ceiling"]  # → RiskLevel.HIGH  (max wins; LOW does not dilute)
+evidence["contributions"]  # → {"skill:file_read": LOW,
+#    "skill:shell_exec": HIGH,
+#    "specialist:researcher": MODERATE}
 ```
 
 A LOW authorization for this act is **denied** — the ceiling is HIGH:
@@ -92,18 +94,18 @@ A LOW authorization for this act is **denied** — the ceiling is HIGH:
 out = run_composite_gated(
     engine=PolicyEngine(),
     name="ops",
-    components=[...],          # as above
+    components=[...],  # as above
     description="ops composite",
     reason="nightly maintenance",
     execute=lambda: "done",
     authorization_level=RiskLevel.LOW,
 )
-out.approved      # → False
-out.executed      # → False — nothing ever ran
-out.error         # → "denied: composite 'ops' inherits risk ceiling HIGH
-                  #    (raised by skill:shell_exec); presented authorization
-                  #    LOW is below the ceiling — explicit approval at HIGH
-                  #    or above is required"
+out.approved  # → False
+out.executed  # → False — nothing ever ran
+out.error  # → "denied: composite 'ops' inherits risk ceiling HIGH
+#    (raised by skill:shell_exec); presented authorization
+#    LOW is below the ceiling — explicit approval at HIGH
+#    or above is required"
 ```
 
 The same act with HIGH authorization **proceeds** through all six gate
@@ -119,9 +121,9 @@ out = run_composite_gated(
     execute=lambda: "done",
     authorization_level=RiskLevel.HIGH,
 )
-out.approved      # → True
-out.executed      # → True
-out.ceiling       # → RiskLevel.HIGH
+out.approved  # → True
+out.executed  # → True
+out.ceiling  # → RiskLevel.HIGH
 ```
 
 And the deny-closed default: add a component nobody can rate, and the
@@ -129,11 +131,13 @@ ceiling jumps to the highest caution — a HIGH authorization is no longer
 enough:
 
 ```python
-evidence = effective_ceiling([
-    {"name": "skill:file_read", "risk": RiskLevel.LOW},
-    {"name": "mystery_plugin"},          # unrated
-])
-evidence["ceiling"]   # → RiskLevel.CRITICAL
+evidence = effective_ceiling(
+    [
+        {"name": "skill:file_read", "risk": RiskLevel.LOW},
+        {"name": "mystery_plugin"},  # unrated
+    ]
+)
+evidence["ceiling"]  # → RiskLevel.CRITICAL
 ```
 
 ## Invariants (what tests prove)

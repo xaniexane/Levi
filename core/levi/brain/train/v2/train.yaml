@@ -70,15 +70,17 @@ schedule:
   # log_every 50: the morning log showed every-50-step lines
   # ("step 50 loss=... ema=...").
   log_every: 50
+  # Judgment, learned from run 3 (2026-09-18): held-out NLL bottomed at
+  # step ~2500 and degraded after — 2900 steps of pure overfitting the
+  # old loop couldn't see. patience 3 = stop after 3 evals (1500 steps)
+  # with no held-out improvement. 0 disables.
+  early_stop_patience: 3
+  early_stop_min_delta: 0.0
 
 eval:
   # every_steps 500: periodic honest eval aligned with checkpoint cadence.
-  # probes_path / baseline_checkpoint intentionally empty: no
-  # eval/probes.jsonl and no weights/v1 baseline exist in the repo; the
-  # harness degrades gracefully ("no probes" note, "comparison skipped")
-  # instead of failing.
   every_steps: 500
-  probes_path: ""
+  probes_path: eval/probes.jsonl
   baseline_checkpoint: ""
   max_val_batches: 50
 
@@ -89,6 +91,9 @@ checkpointing:
   # The morning run saved every 100 steps; 500 is chosen to halve
   # checkpoint I/O on this slower CPU box while keeping 10+ recovery
   # points across the run.
+  # keep_best: the keeper's law, encoded — the lowest-held-out-NLL
+  # checkpoint is never pruned, even outside the keep_last window.
   dir: ../../../../../runs/tiny-gpt-v2-20260916/checkpoints
   save_every: 500
   keep_last: 5
+  keep_best: true

@@ -1,0 +1,3463 @@
+{
+  "batch": "productivity_b",
+  "graded_at": "2026-09-18T19:01:50.774562+00:00",
+  "rubric": "core/levi/automation/grading.py",
+  "record_count": 41,
+  "grade_counts": {
+    "intake": 0,
+    "high-grade": 0,
+    "premium": 0,
+    "elite": 0,
+    "enterprise": 41
+  },
+  "catalog_signature_verified": true,
+  "signature_id": "ipsig-2485283c16e8",
+  "records": [
+    {
+      "minion_id": "productivity-meeting-prep-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-meeting-prep-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-6ad50254e34c",
+          "node_detail": [
+            "[trigger] trigger: App opened (Zoom): flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Meeting Prep (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-meeting-prep-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-meeting-prep-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "App opened (Zoom)",
+        "condition": "Location: WiFi Home",
+        "rite_steps": [
+          "Identify the upcoming Zoom meeting from the calendar",
+          "Pull attendee bios and past notes",
+          "Auto-fill the meeting notes template",
+          "HITL: Notification \u2014 prep notes ready; confirm?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Time window",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Meeting Prep Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-meeting-summary-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-meeting-summary-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-ee75c8e7d2b1",
+          "node_detail": [
+            "[trigger] trigger: App opened (Meet): flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Meeting Summary (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-meeting-summary-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-meeting-summary-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "App opened (Meet)",
+        "condition": "Always",
+        "rite_steps": [
+          "Attach to the active Meet session",
+          "Auto-transcribe the audio",
+          "Extract decisions and action items",
+          "HITL: Notification \u2014 transcript ready; edit?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Bardeen",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Meeting Summary Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-meeting-summary-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-meeting-summary-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-a4cc1d2f0fac",
+          "node_detail": [
+            "[trigger] trigger: App opened (Meet): flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Meeting Summary (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-meeting-summary-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-meeting-summary-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "App opened (Meet)",
+        "condition": "Always",
+        "rite_steps": [
+          "Attach to the active Meet session",
+          "Transcribe with speaker labels",
+          "Highlight open questions",
+          "HITL: Notification \u2014 transcript ready; edit?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Bardeen",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Meeting Summary Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-morning-ritual-chain-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-morning-ritual-chain-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "notification",
+          "run_id": "flow-6f49061e2d3e",
+          "node_detail": [
+            "[trigger] trigger: Time 06:00: flow entered via schedule trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Morning Ritual Chain (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, Shortcuts, Habitica)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-morning-ritual-chain-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-morning-ritual-chain-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 06:00",
+        "condition": "Day weekday",
+        "rite_steps": [
+          "Arm the ritual chain: water, stretch, review goals",
+          "Sequence each step with timers",
+          "Mark completion",
+          "HITL: Notification \u2014 ritual chain armed; begin when ready?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Habitica"
+        },
+        "notes": "The day starts before the day starts. LEVI chains your small wins in order so momentum has nowhere to leak.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Morning Ritual Chain Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-note-backup-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-note-backup-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-2f04cc248eb2",
+          "node_detail": [
+            "[trigger] trigger: Device inserted: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Note Backup (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-note-backup-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-note-backup-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Device inserted",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify the backup device is mounted",
+          "Export all notes to a dated archive",
+          "Upload the archive to Drive",
+          "HITL: Notification \u2014 backup uploaded; confirm?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Cross-device",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Note Backup Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-note-backup-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-note-backup-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-ff5621a60524",
+          "node_detail": [
+            "[trigger] trigger: Device inserted: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Note Backup (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-note-backup-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-note-backup-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Device inserted",
+        "condition": "Always",
+        "rite_steps": [
+          "Verify the backup device is mounted",
+          "Upload notes to the secondary vault",
+          "Verify the upload by file count",
+          "HITL: Notification \u2014 uploaded; confirm?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Cross-device",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Note Backup Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-note-search-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-note-search-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-ad115eb58dca",
+          "node_detail": [
+            "[trigger] trigger: Search query: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Note Search (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-note-search-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-note-search-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Search query",
+        "condition": "Always",
+        "rite_steps": [
+          "Parse the search query",
+          "Search across Drive notes and documents",
+          "Rank hits by relevance",
+          "HITL: Notification \u2014 results ready; open the top hit?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "USB insertion",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Note Search Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-note-search-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-note-search-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-90ed8fcbc038",
+          "node_detail": [
+            "[trigger] trigger: Search query: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Note Search (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-note-search-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-note-search-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Search query",
+        "condition": "Always",
+        "rite_steps": [
+          "Parse the search query",
+          "Search the secondary notes index",
+          "Rank hits by relevance",
+          "HITL: Notification \u2014 results ready; open?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "USB insertion",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Note Search Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-note-search-03",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-note-search-03",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-e200a6dd8f5c",
+          "node_detail": [
+            "[trigger] trigger: Search query: flow entered via manual trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Note Search (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-note-search-03' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-note-search-03' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Search query",
+        "condition": "Always",
+        "rite_steps": [
+          "Parse the search query",
+          "Search the tertiary notes index",
+          "Rank hits by relevance",
+          "HITL: Notification \u2014 results ready; open?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "USB insertion",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Note Search Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-note-sync-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-note-sync-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 5
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-6c1cc38434bc",
+          "node_detail": [
+            "[trigger] trigger: New note in Evernote: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Note Sync (5 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Automate, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-note-sync-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-note-sync-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New note in Evernote",
+        "condition": "Always",
+        "rite_steps": [
+          "Fetch the new Evernote note",
+          "Convert formatting for Mac Notes",
+          "Detect duplicates by title and content hash",
+          "Merge duplicates keeping the newest edits",
+          "HITL: Notification & Dialog \u2014 review the merge before it commits?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "Automate",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Bardeen extracts",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Note Sync Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-note-tagging-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-note-tagging-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-5c87ea47f232",
+          "node_detail": [
+            "[trigger] trigger: New note: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Note Tagging (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-note-tagging-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-note-tagging-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New note",
+        "condition": "Tag: project",
+        "rite_steps": [
+          "Read the new project note",
+          "Auto-suggest tags from its content",
+          "Apply the project tag",
+          "HITL: Notification \u2014 tagged; review?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "USB insertion",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Note Tagging Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-note-tagging-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-note-tagging-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-c5df1dffe7b2",
+          "node_detail": [
+            "[trigger] trigger: New note: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Note Tagging (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-note-tagging-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-note-tagging-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New note",
+        "condition": "Tag: project",
+        "rite_steps": [
+          "Read the new project note",
+          "Auto-suggest tags from its content",
+          "Apply the project tag",
+          "HITL: Notification \u2014 tagged; review?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "USB insertion",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Note Tagging Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-notification-batch-courier-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-notification-batch-courier-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-82c2278042c2",
+          "node_detail": [
+            "[trigger] trigger: Time 10:00: flow entered via schedule trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Notification Batch Courier (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, Daywise)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-notification-batch-courier-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-notification-batch-courier-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 10:00",
+        "condition": "Notifications: pending",
+        "rite_steps": [
+          "Collect held notifications",
+          "Rank them into one batch",
+          "Deliver the batch digest",
+          "HITL: Notification \u2014 batch delivered; anything need action?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Daywise"
+        },
+        "notes": "LEVI couriers your notifications in one tidy package instead of letting them ambush you all day. One knock, full report.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Notification Batch Courier Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-notification-filter-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-notification-filter-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-f0a7c1f44794",
+          "node_detail": [
+            "[trigger] trigger: New notification: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Notification Filter (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-notification-filter-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-notification-filter-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New notification",
+        "condition": "To: work urgent",
+        "rite_steps": [
+          "Inspect the incoming notification source",
+          "Match it against the work-urgent rules",
+          "Route work-urgent items to Slack",
+          "HITL: Notification \u2014 routed; acknowledge?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Geo-fence",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Notification Filter Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-notification-route-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-notification-route-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-6b47676dedbd",
+          "node_detail": [
+            "[trigger] trigger: New notification: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Notification Route (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-notification-route-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-notification-route-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New notification",
+        "condition": "Category: social",
+        "rite_steps": [
+          "Classify the notification as social",
+          "Mute it for the focus window",
+          "Offer a one-hour snooze option",
+          "HITL: Notification \u2014 muted; snooze?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Geo-fence",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Notification Route Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-notification-route-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-notification-route-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-4bd631bdcc71",
+          "node_detail": [
+            "[trigger] trigger: New notification: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Notification Route (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-notification-route-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-notification-route-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New notification",
+        "condition": "Category: social",
+        "rite_steps": [
+          "Classify the notification as social",
+          "Mute it for the focus window",
+          "Offer a one-hour snooze option",
+          "HITL: Notification \u2014 muted; snooze?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Geo-fence",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Notification Route Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-pomodoro-overlord-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-pomodoro-overlord-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "confirm",
+          "run_id": "flow-a071f0f756cd",
+          "node_detail": [
+            "[trigger] trigger: Timer finished: flow entered via manual trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Pomodoro Overlord (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, Shortcuts, Forest)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-pomodoro-overlord-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-pomodoro-overlord-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Timer finished",
+        "condition": "Always",
+        "rite_steps": [
+          "Log the finished pomodoro interval",
+          "Suggest break length by streak",
+          "Queue the next round",
+          "HITL: Confirm \u2014 break or roll into the next interval?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "Shortcuts",
+          "chrome_extension": "Forest"
+        },
+        "notes": "The overlord respects the tomato. LEVI counts your rounds, prescribes the breaks, and only marches on with your confirmation.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Pomodoro Overlord Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-priority-matrix-sorter-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-priority-matrix-sorter-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "dialog",
+          "run_id": "flow-d3709070e8fd",
+          "node_detail": [
+            "[trigger] trigger: New task: flow entered via event trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Priority Matrix Sorter (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, Shortcuts, Todoist)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-priority-matrix-sorter-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-priority-matrix-sorter-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New task",
+        "condition": "Priority: unset",
+        "rite_steps": [
+          "Score the task on urgency and impact",
+          "Suggest an Eisenhower quadrant",
+          "Draft the priority assignment",
+          "HITL: Notification & Dialog \u2014 accept the suggested priority?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Todoist"
+        },
+        "notes": "Untriaged tasks drift. LEVI sniffs each one for urgency and impact, drops it in a quadrant, and asks only for your nod.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Priority Matrix Sorter Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-project-deadline-scout-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-project-deadline-scout-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-80a2b7e6d7b3",
+          "node_detail": [
+            "[trigger] trigger: New project created: flow entered via event trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Project Deadline Scout (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, ClickUp)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-project-deadline-scout-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-project-deadline-scout-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New project created",
+        "condition": "Always",
+        "rite_steps": [
+          "Read the new project brief",
+          "Draft milestones with owners",
+          "Propose a review cadence",
+          "HITL: Edit & Approve \u2014 approve the milestone plan before committing?"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "ClickUp"
+        },
+        "notes": "Hand LEVI a project and it scouts the road ahead: milestones, owners, checkpoints. You approve the expedition before it marches.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Project Deadline Scout Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-reminder-repeat-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-reminder-repeat-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-7b3c59b01678",
+          "node_detail": [
+            "[trigger] trigger: New reminder: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Reminder Repeat (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-reminder-repeat-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-reminder-repeat-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New reminder",
+        "condition": "Repeat: daily",
+        "rite_steps": [
+          "Read the new reminder",
+          "Set its daily repeat schedule",
+          "Confirm the first three fire times",
+          "HITL: Notification \u2014 daily repeat armed; confirm?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Battery level",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Reminder Repeat Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-reminder-snooze-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-reminder-snooze-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-9ef475c5d479",
+          "node_detail": [
+            "[trigger] trigger: New reminder: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Reminder Snooze (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-reminder-snooze-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-reminder-snooze-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New reminder",
+        "condition": "Always",
+        "rite_steps": [
+          "Read the new reminder",
+          "Snooze it by one hour",
+          "Confirm the new fire time",
+          "HITL: Notification \u2014 snoozed 1h; confirm?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Time window",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Reminder Snooze Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-reminder-snooze-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-reminder-snooze-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-93bf35f6bea7",
+          "node_detail": [
+            "[trigger] trigger: New reminder: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Reminder Snooze (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-reminder-snooze-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-reminder-snooze-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New reminder",
+        "condition": "Always",
+        "rite_steps": [
+          "Read the new reminder",
+          "Snooze it by one hour",
+          "Confirm the new fire time",
+          "HITL: Notification \u2014 snoozed 1h; confirm?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Time window",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Reminder Snooze Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-reminder-triage-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-reminder-triage-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-2e6c07320096",
+          "node_detail": [
+            "[trigger] trigger: New reminder: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Reminder Triage (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-reminder-triage-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-reminder-triage-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New reminder",
+        "condition": "To: urgent",
+        "rite_steps": [
+          "Read the new reminder content",
+          "Categorize it by urgency and domain",
+          "Offer actions: reply, file, or defer",
+          "HITL: Notification \u2014 triaged; reply or file?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Location based",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Reminder Triage Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-screen-time-reckoning-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Acknowledge",
+          "hitl_explicit": true,
+          "gate_kind": "acknowledge"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-screen-time-reckoning-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "acknowledge",
+          "run_id": "flow-9b4d32ebf283",
+          "node_detail": [
+            "[trigger] trigger: Time 20:30: flow entered via schedule trigger",
+            "[approval] HITL gate: acknowledge: gate approved: dry-run: approval simulated",
+            "[minion] rite: Screen Time Reckoning (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Screen Time)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-screen-time-reckoning-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-screen-time-reckoning-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 20:30",
+        "condition": "Screen time: >5h",
+        "rite_steps": [
+          "Break down screen time by app",
+          "Highlight the top three time sinks",
+          "Build the reckoning report",
+          "HITL: Acknowledge \u2014 review the reckoning?"
+        ],
+        "hitl_type": "Acknowledge",
+        "gate_kind": "acknowledge",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Screen Time"
+        },
+        "notes": "No sermons, just the numbers. LEVI lays your screen time on the table and lets the top three sinks explain themselves.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Screen Time Reckoning Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-tab-herd-wrangler-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Edit & Approve",
+          "hitl_explicit": true,
+          "gate_kind": "edit_approve"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-tab-herd-wrangler-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 5
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "edit_approve",
+          "run_id": "flow-2c53bf2ae095",
+          "node_detail": [
+            "[trigger] trigger: Browser tabs >20: flow entered via manual trigger",
+            "[approval] HITL gate: edit_approve: gate approved: dry-run: approval simulated",
+            "[minion] rite: Tab Herd Wrangler (5 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, AutoHotkey, Hammerspoon, OneTab)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-tab-herd-wrangler-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-tab-herd-wrangler-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Browser tabs >20",
+        "condition": "Always",
+        "rite_steps": [
+          "Count open browser tabs",
+          "Group tabs by domain",
+          "Collapse duplicate tabs",
+          "Draft a stashed reading list",
+          "HITL: Edit & Approve \u2014 approve the tab roundup before stashing?"
+        ],
+        "hitl_type": "Edit & Approve",
+        "gate_kind": "edit_approve",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "AutoHotkey",
+          "mac": "Hammerspoon",
+          "chrome_extension": "OneTab"
+        },
+        "notes": "Tabs breed in the dark. LEVI lassos the herd, brands them by domain, and pens the strays into a tidy list you can actually read later.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Tab Herd Wrangler Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-task-checklist-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-task-checklist-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-87996835cd67",
+          "node_detail": [
+            "[trigger] trigger: New checklist item: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Task Checklist (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Automate, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-task-checklist-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-task-checklist-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New checklist item",
+        "condition": "Always",
+        "rite_steps": [
+          "Capture the new checklist item",
+          "Add it to the Notion task list",
+          "Link it to its parent task",
+          "HITL: Notification \u2014 added; mark done when finished?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Automate",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "USB insertion",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Task Checklist Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-task-dependency-chain-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-task-dependency-chain-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-96d55ae43ed8",
+          "node_detail": [
+            "[trigger] trigger: New task: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Task Dependency Chain (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, Shortcuts, ClickUp)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-task-dependency-chain-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-task-dependency-chain-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New task",
+        "condition": "Dependencies: yes",
+        "rite_steps": [
+          "Map the task's dependency chain",
+          "Flag blocked predecessors",
+          "Order the execution sequence",
+          "HITL: Notification \u2014 chain mapped; proceed in order?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "ClickUp"
+        },
+        "notes": "Tasks with tangled roots get untangled. LEVI traces the dependency chain and shows you which domino to tip first.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Task Dependency Chain Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-task-due-date-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-task-due-date-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-cab6179ecf25",
+          "node_detail": [
+            "[trigger] trigger: New task: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Task Due Date (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-task-due-date-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-task-due-date-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New task",
+        "condition": "Due: tomorrow",
+        "rite_steps": [
+          "Read the task due tomorrow",
+          "Add it to the calendar with a reminder",
+          "Set a morning nudge",
+          "HITL: Notification \u2014 calendared; confirm?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Time window",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Task Due Date Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-task-due-date-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-task-due-date-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-dd45d6e012da",
+          "node_detail": [
+            "[trigger] trigger: New task: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Task Due Date (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-task-due-date-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-task-due-date-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New task",
+        "condition": "Due: tomorrow",
+        "rite_steps": [
+          "Read the task due tomorrow",
+          "Add a calendar block for it",
+          "Set a morning nudge",
+          "HITL: Notification \u2014 calendared; confirm?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Time window",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Task Due Date Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-task-priority-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-task-priority-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-ccd2ca7be13c",
+          "node_detail": [
+            "[trigger] trigger: New task: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Task Priority (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-task-priority-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-task-priority-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New task",
+        "condition": "Priority: high",
+        "rite_steps": [
+          "Read the new high-priority task",
+          "Highlight it in Todoist with a flag",
+          "Pin it to the top of Today",
+          "HITL: Notification \u2014 highlighted; confirm?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Time window",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Task Priority Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-task-priority-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-task-priority-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-9dd9ac7ab6e5",
+          "node_detail": [
+            "[trigger] trigger: New task: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Task Priority (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-task-priority-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-task-priority-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New task",
+        "condition": "Priority: low",
+        "rite_steps": [
+          "Read the new low-priority task",
+          "Archive it to the backlog",
+          "Set a weekly review nudge",
+          "HITL: Notification \u2014 archived; review later?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Geo-fence",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Task Priority Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-task-priority-03",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-task-priority-03",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-46b65c9105ff",
+          "node_detail": [
+            "[trigger] trigger: New task: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Task Priority (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-task-priority-03' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-task-priority-03' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New task",
+        "condition": "Priority: low",
+        "rite_steps": [
+          "Read the new low-priority task",
+          "Archive it to the backlog",
+          "Set a weekly review nudge",
+          "HITL: Notification \u2014 archived; review?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Geo-fence",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Task Priority Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-task-recurrence-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-task-recurrence-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-a44461405ced",
+          "node_detail": [
+            "[trigger] trigger: New task: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Task Recurrence (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-task-recurrence-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-task-recurrence-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New task",
+        "condition": "Repeat: weekly",
+        "rite_steps": [
+          "Read the new task",
+          "Set its weekly recurrence rule",
+          "Generate the next four occurrences",
+          "HITL: Notification \u2014 recurrence set; approve?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Battery level",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Task Recurrence Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-task-recurrence-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-task-recurrence-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-4ec4d7b0b8b5",
+          "node_detail": [
+            "[trigger] trigger: New task: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Task Recurrence (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-task-recurrence-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-task-recurrence-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New task",
+        "condition": "Repeat: weekly",
+        "rite_steps": [
+          "Read the new task",
+          "Set its weekly recurrence rule",
+          "Generate the next four occurrences",
+          "HITL: Notification \u2014 recurrence set; approve?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Battery level",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Task Recurrence Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-task-tracker-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-task-tracker-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "notification",
+          "run_id": "flow-16351dff422b",
+          "node_detail": [
+            "[trigger] trigger: New Task created: flow entered via event trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Task Tracker (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Automate, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-task-tracker-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-task-tracker-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "New Task created",
+        "condition": "Always",
+        "rite_steps": [
+          "Capture the new task with its source context",
+          "Create it in Notion with a due-date guess",
+          "Suggest placement: Today or backlog",
+          "HITL: Notification \u2014 task filed; confirm the move to Today?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "Automate",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "USB insertion",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Task Tracker Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-time-audit-ledger-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Acknowledge",
+          "hitl_explicit": true,
+          "gate_kind": "acknowledge"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-time-audit-ledger-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "acknowledge",
+          "run_id": "flow-e4c6f266a9a1",
+          "node_detail": [
+            "[trigger] trigger: Time 21:30: flow entered via schedule trigger",
+            "[approval] HITL gate: acknowledge: gate approved: dry-run: approval simulated",
+            "[minion] rite: Time Audit Ledger (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, PowerShell, AppleScript, RescueTime)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-time-audit-ledger-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-time-audit-ledger-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 21:30",
+        "condition": "Always",
+        "rite_steps": [
+          "Tally the day's hours by app and category",
+          "Compare against planned blocks",
+          "Build the audit ledger",
+          "HITL: Acknowledge \u2014 review the time audit?"
+        ],
+        "hitl_type": "Acknowledge",
+        "gate_kind": "acknowledge",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "RescueTime"
+        },
+        "notes": "An honest ledger of your day, no creative accounting. LEVI tracks the hours so the hours stop lying to you.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Time Audit Ledger Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-weekly-digest-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-weekly-digest-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "notification",
+          "run_id": "flow-321ca3e7cd22",
+          "node_detail": [
+            "[trigger] trigger: Time 07:00: flow entered via schedule trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Weekly Digest (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-weekly-digest-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-weekly-digest-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 07:00",
+        "condition": "Day Monday",
+        "rite_steps": [
+          "Compile all open tasks across lists",
+          "Summarize last week's completions",
+          "Build the Monday digest",
+          "HITL: Notification \u2014 digest ready; approve?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Vary Monday",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Weekly Digest Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-weekly-digest-02",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification",
+          "hitl_explicit": true,
+          "gate_kind": "notification"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-weekly-digest-02",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "notification",
+          "run_id": "flow-a345e728c8d4",
+          "node_detail": [
+            "[trigger] trigger: Time 07:00: flow entered via schedule trigger",
+            "[approval] HITL gate: notification: gate approved: dry-run: approval simulated",
+            "[minion] rite: Weekly Digest (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-weekly-digest-02' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-weekly-digest-02' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 07:00",
+        "condition": "Day Monday",
+        "rite_steps": [
+          "Compile the week's metrics snapshot",
+          "Build the digest summary",
+          "Attach trend highlights",
+          "HITL: Notification \u2014 digest ready; approve?"
+        ],
+        "hitl_type": "Notification",
+        "gate_kind": "notification",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Vary Monday",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Weekly Digest Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-weekly-report-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Notification & Dialog",
+          "hitl_explicit": true,
+          "gate_kind": "dialog"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-weekly-report-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "dialog",
+          "run_id": "flow-2b6add4f1cad",
+          "node_detail": [
+            "[trigger] trigger: Time 18:00: flow entered via schedule trigger",
+            "[approval] HITL gate: dialog: gate approved: dry-run: approval simulated",
+            "[minion] rite: Weekly Report (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for MacroDroid, AutoHotkey, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-weekly-report-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-weekly-report-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 18:00",
+        "condition": "Day Monday",
+        "rite_steps": [
+          "Gather the week's completed tasks and metrics",
+          "Generate the weekly report draft",
+          "Attach supporting figures",
+          "HITL: Notification & Dialog \u2014 approve before the report is shared?"
+        ],
+        "hitl_type": "Notification & Dialog",
+        "gate_kind": "dialog",
+        "tool_references": {
+          "android": "MacroDroid",
+          "windows": "AutoHotkey",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "Vary: every Monday 18:00",
+        "origin": "chauncey-intake"
+      },
+      "genesis": {
+        "white_label": "Weekly Report Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-workflow-autopsy-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Confirm",
+          "hitl_explicit": true,
+          "gate_kind": "confirm"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-workflow-autopsy-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": true,
+          "hitl_gate": "confirm",
+          "run_id": "flow-e0aa068470dd",
+          "node_detail": [
+            "[trigger] trigger: Time 19:00: flow entered via schedule trigger",
+            "[approval] HITL gate: confirm: gate approved: dry-run: approval simulated",
+            "[minion] rite: Workflow Autopsy (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, AppleScript, Bardeen)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-workflow-autopsy-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-workflow-autopsy-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Time 19:00",
+        "condition": "Day Friday",
+        "rite_steps": [
+          "Dissect the week's completions, misses, and time sinks",
+          "Draft the one-page debrief",
+          "Stage it for archiving",
+          "HITL: Confirm \u2014 archive the autopsy?"
+        ],
+        "hitl_type": "Confirm",
+        "gate_kind": "confirm",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "AppleScript",
+          "chrome_extension": "Bardeen"
+        },
+        "notes": "The week gets an autopsy, not a eulogy. LEVI opens it up, names what worked and what bled, then files the findings.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Workflow Autopsy Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    },
+    {
+      "minion_id": "productivity-workflow-template-mint-01",
+      "grade": "enterprise",
+      "evidence": {
+        "high_grade": {
+          "missing_fields": [],
+          "incomplete": false,
+          "hitl_type": "Approval",
+          "hitl_explicit": true,
+          "gate_kind": "approval"
+        },
+        "premium": {
+          "flow_id": "flow-productivity-workflow-template-mint-01",
+          "node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "strict_validation": "pass",
+          "rite_steps": 4
+        },
+        "elite": {
+          "dry_run": "complete",
+          "dry_run_receipt": true,
+          "receipt_ok": true,
+          "plan_nodes": 4,
+          "ran_node_kinds": [
+            "trigger",
+            "approval",
+            "minion",
+            "note"
+          ],
+          "rail_ok": true,
+          "condition_satisfying_event_used": false,
+          "hitl_gate": "approval",
+          "run_id": "flow-5c907b7ace7a",
+          "node_detail": [
+            "[trigger] trigger: Task completed: flow entered via manual trigger",
+            "[approval] HITL gate: approval: gate approved: dry-run: approval simulated",
+            "[minion] rite: Workflow Template Mint (4 steps): rail: plan -> preview -> permission -> execute -> verify -> receipt; simulated; receipted",
+            "[note] bank the receipt: annotated"
+          ]
+        },
+        "enterprise": {
+          "adapters_bound": [
+            "DeviceArtifactAdapter (scaffold + setup guide for Tasker, PowerShell, Shortcuts, Notion)"
+          ],
+          "adapter_gaps_declared": [
+            "webhook target unconfigured for 'productivity-workflow-template-mint-01' (WebhookAdapter needs a user-owned target URL)"
+          ],
+          "operator_validation": "validate_operator: pass",
+          "operator_ok": true
+        }
+      },
+      "adapter_gaps": [
+        "webhook target unconfigured for 'productivity-workflow-template-mint-01' (WebhookAdapter needs a user-owned target URL)"
+      ],
+      "doc": {
+        "trigger": "Task completed",
+        "condition": "Pattern: repeat detected",
+        "rite_steps": [
+          "Detect the repeated task pattern",
+          "Draft it as a reusable template",
+          "Define its variables",
+          "HITL: Approval \u2014 mint this workflow as a template?"
+        ],
+        "hitl_type": "Approval",
+        "gate_kind": "approval",
+        "tool_references": {
+          "android": "Tasker",
+          "windows": "PowerShell",
+          "mac": "Shortcuts",
+          "chrome_extension": "Notion"
+        },
+        "notes": "Do it twice, template it forever. LEVI spots your repeated hunts and mints them into traps you can spring with one tap.",
+        "origin": "levi-original"
+      },
+      "genesis": {
+        "white_label": "Workflow Template Mint Minion",
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+      }
+    }
+  ]
+}

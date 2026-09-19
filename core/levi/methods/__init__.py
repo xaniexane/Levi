@@ -72,6 +72,15 @@ silently absorbed; nothing here phones home.
 - ``concatenative``: Stackscript — LEVI's own bounded stack machine
   (Forth's concatenative core remixed: deny-closed bounds, receipts,
   pure compute, no I/O words).
+- ``delphi``: the Delphi method (RAND, 1950s) — iterative anonymous
+  expert rounds with median/IQR feedback and a convergence exit rule.
+- ``ngt``: Nominal Group Technique (Delbecq & Van de Ven) — silent
+  generation → round-robin → clarification → private rank → Borda tally,
+  enforced as a state machine.
+- ``crawford``: the Crawford slip method (C. C. Crawford, 1925) —
+  anonymous one-idea-per-slip rounds; collection before display.
+- ``futuresearch``: Future Search (Weisbord & Janoff) — AREIN-gated,
+  ordered past→present→future→common-ground→action planning arc.
 
 Remix law: faithful preservation belongs in the Archive; these modules are
 LEVI-native realizations — the load-bearing mechanism taken, improved, and

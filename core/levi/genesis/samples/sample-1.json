@@ -1,0 +1,83 @@
+{
+  "agents": [
+    {
+      "agent_id": "productivity-idea-inbox-funnel-01",
+      "class_tag": "AI",
+      "counsel": "AICI",
+      "genesis_descriptor": {
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired",
+        "white_label": "Idea Inbox Funnel Minion"
+      },
+      "grade": "enterprise",
+      "grade_proof": {
+        "grade": "enterprise",
+        "graded_at": "2026-09-18T19:01:54.035944+00:00",
+        "manifest_batch": "productivity_a",
+        "signature_id": "ipsig-21758b0d2323"
+      },
+      "minion_id": "productivity-idea-inbox-funnel-01",
+      "twin_pair": {
+        "left": {
+          "hemisphere_id": "left:productivity-idea-inbox-funnel-01",
+          "role": "generalist planner",
+          "twin_id": "agent:productivity-idea-inbox-funnel-01:fg"
+        },
+        "pair_id": "agentpair:productivity-idea-inbox-funnel-01",
+        "right": {
+          "hemisphere_id": "right:productivity-idea-inbox-funnel-01",
+          "role": "generalist pattern reader",
+          "twin_id": "agent:productivity-idea-inbox-funnel-01:bg"
+        }
+      },
+      "white_label": "Idea Inbox Funnel Minion"
+    }
+  ],
+  "assembler": "levi.genesis.odd_sets v1.0.0",
+  "counsel_map": {
+    "AICI": [
+      "productivity-idea-inbox-funnel-01"
+    ]
+  },
+  "customer": {
+    "name": "Acme Schools",
+    "package_name": "Acme Schools Genesis 1",
+    "sector": "education",
+    "tier": "genesis",
+    "white_labeled": true
+  },
+  "form": "genesis.odd_sets",
+  "inputs": {
+    "agent_ids": [
+      "productivity-idea-inbox-funnel-01"
+    ],
+    "count": 1,
+    "customer_name": "Acme Schools",
+    "method": "deterministic seeded draw",
+    "sector": "education",
+    "seed_hex": "d1d9da3e99cad7d8c39c9fbc223ce0a68c26fe0134f646b7567112aa02728a6c",
+    "tier": "genesis"
+  },
+  "odd_law": {
+    "count": 1,
+    "law": "odd counts of agents in Genesis \u2014 1, 3, 5, 7, 9 \u2026 never even",
+    "rationale": "odd counts can't deadlock \u2014 counsel deliberation and twin-merge always resolve by majority"
+  },
+  "package_id": "genesis-odd-698b8f44a5fd",
+  "packaging": {
+    "model": "lifetime one-copy buy",
+    "money_seam": "paper only \u2014 see levi.genesis.money for paper quotes; no payment rail wired without the keeper's explicit order",
+    "note": "lifetime one-copy buy; white-labeled per business (Acme Schools); specialized packs as add-ons",
+    "status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+  },
+  "selection": {
+    "class_plan": {
+      "AI": 1,
+      "SI": 0,
+      "XI": 0
+    },
+    "method": "deterministic seeded draw",
+    "pool_size": 470,
+    "seed_hex": "d1d9da3e99cad7d8c39c9fbc223ce0a68c26fe0134f646b7567112aa02728a6c"
+  }
+}

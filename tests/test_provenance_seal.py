@@ -87,11 +87,11 @@ def test_round_trip_sign_verify(fakeroot, keydir):
     env = out["envelope"]
     assert env["descriptor"]["name"] == "LEVI"
     assert env["descriptor"]["origin_chain"] == [
-        "DemandPulse",
-        "Nexus",
         "Alpha",
         "Omega",
+        "Wax",
         "LEVI",
+        "Nanobit",
     ]
     assert env["descriptor"]["date_of_invention"] == "2026-04-24"
     assert env["descriptor"]["owner"] == "Chauncey Logan"

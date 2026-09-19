@@ -1,9 +1,9 @@
 package dev.levi.inference
 
 /**
- * Builds chat prompts for the on-device model. Uses the Qwen3 chat template
- * (ChatML-style <|im_start|>/<|im_end|> markers) since the default catalog
- * models are Qwen3 GGUFs. Pure logic — no Android APIs, JVM-testable.
+ * Builds chat prompts for the on-device model. Uses LEVI's chat template
+ * (ChatML-style <|im_start|>/<|im_end|> markers). Pure logic — no Android
+ * APIs, JVM-testable.
  */
 object PromptBuilder {
 

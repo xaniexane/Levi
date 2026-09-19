@@ -357,11 +357,29 @@ class ServiceRegistry:
         if svc.builtin:
             raise ServiceError(
                 "remove: '%s' is a built-in service; disable it instead "
-                "(not supported yet — leave it enabled and ignore its schedule)" % name
+                "(`service disable %s`)" % (name, name)
             )
         del self._services[name]
         self._save()
         return True
+
+    def set_enabled(self, name: str, enabled: bool) -> ServiceDefinition:
+        """Enable or disable a service by name (built-ins included).
+
+        Disabled services are kept in the registry but refuse to run —
+        :func:`levi.bot.automation.run_service` rejects them with a clear
+        error and a rejection receipt. Persisted to disk. Raises
+        :class:`ServiceError` for unknown names.
+        """
+        validate_name(name)
+        svc = self._services.get(name)
+        if svc is None:
+            raise ServiceError(
+                "set_enabled: unknown service %r — see `service list`" % (name,)
+            )
+        svc.enabled = bool(enabled)
+        self._save()
+        return svc
 
     def get(self, name: str) -> Optional[ServiceDefinition]:
         validate_name(name)
@@ -500,14 +518,25 @@ def _handle_morning_briefing(params: Dict[str, Any]) -> ServiceResult:
     except Exception:
         notes.append("demand: unreadable demand_pulse.json")
 
-    body = "\n\n".join(sections) if sections else "(no sections produced a report)"
-    report = "MORNING BRIEFING — %s\n\n%s" % (
-        datetime.now(timezone.utc).date().isoformat(),
-        body,
-    )
+    body = "\n\n".join(sections) if sections else ""
+    # Honest capability reporting: if no section produced a report, the
+    # briefing failed — never a green "success" with an empty body.
+    ok = bool(sections)
+    if ok:
+        report = "MORNING BRIEFING — %s\n\n%s" % (
+            datetime.now(timezone.utc).date().isoformat(),
+            body,
+        )
+    else:
+        report = (
+            "MORNING BRIEFING — %s\n\nNo briefing available: every data "
+            "source was unreachable, and I won't invent headlines. "
+            "Fix the sources below and try again."
+            % datetime.now(timezone.utc).date().isoformat()
+        )
     if notes:
         report += "\n\nNotes: " + "; ".join(notes)
-    return ServiceResult(ok=True, report=report, notes=notes)
+    return ServiceResult(ok=ok, report=report, notes=notes)
 
 
 def _handle_bounty_watch(params: Dict[str, Any]) -> ServiceResult:
@@ -580,12 +609,18 @@ def _handle_backup_status(params: Dict[str, Any]) -> ServiceResult:
         ),
     ]
     if params.get("verify"):
-        from levi.backup.snapshot import verify_snapshot
+        try:
+            from levi.backup.snapshot import verify_snapshot
 
-        ok, problems = verify_snapshot(latest.get("id", ""))
-        lines.append(
-            "verify latest: %s" % ("OK" if ok else "FAILED: %s" % "; ".join(problems))
-        )
+            verify_ok, problems = verify_snapshot(latest.get("id", ""))
+            lines.append(
+                "verify latest: %s"
+                % ("OK" if verify_ok else "FAILED: %s" % "; ".join(problems))
+            )
+        except Exception as exc:  # noqa: BLE001 - verify is advisory; report, don't crash
+            lines.append(
+                "verify latest: could not verify (%s: %s)" % (type(exc).__name__, exc)
+            )
     return ServiceResult(ok=True, report="\n".join(lines))
 
 
@@ -611,6 +646,29 @@ def _handle_research_brief(params: Dict[str, Any]) -> ServiceResult:
                 "or run with the agent runtime available."
             ),
         )
+    # F1: prefer the cited RAG path (interop adapter) over the generative
+    # agent-runtime path. RAG never invents content; when it has nothing
+    # to cite (ok=False) we fall through to the runtime fallback below.
+    try:
+        from levi.interop.adapters.bot_rag import research_brief_rag
+        from levi.memory.store import MemoryStore
+
+        _rag_store = MemoryStore()
+    except Exception:  # noqa: BLE001 - adapter/rag failure degrades to the runtime path
+        research_brief_rag = None  # type: ignore[assignment]
+        _rag_store = None
+    if research_brief_rag is not None and _rag_store is not None:
+        try:
+            _rag_brief = research_brief_rag(topic, _rag_store)
+        except Exception:  # noqa: BLE001 - never let the RAG path kill the fallback
+            _rag_brief = {"ok": False}
+        if _rag_brief.get("ok"):
+            return ServiceResult(
+                ok=True,
+                report=_rag_brief["report"],
+                notes=list(_rag_brief.get("citations") or []),
+            )
+    # else: fall through to the existing agent-runtime path
     try:
         from levi.agent.loop import run_subtask
     except Exception:

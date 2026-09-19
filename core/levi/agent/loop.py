@@ -34,6 +34,8 @@ from dataclasses import asdict, dataclass, field
 from typing import Any, Union
 
 from levi.agent.providers import ChatMessage, ChatProvider, select_provider
+from levi.operator.adapters import as_operator  # Operator contract: every provider sits behind it
+from levi.operator.contract import Operator
 from levi.agent.soul import apply_soul
 from levi.agent.tools import (
     ConfirmationRequired,
@@ -175,6 +177,7 @@ def run_subtask(
     affect: bool = False,
     affect_session: Any = None,
     growth: bool = True,
+    language: str | None = None,
 ) -> AgentTranscript:
     """Run one task through the step-level tool loop.
 
@@ -204,6 +207,12 @@ def run_subtask(
     turn (``levi.bloodstream.turn``) routes MODEL turns through this
     function, so it inherits growth context without a new turn stage.
 
+    ``language`` is a BCP-47-ish code (``"es"``, ``"fr"``, ``"pt-BR"``):
+    the provider is instructed to reply in that language, and
+    deterministic LEVI strings fall back through :mod:`levi.i18n`.
+    ``None`` (default) means English. Unknown codes fall back to
+    English rather than failing.
+
     ``ctx`` is the glue parameter the ``delegate`` tool in
     :mod:`levi.agent.tools` passes when it recurses into this function:
     the sub-run inherits the parent's consent state. When ``ctx`` is
@@ -232,15 +241,34 @@ def run_subtask(
             f"run_subtask: 'history' must be a list of ChatMessage, got "
             f"{type(history).__name__}"
         )
-    if provider is not None and not isinstance(provider, (ChatProvider, str)):
+    if provider is not None and not isinstance(provider, (ChatProvider, Operator, str)):
         raise ValueError(
-            "run_subtask: 'provider' must be a ChatProvider, a provider-name "
-            f"string, or None, got {type(provider).__name__}"
+            "run_subtask: 'provider' must be a ChatProvider, an Operator, "
+            f"a provider-name string, or None, got {type(provider).__name__}"
         )
-    if isinstance(provider, ChatProvider):
+    if language is not None and not isinstance(language, str):
+        raise ValueError(
+            "run_subtask: 'language' must be a language-code string or None, "
+            f"got {type(language).__name__}"
+        )
+    if isinstance(provider, Operator):
+        prov = provider
+    elif isinstance(provider, ChatProvider):
         prov = provider
     else:
         prov = select_provider(provider)
+
+    # Usage governor (opt-in, one line): meter every model call, detect
+    # spikes, enforce cool-downs. Removing it changes nothing else.
+    # The governor wraps ChatProviders; a provider already behind the
+    # Operator contract (e.g. handed in from the chat seat) was governed
+    # at its own seat and is not metered twice here.
+    from levi.governor import GovernedProvider
+
+    if isinstance(prov, ChatProvider):
+        prov = GovernedProvider(prov, task_id=task, agent_id="agent-loop")
+
+    prov = as_operator(prov)  # Operator contract: every provider sits behind it
 
     if registry is None:
         registry = build_default_registry(
@@ -282,6 +310,16 @@ def run_subtask(
             _add = _growth_context.context_addendum(task, limit=3)
             if _add:
                 system = system + "\n\n" + _add
+        except Exception:
+            pass
+
+    # Language: instruct the provider which language to reply in.
+    # Best-effort and honest — unknown codes fall back to English.
+    if language:
+        try:
+            from levi import i18n as _i18n
+
+            system = system + _i18n.reply_directive(language)
         except Exception:
             pass
 

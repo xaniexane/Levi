@@ -6,24 +6,28 @@ import java.io.File
  * Plain data types for the on-device inference module. All pure Kotlin, no
  * Android framework dependency beyond java.io — unit-testable on the JVM.
  *
- * Product framing: the on-device weights are the LEVI family. LEVI is always
- * the headliner and the default selection; anything else is a selectable
- * source, never the headliner.
+ * Product framing: the on-device weights are the LEVI family, trained by
+ * LEVI's own native-brain program. LEVI is the only headliner and the
+ * default selection — 100% pure LEVI, no masks. Open-source third-party
+ * weights and other providers are also selectable, honestly labeled under
+ * their own names: alternatives, never the headliner, never the default,
+ * never wearing the LEVI name.
  */
 
 /**
- * A downloadable on-device model. [baseModel] names the underlying base
- * weights honestly (e.g. "Qwen3-0.6B") whenever LEVI packages a remix;
- * [available] is false for announced-but-not-yet-shipped family members
- * (levi-tiny), which the manager refuses to download.
+ * A downloadable on-device model. [baseModel] names the real weights
+ * honestly — "LEVI native" for the family, the upstream name (e.g.
+ * "Qwen3-0.6B") for open-source alternatives. [available] is false for
+ * announced-but-not-yet-shipped models, which the manager refuses to
+ * download with a clear error instead of failing obscurely.
  */
 data class ModelInfo(
     val id: String,
-    /** Headliner UI name, e.g. "Levi 0.6B". */
+    /** UI name — "Levi …" for the family, the upstream name otherwise. Never a mask. */
     val displayName: String,
-    /** UI subtitle, e.g. "Levi remix · Qwen3 base". */
+    /** UI subtitle, e.g. "LEVI's own native brain" or "Open source · third-party weights". */
     val tagline: String,
-    /** Honest base-weights label, e.g. "Qwen3-0.6B" or "LEVI native". */
+    /** Honest weights label: "LEVI native" or the upstream base name. */
     val baseModel: String,
     val repo: String,
     val file: String,
@@ -38,7 +42,8 @@ data class ModelInfo(
         else "https://huggingface.co/$repo/resolve/main/$file"
 }
 
-/** A non-LEVI provider the user may select as an alternative source.
+/** A remote source the user may select instead of on-device weights.
+ *  LEVI-only: the cloud is purely LEVI — no third-party providers, ever.
  *  Never the headliner, never the default. */
 data class ExternalSource(
     val id: String,
@@ -47,11 +52,11 @@ data class ExternalSource(
 )
 
 object ModelCatalog {
-    /** LEVI's own native brain — on-device build in progress, not yet downloadable. */
+    /** LEVI's own native brain — on-device export in progress, not yet downloadable. */
     val LEVI_TINY = ModelInfo(
         id = "levi-tiny",
         displayName = "Levi Tiny",
-        tagline = "LEVI's own native brain · coming to on-device soon",
+        tagline = "LEVI's own native brain · on-device build in progress",
         baseModel = "LEVI native",
         repo = "",
         file = "",
@@ -62,11 +67,20 @@ object ModelCatalog {
         available = false,
     )
 
-    /** Levi remix: Qwen3-based GGUF base, LEVI-packaged. */
-    val LEVI_0_6B = ModelInfo(
-        id = "levi-0.6b",
-        displayName = "Levi 0.6B",
-        tagline = "Levi remix · Qwen3 base",
+    /**
+     * The LEVI family, headliner order — LEVI-native weights only. Larger
+     * family members join this list as the native-brain program ships
+     * on-device exports. No third-party bases, no remixes, no masks — ever.
+     */
+    val leviFamily: List<ModelInfo> = listOf(LEVI_TINY)
+
+    /** Other options: open-source third-party weights, honestly labeled
+     *  under their own names. Available but out of the spotlight — never
+     *  the headliner, never the default. */
+    val OPEN_QWEN_0_6B = ModelInfo(
+        id = "open-qwen3-0.6b",
+        displayName = "Qwen3 0.6B",
+        tagline = "Open source · third-party weights",
         baseModel = "Qwen3-0.6B",
         repo = "Qwen/Qwen3-0.6B-GGUF",
         file = "Qwen3-0.6B-Q8_0.gguf",
@@ -76,11 +90,13 @@ object ModelCatalog {
         quantLabel = "Q8_0",
     )
 
-    /** Levi remix: Qwen3-based GGUF base, LEVI-packaged. */
-    val LEVI_4B = ModelInfo(
-        id = "levi-4b",
-        displayName = "Levi 4B",
-        tagline = "Levi remix · Qwen3 base",
+    /** Other options: open-source third-party weights, honestly labeled
+     *  under their own names. Available but out of the spotlight — never
+     *  the headliner, never the default. */
+    val OPEN_QWEN_4B = ModelInfo(
+        id = "open-qwen3-4b",
+        displayName = "Qwen3 4B",
+        tagline = "Open source · third-party weights",
         baseModel = "Qwen3-4B",
         repo = "Qwen/Qwen3-4B-GGUF",
         file = "Qwen3-4B-Q4_K_M.gguf",
@@ -90,37 +106,42 @@ object ModelCatalog {
         quantLabel = "Q4_K_M",
     )
 
-    /** The LEVI family, headliner order. */
-    val leviFamily: List<ModelInfo> = listOf(LEVI_TINY, LEVI_0_6B, LEVI_4B)
+    val openSourceModels: List<ModelInfo> = listOf(OPEN_QWEN_0_6B, OPEN_QWEN_4B)
 
     /** Backwards-compatible alias: the headliner list. */
     val models: List<ModelInfo> get() = leviFamily
 
-    /** Selectable sources — alternatives, never the default. */
+    /**
+     * The only remote source: LEVI's own SI cloud provider. Chauncey's law
+     * — the cloud is purely LEVI: synthetic intelligence, not artificial,
+     * and never a third-party provider as a source. Out of the spotlight:
+     * never the headliner, never the default.
+     */
     val externalSources: List<ExternalSource> = listOf(
         ExternalSource(
-            id = "ollama",
-            displayName = "Ollama",
-            note = "A local server on your network. A selectable source — LEVI stays the headliner.",
-        ),
-        ExternalSource(
-            id = "openai-compatible",
-            displayName = "OpenAI-compatible endpoint",
-            note = "Any OpenAI-style API as a selectable source.",
+            id = "levi-si-cloud",
+            displayName = "LEVI SI Cloud",
+            note = "LEVI's own synthetic-intelligence cloud provider. The only remote source — no third-party providers.",
         ),
     )
 
-    /** LEVI is the default selected model. Always. */
-    fun defaultModel(): ModelInfo = LEVI_0_6B
+    /** Levi Tiny is the default selected model. Always. */
+    fun defaultModel(): ModelInfo = LEVI_TINY
+
+    /** Every downloadable model, LEVI family first. */
+    val downloadable: List<ModelInfo>
+        get() = (leviFamily + openSourceModels).filter { it.available }
 
     /**
-     * Largest downloadable LEVI-family model that fits [totalRamMb];
-     * falls back to the default when nothing fits.
+     * Largest downloadable model that fits [totalRamMb], LEVI family
+     * preferred on size ties; falls back to the default when nothing
+     * downloadable fits — the manager then refuses with a clear
+     * "not yet available" error.
      */
     fun recommendedFor(totalRamMb: Long): ModelInfo =
-        leviFamily
-            .filter { it.available && totalRamMb >= it.minRamMb }
-            .maxByOrNull { it.sizeBytes }
+        downloadable
+            .filter { totalRamMb >= it.minRamMb }
+            .maxWithOrNull(compareBy({ it.sizeBytes }, { it in leviFamily }))
             ?: defaultModel()
 }
 

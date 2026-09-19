@@ -61,6 +61,7 @@ line (~line 256):
 ```python
 # --- PENDING: assistant core (apply after hardening pass lands) ---
 from levi.agent.assistant import build_agent_prompt
+
 if system_prompt is None:
     system_prompt = build_agent_prompt(task)
 # --- end PENDING ---
@@ -76,6 +77,7 @@ Where `self.system_prompt = system_prompt` is set (~line 252):
 ```python
 # --- PENDING: assistant core (apply after hardening pass lands) ---
 from levi.agent.assistant import build_agent_prompt
+
 self.system_prompt = system_prompt or build_agent_prompt("")
 # --- end PENDING ---
 ```
@@ -86,6 +88,7 @@ growth loop (mirroring `levi.bot.context.queue_learnings`):
 ```python
 # --- PENDING: assistant core (apply after hardening pass lands) ---
 from levi.agent.assistant import candidate_learnings
+
 for cand in candidate_learnings(user_text):
     append_pending_learning(cand)  # shared queue writer; adopt from bot
 # --- end PENDING ---

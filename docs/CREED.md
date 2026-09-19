@@ -50,9 +50,9 @@ API:
 ```python
 from levi.creed import set_mask, get_mask, list_masks, system_prompt
 
-set_mask("drill")          # persisted to ~/.levi/creed/mask.json
-get_mask().id              # "drill"
-system_prompt()            # laws block first, then the active mask's tone
+set_mask("drill")  # persisted to ~/.levi/creed/mask.json
+get_mask().id  # "drill"
+system_prompt()  # laws block first, then the active mask's tone
 ```
 
 State resolves the LEVI home at call time (`LEVI_HOME`, then `HOME`), so
@@ -71,11 +71,11 @@ from levi.creed import PromotionTracker
 
 t = PromotionTracker()
 fid = t.propose("Facts earn trust slowly and lose it fast.")
-t.reinforce(fid)   # 1 — provisional
-t.reinforce(fid)   # 2 — provisional
-t.reinforce(fid)   # 3 — PROMOTED
-t.promote(fid)     # explicit: immediate, no counting needed
-t.status(fid)      # {"status", "reinforcements", "threshold", "promoted", ...}
+t.reinforce(fid)  # 1 — provisional
+t.reinforce(fid)  # 2 — provisional
+t.reinforce(fid)  # 3 — PROMOTED
+t.promote(fid)  # explicit: immediate, no counting needed
+t.status(fid)  # {"status", "reinforcements", "threshold", "promoted", ...}
 ```
 
 Facts live in the memory store (`levi.memory.store.MemoryStore`) as SEMANTIC

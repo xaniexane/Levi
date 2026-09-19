@@ -17,6 +17,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import dev.levi.app.databinding.ActivityMainBinding
 import dev.levi.app.settings.AppLock
+import dev.levi.app.voice.LeviTts
+import dev.levi.app.voice.SpeakBridge
+import dev.levi.app.voice.VoicePrefs
 import org.json.JSONObject
 
 /**
@@ -42,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var currentUrl: String? = null
     private var pendingVoiceQuery: String? = null
+    private var leviTts: LeviTts? = null
 
     private val voiceInputLauncher =
         registerForActivityResult(
@@ -132,6 +136,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.webView.webChromeClient = WebChromeClient()
+
+        // Spoken read-back: the device's own TTS engine, exposed to the
+        // configured web UI as window.leviSpeak. Silent unless the user
+        // enabled "Speak chat responses" — the bridge checks the toggle.
+        val tts = LeviTts(this)
+        leviTts = tts
+        binding.webView.addJavascriptInterface(
+            SpeakBridge(tts) { VoicePrefs.speakReplies(this) },
+            "leviSpeak",
+        )
 
         handleVoiceIntent(intent)
     }
@@ -264,6 +278,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        leviTts?.shutdown()
+        leviTts = null
         binding.webView.destroy()
         super.onDestroy()
     }

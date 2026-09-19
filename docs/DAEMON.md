@@ -61,10 +61,10 @@ home; the default is `~/.levi`.
 
 ```python
 from levi.daemon.supervisor import (
-    list_services,    # -> list[dict]: the catalog
-    service_status,   # (name) -> dict: one service's health; "unknown" if not found
-    all_status,       # -> dict[str, dict]: every service's health
-    supervise_once,   # -> dict: the foreground pulse (ran_at, up, down, services)
+    list_services,  # -> list[dict]: the catalog
+    service_status,  # (name) -> dict: one service's health; "unknown" if not found
+    all_status,  # -> dict[str, dict]: every service's health
+    supervise_once,  # -> dict: the foreground pulse (ran_at, up, down, services)
 )
 ```
 

@@ -22,12 +22,12 @@ set_goal("ship-book", "Finish the book draft", tags=["deep-work", "writing"])
 log_activity(["deep-work"], "drafted chapter 3")
 log_activity(["novelty"], "doomscrolled the feed")
 
-card = weekly_card()   # or weekly_card(now=datetime...) in tests
+card = weekly_card()  # or weekly_card(now=datetime...) in tests
 if card is None:
-    print("SILENT")     # aligned — or too little data to say
+    print("SILENT")  # aligned — or too little data to say
 else:
     print(card["grade"], card["tag"], card["title"])  # "CARD [drift] ..."
-    print(card["body"])   # the evidence: counts + examples
+    print(card["body"])  # the evidence: counts + examples
 ```
 
 ### Firing rule (all three must hold)

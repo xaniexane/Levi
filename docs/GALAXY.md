@@ -89,7 +89,8 @@ svc = GalaxyServices()  # store ~/.levi/galaxy, metered on the governor ledger
 cap = svc.issue_capability("my-skill-executor", ["galaxy.acme.summarizer.*"])
 
 result = svc.call(
-    "galaxy.acme.summarizer", "summarize",
+    "galaxy.acme.summarizer",
+    "summarize",
     kwargs={"text": "..."},
     capability=cap,
     grantee="my-skill-executor",
@@ -121,9 +122,10 @@ import**:
 # inside skill A's verb implementation; `directory` is the GalaxyServices
 # instance handed to it by the caller (e.g. the agent loop)
 result = directory.call(
-    "galaxy.acme.summarizer", "summarize",
+    "galaxy.acme.summarizer",
+    "summarize",
     kwargs={"text": text},
-    capability=my_own_capability,   # must ALSO cover galaxy.acme.summarizer.*
+    capability=my_own_capability,  # must ALSO cover galaxy.acme.summarizer.*
     grantee="skill-a-executor",
 )
 ```
@@ -202,21 +204,23 @@ work). Each is a precise patch for the coordinator to schedule:
    rule is convention, not enforcement. Suggested shape:
    ```python
    # in the per-skill tool context construction:
-   tool_ctx["galaxy"] = galaxy_services          # GalaxyServices instance
+   tool_ctx["galaxy"] = galaxy_services  # GalaxyServices instance
    tool_ctx["galaxy_capability"] = svc.issue_capability(skill_executor_id, granted_actions)
    ```
    plus documentation in the skill authoring guide that `galaxy.call` is the
    only sanctioned cross-package route.
 
-2. **Pre-call governor gates (owned: `core/levi/governor/*`).**
-   `service.py` meters every attempt on the usage ledger (clean seam, wired
-   today). It does **not** yet consult `BudgetEnforcer` or `CooldownManager`
-   before invoking a verb — a runaway skill could burn budget through local
-   verbs. Patch: in `GalaxyServices.call`, before step 3, add
-   `budgets.authorize()` / `cooldowns.acquire(scope=f"galaxy:{port}")` with
-   the same deny-closed refusal style; wire an injected enforcer the way the
-   `Meter` is injected today. Documented here instead of edited because
-   governor is another builder's tree.
+2. **Pre-call governor gates (owned: `core/levi/governor/*`).** — LANDED
+   2026-09-18. `service.py` meters every attempt on the usage ledger (clean
+   seam, wired today). `GalaxyServices.call` now also consults
+   `BudgetEnforcer` and `CooldownManager` before invoking a verb: in
+   `GalaxyServices.call`, before step 3, `budgets.authorize()` /
+   `cooldowns.acquire(scope=f"galaxy:{port}")` refuse deny-closed as
+   `BudgetDenied` / `CooldownDenied` (both `GalaxyError` subclasses, both
+   metered like every other refusal). The enforcers are injected the way
+   the `Meter` is: an explicit `budgets=`/`cooldowns=` wins, otherwise the
+   real governor state attaches under the same home. Tests:
+   `tests/test_galaxy_governor_gates.py` (6).
 
 3. **Public package registry (not yet built).**
    `search` today only searches *installed* packages. A real Galaxy needs a

@@ -35,6 +35,7 @@ def test_charter_catches_all_sly_trades():
         odds_declared=False,
         has_time_limited_content=True,
         has_randomness=True,  # with no audit hook: rule 10 trips
+        has_sunset_plan=False,  # networked with no funeral plan: rule 11 trips
     )
     ids = {v["rule"] for v in charter.check_manifest(m)}
     assert ids == {r.id for r in charter.RULES}

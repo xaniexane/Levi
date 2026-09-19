@@ -222,13 +222,15 @@ def test_inventory_counts_match_reality():
     real_revivals = len(list((PKG / "revival").glob("[a-z]*.py")))
     real_playbooks = len(list((PKG / "skill" / "playbooks").rglob("*.md")))
     by_name = {w["name"]: w["inventory_count"] for w in list_warehouses()}
-    assert real_methods == 41
+    assert (
+        real_methods == 45
+    )  # 41 + deliberation hunt 2026-09-17: delphi/ngt/crawford/futuresearch
     assert by_name["methods"] == real_methods
-    assert real_revivals == 20
+    assert real_revivals == 469  # + revival yard (yard.py) 2026-09-18
     assert (
         by_name["revivals"] == real_revivals + 3 + 3 + 3
     )  # + telegraph shelf (envelopes/identity/directory) + analog shelf (bench/nomo/fourier) + craft shelf (hallmark/guild/measures)
-    assert real_playbooks == 839
+    assert real_playbooks == 852  # + builder pack (6) + operator.xyz, 2026-09-18
     assert by_name["skills"] == real_playbooks
     assert (
         by_name["games"] == 10
@@ -263,23 +265,31 @@ def test_inventory_unknown_warehouse_rejected():
 
 def test_inventory_pagination_is_honest():
     full = warehouse_inventory("skills", limit=None)
-    assert full["total"] == 839
-    assert len(full["items"]) == 839
+    assert full["total"] == 852  # + builder pack (6) + operator.xyz, 2026-09-18
+    assert len(full["items"]) == 852
     assert full["truncated"] is False
 
     page = warehouse_inventory("skills", limit=50, offset=0)
-    assert page["total"] == 839
+    assert page["total"] == 852
     assert len(page["items"]) == 50
     assert page["truncated"] is True
 
-    last = warehouse_inventory("skills", limit=50, offset=800)
-    assert len(last["items"]) == 39
+    last = warehouse_inventory("skills", limit=50, offset=850)
+    assert len(last["items"]) == 2  # 852 = 17*50 + 2, last page holds 2
     assert last["truncated"] is False
 
     for item in page["items"]:
         assert {"id", "kind", "summary"} <= set(item)
         assert item["kind"] == "playbook"
-        assert item["id"].startswith("playbook.cyber.")
+        # playbook shelves: cyber pack + operator pack + compressed pack + builder pack
+        assert item["id"].startswith(
+            (
+                "playbook.cyber.",
+                "playbook.operator.",
+                "playbook.compressed.",
+                "playbook.builder.",
+            )
+        )
 
 
 def test_inventory_negative_offset_rejected():

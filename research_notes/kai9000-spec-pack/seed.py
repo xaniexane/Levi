@@ -389,15 +389,21 @@ def main() -> int:
     before = store.count()
     result = store.add_many(build_records())
     after = store.count()
-    print("before=%d added=%d skipped=%d after=%d" % (before, result["added"], result["skipped"], after))
+    print(
+        "before=%d added=%d skipped=%d after=%d"
+        % (before, result["added"], result["skipped"], after)
+    )
     if "--verify" in sys.argv:
         from levi.archive.search import search  # noqa: E402
+
         hits = search(store, "focus mute")
         print("search 'focus mute': %d hit(s)" % len(hits))
         for h in hits[:3]:
             print("  -", h.record.id, "|", h.score if hasattr(h, "score") else "")
         rec = store.get("arch-%s-technique-graded-heartbeat-signaling-2026" % TAG)
-        print("direct get signal-grades record:", "OK" if rec is not None else "MISSING")
+        print(
+            "direct get signal-grades record:", "OK" if rec is not None else "MISSING"
+        )
     return 0
 
 

@@ -235,10 +235,120 @@ _INTENT_RUN_BRIEFING = re.compile(
 )
 _INTENT_RUN_BOUNTY = re.compile(r"\b(bounty watch|bounty-watch|new findings)\b", re.I)
 _INTENT_RUN_BACKUP = re.compile(
-    r"\b(backup status|backups? status|check\s+(my\s+)?backup)\b", re.I
+    r"\b(backup status|backups? status|check\s+(my\s+)?backups?)\b", re.I
 )
 _INTENT_LIST = re.compile(r"\b(list|show)\s+(my\s+|the\s+)?services\b", re.I)
 _INTENT_LOG = re.compile(r"\b(service\s+(run\s+)?log|service history|run log)\b", re.I)
+
+# Utterances that *sound* like bot actions but have no handler, no backend,
+# and no capability behind them. These get a clean "I can't do that"
+# instead of falling through to chat and risking a hallucinated action.
+# Checked AFTER the real intents above, so supported phrasings (e.g.
+# "set up a daily bounty watch") always win. Patterns are deliberately
+# narrow: "call me Chauncey" must stay a naming/learning turn, not a
+# phone-call refusal.
+_UNSUPPORTED_ACTIONS = (
+    (
+        re.compile(r"\b(send|write|compose)\b.{0,40}\b(e-?mail|mail)\b", re.I),
+        "send email",
+    ),
+    (
+        re.compile(r"\bemail\s+\S+\s+about\b", re.I),
+        "send email",
+    ),
+    (
+        re.compile(r"\b(text|sms)\s+(me|him|her|them)\b", re.I),
+        "send text messages",
+    ),
+    (
+        re.compile(r"\b(make|place)\s+a\s+(phone\s+)?call\b", re.I),
+        "make phone calls",
+    ),
+    (
+        re.compile(r"\bcall\s+(my|the|him|her|them)\b", re.I),
+        "make phone calls",
+    ),
+    (
+        re.compile(
+            r"\b(delete|remove|erase|wipe)\b.{0,40}"
+            r"\b(files?|folders?|director(y|ies)|backups?|snapshots?|data)\b",
+            re.I,
+        ),
+        "delete files, backups, or data",
+    ),
+    (
+        re.compile(r"\b(buy|purchase)\b", re.I),
+        "buy or purchase things",
+    ),
+    (
+        re.compile(r"\border\s+(a|an|the|some|my)\b", re.I),
+        "place orders",
+    ),
+    (
+        re.compile(
+            r"\bbook\b.{0,30}\b(flight|hotel|table|appointment|ticket)s?\b", re.I
+        ),
+        "book travel or reservations",
+    ),
+    (
+        re.compile(r"\bremind\s+me\b|\bset\s+(an?\s+)?(reminder|alarm|timer)\b", re.I),
+        "set reminders or alarms",
+    ),
+    (
+        re.compile(r"\bschedule\b.{0,40}\b(meeting|appointment)\b", re.I),
+        "schedule meetings",
+    ),
+)
+
+_CANT_DO_TEMPLATE = (
+    "I can't do that one — I have no way to %s. No handler, no backend, "
+    "and I'm not going to pretend otherwise.\n\n"
+    "What I *can* do: 'run my morning briefing', 'check the bounty watch', "
+    "'check backup status', 'list services', 'show me the service log', or "
+    "'research <topic>'."
+)
+
+
+def _setup_scheduled_service(match, ServiceDefinition, ServiceRegistry) -> str:
+    """Register a scheduled variant of a built-in service.
+
+    Raises :class:`ServiceError` (or :class:`OSError`) on any problem —
+    the caller turns that into a clean error reply plus a receipt.
+    """
+    from levi.bot.services import ServiceError
+
+    _verb, freq, display = (
+        match.group(1),
+        match.group(2).lower(),
+        match.group(3).lower(),
+    )
+    base = _SERVICE_ALIASES[display]
+    reg = ServiceRegistry()
+    name = "%s-%s" % (base, freq)
+    existing = reg.get(name)
+    if existing is None:
+        builtin = reg.get(base)
+        if builtin is None:
+            raise ServiceError(
+                "schedule: built-in service %r is missing from the registry" % (base,)
+            )
+        reg.add(
+            ServiceDefinition(
+                name=name,
+                description="%s on a %s schedule" % (builtin.description, freq),
+                service_type=builtin.service_type,
+                schedule=freq,
+                params=dict(builtin.params),
+            )
+        )
+    cron = _FREQ_CRON[freq]
+    return (
+        "Locked in — '%s' is on the %s roster. Heads up: I'm on-demand "
+        "by nature, no built-in scheduler, so here's the cron line that "
+        "makes it actually recur:\n\n    %s cd ~/workspace/levi && "
+        "python -m levi.bot service run %s\n\nInstall that and I'll show "
+        "up %s like clockwork." % (name, freq, cron, name, freq)
+    )
 
 
 def _route_intent(text: str) -> Optional[str]:
@@ -246,43 +356,35 @@ def _route_intent(text: str) -> Optional[str]:
 
     Returns a reply string when an intent matched, else ``None``.
     Lazy imports keep the pure-chat path import-clean.
+
+    Every branch is fail-clean: an unexpected failure inside a branch
+    produces a structured error reply (and a rejection receipt where the
+    act was consequential), never a traceback to the user. Utterances
+    that look like actions the bot cannot perform get an explicit
+    "I can't do that" via :data:`_UNSUPPORTED_ACTIONS`.
     """
     try:
         from levi.bot import automation
-        from levi.bot.services import ServiceDefinition, ServiceRegistry
+        from levi.bot.services import ServiceDefinition, ServiceError, ServiceRegistry
     except Exception:
         return None
 
     match = _INTENT_SCHEDULE.search(text)
     if match:
-        _verb, freq, display = (
-            match.group(1),
-            match.group(2).lower(),
-            match.group(3).lower(),
-        )
-        base = _SERVICE_ALIASES[display]
-        reg = ServiceRegistry()
-        name = "%s-%s" % (base, freq)
-        existing = reg.get(name)
-        if existing is None:
-            builtin = reg.get(base)
-            reg.add(
-                ServiceDefinition(
-                    name=name,
-                    description="%s on a %s schedule" % (builtin.description, freq),
-                    service_type=builtin.service_type,
-                    schedule=freq,
-                    params=dict(builtin.params),
-                )
+        try:
+            return _setup_scheduled_service(match, ServiceDefinition, ServiceRegistry)
+        except Exception as exc:  # noqa: BLE001 - setup must fail clean, never trace back
+            automation.log_receipt(
+                "scheduler-setup",
+                ok=False,
+                summary="rejected: %s: %s" % (type(exc).__name__, exc),
+                error="%s: %s" % (type(exc).__name__, exc),
+                planned="register scheduled service from chat request",
+                approved="on-demand user request",
+                executed="rejected before registry write",
+                verified="n/a — nothing registered",
             )
-        cron = _FREQ_CRON[freq]
-        return (
-            "Locked in — '%s' is on the %s roster. Heads up: I'm on-demand "
-            "by nature, no built-in scheduler, so here's the cron line that "
-            "makes it actually recur:\n\n    %s cd ~/workspace/levi && "
-            "python -m levi.bot service run %s\n\nInstall that and I'll show "
-            "up %s like clockwork." % (name, freq, cron, name, freq)
-        )
+            return "Couldn't set that up: %s" % exc
 
     match = _INTENT_RESEARCH.search(text)
     if match:
@@ -308,8 +410,11 @@ def _route_intent(text: str) -> Optional[str]:
             return automation.narrate(record)
 
     if _INTENT_LIST.search(text):
-        reg = ServiceRegistry()
-        services = reg.list()
+        try:
+            reg = ServiceRegistry()
+            services = reg.list()
+        except Exception as exc:  # noqa: BLE001 - listing must fail clean
+            return "Couldn't list services: %s" % exc
         lines = ["Here's the crew — %d service(s) on the roster:" % len(services)]
         for svc in services:
             state = "on" if svc.enabled else "off"
@@ -340,6 +445,12 @@ def _route_intent(text: str) -> Optional[str]:
                 )
             )
         return "\n".join(lines)
+
+    # No real intent matched — but if the user asked for an action the bot
+    # has no capability for, say so cleanly instead of chatting past it.
+    for pattern, capability in _UNSUPPORTED_ACTIONS:
+        if pattern.search(text):
+            return _CANT_DO_TEMPLATE % capability
 
     return None
 

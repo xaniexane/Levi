@@ -299,3 +299,26 @@ def test_compare_within_noise():
 def test_compare_not_comparable():
     out = eh.compare_reports(_rep("base"), _rep("cand"))
     assert out["overall"].startswith("not comparable")
+
+
+def test_make_probes_deterministic_and_loadable(tmp_path):
+    from levi.brain.train.v2 import make_probes
+
+    def doc(i):
+        kind = "course" if i % 2 == 0 else "academy"
+        sents = [" ".join(f"d{i}s{s}w{k}" for k in range(20)) + "." for s in range(4)]
+        return {"id": f"d{i}", "text": " ".join(sents), "meta": {"kind": kind}}
+
+    src = tmp_path / "docs.jsonl"
+    src.write_text(
+        "\n".join(json.dumps(doc(i)) for i in range(10)), encoding="utf-8"
+    )
+    out1, out2 = tmp_path / "p1.jsonl", tmp_path / "p2.jsonl"
+    assert make_probes.main(["--input", str(src), "--output", str(out1)]) == 0
+    assert make_probes.main(["--input", str(src), "--output", str(out2)]) == 0
+    assert out1.read_bytes() == out2.read_bytes()  # same seed, same probes
+
+    nt, topic = eh.load_probes(out1)
+    assert len(nt) == 10 and len(topic) == 10
+    assert all(p["kind"] == "next_token" for p in nt)
+    assert all(p["choices"][0]["label"] in ("course", "academy") for p in topic)

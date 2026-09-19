@@ -113,10 +113,15 @@ def test_suite_chunks_long_choice_lists():
 def test_suite_at_end_is_harmless():
     nav = Navigator.build()
     nav.handle("2")
-    for _ in range(20):
-        nav.handle("suite")
-    text, quit_flag = nav.handle("suite")
+    text, quit_flag = "", False
+    for _ in range(200):  # bounded walk: tree size grows, so find the end
+        text, quit_flag = nav.handle("suite")
+        if "pas d'autre page" in text:
+            break
     assert not quit_flag and "pas d'autre page" in text
+    # pressing suite again at the end stays harmless
+    text2, quit_flag2 = nav.handle("suite")
+    assert not quit_flag2 and "pas d'autre page" in text2
 
 
 def test_run_script_replays_session():

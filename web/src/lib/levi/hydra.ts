@@ -152,7 +152,10 @@ export function compileIR(opts: {
     provenance: {
       source: "owner-nl",
       transforms: ["compileIR"],
-      model: opts.designMode === "hybrid" ? "grok-4.5 · reference wing (optional)" : "local-deterministic",
+      model:
+        opts.designMode === "hybrid"
+          ? "grok-4.5 · reference wing (optional)"
+          : "local-deterministic",
       seed,
     },
     signed: false,

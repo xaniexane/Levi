@@ -18,8 +18,10 @@ existing WebView → configured LEVI server. No cloud voice dependency of ours.
 | `MainActivity` extras | — | `EXTRA_VOICE_QUERY` → banner + documented `window.leviVoiceQuery(text)` JS hook; `EXTRA_START_VOICE` → system `RecognizerIntent`; toolbar mic action. |
 
 Manifest: `RECORD_AUDIO` (runtime), `AssistActivity` (exported, `excludeFromRecents`, `noHistory`),
-both voice services (`BIND_VOICE_INTERACTION`, exported). Cleartext posture unchanged
-(denied except loopback).
+both voice services (`BIND_VOICE_INTERACTION`, exported), `HeyLeviService`
+(not exported, `foregroundServiceType="microphone"`) with `FOREGROUND_SERVICE`,
+`FOREGROUND_SERVICE_MICROPHONE`, and `USE_FULL_SCREEN_INTENT` (API 34+).
+Cleartext posture unchanged (denied except loopback).
 
 ## How the user enables it
 
@@ -30,6 +32,9 @@ both voice services (`BIND_VOICE_INTERACTION`, exported). Cleartext posture unch
 3. Grant the microphone when the voice plate asks (only needed for the
    hands-free plate; the toolbar mic uses the system recognizer and needs
    no permission).
+4. Optional, same screen: **Hey LEVI hotword** (best-effort listener, costs
+   stated on the toggle) and **Speak chat responses** (device TTS, off by
+   default).
 
 ## Web UI contract (optional, for the Talk UI)
 
@@ -37,15 +42,25 @@ If the page defines `window.leviVoiceQuery(text)`, the app calls it with the
 transcript after load. Until then the query stays visible in the dismissible
 banner — the app never pretends the chat received it.
 
+If the page wants spoken replies, it calls `window.leviSpeak.speak(text)`
+with plain text (and `window.leviSpeak.stop()` to silence). Both are no-ops
+unless the user enabled **Speak chat responses** in Settings — the page may
+offer the affordance, but the user owns the switch. The voice is the
+device's own TTS engine; no cloud voice service of ours.
+
 ## Honest limits
 
-- **Hotword** ("Hey LEVI") is not supported: always-on detection needs
-  system-level support we don't claim.
+- **Hotword** ("Hey LEVI") is best-effort, not system-level: a third-party
+  app can't register a DSP hotword, so the toggle in Settings runs a
+  foreground service that keeps the device's own recognizer warm and
+  matches transcripts. Costs are stated up front — mic indicator shows
+  while listening, battery use rises, detection misses in noise, and the
+  listener stops on reboot (re-enable in Settings).
 - **Gesture behavior varies by OEM** (long-press home, swipe corner, power
   double-press): whatever the device maps to Assist opens LEVI once selected.
-- **Spoken responses**: the session hands text to the chat; it does not speak
-  answers back. A TTS read-back needs a response channel from the web UI
-  (future `leviSpeak` bridge or similar).
+- **Spoken responses** need the web UI's cooperation: the app exposes the
+  `leviSpeak` bridge and the device TTS engine, but the page decides what
+  text to send. Silent by default; the user opts in.
 - **App lock still gates the chat**: invoking the assistant on a locked phone
   lands on the lock screen, not the conversation.
 - `VOICE_COMMAND` (Bluetooth / wired-headset button) routes to the same flow.

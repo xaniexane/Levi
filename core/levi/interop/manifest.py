@@ -41,6 +41,104 @@ DECLARATIONS = {
         "provides": ["bot.services", "bot.research-brief"],
         "requires": ["memory-store", "rag", "agent-assistant"],
     },
+    # -- engines: small deterministic decision machines (compute, never act)
+    "engines": {
+        "provides": [
+            "engines.registry",
+            "engines.triage",
+            "engines.cadence",
+            "engines.weigh",
+            "engines.quorum",
+            "engines.cli",
+        ],
+        "requires": [],
+    },
+    # -- automation: LEVI-native automation engine — minion catalog, HITL rail,
+    # routine recorder ("watch me once") ------------------------------------
+    "automation": {
+        "provides": [
+            "automation.minions",
+            "automation.engine",
+            "automation.hitl",
+            "automation.routines",
+            "automation.cli",
+        ],
+        "requires": ["growth"],  # routines distill from the session harvest
+    },
+    # -- nexus: inter-organ messaging — envelopes, receipts, dead-letters ----
+    "nexus": {
+        "provides": [
+            "nexus.envelope",
+            "nexus.bus",
+            "nexus.si.engine",
+            "nexus.ai.bridge",
+            "nexus.cli",
+        ],
+        "requires": [],
+    },
+    # -- si_team: the SI crew — Levi/Alpha/Omega/Dweller charters, counsel ----
+    "si_team": {
+        "provides": [
+            "si_team.roster",
+            "si_team.consult",
+            "si_team.capability_report",
+            "si_team.charters",
+        ],
+        "requires": [],
+    },
+    # -- omega: Chauncey's Omega Platform, revived as LEVI-native organs -----
+    "omega": {
+        "provides": [
+            "omega.blueprint",
+            "omega.generators",
+            "omega.automation-gen",
+            "omega.skill-gen",
+            "omega.materialize",
+            "omega.cli",
+        ],
+        "requires": ["automation"],
+    },
+    # -- alpha: the SI team's first mind — reasoning -------------------------
+    "alpha": {
+        "provides": ["alpha.reason", "alpha.deliberate", "alpha.cli"],
+        "requires": [],
+    },
+    # -- demand: DemandPulse intelligence feed over the scoring engine -------
+    "demand": {
+        "provides": [
+            "demand.pulse",
+            "demand.scoring",
+            "demand.feed.curate",
+            "demand.feed.digest",
+            "demand.feed.watch",
+            "demand.ai.bridge",
+            "demand.cli",
+        ],
+        "requires": [],
+    },
+    # -- uniforge: the forge that unifies hybrid builds -----------------------
+    "uniforge": {
+        "provides": [
+            "uniforge.plan",
+            "uniforge.targets",
+            "uniforge.si",
+            "uniforge.ai",
+            "uniforge.cli",
+        ],
+        "requires": ["automation"],
+    },
+    # -- dweller: the SI that dwells in the depths of the work ---------------
+    "dweller": {
+        "provides": [
+            "dweller.jobs",
+            "dweller.queue",
+            "dweller.runners",
+            "dweller.si",
+            "dweller.ai",
+            "dweller.cli",
+        ],
+        "requires": ["automation"],
+    },
     # -- growth: baby Levi's harvest → reflect → consolidate → journal loop --
     "growth": {
         "provides": ["growth.journal", "growth.cycle"],
@@ -85,11 +183,14 @@ DECLARATIONS = {
             "methods.codebook",
             "methods.colon",
             "methods.commonplace",
+            "methods.crawford",
+            "methods.delphi",
             "methods.deming",
             "methods.duplex",
             "methods.edgenotch",
             "methods.florilegia",
             "methods.franklin",
+            "methods.futuresearch",
             "methods.ivylee",
             "methods.kardex",
             "methods.kriegsspiel",
@@ -98,6 +199,7 @@ DECLARATIONS = {
             "methods.monitorial",
             "methods.morphological",
             "methods.mundaneum",
+            "methods.ngt",
             "methods.opsroom",
             "methods.optical",
             "methods.pecia",
@@ -188,6 +290,46 @@ DECLARATIONS = {
         ],
         "requires": [],
     },
+    # -- integrations: device + local connectors (Termux bridge, lattices) ----
+    "integrations": {
+        "provides": [
+            "integrations.termux",
+            "integrations.free-lattice",
+            "integrations.free-graph",
+        ],
+        "requires": [],
+    },
+    # -- daemon-fossil: journal compaction daemon — digests + receipts --------
+    "daemon-fossil": {
+        "provides": [
+            "daemon.fossil.compact",
+            "daemon.fossil.digest",
+            "daemon.fossil.receipt",
+            "daemon.fossil.cli",
+        ],
+        "requires": [],
+    },
+    # -- integrations-termux: the Termux device bridge ------------------------
+    "integrations-termux": {
+        "provides": [
+            "integrations.termux.probe",
+            "integrations.termux.battery",
+            "integrations.termux.notify",
+            "integrations.termux.clipboard",
+            "integrations.termux.location",
+            "integrations.termux.cli",
+        ],
+        "requires": [],
+    },
+    # -- bot-switchboard: inbound router bot over manifest capabilities --------
+    "bot-switchboard": {
+        "provides": [
+            "bot.switchboard.route",
+            "bot.switchboard.score",
+            "bot.switchboard.cli",
+        ],
+        "requires": [],
+    },
     # -- perpetual: the never-stops engine — hunt, pulse, supervision ---------
     "perpetual": {
         "provides": [
@@ -209,6 +351,14 @@ DECLARATIONS = {
     # -- cyber-skills: 823 original defensive blue-team playbooks -------------
     "cyber-skills": {
         "provides": ["skills.cyber-playbooks"],
+        "requires": [],
+    },
+    # -- builder-skills: the keeper's shipping lens as advisory playbooks -----
+    # Original LEVI works (ship small, self-review, name-the-pattern,
+    # receipts, trails, timeboxes). Advisory only, INFO risk, dynamic
+    # scan — later playbook batches register with zero merge conflicts.
+    "builder-skills": {
+        "provides": ["skills.builder-playbooks"],
         "requires": [],
     },
     # -- factory: the production line (constructive software cascade) ---------
@@ -399,6 +549,36 @@ DECLARATIONS = {
             "games.open-season",  # un-expiring battle pass: streaks freeze, never punish
             "games.turn-relay",  # BBS-door ritual as a hash-chained turn protocol
             "games.story-table",  # dice-first tabletop RPG: swappable role agents, sealed roll receipts, portable world packs
+        ],
+        "requires": [],
+    },
+    # -- fairtrade: honest generosity, audited (perpetual-hunt evening
+    #    2026-09-16, theme: giant sly-generosity trades) -----------------------
+    # The inversion of the giants' trades: a clean-room catalog of
+    # sly-generosity patterns (walled-garden generosity, asymmetric rules,
+    # roach-motel funnels, manufactured social debt), an offer honesty
+    # auditor, and an append-only ledger where every LEVI generosity
+    # declares its true cost up front.
+    "fairtrade": {
+        "provides": [
+            "fairtrade.trades",
+            "fairtrade.audit",
+            "fairtrade.ledger",
+        ],
+        "requires": [],
+    },
+    # -- twins: the Twin Lattice (SER-21 twin architecture) --------------------
+    # Every runtime entity runs twinned FG/BG: twin agents (per swarm agent),
+    # twin daemons (failover pair), twin shells (6 shells = 3 FG/BG pairs).
+    # Twins are state mirrors only; promotion is explicit and recorded.
+    "twins": {
+        "provides": [
+            "twins.lattice",
+            "twins.agents",
+            "twins.daemons",
+            "twins.shells",
+            "twins.triads",
+            "twins.convergence",
         ],
         "requires": [],
     },
@@ -757,6 +937,88 @@ DECLARATIONS = {
             "identity.genome",
             "identity.cycle",
             "identity.scope-all",
+        ],
+        "requires": [],
+    },
+    # -- daemon-watchman: polling directory watcher for the daemon layer ----
+    # Snapshots (mtime_ns, size) per file under configured roots; emits
+    # created/modified/deleted events into an owner-only JSONL journal.
+    # First sight of a root baselines silently. Stdlib-only, local-first.
+    "daemon-watchman": {
+        "provides": [
+            "daemon.watchman.tick",
+            "daemon.watchman.journal",
+            "daemon.watchman.cli",
+        ],
+        "requires": [],
+    },
+    # -- persona-seasons: temporal modulation of LEVI's personality ---------
+    # Pure functions bending a base tone-weight vector by circadian hour,
+    # season of year, and contact streak. No state, no side effects.
+    "persona-seasons": {
+        "provides": [
+            "persona.seasons.circadian",
+            "persona.seasons.seasonal",
+            "persona.seasons.streak",
+        ],
+        "requires": [],
+    },
+    # -- persona-canon: canon-voice guardrail for the personality layer -----
+    # True names are never translated: LEVI, Leviathan, Alpha, Omega,
+    # Oracle, Logan Wyrd Press / L.W.P., Chauncey. check_voice() flags
+    # borrowed giant identities ("I am Claude", "powered by OpenAI") and
+    # canon-name mistranslations. Flags only, never rewrites. Stdlib-only.
+    "persona-canon": {
+        "provides": [
+            "persona.canon.check_voice",
+            "persona.canon.is_clean",
+            "persona.canon.CANON_NAMES",
+        ],
+        "requires": [],
+    },
+    # -- daemon-signalbus: topic pub/sub between daemons -------------------
+    # Exact or wildcard ("watchman.file.*") subscriptions; every publish
+    # journaled to an owner-only JSONL file with bounded history and
+    # replay-so-you-miss-nothing semantics. Stdlib-only, local-first.
+    "daemon-signalbus": {
+        "provides": [
+            "daemon.signalbus.publish",
+            "daemon.signalbus.subscribe",
+            "daemon.signalbus.replay",
+            "daemon.signalbus.history",
+        ],
+        "requires": [],
+    },
+    # -- automation-backoff: retry schedule + circuit breaker --------------
+    # Deterministic exponential backoff (seeded jitter, capped) and a
+    # per-adapter circuit breaker (closed/open/half-open) with owner-only
+    # persisted state. Injected clocks; no sleeping in the logic.
+    # Stdlib-only, local-first.
+    "automation-backoff": {
+        "provides": [
+            "automation.backoff.RetryPolicy",
+            "automation.backoff.CircuitBreaker",
+        ],
+        "requires": [],
+    },
+    # -- plugins-rss: credentialless read-only RSS/Atom reader --------------
+    # Public syndication feeds need no key; fetch/check operations honoring
+    # the registry honesty contract (failures are api_error, never pretend
+    # success). Stdlib-only (urllib + xml.etree).
+    "plugins-rss": {
+        "provides": [
+            "plugins.rss.fetch",
+            "plugins.rss.check",
+        ],
+        "requires": [],
+    },
+    # -- plugins-webhook: one honest pipe to a user-owned URL ----------------
+    # The target URL is the bearer secret (LEVI_WEBHOOK_URL, never
+    # logged). post is a write op → confirmation forced at
+    # class-definition time; ok=True only after the transport ran.
+    "plugins-webhook": {
+        "provides": [
+            "plugins.webhook.post",
         ],
         "requires": [],
     },

@@ -8,6 +8,7 @@ Subcommands:
 - ``service run NAME [--params JSON]`` — execute a service now.
 - ``service add --name N --schedule S --type T --description D [--params JSON]``
 - ``service remove NAME`` — remove a user-added service (built-ins refuse).
+- ``service enable NAME`` / ``service disable NAME`` — arm/disarm a service.
 - ``service log [--limit N]`` — show recent service runs.
 """
 
@@ -139,6 +140,32 @@ def _cmd_service_remove(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_service_enable(args: argparse.Namespace) -> int:
+    """Enable a service (built-ins included)."""
+    from levi.bot.services import ServiceError, ServiceRegistry
+
+    try:
+        ServiceRegistry().set_enabled(args.name, True)
+    except ServiceError as exc:
+        print("service enable: %s" % exc, file=sys.stderr)
+        return 1
+    print("enabled service '%s'" % args.name)
+    return 0
+
+
+def _cmd_service_disable(args: argparse.Namespace) -> int:
+    """Disable a service (built-ins included). Disabled services refuse to run."""
+    from levi.bot.services import ServiceError, ServiceRegistry
+
+    try:
+        ServiceRegistry().set_enabled(args.name, False)
+    except ServiceError as exc:
+        print("service disable: %s" % exc, file=sys.stderr)
+        return 1
+    print("disabled service '%s'" % args.name)
+    return 0
+
+
 def _cmd_service_log(args: argparse.Namespace) -> int:
     """Print recent service runs."""
     from levi.bot import automation
@@ -215,6 +242,16 @@ def build_parser() -> argparse.ArgumentParser:
     p_remove.add_argument("name", help="Service name.")
     p_remove.set_defaults(func=_cmd_service_remove)
 
+    p_enable = svc_sub.add_parser("enable", help="Enable a service.")
+    p_enable.add_argument("name", help="Service name.")
+    p_enable.set_defaults(func=_cmd_service_enable)
+
+    p_disable = svc_sub.add_parser(
+        "disable", help="Disable a service (it will refuse to run)."
+    )
+    p_disable.add_argument("name", help="Service name.")
+    p_disable.set_defaults(func=_cmd_service_disable)
+
     p_log = svc_sub.add_parser("log", help="Show recent service runs.")
     p_log.add_argument("--limit", type=int, default=20, help="Max records to show.")
     p_log.set_defaults(func=_cmd_service_log)
@@ -223,9 +260,22 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
-    """CLI entry point; returns a process exit code."""
+    """CLI entry point; returns a process exit code.
+
+    Never lets a traceback reach the user: unexpected failures become a
+    one-line structured error on stderr with exit code 1.
+    """
     args = build_parser().parse_args(argv)
-    return args.func(args)
+    try:
+        return args.func(args)
+    except BrokenPipeError:
+        return 0
+    except Exception as exc:  # noqa: BLE001 - last-resort clean failure
+        print(
+            "levi.bot: internal error: %s: %s" % (type(exc).__name__, exc),
+            file=sys.stderr,
+        )
+        return 1
 
 
 if __name__ == "__main__":

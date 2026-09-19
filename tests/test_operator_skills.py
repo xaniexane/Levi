@@ -4,11 +4,11 @@
 ``core/levi/skill/playbooks/operator/*.md`` and parsing each file's mandatory
 frontmatter block. These tests assert:
 
-- exactly 16 playbooks exist and all load via the loader;
+- exactly 17 playbooks exist and all load via the loader;
 - every playbook carries valid frontmatter (all required keys, valid risk,
   id scheme ``operator.<slug>`` matching the filename);
 - every playbook body has the required sections;
-- all 16 register in ``SkillRegistry`` with unique ``operator.*`` ids and
+- all 17 register in ``SkillRegistry`` with unique ``operator.*`` ids and
   ``category == "operator"``;
 - ``chips.json`` holds exactly 7 chips, each with non-empty id/label/inject;
 - safety invariants: unique ids, INFO risk across the pack, no forbidden
@@ -52,6 +52,7 @@ EXPECTED_IDS = [
     "operator.cut",
     "operator.voice",
     "operator.title",
+    "operator.xyz",
 ]
 
 FRONTMATTER_KEYS = (
@@ -76,14 +77,14 @@ def _files():
     return sorted(PLAYBOOK_DIR.glob("*.md"))
 
 
-def test_exactly_sixteen_playbooks_present():
+def test_exactly_seventeen_playbooks_present():
     files = _files()
-    assert len(files) == 16, f"expected 16 operator playbooks, found {len(files)}"
+    assert len(files) == 17, f"expected 17 operator playbooks, found {len(files)}"
 
 
-def test_all_sixteen_load_via_loader():
+def test_all_seventeen_load_via_loader():
     skills = operator_skills.OPERATOR_SKILLS
-    assert len(skills) == 16
+    assert len(skills) == 17
     assert sorted(s.id for s in skills) == sorted(EXPECTED_IDS)
 
 
@@ -122,7 +123,7 @@ def test_playbook_bodies_have_required_sections():
             assert section in body, f"{path.name}: missing section {section}"
 
 
-def test_registry_registers_all_sixteen():
+def test_registry_registers_all_seventeen():
     registry = SkillRegistry()
     for skill_id in EXPECTED_IDS:
         skill = registry.get(skill_id)
@@ -162,4 +163,4 @@ def test_no_forbidden_identity_terms():
     module_text = Path(operator_skills.__file__).read_text(encoding="utf-8").lower()
     for term in FORBIDDEN_TERMS:
         assert term not in module_text, f"operator_skills.py: forbidden term {term!r}"
-    assert checked == 17
+    assert checked == 18

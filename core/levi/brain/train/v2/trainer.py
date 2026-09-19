@@ -3,9 +3,12 @@
 Pipeline::
 
     train.yaml -> load_config -> stage_curriculum -> train loop
-       -> checkpoint every N steps (atomic, pruned, resumable)
+       -> checkpoint every N steps (atomic, pruned, resumable;
+          keep_best never deletes the run's best self)
        -> eval harness every M steps (held-out ppl + probes, JSON reports,
-          baseline comparison)
+          baseline comparison) with early stopping on held-out NLL
+       -> spectrum samples every eval (creative / agentic / identity)
+       -> bloodline ledger entry when the run ends
 
 Only :meth:`Trainer.run` needs torch. Planning, curriculum staging, and
 report comparison are torch-free and hermetic-testable.
@@ -30,7 +33,9 @@ decayed LR rather than restarting warmup.
 from __future__ import annotations
 
 import argparse
+import json
 import math
+import os
 import random
 import sys
 import time
@@ -42,6 +47,8 @@ import numpy as np
 
 from levi.brain.train.v2 import eval_harness as eh
 from levi.brain.train.v2.checkpoint import (
+    best_held_out_entry,
+    list_checkpoints,
     numpy_to_torch_state_dict,
     resume_from_latest,
     save_checkpoint,
@@ -399,8 +406,19 @@ class Trainer:
 
         ema_loss: float | None = None
         reports: list[str] = []
+        # Judgment state: the loop's memory of its own best self. Restored
+        # from the manifest on resume, so a resumed run doesn't forget what
+        # it already learned about itself.
+        patience = cfg.schedule.early_stop_patience
+        min_delta = cfg.schedule.early_stop_min_delta
+        best_nll, best_step = self._restore_best(plan)
+        stale_evals = 0
+        latest_nll: float | None = None
+        early_stopped = False
+        last_step = start_step
         t0 = time.time()
         for step in range(start_step + 1, total_steps + 1):
+            last_step = step
             loss = self._train_step(
                 torch, model, optimizer, streams, cfg, step, total_steps
             )
@@ -415,35 +433,73 @@ class Trainer:
                     flush=True,
                 )
 
-            if step % cfg.checkpointing.save_every == 0 or step == total_steps:
+            # Evaluate BEFORE checkpointing on shared steps, so checkpoint
+            # metrics carry the freshest held-out evidence — the keep_best
+            # decision depends on it.
+            stop_now = False
+            if (
+                cfg.eval.every_steps and step % cfg.eval.every_steps == 0
+            ) or step == total_steps:
+                report_path, nll = self._evaluate(
+                    torch, model, tok, device, plan, cfg, step, val_ids
+                )
+                reports.append(str(report_path))
+                self._creative_samples(torch, model, tok, device, plan, cfg, step)
+                latest_nll = nll
+                if nll is not None:
+                    if best_nll is None or nll < best_nll - min_delta:
+                        best_nll, best_step, stale_evals = nll, step, 0
+                    else:
+                        stale_evals += 1
+                        if patience > 0 and stale_evals >= patience:
+                            print(
+                                f"trainer: early stop at step {step}: held-out "
+                                f"NLL {nll:.4f} unimproved for {stale_evals} "
+                                f"evals (best {best_nll:.4f} at step {best_step})",
+                                flush=True,
+                            )
+                            stop_now = True
+
+            if (
+                step % cfg.checkpointing.save_every == 0
+                or step == total_steps
+                or stop_now
+            ):
+                metrics: dict[str, float] = {
+                    "loss": float(ema_loss if ema_loss is not None else loss)
+                }
+                if latest_nll is not None:
+                    metrics["held_out_nll"] = float(latest_nll)
                 path = save_checkpoint(
                     plan.ckpt_dir,
                     step=step,
                     arrays=torch_state_dict_to_numpy(model.state_dict()),
-                    metrics={"loss": float(ema_loss or loss)},
+                    metrics=metrics,
                     config_hash=plan.config_hash,
                     keep_last=cfg.checkpointing.keep_last,
+                    keep_best=cfg.checkpointing.keep_best,
                 )
                 print(f"trainer: checkpoint -> {path}")
 
-            if (
-                cfg.eval.every_steps and step % cfg.eval.every_steps == 0
-            ) or step == total_steps:
-                report_path = self._evaluate(
-                    torch, model, tok, device, plan, cfg, step, val_ids
-                )
-                reports.append(str(report_path))
+            if stop_now:
+                early_stopped = True
+                break
 
         summary = {
             "name": cfg.name,
             "steps": total_steps,
+            "steps_trained": last_step,
             "final_ema_loss": ema_loss,
+            "early_stopped": early_stopped,
+            "best_held_out_nll": best_nll,
+            "best_step": best_step,
             "config_hash": plan.config_hash,
             "checkpoints": str(plan.ckpt_dir),
             "reports": reports,
             "elapsed_s": round(time.time() - t0, 1),
         }
         print(f"trainer: done. {summary}")
+        self._record_bloodline(plan, cfg, summary)
         return summary
 
     # -- internals ----------------------------------------------------------
@@ -495,6 +551,100 @@ class Trainer:
         model.load_state_dict(state)
         print(f"trainer: resumed from step {resumed['step']} ({resumed['path']})")
         return int(resumed["step"])
+
+    def _restore_best(self, plan: RunPlan) -> tuple[float | None, int | None]:
+        """Best held-out state from the checkpoint manifest (survives resume).
+
+        A resumed run inherits the judgment of its earlier self instead of
+        starting amnesiac.
+        """
+        entry = best_held_out_entry(plan.ckpt_dir)
+        if entry is None:
+            return None, None
+        return float(entry["metrics"]["held_out_nll"]), int(entry["step"])
+
+    # Spectrum prompts: the run is measured on prediction (held-out NLL +
+    # probes) AND on generation across the creative / agentic / identity
+    # spectrum. Fixed prompts and per-step seeding keep steps comparable.
+    SPECTRUM_PROMPTS: tuple[tuple[str, str], ...] = (
+        ("creative", "Write a short verse about a machine that dreams:"),
+        ("agentic", "Plan three steps to teach a new skill to a helper:"),
+        ("identity", "I am LEVI, and what I remember most is"),
+    )
+
+    def _creative_samples(
+        self,
+        torch,
+        model,
+        tok,
+        device,
+        plan: RunPlan,
+        cfg: TrainConfig,
+        step: int,
+    ) -> Path:
+        """Generate spectrum samples with the live model; write a report page."""
+        model.eval()
+        torch.manual_seed(cfg.seed + step)
+        rows: list[tuple[str, str, str]] = []
+        with torch.no_grad():
+            for kind, prompt in self.SPECTRUM_PROMPTS:
+                ids = tok.encode(prompt)
+                idx = torch.tensor([ids], dtype=torch.long, device=device)
+                out = model.generate(idx, max_new=60, temperature=0.8, top_k=50)
+                text = tok.decode(out[0].tolist())
+                rows.append((kind, prompt, text))
+        path = plan.reports_dir / f"samples-step-{step:06d}.md"
+        lines = [
+            f"# Spectrum samples — {cfg.name} @ step {step}",
+            "",
+            "_Greedy/temperature generations from fixed prompts "
+            "(temperature 0.8, top_k 50). Same prompts every eval; "
+            "compare across steps to watch the creative spectrum move._",
+            "",
+        ]
+        for kind, prompt, text in rows:
+            lines += [f"## {kind}", "", f"**prompt:** {prompt}", "", text.strip(), ""]
+        path.write_text("\n".join(lines), encoding="utf-8")
+        print(f"trainer: samples -> {path}")
+        return path
+
+    def _record_bloodline(self, plan: RunPlan, cfg: TrainConfig, summary: dict) -> None:
+        """Append this run to the bloodline ledger: every run's best self, remembered.
+
+        The ledger lives at ``runs/BLOODLINE.json`` — one entry per run, so
+        the lineage of the brain is inspectable without digging through run dirs.
+        """
+        import datetime
+
+        ledger_path = Path(plan.run_dir).parent / "BLOODLINE.json"
+        entries: list = []
+        if ledger_path.is_file():
+            try:
+                entries = json.loads(ledger_path.read_text(encoding="utf-8"))
+                if not isinstance(entries, list):
+                    entries = []
+            except (json.JSONDecodeError, OSError):
+                entries = []
+        entries.append(
+            {
+                "run": cfg.name,
+                "run_dir": str(plan.run_dir),
+                "finished_at": datetime.datetime.now(
+                    datetime.timezone.utc
+                ).isoformat(),
+                "config_hash": plan.config_hash,
+                "steps_trained": summary.get("steps_trained"),
+                "early_stopped": summary.get("early_stopped"),
+                "best_held_out_nll": summary.get("best_held_out_nll"),
+                "best_step": summary.get("best_step"),
+                "final_ema_loss": summary.get("final_ema_loss"),
+                "checkpoints": summary.get("checkpoints"),
+            }
+        )
+        tmp = ledger_path.with_suffix(".json.tmp")
+        tmp.write_text(json.dumps(entries, indent=2), encoding="utf-8")
+        os.replace(tmp, ledger_path)
+        print(f"trainer: bloodline -> {ledger_path}")
 
     def _train_step(
         self,
@@ -574,7 +724,8 @@ class Trainer:
         cfg: TrainConfig,
         step: int,
         val_ids: list[int],
-    ) -> Path:
+    ) -> tuple[Path, float | None]:
+        """Run the eval harness; return (report path, held-out NLL or None)."""
         # Never score a prefix longer than the model can consume: clamp the
         # eval block to both the model's block size and the training length.
         block = self._model_block_size(model)
@@ -605,7 +756,10 @@ class Trainer:
         print(f"trainer: eval report -> {path}")
         for note in report.notes:
             print(f"trainer: eval note: {note}")
-        return path
+        nll = report.perplexity.get("nll_per_token") if isinstance(
+            report.perplexity, dict
+        ) else None
+        return path, (float(nll) if nll is not None else None)
 
     def _attach_baseline(
         self,

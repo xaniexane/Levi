@@ -71,8 +71,8 @@ def test_mcp_tools_list_has_valid_schemas():
     )
     tools = resp["result"]["tools"]
     assert (
-        len(tools) == 27
-    )  # 24 + growth_context (agent growth-loop reader) + image_generate + python_exec
+        len(tools) == 33
+    )  # 27 + 6 read-only status tools (levi_status, growth_status, workshop_inventory, workshop_dry_run, academy_status, factory_status)
     for tool in tools:
         assert tool["name"] and tool["description"]
         schema = tool["inputSchema"]
@@ -234,8 +234,8 @@ def test_mcp_stdio_subprocess_handshake(tmp_path):
         assert init["result"]["protocolVersion"] == PROTOCOL_VERSION
         tools = rpc(2, "tools/list")
         assert (
-            len(tools["result"]["tools"]) == 27
-        )  # 24 + growth_context + image_generate + python_exec
+            len(tools["result"]["tools"]) == 33
+        )  # 27 + 6 read-only status tools (levi_status, growth_status, workshop_inventory, workshop_dry_run, academy_status, factory_status)
         call = rpc(
             3,
             "tools/call",

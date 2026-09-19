@@ -130,6 +130,39 @@ def run_cycle(
     state = _journal.load_state()
     watermarks = dict(state.get("watermarks", {}))
 
+    # F3: consume the bot's pending-learnings queue into the growth
+    # journal at the start of the harvest phase. The adapter is
+    # idempotent (queue renamed to .consumed-<ts> before journaling),
+    # and the journal is one of the two places the cycle is allowed
+    # to write. Skipped under dry_run: dry runs preview without
+    # writing anything.
+    consumed: dict[str, Any] = {
+        "accepted": 0,
+        "rejected": 0,
+        "backup": None,
+        "journaled_ids": [],
+        "rejections": [],
+        "skipped": dry_run,
+    }
+    if not dry_run:
+        try:
+            from levi.interop.adapters.growth_learnings import (
+                consume_pending_learnings,
+                default_queue_path,
+            )
+        except Exception:  # noqa: BLE001 - adapter import failure degrades to no-op
+            consume_pending_learnings = None  # type: ignore[assignment]
+            default_queue_path = None  # type: ignore[assignment]
+        if consume_pending_learnings is not None and default_queue_path is not None:
+            try:
+                result = consume_pending_learnings(default_queue_path(), _journal)
+                if isinstance(result, dict):
+                    consumed.update(result)
+            except Exception as exc:  # noqa: BLE001 - never break the cycle
+                consumed["rejections"] = [
+                    "consume failed: %s: %s" % (type(exc).__name__, exc)
+                ]
+
     experiences, new_marks = harvest_new(since=watermarks)
 
     # Cloud experiences go through the redaction gate BEFORE any
@@ -145,6 +178,7 @@ def run_cycle(
         "cycle_id": cycle_id,
         "dry_run": dry_run,
         "experiences": len(experiences),
+        "pending_learnings": consumed,  # F3: bot queue consumed at harvest start
         "sources": sources,
         "mode": "rules",
         "evidence": {},

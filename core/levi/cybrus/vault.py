@@ -332,3 +332,486 @@ class CredentialVault:
             self._save_entries(entries)
         # Scrub the in-memory entries copy; key/fernet already replaced.
         entries.clear()
+
+
+# ===========================================================================
+# Layer 2 — OAuth token vault, identity scoping, auto-lock (additive).
+#
+# Everything above (CredentialVault) is untouched. This layer adds:
+#   * generate_password — CSPRNG password generation
+#   * IdentityVault — per-identity credential namespaces (containment by
+#     construction: cybrus.id.<identity>.<service>)
+#   * OAuthVault — OAuth access/refresh tokens with scopes, expiry,
+#     provider, owning identity; refresh metadata tracked
+#   * AutoLockVault — drops the in-memory key after inactivity
+#   * Vault access audit — metadata only, never secret values
+#
+# Founder containment (binding law): the vault exposes NO share, copy, or
+# export path for any entry. Founder-tier-owned credentials therefore
+# cannot leave Cybrus — there is no API that could move them.
+# ===========================================================================
+
+_IDENTITY_NS = "cybrus.id"
+_OAUTH_NS = "cybrus.oauth"
+_IDENTITY_META_STORE = "vault_identity_meta"
+
+_PASSWORD_ALPHABET = (
+    "abcdefghijkmnopqrstuvwxyz"  # no l
+    "ABCDEFGHJKLMNPQRSTUVWXYZ"  # no I, O
+    "23456789"  # no 0, 1
+    "!@#$%^&*-_=+"
+)
+
+
+class VaultLockedError(VaultError):
+    """The vault auto-locked after inactivity — unlock again to continue."""
+
+
+class OAuthError(VaultError):
+    """OAuth vault errors: unknown token, containment violation."""
+
+
+def generate_password(length: int = 24) -> str:
+    """Generate a strong random password from the unambiguous alphabet.
+
+    Uses :mod:`secrets` (CSPRNG). Raises :class:`VaultError` when
+    ``length`` < 12. The value is returned once — store it in the vault
+    immediately; it is never logged anywhere.
+    """
+    import secrets
+
+    if not isinstance(length, int) or isinstance(length, bool) or length < 12:
+        raise VaultError("password length must be an integer >= 12")
+    return "".join(secrets.choice(_PASSWORD_ALPHABET) for _ in range(length))
+
+
+def _utcnow_iso() -> str:
+    from datetime import datetime, timezone
+
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _audit_vault(event: str, identity: str, details: Optional[dict] = None) -> None:
+    """Append a vault audit record. ``details`` must NEVER contain secret
+    material — callers pass names, providers, scopes, never token values."""
+    from levi.cybrus.audit import AuditEngine
+
+    AuditEngine().append(event, str(identity), dict(details or {}))
+
+
+def _identity_tier(identity: str) -> Optional[str]:
+    """Tier of an identity, or None when the identity does not exist."""
+    try:
+        from levi.cybrus.identity import IdentityStore
+
+        rec = IdentityStore().get(identity)
+        return rec.get("tier") if rec else None
+    except Exception:
+        return None
+
+
+def _load_meta() -> dict:
+    from levi.cybrus._paths import load_json_store, store_path
+
+    return load_json_store(store_path(_IDENTITY_META_STORE)) or {}
+
+
+def _save_meta(meta: dict) -> None:
+    from levi.cybrus._paths import save_json_store, store_lock, store_path
+
+    path = store_path(_IDENTITY_META_STORE)
+    with store_lock(path):
+        current = _load_meta()
+        current.update(meta)
+        save_json_store(path, current)
+
+
+class IdentityVault:
+    """Per-identity credential namespace over :class:`CredentialVault`.
+
+    Entries live under the service ``cybrus.id.<identity>.<service>``, so
+    identity A can never address identity B's entries — scoping is by
+    construction, not convention. Owner + tier are recorded in vault
+    metadata; founder-tier-owned entries are additionally flagged
+    ``founder_owned`` — and since the vault has no share/copy/export path,
+    founder-only powers never leave Cybrus.
+    """
+
+    def __init__(self, passphrase: str, identity: str, directory: Optional[Path] = None):
+        self.identity = _sanitize(identity, "identity")
+        self._vault = CredentialVault(passphrase, directory=directory)
+        tier = _identity_tier(self.identity)
+        _save_meta(
+            {
+                f"{_IDENTITY_NS}.{self.identity}": {
+                    "owner": self.identity,
+                    "tier": tier,
+                    "founder_owned": tier == "founder",
+                }
+            }
+        )
+
+    @property
+    def backend(self) -> str:
+        """Which crypto backend unlocked this vault (honest label)."""
+        return self._vault.backend
+
+    def _service(self, service: str) -> str:
+        return f"{_IDENTITY_NS}.{self.identity}.{_sanitize(service, 'service')}"
+
+    def store(self, service: str, username: str, secret: str) -> None:
+        self._vault.store(self._service(service), username, secret)
+        _audit_vault(
+            "vault.stored", self.identity, {"service": service, "username": username}
+        )
+
+    def get(self, service: str, username: str) -> str:
+        secret = self._vault.get(self._service(service), username)
+        _audit_vault(
+            "vault.accessed", self.identity, {"service": service, "username": username}
+        )
+        return secret
+
+    def delete(self, service: str, username: str) -> None:
+        self._vault.delete(self._service(service), username)
+        _audit_vault(
+            "vault.deleted", self.identity, {"service": service, "username": username}
+        )
+
+    def list_services(self) -> list:
+        """This identity's services only (namespace prefix stripped)."""
+        prefix = f"{_IDENTITY_NS}.{self.identity}."
+        return sorted(
+            s[len(prefix):]
+            for s in self._vault.list_services()
+            if s.startswith(prefix)
+        )
+
+    def change_master_password(self, new_passphrase: str) -> None:
+        self._vault.change_master_password(new_passphrase)
+
+
+class OAuthVault:
+    """OAuth token storage — access/refresh tokens with scopes, expiry,
+    provider, and owning identity, encrypted at rest in the credential vault.
+
+    Containment: a token is readable only by its owning identity —
+    ``requester`` must equal the stored identity, or :class:`OAuthError`
+    is raised. Refresh metadata (``refresh_count``,
+    ``last_refreshed_at``) is tracked on every recorded refresh.
+
+    Honest boundary: this vault records token metadata and performs NO
+    network calls. The actual provider refresh HTTP exchange is the
+    caller's job; :meth:`record_refresh` stores the fresh tokens the
+    caller obtained elsewhere.
+    """
+
+    def __init__(self, passphrase: str, directory: Optional[Path] = None):
+        self._vault = CredentialVault(passphrase, directory=directory)
+
+    @property
+    def backend(self) -> str:
+        """Which crypto backend unlocked this vault (honest label)."""
+        return self._vault.backend
+
+    @staticmethod
+    def _service(provider: str) -> str:
+        try:
+            return f"{_OAUTH_NS}.{_sanitize(provider, 'provider')}"
+        except VaultError as exc:
+            raise OAuthError(str(exc)) from exc
+
+    @staticmethod
+    def _record(
+        provider: str,
+        identity: str,
+        access_token: str,
+        refresh_token: Optional[str],
+        scopes: list,
+        expires_in: Optional[int],
+        refresh_count: int = 0,
+        last_refreshed_at: Optional[str] = None,
+    ) -> dict:
+        now = _utcnow_iso()
+        return {
+            "provider": provider,
+            "identity": identity,
+            "access_token": access_token,
+            "refresh_token": refresh_token,
+            "scopes": list(scopes),
+            "issued_at": now,
+            "expires_at": None
+            if expires_in is None
+            else __import__("time").time() + expires_in,
+            "refresh_count": refresh_count,
+            "last_refreshed_at": last_refreshed_at,
+        }
+
+    @staticmethod
+    def _validate_scopes(scopes) -> list:
+        if not isinstance(scopes, (list, tuple)):
+            raise OAuthError("scopes must be a list of strings")
+        clean = []
+        for s in scopes:
+            if not isinstance(s, str) or not s.strip():
+                raise OAuthError("scopes must be non-empty strings")
+            clean.append(s.strip())
+        return clean
+
+    def store_token(
+        self,
+        provider: str,
+        identity: str,
+        access_token: str,
+        refresh_token: Optional[str] = None,
+        scopes=(),
+        expires_in: Optional[int] = None,
+    ) -> dict:
+        """Store an OAuth token set. Returns the metadata (never printed
+        with token values by callers)."""
+        identity = _sanitize(identity, "identity")
+        if not isinstance(access_token, str) or not access_token:
+            raise OAuthError("access_token must be a non-empty string")
+        if refresh_token is not None and (
+            not isinstance(refresh_token, str) or not refresh_token
+        ):
+            raise OAuthError("refresh_token must be a non-empty string or None")
+        if expires_in is not None and (
+            not isinstance(expires_in, int)
+            or isinstance(expires_in, bool)
+            or expires_in <= 0
+        ):
+            raise OAuthError("expires_in must be a positive integer or None")
+        clean_scopes = self._validate_scopes(scopes)
+        try:
+            clean_provider = _sanitize(provider, "provider")
+        except VaultError as exc:
+            raise OAuthError(str(exc)) from exc
+        record = self._record(
+            clean_provider,
+            identity,
+            access_token,
+            refresh_token,
+            clean_scopes,
+            expires_in,
+        )
+        service = self._service(provider)
+        self._vault.store(service, identity, __import__("json").dumps(record))
+        _audit_vault(
+            "oauth.stored",
+            identity,
+            {
+                "provider": record["provider"],
+                "scopes": clean_scopes,
+                "expires_in": expires_in,
+                "has_refresh_token": refresh_token is not None,
+            },
+        )
+        return {k: v for k, v in record.items() if k not in ("access_token", "refresh_token")}
+
+    def _load(self, provider: str, identity: str) -> dict:
+        import json
+
+        identity = _sanitize(identity, "identity")
+        try:
+            raw = self._vault.get(self._service(provider), identity)
+        except KeyError:
+            raise OAuthError(
+                f"no OAuth token stored for provider {provider!r} / identity {identity!r}"
+            ) from None
+        try:
+            record = json.loads(raw)
+        except ValueError as exc:
+            raise OAuthError("stored OAuth record is corrupt") from exc
+        if not isinstance(record, dict):
+            raise OAuthError("stored OAuth record is corrupt")
+        return record
+
+    def get_token(self, provider: str, identity: str, requester: str) -> dict:
+        """Return the full token record. ``requester`` must equal
+        ``identity`` — containment by identity, no cross-reads."""
+        requester = _sanitize(requester, "requester")
+        identity = _sanitize(identity, "identity")
+        if requester != identity:
+            raise OAuthError(
+                f"containment: {requester!r} may not read {identity!r}'s tokens"
+            )
+        record = self._load(provider, identity)
+        _audit_vault(
+            "oauth.accessed",
+            identity,
+            {"provider": record["provider"], "scopes": record["scopes"]},
+        )
+        return record
+
+    def record_refresh(
+        self,
+        provider: str,
+        identity: str,
+        requester: str,
+        new_access_token: str,
+        new_refresh_token: Optional[str] = None,
+        expires_in: Optional[int] = None,
+    ) -> dict:
+        """Record a refresh the caller performed against the provider:
+        replaces the tokens, bumps ``refresh_count``, stamps
+        ``last_refreshed_at``. No network is touched here."""
+        requester = _sanitize(requester, "requester")
+        identity = _sanitize(identity, "identity")
+        if requester != identity:
+            raise OAuthError(
+                f"containment: {requester!r} may not refresh {identity!r}'s tokens"
+            )
+        old = self._load(provider, identity)
+        if not isinstance(new_access_token, str) or not new_access_token:
+            raise OAuthError("new_access_token must be a non-empty string")
+        record = self._record(
+            old["provider"],
+            identity,
+            new_access_token,
+            new_refresh_token if new_refresh_token is not None else old.get("refresh_token"),
+            old.get("scopes", []),
+            expires_in,
+            refresh_count=int(old.get("refresh_count", 0)) + 1,
+            last_refreshed_at=_utcnow_iso(),
+        )
+        import json
+
+        self._vault.store(self._service(provider), identity, json.dumps(record))
+        _audit_vault(
+            "oauth.refreshed",
+            identity,
+            {"provider": record["provider"], "refresh_count": record["refresh_count"]},
+        )
+        return {k: v for k, v in record.items() if k not in ("access_token", "refresh_token")}
+
+    @staticmethod
+    def is_expired(record: dict, skew_seconds: int = 60) -> bool:
+        """True when the record's ``expires_at`` has passed (with skew).
+        Records without an expiry never expire."""
+        import time
+
+        expires_at = record.get("expires_at")
+        if expires_at is None:
+            return False
+        return time.time() >= float(expires_at) - skew_seconds
+
+    def list_tokens(self, identity: Optional[str] = None) -> list:
+        """Token metadata only — providers, identities, scopes, expiry,
+        refresh counts. Token values are never listed."""
+        out = []
+        for service in self._vault.list_services():
+            if not service.startswith(_OAUTH_NS + "."):
+                continue
+            provider = service[len(_OAUTH_NS) + 1:]
+            try:
+                entries = self._vault._load_entries().get(service, {})
+            except VaultError:
+                continue
+            for ident in sorted(entries):
+                if identity is not None and ident != identity:
+                    continue
+                try:
+                    record = self._load(provider, ident)
+                except OAuthError:
+                    continue
+                out.append(
+                    {
+                        "provider": provider,
+                        "identity": ident,
+                        "scopes": record.get("scopes", []),
+                        "expires_at": record.get("expires_at"),
+                        "expired": self.is_expired(record),
+                        "refresh_count": record.get("refresh_count", 0),
+                    }
+                )
+        return sorted(out, key=lambda r: (r["provider"], r["identity"]))
+
+    def revoke(self, provider: str, identity: str, requester: str) -> None:
+        """Delete a stored token set. Containment rules apply."""
+        requester = _sanitize(requester, "requester")
+        identity = _sanitize(identity, "identity")
+        if requester != identity:
+            raise OAuthError(
+                f"containment: {requester!r} may not revoke {identity!r}'s tokens"
+            )
+        # Fail closed when nothing is stored (KeyError -> OAuthError).
+        self._load(provider, identity)
+        self._vault.delete(self._service(provider), identity)
+        _audit_vault("oauth.revoked", identity, {"provider": _sanitize(provider, "provider")})
+
+
+class AutoLockVault:
+    """Auto-locking wrapper around :class:`CredentialVault`.
+
+    The in-memory vault (and its derived key) is dropped after
+    ``idle_seconds`` of inactivity; any operation past the deadline raises
+    :class:`VaultLockedError` until :meth:`unlock` is called again with
+    the passphrase. The passphrase itself is never retained — a locked
+    vault can only be reopened by presenting it again.
+
+    Honest limit: dropping the reference removes *our* handle on the key;
+    CPython may keep the bytes in freed memory until the allocator reuses
+    them. This is standard best-effort memory hygiene for a Python
+    process, not a certified wipe.
+    """
+
+    def __init__(self, idle_seconds: float = 900):
+        if (
+            not isinstance(idle_seconds, (int, float))
+            or isinstance(idle_seconds, bool)
+            or idle_seconds <= 0
+        ):
+            raise VaultError("idle_seconds must be a positive number")
+        self.__dict__["_idle"] = float(idle_seconds)
+        self.__dict__["_vault"] = None
+        self.__dict__["_deadline"] = 0.0
+
+    def unlock(self, passphrase: str, directory: Optional[Path] = None) -> "AutoLockVault":
+        import time
+
+        self.__dict__["_vault"] = CredentialVault(passphrase, directory=directory)
+        self.__dict__["_deadline"] = time.monotonic() + self.__dict__["_idle"]
+        return self
+
+    def lock(self) -> None:
+        """Lock now: drop the in-memory vault and its derived key."""
+        self.__dict__["_vault"] = None
+        self.__dict__["_deadline"] = 0.0
+
+    @property
+    def is_locked(self) -> bool:
+        import time
+
+        vault = self.__dict__["_vault"]
+        if vault is None:
+            return True
+        if time.monotonic() >= self.__dict__["_deadline"]:
+            self.lock()
+            return True
+        return False
+
+    def _checked(self):
+        import time
+
+        vault = self.__dict__["_vault"]
+        if vault is None:
+            raise VaultLockedError("vault is locked: call unlock(passphrase) first")
+        if time.monotonic() >= self.__dict__["_deadline"]:
+            self.lock()
+            raise VaultLockedError(
+                "vault auto-locked after inactivity: call unlock(passphrase) again"
+            )
+        self.__dict__["_deadline"] = time.monotonic() + self.__dict__["_idle"]
+        return vault
+
+    @property
+    def backend(self) -> str:
+        return self._checked().backend
+
+    def __getattr__(self, name: str):
+        # Only fires when normal attribute lookup fails — delegates every
+        # CredentialVault operation through the idle check.
+        if name.startswith("__") and name.endswith("__"):
+            raise AttributeError(name)
+        return getattr(self._checked(), name)

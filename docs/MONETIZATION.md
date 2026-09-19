@@ -2,18 +2,23 @@
 
 > Status: planning draft, 2026-09-15. Prices are targets anchored to verified
 > competitor pricing (June–Sept 2026). Validate against real unit costs
-> (hosted inference, fleet compute) before launch. Nothing here overrides
-> **free core forever** — that is binding (see `docs/ENTERPRISE.md`).
+> (hosted inference, fleet compute) before launch. Doctrine note
+> (2026-09-17/18): "free core forever" is dead — the live law is
+> **no-free-core, dollar-scale entry, volume over margin** (see
+> `docs/LEXICON.md`, "No free core"). This draft predates the change; its
+> tier mechanics are historical design, not live doctrine.
 
 ## The boundary (non-negotiable)
 
-**Free forever, no account, no ads:** the local LEVI core — agent runtime,
+**Dollar-scale entry, no account, no ads:** the local LEVI core — agent runtime,
 fleet (local), PWA, growth loop, model family, all skills, courses corpus,
-MCP, learning-pack *receiving*. This is the mission and the moat.
+MCP, learning-pack *receiving*. This is the mission and the moat: paid but
+tiny, volume over margin.
 
 **Paid only for things that cost us money or serve businesses:** hosted
 inference, cloud sync/API, fleet compute at scale, team features, product-line
-SaaS, marketplace rails. If it can run on the user's own hardware, it is free.
+SaaS, marketplace rails. On the user's own hardware the entry is
+dollar-scale — there is no free core.
 
 ## Pricing philosophy: more bang for the $1
 
@@ -41,8 +46,9 @@ agent-hours and completed tasks, not messages. Every paid tier is framed as
 1. **Offline-first and fully local.** Works in a bunker, on a plane, in a
    country that blocks the cloud. No account required, nothing to harvest.
    Their "local" plays are thin clients with a cloud leash.
-2. **Free core forever.** The intelligence is not a subscription hostage.
-   Their free tiers are crippled, ad-supported funnels.
+2. **No free core — dollar-scale entry.** The bottom tier is paid but tiny,
+   priced ~30–60% below the giants; volume over margin. Their free tiers are
+   crippled, ad-supported funnels.
 3. **A workforce, not a chatbot.** Fleet swarms with budgets, independent
    verification, and human approvals — priced in agent-hours, sold on
    outcomes. They sell a copilot; we sell the crew.
@@ -58,9 +64,9 @@ agent-hours and completed tasks, not messages. Every paid tier is framed as
 
 **Pack pitches rewritten through this lens:**
 
-- *Cloud Solo $12:* "The $20 chatbots rent you a conversation. LEVI is free
-  on your own hardware forever — $12 only when you want our cloud to do the
-  heavy lifting."
+- *Cloud Solo $12:* "The $20 chatbots rent you a conversation. LEVI starts
+  at dollar-scale on your own hardware — $12 only when you want our cloud to
+  do the heavy lifting."
 - *Fleet:* "They sell you a copilot. We sell you the crew — with receipts."
 - *NeighborOS:* "They sell software with an AI upsell. We sell the workforce
   itself, and it never sleeps."

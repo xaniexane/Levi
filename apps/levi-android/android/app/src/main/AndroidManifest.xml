@@ -13,6 +13,15 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- Notification channels ("Messaging channels", "Notifications" rows). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- "Hey LEVI" hotword listener: a user-toggled foreground service of
+         microphone type. Needs FOREGROUND_SERVICE to run at all and the
+         microphone subtype on API 34+. USE_FULL_SCREEN_INTENT (API 34+,
+         granted at install) lets the hotword trigger pop LEVI's voice
+         input via a full-screen notification — the sanctioned path, since
+         background activity launches are restricted. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     <!-- Coarse location for the "location_coarse" device tool (network/IP-based
          estimate only). Runtime permission: the tool fails closed until granted,
          and the location is read only when the tool is invoked — never tracked. -->
@@ -127,6 +136,15 @@
                 <action android:name="android.service.voice.VoiceInteractionSessionService" />
             </intent-filter>
         </service>
+
+        <!-- "Hey LEVI" hotword listener. Started and stopped only by the
+             user's Settings toggle; never exported, never bound. Declaring
+             the microphone foreground-service type is what lets it hold
+             the mic while listening. -->
+        <service
+            android:name=".voice.HeyLeviService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
 
         <!-- Shares data-export / issue-report files from cache only. -->
         <provider

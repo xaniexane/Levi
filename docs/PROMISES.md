@@ -20,23 +20,28 @@ A promise has three states:
 ```python
 from levi.promises import PromiseStore, check
 
-store = PromiseStore()                      # home resolved at call time
+store = PromiseStore()  # home resolved at call time
 p = store.make("draft the brief", due="2026-09-20", actor="levi")
 store.fulfill(p["id"], evidence="drafted 09:40, sent to user")
 store.break_promise(p["id"], why="user asked me to hold off")
 
-store.list("pending")                       # filter by state
-store.overdue(now=...)                      # pending + past due
-store.status(now=...)                        # kept/pending/broken + rate
+store.list("pending")  # filter by state
+store.overdue(now=...)  # pending + past due
+store.status(now=...)  # kept/pending/broken + rate
 ```
 
 `status()` returns:
 
 ```python
-{"kept": 2, "pending": 1, "broken": 1, "total": 4,
- "fulfillment_rate": 0.667,   # kept / (kept + broken); None if none resolved
- "overdue": 1,
- "note": "2 of 3 resolved promises kept (67%)."}
+{
+    "kept": 2,
+    "pending": 1,
+    "broken": 1,
+    "total": 4,
+    "fulfillment_rate": 0.667,  # kept / (kept + broken); None if none resolved
+    "overdue": 1,
+    "note": "2 of 3 resolved promises kept (67%).",
+}
 ```
 
 Empty state is honest: no promises → `fulfillment_rate` is `None` and the

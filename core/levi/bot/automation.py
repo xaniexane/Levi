@@ -48,7 +48,13 @@ def _run_log_path() -> str:
 
 @dataclass
 class RunRecord:
-    """One executed service run."""
+    """One executed (or rejected) service run.
+
+    The ``planned`` / ``approved`` / ``executed`` / ``verified`` fields
+    carry the Plan → Permission → Execute → Verify → Receipt rail in
+    structured form: what was intended, on what authority it ran, what
+    actually happened, and how the outcome was checked.
+    """
 
     service: str
     ok: bool
@@ -57,6 +63,10 @@ class RunRecord:
     files: List[str] = field(default_factory=list)
     notes: List[str] = field(default_factory=list)
     error: str = ""
+    planned: str = ""
+    approved: str = ""
+    executed: str = ""
+    verified: str = ""
     ts: str = ""
 
     def __post_init__(self) -> None:
@@ -73,6 +83,10 @@ class RunRecord:
             "files": self.files,
             "notes": self.notes,
             "error": self.error,
+            "planned": self.planned,
+            "approved": self.approved,
+            "executed": self.executed,
+            "verified": self.verified,
         }
 
 
@@ -85,6 +99,43 @@ def _append_run_log(record: RunRecord) -> None:
             fh.write(json.dumps(record.to_dict(), ensure_ascii=False) + "\n")
     except OSError:
         pass
+
+
+def log_receipt(
+    service: str,
+    *,
+    ok: bool,
+    summary: str,
+    report: str = "",
+    files: List[str] | None = None,
+    notes: List[str] | None = None,
+    error: str = "",
+    planned: str = "",
+    approved: str = "",
+    executed: str = "",
+    verified: str = "",
+) -> RunRecord:
+    """Build a :class:`RunRecord` and append it to the run log.
+
+    This is the single choke point for receipts: every dispatch — success,
+    handler failure, or rejected-before-dispatch — goes through here, so
+    no consequential act ends without a receipt entry. Never raises.
+    """
+    record = RunRecord(
+        service=service,
+        ok=ok,
+        summary=summary,
+        report=report,
+        files=list(files or ()),
+        notes=list(notes or ()),
+        error=error,
+        planned=planned,
+        approved=approved,
+        executed=executed,
+        verified=verified,
+    )
+    _append_run_log(record)
+    return record
 
 
 def read_run_log(limit: int = 20) -> List[Dict[str, Any]]:
@@ -114,52 +165,113 @@ def run_service(
     name: str,
     params_override: Optional[Dict[str, Any]] = None,
     registry: Optional[ServiceRegistry] = None,
+    *,
+    scheduled: bool = False,
 ) -> RunRecord:
     """Execute the named service and log the run.
 
-    Returns a :class:`RunRecord` (never raises for service-level failures;
-    raises :class:`ServiceError` only for invalid *requests*, e.g. unknown
+    Every path writes a receipt via :func:`log_receipt` — including
+    rejected requests (unknown/disabled service, bad params), so an
+    exception path never ends without a structured error *and* a receipt
+    entry. Returns a :class:`RunRecord` for service-level outcomes;
+    raises :class:`ServiceError` only for invalid *requests* (e.g. unknown
     service name).
+
+    ``scheduled=True`` records that the authority for this run was a
+    cron/daemon schedule rather than an on-demand user request.
     """
     from levi.bot.services import validate_name
 
-    validate_name(name)
-    reg = registry or ServiceRegistry()
-    definition: Optional[ServiceDefinition] = reg.get(name)
-    if definition is None:
-        raise ServiceError("run: unknown service %r — see `service list`" % (name,))
-    if not definition.enabled:
-        raise ServiceError("run: service %r is disabled" % (name,))
-    merged: Dict[str, Any] = dict(definition.params)
-    if params_override:
-        if not isinstance(params_override, dict):
-            raise ServiceError("run: params_override must be a dict")
-        merged.update(params_override)
+    approval = "scheduled run (cron/daemon)" if scheduled else "on-demand user request"
+    base_planned = "execute service %r" % (name,)
 
+    def _reject(reason: str, exc: BaseException):
+        log_receipt(
+            name if isinstance(name, str) else "?",
+            ok=False,
+            summary="rejected: %s" % reason,
+            error="%s: %s" % (type(exc).__name__, exc),
+            planned=base_planned,
+            approved=approval,
+            executed="rejected before handler dispatch",
+            verified="n/a — nothing executed",
+        )
+        raise exc
+
+    try:
+        validate_name(name)
+        reg = registry or ServiceRegistry()
+        definition: Optional[ServiceDefinition] = reg.get(name)
+        if definition is None:
+            raise ServiceError("run: unknown service %r — see `service list`" % (name,))
+        if not definition.enabled:
+            raise ServiceError(
+                "run: service %r is disabled — `service enable %s` to re-arm it"
+                % (name, name)
+            )
+        merged: Dict[str, Any] = dict(definition.params)
+        if params_override:
+            if not isinstance(params_override, dict):
+                raise ServiceError("run: params_override must be a dict")
+            merged.update(params_override)
+    except Exception as exc:  # noqa: BLE001 - invalid requests are receipted, then raised
+        _reject(str(exc), exc)
+
+    planned = "execute service '%s' (type=%s, schedule=%s) with params %s" % (
+        name,
+        definition.service_type,
+        definition.schedule,
+        json.dumps(merged, sort_keys=True, ensure_ascii=False)[:500],
+    )
     handler = get_handler_for(definition)
+    handler_label = getattr(handler, "__name__", type(handler).__name__)
     try:
         result: ServiceResult = handler(merged)
     except ServiceError as exc:
-        record = RunRecord(
-            service=name, ok=False, summary="rejected: %s" % exc, error=str(exc)
+        record = log_receipt(
+            name,
+            ok=False,
+            summary="rejected: %s" % exc,
+            error=str(exc),
+            planned=planned,
+            approved=approval,
+            executed="handler %s refused before acting" % handler_label,
+            verified="n/a — refused, no side effects",
         )
     except Exception as exc:  # noqa: BLE001 - handlers must never crash the runner
-        record = RunRecord(
-            service=name,
+        record = log_receipt(
+            name,
             ok=False,
             summary="crashed: %s: %s" % (type(exc).__name__, exc),
             error="%s: %s" % (type(exc).__name__, exc),
+            planned=planned,
+            approved=approval,
+            executed="handler %s raised %s" % (handler_label, type(exc).__name__),
+            verified="n/a — crashed, outcome unknown; nothing claimed",
         )
     else:
-        record = RunRecord(
-            service=name,
+        if result.ok:
+            verified = (
+                "; ".join(result.notes)
+                if result.notes
+                else "handler reported success; report produced"
+            )
+            executed = "handler %s completed" % handler_label
+        else:
+            verified = "handler reported failure; no success claimed"
+            executed = "handler %s completed with a failure report" % handler_label
+        record = log_receipt(
+            name,
             ok=result.ok,
             summary=result.summary(),
             report=result.report,
             files=list(result.files),
             notes=list(result.notes),
+            planned=planned,
+            approved=approval,
+            executed=executed,
+            verified=verified,
         )
-    _append_run_log(record)
     return record
 
 

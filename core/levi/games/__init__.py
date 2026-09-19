@@ -8,6 +8,7 @@ Contents:
 - :mod:`levi.games.charter` — the Fair Play Charter: honest-design rules
   every LEVI game must pass (machine-checkable).
 - :mod:`levi.games.saves` — portable, player-owned save files.
+- :mod:`levi.games.sunset` — sunset escrow: the funeral planned at birth.
 - :mod:`levi.games.deduction` — Codebreak: a Mastermind-style deduction game.
 - :mod:`levi.games.daily_puzzle` — the Daily Cipher: a deterministic,
   FOMO-free daily substitution-cipher puzzle with free unlimited hints.
@@ -30,6 +31,7 @@ from levi.games import (
     hotseat,
     mancala,
     saves,
+    sunset,
 )
 
 __all__ = [
@@ -40,4 +42,5 @@ __all__ = [
     "hotseat",
     "mancala",
     "saves",
+    "sunset",
 ]

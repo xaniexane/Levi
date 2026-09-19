@@ -113,11 +113,11 @@ from levi.jobs.tracker import JobTracker, import_demand
 
 t = JobTracker()  # ~/.levi/jobs/jobs.json
 job = t.add("Compost route", source="manual")
-t.move(job.id, "active")                      # validated transition
+t.move(job.id, "active")  # validated transition
 t.note(job.id, "first pickup Thursday")
-job, created = t.upsert("Compost route")      # idempotent add-or-refresh
+job, created = t.upsert("Compost route")  # idempotent add-or-refresh
 t.update(job.id, status="won")
-import_demand(t, min_worth=0.5)               # pull in demand opportunities
+import_demand(t, min_worth=0.5)  # pull in demand opportunities
 ```
 
 ## Skills
@@ -133,6 +133,164 @@ core/levi/jobs/
 ├── tracker.py   JobTracker: JSON persistence, statuses + transition map,
 │                notes, restrictions, stats, upsert, legacy migration,
 │                import_demand(); JOB_SKILLS list
-└── cli.py       register_jobs_parser() + cmd_jobs() (wired into
-                 core/levi/cli/main.py)
+├── cli.py       register_jobs_parser() + cmd_jobs() (wired into
+│                core/levi/cli/main.py); dispatches `organ` to organ_cli
+├── profiles.py  ENGINE law: one profile per human, deny-closed schema,
+│                owner-only JSON. Chauncey's data is ONE profile here —
+│                never a literal in engine code.
+├── store.py     Warehouse: 19 workbook-sheet tables as JSON
+│                (review_buffer … job_history_archive) + gig_offers,
+│                gig_income; import_workbook() reads the V2 xlsx.
+├── sourcing.py  ENGINE 1: Review Buffer intake — dedupe, blacklist
+│                screen, hard-restriction screen; hypothesis-labeled.
+├── triage.py    ENGINE 2: deterministic 1–10 scoring + promotion to
+│                the Apply Queue at threshold.
+├── apply.py     ENGINE 3: packet drafting/prefill; human authorizes
+│                EVERY submission; log only on human-confirmed submit.
+├── intel.py     ENGINE 4: company intel, watchlist, blacklist,
+│                restrictions/filters.
+├── prep.py      ENGINE 5: Prep Hub, Resume Map, Cover Letter Bank,
+│                cover-letter factory (drafts only).
+├── gig.py       Gig/fast-cash parallel track: offers, rule evaluation,
+│                human-approved grabs, income tracker.
+├── modes.py     Run modes: full / light / low-data / offline.
+├── chains.py    Chained workflows: trigger → conditions → actions →
+│                verification → receipt; to_flow() renders flows.py
+│                manifests; chain_mermaid() for visualization.
+└── organ_cli.py  `levi jobs organ …` surface (dry-run default).
 ```
+
+---
+
+# Universal Job Organ
+
+A LEVI organ, not a spreadsheet port. Five compressed engines over the
+warehouse whose schema is the recovered 19-sheet **Hybrid Job Search
+and Apply System V2** workbook — every table mirrors one workbook
+sheet, column for column.
+
+## The five engines
+
+| Engine | Module | Job |
+|---|---|---|
+| **Sourcing** | `sourcing.py` | Stages listings into the Review Buffer: dedupe, blacklist screen, hard-restriction screen. Everything ingested is labeled hypothesis until verified. |
+| **Triage** | `triage.py` | Deterministic 1–10 match scoring with a published breakdown; promotes ≥ threshold into the Apply Queue. |
+| **Apply** | `apply.py` | Builds submission packets (resume pick + cover-letter draft + prefill). Drafts and prefills only — never submits. |
+| **Intel** | `intel.py` | Company intel, watchlist, blacklist, restrictions/filters. Local enrichment only; unknown companies report `intel: null`. |
+| **Prep** | `prep.py` | Prep Hub (STAR scaffolds), Resume Map, Cover Letter Bank, and the cover-letter factory (drafts only, unknown placeholders stay visible). |
+
+Parallel track: **gig / fast-cash** (`gig.py`) — gig offers, auto-accept
+rule *evaluation*, human-approved block grabs, income tracker.
+
+## Pipeline
+
+```
+Review Buffer → Apply Queue → Application Log
+                     ↓
+              Interviews → Offers / Decisions
+```
+
+Plus: Prep Hub, Resume Map, Cover Letter Bank, Skills Matrix, Job
+Boards, Company Intel, Restrictions & Filters, Blacklist, Automation
+Logs, Training & Courses, Job History Archive, gig_offers, gig_income.
+
+## Binding laws (enforced in code)
+
+1. **Universal engine, separate profiles.** `profiles.py` holds one
+   record per human; engine code contains zero personal data. No profile
+   → engines degrade honestly, never invent.
+2. **The human authorizes EVERY actual submission.** `apply.py` drafts
+   packets; the Application Log only gains a row after the human
+   *confirms* they submitted (`log_submission` refuses on dry-run or
+   denial). The organ is never the hand on the button.
+3. **Dry-run is the default** for every engine, chain, and CLI command.
+   Live execution is an explicit per-call choice and still gates.
+4. **Board scraping is not built.** The organ consumes listing dicts
+   (local files, workbook, human paste). Fetching is the human's
+   browser or a browser agent's job.
+
+## Scoring rubric (1–10, deterministic)
+
+Base 1, plus: role fit +3 · pay fit +2 · remote fit +2 · skills overlap
++2 · equipment +1. Hard caps at 2: avoided job type matched; record
+needs felony-friendly and the listing is not. Every score ships its
+breakdown.
+
+## Chained workflows
+
+`chains.py`: **trigger → conditions → actions → verification → receipt**.
+Four built-ins: `morning-sweep`, `apply-packet`, `interview-prep`,
+`gig-watch`. Each chain renders a `levi.automation.flows`-compatible
+manifest (`to_flow` / `chain_mermaid`) — predicate/emit/note nodes,
+valid per `build_flow`.
+
+**Seam (honest):** flows.py `minion` nodes must reference the signed
+automation catalog, and job actions aren't catalog minions — so the flow
+manifest is the *map* (visualizable), while the native `run_chain` is
+the *territory* (executable). If a sibling registers `jobs.*` minions in
+the catalog later, the manifests become executable via `run_flow` as-is.
+No sibling chain framework was found in the repo; this is noted, not
+assumed.
+
+## Interaction modes (via `levi.automation.hitl`)
+
+notification · dialog · approval · edit-and-approve · acknowledge ·
+confirm. Gates resolve through an injected responder — dry-run
+simulates, live CLI asks on stdin, tests inject `auto_approve` /
+`auto_deny`.
+
+## Run modes
+
+`--mode full` (default) · `light` (read-only) · `low-data` (local work
+only, no external enrichment) · `offline` (hard no-network posture).
+
+## CLI
+
+Organ-level flags (`--profile`, `--mode`, `--live`) come **before** the
+engine name. Dry-run default: add `--live` to execute.
+
+```bash
+# profiles (Chauncey's data is ONE profile, filled by him, never hardcoded)
+levi jobs organ --live profile create chauncey --scaffold
+levi jobs organ --live --profile chauncey profile set chauncey phone "217-610-0636"
+
+# warehouse from the recovered workbook
+levi jobs organ --live workbook import --path "/path/to/Hybrid Job Search and Apply System V2 (Master – Clean) (2).xlsx"
+
+# pipeline
+levi jobs organ sourcing ingest --file listings.json --board indeed
+levi jobs organ --profile chauncey triage run --threshold 7
+levi jobs organ --live --profile chauncey apply draft --queue-id 1
+levi jobs organ --live --profile chauncey apply authorize --queue-id 1   # human approves
+# ... human submits on the board site ...
+levi jobs organ --live --profile chauncey apply log --queue-id 1 --confirmed
+
+# intel / prep / gig
+levi jobs organ intel check --company "Acme" --title "Chat Agent"
+levi jobs organ --live --profile chauncey prep packet --title "Chat Agent" --company "Acme"
+levi jobs organ --live --profile chauncey gig offer-add --platform DashX --title "Dinner block" --pay 48
+levi jobs organ --profile chauncey gig evaluate --min-pay 40 --max-dist 5
+
+# chains
+levi jobs organ --profile chauncey chain run morning-sweep --listings listings.json
+levi jobs organ --profile chauncey chain flow apply-packet   # mermaid manifest
+
+# dashboard
+levi jobs organ --profile chauncey dash
+```
+
+## State
+
+`~/.levi/jobs/`: `warehouse/*.json` (19 tables), `profiles/*.json`,
+plus the pre-existing `jobs.json` tracker (untouched). Dir 0700, files
+0600. The old `levi jobs` tracker commands are unchanged.
+
+## Honest gaps
+
+- No board scraping or auto-applying (by design, per the laws).
+- No real gig-platform integration — the organ stages and evaluates; the
+  human taps the grab in the gig app.
+- Chain flow manifests aren't executable via `run_flow` until job
+  minions exist in the automation catalog (seam documented above).
+- `enrich_external` capability exists in the mode table but no external
+  enrichment source is wired yet.

@@ -99,6 +99,11 @@ class ScheduleSpec:
     weight_decay: float = 0.0
     grad_clip: float = 1.0
     log_every: int = 25
+    # Judgment: stop after this many evals with no held-out improvement
+    # (0 = disabled; the run always trains the full schedule).
+    early_stop_patience: int = 0
+    # Minimum held-out NLL drop that counts as an improvement.
+    early_stop_min_delta: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -114,6 +119,10 @@ class CheckpointSpec:
     dir: str = "weights/v2"
     save_every: int = 250
     keep_last: int = 5
+    # The keeper's law, encoded: never delete the best self. The
+    # lowest-held-out-NLL checkpoint is protected from pruning even when
+    # newer, worse checkpoints push it out of the keep_last window.
+    keep_best: bool = True
 
 
 @dataclass(frozen=True)
@@ -157,6 +166,12 @@ def _check_float(value: Any, key: str, where: str, minimum: float = 0.0) -> floa
 def _check_str(value: Any, key: str, where: str, allow_empty: bool = False) -> str:
     if not isinstance(value, str) or (not allow_empty and not value.strip()):
         raise ConfigError(f"config[{where}].{key}: expected non-empty str")
+    return value
+
+
+def _check_bool(value: Any, key: str, where: str) -> bool:
+    if not isinstance(value, bool):
+        raise ConfigError(f"config[{where}].{key}: expected bool, got {value!r}")
     return value
 
 
@@ -276,6 +291,8 @@ def _schedule_spec(raw: Any) -> ScheduleSpec:
             "weight_decay",
             "grad_clip",
             "log_every",
+            "early_stop_patience",
+            "early_stop_min_delta",
         },
         "schedule",
     )
@@ -296,6 +313,15 @@ def _schedule_spec(raw: Any) -> ScheduleSpec:
         ),
         grad_clip=_check_float(raw.get("grad_clip", 1.0), "grad_clip", "schedule"),
         log_every=_check_int(raw.get("log_every", 25), "log_every", "schedule"),
+        early_stop_patience=_check_int(
+            raw.get("early_stop_patience", 0),
+            "early_stop_patience",
+            "schedule",
+            minimum=0,
+        ),
+        early_stop_min_delta=_check_float(
+            raw.get("early_stop_min_delta", 0.0), "early_stop_min_delta", "schedule"
+        ),
     )
 
 
@@ -329,13 +355,16 @@ def _checkpoint_spec(raw: Any) -> CheckpointSpec:
     raw = raw or {}
     if not isinstance(raw, dict):
         raise ConfigError("config[checkpointing]: expected a mapping")
-    _reject_unknown(raw, {"dir", "save_every", "keep_last"}, "checkpointing")
+    _reject_unknown(
+        raw, {"dir", "save_every", "keep_last", "keep_best"}, "checkpointing"
+    )
     return CheckpointSpec(
         dir=_check_str(raw.get("dir", "weights/v2"), "dir", "checkpointing"),
         save_every=_check_int(
             raw.get("save_every", 250), "save_every", "checkpointing"
         ),
         keep_last=_check_int(raw.get("keep_last", 5), "keep_last", "checkpointing"),
+        keep_best=_check_bool(raw.get("keep_best", True), "keep_best", "checkpointing"),
     )
 
 

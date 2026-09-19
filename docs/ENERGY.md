@@ -35,19 +35,18 @@ from levi.energy.tracker import EnergyLog
 log = EnergyLog()  # $LEVI_HOME/energy/sessions.json (else ~/.levi)
 
 # Log a session. shipped = did it produce its outcome?
-s = log.log_session("2026-09-15T09:00", "2026-09-15T11:30",
-                    kind="deep", shipped=True)
+s = log.log_session("2026-09-15T09:00", "2026-09-15T11:30", kind="deep", shipped=True)
 # kind is free-form ("deep", "admin", ...); only "deep" feeds peaks.
 
 log.sessions(kind="deep", shipped=True)  # filter the ledger
 
-peaks = log.peak_hours()            # or peak_hours(min_sessions=8,
-                                    #              window_hours=3)
+peaks = log.peak_hours()  # or peak_hours(min_sessions=8,
+#              window_hours=3)
 # {"enough_data": True, "n_deep_shipped": 12,
 #  "windows": [{"start_hour": 9, "end_hour": 12, "minutes": 540.0,
 #               "share": 0.88, "rank": 1}, ...]}
 
-slot = log.suggest_slot("hard")     # "hard"|"deep"|"normal"|"admin"|"light"
+slot = log.suggest_slot("hard")  # "hard"|"deep"|"normal"|"admin"|"light"
 # {"task_weight": "hard", "when": "2026-09-16T09:00",
 #  "until": "2026-09-16T10:00", "window": {...},
 #  "basis": "learned",

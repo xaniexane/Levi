@@ -114,8 +114,10 @@ A service of type `custom` has no built-in behavior — give it one with
 ```python
 from levi.bot.services import ServiceResult, register_handler
 
+
 def my_handler(params):
     return ServiceResult(ok=True, report="hello from my service")
+
 
 register_handler("my-service", my_handler)
 ```

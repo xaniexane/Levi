@@ -114,6 +114,7 @@ convention, e.g. `# === OBS-REGION-BEGIN ===`):
 # === OBS-REGION-BEGIN: observability query surface ===
 try:
     from levi.observability import __main__ as _obs
+
     obs_p = sub.add_parser("observe", help="Query the decision-trace corpus")
     obs_sub = obs_p.add_subparsers(dest="observe_cmd", required=True)
     # ... mirror _obs.build_parser() subcommands, or delegate:

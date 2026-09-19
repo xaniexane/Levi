@@ -18,14 +18,14 @@ still hold?" — reaffirm it with a note, or retire it with a reason.
 ```python
 from levi.decisions import DecisionJournal, check
 
-j = DecisionJournal()                        # home resolved at call time
+j = DecisionJournal()  # home resolved at call time
 d = j.decide("cache news for 24h", "freshness vs cost", revisit="2026-10-15")
 j.reaffirm(d["id"], note="still the right trade — bandwidth costs real money")
 j.retire(d["id"], why="user asked for live feeds; cost no longer the driver")
 
-j.due_for_revisit(now=...)                   # active decisions with revisit <= now
-j.list("retired")                            # the compost heap
-j.status(now=...)                             # active/retired/due counts
+j.due_for_revisit(now=...)  # active decisions with revisit <= now
+j.list("retired")  # the compost heap
+j.status(now=...)  # active/retired/due counts
 ```
 
 Revisit dates accept `YYYY-MM-DD` strings, `date`, or `datetime`.

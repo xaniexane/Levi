@@ -43,28 +43,42 @@ tests that root is always a tmp dir — never the real tree.
 ```python
 from pathlib import Path
 from levi.sweeps.sweeps import (
-    SweepSpec, register, unregister, list_specs, run_sweep,
+    SweepSpec,
+    register,
+    unregister,
+    list_specs,
+    run_sweep,
     SweepRefusedError,
 )
+
 
 # Register your own spec. safe=False specs are reported, never auto-run.
 def check(root: Path, max_age_days: float) -> list[str]:
     return ["stale/report.txt"] if (root / "stale/report.txt").exists() else []
 
+
 def fix(root: Path, issue: str) -> bool:
     (root / issue).unlink()
     return True
 
-register(SweepSpec(id="my-sweep", area="reports",
-                   description="drop stale reports",
-                   check=check, fix=fix, safe=True))
+
+register(
+    SweepSpec(
+        id="my-sweep",
+        area="reports",
+        description="drop stale reports",
+        check=check,
+        fix=fix,
+        safe=True,
+    )
+)
 
 report = run_sweep(Path("/data/scratch"), max_age_days=7)
 # report.fixed / .remaining / .skipped_unsafe / .errors
 print(report.format())
 unregister("my-sweep")
 
-list_specs()     # all registered specs, sorted by id
+list_specs()  # all registered specs, sorted by id
 ```
 
 `run_sweep(root, only=[...])` runs a subset. `check` receives

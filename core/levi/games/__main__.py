@@ -25,13 +25,20 @@ Commands:
   saves list <game>           list save slots
   saves export <game> <slot> <file>   export a portable save
   saves import <file> [--slot S]      import a portable save
+  sunset plan <game> [--promise K ...]
+                            escrow a sunset plan (the funeral at birth)
+  sunset drill <game>         re-verify every sunset commitment
+  sunset list                 games with escrowed plans
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from datetime import date
+
+from levi.games.sunset import COMMITMENTS
 
 
 def _cmd_charter(_args) -> int:
@@ -99,6 +106,48 @@ def _cmd_saves(args) -> int:
             return 2
     except SaveError as exc:
         print("save error: %s" % exc)
+        return 1
+    return 0
+
+
+def _cmd_sunset(args) -> int:
+    from levi.games.sunset import (
+        COMMITMENTS,
+        Commitment,
+        EscrowVault,
+        SunsetError,
+        SunsetPlan,
+        drill,
+        mark_delivered,
+    )
+
+    vault = EscrowVault()
+    try:
+        if args.action == "plan":
+            plan = SunsetPlan(game_id=args.game, escrow_text=args.text or "")
+            if args.promise:
+                for key in args.promise:
+                    c = plan.commitments.get(key)
+                    if c is not None:
+                        c.promised = True
+            vault.store(plan)
+            print("sunset plan escrowed for %s — the funeral is planned" % args.game)
+        elif args.action == "show":
+            plan = vault.load(args.game)
+            print(json.dumps(plan.to_dict(), indent=2))
+        elif args.action == "list":
+            games = vault.list_games()
+            print("escrowed games: %s" % (", ".join(games) or "(none)"))
+        elif args.action == "deliver":
+            mark_delivered(vault, args.game, args.commitment, args.evidence or "")
+            print("recorded: %s delivered for %s" % (args.commitment, args.game))
+        elif args.action == "drill":
+            print(drill(vault, args.game).text())
+        else:
+            print("unknown sunset action %r" % args.action)
+            return 2
+    except SunsetError as exc:
+        print("sunset error: %s" % exc)
         return 1
     return 0
 
@@ -294,6 +343,23 @@ def main(argv=None) -> int:
     odds_p.add_argument("--trials", type=int, default=20000, help="trials for --prove")
     odds_p.add_argument("--seed", type=int, default=None, help="seed for --prove")
 
+    sunset_p = sub.add_parser("sunset", help="sunset escrow: the funeral at birth")
+    sunset_p.add_argument(
+        "action", choices=["plan", "show", "list", "deliver", "drill"]
+    )
+    sunset_p.add_argument("game", nargs="?", default=None)
+    sunset_p.add_argument("--text", default="", help="plain-language commitment")
+    sunset_p.add_argument(
+        "--promise",
+        action="append",
+        choices=list(COMMITMENTS),
+        help="commitment to promise (repeatable)",
+    )
+    sunset_p.add_argument(
+        "--commitment", default=None, help="commitment to mark delivered"
+    )
+    sunset_p.add_argument("--evidence", default="", help="where the artifact lives")
+
     season_p = sub.add_parser("season", help="the un-expiring battle pass")
     season_p.add_argument(
         "action", choices=["new", "add", "log", "status", "close", "reopen"]
@@ -324,9 +390,7 @@ def main(argv=None) -> int:
     relay_p.add_argument("--file", default=None, help="relay file (export/import)")
     relay_p.add_argument("--slot", default="relay", help="save slot")
 
-    table_p = sub.add_parser(
-        "table", help="the story table: dice-first tabletop RPG"
-    )
+    table_p = sub.add_parser("table", help="the story table: dice-first tabletop RPG")
     table_p.add_argument(
         "table_args",
         nargs=argparse.REMAINDER,
@@ -348,6 +412,8 @@ def main(argv=None) -> int:
         return _cmd_mancala(args)
     if args.command == "saves":
         return _cmd_saves(args)
+    if args.command == "sunset":
+        return _cmd_sunset(args)
     if args.command == "story":
         return _cmd_story(args)
     if args.command == "odds":

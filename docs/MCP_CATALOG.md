@@ -52,17 +52,19 @@ code at install time.
 Append one dict to `CATALOG` in `core/levi/mcp/catalog.py`:
 
 ```python
-{
-    "name": "my-server",                    # unique, [A-Za-z0-9_-]{1,64}
-    "description": "One line, no secrets.",
-    "transport": "stdio",                   # or "http"
-    "command": ["npx", "-y", "my-mcp-pkg"], # stdio …
-    # "url": "https://host/mcp",           # … or http (one of the two)
-    "provider": "Someone",                  # external provider name
-    "reference": True,                      # must be exactly True
-    "tags": ["docs"],                       # optional
-    "note": "No API key required.",         # optional
-},
+(
+    {
+        "name": "my-server",  # unique, [A-Za-z0-9_-]{1,64}
+        "description": "One line, no secrets.",
+        "transport": "stdio",  # or "http"
+        "command": ["npx", "-y", "my-mcp-pkg"],  # stdio …
+        # "url": "https://host/mcp",           # … or http (one of the two)
+        "provider": "Someone",  # external provider name
+        "reference": True,  # must be exactly True
+        "tags": ["docs"],  # optional
+        "note": "No API key required.",  # optional
+    },
+)
 ```
 
 Rules enforced on load (`CatalogError` otherwise):

@@ -44,6 +44,7 @@ ACADEMY_PKG = Path(__file__).resolve().parent
 
 from levi.academy import concepts as acon  # noqa: E402
 from levi.academy import corpus_ingest as aci  # noqa: E402
+from levi.academy import remediation as arem  # noqa: E402
 from levi.academy import research as aresearch  # noqa: E402
 from levi.academy import session_exercises as aex  # noqa: E402
 from levi.academy import synthesize as asynth  # noqa: E402
@@ -687,6 +688,12 @@ def run_one_session(
         }
         result["streak"] = streak
         result["pending_remedial"] = progress["pending_remedial"]
+    # Extra help: auto-remediation attaches a micro-session plan when the
+    # learner struggles. Additive only — the record shape is untouched.
+    # Feed it what the learner actually missed so re-drills are specific.
+    result["missed_objectives"] = mastery["missed_objectives"]
+    result["missed_questions"] = mastery["missed_questions"]
+    arem.attach_remediation(result)
     save_progress(progress)
     return result
 
@@ -851,6 +858,11 @@ def run_remedial(
             {"gate_passed": False, "attempts": attempt + 1, "ts": _now_iso()}
         )
         result["pending_remedial"] = progress["pending_remedial"]
+    # Extra help on the remedial path too — a failed re-attempt still gets
+    # a re-drill plan, and repeat failures escalate to a counselor.
+    result["missed_objectives"] = mastery["missed_objectives"]
+    result["missed_questions"] = mastery["missed_questions"]
+    arem.attach_remediation(result)
     save_progress(progress)
     return result
 

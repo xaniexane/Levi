@@ -1,0 +1,41 @@
+{
+  "description": "TEAM + SKILL pack for the electrical trade: refines the career as well as the craft. Skill-development entries (improve/combine) level up the electrician — mentoring apprentices, honest estimating and quoting, code-compliant habits, panel schedules, torque discipline, two-pass workflow, conduit bending. Team-play entries train crews to coordinate — two-person lockout/tagout, signaled wire pulls, wrong-parts pivot protocol, teach-back huddles, shadow rotations, and a drilled stop-work play for smoke mid-job. Outputs feed the learning engine; the pack ultimately builds toward personal refinement tools. All entries follow MECHANISM -> IMPROVISE -> STEPS -> STOP. Every entry leads with de-energize-first; anything past homeowner scope stops at 'call a licensed electrician.' Lawful DIY only.",
+  "draft": true,
+  "entry_count": 52,
+  "field": "electrical",
+  "level_breakdown": {
+    "applied": 32,
+    "foundation": 13,
+    "mastery": 7
+  },
+  "notes_for_main_builder": "Starter set of 38 entries plus 14 team+skill entries (sw-electrical-039 to sw-electrical-052): 7 career-skill (improve/combine) + 7 team-play. Ids normalized by coordinator to the framework law (curriculum/schema.py); full file validates clean. Open question: should 'combine' entries like sw-electrical-031 require a cross-pack prerequisite syntax later, or stay pack-local as now?",
+  "pack": "Electrical",
+  "safety_posture": "electricity kills. Every entry de-energizes first (breaker off, verified dead). No mains-panel or live work beyond safe homeowner scope; every entry carries an explicit electrician-call stop condition. Improvised tools never defeat safety: no breaker bypasses, no ungrounded cheats, no taped fuses.",
+  "selector": {
+    "domains": [
+      "electrical"
+    ],
+    "levels": [
+      "foundation",
+      "applied",
+      "mastery"
+    ],
+    "tracks": [
+      "build",
+      "create",
+      "improve",
+      "restore",
+      "combine",
+      "improvise"
+    ]
+  },
+  "track_emphasis": {
+    "build": "secondary — lamps, outage kits, cord projects with gauge math",
+    "combine": "tertiary — combination devices that merge functions in one yoke",
+    "create": "tertiary — new devices from parts (lamp builds, photocell adds)",
+    "improve": "secondary — load audits, LED retrofits, dimmers, USB outlets, sensors; plus career-skill: mentoring, estimating, quoting, habits, torque, conduit, two-pass workflow",
+    "improvise": "primary — Sidewinder doctrine core: lamp tests, knife stripping, coat-hanger fishing, radio breaker-mapping; plus crew plays: lockout/tagout, wire-pull signals, wrong-parts pivot, stop-work ritual",
+    "restore": "primary — diagnosis and replacement of worn residential devices"
+  },
+  "version": "0.1.0-draft"
+}

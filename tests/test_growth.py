@@ -35,6 +35,11 @@ def env(tmp_path, monkeypatch):
     mem = tmp_path / "memory"
     monkeypatch.setenv("LEVI_AGENT_SESSIONS_DIR", str(sessions))
     monkeypatch.setenv("LEVI_GROWTH_DIR", str(growth))
+    # Isolate the widened ops-log harvest sources (2026-09-16): without
+    # these, harvest_ops_logs reads the real HOME and no test is quiet.
+    monkeypatch.setenv("LEVI_HOME", str(tmp_path / "levihome"))
+    monkeypatch.setenv("LEVI_WORKSPACE", str(tmp_path / "workspace"))
+    monkeypatch.setenv("LEVI_MEMORY_DIR", str(tmp_path / "memlog"))
     return {"sessions": sessions, "growth": growth, "mem": mem}
 
 

@@ -16,7 +16,7 @@ KeyError or a silent default.
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, List
 import hashlib
 
 ORGAN = "reim"
@@ -249,6 +249,89 @@ def compost_failure(record: Dict) -> Dict:
             "organ": ORGAN,
         },
     }
+
+
+def corroborate(existing: Dict, new_record: Dict) -> Dict:
+    """Merge two compost records of the SAME failure into one.
+
+    ``existing`` and ``new_record`` must both be REIM compost records
+    (compost_failure output) whose fingerprints match — fingerprint match
+    is the definition of same failure identity.
+
+    Returns a new dict (inputs are not mutated) with:
+
+    - ``corroboration`` incremented by 1,
+    - ``ts`` set to the newer of the two timestamps,
+    - ``provenance["merged_from"]`` counting how many records were merged
+      into this one (2 after the first merge, 3 after the second, ...).
+
+    Raises ValueError when either input is malformed or when the
+    fingerprints differ (fail-closed — no mushy merges).
+    """
+    for name, compost in (("existing", existing), ("new_record", new_record)):
+        if not isinstance(compost, dict):
+            raise ValueError(
+                "corroborate: %s must be a dict, got %s"
+                % (name, type(compost).__name__)
+            )
+        missing = [
+            k
+            for k in ("organ", "fingerprint", "corroboration", "ts", "provenance")
+            if k not in compost
+        ]
+        if missing:
+            raise ValueError(
+                "corroborate: %s is missing keys: %s" % (name, ", ".join(missing))
+            )
+        if compost["organ"] != ORGAN:
+            raise ValueError(
+                "corroborate: %s is not a REIM compost record (organ=%r)"
+                % (name, compost.get("organ"))
+            )
+        if (
+            not isinstance(compost["corroboration"], int)
+            or compost["corroboration"] < 1
+        ):
+            raise ValueError(
+                "corroborate: %s['corroboration'] must be a positive int, got %r"
+                % (name, compost.get("corroboration"))
+            )
+    if existing["fingerprint"] != new_record["fingerprint"]:
+        raise ValueError(
+            "corroborate: fingerprint mismatch (%r != %r) — refusing to merge"
+            % (existing["fingerprint"], new_record["fingerprint"])
+        )
+    merged = dict(existing)
+    merged["corroboration"] = existing["corroboration"] + 1
+    merged["ts"] = max(existing["ts"], new_record["ts"])
+    provenance = dict(existing.get("provenance", {}))
+    provenance["merged_from"] = int(provenance.get("merged_from", 1)) + 1
+    merged["provenance"] = provenance
+    return merged
+
+
+def compost_batch(records: List) -> List[Dict]:
+    """Compost a batch of failure records, auto-merging repeats.
+
+    ``records`` must be a list of failure-record dicts (compost_failure
+    input shape). Records with the same fingerprint are the same failure:
+    they merge via :func:`corroborate`, so N repeats of one failure yield
+    one compost with corroboration N — the path by which a repeated
+    failure becomes promotion-eligible.
+
+    A malformed record raises ValueError (fail-closed); nothing is
+    skipped silently. Order of first occurrence is preserved.
+    """
+    if not isinstance(records, list):
+        raise ValueError(
+            "compost_batch: records must be a list, got %s" % type(records).__name__
+        )
+    merged: Dict[str, Dict] = {}
+    for record in records:
+        compost = compost_failure(record)  # raises on malformed records
+        fp = compost["fingerprint"]
+        merged[fp] = corroborate(merged[fp], compost) if fp in merged else compost
+    return list(merged.values())
 
 
 def format_compost(compost: Dict) -> str:

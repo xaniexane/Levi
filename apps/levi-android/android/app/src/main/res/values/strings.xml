@@ -45,7 +45,7 @@
     <string name="assistant_not_default">LEVI is not the default assistant</string>
     <string name="assistant_choose_title">Choose default assistant</string>
     <string name="assistant_choose_sub">Opens system settings where you pick LEVI</string>
-    <string name="assistant_note">Long-press home (or your device\'s assistant gesture) opens LEVI once it is selected as the default assistant. Only the system picker can change this — LEVI can only show its own status. Hotword ("Hey LEVI") detection is not supported: always-on listening needs system-level support. Gesture behavior varies by manufacturer. The app lock still gates the chat, so a locked phone stays locked.</string>
+    <string name="assistant_note">Long-press home (or your device\'s assistant gesture) opens LEVI once it is selected as the default assistant. Only the system picker can change this — LEVI can only show its own status. The “Hey LEVI” hotword is a best-effort listener (toggle below), not system-level detection: it keeps the mic warm, so the mic indicator shows and battery use rises. Gesture behavior varies by manufacturer. The app lock still gates the chat, so a locked phone stays locked.</string>
     <string name="perm_mic_title">Microphone</string>
     <string name="perm_mic_sub">Needed for the assistant voice plate. Tap to grant.</string>
     <string name="voice_prompt">Ask LEVI</string>
@@ -116,4 +116,14 @@
     <string name="url_saved">Server URL saved: %1$s</string>
     <string name="url_cleared">Server URL cleared.</string>
     <string name="settings_help">On your computer, run the LEVI web client (in the repo: cd web &amp;&amp; npm run dev), then enter its https:// URL here. Plain http:// only works for an on-device server (http://127.0.0.1); for a LAN machine, serve it over TLS (e.g. a Caddy reverse proxy) or expose it with a tunnel (e.g. cloudflared) and use the https:// tunnel URL. Full steps: docs/ANDROID_APP.md</string>
+    <string name="hey_levi_title">Hey LEVI hotword</string>
+    <string name="hey_levi_sub">Listens for “Hey LEVI” and opens voice input. Best-effort: a third-party app can’t do system-level hotword detection, so this keeps the mic warm with the device’s own recognizer — Android shows the mic indicator while it listens, and it uses more battery. Stops on reboot; re-enable here.</string>
+    <string name="hey_levi_channel_listen">Hey LEVI listener</string>
+    <string name="hey_levi_notif_title">Listening for “Hey LEVI”</string>
+    <string name="hey_levi_notif_text">Tap to open LEVI voice input</string>
+    <string name="hey_levi_channel_trigger">Hey LEVI heard you</string>
+    <string name="hey_levi_trigger_title">LEVI heard you</string>
+    <string name="hey_levi_trigger_text">Tap to talk to LEVI</string>
+    <string name="speak_replies_title">Speak chat responses</string>
+    <string name="speak_replies_sub">Reads LEVI’s replies aloud with the device’s own voice — no cloud voice service. The web chat sends text through the leviSpeak bridge; silent until you turn this on.</string>
 </resources>

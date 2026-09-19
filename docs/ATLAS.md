@@ -118,7 +118,7 @@ How to run, operate, and plan the organism.
 - [CONSOLE.md](CONSOLE.md) — the interactive terminal surfaces (dashboard console + simulation) built on the `levi.ux` effects kit.
 - [ENTERPRISE.md](ENTERPRISE.md) — **(planned)** the Global Agentic SI Enterprise program: what LEVI becomes at global scale.
 - [ENTERPRISE_BLUEPRINT.md](ENTERPRISE_BLUEPRINT.md) — **(planned)** the detailed implementation design reference for the enterprise program, adapted to the organism rather than adopted literally.
-- [MONETIZATION.md](MONETIZATION.md) — **(planned)** draft monetization plan; binding constraint throughout: free core forever.
+- [MONETIZATION.md](MONETIZATION.md) — **(planned)** draft monetization plan (2026-09-15 draft; its "free core forever" binding constraint was superseded 2026-09-17 — live law is no-free-core, dollar-scale entry, volume over margin).
 - [RUNBOOK.md](RUNBOOK.md) — operator instructions for running each piece; the products are independent — run only what you need.
 
 ## Product lines

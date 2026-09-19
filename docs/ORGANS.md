@@ -33,6 +33,7 @@ The registry therefore maps the organ name `"echoverse"` to the existing
 
 ```python
 from levi.organs.registry import run_organ
+
 run_organ("echoverse", seed="ship the release", cycles=3)
 ```
 
@@ -146,7 +147,9 @@ failure2 = {
     "severity": "medium",
 }
 compost2 = run_organ("reim", record=failure2)
-compost2["corroboration"] = 2  # corroboration is external evidence, counted by the caller
+compost2["corroboration"] = (
+    2  # corroboration is external evidence, counted by the caller
+)
 
 proposals = run_organ("riem", compost_records=[compost, compost2])
 # -> [{"kind": "checklist-item", "confidence": "high", "applied": False, ...}]

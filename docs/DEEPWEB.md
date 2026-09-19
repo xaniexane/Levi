@@ -44,9 +44,9 @@ home dir for hermetic runs). Surveys can be persisted with `--save` under
 from levi.research import deepweb as dw
 
 survey = dw.survey_topic("forgotten UIs", seed_domains=["example.org"])
-for src in survey.sources:      # each carries url, retrieved_at, method
+for src in survey.sources:  # each carries url, retrieved_at, method
     print(src.kind, src.url)
-for r in survey.refusals:       # honest record of what could not be reached
+for r in survey.refusals:  # honest record of what could not be reached
     print(r["url"], r["reason"])
 ```
 

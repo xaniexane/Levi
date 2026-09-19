@@ -140,6 +140,54 @@ def _check_agent_server(home: Path | None = None) -> Tuple[bool, str]:  # noqa: 
     return True, f"agent HTTP server module live (handler {handler_name})"
 
 
+def _check_interop_registry(home: Path | None = None) -> Tuple[bool, str]:  # noqa: ARG001
+    """F7: interop provides/requires wiring as a daemon self-check.
+
+    ``check_all()`` raises :class:`RegistryError` on any broken wiring;
+    surfacing it here makes ``python -m levi.daemon pulse`` report it
+    instead of the daemon failing silently at runtime. The check is
+    guarded like every other health check, so a broken declaration
+    marks the service DOWN rather than breaking the supervisor.
+    """
+    from levi.interop.registry import RegistryError, check_all
+
+    try:
+        modules = check_all()
+    except RegistryError as exc:
+        return False, f"interop registry wiring BROKEN: {exc}"[:500]
+    return True, f"{len(modules)} declared module(s), provides/requires wiring valid"
+
+
+def _check_gardener(home: Path | None = None) -> Tuple[bool, str]:
+    from levi.daemon.gardener import Gardener
+
+    return Gardener(home=home or levi_home()).check()
+
+
+def _check_sentinel(home: Path | None = None) -> Tuple[bool, str]:
+    from levi.daemon.sentinel import Sentinel
+
+    return Sentinel(home=home or levi_home()).check()
+
+
+def _check_courier(home: Path | None = None) -> Tuple[bool, str]:
+    from levi.daemon.courier import Courier
+
+    return Courier(home=home or levi_home()).check()
+
+
+def _check_archivist(home: Path | None = None) -> Tuple[bool, str]:
+    from levi.daemon.archivist import Archivist
+
+    return Archivist(home=home or levi_home()).check()
+
+
+def _check_midwife(home: Path | None = None) -> Tuple[bool, str]:
+    from levi.daemon.midwife import Midwife
+
+    return Midwife(home=home or levi_home()).check()
+
+
 def _guarded(check: HealthCheck) -> HealthCheck:
     """Wrap a health check so it can never raise."""
 
@@ -261,6 +309,76 @@ class Supervisor:
             "start_hint": "levi agent serve  (foreground only; binds 127.0.0.1)",
             "health": _guarded(functools.partial(_check_agent_server)),
             "_check_fn": _check_agent_server,
+        },
+        {
+            "name": "interop-registry",
+            "module": "levi.interop.registry",
+            "summary": (
+                "Interop provides/requires wiring self-check: every declared "
+                "module's dependencies resolve. A DOWN report means a module "
+                "dropped a capability its dependents require."
+            ),
+            "start_hint": "python -m levi.daemon pulse  (foreground)",
+            "health": _guarded(functools.partial(_check_interop_registry)),
+            "_check_fn": _check_interop_registry,
+        },
+        {
+            "name": "gardener",
+            "module": "levi.daemon.gardener",
+            "summary": (
+                "Compost daemon: prunes expired cache entries, rotates "
+                "oversized logs, writes compost receipts. Never touches "
+                "memory, brain, vaults, or user data."
+            ),
+            "start_hint": "python -m levi.daemon.gardener  (foreground)",
+            "health": _guarded(functools.partial(_check_gardener)),
+            "_check_fn": _check_gardener,
+        },
+        {
+            "name": "sentinel",
+            "module": "levi.daemon.sentinel",
+            "summary": (
+                "Read-only policy/consent watchdog: raises a signalbus "
+                "alert for consequential acts that ran without approval. "
+                "Reports; never blocks."
+            ),
+            "start_hint": "python -m levi.daemon.sentinel  (foreground)",
+            "health": _guarded(functools.partial(_check_sentinel)),
+            "_check_fn": _check_sentinel,
+        },
+        {
+            "name": "courier",
+            "module": "levi.daemon.courier",
+            "summary": (
+                "Sealed-envelope carrier between organs and seats: "
+                "checksum-verified delivery, receipts, tamper quarantine."
+            ),
+            "start_hint": "python -m levi.daemon.courier  (foreground)",
+            "health": _guarded(functools.partial(_check_courier)),
+            "_check_fn": _check_courier,
+        },
+        {
+            "name": "archivist",
+            "module": "levi.daemon.archivist",
+            "summary": (
+                "Periodic state snapshots (manifests) with a hash-chained "
+                "receipt log for auditability; chain verified every tick."
+            ),
+            "start_hint": "python -m levi.daemon.archivist  (foreground)",
+            "health": _guarded(functools.partial(_check_archivist)),
+            "_check_fn": _check_archivist,
+        },
+        {
+            "name": "midwife",
+            "module": "levi.daemon.midwife",
+            "summary": (
+                "Pre-assembly blueprint validator: every part present and "
+                "healthy before the line builds. Fail-closed on unknown "
+                "or unhealthy parts."
+            ),
+            "start_hint": "python -m levi.daemon.midwife  (foreground)",
+            "health": _guarded(functools.partial(_check_midwife)),
+            "_check_fn": _check_midwife,
         },
     ]
 

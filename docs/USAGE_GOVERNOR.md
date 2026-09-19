@@ -65,23 +65,23 @@ They cannot create it.**
 - **In code:** `GovernedProvider(..., pass_id="bp_…")` or
   `gov.chat_with_pass(messages, tools, pass_id)`.
 
-## Integration seam (pending wiring)
+## Integration seam (LANDED 2026-09-18)
 
-The governor is built and tested but **not yet wired into the agent loop** —
-deliberately, to avoid touching in-flight files. The patch is one line in
+The governor is now wired into the agent loop: one line in
 `core/levi/agent/loop.py`, inside `run_subtask()`, right after the provider
-is resolved (~line 238):
+is resolved:
 
 ```python
-    if isinstance(provider, ChatProvider):
-        prov = provider
-    else:
-        prov = select_provider(provider)
+if isinstance(provider, ChatProvider):
+    prov = provider
+else:
+    prov = select_provider(provider)
 
-    # Usage governor (opt-in, one line): meter every model call, detect
-    # spikes, enforce cool-downs. Removing it changes nothing else.
-    from levi.governor import GovernedProvider
-    prov = GovernedProvider(prov, task_id=task, agent_id="agent-loop")
+# Usage governor (opt-in, one line): meter every model call, detect
+# spikes, enforce cool-downs. Removing it changes nothing else.
+from levi.governor import GovernedProvider
+
+prov = GovernedProvider(prov, task_id=task, agent_id="agent-loop")
 ```
 
 This is safe because `provider_name` (computed just below) reads
@@ -92,14 +92,17 @@ an honest message instead of crashing).
 
 One patch covers the loop, the chat REPL (`agent/chat.py` calls
 `run_subtask`), and the agent server (`agent/server.py`) — they all funnel
-through `run_subtask`.
+through `run_subtask`. Tests: `tests/test_agent_governor_wiring.py` (3:
+ledger metering with `agent_id="agent-loop"` attribution, inner
+provider name preserved, governor refusal ends the run honestly).
 
 **Priority lane wiring (optional):** if the caller holds a burst pass,
 attach it — it only matters during genuine contention:
 
 ```python
-    prov = GovernedProvider(prov, task_id=task, agent_id="agent-loop",
-                            pass_id=user_burst_pass_id)  # or None
+prov = GovernedProvider(
+    prov, task_id=task, agent_id="agent-loop", pass_id=user_burst_pass_id
+)  # or None
 ```
 
 or per call: `prov.chat_with_pass(messages, tools, pass_id)`.

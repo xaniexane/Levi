@@ -45,6 +45,12 @@ from pathlib import Path
 from typing import Any, Callable
 
 
+#: Maximum ``delegate`` nesting depth. A delegated subtask's registry
+#: contains ``delegate`` too, so without a cap a model can recurse
+#: delegate → delegate → delegate until every level burns its timeout.
+MAX_DELEGATE_DEPTH = 3
+
+
 # ---------------------------------------------------------------------------
 # Value types
 # ---------------------------------------------------------------------------
@@ -112,10 +118,14 @@ class ExecContext:
     ``consent`` — pre-granted approval for gated tools (e.g. CLI --yes).
     ``confirm`` — optional callback invoked with a human-readable
     preview string; the tool runs only if it returns True.
+    ``depth`` — delegation depth: 0 is a top-level run, each nested
+    ``delegate`` subtask increments it. The ``delegate`` tool refuses
+    to recurse past ``MAX_DELEGATE_DEPTH``.
     """
 
     consent: bool = False
     confirm: Callable[[str], bool] | None = None
+    depth: int = 0
 
     def __post_init__(self) -> None:
         if not isinstance(self.consent, bool):
@@ -126,6 +136,14 @@ class ExecContext:
             raise ValueError(
                 f"ExecContext: 'confirm' must be callable or None, "
                 f"got {type(self.confirm).__name__}"
+            )
+        if (
+            not isinstance(self.depth, int)
+            or isinstance(self.depth, bool)
+            or self.depth < 0
+        ):
+            raise ValueError(
+                f"ExecContext: 'depth' must be an integer >= 0, got {self.depth!r}"
             )
 
 
@@ -901,6 +919,12 @@ def _register_builtins(
         )
 
     # -- delegate -----------------------------------------------------------
+    # Depth guard: a delegated subtask's registry contains ``delegate``
+    # too, so without a cap a model can recurse delegate → delegate →
+    # delegate until every level burns its 300s timeout. Depth is carried
+    # on ExecContext (loop.py threads the run's ctx through execute(),
+    # which publishes it as registry._active_ctx for the duration of the
+    # call), so each nesting level sees its parent's depth.
     def _delegate(args: dict) -> ToolResult:
         task = args.get("task")
         if not task or not str(task).strip():
@@ -911,6 +935,17 @@ def _register_builtins(
         except (TypeError, ValueError):
             return ToolResult(ok=False, error="delegate: 'max_steps' must be an int")
         max_steps = max(1, min(max_steps, 25))
+
+        parent_ctx = registry._active_ctx or ExecContext()
+        if parent_ctx.depth >= MAX_DELEGATE_DEPTH:
+            return ToolResult(
+                ok=False,
+                error=(
+                    f"delegate: max delegation depth ({MAX_DELEGATE_DEPTH}) "
+                    "reached — refusing to recurse further. Break the task "
+                    "into shallower subtasks instead."
+                ),
+            )
 
         try:
             from levi.agent import loop as agent_loop
@@ -933,7 +968,11 @@ def _register_builtins(
             memory_dir=memory_dir,
             skills_dir=skills_dir,
         )
-        child_ctx = ExecContext(consent=parent_ctx.consent, confirm=parent_ctx.confirm)
+        child_ctx = ExecContext(
+            consent=parent_ctx.consent,
+            confirm=parent_ctx.confirm,
+            depth=parent_ctx.depth + 1,
+        )
         result_box: dict[str, Any] = {}
 
         def _worker() -> None:
@@ -1303,6 +1342,187 @@ def _register_builtins(
             error="" if proc.returncode == 0 else f"exit code {proc.returncode}",
         )
 
+    # -- read-only LEVI status/inventory tools --------------------------------
+    # Pure reads (or local-only simulations) exposed so MCP clients and the
+    # agent loop can see LEVI's own state. Nothing here writes, spawns, calls
+    # a provider, or moves money. Every payload carries honest capability
+    # labels: "local-only" + "read-only" (or "simulated" for dry runs).
+    def _json_ok(payload: dict) -> ToolResult:
+        return ToolResult(
+            ok=True, output=_truncate(json.dumps(payload, indent=2, default=str))
+        )
+
+    def _levi_status(args: dict) -> ToolResult:
+        try:
+            from levi import __version__
+        except Exception:
+            __version__ = "0.0.0"
+        return _json_ok(
+            {
+                "name": "levi",
+                "version": __version__,
+                "capability": "local-only",
+                "execution": "read-only",
+                "origin_chain": "Alpha + Omega -> Wax -> LEVI -> Nanobit -> the eleven originals",
+                "note": "Local-first synthetic organism. No cloud, no live execution over this interface.",
+            }
+        )
+
+    def _growth_status(args: dict) -> ToolResult:
+        try:
+            from levi.growth import cycle
+        except Exception as exc:
+            return ToolResult(
+                ok=False, error=f"growth_status: cannot import levi.growth: {exc}"
+            )
+        try:
+            data = cycle.status()
+        except Exception as exc:
+            return ToolResult(ok=False, error=f"growth_status: failed: {exc}")
+        data = dict(data)
+        data["capability"] = "local-only"
+        data["execution"] = "read-only"
+        return _json_ok(data)
+
+    def _workshop_inventory(args: dict) -> ToolResult:
+        try:
+            import importlib
+
+            _inv_mod = importlib.import_module("levi.workshop.inventory")
+        except Exception as exc:
+            return ToolResult(
+                ok=False,
+                error=f"workshop_inventory: cannot import levi.workshop: {exc}",
+            )
+        try:
+            inv = _inv_mod.inventory()
+        except Exception as exc:
+            return ToolResult(ok=False, error=f"workshop_inventory: failed: {exc}")
+        return _json_ok(
+            {
+                "counts": inv.get("counts", {}),
+                "capability": "local-only",
+                "execution": "read-only",
+                "note": "Parts only — no assembly is spawned by reading inventory.",
+            }
+        )
+
+    def _workshop_dry_run(args: dict) -> ToolResult:
+        required = ("name", "agent", "specialist", "substrate", "organ", "legion_role")
+        missing = [
+            k for k in required if not args.get(k) or not str(args.get(k)).strip()
+        ]
+        if missing:
+            return ToolResult(
+                ok=False,
+                error=f"workshop_dry_run: missing required args: {', '.join(missing)}",
+            )
+        claims = args.get("claims")
+        if claims is not None and not isinstance(claims, list):
+            return ToolResult(
+                ok=False, error="workshop_dry_run: 'claims' must be a list of strings"
+            )
+        try:
+            import importlib
+
+            _bp = importlib.import_module("levi.workshop.blueprint")
+            _val = importlib.import_module("levi.workshop.validate")
+            _dr = importlib.import_module("levi.workshop.dryrun")
+        except Exception as exc:
+            return ToolResult(
+                ok=False, error=f"workshop_dry_run: cannot import levi.workshop: {exc}"
+            )
+        try:
+            bp = _bp.compose_blueprint(
+                name=str(args["name"]),
+                agent=str(args["agent"]),
+                specialist=str(args["specialist"]),
+                substrate=str(args["substrate"]),
+                organ=str(args["organ"]),
+                legion_role=str(args["legion_role"]),
+                nanobit=str(args.get("nanobit") or ""),
+                original=str(args.get("original") or ""),
+                claims=[str(c) for c in claims] if claims else None,
+                twin_note=str(args.get("twin_note") or ""),
+            )
+        except _val.ValidationError as exc:
+            return ToolResult(
+                ok=False, error=f"workshop_dry_run: composition refused: {exc}"
+            )
+        except Exception as exc:
+            return ToolResult(
+                ok=False, error=f"workshop_dry_run: composition failed: {exc}"
+            )
+        try:
+            notes = _val.validate_blueprint(bp)
+        except _val.ValidationError as exc:
+            return ToolResult(
+                ok=False,
+                error=f"workshop_dry_run: blueprint refused by fail-closed validation: {exc}",
+            )
+        except Exception as exc:
+            return ToolResult(
+                ok=False, error=f"workshop_dry_run: validation failed: {exc}"
+            )
+        try:
+            report = _dr.dry_run(bp)
+        except _val.ValidationError as exc:
+            return ToolResult(
+                ok=False, error=f"workshop_dry_run: dry run refused: {exc}"
+            )
+        except Exception as exc:
+            return ToolResult(
+                ok=False, error=f"workshop_dry_run: dry run failed: {exc}"
+            )
+        report = dict(report)
+        report["validation_notes"] = list(notes)
+        report["capability"] = "local-only"
+        report["execution"] = (
+            "simulated — nothing spawned, no organ executed, no provider called"
+        )
+        return _json_ok(report)
+
+    def _academy_status(args: dict) -> ToolResult:
+        try:
+            from levi.academy import run_session
+        except Exception as exc:
+            return ToolResult(
+                ok=False, error=f"academy_status: cannot import levi.academy: {exc}"
+            )
+        try:
+            prog = run_session.load_progress()
+        except Exception as exc:
+            return ToolResult(ok=False, error=f"academy_status: failed: {exc}")
+        completed = prog.get("completed", []) or []
+        sessions = prog.get("sessions", {}) or {}
+        streaks = prog.get("streaks", {}) or {}
+        return _json_ok(
+            {
+                "program_start": prog.get("program_start"),
+                "completed_blocks": len(completed),
+                "sessions": len(sessions),
+                "streaks_tracked": len(streaks),
+                "capability": "local-only",
+                "execution": "read-only",
+            }
+        )
+
+    def _factory_status(args: dict) -> ToolResult:
+        try:
+            from levi.factory import pipeline
+        except Exception as exc:
+            return ToolResult(
+                ok=False, error=f"factory_status: cannot import levi.factory: {exc}"
+            )
+        try:
+            data = pipeline.SoftwareFactory().status()
+        except Exception as exc:
+            return ToolResult(ok=False, error=f"factory_status: failed: {exc}")
+        data = dict(data)
+        data["capability"] = "local-only"
+        data["execution"] = "read-only"
+        return _json_ok(data)
+
     # -- register everything -------------------------------------------------
     def _schema(properties: dict, required: list[str]) -> dict:
         return {"type": "object", "properties": properties, "required": required}
@@ -1633,6 +1853,79 @@ def _register_builtins(
                 ["code"],
             ),
             handler=_python_exec,
+        ),
+        # -- read-only LEVI status/inventory tools ---------------------------
+        # Pure reads / local-only simulations. Nothing here writes, spawns,
+        # calls a provider, or moves money; no confirmation needed.
+        Tool(
+            name="levi_status",
+            description=(
+                "LEVI identity and honesty labels: version, origin chain, "
+                "local-only capability. Read-only."
+            ),
+            parameters=_schema({}, []),
+            handler=_levi_status,
+        ),
+        Tool(
+            name="growth_status",
+            description=(
+                "Growth-loop dashboard: developmental stage, learnings, "
+                "cycles, pending work. Read-only."
+            ),
+            parameters=_schema({}, []),
+            handler=_growth_status,
+        ),
+        Tool(
+            name="workshop_inventory",
+            description=(
+                "Agent Workshop part counts: agents, specialists, "
+                "substrates, organs, legion roles, nanobit, originals. "
+                "Read-only; reading inventory assembles nothing."
+            ),
+            parameters=_schema({}, []),
+            handler=_workshop_inventory,
+        ),
+        Tool(
+            name="workshop_dry_run",
+            description=(
+                "Compose, fail-closed-validate, and simulate a Workshop "
+                "blueprint. Invalid parts, planned own-cloud, and "
+                "unauthorized providers are refused. Pure simulation: "
+                "nothing is spawned, no organ runs, no provider is called."
+            ),
+            parameters=_schema(
+                {
+                    "name": {"type": "string"},
+                    "agent": {"type": "string"},
+                    "specialist": {"type": "string"},
+                    "substrate": {"type": "string"},
+                    "organ": {"type": "string"},
+                    "legion_role": {"type": "string"},
+                    "nanobit": {"type": "string"},
+                    "original": {"type": "string"},
+                    "claims": {"type": "array"},
+                    "twin_note": {"type": "string"},
+                },
+                ["name", "agent", "specialist", "substrate", "organ", "legion_role"],
+            ),
+            handler=_workshop_dry_run,
+        ),
+        Tool(
+            name="academy_status",
+            description=(
+                "Boot Camp academy progress summary: completed blocks, "
+                "sessions, streaks tracked. Read-only."
+            ),
+            parameters=_schema({}, []),
+            handler=_academy_status,
+        ),
+        Tool(
+            name="factory_status",
+            description=(
+                "Software factory status: project counts by stage. Read-only."
+            ),
+            parameters=_schema({}, []),
+            handler=_factory_status,
         ),
     ]
     for tool in tools:

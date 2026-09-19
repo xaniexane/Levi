@@ -16,6 +16,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import dev.levi.app.R
 import dev.levi.app.voice.AssistantStatus
+import dev.levi.app.voice.HeyLeviService
+import dev.levi.app.voice.VoicePrefs
 
 /**
  * "Set as default assistant" screen.
@@ -31,9 +33,25 @@ class AssistantFragment : Fragment() {
 
     private lateinit var content: LinearLayout
 
+    /** Set when the user flips the hotword toggle before mic is granted. */
+    private var pendingHeyLeviStart = false
+
     private val requestMic =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            if (pendingHeyLeviStart && isMicGranted()) {
+                pendingHeyLeviStart = false
+                enableHeyLevi(true)
+            }
             render() // Granted or denied — show the truth.
+        }
+
+    /**
+     * Android 13+: the hotword trigger's "tap to talk" pop-up needs this
+     * to be seen. The listener itself works without it.
+     */
+    private val requestNotifs =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            // Granted or denied — the toggle already reflects the truth.
         }
 
     override fun onCreateView(
@@ -101,10 +119,75 @@ class AssistantFragment : Fragment() {
             },
         )
 
+        // "Hey LEVI" hotword: the switch shows the actual listener state,
+        // not just the wish — if the service died, the toggle reads off.
+        if (rows.childCount > 0) rows.addView(SettingsUi.divider(ctx))
+        rows.addView(
+            SettingsUi.switchRow(
+                ctx,
+                R.drawable.ic_mic,
+                getString(R.string.hey_levi_title),
+                getString(R.string.hey_levi_sub),
+                HeyLeviService.running,
+                onChecked = { checked ->
+                    if (checked) {
+                        if (!isMicGranted()) {
+                            pendingHeyLeviStart = true
+                            requestMic.launch(Manifest.permission.RECORD_AUDIO)
+                        } else {
+                            enableHeyLevi(true)
+                        }
+                    } else {
+                        pendingHeyLeviStart = false
+                        enableHeyLevi(false)
+                    }
+                    // The service starts asynchronously; re-render shortly
+                    // so the switch shows the true state.
+                    content.postDelayed({ render() }, 600)
+                },
+            ),
+        )
+
+        // Spoken read-back of chat replies (device TTS, off by default).
+        if (rows.childCount > 0) rows.addView(SettingsUi.divider(ctx))
+        rows.addView(
+            SettingsUi.switchRow(
+                ctx,
+                R.drawable.ic_mic,
+                getString(R.string.speak_replies_title),
+                getString(R.string.speak_replies_sub),
+                VoicePrefs.speakReplies(ctx),
+                onChecked = { checked ->
+                    VoicePrefs.setSpeakReplies(ctx, checked)
+                },
+            ),
+        )
+
         content.addView(group)
         content.addView(
             SettingsUi.note(ctx, getString(R.string.assistant_note)),
         )
+    }
+
+    /**
+     * Turns the "Hey LEVI" listener on or off. The preference records the
+     * wish; [HeyLeviService.running] is the truth the toggle displays.
+     */
+    private fun enableHeyLevi(enabled: Boolean) {
+        val ctx = requireContext()
+        VoicePrefs.setHeyLeviEnabled(ctx, enabled)
+        if (enabled) {
+            HeyLeviService.start(ctx)
+            // Android 13+: without this the trigger pop-up can't be seen.
+            if (Build.VERSION.SDK_INT >= 33 &&
+                ctx.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) !=
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                requestNotifs.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        } else {
+            HeyLeviService.stop(ctx)
+        }
     }
 
     /**

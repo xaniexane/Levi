@@ -1,7 +1,9 @@
 """Identity store — account/identity records for Cybrus (LEVI-original).
 
 Tier model (LOCAL POLICY, not a payment system):
-- ``founder``: unlimited accounts, free forever (the owner's tier).
+- ``founder``: Chauncey himself — free for life, unlimited access,
+  bypasses every tier gate. Bound to the keeper-set ``FOUNDER_IDENTITIES``
+  list; no other name may wear it.
 - ``starter``: up to 5 active accounts.
 - ``pro``: up to 50 active accounts.
 
@@ -43,12 +45,23 @@ from levi.cybrus._paths import (
 
 _STORE_NAME = "identities"
 
+#: The founder tier — Chauncey himself. Free for life, unlimited access,
+#: bypasses every tier gate in the organism. The tier is code; the PERSON
+#: is bound by the keeper-set list below.
+FOUNDER_TIER = "founder"
+
 #: Account quotas per tier. ``None`` = unlimited. Local policy — not billing.
 TIER_LIMITS: dict[str, Optional[int]] = {
-    "founder": None,
+    FOUNDER_TIER: None,
     "starter": 5,
     "pro": 50,
 }
+
+#: Keeper-set binding: the ONLY identity names allowed to hold the founder
+#: tier. DRAFT — ("chauncey",) is a placeholder awaiting the keeper's word
+#: for his true identity name. Anyone else requesting the founder tier is
+#: refused loud (TierError).
+FOUNDER_IDENTITIES: tuple[str, ...] = ("chauncey",)
 
 VALID_TIERS = frozenset(TIER_LIMITS)
 VALID_STATUSES = frozenset({"active", "suspended"})
@@ -70,6 +83,22 @@ def _check_name(name: str) -> str:
             "invalid identity name %r: use 1-64 chars of [A-Za-z0-9._-]" % (name,)
         )
     return name
+
+
+def is_founder(record: Optional[dict]) -> bool:
+    """True when the record wears the founder tier — free for life, unlimited
+    access, bypasses every tier gate. Local/paper only."""
+    return bool(record) and record.get("tier") == FOUNDER_TIER
+
+
+def require_founder(store: "IdentityStore", id_or_name: str) -> dict:
+    """Return the identity record when it is the founder; raise TierError
+    otherwise. Every future tier gate in the organism consults this —
+    the founder never queues behind a gate."""
+    rec = store.get(id_or_name)
+    if not is_founder(rec):
+        raise TierError(f"founder tier required; {id_or_name!r} is not the founder")
+    return rec
 
 
 class IdentityStore:
@@ -137,6 +166,11 @@ class IdentityStore:
             raise TierError(
                 f"unknown tier {tier!r}; valid tiers: {sorted(VALID_TIERS)}"
             )
+        if tier == FOUNDER_TIER and name not in FOUNDER_IDENTITIES:
+            raise TierError(
+                f"the founder tier is the keeper's own — {name!r} is not "
+                "named in FOUNDER_IDENTITIES"
+            )
         with store_lock(self._path):
             self._reload()
             if self.exists(name):
@@ -175,11 +209,21 @@ class IdentityStore:
                 new_name = _check_name(fields["name"])
                 if new_name != rec["name"] and self.exists(new_name):
                     raise ValueError(f"identity name already taken: {new_name!r}")
+                if rec["tier"] == FOUNDER_TIER and new_name not in FOUNDER_IDENTITIES:
+                    raise TierError(
+                        f"the founder tier is the keeper's own — {new_name!r} "
+                        "is not named in FOUNDER_IDENTITIES"
+                    )
                 rec["name"] = new_name
             if "tier" in fields:
                 new_tier = fields["tier"]
                 if new_tier not in VALID_TIERS:
                     raise TierError(f"unknown tier {new_tier!r}")
+                if new_tier == FOUNDER_TIER and rec["name"] not in FOUNDER_IDENTITIES:
+                    raise TierError(
+                        f"the founder tier is the keeper's own — {rec['name']!r} "
+                        "is not named in FOUNDER_IDENTITIES"
+                    )
                 limit = TIER_LIMITS[new_tier]
                 if limit is not None and new_tier != rec["tier"]:
                     used = sum(1 for r in self._records if r["tier"] == new_tier)

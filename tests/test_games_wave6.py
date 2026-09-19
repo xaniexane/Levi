@@ -200,12 +200,13 @@ def test_generate_variant_is_deterministic():
 # ---------------------------------------------------------------------------
 
 
-def test_ten_rules_total():
-    assert len(charter.RULES) == 10
-    assert [r.id for r in charter.RULES[-3:]] == [
+def test_eleven_rules_total():
+    assert len(charter.RULES) == 11
+    assert [r.id for r in charter.RULES[-4:]] == [
         "no_kill_switch",
         "no_synthetic_scarcity",
         "odds_are_public",
+        "sunset_is_planned",
     ]
 
 

@@ -36,6 +36,8 @@ class GameManifest:
     has_time_limited_content: bool = False  # battle-pass FOMO seasons
     has_randomness: bool = False  # the game involves chance at all
     has_audit_hook: bool = False  # an empirical odds audit (prove-the-odds)
+    # --- evening-20260917: the sunset trade, defaulted honest ---
+    has_sunset_plan: bool = True  # networked games owe the player a funeral plan
 
 
 # ---------------------------------------------------------------------------
@@ -126,6 +128,15 @@ RULES: Tuple[CharterRule, ...] = (
         "odds are declared AND empirically auditable (a prove-the-odds "
         "hook the player can run).",
         check=lambda m: not m.has_randomness or (m.odds_declared and m.has_audit_hook),
+    ),
+    CharterRule(
+        id="sunset_is_planned",
+        title="The sunset is planned",
+        inversion="The Crew trade: a server must never take the game with "
+        "it unannounced. If a game requires the network, it carries a "
+        "sunset-escrow plan (levi.games.sunset) written at birth, and the "
+        "drill keeps it honest.",
+        check=lambda m: (not m.requires_network) or m.has_sunset_plan,
     ),
 )
 

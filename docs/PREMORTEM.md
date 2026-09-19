@@ -52,13 +52,17 @@ from levi.premortem.ritual import Premortem
 
 pm = Premortem()  # $LEVI_HOME/premortem/sessions.json (else ~/.levi)
 
-s = pm.begin("rewrite the billing system")       # open the session
-pm.add_cause(s.id, "double-billing on retry",
-             likelihood=4, impact=5,
-             mitigation="idempotency keys on every charge")
+s = pm.begin("rewrite the billing system")  # open the session
+pm.add_cause(
+    s.id,
+    "double-billing on retry",
+    likelihood=4,
+    impact=5,
+    mitigation="idempotency keys on every charge",
+)
 pm.add_cause(s.id, "migration locks the ledger", likelihood=3, impact=5)
 
-result = pm.close(s.id)   # rank + checklist; session now immutable
+result = pm.close(s.id)  # rank + checklist; session now immutable
 # {"session_id": ..., "task": ..., "n_causes": 2, "top_risk": 20,
 #  "ranked": [{"cause": ..., "likelihood": 4, "impact": 5, "risk": 20,
 #              "mitigated": True, "item": "[ ] risk 20 — ..."}, ...],
@@ -67,7 +71,7 @@ result = pm.close(s.id)   # rank + checklist; session now immutable
 #  "unmitigated": 1}
 
 print(pm.format_close(result))
-pm.sessions(status="open")   # list sessions
+pm.sessions(status="open")  # list sessions
 ```
 
 ## CLI

@@ -1,0 +1,46 @@
+{
+  "pack": "Institutional",
+  "field": "institutional",
+  "description": "Team-and-skill edition pack for careers inside large institutions -- hospitals, universities, correctional facilities, corporate campuses, and facilities/maintenance teams. Bundles (1) field how-tos for institutional craft: work-order triage, maintenance improvisation with constrained resources, shift handoffs; (2) career-skill entries for refining the craft and leveling up: documentation, mentoring, promotion cases, bureaucracy navigation; (3) team-play entries for coordinating crews under pressure: short-staffed huddles, flood response, incident command, on-call design. Every entry carries compliance-aware stop conditions that name the regulatory line -- life-safety systems, licensed trades, and code boundaries are never improvised past.",
+  "version": "0.1.0-draft",
+  "draft": true,
+  "entry_count": 40,
+  "level_breakdown": {
+    "foundation": 10,
+    "applied": 20,
+    "mastery": 10
+  },
+  "kind_breakdown": {
+    "field_howto": 19,
+    "career_skill": 12,
+    "team_play": 9
+  },
+  "selector": {
+    "domains": [
+      "general"
+    ],
+    "levels": [
+      "foundation",
+      "applied",
+      "mastery"
+    ],
+    "tracks": [
+      "build",
+      "create",
+      "improve",
+      "restore",
+      "combine",
+      "improvise"
+    ]
+  },
+  "track_emphasis": {
+    "improve": "primary -- triage, documentation, career leveling, mentoring, and the compliance-aware stop culture are all improvement of craft and career",
+    "improvise": "primary -- Sidewinder doctrine core: constrained resources, temp fixes, short crews, and no-forklift moves",
+    "restore": "primary -- the maintenance trade is repair: drains, valves, breakers, doors, HVAC, leaks",
+    "build": "secondary -- shift kits, cannibalization boards, spare-parts bibles, temp lighting rigs",
+    "combine": "secondary -- multi-trade coordination, cannibalization, mentoring as knowledge-combining",
+    "create": "tertiary -- SOPs, on-call rotations, promotion cases, incident-command structures, red-line posters"
+  },
+  "safety_posture": "Compliance-aware: every entry names the regulatory line in its stop conditions. Never improvise past life-safety systems (fire alarm/suppression NFPA 72/13, fire doors NFPA 80, medical gas NFPA 99, elevators, boilers/pressure vessels, emergency circuits), licensed-trade boundaries (electrical panel interiors, refrigerant/EPA 608, asbestos/lead abatement), or institutional policy (key control, fall protection, confined space, lockout/tagout). Temporary fixes are labeled, dated, and scheduled for permanent repair -- never silent, never on life-safety.",
+  "notes_for_main_builder": "40 entries: 20 field how-tos, 11 career-skill, 9 team-play. Domain is 'general' per coordinator spec (institutional spans hospitals, universities, corrections, campuses). Prerequisites form a DAG within the pack, all resolving locally. Open question: whether team-play entries should later carry a team-size hint field for the platform's team runtime."
+}

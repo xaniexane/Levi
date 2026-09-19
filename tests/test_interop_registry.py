@@ -58,6 +58,8 @@ def test_manifest_registers_all_modules():
         "packs",
         # shareware (perpetual-hunt daily 2026-09-16: the honest markets)
         "shareware",
+        # engines (pack-to-the-brim 2026-09-17: deterministic decision machines)
+        "engines",
         "commitments",
         "recap",
         "classifieds",
@@ -94,6 +96,12 @@ def test_manifest_registers_all_modules():
         "analog",
         # reveal (perpetual-hunt daily 2026-09-16b: retired software wave)
         "reveal",
+        # fairtrade (perpetual-hunt evening 2026-09-16: giant sly-generosity
+        # trades inverted into an honest-trade ledger + auditor)
+        "fairtrade",
+        # twins (2026-09-16: SER-21 twin architecture — twin agents, twin
+        # daemons, 6 twin shells as 3 FG/BG pairs)
+        "twins",
         # quickdial (perpetual-hunt evening-20260916-software: dead desktop
         # software wave 3 — committed in b094858, hardcoded set lagged behind)
         "quickdial",
@@ -112,6 +120,39 @@ def test_manifest_registers_all_modules():
         # identity (Echo/Mandella variant engine with REIM/RIEM controlled
         # compression; --scope all interpenetrates every declared module)
         "identity",
+        # automation (2026-09-17: LEVI-native automation engine — minion
+        # catalog, HITL rail, "watch me once" routine recorder)
+        "automation",
+        # dream-products wave (2026-09-17: SI team, Nexus, DemandPulse,
+        # Omega/Alpha organs, UniForge, Dweller labor — manifest grew,
+        # hardcoded set lagged behind)
+        "nexus",
+        "demand",
+        "si_team",
+        "omega",
+        "alpha",
+        "uniforge",
+        "dweller",
+        # pack-to-the-brim (2026-09-17: polling directory watchman, temporal
+        # personality modulation, credentialless RSS/Atom reader)
+        "daemon-watchman",
+        "persona-seasons",
+        "plugins-rss",
+        # pack-to-the-brim (2026-09-18: daemon signal bus, canon-voice
+        # guardrail, automation retry/backoff + circuit breaker)
+        "daemon-signalbus",
+        "persona-canon",
+        "automation-backoff",
+        # pack-to-the-brim (2026-09-18 night: journal compaction daemon,
+        # Termux device bridge, inbound switchboard router bot)
+        "integrations",
+        "daemon-fossil",
+        "integrations-termux",
+        "bot-switchboard",
+        # pre-existing manifest entries whose pinned set lagged behind
+        # (builder skills wave, webhook plugin — not this run's additions)
+        "builder-skills",
+        "plugins-webhook",
     }
 
 

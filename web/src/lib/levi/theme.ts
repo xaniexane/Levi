@@ -36,3 +36,36 @@ export function readStoredTheme(
 export function applyTheme(theme: Theme, doc: Document = globalThis.document): void {
   doc.documentElement.dataset.theme = theme;
 }
+
+/* ------------------------------------------------ profile packs -------- */
+
+/**
+ * MySpace-era profile packs (see profile-packs.ts): user-authored theming that
+ * compiles to CSS custom properties + data attributes — never raw CSS. The
+ * void/light toggle keeps working as-is; packs sit on top. Packs persist
+ * under "levi-packs", separate from this file's THEME_STORAGE_KEY.
+ */
+import { LIGHT_PACK, VOID_PACK, type ProfilePack } from "./profile-packs.ts";
+
+export {
+  applyPack,
+  BUILTIN_PACKS,
+  builtinPack,
+  exportPack,
+  FONT_ALLOWLIST,
+  importPack,
+  PACK_DENSITIES,
+  PACK_STORAGE_KEY,
+  readPackStore,
+  resolveActivePack,
+  saveUserPack,
+  setActivePackId,
+  validatePack,
+  VOID_PACK,
+  LIGHT_PACK,
+} from "./profile-packs.ts";
+
+/** The builtin pack that reproduces the given theme (see styles.css). */
+export function packForTheme(theme: Theme): ProfilePack {
+  return theme === "light" ? LIGHT_PACK : VOID_PACK;
+}

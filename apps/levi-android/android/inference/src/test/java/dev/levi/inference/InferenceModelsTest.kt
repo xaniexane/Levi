@@ -7,24 +7,36 @@ class InferenceModelsTest {
 
     @Test
     fun `levi is the default selected model`() {
-        assertEquals(ModelCatalog.LEVI_0_6B, ModelCatalog.defaultModel())
-        assertEquals("levi-0.6b", ModelCatalog.defaultModel().id)
+        assertEquals(ModelCatalog.LEVI_TINY, ModelCatalog.defaultModel())
+        assertEquals("levi-tiny", ModelCatalog.defaultModel().id)
     }
 
     @Test
-    fun `headliner list leads with the levi family`() {
+    fun `headliner list is the levi family only`() {
         val ids = ModelCatalog.leviFamily.map { it.id }
-        assertEquals(listOf("levi-tiny", "levi-0.6b", "levi-4b"), ids)
+        assertEquals(listOf("levi-tiny"), ids)
         assertEquals(ModelCatalog.leviFamily, ModelCatalog.models)
     }
 
     @Test
-    fun `remixes label their base honestly`() {
-        assertEquals("Qwen3-0.6B", ModelCatalog.LEVI_0_6B.baseModel)
-        assertEquals("Qwen3-4B", ModelCatalog.LEVI_4B.baseModel)
-        assertTrue(ModelCatalog.LEVI_0_6B.tagline.contains("Qwen3"))
-        assertTrue(ModelCatalog.LEVI_4B.tagline.contains("Qwen3"))
-        assertTrue(ModelCatalog.LEVI_0_6B.displayName.startsWith("Levi"))
+    fun `every family model is levi native - no third-party bases, no masks`() {
+        for (model in ModelCatalog.leviFamily) {
+            assertEquals("LEVI native", model.baseModel)
+            assertTrue(model.displayName.startsWith("Levi"))
+        }
+    }
+
+    @Test
+    fun `open-source alternatives wear their own names, never levi's`() {
+        assertTrue(ModelCatalog.openSourceModels.isNotEmpty())
+        for (model in ModelCatalog.openSourceModels) {
+            assertFalse(model.displayName.startsWith("Levi"))
+            assertFalse(model.id.startsWith("levi-"))
+            assertNotEquals("LEVI native", model.baseModel)
+            assertTrue(model.tagline.contains("Open source"))
+        }
+        assertEquals("Qwen3-0.6B", ModelCatalog.OPEN_QWEN_0_6B.baseModel)
+        assertEquals("Qwen3-4B", ModelCatalog.OPEN_QWEN_4B.baseModel)
     }
 
     @Test
@@ -35,19 +47,25 @@ class InferenceModelsTest {
     }
 
     @Test
-    fun `external sources are never the headliner`() {
-        assertTrue(ModelCatalog.externalSources.isNotEmpty())
+    fun `cloud is purely Levi — no third-party provider endpoints`() {
         val ids = ModelCatalog.externalSources.map { it.id }
-        assertTrue(ids.contains("ollama"))
+        assertEquals(listOf("levi-si-cloud"), ids)
         assertFalse(ModelCatalog.leviFamily.any { it.id in ids })
     }
 
     @Test
-    fun `recommendedFor picks the largest fitting levi model`() {
-        assertEquals(ModelCatalog.LEVI_4B, ModelCatalog.recommendedFor(8192))
-        assertEquals(ModelCatalog.LEVI_0_6B, ModelCatalog.recommendedFor(2048))
-        // Falls back to the default when nothing fits.
+    fun `recommendedFor picks the largest downloadable that fits`() {
+        assertEquals(ModelCatalog.OPEN_QWEN_4B, ModelCatalog.recommendedFor(8192))
+        assertEquals(ModelCatalog.OPEN_QWEN_0_6B, ModelCatalog.recommendedFor(2048))
+        // Falls back to the default when nothing downloadable fits.
         assertEquals(ModelCatalog.defaultModel(), ModelCatalog.recommendedFor(256))
+    }
+
+    @Test
+    fun `downloadable excludes announced-but-not-shipped models`() {
+        val ids = ModelCatalog.downloadable.map { it.id }
+        assertFalse(ids.contains("levi-tiny"))
+        assertTrue(ids.contains("open-qwen3-0.6b"))
     }
 
     @Test
@@ -67,14 +85,14 @@ class InferenceModelsTest {
     }
 
     @Test
-    fun `download url points at huggingface resolve`() {
+    fun `open-source download urls point at huggingface resolve`() {
         assertEquals(
             "https://huggingface.co/Qwen/Qwen3-0.6B-GGUF/resolve/main/Qwen3-0.6B-Q8_0.gguf",
-            ModelCatalog.LEVI_0_6B.downloadUrl,
+            ModelCatalog.OPEN_QWEN_0_6B.downloadUrl,
         )
         assertEquals(
             "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/main/Qwen3-4B-Q4_K_M.gguf",
-            ModelCatalog.LEVI_4B.downloadUrl,
+            ModelCatalog.OPEN_QWEN_4B.downloadUrl,
         )
     }
 }

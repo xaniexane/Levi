@@ -52,6 +52,12 @@ jobs:
       - name: Root pytest suite (core + megazord)
         run: python -m pytest tests/ -q
 
+      - name: Interop registry check_all (F7)
+        # The provides/requires manifest is a living contract: fail fast
+        # when any module drops a capability its dependents require.
+        # check_all() raises RegistryError on any broken wiring.
+        run: python3 -c "from levi.interop.registry import check_all; check_all(); print('registry check_all OK')"
+
       - name: Install VYVE backend deps
         run: pip install -r apps/vyve-messenger/backend/requirements.txt
 

@@ -48,22 +48,22 @@ a thread die and reignite.
 
 ```python
 # agent/chat.py — in the per-turn handler, after appending the turn:
-from levi.convo.state import DialogueState          # PENDING
-from levi.convo.render import render_block           # PENDING
-from levi.convo.recall import recall_turns           # PENDING
-from levi.convo.guard import check_contradictions    # PENDING
+from levi.convo.state import DialogueState  # PENDING
+from levi.convo.render import render_block  # PENDING
+from levi.convo.recall import recall_turns  # PENDING
+from levi.convo.guard import check_contradictions  # PENDING
 
-state = DialogueState()                              # PENDING (session-scoped)
+state = DialogueState()  # PENDING (session-scoped)
 
-changed = state.update(speaker, text)                # PENDING (every turn)
-recalled = recall_turns(text, state.turns)          # PENDING
-prompt_prefix = render_block(state, recalled)        # PENDING (prepend to prompt)
+changed = state.update(speaker, text)  # PENDING (every turn)
+recalled = recall_turns(text, state.turns)  # PENDING
+prompt_prefix = render_block(state, recalled)  # PENDING (prepend to prompt)
 findings = check_contradictions(reply, state.facts)  # PENDING (on LEVI replies)
 ```
 
 ```python
 # agent/loop.py — inside run_subtask, before building the prompt:
-from levi.convo.render import render_block           # PENDING
+from levi.convo.render import render_block  # PENDING
 # if a DialogueState is passed in, prepend render_block(state) to system  # PENDING
 ```
 

@@ -72,6 +72,8 @@ __all__ = [
     "ManifestError",
     "InstallError",
     "UnknownPackage",
+    "BudgetDenied",
+    "CooldownDenied",
     "InstalledPackage",
     "GalaxyServices",
     "CAPABILITY_ISSUER",
@@ -117,6 +119,14 @@ class InstallError(GalaxyError):
 
 class UnknownPackage(GalaxyError):
     """No package is installed under that id."""
+
+
+class BudgetDenied(GalaxyError):
+    """``BudgetEnforcer.authorize()`` refused the call (deny-closed)."""
+
+
+class CooldownDenied(GalaxyError):
+    """``CooldownManager.acquire()`` refused the call (deny-closed)."""
 
 
 # ---------------------------------------------------------------------------
@@ -216,6 +226,8 @@ class GalaxyServices:
         store_dir: "str | os.PathLike[str] | None" = None,
         *,
         meter: Any = None,
+        budgets: Any = None,
+        cooldowns: Any = None,
         home: "str | os.PathLike[str] | None" = None,
         clock=time.time,
     ) -> None:
@@ -239,6 +251,20 @@ class GalaxyServices:
 
             meter = Meter(home=home, clock=clock)
         self._meter = meter
+        # Governor gates (GALAXY.md "Pre-call governor gates"): an explicit
+        # enforcer wins; otherwise attach the real governor state under the
+        # same home, the way the Meter is injected above. A runaway skill
+        # must not burn budget through local verbs.
+        if budgets is None:
+            from levi.governor.budgets import BudgetEnforcer
+
+            budgets = BudgetEnforcer(home=home, clock=clock)
+        self._budgets = budgets
+        if cooldowns is None:
+            from levi.governor.cooldown import CooldownManager
+
+            cooldowns = CooldownManager(home=home, clock=clock)
+        self._cooldowns = cooldowns
         self._load()
 
     # -- install / remove -------------------------------------------------
@@ -550,6 +576,10 @@ class GalaxyServices:
            :mod:`levi.revival.telescript` exceptions, and nothing is invoked.
         2. The ``galaxy.<id>.<verb>`` action must be covered by a granted
            pattern, else :class:`ActionRefused`.
+        2b. Governor gates (GALAXY.md "Pre-call governor gates"):
+            ``budgets.authorize()`` and ``cooldowns.acquire(scope=...)``
+            refuse deny-closed (``BudgetDenied`` / ``CooldownDenied``) —
+            a runaway skill cannot burn budget through local verbs.
         3. The verb is invoked via the port registry (``UnknownPort`` /
            ``UnknownVerb`` on miss).
         4. The attempt is metered on the governor ledger.
@@ -574,6 +604,17 @@ class GalaxyServices:
                 f"capability for {cap.grantee!r} does not permit {action!r} "
                 "(deny-closed: grant the action explicitly)"
             )
+        # Pre-call governor gates: budgets and cool-downs, deny-closed.
+        ok_budget, budget_reason = self._budgets.authorize()
+        if not ok_budget:
+            self._meter_attempt(action, cap.grantee, error="BudgetDenied")
+            raise BudgetDenied(
+                "galaxy call refused by usage budget: %s" % budget_reason
+            )
+        grant = self._cooldowns.acquire(scope=f"galaxy:{port}")
+        if not grant.allowed:
+            self._meter_attempt(action, cap.grantee, error="CooldownDenied")
+            raise CooldownDenied("galaxy call refused by cool-down: %s" % grant.reason)
         try:
             result = self._registry.send_command(
                 port,

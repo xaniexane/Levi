@@ -121,3 +121,41 @@ exhaustion), always carrying the pattern-based disclaimer.
   `memory_write` note through the normal (consent-gated) path.
 - Not a brain — the detector is ~200 lines of regex and word lists.
   Its power is in the *policy*, not the perception.
+
+## EI-routed persona selection
+
+Module: `core/levi/ei/routing.py` (stdlib-only). Runs on the output of
+`FiveDEI.evaluate()` (`core/levi/ei/five_d.py`), which per the DNA law
+evaluates **before** any persona/model routing.
+
+- `suggest_lens(ei_state, available) -> str` — advisory mapping from an
+  `EIState` to a lens-id string, resolved against the caller-supplied
+  `available` list. It deliberately does not import the personas
+  package; it speaks lens-id strings only.
+- `route_for_text(text, available, context=None) -> (str, EIState)` —
+  cheap, side-effect-free: runs `FiveDEI().evaluate` then `suggest_lens`.
+
+### Mapping table
+
+| Signal (from EIState)                                  | Suggested lens | Rationale                    |
+|--------------------------------------------------------|----------------|------------------------------|
+| `user_intensity >= 0.7`                                | `protector`    | steadies a hot frame         |
+| steadying tones: crisis, distress, fear, anger, grief, exhausted | `protector` | steady, non-escalating presence |
+| `user_tone == "playful"`                               | `trickster`    | matches light energy         |
+| learning, exploratory, curious, confusion              | `mentor`       | clarify, guide               |
+| reflective, archival                                   | `archivist`    | slow, record-keeping frame   |
+| adversarial, pushback, debate (needs steelmanning)     | `challenger`   | engage the argument honestly |
+| anything else (neutral, warm, unknown)                 | `friend`       | warm default                 |
+
+Fallback (never crashes): if the suggested id is not in `available`,
+use `"friend"` when offered, else `available[0]`; empty `available`
+fails closed to `"friend"`.
+
+### Advisory-only law (binding)
+
+The suggestion is **advisory**. EI modulates tone; it never overrides
+**safety, permission, or factual integrity**. This module performs no
+policy checks, grants no permissions, and cannot suppress, reorder, or
+bypass any safety gate, consent requirement, or truth constraint. A
+downstream router may ignore the suggestion entirely; policy gates run
+independently of (and after) any lens application.

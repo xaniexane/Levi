@@ -1,8 +1,10 @@
 """Cybrus CLI — ``python -m levi.cybrus`` and the ``levi cybrus`` hook.
 
-Subcommands: status, account create/list/set-password, vault store/get/list,
-token issue/rotate/revoke, apikey create/list/revoke, route grant, qid parse,
-approve, deny, approvals pending, audit tail/verify, device enroll/trust/list.
+Subcommands: status, account create/list/set-password, vault store/get/list/
+generate/oauth-store/oauth-get/oauth-list/oauth-refresh/oauth-revoke,
+token issue/rotate/revoke, apikey create/list/revoke, route list/
+add-external/remove-external/grant, qid parse, approve, deny, approvals
+pending, audit tail/verify, device enroll/trust/list.
 
 Secrets are NEVER taken via argv: the vault secret, master password, and
 account passwords are read with ``getpass`` (prompt, no echo). Plaintext
@@ -190,17 +192,23 @@ def _cmd_account_set_password(args) -> int:
 
 def _open_vault():
     """Unlock the credential vault. Master password via getpass prompt —
-    never argv, never stored."""
+    never argv, never stored. Returns ``(vault, passphrase)`` — the
+    passphrase lets OAuth/identity layers open the same vault."""
     vault_mod = _mod("vault")
     master = getpass.getpass("Vault master password: ")
     if not master:
         raise SystemExit("error: master password is required")
-    return vault_mod.CredentialVault(master)
+    return vault_mod.CredentialVault(master), master
+
+
+def _open_oauth_vault(master):
+    """Open the OAuth token layer on the same vault passphrase."""
+    return _mod("vault").OAuthVault(master)
 
 
 def _cmd_vault(args) -> int:
     try:
-        vault = _open_vault()
+        vault, master = _open_vault()
     except SystemExit as exc:
         print(exc)
         return 2
@@ -232,11 +240,125 @@ def _cmd_vault(args) -> int:
             for service in services:
                 print(service)
             return 0
+        if cmd == "generate":
+            password = _mod("vault").generate_password(args.length)
+            print("generated password (shown once — store it now):")
+            print(password)
+            return 0
+        if cmd == "oauth-store":
+            return _cmd_vault_oauth_store(args, master)
+        if cmd == "oauth-get":
+            return _cmd_vault_oauth_get(args, master)
+        if cmd == "oauth-list":
+            return _cmd_vault_oauth_list(args, master)
+        if cmd == "oauth-refresh":
+            return _cmd_vault_oauth_refresh(args, master)
+        if cmd == "oauth-revoke":
+            return _cmd_vault_oauth_revoke(args, master)
     except AttributeError as exc:
         print(f"error: vault module API mismatch ({exc}) — see levi/cybrus/vault.py")
         return 2
     print(f"unknown vault command: {cmd}")
     return 2
+
+
+def _cmd_vault_oauth_store(args, master) -> int:
+    vault_mod = _mod("vault")
+    access = getpass.getpass("OAuth access token (never echoed): ")
+    if not access:
+        print("error: access token is required")
+        return 2
+    refresh = getpass.getpass("OAuth refresh token (optional, Enter to skip): ")
+    ov = _open_oauth_vault(master)
+    try:
+        meta = ov.store_token(
+            args.provider,
+            args.identity,
+            access,
+            refresh_token=refresh or None,
+            scopes=args.scope or [],
+            expires_in=args.expires_in,
+        )
+    except vault_mod.OAuthError as exc:
+        print(f"oauth store failed: {exc}")
+        return 2
+    print(f"stored OAuth token for {args.provider}/{args.identity}")
+    print(f"  scopes:     {', '.join(meta['scopes']) if meta['scopes'] else '(none)'}")
+    print(f"  expires_at: {meta['expires_at'] or 'never'}")
+    return 0
+
+
+def _cmd_vault_oauth_get(args, master) -> int:
+    vault_mod = _mod("vault")
+    ov = _open_oauth_vault(master)
+    try:
+        record = ov.get_token(args.provider, args.identity, requester=args.identity)
+    except vault_mod.OAuthError as exc:
+        print(f"oauth get failed: {exc}")
+        return 1
+    expired = "EXPIRED" if vault_mod.OAuthVault.is_expired(record) else "valid"
+    print(f"provider:      {record['provider']}")
+    print(f"identity:      {record['identity']}")
+    print(f"scopes:        {', '.join(record['scopes']) if record['scopes'] else '(none)'}")
+    print(f"status:        {expired}")
+    print(f"refresh_count: {record['refresh_count']}")
+    print("access token (handle with care):")
+    print(record["access_token"])
+    return 0
+
+
+def _cmd_vault_oauth_list(args, master) -> int:
+    ov = _open_oauth_vault(master)
+    tokens = ov.list_tokens(identity=args.identity)
+    if not tokens:
+        print("no OAuth tokens stored" + (f" for {args.identity}" if args.identity else ""))
+        return 0
+    for t in tokens:
+        status = "EXPIRED" if t["expired"] else "valid"
+        print(
+            f"{t['provider']}/{t['identity']} "
+            f"[scopes: {', '.join(t['scopes']) if t['scopes'] else '(none)'}] "
+            f"{status} refreshes={t['refresh_count']}"
+        )
+    return 0
+
+
+def _cmd_vault_oauth_refresh(args, master) -> int:
+    vault_mod = _mod("vault")
+    access = getpass.getpass("New OAuth access token (never echoed): ")
+    if not access:
+        print("error: access token is required")
+        return 2
+    refresh = getpass.getpass("New OAuth refresh token (optional, Enter to keep old): ")
+    ov = _open_oauth_vault(master)
+    try:
+        meta = ov.record_refresh(
+            args.provider,
+            args.identity,
+            requester=args.identity,
+            new_access_token=access,
+            new_refresh_token=refresh or None,
+            expires_in=args.expires_in,
+        )
+    except vault_mod.OAuthError as exc:
+        print(f"oauth refresh failed: {exc}")
+        return 1
+    print(f"refreshed OAuth token for {args.provider}/{args.identity}")
+    print(f"  refresh_count: {meta['refresh_count']}")
+    print(f"  expires_at:    {meta['expires_at'] or 'never'}")
+    return 0
+
+
+def _cmd_vault_oauth_revoke(args, master) -> int:
+    vault_mod = _mod("vault")
+    ov = _open_oauth_vault(master)
+    try:
+        ov.revoke(args.provider, args.identity, requester=args.identity)
+    except vault_mod.OAuthError as exc:
+        print(f"oauth revoke failed: {exc}")
+        return 1
+    print(f"revoked OAuth token for {args.provider}/{args.identity}")
+    return 0
 
 
 # ---------------------------------------------------------------------------
@@ -533,15 +655,66 @@ def _cmd_apikey(args) -> int:
 
 
 def _cmd_route(args) -> int:
+    router_mod = _mod("router")
+    cmd = args.route_cmd
+    if cmd == "list":
+        reg = router_mod.RouteRegistry()
+        table = reg.list_routes()
+        print("internal routes (first-class, always available):")
+        for r in table["internal"]:
+            print(f"  {r['name']} — {r['description']}")
+        print("external routes (deliberate additions only):")
+        if not table["external"]:
+            print("  (none registered)")
+        for r in table["external"]:
+            print(
+                f"  {r['provider']} [scope: {r['scope']}] "
+                f"approved_by={r['approved_by']} added={r['added_at'][:10]}"
+            )
+        return 0
+    if cmd in ("add-external", "remove-external"):
+        gateway_mod = _mod("gateway")
+        try:
+            gw = _open_gateway()
+        except SystemExit as exc:
+            print(exc)
+            return 2
+        password = getpass.getpass(f"Password for {args.actor} (never echoed): ")
+        if not password:
+            print("error: password is required")
+            return 2
+        try:
+            gw.auth(args.actor, password)
+        except gateway_mod.GatewayAuthError as exc:
+            print(f"route update failed: {exc}")
+            return 2
+        reg = router_mod.RouteRegistry()
+        try:
+            if cmd == "add-external":
+                record = reg.add_external(
+                    args.provider,
+                    scope=args.scope,
+                    approved_by=args.actor,
+                    reason=args.reason,
+                )
+            else:
+                reg.remove_external(args.provider, by=args.actor)
+                print(f"removed external route {args.provider}")
+                return 0
+        except router_mod.RouteError as exc:
+            print(f"route update failed: {exc}")
+            return 2
+        print(f"registered external route {record['provider']} [scope: {record['scope']}]")
+        print("  external crossings are marked and audit-logged")
+        return 0
+    if cmd != "grant":
+        print(f"unknown route command: {cmd}")
+        return 2
     gateway_mod = _mod("gateway")
     try:
         gw = _open_gateway()
     except SystemExit as exc:
         print(exc)
-        return 2
-    cmd = args.route_cmd
-    if cmd != "grant":
-        print(f"unknown route command: {cmd}")
         return 2
     password = getpass.getpass(f"Password for {args.actor} (never echoed): ")
     if not password:
@@ -602,6 +775,33 @@ def _cmd_qid(args) -> int:
     return 0
 
 
+def _cmd_money(args) -> int:
+    money_mod = _mod("money")
+    cmd = getattr(args, "money_cmd", None) or "status"
+    gw = money_mod.MoneyGateway()
+    if cmd == "status":
+        st = money_mod.status()
+        print(f"law:            {st['law']}")
+        print(f"active rails:   {st['active_rails']}")
+        print(f"execute:        {st['execute_posture']}")
+        print(f"live rails:     {st['live_rails_exist']}")
+        return 0
+    if cmd == "rails":
+        rails = gw.list_rails()
+        if not rails:
+            print("no money rails registered (fail-closed: nothing can move money)")
+            return 0
+        for r in rails:
+            print(f"{r.name}: provider={r.provider} approved_by={r.approved_by} status={r.status}")
+        return 0
+    if cmd == "audit":
+        for e in gw.audit_log():
+            print(f"{e.get('ts')} {e.get('event')} {e.get('plan_id', e.get('name', ''))}")
+        return 0
+    print(f"unknown money command: {cmd}")
+    return 2
+
+
 # ---------------------------------------------------------------------------
 # registration (mirrors levi/jobs/cli.py: register_*_parser + cmd_*)
 # ---------------------------------------------------------------------------
@@ -624,7 +824,7 @@ def _register_commands(cy) -> None:
     ac.add_argument(
         "--tier",
         default="starter",
-        help="tier: founder | starter | pro (default: starter)",
+        help="tier: founder (keeper-bound) | starter | pro (default: starter)",
     )
     asub.add_parser("list", help="list identity accounts")
     asp = asub.add_parser(
@@ -642,6 +842,25 @@ def _register_commands(cy) -> None:
     vg.add_argument("service", help="service name")
     vg.add_argument("username", help="username")
     vsub.add_parser("list", help="list stored services (names only, never secrets)")
+    vg2 = vsub.add_parser("generate", help="generate a strong password (shown once)")
+    vg2.add_argument("--length", type=int, default=24, help="password length >= 12 (default: 24)")
+    vo = vsub.add_parser("oauth-store", help="store an OAuth token set (tokens prompted, never argv)")
+    vo.add_argument("provider", help="provider name, e.g. github")
+    vo.add_argument("--identity", required=True, help="owning identity")
+    vo.add_argument("--scope", action="append", default=[], help="OAuth scope (repeatable)")
+    vo.add_argument("--expires-in", type=int, default=None, help="access token lifetime in seconds")
+    vog = vsub.add_parser("oauth-get", help="retrieve an OAuth token (containment: identity only)")
+    vog.add_argument("provider", help="provider name")
+    vog.add_argument("--identity", required=True, help="owning identity")
+    vol = vsub.add_parser("oauth-list", help="list OAuth tokens (metadata only, never token values)")
+    vol.add_argument("--identity", default=None, help="filter to one identity")
+    vor = vsub.add_parser("oauth-refresh", help="record a provider refresh (metadata tracked)")
+    vor.add_argument("provider", help="provider name")
+    vor.add_argument("--identity", required=True, help="owning identity")
+    vor.add_argument("--expires-in", type=int, default=None, help="new access token lifetime in seconds")
+    vov = vsub.add_parser("oauth-revoke", help="revoke (delete) an OAuth token set")
+    vov.add_argument("provider", help="provider name")
+    vov.add_argument("--identity", required=True, help="owning identity")
 
     tp = cmds.add_parser("token", help="scoped API tokens")
     tsub = tp.add_subparsers(dest="token_cmd")
@@ -719,8 +938,17 @@ def _register_commands(cy) -> None:
     kr = ksub.add_parser("revoke", help="revoke a named API key")
     kr.add_argument("name", help="key name")
 
-    rp = cmds.add_parser("route", help="the sole external gateway (control plane)")
+    rp = cmds.add_parser("route", help="platform API router: internal first-class, external by special request")
     rsub = rp.add_subparsers(dest="route_cmd")
+    rsub.add_parser("list", help="list internal + registered external routes")
+    ra = rsub.add_parser("add-external", help="register an external provider (deliberate, human-approved)")
+    ra.add_argument("provider", help="external provider name")
+    ra.add_argument("--scope", required=True, help="scope of the external route")
+    ra.add_argument("--reason", required=True, help="why this external route is needed")
+    ra.add_argument("--actor", required=True, help="authenticated identity approving the addition")
+    rr = rsub.add_parser("remove-external", help="decommission an external route")
+    rr.add_argument("provider", help="external provider name")
+    rr.add_argument("--actor", required=True, help="authenticated identity removing it")
     rg = rsub.add_parser("grant", help="request a short-lived routing grant")
     rg.add_argument("destination", help="external destination")
     rg.add_argument("--purpose", required=True, help="why this route is needed")
@@ -730,6 +958,12 @@ def _register_commands(cy) -> None:
     qsub = qp.add_subparsers(dest="qid_cmd")
     qparse = qsub.add_parser("parse", help="parse and validate a QID")
     qparse.add_argument("qid", help='qid string, e.g. "3.42.7.0"')
+
+    mp = cmds.add_parser("money", help="Cybrus money gateway — the only path for money movement")
+    msub = mp.add_subparsers(dest="money_cmd")
+    msub.add_parser("status", help="the money law, rail count, fail-closed posture")
+    msub.add_parser("rails", help="list registered money rails (references, never core)")
+    msub.add_parser("audit", help="tail the money-gateway audit log (metadata only)")
 
 
 def register_cybrus_parser(sub) -> None:
@@ -757,6 +991,8 @@ def cmd_cybrus(args: argparse.Namespace) -> int:
         return _cmd_route(args)
     if cmd == "qid":
         return _cmd_qid(args)
+    if cmd == "money":
+        return _cmd_money(args)
     if cmd == "approve":
         return _cmd_approve(args)
     if cmd == "deny":

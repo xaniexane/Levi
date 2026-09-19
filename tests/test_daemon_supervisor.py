@@ -27,6 +27,14 @@ EXPECTED_SERVICES = {
     "galaxy-services": "levi.galaxy.service",
     "oath-trust": "levi.oath",
     "agent-server": "levi.agent.server",
+    # F7: interop provides/requires wiring self-check
+    "interop-registry": "levi.interop.registry",
+    # worker daemons: gardener, sentinel, courier, archivist, midwife
+    "gardener": "levi.daemon.gardener",
+    "sentinel": "levi.daemon.sentinel",
+    "courier": "levi.daemon.courier",
+    "archivist": "levi.daemon.archivist",
+    "midwife": "levi.daemon.midwife",
 }
 
 REQUIRED_KEYS = {"name", "module", "summary", "start_hint", "health"}
@@ -168,7 +176,8 @@ def test_cli_pulse(tmp_path, monkeypatch):
     home = tmp_path / "cli-home"
     proc = _run_daemon_cli(home, "pulse")
     assert proc.returncode == 0, proc.stderr
-    assert "8/8 up" in proc.stdout
+    expected = f"{len(EXPECTED_SERVICES)}/{len(EXPECTED_SERVICES)} up"
+    assert expected in proc.stdout
 
 
 def test_cli_list_and_status(tmp_path, monkeypatch):

@@ -1,0 +1,155 @@
+{
+  "agents": [
+    {
+      "agent_id": "communication-meeting-chat-scribe-01",
+      "class_tag": "XI",
+      "counsel": "XICI",
+      "genesis_descriptor": {
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired",
+        "white_label": "Meeting Chat Scribe Minion"
+      },
+      "grade": "enterprise",
+      "grade_proof": {
+        "grade": "enterprise",
+        "graded_at": "2026-09-18T19:01:59.340497+00:00",
+        "manifest_batch": "security_privacy_communication",
+        "signature_id": "ipsig-798480f76106"
+      },
+      "minion_id": "communication-meeting-chat-scribe-01",
+      "twin_pair": {
+        "left": {
+          "hemisphere_id": "left:communication-meeting-chat-scribe-01",
+          "role": "nano-fast sequencer",
+          "twin_id": "agent:communication-meeting-chat-scribe-01:fg"
+        },
+        "pair_id": "agentpair:communication-meeting-chat-scribe-01",
+        "right": {
+          "hemisphere_id": "right:communication-meeting-chat-scribe-01",
+          "role": "nano-fast tripwire",
+          "twin_id": "agent:communication-meeting-chat-scribe-01:bg"
+        }
+      },
+      "white_label": "Meeting Chat Scribe Minion"
+    },
+    {
+      "agent_id": "smart-home-iot-nightly-lockdown-01",
+      "class_tag": "SI",
+      "counsel": "SICI",
+      "genesis_descriptor": {
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired",
+        "white_label": "Nightly Lockdown Minion"
+      },
+      "grade": "enterprise",
+      "grade_proof": {
+        "grade": "enterprise",
+        "graded_at": "2026-09-18T19:01:50.991998+00:00",
+        "manifest_batch": "smart_home_travel",
+        "signature_id": "ipsig-8e9c4532f16c"
+      },
+      "minion_id": "smart-home-iot-nightly-lockdown-01",
+      "twin_pair": {
+        "left": {
+          "hemisphere_id": "left:smart-home-iot-nightly-lockdown-01",
+          "role": "dynasty-native executor",
+          "twin_id": "agent:smart-home-iot-nightly-lockdown-01:fg"
+        },
+        "pair_id": "agentpair:smart-home-iot-nightly-lockdown-01",
+        "right": {
+          "hemisphere_id": "right:smart-home-iot-nightly-lockdown-01",
+          "role": "dynasty-native variant mind",
+          "twin_id": "agent:smart-home-iot-nightly-lockdown-01:bg"
+        }
+      },
+      "white_label": "Nightly Lockdown Minion"
+    },
+    {
+      "agent_id": "travel-local-transit-loyalty-ledger-01",
+      "class_tag": "AI",
+      "counsel": "AICI",
+      "genesis_descriptor": {
+        "packaging": "lifetime one-copy buy; white-labeled per business; specialized packs as add-ons",
+        "packaging_status": "descriptor only \u2014 no pricing, payment, or fulfillment wired",
+        "white_label": "Transit Loyalty Ledger Minion"
+      },
+      "grade": "enterprise",
+      "grade_proof": {
+        "grade": "enterprise",
+        "graded_at": "2026-09-18T19:01:50.991998+00:00",
+        "manifest_batch": "smart_home_travel",
+        "signature_id": "ipsig-8e9c4532f16c"
+      },
+      "minion_id": "travel-local-transit-loyalty-ledger-01",
+      "twin_pair": {
+        "left": {
+          "hemisphere_id": "left:travel-local-transit-loyalty-ledger-01",
+          "role": "generalist planner",
+          "twin_id": "agent:travel-local-transit-loyalty-ledger-01:fg"
+        },
+        "pair_id": "agentpair:travel-local-transit-loyalty-ledger-01",
+        "right": {
+          "hemisphere_id": "right:travel-local-transit-loyalty-ledger-01",
+          "role": "generalist pattern reader",
+          "twin_id": "agent:travel-local-transit-loyalty-ledger-01:bg"
+        }
+      },
+      "white_label": "Transit Loyalty Ledger Minion"
+    }
+  ],
+  "assembler": "levi.genesis.odd_sets v1.0.0",
+  "counsel_map": {
+    "AICI": [
+      "travel-local-transit-loyalty-ledger-01"
+    ],
+    "SICI": [
+      "smart-home-iot-nightly-lockdown-01"
+    ],
+    "XICI": [
+      "communication-meeting-chat-scribe-01"
+    ]
+  },
+  "customer": {
+    "name": "Acme Schools",
+    "package_name": "Acme Schools Genesis 3",
+    "sector": "education",
+    "tier": "genesis",
+    "white_labeled": true
+  },
+  "form": "genesis.odd_sets",
+  "inputs": {
+    "agent_ids": [
+      "communication-meeting-chat-scribe-01",
+      "smart-home-iot-nightly-lockdown-01",
+      "travel-local-transit-loyalty-ledger-01"
+    ],
+    "count": 3,
+    "customer_name": "Acme Schools",
+    "method": "deterministic seeded draw",
+    "sector": "education",
+    "seed_hex": "809e556695b0a87731892ffb3ecbe3b8504e9049910177af9128bed9bdfebe9b",
+    "tier": "genesis"
+  },
+  "odd_law": {
+    "count": 3,
+    "law": "odd counts of agents in Genesis \u2014 1, 3, 5, 7, 9 \u2026 never even",
+    "rationale": "odd counts can't deadlock \u2014 counsel deliberation and twin-merge always resolve by majority"
+  },
+  "package_id": "genesis-odd-f88d53c437fa",
+  "packaging": {
+    "model": "lifetime one-copy buy",
+    "money_seam": "paper only \u2014 see levi.genesis.money for paper quotes; no payment rail wired without the keeper's explicit order",
+    "note": "lifetime one-copy buy; white-labeled per business (Acme Schools); specialized packs as add-ons",
+    "status": "descriptor only \u2014 no pricing, payment, or fulfillment wired"
+  },
+  "selection": {
+    "class_plan": {
+      "AI": 1,
+      "SI": 1,
+      "XI": 1
+    },
+    "method": "deterministic seeded draw",
+    "pool_size": 470,
+    "seed_hex": "809e556695b0a87731892ffb3ecbe3b8504e9049910177af9128bed9bdfebe9b"
+  }
+}

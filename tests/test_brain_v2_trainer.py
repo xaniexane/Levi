@@ -599,3 +599,55 @@ def test_model_block_size_reads_dict_config():
 
     assert Trainer._model_block_size(M()) == 64
     assert Trainer._model_block_size(object()) == 10**9
+
+
+# --- judgment helpers: torch-free, tested without torch ---
+
+
+def test_restore_best_reads_manifest_judgment(corpus_dir, tmp_path):
+    import numpy as np
+
+    from levi.brain.train.v2 import checkpoint as ckpt_mod
+
+    plan = plan_run(corpus_dir / "train.yaml", tmp_path / "run")
+    trainer = Trainer(plan)
+    assert trainer._restore_best(plan) == (None, None)
+
+    ckpt_mod.save_checkpoint(
+        plan.ckpt_dir,
+        step=100,
+        arrays={"w": np.zeros(2)},
+        metrics={"held_out_nll": 5.0},
+    )
+    ckpt_mod.save_checkpoint(
+        plan.ckpt_dir,
+        step=200,
+        arrays={"w": np.zeros(2)},
+        metrics={"held_out_nll": 4.0},
+    )
+    # A resumed run inherits its earlier self's judgment.
+    assert trainer._restore_best(plan) == (4.0, 200)
+
+
+def test_record_bloodline_appends_and_preserves(corpus_dir, tmp_path):
+    plan = plan_run(corpus_dir / "train.yaml", tmp_path / "run")
+    trainer = Trainer(plan)
+    base = {
+        "steps_trained": 500,
+        "early_stopped": True,
+        "best_held_out_nll": 4.2,
+        "best_step": 300,
+        "final_ema_loss": 2.1,
+        "checkpoints": str(plan.ckpt_dir),
+    }
+    trainer._record_bloodline(plan, plan.cfg, base)
+    trainer._record_bloodline(plan, plan.cfg, {**base, "early_stopped": False})
+
+    ledger = json.loads((tmp_path / "BLOODLINE.json").read_text(encoding="utf-8"))
+    assert len(ledger) == 2
+    assert ledger[0]["early_stopped"] is True
+    assert ledger[1]["early_stopped"] is False
+    assert ledger[0]["best_held_out_nll"] == 4.2
+    assert ledger[0]["best_step"] == 300
+    assert ledger[0]["run"] == plan.cfg.name
+    assert ledger[0]["config_hash"]

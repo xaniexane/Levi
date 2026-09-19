@@ -123,7 +123,26 @@ the native voice whenever its weights exist.
   Log: `~/workspace/levi-brain-runs/run2400/train.log`. Output went to
   the run dir, never the shipped weights — promotion only if eval
   (held-out loss + sample quality vs run 1) is genuinely better.
-  Result: _pending at time of writing; see train log._
+  **Measured result (closed 2026-09-18): ABORTED.** The log ends at step
+  480/2400 (`step 480/2400 loss 2.4093`) — the process was killed and
+  never resumed. No checkpoint, no eval report, no samples were ever
+  produced. Promotion was never possible; the Run 1 weights stand.
+- **Run 3 — 5400 steps (2026-09-16 → 2026-09-18, tiny-gpt-v2).** First run
+  on the v2 harness: LeviBrainV2, 6L/6H/384embd, 13,767,552 params,
+  byte-BPE vocab-8192 tokenizer, lr 3e-4 cosine, batch 32, seq 128, seed
+  1337. Frozen corpus: 739 raw docs → 379 unique (90/5/5 split).
+  Completed all 5400 steps 2026-09-18 04:05 UTC across ≥3 sessions
+  (config-hash-gated resumes at 4500 and 5000 worked as designed).
+  Final: train EMA loss 3.6467; held-out NLL 4.8284 (ppl 125.01).
+  **Verdict: DO NOT PROMOTE.** Held-out NLL bottomed at step 2500
+  (4.7364, ppl 114.02) and degraded to 4.8284 by step 5400 — overfit,
+  and the best checkpoint (ckpt-002500) was pruned by `keep_last`.
+  Cross-run comparison vs Run 1 is not comparable (different tokenizers
+  and corpora); the mechanical harness verdict is "regressed — do not
+  promote". No probe metrics were recorded (probes never configured).
+  Full record: `runs/tiny-gpt-v2-20260916/RESULTS.md`. Run-1 weights
+  (`tiny-gpt.pt`) stand. Lessons: held-out early stopping, `keep_best`
+  checkpoint policy, bigger corpus before more steps, configure probes.
 
 ## 6. News stays out of the weights (deliberate)
 
@@ -180,6 +199,16 @@ by the harness or its tests.
   report-`.json` compare; anything else is noted and skipped, never fatal).
   Builder contract matches `levi.brain.train.model_v2:build_model`
   (dict in, `nn.Module` out); only `run()` needs torch.
+- `watchdog.py` — stdlib-only one-shot supervisor (Fourth Death
+  recommendation): checks the trainer pid in `<run-dir>/watchdog.json`,
+  relaunches with the same LAUNCH.md command semantics (auto-resume +
+  config-hash gate preserved) if dead, capped by `--max-restarts`,
+  every decision logged. Meant for cron/timers, not a daemon. Tested
+  hermetically (`tests/test_brain_v2_watchdog.py`).
+- `sample.py` — honest sample generation from a v2 `.npz` checkpoint
+  (torch, training-only): greedy/temperature samples from fixed prompts,
+  optionally side-by-side against the v1 char-level checkpoint.
+  Written for the Run 3 post-mortem; a thin CLI, no test coverage claimed.
 
 **CLI:** `levi brain train --config train.yaml [--run-dir DIR]
 [--device cpu] [--stage-only]` — thin delegation to the trainer, so there

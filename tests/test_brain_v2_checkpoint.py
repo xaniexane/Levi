@@ -155,3 +155,70 @@ def test_torch_bridge_rejects_missing_key():
     sd = {"w": torch.randn(2)}
     with pytest.raises(CheckpointError, match="missing parameter"):
         ckpt.numpy_to_torch_state_dict({}, sd)
+
+
+# --- keep_best: the run never deletes its own best self ---
+
+
+def test_keep_best_protects_lowest_nll_outside_window(tmp_path):
+    nlls = {100: 5.0, 200: 4.0, 300: 4.5, 400: 4.2, 500: 4.8, 600: 5.2}
+    for step, nll in nlls.items():
+        ckpt.save_checkpoint(
+            tmp_path,
+            step=step,
+            arrays=_arrays(),
+            metrics={"loss": 2.0, "held_out_nll": nll},
+            keep_last=3,
+            keep_best=True,
+        )
+    remaining = {e["step"] for e in ckpt.list_checkpoints(tmp_path)}
+    assert 200 in remaining  # best survives outside the keep_last window
+    assert remaining == {200, 400, 500, 600}
+
+
+def test_keep_best_false_restores_legacy_prune(tmp_path):
+    # Best (step 100) is the oldest: legacy pruning deletes it like anything else.
+    for step in (100, 200, 300, 400):
+        ckpt.save_checkpoint(
+            tmp_path,
+            step=step,
+            arrays=_arrays(),
+            metrics={"held_out_nll": 4.0 + step / 1000.0},
+            keep_last=2,
+            keep_best=False,
+        )
+    assert [e["step"] for e in ckpt.list_checkpoints(tmp_path)] == [300, 400]
+
+
+def test_best_held_out_entry_selects_minimum(tmp_path):
+    ckpt.save_checkpoint(
+        tmp_path, step=100, arrays=_arrays(), metrics={"held_out_nll": 5.0}
+    )
+    ckpt.save_checkpoint(
+        tmp_path, step=200, arrays=_arrays(), metrics={"held_out_nll": 4.0}
+    )
+    ckpt.save_checkpoint(
+        tmp_path, step=300, arrays=_arrays(), metrics={"held_out_nll": 4.5}
+    )
+    best = ckpt.best_held_out_entry(tmp_path)
+    assert best is not None and best["step"] == 200
+    assert best["metrics"]["held_out_nll"] == 4.0
+
+
+def test_best_held_out_entry_none_without_evidence(tmp_path):
+    ckpt.save_checkpoint(
+        tmp_path, step=100, arrays=_arrays(), metrics={"loss": 1.0}
+    )
+    assert ckpt.best_held_out_entry(tmp_path) is None
+
+
+def test_best_held_out_entry_ignores_missing_files(tmp_path):
+    p = ckpt.save_checkpoint(
+        tmp_path, step=100, arrays=_arrays(), metrics={"held_out_nll": 4.0}
+    )
+    ckpt.save_checkpoint(
+        tmp_path, step=200, arrays=_arrays(), metrics={"held_out_nll": 5.0}
+    )
+    p.unlink()  # the recorded best is gone from disk: fall back honestly
+    best = ckpt.best_held_out_entry(tmp_path)
+    assert best is not None and best["step"] == 200

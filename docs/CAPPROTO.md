@@ -60,6 +60,7 @@ from `LEVI_TELESCRIPT_SECRET`; without it, tokens verify only in-process
 
 ```python
 from levi.capproto.tokens import attenuate
+
 child = attenuate(parent_token, actions=["kvnote.get"], ttl_seconds=60)
 ```
 

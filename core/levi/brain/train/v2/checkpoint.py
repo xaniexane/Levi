@@ -13,7 +13,12 @@ Manifest entry schema::
 
     {"step": 500, "file": "ckpt-000500.npz", "sha256": "...",
      "bytes": 123456, "config_hash": "...",
-     "metrics": {"loss": 2.31}, "saved_at": "2026-09-15T21:00:00Z"}
+     "metrics": {"loss": 2.31, "held_out_nll": 4.12},
+     "saved_at": "2026-09-15T21:00:00Z"}
+
+``metrics.held_out_nll`` (recorded when the trainer has run an eval)
+is the checkpoint's held-out evidence; the lowest-NLL entry is the
+run's best self and is protected from pruning (see ``keep_best``).
 """
 
 from __future__ import annotations
@@ -24,7 +29,7 @@ import os
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Iterable, Mapping
 
 import numpy as np
 
@@ -77,11 +82,14 @@ def save_checkpoint(
     metrics: Mapping[str, float] | None = None,
     config_hash: str = "",
     keep_last: int = 5,
+    keep_best: bool = True,
 ) -> Path:
     """Save a checkpoint atomically and record it in the manifest.
 
     Returns the final checkpoint path. Prunes older checkpoints to
-    ``keep_last`` after saving.
+    ``keep_last`` after saving — but never prunes the best-held-out
+    checkpoint (``keep_best``): the run's best self is never deleted,
+    no matter how many newer, worse checkpoints follow it.
     """
     if step < 0:
         raise CheckpointError(f"step must be >= 0, got {step}")
@@ -119,7 +127,12 @@ def save_checkpoint(
         "saved_at": _utcnow(),
     }
     _append_manifest_entry(ckpt_dir, entry)
-    prune_checkpoints(ckpt_dir, keep_last)
+    protect: set[str] = set()
+    if keep_best:
+        best = best_held_out_entry(ckpt_dir)
+        if best is not None:
+            protect.add(best["file"])
+    prune_checkpoints(ckpt_dir, keep_last, protect=protect)
     return path
 
 
@@ -237,11 +250,40 @@ def resume_from_latest(
 # Pruning
 
 
-def prune_checkpoints(ckpt_dir: str | Path, keep_last: int) -> list[Path]:
-    """Delete all but the ``keep_last`` newest checkpoints. Returns removed."""
+def best_held_out_entry(ckpt_dir: str | Path) -> dict | None:
+    """Manifest entry with the lowest held-out NLL — the run's best self.
+
+    Entries without a recorded ``metrics.held_out_nll`` are ignored.
+    Returns None when no entry has held-out evidence yet.
+    """
+    ckpt_dir = Path(ckpt_dir)
+    scored = [
+        e
+        for e in list_checkpoints(ckpt_dir)
+        if isinstance(e.get("metrics"), dict)
+        and e["metrics"].get("held_out_nll") is not None
+        and (ckpt_dir / e.get("file", "")).is_file()
+    ]
+    if not scored:
+        return None
+    return min(scored, key=lambda e: (e["metrics"]["held_out_nll"], e.get("step", 0)))
+
+
+def prune_checkpoints(
+    ckpt_dir: str | Path,
+    keep_last: int,
+    protect: Iterable[str] = (),
+) -> list[Path]:
+    """Delete all but the ``keep_last`` newest checkpoints. Returns removed.
+
+    ``protect`` holds checkpoint filenames that must survive pruning (the
+    best-held-out checkpoint). Protected files are also kept in the manifest
+    so the record reflects the disk.
+    """
     if keep_last < 1:
         raise CheckpointError(f"keep_last must be >= 1, got {keep_last}")
     ckpt_dir = Path(ckpt_dir)
+    protect = set(protect)
     existing = [
         e
         for e in reversed(list_checkpoints(ckpt_dir))
@@ -249,14 +291,21 @@ def prune_checkpoints(ckpt_dir: str | Path, keep_last: int) -> list[Path]:
     ]
     removed: list[Path] = []
     for entry in existing[keep_last:]:
+        if entry["file"] in protect:
+            continue
         path = ckpt_dir / entry["file"]
         try:
             path.unlink()
             removed.append(path)
         except OSError:
             pass
+    removed_files = {p.name for p in removed}
     # Drop pruned entries from the manifest so it reflects disk.
-    kept_files = {e["file"] for e in existing[:keep_last]}
+    kept_files = {e["file"] for e in existing[:keep_last]} | {
+        e["file"]
+        for e in existing
+        if e["file"] in protect and e["file"] not in removed_files
+    }
     manifest_path = ckpt_dir / MANIFEST_NAME
     entries = [e for e in list_checkpoints(ckpt_dir) if e.get("file") in kept_files]
     _atomic_write_bytes(

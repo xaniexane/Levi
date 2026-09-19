@@ -67,6 +67,8 @@ CLI_COMMANDS: Dict[str, List[str]] = {
     "bounty": ["bounty"],
     "agent-assistant": ["ask"],
     "bot-services": ["services"],
+    "automation": ["automation"],
+    "engines": ["engines"],
     "factory": ["factory"],
     "archive": ["python -m levi.archive"],
     "cyber-skills": [],
@@ -123,6 +125,9 @@ CLI_COMMANDS.update(
         # -- shelf (perpetual-hunt daily 2026-09-16: fallen platforms --------
         # Reader share-with-note + Digg bury, revived as a local curation desk
         "shelf": ["python -m levi.shelf"],
+        # -- fairtrade (perpetual-hunt evening 2026-09-16: giant ----------
+        # sly-generosity trades inverted into an honest-trade ledger + auditor
+        "fairtrade": ["python -m levi.fairtrade"],
         # -- reveal (perpetual-hunt daily 2026-09-16b: retired software ------
         # WordPerfect Reveal Codes, clean-room revived: the honest second
         # screen on a document — structure codes + invisible characters.
@@ -139,6 +144,19 @@ CLI_COMMANDS.update(
         # markets — Apogee's episode model remixed as local trial grants)
         "shareware": ["python -m levi.shareware"],
         "commitments": ["python -m levi.commitments"],
+        # -- pack-to-the-brim (2026-09-17): directory watchman + temporal ---
+        # personality modulation + credentialless RSS/Atom reader
+        "daemon-watchman": ["python -m levi.daemon.watchman"],
+        "daemon-signalbus": ["python -m levi.daemon.signalbus"],
+        # -- pack-to-the-brim (2026-09-18 night): journal compaction daemon,
+        # Termux device bridge, inbound switchboard router bot ---------------
+        "daemon-fossil": ["python -m levi.daemon.fossil"],
+        "integrations-termux": ["python -m levi.integrations.termux"],
+        "bot-switchboard": ["python -m levi.bot.switchboard"],
+        "persona-seasons": [],
+        "persona-canon": ["python -m levi.persona.canon"],
+        "automation-backoff": [],
+        "plugins-rss": [],
         "recap": ["python -m levi.recap"],
         "classifieds": ["python -m levi.classifieds"],
         "dials": ["python -m levi.dials"],
@@ -296,9 +314,51 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "service directory, daemon automations and supervision, the "
             "perpetual hunt/pulse engine, and the bot service registry."
         ),
-        "shelves": ["galaxy", "daemon", "perpetual", "bot-services", "serve"],
+        "shelves": [
+            "galaxy",
+            "daemon",
+            "daemon-watchman",
+            "daemon-signalbus",
+            "daemon-fossil",
+            "integrations-termux",
+            "bot-switchboard",
+            "perpetual",
+            "bot-services",
+            "serve",
+        ],
         "strategy": "services",
         "pull_hint": "python -m levi.galaxy services  ·  levi daemon  ·  python -m levi.perpetual pulse",
+    },
+    "automation": {
+        "title": "Automation Warehouse",
+        "summary": (
+            "The LEVI-native automation engine: the HITL-gated minion catalog "
+            "(hundreds of minions across 11 categories, Chauncey's intake rows "
+            "preserved untouched), the dry-run rail "
+            "(Plan→Preview→Permission→Execute→Verify→Receipt), and the "
+            "routine recorder — 'watch me once' routine learning from the "
+            "growth session harvest. Local, user-owned, permission-gated "
+            "playback; live execution stays unwired."
+        ),
+        "shelves": ["automation"],
+        "strategy": "capabilities",
+        "pull_hint": "levi automation minions  ·  levi automation dry-run <minion-id>  ·  levi automation routines",
+    },
+    "engines": {
+        "title": "Engines Warehouse",
+        "summary": (
+            "Small deterministic decision machines: triage (weighted "
+            "multi-option verdicts), cadence (rhythm math over timestamps), "
+            "weigh (two-sided judgment with calibrated confidence), and "
+            "quorum (weighted majority verdicts with a quorum gate and "
+            "deterministic ties). "
+            "Same inputs → same verdict, every time; they compute, never "
+            "act. Plus the compressed-engines playbook pack — the native "
+            "pattern library behind them."
+        ),
+        "shelves": ["engines"],
+        "strategy": "capabilities",
+        "pull_hint": "levi engines list  ·  levi engines run <id> --input '<json>'",
     },
     "games": {
         "title": "Games Warehouse",
@@ -417,6 +477,9 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "premortem",
             "copper",
             "verify",
+            "persona-seasons",
+            "persona-canon",
+            "automation-backoff",
         ],
         "strategy": "capabilities",
         "pull_hint": "python -m levi.signals  ·  python -m levi.promises  ·  from levi.creed import laws",
@@ -444,8 +507,10 @@ WAREHOUSES: Dict[str, Dict[str, Any]] = {
             "commitments",
             "recap",
             "feedreader",
+            "plugins-rss",
             "feedlab",
             "liberation",
+            "fairtrade",
         ],
         "strategy": "capabilities",
         "pull_hint": "python -m levi.communities  ·  python -m levi.threads  ·  python -m levi.feedreader",
@@ -760,6 +825,9 @@ def _module_summary(module: str) -> str:
         "lifepack": "portable LEVI state — export/import/validate",
         "bloodstream": "the one-turn pipeline + event bus",
         "daemon": "control plane — automations, heartbeat, kernel",
+        "daemon-fossil": "journal compaction daemon — digests + receipts, honest retention",
+        "integrations-termux": "Termux device bridge — battery, notify, clipboard, location",
+        "bot-switchboard": "inbound router bot — routes requests to manifest modules",
         "perpetual": "the never-stops engine — hunt, pulse, supervision",
         "archive": "the Smithsonian records (dated queryable corpus)",
         "cyber-skills": "823 original defensive blue-team playbooks",
@@ -776,6 +844,7 @@ def _module_summary(module: str) -> str:
         "organs": "echoverse / mandella / REIM / RIEM",
         "oath": "identity / trust substrate",
         "bot-services": "service registry incl. research-brief",
+        "engines": "deterministic decision machines (triage/cadence/weigh)",
     }
     return summaries.get(module, module)
 

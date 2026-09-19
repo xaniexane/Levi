@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 
 from .tracker import STATUSES, JobTracker, import_demand
+from .organ_cli import cmd_organ, register_organ_parser
 
 
 def register_jobs_parser(sub) -> None:
@@ -91,6 +92,8 @@ def register_jobs_parser(sub) -> None:
         help="show what would be imported without writing",
     )
 
+    register_organ_parser(cmds)
+
 
 def _fmt_job(job) -> str:
     return (
@@ -102,6 +105,8 @@ def _fmt_job(job) -> str:
 
 
 def cmd_jobs(args: argparse.Namespace) -> int:
+    if getattr(args, "jobs_cmd", None) == "organ":
+        return cmd_organ(args)
     tracker = JobTracker()
     cmd = getattr(args, "jobs_cmd", None) or "stats"
 

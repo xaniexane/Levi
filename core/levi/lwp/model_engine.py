@@ -25,6 +25,8 @@ import random
 import re
 import uuid
 
+from levi.power.lwp import power_repeats, power_step
+
 DEFAULT = Path.home() / ".levi" / "lwp_model_state.json"
 GOLD = 80_000
 
@@ -302,12 +304,7 @@ class LWPModelEngine:
 
     def target_words(self) -> int:
         n = {"peak": 170, "distance": 260, "finale": 240}.get(self.state.phase, 300)
-        if self.state.power == "gain":
-            n += 70
-        if self.state.power == "immortal":
-            n += 120
-        if self.state.power == "booster":
-            n += 30
+        n += power_step(self.state.power)  # booster/gain/immortal steps (levi.power)
         return n
 
     def anomaly(self) -> int:
@@ -362,7 +359,7 @@ class LWPModelEngine:
             )
         if st.ghost and (direction in ("reverse", "inverse") or riem):
             parts.append(f"Phantom from a denied hour: {st.ghost}")
-        if st.power == "repeater":
+        if power_repeats(st.power):  # repeater: scar re-injection (levi.power)
             parts.append("Scar liturgy re-entered so the distance would not rot.")
         if st.power == "gain" or st.phase == "gold_push":
             parts.append(

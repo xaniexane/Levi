@@ -80,9 +80,7 @@ def test_chain_detects_tamper(tmp_path):
     t.roll("d20", label="b")
     # tamper with a stored receipt directly in sqlite (the retcon attempt)
     conn = sqlite3.connect(str(tmp_path / "ledger.db"))
-    conn.execute(
-        "UPDATE receipts SET total=20 WHERE slot=? AND seq=1", (t.slot,)
-    )
+    conn.execute("UPDATE receipts SET total=20 WHERE slot=? AND seq=1", (t.slot,))
     conn.commit()
     conn.close()
     ok, bad = t.verify()

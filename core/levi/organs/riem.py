@@ -25,6 +25,8 @@ from __future__ import annotations
 from typing import Dict, List
 import hashlib
 
+from levi.organs.reim import compost_failure, corroborate
+
 ORGAN = "riem"
 
 KIND_BY_CLASS = {
@@ -167,6 +169,27 @@ def promote(compost_records: List[Dict]) -> List[Dict]:
             }
         )
     return proposals
+
+
+def failure_to_genome(record: Dict, prior: Dict | None = None) -> Dict:
+    """Run the full failure -> genome pipeline in one call.
+
+    1. Compost ``record`` with REIM (fail-closed on malformed input).
+    2. If ``prior`` (a previous compost of the same failure) is given,
+       corroborate the two into one record with a higher corroboration —
+       this is how a repeated failure earns promotion eligibility.
+    3. Promote the compost into genome proposals with RIEM.
+
+    Returns ``{"compost": <compost record>, "proposals": [...]}``.
+
+    Proposals are data, not writes: every proposal carries
+    ``applied=False``. Applying one is always a human (or higher-organ)
+    decision — this function never mutates memory, policy, or config.
+    """
+    compost = compost_failure(record)
+    if prior is not None:
+        compost = corroborate(prior, compost)
+    return {"compost": compost, "proposals": promote([compost])}
 
 
 def format_proposals(proposals: List[Dict]) -> str:

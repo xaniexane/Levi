@@ -12,24 +12,28 @@ referenced or copied.
 
 ## The LEVI family (product framing)
 
-The on-device weights are the **LEVI family** — LEVI is always the headliner
-and the default selected model:
+The on-device weights are the **LEVI family** — trained by LEVI's own
+native-brain program, 100% pure LEVI. LEVI is the only headliner and the
+default selected model. No third-party bases, no remixes wearing a LEVI
+mask, no external provider sources.
 
-| id | UI name | What it is | Base (labeled honestly) | Size | RAM |
-|----|---------|-----------|------------------------|------|-----|
-| `levi-tiny` | Levi Tiny | LEVI's own native brain — on-device build in progress | LEVI native | — | ~512 MB |
-| `levi-0.6b` | Levi 0.6B | **Default.** Levi remix, LEVI-packaged | Qwen3-0.6B | ~640 MB | ~1.5 GB |
-| `levi-4b` | Levi 4B | Levi remix, LEVI-packaged | Qwen3-4B | ~2.5 GB | ~4 GB |
+| id | UI name | What it is | Size | RAM |
+|----|---------|-----------|------|-----|
+| `levi-tiny` | Levi Tiny | **Default.** LEVI's own native brain — on-device build in progress | — | ~512 MB |
 
 `levi-tiny` is announced but not downloadable yet — `ModelManager.download()`
-refuses it with a clear error instead of failing obscurely. When LEVI's native
-brain (today a PyTorch proof-of-pipeline in `core/levi/brain/`) gets an
-on-device export path, it slots into this family as the true first-party
-weight.
+refuses it with a clear error instead of failing obscurely. Larger LEVI-native
+weights join this family as the native brain (today a PyTorch
+proof-of-pipeline in `core/levi/brain/`) ships on-device exports.
 
-Other providers (Ollama, OpenAI-compatible endpoints) appear in the model
-picker as **selectable sources** — alternatives, never the headliner, never
-the default. See `ModelCatalog.externalSources`.
+Beyond the family, other options exist for those who want them:
+open-source third-party weights (e.g. Qwen3 GGUFs) and LEVI SI Cloud
+(LEVI's own synthetic-intelligence cloud provider) as the only remote
+source — no third-party provider endpoints, ever. They stay out
+of the spotlight — honestly labeled under their own names, tucked in a
+secondary section, never the headliner, never the default, never wearing
+the LEVI name. See `ModelCatalog.openSourceModels` and
+`ModelCatalog.externalSources`.
 
 ## Module layout
 
@@ -46,7 +50,7 @@ inference/
     LlamaBridge.kt                  JNI declarations + nativeAvailable guard
     InferenceEngine.kt              single-threaded high-level API (Result-based)
     ModelManager.kt                 HF download with resume + SHA-256, LEVI-family catalog
-    PromptBuilder.kt                persona -> Qwen3 chat template
+    PromptBuilder.kt                persona -> LEVI chat template
     InferenceModels.kt              ModelInfo/ModelCatalog/LeviPersona/params
   src/test/java/...                 JVM unit tests (no emulator needed)
 ```
@@ -54,10 +58,10 @@ inference/
 ## Integration flow (app side, to be wired)
 
 ```
-1. Picker (default selection = Levi 0.6B)
+1. Picker (default selection = Levi Tiny)
      ModelCatalog.defaultModel()                       // always LEVI
-     ModelCatalog.recommendedFor(totalRamMb)           // largest fitting LEVI model
-     ModelCatalog.externalSources                      // "More sources…" section
+     ModelCatalog.recommendedFor(totalRamMb)           // largest fitting downloadable
+     ModelCatalog.openSourceModels + externalSources   // secondary "Other options" — out of the spotlight; cloud is purely LEVI
 
 2. Download (first run, Wi-Fi recommended)
      ModelManager(modelsDir).download(info, listener)
@@ -100,7 +104,7 @@ separate, testable increment.
 
 ## Verification status
 
-- **JVM unit tests:** 25/25 green (`:inference:testDebugUnitTest`), no emulator needed.
+- **JVM unit tests:** 27/27 green (`:inference:testDebugUnitTest`), no emulator needed.
 - **Native compile:** `liblevi_llama.so` builds for `arm64-v8a`, `armeabi-v7a`
   (with `GGML_LLAMAFILE=OFF` — upstream's llamafile sgemm uses fp16 NEON
   intrinsics missing on 32-bit ARM), and `x86_64`. All 7 JNI entry points
@@ -119,16 +123,21 @@ No emulator or device numbers have been measured yet — the native build is
 wired to CI and the first real numbers will come from a physical device.
 Expectations, not promises:
 
-- **Levi 0.6B (Q8_0), modern mid-range phone (8 GB RAM):** prompt processing
-  fast (GGUF Q8 prompt eval is cheap at 0.6B); generation roughly **15–40
-  tok/s** on CPU depending on SoC and thread count. Usable for chat.
-- **Levi 4B (Q4_K_M):** roughly **8–20 tok/s**; needs a 6–8 GB device and
-  patience on first load.
+- **Levi Tiny (native brain):** targets ~512 MB RAM. No tok/s numbers are
+  quoted until `engine.benchmark()` produces them on a real phone —
+  expectations, not promises.
+- **Qwen3 0.6B (Q8_0, open source), modern mid-range phone (8 GB RAM):**
+  prompt processing fast (GGUF Q8 prompt eval is cheap at 0.6B); generation
+  roughly **15–40 tok/s** on CPU depending on SoC and thread count. Usable
+  for chat.
+- **Qwen3 4B (Q4_K_M, open source):** roughly **8–20 tok/s**; needs a 6–8 GB
+  device and patience on first load.
 - **First load:** seconds — model mmap plus KV allocation for the context
-  size. `contextSize = 2048` keeps KV cache small (~tens of MB at 0.6B).
-- **Qwen3 bases think by default.** The remix weights emit `<think>` traces
-  unless the prompt carries `/no_think`; the app should add it (or strip
-  think blocks) for chat UX. `PromptBuilder` leaves this choice to the app.
+  size. `contextSize = 2048` keeps the KV cache small.
+- **Qwen3 emits `<think>` traces by default.** The open-source Qwen3 weights
+  think unless the prompt carries `/no_think`; the app should add it (or
+  strip think blocks) for chat UX. `PromptBuilder` leaves this choice to
+  the app.
 - **No NPU/GPU path yet:** `n_gpu_layers = 0`; pure CPU via llama.cpp's
   optimized kernels (ARM NEON dotprod/i8mm where the SoC supports them).
 
@@ -147,9 +156,10 @@ before quoting them anywhere user-facing.
 4. **levi-tiny is future.** The native brain exists as a training
    proof-of-pipeline (`core/levi/brain/`); its on-device export (execuTorch /
    LiteRT / custom) is a separate research track.
-5. **Model provenance.** Remix bases are honest Qwen3 GGUFs from the
-   publisher's official Hugging Face repos; SHA-256 is verified when the
-   publisher advertises a digest, skipped openly otherwise.
+5. **Model provenance.** Every weight in the catalog is LEVI's own — trained
+   by the native-brain program and published under LEVI's own repos. No
+   third-party bases, no remixes, no masks. SHA-256 is verified on download
+   when a digest is advertised, skipped openly otherwise.
 6. **Battery/thermal.** Sustained generation throttles on most phones;
    streaming keeps UX acceptable but long generations will warm the device.
 7. **What needs an emulator/device:** the JNI bridge, `.so` loading,

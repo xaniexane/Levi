@@ -470,14 +470,22 @@ def load_pack(path: "str | os.PathLike[str]") -> Dict[str, Any]:
     cast = json.loads((d / "cast.json").read_text(encoding="utf-8"))
     rules = json.loads((d / "rules.json").read_text(encoding="utf-8"))
     lore = (d / "lore.md").read_text(encoding="utf-8")
-    scenes = {
-        p.stem: p.read_text(encoding="utf-8")
-        for p in sorted((d / "scenes").glob("*.md"))
-    } if (d / "scenes").is_dir() else {}
-    quests = {
-        p.stem: p.read_text(encoding="utf-8")
-        for p in sorted((d / "quests").glob("*.md"))
-    } if (d / "quests").is_dir() else {}
+    scenes = (
+        {
+            p.stem: p.read_text(encoding="utf-8")
+            for p in sorted((d / "scenes").glob("*.md"))
+        }
+        if (d / "scenes").is_dir()
+        else {}
+    )
+    quests = (
+        {
+            p.stem: p.read_text(encoding="utf-8")
+            for p in sorted((d / "quests").glob("*.md"))
+        }
+        if (d / "quests").is_dir()
+        else {}
+    )
     return {
         "dir": str(d),
         "meta": meta,
@@ -505,7 +513,9 @@ def list_packs(root: Optional[Path] = None) -> List[Tuple[str, str]]:
     return sorted(found.items())
 
 
-def export_pack(src_dir: "str | os.PathLike[str]", dest_zip: "str | os.PathLike[str]") -> Path:
+def export_pack(
+    src_dir: "str | os.PathLike[str]", dest_zip: "str | os.PathLike[str]"
+) -> Path:
     src = Path(src_dir)
     load_pack(src)  # validate first
     dest = Path(dest_zip)
@@ -597,9 +607,7 @@ class Table:
         target: Optional[int] = None,
     ) -> RollReceipt:
         dice = tuple(self.rng.randint(1, spec.faces) for _ in range(spec.count))
-        receipt = self.ledger.append(
-            self.slot, spec, dice, label=label, target=target
-        )
+        receipt = self.ledger.append(self.slot, spec, dice, label=label, target=target)
         if not self.quiet:
             print(receipt.format(), flush=True)
         return receipt
@@ -608,7 +616,9 @@ class Table:
         """Roll first, seal it, print the receipt. Narrate only after."""
         return self._seal(parse_spec(spec_text), label)
 
-    def check(self, spec_text: str, vs: int, label: str = "") -> Tuple[RollReceipt, bool]:
+    def check(
+        self, spec_text: str, vs: int, label: str = ""
+    ) -> Tuple[RollReceipt, bool]:
         """The dice-first check: the receipt is sealed and printed BEFORE
         any narration runs. The narrator receives the frozen receipt."""
         receipt = self._seal(parse_spec(spec_text), label, target=int(vs))
@@ -651,9 +661,7 @@ class Table:
         return out
 
     def npc(self, cast_id: str, prompt: str = "") -> str:
-        npc = next(
-            (c for c in self.pack["cast"] if c.get("id") == cast_id), None
-        )
+        npc = next((c for c in self.pack["cast"] if c.get("id") == cast_id), None)
         if npc is None:
             known = ", ".join(c.get("id", "?") for c in self.pack["cast"])
             raise ValueError(f"unknown cast member {cast_id!r} (try: {known})")
@@ -685,7 +693,9 @@ class Table:
         )
 
     @classmethod
-    def load(cls, slot: str = "table", root: Optional[Path] = None, quiet: bool = False) -> "Table":
+    def load(
+        cls, slot: str = "table", root: Optional[Path] = None, quiet: bool = False
+    ) -> "Table":
         store = SaveStore((Path(root) if root else _default_root()) / "saves")
         state = store.load(GAME_ID, slot)
         pack = load_pack(state["pack_dir"])
@@ -711,7 +721,9 @@ class Table:
         if pack_name not in packs:
             known = ", ".join(sorted(packs)) or "none"
             raise ValueError(f"unknown pack {pack_name!r} (try: {known})")
-        table = cls(load_pack(packs[pack_name]), slot=slot, seed=seed, root=root, quiet=quiet)
+        table = cls(
+            load_pack(packs[pack_name]), slot=slot, seed=seed, root=root, quiet=quiet
+        )
         table.save()
         return table
 
@@ -747,7 +759,9 @@ def charter_report() -> str:
     for r in results:
         mark = "PASS" if r["passed"] else "FAIL"
         lines.append(f"  [{mark}] {r['id']}: {r['title']}")
-    lines.append("verdict: " + ("FAIR — all rules pass" if is_fair(manifest()) else "UNFAIR"))
+    lines.append(
+        "verdict: " + ("FAIR — all rules pass" if is_fair(manifest()) else "UNFAIR")
+    )
     return "\n".join(lines)
 
 
@@ -780,13 +794,17 @@ def _open(slot: str, root: Optional[Path], quiet: bool) -> Table:
     except Exception:
         packs = list_packs(root)
         if not packs:
-            raise SystemExit("no world packs found and no saved table; run `table new` first") from None
+            raise SystemExit(
+                "no world packs found and no saved table; run `table new` first"
+            ) from None
         # fall back to a fresh table on the first pack
         return Table.new(packs[0][0], slot=slot, root=root, quiet=quiet)
 
 
 def cmd(argv: Optional[List[str]] = None) -> int:
-    p = argparse.ArgumentParser(prog="table", description="The Story Table — dice-first tabletop RPG")
+    p = argparse.ArgumentParser(
+        prog="table", description="The Story Table — dice-first tabletop RPG"
+    )
     sub = p.add_subparsers(dest="cmd", required=True)
 
     s = sub.add_parser("new", help="start a table on a world pack")
@@ -794,7 +812,9 @@ def cmd(argv: Optional[List[str]] = None) -> int:
     s.add_argument("--slot", default="table")
     s.add_argument("--seed", type=int, default=None)
 
-    s = sub.add_parser("check", help="dice-first check: roll, seal receipt, then narrate")
+    s = sub.add_parser(
+        "check", help="dice-first check: roll, seal receipt, then narrate"
+    )
     s.add_argument("spec", help="e.g. 2d6+3, d20")
     s.add_argument("--vs", type=int, required=True, help="target number")
     s.add_argument("--label", default="")
@@ -912,7 +932,11 @@ def cmd(argv: Optional[List[str]] = None) -> int:
         t = _open(args.slot, root, quiet=True)
         if args.verify:
             ok, bad = t.verify()
-            print("chain intact — no retcon possible" if ok else f"CHAIN BROKEN at receipt #{bad:04d}")
+            print(
+                "chain intact — no retcon possible"
+                if ok
+                else f"CHAIN BROKEN at receipt #{bad:04d}"
+            )
             t.close()
             return 0 if ok else 1
         receipts = t.receipts()

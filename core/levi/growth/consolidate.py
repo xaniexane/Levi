@@ -96,6 +96,8 @@ def consolidate(
     dry_run: bool = False,
     dedup_threshold: float = 0.5,
     on_corroborate: Any = None,
+    extra_tags: tuple = (),
+    dedup_scope: tuple = (),
 ) -> dict[str, Any]:
     """Write learnings to the memory store with dedup.
 
@@ -108,6 +110,12 @@ def consolidate(
     :func:`levi.creed.promotion.consolidation_corroboration_hook` here so
     repeated corroboration feeds the creed promotion rule — without this
     module ever importing the creed package.
+
+    ``extra_tags`` appends tags to every written entry (e.g. the
+    raising tracks' ``seat:<key>`` namespace). ``dedup_scope`` scopes
+    the dedup pool to entries carrying all of those tags — one seat's
+    learnings corroborate only that seat's record. Both default to
+    empty, which keeps the original Levi-only behavior exactly.
 
     Raises ValueError when ``learnings`` is not a list or
     ``dedup_threshold`` is not within 0..1.
@@ -127,6 +135,18 @@ def consolidate(
             "consolidate: dedup_threshold must be within 0..1, got %r"
             % (dedup_threshold,)
         )
+    try:
+        extra_tags = tuple(extra_tags)
+    except TypeError:
+        raise ValueError(
+            "consolidate: extra_tags must be iterable, got %r" % (extra_tags,)
+        )
+    if not all(isinstance(t, str) and t.strip() for t in extra_tags):
+        raise ValueError("consolidate: extra_tags must all be non-empty strings")
+    try:
+        dedup_scope = tuple(dedup_scope)
+    except TypeError:
+        raise ValueError("consolidate: dedup_scope must be iterable")
     report: dict[str, Any] = {
         "accepted": 0,
         "corroborated": 0,
@@ -139,7 +159,11 @@ def consolidate(
     if store is None:
         store = MemoryStore()
 
-    growth_entries = [e for e in store.list(limit=5000) if "growth" in e.tags]
+    growth_entries = [
+        e
+        for e in store.list(limit=5000)
+        if "growth" in (e.tags or []) and all(t in (e.tags or []) for t in dedup_scope)
+    ]
     # Precompute word sets once — was recomputed for every
     # learning x existing-entry pair (O(learnings x entries) tokenizations).
     entry_words: list[tuple[Any, frozenset]] = [
@@ -205,7 +229,7 @@ def consolidate(
             continue
 
         mtype = MemoryType(_KIND_TO_TYPE[learning.kind])
-        tags = ["growth", "levi-learned", learning.kind]
+        tags = ["growth", "levi-learned", learning.kind] + list(extra_tags)
         entry = store.add(
             memory_type=mtype,
             content=content,

@@ -15,9 +15,11 @@ default to ``requires_confirmation=True`` with no per-feature override
 """
 
 from __future__ import annotations
-from . import github, registry  # noqa: F401
+from . import github, registry, rss, webhook  # noqa: F401
 from . import http as http  # noqa: F401 (stdlib HTTP helper)
 from .github import GitHubConnector  # noqa: F401
+from .rss import RssConnector  # noqa: F401
+from .webhook import WebhookConnector  # noqa: F401
 from .http import (  # noqa: F401
     ApiError,
     HttpClient,

@@ -11,6 +11,7 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 from enum import Enum
 from datetime import datetime, timezone
+import os
 import sys
 import uuid
 import json
@@ -347,6 +348,22 @@ class AutomationRegistry:
         self._persist()
         return a.last_result
 
+    def register(self, automation: Automation) -> Automation:
+        """Insert a pre-built Automation (e.g. a built-in daemon job).
+
+        Replaces any automation already stored under the same id.
+        """
+        if not isinstance(automation, Automation):
+            raise AutomationError(
+                f"invalid automation {automation!r}: expected Automation, "
+                f"got {type(automation).__name__}"
+            )
+        if not isinstance(automation.id, str) or not automation.id.strip():
+            raise AutomationError("automation is missing a valid 'id'")
+        self._autos[automation.id] = automation
+        self._persist()
+        return automation
+
     def list(self) -> List[Automation]:
         return sorted(self._autos.values(), key=lambda x: x.name)
 
@@ -365,3 +382,78 @@ class AutomationRegistry:
             "by_status": by,
             "data_dir": str(self.data_dir),
         }
+
+
+# ---------------------------------------------------------------------------
+# Nightly dream cycle (levi.dream wiring)
+#
+# Registered-but-inert by default: the job installs as PAUSED, and the
+# runner is a no-op unless LEVI_DREAM_ENABLED=1. The operator activates the
+# job when the nightly dream run is wanted. Dreams are records — the runner
+# never executes actions and never leaves the machine.
+# ---------------------------------------------------------------------------
+
+DREAM_JOB_ID = "auto.nightly-dream"
+DREAM_JOB_RUNNER = "levi.dream.cycle:run_nightly"
+DREAM_ENV_ENABLED = "LEVI_DREAM_ENABLED"
+
+
+def build_nightly_dream_automation(seed_limit: int = 5) -> "Automation":
+    """Build the nightly dream-cycle job (not registered — use
+    :func:`ensure_nightly_dream_job` to install it idempotently)."""
+    return Automation(
+        id=DREAM_JOB_ID,
+        name="nightly dream cycle",
+        description=(
+            "Run the dream engine over recent seeds: synthesize dreams, "
+            "compost failed branches via REIM, and surface RIEM genome "
+            "proposals (data only, never applied)."
+        ),
+        trigger=TriggerKind.SCHEDULE,
+        trigger_config={
+            "cadence": "nightly",
+            "window": "02:00-04:00 local",
+            "runner": DREAM_JOB_RUNNER,
+            "seed_limit": seed_limit,
+        },
+        actions=[],
+        status=AutomationStatus.PAUSED,  # inert until the operator activates
+        risk_ceiling=0,
+        tags=["dream", "nightly", "reim", "riem"],
+    )
+
+
+def ensure_nightly_dream_job(registry: "AutomationRegistry") -> "Automation":
+    """Idempotently install the nightly dream job in an automation registry.
+
+    Safe to call on every daemon boot: an existing job is left untouched.
+    """
+    existing = registry.get(DREAM_JOB_ID)
+    if existing is not None:
+        return existing
+    return registry.register(build_nightly_dream_automation())
+
+
+def run_dream_job(limit: int = 5, seeds: "Optional[list]" = None) -> str:
+    """Runner for the nightly dream job.
+
+    Returns a one-line summary. Inert (does nothing) unless
+    ``LEVI_DREAM_ENABLED=1`` — a registered-but-unsanctioned job must not
+    run on its own.
+    """
+    if os.environ.get(DREAM_ENV_ENABLED) != "1":
+        return "dream job inert (set %s=1 to run)" % DREAM_ENV_ENABLED
+    from levi.dream.cycle import run_cycle
+
+    summary = run_cycle(limit=limit, seeds=seeds)
+    return (
+        "dream cycle: %d dreams, %d variants, %d composted, %d risky, "
+        "%d proposals (unapplied)"
+        % (
+            summary["dreams"],
+            summary["variants"],
+            summary["compost_branches"],
+            summary["risky_branches"],
+            len(summary["proposals"]),
+        )
+    )

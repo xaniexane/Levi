@@ -169,7 +169,7 @@ try:  # pragma: no cover — import-time fallback keeps module import light
             return "no browser plan yet — build one first"
         return emit_termux_helper(plan)
 
-    BROWSER_SKILLS = [
+    BROWSER_WARES = [
         Skill(
             id="automation_browser_plan",
             name="Browser Plan",
@@ -190,6 +190,6 @@ try:  # pragma: no cover — import-time fallback keeps module import light
         ),
     ]
 except ImportError:  # pragma: no cover
-    BROWSER_SKILLS = []  # type: ignore[assignment]
+    BROWSER_WARES = []  # type: ignore[assignment]
     Skill = object  # type: ignore[assignment,misc]
     SkillRisk = None  # type: ignore[assignment]

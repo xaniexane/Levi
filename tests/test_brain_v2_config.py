@@ -267,3 +267,64 @@ def test_n_kv_head_defaults_to_zero(tmp_path):
         encoding="utf-8",
     )
     assert load_config(q).model.n_kv_head == 0
+
+
+# --- judgment keys: early stopping + keep_best ---
+
+
+def test_judgment_keys_default(tmp_path):
+    cfg = load_config(_write(tmp_path))
+    assert cfg.schedule.early_stop_patience == 0
+    assert cfg.schedule.early_stop_min_delta == 0.0
+    assert cfg.checkpointing.keep_best is True
+
+
+def _write_raw(tmp_path, mutate):
+    raw = yaml.safe_load(VALID_YAML)
+    mutate(raw)
+    p = tmp_path / "train.yaml"
+    p.write_text(yaml.safe_dump(raw), encoding="utf-8")
+    return p
+
+
+def test_judgment_keys_parse(tmp_path):
+    p = _write_raw(
+        tmp_path,
+        lambda raw: (
+            raw["schedule"].update(
+                {"early_stop_patience": 3, "early_stop_min_delta": 0.01}
+            ),
+            raw["checkpointing"].update({"keep_best": False}),
+        ),
+    )
+    cfg = load_config(p)
+    assert cfg.schedule.early_stop_patience == 3
+    assert cfg.schedule.early_stop_min_delta == 0.01
+    assert cfg.checkpointing.keep_best is False
+
+
+@pytest.mark.parametrize("bad", [-1, 2.5, "three"])
+def test_early_stop_patience_rejects_non_int(tmp_path, bad):
+    p = _write_raw(
+        tmp_path, lambda raw: raw["schedule"].update({"early_stop_patience": bad})
+    )
+    with pytest.raises(ConfigError):
+        load_config(p)
+
+
+@pytest.mark.parametrize("bad", [-0.5, "none"])
+def test_early_stop_min_delta_rejects_bad(tmp_path, bad):
+    p = _write_raw(
+        tmp_path, lambda raw: raw["schedule"].update({"early_stop_min_delta": bad})
+    )
+    with pytest.raises(ConfigError):
+        load_config(p)
+
+
+@pytest.mark.parametrize("bad", ["yes-please", 1, 0])
+def test_keep_best_rejects_non_bool(tmp_path, bad):
+    p = _write_raw(
+        tmp_path, lambda raw: raw["checkpointing"].update({"keep_best": bad})
+    )
+    with pytest.raises(ConfigError):
+        load_config(p)

@@ -736,6 +736,10 @@ def _cli(argv):
 @pytest.fixture()
 def cli_identity(home, monkeypatch):
     """An identity with a real credential; getpass answered from a queue."""
+    # founder tier is keeper-bound — the fixture name rides the list.
+    import levi.cybrus.identity as ident
+
+    monkeypatch.setattr(ident, "FOUNDER_IDENTITIES", ("approver",))
     name, password = _make_account("approver", tier="founder")
     answers = []
 

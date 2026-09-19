@@ -39,6 +39,8 @@ from typing import Any
 
 from levi.agent.loop import AgentTranscript, run_subtask
 from levi.agent.providers import ChatMessage, ChatProvider, select_provider
+from levi.operator.adapters import as_operator  # Operator contract: every provider sits behind it
+from levi.operator.contract import Operator
 from levi.agent.tools import build_default_registry
 
 SESSIONS_ENV = "LEVI_AGENT_SESSIONS_DIR"
@@ -238,12 +240,27 @@ class ConversationManager:
         affect: bool = False,
         affect_session: Any = None,
         growth: bool = True,
+        language: str | None = None,
     ):
         self.session = ChatSession(session_name)
-        if isinstance(provider, ChatProvider):
+        if isinstance(provider, Operator):
+            # Already behind the contract (e.g. resolved from seat config):
+            # governed at its own seat, never metered twice.
             self.provider = provider
         else:
-            self.provider = select_provider(provider)
+            if isinstance(provider, ChatProvider):
+                self.provider = provider
+            else:
+                self.provider = select_provider(provider)
+            # Usage governor: the chat seat meters its own calls once, here.
+            # run_subtask() skips governing providers already behind the
+            # Operator contract, so chat turns are never metered twice.
+            from levi.governor import GovernedProvider
+
+            self.provider = GovernedProvider(
+                self.provider, task_id="chat:%s" % session_name, agent_id="agent-chat"
+            )
+            self.provider = as_operator(self.provider)  # Operator contract
         self.provider_name = getattr(self.provider, "name", None) or "?"
         self.registry = registry
         self.max_steps = max(1, int(max_steps or 10))
@@ -252,6 +269,7 @@ class ConversationManager:
         self.workspace_root = workspace_root
         self.system_prompt = system_prompt
         self.growth = bool(growth)
+        self.language = language
         self.affect = bool(affect)
         if affect_session is not None:
             self.affect_session = affect_session
@@ -273,6 +291,20 @@ class ConversationManager:
         else:
             self.ctx_size = CONSERVATIVE_CTX_SIZE
         self._memory_key = "chat-%s" % self.session.name
+
+    def _effective_language(self, text: str) -> str | None:
+        """Language for one turn: an explicit ``--lang`` (or constructor
+        ``language=``) always wins; otherwise detect per message with
+        :mod:`levi.i18n` (best-effort heuristic, never asserted as fact).
+        Detection never breaks a turn — failures fall back to None."""
+        if self.language:
+            return self.language
+        try:
+            from levi import i18n as _i18n
+
+            return _i18n.detect(text)
+        except Exception:
+            return None
 
     # -- public -----------------------------------------------------------
 
@@ -306,6 +338,39 @@ class ConversationManager:
             consent=use_consent,
             confirm=use_confirm,
         )
+        # F2: query-relevant "what LEVI knows about the user" block from the
+        # interop retrieval adapter (hybrid; degrades to the legacy loader,
+        # then to nothing). Injected into the turn's system prompt so the
+        # agent reasons with it. Kill switch: LEVI_CHAT_USER_CONTEXT=0.
+        system_prompt = self.system_prompt
+        if os.environ.get("LEVI_CHAT_USER_CONTEXT", "1").strip().lower() not in {
+            "0",
+            "false",
+            "no",
+        }:
+            try:
+                from levi.interop.adapters.assistant_retrieval import (
+                    load_user_context_retrieved,
+                )
+            except Exception:  # noqa: BLE001 - adapter import failure degrades silently
+                load_user_context_retrieved = None  # type: ignore[assignment]
+            if load_user_context_retrieved is not None:
+                try:
+                    _uctx = load_user_context_retrieved(None, text, limit=8)
+                except Exception:  # noqa: BLE001 - adapter never raises, belt and braces
+                    _uctx = {"block": ""}
+                _block = ((_uctx or {}).get("block") or "").strip()
+                if _block:
+                    _prelude = (
+                        "What LEVI remembers about the user (from local memory; "
+                        "use it to personalize, never claim more than it says):\n"
+                        + _block
+                    )
+                    system_prompt = (
+                        (_prelude + "\n\n" + system_prompt)
+                        if system_prompt
+                        else _prelude
+                    )
         transcript = run_subtask(
             text,
             provider=self.provider,
@@ -315,10 +380,11 @@ class ConversationManager:
             consent=use_consent,
             confirm=use_confirm,
             workspace_root=self.workspace_root,
-            system_prompt=self.system_prompt,
+            system_prompt=system_prompt,
             affect=self.affect,
             affect_session=self.affect_session,
             growth=self.growth,
+            language=self._effective_language(text),
         )
 
         # Persist the turn's dialogue (assistant texts, tool exchanges,
@@ -555,10 +621,81 @@ Commands:
   /summary  show the current rolling summary (if compression has run)
   /facts    show durable facts remembered for this session
   /context  show estimated context usage for the next turn
+  /request <text>  drop a feature/request into the inbox
+  /requests [status]  list inbox requests (open/considered/building/done)
+  /requests <n> <status>  move a request forward
+  /analytics [week|top]  your local usage patterns (nothing leaves this machine)
   /quit     save and exit (Ctrl-D also exits)
 Every other line is sent as your message; each turn runs the full
 agentic loop with tools. History is saved per session automatically.\
 """
+
+
+def _repl_request(line: str, session_name: str) -> None:
+    """``/request <text>`` — drop a feature request into the inbox."""
+    from levi.inbox.analytics import record as _record
+    from levi.inbox.requests import RequestBox, RequestError
+
+    text = line[len("/request"):].strip()
+    if not text:
+        print("usage: /request <your feature or request>")
+        return
+    try:
+        req = RequestBox().add(text)
+    except RequestError as exc:
+        print(f"request not saved: {exc}")
+        return
+    _record("chat.request", session_name)
+    print(f"request #{req.id} saved — in the box, will be triaged")
+
+
+def _repl_requests(line: str) -> None:
+    """``/requests [status]`` or ``/requests <n> <status>`` — triage view."""
+    from levi.inbox.requests import RequestBox, RequestError, render_list
+
+    rest = line[len("/requests"):].strip()
+    box = RequestBox()
+    try:
+        if not rest:
+            print(render_list(box.list()))
+            return
+        parts = rest.split()
+        if len(parts) == 1 and not parts[0].isdigit():
+            print(render_list(box.list(status=parts[0])))
+            return
+        if len(parts) == 2 and parts[0].isdigit():
+            req = box.set_status(int(parts[0]), parts[1])
+            print(f"request #{req.id} → {req.status}")
+            return
+        print("usage: /requests [status] | /requests <n> <status>")
+    except RequestError as exc:
+        print(f"requests: {exc}")
+
+
+def _repl_analytics(line: str) -> None:
+    """``/analytics`` (today) or ``/analytics week`` — usage views."""
+    from levi.inbox.analytics import (
+        Analytics,
+        record as _record,
+        render_daily,
+        render_weekly,
+    )
+
+    rest = line[len("/analytics"):].strip()
+    agg = Analytics()
+    _record("chat.analytics")
+    if rest in ("week", "weekly", "7d"):
+        print(render_weekly(agg.weekly()))
+    elif rest in ("top",):
+        top = agg.top()
+        if not top:
+            print("analytics — no events yet")
+        else:
+            print("analytics — top capabilities (7d):")
+            for item in top:
+                print(f"  {item['capability']}: {item['count']}")
+    else:
+        print(render_daily(agg.daily()))
 
 
 def run_chat_repl(
@@ -574,6 +711,7 @@ def run_chat_repl(
     affect: bool = False,
     affect_session: Any = None,
     growth: bool = True,
+    language: str | None = None,
 ) -> None:
     """Interactive long-conversation REPL. Returns on /quit / EOF."""
     mgr = ConversationManager(
@@ -588,6 +726,7 @@ def run_chat_repl(
         affect=affect,
         affect_session=affect_session,
         growth=growth,
+        language=language,
     )
     resumed = len(mgr.session.message_records())
     print(
@@ -643,6 +782,23 @@ def run_chat_repl(
                 % (est, 100.0 * est / max(1, mgr.ctx_size), mgr.ctx_size)
             )
             continue
+        if line.startswith("/requests"):
+            _repl_requests(line)
+            continue
+        if line.startswith("/request"):
+            _repl_request(line, session_name)
+            continue
+        if line.startswith("/analytics"):
+            _repl_analytics(line)
+            continue
+        if line.startswith("/engage"):
+            try:
+                from levi.engagement.cli import chat_handle as _engage_handle
+
+                print(_engage_handle(line))
+            except Exception as exc:
+                print(f"engage failed: {type(exc).__name__}: {exc}")
+            continue
         try:
             result = mgr.turn(
                 line,
@@ -671,6 +827,12 @@ def run_chat_repl(
             "context ~%.0f%% of %d tokens\n"
             % (100.0 * result.context_pct, mgr.ctx_size)
         )
+        try:
+            from levi.inbox.analytics import record as _turn_record
+
+            _turn_record("chat.turn", session_name)
+        except Exception:
+            pass  # analytics is telemetry, never load-bearing
     print(
         "session %r saved (%d messages)."
         % (mgr.session.name, len(mgr.session.message_records()))

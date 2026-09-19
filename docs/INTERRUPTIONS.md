@@ -16,23 +16,27 @@ Each entry carries a value verdict: `useful`, `noise`, or `mixed`.
 ```python
 from levi.interruptions import InterruptionLedger, noise_roi, check
 
-lg = InterruptionLedger()                    # home resolved at call time
+lg = InterruptionLedger()  # home resolved at call time
 lg.log("heartbeat", "morning pulse", "useful")
 lg.log("nudge-engine", "random fun fact", "noise")
 
-lg.noise_roi(days=7, now=...)                # weekly noise report
+lg.noise_roi(days=7, now=...)  # weekly noise report
 ```
 
 `noise_roi()` returns:
 
 ```python
-{"days": 7, "window_start": ..., "window_end": ...,
- "counts": {"useful": 3, "noise": 2, "mixed": 1},
- "total": 6,
- "noise_ratio": 0.333,                       # noise / total; None when empty
- "top_noisy_sources": [{"source": "nudge-engine", "noise": 2, "total": 2}],
- "verdict": "mixed: 33% noise — mostly pulling its weight, "
-            "some sources worth throttling."}
+{
+    "days": 7,
+    "window_start": ...,
+    "window_end": ...,
+    "counts": {"useful": 3, "noise": 2, "mixed": 1},
+    "total": 6,
+    "noise_ratio": 0.333,  # noise / total; None when empty
+    "top_noisy_sources": [{"source": "nudge-engine", "noise": 2, "total": 2}],
+    "verdict": "mixed: 33% noise — mostly pulling its weight, "
+    "some sources worth throttling.",
+}
 ```
 
 Empty state is honest: nothing logged → verdict says "nothing logged in the

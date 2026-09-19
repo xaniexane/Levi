@@ -742,6 +742,13 @@ class SkillRegistry:
 
         for s in OPERATOR_SKILLS:
             self.register(s)
+        # LEVI compressed-engines skill pack (native engine patterns +
+        # executable triage/cadence/weigh skills). Data-driven: scans
+        # playbooks/compressed/*.md. Lazy import keeps registry decoupled.
+        from levi.skill.compressed_skills import COMPRESSED_SKILLS
+
+        for s in COMPRESSED_SKILLS:
+            self.register(s)
         # LEVI curriculum skill pack (awesome-courses subjects).
         # Data-driven: course_skills scans knowledge/courses/catalog.json.
         from levi.skill.course_skills import COURSE_SKILLS
@@ -781,11 +788,11 @@ class SkillRegistry:
             self.register(s)
         # Automation: browser plans (INFO, plans only), primitives (INFO),
         # CDP session (HIGH + HITL — drives a real browser once confirmed).
-        from levi.automation.browser import BROWSER_SKILLS
+        from levi.automation.browser import BROWSER_WARES
         from levi.automation.primitives import PRIMITIVE_SKILLS
         from levi.automation.cdp import CDP_SKILLS
 
-        for s in BROWSER_SKILLS + PRIMITIVE_SKILLS + CDP_SKILLS:
+        for s in BROWSER_WARES + PRIMITIVE_SKILLS + CDP_SKILLS:
             self.register(s)
         # Integrity (INFO, defensive verification) + solver (INFO, UX lenses).
         from levi.security.integrity import INTEGRITY_SKILLS
@@ -800,6 +807,13 @@ class SkillRegistry:
         from levi.docs.skills import DOC_SKILLS
 
         for s in DOC_SKILLS:
+            self.register(s)
+        # LEVI Sidewinder course (field-improvisation doctrine + data-driven
+        # course corpus). Category "fieldcraft", INFO risk, read-only.
+        # Lazy import: sidewinder.skills imports Skill/SkillRisk from this module.
+        from levi.sidewinder.skills import SIDEWINDER_SKILLS
+
+        for s in SIDEWINDER_SKILLS:
             self.register(s)
         # LEVI user-created skills (~/.levi/skills/<id>/SKILL.md).
         # Data-driven: creator.list_user_skills scans the dir and registers

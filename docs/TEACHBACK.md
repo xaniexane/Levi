@@ -17,8 +17,14 @@ No vibes.
 ## API
 
 ```python
-from levi.teachback import (add_statement, model, render_brief,
-                            correct, affirm, note_evidence)
+from levi.teachback import (
+    add_statement,
+    model,
+    render_brief,
+    correct,
+    affirm,
+    note_evidence,
+)
 
 add_statement("ship", "Ship the Levi book by year end", confidence=0.7)
 
@@ -30,14 +36,15 @@ print(render_brief())
 correct("ship", "Ship the book — deadline moved to March")
 # -> statement updated, confidence 0.70 -> 0.55, correction logged
 
-affirm("ship")                          # confidence +0.10 (cap 1.0)
-note_evidence("ship", "drafted ch. 3")   # evidence_count+1, +0.05 (cap 0.95)
+affirm("ship")  # confidence +0.10 (cap 1.0)
+note_evidence("ship", "drafted ch. 3")  # evidence_count+1, +0.05 (cap 0.95)
 
-for s in model():                       # current statements + confidence
+for s in model():  # current statements + confidence
     print(s["id"], s["statement"], s["confidence"])
 
 # Append-only history per statement — corrections are preserved, never rewritten.
 from levi.teachback import TeachbackModel
+
 TeachbackModel().history("ship")
 ```
 

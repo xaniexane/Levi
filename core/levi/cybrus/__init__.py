@@ -30,17 +30,43 @@ from __future__ import annotations
 
 from levi.cybrus._paths import cybrus_dir
 from levi.cybrus.factory import AccountFactory
-from levi.cybrus.identity import IdentityStore, TierError
+from levi.cybrus.identity import (
+    IdentityStore,
+    TierError,
+    is_founder,
+    require_founder,
+)
+from levi.cybrus.router import RouteError, RouteRefused, RouteRegistry
 from levi.cybrus.tokens import TokenEngine, TokenError
-from levi.cybrus.vault import CredentialVault, VaultError
+from levi.cybrus.vault import (
+    AutoLockVault,
+    CredentialVault,
+    IdentityVault,
+    OAuthError,
+    OAuthVault,
+    VaultError,
+    VaultLockedError,
+    generate_password,
+)
 
 __all__ = [
     "AccountFactory",
+    "AutoLockVault",
     "CredentialVault",
     "IdentityStore",
+    "IdentityVault",
+    "is_founder",
+    "OAuthError",
+    "OAuthVault",
+    "RouteError",
+    "RouteRefused",
+    "RouteRegistry",
     "TierError",
+    "require_founder",
     "TokenEngine",
     "TokenError",
     "VaultError",
+    "VaultLockedError",
     "cybrus_dir",
+    "generate_password",
 ]

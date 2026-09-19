@@ -408,6 +408,18 @@ REPORTS = [
         ),
     },
     {
+        "slug": "deliberation-hunt-20260917",
+        "files": ["report.md"],
+        "parser": parse_m40,
+        "tag": "m40",
+        "notes": (
+            "Web-sourced 2026-09-17; two sources per entry. Theme: fallen "
+            "group-deliberation methods (Delphi, NGT, Crawford slips, "
+            "Future Search). Built as core/levi/methods/{delphi,ngt,"
+            "crawford,futuresearch}.py with tests."
+        ),
+    },
+    {
         "slug": "hw-hunt-20260916",
         "files": ["findings.jsonl"],
         "parser": parse_findings_jsonl,
@@ -438,6 +450,19 @@ REPORTS = [
             "giant-patterns vein: the honest markets "
             "(shareware, SourceForge/DevShare, Yahoo Pipes, "
             "AltaVista). Skepticism flags embedded per record."
+        ),
+    },
+    {
+        "slug": "wire-protocols-20260919",
+        "files": ["findings.jsonl"],
+        "parser": parse_findings_jsonl,
+        "tag": "wire",
+        "notes": (
+            "Web-verified 2026-09-19; perpetual-hunt wave-019 deeper vein, "
+            "dead wire protocols: Ceefax/Teletext (1974-2012) broadcast "
+            "page carousel, SELCAL (1957) addressed wake-signaling, "
+            "Bell 103 (1962) answer-tone pairing ritual. Built as "
+            "core/levi/teletext/ and core/levi/attention/ with 23 tests."
         ),
     },
 ]

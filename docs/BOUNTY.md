@@ -87,3 +87,97 @@ surface — the ideal daily signal for a hunter.
   unattended pipeline.
 - The judgment half — novel vulns, business logic, chaining, report
   writing — stays human. The machine finds; the hunter decides.
+
+---
+
+# The Service-Bounty Hunter
+
+Chauncey's order: bounty hunter abilities — find the problem, deliver a
+detailed accurate solution, secure payment for the services — plus the
+hunt showcase: the public track record.
+
+## The hunt
+
+A **bounty** = a problem statement + terms (scope, deadline, payment
+terms). Bounties are registered manually (`levi bounty register ...`) or
+sensed as drafts from DemandPulse opportunities
+(`levi bounty sense --register`) — the hunter composes DemandPulse's
+scouting, never duplicates it.
+
+The state machine is forward-only and fail-closed:
+
+```
+draft -> open -> quoted -> agreed -> hunting -> delivered -> paid
+```
+
+Side exits to `cancelled` exist from every pre-paid state; `disputed`
+can return to `hunting` or cancel. `paid` and `cancelled` are terminal.
+
+**The no-fabrication guard.** Nothing reaches `delivered` without all
+four: a real solution, real evidence, an honest confidence number
+(0–1), and verification notes. The hunter wins on accuracy, not
+pressure — never manipulative. A delivery that cannot be verified is
+refused, not faked.
+
+**Quotes are quotes, not charges.** `levi bounty quote` prices the hunt
+through the founder-level price advisor (doctrine: no free core,
+~30–60% below giants, volume over margin). Quoting moves nothing.
+
+## Payment — Cybrus only
+
+Binding law: **Cybrus is the only one ever allowed to handle money.**
+The bounty module plans and tracks payment but never moves funds
+itself. Every movement goes through `levi.cybrus.money.MoneyGateway`:
+
+- `pay --plan` — builds the gateway PLAN (preview, not permission).
+- `pay --execute --authorized-by <keeper>` — attempts settlement.
+  Authorization must be Chauncey's keeper identity; the module never
+  forges it.
+
+Payment states: `none → quoted → agreed → delivered → paid`. `paid`
+requires a gateway receipt showing an executed movement.
+
+**Honest boundary:** no payment rails are registered and no rail
+plug-ins are wired, so `MoneyGateway.execute()` always refuses
+(fail-closed). Settlement therefore refuses truthfully today, and
+`paid` — and with it showcase admission — is structurally unreachable
+until Chauncey deliberately registers a rail. The module records the
+refusal instead of pretending payment happened.
+
+## The hunt showcase
+
+`levi bounty showcase` renders the public track record. Admission is
+structural, not editorial — all three must hold:
+
+1. the bounty is in state `paid`,
+2. it carries a Cybrus gateway receipt,
+3. the gateway's own record shows the movement **executed**.
+
+`--admit <bounty-id>` enforces this and refuses anything less, with the
+reason stated. `--verify-client <entry-id>` adds the client's
+attestation — a mark of confirmation, never a substitute for payment
+proof. No fake entries, ever; the record starts empty and stays honest.
+
+## Posture
+
+High deterministic ambition, never violent, never manipulative. The
+six-gate chain (Plan → Preview → Permission → Execute → Verify →
+Receipt) governs the consequential acts: quoting (plan/preview),
+agreement (permission), delivery (execute/verify), settlement
+(receipt). Every step is logged on the bounty's append-only history.
+
+## CLI quick reference
+
+```
+levi bounty register "Hunt title" --problem "..." --scope "..." --client "..."
+levi bounty list [--state hunting]
+levi bounty quote <id> [--giant-price 99] [--strategy volume|margin]
+levi bounty agree <id> --note "client accepted terms on <date>"
+levi bounty start <id>
+levi bounty deliver <id> --solution "..." --evidence "a;;b" --confidence 0.9 --verification "..."
+levi bounty pay <id> --plan
+levi bounty pay <id> --execute --authorized-by chauncey
+levi bounty pay <id> --status
+levi bounty sense [--min-worth 0.5] [--register]
+levi bounty showcase [--admit <id>] [--verify-client <entry-id> --note "..."]
+```

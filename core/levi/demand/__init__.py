@@ -18,8 +18,33 @@ from levi.demand.scoring import (
     validate_weights,
 )
 
+from levi.demand.authority import (
+    TIER_MAJOR,
+    TIER_MID,
+    TIER_MINOR,
+    Action,
+    AuthorityEngine,
+    AuthorityRefused,
+    Escalation,
+    Receipt,
+    SensedSignal,
+    classify_action,
+    register_executor,
+)
+
 __all__ = [
     "DemandPulse",
+    "TIER_MAJOR",
+    "TIER_MID",
+    "TIER_MINOR",
+    "Action",
+    "AuthorityEngine",
+    "AuthorityRefused",
+    "Escalation",
+    "Receipt",
+    "SensedSignal",
+    "classify_action",
+    "register_executor",
     "DEFAULT_THRESHOLD",
     "DEFAULT_WEIGHTS",
     "FACTORS",

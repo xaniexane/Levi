@@ -16,7 +16,7 @@ Self-composition: smallest useful combination of capabilities for the task.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from pathlib import Path
 
 from levi.daemon.kernel import DaemonKernel
@@ -39,6 +39,11 @@ CYCLE_STEPS = [
     "OPTIMIZE",
     "WAIT",
 ]
+
+#: Worker daemons the unified core can tick in one foreground pass.
+#: Each module exposes a class named like the module (Gardener, Sentinel,
+#: Courier, Archivist, Midwife) with a ``tick()`` method.
+WORKER_DAEMONS = ("gardener", "sentinel", "courier", "archivist", "midwife")
 
 
 @dataclass
@@ -272,6 +277,7 @@ class UnifiedDaemon:
             "Operating layer — not a giant chatbot.",
             "",
             "Subsystems: cognition · X LWP · DemandPulse · Income Factory · Memory",
+            "Worker daemons: " + " · ".join(WORKER_DAEMONS),
             "",
             self.kernel.status(),
             "",
@@ -284,3 +290,35 @@ class UnifiedDaemon:
             "Free-first: local/open components preferred; cloud optional under cost governor.",
         ]
         return "\n".join(lines)
+
+    def tick_workers(self, home: Optional[Path] = None) -> Dict[str, Any]:
+        """Run one foreground tick of every worker daemon.
+
+        ``home`` is the user home (workers resolve ``~/.levi`` from it),
+        matching the heartbeat convention. Lazy-imports each worker so
+        the unified core stays import-safe; a worker that fails to
+        import or tick is reported, never fatal.
+        """
+        import importlib
+
+        user_home = Path(home) if home is not None else Path.home()
+        results: Dict[str, Any] = {}
+        for name in WORKER_DAEMONS:
+            try:
+                mod = importlib.import_module(f"levi.daemon.{name}")
+                cls = getattr(mod, name.capitalize())
+                worker = cls(home=user_home)
+            except Exception as exc:  # noqa: BLE001
+                results[name] = {"ok": False, "error": f"import failed: {exc}"}
+                continue
+            try:
+                outcome = worker.tick()
+                results[name] = {
+                    "ok": True,
+                    "report": (
+                        outcome.to_dict() if hasattr(outcome, "to_dict") else outcome
+                    ),
+                }
+            except Exception as exc:  # noqa: BLE001
+                results[name] = {"ok": False, "error": f"tick failed: {exc}"}
+        return results

@@ -9,7 +9,7 @@ LEVI grows from a personal synthetic intelligence into a global SI enterprise wh
 
 ## Reconciliation with the mission (binding)
 
-- **Free core forever.** The local-first LEVI core is never monetized. Revenue lives in the cloud, marketplace, and enterprise layers — never in the core, never as a toll on the organism itself.
+- **No free core.** "Free core forever" is dead (killed 2026-09-17; see `docs/LEXICON.md`). The local-first LEVI core carries a paid-but-tiny entry tier — dollar-scale entry, volume over margin. Revenue lives in the cloud, marketplace, and enterprise layers.
 - **Privacy-preserving learning.** Global learning uses consent, anonymization, aggregation, and opt-out — the rails already built for cross-user learning (`docs/CLOUD_API.md`). No private conversation is ever dumped into a shared corpus.
 - **Fearless and unblocked** apply to the enterprise too: no corporate refusal theater in the workforce product.
 - **Human control is architectural.** The HITL control plane is not a feature; it's a load-bearing wall (see phase 2).
@@ -55,7 +55,7 @@ Status: **HAVE** = built · **PARTIAL** = real pieces exist · **GAP** = not bui
 | 29 | Global scaling engine | INFRA | Regional infra, data residency — real-world deployment work |
 | 30 | Self-sustaining operations | GAP | Heartbeat monitors; no infra control |
 | 31 | Economic flywheels | PARTIAL | Learning flywheel exists in growth loop |
-| 32 | Freemium economics | GAP | Design decision required; reconciled with free core above |
+| 32 | Freemium economics | GAP | Design decision required; reconciled with the no-free-core law (see reconciliation above) |
 | 33 | Model economics engine | GAP | — |
 | 34 | AI router | GAP | — |
 | 35 | Global evaluation system | GAP | Tests exist; not a production eval platform |
